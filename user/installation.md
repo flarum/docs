@@ -12,5 +12,13 @@
 
 ## Installation
 
+### With composer
+
+
+((future))
+### With installer
+
+((endfuture))
+
 ## Migration
 
