@@ -1,3 +1,7 @@
+# Contributing to Flarum documentation
+
+Thank you for your willingness to contribute to these docs. Read through the following to make your life easier while you do.
+
 ## Filename formatting
 
 Documentation filenames are always in lowercase and have the extension `.md` indicating it's a markdown file.
