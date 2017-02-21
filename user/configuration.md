@@ -15,7 +15,7 @@ Flarum includes a .htaccess file – make sure it’s been uploaded correctly. I
 Add the following lines to your server's configuration block:
 
 ```
- location / { try_files $uri $uri/ /index.php?$query_string; }
+    location / { try_files $uri $uri/ /index.php?$query_string; }
     location /api { try_files $uri $uri/ /api.php?$query_string; }
     location /admin { try_files $uri $uri/ /admin.php?$query_string; }
 
