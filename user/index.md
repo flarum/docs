@@ -10,5 +10,5 @@ Welcome to Flarum, an open-source forum software meant to be powerful yet simple
 ### - [Updating] (https://github.com/Arkinn/docs/blob/master/user/updating.md)
 
 ## Support
-### - [Troubleshooting] (https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md
+### - [Troubleshooting] (https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
 ### - [F.A.Q's] (https://github.com/Arkinn/docs/blob/master/user/faq.md)
