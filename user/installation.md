@@ -27,5 +27,6 @@ While this command is running, you can configure URL rewriting on your web serve
 
 ((endfuture))
 
-## Migration
+## Importing Data
 
+Eventually we hope to build data importers so you can migrate to Flarum from other forum software. However, it is far too early at this stage – we need to achieve stability first!
