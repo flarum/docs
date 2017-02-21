@@ -80,4 +80,4 @@ Add the following to your server's configuration block:
 ```
 ## Configuring SMTP
 
-There’s currently no GUI to configure SMTP (see [#258](https://github.com/flarum/core/issues/258). For now you can enter your details in manually in the settings database table using a tool like phpMyAdmin:
+There’s currently no GUI to configure SMTP (see [#258] (https://github.com/flarum/core/issues/258). For now you can enter your details in manually in the settings database table using a tool like phpMyAdmin:
