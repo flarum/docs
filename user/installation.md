@@ -18,18 +18,18 @@ Flarum utilizes Composer to manage its dependencies and extensions. So, before i
 
 ### Ubuntu
   ```
-  sudo apt-get install composer
+    sudo apt-get install composer
   ```
   
 ### CentOS
   ```
-  sudo yum install composer
+    sudo yum install composer
   ```
   
 Once Composer is installed you'll then need to run this command in the location where Flarum should be installed:
-
-  composer create-project flarum/flarum . --stability=beta
-
+  ```
+    composer create-project flarum/flarum . --stability=beta
+  ```
 
 
 ((future))
