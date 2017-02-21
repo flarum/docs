@@ -9,6 +9,7 @@
   - dom
   - fileinfo
 - MySQL 5.5 or up.
+- SSH (command-line) access
 
 ## Installation
 
