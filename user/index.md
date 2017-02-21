@@ -23,7 +23,7 @@ Please keep in mind that Flarum is beta software. That means:
 
 Beta is all about fixing these issues and improving Flarum. We’re busy working hard to make Flarum better, so we ask that you:
 
-   - Don’t use it in production. We can’t support you if things go awry. And upgrading to subsequent versions might involve getting your hands dirty.
-   - Report bugs responsibly. Poorly written bug reports take time to deal with, distracting us from adding new features and making Flarum stable.
+   - **Don’t use it in production.** We can’t support you if things go awry. And upgrading to subsequent versions might involve getting your hands dirty.
+   - **Report bugs responsibly.** Poorly written bug reports take time to deal with, distracting us from adding new features and making Flarum stable.
 
 Before you install, please read our Contributing guide so you will know what you’re signing up for!
