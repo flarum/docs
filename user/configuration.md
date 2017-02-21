@@ -92,3 +92,6 @@ There’s currently no GUI to configure SMTP (see [#258] (https://github.com/fla
     mail_encryption: ...
 ```
 
+## Importing Data
+
+Eventually we hope to build data importers so you can migrate to Flarum from other forum software. However, it is far too early at this stage – we need to achieve stability first!
