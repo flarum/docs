@@ -22,11 +22,6 @@ Flarum utilizes Composer to manage its dependencies and extensions. So, before i
 
 While this command is running, you can configure URL rewriting on your web server. Finally, navigate to your forum in a browser and follow the instructions to complete the installation.
 
-((future))
-### With installer
-
-((endfuture))
-
 ## Importing Data
 
 Eventually we hope to build data importers so you can migrate to Flarum from other forum software. However, it is far too early at this stage – we need to achieve stability first!
