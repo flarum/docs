@@ -67,7 +67,7 @@ Add the following lines to your server's configuration block:
     gzip_disable "MSIE [1-6]\.(?!.*SV1)";
   ```
 
-### LightTPD
+### Lighttpd
 
 Add the following to your server's configuration block:
 
