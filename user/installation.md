@@ -36,3 +36,6 @@ Flarum utilizes Composer to manage its dependencies and extensions. So, before i
   ```
 
 While this command is running, you can configure URL rewriting on your web server. Finally, navigate to your forum in a browser and follow the instructions to complete the installation.
+
+## Step 2: Configure the Web Server
+[Continue to Step 2] (https://github.com/Arkinn/docs/blob/master/user/configuration.md)
