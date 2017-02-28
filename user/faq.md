@@ -42,4 +42,4 @@ Despite not having a visual editor at the moment, Flarum does support Markdown a
 
 ### How do I translate Flarum into my language?
 
-We’re currently working on documentation for the language pack creation process. We kindly ask that you wait until it is ready before attempting to translate Flarum. Thanks for your patience!
+Check out [this page] (https://github.com/Arkinn/docs/blob/master/extend/internationalization.md) on how to translate Flarum!
