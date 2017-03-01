@@ -8,6 +8,8 @@ Welcome to Flarum, an open-source forum software meant to be powerful yet simple
 ### - [Download the Files] (https://github.com/Arkinn/docs/blob/master/user/installation.md)
 ### - [Configure the Web Server] (https://github.com/Arkinn/docs/blob/master/user/configuration.md)
 ### - [Updating] (https://github.com/Arkinn/docs/blob/master/user/updating.md)
+###(Optional)###
+### - [Add Language Packs] (https://github.com/Arkinn/docs/blob/master/user/language.md)
 
 ## Support
 ### - [Troubleshooting] (https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
