@@ -16,7 +16,15 @@ You may decide to ignore these risks and install Flarum anyway. That’s up to y
 
 ### How do I add a header logo, links, or favicon?
 
-Adding a favicon should be as simple as plopping a favicon.ico file at the root of your domain. There’s no easy way to add a header logo/links right now, but it’s coming in a beta release in the near future. Thanks for your patience!
+We've made it super-easy to add a Logo, Favicon etc, please follow the short set of instructions as set out below!
+
+1) Click on your **Name** at the at the top right of the screen, and select **Administration**
+
+2) Select **Appearance** on the left hand navigation panel
+
+3) On the page to the right, you'll see the option to upload your Logo, Favicon, etc. Go ahead and click **Choose an image..** under the appropriate label, and then select the image you want to upload.
+
+4) Simple as that!
 
 ### Can I integrate Flarum with WordPress/Laravel/etc.?
 
