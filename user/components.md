@@ -18,12 +18,16 @@ This tutorial will make use of the following:
 
 	- ```sudo apt-get install python-software-properties```
 
+  - (For CentOS) EPEL Release
+
+	- ```sudo yum install epel-release```
+
 
 ### Installing Apache2
 
 #### For CentOS
 
-``` sudo apt-get install httpd ```
+``` sudo yum install httpd ```
 
 #### For Ubuntu
 
@@ -33,7 +37,7 @@ This tutorial will make use of the following:
 
 #### For CentOS
 
-
+``` sudo yum install nginx ```
 
 #### For Ubuntu
 
@@ -43,7 +47,7 @@ This tutorial will make use of the following:
 
 #### For CentOS
 
-(( Placeholder Text ))
+(( Coming soon - being worked on ))
 
 #### For Ubuntu
 
