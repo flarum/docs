@@ -1,4 +1,4 @@
-## Installing PHP, MySQL Server, Apache2, and all other depenancies.
+## Installing PHP, MySQL Server, Apache2, and all other dependancies.
 
 **PLEASE NOTE**: We will _ONLY_ be covering the **installation** of these components.
 
@@ -12,7 +12,7 @@ This tutorial will make use of the following:
 
   - zip / unzip
 
-	``` sudo apt-get install zip unzip ```
+	- ``` sudo apt-get install zip unzip ```
 
   - python-software-properties
 
@@ -39,7 +39,7 @@ This tutorial will make use of the following:
 
 ``` sudo apt-get install nginx ```
 
-### Installing PHP5.5+ & Dependancies
+### Installing PHP 7.0+ & Dependancies
 
 #### For CentOS
 
@@ -56,7 +56,7 @@ This tutorial will make use of the following:
 ```sudo apt-get install php7.0-mbstring openssl php-json php7.0-xml php7.0-curl php7.0-gd php7.0-mysql```
 
 
-#### Enable Dependancies (Works for both Apache2, and Nginx)
+### Enable Dependancies (Works for both Apache2, and Nginx)
 
 ```
 phpenmod mbstring
@@ -84,4 +84,4 @@ sudo service apache2 restart
 
 ## Continue
 
-Continue to Next Step: Download Flarum
+[Continue to Next Step: Download Flarum] (https://github.com/Arkinn/docs/blob/master/user/installation.md)
