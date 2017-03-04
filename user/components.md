@@ -1,22 +1,29 @@
 ## Installing PHP, MySQL Server, Apache2, and all other depenancies.
 
+**PLEASE NOTE**: We will _ONLY_ be covering the **installation** of these components.
 
-***PLEASE NOTE***: We will _ONLY_ be covering the installation of these components. For configuration instructions, please visit (This page).
+### Prerequisites
 
-### Pre-requisites
-
-This tutorial will make use of the following plugins:
+This tutorial will make use of the following:
 
   - Composer
+
+	- ```sudo apt-get install composer```
+
   - zip / unzip
+
+	``` sudo apt-get install zip unzip ```
+
   - python-software-properties
+
+	- ```sudo apt-get install python-software-properties```
 
 
 ### Installing Apache2
 
 #### For CentOS
 
-(( Placeholder Text ))
+``` sudo apt-get install httpd ```
 
 #### For Ubuntu
 
@@ -26,11 +33,11 @@ This tutorial will make use of the following plugins:
 
 #### For CentOS
 
-(( Placeholder Text ))
+
 
 #### For Ubuntu
 
-(( Placeholder Text ))
+``` sudo apt-get install nginx ```
 
 ### Installing PHP5.5+ & Dependancies
 
@@ -46,10 +53,24 @@ This tutorial will make use of the following plugins:
 
 ```sudo apt-get install php7.0```
 
-```sudo apt-get install php7.0-mbstring openssl php-json php-gd php7.0-xml php7.0-curl php7.0-gd php7.0-mysql```
+```sudo apt-get install php7.0-mbstring openssl php-json php7.0-xml php7.0-curl php7.0-gd php7.0-mysql```
 
 
-#### Dependancies
+#### Enable Dependancies (Works for both Apache2, and Nginx)
+
+```
+phpenmod mbstring
+phpenmod pdo_mysql
+phpenmod json
+phpenmod gd
+phpenmod dom
+phpenmod fileinfo
+```
+#### Restart Apache2 (Important after Enabling Dependancies)
+
+```
+sudo service apache2 restart
+```
 
 ### Installing MySQL Server
 
@@ -61,7 +82,6 @@ This tutorial will make use of the following plugins:
 
 ``` sudo apt-get install mysql-server ```
 
+## Continue
+
 Continue to Next Step: Download Flarum
-
-### Enable PHP Extensions
-
