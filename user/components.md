@@ -1,9 +1,16 @@
 ## Installing PHP, MySQL Server, Apache2, and all other depenancies.
 
-To follow this tutorial, you will need SSH (command-line) access to your server.
-
 
 ***PLEASE NOTE***: We will _ONLY_ be covering the installation of these components. For configuration instructions, please visit (This page).
+
+### Pre-requisites
+
+This tutorial will make use of the following plugins:
+
+  - Composer
+  - zip / unzip
+  - python-software-properties
+
 
 ### Installing Apache2
 
@@ -13,7 +20,7 @@ To follow this tutorial, you will need SSH (command-line) access to your server.
 
 #### For Ubuntu
 
-(( Placeholder Text ))
+``` sudo apt-get install apache2 ```
 
 ### Installing Nginx
 
@@ -33,7 +40,16 @@ To follow this tutorial, you will need SSH (command-line) access to your server.
 
 #### For Ubuntu
 
-(( Placeholder Text ))
+#### PHP 7.0
+
+```sudo add-apt-repository ppa:ondrej/php```
+
+```sudo apt-get install php7.0```
+
+```sudo apt-get install php7.0-mbstring openssl php-json php-gd php7.0-xml php7.0-curl php7.0-gd php7.0-mysql```
+
+
+#### Dependancies
 
 ### Installing MySQL Server
 
@@ -43,6 +59,9 @@ To follow this tutorial, you will need SSH (command-line) access to your server.
 
 #### For Ubuntu
 
-(( Placeholder Text ))
+``` sudo apt-get install mysql-server ```
 
 Continue to Next Step: Download Flarum
+
+### Enable PHP Extensions
+
