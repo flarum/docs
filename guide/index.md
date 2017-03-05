@@ -4,9 +4,9 @@
 
 ### Section 1: Getting Started
 
- - [Registration]
- - [Logging in]
- - [Your Profile]
+ - [Registration] (https://github.com/Arkinn/docs/blob/testing/guide/registration.md)
+ - [Logging in] (https://github.com/Arkinn/docs/blob/testing/guide/login.md)
+ - [Your Profile] (https://github.com/Arkinn/docs/blob/testing/guide/profile.md)
  - [Searching the Forum]
  - [Start a new discussion]
  - [Reply to a post]
