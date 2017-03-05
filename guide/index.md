@@ -26,12 +26,12 @@
 
 ### Section 3: Admin Basics
 
- - [Change the Forum Title]
- - [Change the Forum Description]
- - [Change home page view]
- - [Edit the Welcome Banner]
- - [Configure your forum SMTP settings]
- - [Add/Modify/Delete User Groups]
- - [Assign permissions to User Groups]
- - [Upload a custom Logo / Favicon]
- - [Create/Edit/Remove Primary & Secondary Tags]
+ - [Change the Forum Title] (admin/forumtitle.md)
+ - [Change the Forum Description] (admin/forumdescription.md)
+ - [Change home page view] (admin/homeview.md)
+ - [Edit the Welcome Banner] (admin/welcomebanner.md)
+ - [Configure your forum SMTP settings] (admin/smtp.md)
+ - [Add/Modify/Delete User Groups] (admin/usergroups.md)
+ - [Assign permissions to User Groups] (admin/grouppermissions.md)
+ - [Upload a custom Logo / Favicon] (admin/uploadlogo.md)
+ - [Create/Edit/Remove Primary & Secondary Tags] (admin/tags.md)
