@@ -4,7 +4,7 @@
 Once you have [created a user account] the next step to interacting with the community will be to login.
 The Login dialogue can be generally be found by going to the top right hand of your screen, and clicking Log In
 
-![alt tag] (http://imgur.com/kMCiFia	)
+![alt tag] (http://imgur.com/kMCiFia)
 
 Once you've done that, you'll be presented with a screen that looks like this:
 
