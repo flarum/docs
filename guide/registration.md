@@ -5,11 +5,11 @@ To be able to post, and interact with a Flarum powered community, you'll first n
 
 You can find the register button generally located at the top right hand of your screen:
 
-![alt tag] (path)
+![alt tag] (http://i.imgur.com/kMCiFia.png)
 
 Once you click the Sign Up button, you should be presented with a screen that looks like this:
 
-![alt tag] (path)
+![alt tag] (http://i.imgur.com/eBMezX7.png)
 
 Flarum has a few authentication options you can use, such as Facebook, GitHub and Twitter accounts.
 
