@@ -3,7 +3,7 @@
 
 To be able to post, and interact with a Flarum powered community, you'll first need to register yourself a user account. The registration process could not be easier, and takes only a few moments of your time.
 
-You can find the register button generally located at the top right hand of your screen:
+You can find the register button generally located at the top right hand of your screen, which looks like this:
 
 ![alt tag] (http://i.imgur.com/kMCiFia.png)
 
