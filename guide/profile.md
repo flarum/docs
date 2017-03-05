@@ -13,7 +13,7 @@ Flarum has a basic profile system, in your profile there are 3 different categor
 
 **Mentions** this will list any posts that have mentioned you by username (starting with @), most recent mentions start at the top, to the older at the bottom.
 
-Your profile page also has a "Settings" tab, this allows you to change your password, e-mail address.
+Your profile page also has a **Settings** tab, this allows you to change your password, e-mail address.
 
 The Notifications section on the profile page is a little more featured, as it gives you the opportunity to define how you wish to be notified about certain events.
 
