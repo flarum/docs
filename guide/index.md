@@ -1,6 +1,6 @@
 ![alt tag] (http://flarum.org/img/logo.png)
 
-## Flarum User Handbook
+## User Handbook
 
 ### Section 1: Getting Started
 
