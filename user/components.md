@@ -21,6 +21,10 @@ This tutorial will make use of the following:
   - (For CentOS) EPEL Release
 
 	- ```sudo yum install epel-release```
+  
+  - (For CentOS) Webtatic Release
+  
+  - ```rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm```
 
 
 ### Installing Apache2
@@ -43,15 +47,15 @@ This tutorial will make use of the following:
 
 ``` sudo apt-get install nginx ```
 
-### Installing PHP 7.0+ & Dependancies
+### Installing PHP + & Dependancies
 
 #### For CentOS
 
-(( Coming soon - being worked on ))
+```
+sudo yum install php56w-{mbstring,json,gd,dom,fileinfo,mysql}
+```
 
 #### For Ubuntu
-
-#### PHP 7.0
 
 ```sudo add-apt-repository ppa:ondrej/php```
 
@@ -60,7 +64,7 @@ This tutorial will make use of the following:
 ```sudo apt-get install php7.0-mbstring openssl php-json php7.0-xml php7.0-curl php7.0-gd php7.0-mysql```
 
 
-### Enable Dependancies (Works for both Apache2, and Nginx)
+### Enable Dependancies (Ubuntu)
 
 ```
 phpenmod mbstring
@@ -72,9 +76,16 @@ phpenmod fileinfo
 ```
 #### Restart Apache2 (Important after Enabling Dependancies)
 
+#### For Ubuntu
+
 ```
 sudo service apache2 restart
 ```
+#### For CentOS
+```
+sudo service httpd restart
+```
+
 
 ### Installing MySQL Server
 
