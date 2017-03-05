@@ -4,15 +4,15 @@
 
 ### Section 1: Getting Started
 
- - [Registration] (https://github.com/Arkinn/docs/blob/testing/guide/registration.md)
- - [Logging in] (https://github.com/Arkinn/docs/blob/testing/guide/login.md)
- - [Your Profile] (https://github.com/Arkinn/docs/blob/testing/guide/profile.md)
- - [Searching the Forum]
- - [Start a new discussion]
- - [Reply to a post]
- - [Reply to a persons comment]
- - [Like a post]
- - [Flag content]
+ - [Registration] (registration.md)
+ - [Logging in] (login.md)
+ - [Your Profile] (profile.md)
+ - [Searching the Forum] (searching.md)
+ - [Start a new discussion] (startdiscussion.md)
+ - [Reply to a post] (reply.md)
+ - [Reply to a persons comment] (replycomment.md)
+ - [Like a post] (like.md)
+ - [Flag content] (flag.md)
 
 ### Section 2: Moderator Basics
 
