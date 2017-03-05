@@ -16,13 +16,13 @@
 
 ### Section 2: Moderator Basics
 
- - [Review flagged content]
- - [Edit someones post]
- - [Delete someones post]
- - [Rename a discussion]
- - [Lock a discussion]
- - [Sticky/Unsticky a discussion]
- - [Edit assigned tags]
+ - [Review flagged content] (moderator/reviewflag.md)
+ - [Edit someones post] (moderator/editpost.md)
+ - [Delete someones post] (moderator/deletepost.md)
+ - [Rename a discussion] (moderator/renamediscussion.md)
+ - [Lock a discussion] (moderator/lock.md)
+ - [Sticky/Unsticky a discussion] (moderator/sticky.md)
+ - [Edit assigned tags] (moderator/editassignedtags.md)
 
 ### Section 3: Admin Basics
 
