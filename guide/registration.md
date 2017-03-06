@@ -9,7 +9,7 @@ You can find the Sign Up button generally located at the top right hand of your 
 
 Once you click the Sign Up button, you should be presented with a screen that looks like this:
 
-![alt tag] (http://i.imgur.com/Cu4Vy9E.png)
+![alt tag] (http://i.imgur.com/FhhpXfH.png)
 
 Flarum has a few authentication options you can use, such as Facebook, GitHub and Twitter accounts.
 
