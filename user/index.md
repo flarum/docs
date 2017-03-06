@@ -4,12 +4,9 @@
 
 Welcome to Flarum, an open-source forum software meant to be powerful yet simple.
 
-## Installation
-### - [Download the Files] (https://github.com/Arkinn/docs/blob/master/user/installation.md)
-### - [Configure the Web Server] (https://github.com/Arkinn/docs/blob/master/user/configuration.md)
-### - [Updating] (https://github.com/Arkinn/docs/blob/master/user/updating.md)
-###(Optional)###
-### - [Add Language Packs] (https://github.com/Arkinn/docs/blob/master/user/language.md)
+## OS Specific Installation Guides
+### - [CentOS 7]
+### - [Ubuntu Server]
 
 ## Support
 ### - [Troubleshooting] (https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
