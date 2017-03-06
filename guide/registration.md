@@ -3,13 +3,13 @@
 
 To be able to post, and interact with a Flarum powered community, you'll first need to register yourself a user account. The registration process could not be easier, and takes only a few moments of your time.
 
-You can find the register button generally located at the top right hand of your screen, which looks like this:
+You can find the Sign Up button generally located at the top right hand of your screen, which looks like this:
 
-![alt tag] (http://i.imgur.com/kMCiFia.png)
+![alt tag] (http://i.imgur.com/9AIZ8Sp.png)
 
 Once you click the Sign Up button, you should be presented with a screen that looks like this:
 
-![alt tag] (http://i.imgur.com/eBMezX7.png)
+![alt tag] (http://i.imgur.com/Cu4Vy9E.png)
 
 Flarum has a few authentication options you can use, such as Facebook, GitHub and Twitter accounts.
 
