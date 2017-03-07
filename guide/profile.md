@@ -39,4 +39,4 @@ Your settings page contains the ability to change your Password, and e-mail addr
  
 You are able to change this at any time simply by clicking on which event you wish to use, for example, if you wanted to receive an email whenever someone mentions you with the @ symbol in the forums, then **clicking that icon** making sure it is a **Green Tick** will activate that setting. Each time you click an icon, it will automatically save that preference for you.
 
-![alt tag} (http://i.imgur.com/7D5ZePl.png)
+![alt tag] (http://i.imgur.com/7D5ZePl.png)
