@@ -14,7 +14,7 @@ Before you install, please read our Contributing guide so you will know what you
 
 ## Installing from scratch on Ubuntu Server 16.04.2 LTS
 
-  - This guide has been extensively tested on Ubuntu SErver 16.04.2 LTS, if you use a different version to this, your mileage may vary!
+  - This guide has been extensively tested on Ubuntu Server 16.04.2 LTS, if you use a different version to this, your mileage may vary!
   
 ## Update your System
 
