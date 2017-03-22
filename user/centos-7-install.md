@@ -47,7 +47,7 @@ php -r "unlink('composer-setup.php');"
 
 ## Configure PHP-FPM
 
-nano /etc/php-fpm.d/www.conf
+nano /etc/php-fpm.d/ww&#8203;w.conf
 
 Find & Replace:
 ```
