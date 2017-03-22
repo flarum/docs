@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 ![alt tag] (http://flarum.org/img/logo.png)
+=======
+![alt tag](http://flarum.org/img/logo.png)
+>>>>>>> 71145da78db3a081d891abb9d56f3d852de6fc8d
 
 # End user guide
 
 Welcome to Flarum, an open-source forum software meant to be powerful yet simple.
 
+<<<<<<< HEAD
 ## Installation
 ### - [Download the Files] (https://github.com/Arkinn/docs/blob/master/user/installation.md)
 ### - [Configure the Web Server] (https://github.com/Arkinn/docs/blob/master/user/configuration.md)
@@ -14,6 +19,15 @@ Welcome to Flarum, an open-source forum software meant to be powerful yet simple
 ## Support
 ### - [Troubleshooting] (https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
 ### - [F.A.Q's] (https://github.com/Arkinn/docs/blob/master/user/faq.md)
+=======
+## OS Specific Installation Guides
+### - [CentOS 7](centos-7-install.md)
+### - [Ubuntu Server](ubuntu-server-install.md)
+
+## Support
+### - [Troubleshooting](https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
+### - [F.A.Q's](https://github.com/Arkinn/docs/blob/master/user/faq.md)
+>>>>>>> 71145da78db3a081d891abb9d56f3d852de6fc8d
 
 
 ## BETA Software
