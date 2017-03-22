@@ -2,7 +2,6 @@
 
 It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
 
-<<<<<<< HEAD
 Once you have added a language pack, you can [set it as the default language] (http://flarum.org/docs/languages/#setting-the-default) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it] (http://flarum.org/docs/languages/#disabling).
 
 If you’re using any third-party extensions, be sure to [read this] (http://flarum.org/docs/languages/#third-party-extensions) before you start.
@@ -10,15 +9,6 @@ If you’re using any third-party extensions, be sure to [read this] (http://fla
 ### Language Pack Installation
 
 To begin, visit the [Extensions > Languages] (http://discuss.flarum.org/t/languages) tag at the Flarum Community site and find a language pack that you want to install. Be sure to download the ZIP file for the Flarum version you’re running.
-=======
-Once you have added a language pack, you can [set it as the default language](http://flarum.org/docs/languages/#setting-the-default) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](http://flarum.org/docs/languages/#disabling).
-
-If you’re using any third-party extensions, be sure to [read this](http://flarum.org/docs/languages/#third-party-extensions) before you start.
-
-### Language Pack Installation
-
-To begin, visit the [Extensions > Languages](http://discuss.flarum.org/t/languages) tag at the Flarum Community site and find a language pack that you want to install. Be sure to download the ZIP file for the Flarum version you’re running.
->>>>>>> 71145da78db3a081d891abb9d56f3d852de6fc8d
 
   1. Unpack the ZIP file and read the instructions in the enclosed **readme.txt** file
 
