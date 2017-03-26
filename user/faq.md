@@ -8,6 +8,23 @@ Will I be able to upgrade from beta to subsequent releases?
 
 Yes! However, the upgrade process may require you to get your hands a little dirty. We’ll do our best to ensure it’s as easy as possible.
 
+### Can i donate money to speed up development?
+
+All donations are gratefully received, and you can do so at this location:
+
+[Make a Donation](http://flarum.org/donate)
+
+However, donations will not directly impact the speed of development on Flarum, we also encourage users to contribute in other ways, such as:
+
+ - [Code for Core](https://github.com/flarum/core)
+ - Code Extensions (( Awaiting future link to document ))
+ - Design / Develop Themes (( Awaiting future link to document ))
+ - Contribute to Documentation (( Future link to contrib page ))
+ - Translate Flarum (( Future link to Translation Docs ))
+ - [Provide Help & Support on the community forums](https://discuss.flarum.org/)
+ - [Make a monetary donation](http://flarum.org/donate)
+ - Be a Flarumite! (Fan)
+
 ### So can I use the beta version in production? Please?
 
 There’s a reason the [installation instructions](http://flarum.org/docs/installation/) begin by warning against this. Flarum is not mature yet, and there is plenty of room for something to go wrong. Extensions you’re relying on could be rendered incompatible by newer beta versions. Bugs could cause a loss of content or expose private information to the internet at large. Suboptimal SEO could hurt your site’s ranking, making it hard to attract new members. Existing members could get fed up with performance issues or incomplete features and head for greener pastures. And so on …
