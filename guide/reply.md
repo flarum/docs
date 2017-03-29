@@ -1,14 +1,32 @@
 ## User Handbook
 ### Making a Reply to a Post
 
-Making a reply to a post is a very simple process.
+When you want to make a reply, there are 2 things you will want to consider, are you replying to the **THREAD** it's self, or are you making a reply to **someone's comment**? either way there is a difference, we'll tell you (and also show you) the differences between the two.
 
-From the screenshot below, there are 2 ways to make a reply, one of those ways is to click on the large blue **"Reply"** button to the right hand side of the screen, alternatively at the bottom of the screen, there is a box wth **"Write a Reply.."** inside. 
+## Making a reply to the Thread
 
-![alt tag] (http://i.imgur.com/wZS1vLC.png)
+Using this method will create a fresh reply, with no mentions or ties to any other comment on the page (Unless you insert them manually).
 
-Clicking either of those, will bring up the reply box, where you can type your response in.
+To do this:
 
-![alt tag] (http://i.imgur.com/YJhssXV.png)
+ - Click on the **Reply** button to the right of the page, above the infinity scroller.
+ - Once the reply box displays, type your desired response to the thread.
+ - Click on the **Post Reply** button at the bottom left of the box.
+ 
+You will see your reply go live almost immediately for both you, and everyone else to see. The below animation will also show you visually how it's done.
 
-Once you have finished writing what you want to say, then go ahead and click "Post Reply" which wil make your post immediately visible on that thread, and allow anyone to reply to you.
+![alt tag](http://i.imgur.com/4YQv9FJ.gif)
+
+## Making a reply to another user's reply
+
+This particular method is used for when you wish to reply to a comment made by someone else, this will automatically create a tie to their reply and will notify the person that their comment has recieved a response (Depending on their personal preference settings) in case they wish to in turn respond to you.
+
+To do this:
+
+- Hover to the bottom of their post to bring up the **Reply** link
+- Once the reply box displays, type your desired response to the thread.
+- Click on the **Post Reply** button at the bottom left of the box.
+
+Again, once you've done this, your comment will go almost immediately live for all to view, and a notification (if they have allowed) will be immediately sent to their notification area.
+ 
+![alt tag](http://i.imgur.com/uLB6j2j.gif)
