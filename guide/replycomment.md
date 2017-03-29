@@ -1,16 +1,16 @@
 ## User Handbook
 ### Replying to a persons post
 
-So, you want to reply to a post posted by someone else? then let's show you how!
+This particular method is used for when you wish to reply to a comment made by someone else, this will automatically create a tie to their reply and will notify the person that their comment has recieved a response (Depending on their personal preference settings) in case they wish to in turn respond to you.
 
-Firstly, you'll want to find the post to reply to, once you have, hover your mouse over the right, bottom side of their post area, this will bring up more options, such as to like the post, etc (See below):
+To do this:
 
-![alt tag] (http://i.imgur.com/2mbfn6C.png)
+- Hover to the bottom of their post to bring up the **Reply** link
+- Once the reply box displays, type your desired response to the thread.
+- Click on the **Post Reply** button at the bottom left of the box.
 
-Simply clicking the **"Reply"** button there will bring up a reply window, and automatically mention the post in which you wish to respond to.
+Again, once you've done this, your comment will go almost immediately live for all to view, and a notification (if they have allowed) will be immediately sent to their notification area.
+ 
+![alt tag](http://i.imgur.com/uLB6j2j.gif)
 
-![alt tag] (http://i.imgur.com/y0WlFAt.png)
-
-After that, simply type your desired response, and click **"Post Reply"**
-
-Easy as that!
+If you are looking to make a reply to the thread only, then you'll want to view [this thread](reply.md) to see how!
