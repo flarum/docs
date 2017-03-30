@@ -5,16 +5,29 @@ Flarum has a powerful, easy to use forum search feature, to which you can search
 
 At the top of your screen, you'll see a box with **Search** written inside, you'll notice that this will do a search for discussions **AND** users all in the same box when you type.
 
-## Searching for a Forum User
+## Using the Search Box
 
-You can locate user accounts by simply typing their **username** in the search box, the section for this will be clearly labelled **Users** as the below animation will show you:
+In the below examples, we are going to use the search term 'free' and will be demonstrating how this looks and how to to look for both post content, and a users profile.
+The screenshot below will show what happens when we have entered our search term, and the results displayed:
 
-(( future: link to animation ))
+![alt tag](http://i.imgur.com/IrabCOH.png)
 
-Clicking on the name of the user you wish to view will take you directly to their profile.
+You'lll notice that the search system has done a search for both _content_ **AND** _users_ pretty cool, right?
 
-## Searching discussions for content
+### Selecting the user's profile
 
-Flarum allows you to search all discussions, and all replies (including titles) for keywords depending on your search, in the example below I have searched for the keyword _free_, as the below example will show you, it will list 3 discussions where that word is present and apply a bold font to the word(s) so they stand out.
+When you've clicked on the user's profile (I've done this from the search box above) you'll be presented with the users profile where you can view their posts, any discussions they've started or contributed to and also any times they have been mentioned on the forums. You can find a much more about this in the [Your Profile](profile.md) page.
 
-(( Future: link to animation ))
+![alt tag](http://i.imgur.com/fVYoWGG.png)
+
+### Selecting a post from the results
+
+Once you've seen something that takes your interest, or you've found the post you were looking for, go ahead and click the result from the search box which will display the discussion your post was found on. In the example below, I selected the first result from our search a little earlier.
+
+![alt tag](http://i.imgur.com/f82JsHJ.png)
+
+#### But wait, what happens if I can't find any posts of interest, or the one I'm looking for? 3 discussion is not enough!
+
+Well you are in luck! take another look at the search box (first screenshot), you'll see "Search all discussions for" clicking this will allow you see many more discussions and posts based on the search term you provided. To see what this looks like, see the screenshot below:
+
+![alt tag](http://i.imgur.com/79uOeJ3.png)
