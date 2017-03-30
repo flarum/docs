@@ -4,6 +4,8 @@
 
 As a Moderator, no doubt at some point through your journey your users will come across content that is not appropriate, off topic, spam etc. Flarum has an incredibly simple tool to deal with this, which we will outline in much greater detail in this document.
 
+### (( Documentation Note: The below 2 screenshots could do with replacing with an animation, it will look much tidier and give a better impression ))
+
 The screenshot below will show you what happens, and what you should expect to see when content is flagged for review:
 
 ![alt tag](http://i.imgur.com/w7yPYtR.png)
@@ -11,6 +13,7 @@ The screenshot below will show you what happens, and what you should expect to s
 So, you click on the flag message, and it will bring you to the post in question, similar to the below screenshot:
 
 ![alt tag](http://i.imgur.com/BS0p5rY.png)
+
 
 Pretty hard to miss, right?
 
