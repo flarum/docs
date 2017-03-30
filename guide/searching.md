@@ -3,12 +3,18 @@
 
 Flarum has a powerful, easy to use forum search feature, to which you can search for post content, users and mentions.
 
-At the top of your screen, you'll see a box with _Search_ written inside, you can use this box to search for almost anything you want on the forums. For example, in the screenshot below I searched for posts, user and mentions for the user 'Franz'
+At the top of your screen, you'll see a box with **Search** written inside, you'll notice that this will do a search for discussions **AND** users all in the same box when you type.
 
-![alt tag] (http://i.imgur.com/t35GIPi.png)
+## Searching for a Forum User
 
-Click on either the User, or the Posts to be taken directly to them.
+You can locate user accounts by simply typing their **username** in the search box, the section for this will be clearly labelled **Users** as the below animation will show you:
 
-It's as easy as that!
+(( future: link to animation ))
 
-If you want to see more results, click on the top result "Search all discussions for 'Franz'" and that will happen.
+Clicking on the name of the user you wish to view will take you directly to their profile.
+
+## Searching discussions for content
+
+Flarum allows you to search all discussions, and all replies (including titles) for keywords depending on your search, in the example below I have searched for the keyword _free_, as the below example will show you, it will list 3 discussions where that word is present and apply a bold font to the word(s) so they stand out.
+
+(( Future: link to animation ))
