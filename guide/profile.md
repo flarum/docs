@@ -9,33 +9,37 @@ Flarum has a basic profile system, in your profile there are 3 different categor
 
 ## Categories Explained
 
+You can be taken straight to any of the posts, or discussions explained in this section by clicking on the result of each of the categories.
+
 ### Posts 
-Will allow you to see a 'Timeline view' of posts that you have made in any discussion you have access to, starting from the most recent at the top, to the older at the bottom. 
+The Posts tab will allow you to see a 'Timeline view' of posts that you have made in any discussion you have access to, the most recent posts you have made will appear at the top, whilst the older posts will be descending.
 You can see an example of how the look in the screenshot below:
 
 ![alt tag](http://i.imgur.com/Bue8BZ1.png)
 
 ### Discussions
-Allows you to see what discussions you are currently participating in, for example have either started, or made a reply in. Again this is most recent at the top, to the older at the bottom.
+The Discussions tab will allow you to see what discussions you are currently participating in, or have started. The order they appear in is the same as **Posts**, the most recent at the top.
+
 You can see how this looks in the screenshot below:
 
 ![alt tag](http://i.imgur.com/Z1jA2Nb.png)
 
 ### Mentions
-This will list any posts that have mentioned you by username (starting with @), most recent mentions start at the top, to the older at the bottom.
+The Mentions tab will display all the posts you have recieved a mention in, following the same ordering by having the most recent at the top.
+
 This is how it looks:
 
 ![alt tag](http://i.imgur.com/4SgbhzL.png)
 
 ### Settings
 
-Your settings page contains the ability to change your Password, and e-mail address (which you can see in the screenshot below). You are also given the option to change how you wish to be notified about certain events. Each one is configurable for both notification area, and e-mail. 
+The Settings page allows you to configure certain preferences on your profile, you may change your registered e-mail address and password on this page. You can also set your preference on how you wish to be notified about certain events in Flarum, for example you can set if you wish to be notified by email and/or in the notification area if someone replies to your post. There are many other options available for you to see, take a look at the screenshot below to see what Flarum can do for you!
 
 #### Notification Key
 
  - The **Red "X"** means that the event selected will **NOT** trigger a notification.
  - The **Green Tick** means that the event selected **WILL** trigger a notification.
- - The **Grey "X"** means that the event **cannot** be triggered at this time.
+ - The **Grey "X"** means that the event **CANNOT** be triggered at this time.
  
 You are able to change this at any time simply by clicking on which event you wish to use, for example, if you wanted to receive an email whenever someone mentions you with the @ symbol in the forums, then **clicking that icon** making sure it is a **Green Tick** will activate that setting. Each time you click an icon, it will automatically save that preference for you.
 
