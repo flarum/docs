@@ -3,7 +3,7 @@
 
 Once you have [created a user account](https://github.com/Arkinn/docs/blob/testing/guide/registration.md) the next step to interacting with the community will be to login.
 
-The login screen can be accessed by clicking "Log In" at the top right of the screen, the animation below will show you what thi looks like:
+The login screen can be accessed by clicking **Log In** at the top right of the screen, the animation below will show you what this looks like:
 
 ![alt img](http://i.imgur.com/alVHNSp.gif)
 
