@@ -8,8 +8,6 @@ To sign up, click the "Sign Up" button at the top right of the screen to be pres
 ![alt tag](http://i.imgur.com/sMZR7Zj.gif)
 
 
-Flarum has a few authentication options you can use, such as Facebook, GitHub and Twitter accounts.
-
  - **Username** - This will be your member account name, it will be displayed on all the posts you make and the discussions you start, aswell as your profile page. You may have to try a few names depending if your username is already taken by another party.
 
  - **E-Mail** - This will be an e-mail account of your choosing linked to your Forum account, you will need to provide a valid, working email address otherwise it may hinder your ability to use the site at all.
