@@ -28,8 +28,6 @@ Alright! so you've soft-deleted the post, that's cool but it's still there. Not 
 
 ** ((Documentation note: test out an animation below (showing both sides of post delete))) **
 
-![alt tag](http://i.imgur.com/c6YQYdx.png)
-
 Firstly, you need to go to the post location (If you're not already there), after the username, and post time you'll see the _post menu_. Go ahead and click on that, which will bring the post back to full view again, not for long though! as at the bottom right of the post space, there will be another _post menu_, click on that and you'll be presented with 2 options.
 
  - Restore
