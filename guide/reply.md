@@ -1,8 +1,6 @@
 ## User Handbook
 ### Making a Reply to a Post
 
-Making a reply to a comment is very simple, 
-
 Using this method will create a fresh reply, with no mentions or ties to any other comment on the page (Unless you insert them manually).
 
 To do this:
