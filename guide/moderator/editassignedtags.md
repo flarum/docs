@@ -4,7 +4,7 @@
 
 Has a thread been assigned the wrong tags or do you need to add more? not to worry! this is easy to do.
 
-Using the screenshot below, find the thread in question, and hover your mouse over the right side, which will reveal the three dots icon, click that to reveal the thread menu:
+Using the screenshot below, find the thread in question, and hover your mouse over the right side, which will reveal the _thread menu_.
 
 ![alt tag](http://i.imgur.com/EXfRXAZ.png)
 
