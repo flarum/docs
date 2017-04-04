@@ -16,6 +16,7 @@ From here you can do 1 of 2 things.
  - Delete the Post
 
 Is the content truly requiring mod action? then go ahead and delete the post! just be warned that this option will only **soft-delete** the post for now (we'll show you how to permanently delete it below shortly).
+![alt tag](http://i.imgur.com/RfllSQx.gif)
 
  - Dismiss the Flag
 
@@ -33,8 +34,10 @@ Firstly, you need to go to the post location (If you're not already there), afte
 
  - Restore
 
-Made an error the first time, and don't think the post needed deleting? no problem, click Restore and it will be put straight back.
+Made an error the first time, and don't think the post needed deleting? no problem, click Restore and it will be put straight back. Go ahead and check out the animation below:
+![alt tag](http://i.imgur.com/3950KkC.gif)
 
  - Delete Forever
 
 Definitely sure this needs to go? then click this button, and the post will vanish from the site. Just be warned though, that if you chose this option, there's no going back!
+![alt img](http://i.imgur.com/x6DxtER.gif)
