@@ -10,10 +10,10 @@ Be aware though, clicking **Delete** will only soft-delete the post, meaning for
 
 The option to Delete looks like this:
 
-![alt tag](http://i.imgur.com/cGDouMB.png)
+![alt tag](https://camo.githubusercontent.com/169b2749ce69efc1e7b322b2e90276924de98a50/687474703a2f2f692e696d6775722e636f6d2f52666c6c5351782e676966)
 
 To permanently delete the post, once you are **sure you want it removing** then go ahead and expand the post, by clicking on the three dots next to the username of the poster (screenshot below, top left), once the post is expanded, do the same as you did in the last step, click on the bottom right three dots, this will being up the option to **Delete Forever**.
 
-![alt tag](http://i.imgur.com/a8NTCqv.png)
+![alt tag](https://camo.githubusercontent.com/0f74b3ce554ed0dae90d34eb27bef8c11e8b5b0c/687474703a2f2f692e696d6775722e636f6d2f783644787445522e676966)
 
 Once you've clicked on **Delete Forever** the post will be permanently removed from the database.
