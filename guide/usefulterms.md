@@ -3,11 +3,24 @@
 
 This part of the document is to give you a better understanding on what certain terms said throughout the documentation mean. You can refer to this at any time you are uncertain of anything.
 
-#### Discussion
+**_Discussion_**
+
 This is a brand new 'thread' or 'discussion' which creates the initial post for people to reply to.
 
-#### Post
+**_Post_**
+
 A post is found at the very start of a discussion, and also any subsequent replies users make. A post is the content that you as a user write in contribution to a particular discussion or thread.
 
-#### Mention
-A mention is activated by typing @(username) anywhere in your post (obviously replacing 'username' with the username of the person you wish to mention). This will create a link to that person's user account, and will also notify them that they've been mentioned when they next login (or straight away if they are already online). This function is designed to bring a post or thread to someone's attention.
+**_Mention_**
+
+Mentions are a way of publically alerting another user to the discussion or post, a mention is used by:
+@username
+for example, if someone wanted to mention me (Arkinn) to a post, they would simply type @arkinn **anywhere** in their post (content can also be added aswell), once submitted I would get a notification of the mention immediately.
+
+**_Post Menu_**
+
+The Post Menu is a small list of tools that can be used to edit, flag, reply to, like, delete, restore and permanently delete a post.
+
+**_Thread Menu_**
+
+The Thread Menu is similar to the Post Menu, although is designed specifically for use with threads/discussions. The tools allow for lock/unlock, sticky/unsticky, deleting, follow/unfollow, rename and edit tags.
