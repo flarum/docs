@@ -2,6 +2,8 @@
 
 ### Editing a User's Post
 
+(( Documentation note: review required / not happy with the wording of first paragraph ))
+
 So, you need to edit a users post? simple, let's show you how!
 
 Firstly, you'll need to find the post in question, once you are there, hover your mouse over the right, lower side of the post area. You'll see three dots, with a background. Click on that, and as the screenshot below will show, you'll have the option to edit the selected post.
