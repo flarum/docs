@@ -9,9 +9,9 @@ We need to let the Moderators know why this post is being flagged, you can selec
 
 ![alt img](http://i.imgur.com/FOWYKBx.png)
 
-**Off-topic** this option is for anything not related to the subject being spoken about.
-**Inappropriate** for anything that is not appropriate for the forum, such as nudity, bad language etc.
-**Spam** self-explanatory really, but could be things like advertising, nonsense typing or filling many discussions with the same post.
-**Other** in case the category for the flag is not listed, you can type your own reason for flagging the post. 
+- **Off-topic** this option is for anything not related to the subject being spoken about.
+- **Inappropriate** for anything that is not appropriate for the forum, such as nudity, bad language etc.
+- **Spam** self-explanatory really, but could be things like advertising, nonsense typing or filling many discussions with the same post.
+- **Other** in case the category for the flag is not listed, you can type your own reason for flagging the post. 
 
 Once you've selected the appropriate radio button, click **Flag Post** which will immediately send the alert to the Moderators.
