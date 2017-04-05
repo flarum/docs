@@ -30,7 +30,7 @@ Firstly, you need to go to the post location (If you're not already there), afte
 
  - Restore
 
-Made an error the first time, and don't think the post needed deleting? no problem, click Restore and it will be put straight back. Go ahead and check out the animation below:
+Made an error the first time, and don't think the post needed deleting? no problem, click **Restore** and it will be put straight back. Go ahead and check out the animation below:
 ![alt tag](http://i.imgur.com/3950KkC.gif)
 
  - Delete Forever
