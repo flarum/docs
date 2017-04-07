@@ -35,7 +35,7 @@ rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 
 rpm -Uvh https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
 yum -y update
-yum install -y nginx php71w-{cli,curl,mbstring,openssl,json,pdo_mysql,gd,dom,fpm} mysql-server
+yum install -y nginx php71w-{cli,curl,mbstring,openssl,json,pdo_mysql,gd,dom,fpm} mysql-server unzip
 ```
 
 ## Install Composer
