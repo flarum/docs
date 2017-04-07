@@ -35,3 +35,6 @@
  - [Assign permissions to User Groups](admin/grouppermissions.md)
  - [Upload a custom Logo / Favicon](admin/uploadlogo.md)
  - [Create/Edit/Remove Primary & Secondary Tags](admin/tags.md)
+ 
+ ### Section 4: Useful Links
+ - [Useful Terms](usefulterms.md)
