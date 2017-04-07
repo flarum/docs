@@ -25,7 +25,7 @@ sudo apt-get update && sudo apt-get upgrade
 ## Install Dependancies
 
 ```
-sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server
+sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip
 ```
 
 ## Download & Install Flarum
