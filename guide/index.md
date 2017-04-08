@@ -2,6 +2,12 @@
 
 ## User Handbook
 
+Welcome!
+
+Thank you for viewing the Flarum User Handbook. Throughout the contents of the sections, we will be showing you in depth how to use different parts of Flarum. On many of the sections, we also **show** you how to do a particular task by using animated gifs. 
+
+The contents of this user handbook are constantly being updated, both with edits/fixes when new versions are released, and also when we find something that we have not yet written about that we feel our users would benefit from knowing. So with that in mind, please check back here regularly for new content.
+
 ### Section 1: Getting Started
 
  - [Registration](registration.md)
