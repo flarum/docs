@@ -16,6 +16,7 @@ To upload a custom favicon, do the same as above, only under the **Favicon** lab
 (( future: shot of favicon option ))
 
 Recommended **minimum** image dimensions are:
+
 Logo: 241px x 60px
 
 Favicon: 32px x 32px
