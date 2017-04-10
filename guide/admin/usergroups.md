@@ -1,11 +1,13 @@
 ## User Handbook
 ### Creating, Deleting and Modifying User Groups
 
-Managing user groups on your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking Administration. The example below will show you how this is done:
+Managing user groups on your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-(( Future: shot of Administration link ))
+![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
 
-Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Permissions** to reveal the user group configuration page to the right hand side.
+Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Permissions** to reveal the configuration page to the right hand side.
+
+![Permissions Screenshot](http://i.imgur.com/yX4ETf0.png)
 
 User groups are used for all kinds of different purposes, Flarum has a fantastic management system which makes it super-easy to manage user groups, and their associated permissions.
 
@@ -13,7 +15,7 @@ User groups are used for all kinds of different purposes, Flarum has a fantastic
 
 On the configuration page, you'll see some pre-created user groups (if your Flarum installation is a fresh install), these are Admins & Mods. Next to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
 
-(( Future: screenshot of group creation prompt ))
+![SS Group Creation Prompt](http://i.imgur.com/MM091OJ.png)
 
 There are 4 pieces of information Flarum needs from you to create this new user group, for this example we're going to be creating a user group called **Staff Member** but you can name this anything you wish.
 
@@ -31,6 +33,10 @@ Choosing a Color can be done by obtaining the HTML Colour Code of your desired c
 ##### Icon
 
 The Icon is a small picture that goes at the side of your user avatar in posts to signify that you are a member of this particular user group. To pick your icon, you'll need to visit [This Website](http://fontawesome.io/icons/) to pick out your icon, for this example we will be using the ```id-card``` icon. In this field, you'll just need to write "id-card" (without the quotation brackets) and then we're done!
+
+Once you've filled in the form, it should look something like this:
+
+![SS Group Create Filled In](http://i.imgur.com/3hca40f.png)
 
 Click on **Save Changes** once you've completed the form, which will then create your new user group!
 
