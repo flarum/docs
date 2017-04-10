@@ -9,7 +9,7 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ![Tags Screenshot](http://i.imgur.com/5OXYTTd.png)
 
-#### Creating a new Tag
+### Creating a new Tag
 
 A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins).
 
