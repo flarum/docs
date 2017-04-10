@@ -36,7 +36,7 @@ Choosing a Color can be done by obtaining the HTML Colour Code of your desired c
 
 #### Icon
 
-The Icon is a small picture that goes at the side of your user avatar in posts to signify that you are a member of this particular user group. To pick your icon, you'll need to visit [This Website](http://fontawesome.io/icons/) to pick out your icon, for this example we will be using the ```id-card``` icon. In this field, you'll just need to write "id-card" (without the quotation brackets) and then we're done!
+The Icon is a small picture that goes at the side of your user avatar in posts to signify that you are a member of this particular user group. To pick your icon, you'll need to visit [this website](http://fontawesome.io/icons/) to pick out your icon, for this example we will be using the ```id-card``` icon. In this field, you'll just need to write "id-card" (without the quotation brackets) and then we're done!
 
 Once you've filled in the form, it should look something like this:
 
