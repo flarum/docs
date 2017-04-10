@@ -12,7 +12,7 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 On the configuration page, you'll see the **Home Page** option with 2 radio buttons underneath, they read **All Discussions** and **Tags**.
 
-#### All Discussions
+### All Discussions
 
 Having this radio button set will display the most recent discussions by default on the forum main page (home page), sticky topics will of course remain at the very top of the board.
 
@@ -20,7 +20,7 @@ The **All Discussions** option makes the forum look like this:
 
 ![Screenshot of All Discussions](http://i.imgur.com/RVAzmWf.png)
 
-#### Tags
+### Tags
 
 This radio button will set your forum's main page (home page) to display your set tags only, you'll have to click whichever category you wish to view before any discussions will appear.
 
