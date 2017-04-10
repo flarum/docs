@@ -23,7 +23,7 @@ To start off with it is essential that you know what permissions you wish to ass
 
 You'll need to repeat that process for each permission you wish to assign.
 
-### Removing permmissions from a User Group
+### Removing permissions from a User Group
 
 To remove the permission assigned, follow the same procedure above, this time you'll be clicking the user group to **remove** it from the permission, see below for an example:
 
