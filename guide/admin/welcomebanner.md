@@ -11,12 +11,11 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ![Basics Screenshot](http://i.imgur.com/ZMggtZG.png)
 
-Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on Basics to reveal the configuration page to the right hand side.
-
 On the configuration page, you'll see **Welcome Banner** as the last option on that page, underneath will be **2** text boxes, one for the forum title, and one for subheading.
-![SS of Welcome Banner](http://i.imgur.com/u36JGbS.png)
+
+![Forum Banner picture](http://i.imgur.com/H4CNKoN.png)
 
 By default the title says "Welcome to Flarum"
 And by default the subheading says "This is beta software and you should not use it in production."
 
-Once you've changed those 2 boxes to be appropriate for your forum, click **Save Changes** to make those edits immediately live on your forum instance.
+Make the necessary edits that you feel are necessary to those 2 fields then click **Save Changes** to save your new welcome banner.
