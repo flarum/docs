@@ -36,7 +36,6 @@ The contents of this user handbook are constantly being updated, both with edits
  - [Change the Forum Description](admin/forumdescription.md)
  - [Change home page view](admin/homeview.md)
  - [Edit the Welcome Banner](admin/welcomebanner.md)
- - [Configure your forum SMTP settings](admin/smtp.md)
  - [Add/Modify/Delete User Groups](admin/usergroups.md)
  - [Assign permissions to User Groups](admin/grouppermissions.md)
  - [Upload a custom Logo / Favicon](admin/uploadlogo.md)
