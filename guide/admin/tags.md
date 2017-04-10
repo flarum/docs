@@ -17,23 +17,23 @@ On the configuration page for **Tags** you'll need to click **Create Tag** which
 
 ![SS Tag Creation Box](http://i.imgur.com/0Gr5W9t.png)
 
-### Create Tag Components:
+### Create Tag Components
 
-#### Name
+#### Name:
 
 The name is what you'd like the tag to be called, also known as the category title.
 
-#### Slug
+#### Slug:
 
 The slug is a string that goes into the URL, essentially it's a version of the name of the tag that is all lower-case, and uses dashes instead of spaces.
 
 Unless you need to, you generally don't need to do anything with this, as when you type in the **Name** the slug auto-fills in.
 
-#### Description
+#### Description:
 
 The description of the tag will appear alongside the **name** in the tag selection post when making a post, it's a short few words giving a more in-depth description of the category it belongs to.
 
-#### Colour
+#### Colour:
 
 This is the colour you would like the tag to appear in on the posts, and forums, the colour box uses **HTML Colour Codes** beginning with a **#** you can Google around for HTML Colour Codes, there are plenty of websites on this.
 
