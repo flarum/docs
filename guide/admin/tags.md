@@ -1,11 +1,13 @@
 ## User Handbook
 ### Creating, editing and deleting Tags
 
-Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking Administration. The example below will show you how this is done:
+Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-(( Future: shot of Administration link ))
+![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
 
 Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Tags** to reveal the configuration page to the right hand side.
+
+![Tags Screenshot](http://i.imgur.com/5OXYTTd.png)
 
 #### Creating a new Tag
 
@@ -13,7 +15,7 @@ A tag is a way of categorising posts made by a user, they are primarily set by t
 
 On the configuration page for **Tags** you'll need to click **Create Tag** which will bring up the create tag box:
 
-(( Future: shot of tag creation box ))
+![SS Tag Creation Box](http://i.imgur.com/0Gr5W9t.png)
 
 Create Tag Components:
 
@@ -39,14 +41,14 @@ Once you've filled in the appropriate information in the Create Tag prompt, clic
 
 By default, new tags created will be **Secondary Tags** also known as **Sub Categories**, sometimes you'll want these to be primary tags, to do this, click and drag the tag to the **Primary** slot at the top, follow the below animation to see how this is done:
 
-(( Future: animation to show moving between primary and secondary tags ))
+![Anim - Moving Tags](http://i.imgur.com/vW8ynBs.gif)
 
 #### Deleting a Tag
 
 To delete a tag, hover your mouse to the right of the tag you wish to remove, and click on the **Pencil Icon** this will bring up the editing prompt, to the bottom right of that prompt, you'll see the **Delete tag** link, click that and then click **OK** to delete the tag.
 The below animation will show you how this is done:
 
-(( Future: animation to delete a tag ))
+![Anim - Delete a Tag](http://i.imgur.com/cVdeJzw.gif)
 
 #### Editing a Tag
 
