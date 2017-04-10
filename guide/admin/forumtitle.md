@@ -9,11 +9,7 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ![Basics Screenshot](http://i.imgur.com/ZMggtZG.png)
 
-At the top of the configuration page, you'll see _Forum Title_ underneath will be a box with your **current** forum title written in. As show below:
-
-![SS of Welcome Banner in ACP](http://i.imgur.com/H4CNKoN.png)
-
-Replace both fields of text with what you think is necesssary, and then click on _**Save Changes**_
+At the top of the configuration page, you'll see _Forum Title_ underneath will be a box with your **current** forum title written in. Replace the text with your desired forum title and then click on _**Save Changes**_
 
 Once you've one that, to the top left of your screen, there will be an arrow pointing to the left as show below:
 
