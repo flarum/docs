@@ -16,5 +16,3 @@ Once you've one that, to the top left of your screen, there will be an arrow poi
 ![Anim for Home](http://i.imgur.com/5QJY4fH.gif)
 
 Click the arrow, which will then take you back to your forum's main page, with your new forum title in place.
-
-Easy as that, your new forum title has been saved!
