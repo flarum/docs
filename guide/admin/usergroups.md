@@ -13,7 +13,11 @@ User groups are used for all kinds of different purposes, Flarum has a fantastic
 
 ### Create a new User Group
 
-On the configuration page, you'll see some pre-created user groups (if your Flarum installation is a fresh install), these are Admins & Mods. Next to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
+On the configuration page, you'll see some pre-created user groups (if your Flarum installation is a fresh install), these are Admins & Mods, as shown below:
+
+![SS Group bar](http://i.imgur.com/04ZEw0G.png)
+
+Next to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
 
 ![SS Group Creation Prompt](http://i.imgur.com/MM091OJ.png)
 
