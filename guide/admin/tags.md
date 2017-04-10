@@ -25,7 +25,9 @@ The name is what you'd like the tag to be called, also known as the category tit
 
 ##### Slug
 
-(( Future: need to ask about this ))
+The slug is a string that goes into the URL, essentially it's a version of the name of the tag that is all lower-case, and uses dashes instead of spaces.
+
+Unless you need to, you generally don't need to do anything with this, as when you type in the **Name** the slug auto-fills in.
 
 ##### Description
 
