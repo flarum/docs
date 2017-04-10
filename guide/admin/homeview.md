@@ -2,7 +2,7 @@
 ### Changing the Home Page View
 
 
-Changing the title of your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
+Changing the home page view layout of your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
 ![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
 
