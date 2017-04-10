@@ -39,19 +39,19 @@ This is the colour you would like the tag to appear in on the posts, and forums,
 
 Once you've filled in the appropriate information in the Create Tag prompt, click on **Save Changes** to add the new tag.
 
-#### Moving the Tag between Primary, and Secondary tags
+### Moving the Tag between Primary, and Secondary tags
 
 By default, new tags created will be **Secondary Tags** also known as **Sub Categories**, sometimes you'll want these to be primary tags, to do this, click and drag the tag to the **Primary** slot at the top, follow the below animation to see how this is done:
 
 ![Anim - Moving Tags](http://i.imgur.com/vW8ynBs.gif)
 
-#### Deleting a Tag
+### Deleting a Tag
 
 To delete a tag, hover your mouse to the right of the tag you wish to remove, and click on the **Pencil Icon** this will bring up the editing prompt, to the bottom right of that prompt, you'll see the **Delete tag** link, click that and then click **OK** to delete the tag.
 The below animation will show you how this is done:
 
 ![Anim - Delete a Tag](http://i.imgur.com/cVdeJzw.gif)
 
-#### Editing a Tag
+### Editing a Tag
 
 Made a mistake, or need to change something on a tag? follow the same procedure as above in **Deleting a Tag** until you get to the editing prompt, this time, **DON'T** click on Delete Tag, instead edit the information displayed until you are happy, then click **Save Changes**. Easy as that!
