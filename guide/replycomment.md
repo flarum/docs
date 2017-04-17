@@ -11,6 +11,6 @@ To do this:
 
 Again, once you've done this, your comment will go almost immediately live for all to view, and a notification (if they have allowed) will be immediately sent to their notification area.
  
-![alt tag](http://i.imgur.com/uLB6j2j.gif)
+![Anim - Reply to a post/comment ](http://i.imgur.com/uLB6j2j.gif)
 
 If you are looking to make a reply to the thread only, then you'll want to view [this thread](reply.md) to see how!
