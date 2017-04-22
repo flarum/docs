@@ -12,7 +12,7 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 On the configuration page to the right, you'll see **Forum Description** with a box underneath to write in, write a few words which generally describe what kind of forum community you are creating then click on **Save Changes**.
 
-Once you've one that, to the top left of your screen, there will be an arrow pointing to the left as show below:
+Once you've done that, to the top left of your screen, there will be an arrow pointing to the left as show below:
 
 ![Arrow to Home](http://i.imgur.com/5QJY4fH.gif)
 
