@@ -5,7 +5,7 @@ Once you have [created a user account](https://github.com/Arkinn/docs/blob/testi
 
 The login screen can be accessed by clicking **Log In** at the top right of the screen, the animation below will show you what this looks like:
 
-![Anim - Login page](http://i.imgur.com/alVHNSp.gif)
+![Animation - Login page](http://i.imgur.com/alVHNSp.gif)
 
 Enter your **Username** _OR_ **e-mail address** and **Password** that you filled out during the [sign up process](https://github.com/Arkinn/docs/blob/testing/guide/registration.md) and then click Log In. 
 
