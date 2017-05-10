@@ -17,9 +17,11 @@ In this guide, we're going to use the usergroup that we created in [Create/Modif
 
 ### Assigning permissions to a User Group
 
-To start off with it is essential that you know what permissions you wish to assign to the user group you selected, in this example, as it's a staff member user group, we're going to be assigning all of the available permissions, you can do that by hovering your mouse after the icon of each of the available permissions, there you'll find a small drop-down icon, click that and select the user group you wish to attach this permission to, as you can see below:
+To start off with, it's crucial that you know which user group should recieve which permission, it's a good idea to have this mapped out before hand, as it will help invaluably later on.
 
-![Anim - Assigning Permissions](http://i.imgur.com/NwxeTLI.gif)
+As you'll see in the animation below, simply select the permission, and then select the target user group on the drop down menu - simple!
+
+![Animation - Assigning Permissions](http://i.imgur.com/NwxeTLI.gif)
 
 You'll need to repeat that process for each permission you wish to assign.
 
@@ -27,5 +29,5 @@ You'll need to repeat that process for each permission you wish to assign.
 
 To remove the permission assigned, follow the same procedure above, this time you'll be clicking the user group to **remove** it from the permission, see below for an example:
 
-![Anim - Removing Permissions](http://i.imgur.com/VKDVXwI.gif)
+![Animation - Removing Permissions](http://i.imgur.com/VKDVXwI.gif)
 
