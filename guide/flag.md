@@ -7,7 +7,7 @@ Firstly, find the post that you wish to flag, then click on the _Post Menu_ to r
 
 We need to let the Moderators know why this post is being flagged, you can select from a list of 3 items, these are currently:
 
-![SS - Report a post options](http://i.imgur.com/FOWYKBx.png)
+![SS - Report a post options](687474703a2f2f692e696d6775722e636f6d2f464f57594b42782e706e67.png)
 
 - **Off-topic** this option is for anything not related to the subject being spoken about.
 - **Inappropriate** for anything that is not appropriate for the forum, such as nudity, bad language etc.
