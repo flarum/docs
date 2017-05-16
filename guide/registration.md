@@ -5,7 +5,7 @@ To be able to post, and interact with a Flarum powered community, you'll first n
 
 To sign up, click the "Sign Up" button at the top right of the screen to be presented with the sign up form, like the animation below:
 
-![Animation - Sign up page](http://i.imgur.com/sMZR7Zj.gif)
+![Animation - Sign up page](687474703a2f2f692e696d6775722e636f6d2f734d5a52375a6a2e676966.gif)
 
 
  - **Username** - This will be your member account name, it will be displayed on all the posts you make and the discussions you start, aswell as your profile page. You may have to try a few names depending if your username is already taken by another party.
