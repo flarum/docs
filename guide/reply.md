@@ -11,6 +11,6 @@ To do this:
  
 You will see your reply go live almost immediately for both you, and everyone else to see. The below animation will also show you visually how it's done.
 
-![Animation - Like and unlike a post](http://i.imgur.com/4YQv9FJ.gif)
+![Animation - Like and unlike a post](687474703a2f2f692e696d6775722e636f6d2f3459517639464a2e676966.gif)
 
 If you want to create a reply to someone's comment, then you'll want to view [this link](replycomment.md) to see how it's done!
