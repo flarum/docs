@@ -4,11 +4,11 @@
 
 Changing the home page view layout of your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
+![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
 Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Basics** to reveal the configuration page to the right hand side.
 
-![Basics Screenshot](http://i.imgur.com/ZMggtZG.png)
+![Basics Screenshot](687474703a2f2f692e696d6775722e636f6d2f5a4d6767745a472e706e67.png)
 
 On the configuration page, you'll see the **Home Page** option with 2 radio buttons underneath, they read **All Discussions** and **Tags**.
 
@@ -18,7 +18,7 @@ Having this radio button set will display the most recent discussions by default
 
 The **All Discussions** option makes the forum look like this:
 
-![Screenshot of All Discussions](http://i.imgur.com/RVAzmWf.png)
+![Screenshot of All Discussions](687474703a2f2f692e696d6775722e636f6d2f5256417a6d57662e706e67.png)
 
 ### Tags
 
@@ -26,7 +26,7 @@ This radio button will set your forum's main page (home page) to display your se
 
 The **Tags** option will make the forum look like this:
 
-![Screenshot of Tags option](http://i.imgur.com/DbXUwQa.png)
+![Screenshot of Tags option](687474703a2f2f692e696d6775722e636f6d2f446258557751612e706e67.png)
 
 Setting any of these options will set it for **everybody** there is currently no way to set this for individual users, so bear that in mind when making the decision which one suits your forum the best.
 
