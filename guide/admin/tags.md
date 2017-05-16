@@ -3,11 +3,11 @@
 
 Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
+![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
 Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Tags** to reveal the configuration page to the right hand side.
 
-![Tags Screenshot](http://i.imgur.com/5OXYTTd.png)
+![Tags Screenshot](687474703a2f2f692e696d6775722e636f6d2f354f58595454642e706e67.png)
 
 ### Creating a new Tag
 
@@ -15,7 +15,7 @@ A tag is a way of categorising posts made by a user, they are primarily set by t
 
 On the configuration page for **Tags** you'll need to click **Create Tag** which will bring up the create tag box:
 
-![SS Tag Creation Box](http://i.imgur.com/0Gr5W9t.png)
+![SS Tag Creation Box](687474703a2f2f692e696d6775722e636f6d2f304772355739742e706e67.png)
 
 ### Create Tag Components
 
@@ -43,14 +43,14 @@ Once you've filled in the appropriate information in the Create Tag prompt, clic
 
 By default, new tags created will be **Secondary Tags** also known as **Sub Categories**, sometimes you'll want these to be primary tags, to do this, click and drag the tag to the **Primary** slot at the top, follow the below animation to see how this is done:
 
-![Anim - Moving Tags](http://i.imgur.com/vW8ynBs.gif)
+![Anim - Moving Tags](687474703a2f2f692e696d6775722e636f6d2f765738796e42732e676966.gif)
 
 ### Deleting a Tag
 
 To delete a tag, hover your mouse to the right of the tag you wish to remove, and click on the **Pencil Icon** this will bring up the editing prompt, to the bottom right of that prompt, you'll see the **Delete tag** link, click that and then click **OK** to delete the tag.
 The below animation will show you how this is done:
 
-![Anim - Delete a Tag](http://i.imgur.com/cVdeJzw.gif)
+![Anim - Delete a Tag](687474703a2f2f692e696d6775722e636f6d2f635664654a7a772e676966.gif)
 
 ### Editing a Tag
 
