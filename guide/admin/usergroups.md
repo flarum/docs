@@ -3,11 +3,11 @@
 
 Managing user groups on your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
+![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
 Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Permissions** to reveal the configuration page to the right hand side.
 
-![Permissions Screenshot](http://i.imgur.com/yX4ETf0.png)
+![Permissions Screenshot](687474703a2f2f692e696d6775722e636f6d2f795834455466302e706e67.png)
 
 User groups are used for all kinds of different purposes, Flarum has a fantastic management system which makes it super-easy to manage user groups, and their associated permissions.
 
@@ -15,11 +15,11 @@ User groups are used for all kinds of different purposes, Flarum has a fantastic
 
 On the configuration page, you'll see some pre-created user groups (if your Flarum installation is a fresh install), these are Admins & Mods, as shown below:
 
-![SS Group bar](http://i.imgur.com/04ZEw0G.png)
+![SS Group bar](687474703a2f2f692e696d6775722e636f6d2f30345a457730472e706e67.png)
 
 Next to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
 
-![SS Group Creation Prompt](http://i.imgur.com/MM091OJ.png)
+![SS Group Creation Prompt](687474703a2f2f692e696d6775722e636f6d2f4d4d3039314f4a2e706e67.png)
 
 There are 4 pieces of information Flarum needs from you to create this new user group, for this example we're going to be creating a user group called **Staff Member** but you can name this anything you wish.
 
@@ -40,7 +40,7 @@ The Icon is a small picture that goes at the side of your user avatar in posts t
 
 Once you've filled in the form, it should look something like this:
 
-![SS Group Create Filled In](http://i.imgur.com/3hca40f.png)
+![SS Group Create Filled In](687474703a2f2f692e696d6775722e636f6d2f336863613430662e706e67.png)
 
 Click on **Save Changes** once you've completed the form, which will then create your new user group!
 
