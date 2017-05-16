@@ -7,4 +7,4 @@ In the world of Social Media, everyone is (or at least should be) in the knowled
 
 Simply bring your mouse to the bottom right of the post you wish to like, and press the like link. Simple as that! to unlike a post, it's simply the same process. The animation below will show all you need to know.
 
-![Animation - Like/unlike a comment/post](http://i.imgur.com/1jucq8m.gif)
+![Animation - Like/unlike a comment/post](687474703a2f2f692e696d6775722e636f6d2f316a756371386d2e676966.gif)
