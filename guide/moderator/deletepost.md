@@ -12,7 +12,7 @@ The option to Delete looks like this:
 
 ![Animation - Showing post soft-delete](687474703a2f2f692e696d6775722e636f6d2f52666c6c5351782e676966.gif)
 
-To permanently delete the post, once you are **sure you want it removing** then go ahead and expand the post, by clicking on the _expand button_ next to the username of the poster, once the post is expanded, do the same as you did in the last step, click on the _post menu_, this will bring up the option to **Delete Forever** as shown below:
+To permanently delete the post, once you are **sure you want it removed** then go ahead and expand the post, by clicking on the _expand button_ next to the username of the poster, once the post is expanded, do the same as you did in the last step, click on the _post menu_, this will bring up the option to **Delete Forever** as shown below:
 
 ![Animation - Showing post permanent delete](687474703a2f2f692e696d6775722e636f6d2f783644787445522e676966.gif)
 
