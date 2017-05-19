@@ -20,4 +20,3 @@ Once you've one that, to the top left of your screen, there will be an arrow poi
 ![Anim for Home](687474703a2f2f692e696d6775722e636f6d2f35514a593466482e676966.gif)
 
 Click the arrow, which will then take you back to your forum's main page, with your new forum title in place.
-a
