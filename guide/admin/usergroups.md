@@ -32,7 +32,7 @@ There are 4 pieces of information Flarum needs from you to create this new user 
  
 #### Color
 
-Choosing a Color can be done by obtaining the HTML Colour Code of your desired colour, there are plenty of websites you can view which a quick Google search would give you. Enter the colour code you wish to use (starts with a **#**).
+Choosing a Color can be done by obtaining the HTML Color Code of your desired color, there are plenty of websites you can view which a quick Google search would give you. Enter the color code you wish to use (starts with a **#**).
 
 #### Icon
 
