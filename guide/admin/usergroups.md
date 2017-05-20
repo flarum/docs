@@ -46,7 +46,13 @@ Click on **Save Changes** once you've completed the form, which will then create
 
 ### Delete a User Group
 
-Deleting a user group is very simple, at the top of the configuration page, you'll see all the user groups that you've created, click on the user group that you wish to **delete** which will bring up the user group editing box, bring your mouse to the bottom right of that box over the **Delete group** link, click that and then click **OK** to the warning that comes up. Boom! the user group is now deleted.
+To Delete a user group, you will need to open the user group editor (see below: Modifying a User Group) on the user group you wish to remove.
+
+Once you have the window open, to the bottom right of that box, you will see the option to Delete the User Group.
+
+![SS - Delete Group option](Screenshot-from-2017-05-20-18-04-09.png)
+
+Click on **Delete Group** which will pop up a small warning box, informing you the user group will be deleted, but the members of that group will not. Click on **OK** to complete the group deletion.
 
 ### Modifying a User Group
 
