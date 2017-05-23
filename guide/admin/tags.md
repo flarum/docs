@@ -34,9 +34,9 @@ Unless you need to, you generally don't need to do anything with this, as when y
 
 The description of the tag will appear alongside the **name** in the tag selection post when making a post, it's a short few words giving a more in-depth description of the category it belongs to.
 
-#### Colour:
+#### Color:
 
-This is the colour you would like the tag to appear in on the posts, and forums, the colour box uses **HTML Colour Codes** beginning with a **#** you can Google around for HTML Colour Codes, there are plenty of websites on this.
+This is the color you would like the tag to appear in on the posts, and forums, the color box uses **HTML Color Codes** beginning with a **#** you can Google around for HTML Color Codes, there are plenty of websites on this.
 
 Once you've filled in the appropriate information in the Create Tag prompt, click on **Save Changes** to add the new tag.
 
