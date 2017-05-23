@@ -10,7 +10,9 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ![Basics Screenshot](687474703a2f2f692e696d6775722e636f6d2f5a4d6767745a472e706e67.png)
 
-On the configuration page, you'll see the **Home Page** option with 2 radio buttons underneath, they read **All Discussions** and **Tags**.
+Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise this will not function as guided below.
+
+Depending on what kind of extensions you have installed, there may also be other view options available for you to use. In this guide, we are using a fresh standard installation, with no additional extensions other than the defaults.
 
 ### All Discussions
 
