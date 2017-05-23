@@ -1,5 +1,6 @@
 ## User Handbook
-### Creating, editing and deleting Tags
+
+Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise this will not function as guided below.
 
 Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
