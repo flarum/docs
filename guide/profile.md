@@ -7,29 +7,29 @@ Flarum has a basic profile system, in your profile there are 3 different categor
  - Discussions
  - Mentions
 
-## Categories Explained
+## Sections Explained
 
-You can be taken straight to any of the posts, or discussions explained in this section by clicking on the result of each of the categories.
+You can be taken straight to any of the posts, or discussions explained in this section by clicking on the result of each of the sections.
 
 ### Posts 
 The Posts tab will allow you to see a 'Timeline view' of posts that you have made in any discussion you have access to, the most recent posts you have made will appear at the top, whilst the older posts will be descending.
 You can see an example of how the look in the screenshot below:
 
-![SS - Posts category](687474703a2f2f692e696d6775722e636f6d2f42756538425a312e706e67.png)
+![SS - Posts section](687474703a2f2f692e696d6775722e636f6d2f42756538425a312e706e67.png)
 
 ### Discussions
 The Discussions tab will allow you to see what discussions you are currently participating in, or have started. The order they appear in is the same as **Posts**, the most recent at the top.
 
 You can see how this looks in the screenshot below:
 
-![SS - Discussions category](687474703a2f2f692e696d6775722e636f6d2f5a316a41324e622e706e67.png)
+![SS - Discussions section](687474703a2f2f692e696d6775722e636f6d2f5a316a41324e622e706e67.png)
 
 ### Mentions
 The Mentions tab will display all the posts you have recieved a mention in, following the same ordering by having the most recent at the top.
 
 This is how it looks:
 
-![SS - Mentions category](687474703a2f2f692e696d6775722e636f6d2f34536762687a4c2e706e67.png)
+![SS - Mentions section](687474703a2f2f692e696d6775722e636f6d2f34536762687a4c2e706e67.png)
 
 ### Settings
 
