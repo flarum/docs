@@ -46,13 +46,20 @@ By default, new tags created will be **Secondary Tags** also known as **Sub Cate
 
 ![Anim - Moving Tags](687474703a2f2f692e696d6775722e636f6d2f765738796e42732e676966.gif)
 
-### Deleting a Tag
+### Deleting & Editing a Tag
 
-To delete a tag, hover your mouse to the right of the tag you wish to remove, and click on the **Pencil Icon** this will bring up the editing prompt, to the bottom right of that prompt, you'll see the **Delete tag** link, click that and then click **OK** to delete the tag.
-The below animation will show you how this is done:
+To edit a Tag, you'll first need to access the Tag Editor, this can be done by clicking the **Pencil Icon** as shown below on the desired tag:
+
+![SS - Tag Editor Pencil Icon](tag-editor-pencil.png)
+
+This will bring up the **Tag Editor** screen, with the following information:
+
+![SS - Tag Editor](tag-editor.png)
+
+To make changes, modify the content in the desired text boxes and then click **Save Changes**.
+
+The **Delete Tag** button also resides at the bottom-right hand of the Tag Editor, to remove the tag, follow the animation below:
 
 ![Anim - Delete a Tag](687474703a2f2f692e696d6775722e636f6d2f635664654a7a772e676966.gif)
 
-### Editing a Tag
 
-Made a mistake, or need to change something on a tag? follow the same procedure as above in **Deleting a Tag** until you get to the editing prompt, this time, **DON'T** click on Delete Tag, instead edit the information displayed until you are happy, then click **Save Changes**. Easy as that!
