@@ -6,6 +6,8 @@ To lock a discussion, as always you'll first need to find the discussion in the 
 
 ![SS - Showing discussion menu](687474703a2f2f692e696d6775722e636f6d2f4558665258415a2e706e67.png)
 
-With the menu, click on the **Lock** label which will immediately lock the thread, preventing any futher replies (Note that people who have **permission** to lock discussions can also reply discussions if they are locked). A confirmation of the thread lock will be a padlock over the user's avatar as shown below:
+With the menu, click on the **Lock** label which will immediately lock the thread, preventing any futher replies (Note that people who have **permission** to lock discussions can also reply discussions if they are locked). 
+
+A confirmation of the thread lock will be a padlock over the user's avatar as shown below:
 
 ![SS - Showing 'locked' status](687474703a2f2f692e696d6775722e636f6d2f5043454e68774c2e706e67.png)
