@@ -10,11 +10,15 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ![Basics Screenshot](687474703a2f2f692e696d6775722e636f6d2f5a4d6767745a472e706e67.png)
 
-On the configuration page to the right, you'll see **Forum Description** with a box underneath to write in, write a few words which generally describe what kind of forum community you are creating then click on **Save Changes**.
+On the configuration page to the right, you'll see **Forum Description** with a box underneath to write in as shown below:
+
+![SS - Forum Description](forum-description-sample.png)
+
+Write a few words which generally describe what kind of forum community you are creating then click on **Save Changes**.
 
 Once you've one that, to the top left of your screen, there will be an arrow pointing to the left as show below:
 
-![Arrow to Home](687474703a2f2f692e696d6775722e636f6d2f35514a593466482e676966.gif)
+![Arrow to Home](home-arrow.png)
 
 Click the arrow, which will then take you back to your forum's main page.
 
