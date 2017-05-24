@@ -2,7 +2,7 @@
 
 ### Editing tags Assigned to a Thread
 
-Has a thread been assigned the wrong tags or do you need to add more? not to worry! this is easy to do.
+Has a thread been assigned the wrong tags or do you need to add more? Not to worry! This is easy to do.
 
 Using the screenshot below, find the thread in question, and hover your mouse over the right side, which will reveal the _thread menu_.
 
