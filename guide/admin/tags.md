@@ -58,6 +58,8 @@ This will bring up the **Tag Editor** screen, with the following information:
 
 To make changes, modify the content in the desired text boxes and then click **Save Changes**.
 
+***Hide from All Discussions*** is an option used to prevent any Discussions this tag is attached to from being displayed on the **All Discussions** home page view.
+
 The **Delete Tag** button also resides at the bottom-right hand of the Tag Editor, to remove the tag, follow the animation below:
 
 ![Anim - Delete a Tag](687474703a2f2f692e696d6775722e636f6d2f635664654a7a772e676966.gif)
