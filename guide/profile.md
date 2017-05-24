@@ -1,7 +1,7 @@
 ## User Handbook
 ### Your Profile
 
-Flarum has a basic profile system, in your profile there are 3 different categories of your profile that you can view.
+Flarum has a basic profile system, in your profile there are 3 different sections of your profile that you can view.
 
  - Posts
  - Discussions
