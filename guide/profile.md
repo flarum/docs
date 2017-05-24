@@ -9,9 +9,9 @@ Flarum has a basic profile system, in your profile there are 3 different section
 
 ## Sections Explained
 
-You can be taken straight to any of the posts, or discussions explained in this section by clicking on the result of each of the sections.
+You can be taken straight to any of the posts, or discussions explained in this section by clicking on the result of each of the sections. Your Posts, Discussions and Mentions sections are available for the public to view when they visit your profile, however they will only show what those users have access to.
 
-### Posts 
+### Posts
 The Posts tab will allow you to see a 'Timeline view' of posts that you have made in any discussion you have access to, the most recent posts you have made will appear at the top, whilst the older posts will be descending.
 You can see an example of how the look in the screenshot below:
 
@@ -33,7 +33,7 @@ This is how it looks:
 
 ### Settings
 
-The Settings page allows you to configure certain preferences on your profile, you may change your registered e-mail address and password on this page. You can also set your preference on how you wish to be notified about certain events in Flarum, for example you can set if you wish to be notified by email and/or in the notification area if someone replies to your post. There are many other options available for you to see, take a look at the screenshot below to see what Flarum can do for you!
+The Settings page allows you to configure certain preferences on your profile which are only visible to you, the user, you may change your registered e-mail address and password on this page. You can also set your preference on how you wish to be notified about certain events in Flarum, for example you can set if you wish to be notified by email and/or in the notification area if someone replies to your post. There are many other options available for you to see, take a look at the screenshot below to see what Flarum can do for you!
 
 #### Notification Key
 
