@@ -12,7 +12,9 @@ Once you are in the Administration Panel, you'll see some navigation tabs flowin
 
 ### Creating a new Tag
 
-A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins).
+A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins). 
+
+#### Secondary Tags
 
 On the configuration page for **Tags** you'll need to click **Create Tag** which will bring up the create tag box:
 
@@ -45,6 +47,10 @@ Once you've filled in the appropriate information in the Create Tag prompt, clic
 By default, new tags created will be **Secondary Tags** also known as **Sub Categories**, sometimes you'll want these to be primary tags, to do this, click and drag the tag to the **Primary** slot at the top, follow the below animation to see how this is done:
 
 ![Anim - Moving Tags](687474703a2f2f692e696d6775722e636f6d2f765738796e42732e676966.gif)
+
+Nested Tags can also be created using the same method shown above however will need to be dragged closer to it's primary tag, nested tags will look like the screenshot below:
+
+![SS - Nested Tag](nested-tags.png)
 
 ### Deleting & Editing a Tag
 
