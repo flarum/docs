@@ -18,7 +18,7 @@ You can see an example of how the look in the screenshot below:
 ![SS - Posts section](687474703a2f2f692e696d6775722e636f6d2f42756538425a312e706e67.png)
 
 ### Discussions
-The Discussions tab will allow you to see what discussions you are currently participating in, or have started. The order they appear in is the same as **Posts**, the most recent at the top.
+The Discussions tab will allow you to see what discussions you have started. The order they appear in is the same as **Posts**, the most recent at the top.
 
 You can see how this looks in the screenshot below:
 
