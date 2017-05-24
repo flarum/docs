@@ -5,7 +5,7 @@ Every now and then content that you think is breaking the rules needs to be look
 
 Firstly, find the post that you wish to flag, then click on the _Post Menu_ to reveal the **flag** button. Click that and the box below will display.
 
-We need to let the Moderators know why this post is being flagged, you can select from a list of 3 items, these are currently:
+We need to let the Moderators know why this post is being flagged, you can select from the 4 radio buttons displayed, these are currently:
 
 ![SS - Report a post options](687474703a2f2f692e696d6775722e636f6d2f464f57594b42782e706e67.png)
 
