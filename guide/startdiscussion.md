@@ -3,11 +3,11 @@
 
 Discussions can be started once you are logged in, to begin click on **Start a Discussion** to the left hand side of your screen. The button for this looks like this:
 
-![alt tag](http://i.imgur.com/2suu8il.png)
+![SS - Start a discussion button](687474703a2f2f692e696d6775722e636f6d2f3273757538696c2e706e67.png)
 
 Once that button is pressed, at the bottom center of your screen, the discussion dialogue box will appear so you can start your discussion, the box looks like this:
 
-![alt tag](http://i.imgur.com/IPIRsVQ.png)
+![SS - Dialogue box bottom](687474703a2f2f692e696d6775722e636f6d2f495049527356512e706e67.png)
 
 ### Form Components
 
@@ -15,7 +15,7 @@ Once that button is pressed, at the bottom center of your screen, the discussion
 
 On the form, you'll need to select some tags to categorise what you are talking about. Click on "Choose Tags" from the screenshot above, and the following page will display:
 
-![alt tag](http://i.imgur.com/VbyNn7Z.png)
+![SS - Tag screen](687474703a2f2f692e696d6775722e636f6d2f5662794e6e375a2e706e67.png)
 
 Select the tags you think are appropriate, or relevant to your discussion, and then click "Ok" to apply them.
 

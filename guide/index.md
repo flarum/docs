@@ -8,6 +8,10 @@ Thank you for viewing the Flarum User Handbook. Throughout the contents of the s
 
 The contents of this user handbook are constantly being updated, both with edits/fixes when new versions are released, and also when we find something that we have not yet written about that we feel our users would benefit from knowing. So with that in mind, please check back here regularly for new content.
 
+### Glossary
+
+ - [Glossary](usefulterms.md)
+
 ### Section 1: Getting Started
 
  - [Registration](registration.md)
@@ -34,12 +38,10 @@ The contents of this user handbook are constantly being updated, both with edits
 
  - [Change the Forum Title](admin/forumtitle.md)
  - [Change the Forum Description](admin/forumdescription.md)
- - [Change home page view](admin/homeview.md)
+ - [Home Page Display Options](admin/homeview.md)
  - [Edit the Welcome Banner](admin/welcomebanner.md)
  - [Add/Modify/Delete User Groups](admin/usergroups.md)
  - [Assign permissions to User Groups](admin/grouppermissions.md)
  - [Upload a custom Logo / Favicon](admin/uploadlogo.md)
  - [Create/Edit/Remove Primary & Secondary Tags](admin/tags.md)
  
- ### Section 4: Useful Links
- - [Useful Terms](usefulterms.md)

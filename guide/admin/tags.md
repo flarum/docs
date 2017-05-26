@@ -1,21 +1,24 @@
 ## User Handbook
-### Creating, editing and deleting Tags
+
+Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise this will not function as guided below.
 
 Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
-![Administration Link Screenshot](http://i.imgur.com/WZ1Zjx9.gif)
+![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
 Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Tags** to reveal the configuration page to the right hand side.
 
-![Tags Screenshot](http://i.imgur.com/5OXYTTd.png)
+![Tags Screenshot](687474703a2f2f692e696d6775722e636f6d2f354f58595454642e706e67.png)
 
 ### Creating a new Tag
 
-A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins).
+A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins). 
+
+#### Secondary Tags
 
 On the configuration page for **Tags** you'll need to click **Create Tag** which will bring up the create tag box:
 
-![SS Tag Creation Box](http://i.imgur.com/0Gr5W9t.png)
+![SS Tag Creation Box](687474703a2f2f692e696d6775722e636f6d2f304772355739742e706e67.png)
 
 ### Create Tag Components
 
@@ -33,9 +36,9 @@ Unless you need to, you generally don't need to do anything with this, as when y
 
 The description of the tag will appear alongside the **name** in the tag selection post when making a post, it's a short few words giving a more in-depth description of the category it belongs to.
 
-#### Colour:
+#### Color:
 
-This is the colour you would like the tag to appear in on the posts, and forums, the colour box uses **HTML Colour Codes** beginning with a **#** you can Google around for HTML Colour Codes, there are plenty of websites on this.
+This is the color you would like the tag to appear in on the posts, and forums, the color box uses **HTML Color Codes** beginning with a **#** you can Google around for HTML Color Codes, there are plenty of websites on this.
 
 Once you've filled in the appropriate information in the Create Tag prompt, click on **Save Changes** to add the new tag.
 
@@ -43,15 +46,28 @@ Once you've filled in the appropriate information in the Create Tag prompt, clic
 
 By default, new tags created will be **Secondary Tags** also known as **Sub Categories**, sometimes you'll want these to be primary tags, to do this, click and drag the tag to the **Primary** slot at the top, follow the below animation to see how this is done:
 
-![Anim - Moving Tags](http://i.imgur.com/vW8ynBs.gif)
+![Anim - Moving Tags](687474703a2f2f692e696d6775722e636f6d2f765738796e42732e676966.gif)
 
-### Deleting a Tag
+Nested Tags can also be created using the same method shown above however will need to be dragged closer to it's primary tag, nested tags will look like the screenshot below:
 
-To delete a tag, hover your mouse to the right of the tag you wish to remove, and click on the **Pencil Icon** this will bring up the editing prompt, to the bottom right of that prompt, you'll see the **Delete tag** link, click that and then click **OK** to delete the tag.
-The below animation will show you how this is done:
+![SS - Nested Tag](nested-tags.png)
 
-![Anim - Delete a Tag](http://i.imgur.com/cVdeJzw.gif)
+### Deleting & Editing a Tag
 
-### Editing a Tag
+To edit a Tag, you'll first need to access the Tag Editor, this can be done by clicking the **Pencil Icon** as shown below on the desired tag:
 
-Made a mistake, or need to change something on a tag? follow the same procedure as above in **Deleting a Tag** until you get to the editing prompt, this time, **DON'T** click on Delete Tag, instead edit the information displayed until you are happy, then click **Save Changes**. Easy as that!
+![SS - Tag Editor Pencil Icon](tag-editor-pencil.png)
+
+This will bring up the **Tag Editor** screen, with the following information:
+
+![SS - Tag Editor](tag-editor.png)
+
+To make changes, modify the content in the desired text boxes and then click **Save Changes**.
+
+***Hide from All Discussions*** is an option used to prevent any Discussions this tag is attached to from being displayed on the **All Discussions** home page view.
+
+The **Delete Tag** button also resides at the bottom-right hand of the Tag Editor, to remove the tag, follow the animation below:
+
+![Anim - Delete a Tag](687474703a2f2f692e696d6775722e636f6d2f635664654a7a772e676966.gif)
+
+

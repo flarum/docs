@@ -10,10 +10,10 @@ Be aware though, clicking **Delete** will only soft-delete the post, meaning for
 
 The option to Delete looks like this:
 
-![alt tag](https://camo.githubusercontent.com/169b2749ce69efc1e7b322b2e90276924de98a50/687474703a2f2f692e696d6775722e636f6d2f52666c6c5351782e676966)
+![Animation - Showing post soft-delete](687474703a2f2f692e696d6775722e636f6d2f52666c6c5351782e676966.gif)
 
-To permanently delete the post, once you are **sure you want it removing** then go ahead and expand the post, by clicking on the _expand button_ next to the username of the poster, once the post is expanded, do the same as you did in the last step, click on the _post menu_, this will bring up the option to **Delete Forever** as shown below:
+To permanently delete the post, once you are **sure you want it removed** then go ahead and expand the post, by clicking on the _expand button_ next to the username of the poster, once the post is expanded, do the same as you did in the last step, click on the _post menu_, this will bring up the option to **Delete Forever** as shown below:
 
-![alt tag](https://camo.githubusercontent.com/0f74b3ce554ed0dae90d34eb27bef8c11e8b5b0c/687474703a2f2f692e696d6775722e636f6d2f783644787445522e676966)
+![Animation - Showing post permanent delete](687474703a2f2f692e696d6775722e636f6d2f783644787445522e676966.gif)
 
 Once you've clicked on **Delete Forever** the post will be permanently removed from the database.
