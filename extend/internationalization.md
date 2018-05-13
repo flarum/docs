@@ -1,8 +1,3 @@
----
-layout: docs
-title: Internationalization
-permalink: /docs/extend/internationalize/
----
 Flarum features a powerful translation system (based on [Symfony's translator](http://symfony.com/doc/current/book/translation.html)) that allows the interface to display information in virtually any language. You should consider taking advantage of Flarum's translator as you develop your extension, even if you have no intention of using it in more than a single language.
 
 For one thing, this system will allow you to change the information displayed by your extension without editing the actual code. It will also give you the tools needed to efficiently deal with phenomena such as pluralization and agreement for gender. And you never know: it may come in handy later, if you decide you want to add more languages and make your extension available to users around the world!
