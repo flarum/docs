@@ -10,7 +10,7 @@ Read more about:
 ## Structure
 
 - [/user](/user/index.md)
-  - [/user/installation](/user/installation.md)
+  - [/user/installation](/user/index.md)
   - [/user/updating](/user/updating.md)
   - [/user/troubleshooting](/user/troubleshooting.md)
   - [/user/configuration](/user/configuration.md)
