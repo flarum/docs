@@ -155,7 +155,7 @@ Breaking it down:
         * **backgroundColor** is the color behind the icon
         * **color** is the color of the icon itself
 
-Now that your `composer.json` is configured to your liking, you should tell Flarum about your extension! Navigate to the root directory of your Flarum install and run `composer require name *@dev` where `name` is the value from your `composer.json` file 
+Now that your `composer.json` is configured to your liking, you should tell Flarum about your extension! Navigate to the root directory of your Flarum install and run `composer require name *@dev` where `name` is the value from your `composer.json` file
 
 Alright, all set? Now go ahead and fire 'er up on your forum's Administration page!
 
@@ -425,6 +425,7 @@ But seriously, you're well on your way to developing a useful Flarum extension, 
 The rest of the extension docs are still under construction. In the meantime:
 
 * Check out the source code of [Flarum's bundled extensions](https://github.com/flarum) to see how they work
+* Investigate Flarum's [source code](https://github.com/flarum/core) and [unofficial API docs](https://datitisev.github.io/FlarumAPIDocs/) to learn about Flarum's core
 * Ask questions on the [Flarum Community](http://discuss.flarum.org/t/extensibility) or in the [Discord](http://flarum.org/discord)
 * Take a look at this [handy-dandy extension generator](https://github.com/ReFlar/extension-generator) for automating the above setup
 
