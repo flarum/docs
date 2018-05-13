@@ -97,6 +97,8 @@ The `bootstrap.php` file is included by Flarum on each and every page load, as l
 ```php
 <?php
 
+namespace acme\HelloWorld;
+
 return function () {
     echo 'Hello, world!';
 };
@@ -183,6 +185,8 @@ Listening for an event is easy. Just inject the Event Dispatcher into your `boot
 ```php
 <?php
 
+namespace acme\HelloWorld;
+
 use Flarum\Event\PostWillBeSaved;
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -204,6 +208,107 @@ $event->post->content = 'This is not what I wrote!';
 ```
 
 Try it out! Now whenever someone makes a post, the content will be set to "This is not what I wrote!". Keep this one in mind for your next April Fools' Day prank.
+
+### Getting Organized
+
+An important part of making a good extension is keeping it organized! The best way to do this is to store your classes in folders labeled for their purpose. Inside your extensions folder, make a folder called `src` this is the source for all of your PHP classes (Look back at the `autoload` option in your `composer.json`).
+
+Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. 
+
+Next we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
+
+Let's tell our `bootstrap.php` about our new class:
+
+```php
+<?php
+
+namespace acme\HelloWorld;
+
+use Illuminate\Contracts\Events\Dispatcher;
+
+return function (Dispatcher $events) {
+    $events->subscribe(Listeners\ChangePostContent::class);
+};
+```
+
+This send events to the `ChangePostContent` class.
+
+We need our new class to actually do something now:
+
+```php
+<?php
+
+namespace acme\HelloWorld\Listeners;
+
+use Flarum\Event\PostWillBeSaved;
+use Illuminate\Contracts\Events\Dispatcher;
+
+class ChangePostContent
+{
+    /**
+     * @param Dispatcher $events
+     */
+    public function subscribe(Dispatcher $events)
+    {
+        $events->listen(PostWillBeSaved::class, [$this, 'EditPostContent']);
+    }
+
+    /**
+     * @param PostWillBeSaved $event
+     */
+    public function EditPostContent(PostWillBeSaved $event)
+    {
+        $event->post->content = 'This is not what I wrote!';
+    }
+}
+``` 
+
+The subscribe function (which we called in the `boostrap.php`) is where you should declare which events you want to listen for. `$events->listen()` is a function which accepts 2 arguments:
+
+* The event class you want to listen for.
+* An array which contains the callback for when that event is triggered
+    * `$this` should be the first element of the array, it says that the function to be called is in this current class
+    * The name of the function as a string should be the second argument, this states the specific function in the class to be called
+    
+You can even define multiple event listeners in one class:
+
+```php
+<?php
+
+namespace acme\HelloWorld\Listeners;
+
+use Flarum\Event\PostWillBeSaved;
+use Flarum\Event\UserWillBeSaved;
+use Illuminate\Contracts\Events\Dispatcher;
+
+class ChangePostContent
+{
+    /**
+     * @param Dispatcher $events
+     */
+    public function subscribe(Dispatcher $events)
+    {
+        $events->listen(PostWillBeSaved::class, [$this, 'EditPostContent']);
+        $events->listen(UserWillBeSaved::class, [$this, 'EditUsername']);
+    }
+
+    /**
+     * @param PostWillBeSaved $event
+     */
+    public function EditPostContent(PostWillBeSaved $event)
+    {
+        $event->post->content = 'This is not what I wrote!';
+    }
+    
+    /**
+     * @param UserWillBeSaved $event
+     */
+    public function EditUsername(UserWillBeSaved $event)
+    {
+        $event->user->username = 'FooBar';
+    }    
+}
+``` 
 
 ## Changing the UI
 
@@ -279,17 +384,37 @@ gulp watch
 
 This will compile your browser-ready JavaScript code into the `js/forum/dist/extension.js` file, and keep watching for changes to the source files!
 
-One last step: we've got to tell Flarum about our extension's JavaScript. Add the following event handler to your `bootstrap.php`:
+One last step: we've got to tell Flarum about our extension's JavaScript. Make an event handler called `AddClientAssets` in your `Listeners` directory:
 
 ```php
-use Flarum\Event\ConfigureClientView;
+<?php
 
-$events->listen(ConfigureClientView::class, function (ConfigureClientView $event) {
-    if ($event->isForum()) {
-        $event->addAssets(__DIR__.'/js/forum/dist/extension.js');
-        $event->addBootstrapper('acme/hello-world/main');
+namespace acme\HelloWorld\Listeners;
+
+use Flarum\Event\ConfigureWebApp;
+use Illuminate\Contracts\Events\Dispatcher;
+
+class AddClientAssets
+{
+    /**
+     * @param Dispatcher $events
+     */
+    public function subscribe(Dispatcher $events)
+    {
+        $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
     }
-});
+
+    /**
+     * @param ConfigureWebApp $event
+     */
+    public function addAssets(ConfigureWebApp $event)
+    {
+        if ($event->isForum()) {
+            $event->addAssets( __DIR__.'/../../js/forum/dist/extension.js');
+            $event->addBootstrapper('acme/hello-world/main');
+        }
+    }
+}
 ```
 
 This will cause our extension's JavaScript to be loaded into the page, and our bootstrapper module to be run as the application boots up. Give it a try!
@@ -386,17 +511,37 @@ Wait, all that Javascript stuff is cool in all, but what's the point if it doesn
 Back to our good friend `bootstrap.php`, simply add the directory of your LESS file:
 
 ```php
-use Flarum\Event\ConfigureClientView;
+<?php
 
-$events->listen(ConfigureClientView::class, function (ConfigureClientView $event) {
-    if ($event->isForum()) {
-        $event->addAssets([
-            __DIR__.'/js/forum/dist/extension.js',
-            __DIR__.'less/forum/extension.less',
-        ]);
-        $event->addBootstrapper('acme/hello-world/main');
+namespace acme\HelloWorld\Listeners;
+
+use Flarum\Event\ConfigureWebApp;
+use Illuminate\Contracts\Events\Dispatcher;
+
+class AddClientAssets
+{
+    /**
+     * @param Dispatcher $events
+     */
+    public function subscribe(Dispatcher $events)
+    {
+        $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
     }
-});
+
+    /**
+     * @param ConfigureWebApp $event
+     */
+    public function addAssets(ConfigureWebApp $event)
+    {
+        if ($event->isForum()) {
+            $event->addAssets([
+                __DIR__.'/../../js/forum/dist/extension.js',
+                __DIR__.'/../../less/forum/extension.less',
+            ]);
+            $event->addBootstrapper('acme/hello-world/main');
+        }
+    }
+}
 ```
 
 LESS is a modern version of CSS that utilizes the same syntax, with a few more features such as: variables, nesting, functions, just to name a few. If you've never used LESS before, and prefer to not learn about the cool features, you can use it in the exact same way you do CSS.
@@ -423,7 +568,3 @@ The rest of the extension docs are still under construction. In the meantime:
 * Investigate Flarum's [source code](https://github.com/flarum/core) and [unofficial API docs](https://datitisev.github.io/FlarumAPIDocs/) to learn about Flarum's core
 * Ask questions on the [Flarum Community](http://discuss.flarum.org/t/extensibility) or in the [Discord](http://flarum.org/discord)
 * Take a look at this [handy-dandy extension generator](https://github.com/ReFlar/extension-generator) for automating the above setup
-
-<!--* Extension Structure - Learn how to generate a full extension skeleton and keep your event listeners organized
-* Working with Data - Learn how to extend Flarum's database tables, save data, etc.
-* etc.-->

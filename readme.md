@@ -23,6 +23,7 @@ Read more about:
   - [/extend/quick-start](/extend/quick-start.md)
   - [/extend/distribution](/extend/distribution.md)
   - [/extend/data](/extend/data.md)
+  - [/extend/internationalization](/extend/internationalization.md)
   - [/extend/permissions](/extend/permissions.md)
   - [/extend/settings](/extend/settings.md)
   - [/extend/notifications](/extend/notifications.md)
