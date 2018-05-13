@@ -1,8 +1,3 @@
----
-layout: docs
-title: Quick Start
-permalink: /docs/extend/start/
----
 Before we get started, there's something you should be aware of: Flarum uses some modern languages and tools. If you've only ever built WordPress or Drupal plugins before, you might feel a bit out of your depth! That's OK — this is a great time to learn cool new things and extend your skillset. Below is a list of the technologies that Flarum uses, as well as some links and resources you might find useful:
 
 * **Object-oriented PHP.** Classes, namespaces, and autoloading. Laracasts has a [great series](https://laracasts.com/series/object-oriented-bootcamp-in-php/episodes/1) on this.
