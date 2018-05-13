@@ -54,14 +54,22 @@ If your extension is located in GitHub, this URL will look something like `https
 
 Once you entered your public repository URL in there, your package will be automatically crawled periodically.
 
+## Future releases
+
+For future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
+
+You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages), but if you don't, you'll need to visit the package's page (_`https://packagist.org/packages/vendor/name`_) and click the "Update" button that will appear next to "Abandon" and "Edit".
+
 ## Conclusion
 
 Now you know how to publish your Flarum extension for everyone to use.
-For future releases, all you will need to do is commit, tag, and push it to the remote server.
+
+Let's recap what we learned:
 
 * A VCS, or version control system, is required to publish an extension
 * The normal workflow of a git repository is to add the files, commit them, and push them to the remote repository
 * To create a release in a git repository, one needs to "tag" a commit and then push the tag as well as the commit
+* Future releases are easier to publish than the initial one
 
 ## What now?
 
