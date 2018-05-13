@@ -1,7 +1,7 @@
 ---
 layout: docs
-title: Releasing
-permalink: /docs/extend/releasing/
+title: Distribution
+permalink: /docs/extend/distribution/
 ---
 
 One of the most important things about creating an extension is releasing it to the world. Fortunately, this is a pretty simple process.
