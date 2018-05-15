@@ -4,7 +4,7 @@ At some point while making an extension. you will probably want to save some sor
 
 ### Basic Info
 
-The [`SettingsRepositoryInterface`](https://github.com/flarum/core/blob/v0.1.0-beta.7.1/src/Settings/SettingsRepositoryInterface.php) allows you to do just that, interface with the settings repository!
+The [`SettingsRepositoryInterface`](https://github.com/flarum/core/blob/master/src/Settings/SettingsRepositoryInterface.php) allows you to do just that, interface with the settings repository!
 
 The first step to interfacing with the table is to load the `SettingsRepositoryInterface` into your class's [IoC](https://laravel.com/docs/4.2/ioc):
 
@@ -46,7 +46,7 @@ The `get` function accepts 2 arguments:
 
 Setting data is just as easy as getting data, use the `set` function:
 
-`$this->settings->set('forum_title', 'Super Awesome Forum)`
+`$this->settings->set('forum_title', 'Super Awesome Forum')`
 
 The `set` function also takes 2 arguments:
 
@@ -112,4 +112,4 @@ Always remember to use [internationalizations](internationalization.md)!
 
 Each `Form-group` should contain an individual input. The `bidi` property on the input corresponds to the setting on the Settings table that the input will modify. It will be automatically propagated with the current settings value, and it will change the value once "Save Settings" button is clicked.
 
-*Oh? What's this?* When you click "Save Settings" the [SettingWasSet](https://github.com/flarum/core/blob/v0.1.0-beta.7.1/src/Event/SettingWasSet.php) event is dispatched? How cool!
+*Oh? What's this?* When you click "Save Settings" the (settings) [Saved](https://github.com/flarum/core/blob/master/src/Settings/Event/Saved.php) event is dispatched? How cool!

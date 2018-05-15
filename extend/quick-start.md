@@ -118,7 +118,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": "^0.1.0-beta.7.1"
+        "flarum/core": "^0.1.0-beta.8"
     },
     "autoload": {
         "psr-4": {
@@ -172,34 +172,36 @@ Whenever something of importance is about to happen, is happening, or has just h
 
 For example:
 
-* When a discussion is started, Flarum fires the `DiscussionWasStarted` event. A "Twitter Feed" Extension could listen for this event and react by sending a tweet with the discussion's title and URL.
-* When post data is about to be saved to the database, Flarum fires the `PostWillBeSaved` event. An "Attachments" Extension could listen for this event and react by validating any uploaded files, and queing them to be saved to the database too.
-* When the page HTML is about to be rendered, Flarum fires the `ConfigureClientView` event. A theme Extension could listen for this event and react by adding some CSS code to the page.
+* When a discussion is started, Flarum fires the (Discussion)`Started` event. A "Twitter Feed" Extension could listen for this event and react by sending a tweet with the discussion's title and URL.
+* When post data is about to be saved to the database, Flarum fires the (post) `Saving` event. An "Attachments" Extension could listen for this event and react by validating any uploaded files, and queing them to be saved to the database too.
+* When the page HTML is about to be rendered, Flarum fires the `Rendering` event. A theme Extension could listen for this event and react by adding some CSS code to the page.
 
-Get the idea? Great! There are dozens of events you can listen for, and they're all found under the [`Flarum\Event` namespace](https://github.com/flarum/core/tree/v0.1.0-beta.7.1/src/Event). Go ahead, have a squiz!
+Get the idea? Great! There are dozens of events you can listen for. Looking for a `user` event? Head to the [`user`](https://github.com/flarum/core/tree/master/src/User) namespace and then look through the various events. Go ahead, have a squiz!
 
 ### Event Handlers
 
-Listening for an event is easy. Just inject the Event Dispatcher into your `bootstrap.php` function, and register a handler with the `listen` method. You'll need to pass the **fully qualified class name** of the `Flarum\Event` class as the first argument, and your handler as the second.
+Listening for an event is easy. Just inject the Event Dispatcher into your `bootstrap.php` function, and register a handler with the `listen` method. You'll need to pass the **fully qualified class name** of the event class as the first argument, and your handler as the second.
 
 ```php
 <?php
 
 namespace acme\HelloWorld;
 
-use Flarum\Event\PostWillBeSaved;
+use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
 
-return function (Dispatcher $events) {
-    $events->listen(PostWillBeSaved::class, function (PostWillBeSaved $event) {
+return [
+    function (Dispatcher $events) {
+        $events->listen(Saving::class, function (Saving $event) {
         // do stuff before a post is saved
-    });
-};
+        });
+    }
+];
 ```
 
 Great – we've hooked up a handler. But we still need to make it do something!
 
-Because Flarum events are classes, they usually contain a bunch of useful data for us to work with. In our case, let's take a look at the [`PostWillBeSaved` event documentation](https://github.com/flarum/core/blob/v0.1.0-beta.7.1/src/Event/PostWillBeSaved.php) to see what's available.
+Because Flarum events are classes, they usually contain a bunch of useful data for us to work with. In our case, let's take a look at the (post) [`Saving` event documentation](https://github.com/flarum/core/blob/master/src/Post/Event/Saving.php) to see what's available.
 
 I like the look of that `$post` property ... oh boy, a `Flarum\Core\Post` object! This is a **model** which represents the `posts` table in the database. We'll learn more about how that works later, but for now, let's override the content of the post inside of our handler:
 
@@ -213,7 +215,7 @@ Try it out! Now whenever someone makes a post, the content will be set to "This 
 
 An important part of making a good extension is keeping it organized! The best way to do this is to store your classes in folders labeled for their purpose. Inside your extensions folder, make a folder called `src` this is the source for all of your PHP classes (Look back at the `autoload` option in your `composer.json`).
 
-Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. 
+Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. (`boostrap.php` should be the only php file outside of `src`)
 
 Next we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
 
@@ -226,12 +228,14 @@ namespace acme\HelloWorld;
 
 use Illuminate\Contracts\Events\Dispatcher;
 
-return function (Dispatcher $events) {
-    $events->subscribe(Listeners\ChangePostContent::class);
-};
+return [
+    function (Dispatcher $events) {
+        $events->subscribe(Listeners\ChangePostContent::class);
+    }
+];
 ```
 
-This send events to the `ChangePostContent` class.
+This sends events to the `ChangePostContent` class.
 
 We need our new class to actually do something now:
 
@@ -240,7 +244,7 @@ We need our new class to actually do something now:
 
 namespace acme\HelloWorld\Listeners;
 
-use Flarum\Event\PostWillBeSaved;
+use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class ChangePostContent
@@ -250,13 +254,13 @@ class ChangePostContent
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PostWillBeSaved::class, [$this, 'EditPostContent']);
+        $events->listen(Saving::class, [$this, 'EditPostContent']);
     }
 
     /**
-     * @param PostWillBeSaved $event
+     * @param Saving $event
      */
-    public function EditPostContent(PostWillBeSaved $event)
+    public function EditPostContent(Saving $event)
     {
         $event->post->content = 'This is not what I wrote!';
     }
@@ -277,8 +281,8 @@ You can even define multiple event listeners in one class:
 
 namespace acme\HelloWorld\Listeners;
 
-use Flarum\Event\PostWillBeSaved;
-use Flarum\Event\UserWillBeSaved;
+use Flarum\Post\Event\Saving as PostSaving;
+use Flarum\User\Event\Saving as UserSaving;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class ChangePostContent
@@ -288,22 +292,22 @@ class ChangePostContent
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PostWillBeSaved::class, [$this, 'EditPostContent']);
-        $events->listen(UserWillBeSaved::class, [$this, 'EditUsername']);
+        $events->listen(PostSaving::class, [$this, 'EditPostContent']);
+        $events->listen(UserSaving::class, [$this, 'EditUsername']);
     }
 
     /**
-     * @param PostWillBeSaved $event
+     * @param PostSaving $event
      */
-    public function EditPostContent(PostWillBeSaved $event)
+    public function EditPostContent(PostSaving $event)
     {
         $event->post->content = 'This is not what I wrote!';
     }
     
     /**
-     * @param UserWillBeSaved $event
+     * @param UserSaving $event
      */
-    public function EditUsername(UserWillBeSaved $event)
+    public function EditUsername(UserSaving $event)
     {
         $event->user->username = 'FooBar';
     }    
@@ -384,37 +388,23 @@ gulp watch
 
 This will compile your browser-ready JavaScript code into the `js/forum/dist/extension.js` file, and keep watching for changes to the source files!
 
-One last step: we've got to tell Flarum about our extension's JavaScript. Make an event handler called `AddClientAssets` in your `Listeners` directory:
+One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case we will be using the [`Assets` extender](https://github.com/flarum/core/blob/master/src/Extend/Assets.php). 
+
+In your `boostrap.php`:
 
 ```php
 <?php
 
 namespace acme\HelloWorld\Listeners;
 
-use Flarum\Event\ConfigureWebApp;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\Extend;
 
-class AddClientAssets
-{
-    /**
-     * @param Dispatcher $events
-     */
-    public function subscribe(Dispatcher $events)
-    {
-        $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
-    }
-
-    /**
-     * @param ConfigureWebApp $event
-     */
-    public function addAssets(ConfigureWebApp $event)
-    {
-        if ($event->isForum()) {
-            $event->addAssets( __DIR__.'/../../js/forum/dist/extension.js');
-            $event->addBootstrapper('acme/hello-world/main');
-        }
-    }
-}
+return [
+    (new Extend\Assets('forum'))
+        ->asset(__DIR__.'/js/forum/dist/extension.js')
+        ->asset(__DIR__.'/less/forum/extension.less')
+        ->bootstrapper('acme/hello-world/main')  
+];
 ```
 
 This will cause our extension's JavaScript to be loaded into the page, and our bootstrapper module to be run as the application boots up. Give it a try!
@@ -438,7 +428,7 @@ Flarum's interface is made up of many nested **components**. Components are a bi
 
 With this in mind, let's take a look at how we would change a part of Flarum's UI.
 
-First, we want to find the component that is responsible for the part of the UI we're interested in. Let's say we want to replace each post with a smiley face – no doubt, we're after the [`Post` component](http://apidocs.flarum.org/0.1.0/js/class/js/forum/src/components/Post.js~Post.html).
+First, we want to find the component that is responsible for the part of the UI we're interested in. Let's say we want to replace each post with a smiley face – no doubt, we're after the [`Post` component](https://github.com/flarum/core/blob/master/js/forum/src/components/Post.js).
 
 Each component is a class that has a `view()` method. This method returns a virtual DOM object, constructed with [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What's that? Well, it's basically a JavaScript representation of the component's HTML. The rendering framework that Flarum uses, [Mithril.js](http://mithril.js.org), takes it and turns it into real HTML in the most efficient way possible. (That's why Flarum is so speedy!)
 
@@ -515,33 +505,14 @@ Back to our good friend `bootstrap.php`, simply add the directory of your LESS f
 
 namespace acme\HelloWorld\Listeners;
 
-use Flarum\Event\ConfigureWebApp;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\Extend;
 
-class AddClientAssets
-{
-    /**
-     * @param Dispatcher $events
-     */
-    public function subscribe(Dispatcher $events)
-    {
-        $events->listen(ConfigureWebApp::class, [$this, 'addAssets']);
-    }
-
-    /**
-     * @param ConfigureWebApp $event
-     */
-    public function addAssets(ConfigureWebApp $event)
-    {
-        if ($event->isForum()) {
-            $event->addAssets([
-                __DIR__.'/../../js/forum/dist/extension.js',
-                __DIR__.'/../../less/forum/extension.less',
-            ]);
-            $event->addBootstrapper('acme/hello-world/main');
-        }
-    }
-}
+return [
+    (new Extend\Assets('forum'))
+        ->asset(__DIR__.'/js/forum/dist/extension.js')
+        ->asset(__DIR__.'/less/forum/extension.less')
+        ->bootstrapper('acme/hello-world/main') 
+];
 ```
 
 LESS is a modern version of CSS that utilizes the same syntax, with a few more features such as: variables, nesting, functions, just to name a few. If you've never used LESS before, and prefer to not learn about the cool features, you can use it in the exact same way you do CSS.
@@ -555,7 +526,7 @@ But seriously, you're well on your way to developing a useful Flarum extension, 
 * Extensions are Composer packages with their metadata defined in `composer.json`.
 * They have a `bootstrap.php` which returns a function.
 * The function can receive the event dispatcher, which can then be used to set up event listeners/handlers.
-* Event handlers can be used to react to a [whole range of things](https://github.com/flarum/core/tree/v0.1.0-beta.7.1/src/Event) that are about to happen, are happening, or have happened.
+* Event handlers can be used to react to a whole range of things that are about to happen, are happening, or have happened.
 * Flarum's front-end is a JavaScript application; to extend it, you must set up JavaScript transpilation.
 * The UI is made up of many nested components which construct virtual DOM objects.
 * [Components](https://github.com/flarum/core/tree/master/js/) can be changed to make edits to the UI by modifying virtual DOM objects and Item Lists.
