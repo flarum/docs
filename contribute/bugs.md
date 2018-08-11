@@ -1,3 +1,4 @@
+
 # Identifying errors
 
 1. Did you enable debug in your `config.php` file?

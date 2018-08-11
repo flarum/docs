@@ -1,3 +1,7 @@
+---
+title: FAQ
+---
+
 ## FAQ
 
 ### When will Flarum be stable?
