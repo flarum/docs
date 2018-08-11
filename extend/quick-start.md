@@ -335,7 +335,7 @@ Before we can write any JavaScript, though, we need to set up a **transpiler**. 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
 * Node.js (Download)
-* Gulp (`npm install --global gulp`)
+* Webpack (`npm run build`)
 
 This can be tricky, because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
@@ -401,13 +401,12 @@ use Flarum\Extend;
 
 return [
     (new Extend\Assets('forum'))
-        ->asset(__DIR__.'/js/forum/dist/extension.js')
-        ->asset(__DIR__.'/less/forum/extension.less')
-        ->bootstrapper('acme/hello-world/main')  
+        ->js(__DIR__.'/js/dist/forum.js')
+        ->css(__DIR__.'/less/forum/extension.less')
 ];
 ```
 
-This will cause our extension's JavaScript to be loaded into the page, and our bootstrapper module to be run as the application boots up. Give it a try!
+This will cause our extension's JavaScript to be loaded into the page. Give it a try!
 
 ### Components
 
@@ -509,9 +508,8 @@ use Flarum\Extend;
 
 return [
     (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/forum/dist/extension.js')
+        ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum/extension.less')
-        ->bootstrapper('acme/hello-world/main') 
 ];
 ```
 
