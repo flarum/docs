@@ -16,3 +16,4 @@ Bug reports offer helpful information for our developers to quickly analyze the 
 - Whether you are using a shared hosting environment or have/manage your own server.
 - A list of the extensions you've installed or the composer.json file.
 - Any logs you think will help us with find the root cause.
+  
