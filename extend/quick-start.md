@@ -395,7 +395,7 @@ In your `boostrap.php`:
 ```php
 <?php
 
-namespace acme\HelloWorld\Listeners;
+namespace acme\HelloWorld;
 
 use Flarum\Extend;
 
@@ -503,14 +503,14 @@ Back to our good friend `bootstrap.php`, simply add the directory of your LESS f
 ```php
 <?php
 
-namespace acme\HelloWorld\Listeners;
+namespace acme\HelloWorld;
 
 use Flarum\Extend;
 
 return [
-    (new Extend\Assets('forum'))
-        ->asset(__DIR__.'/js/forum/dist/extension.js')
-        ->asset(__DIR__.'/less/forum/extension.less')
+    (new Extend\Frontend('forum'))
+        ->js(__DIR__.'/js/forum/dist/extension.js')
+        ->css(__DIR__.'/less/forum/extension.less')
         ->bootstrapper('acme/hello-world/main') 
 ];
 ```
