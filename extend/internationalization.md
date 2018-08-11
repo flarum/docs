@@ -212,16 +212,52 @@ Support for grammatical gender will be added in a future version of Flarum. Deta
 
 ## Server-side Translation
 
-Translation is generally handled by Flarum's front-end client.
+Translation is generally handled by Flarum's front-end client. However, you can use translations in your PHP code if you need to.
 
-(FIXME: *Explain server-side translation here, or merge into previous section.*)
+First, you'll need to get the `Flarum\Locale\Translator` class. This can be done a few different ways:
+```php
+$translator = app('translator');
+$translator = app('Flarum\Locale\Translator');
+$translator = app(Translator::class); // you'll need to import the class with 'use' for this
+```  
+
+Then, the API is similar to the JavaScript Translator class. You can use `$translator->trans` like you'd use `app.translator.trans` in JavaScript.
+You can learn more about the Translator's methods in [Symfony's `Translator` documentation](http://api.symfony.com/3.1/Symfony/Component/Translation/Translator.html), which Flarum's `Translator` extends. 
 
 
 ## Registering Locales
 
-There's one last thing you need to do before Flarum can use your translations.
+There's one last thing you need to do before Flarum can use your translations. You need to register them. Fortunately, Flarum beta 8 makes this pretty easy.
 
-(FIXME: *Explain locale registration, or delete section if not needed.*)
+You'll need to add the following to your `bootstrap.php`:
+
+```php
+new Extend\Locales(__DIR__ . '/locale'),
+
+// or if you use a resources folder
+new Extend\Locales(__DIR__ . '/resources/locale'),
+```
+
+### Language Packs
+
+However, the process is a bit different for language packs. With a language pack, the only thing you'll need to have in your `bootstrap.php` is the following:
+
+```php
+<?php
+
+return new Flarum\Extend\LanguagePack;
+```
+
+The `composer.json` will also need updated. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`.
+You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`:
+```json
+"flarum-locale": {
+  "code": "en",
+  "title": "English"
+}
+```
+And that's it! It should work out of the box.
+
 
 ---
 <a name="appendix-a"></a>
