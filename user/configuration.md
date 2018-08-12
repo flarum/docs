@@ -1,6 +1,6 @@
 ## Configuration
 
-[toc]
+[[toc]]
 
 ### An important file, config.php
 

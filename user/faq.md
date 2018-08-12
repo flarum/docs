@@ -1,6 +1,6 @@
 ## FAQ
 
-[toc]
+[[toc]]
 
 ### When will Flarum be stable?
 

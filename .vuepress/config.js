@@ -19,5 +19,9 @@ module.exports = {
         link: 'https://discuss.flarum.org',
       }
     ],
+  },
+
+  markdown: {
+    lineNumbers: true
   }
 };
