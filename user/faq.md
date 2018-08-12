@@ -1,8 +1,6 @@
----
-title: FAQ
----
-
 ## FAQ
+
+[toc]
 
 ### When will Flarum be stable?
 
@@ -12,11 +10,12 @@ Will I be able to upgrade from beta to subsequent releases?
 
 Yes! However, the upgrade process may require you to get your hands a little dirty. We’ll do our best to ensure it’s as easy as possible.
 
-### Can i donate money to speed up development?
+### Can I donate money to speed up development?
 
 All donations are gratefully received, and you can do so at this location:
 
-[Make a Donation](http://flarum.org/donate)
+- [Patreon](http://flarum.org/donate)
+- [OpenCollective](https://opencollective.com/flarum)
 
 However, donations will not directly impact the speed of development on Flarum, we also encourage users to contribute in other ways, such as:
 
@@ -26,7 +25,6 @@ However, donations will not directly impact the speed of development on Flarum, 
  - Contribute to Documentation (( Future link to contrib page ))
  - Translate Flarum (( Future link to Translation Docs ))
  - [Provide Help & Support on the community forums](https://discuss.flarum.org/)
- - [Make a monetary donation](http://flarum.org/donate)
  - Be a Flarumite! (Fan)
 
 ### So can I use the beta version in production? Please?
@@ -34,18 +32,6 @@ However, donations will not directly impact the speed of development on Flarum, 
 There’s a reason the [installation instructions](http://flarum.org/docs/installation/) begin by warning against this. Flarum is not mature yet, and there is plenty of room for something to go wrong. Extensions you’re relying on could be rendered incompatible by newer beta versions. Bugs could cause a loss of content or expose private information to the internet at large. Suboptimal SEO could hurt your site’s ranking, making it hard to attract new members. Existing members could get fed up with performance issues or incomplete features and head for greener pastures. And so on …
 
 You may decide to ignore these risks and install Flarum anyway. That’s up to you … but please be aware that if things go horribly wrong, it will be your responsibility to deal with them. We can’t guarantee we’ll be able to help you fix your problems at all — much less in a timely fashion. So bear in mind that it’s **your** site that you’ll be putting on the line, and choose wisely.
-
-### How do I add a header logo, links, or favicon?
-
-We've made it super-easy to add a Logo, Favicon etc, please follow the short set of instructions as set out below!
-
-1) Click on your **Name** at the at the top right of the screen, and select **Administration**
-
-2) Select **Appearance** on the left hand navigation panel
-
-3) On the page to the right, you'll see the option to upload your Logo, Favicon, etc. Go ahead and click **Choose an image..** under the appropriate label, and then select the image you want to upload.
-
-4) Simple as that!
 
 ### Can I integrate Flarum with WordPress/Laravel/etc.?
 
@@ -72,3 +58,13 @@ Despite not having a visual editor at the moment, Flarum does support Markdown a
 ### How do I translate Flarum into my language?
 
 Check out [this page](https://github.com/Arkinn/docs/blob/master/extend/internationalization.md) on how to translate Flarum!
+
+### How do I become staff on Flarum Discuss?
+
+> "Through an arcane and arduous ordeal, involving mystic rituals, life threatening peril and adventures to far off lands where many go and few return."
+> 
+> ~ jordanjay29
+
+The real answer is that we generally keep an eye on our community for stand out members who would make good staff. Honestly, for most of our current staff, what they did before becoming staff wasn't much different from what they do now.
+
+Find a passion and contribute however you feel is best. Then let it take its course. You don't have to have a badge to be respected here.
