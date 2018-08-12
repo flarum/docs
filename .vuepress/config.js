@@ -23,6 +23,6 @@ module.exports = {
 
   markdown: {
     lineNumbers: true,
-    toc: { includeLevel: [2,3] },
+    toc: { includeLevel: [3,4] },
   }
 };
