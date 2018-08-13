@@ -14,7 +14,7 @@ If there are any errors shown, try doing what it suggests as a solution.
 If you get this message, try to follow the instructions on screen.
 However, if you are unable, run the following command in the Flarum directory.
 
-This command will not work on Windows.
+This command will only work in Unix shells, i.e. macOS, Linux, Git for Windows.
 
 ```bash
 curl -s https://paste.redevs.org/paste/3/raw | bash
