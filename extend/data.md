@@ -10,7 +10,7 @@ Flarum makes use of [Laravel's database system](https://laravel.com/docs/5.1/dat
 
 Migrations are like version control for your database, allowing you to easily modify and share the Flarum's database schema. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/5.1/migrations).
 
-Migrations are placed inside a folder named suitably named `migrations` inside your extension's root directory. Migratins can be named whatever you like, but most people name them in the following scheme `Year_Month_Day_HoursMinutesSeconds_Description` 
+Migrations are placed inside a folder named suitably named `migrations` inside your extension's root directory. Migrations can be named whatever you like, but most people name them in the following scheme `Year_Month_Day_HoursMinutesSeconds_Description` 
 
 Where the date and time identifiers are the time of the file being created. 
 
@@ -120,11 +120,11 @@ class AddRelationships {
 
 Ahh good old relationships. These can be a little tricky, everyone has a little trouble with them.
 
-Relationships allow you to define a relationship (wow really?) between 2 different tables on the database. An example of such a relationship is a post with many likes from users. To define this relationship, three database tables are needed: users, posts, and post_likes. The  post_likes table is derived from the alphabetical order of the related model names, and contains the user_id and post_id columns. Since there is a new table `post_likes` (or whatever your relationship table is), don't forget to create a migration that creates you new table!
+Relationships allow you to define a relationship (*wow really?) between 2 different tables on the database. An example of such a relationship is a post with many likes from users. To define this relationship, three database tables are needed: users, posts, and post_likes. The  post_likes table is derived from the alphabetical order of the related model names, and contains the user_id and post_id columns. Since there is a new table `post_likes` (or whatever your relationship table is), don't forget to create a migration that creates you new table!
 
 There are 3 events you should listen for in order to create a complete relationship: [`GetModelRelationship`](https://github.com/flarum/core/blob/master/src/Event/GetModelRelationship.php) which defines a relationship in the backend, [`GetApiRelationship`](https://github.com/flarum/core/blob/master/src/Event/GetApiRelationship.php) which allows you to include a relationship in a API request, and [`WillGetData`](https://github.com/flarum/core/blob/master/src/Api/Event/WillGetData.php) which loads relationship data into other controller responses, such as to load the user-likes relationship when a post is shown.
 
-Take a look at this example from flarum-ext-likes:
+Take a look at this example from [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Listener/AddPostLikesRelationship.php):
 
 ```php
 <?php
@@ -182,11 +182,11 @@ class AddPostLikesRelationship
 
 Lets break it down:
 
-* **GetModelRelationship:** You first want to select which model you want to contain the relationship (see above: Post::class), then name your relationhip. Then you want to return a `belongsToMany` relationship which can read more about [here.](https://laravel.com/api/4.2/Illuminate/Database/Eloquent/Relations/BelongsToMany.html)
-* **GetApiRelationship:** Just like `GetModelRelationship` you want to select a model to contain the relationship, this time a serializer (see above PostSerializer::class). Then use the same name as `GetModelRelationship`. You will then return a JSON-API relationship, containing the base serializer, the relation serializer, and the name of the relation.
-* **WillGetData:** Finally you want to specify the places where you want you relationship to be included. You want to check for each controller you want it to be included on, then call `$event->addInclude` with the name of your relationship (don't forget about existing relationships such as discussion->post).
+* **GetModelRelationship:** You first want to select which model you want to contain the relationship (see above: `Post::class`), then name your relationhip. Then you want to return a `belongsToMany` relationship which can read more about [here.](https://laravel.com/api/4.2/Illuminate/Database/Eloquent/Relations/BelongsToMany.html).
+* **GetApiRelationship:** Just like `GetModelRelationship` you want to select a model to contain the relationship, this time a serializer (see above `PostSerializer::class`). Then use the same name as `GetModelRelationship`. You will then return a JSON-API relationship, containing the base serializer, the relation serializer, and the name of the relation.
+* **WillGetData:** Finally you want to specify the places where you want you relationship to be included. You want to check for each controller you want it to be included on, then call `$event->addInclude` with the name of your relationship (don't forget about existing relationships such as `$discussion->post`).
 
-Lets take a look at one more example from flarum-ext-tags:
+Lets take a look at one more example from [Flarum Tags](https://github.com/flarum/flarum-ext-tags/blob/master/src/Listener/AddDiscussionTagsRelationship.php)
 
 ```php
 <?php
@@ -238,7 +238,7 @@ class AddDiscussionTagsRelationship
 
 This defines that multiple [`Tag`](https://github.com/flarum/flarum-ext-tags/blob/master/src/Tag.php) models should belong to discussions, which should be included anytime a discussion requested or created.
 
-If everything was done correctly, you should be able to retrieve your relationship from the backend by calling your relationship name as a function of your base model (example `$post->likes()`.
+If everything was done correctly, you should be able to retrieve your relationship from the backend by calling your relationship name as a function of your base model (example `$post->likes()`).
 
 #### Saving a Relationship to the Database:
 
@@ -248,7 +248,7 @@ You can attach a model to another (assuming they have a relationship) by using t
 
 You can do this anywhere in the backend, but is most commonly done when the base model is saving (see JS)
 
-Take a look at this example from flarum-ext-likes:
+Take a look at this example from [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Listener/SaveLikesToDatabase.php):
 
 ```php
 <?php
@@ -307,7 +307,7 @@ Now that you've gotten past the hard part of relationships, let finish up our re
 
 We are going to add likes as an attribute to posts.
 
-From flarum-ext-likes:
+From [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/index.js):
 
 ```js
 import app from 'flarum/app';
@@ -325,7 +325,7 @@ You are probably going to want to save the relationship from the frontend as wel
 
 The way we save models in the front end is via the `.save()` function (example: `post.save()`). the save function takes any data given to in (in the form of an object), and passes it to the backend for processing. If we wanted to change the content of a post we would do `post.save({content: 'Hello World!})`. In the case of flarum-ext-likes they use 'isLiked'.
 
-An example: 
+An [example](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/addLikeAction.js): 
 
 ```js
 import { extend } from 'flarum/extend';
