@@ -97,7 +97,7 @@ The `bootstrap.php` file is included by Flarum on each and every page load, as l
 ```php
 <?php
 
-namespace acme\HelloWorld;
+namespace Acme\HelloWorld;
 
 return function () {
     echo 'Hello, world!';
@@ -114,7 +114,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
 ```json
 {
-    "name": "acme/flarum-hello-world",
+    "name": "acme/flarum-ext-hello-world",
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
@@ -122,7 +122,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     },
     "autoload": {
         "psr-4": {
-            "acme\\HelloWorld\\": "src/"
+            "Acme\\HelloWorld\\": "src/"
         }
     },
     "extra": {
@@ -140,7 +140,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
 Breaking it down:
 
-* **name** is the name of the Composer package in the format `vendor/extension`. You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `acme` as your vendor name. You should also prefix the `extension` part with `flarum-ext-` to indicate that it's a package specifically intended for use with Flarum.
+* **name** is the name of the Composer package in the format `vendor/extension`. You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `Acme` as your vendor name. You should also prefix the `extension` part with `flarum-ext-` to indicate that it's a package specifically intended for use with Flarum.
 * **description** is a short one-sentence description of what the extension does.
 * **type** MUST be set to flarum-extension. This ensures that when someone “requires” your extension, it will be identified as such.
 * **require** contains a list of your extension's own dependencies. You'll want to specify the first version of Flarum that your extension is compatible with here, usually prefixed with a caret (`^`).
@@ -185,7 +185,7 @@ Listening for an event is easy. Just inject the Event Dispatcher into your `boot
 ```php
 <?php
 
-namespace acme\HelloWorld;
+namespace Acme\HelloWorld;
 
 use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -224,7 +224,7 @@ Let's tell our `bootstrap.php` about our new class:
 ```php
 <?php
 
-namespace acme\HelloWorld;
+namespace Acme\HelloWorld;
 
 use Illuminate\Contracts\Events\Dispatcher;
 
@@ -242,7 +242,7 @@ We need our new class to actually do something now:
 ```php
 <?php
 
-namespace acme\HelloWorld\Listeners;
+namespace Acme\HelloWorld\Listeners;
 
 use Flarum\Post\Event\Saving;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -279,7 +279,7 @@ You can even define multiple event listeners in one class:
 ```php
 <?php
 
-namespace acme\HelloWorld\Listeners;
+namespace Acme\HelloWorld\Listeners;
 
 use Flarum\Post\Event\Saving as PostSaving;
 use Flarum\User\Event\Saving as UserSaving;
@@ -335,43 +335,51 @@ Before we can write any JavaScript, though, we need to set up a **transpiler**. 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
 * Node.js (Download)
-* Webpack (`npm run build`)
+* Webpack (`webpack --mode production`)
 
 This can be tricky, because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
 ### Transpilation
 
-It's time to set up our little JavaScript transpilation project. Create a new folder in your extension at `js/forum`, then pop in a couple of new files:
+It's time to set up our little JavaScript transpilation project. Create a new folder in your extension called `js`, then pop in a couple of new files:
 
 `package.json`
 
 ```json
 {
-  "private": true,
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "flarum-gulp": "^0.2.0"
+  "name": "@acme/hello-world",
+  "version": "0.0.0",
+  "dependencies": {
+    "flarum-webpack-config": "^0.1.0-beta.8",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.0.7"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch"
   }
 }
 ```
 
-`Gulpfile.js`
-
-```js
-var flarum = require('flarum-gulp');
-
-flarum({
-  modules: {
-    'acme/hello-world': [
-      'src/**/*.js'
-    ]
-  }
-});
-```
-
 Don't forget to change `acme` to your own vendor name!
 
-Now create a file at `js/forum/src/main.js`. This is like the JavaScript equivalent of `bootstrap.php` – its content is executed as the JavaScript application boots up. This is where we will make our changes to the UI. For now, though, let's just alert a friendly greeting:
+`forum.js`
+
+```js
+export * from './src/forum';
+```
+
+&
+
+`webpack.config.js`
+
+```js
+const config = require('flarum-webpack-config');
+
+module.exports = config();
+```
+
+Now create a file at `js/src/forum/index.js`. This is like the JavaScript equivalent of `bootstrap.php` – its content is executed as the JavaScript application boots up. This is where we will make our changes to the UI. For now, though, let's just alert a friendly greeting:
 
 ```js
 app.initializers.add('acme-hello-world', function() {
@@ -379,34 +387,43 @@ app.initializers.add('acme-hello-world', function() {
 });
 ```
 
+To figure out your initializer name use this table:
+
+| Composer package name     | Resulting initializer name |
+|---------------------------|----------------------------|
+| vendor/flarum-ext-package | vendor-package             |
+| vendor/flarum-package     | vendor-package             |
+| vendor/package            | vendor-package             |
+
 OK, time to fire up the transpiler. Run the following commands in the `js/forum` directory:
 
 ```bash
 npm install
-gulp watch
+npm run watch
 ```
 
-This will compile your browser-ready JavaScript code into the `js/forum/dist/extension.js` file, and keep watching for changes to the source files!
+This will compile your browser-ready JavaScript code into the `js/dist/forum.js` file, and keep watching for changes to the source files!
 
-One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case we will be using the [`Assets` extender](https://github.com/flarum/core/blob/master/src/Extend/Assets.php). 
+One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case we will be using the [`Frontend` extender](https://github.com/flarum/core/blob/master/src/Extend/Frontend.php). 
 
 In your `boostrap.php`:
 
 ```php
 <?php
 
-namespace acme\HelloWorld;
+namespace Acme\HelloWorld;
 
 use Flarum\Extend;
 
 return [
     (new Extend\Assets('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum/extension.less')
 ];
 ```
 
 This will cause our extension's JavaScript to be loaded into the page. Give it a try!
+
+*Psst* If you want to add JS to the admin page, just create a file called admin.js replace `export * from './src/forum';` with `export * from './src/admin';` create an admin folder and repeat the steps above replacing `forum` with `admin` any time is shows up!
 
 ### Components
 
@@ -502,7 +519,7 @@ Back to our good friend `bootstrap.php`, simply add the directory of your LESS f
 ```php
 <?php
 
-namespace acme\HelloWorld;
+namespace Acme\HelloWorld;
 
 use Flarum\Extend;
 

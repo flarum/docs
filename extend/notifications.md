@@ -129,7 +129,7 @@ Similar to the notification blueprint, we need tell Flarum how we want our notif
 
 First, create a class that extends the notification component. Then, there are 4 functions to add:
 
-* `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the  (example: `fas fa-code-branch`).
+* `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
 * `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.props.notification.subject())`).
 * `content()`: What the notification itself should show. It should say the user name and then the action. It will be followed by when the notification was sent (make sure to use translations).
 * `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
@@ -171,6 +171,31 @@ Open up your index.js (the forum one) and start off by importing your newly crea
 `app.notificationComponents.{nameOfNotification} = {NotificationTemplate};`
  
 Make sure to replace `{nameOfNotification}` with the name of the notification in your PHP blueprint (`getType()`) and replace `{NotificationTemplate}` with the name of the JS notification template we just made! (Make sure it's imported!)
+
+Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGird`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js#L204) function
+
+From [Flarum-Likes](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/index.js):
+
+```js
+import { extend } from 'flarum/extend';
+import app from 'flarum/app';
+import NotificationGrid from 'flarum/components/NotificationGrid';
+
+import PostLikedNotification from './components/PostLikedNotification';
+
+app.initializers.add('flarum-likes', () => {
+  app.notificationComponents.postLiked = PostLikedNotification;
+
+  extend(NotificationGrid.prototype, 'notificationTypes', function (items) {
+    items.add('postLiked', {
+      name: 'postLiked',
+      icon: 'far fa-thumbs-up',
+      label: app.translator.trans('flarum-likes.forum.settings.notify_post_liked_label')
+    });
+  });
+});
+```
+Simply add the name of your notification (from the blueprint), an icon you want to show, and a description of the notification and you are all set!
 
 ## Sending your notification
 
