@@ -70,12 +70,12 @@ class PostLikedBlueprint implements BlueprintInterface
 **Note time!**
  * `__construct` had all of the data that would be used in the blueprint (you will be sending that data later).
  * `getData()` isn't required.
- 
+
 Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blob/master/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
 ## Sending the Notification
 
-Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified about your notification.
+Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification.
 
 The event you want to listen for is [`ConfigureNotificationTypes`](https://github.com/flarum/core/blob/master/src/Event/ConfigureNotificationTypes.php)
 
@@ -125,13 +125,13 @@ Your notification is coming together nicely! Just a few things left to do!
 
 As with everything in Flarum, what we register in the backend, must be registered in the frontend as well.
 
-Similar to the notification blueprint, we need tell Flarum how we want our notification displayed. 
+Similar to the notification blueprint, we need tell Flarum how we want our notification displayed.
 
 First, create a class that extends the notification component. Then, there are 4 functions to add:
 
 * `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
 * `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.props.notification.subject())`).
-* `content()`: What the notification itself should show. It should say the user name and then the action. It will be followed by when the notification was sent (make sure to use translations).
+* `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
 * `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
 
 *Let take a look at our example shall we?*
@@ -169,7 +169,7 @@ Next, we need to tell Flarum that the notification you send in the backend corre
 Open up your index.js (the forum one) and start off by importing your newly created notification template. Then add the following line:
 
 `app.notificationComponents.{nameOfNotification} = {NotificationTemplate};`
- 
+
 Make sure to replace `{nameOfNotification}` with the name of the notification in your PHP blueprint (`getType()`) and replace `{NotificationTemplate}` with the name of the JS notification template we just made! (Make sure it's imported!)
 
 Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGird`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js#L204) function

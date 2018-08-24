@@ -4,9 +4,9 @@
 
 Deleting a post made by someone else is easy, but has 2 stages, which are outlined in detail below.
 
-As always, firstly you'll want to find the post that needs deleting. Once you have, hover your mouse to the right, lower side of the post area  to bring up the _post menu_ click on that and then click **Delete**.
+As always, firstly you'll want to find the post that needs deleting. Once you have, hover your mouse to the right, the lower side of the post area to bring up the _post menu_ click on that and then click **Delete**.
 
-Be aware though, clicking **Delete** will only soft-delete the post, meaning for now, the post will remain there in non-live state. This gives you the opportunity to restore the post should you think you have made a mistake, or want another mod to review it, etc.
+Be aware though, clicking **Delete** will only soft-delete the post, meaning, for now, the post will remain there in the non-live state. This gives you the opportunity to restore the post should you think you have made a mistake, or want another mod to review it, etc.
 
 The option to Delete looks like this:
 

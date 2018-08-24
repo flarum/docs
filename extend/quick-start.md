@@ -106,7 +106,7 @@ return function () {
 
 ### composer.json
 
-Ever heard of [Composer](https://getcomposer.org)? It's a dependency manager for PHP. It allows applications to easily pull in external code libraries, and makes it easy to keep them up-to-date so that security and bug fixes are propagated rapidly. Pretty cool, huh?
+Ever heard of [Composer](https://getcomposer.org)? It's a dependency manager for PHP. It allows applications to easily pull in external code libraries and makes it easy to keep them up-to-date so that security and bug fixes are propagated rapidly. Pretty cool, huh?
 
 As it turns out, every Flarum Extension is also a Composer package. That means someone's Flarum installation can "require" a certain Extension and Composer will pull it in and keep it up-to-date. Nice!
 
@@ -168,15 +168,15 @@ Alright folks, listen up.
 
 No, seriously, that's all there is to it.
 
-Whenever something of importance is about to happen, is happening, or has just happened, Flarum fires an **event**. As an Extension developer, your job is pretty simple: **listen** for the events you're interested in, and react accordingly.
+Whenever something of importance is about to happen, is happening, or has just happened, Flarum fires an **event**. As an Extension developer, your job is pretty simple: **listen** for the events you're interested in and react accordingly.
 
 For example:
 
 * When a discussion is started, Flarum fires the (Discussion)`Started` event. A "Twitter Feed" Extension could listen for this event and react by sending a tweet with the discussion's title and URL.
-* When post data is about to be saved to the database, Flarum fires the (post) `Saving` event. An "Attachments" Extension could listen for this event and react by validating any uploaded files, and queing them to be saved to the database too.
+* When post data is about to be saved to the database, Flarum fires the (post) `Saving` event. An "Attachments" Extension could listen for this event and react by validating any uploaded files and queuing them to be saved to the database too.
 * When the page HTML is about to be rendered, Flarum fires the `Rendering` event. A theme Extension could listen for this event and react by adding some CSS code to the page.
 
-Get the idea? Great! There are dozens of events you can listen for. Looking for a `user` event? Head to the [`user`](https://github.com/flarum/core/tree/master/src/User) namespace and then look through the various events. Go ahead, have a squiz!
+Get the idea? Great! There are dozens of events you can listen to. Looking for a `user` event? Head to the [`user`](https://github.com/flarum/core/tree/master/src/User) namespace and then look through the various events. Go ahead, have a squiz!
 
 ### Event Handlers
 
@@ -215,9 +215,9 @@ Try it out! Now whenever someone makes a post, the content will be set to "This 
 
 An important part of making a good extension is keeping it organized! The best way to do this is to store your classes in folders labeled for their purpose. Inside your extensions folder, make a folder called `src` this is the source for all of your PHP classes (Look back at the `autoload` option in your `composer.json`).
 
-Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. (`boostrap.php` should be the only php file outside of `src`)
+Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. (`boostrap.php` should be the only PHP file outside of `src`)
 
-Next we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
+Next, we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
 
 Let's tell our `bootstrap.php` about our new class:
 
@@ -265,15 +265,15 @@ class ChangePostContent
         $event->post->content = 'This is not what I wrote!';
     }
 }
-``` 
+```
 
 The subscribe function (which we called in the `boostrap.php`) is where you should declare which events you want to listen for. `$events->listen()` is a function which accepts 2 arguments:
 
-* The event class you want to listen for.
+* The event class you want to listen to.
 * An array which contains the callback for when that event is triggered
     * `$this` should be the first element of the array, it says that the function to be called is in this current class
     * The name of the function as a string should be the second argument, this states the specific function in the class to be called
-    
+
 You can even define multiple event listeners in one class:
 
 ```php
@@ -303,7 +303,7 @@ class ChangePostContent
     {
         $event->post->content = 'This is not what I wrote!';
     }
-    
+
     /**
      * @param UserSaving $event
      */
@@ -312,11 +312,11 @@ class ChangePostContent
         $event->user->username = 'FooBar';
     }    
 }
-``` 
+```
 
 ## Changing the UI
 
-We're making good progress. We've learnt how to bootstrap our extension, and we can listen for events, which opens up a lot of doors.
+We're making good progress. We've learned how to bootstrap our extension, and we can listen for events, which opens up a lot of doors.
 
 The next thing we're going to learn is how to make changes to Flarum's user interface. How to add buttons, marquees, and blinking text. Well, maybe not the last couple...
 
@@ -337,7 +337,7 @@ In order to do this transpilation, you need to be working in a capable environme
 * Node.js (Download)
 * Webpack (`webpack --mode production`)
 
-This can be tricky, because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
+This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
 ### Transpilation
 
@@ -404,7 +404,7 @@ npm run watch
 
 This will compile your browser-ready JavaScript code into the `js/dist/forum.js` file, and keep watching for changes to the source files!
 
-One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case we will be using the [`Frontend` extender](https://github.com/flarum/core/blob/master/src/Extend/Frontend.php). 
+One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case, we will be using the [`Frontend` extender](https://github.com/flarum/core/blob/master/src/Extend/Frontend.php).
 
 In your `boostrap.php`:
 
@@ -423,11 +423,11 @@ return [
 
 This will cause our extension's JavaScript to be loaded into the page. Give it a try!
 
-*Psst* If you want to add JS to the admin page, just create a file called admin.js replace `export * from './src/forum';` with `export * from './src/admin';` create an admin folder and repeat the steps above replacing `forum` with `admin` any time is shows up!
+*Psst* If you want to add JS to the admin page, just create a file called admin.js replace `export * from './src/forum';` with `export * from './src/admin';` create an admin folder and repeat the steps above replacing `forum` with `admin` any time it shows up!
 
 ### Components
 
-Flarum's interface is made up of many nested **components**. Components are a bit like HTML elements in that they encapsulate content and behaviour. For example, look at this simplified tree of the components that make up a discussion page:
+Flarum's interface is made up of many nested **components**. Components are a bit like HTML elements in that they encapsulate content and behavior. For example, look at this simplified tree of the components that make up a discussion page:
 
 * DiscussionPage
     - DiscussionList (the side pane)
@@ -530,7 +530,7 @@ return [
 ];
 ```
 
-LESS is a modern version of CSS that utilizes the same syntax, with a few more features such as: variables, nesting, functions, just to name a few. If you've never used LESS before, and prefer to not learn about the cool features, you can use it in the exact same way you do CSS.
+LESS is a modern version of CSS that utilizes the same syntax, with a few more features such as variables, nesting, functions, just to name a few. If you've never used LESS before, and prefer to not learn about the cool features, you can use it in the exact same way you do CSS.
 
 ## Conclusion
 

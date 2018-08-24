@@ -50,7 +50,7 @@ git push && git push --tags # pushes the tag (release) with the commit
 Composer packages are published to a Composer repository, usually [Packagist](https://packagist.org/). You will need an account to proceed.
 
 If this is the first release you are publishing of your extension, you will need to submit it at https://packagist.org/packages/submit and enter the extension's repository URL.
-If your extension is located in GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`.
+If your extension is located on GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`.
 
 Once you entered your public repository URL in there, your package will be automatically crawled periodically.
 
@@ -75,4 +75,4 @@ Let's recap what we learned:
 
 You will most likely want to create a discussion on the [Flarum Community](http://discuss.flarum.org/) forum.
 
-The community will thank you, and expect you to update it and fix bugs that come up, so be ready for that.
+The community will thank you and expect you to update it and fix bugs that come up, so be ready for that.

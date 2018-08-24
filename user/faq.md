@@ -43,7 +43,7 @@ We would love to build countless features and extensions for Flarum, but first t
 
 ### Why haven’t you fixed [insert issue here] yet?
 
-Here again the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](http://flarum.org/docs/contributing)!
+Here again, the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](http://flarum.org/docs/contributing)!
 
 ### Will I be able to migrate my forum to Flarum?
 
@@ -53,7 +53,7 @@ Yes, but not for a while. Our focus right now is on getting Flarum stable and fe
 
 Flarum currently does not have a visual editor – it’s just something we didn’t get to in time for beta. Rest assured, it is planned and will be available in the core soon.
 
-Despite not having a visual editor at the moment, Flarum does support Markdown and BBCode. Markdown is a plain text format for writing structured documents, based on conventions used for indicating formatting in email and usenet posts. If you are completely new to Markdown, check out [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to help you with formatting your posts on Flarum.
+Despite not having a visual editor at the moment, Flarum does support Markdown and BBCode. Markdown is a plain text format for writing structured documents, based on conventions used for indicating formatting in email and Usenet posts. If you are completely new to Markdown, check out [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to help you with formatting your posts on Flarum.
 
 ### How do I translate Flarum into my language?
 
@@ -62,7 +62,7 @@ Check out [this page](https://github.com/Arkinn/docs/blob/master/extend/internat
 ### How do I become staff on Flarum Discuss?
 
 > "Through an arcane and arduous ordeal, involving mystic rituals, life threatening peril and adventures to far off lands where many go and few return."
-> 
+>
 > ~ jordanjay29
 
 The real answer is that we generally keep an eye on our community for stand out members who would make good staff. Honestly, for most of our current staff, what they did before becoming staff wasn't much different from what they do now.

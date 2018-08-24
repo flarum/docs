@@ -1,7 +1,7 @@
 ## User Handbook
 ### Starting a Discussion
 
-Discussions can be started once you are logged in, to begin click on **Start a Discussion** to the left hand side of your screen. The button for this looks like this:
+Discussions can be started once you are logged in, to begin, click on **Start a Discussion** to the left-hand side of your screen. The button for this looks like this:
 
 ![SS - Start a discussion button](687474703a2f2f692e696d6775722e636f6d2f3273757538696c2e706e67.png)
 
@@ -13,7 +13,7 @@ Once that button is pressed, at the bottom center of your screen, the discussion
 
 ### Tags
 
-On the form, you'll need to select some tags to categorise what you are talking about. Click on "Choose Tags" from the screenshot above, and the following page will display:
+On the form, you'll need to select some tags to categorize what you are talking about. Click on "Choose Tags" from the screenshot above, and the following page will display:
 
 ![SS - Tag screen](687474703a2f2f692e696d6775722e636f6d2f5662794e6e375a2e706e67.png)
 
@@ -21,7 +21,7 @@ Select the tags you think are appropriate, or relevant to your discussion, and t
 
 ### Discussion Title
 
-Discussion Title is giving a very short, brief subject on your discussion, for example if you wanted to start a discussion about the weather today, then your Title would be something along the lines of "The Weather Today".
+Discussion Title is giving a very short, brief subject on your discussion, for example, if you wanted to start a discussion about the weather today, then your Title would be something along the lines of "The Weather Today".
 
 ### Write a post
 

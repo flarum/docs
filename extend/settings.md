@@ -21,7 +21,7 @@ class ClassInterfacesWithSettings
      * @var SettingsRepositoryInterface
      */
     protected $settings;
-    
+
     public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
@@ -40,7 +40,7 @@ To get values from the Settings table, all we have to do is use `SettingsReposit
 The `get` function accepts 2 arguments:
 
 1. The key of the setting you are trying to get in the Settings table
-2. (Optional) Allows you to set a default value if the key does not contain any data, otherwise it will return `null`
+2. (Optional) Allows you to set a default value if the key does not contain any data, otherwise, it will return `null`
 
 ### Setting a value
 
@@ -67,7 +67,7 @@ You'll likely want to allow a forum admin to change a setting related to your ex
 
 First, setup your admin JS as discussed [here](quick-start.md#environment-setup) (replacing forum with admin).
 
-We will continuing to use the "Hello World" example, but your `main.js` should look something like this:
+We will continue to use the "Hello World" example, but your `main.js` should look something like this:
 
 ```js
 import app from 'flarum/app';

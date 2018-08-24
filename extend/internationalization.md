@@ -1,6 +1,6 @@
 Flarum features a powerful translation system (based on [Symfony's translator](http://symfony.com/doc/current/book/translation.html)) that allows the interface to display information in virtually any language. You should consider taking advantage of Flarum's translator as you develop your extension, even if you have no intention of using it in more than a single language.
 
-For one thing, this system will allow you to change the information displayed by your extension without editing the actual code. It will also give you the tools needed to efficiently deal with phenomena such as pluralization and agreement for gender. And you never know: it may come in handy later, if you decide you want to add more languages and make your extension available to users around the world!
+For one thing, this system will allow you to change the information displayed by your extension without editing the actual code. It will also give you the tools needed to efficiently deal with phenomena such as pluralization and agreement for gender. And you never know: it may come in handy later if you decide you want to add more languages and make your extension available to users around the world!
 
 This guide will show you how to [create a locale file](#creating-a-locale-file) containing language resources for your extension, and how to [use the translator](#using-the-translator) to access those resources from within your code. You will learn how to deal with more complex translations involving [variables](#variables) and [HTML tags](#html-tags), as well as [pluralization](#pluralization) and [gender](#gender).
 
@@ -14,7 +14,7 @@ Unlike Flarum's bundled extensions &mdash; which are translated using resources 
 
 As a rule, a Flarum site can only display translations corresponding to the language packs that have been installed on that site. But Flarum will do its level best &mdash; within this limitation &mdash; to render your extension's output in some sort of user-readable language:
 
-1. It will begin by looking for a translation in the user's preferred display language. 
+1. It will begin by looking for a translation in the user's preferred display language.
 2. If it can't find one, it will look for a translation in the forum's default language.
 3. As a last-ditch effort, it will look for a "generic" English translation of the output.
 4. If none of the above are available, it will give up and display a translation key.
@@ -27,7 +27,7 @@ Since English translations could be the only thing standing between forum users 
 
 ## Creating a Locale File
 
-Flarum's language resources use the [YAML](https://en.wikipedia.org/wiki/YAML) file format. The locale files for a third-party extension need to be stored in the extenion's `locale` folder. Each locale file should be named using the [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the language it contains. For example, a file containing French translations should be named  "`fr.yml`".
+Flarum's language resources use the [YAML](https://en.wikipedia.org/wiki/YAML) file format. The locale files for a third-party extension need to be stored in the extension's `locale` folder. Each locale file should be named using the [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the language it contains. For example, a file containing French translations should be named  "`fr.yml`".
 
 > **Note:** If you wish to provide support for a specific locale, you can add an underscore followed by an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code; the filename for French as spoken in Canada, for example, would be "`fr_CA.yml`". But you should be sure to include a locale file containing "generic" translations for the same language, so Flarum will have something it can fall back on in the event a user specifies a locale that you haven't provided for.
 
@@ -55,7 +55,7 @@ acme-hello-world:                # Namespacing for the extension; unindented.
     hello_text: "Hello, world!"  # Identifier/translation; indented 4 spaces.
 ```
 
-Once you have this information in place, you can form the **full translation key** that you will use to access a translation by listing its keys in order from extension namespace to identifier, with periods as delimiters. For example, the full translation key for the "Hello, world!" translation would be:
+Once you have this information in place, you can form the **full translation key** that you will use to access a translation by listing its keys in order from extension namespace to an identifier, with periods as delimiters. For example, the full translation key for the "Hello, world!" translation would be:
 
 ```javascript
 'acme-hello-world.alert.hello_text'
@@ -108,7 +108,7 @@ It's not uncommon to use the same bit of text in more than one location or conte
 - As a **button** that users can click when they want to edit some stuff
 - As the **title** of a dialog box displayed when users click that button
 
-Your instinct might be to add a single translation &mdash; let's call it "`edit_stuff`" &mdash; and use that ID key twice in your code. This approach is efficient, but it lacks flexibility: in some languages, it may not be possible to use the same phrase for both the button and the dialog title! A better way would be to define *two* keys for use in your code, then set them both to reference the same translation, like so: 
+Your instinct might be to add a single translation &mdash; let's call it "`edit_stuff`" &mdash; and use that ID key twice in your code. This approach is efficient, but it lacks flexibility: in some languages, it may not be possible to use the same phrase for both the button and the dialog title! A better way would be to define *two* keys for use in your code, then set them both to reference the same translation, like so:
 
 ```yaml
 edit_stuff_button: => edit_stuff    # Used in the code that creates the button.
@@ -177,7 +177,7 @@ Note that each parameter is defined using a single HTML tag, with a slash added 
 icon_text: "Enter the name of any <a>FontAwesome</a> icon class, <em>without</em> the <code>fa-</code> prefix."
 ```
 
-Of course, you can give a parameter any name you like &mdash; you could use `<fred>` and `</fred>` to enclose your link text, if you really wanted to! But we recommend sticking as close as possible to the actual HTML tags being represented, so your localizers will be able to understand what's going on.
+Of course, you can give a parameter any name you like &mdash; you could use `<fred>` and `</fred>` to enclose your link text if you really wanted to! But we recommend sticking as close as possible to the actual HTML tags being represented, so your localizers will be able to understand what's going on.
 
 Localizers can reorder elements as needed, and even choose to omit tags if they so desire. But they can't add any tags of their own: the translator will simply ignore any HTML-style tag that doesn't correspond to a properly defined parameter in the code.
 
@@ -186,14 +186,14 @@ Localizers can reorder elements as needed, and even choose to omit tags if they 
 
 ### Handling Pluralization
 
-On occassion you may need to provide alternate versions of a translation to accommodate pluralization of a word or phrase. This is done by using the `app.translator.transChoice()` method to pass the translation key &mdash; along with a variable that sets the conditions for pluralization &mdash; to the translator. 
+On occasion, you may need to provide alternate versions of a translation to accommodate pluralization of a word or phrase. This is done by using the `app.translator.transChoice()` method to pass the translation key &mdash; along with a variable that sets the conditions for pluralization &mdash; to the translator.
 
 ```javascript
 const remaining = this.minPrimary - primaryCount;
 return app.translator.transChoice('choose_primary_placeholder', remaining, {count: remaining});
 ```
 
-This example is from the [Choose Tags modal](https://github.com/flarum/tags/blob/master/js/forum/src/components/TagDiscussionModal.js) of the Tags extension, where it tells the user how many more primary tags can be selected. Note that the `remaining` variable is passed to the translator **twice**. First it appears as itself, to condition the pluralization of the word "tags". Then it appears again as the value of the `count` parameter, which the translator can use to insert that value in the translation.
+This example is from the [Choose Tags modal](https://github.com/flarum/tags/blob/master/js/forum/src/components/TagDiscussionModal.js) of the Tags extension, where it tells the user how many more primary tags can be selected. Note that the `remaining` variable is passed to the translator **twice**. First, it appears as itself, to condition the pluralization of the word "tags". Then it appears again as the value of the `count` parameter, which the translator can use to insert that value in the translation.
 
 When the `app.translator.transChoice()` method is called, the translator scans the translation for a variant that matches the sort of pluralization required by the value of the variable. These variants need to be listed serially &mdash; singular form first, then plural forms in order of increasing magnitude &mdash; and separated using the vertical line (`|`) character. Here's the English translation for the above code:
 
@@ -222,7 +222,7 @@ $translator = app(Translator::class); // you'll need to import the class with 'u
 ```  
 
 Then, the API is similar to the JavaScript Translator class. You can use `$translator->trans` like you'd use `app.translator.trans` in JavaScript.
-You can learn more about the Translator's methods in [Symfony's `Translator` documentation](http://api.symfony.com/3.1/Symfony/Component/Translation/Translator.html), which Flarum's `Translator` extends. 
+You can learn more about the Translator's methods in [Symfony's `Translator` documentation](http://api.symfony.com/3.1/Symfony/Component/Translation/Translator.html), which Flarum's `Translator` extends.
 
 
 ## Registering Locales
@@ -248,7 +248,7 @@ However, the process is a bit different for language packs. With a language pack
 return new Flarum\Extend\LanguagePack;
 ```
 
-The `composer.json` will also need updated. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`.
+The `composer.json` will also need to be updated. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`.
 You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`:
 ```json
 "flarum-locale": {
@@ -312,11 +312,11 @@ These two keys don't correspond to interfaces; they're for translations that req
 
 The keys in this level are not so rigidly defined. Their main purpose is to chop the UI up into manageable chunks, so localizers can find the translations and see for themselves how they are used by the software. (Third-level keys aren't used in the `ref` and `group` namespaces, which don't need chopping.)
 
-If you're modifying an existing location &mdash; to add a new setting to the Settings page, for example &mdash; you should copy our namespacing so experienced Flarum localizers will know  at a glance exactly where the new translations are displayed. See the [English locale files](https://github.com/flarum/english/tree/master/locale) for the details of our namespacing scheme.
+If you're modifying an existing location &mdash; to add a new setting to the Settings page, for example &mdash; you should copy our namespacing so experienced Flarum localizers will know at a glance exactly where the new translations are displayed. See the [English locale files](https://github.com/flarum/english/tree/master/locale) for the details of our namespacing scheme.
 
 If your extension adds a new location &mdash; such as a new dialog box &mdash; you should feel free to create a new third-level key to namespace the translations that go there. Take a couple minutes to familiarize yourself with the namespacing in the locale files linked above, then create a new key that fits in with that scheme.
 
-As a general rule, third-level keys should be short &mdash; no more than one or two words &mdash; and expressed in `snake_case`. They should be descriptive of the locations where the translations are used. 
+As a general rule, third-level keys should be short &mdash; no more than one or two words &mdash; and expressed in `snake_case`. They should be descriptive of the locations where the translations are used.
 
 <a name="naming-id-keys"></a>
 
@@ -334,7 +334,7 @@ We'll start with the suffix because it's the most important part of the key name
 _button:        # Used for buttons (including dropdown menu items).
 _link:          # Used for links that are not shown graphically as buttons.
 _heading:       # Used for headings in tables and lists.
-_label:         # Used for the names of data fields, checkbox settings, etc. 
+_label:         # Used for the names of data fields, checkbox settings, etc.
 _placeholder:   # Used for placeholder text displayed in fields.
 ```
 
@@ -367,7 +367,7 @@ In some cases, the summary may be replaced by a description of the object's func
 
 The root may also be **omitted** in certain cases &mdash; usually when the suffix alone is sufficient to identify the translation. For example, it's unlikely that a page or dialog box will have more than one title &hellip; and like as not, the content of the title is already given in the third-level namespacing! So the suffix can stand alone.
 
-Suffixes are also sufficient to identify the subject and body components of an email message, since each email will have only one subject line and one body. Note that the leading underscore is omitted in such cases: you would use just `title`, `subject`, or `body` as the ID key.
+Suffixes are also sufficient to identify the subject and body components of an email message since each email will have only one subject line and one body. Note that the leading underscore is omitted in such cases: you would use just `title`, `subject`, or `body` as the ID key.
 
 
 <a name="reusing-translations"></a>
@@ -375,7 +375,7 @@ Suffixes are also sufficient to identify the subject and body components of an e
 ### Reusing Translations
 
 
-Flarum's unique [key references](#key-references) fulfil the same role as YAML anchors, but they're better in one respect: you can even reference keys in a different file! For this reason, you need to use the **full translation key** when referencing. Here's a more realistic example of how referencing works, complete with namespacing:
+Flarum's unique [key references](#key-references) fulfill the same role as YAML anchors, but they're better in one respect: you can even reference keys in a different file! For this reason, you need to use the **full translation key** when referencing. Here's a more realistic example of how referencing works, complete with namespacing:
 
 ```yaml
 core:
@@ -419,7 +419,7 @@ For this reason, any key references in the [core resources](https://github.com/f
 
 - Translations used by both the extension and the core should go in the `core.ref` namespace.
 
-Third-party extensions are welcome to reference keys in the `core.ref` namespace, but please be aware that we cannot add translations to this namespace based on reuse in third-party extensions. A third-party dev who wants to reuse a translation from a namespace other that `core.ref` will need to add a properly keyed duplicate translation to the extension's locale file. 
+Third-party extensions are welcome to reference keys in the `core.ref` namespace, but please be aware that we cannot add translations to this namespace based on reuse in third-party extensions. A third-party dev who wants to reuse a translation from a namespace other than `core.ref` will need to add a properly keyed duplicate translation to the extension's locale file.
 
 No extension should ever reference a key from another extension, as doing so will result in a dependency.
 
@@ -441,7 +441,7 @@ You may also wish to add **inline comments** after a specific translation to pro
 
 ## Appendix B: Coding for the World
 
-In this appendix we'd like to offer a few tips that may help you to avoid some of the more common pitfalls in the internationalization process. Abstracting language from code is easily one of the more humdrum tasks a programmer has to deal with, but if you don't give due attention to the subtleties involved, you're likely to end up creating your localizers an unnecessary headache or two.
+In this appendix, we'd like to offer a few tips that may help you to avoid some of the more common pitfalls in the internationalization process. Abstracting language from code is easily one of the more humdrum tasks a programmer has to deal with, but if you don't give due attention to the subtleties involved, you're likely to end up creating your localizers an unnecessary headache or two.
 
 Of course, it's not just about making life easier for localizers. Because when they get headaches, they will come to you for help &mdash; often months (or even years) after you've put the project behind you and moved on to something else! It's the sort of situation where an ounce or two of prevention may indeed be worth several pounds of cure further down the road &hellip; for everybody involved.
 
@@ -451,9 +451,9 @@ It's probably impossible to avoid localization issues completely; there are just
 
 This probably goes without saying. After all, if you're going to go to the trouble of extracting translations, you might as well finish the job, right? Well, yes, but that's easier said than done. It's really quite unusual to find a program that doesn't have at least a few bits of hardcoded text floating around somewhere.
 
-Even tiny bits of text can cause problems for localizers. A comma here, a colon there &hellip; perhaps a pair of brackets inserted to make the page more legible: such things can and do cause issues for localizers. After all, not all languages use the same glyphs for these things! Just one hardcoded space can be a problem for someone trying to translate the interface into a languages that doesn't use spaces to separate words.
+Even tiny bits of text can cause problems for localizers. A comma here, a colon there &hellip; perhaps a pair of brackets inserted to make the page more legible: such things can and do cause issues for localizers. After all, not all languages use the same glyphs for these things! Just one hardcoded space can be a problem for someone trying to translate the interface into a language that doesn't use spaces to separate words.
 
-Generally speaking, any displayed text that isn't supplied by a variable or the result of a calculation *must* be included in the locale files. That's easily said, but actually doing it takes a bit of perseverence.
+Generally speaking, any displayed text that isn't supplied by a variable or the result of a calculation *must* be included in the locale files. That's easily said, but actually doing it takes a bit of perseverance.
 
 ### Avoid Hardcoded Syntax!
 
@@ -472,7 +472,7 @@ sign_up: Sign Up
 
 There were good reasons for doing it this way. For one thing, it made it easy to turn the second half into a link. And since the second translation is reused elsewhere, keeping it separate seemed like a no-brainer.
 
-But there were problems with this approach. The hardcoded space seemed likely to pose issues for some localizers, as mentioned above. And splitting this text into two strings would make it impossible to render the line as a single sentence with the link embeded in the middle:
+But there were problems with this approach. The hardcoded space seemed likely to pose issues for some localizers, as mentioned above. And splitting this text into two strings would make it impossible to render the line as a single sentence with the link embedded in the middle:
 
 > If you don't have an account yet, you can [sign up](#) instead!
 
@@ -524,4 +524,4 @@ If the namespacing keys combine to form a complete specification of where a tran
 
 Although this may sound inefficient, there's a good reason for doing things this way: it's the easiest way to ensure that localizers will have the flexibility they need. If you reuse keys in your code, you'll eventually hit a snag. Your localizers will be unable to find a single expression that fits every context where you've used some key or other &hellip; and then they'll start bugging you to fix your code.
 
-Fortunately, you can avoid many such issues if you simply take care to [namespace translations](#namespacing-translations) correctly, [name your ID keys](#naming-id-keys) appropriately, and always [reuse translations](#reusing-translations) instead of keys. Though it may seem like a bother, in the long run the [standard format](#appendix-a) will make localization much easier for *everyone*.
+Fortunately, you can avoid many such issues if you simply take care to [namespace translations](#namespacing-translations) correctly, [name your ID keys](#naming-id-keys) appropriately, and always [reuse translations](#reusing-translations) instead of keys. Though it may seem like a bother, in the long run, the [standard format](#appendix-a) will make localization much easier for *everyone*.

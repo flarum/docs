@@ -33,9 +33,9 @@ Once you have installed a language pack and made sure it’s working, you may wa
 
 ### Disabling a Language Pack
 
-If you decide you don’t need to support a certain language after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
+If you decide you don’t need to support a certain language, after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
 
-Disabling a language can useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
+Disabling a language can be useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
 
 ### Third-Party Extensions
 

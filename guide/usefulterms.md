@@ -1,7 +1,7 @@
 ## User Handbook
 ### A glossary of terms used in the documentation, and their explanation
 
-This part of the document is to give you a better understanding on what certain terms said throughout the documentation mean. You can refer to this at any time you are uncertain of anything.
+This part of the document is to give you a better understanding of what certain terms said throughout the documentation mean. You can refer to this at any time you are uncertain of anything.
 
 **_Discussion_**
 
@@ -15,7 +15,7 @@ A post is found at the very start of a discussion, and also any subsequent repli
 
 Mentions are a way of publically alerting another user to the discussion or post, a mention is used by:
 @username
-for example, if someone wanted to mention me (Arkinn) to a post, they would simply type @arkinn **anywhere** in their post (content can also be added aswell), once submitted I would get a notification of the mention immediately.
+for example, if someone wanted to mention me (Arkinn) to a post, they would simply type @arkinn **anywhere** in their post (content can also be added as well), once submitted I would get a notification of the mention immediately.
 
 **_Post Menu_**
 
