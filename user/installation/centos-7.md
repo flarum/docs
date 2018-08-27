@@ -14,38 +14,44 @@ Before you install, please read our Contributing guide so you will know what you
 
 ## Installing from scratch on CentOS 7
 
-## Some important notes before we begin:
+### Some important notes before we begin:
 
   - Following this tutorial will **disable the firewall, and SELinux**
-  
-Whilst this is **not** ideal for a server environment, we do this for ease of use, and to get you through the installation, so for now you will be responsible for setting up your own security measures. 
+
+Whilst this is **not** ideal for a server environment, we do this for ease of use, and to get you through the installation, so, for now, you will be responsible for setting up your own security measures.
 
   - This guide has been extensively tested on CentOS 7.3 1611, if you use a different version to this, your mileage may vary!
 
-## Disable SELinux & Stop the Firewall
+### Disable SELinux & Stop the Firewall
 ```
 setenforce 0
 systemctl disable firewalld.service
 systemctl stop firewalld.service
 ```
 
-## Install Dependancies
+### Install Dependancies
 ```
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 rpm -Uvh https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
 yum -y update
 yum install -y nginx php71w-{cli,curl,mbstring,openssl,json,pdo_mysql,gd,dom,fpm} mysql-server unzip
 ```
 
-## Install Composer
-```
-php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
-sudo php composer-setup.php --install-dir=/usr/bin --filename composer
-php -r "unlink('composer-setup.php');" 
+### Install Composer
+
+Flarum uses Composer to install & manage its dependencies.
+
+See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a user guide to using Composer
+
+Run the following commands to install composer:
+```sh
+curl https://getcomposer.org/installer -o composer.phar
+sudo php composer.phar --install-dir=/usr/bin --filename composer
+rm composer.phar
 ```
 
-## Configure PHP-FPM
+### Configure PHP-FPM
 
 nano /etc/php-fpm.d/ww&#8203;w.conf
 
@@ -56,38 +62,40 @@ listen = /var/run/php-fpm/php-fpm.sock
 
 ;listen.owner = nodody
 listen.owner = nginx
- 
+
 ;listen.group = nobody
 listen.group = nginx
- 
+
 ;listen.mode = 0660
 listen.mode = 0660
 ```
 
 **Ctrl-X and "Y" to save.**
 
-## Configure Nginx
+### Configure Nginx
 
-nano /etc/nginx/conf.d/flarum.conf
+Run `nano /etc/nginx/sites-available/flarum.conf`, then type the following.
+
+Make sure you replace `{domain-name-here}` with your domain.
+
 ```
-    server {
-        listen       80;
-```
-### Important: your server name should be your domain name
-```
-        server_name  {yourservername};
-        root         /usr/share/nginx/flarum;
-        index index.php index.html index.htm;
- 
+server {
+    listen       80;
+
+    # IMPORTANT: change this
+    server_name  {domain-name-here};
+    root         /usr/share/nginx/flarum;
+    index index.php index.html index.htm;
+
     location / { try_files $uri $uri/ /index.php?$query_string; }
     location /api { try_files $uri $uri/ /api.php?$query_string; }
     location /admin { try_files $uri $uri/ /admin.php?$query_string; }
- 
+
     location /flarum {
         deny all;
         return 404;
     }
- 
+
     location ~ .php$ {
         fastcgi_split_path_info ^(.+.php)(/.+)$;
         fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
@@ -95,11 +103,11 @@ nano /etc/nginx/conf.d/flarum.conf
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     }
- 
+
     location ~* \.html$ {
         expires -1;
     }
- 
+
     location ~* \.(css|js|gif|jpe?g|png)$ {
         expires 1M;
         add_header Pragma public;
@@ -126,21 +134,21 @@ nano /etc/nginx/conf.d/flarum.conf
                text/xml;
     gzip_buffers 16 8k;
     gzip_disable "MSIE [1-6]\.(?!.*SV1)";
- 
- 
- 
+
+
+
 }
 ```
 
 Ctrl-X and "Y" to save.
 
-## Install Flarum
+### Install Flarum
 ```
 mkdir -p /usr/share/nginx/flarum
 composer create-project flarum/flarum /usr/share/nginx/flarum --stability=beta
 ```
 
-## Configure Permissions
+### Configure Permissions
 ```
 chmod 775 /usr/share/nginx/flarum
 chmod 775 -R /usr/share/nginx/flarum/assets /usr/share/nginx/flarum/storage
@@ -148,12 +156,12 @@ sudo chgrp nginx /usr/share/nginx/flarum
 sudo chgrp -R nginx /usr/share/nginx/flarum/assets /usr/share/nginx/flarum/storage
 ```
 
-## Configure MySQL
+### Configure MySQL
 ```
 systemctl start mysqld
 sudo grep 'temporary password' /var/log/mysqld.log
 mysql_secure_installation
- 
+
 mysql -uroot -p'{yourpassword}'
 create database flarum;
 create user flarum@localhost identified by '{newpassword}'

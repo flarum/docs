@@ -6,17 +6,17 @@ Changing the home page display layout of your forum instance requires you to be 
 
 ![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
-Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Basics** to reveal the configuration page to the right hand side.
+Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left-hand side, click on **Basics** to reveal the configuration page to the right-hand side.
 
 ![Basics Screenshot](687474703a2f2f692e696d6775722e636f6d2f5a4d6767745a472e706e67.png)
 
-Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise this will not function as guided below.
+Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise, this will not function as guided below.
 
 Depending on what kind of extensions you have installed, there may also be other view options available for you to use. In this guide, we are using a fresh standard installation, with no additional extensions other than the defaults.
 
 ### All Discussions
 
-Having this radio button set will display the most recent discussions by default on the forum main page (home page), sticky topics will of course remain at the very top of the board.
+Having this radio button set will display the most recent discussions by default on the forum main page (home page), sticky topics will, of course, remain at the very top of the board.
 
 The **All Discussions** option makes the forum look like this:
 
@@ -32,4 +32,4 @@ The **Tags** option will make the forum look like this:
 
 Setting any of these options will set it for **everybody** there is currently no way to set this for individual users, so bear that in mind when making the decision which one suits your forum the best.
 
-You can of course switch the radio buttons at anytime you wish to, should you feel the current selection does not suit your needs.
+You can, of course, switch the radio buttons at any time you wish to, should you feel the current selection does not suit your needs.

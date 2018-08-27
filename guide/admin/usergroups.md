@@ -5,11 +5,11 @@ Managing user groups on your forum instance requires you to be in the Administra
 
 ![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
-Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Permissions** to reveal the configuration page to the right hand side.
+Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left-hand side, click on **Permissions** to reveal the configuration page to the right-hand side.
 
 ![Permissions Screenshot](687474703a2f2f692e696d6775722e636f6d2f795834455466302e706e67.png)
 
-User groups are used for all kinds of different purposes, Flarum has a fantastic management system which makes it super-easy to manage user groups, and their associated permissions.
+User groups are used for all kinds of different purposes, Flarum has a fantastic management system which makes it super-easy to manage user groups and their associated permissions.
 
 ### Create a new User Group
 
@@ -17,11 +17,11 @@ On the configuration page, you'll see some pre-created user groups (if your Flar
 
 ![SS Group bar](687474703a2f2f692e696d6775722e636f6d2f30345a457730472e706e67.png)
 
-Next to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
+Next, to those user groups, you'll see **New Group** click that to bring up the **Create Group** prompt.
 
 ![SS Group Creation Prompt](687474703a2f2f692e696d6775722e636f6d2f4d4d3039314f4a2e706e67.png)
 
-There are 4 pieces of information Flarum needs from you to create this new user group, for this example we're going to be creating a user group called **Staff Member** but you can name this anything you wish.
+There are 4 pieces of information Flarum needs from you to create this new user group, for this example, we're going to be creating a user group called **Staff Member** but you can name this anything you wish.
 
 ### Create Group Form Components
 
@@ -29,7 +29,7 @@ There are 4 pieces of information Flarum needs from you to create this new user 
 
  - Singular: is how the name is written should it only apply to one person, in this example our Singular name is **Staff Member**
  - Plural: is how the name is written should it apply to more than one person, this example would be named **Staff Members**
- 
+
 #### Color
 
 Choosing a Color can be done by obtaining the HTML Color Code of your desired color, there are plenty of websites you can view which a quick Google search would give you. Enter the color code you wish to use (starts with a **#**).
@@ -56,4 +56,4 @@ Click on **Delete Group** which will pop up a small warning box, informing you t
 
 ### Modifying a User Group
 
-On the configuration page at the top, go ahead and click on the user group that requires editing to bring up the group editing box, when it displays, make the edits that you feel are necessary. Once you are done with that, click on **Save Changes** to update the groups settings with your edits.
+On the configuration page at the top, go ahead and click on the user group that requires editing to bring up the group editing box, when it displays, make the edits that you feel are necessary. Once you are done with that, click on **Save Changes** to update the groups' settings with your edits.

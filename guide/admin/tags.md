@@ -1,18 +1,18 @@
 ## User Handbook
 
-Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise this will not function as guided below.
+Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise, this will not function as guided below.
 
 Managing your forum tags requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
 ![Administration Link Screenshot](687474703a2f2f692e696d6775722e636f6d2f575a315a6a78392e676966.gif)
 
-Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left hand side, click on **Tags** to reveal the configuration page to the right hand side.
+Once you are in the Administration Panel, you'll see some navigation tabs flowing down the left-hand side, click on **Tags** to reveal the configuration page to the right-hand side.
 
 ![Tags Screenshot](687474703a2f2f692e696d6775722e636f6d2f354f58595454642e706e67.png)
 
 ### Creating a new Tag
 
-A tag is a way of categorising posts made by a user, they are primarily set by the staff of the forum (admins). 
+A tag is a way of categorizing posts made by a user, they are primarily set by the staff of the forum (admins).
 
 #### Secondary Tags
 
@@ -48,7 +48,7 @@ By default, new tags created will be **Secondary Tags** also known as **Sub Cate
 
 ![Anim - Moving Tags](687474703a2f2f692e696d6775722e636f6d2f765738796e42732e676966.gif)
 
-Nested Tags can also be created using the same method shown above however will need to be dragged closer to it's primary tag, nested tags will look like the screenshot below:
+Nested Tags can also be created using the same method shown above however will need to be dragged closer to its primary tag, nested tags will look like the screenshot below:
 
 ![SS - Nested Tag](nested-tags.png)
 
@@ -66,8 +66,6 @@ To make changes, modify the content in the desired text boxes and then click **S
 
 ***Hide from All Discussions*** is an option used to prevent any Discussions this tag is attached to from being displayed on the **All Discussions** home page view.
 
-The **Delete Tag** button also resides at the bottom-right hand of the Tag Editor, to remove the tag, follow the animation below:
+The **Delete Tag** button also resides at the bottom right hand of the Tag Editor, to remove the tag, follow the animation below:
 
 ![Anim - Delete a Tag](687474703a2f2f692e696d6775722e636f6d2f635664654a7a772e676966.gif)
-
-

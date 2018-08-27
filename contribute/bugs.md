@@ -1,3 +1,4 @@
+
 # Identifying errors
 
 1. Did you enable debug in your `config.php` file?
@@ -11,8 +12,8 @@ Our preferred communication channel for bugs is through [Github](https://github.
 Bug reports offer helpful information for our developers to quickly analyze the root cause, including:
 
 - The version of Flarum you have installed.
-- Any webserver information you have, like Apache/Nginx and the PHP version.
+- Any web server information you have, like Apache/Nginx and the PHP version.
 - The URL to your website, so we can see the bug for ourselves.
 - Whether you are using a shared hosting environment or have/manage your own server.
 - A list of the extensions you've installed or the composer.json file.
-- Any logs you think will help us with find the root cause.
+- Any logs you think will help us in finding the root cause.

@@ -5,12 +5,12 @@
 Welcome to Flarum, an open-source forum software meant to be powerful yet simple.
 
 ## OS Specific Installation Guides
-### - [CentOS 7](centos-7-install.md)
-### - [Ubuntu Server](ubuntu-server-install.md)
+### - [CentOS 7](installation/centos-7)
+### - [Ubuntu Server](installation/ubuntu-server)
 
 ## Support
-### - [Troubleshooting](https://github.com/Arkinn/docs/blob/master/user/troubleshooting.md)
-### - [F.A.Q's](https://github.com/Arkinn/docs/blob/master/user/faq.md)
+### - [Troubleshooting](troubleshooting)
+### - [F.A.Q's](faq)
 
 
 ## BETA Software
