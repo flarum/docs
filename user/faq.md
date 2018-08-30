@@ -18,7 +18,7 @@ All donations are gratefully received, and you can do so at this location:
 However, donations will not directly impact the speed of development on Flarum, we also encourage users to contribute in other ways, such as:
 
  - [Code for Core](https://github.com/flarum/core)
- - Code Extensions (( Awaiting future link to document ))
+ - [Extend Flarum with Extensions](/extend)
  - Design / Develop Themes (( Awaiting future link to document ))
  - Contribute to Documentation (( Future link to contrib page ))
  - Translate Flarum (( Future link to Translation Docs ))

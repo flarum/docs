@@ -1,56 +1,45 @@
-## BETA Software
+## Flarum Installation Guide on Ubuntu Server 16.04
 
-Please keep in mind that Flarum is beta software. That means:
+> This guide has been extensively tested on Ubuntu Server 16.04.2 LTS, if you use a different version to this, your mileage may vary!
 
-   - It still has some incomplete features and bugs 🐛🐞 and
-   - At some point – sooner or later – it will probably break! 💥
+### Preparing
+#### Update your System
 
-Beta is all about fixing these issues and improving Flarum. We’re busy working hard to make Flarum better, so we ask that you:
-
-   - **Don’t use it in production.** We can’t support you if things go awry. And upgrading to subsequent versions might involve getting your hands dirty.
-   - **Report bugs responsibly.** Poorly written bug reports take time to deal with, distracting us from adding new features and making Flarum stable.
-
-Before you install, please read our Contributing guide so you will know what you’re signing up for!
-
-## Installing from scratch on Ubuntu Server 16.04.2 LTS
-
-  - This guide has been extensively tested on Ubuntu Server 16.04.2 LTS, if you use a different version to this, your mileage may vary!
-  
-## Update your System
-
-```
-sudo apt-get update && sudo apt-get upgrade
+```bash
+sudo apt-get update
+sudo apt-get upgrade
 ```
 
-## Install Dependencies
+#### Install Dependencies
 
-```
+```bash
 sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip
 ```
 
-## Installing Flarum
-
-### Composer
+#### Install Composer
 
 Flarum uses Composer to install & manage its dependencies.
 
 See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a user guide to using Composer
 
-### Setting up 
+### Installing Flarum
 
-```
+#### Setting up 
+
+```bash
 composer create-project flarum/flarum -s beta /var/www/flarum --prefer-dist --no-dev
 ```
 
-### Set Group Permissions
-```
+#### Set Group Permissions
+
+```bash
 sudo chmod 775 /var/www/flarum
 sudo chmod -R 775 /var/www/flarum/assets /var/www/flarum/storage
 sudo chgrp www-data /var/www/flarum
 sudo chgrp -R www-data /var/www/flarum/assets /var/www/flarum/storage
 ```
 
-### Write the Nginx Configuration
+#### Write the Nginx Configuration
 
 ```bash
 nano /etc/nginx/sites-available/flarum.conf
@@ -66,7 +55,6 @@ server {
   index index.php index.html index.htm;
   error_log /var/log/nginx/error.log error;
   
-  # IMPORTANT: change this
   server_name {domain-name-here};
   
   location / { try_files $uri $uri/ /index.php?$query_string; }
@@ -125,28 +113,25 @@ server {
 
 Press `Ctrl-X` and then `Y` to save.
 
-### Enable your Flarum nginx configuration
+#### Enable your Flarum nginx configuration
 ```
 sudo ln -s /etc/nginx/sites-available/flarum.conf /etc/nginx/sites-enabled/flarum.conf
 ```
 
-### Test your Nginx Configuration & Reload Nginx
+#### Test your Nginx Configuration & Reload Nginx
 ```
 sudo nginx -t
 service nginx reload
 ```
 
 
-### Create your MySQL Database & User
+#### Create your MySQL Database & User
 
-#### (Optional) Generate a Strong MySQL Password
-```
-pwgen 15 1
-```
+To generate a Strong MySQL Password (optional): `pwgen 15 1`.
 
-#### Set up MySQL
+##### Set up MySQL
 
-```
+```bash
 mysql -uroot -p'{yourpassword}'
 CREATE DATABASE IF NOT EXISTS flarum;
 CREATE USER flarum@localhost identified by '{generatedpassword}';
@@ -155,6 +140,6 @@ FLUSH PRIVILIEGES;
 EXIT;
 ```
 
-### Finish up
+#### Finish up
 
 Now go ahead and view your site, you should see the Flarum Install page. Now you're ready to go!

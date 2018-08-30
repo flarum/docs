@@ -1,14 +1,16 @@
+## Internationalization
+
 Flarum features a powerful translation system (based on [Symfony's translator](http://symfony.com/doc/current/book/translation.html)) that allows the interface to display information in virtually any language. You should consider taking advantage of Flarum's translator as you develop your extension, even if you have no intention of using it in more than a single language.
 
 For one thing, this system will allow you to change the information displayed by your extension without editing the actual code. It will also give you the tools needed to efficiently deal with phenomena such as pluralization and agreement for gender. And you never know: it may come in handy later if you decide you want to add more languages and make your extension available to users around the world!
 
-This guide will show you how to [create a locale file](#creating-a-locale-file) containing language resources for your extension, and how to [use the translator](#using-the-translator) to access those resources from within your code. You will learn how to deal with more complex translations involving [variables](#variables) and [HTML tags](#html-tags), as well as [pluralization](#pluralization) and [gender](#gender).
+This guide will show you how to [create a locale file](#locale-file) containing language resources for your extension, and how to [use the translator](#using-the-translator) to access those resources from within your code. You will learn how to deal with more complex translations involving [variables](#including-variables) and [HTML tags](#adding-html-tags), as well as [pluralization](#handling-pluralization) and [gender](#gender).
 
-We will also describe the [standard format](#appendix-a) to be followed when developing language resources for Flarum, and offer [some tips](#appendix-b) that can help you make your language resources easier to localize. But first, let's begin with an overview of how Flarum prioritizes resources when displaying output for a third-party extension.
+We will also describe the [standard format](#appendix-a:-standard-key-format) to be followed when developing language resources for Flarum, and offer [some tips](#appendix-b:-coding-for-the-world) that can help you make your language resources easier to localize. But first, let's begin with an overview of how Flarum prioritizes resources when displaying output for a third-party extension.
 
 
 
-## How Flarum Translates
+### How Flarum Translates
 
 Unlike Flarum's bundled extensions &mdash; which are translated using resources added by [language packs](http://flarum.org/docs/translate/) &mdash; a third-party extension has to supply all of its own translations. As a Flarum developer, it will be up to you to obtain and maintain the resources for every language you want your extension to support.
 
@@ -23,19 +25,18 @@ Since English translations could be the only thing standing between forum users 
 
 
 
-<a name="creating-a-locale-file"></a>
-
-## Creating a Locale File
+### Locale File
 
 Flarum's language resources use the [YAML](https://en.wikipedia.org/wiki/YAML) file format. The locale files for a third-party extension need to be stored in the extension's `locale` folder. Each locale file should be named using the [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the language it contains. For example, a file containing French translations should be named  "`fr.yml`".
 
-> **Note:** If you wish to provide support for a specific locale, you can add an underscore followed by an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code; the filename for French as spoken in Canada, for example, would be "`fr_CA.yml`". But you should be sure to include a locale file containing "generic" translations for the same language, so Flarum will have something it can fall back on in the event a user specifies a locale that you haven't provided for.
+::: warning
+If you wish to provide support for a specific locale, you can add an underscore followed by an [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) country code; the filename for French as spoken in Canada, for example, would be "`fr_CA.yml`". But you should be sure to include a locale file containing "generic" translations for the same language, so Flarum will have something it can fall back on in the event a user specifies a locale that you haven't provided for.
+:::
+
 
 The extension skeleton includes a `locale/en.yml` template where you can put your extension's English translations. If you want to add resources for another language or locale, just duplicate the template and give it an appropriate filename. Then open the file and start adding your translations!
 
-<a name="adding-keys"></a>
-
-### Adding Keys
+#### Adding Keys
 
 Each translation in the locale file must be preceded by a key, which you will use as the **identifier** for that translation. The ID key should be in `snake_case` and followed by a colon and a space, as shown below:
 
@@ -63,14 +64,11 @@ Once you have this information in place, you can form the **full translation key
 
 That's really all you need to know about the mechanics of key creation. Please be aware, however, that there is a standard format that developers need to follow when creating language resources for Flarum. The rules for [namespacing translations](#namespacing-translations) and [naming ID keys](#naming-id-keys) may be found in Appendix A.
 
-### Adding Translations
+#### Adding Translations
 
 The examples in the preceding section have already given you the basics: you type an ID key &mdash; followed by a colon and a space &mdash; then you type in the translation. It's that easy! Here we would just like to add a few details that will help you deal with longer and more complex translations.
 
-<a name="quotation-marks"></a>
-
-#### Quotation Marks
-
+::: warning Quotation Marks
 You may have noticed that only one of the two sample translations in the previous section was enclosed in quotation marks. It is generally not necessary to delimit translations in this way. You should, however, use **double quotes** to enclose any translation that includes one or more of the following characters:
 
 ```yaml
@@ -80,10 +78,9 @@ You may have noticed that only one of the two sample translations in the previou
 Since Flarum uses curly brackets and angle brackets to denote placeholders for [variables](#variables) and [HTML tags](#html-tags), respectively, it goes without saying that any translation that includes such placeholders will also need to be enclosed in double quotes.
 
 Furthermore, you should use **single quotes** to enclose any translation that includes one or more double quote (`"`) or backslash (`\`) characters. This rule takes precedence! So if a translation were to include both double quotes and one or more characters from the list above &mdash; as does [this example](#variables), in which a variable placeholder is set off by quotation marks &mdash; you would need to enclose it in *single quotes*.
+:::
 
-<a name="literal-blocks"></a>
-
-#### Literal Blocks
+##### Literal Blocks
 
 When you need a translation to appear as more than a single line of text, the translation should be added as a **literal block**. Enter a vertical bar (`|`) character where you would normally begin the translation, then add the translation below the ID key, indenting each line by an extra two spaces:
 
@@ -101,7 +98,7 @@ Flarum's core language resources employ literal blocks mainly for email body con
 
 <a name="key-references"></a>
 
-#### Key References
+##### Key References
 
 It's not uncommon to use the same bit of text in more than one location or context. Let's assume that you want your extension to display the phrase "Edit Stuff" in two locations in the user interface:
 
@@ -122,7 +119,7 @@ You can set one key to reference another by replacing its translation with an eq
 There's more to be said about referencing &mdash; for one thing, we've totally ignored the issue of namespacing in the above example! And you may be wondering why we suggested creating three keys when two would suffice. For an explanation, see the rules for [reusing translations](#reusing-translations) in Appendix A.
 
 
-## Using the Translator
+### Using the Translator
 
 Once you've added a translation to your locale file, with appropriate namespacing and identifier keys, you can use the `app.translator.trans()` method to reference that translation in your code. For instance, the `js/forum/src/main.js` file for the [Quick Start tutorial](http://flarum.org/docs/extend/start/) might end up looking like this:
 
@@ -157,9 +154,7 @@ all_discussions_button: 'Search all discussions for "{query}"'
 
 Since curly brackets are used to denote the placeholder, the translation as a whole needs to be enclosed in [quotation marks](#quotation-marks). Normally, double quotes would be used; but since this particular translation is using double quotes to set off the search query, the single-quote rule takes precedence.
 
-<a name="html-tags"></a>
-
-### Adding HTML Tags
+#### Adding HTML Tags
 
 Abstracting translations from HTML can pose a unique challenge: How do you deal with HTML elements that affect just part of the sentence? Fortunately, Flarum gives you a way to add tags to your translations.
 
@@ -182,9 +177,7 @@ Of course, you can give a parameter any name you like &mdash; you could use `<fr
 Localizers can reorder elements as needed, and even choose to omit tags if they so desire. But they can't add any tags of their own: the translator will simply ignore any HTML-style tag that doesn't correspond to a properly defined parameter in the code.
 
 
-<a name="pluralization"></a>
-
-### Handling Pluralization
+#### Handling Pluralization
 
 On occasion, you may need to provide alternate versions of a translation to accommodate pluralization of a word or phrase. This is done by using the `app.translator.transChoice()` method to pass the translation key &mdash; along with a variable that sets the conditions for pluralization &mdash; to the translator.
 
@@ -203,9 +196,7 @@ choose_primary_placeholder: "Choose a primary tag|Choose {count} primary tags"
 
 Of course English has only two variants: singular or plural. You'll need to provide additional variants when creating translations for a language that has more than one plural form. If you need detailed information about the number of variants required for a language &mdash; or the order in which they should be listed &mdash; you can refer directly to the [pluralization rules](https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Translation/PluralizationRules.php) that Flarum uses to map the variable to plural forms.
 
-<a name="gender"></a>
-
-### Dealing with Gender
+#### Dealing with Gender
 
 Support for grammatical gender will be added in a future version of Flarum. Detailed instructions will be provided here once that functionality becomes available.
 
@@ -260,7 +251,6 @@ And that's it! It should work out of the box.
 
 
 ---
-<a name="appendix-a"></a>
 
 ## Appendix A: Standard Key Format
 
@@ -274,7 +264,7 @@ Developers who wish to contribute to the development of Flarum are expected to f
 
 All translations are to be organized in categories, using namespacing keys arranged in up to **three** levels. Each level provides localizers with an important bit of information about *where the translation is used:*
 
-#### ➡️ The top-level key indicates *which component uses the translation*.
+#### ➡ The top-level key indicates *which component uses the translation*.
 
 The namespacing for translation keys used in official Flarum components, including bundled extensions, should match the name of the language pack locale file for the component in question. The namespaces for Flarum's non-extension components are fixed as shown below:
 
@@ -287,7 +277,7 @@ Translation keys used in an extension &mdash; including any third-party extensio
 
 There should be only **one** first-level prefix in any locale file; it should be the first line in the locale file.
 
-#### ➡️ The second-level key indicates *which interface uses the translation*.
+#### ➡ The second-level key indicates *which interface uses the translation*.
 
 Since Flarum doesn't have all that many interfaces, we've come up with a short list of second-level keys for you to choose from. We've included the more frequently used ones in the locale file template created with the extension skeleton. Below you will find the complete list, with explanations:
 
@@ -308,7 +298,7 @@ group:       # Translations used as default group names.
 
 These two keys don't correspond to interfaces; they're for translations that require special handling. We'll explain how to use the `ref` namespace when we talk about [reusing translations](#reusing-translations). The `group` namespace holds the default group names, which are translated by the server rather than at the front end.
 
-#### ➡️ The third-level key indicates *which part of the UI uses the translation*.
+#### ➡ The third-level key indicates *which part of the UI uses the translation*.
 
 The keys in this level are not so rigidly defined. Their main purpose is to chop the UI up into manageable chunks, so localizers can find the translations and see for themselves how they are used by the software. (Third-level keys aren't used in the `ref` and `group` namespaces, which don't need chopping.)
 
@@ -326,7 +316,7 @@ Like the third-level namespacing keys, identifier keys should be expressed in `s
 
 The typical ID key consists of two parts &mdash; a **root** and a **suffix** &mdash; each of which may be omitted in certain circumstances. Just as the namespacing keys tell localizers *where the translation is used*, each part of the ID key provides a further bit of information about the translation:
 
-#### ➡️ The suffix indicates *how the translation is used*.
+#### ➡ The suffix indicates *how the translation is used*.
 
 We'll start with the suffix because it's the most important part of the key name. It tells localizers what sort of object they should look for when trying to find the translation in the interface. For example, the suffixes in the following list are used for GUI objects more or less related to user operations:
 
@@ -359,7 +349,7 @@ The above is a complete listing of the suffixes available for use in locale file
 
 Suffixes should be **omitted** from ID keys for [reused translations](#reusing-translations) in the `ref:` namespace. This is because you can't be sure these translations will always be used in the same context. Adding a new context would mean changing the key name *everywhere it's referenced* &hellip; so it's best to keep these translations generic.
 
-#### ➡️ The root indicates *what the translation says*.
+#### ➡ The root indicates *what the translation says*.
 
 In other words, it should be a brief summation of the translation's content. If the translation is a very short phrase &mdash; no more than a few words long &mdash; you may want to use it verbatim (in `snake_case`, of course). If it's very long, on the other hand, you should try to boil it down to as few words as possible.
 
@@ -373,7 +363,6 @@ Suffixes are also sufficient to identify the subject and body components of an e
 <a name="reusing-translations"></a>
 
 ### Reusing Translations
-
 
 Flarum's unique [key references](#key-references) fulfill the same role as YAML anchors, but they're better in one respect: you can even reference keys in a different file! For this reason, you need to use the **full translation key** when referencing. Here's a more realistic example of how referencing works, complete with namespacing:
 
@@ -437,9 +426,8 @@ You should add **comment lines** above every second- or third-level namespacing 
 You may also wish to add **inline comments** after a specific translation to provide localizers with further information about that translation (such as the fact that a translation can be pluralized if necessary).
 
 ---
-<a name="appendix-b"></a>
 
-## Appendix B: Coding for the World
+### Appendix B: Coding for the World
 
 In this appendix, we'd like to offer a few tips that may help you to avoid some of the more common pitfalls in the internationalization process. Abstracting language from code is easily one of the more humdrum tasks a programmer has to deal with, but if you don't give due attention to the subtleties involved, you're likely to end up creating your localizers an unnecessary headache or two.
 
@@ -447,7 +435,7 @@ Of course, it's not just about making life easier for localizers. Because when t
 
 It's probably impossible to avoid localization issues completely; there are just too many variables. But by following a few simple guidelines, you should be able to head off many issues before they happen.
 
-### Eliminate All Hardcoded Text!
+#### Eliminate All Hardcoded Text!
 
 This probably goes without saying. After all, if you're going to go to the trouble of extracting translations, you might as well finish the job, right? Well, yes, but that's easier said than done. It's really quite unusual to find a program that doesn't have at least a few bits of hardcoded text floating around somewhere.
 
@@ -455,7 +443,7 @@ Even tiny bits of text can cause problems for localizers. A comma here, a colon 
 
 Generally speaking, any displayed text that isn't supplied by a variable or the result of a calculation *must* be included in the locale files. That's easily said, but actually doing it takes a bit of perseverance.
 
-### Avoid Hardcoded Syntax!
+#### Avoid Hardcoded Syntax!
 
 Hardcoded text isn't the only way that code can create problems for localizers. Hardcoded syntax issues occur when the code forces words into a specific order that just won't work in other languages. They are generally the result of using two translations where just one would be more appropriate.
 
@@ -488,7 +476,7 @@ The moral of this story is: when you've got two adjacent chunks of text which se
 
 We might also conclude that the presence of little bits of hardcoded text &mdash; such as the hardcoded space in this example &mdash; may be a sort of [code smell](https://en.wikipedia.org/wiki/Code_smell) indicating the presence of a deeper issue. This isn't always the case, but it's a possibility that's worth taking into consideration.
 
-### Keep an Eye Out for Plurals!
+#### Keep an Eye Out for Plurals!
 
 They are surprisingly easy to overlook. Of course, the need for pluralization support is fairly obvious here:
 
@@ -516,7 +504,7 @@ mentioned_by_self_text: "{users} replied to this."  # Can be pluralized ...
 &hellip; but it would be a very good idea to add a comment after the translations in question, to alert localizers to the fact that the code will support the addition of such variants, should they be necessary.
 
 
-### Reuse Translations, Not Keys!
+#### Reuse Translations, Not Keys!
 
 If the namespacing keys combine to form a complete specification of where a translation is used, and the ID key specifies exactly how the translation is used and what it says, then it stands to reason that every full translation key must be unique. In other words: *you should never use the same key more than once!*
 
@@ -524,4 +512,4 @@ If the namespacing keys combine to form a complete specification of where a tran
 
 Although this may sound inefficient, there's a good reason for doing things this way: it's the easiest way to ensure that localizers will have the flexibility they need. If you reuse keys in your code, you'll eventually hit a snag. Your localizers will be unable to find a single expression that fits every context where you've used some key or other &hellip; and then they'll start bugging you to fix your code.
 
-Fortunately, you can avoid many such issues if you simply take care to [namespace translations](#namespacing-translations) correctly, [name your ID keys](#naming-id-keys) appropriately, and always [reuse translations](#reusing-translations) instead of keys. Though it may seem like a bother, in the long run, the [standard format](#appendix-a) will make localization much easier for *everyone*.
+Fortunately, you can avoid many such issues if you simply take care to [namespace translations](#namespacing-translations) correctly, [name your ID keys](#naming-identifier-keys) appropriately, and always [reuse translations](#reusing-translations) instead of keys. Though it may seem like a bother, in the long run, the [standard format](#appendix-a:-standard-key-format) will make localization much easier for *everyone*.

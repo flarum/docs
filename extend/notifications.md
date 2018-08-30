@@ -1,6 +1,8 @@
+## Notifications
+
 Keep users in the know!
 
-## Creating the Notification
+### Creating
 
 *The villagers need your help!*
 
@@ -73,7 +75,7 @@ class PostLikedBlueprint implements BlueprintInterface
 
 Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blob/master/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
-## Sending the Notification
+### Registering
 
 Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification.
 
@@ -121,7 +123,7 @@ class SendNotificationWhenReplyIsPosted
 
 Your notification is coming together nicely! Just a few things left to do!
 
-## Notifications in JS
+### JavaScript Nofication Component
 
 As with everything in Flarum, what we register in the backend, must be registered in the frontend as well.
 
@@ -197,7 +199,7 @@ app.initializers.add('flarum-likes', () => {
 ```
 Simply add the name of your notification (from the blueprint), an icon you want to show, and a description of the notification and you are all set!
 
-## Sending your notification
+### Sending
 
 *Data doesn't just appear in the database magically*
 
