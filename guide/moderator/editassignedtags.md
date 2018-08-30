@@ -1,6 +1,4 @@
-## User Handbook
-
-### Editing tags Assigned to a Thread
+## Editing tags Assigned to a Thread
 
 Has a thread been assigned the wrong tags or do you need to add more? Not to worry! This is easy to do.
 

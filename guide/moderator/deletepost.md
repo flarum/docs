@@ -1,6 +1,4 @@
-## User Handbook
-
-### Deleting a Users Post
+## Deleting a Users Post
 
 Deleting a post made by someone else is easy, but has 2 stages, which are outlined in detail below.
 

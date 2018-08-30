@@ -1,5 +1,4 @@
-## User Handbook
-### Your Profile
+# Your Profile
 
 Flarum has a basic profile system, in your profile, there are 3 different sections of your profile that you can view.
 
@@ -37,9 +36,11 @@ The Settings page allows you to configure certain preferences on your profile wh
 
 #### Notification Key
 
- - The **Red "X"** means that the event selected will **NOT** trigger a notification.
- - The **Green Tick** means that the event selected **WILL** trigger a notification.
- - The **Grey "X"** means that the event **CANNOT** be triggered at this time.
+| Symbol | Description 
+|---|---|
+| **Green Tick** | Event **WILL** trigger a notification  |
+| **Red X** | Event **WILL NOT** trigger a notification | 
+| **Grey X** | Event **CANNOT** trigger a notification | 
 
 You are able to change this at any time simply by clicking on which event you wish to use, for example, if you wanted to receive an email whenever someone mentions you with the @ symbol in the forums, then **clicking that icon** making sure it is a **Green Tick** will activate that setting. Each time you click an icon, it will automatically save that preference for you.
 

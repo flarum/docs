@@ -1,5 +1,4 @@
-## User Handbook
-### Editing the Welcome Banner
+## Editing the Welcome Banner
 
 The Welcome Banner is one of the first things you forum guests, members, moderators, and admins will see. From a fresh installation, it is the text situated inside the large grey strip at the top of the page.
 

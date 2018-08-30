@@ -1,36 +1,36 @@
-## Flarum Installation Guide on Ubuntu Server 16.04
+# Flarum Installation Guide on Ubuntu Server 16.04
 
 > This guide has been extensively tested on Ubuntu Server 16.04.2 LTS, if you use a different version to this, your mileage may vary!
 
-### Preparing
-#### Update your System
+## Preparing
+### Update your System
 
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 ```
 
-#### Install Dependencies
+### Install Dependencies
 
 ```bash
 sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip
 ```
 
-#### Install Composer
+### Install Composer
 
 Flarum uses Composer to install & manage its dependencies.
 
 See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a user guide to using Composer
 
-### Installing Flarum
+## Installing Flarum
 
-#### Setting up 
+### Setting up 
 
 ```bash
 composer create-project flarum/flarum -s beta /var/www/flarum --prefer-dist --no-dev
 ```
 
-#### Set Group Permissions
+### Set Group Permissions
 
 ```bash
 sudo chmod 775 /var/www/flarum
@@ -39,7 +39,7 @@ sudo chgrp www-data /var/www/flarum
 sudo chgrp -R www-data /var/www/flarum/assets /var/www/flarum/storage
 ```
 
-#### Write the Nginx Configuration
+### Write the Nginx Configuration
 
 ```bash
 nano /etc/nginx/sites-available/flarum.conf
@@ -113,23 +113,23 @@ server {
 
 Press `Ctrl-X` and then `Y` to save.
 
-#### Enable your Flarum nginx configuration
+### Enable your Flarum nginx configuration
 ```
 sudo ln -s /etc/nginx/sites-available/flarum.conf /etc/nginx/sites-enabled/flarum.conf
 ```
 
-#### Test your Nginx Configuration & Reload Nginx
+### Test your Nginx Configuration & Reload Nginx
 ```
 sudo nginx -t
 service nginx reload
 ```
 
 
-#### Create your MySQL Database & User
+### Create your MySQL Database & User
 
 To generate a Strong MySQL Password (optional): `pwgen 15 1`.
 
-##### Set up MySQL
+#### Set up MySQL
 
 ```bash
 mysql -uroot -p'{yourpassword}'
@@ -140,6 +140,6 @@ FLUSH PRIVILIEGES;
 EXIT;
 ```
 
-#### Finish up
+### Finish up
 
 Now go ahead and view your site, you should see the Flarum Install page. Now you're ready to go!

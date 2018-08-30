@@ -1,6 +1,6 @@
-## Configuration
+# Configuration
 
-### An important file, config.php
+## An important file, config.php
 
 There is only one place where Flarum configuration cannot be modified through the Flarum admin (excluding the database), and that is the `config.php` file located in the root of your Flarum installation
 
@@ -36,9 +36,9 @@ Here's a quick overview of what everything means with an example file:
 );
 ```
 
-### Customizing the interface
+## Customizing the interface
 
-#### Adding a logo, favicon, and links to the header
+### Adding a logo, favicon, and links to the header
 
 We've made it super-easy to add a Logo, Favicon etc, please follow the short set of instructions as set out below!
 

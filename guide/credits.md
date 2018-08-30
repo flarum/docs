@@ -1,5 +1,4 @@
-## User Handbook
-### Credits
+## Credits
 
 There are a couple of people on the Flarum team that special thanks are due to for their help, and sharing their expertise to make this user guide.
 

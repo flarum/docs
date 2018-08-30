@@ -1,4 +1,4 @@
-## Extending Flarum: Quick Start
+# Extending Flarum: Quick Start
 
 Before we get started, there's something you should be aware of: Flarum uses some modern languages and tools. If you've only ever built WordPress or Drupal plugins before, you might feel a bit out of your depth! That's OK — this is a great time to learn cool new things and extend your skillset. Below is a list of the technologies that Flarum uses, as well as some links and resources you might find useful:
 
@@ -9,7 +9,7 @@ Before we get started, there's something you should be aware of: Flarum uses som
 
 Don't fret if you get stuck – there are plenty of people on the [Community Forum](http://discuss.flarum.org/t/extensibility) and [Discord](http://flarum.org/discord) who are more than willing to help.
 
-### Getting Started
+## Getting Started
 
 Alright, enough chit-chat — let's jump right in and make a basic "Hello World" extension for Flarum. You'll need to have Flarum up and running to do this, so if you haven't installed Flarum yet, go and [do that now](/user).
 
@@ -92,7 +92,7 @@ Make a new folder in the format of `flarum-ext-{name}` where `name` is the name 
 
 Now that your extension has a folder, we'll put two files in it: `bootstrap.php` and `composer.json`. These files serve as the heart and soul of the extension.
 
-#### bootstrap.php
+### bootstrap.php
 
 The `bootstrap.php` file is included by Flarum on each and every page load, as long as the extension is enabled. This file must return a function. Inside that function is where you'll put your programming logic — the PHP code that does your extension's bidding. We'll just echo a friendly greeting for now:
 
@@ -106,7 +106,7 @@ return function () {
 };
 ```
 
-#### composer.json
+### composer.json
 
 Ever heard of [Composer](https://getcomposer.org)? It's a dependency manager for PHP. It allows applications to easily pull in external code libraries and makes it easy to keep them up-to-date so that security and bug fixes are propagated rapidly. Pretty cool, huh?
 
@@ -164,7 +164,7 @@ Woop! Hello to you too, Extension!
 
 Disregarding the fact that this Extension breaks your forum's JSON-API ... I suppose it's not bad for a first try! Now, shall we do something a bit more useful?
 
-### Listening for Events
+## Listening for Events
 
 Alright folks, listen up.
 
@@ -180,7 +180,7 @@ For example:
 
 Get the idea? Great! There are dozens of events you can listen to. Looking for a `user` event? Head to the [`user`](https://github.com/flarum/core/tree/master/src/User) namespace and then look through the various events. Go ahead, have a squiz!
 
-#### Event Handlers
+### Event Handlers
 
 Listening for an event is easy. Just inject the Event Dispatcher into your `bootstrap.php` function, and register a handler with the `listen` method. You'll need to pass the **fully qualified class name** of the event class as the first argument, and your handler as the second.
 
@@ -213,7 +213,7 @@ $event->post->content = 'This is not what I wrote!';
 
 Try it out! Now whenever someone makes a post, the content will be set to "This is not what I wrote!". Keep this one in mind for your next April Fools' Day prank.
 
-#### Getting Organized
+### Getting Organized
 
 An important part of making a good extension is keeping it organized! The best way to do this is to store your classes in folders labeled for their purpose. Inside your extensions folder, make a folder called `src` this is the source for all of your PHP classes (Look back at the `autoload` option in your `composer.json`).
 
@@ -316,7 +316,7 @@ class ChangePostContent
 }
 ```
 
-### Changing the UI
+## Changing the UI
 
 We're making good progress. We've learned how to bootstrap our extension, and we can listen for events, which opens up a lot of doors.
 
@@ -332,7 +332,7 @@ So how do we make changes to the UI then?
 
 Before we can write any JavaScript, though, we need to set up a **transpiler**. You see, Flarum's front-end code is written in a cutting-edge version of JavaScript called [ES6](http://git.io/es6features) – but browsers don't support it yet, so it has to be transpiled back into something they can understand.
 
-#### Environment Setup
+### Environment Setup
 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
@@ -341,7 +341,7 @@ In order to do this transpilation, you need to be working in a capable environme
 
 This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
-#### Transpilation
+### Transpilation
 
 It's time to set up our little JavaScript transpilation project. Create a new folder in your extension called `js`, then pop in a couple of new files:
 
@@ -427,7 +427,7 @@ This will cause our extension's JavaScript to be loaded into the page. Give it a
 
 *Psst* If you want to add JS to the admin page, just create a file called admin.js replace `export * from './src/forum';` with `export * from './src/admin';` create an admin folder and repeat the steps above replacing `forum` with `admin` any time it shows up!
 
-#### Components
+### Components
 
 Flarum's interface is made up of many nested **components**. Components are a bit like HTML elements in that they encapsulate content and behavior. For example, look at this simplified tree of the components that make up a discussion page:
 
@@ -466,7 +466,7 @@ app.initializers.add('acme-hello-world', function() {
 
 The function we pass into the `extend` helper receives the return value from the original `view()` method – a virtual DOM object. (If you're interested to see what that looks like, add `console.log(vdom)` to see!) Then, we can add our smiley face to the array of child elements. We can also modify attributes.
 
-#### Item Lists
+### Item Lists
 
 Certain parts of Flarum's user interface are really just *lists of items*. For example:
 
@@ -510,7 +510,7 @@ if (items.has('session')) {
 }
 ```
 
-#### Styling
+### Styling
 
 Wait, all that Javascript stuff is cool in all, but what's the point if it doesn't look good?
 
@@ -534,7 +534,7 @@ return [
 
 LESS is a modern version of CSS that utilizes the same syntax, with a few more features such as variables, nesting, functions, just to name a few. If you've never used LESS before, and prefer to not learn about the cool features, you can use it in the exact same way you do CSS.
 
-### Conclusion
+## Conclusion
 
 Bravo! You made it to the end. It's been fun. :')
 
@@ -548,7 +548,7 @@ But seriously, you're well on your way to developing a useful Flarum extension, 
 * The UI is made up of many nested components which construct virtual DOM objects.
 * [Components](https://github.com/flarum/core/tree/master/js/) can be changed to make edits to the UI by modifying virtual DOM objects and Item Lists.
 
-### What Now?
+## What Now?
 
 The rest of the extension docs are still under construction. In the meantime:
 

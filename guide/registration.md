@@ -1,5 +1,4 @@
-## User Handbook
-### Registration
+## Registration
 
 To be able to post, and interact with a Flarum powered community, you'll first need to register yourself a user account. The registration process could not be easier and takes only a few moments of your time.
 

@@ -1,10 +1,10 @@
-## Distribution
+# Distribution
 
 One of the most important things about creating an extension is releasing it to the world. Fortunately, this is a pretty simple process.
 
-### Preparing for release
+## Preparing for release
 
-#### Repository
+### Repository
 
 The first thing you'll need to do is set up a VCS, or version control system.
 The most popular VCS is [`git`](https://git-scm.com/). In this guide we'll be using `git`, so make sure you have it [installed](https://git-scm.com/downloads) before continuing.
@@ -19,15 +19,15 @@ After creating a repository in the web-based hosting server of your choice, you'
 GitHub and GitLab both show you instructions on how to this, but if you are using another one, you'll need to run `git remote add origin REMOTE`, where `REMOTE` is the URL to the `.git` repository.
 
 
-#### Information
+### Information
 
 As you are going to be publishing this extension, you'll want to make sure that the information is up to date.
 Take a minute to revisit `composer.json` and update the name, description, keywords, and flarum extension information if they are updated.
 It is recommended to have a `README.md` file in your repository to explain what the extension is, so create it if you haven't already.
 
-### Releasing
+## Releasing
 
-#### Pushing changes to the remote repository
+### Pushing changes to the remote repository
 
 Git repositories work in a way that you have to select what changes you want to "push" to the server.
 A normal Git workflow looks like the following:
@@ -47,7 +47,7 @@ git tag v0.1.0
 git push && git push --tags # pushes the tag (release) with the commit
 ```
 
-#### Packagist
+### Packagist
 
 Composer packages are published to a Composer repository, usually [Packagist](https://packagist.org/). You will need an account to proceed.
 
@@ -56,13 +56,13 @@ If your extension is located on GitHub, this URL will look something like `https
 
 Once you entered your public repository URL in there, your package will be automatically crawled periodically.
 
-#### Future releases
+### Future releases
 
 For future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
 
 You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages), but if you don't, you'll need to visit the package's page (_`https://packagist.org/packages/vendor/name`_) and click the "Update" button that will appear next to "Abandon" and "Edit".
 
-### Conclusion
+## Conclusion
 
 Now you know how to publish your Flarum extension for everyone to use.
 
@@ -73,7 +73,7 @@ Let's recap what we learned:
 * To create a release in a git repository, one needs to "tag" a commit and then push the tag as well as the commit
 * Future releases are easier to publish than the initial one
 
-### What now?
+## What now?
 
 You will most likely want to create a discussion on the [Flarum Community](http://discuss.flarum.org/) forum.
 

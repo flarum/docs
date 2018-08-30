@@ -1,5 +1,4 @@
-## User Handbook
-### Creating, Deleting and Modifying User Groups
+## Creating, Deleting and Modifying User Groups
 
 Managing user groups on your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 
@@ -25,16 +24,16 @@ There are 4 pieces of information Flarum needs from you to create this new user 
 
 ### Create Group Form Components
 
-#### Name
 
+**Name**:
  - Singular: is how the name is written should it only apply to one person, in this example our Singular name is **Staff Member**
  - Plural: is how the name is written should it apply to more than one person, this example would be named **Staff Members**
 
-#### Color
+**Color**:
 
 Choosing a Color can be done by obtaining the HTML Color Code of your desired color, there are plenty of websites you can view which a quick Google search would give you. Enter the color code you wish to use (starts with a **#**).
 
-#### Icon
+**Icon**:
 
 The Icon is a small picture that goes at the side of your user avatar in posts to signify that you are a member of this particular user group. To pick your icon, you'll need to visit [the Font Awesome website](http://fontawesome.io/icons/) to pick out your icon, for this example we will be using the ```id-card``` icon. In this field, you'll just need to write "id-card" (without the quotation brackets) and then we're done!
 

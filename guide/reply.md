@@ -1,5 +1,4 @@
-## User Handbook
-### Making a Reply to a Post
+## Making a Reply to a Post
 
 Using this method will create a fresh reply, with no mentions or ties to any other comment on the page (Unless you insert them manually).
 

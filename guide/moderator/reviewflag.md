@@ -1,13 +1,10 @@
-## User Handbook
-
-### Reviewing Flagged Content as a Moderator
+## Reviewing Flagged Content as a Moderator
 
 As a Moderator, no doubt at some point through your journey your users will come across content that is not appropriate, off-topic, spam etc. Flarum has an incredibly simple tool to deal with this, which we will outline in much greater detail in this document.
 
 To begin with, you'll need to view the content that has been flagged. To do this, go to the **Flag** at the top right of your screen, and click on it, this will produce a list of items that have currently been flagged (in the example, we only have one). Once you're ready, click that result and you'll be taken directly to the post. See the animated example below:
 
 ![Animation - Flagged posts from notification area](687474703a2f2f692e696d6775722e636f6d2f6b61395236384d2e676966.gif)
-
 
 Pretty hard to miss, right?
 

@@ -1,5 +1,3 @@
-## User Handbook
-
 ## Locking a Discussion
 
 To lock a discussion, as always you'll first need to find the discussion in the discussions list, once you have gone ahead and bring up the thread menu by hovering the mouse over the right of the thread, and selecting the discussion menu, as shown in the screenshot below:

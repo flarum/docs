@@ -1,6 +1,6 @@
 ![alt tag](http://flarum.org/img/logo.png)
 
-## User Handbook
+# User Handbook
 
 Welcome!
 
@@ -8,11 +8,11 @@ Thank you for viewing the Flarum User Handbook. Throughout the contents of the s
 
 The contents of this user handbook are constantly being updated, both with edits/fixes when new versions are released, and also when we find something that we have not yet written about that we feel our users would benefit from knowing. So with that in mind, please check back here regularly for new content.
 
-### Glossary
+## Glossary
 
- - [Glossary](usefulterms.md)
+ - [Glossary](glossary.md)
 
-### Section 1: Getting Started
+## Section 1: Getting Started
 
  - [Registration](registration.md)
  - [Logging in](login.md)
@@ -24,7 +24,7 @@ The contents of this user handbook are constantly being updated, both with edits
  - [Like a post](like.md)
  - [Flag content](flag.md)
 
-### Section 2: Moderator Basics
+## Section 2: Moderator Basics
 
  - [Review flagged content](moderator/reviewflag.md)
  - [Edit someones post](moderator/editpost.md)
@@ -34,7 +34,7 @@ The contents of this user handbook are constantly being updated, both with edits
  - [Sticky/Unsticky a discussion](moderator/sticky.md)
  - [Edit assigned tags](moderator/editassignedtags.md)
 
-### Section 3: Admin Basics
+## Section 3: Admin Basics
 
  - [Change the Forum Title](admin/forumtitle.md)
  - [Change the Forum Description](admin/forumdescription.md)

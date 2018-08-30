@@ -1,5 +1,4 @@
-## User Handbook
-### Uploading a custom logo & favicon
+## Uploading a custom logo & favicon
 
 To upload a custom logo to your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 

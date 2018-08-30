@@ -1,8 +1,8 @@
-## Extension Settings
+# Extension Settings
 
 At some point while making an extension. you will probably want to save some sort of setting to the database. Thankfully, Flarum allows you to do this extremely easily.
 
-### The SettingsRepositoryInterface
+## The SettingsRepositoryInterface
 
 The [`SettingsRepositoryInterface`](https://github.com/flarum/core/blob/master/src/Settings/SettingsRepositoryInterface.php) allows you to do just that, interface with the settings repository!
 
@@ -31,7 +31,7 @@ class ClassInterfacesWithSettings
 
 Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` in our class.
 
-#### Getting Settings
+### Getting Settings
 
 To get values from the Settings table, all we have to do is use `SettingsRepositoryInterface`'s `get` function:
 
@@ -42,7 +42,7 @@ The `get` function accepts 2 arguments:
 1. The key of the setting you are trying to get in the Settings table
 2. (Optional) Allows you to set a default value if the key does not contain any data, otherwise, it will return `null`
 
-#### Setting a value
+### Setting a value
 
 Setting data is just as easy as getting data, use the `set` function:
 
@@ -53,15 +53,15 @@ The `set` function also takes 2 arguments:
 1. The key of the setting you are trying to set in the Settings table
 2. The value you want to set it to
 
-#### Other functions
+### Other functions
 
 The `all` function returns the entire settings table
 
 The `delete` function allows you to delete an entry on the table, with the first argument being the key to delete.
 
-### Extension settings
+## Extension settings
 
-#### SettingsModal
+### SettingsModal
 
 You'll likely want to allow a forum admin to change a setting related to your extension to their liking. This can be achieved through the `SettingsModal`
 

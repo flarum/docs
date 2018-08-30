@@ -1,6 +1,6 @@
-## Flarum Installation Guide on CentOS 7
+# Flarum Installation Guide on CentOS 7
 
-### Some important notes before we begin:
+## Some important notes before we begin:
 
  Following this tutorial will:
    - **disable the firewall**
@@ -10,14 +10,14 @@ Whilst this is **not** ideal for a server environment, we do this for ease of us
 
  > This guide has been extensively tested on CentOS 7.3 1611, if you use a different version to this, your mileage may vary!
 
-### Disable SELinux & Stop the Firewall
+## Disable SELinux & Stop the Firewall
 ```bash
 setenforce 0
 systemctl disable firewalld.service
 systemctl stop firewalld.service
 ```
 
-### Install Dependancies
+## Install Dependencies
 ```bash
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
@@ -26,7 +26,7 @@ yum -y update
 yum install -y nginx php71w-{cli,curl,mbstring,openssl,json,pdo_mysql,gd,dom,fpm} mysql-server unzip
 ```
 
-### Install Composer
+## Install Composer
 
 Flarum uses Composer to install & manage its dependencies.
 
@@ -39,7 +39,7 @@ sudo php composer.phar --install-dir=/usr/bin --filename composer
 rm composer.phar
 ```
 
-### Configure PHP-FPM
+## Configure PHP-FPM
 
 Open the PHP-FPM configuration (i.e. /etc/php-fpm.d/www.conf)
 
@@ -65,7 +65,7 @@ listen.mode = 0660
 
 **Ctrl-X and "Y" to save.**
 
-### Configure Nginx
+## Configure Nginx
 
 Run `nano /etc/nginx/sites-available/flarum.conf`, then type the following.
 
@@ -131,14 +131,14 @@ server {
 
 Ctrl-X and "Y" to save.
 
-### Install Flarum
+## Install Flarum
 
 ```bash
 mkdir -p /usr/share/nginx/flarum
 composer create-project flarum/flarum /usr/share/nginx/flarum --stability=beta
 ```
 
-### Configure Permissions
+## Configure Permissions
 
 ```bash
 chmod 775 /usr/share/nginx/flarum
@@ -147,7 +147,7 @@ sudo chgrp nginx /usr/share/nginx/flarum
 sudo chgrp -R nginx /usr/share/nginx/flarum/assets /usr/share/nginx/flarum/storage
 ```
 
-### Configure MySQL
+## Configure MySQL
 
 ```bash
 systemctl start mysqld
@@ -162,6 +162,6 @@ flush privileges;
 exit;
 ```
 
-## Installation Complete!
+# Installation Complete!
 
 Go ahead and view your domain from your browser, and the Flarum Install page should be available to view!

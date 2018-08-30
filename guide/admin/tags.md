@@ -1,4 +1,4 @@
-## User Handbook
+## Tags
 
 Please note: The information below **Requires** the **Tags Extension** to be **Enabled** (which is enabled by default), otherwise, this will not function as guided below.
 
@@ -22,23 +22,20 @@ On the configuration page for **Tags** you'll need to click **Create Tag** which
 
 ### Create Tag Components
 
-#### Name:
-
+**Name**:
 The name is what you'd like the tag to be called, also known as the category title.
 
-#### Slug:
+**Slug**:
 
 The slug is a string that goes into the URL, essentially it's a version of the name of the tag that is all lower-case, and uses dashes instead of spaces.
-
 Unless you need to, you generally don't need to do anything with this, as when you type in the **Name** the slug auto-fills in.
 
-#### Description:
-
+**Description**:
 The description of the tag will appear alongside the **name** in the tag selection post when making a post, it's a short few words giving a more in-depth description of the category it belongs to.
 
-#### Color:
+**Color**:
 
-This is the color you would like the tag to appear in on the posts, and forums, the color box uses **HTML Color Codes** beginning with a **#** you can Google around for HTML Color Codes, there are plenty of websites on this.
+This is the color you would like the tag to appear in on the posts, and forums, the color box uses any value accepted by CSS, like hexcode (beginning with a **#**) or color names. You can Google around for Color Hexcodes, there are plenty of websites on this.
 
 Once you've filled in the appropriate information in the Create Tag prompt, click on **Save Changes** to add the new tag.
 

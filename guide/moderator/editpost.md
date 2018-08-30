@@ -1,6 +1,4 @@
-## User Handbook
-
-### Editing a User's Post
+## Editing a User's Post
 
 So, you need to edit a users post? simple, let's show you how!
 

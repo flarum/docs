@@ -1,4 +1,4 @@
-## Flarum Guide
+# Flarum Guide
 
 ![alt tag](http://flarum.org/img/logo.png)
 
@@ -18,16 +18,16 @@ Beta is all about fixing these issues and improving Flarum. We’re busy working
 Before you install, please read our Contributing guide so you will know what you’re signing up for!
 :::
 
-### OS Specific Installation Guides
+## OS Specific Installation Guides
 
 - [CentOS 7](installation/centos-7.md)
 - [Ubuntu Server](installation/ubuntu-server.md)
 
-### Updating
+## Updating
 
 - [v0.1.0-beta.7](versions/0.1.0-beta.7.md)
 
-### Support
+## Support
 
 - [Troubleshooting](troubleshooting.md)
 - [F.A.Q's](faq.md)

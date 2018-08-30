@@ -1,5 +1,4 @@
-## User Handbook
-### Changing the Forum Description
+## Changing the Forum Description
 
 
 Changing the description of your forum instance requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:

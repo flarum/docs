@@ -1,14 +1,14 @@
-## Data
+# Data
 
 Data! So many ways to create, delete, and edit!
 
-### Basics
+## Basics
 
-#### Intro
+### Intro
 
 Flarum makes use of [Laravel's database system](https://laravel.com/docs/5.1/database) it is highly recommended that you read the documentation relating to that before starting on Flarum
 
-#### Migrations
+### Migrations
 
 Migrations are like version control for your database, allowing you to easily modify and share the Flarum's database schema. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/5.1/migrations).
 
@@ -54,7 +54,7 @@ return Migration::addColumns('discussions', [
 
 This adds a boolean to `discussions` called `sticky`. Bonus, it sets the default value to 0
 
-#### Exposing Data to the Frontend
+### Exposing Data to the Frontend
 
 With all your new snazzy database tables and columns, you're going to want a way to allow the frontend to access it.
 
@@ -114,11 +114,11 @@ class AddRelationships {
 }
 ```
 
-### Advanced
+## Advanced
 
-#### Relationships
+### Relationships
 
-##### Defining a Relationship
+#### Defining a Relationship
 
 Ahh good old relationships. These can be a little tricky, everyone has a little trouble with them.
 
@@ -242,7 +242,7 @@ This defines that multiple [`Tag`](https://github.com/flarum/flarum-ext-tags/blo
 
 If everything was done correctly, you should be able to retrieve your relationship from the backend by calling your relationship name as a function of your base model (example `$post->likes()`).
 
-##### Saving a Relationship to the Database
+#### Saving a Relationship to the Database
 
 What good is a relationship if you can't save it to the database?
 
@@ -303,7 +303,7 @@ As you can see, it checks to see whether the data contains `isLiked`, if it does
 
 Next, we will take a look on how to complete our relationship in the frontend!
 
-##### Adding the relationship to JavaScript
+#### Adding the relationship to JavaScript
 
 Now that you've gotten past the hard part of relationships, let finish up our relationship but making it accessible on the frontend.
 
@@ -360,7 +360,7 @@ export default function() {
 
 It first checks whether the post was already liked (so it knows to unlike, and not like again) then once the button is pressed, it toggles the `isLiked` variable, and sends that to the backend to either add or remove the like from the post (see above in PHP).
 
-#### Wrapping up:
+### Wrapping up
 
 *Wow that was a doozy* Don't worry if you are a little lost, mess around with it until you get something that works. Getting relationships to finally work is one of the most satisfying things in Flarum extension development.
 

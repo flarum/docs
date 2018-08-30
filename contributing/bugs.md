@@ -1,8 +1,8 @@
-## Reporting Bugs
+# Reporting Bugs
 
 Thank you for helping us test Flarum. We're happy to have you on the team! We need people who can *troubleshoot issues patiently* and *communicate them clearly*. As you probably know, good bug reporting takes some time and effort. If you're fine with that, then let's get started!
 
-### Duplicates
+## Duplicates
 
 Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
 
@@ -11,7 +11,7 @@ Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you
 
 If you've searched *thoroughly* and come up empty-handed, we'll welcome your report. If it's just a simple issue (a misspelled word or graphics glitch, for example) skip to the next paragraph. But if you're seeing errors, or something is clearly broken, we'll need you to gather some information first. Please head over to our [Troubleshooting](/user/troubleshooting.md) guide and follow the instructions there. Collect as much info as you can!
 
-### Reporting
+## Reporting
 
 Okay, time to get writing. Head back to the [Support forum](http://discuss.flarum.org/t/support) and start a new discussion. Be sure to give it a title that's clear and concise, and then explain the problem thoroughly. Don't forget to mention:
 

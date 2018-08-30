@@ -1,5 +1,4 @@
-## User Handbook
-### Assign permissions to User Groups
+## Assign permissions to User Groups
 
 To assign a permission set to a User Group this requires you to be in the Administrator Control Panel, you can do this by clicking your username to the top right of your screen, and then clicking **Administration**. The example below will show you how this is done:
 

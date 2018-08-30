@@ -1,5 +1,4 @@
-## User Handbook
-### Liking a post
+## Liking a post
 
 Please note: This guide will **Require** the **Likes Extension** to be **Enabled** (which it is by default) otherwise it will not function as intended.
 

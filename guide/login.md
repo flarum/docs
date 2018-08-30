@@ -1,5 +1,4 @@
-## User Handbook
-### Logging In
+## Logging In
 
 Once you have [created a user account](https://github.com/Arkinn/docs/blob/testing/guide/registration.md) the next step of interacting with the community will be to log in.
 

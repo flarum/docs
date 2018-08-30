@@ -1,5 +1,4 @@
-## User Handbook
-### Replying to someone's post
+## Replying to someone's post
 
 This particular method is used for when you wish to reply to a comment made by someone else, this will automatically create a tie to their reply and will notify the person that their comment has received a response (Depending on their personal preference settings) in case they wish to in turn respond to you.
 
