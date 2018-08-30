@@ -21,8 +21,6 @@ Read more about:
   - [/contribute/bugs](/contribute/bugs.md)
   - [/contribute/develop](/contribute/develop.md)
 - [/extend](/extend/index.md)
-  - [/extend/technology](/extend/technology.md)
-  - [/extend/quick-start](/extend/quick-start.md)
   - [/extend/distribution](/extend/distribution.md)
   - [/extend/data](/extend/data.md)
   - [/extend/internationalization](/extend/internationalization.md)

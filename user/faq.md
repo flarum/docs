@@ -1,7 +1,5 @@
 ## FAQ
 
-[[toc]]
-
 ### When will Flarum be stable?
 
 It’s impossible for us to say at the moment – there are too many variables! You can follow our progress on the [Roadmap](http://flarum.org/roadmap).

@@ -1,7 +1,5 @@
 ## Configuration
 
-[[toc]]
-
 ### An important file, config.php
 
 There is only one place where Flarum configuration cannot be modified through the Flarum admin (excluding the database), and that is the `config.php` file located in the root of your Flarum installation
