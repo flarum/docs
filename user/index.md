@@ -18,14 +18,10 @@ Beta is all about fixing these issues and improving Flarum. We’re busy working
 Before you install, please read our Contributing guide so you will know what you’re signing up for!
 :::
 
-## OS Specific Installation Guides
+## Guides
 
-- [CentOS 7](installation/beta7/centos-7.md)
-- [Ubuntu Server](installation/beta7/ubuntu-server.md)
-
-## Updating
-
-- [v0.1.0-beta.7](versions/0.1.0-beta.7.md)
+- [Installing](installation)
+- [Update Guides](versions)
 
 ## Support
 
