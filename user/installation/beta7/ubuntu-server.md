@@ -1,8 +1,6 @@
 # Flarum Installation Guide on Ubuntu Server 16.04
 
-::: warning
-This guide has not been tested for beta 8. Please report any errors you find.
-:::
+> This guide has been extensively tested on Ubuntu Server 16.04.2 LTS, if you use a different version to this, your mileage may vary!
 
 ## Preparing
 ### Update your System
@@ -15,7 +13,7 @@ sudo apt-get upgrade
 ### Install Dependencies
 
 ```bash
-sudo apt-get install pwgen php7.2-{mysql,common,gd,xml,mbstring,curl} php7.2 composer nginx mysql-server unzip
+sudo apt-get install pwgen php7.0-{mysql,common,gd,xml,mbstring,curl} php7.0 composer nginx mysql-server unzip
 ```
 
 ### Install Composer
@@ -29,7 +27,7 @@ See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-comp
 ### Setting up 
 
 ```bash
-composer create-project flarum/flarum -s beta /var/www/flarum --prefer-dist --no-dev
+composer create-project flarum/flarum -s beta /var/www/flarum  v0.1.0-beta.7 --prefer-dist --no-dev
 ```
 
 ### Set Group Permissions
@@ -70,7 +68,7 @@ server {
   
   location ~ .php$ {
       fastcgi_split_path_info ^(.+.php)(/.+)$;
-      fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+      fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
       fastcgi_index index.php;
       include fastcgi_params;
   

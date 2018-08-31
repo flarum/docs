@@ -20,8 +20,8 @@ Before you install, please read our Contributing guide so you will know what you
 
 ## OS Specific Installation Guides
 
-- [CentOS 7](installation/centos-7.md)
-- [Ubuntu Server](installation/ubuntu-server.md)
+- [CentOS 7](installation/beta7/centos-7.md)
+- [Ubuntu Server](installation/beta7/ubuntu-server.md)
 
 ## Updating
 

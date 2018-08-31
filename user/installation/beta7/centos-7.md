@@ -8,13 +8,9 @@
 
 Whilst this is **not** ideal for a server environment, we do this for ease of use, and to get you through the installation, so, for now, you will be responsible for setting up your own security measures.
 
-::: warning
-This guide has not been tested for beta 8. Please report any errors you find.
-:::
-
+ > This guide has been extensively tested on CentOS 7.3 1611, if you use a different version to this, your mileage may vary!
 
 ## Disable SELinux & Stop the Firewall
-
 ```bash
 setenforce 0
 systemctl disable firewalld.service
@@ -139,7 +135,7 @@ Ctrl-X and "Y" to save.
 
 ```bash
 mkdir -p /usr/share/nginx/flarum
-composer create-project flarum/flarum /usr/share/nginx/flarum --stability=beta
+composer create-project flarum/flarum /usr/share/nginx/flarum v0.1.0-beta.7 --stability=beta
 ```
 
 ## Configure Permissions
