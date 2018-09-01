@@ -16,7 +16,7 @@ Alright, enough chit-chat — let's jump right in and make a basic "Hello World"
 All done? Okay. We'll start by giving your extension a place to live. Make a new folder called `workbench`. Next, add this to your `composer.json`:
 
 ```json
- "repositories": [
+    "repositories": [
         {
             "type": "path",
             "url": "workbench/*/"
@@ -24,7 +24,7 @@ All done? Okay. We'll start by giving your extension a place to live. Make a new
     ],
 ```
 
-Your `composer.json` should now look like this:
+Your `composer.json` should now look similar to this:
 
 ```json
 {
