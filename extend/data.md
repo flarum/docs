@@ -6,11 +6,11 @@ Data! So many ways to create, delete, and edit!
 
 ### Intro
 
-Flarum makes use of [Laravel's database system](https://laravel.com/docs/5.1/database) it is highly recommended that you read the documentation relating to that before starting on Flarum
+Flarum makes use of [Laravel's database system](https://laravel.com/docs/database) it is highly recommended that you read the documentation relating to that before starting on Flarum
 
 ### Migrations
 
-Migrations are like version control for your database, allowing you to easily modify and share the Flarum's database schema. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/5.1/migrations).
+Migrations are like version control for your database, allowing you to easily modify and share the Flarum's database schema. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/migrations).
 
 Migrations are placed inside a folder named suitably named `migrations` inside your extension's root directory. Migrations can be named whatever you like, but most people name them in the following scheme `Year_Month_Day_HoursMinutesSeconds_Description`
 
