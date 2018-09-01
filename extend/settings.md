@@ -1,12 +1,12 @@
 # Extension Settings
 
-At some point while making an extension. you will probably want to save some sort of setting to the database. Thankfully, Flarum allows you to do this extremely easily.
+At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy.
 
-## The SettingsRepositoryInterface
+## The Settings Repository
 
-The [`SettingsRepositoryInterface`](https://github.com/flarum/core/blob/master/src/Settings/SettingsRepositoryInterface.php) allows you to do just that, interface with the settings repository!
-
-The first step to interfacing with the table is to load the `SettingsRepositoryInterface` into your class's [IoC](https://laravel.com/docs/4.2/ioc):
+Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`.
+Because Flarum uses Laravel's [IoC container](https://laravel.com/docs/ioc), you don't need to worry about where to obtain such a repository, or how to instantiate one.
+Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
 
 ```php
 <?php
@@ -31,35 +31,35 @@ class ClassInterfacesWithSettings
 
 Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` in our class.
 
-### Getting Settings
+### Reading Settings
 
-To get values from the Settings table, all we have to do is use `SettingsRepositoryInterface`'s `get` function:
+To read settings, all we have to do is use the repository's `get()` function:
 
 `$this->settings->get('forum_title')`
 
-The `get` function accepts 2 arguments:
+The `get()` function accepts two arguments:
 
-1. The key of the setting you are trying to get in the Settings table
-2. (Optional) Allows you to set a default value if the key does not contain any data, otherwise, it will return `null`
+1. The name of the setting you are trying to read.
+2. (Optional) A default value if no value has been stored for such a setting. By default, this will be `null`.
 
-### Setting a value
+### Storing Settings
 
-Setting data is just as easy as getting data, use the `set` function:
+Storing settings ist just as easy, use the `set()` function:
 
 `$this->settings->set('forum_title', 'Super Awesome Forum')`
 
-The `set` function also takes 2 arguments:
+The `set` function also accepts two arguments:
 
-1. The key of the setting you are trying to set in the Settings table
-2. The value you want to set it to
+1. The name of the setting you are trying to change.
+2. The value you want to store for this setting.
 
 ### Other functions
 
-The `all` function returns the entire settings table
+The `all()` function returns an array of all known settings.
 
-The `delete` function allows you to delete an entry on the table, with the first argument being the key to delete.
+The `delete($name)` function lets you remove a named setting.
 
-## Extension settings
+## A Frontend for Your Settings
 
 ### SettingsModal
 
