@@ -10,9 +10,7 @@ Read more about:
 ## Structure
 
 - [/user](/user/index.md)
-  - [/user/installation](/user/index.md)
-  - [/user/installation/centos-7](/user/installation/beta7/centos-7.md)
-  - [/user/installation/ubuntu-server](/user/installation/beta7/ubuntu-server.md)
+  - [/user/installation](/user/installation/index.md)
   - [/user/updating](/user/updating.md)
   - [/user/troubleshooting](/user/troubleshooting.md)
   - [/user/configuration](/user/configuration.md)
@@ -21,6 +19,7 @@ Read more about:
   - [/contributing/bugs](/contributing/bugs.md)
   - [/contributing/develop](/contributing/develop.md)
 - [/extend](/extend/index.md)
+  - [/extend/quick-start](/extend/quick-start.md)
   - [/extend/distribution](/extend/distribution.md)
   - [/extend/data](/extend/data.md)
   - [/extend/internationalization](/extend/internationalization.md)

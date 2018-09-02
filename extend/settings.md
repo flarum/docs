@@ -65,7 +65,7 @@ The `delete($name)` function lets you remove a named setting.
 
 You'll likely want to allow a forum admin to change a setting related to your extension to their liking. This can be achieved through the `SettingsModal`
 
-First, setup your admin JS as discussed [here](index.md#environment-setup) (replacing forum with admin).
+First, setup your admin JS as discussed [here](quick-start.md#environment-setup) (replacing forum with admin).
 
 We will continue to use the "Hello World" example, but your `main.js` should look something like this:
 
