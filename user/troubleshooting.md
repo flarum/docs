@@ -2,7 +2,7 @@
 
 If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](/user/installation/requirements). If you're missing something that Flarum needs to run (such as the PHP `fileinfo` extension, for example) you'll need to remedy that first.
 
-Next, you should take a few minutes to search the [Support forum](http://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
+Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
 
 ## Possible Solutions

@@ -1,4 +1,4 @@
-![alt tag](http://flarum.org/img/logo.png)
+![alt tag](https://flarum.org/img/logo.png)
 
 # User Handbook
 

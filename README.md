@@ -5,7 +5,7 @@ This repository holds the documentation for Flarum.
 Read more about:
 
 - [Contributing](contributing.md)
-- [Flarum](http://flarum.org)
+- [Flarum](https://flarum.org)
 
 ## Structure
 

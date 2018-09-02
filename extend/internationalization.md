@@ -1,6 +1,6 @@
 # Internationalization
 
-Flarum features a powerful translation system (based on [Symfony's translator](http://symfony.com/doc/current/book/translation.html)) that allows the interface to display information in virtually any language. You should consider taking advantage of Flarum's translator as you develop your extension, even if you have no intention of using it in more than a single language.
+Flarum features a powerful translation system (based on [Symfony's translator](https://symfony.com/doc/current/book/translation.html)) that allows the interface to display information in virtually any language. You should consider taking advantage of Flarum's translator as you develop your extension, even if you have no intention of using it in more than a single language.
 
 For one thing, this system will allow you to change the information displayed by your extension without editing the actual code. It will also give you the tools needed to efficiently deal with phenomena such as pluralization and agreement for gender. And you never know: it may come in handy later if you decide you want to add more languages and make your extension available to users around the world!
 
@@ -12,7 +12,7 @@ We will also describe the [standard format](#appendix-a:-standard-key-format) to
 
 ## How Flarum Translates
 
-Unlike Flarum's bundled extensions &mdash; which are translated using resources added by [language packs](http://flarum.org/docs/translate/) &mdash; a third-party extension has to supply all of its own translations. As a Flarum developer, it will be up to you to obtain and maintain the resources for every language you want your extension to support.
+Unlike Flarum's bundled extensions &mdash; which are translated using resources added by [language packs](https://flarum.org/docs/translate/) &mdash; a third-party extension has to supply all of its own translations. As a Flarum developer, it will be up to you to obtain and maintain the resources for every language you want your extension to support.
 
 As a rule, a Flarum site can only display translations corresponding to the language packs that have been installed on that site. But Flarum will do its level best &mdash; within this limitation &mdash; to render your extension's output in some sort of user-readable language:
 
@@ -48,7 +48,7 @@ You can also use keys to **namespace** your translations. For starters, the firs
 
 Additional keys can be used to divide the extension namespace into groups. This comes in handy when you want to organize your translations according to where they appear in the user interface, for example. These intermediate namespacing keys should always be in `snake_case`.
 
-Each namespacing key should also be followed by a colon. Keys should be nested according to the YAML outline format, adding two spaces of indentation for each level in the hierarchy. Put this all together, and the locale file for the [Quick Start tutorial](http://flarum.org/docs/extend/start/) might look something like this:
+Each namespacing key should also be followed by a colon. Keys should be nested according to the YAML outline format, adding two spaces of indentation for each level in the hierarchy. Put this all together, and the locale file for the [Quick Start tutorial](/extend/quick-start.md) might look something like this:
 
 ```yaml
 acme-hello-world:                # Namespacing for the extension; unindented.
@@ -119,7 +119,7 @@ There's more to be said about referencing &mdash; for one thing, we've totally i
 
 ## Using the Translator
 
-Once you've added a translation to your locale file, with appropriate namespacing and identifier keys, you can use the `app.translator.trans()` method to reference that translation in your code. For instance, the `js/forum/src/main.js` file for the [Quick Start tutorial](http://flarum.org/docs/extend/start/) might end up looking like this:
+Once you've added a translation to your locale file, with appropriate namespacing and identifier keys, you can use the `app.translator.trans()` method to reference that translation in your code. For instance, the `js/forum/src/main.js` file for the [Quick Start tutorial](/extend/quick-start.md) might end up looking like this:
 
 ```javascript
 app.initializers.add('acme-hello-world', function() {
@@ -159,12 +159,13 @@ You begin by adding a key to the parameters argument for each element that you w
 ```jsx harmony
 <div className="helpText">
   {app.translator.trans('icon_text', {
-    a: <a href="http://fortawesome.github.io/Font-Awesome/icons/" tabindex="-1"/>
+    a: <a href="https://fortawesome.github.io/Font-Awesome/icons/" tabindex="-1"/>
   })}
 </div>
 ```
 
-Note that each parameter is defined using a single HTML tag, with a slash added before the closing angle bracket. You can then use HTML-style opening and closing tags in your locale file to specify which part of the translation is affected by each element. Once again, double quotes are required:
+Note that each parameter is defined using a single HTML tag, with a slash added before the closing angle bracket. You can then use HTML-style opening and closing tags in your locale file to specify which part of the translation is affected by each element. Once again, double quotes are required.
+You can see that not all tags are passed as an argument, only those who have attributes.
 
 ```yaml
 icon_text: "Enter the name of any <a>FontAwesome</a> icon class, <em>without</em> the <code>fa-</code> prefix."
@@ -215,7 +216,7 @@ $translator = app(Translator::class); // you'll need to import the class with 'u
 ```  
 
 Then, the API is similar to the JavaScript Translator class. You can use `$translator->trans` like you'd use `app.translator.trans` in JavaScript.
-You can learn more about the Translator's methods in [Symfony's `Translator` documentation](http://api.symfony.com/3.1/Symfony/Component/Translation/Translator.html), which Flarum's `Translator` extends.
+You can learn more about the Translator's methods in [Symfony's `Translator` documentation](https://api.symfony.com/3.1/Symfony/Component/Translation/Translator.html), which Flarum's `Translator` extends.
 
 
 # Registering Locales

@@ -364,4 +364,4 @@ It first checks whether the post was already liked (so it knows to unlike, and n
 
 *Wow that was a doozy* Don't worry if you are a little lost, mess around with it until you get something that works. Getting relationships to finally work is one of the most satisfying things in Flarum extension development.
 
-*Still stuck?* There are lots of experienced developers waiting to help you in the [Flarum Community](http://discuss.flarum.org/t/extensibility) or in the [Chat](http://flarum.org/chat).
+*Still stuck?* There are lots of experienced developers waiting to help you in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Chat](https://flarum.org/chat).

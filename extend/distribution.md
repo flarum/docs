@@ -75,6 +75,6 @@ Let's recap what we learned:
 
 ## What now?
 
-You will most likely want to create a discussion on the [Flarum Community](http://discuss.flarum.org/) forum.
+You will most likely want to create a discussion on the [Flarum Community](https://discuss.flarum.org/) forum.
 
 The community will thank you and expect you to update it and fix bugs that come up, so be ready for that.

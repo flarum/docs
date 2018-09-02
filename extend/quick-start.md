@@ -3,11 +3,11 @@
 Before we get started, there's something you should be aware of: Flarum uses some modern languages and tools. If you've only ever built WordPress or Drupal plugins before, you might feel a bit out of your depth! That's OK — this is a great time to learn cool new things and extend your skillset. Below is a list of the technologies that Flarum uses, as well as some links and resources you might find useful:
 
 * **Object-oriented PHP.** Classes, namespaces, and autoloading. Laracasts has a [great series](https://laracasts.com/series/object-oriented-bootcamp-in-php/episodes/1) on this.
-* **Laravel components.** Specifically, [Database](http://laravel.com/docs/eloquent) and [Validation](http://laravel.com/docs/validation).
-* **JavaScript, ES6, and JSX.** Learn about [ES6 features](http://git.io/es6features) and [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html).
-* **Mithril.js.** Only a [basic understanding](http://mithril.js.org/getting-started.html) is necessary.
+* **Laravel components.** Specifically, [Database](https://laravel.com/docs/eloquent) and [Validation](https://laravel.com/docs/validation).
+* **JavaScript, ES6, and JSX.** Learn about [ES6 features](https://git.io/es6features) and [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html).
+* **Mithril.js.** Only a [basic understanding](https://mithril.js.org/archive/v0.2.5/getting-started.html) is necessary.
 
-Don't fret if you get stuck – there are plenty of people on the [Community Forum](http://discuss.flarum.org/t/extensibility) and [Chat](http://flarum.org/chat) who are more than willing to help.
+Don't fret if you get stuck – there are plenty of people on the [Community Forum](https://discuss.flarum.org/t/extensibility) and [Chat](https://flarum.org/chat) who are more than willing to help.
 
 ## Getting Started
 
@@ -330,7 +330,7 @@ So how do we make changes to the UI then?
 
 *JavaScript!*
 
-Before we can write any JavaScript, though, we need to set up a **transpiler**. You see, Flarum's front-end code is written in a cutting-edge version of JavaScript called [ES6](http://git.io/es6features) – but browsers don't support it yet, so it has to be transpiled back into something they can understand.
+Before we can write any JavaScript, though, we need to set up a **transpiler**. You see, Flarum's front-end code is written in a cutting-edge version of JavaScript called [ES6](https://git.io/es6features) – but browsers don't support it yet, so it has to be transpiled back into something they can understand.
 
 ### Environment Setup
 
@@ -339,7 +339,7 @@ In order to do this transpilation, you need to be working in a capable environme
 * Node.js (Download)
 * Webpack (`webpack --mode production`)
 
-This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](http://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](http://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
+This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](https://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](https://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
 ### Transpilation
 
@@ -448,7 +448,7 @@ With this in mind, let's take a look at how we would change a part of Flarum's U
 
 First, we want to find the component that is responsible for the part of the UI we're interested in. Let's say we want to replace each post with a smiley face – no doubt, we're after the [`Post` component](https://github.com/flarum/core/blob/master/js/forum/src/components/Post.js).
 
-Each component is a class that has a `view()` method. This method returns a virtual DOM object, constructed with [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What's that? Well, it's basically a JavaScript representation of the component's HTML. The rendering framework that Flarum uses, [Mithril.js](http://mithril.js.org), takes it and turns it into real HTML in the most efficient way possible. (That's why Flarum is so speedy!)
+Each component is a class that has a `view()` method. This method returns a virtual DOM object, constructed with [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What's that? Well, it's basically a JavaScript representation of the component's HTML. The rendering framework that Flarum uses, [Mithril.js](https://mithril.js.org/archive/v0.2.5), takes it and turns it into real HTML in the most efficient way possible. (That's why Flarum is so speedy!)
 
 The best way to add things to the UI is via Flarum's [*extend* helper](https://github.com/flarum/core/blob/master/js/lib/extend.js):
 
@@ -490,7 +490,7 @@ import HeaderSecondary from 'flarum/components/HeaderSecondary';
 
 app.initializers.add('acme-hello-world', function() {
   extend(HeaderSecondary.prototype, 'items', function(items) {
-    items.add('google', <a className="google-search" href="http://google.com" className="Button Button--link">Google</a>);
+    items.add('google', <a className="google-search" href="https://google.com" className="Button Button--link">Google</a>);
   });
 });
 ```
@@ -499,7 +499,7 @@ Not bad! No doubt our users will be lining up to thank us for such quick and con
 
 ```jsx harmony
 // Set the item order (higher numbers come first)
-items.add('google', <a href="http://google.com">Google</a>, 100);
+items.add('google', <a href="https://google.com">Google</a>, 100);
 
 // Remove existing items
 items.remove('search');
@@ -554,5 +554,5 @@ The rest of the extension docs are still under construction. In the meantime:
 
 * Check out the source code of [Flarum's bundled extensions](https://github.com/flarum) to see how they work
 * Investigate Flarum's [source code](https://github.com/flarum/core) and [unofficial API docs](https://datitisev.github.io/FlarumAPIDocs/) to learn about Flarum's core
-* Ask questions on the [Flarum Community](http://discuss.flarum.org/t/extensibility) or in the [Discord](http://flarum.org/discord)
+* Ask questions on the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord)
 * Take a look at this [handy-dandy extension generator](https://github.com/ReFlar/extension-generator) for automating the above setup

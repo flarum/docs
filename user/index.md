@@ -1,6 +1,6 @@
 # Flarum Guide
 
-![alt tag](http://flarum.org/img/logo.png)
+![alt tag](https://flarum.org/img/logo.png)
 
 Welcome to Flarum, an open-source forum software meant to be powerful yet simple.
 
