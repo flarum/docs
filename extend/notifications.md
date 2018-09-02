@@ -140,7 +140,7 @@ First, create a class that extends the notification component. Then, there are 4
 
 From [Flarum Subscriptions](https://github.com/flarum/flarum-ext-subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
-```js
+```jsx harmony
 import Notification from 'flarum/components/Notification';
 import username from 'flarum/helpers/username';
 

@@ -69,7 +69,7 @@ First, setup your admin JS as discussed [here](quick-start.md#environment-setup)
 
 We will continue to use the "Hello World" example, but your `main.js` should look something like this:
 
-```js
+```jsx harmony
 import HelloWorldSettingsModal from "./components/HelloWorldSettingsModal";
 
 app.initializers.add('acme-hello-world', () => {
@@ -79,7 +79,7 @@ app.initializers.add('acme-hello-world', () => {
 
 Then create a `components` folder in the same directory as your `main.js`. Next, a file called `HelloWorldSettingsModal.js`:
 
-```js
+```jsx harmony
 import SettingsModal from 'flarum/components/SettingsModal';
 
 export default class HelloWorldSettingsModal extends SettingsModal {

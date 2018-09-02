@@ -75,9 +75,9 @@ You may have noticed that only one of the two sample translations in the previou
 `  !  @  #  %  &  *  -  =  [  ]  {  }  |  :  ,  <  >  ?
 ```
 
-Since Flarum uses curly brackets and angle brackets to denote placeholders for [variables](#variables) and [HTML tags](#html-tags), respectively, it goes without saying that any translation that includes such placeholders will also need to be enclosed in double quotes.
+Since Flarum uses curly brackets and angle brackets to denote placeholders for [variables](#including-variables) and [HTML tags](#html-tags), respectively, it goes without saying that any translation that includes such placeholders will also need to be enclosed in double quotes.
 
-Furthermore, you should use **single quotes** to enclose any translation that includes one or more double quote (`"`) or backslash (`\`) characters. This rule takes precedence! So if a translation were to include both double quotes and one or more characters from the list above &mdash; as does [this example](#variables), in which a variable placeholder is set off by quotation marks &mdash; you would need to enclose it in *single quotes*.
+Furthermore, you should use **single quotes** to enclose any translation that includes one or more double quote (`"`) or backslash (`\`) characters. This rule takes precedence! So if a translation were to include both double quotes and one or more characters from the list above &mdash; as does [this example](#including-variables), in which a variable placeholder is set off by quotation marks &mdash; you would need to enclose it in *single quotes*.
 :::
 
 #### Literal Blocks
@@ -95,8 +95,6 @@ literal_block_text: |
 The literal block ends with the last line to be indented at least two spaces more than the ID key. Quotation marks are not needed because the block is effectively delimited by this extra two spaces of indentation.
 
 Flarum's core language resources employ literal blocks mainly for email body content.
-
-<a name="key-references"></a>
 
 #### Key References
 
@@ -129,15 +127,13 @@ app.initializers.add('acme-hello-world', function() {
 });
 ```
 
-This shows the basic translation method, with no bells or whistles attached. Below you'll find examples of more complex translations involving things like [variables](#variables) and [HTML tags](#html-tags). (Please note that we've omitted the namespacing in the following examples to keep them simple; if you look at the actual code, you'll find the translations are properly namespaced according to the [standard format](#namespacing-translations).)
-
-<a name="variables"></a>
+This shows the basic translation method, with no bells or whistles attached. Below you'll find examples of more complex translations involving things like [variables](#including-variables) and [HTML tags](#html-tags). (Please note that we've omitted the namespacing in the following examples to keep them simple; if you look at the actual code, you'll find the translations are properly namespaced according to the [standard format](#namespacing-translations).)
 
 ## Including Variables
 
 You can include variables in translations. As an example, let's look at the code that creates the first item in Flarum's [search results dropdown](https://github.com/flarum/core/blob/master/js/forum/src/components/DiscussionsSearchSource.js). This button quotes the search query entered by the user &mdash; information that is passed to the translator along with the translation key, as an additional parameter:
 
-```javascript
+```jsx harmony
 {LinkButton.component({
   icon: 'search',
   children: app.translator.trans('all_discussions_button', {query}),
@@ -158,11 +154,13 @@ Since curly brackets are used to denote the placeholder, the translation as a wh
 
 Abstracting translations from HTML can pose a unique challenge: How do you deal with HTML elements that affect just part of the sentence? Fortunately, Flarum gives you a way to add tags to your translations.
 
-You begin by adding a parameter for each element that you want the translator to handle. The following snippet &mdash; from the [Edit Group modal](https://github.com/flarum/core/blob/master/js/admin/src/components/EditGroupModal.js) of the admin interface &mdash; shows a translation key accompanied by three such parameters. (You'll have to scroll the code sideways to see them all.)
+You begin by adding a key to the parameters argument for each element that you want the translator to handle. The following snippet — from the [Edit Group modal](https://github.com/flarum/core/blob/master/js/src/admin/components/EditGroupModal.js) of the admin interface — shows a translation key accompanied by a parameters object with one item.
 
-```javascript
+```jsx harmony
 <div className="helpText">
-  {app.translator.trans('icon_text', {a: <a href="http://fortawesome.github.io/Font-Awesome/icons/" tabindex="-1"/>}, {em: <em/>}, {code: <code/>})}
+  {app.translator.trans('icon_text', {
+    a: <a href="http://fortawesome.github.io/Font-Awesome/icons/" tabindex="-1"/>
+  })}
 </div>
 ```
 
@@ -181,9 +179,13 @@ Localizers can reorder elements as needed, and even choose to omit tags if they 
 
 On occasion, you may need to provide alternate versions of a translation to accommodate pluralization of a word or phrase. This is done by using the `app.translator.transChoice()` method to pass the translation key &mdash; along with a variable that sets the conditions for pluralization &mdash; to the translator.
 
-```javascript
+```js
 const remaining = this.minPrimary - primaryCount;
-return app.translator.transChoice('choose_primary_placeholder', remaining, {count: remaining});
+return app.translator.transChoice(
+  'choose_primary_placeholder',
+  remaining,
+  { count: remaining }
+);
 ```
 
 This example is from the [Choose Tags modal](https://github.com/flarum/tags/blob/master/js/forum/src/components/TagDiscussionModal.js) of the Tags extension, where it tells the user how many more primary tags can be selected. Note that the `remaining` variable is passed to the translator **twice**. First, it appears as itself, to condition the pluralization of the word "tags". Then it appears again as the value of the `count` parameter, which the translator can use to insert that value in the translation.
@@ -258,8 +260,6 @@ The following guidelines were created for use in the Flarum core and bundled ext
 
 Developers who wish to contribute to the development of Flarum are expected to follow these guidelines. Third-party developers may also wish to follow them, so experienced Flarum localizers who undertake the translation of third-party extensions will find themselves working in familiar surroundings.
 
-<a name="namespacing-translations"></a>
-
 ## Namespacing Translations
 
 All translations are to be organized in categories, using namespacing keys arranged in up to **three** levels. Each level provides localizers with an important bit of information about *where the translation is used:*
@@ -307,8 +307,6 @@ If you're modifying an existing location &mdash; to add a new setting to the Set
 If your extension adds a new location &mdash; such as a new dialog box &mdash; you should feel free to create a new third-level key to namespace the translations that go there. Take a couple minutes to familiarize yourself with the namespacing in the locale files linked above, then create a new key that fits in with that scheme.
 
 As a general rule, third-level keys should be short &mdash; no more than one or two words &mdash; and expressed in `snake_case`. They should be descriptive of the locations where the translations are used.
-
-<a name="naming-id-keys"></a>
 
 ## Naming Identifier Keys
 
@@ -359,9 +357,6 @@ The root may also be **omitted** in certain cases &mdash; usually when the suffi
 
 Suffixes are also sufficient to identify the subject and body components of an email message since each email will have only one subject line and one body. Note that the leading underscore is omitted in such cases: you would use just `title`, `subject`, or `body` as the ID key.
 
-
-<a name="reusing-translations"></a>
-
 ## Reusing Translations
 
 Flarum's unique [key references](#key-references) fulfill the same role as YAML anchors, but they're better in one respect: you can even reference keys in a different file! For this reason, you need to use the **full translation key** when referencing. Here's a more realistic example of how referencing works, complete with namespacing:
@@ -383,7 +378,7 @@ core:
 
 As you can see, we want to reuse a single translation in three different contexts (including two locations): (1) as a link displayed in the site header, (2) as a button displayed in the Log In modal, and (3) as the title of that modal. So all three of these keys have been set to reference the same full translation key.
 
-The reused translation is identified by a key that omits the suffix &mdash; as specified [above](#naming-id-keys) &mdash; and is placed in the `ref` namespace. The latter measure is needed to avoid conflicts that can occur if a reused translation is given the same name as a second-level namespacing key. (The `email` keys are a case in point.)
+The reused translation is identified by a key that omits the suffix &mdash; as specified [above](#naming-identifier-keys) &mdash; and is placed in the `ref` namespace. The latter measure is needed to avoid conflicts that can occur if a reused translation is given the same name as a second-level namespacing key. (The `email` keys are a case in point.)
 
 The `ref` namespace also makes it easy to track translation reuse. Imagine what would happen if you set the scalars for the button and title to reference `core.forum.header.log_in_link` instead:
 

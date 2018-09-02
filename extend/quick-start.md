@@ -484,7 +484,7 @@ Generally, the component that owns the list of items will have a specific method
 
 Let's take the left side of the header, for example – the [`HeaderSecondary` component](https://github.com/flarum/core/blob/master/js/forum/src/components/HeaderSecondary.js). In this case, the method we're after is named `items()`. Let's do it!
 
-```js
+```jsx harmony
 import { extend } from 'flarum/extend';
 import HeaderSecondary from 'flarum/components/HeaderSecondary';
 
@@ -497,7 +497,7 @@ app.initializers.add('acme-hello-world', function() {
 
 Not bad! No doubt our users will be lining up to thank us for such quick and convenient access to Google. But in the meantime, let's play around and see what else we can do with `ItemList` objects:
 
-```js
+```jsx harmony
 // Set the item order (higher numbers come first)
 items.add('google', <a href="http://google.com">Google</a>, 100);
 

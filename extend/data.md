@@ -329,7 +329,7 @@ The way we save models in the front end is via the `.save()` function (example: 
 
 An [example](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/addLikeAction.js):
 
-```js
+```jsx harmony
 import { extend } from 'flarum/extend';
 import app from 'flarum/app';
 import Button from 'flarum/components/Button';
