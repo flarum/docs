@@ -9,6 +9,53 @@ Before we get started, there's something you should be aware of: Flarum uses som
 
 Don't fret if you get stuck – there are plenty of people on the [Community Forum](https://discuss.flarum.org/t/extensibility) and [Chat](https://flarum.org/chat) who are more than willing to help.
 
+## Principles
+
+The times of manually modifying the forum's source files are over. You can extend all parts of Flarum by only adding new files containing "**extenders**" that hook into the software's code. We strive for enabling a great range of use-cases in such a way - and we go to great lengths to do so.
+
+Thanks to Flarum's architecture, it should be possible to extend and customize your forum even in ways we have not foreseen. However, we only guarantee that your use of extenders will keep working across new minor releases of Flarum, whereas anything beyond might not. This way, we give you all the flexibility you need, while also preserving a certain level of stability.
+
+## Customizing Your Forum
+
+For simple customizations, there is no need to create a full-blown extension package just to make changes. These could be some HTML to make the forum fit in with your general site layout, a bit of custom JavaScript, or even an integration with your site's authentication system.
+
+In a stock install of Flarum, you will be able to collect these changes in the `extend.php` file in its root directory. Flarum loads this file at just the right time in its boot process so that you can make changes to all parts of the system. By default, this file returns an empty array:
+
+```php
+return [
+    // Register extenders here to customize your forum!
+];
+```
+
+The `extend.php` file is also the best place to quickly experiment with customizations, even if you consider turning them into an extension later.
+
+## Extenders
+
+Extenders are *declarative*. This means they describe in plain terms the goals you are trying to achieve (such as adding a new route to the forum frontend, or executing some code when a new discussion was created), leaving the implementation to Flarum itself. This is what allows us to stay nimble and regularly change the core of Flarum when the need arises, without sacrificing the stability of the public API that you are relying on.
+
+Extenders are objects that encapsulate how to achieve the effect you desire with the current version of Flarum. All you need to know is the various ways in which you can create and configure the different extender types.
+
+Every extender is different. However, registrations will always look somewhat similar to this:
+
+```php
+// Register a JavaScript and a CSS file to be delivered
+// with the forum frontend
+(new Extend\Frontend('forum'))
+    ->js(__DIR__.'/forum-scripts.js')
+    ->css(__DIR__.'/forum-styles.css')
+```
+
+You first create an instance of the extender, and then (optionally) call methods on it for further configuration. All of these methods return the extender itself, so that you can achieve your entire configuration just by chaining method calls.
+
+We have listed all extenders and their options in the [Extenders reference](/extend/extenders.md).
+
+## Packaging
+
+At some point, your customization might have outgrown `extend.php`. Or maybe you have wanted to build an extension to share with the community from the get-go.
+
+It is time to abandon the simple customizations that are bound to your installation. Time to become an extension developer!
+
+
 ## Getting Started
 
 Alright, enough chit-chat — let's jump right in and make a basic "Hello World" extension for Flarum. You'll need to have Flarum up and running to do this, so if you haven't installed Flarum yet, go and [do that now](/user).
@@ -312,7 +359,7 @@ class ChangePostContent
     public function EditUsername(UserSaving $event)
     {
         $event->user->username = 'FooBar';
-    }    
+    }
 }
 ```
 
