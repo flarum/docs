@@ -184,7 +184,7 @@ class AddPostLikesRelationship
 
 Let's break it down:
 
-* **GetModelRelationship:** You first want to select which model you want to contain the relationship (see above: `Post::class`), then name your relationship. Then you want to return a `belongsToMany` relationship which can read more about [here.](https://laravel.com/api/4.2/Illuminate/Database/Eloquent/Relations/BelongsToMany.html).
+* **GetModelRelationship:** You first want to select which model you want to contain the relationship (see above: `Post::class`), then name your relationship. Then you want to return a `belongsToMany` relationship which can read more about [here.](https://laravel.com/api/5.5/Illuminate/Database/Eloquent/Relations/BelongsToMany.html).
 * **GetApiRelationship:** Just like `GetModelRelationship` you want to select a model to contain the relationship, this time a serializer (see above `PostSerializer::class`). Then use the same name as `GetModelRelationship`. You will then return a JSON-API relationship, containing the base serializer, the relation serializer, and the name of the relation.
 * **WillGetData:** Finally you want to specify the places where you want your relationship to be included. You want to check for each controller you want it to be included on, then call `$event->addInclude` with the name of your relationship (don't forget about existing relationships such as `$discussion->post`).
 
