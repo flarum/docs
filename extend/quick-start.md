@@ -137,11 +137,11 @@ Now that you have your Flarum ready for development, it's time to start making y
 
 Make a new folder in the format of `flarum-ext-{name}` where `name` is the name of your extension, in this case, we will be calling our extension `hello-world`.
 
-Now that your extension has a folder, we'll put two files in it: `bootstrap.php` and `composer.json`. These files serve as the heart and soul of the extension.
+Now that your extension has a folder, we'll put two files in it: `extend.php` and `composer.json`. These files serve as the heart and soul of the extension.
 
-### bootstrap.php
+### extend.php
 
-The `bootstrap.php` file is included by Flarum on each and every page load, as long as the extension is enabled. This file must return a function. Inside that function is where you'll put your programming logic — the PHP code that does your extension's bidding. We'll just echo a friendly greeting for now:
+The `extend.php` file is included by Flarum on each and every page load, as long as the extension is enabled. This file must return a function. Inside that function is where you'll put your programming logic — the PHP code that does your extension's bidding. We'll just echo a friendly greeting for now:
 
 ```php
 <?php
@@ -229,7 +229,7 @@ Get the idea? Great! There are dozens of events you can listen to. Looking for a
 
 ### Event Handlers
 
-Listening for an event is easy. Just inject the Event Dispatcher into your `bootstrap.php` function, and register a handler with the `listen` method. You'll need to pass the **fully qualified class name** of the event class as the first argument, and your handler as the second.
+Listening for an event is easy. Just inject the Event Dispatcher into your `extend.php` function, and register a handler with the `listen` method. You'll need to pass the **fully qualified class name** of the event class as the first argument, and your handler as the second.
 
 ```php
 <?php
@@ -268,7 +268,7 @@ Take a look at some of the bundled extensions for the best folder names. In this
 
 Next, we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
 
-Let's tell our `bootstrap.php` about our new class:
+Let's tell our `extend.php` about our new class:
 
 ```php
 <?php
@@ -428,7 +428,7 @@ const config = require('flarum-webpack-config');
 module.exports = config();
 ```
 
-Now create a file at `js/src/forum/index.js`. This is like the JavaScript equivalent of `bootstrap.php` – its content is executed as the JavaScript application boots up. This is where we will make our changes to the UI. For now, though, let's just alert a friendly greeting:
+Now create a file at `js/src/forum/index.js`. This is like the JavaScript equivalent of `extend.php` – its content is executed as the JavaScript application boots up. This is where we will make our changes to the UI. For now, though, let's just alert a friendly greeting:
 
 ```js
 app.initializers.add('acme-hello-world', function() {
@@ -563,7 +563,7 @@ Wait, all that Javascript stuff is cool in all, but what's the point if it doesn
 
 *Good question voice in my head!* Flarum allows you to add your own custom [LESS](http://lesscss.org/features/) in the same way as you add your own Javascript!
 
-Back to our good friend `bootstrap.php`, simply add the directory of your LESS file:
+Back to our good friend `extend.php`, simply add the directory of your LESS file:
 
 ```php
 <?php
@@ -588,7 +588,7 @@ Bravo! You made it to the end. It's been fun. :')
 But seriously, you're well on your way to developing a useful Flarum extension, having mastered the basic concepts. Let's quickly recap what we learned:
 
 * Extensions are Composer packages with their metadata defined in `composer.json`.
-* They have a `bootstrap.php` which returns a function.
+* They have a `extend.php` which returns a function.
 * The function can receive the event dispatcher, which can then be used to set up event listeners/handlers.
 * Event handlers can be used to react to a whole range of things that are about to happen, are happening, or have happened.
 * Flarum's front-end is a JavaScript application; to extend it, you must set up JavaScript transpilation.

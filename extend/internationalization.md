@@ -223,7 +223,7 @@ You can learn more about the Translator's methods in [Symfony's `Translator` doc
 
 There's one last thing you need to do before Flarum can use your translations. You need to register them. Fortunately, Flarum beta 8 makes this pretty easy.
 
-You'll need to add the following to your `bootstrap.php`:
+You'll need to add the following to your `extend.php`:
 
 ```php
 new Extend\Locales(__DIR__ . '/locale'),
@@ -234,7 +234,7 @@ new Extend\Locales(__DIR__ . '/resources/locale'),
 
 ## Language Packs
 
-However, the process is a bit different for language packs. With a language pack, the only thing you'll need to have in your `bootstrap.php` is the following:
+However, the process is a bit different for language packs. With a language pack, the only thing you'll need to have in your `extend.php` is the following:
 
 ```php
 <?php
