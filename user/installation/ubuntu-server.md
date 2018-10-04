@@ -19,14 +19,14 @@ First, install PHP:
 ```bash
 sudo apt-get install php7.0 php7.0-common php7.0-pdo_mysql php7.0-gd php7.0-dom php7.0-mbstring php7.0-json php7.0-fileinfo php7.0-openssl php7.0-tokenizer php7.0-fpm
 ```
+To secure the installation a bit, run this command:
+```bash
+sudo sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=0|i" /etc/php/7.0/fpm/php.ini
+```
 PHP generally requires no configuration to work, but for the process manager (what we'll use to connect the webserver to PHP) to work, we need to start PHP-FPM:
 ```bash
 sudo service php7.0-fpm start
 sudo systemctl enable php7.0-fpm.service
-```
-To secure the installation a bit, run this command:
-```bash
-sudo sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=0|i" /etc/php/7.0/fpm/php.ini
 ```
 To install Composer, we'll need to run these commands:
 ```bash
