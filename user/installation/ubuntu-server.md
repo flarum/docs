@@ -1,4 +1,4 @@
-# Installation on Ubuntu Server 16.04
+# Installation on Ubuntu Server 18.04
 
 ::: warning
 This guide has not been tested for beta 8. Please report any errors you find.
@@ -17,16 +17,16 @@ sudo apt-get upgrade
 
 First, install PHP:
 ```bash
-sudo apt-get install php7.0 php7.0-common php7.0-pdo_mysql php7.0-gd php7.0-dom php7.0-mbstring php7.0-json php7.0-fileinfo php7.0-openssl php7.0-tokenizer php7.0-fpm
+sudo apt-get install php7.2 php7.2-common php7.2-pdo_mysql php7.2-gd php7.2-dom php7.2-mbstring php7.2-json php7.2-fileinfo php7.2-openssl php7.2-tokenizer php7.2-fpm
 ```
 To secure the installation a bit, run this command:
 ```bash
-sudo sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=0|i" /etc/php/7.0/fpm/php.ini
+sudo sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=0|i" /etc/php/7.2/fpm/php.ini
 ```
 PHP generally requires no configuration to work, but for the process manager (what we'll use to connect the webserver to PHP) to work, we need to start PHP-FPM:
 ```bash
-sudo service php7.0-fpm start
-sudo systemctl enable php7.0-fpm.service
+sudo service php7.2-fpm start
+sudo systemctl enable php7.2-fpm.service
 ```
 To install Composer, we'll need to run these commands:
 ```bash
@@ -87,7 +87,7 @@ server {
   
   location ~ .php$ {
       fastcgi_split_path_info ^(.+.php)(/.+)$;
-      fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+      fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
       fastcgi_index index.php;
       include snippets/fastcgi-php.conf;
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
