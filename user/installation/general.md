@@ -16,7 +16,7 @@ Before you install, please read our [Contributing guide](/contributing.md) so yo
 
 ## Requirements
 
-> As of 0.1.0-beta.3, Flarum utilizes [Composer](https://getcomposer.org) to manage its dependencies and extensions. This means that Flarum cannot be installed on hosts without SSH access. Rest assured that we are planning to address this in the future and make sure that Flarum is accessible to everyone. Until then, if you want to run Flarum, you will need to find a host that permits SSH access.
+> Flarum utilizes [Composer](https://getcomposer.org) to manage its dependencies and extensions. This means that Flarum cannot be installed on hosts without SSH access. Rest assured that we are planning to address this in the future and make sure that Flarum is accessible to everyone. Until then, if you want to run Flarum, you will need to find a host that permits SSH access.
 
 To run Flarum, you will need:
 * A webserver: **Apache** (with mod_rewrite), **Nginx**, or **Lighttpd**
