@@ -32,7 +32,7 @@ Flarum uses Composer to manage its dependencies and extensions. Before installin
 composer create-project flarum/flarum . --stability=beta
 ```
 
-While this command is running, you can configure URL rewriting on your webserver. When that's done, navigate to your forum in a web browser and follow the instructions to complete the installation.
+While this command is running, you can configure URL rewriting on your webserver. Make sure your webroot is set to `/path/to/your/forum/public`. When that's done, navigate to your forum in a web browser and follow the instructions to complete the installation.
 
 ## URL Rewriting
 
