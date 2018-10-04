@@ -1,4 +1,4 @@
-# Installation on Ubuntu Server 18.04
+# Flarum Installation Guide for Ubuntu Server 16.04
 
 ::: warning
 This guide has not been tested for beta 8. Please report any errors you find.
@@ -13,10 +13,13 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-## Installing PHP & Composer
+### Install Dependencies
 
 First, install PHP:
 ```bash
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
 sudo apt-get install php7.2 php7.2-common php7.2-pdo_mysql php7.2-gd php7.2-dom php7.2-mbstring php7.2-json php7.2-fileinfo php7.2-openssl php7.2-tokenizer php7.2-fpm
 ```
 To secure the installation a bit, run this command:
@@ -28,12 +31,9 @@ PHP generally requires no configuration to work, but for the process manager (wh
 sudo service php7.2-fpm start
 sudo systemctl enable php7.2-fpm.service
 ```
-To install Composer, we'll need to run these commands:
+To install Composer, we'll need to run this command:
 ```bash
-sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-sudo php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
-sudo php -r "unlink('composer-setup.php');"
+wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet
 ```
 
 See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a guide to using Composer.
@@ -137,7 +137,7 @@ sudo systemctl enable nginx.service
 ```
 
 
-## Setting up MySQL
+### Setting up MySQL
 
 First, you'll need to install MySQL:
 ```bash
@@ -162,4 +162,7 @@ CREATE USER 'flarum'@'localhost' IDENTIFIED BY 'PASSWORD';
 CREATE DATABASE flarum;
 GRANT ALL PRIVILEGES ON flarum.* TO 'flarum'@'localhost';
 ```
+
+### Finish up
+
 You're ready to go! Go ahead and go to your site and install Flarum (the MySQL username will be `flarum`, same with the database name)!
