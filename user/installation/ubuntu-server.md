@@ -133,6 +133,7 @@ Now you need to enable your configuration and reload nginx:
 ```bash
 sudo ln -s /etc/nginx/sites-available/flarum /etc/nginx/sites-enabled/flarum
 sudo service nginx reload
+sudo systemctl enable nginx.service
 ```
 
 
