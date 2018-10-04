@@ -41,7 +41,7 @@ While this command is running, you can configure URL rewriting on your webserver
 Flarum includes a `.htaccess` file - make sure it's in there. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
 
 ```apache
-    <Directory "/path/to/your/forum">
+    <Directory "/path/to/your/forum/public">
         AllowOverride All
     </Directory>
 ```
