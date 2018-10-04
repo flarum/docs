@@ -1,11 +1,12 @@
-# Flarum Installation Guide on Ubuntu Server 16.04
+# Flarum Installation Guide for Ubuntu Server 16.04
 
 ::: warning
 This guide has not been tested for beta 8. Please report any errors you find.
 :::
 
-## Preparing
-### Update your System
+## Preparation
+
+First, you'll want to update your system for the most security:
 
 ```bash
 sudo apt-get update
@@ -14,15 +15,28 @@ sudo apt-get upgrade
 
 ### Install Dependencies
 
+First, install PHP:
 ```bash
-sudo apt-get install pwgen php7.2-{mysql,common,gd,xml,mbstring,curl} php7.2 composer nginx mysql-server unzip
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install php7.2 php7.2-common php7.2-pdo_mysql php7.2-gd php7.2-dom php7.2-mbstring php7.2-json php7.2-fileinfo php7.2-openssl php7.2-tokenizer php7.2-fpm
+```
+To secure the installation a bit, run this command:
+```bash
+sudo sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=0|i" /etc/php/7.2/fpm/php.ini
+```
+PHP generally requires no configuration to work, but for the process manager (what we'll use to connect the webserver to PHP) to work, we need to start PHP-FPM:
+```bash
+sudo service php7.2-fpm start
+sudo systemctl enable php7.2-fpm.service
+```
+To install Composer, we'll need to run this command:
+```bash
+wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --quiet
 ```
 
-### Install Composer
-
-Flarum uses Composer to install & manage its dependencies.
-
-See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a user guide to using Composer
+See https://discuss.flarum.org/d/9225-the-most-unsettling-end-user-guide-to-composer-for-flarum for a guide to using Composer.
 
 ## Installing Flarum
 
@@ -43,11 +57,16 @@ sudo chgrp -R www-data /var/www/flarum/assets /var/www/flarum/storage
 
 ### Write the Nginx Configuration
 
+First, you'll need to install Nginx:
 ```bash
-nano /etc/nginx/sites-available/flarum.conf
+sudo apt-get install nginx
+```
+When that's finished, go ahead and run this command to open the Flarum Nginx configuration file:
+```bash
+sudo nano /etc/nginx/sites-available/flarum
 ```
 
-Then type the following. Make sure you replace `{domain-name-here}` with your domain.
+Afterwards, type the following. Make sure you replace `{domain-name-here}` with your domain.
 
 ```nginx
 server {
@@ -60,8 +79,6 @@ server {
   server_name {domain-name-here};
   
   location / { try_files $uri $uri/ /index.php?$query_string; }
-  location /api { try_files $uri $uri/ /api.php?$query_string; }
-  location /admin { try_files $uri $uri/ /admin.php?$query_string; }
   
   location /flarum {
       deny all;
@@ -72,10 +89,7 @@ server {
       fastcgi_split_path_info ^(.+.php)(/.+)$;
       fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
       fastcgi_index index.php;
-      include fastcgi_params;
-  
-  
-  
+      include snippets/fastcgi-php.conf;
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
   }
   
@@ -115,33 +129,40 @@ server {
 
 Press `Ctrl-X` and then `Y` to save.
 
-### Enable your Flarum nginx configuration
-```
-sudo ln -s /etc/nginx/sites-available/flarum.conf /etc/nginx/sites-enabled/flarum.conf
-```
-
-### Test your Nginx Configuration & Reload Nginx
-```
-sudo nginx -t
-service nginx reload
-```
-
-
-### Create your MySQL Database & User
-
-To generate a Strong MySQL Password (optional): `pwgen 15 1`.
-
-#### Set up MySQL
-
+Now you need to enable your configuration and reload nginx:
 ```bash
-mysql -uroot -p'{yourpassword}'
-CREATE DATABASE IF NOT EXISTS flarum;
-CREATE USER flarum@localhost identified by '{generatedpassword}';
-GRANT ALL PRIVILEGES ON flarum.* TO flarum@localhost;
-FLUSH PRIVILIEGES;
-EXIT;
+sudo ln -s /etc/nginx/sites-available/flarum /etc/nginx/sites-enabled/flarum
+sudo service nginx reload
+sudo systemctl enable nginx.service
+```
+
+
+### Setting up MySQL
+
+First, you'll need to install MySQL:
+```bash
+sudo apt-get install mysql-server
+```
+
+You'll be asked to supply a root password for use within the database system. Make sure it's a long, strong password and you have it written down somewhere just in case you forget.
+
+When that's done, run the following command:
+```bash
+sudo mysql_secure_installation
+```
+You'll be asked to enter the password you set for the MySQL root account. Afterwards, you'll be asked if you want to configure the `VALIDATE PASSWORD PLUGIN`. This makes sure passwords are secure, but since we aren't really sharing this server with anybody else (and your passwords are hopefully already secure), you can press `n`, then enter. For the rest of the questions, you'll want to use `y` every time for the most security.
+
+Now you can create your Flarum database and user:
+```bash
+mysql -u root -p
+```
+When you're in, run the following commands (replace `PASSWORD` with a secure password):
+```sql
+CREATE USER 'flarum'@'localhost' IDENTIFIED BY 'PASSWORD';
+CREATE DATABASE flarum;
+GRANT ALL PRIVILEGES ON flarum.* TO 'flarum'@'localhost';
 ```
 
 ### Finish up
 
-Now go ahead and view your site, you should see the Flarum Install page. Now you're ready to go!
+You're ready to go! Go ahead and go to your site and install Flarum (the MySQL username will be `flarum`, same with the database name)!
