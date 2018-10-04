@@ -52,8 +52,6 @@ Add the following lines to your server's configuration block:
 
 ```nginx
     location / { try_files $uri $uri/ /index.php?$query_string; }
-    location /api { try_files $uri $uri/ /api.php?$query_string; }
-    location /admin { try_files $uri $uri/ /admin.php?$query_string; }
 
     location ~* ^/(composer\.(json|lock)|config\.php|flarum|storage|vendor) {
         deny all;
@@ -109,8 +107,6 @@ Add the following lines to your server's configuration block:
 
 ```lighttpd
     url.rewrite-if-not-file = (
-        "/admin.*" => "/admin.php",
-        "/api.*"   => "/api.php",
         "/.*"      => "/index.php"
     )
 ```
