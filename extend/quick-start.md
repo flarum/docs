@@ -264,7 +264,7 @@ Try it out! Now whenever someone makes a post, the content will be set to "This 
 
 An important part of making a good extension is keeping it organized! The best way to do this is to store your classes in folders labeled for their purpose. Inside your extensions folder, make a folder called `src` this is the source for all of your PHP classes (Look back at the `autoload` option in your `composer.json`).
 
-Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. (`boostrap.php` should be the only PHP file outside of `src`)
+Take a look at some of the bundled extensions for the best folder names. In this case, we are going to be listening for an event, so we will make a folder called `Listeners` inside of `src`. (`extend.php` should be the only PHP file outside of `src`)
 
 Next, we will make a class with a name that describes what it does, in this case, we will call it `ChangePostContent`.
 
@@ -316,7 +316,7 @@ class ChangePostContent
 }
 ```
 
-The subscribe function (which we called in the `boostrap.php`) is where you should declare which events you want to listen for. `$events->listen()` is a function which accepts 2 arguments:
+The subscribe function (which we called in the `extend.php` file) is where you should declare which events you want to listen for. `$events->listen()` is a function which accepts 2 arguments:
 
 * The event class you want to listen to.
 * An array which contains the callback for when that event is triggered
@@ -455,7 +455,7 @@ This will compile your browser-ready JavaScript code into the `js/dist/forum.js`
 
 One last step: we've got to tell Flarum about our extension's JavaScript. Flarum comes with [handy helper methods](https://github.com/flarum/core/tree/master/src/Extend) that allow you to complete common tasks. In this case, we will be using the [`Frontend` extender](https://github.com/flarum/core/blob/master/src/Extend/Frontend.php).
 
-In your `boostrap.php`:
+In your `extend.php`:
 
 ```php
 <?php
