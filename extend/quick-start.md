@@ -465,7 +465,7 @@ namespace Acme\HelloWorld;
 use Flarum\Extend;
 
 return [
-    (new Extend\Assets('forum'))
+    (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
 ];
 ```
