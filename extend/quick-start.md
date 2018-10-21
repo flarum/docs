@@ -98,24 +98,23 @@ Your `composer.json` should now look similar to this:
     },
     "require": {
         "flarum/core": "^0.1.0",
-        "flarum/flarum-ext-akismet": "^0.1.0",
-        "flarum/flarum-ext-approval": "^0.1.0",
-        "flarum/flarum-ext-auth-facebook": "^0.1.0",
-        "flarum/flarum-ext-auth-github": "^0.1.0",
-        "flarum/flarum-ext-auth-twitter": "^0.1.0",
-        "flarum/flarum-ext-bbcode": "^0.1.0",
-        "flarum/flarum-ext-emoji": "^0.1.0",
-        "flarum/flarum-ext-english": "^0.1.0",
-        "flarum/flarum-ext-flags": "^0.1.0",
-        "flarum/flarum-ext-likes": "^0.1.0",
-        "flarum/flarum-ext-lock": "^0.1.0",
-        "flarum/flarum-ext-markdown": "^0.1.0",
-        "flarum/flarum-ext-mentions": "^0.1.0",
-        "flarum/flarum-ext-pusher": "^0.1.0",
-        "flarum/flarum-ext-sticky": "^0.1.0",
-        "flarum/flarum-ext-subscriptions": "^0.1.0",
-        "flarum/flarum-ext-suspend": "^0.1.0",
-        "flarum/flarum-ext-tags": "^0.1.0"
+        "flarum/approval": "^0.1.0",
+        "flarum/auth-facebook": "^0.1.0",
+        "flarum/auth-github": "^0.1.0",
+        "flarum/auth-twitter": "^0.1.0",
+        "flarum/bbcode": "^0.1.0",
+        "flarum/emoji": "^0.1.0",
+        "flarum/lang-english": "^0.1.0",
+        "flarum/flags": "^0.1.0",
+        "flarum/likes": "^0.1.0",
+        "flarum/lock": "^0.1.0",
+        "flarum/markdown": "^0.1.0",
+        "flarum/mentions": "^0.1.0",
+        "flarum/pusher": "^0.1.0",
+        "flarum/sticky": "^0.1.0",
+        "flarum/subscriptions": "^0.1.0",
+        "flarum/suspend": "^0.1.0",
+        "flarum/tags": "^0.1.0"
     },
     "repositories": [
         {
@@ -133,9 +132,10 @@ Your `composer.json` should now look similar to this:
     "prefer-stable": true
 }
 ```
+
 Now that you have your Flarum ready for development, it's time to start making your extension! Navigate to the `workbench` directory we created earlier.
 
-Make a new folder in the format of `flarum-ext-{name}` where `name` is the name of your extension, in this case, we will be calling our extension `hello-world`.
+Make a new folder in the format of `{vendor}-{name}` where `vendor` is your vendor name, i.e. 'acme' (see below), and `name` is the name of your extension. In this case, we will be calling our extension `acme-hello-world`.
 
 Now that your extension has a folder, we'll put two files in it: `extend.php` and `composer.json`. These files serve as the heart and soul of the extension.
 
@@ -163,7 +163,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
 ```json
 {
-    "name": "acme/flarum-ext-hello-world",
+    "name": "acme/hello-world",
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
@@ -189,17 +189,19 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
 Breaking it down:
 
-* **name** is the name of the Composer package in the format `vendor/extension`. You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `Acme` as your vendor name. You should also prefix the `extension` part with `flarum-ext-` to indicate that it's a package specifically intended for use with Flarum.
+* **name** is the name of the Composer package in the format `vendor/extension`. You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `Acme` as your vendor name.
+  > In the old days, `extension` would be prefixed with `flarum-ext-` to indicate that it's a package specifically intended for use with Flarum.
+  > That standard has died with beta 8, though there's no problem if you still want to prefix your packge names.
 * **description** is a short one-sentence description of what the extension does.
 * **type** MUST be set to flarum-extension. This ensures that when someone “requires” your extension, it will be identified as such.
 * **require** contains a list of your extension's own dependencies. You'll want to specify the first version of Flarum that your extension is compatible with here, usually prefixed with a caret (`^`).
 * **autoload** is info that tells Composer where your code is located, and where you define your extension's namespace
 * **extra** contains some Flarum-specific information, this info will be shown on the admin extensions page. It must contain `flarum-extension`
-    * **title** is the name of your extension
-    * **icon** contains info related to the icon that shows on the extensions page
-        * **name** is identifier of the [Font Awesome](https://fontawesome.com) icon
-        * **backgroundColor** is the color behind the icon
-        * **color** is the color of the icon itself
+  * **title** is the name of your extension
+  * **icon** contains info related to the icon that shows on the extensions page
+    * **name** is identifier of the [Font Awesome](https://fontawesome.com) icon
+    * **backgroundColor** is the color behind the icon
+    * **color** is the color of the icon itself
 
 Now that your `composer.json` is configured to your liking, you should tell Flarum about your extension! Navigate to the root directory of your Flarum install and run `composer require name *@dev` where `name` is the value from your `composer.json` file
 

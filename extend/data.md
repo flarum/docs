@@ -18,7 +18,7 @@ Where the date and time identifiers are the time of the file being created.
 
 Let's take a look at an example, shall we?
 
-From [Flarum Tags](https://github.com/flarum/flarum-ext-tags/blob/master/migrations/2015_02_24_000000_create_discussions_tags_table.php):
+From [Flarum Tags](https://github.com/flarum/tags/blob/master/migrations/2015_02_24_000000_create_discussions_tags_table.php):
 
 ```php
 <?php
@@ -40,7 +40,7 @@ This creates a table called `discussion_tags` and adds the integer `discussion_i
 
 You can also add to existing tables!
 
-From [Flarum Sticky](https://github.com/flarum/flarum-ext-sticky/blob/master/migrations/2015_02_24_000000_add_sticky_to_discussions.php):
+From [Flarum Sticky](https://github.com/flarum/sticky/blob/master/migrations/2015_02_24_000000_add_sticky_to_discussions.php):
 
 ```php
 <?php
@@ -126,7 +126,7 @@ Relationships allow you to define a relationship (*wow really?) between 2 differ
 
 There are 3 events you should listen for in order to create a complete relationship: [`GetModelRelationship`](https://github.com/flarum/core/blob/master/src/Event/GetModelRelationship.php) which defines a relationship in the backend, [`GetApiRelationship`](https://github.com/flarum/core/blob/master/src/Event/GetApiRelationship.php) which allows you to include a relationship in an API request, and [`WillGetData`](https://github.com/flarum/core/blob/master/src/Api/Event/WillGetData.php) which loads relationship data into other controller responses, such as to load the user-likes relationship when a post is shown.
 
-Take a look at this example from [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Listener/AddPostLikesRelationship.php):
+Take a look at this example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/AddPostLikesRelationship.php):
 
 ```php
 <?php
@@ -188,7 +188,7 @@ Let's break it down:
 * **GetApiRelationship:** Just like `GetModelRelationship` you want to select a model to contain the relationship, this time a serializer (see above `PostSerializer::class`). Then use the same name as `GetModelRelationship`. You will then return a JSON-API relationship, containing the base serializer, the relation serializer, and the name of the relation.
 * **WillGetData:** Finally you want to specify the places where you want your relationship to be included. You want to check for each controller you want it to be included on, then call `$event->addInclude` with the name of your relationship (don't forget about existing relationships such as `$discussion->post`).
 
-Let's take a look at one more example from [Flarum Tags](https://github.com/flarum/flarum-ext-tags/blob/master/src/Listener/AddDiscussionTagsRelationship.php)
+Let's take a look at one more example from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Listener/AddDiscussionTagsRelationship.php)
 
 ```php
 <?php
@@ -238,7 +238,7 @@ class AddDiscussionTagsRelationship
 }
 ```
 
-This defines that multiple [`Tag`](https://github.com/flarum/flarum-ext-tags/blob/master/src/Tag.php) models should belong to discussions, which should be included anytime a discussion requested or created.
+This defines that multiple [`Tag`](https://github.com/flarum/tags/blob/master/src/Tag.php) models should belong to discussions, which should be included anytime a discussion requested or created.
 
 If everything was done correctly, you should be able to retrieve your relationship from the backend by calling your relationship name as a function of your base model (example `$post->likes()`).
 
@@ -250,7 +250,7 @@ You can attach a model to another (assuming they have a relationship) by using t
 
 You can do this anywhere in the backend, but is most commonly done when the base model is saving (see JS)
 
-Take a look at this example from [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Listener/SaveLikesToDatabase.php):
+Take a look at this example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SaveLikesToDatabase.php):
 
 ```php
 <?php
@@ -309,7 +309,7 @@ Now that you've gotten past the hard part of relationships, let finish up our re
 
 We are going to add likes as an attribute to posts.
 
-From [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/index.js):
+From [Flarum Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
 
 ```js
 import app from 'flarum/app';
@@ -325,9 +325,9 @@ Now likes will be accessible by calling the `likes()` function on any post! (`po
 
 You are probably going to want to save the relationship from the frontend as well. First, make sure you have a Listener ready to catch the base model saving so it can attach your model to the relationship.
 
-The way we save models in the front end is via the `.save()` function (example: `post.save()`). the save function takes any data given to in (in the form of an object) and passes it to the backend for processing. If we wanted to change the content of a post we would do `post.save({content: 'Hello World!})`. In the case of flarum-ext-likes, they use 'isLiked'.
+The way we save models in the front end is via the `.save()` function (example: `post.save()`). the save function takes any data given to in (in the form of an object) and passes it to the backend for processing. If we wanted to change the content of a post we would do `post.save({content: 'Hello World!})`. In the case of flarum/likes, they use 'isLiked'.
 
-An [example](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/addLikeAction.js):
+An [example](https://github.com/flarum/likes/blob/master/js/src/forum/addLikeAction.js):
 
 ```jsx harmony
 import { extend } from 'flarum/extend';

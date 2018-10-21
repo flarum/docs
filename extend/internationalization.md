@@ -303,7 +303,7 @@ These two keys don't correspond to interfaces; they're for translations that req
 
 The keys in this level are not so rigidly defined. Their main purpose is to chop the UI up into manageable chunks, so localizers can find the translations and see for themselves how they are used by the software. (Third-level keys aren't used in the `ref` and `group` namespaces, which don't need chopping.)
 
-If you're modifying an existing location &mdash; to add a new setting to the Settings page, for example &mdash; you should copy our namespacing so experienced Flarum localizers will know at a glance exactly where the new translations are displayed. See the [English locale files](https://github.com/flarum/english/tree/master/locale) for the details of our namespacing scheme.
+If you're modifying an existing location &mdash; to add a new setting to the Settings page, for example &mdash; you should copy our namespacing so experienced Flarum localizers will know at a glance exactly where the new translations are displayed. See the [English locale files](https://github.com/flarum/lang-english/tree/master/locale) for the details of our namespacing scheme.
 
 If your extension adds a new location &mdash; such as a new dialog box &mdash; you should feel free to create a new third-level key to namespace the translations that go there. Take a couple minutes to familiarize yourself with the namespacing in the locale files linked above, then create a new key that fits in with that scheme.
 
@@ -398,7 +398,7 @@ core:
 
 It would very easy to change the translation for the header link without realizing that you're also changing things in the Log In modal &mdash; to say nothing of any extensions that might also be referencing that key! This sort of thing will be less likely to occur if you keep your reused translations in the `ref` namespace.
 
-For this reason, any key references in the [core resources](https://github.com/flarum/english/blob/master/locale/core.yml) **must** point to keys in the `core.ref` namespace. Key references in the resources for bundled extensions may point to either of two locations:
+For this reason, any key references in the [core resources](https://github.com/flarum/lang-english/blob/master/locale/core.yml) **must** point to keys in the `core.ref` namespace. Key references in the resources for bundled extensions may point to either of two locations:
 
 - Extension-specific translations should go in the `ref` namespace of the extension's locale file.
 

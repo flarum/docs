@@ -20,7 +20,7 @@ You first need to create a new class which extends the [`BlueprintInterface`](ht
 * `getType()` This is where you name your notification, this will be important for later steps.
 * `getSubjectModal()`: Specify the type of model the subject is (from `getSubject`).
 
-Lets take a look at an example from [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Notification/PostLikedBlueprint.php):
+Lets take a look at an example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Notification/PostLikedBlueprint.php):
 
 ```php
 <?php
@@ -87,7 +87,7 @@ You are going to want to use the `$event->add()` function which accepts 3 argume
 * `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
 * `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
 
-Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/flarum-ext-subscriptions/blob/master/src/Listener/SendNotificationWhenReplyIsPosted.php):
+Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/src/Listener/SendNotificationWhenReplyIsPosted.php):
 
 ```php
 <?php
@@ -138,7 +138,7 @@ First, create a class that extends the notification component. Then, there are 4
 
 *Let take a look at our example shall we?*
 
-From [Flarum Subscriptions](https://github.com/flarum/flarum-ext-subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
+From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
 ```jsx harmony
 import Notification from 'flarum/components/Notification';
@@ -176,7 +176,7 @@ Make sure to replace `{nameOfNotification}` with the name of the notification in
 
 Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGird`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js#L204) function
 
-From [Flarum-Likes](https://github.com/flarum/flarum-ext-likes/blob/master/js/src/forum/index.js):
+From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
 
 ```js
 import { extend } from 'flarum/extend';
@@ -214,7 +214,7 @@ Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://g
 
 Lets take a look at our **final** example for today:
 
-From [Flarum Likes](https://github.com/flarum/flarum-ext-likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php):
+From [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php):
 
 ```php
 <?php

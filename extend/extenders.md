@@ -14,7 +14,7 @@ As simplest extender, the [`LanguagePack` extender](https://github.com/flarum/co
 
 This extender has no setters. All you have to do is instantiate it, make sure you language pack is in the `locale` folder, and you're done!
 
-Here's a quick example from [Flarum English](https://github.com/flarum/flarum-ext-english/blob/master/extend.php):
+Here's a quick example from [Flarum English](https://github.com/flarum/lang-english/blob/master/extend.php):
 
 ```php
 <?php
@@ -34,7 +34,7 @@ It has 3 setters to call:
 - **`js($path)`** - Where `$path` is the path to the CSS/LESS file you want to add
 - **`route($path, $name, $content)`** - Where `$path` is the url of the sub-route, `$name` is the name of the route, and `$content` is optional content to be included in the route
 
-Here's an example from [Flarum Tags](https://github.com/flarum/flarum-ext-tags/blob/master/extend.php):
+Here's an example from [Flarum Tags](https://github.com/flarum/tags/blob/master/extend.php):
 
 ```php
 <?php
@@ -92,7 +92,7 @@ As you can see, all of the function accept the same arguments:
 * `$name` - The name of the route usually in the format `{path name}.{descriptor}`
 * `$handler` - This is the controller that will handle the API request
 
-Let's take a look a look at another example from [Flarum Tags](https://github.com/flarum/flarum-ext-tags/blob/master/extend.php):
+Let's take a look a look at another example from [Flarum Tags](https://github.com/flarum/tags/blob/master/extend.php):
 
 ```php
 <?php
@@ -118,7 +118,7 @@ This extender only has 1 setter, which accepts a callback as its only argument:
 
 * **`configure(callable $callback)`**
 
-Let take a look at how [Flarum BBCode](https://github.com/flarum/flarum-ext-bbcode/blob/master/extend.php) add BBCode markup:
+Let take a look at how [Flarum BBCode](https://github.com/flarum/bbcode/blob/master/extend.php) add BBCode markup:
 
 ```php
 
@@ -143,7 +143,7 @@ Optionally, you can add a function to your array of extenders to listen for any 
 
 The best part of extenders is that they can all be used in tandem in your `extend.php`!
 
-How about we look at once last example, this time, the entire [Flarum Tags `extend.php`](https://github.com/flarum/flarum-ext-tags/blob/master/extend.php):
+How about we look at once last example, this time, the entire [Flarum Tags `extend.php`](https://github.com/flarum/tags/blob/master/extend.php):
 
 ```php
 <?php
