@@ -206,6 +206,10 @@ Support for grammatical gender will be added in a future version of Flarum. Deta
 
 # Server-side Translation
 
+::: WARNING
+In order for server-side translation to work, you must have your locale registered before everything else in your `extend.php`.
+:::
+
 Translation is generally handled by Flarum's front-end client. However, you can use translations in your PHP code if you need to.
 
 First, you'll need to get the `Flarum\Locale\Translator` class. This can be done a few different ways:
