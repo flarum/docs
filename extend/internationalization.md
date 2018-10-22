@@ -221,6 +221,10 @@ You can learn more about the Translator's methods in [Symfony's `Translator` doc
 
 # Registering Locales
 
+::: WARNING
+In order for server-side translation to work, you must have your locale registered before everything else in your `extend.php`.
+:::
+
 There's one last thing you need to do before Flarum can use your translations. You need to register them. Fortunately, Flarum beta 8 makes this pretty easy.
 
 You'll need to add the following to your `extend.php`:
