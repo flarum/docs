@@ -446,6 +446,8 @@ To figure out your initializer name use this table:
 | vendor/flarum-package     | vendor-package             |
 | vendor/package            | vendor-package             |
 
+> When using an `extend.php` inside the Flarum root directory, the initializer has to be named `site-custom`.
+
 OK, time to fire up the transpiler. Run the following commands in the `js/forum` directory:
 
 ```bash
