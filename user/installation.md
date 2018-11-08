@@ -110,6 +110,10 @@ Add the following lines to your server's configuration block:
     url.rewrite-if-not-file = (
         "/.*"      => "/index.php"
     )
+    
+    $HTTP["url"] =~ "^/(composer\.(json|lock)|config\.php|flarum|storage|vendor)" {
+        url.access-deny = ("")
+    }
 ```
 
 ## Importing Data
