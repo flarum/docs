@@ -2,15 +2,13 @@
 
 These directions are meant for subdirectory installations or shared hosting where you have less control over your directory structure. For Flarum to work on these environments we need to modify the location of some of the files shipped with the software.
 
-## Public path
-
 Flarum serves the forum from a file called `index.php` this file makes sure requests for your forum, the underlying API and the admin are handled by the correct code.
 
 By default the `index.php` is located inside a folder named `public`. The idea is that this folder is the only folder made available when visitors browser your forum. That's also the reason why the `public/assets` directory contains your user avatars as these need to be visible by your users.
 
 When you have full control over your webserver you can easily configure the website to be served from `public/index.php`, however this is not the case when using sub directories or shared hosting.
 
-### Sub directory
+## Sub directory
 
 In order to make Flarum work on your specific environment, we need to identify where the public path is. For subdirectories, this is the same path as the installation directory of Flarum, eg `/var/www/mydomain.com/forum/`.
 
@@ -43,7 +41,7 @@ Now lastly edit the `index.php` and update the values behind the `base`, `public
 
 Visit your website and follow the instructions from the wizard.
 
-### Shared hosting
+## Shared hosting
 
 In case you have no control over which directory is made public to your visitors, you can configure Flarum to work from any directory. Sometimes the public directory is `public_html` (eg when using DirectAdmin or cPanel) or `httpdocs`. If you're unable to update this path from your control panel, follow these instructions to launch your Flarum forum nevertheless.
 
