@@ -5,6 +5,7 @@ module.exports = {
   themeConfig: {
     lastUpdated: 'Last Updated',
     docsRepo: 'flarum/docs',
+    docsDir: 'docs',
     editLinks: true,
     nav: [
       { text: 'Guide', link: '/' },
