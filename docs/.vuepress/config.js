@@ -7,7 +7,7 @@ module.exports = {
     docsRepo: 'flarum/docs',
     editLinks: true,
     nav: [
-      { text: 'Guide', link: '/guide/' },
+      { text: 'Guide', link: '/' },
       { text: 'Extend', link: '/extend/' },
       { text: 'API Reference', link: '/api/' },
       {
@@ -20,41 +20,6 @@ module.exports = {
       }
     ],
     sidebar: {
-      '/guide/': [
-        {
-          title: 'Introduction',
-          collapsable: false,
-          children: [
-            '/guide/',
-            '/guide/code-of-conduct',
-            '/guide/releases',
-            '/guide/contributing',
-            '/guide/bugs',
-            '/guide/faq'
-          ]
-        },
-        {
-          title: 'Setting Up',
-          collapsable: false,
-          children: [
-            '/guide/install',
-            '/guide/update',
-            '/guide/troubleshoot'
-          ]
-        },
-        {
-          title: 'Customization',
-          collapsable: false,
-          children: [
-            '/guide/config',
-            '/guide/appearance',
-            '/guide/extensions',
-            '/guide/languages',
-            '/guide/tags',
-            '/guide/permissions'
-          ]
-        }
-      ],
       '/extend/': [
         {
           title: 'Main Concepts',
@@ -98,6 +63,41 @@ module.exports = {
         //   children: [
         //   ]
         // }
+      ],
+      '/': [
+        {
+          title: 'Introduction',
+          collapsable: false,
+          children: [
+            '/',
+            '/code-of-conduct',
+            '/releases',
+            '/contributing',
+            '/bugs',
+            '/faq'
+          ]
+        },
+        {
+          title: 'Setting Up',
+          collapsable: false,
+          children: [
+            '/install',
+            '/update',
+            '/troubleshoot'
+          ]
+        },
+        {
+          title: 'Customization',
+          collapsable: false,
+          children: [
+            '/config',
+            '/appearance',
+            '/extensions',
+            '/languages',
+            '/tags',
+            '/permissions'
+          ]
+        }
       ]
     }
   }
