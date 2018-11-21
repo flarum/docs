@@ -1,4 +1,4 @@
 .DS_Store
 Thumbs.db
-.idea
-.vuepress/dist
+docs/.vuepress/dist
+node_modules
