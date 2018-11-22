@@ -11,8 +11,8 @@ Beta is all about fixing these issues and improving Flarum. **Please don't use F
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod_rewrite enabled) or **Nginx**
-* **PHP 7.1+** with the following extensions: mbstring, pdo_mysql, openssl, json, gd, dom, fileinfo, tokenizer
-* **MySQL 5.6+**
+* **PHP 5.6+** with the following extensions: mbstring, pdo_mysql, openssl, json, gd, dom, fileinfo, tokenizer
+* **MySQL 5.5+**
 * **SSH (command-line) access** to run Composer
 
 ::: tip Shared Hosting
@@ -29,7 +29,7 @@ Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and e
 composer create-project flarum/flarum . --stability=beta
 ```
 
-While this command is running, you can configure your web server. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
+While this command is running, you can set up [URL Rewriting](#url-rewriting) as per the instructions below.
 
 When everything is ready, navigate to your forum in a web browser and follow the instructions to complete the installation.
 
@@ -40,31 +40,53 @@ When everything is ready, navigate to your forum in a web browser and follow the
 Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
 
 ```apache
-    <Directory "/path/to/flarum/public">
+    <Directory "/path/to/flarum">
         AllowOverride All
     </Directory>
 ```
 
 ### Nginx
 
-Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctly. Then, assuming you have a PHP site set up within Nginx, add the following to your server's configuration block:
+Add the following lines to your server's configuration block:
 
 ```nginx
-    include /path/to/flarum/.nginx.conf;
-```
+    location / { try_files $uri $uri/ /index.php?$query_string; }
+    location /api { try_files $uri $uri/ /api.php?$query_string; }
+    location /admin { try_files $uri $uri/ /admin.php?$query_string; }
 
-## Customizing Paths
+    location ~* ^/(composer\.(json|lock)|config\.php|flarum|storage|vendor) {
+        deny all;
+        return 404;
+    }
 
-By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible.
+    location ~* \.(css|js|gif|jpe?g|png)$ {
+        expires 1M;
+        add_header Pragma public;
+        add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+    }
 
-However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
-
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-14 in order to protect sensitive resources. Finally, edit both `index.php` and the `flarum` executable, and update the paths to reflect your new directory structure:
-
-```php
-        'base' => __DIR__,
-        'public' => __DIR__,
-        'storage' => __DIR__.'/storage',
+    gzip on;
+    gzip_http_version 1.1;
+    gzip_vary on;
+    gzip_comp_level 6;
+    gzip_proxied any;
+    gzip_types application/atom+xml
+               application/javascript
+               application/json
+               application/vnd.ms-fontobject
+               application/x-font-ttf
+               application/x-web-app-manifest+json
+               application/xhtml+xml
+               application/xml
+               font/opentype
+               image/svg+xml
+               image/x-icon
+               text/css
+               #text/html -- text/html is gzipped by default by nginx
+               text/plain
+               text/xml;
+    gzip_buffers 16 8k;
+    gzip_disable "MSIE [1-6]\.(?!.*SV1)";
 ```
 
 ## Importing Data
