@@ -32,6 +32,7 @@ module.exports = {
             '/extend/routes',
             '/extend/data',
             '/extend/distribution',
+            '/extend/update-b8',
           ]
         },
         {
