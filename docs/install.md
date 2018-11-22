@@ -35,6 +35,10 @@ When everything is ready, navigate to your forum in a web browser and follow the
 
 ## URL Rewriting
 
+::: tip Current Instructions
+If you are installing Flarum while this notice is present, these instructions are for a future version of Flarum, 0.1.0 Beta 8. Please reference [the following page](https://github.com/flarum/flarum.github.io/blob/20322c0e6011e4f304ae7e95f41594a0b086bc27/_docs/installation.md) for instructions to configure URL Rewriting at this time. 
+**Do not follow the instructions below.**
+
 ### Apache
 
 Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
