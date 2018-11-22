@@ -36,7 +36,7 @@ When everything is ready, navigate to your forum in a web browser and follow the
 ## URL Rewriting
 
 ::: tip Current Instructions
-If you are installing Flarum while this notice is present, these instructions are for a future version of Flarum, 0.1.0 Beta 8. Please reference [the following page](https://github.com/flarum/flarum.github.io/blob/20322c0e6011e4f304ae7e95f41594a0b086bc27/_docs/installation.md) for instructions to configure URL Rewriting at this time. 
+These instructions are for a future version of Flarum, 0.1.0 Beta 8. Please reference [the following page](https://github.com/flarum/flarum.github.io/blob/20322c0e6011e4f304ae7e95f41594a0b086bc27/_docs/installation.md) for instructions to configure URL Rewriting at this time. 
 **Do not follow the instructions below.**
 
 ### Apache
