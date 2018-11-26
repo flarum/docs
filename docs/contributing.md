@@ -31,7 +31,7 @@ sed -i 's/\^0\.1\.0/\^0\.1\.x-dev/' composer.json
 composer install
 ```
 
-Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](http://nodejs.org). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
 
 ```bash
 cd packages/core/js
@@ -70,7 +70,7 @@ A typical contribution workflow looks like this:
 
 4. 💾 **Commit** your code with a descriptive message.
     * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
-    * Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+    * Write a [good commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
 5. 🎁 **Submit** a Pull Request on GitHub.
     * Fill out the pull request template.
@@ -91,7 +91,7 @@ Don't worry if your code styling isn't perfect! StyleCI will automatically merge
 
 ### PHP
 
-Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](http://www.phpdoc.org/docs/latest/index.html) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
 * Interfaces should be suffixed with `Interface` (eg. `MailableInterface`)
