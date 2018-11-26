@@ -107,7 +107,7 @@ export default class HelloWorldSettingsModal extends SettingsModal {
 }
 ```
 
-Always remember to use [internationalizations](internationalization.md)!
+Always remember to use [internationalizations](i18n.md)!
 
 Each `Form-group` should contain an individual input. The `bidi` property on the input corresponds to the setting on the Settings table that the input will modify. It will be automatically propagated with the current settings value, and it will change the value once "Save Settings" button is clicked.
 
