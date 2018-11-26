@@ -12,11 +12,11 @@ Yes! However, the upgrade process may require you to get your hands a little dir
 
 All donations are gratefully received. You can give on [Patreon](https://flarum.org/donate) or [OpenCollective](https://opencollective.com/flarum).
 
-However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](/guide/contributing.md), [building extensions](/extend/), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
+However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Can I use the beta version in production? Please?
 
-There’s a reason the [installation instructions](/guide/install.md) begin by warning against this. Flarum is not mature yet, and there is plenty of room for something to go wrong. Extensions you’re relying on could be rendered incompatible by newer beta versions. Bugs could cause a loss of content or expose private information to the Internet at large. Suboptimal SEO could hurt your site’s ranking, making it hard to attract new members. Existing members could get fed up with performance issues or incomplete features and head for greener pastures. And so on …
+There’s a reason the [installation instructions](install.md) begin by warning against this. Flarum is not mature yet, and there is plenty of room for something to go wrong. Extensions you’re relying on could be rendered incompatible by newer beta versions. Bugs could cause a loss of content or expose private information to the Internet at large. Suboptimal SEO could hurt your site’s ranking, making it hard to attract new members. Existing members could get fed up with performance issues or incomplete features and head for greener pastures. And so on …
 
 You may decide to ignore these risks and install Flarum anyway. That’s up to you … but please be aware that if things go horribly wrong, it will be your responsibility to deal with them. We can’t guarantee we’ll be able to help you fix your problems at all — much less in a timely fashion. So bear in mind that it’s **your** site that you’ll be putting on the line, and choose wisely.
 
@@ -30,7 +30,7 @@ We would love to build countless features and extensions for Flarum, but first t
 
 ### Why haven’t you fixed [insert issue here] yet?
 
-Here again, the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](/guide/contributing.md)!
+Here again, the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](contributing.md)!
 
 ### Will I be able to migrate my forum to Flarum?
 

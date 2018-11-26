@@ -2,8 +2,8 @@
 
 It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
 
-Once you have added a language pack, you can [set it as the default language](/user/language.md#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](/user/language.md#disabling-a-language-pack).
-If you’re using any third-party extensions, be sure to [read this](/user/language.md#third-party-extensions) before you start.
+Once you have added a language pack, you can [set it as the default language](#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack).
+If you’re using any third-party extensions, be sure to [read this](#third-party-extensions) before you start.
 
 ## Language Pack Installation
 

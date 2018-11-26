@@ -1,6 +1,6 @@
 # Troubleshooting
 
-If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](/guide/install#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
+If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
 Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
@@ -32,6 +32,6 @@ Copy any messages to a text file and jot down a few notes about *when* the error
 
 ## Step 4: Prepare a report
 
-Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](/guide/bugs.md).
+Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](bugs.md).
 
 If you discover something new about the issue after filing your report, please add that information at the bottom of your original post. It's a good idea to file a report even if you have solved the problem on your own, since other users may also benefit from your solution. If you've found a temporary workaround for the problem, be sure to mention that as well.

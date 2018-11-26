@@ -22,7 +22,7 @@ Our moderators may edit or delete any content that is offensive or disruptive to
 
 ### Make Yourself Heard
 
-Want to start a new discussion? First, be sure to read [our FAQ](/guide/faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: *it could be someone has already started a discussion about it!*
+Want to start a new discussion? First, be sure to read [our FAQ](faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: *it could be someone has already started a discussion about it!*
 
 When you're sure you're ready to start a discussion, please keep the following points in mind:
 
