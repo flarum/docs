@@ -67,6 +67,12 @@ Simply move all the files inside the `public` directory (including `.htaccess`) 
         'storage' => __DIR__.'/storage',
 ```
 
+In case you moved the `index.php` one directory up, into the installation directory, make sure to change the following line as well:
+
+```php
+require 'vendor/autoload.php';
+```
+
 ## Importing Data
 
 If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
