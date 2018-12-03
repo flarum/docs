@@ -12,7 +12,7 @@ Before you install Flarum, it's important to check that your server meets the re
 
 * **Apache** (with mod_rewrite enabled) or **Nginx**
 * **PHP 7.1+** with the following extensions: dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer
-* **MySQL 5.6+**
+* **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
 ::: tip Shared Hosting
