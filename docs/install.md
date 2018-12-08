@@ -19,6 +19,7 @@ Before you install Flarum, it's important to check that your server meets the re
 At this stage, it's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
 
 This doesn't necessarily mean you need a VPS. Some shared hosts give you SSH access, through which you should be able to install Composer and Flarum just fine. For other hosts without SSH, you can try workarounds such as [Pockethold](https://github.com/andreherberth/pockethold).
+Also, you can create starter project on your computer and then upload it to webhost.
 :::
 
 ## Installing
