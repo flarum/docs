@@ -36,7 +36,7 @@ Flarum's front-end code is written in ES6 and transpiled into JavaScript. During
 ```bash
 cd packages/core/js
 npm install
-npm run watch
+npm run dev
 ```
 
 The process is the same for extensions, except you should link the core JavaScript into the extension so that your IDE will understand `import from '@flarum/core'` statements.
@@ -45,7 +45,7 @@ The process is the same for extensions, except you should link the core JavaScri
 cd packages/tags/js
 npm install
 npm link ../../core/js
-npm run watch
+npm run dev
 ```
 
 ## Development Workflow
