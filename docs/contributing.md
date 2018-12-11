@@ -26,7 +26,7 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 
 # Replace "^0.1.0" with "^0.1.x-dev" in composer.json
-sed -i 's/\^0\.1\.0/\^0\.1\.x-dev/' composer.json
+sed -i '' 's/\^0\.1\.0/\^0\.1\.x-dev/' composer.json
 
 composer install
 ```
