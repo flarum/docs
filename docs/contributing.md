@@ -24,12 +24,11 @@ cd flarum
 composer config repositories.0 path "packages/*"
 git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
-
-# Replace "^0.1.0" with "^0.1.x-dev" in composer.json
-sed -i 's/\^0\.1\.0/\^0\.1\.x-dev/' composer.json
-
-composer install
 ```
+
+Next, ensure that Composer accepts unstable releases from your local copies by changing the value of `minimum-stability` from `beta` to `dev` in `composer.json`.
+
+Finally, run `composer install` to complete the installation from the path repositories.
 
 Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
 
