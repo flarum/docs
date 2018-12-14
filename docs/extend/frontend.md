@@ -61,7 +61,7 @@ OK, time to fire up the transpiler. Run the following commands in the `js` direc
 
 ```bash
 npm install
-npm run watch
+npm run dev
 ```
 
 This will compile your browser-ready JavaScript code into the `js/dist/forum.js` file, and keep watching for changes to the source files. Nifty!
