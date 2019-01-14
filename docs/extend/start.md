@@ -136,7 +136,7 @@ Use the [ReFlar extension generator](https://github.com/ReFlar/extension-generat
 The final thing we need to do to get up and running is to install your extension. Navigate to the root directory of your Flarum install and run the following command:
 
 ```bash
-composer require acme/flarum-hello-world *@dev
+composer require "acme/flarum-hello-world:*@dev"
 ```
 
 Once that's done, go ahead and fire 'er up on your forum's Administration page, then navigate back to your forum.
