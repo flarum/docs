@@ -53,6 +53,25 @@ Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctl
     include /path/to/flarum/.nginx.conf;
 ```
 
+### Caddy
+Caddy requires a very simple configuration in order for flarum to work properly. Note that you should replace the URL with your own and the path with your own path to your `public` folder. If you are using a diffrent version of PHP you wil also need to change the `fastcgi` path to point to your correct php install socket or URL.
+
+```caddy
+www.example.com {
+    root /var/www/flarum/public
+    rewrite {
+        to {path} {path}/ /index.php
+    }
+    fastcgi / /var/run/php/php7.2-fpm.sock php
+    header /assets {
+        +Cache-Control "public, must-revalidate, proxy-revalidate"
+        +Cache-Control "max-age=25000",
+        Pragma "public" 
+    }
+    gzip
+}
+```
+
 ## Customizing Paths
 
 By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
