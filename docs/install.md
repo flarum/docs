@@ -54,7 +54,8 @@ Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctl
 ```
 
 ### Caddy
-Caddy requires a very simple configuration in order for flarum to work properly. Note that you should replace the URL with your own and the path with your own path to your `public` folder. If you are using a diffrent version of PHP you wil also need to change the `fastcgi` path to point to your correct php install socket or URL.
+
+Caddy requires a very simple configuration in order for Flarum to work properly. Note that you should replace the URL with your own and the path with the path to your own `public` folder. If you are using a different version of PHP, you wil also need to change the `fastcgi` path to point to your correct PHP install socket or URL.
 
 ```caddy
 www.example.com {
