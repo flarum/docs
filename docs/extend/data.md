@@ -329,7 +329,7 @@ class CreateTagController extends AbstractCreateController
 
 For the controller that updates a resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the create controller, you can access the incoming JSON:API document body via `$request->getParsedBody()`.
 
-### Deleteing a Resource
+### Deleting a Resource
 
 For the controller that deletes a resource, extend the `Flarum\Api\Controller\AbstractDeleteController` class. You only need to implement a `delete` method which enacts the deletion. The controller will automatically return an empty `204 No Content` response.
 
