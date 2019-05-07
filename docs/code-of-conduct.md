@@ -43,7 +43,7 @@ You're taking the time to participate in a discussion, in the hope that others w
 - Avoid making one-word posts just to agree with someone; you can use the "Like" button for that.
 - Avoid making multiple posts in a row when one would suffice. This is a forum, not a chat room.
 - If your reply is likely to divert the course of the discussion, consider starting a new discussion instead.
-- If you just want to post a bit of nonsense as a test, please do it in the [Post tests here](https://discuss.flarum.org/t/sandbox) tag instead.
+- If you just want to post a bit of nonsense as a test, please do it in the [Test Posting](https://discuss.flarum.org/t/sandbox) tag instead.
 - Make sure your replies provide constructive feedback and support to allow for an inclusive community.
 
 No one's going to complain about the occasional joke or smart remark. We like to keep the mood light! But to keep things productive, as well, we ask that you try to avoid derailing a discussion altogether. 
