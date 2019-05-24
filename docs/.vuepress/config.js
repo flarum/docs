@@ -10,7 +10,7 @@ module.exports = {
     nav: [
       { text: 'Guide', link: '/' },
       { text: 'Extend', link: '/extend/' },
-      { text: 'API Reference', link: 'https://api.flarum.redevs.org/' },
+      { text: 'API Reference', link: 'https://api.flarum.dev/' },
       {
         text: 'Flarum',
         items: [
