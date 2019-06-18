@@ -10,7 +10,7 @@ This guide is not comprehensive. You may encounter some changes we haven't docum
 
 Beta 8 comes with large changes to the overall structure of the PHP backend. You will need to look through [this list](https://discuss.flarum.org/d/6572-help-us-namespace-changes) of namespace changes and make changes to your extension accordingly.
 
-[This script](https://gist.github.com/tobscure/55e7c05c95404e5efab3a9e43799d375) can help you to automate most of the namespace changes. Of course, you should still test your extension after running the script as it may miss something.
+[This script](https://gist.github.com/tobyzerner/55e7c05c95404e5efab3a9e43799d375) can help you to automate most of the namespace changes. Of course, you should still test your extension after running the script as it may miss something.
 
 ## Database Naming
 
