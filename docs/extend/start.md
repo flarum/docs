@@ -59,7 +59,7 @@ return [
 
 Now pay your forum a visit for a pleasant (albeit extremely obtrusive) greeting. 👋
 
-For simple site-specific customizations – like adding a bit of custom CSS/JavaScript, or integrating wth your site's authentication system – the `extend.php` file in your forum's root is great. But at some point, your customization might outgrow it. Or maybe you have wanted to build an extension to share with the community from the get-go. Time to build an extension!
+For simple site-specific customizations – like adding a bit of custom CSS/JavaScript, or integrating with your site's authentication system – the `extend.php` file in your forum's root is great. But at some point, your customization might outgrow it. Or maybe you have wanted to build an extension to share with the community from the get-go. Time to build an extension!
 
 ## Extension Packaging
 
