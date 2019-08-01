@@ -10,8 +10,8 @@ Beta is all about fixing these issues and improving Flarum. **Please don't use F
 
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
-* **Apache** (with mod_rewrite enabled) or **Nginx**
-* **PHP 7.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
+* **Apache** (with mod\_rewrite enabled) or **Nginx**
+* **PHP 7.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
