@@ -12,6 +12,7 @@ Before you install Flarum, it's important to check that your server meets the re
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
 * **PHP 7.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+  * Ubuntu/Debian: `sudo apt install php-curl php-xml php-gd php-json php-mbstring php-mysql php-zip`
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
