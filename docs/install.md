@@ -6,6 +6,10 @@ Flarum is **beta software**. That means it still has some incomplete features an
 Beta is all about fixing these issues and improving Flarum. **Please don't use Flarum in production unless you know what you're doing**. We can’t support you if things go awry. Upgrading to subsequent versions will be possible, but might involve getting your hands dirty. 
 :::
 
+::: tip Quick test drive?
+If you just want to see if Flarum is suitable for you, you can set up a forum in seconds at [Free Flarum](https://www.freeflarum.com) (not affiliated with flarum.org).
+:::
+
 ## Server Requirements
 
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
