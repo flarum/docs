@@ -7,7 +7,7 @@ Beta is all about fixing these issues and improving Flarum. **Please don't use F
 :::
 
 ::: tip Quick test drive?
-If you just want to see if Flarum is suitable for you, you can set up a forum in seconds at [Free Flarum](https://www.freeflarum.com) (not affiliated with flarum.org).
+If you just want to see if Flarum is suitable for you, you can set up a forum in seconds at [Free Flarum](https://www.freeflarum.com). This is a free, third party service not affiliated with the Flarum team.
 :::
 
 ## Server Requirements
