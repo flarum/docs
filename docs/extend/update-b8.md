@@ -57,7 +57,7 @@ Previously Flarum and its extensions used a custom Gulp workflow to compile ES6 
 
 You will need to tweak the structure of your extension's `js` directory. Currently, your JS file hierarchy looks something like the following:
 
-```tree
+```
 js
 ├── admin
 │   ├── src
