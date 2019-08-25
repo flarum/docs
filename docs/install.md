@@ -70,7 +70,7 @@ www.example.com {
     fastcgi / /var/run/php/php7.2-fpm.sock php
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
-        +Cache-Control "max-age=25000",
+        +Cache-Control "max-age=25000"
         Pragma "public" 
     }
     gzip
