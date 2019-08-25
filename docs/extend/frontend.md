@@ -173,7 +173,7 @@ You should familiarize yourself with [Mithril's component API](https://mithril.j
 With these differences in mind, a basic component might look like this:
 
 ```jsx
-import { Component } from '@flarum/core/forum';
+import Component from 'flarum/Component';
 
 class Counter extends Component {
   init() {
