@@ -43,7 +43,7 @@ When everything is ready, navigate to your forum in a web browser and follow the
 
 Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
 
-```apache
+```
     <Directory "/path/to/flarum/public">
         AllowOverride All
     </Directory>
@@ -61,7 +61,7 @@ Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctl
 
 Caddy requires a very simple configuration in order for Flarum to work properly. Note that you should replace the URL with your own and the path with the path to your own `public` folder. If you are using a different version of PHP, you wil also need to change the `fastcgi` path to point to your correct PHP install socket or URL.
 
-```caddy
+```
 www.example.com {
     root /var/www/flarum/public
     rewrite {
