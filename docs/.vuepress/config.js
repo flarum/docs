@@ -33,6 +33,7 @@ module.exports = {
             '/extend/data',
             '/extend/distribution',
             '/extend/update-b8',
+            '/extend/update-b10',
           ]
         },
         {
