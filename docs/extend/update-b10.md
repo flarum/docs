@@ -10,6 +10,7 @@ If you need help applying these changes or using new features, please start a di
 
 - The `Flarum\Event\GetDisplayName` class has been moved to `Flarum\User\Event\GetDisplayName`.
 - The `Flarum\Http\Exception\ForbiddenException` has been removed. Use `Flarum\User\Exception\PermissionDeniedException` instead.
+- The `assertGuest()` method of the `Flarum\User\AssertPermissionTrait` has been removed without replacement.
 
 ## Recommendations
 
