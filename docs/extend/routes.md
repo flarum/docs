@@ -12,7 +12,7 @@ On the backend, Flarum has three collections of routes:
 
 * `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
 
-* `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
+* `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's [JSON:API].
 
 ### Defining Routes
 
@@ -204,3 +204,18 @@ return [
         })
 ];
 ```
+
+## JSON:API
+[JSON:API]: #json_api
+
+This is an incomplete list of endpoints which Flarum provides.
+Please note that extension may provide new endpoints or 
+extend existing ones.
+Please add those you use.
+
+- Listing discussions  
+    [/api/discussions](https://discuss.flarum.org/api/discussions)
+- Listing discussions including relationships to other objects  
+    [/api/discussions?include=user,lastPostedUser,firstPost,tags](https://discuss.flarum.org/api/discussions?include=user,lastPostedUser,firstPost,tags)
+- Listing discussions in a category or tag  
+    [/api/discussions?filter[q]=tag:TAG](https://discuss.flarum.org/api/discussions?filter[q]=tag:dev)
