@@ -209,7 +209,7 @@ return [
 [JSON:API]: #json_api
 
 This is an incomplete list of endpoints which Flarum provides.
-Please note that extension may provide new endpoints or 
+Please note that [extension may provide new endpoints][data-api-endpoints] or 
 extend existing ones.
 Please add those you use.
 
@@ -219,3 +219,5 @@ Please add those you use.
     [/api/discussions?include=user,lastPostedUser,firstPost,tags](https://discuss.flarum.org/api/discussions?include=user,lastPostedUser,firstPost,tags)
 - Listing discussions in a category or tag  
     [/api/discussions?filter[q]=tag:TAG](https://discuss.flarum.org/api/discussions?filter[q]=tag:dev)
+
+[data-api-endpoints]: data.html#api-endpoints
