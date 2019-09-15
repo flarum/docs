@@ -11,6 +11,24 @@ If you need help applying these changes or using new features, please start a di
 - The `Flarum\Event\GetDisplayName` class has been moved to `Flarum\User\Event\GetDisplayName`.
 - The `Flarum\Http\Exception\ForbiddenException` has been removed. Use `Flarum\User\Exception\PermissionDeniedException` instead.
 - The `assertGuest()` method of the `Flarum\User\AssertPermissionTrait` has been removed without replacement.
+- Old error handling middleware and exception handler classes were removed (see "New Features" for more details):
+  - `Flarum\Api\Middleware\HandleErrors`
+  - `Flarum\Http\Middlware\HandleErrorsWithView`
+  - `Flarum\Http\Middlware\HandleErrorsWithWhoops`
+  - `Flarum\Api\ErrorHandler`
+  - `Flarum\Api\ExceptionHandler\FallbackExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\FloodingExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\IlluminateValidationExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\InvalidAccessTokenExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\InvalidConfirmationTokenExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\MethodNotAllowedExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\ModelNotFoundExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\PermissionDeniedExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\RouteNotFoundExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\TokenMismatchExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\ValidationExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\FallbackExceptionHandler`
+  - `Flarum\Api\ExceptionHandler\FallbackExceptionHandler`
 
 ## Recommendations
 
@@ -22,6 +40,7 @@ If you need help applying these changes or using new features, please start a di
   - You can build custom exception classes that will abort the current request (or console command). If they have semantic meaning to your application, they should implement the `Flarum\Foundation\KnownError` interface, which exposes a "type" that is used to render pretty error pages or dedicated error messages.
   - More consistent use of HTTP 401 and 403 status codes. HTTP 401 should be used when logging in (i.e. authenticating) could make a difference; HTTP 403 is reserved for requests that fail because the already authenticated user is lacking permissions to do something. 
   - The `assertRegistered()` and `assertPermission()` methods of the `Flarum\User\AssertPermissionTrait` trait have been changed to match above semantics. See [this pull request](https://github.com/flarum/core/pull/1854) for more details.
+  - Error views are now determined based on error "type", not on status code (see [bdac88b](https://github.com/flarum/core/commit/bdac88b5733643b9c5dabae9e09a64d9f6e41d58))
 - **Queue support**: This release incorporates Laravel's illuminate/queue package, which allows offloading long-running tasks (such as email sending or regular cleanup jobs) onto a dedicated worker process. These changes are mostly under the hood, the next release(s) will start using the queue system for sending emails. By default, Flarum will use the "sync" queue driver, which executes queued tasks immediately. This is far from ideal and mostly guarantees a hassle-free setups. Production-grade Flarum installs are expected to upgrade to a more full-featured queue adapter.
 - The `Flarum\Extend\LanguagePack` now accepts an optional path in its constructor. That way, language packs can store their locales in a different directory if they want to.
 - The `formatContent()` method of `Flarum\Post\CommentPost` can now be called without an HTTP request instance, e.g. when rendering a post in an email template.
