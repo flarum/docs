@@ -44,9 +44,9 @@ When everything is ready, navigate to your forum in a web browser and follow the
 Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
 
 ```
-    <Directory "/path/to/flarum/public">
-        AllowOverride All
-    </Directory>
+<Directory "/path/to/flarum/public">
+    AllowOverride All
+</Directory>
 ```
 
 ### Nginx
@@ -54,7 +54,7 @@ Flarum includes a `.htaccess` file in the `public` directory – make sure it ha
 Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctly. Then, assuming you have a PHP site set up within Nginx, add the following to your server's configuration block:
 
 ```nginx
-    include /path/to/flarum/.nginx.conf;
+include /path/to/flarum/.nginx.conf;
 ```
 
 ### Caddy
@@ -90,9 +90,9 @@ require 'vendor/autoload.php';
 ```
 
 ```php
-        'base' => __DIR__,
-        'public' => __DIR__,
-        'storage' => __DIR__.'/storage',
+'base' => __DIR__,
+'public' => __DIR__,
+'storage' => __DIR__.'/storage',
 ```
 
 ## Importing Data
