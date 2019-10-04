@@ -77,7 +77,7 @@ www.example.com {
 }
 ```
 ## Folder Ownership
-During installation Flarum may request that you set some folders to permission level `755`. If after completing these steps Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. 
+During installation, Flarum may request that you set some folders to permission level `755`. If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. 
 
 By default in most linux distributions, `www-data` is the group and user that both PHP and the web server operate under. You can change the folder ownership in most linux operating systems by running `chown -R www-data:www-data foldername/`. 
 
