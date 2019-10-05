@@ -86,7 +86,7 @@ Your environment may vary from the documentation provided, please consult your w
 :::
 
 ::: danger Never use permission 777
-You should never set any folder or file to permission level `777` this permission level allows anyone to access the content of the folder and file regardless of user or group. 
+You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group. 
 :::
 
 ## Customizing Paths
