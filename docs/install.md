@@ -25,6 +25,10 @@ At this stage, it's not possible to install Flarum by downloading a ZIP file and
 This doesn't necessarily mean you need a VPS. Some shared hosts give you SSH access, through which you should be able to install Composer and Flarum just fine. For other hosts without SSH, you can try workarounds such as [Pockethold](https://github.com/andreherberth/pockethold).
 :::
 
+::: warning mod_rewrite and Apache
+If using the Apache web server, make sure `mod_rewrite` is enabled! `mod_rewrite` is necessary for Flarum URLs to work, and your installation will not function properly if not enabled.
+:::
+
 ## Installing
 
 Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. Before installing Flarum, you will need to [install Composer](https://getcomposer.org) on your machine. Afterwards, run this command in an empty location that you want Flarum to be installed in:
