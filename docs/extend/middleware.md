@@ -1,37 +1,6 @@
 #  Middleware
 
-Middleware is a nifty way to filter HTTP requests in Flarum. This can allow you to, for example, run a check against an external database checking a user when they register, either allowing them to continue the process or not. The possibilities are endless!
-
-## Adding Middleware In Your Extension
-
-To add a new middleware, add a listener in your `extend.php` file:
-
-```php
-$events->subscribe(Listeners\AddMiddleware::class);
-```
-
-Now, in your listener, you can define the middleware:
-
-```php
-use Flarum\Event\ConfigureMiddleware;
-use Illuminate\Contracts\Events\Dispatcher;
-use YourMiddleware;
-
-class AddMiddleware
-{
-    public function subscribe(Dispatcher $events)
-    {
-        $events->listen(ConfigureMiddleware::class, [$this, 'addMiddleware']);
-    }
-    
-    public function addMiddleware(ConfigureMiddleware $event)
-    {
-        $event->pipe(app(YourMiddleware::class));
-    }
-}
-```
-
-Tada! Middleware defined. Now onto the middleware itself:
+Middleware is a nifty way to wrap the handling of HTTP requests in Flarum. This can allow you to modify responses, add your own checks to the request, and much more. The possibilities are endless!
 
 ```php
 use Psr\Http\Message\ResponseInterface;
@@ -41,11 +10,31 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class YourMiddleware implements MiddlewareInterface {
   public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
+  {    
     // Your logic here!
+    return $handler->handle($request);
   }
 }
 ```
+
+## Adding Middleware In Your Extension
+
+To add a new middleware, simply use the middleware extender in your extension's `extend.php` file:
+
+```php
+use Flarum\Extend;
+
+return [
+  // Add middleware to forum frontend
+  (new Extend\Middleware('forum'))->add(YourMiddleware::class),
+  // Admin frontend
+  (new Extend\Middleware('admin'))->add(YourMiddleware::class),
+  // API frontend
+  (new Extend\Middleware('api'))->add(YourMiddleware::class)
+];
+```
+
+Tada! Middleware defined.
 
 Now that we've got the basics down, let's run through a few more things:
 
@@ -54,7 +43,7 @@ Now that we've got the basics down, let's run through a few more things:
 If you don't need your middleware to execute under every route, you can add an `if` to filter it:
 
 ```php
-use Zend\Diactoros\Uri;
+use Laminas\Diactoros\Uri;
 
 $currentRoute = $request->getUri()->getPath();
 $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
@@ -96,6 +85,18 @@ if ($userFoundInDatabase) {
 Phew! Crisis avoided.
 
 To learn more about the request and response objects, see the [PSR HTTP message interfaces](https://www.php-fig.org/psr/psr-7/#1-specification) documentation.
+
+## Modifying the Response After Handling
+
+If you'd like to do something with the response after the initial request as been handled, that's no problem! Just run the request handler and then your logic:
+
+```php
+$response = $handler->handle($request);
+
+// Your logic here!
+
+return $response;
+```
 
 ## Passing On the Request
 
