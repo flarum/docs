@@ -45,10 +45,10 @@ In Flarum, **Controller** is just another name for a class that implements [Requ
 
 namespace Acme\HelloWorld;
 
+use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\HtmlResponse;
 
 class HelloWorldController implements RequestHandlerInterface
 {
