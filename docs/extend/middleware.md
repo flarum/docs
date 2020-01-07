@@ -48,7 +48,7 @@ use Laminas\Diactoros\Uri;
 $currentRoute = $request->getUri()->getPath();
 $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
 
-if ($currentRoute === $routeToRunUnder) {
+if ($currentRoute === $routeToRunUnder->getPath()) {
   // Your logic here!
 }
 ```
