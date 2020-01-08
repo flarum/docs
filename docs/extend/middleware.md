@@ -98,7 +98,7 @@ To learn more about the request and response objects, see the [PSR HTTP message 
 
 ## Modifying the Response After Handling
 
-If you'd like to do something with the response after the initial request as been handled, that's no problem! Just run the request handler and then your logic:
+If you'd like to do something with the response after the initial request has been handled, that's no problem! Just run the request handler and then your logic:
 
 ```php
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
