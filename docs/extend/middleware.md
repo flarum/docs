@@ -45,11 +45,16 @@ If you don't need your middleware to execute under every route, you can add an `
 ```php
 use Laminas\Diactoros\Uri;
 
-$currentRoute = $request->getUri()->getPath();
-$routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
+public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+{
+  $currentRoute = $request->getUri()->getPath();
+  $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
 
-if ($currentRoute === $routeToRunUnder->getPath()) {
-  // Your logic here!
+  if ($currentRoute === $routeToRunUnder->getPath()) {
+    // Your logic here!
+  }
+  
+  return $handler->handle($request);
 }
 ```
 
@@ -64,21 +69,26 @@ use Flarum\Api\JsonApiResponse;
 use Tobscure\JsonApi\Document;
 use Tobscure\JsonApi\Exception\Handler\ResponseBag;
 
-if ($userFoundInDatabase) {
-  $error = new ResponseBag('422', [
-    [
-      'status' => '422',
-      'code' => 'validation_error',
-      'source' => [
-        'pointer' => '/data/attributes/email',
+public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+{
+  if ($userFoundInDatabase) {
+    $error = new ResponseBag('422', [
+      [
+        'status' => '422',
+        'code' => 'validation_error',
+        'source' => [
+          'pointer' => '/data/attributes/email',
+        ],
+        'detail' => 'Yikes! Your email can\'t be used.',
       ],
-      'detail' => 'Yikes! Your email can\'t be used.',
-    ],
-  ]);
-  $document = new Document();
-  $document->setErrors($error->getErrors());
+    ]);
+    $document = new Document();
+    $document->setErrors($error->getErrors());
   
-  return new JsonApiResponse($document, $error->getStatus());
+    return new JsonApiResponse($document, $error->getStatus());
+  }
+
+  return $handler->handle($request);
 }
 ```
 
@@ -91,12 +101,18 @@ To learn more about the request and response objects, see the [PSR HTTP message 
 If you'd like to do something with the response after the initial request as been handled, that's no problem! Just run the request handler and then your logic:
 
 ```php
-$response = $handler->handle($request);
+public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+{
+  $response = $handler->handle($request);
 
-// Your logic here!
-
-return $response;
+  // Your logic...
+  $response = $response->withHeader('Content-Type', 'application/json');
+  
+  return $response;
+}
 ```
+
+Keep in mind that PSR-7 responses are immutable, so you'll need to reassign the `$response` variable every time you modify the response.
 
 ## Passing On the Request
 
