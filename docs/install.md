@@ -41,13 +41,17 @@ When everything is ready, navigate to your forum in a web browser and follow the
 
 ### Apache
 
-Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. If you're using shared hosting, confirm with your provider that `mod_rewrite` is enabled and `.htaccess` files are allowed. If you're managing your own server, you may need to add the following to your site configuration:
+Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. **Flarum will not function properly if `mod_rewrite` is not enabled or `.htaccess` is not allowed.** Be sure to check with your hosting provider (or your VPS) that these features are enabled. If you're managing your own server, you may need to add the following to your site configuration to enable `.htaccess` files:
 
 ```
 <Directory "/path/to/flarum/public">
     AllowOverride All
 </Directory>
 ```
+
+This ensures that htaccess overrides are allowed so Flarum can rewrite URLs properly.
+
+Methods for enabling `mod_rewrite` vary depending on your OS. You can enable it by running `sudo a2enmod rewrite` on Ubuntu. `mod_rewrite` is enabled by default on CentOS. Don't forget to restart Apache after making modifications!
 
 ### Nginx
 
