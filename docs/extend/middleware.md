@@ -30,7 +30,17 @@ return [
   // Admin frontend
   (new Extend\Middleware('admin'))->add(YourMiddleware::class),
   // API frontend
-  (new Extend\Middleware('api'))->add(YourMiddleware::class)
+  (new Extend\Middleware('api'))->add(YourMiddleware::class),
+  
+  (new Extend\Middleware('frontend'))
+    // remove a middleware
+    ->remove(YourMiddleware::class)
+    // insert before another middleware
+    ->insertBefore(MyMiddleware::class, YourMiddleware::class)
+    // insert after another middleware
+    ->insertAfter(MyMiddleware::class, YourMiddleware::class)
+    // replace a middleware
+    ->replace(MyMiddleware::class, YourMiddleware::class)
 ];
 ```
 
