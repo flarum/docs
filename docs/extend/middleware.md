@@ -23,6 +23,7 @@ To add a new middleware, simply use the middleware extender in your extension's 
 
 ```php
 use Flarum\Extend;
+// use Flarum\Http\Middleware\CheckCsrfToken;
 
 return [
   // Add middleware to forum frontend
@@ -33,14 +34,14 @@ return [
   (new Extend\Middleware('api'))->add(YourMiddleware::class),
   
   (new Extend\Middleware('frontend'))
-    // remove a middleware
-    ->remove(YourMiddleware::class)
-    // insert before another middleware
-    ->insertBefore(MyMiddleware::class, YourMiddleware::class)
-    // insert after another middleware
-    ->insertAfter(MyMiddleware::class, YourMiddleware::class)
-    // replace a middleware
-    ->replace(MyMiddleware::class, YourMiddleware::class)
+    // remove a middleware (e.g. remove CSRF token check 😱)
+    ->remove(CheckCsrfToken::class)
+    // insert before another middleware (e.g. before a CSRF token check)
+    ->insertBefore(CheckCsrfToken::class, YourMiddleware::class)
+    // insert after another middleware (e.g. after a CSRF token check)
+    ->insertAfter(CheckCsrfToken::class, YourMiddleware::class)
+    // replace a middleware (e.g. replace the CSRF check with your own implementation)
+    ->replace(CheckCsrfToken::class, YourMiddleware::class)
 ];
 ```
 
