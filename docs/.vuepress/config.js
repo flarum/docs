@@ -34,6 +34,7 @@ module.exports = {
             '/extend/distribution',
             '/extend/update-b8',
             '/extend/update-b10',
+            '/extend/update-b12',
           ]
         },
         {
