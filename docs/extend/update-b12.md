@@ -13,6 +13,7 @@ If you need help applying these changes or using new features, please start a di
 - PHP 7.1 support will be dropped in beta.13.
 - Using library classes from the `Zend` namespace is now deprecated and will be removed in beta.13. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull#1963).
 - The `Flarum\Util\Str::slug()` method has been deprecated. Use `Illuminate\Support\Str::slug()` instead.
+- The `Flarum\Event\ConfigureMiddleware` has been deprecated. We finally have a [proper replacement](middleware.md) - see "New Features" below. Therefore, it will be removed in beta.13.
 - If you implement the `Flarum\Mail\DriverInterface`:
   - Returning a plain array of field names from the `availableSettings()` method is deprecated, but still supported. It must now return an array of field names mapping to their type. See [the inline documentation](https://github.com/flarum/core/blob/08e40bc693cce7be02d4fb24633553c7eaf2738d/src/Mail/DriverInterface.php#L25-L32) for more details.
   - Implement the `validate()` method that will be required in beta.13. See [its documentation](https://github.com/flarum/core/blob/08e40bc693cce7be02d4fb24633553c7eaf2738d/src/Mail/DriverInterface.php#L34-L48).
