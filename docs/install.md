@@ -99,11 +99,13 @@ By default Flarum's directory structure includes a `public` directory which cont
 
 However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-14 in order to protect sensitive resources. Finally, edit both `index.php` and the `flarum` executable, and update the paths in the following lines to reflect your new directory structure:
+Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-14 in order to protect sensitive resources. You will also need to edit the `index.php` file and change the following line:
 
 ```php
-require 'vendor/autoload.php';
+$site = require './site.php';
 ```
+
+ Finally, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
