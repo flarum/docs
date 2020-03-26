@@ -3,6 +3,10 @@ module.exports = {
   base: '/docs/',
 
   themeConfig: {
+     algolia: {
+      apiKey: '8f760cdb850b1e696b72329eed96b01b',
+      indexName: 'flarum'
+    },
     lastUpdated: 'Last Updated',
     docsRepo: 'flarum/docs',
     docsDir: 'docs',
