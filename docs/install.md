@@ -15,7 +15,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.2+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
