@@ -2,7 +2,7 @@
 
 ## Customizing the interface
 
-### Adding a logo, favicon, and links to the header
+### Adding a logo and favicon
 
 We've made it super-easy to add a Logo, Favicon etc, please follow the short set of instructions as set out below!
 
