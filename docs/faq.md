@@ -2,7 +2,7 @@
 
 ### When will Flarum be stable?
 
-It’s impossible for us to say at the moment – there are too many variables! You can follow our progress on the [Roadmap](https://flarum.org/roadmap).
+It’s impossible for us to say at the moment – there are too many variables! You can follow our progress on the [Blog](https://discuss.flarum.org/t/blog).
 
 ### Will I be able to upgrade from beta to subsequent releases?
 
@@ -10,7 +10,7 @@ Yes! However, the upgrade process may require you to get your hands a little dir
 
 ### Can I donate money to speed up development?
 
-All donations are gratefully received. You can give on [Patreon](https://flarum.org/donate) or [OpenCollective](https://opencollective.com/flarum).
+All donations are gratefully received. You can give on [Github Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum).
 
 However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
@@ -26,7 +26,7 @@ Wouldn’t it be inte-_great_! Right now it’s not possible, but we do hope to 
 
 ### Will Flarum have [insert feature here]? When? Why not?
 
-We would love to build countless features and extensions for Flarum, but first things first: Our focus is on the essentials and stability. Check out the [Roadmap](https://flarum.org/roadmap/) for an overview of what we are planning to implement.
+We would love to build countless features and extensions for Flarum, but first things first: Our focus is on the essentials and stability.
 
 ### Why haven’t you fixed [insert issue here] yet?
 
