@@ -7,7 +7,7 @@ Beta is all about fixing these issues and improving Flarum. **Please don't use F
 :::
 
 ::: tip Quick test drive?
-Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free third party service not affiliated with the Flarum team.
+Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
 :::
 
 ## Server Requirements
