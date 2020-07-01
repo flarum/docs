@@ -68,16 +68,14 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 ```
 www.example.com {
     root /var/www/flarum/public
-    rewrite {
-        to {path} {path}/ /index.php
-    }
-    fastcgi / /var/run/php/php7.2-fpm.sock php
+    try_files {path} {path}/ /index.php
+    php_fastcgi / /var/run/php/php7.2-fpm.sock php
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public" 
     }
-    gzip
+    encode gzip
 }
 ```
 ## Folder Ownership
