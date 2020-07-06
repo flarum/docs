@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Flarum Documentation',
-  base: '/docs/',
+  base: '/',
 
   themeConfig: {
      algolia: {
