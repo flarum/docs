@@ -144,7 +144,7 @@ To register the route on the frontend, there is a `Routes` extender which works 
 ```jsx
 export const extend = [
   new Extend.Routes()
-    .add('/users', 'acme.users', <UsersPage />)
+    .add('acme.users', '/users', <UsersPage />)
 ];
 ```
 
@@ -156,7 +156,7 @@ Frontend routes also allow you to capture segments of the URI, but the [Mithril 
 
 ```jsx
   new Extend.Routes()
-    .add('/user/:id', 'acme.user', <UsersPage />)
+    .add('acme.user', '/user/:id', <UsersPage />)
 ```
 
 Route parameters will be passed into the `props` of the route's component.
