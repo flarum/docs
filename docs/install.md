@@ -7,7 +7,7 @@ Beta is all about fixing these issues and improving Flarum. **Please don't use F
 :::
 
 ::: tip Quick test drive?
-Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free third party service not affiliated with the Flarum team.
+Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
 :::
 
 ## Server Requirements
@@ -15,7 +15,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.1+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.2.9+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
@@ -68,16 +68,14 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 ```
 www.example.com {
     root /var/www/flarum/public
-    rewrite {
-        to {path} {path}/ /index.php
-    }
-    fastcgi / /var/run/php/php7.2-fpm.sock php
+    try_files {path} {path}/ /index.php
+    php_fastcgi / /var/run/php/php7.2-fpm.sock php
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public" 
     }
-    gzip
+    encode gzip
 }
 ```
 ## Folder Ownership
@@ -99,7 +97,9 @@ By default Flarum's directory structure includes a `public` directory which cont
 
 However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-14 in order to protect sensitive resources. You will also need to edit the `index.php` file and change the following line:
+Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-14 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
+
+You will also need to edit the `index.php` file and change the following line:
 
 ```php
 $site = require './site.php';

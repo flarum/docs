@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Flarum Documentation',
-  base: '/docs/',
+  base: '/',
 
   themeConfig: {
      algolia: {
@@ -39,6 +39,7 @@ module.exports = {
             '/extend/update-b8',
             '/extend/update-b10',
             '/extend/update-b12',
+            '/extend/update-b13',
           ]
         },
         {
