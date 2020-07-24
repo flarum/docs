@@ -285,6 +285,7 @@ For the controller that shows a single resource, extend the `Flarum\Api\Controll
 
 ```php
 use Flarum\Api\Controller\AbstractShowController;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Tobscure\JsonApi\Document;
 
@@ -294,7 +295,7 @@ class ShowTagController extends AbstractShowController
     
     protected function data(Request $request, Document $document)
     {
-        $id = array_get($request->getQueryParams(), 'id');
+        $id = Arr::get($request->getQueryParams(), 'id');
         
         return Tag::findOrFail($id);
     }
@@ -307,6 +308,7 @@ For the controller that creates a resource, extend the `Flarum\Api\Controller\Ab
 
 ```php
 use Flarum\Api\Controller\AbstractCreateController;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Tobscure\JsonApi\Document;
 
@@ -316,10 +318,10 @@ class CreateTagController extends AbstractCreateController
     
     protected function data(Request $request, Document $document)
     {
-        $attributes = array_get($request->getParsedBody(), 'data.attributes');
+        $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
         
         return Tag::create([
-            'name' => array_get($attributes, 'name')
+            'name' => Arr::get($attributes, 'name')
         ]);
     }
 }
@@ -335,13 +337,14 @@ For the controller that deletes a resource, extend the `Flarum\Api\Controller\Ab
 
 ```php
 use Flarum\Api\Controller\AbstractDeleteController;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DeleteTagController extends AbstractDeleteController
 {    
     protected function delete(Request $request)
     {
-        $id = array_get($request->getQueryParams(), 'id');
+        $id = Arr::get($request->getQueryParams(), 'id');
         
         Tag::findOrFail($id)->delete();
     }

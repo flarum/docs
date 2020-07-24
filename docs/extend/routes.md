@@ -73,7 +73,9 @@ Sometimes you will need to capture segments of the URI within your route. You ma
 The values of these parameters will be merged with the request's query params, which you can access in your controller by calling `$request->getQueryParams()`:
 
 ```php
-$id = array_get($request->getQueryParams(), 'id');
+use Illuminate\Support\Arr;
+
+$id = Arr::get($request->getQueryParams(), 'id');
 ```
 
 ### Generating URLs
