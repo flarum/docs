@@ -12,7 +12,7 @@ module.exports = {
     label: '简体中文',
     nav: require('./nav/zh'),
     sidebar: require('./sidebar/zh'),
-    editLinkText: '保住我们改善此页',
+    editLinkText: '帮助我们改善此页',
     lastUpdated: '上次更新'
   }
 }
