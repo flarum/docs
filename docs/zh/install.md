@@ -25,7 +25,7 @@ Flarum 处于 **测试版本**。这意味着她有一些不完整的功能和 B
 这并不意味着您需要一个 VPS。某些共享主机会给予您 SSH 访问权限，这样您就应该能够安装 Composer 和 Flarum 了。对于其他不开放 SSH 权限的主机，您可以尝试 [Pockethold](https://github.com/andreherberth/pockethold) 等变通方法。
 :::
 
-## 安装
+## 开始安装
 
 Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖和扩展。在安装 Flarum 之前，您需要在机器上 [安装 Composer](https://getcomposer.org)。然后，在您想要安装 Flarum 的空白目录下运行这个命令：
 
@@ -117,8 +117,6 @@ www.example.com {
 ├── README.md
 └── site.php
 :::
-
-
 
 但是，如果您想把 Flarum 放在一个子目录下（比如 `您的网站.com/forum`），或者您的主机没有给您控制网站根目录的权利（您只能使用 `public_html` 或 `htdocs` 之类的目录），那么您可以在没有 `public` 的情况下设置 Flarum。
 

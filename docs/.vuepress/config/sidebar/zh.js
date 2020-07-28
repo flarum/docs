@@ -13,7 +13,7 @@ module.exports = {
       ]
     },
     {
-      title: '配置',
+      title: '部署',
       collapsable: false,
       children: [
         '/zh/install',

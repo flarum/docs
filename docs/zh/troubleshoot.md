@@ -1,12 +1,12 @@
-# 故障排除
+# 故障排查
 
 如果 Flarum 没有按照预期安装或工作，您首先应该 *再次检查* 您的服务器环境是否符合 [系统要求](install.md#server-requirements)。如果您缺少一些 Flarum 运行所需的东西，请先解决。
 
-接下来，您应该花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)。有可能已经有人报告了这个问题，并且已经有了解决办法。如果您已经彻底搜索过了，但仍然找不到任何有关信息，那就可以开始排除故障了。
+接下来，您应该花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)。有可能已经有人报告了这个问题，并且已经有了解决办法。如果您已经彻底搜索过了，仍然找不到任何有关信息，那就可以开始排查故障了。
 
 ## 步骤 1：开启调试模式
 
-在您继续前，您应该启用 Flarum 的调试工具。只需用文本编辑器打开 **config.php**，将 `debug` 的值改为 `true`，然后保存文件。这将使 Flarum 显示详细的错误信息，好让您了解发生了什么问题。
+在您继续前，您应当启用 Flarum 的调试工具。用文本编辑器打开 **config.php**，将 `debug` 的值改为 `true`，然后保存文件即可。这将使 Flarum 显示详细的错误信息，好让您了解发生了什么问题。
 
 如果您一直看到空白页面，而上面的改动不起任何作用，请尝试将您的 **php.ini** 配置文件中的 `display_errors` 设置为 `On`。
 

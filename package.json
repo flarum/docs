@@ -6,6 +6,6 @@
   },
   "devDependencies": {
     "@vuepress/plugin-container": "^1.0.0-alpha.41",
-    "vuepress": "^1.4.0"
+    "vuepress": "^1.5.2"
   }
 }
