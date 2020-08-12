@@ -2,4 +2,3 @@
 Thumbs.db
 docs/.vuepress/dist
 node_modules
-secret.js

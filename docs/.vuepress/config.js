@@ -1,23 +1,21 @@
-const plugins = require("./config/plugins");
-const locales = require("./config/locales");
-const themeLocales = require("./config/themeLocales");
-const secret = require("./config/secret");
+const locales = require('./config/locales');
 
-module.exports = {
+module.exports = ctx => ({
   base: '/',
 
-  plugins: plugins,
-  locales: locales,
+  plugins: require('./config/plugins'),
+  locales: locales.get(),
 
   themeConfig: {
-    algolia: {
-        apiKey: secret.apiKey,
-        indexName: secret.indexName
+    algolia: ctx.isProd && {
+        apiKey: '8f760cdb850b1e696b72329eed96b01b',
+        indexName: 'flarum'
     },
 
     docsRepo: 'flarum/docs',
     docsDir: 'docs',
     editLinks: true,
-    locales: themeLocales
+
+    locales: locales.theme(),
   },
-}
+})
