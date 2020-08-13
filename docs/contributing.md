@@ -51,7 +51,7 @@ npm run dev
 
 A typical contribution workflow looks like this:
 
-1. 🌳 **Branch** off the approprite branch into a new feature branch.
+1. 🌳 **Branch** off the appropriate branch into a new feature branch.
     * *Bug fixes* should be sent to the latest stable branch.
     * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
     * *Major* features should always be sent to the `master` branch, which contains the upcoming Flarum release.
