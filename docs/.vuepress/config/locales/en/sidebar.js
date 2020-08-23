@@ -79,7 +79,8 @@ module.exports = {
           'extensions',
           'languages',
           'tags',
-          'permissions'
+          'permissions',
+          'console'
         ]
       }
     ],
