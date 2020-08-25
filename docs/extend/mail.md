@@ -50,9 +50,10 @@ To register mail drivers, use the `Flarum\Extend\Mail` extender in your extensio
 ```php
 use Flarum\Extend;
 use YourNamespace\Mail\CustomDriver;
+
 return [
   // Other extenders
-  (new Extend\Mail())->command(CustomDriver::class)
+  (new Extend\Mail())->driver(CustomDriver::class)
   // Other extenders
 ];
 ```
