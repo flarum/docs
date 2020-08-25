@@ -24,4 +24,4 @@ The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It 
 
 ## Testing Email
 
-Once you've saved an email configuration, you can click the "Send Test Mail" button on the Mail page of the admin dashboard to send to make sure your configuration works. If you see an error, or do not receive an email, adjust the configuration and try again. Make sure to check your spam if there's no error, but nothing shows up in your inbox.
+Once you've saved an email configuration, you can click the "Send Test Mail" button on the Mail page of the admin dashboard to make sure your configuration works. If you see an error, or do not receive an email, adjust the configuration and try again. Make sure to check your spam if there's no error, but nothing shows up in your inbox.
