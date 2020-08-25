@@ -8,7 +8,7 @@ Flarum provides several drivers by default, they are listed and explained below.
 
 ### SMTP
 
-This is probably the most commonly used email driver, and works pretty much exactly like you'd expect. Please note that the encryption field expects either `ssl` or `tls`.
+This is probably the most commonly used email driver, allowing you to configure a host, port/encryption, username, and password for an external SMTP service. Please note that the encryption field expects either `ssl` or `tls`.
 
 ### Mail
 
@@ -16,7 +16,7 @@ The `mail` driver will try to use the sendmail / postfix email system included i
 
 ### Mailgun
 
-This driver also does exactly what it says it does :D
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
 
 ### Log
 
