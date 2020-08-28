@@ -24,6 +24,7 @@ module.exports = {
           'console',
           'formatting',
           'i18n',
+          'mail',
           'middleware',
           'notifications',
           'permissions',
@@ -78,6 +79,7 @@ module.exports = {
           'appearance',
           'extensions',
           'languages',
+          'mail',
           'tags',
           'permissions'
         ]
