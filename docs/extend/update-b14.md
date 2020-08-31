@@ -242,7 +242,7 @@ Button.component({
 });
 ```
 
-This will no longer work, and will actually result in errors. Instead, the 3rd argument of the component method should be used:
+This will no longer work, and will actually result in errors. Instead, the 2nd argument of the `component` method should be used:
 
 ```js
 Button.component({
@@ -255,6 +255,11 @@ Children can still be passed in through JSX:
 ```js
 <Button className='Button Button--primary'>Button Text</Button>
 ```
+
+#### Tag attr
+
+Because mithril uses 'tag' to indicate the actual html tag (or component class) used for a vnode, you can no longer pass `tag` as an attr to components
+extending Flarum's `Component` helper class. The best workaround here is to just use another name for this attr.
 
 *TODO: States, and other BC breaks*
 
