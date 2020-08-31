@@ -37,8 +37,94 @@ In mithril 0.2, we had 2 "lifecycle hooks":
 
 `config`, which ran when components were created, and on every redraw.
 
-Information about the replacement hooks and what they do can be found [in Mithril's documentation](https://mithril.js.org/lifecycle-methods.html).
 
+Mithril 2 has the following hooks; each of which take `vnode` as an argument:
+
+- `oninit`
+- `oncreate`
+- `onbeforeupdate`
+- `onupdate`
+- `onbeforeremove`
+- `onremove`
+
+Please note that if your component is extending Flarum's helper `Component` class, you must call `super.METHOD(vnode)` if using `oninit`, `oncreate`, and `onbeforeupdate`.
+
+More information about what each of these do can be found [in Mithril's documentation](https://mithril.js.org/lifecycle-methods.html).
+
+A trivial example of how the old methods map to the new is:
+
+```js
+class OldMithrilComponent extends Component {
+  init() {
+    console.log('Code to run when component instance created, but before attached to the DOM.');
+  }
+
+  config(element, isInitialized) {
+    console.log('Code to run on every redraw AND when the element is first attached');
+
+    if (isInitialized) return;
+
+    console.log('Code to execute only once when components are first created and attached to the DOM');
+
+    context.onunload = () => {
+      console.log('Code to run when the component is removed from the DOM');
+    }
+  }
+
+  view() {
+    // In mithril 0, you could skip redrawing a component (or part of a component) by returning a subtree retain directive.
+    // See https://mithril.js.org/archive/v0.2.5/mithril.render.html#subtree-directives
+    // dontRedraw is a substitute for logic; usually, this is used together with SubtreeRetainer.
+    if (dontRedraw()) return { subtree: 'retain' };
+
+    return <p>Hello World!</p>;
+  }
+}
+
+class NewMithrilComponent extends Component {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    console.log('Code to run when component instance created, but before attached to the DOM.');
+  }
+
+  oncreate(vnode) {
+    super.oncreate(vnode);
+
+    console.log('Code to run when components are first created and attached to the DOM');
+  }
+
+  onbeforeupdate(vnode, oldVnode) {
+    super.onbeforeupdate(vnode);
+
+    console.log('Code to run BEFORE diffing / redrawing components on every redraw');
+
+    // In mithril 2, if we want to skip diffing / redrawing a component, we return "false" in its onbeforeupdate lifecycle hook.
+    // See https://mithril.js.org/lifecycle-methods.html#onbeforeupdate
+    // This is also typically used with SubtreeRetainer.
+    if (dontRedraw()) return false;
+  }
+
+  onupdate(vnode) {
+    // Unlike config, this does NOT run when components are first attached.
+    // Some code might need to be replicated between oncreate and onupdate.
+    console.log('Code to run on every redraw AFTER the DOM is updated.');
+  }
+
+  onbeforeremove(vnode) {
+    // This is run before components are removed from the DOM.
+    // If a promise is returned, the DOM element will only be removed when the
+    // promise completes. It is only called on the top-level component that has
+    // been removed. It has no equivalent in Mithril 0.2.
+    // See https://mithril.js.org/lifecycle-methods.html#onbeforeremove
+    return Promise.resolve();
+  }
+
+  onremove(vnode) {
+      console.log('Code to run when the component is removed from the DOM');
+  }
+}
+```
 
 #### Component instances should not be stored
 
