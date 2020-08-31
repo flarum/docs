@@ -18,17 +18,135 @@ If your extension does not change the UI, consider yourself lucky. :-)
 
 ## Frontend (JavaScript)
 
-### Changes in Core
-
-*TODO: States, and other BC breaks*
-
 ### Mithril 2.0: Concepts
+
+Most breaking changes required by beta 14 are prompted by changes in Mithril 2.
+[Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
 
 *TODO: Explain*
 
-- props -> attrs
-- vnodes
-- Component instances should not be stored
+#### props -> attrs
+
+Props passed into component are now referred to as `attrs`, and can be accessed via `this.attrs` where you would prior use `this.props`. This was done to be closer to Mithril's preferred terminology. We have provided a temporary backwards compatibility layer for `this.props`, but recommend using `this.attrs.
+
+#### Lifecycle Hooks
+
+In mithril 0.2, we had 2 "lifecycle hooks":
+
+`init`, an unofficial hook which ran when the component instance was initialized.
+
+`config`, which ran when components were created, and on every redraw.
+
+Information about the replacement hooks and what they do can be found [in Mithril's documentation](https://mithril.js.org/lifecycle-methods.html).
+
+
+#### Component instances should not be stored
+
+Due to optimizations in Mithril's redrawing algorithms, [component instances should not be stored](https://mithril.js.org/components.html#define-components-statically,-call-them-dynamically).
+
+So whereas before, you might have done something like:
+
+```js
+class ChildComponent extends Component {
+  init() {
+    this.counter = 0;
+  }
+
+  view() {
+    return <p>{this.counter}</p>;
+  }
+}
+class ParentComponent extends Component {
+  init() {
+    this.child = new ChildComponent();
+  }
+
+  view() {
+    return (
+      <div>
+        <button onclick={this.child.counter += 1}></button>
+        {this.child.render()}
+      </div>
+    )
+  }
+}
+```
+
+That will no longer work. In fact; the Component class no longer has a render method.
+
+Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance:
+
+```js
+class ChildComponent extends Component {
+  view() {
+    return <p>{this.attrs.counter}</p>;
+  }
+}
+
+class ParentComponent extends Component {
+  init() {
+    this.counter = 0;
+  }
+
+  view() {
+    return (
+      <div>
+        <button onclick={this.counter += 1}></button>
+        <ChildComponent counter={this.counter}></ChildComponent>
+      </div>
+    )
+  }
+}
+```
+
+For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components.
+In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance:
+
+```js
+class Counter {
+  constructor() {
+    this._counter = 0;
+  }
+
+  increaseCounter() {
+    this._counter += 1;
+  }
+
+  getCount() {
+    return this._counter;
+  }
+}
+
+app.counter = new Counter();
+
+extend(HeaderSecondary.prototype, 'items', function(items) {
+  items.add('counterDisplay',
+    <div>
+      <p>Counter: {app.counter.getCount()}</p>
+    </div>
+  );
+})
+
+extend(HeaderPrimary.prototype, 'items', function(items) {
+  items.add('counterButton',
+    <div>
+      <button onclick={app.counter.increaseCounter()}>Increase Counter</button>
+    </div>
+  );
+})
+```
+
+This "state pattern" can be found throughout core. Some non-trivial examples are:
+
+- PageState
+- SearchState and GlobalSearchState
+- NotificationListState
+- DiscussionListState
+
+### Changes in Core
+
+
+*TODO: States, and other BC breaks*
 
 ### How to upgrade a component
 
@@ -58,7 +176,7 @@ If your extension does not change the UI, consider yourself lucky. :-)
   - `m.redraw.strategy('none')` -> `e.redraw = false` in event handler
   - `m.lazyRedraw()` -> `m.redraw()`
 
-#### Optional changes
+#### Deprecated changes
 
 For the following changes, we currently provide a backwards-compatibility layer.
 This will be removed in time for the stable release.
