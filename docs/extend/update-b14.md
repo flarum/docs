@@ -150,7 +150,7 @@ class ParentComponent extends Component {
   view() {
     return (
       <div>
-        <button onclick={this.child.counter += 1}></button>
+        <button onclick={() => this.child.counter += 1}></button>
         {this.child.render()}
       </div>
     )
@@ -177,7 +177,7 @@ class ParentComponent extends Component {
   view() {
     return (
       <div>
-        <button onclick={this.counter += 1}></button>
+        <button onclick={() => this.counter += 1}></button>
         <ChildComponent counter={this.counter}></ChildComponent>
       </div>
     )
@@ -216,7 +216,7 @@ extend(HeaderSecondary.prototype, 'items', function(items) {
 extend(HeaderPrimary.prototype, 'items', function(items) {
   items.add('counterButton',
     <div>
-      <button onclick={app.counter.increaseCounter()}>Increase Counter</button>
+      <button onclick={() => app.counter.increaseCounter()}>Increase Counter</button>
     </div>
   );
 })
@@ -230,6 +230,42 @@ This "state pattern" can be found throughout core. Some non-trivial examples are
 - DiscussionListState
 
 ### Changes in Core
+
+#### Subtree Retainer
+
+`SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
+When called, it checks if any of the data has changed; if not, it indicates that a redraw is not necessary.
+
+In mithril 0.2, its `retain` method returned a [subtree retain directive](https://mithril.js.org/archive/v0.1.25/mithril.render.html#subtree-directives) if no redraw was necessary.
+
+In mithril 2, we use its `needsRebuild` method in combination with `onbeforeupdate`. For instance:
+
+```js
+class CustomComponent extends Component {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    this.showContent = false;
+
+    this.subtree = new SubtreeRetainer(
+      () => this.showContent,
+    )
+  }
+
+  onbeforeupdate() {
+    // If needsRebuild returns true, mithril will diff and redraw the vnode as usual. Otherwise, it will skip this redraw cycle.
+    // In this example, this means that this component and its children will only be redrawn when extra content is toggled.
+    return this.subtree.needsRebuild();
+  }
+
+  view(vnode) {
+    return <div>
+      <button onclick={() => this.showContent = !this.showContent}>Toggle Extra Content</button>
+      <p>Hello World!{this.showContent ? ' Extra Content!' : ''}</p>
+    </div>;
+  }
+}
+```
 
 #### Children and .component
 
