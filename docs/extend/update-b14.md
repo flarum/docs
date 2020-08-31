@@ -267,6 +267,27 @@ class CustomComponent extends Component {
 }
 ```
 
+#### attrs() method
+
+Previously, some components would have an attrs() method, which provided an extensible way to provide attrs to the top-level child vnode returned by `view()`. For instance,
+
+```js
+class CustomComponent extends Component {
+  view() {
+    return <div {...this.attrs()}><p>Hello World!</p></div>;
+  }
+
+  attrs() {
+    return {
+      className: 'SomeClass',
+      onclick: () => console.log('click'),
+    };
+  }
+}
+```
+
+Since `this.attrs` is now used for attrs passed in from parent components, `attrs` methods have been renamed to `elementAttrs`.
+
 #### Children and .component
 
 Previously, an element could be created with child elements by passing those in as the `children` prop:
