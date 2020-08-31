@@ -14,6 +14,7 @@ module.exports = {
           'update-b10',
           'update-b12',
           'update-b13',
+          'update-b14',
         ]
       },
       {
