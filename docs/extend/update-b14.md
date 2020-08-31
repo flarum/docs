@@ -27,7 +27,7 @@ Most breaking changes required by beta 14 are prompted by changes in Mithril 2.
 
 #### props -> attrs
 
-Props passed into component are now referred to as `attrs`, and can be accessed via `this.attrs` where you would prior use `this.props`. This was done to be closer to Mithril's preferred terminology. We have provided a temporary backwards compatibility layer for `this.props`, but recommend using `this.attrs.
+Props passed into component are now referred to as `attrs`, and can be accessed via `this.attrs` where you would prior use `this.props`. This was done to be closer to Mithril's preferred terminology. We have provided a temporary backwards compatibility layer for `this.props`, but recommend using `this.attrs`.
 
 #### Lifecycle Hooks
 
@@ -231,6 +231,30 @@ This "state pattern" can be found throughout core. Some non-trivial examples are
 
 ### Changes in Core
 
+#### Children and .component
+
+Previously, an element could be created with child elements by passing those in as the `children` prop:
+
+```js
+Button.component({
+  className: 'Button Button--primary',
+  children: 'Button Text'
+});
+```
+
+This will no longer work, and will actually result in errors. Instead, the 3rd argument of the component method should be used:
+
+```js
+Button.component({
+  className: 'Button Button--primary'
+}, 'Button Text');
+```
+
+Children can still be passed in through JSX:
+
+```js
+<Button className='Button Button--primary'>Button Text</Button>
+```
 
 *TODO: States, and other BC breaks*
 
