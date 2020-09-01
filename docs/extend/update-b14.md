@@ -126,6 +126,22 @@ class NewMithrilComponent extends Component {
 }
 ```
 
+#### Children vs Text Nodes
+
+TODO
+
+#### Routing API
+
+TODO
+
+#### Redraw API
+
+TODO
+
+#### AJAX
+
+TODO
+
 #### Component instances should not be stored
 
 Due to optimizations in Mithril's redrawing algorithms, [component instances should not be stored](https://mithril.js.org/components.html#define-components-statically,-call-them-dynamically).
@@ -267,6 +283,46 @@ This replaces the old method of passing the alert instance itself to `dismiss`.
 
 The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component.
 Any modifications by extensions should accordingly be done to `AlertManagerState`.
+
+#### Composer
+
+TODO
+
+#### Widget and DashboardWidget
+
+Widget Removed (TODO)
+
+#### NotificationList
+
+TODO
+
+#### Checkbox
+
+Loading is now a prop
+
+#### Preference Saver
+
+Deprecated / removed. Will eventually replace, maybe not in time for beta 14 though.
+
+#### DiscussionListState
+
+TODO
+
+#### PageState
+
+TODO
+
+#### PostStream
+
+TODO
+
+#### moment -> dayjs
+
+TODO
+
+#### Fragment
+
+TODO: Explain what it is, when it should be used, and when it should NOT be used. (only with m.render()).
 
 #### Subtree Retainer
 
@@ -443,14 +499,27 @@ Considering you have to do the changes anyway, why not do them now?
 ### New Features
 
 *TODO*
+- We are now on Laravel 6
+- Optional params in url generator now work
+- View Extender
+- User Extender (prepareGroups)
+- Error handler middleware can now be manipulated by middleware extender
+- Display Name Extender
 
 ### Deprecations
 
 *TODO*
 
 - TODO: `url` as array in `config.php` - [PR](https://github.com/flarum/core/pull/2271#discussion_r475930358)
+- AssertPermissionTrait has been deprecated - [Issue](https://github.com/flarum/core/issues/1320)
 
 ### Removals
+
+Warnings to users
+
+No more laravel helpers
+Symfony translator interface should be used, not Laravel's
+Do NOT use the old callback notation for configuring view namespaces. This will break all extensions that boot after your extension. The view extender must be used.
 
 *TODO*
 
