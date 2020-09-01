@@ -320,6 +320,44 @@ extending Flarum's `Component` helper class. The best workaround here is to just
 
 *TODO: States, and other BC breaks*
 
+#### affixSidebar
+
+The `affixSidebar` util has been removed. Instead, if you want to affix a sidebar, wrap the sidebar code in an `AffixedSidebar` component. For instance,
+
+```js
+class OldWay extends Component {
+  view() {
+    return <div>
+      <div className="container">
+        <div className="sideNavContainer">
+          <nav className="sideNav" config={affixSidebar}>
+            <p>Affixed Sidebar</p>
+          </nav>
+          <div className="sideNavOffset">Actual Page Content</div>
+        </div>
+      </div>
+    </div>;
+  }
+}
+
+class NewWay extends Component {
+  view() {
+    return <div>
+      <div className="container">
+        <div className="sideNavContainer">
+          <AffixedSidebar>
+            <nav className="sideNav">
+              <p>Affixed Sidebar</p>
+            </nav>
+          </AffixedSidebar>
+          <div className="sideNavOffset">Actual Page Content</div>
+        </div>
+      </div>
+    </div>;
+  }
+}
+```
+
 ### How to upgrade a component
 
 #### Required changes
