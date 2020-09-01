@@ -248,6 +248,26 @@ app.modal.show(LoginModal, {identification: 'prefilledUsername'});
 The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component.
 Any modifications by extensions should accordingly be done to `ModalManagerState`.
 
+#### Alerts
+
+Previously, alerts could be opened by providing an `Alert` component instance:
+
+```js
+app.alerts.show(new Alert(type: 'success', children: 'Hello, this is a success alert!'));
+```
+
+Since we don't store component instances anymore, we pass in children, attrs, and (optionally) a component class separately.
+
+```js
+app.alerts.show('Hello, this is a success alert!', {type: 'success'}, Alert); // 3rd argument is optional, defaults to Alert.
+```
+
+Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert.
+This replaces the old method of passing the alert instance itself to `dismiss`.
+
+The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component.
+Any modifications by extensions should accordingly be done to `AlertManagerState`.
+
 #### Subtree Retainer
 
 `SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
@@ -334,8 +354,6 @@ Children can still be passed in through JSX:
 
 Because mithril uses 'tag' to indicate the actual html tag (or component class) used for a vnode, you can no longer pass `tag` as an attr to components
 extending Flarum's `Component` helper class. The best workaround here is to just use another name for this attr.
-
-*TODO: States, and other BC breaks*
 
 #### affixSidebar
 
