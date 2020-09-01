@@ -231,6 +231,23 @@ This "state pattern" can be found throughout core. Some non-trivial examples are
 
 ### Changes in Core
 
+#### Modals
+
+Previously, modals could be opened by providing a `Modal` component instance:
+
+```js
+app.modal.show(new LoginModal(identification: 'prefilledUsername'));
+```
+
+Since we don't store component instances anymore, we pass in the component class and any attrs separately.
+
+```js
+app.modal.show(LoginModal, {identification: 'prefilledUsername'});
+```
+
+The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component.
+Any modifications by extensions should accordingly be done to `ModalManagerState`.
+
 #### Subtree Retainer
 
 `SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
