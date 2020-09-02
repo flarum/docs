@@ -49,9 +49,3 @@ Runs all outstanding migrations. This should be used when an extension that modi
 `php flarum migrate:reset --extension [extension_id]`
 
 Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
-
-### generate:migration
-
-`php flarum generate:migration --extension [composer_extension_name] [name]`
-
-Generates an empty migration file with a given name for a given extension. This is mostly useful for extension developers. Please note that you should provide the composer extension name instead of the composer id (e.g. `flarum/flags` instead of `flarum-flags`).
