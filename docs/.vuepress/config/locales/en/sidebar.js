@@ -81,7 +81,8 @@ module.exports = {
           'languages',
           'mail',
           'tags',
-          'permissions'
+          'permissions',
+          'console'
         ]
       }
     ],
