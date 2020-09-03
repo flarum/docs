@@ -454,6 +454,10 @@ Methods for `hasDiscussions`, `isLoading`, `isSearchResults`, and `empty` have b
 
 TODO
 
+#### SearchState and GlobalSearchState
+
+TODO
+
 #### moment -> dayjs
 
 The `moment` library has been removed, and replaced by the `dayjs` library. The global `moment` can still be used for now, but is deprecated. `moment` and `dayjs` have very similar APIs, so very few changes will be needed. Please see the dayjs documentation [for more information](https://day.js.org/en/) on how to use it.
