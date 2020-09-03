@@ -467,7 +467,22 @@ Methods for `disabled` and `viewingEnd` have been added to `forum/states/PostStr
 
 #### SearchState and GlobalSearchState
 
-TODO
+As with other components, we no longer store instances of `forum/components/Search`. As such, every `Search` component instance should be paired with a `forum/states/SearchState` instance. 
+
+At the minimum, `SearchState` contains the following methods:
+
+- getValue
+- setValue
+- clear
+- cache (adds a searched value to cache, meaning that we don't need to search for its results again)
+- isCached (checks if a value has been searched for before)
+
+All of these methods have been moved from `Search` to `SearchState`. Additionally, Search's `stickyParams`, `params`, `changeSort`, `getInitialSearch`, and `clearInitialSearch` methods have been moved to `forum/states/GlobalSearchState`, which is now available via `app.search`.
+
+To use a custom search, you'll want to:
+
+1. Possibly create a custom subclass of `SearchState`
+2. Create a custom subclass of `Search`, which overrides the `selectResult` method to handle selecting results as needed by your use case, and modify the `sourceItems` methods to contain the search sources you need.
 
 #### moment -> dayjs
 
