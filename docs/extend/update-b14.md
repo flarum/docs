@@ -181,7 +181,7 @@ Remember that Mithril automatically triggers a redraw after DOM event handlers. 
   Click Me!
 </button>
 
-// Mithril 0.2
+// Mithril 2
 <button onclick={e => {
   console.log("Hello world");
   e.redraw = false;
