@@ -372,6 +372,8 @@ Various input fields are now stored as [Mithril Streams](https://mithril.js.org/
 
 For `forum/components/TextEditor`, the `setValue`, `moveCursorTo`, `getSelectionRange`, `insertAtCursor`, `insertAt`, `insertBetween`, `replaceBeforeCursor`, `insertBetween` methods have been moved to `forum/components/SuperTextarea`.
 
+Also for `forum/components/TextEditor`, `this.disabled` is no longer used; `disabled` is passed in as an attr instead. It may be accessed externally via `app.composer.body.attrs.disabled`.
+
 Similarly to Modals and Alerts, `app.composer.load` no longer accepts a component instance. Instead, pass in the body class and any attrs. For instance,
 
 ```js
