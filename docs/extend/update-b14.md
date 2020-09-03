@@ -443,7 +443,7 @@ TODO
 
 #### moment -> dayjs
 
-TODO
+The `moment` library has been removed, and replaced by the `dayjs` library. The global `moment` can still be used for now, but is deprecated. `moment` and `dayjs` have very similar APIs, so very few changes will be needed. Please see the dayjs documentation [for more information](https://day.js.org/en/) on how to use it.
 
 #### Fragment
 
@@ -617,6 +617,7 @@ Considering you have to do the changes anyway, why not do them now?
 - static `initProps()` -> static `initAttrs()`
 - `m.prop` -> `m.stream`
 - `m.withAttr` -> `withAttr` with import
+- `moment` -> `dayjs`
 
 
 ## Backend (PHP)
