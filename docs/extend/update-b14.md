@@ -23,8 +23,6 @@ If your extension does not change the UI, consider yourself lucky. :-)
 Most breaking changes required by beta 14 are prompted by changes in Mithril 2.
 [Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
 
-*TODO: Explain*
-
 #### props -> attrs
 
 Props passed into component are now referred to as `attrs`, and can be accessed via `this.attrs` where you would prior use `this.props`. This was done to be closer to Mithril's preferred terminology. We have provided a temporary backwards compatibility layer for `this.props`, but recommend using `this.attrs`.
@@ -134,7 +132,36 @@ Please see [the mithril documentation](https://mithril.js.org/vnodes.html#struct
 
 #### Routing API
 
-TODO
+Mithril 2 introduces a few changes in the routing API. Most of these are quite simple:
+
+- `m.route()` to get the current route has been replaced by `m.route.get()`
+- `m.route(NEW_ROUTE)` to set a new route has been replaced by `m.route.set(NEW_ROUTE)`
+- When registering new routes, a component class should be provided, not a component instance.
+
+For example:
+
+```js
+// Mithril 0.2
+app.routes.new_page = { path: '/new', component: NewPage.component() }
+
+// Mithril 2.0
+app.routes.new_page = { path: '/new', component: NewPage }
+```
+
+Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed.
+
+```js
+// Mithril 0.2
+<a href="/path" config={m.route}>Link Content</a>
+
+// Mithril 2
+<m.route.Link href="/path">Link Content</m.route.Link>
+
+// Or, for convenience through a Flarum util:
+<a route="/path">Link Content</a>
+```
+
+For a full list of routing-related changes, please see [the mithril documentation](https://mithril.js.org/migration-v02x.html).
 
 #### Redraw API
 
