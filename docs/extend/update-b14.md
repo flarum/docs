@@ -360,7 +360,7 @@ TODO
 
 #### Widget and DashboardWidget
 
-Widget Removed (TODO)
+The redundant `flarum/admin/components/Widget` component has been removed. `flarum/admin/components/DashboardWidget` should be used instead.
 
 #### NotificationList
 
@@ -368,11 +368,40 @@ TODO
 
 #### Checkbox
 
-Loading is now a prop
+Loading state in the `flarum/common/components/Checkbox` component is no longer managed through `this.loading`; it is now passed in as a prop (`this.attrs.loading`).
 
 #### Preference Saver
 
-Deprecated / removed. Will eventually replace, maybe not in time for beta 14 though.
+The `preferenceSaver` method of `flarum/forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. For instance:
+
+```js
+// Old way
+Switch.component({
+  children: app.translator.trans('core.forum.settings.privacy_disclose_online_label'),
+  state: this.user.preferences().discloseOnline,
+  onchange: (value, component) => {
+    this.user.pushAttributes({ lastSeenAt: null });
+    this.preferenceSaver('discloseOnline')(value, component);
+  },
+})
+
+// Without preferenceSaver
+Switch.component({
+  children: app.translator.trans('core.forum.settings.privacy_disclose_online_label'),
+  state: this.user.preferences().discloseOnline,
+  onchange: (value) => {
+    this.discloseOnlineLoading = true;
+
+    this.user.savePreferences({ discloseOnline: value }).then(() => {
+      this.discloseOnlineLoading = false;
+      m.redraw();
+    });
+  },
+  loading: this.discloseOnlineLoading,
+})
+```
+
+A replacement will eventually be introduced.
 
 #### DiscussionListState
 
