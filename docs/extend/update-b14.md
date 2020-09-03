@@ -23,9 +23,19 @@ If your extension does not change the UI, consider yourself lucky. :-)
 Most breaking changes required by beta 14 are prompted by changes in Mithril 2.
 [Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
 
-#### props -> attrs
+#### props -> attrs; initProps -> initAttrs
 
 Props passed into component are now referred to as `attrs`, and can be accessed via `this.attrs` where you would prior use `this.props`. This was done to be closer to Mithril's preferred terminology. We have provided a temporary backwards compatibility layer for `this.props`, but recommend using `this.attrs`.
+
+Accordingly, `initProps` has been replaced with `initAttrs`, with a similar BC layer.
+
+#### m.prop -> m.stream
+
+Mithril streams, which were available via `m.prop` in Mithril 0.2, are now available via `m.stream`. `m.prop` will still work for now due to a temporary BC layer.
+
+#### m.withAttr -> withAttr
+
+The `m.withAttr` util has been removed from Mithril. We have provided `common/utils/withAttr`, which does the same thing. A temporary BC layer has been added for `m.withAttr`.
 
 #### Lifecycle Hooks
 
