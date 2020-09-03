@@ -128,7 +128,9 @@ class NewMithrilComponent extends Component {
 
 #### Children vs Text Nodes
 
-TODO
+In Mithril 0.2, every child of a vnode is another vnode, stored in `vnode.children`. For Mithril 2, as a performance optimization, vnodes with a single text child now store that text directly in `vnode.text`. For developers, that means that `vnode.children` might not always contain the results needed. Luckily, text being stored in `vnode.text` vs `vnode.children` will be the same each time for a given component, but developers should be aware that at times, they might need to use `vnode.text` and not `vnode.children`.
+
+Please see [the mithril documentation](https://mithril.js.org/vnodes.html#structure) for more information on vnode structure.
 
 #### Routing API
 
