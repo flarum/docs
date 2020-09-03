@@ -450,6 +450,13 @@ Methods for `hasDiscussions`, `isLoading`, `isSearchResults`, and `empty` have b
 - Instead of `app.current instanceof X`, use `app.current.matches(X)`
 - Instead of `app.current.PROPERTY`, use `app.current.get('PROPERTY')`. Please note that all properties must be exposed EXPLICITLY via `app.current.set('PROPERTY', VALUE)`.
 
+#### Pages and `oninit`
+
+Due to Mithril routing changes, `oninit` is NOT called again if a route is changed AND the same component handles the new route. For instance, if you go directly from one discussion's page to another, `oninit` will not be called. See https://mithril.js.org/route.html#key-parameter. In core, we have identified 2 strategies that, when used together, replicate previous behavior.
+
+- If the route is programatically changed, and we always want to recreate the page component, we can use the `common/utils/setRouteWithForcedRefresh` util. Under the surface, this uses a unique key as per the above Mithril documentation.
+- When creating a page, we can store the current path under `this.prevRoute`. THen, in `onbeforeupdate`, if `m.route.get()` is different from `this.prevRoute`, we can load in new data for this page and re-render. For an example, see `DiscussionPage` and `UserPage`
+
 #### PostStream
 
 Logic from `forum/components/PostStreamScrubber`'s `update` method has been moved to `forum/components/PostStream`'s `updateScrubber` method.
