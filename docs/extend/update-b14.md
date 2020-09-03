@@ -392,7 +392,9 @@ The redundant `admin/components/Widget` component has been removed. `admin/compo
 
 #### NotificationList
 
-TODO
+For `forum/components/NotificationList`, the `clear`, `load`, `loadMore`, `parseResults`, and `markAllAsRead` methods have been moved to `forum/states/NotificationListState`.
+
+Methods for `isLoading` and `hasMoreResults` have been added to `forum/states/NotificationListState`.
 
 #### Checkbox
 
