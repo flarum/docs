@@ -521,9 +521,9 @@ class NewWay extends Component {
 
 ### How to upgrade a component
 
-#### Required changes
+#### Required changes recap
 
-*TODO*
+Each of these changes has been explained above, this is just a recap of major changes for your convenience.
 
 - `view()` -> `view(vnode)`
 - Lifecycle
