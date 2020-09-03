@@ -192,7 +192,9 @@ Remember that Mithril automatically triggers a redraw after DOM event handlers. 
 
 #### AJAX
 
-TODO
+The `data` parameter of `m.request({...})` has been split up into `body` and `params`.
+
+For examples and other AJAX changes, see [the mithril documentation](https://mithril.js.org/migration-v02x.html#mrequest).
 
 #### Promises
 
