@@ -165,11 +165,50 @@ For a full list of routing-related changes, please see [the mithril documentatio
 
 #### Redraw API
 
-TODO
+Mithril 2 introduces a few changes in the redraw API. Most of these are quite simple:
+
+- Instead of `m.redraw(true)` for synchronous redraws, use `m.redraw.sync()`
+- Instead of `m.lazyRedraw()`, use `m.redraw()`
+
+Remember that Mithril automatically triggers a redraw after DOM event handlers. The API for preventing a redraw has also changed:
+
+```js
+// Mithril 0.2
+<button onclick={() => {
+  console.log("Hello world");
+  m.redraw.strategy('none');
+}}>
+  Click Me!
+</button>
+
+// Mithril 0.2
+<button onclick={e => {
+  console.log("Hello world");
+  e.redraw = false;
+}}>
+  Click Me!
+</button>
+```
 
 #### AJAX
 
 TODO
+
+#### Promises
+
+`m.deferred` has been removed, native promises should be used instead. For instance:
+
+```js
+// Mithril 0.2
+const deferred = m.deferred();
+
+app.store.find('posts').then(result => deferred.resolve(result));
+
+return deferred.promise;
+
+// Mithril 2
+return app.store.find('posts');
+```
 
 #### Component instances should not be stored
 
