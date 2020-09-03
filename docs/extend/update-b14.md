@@ -435,7 +435,10 @@ TODO
 
 #### PageState
 
-TODO
+`app.current` and `app.previous` no longer represent component instances, they are now instances of the `common/states/PageState` class. This means that:
+
+- Instead of `app.current instanceof X`, use `app.current.matches(X)`
+- Instead of `app.current.PROPERTY`, use `app.current.get('PROPERTY')`. Please note that all properties must be exposed EXPLICITLY via `app.current.set('PROPERTY', VALUE)`.
 
 #### PostStream
 
