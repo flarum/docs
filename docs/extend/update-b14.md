@@ -456,7 +456,11 @@ TODO
 
 #### SearchState and GlobalSearchState
 
-TODO
+Logic from `forum/components/PostStreamScrubber`'s `update` method has been moved to `forum/components/PostStream`'s `updateScrubber` method.
+
+For `forum/components/PostStream`, the `update`, `goToFirst`, `goToLast`, `goToNumber`, `goToIndex`, `loadNearNumber`, `loadNearIndex`, `loadNext`, `loadPrevious`, `loadPage`, `loadRange`, `show`, `posts`, `reset`, `count`, and `sanitizeIndex` methods have been moved to `forum/states/PostStreamState`.
+
+Methods for `disabled` and `viewingEnd` have been added to `forum/states/PostStreamState`.
 
 #### moment -> dayjs
 
