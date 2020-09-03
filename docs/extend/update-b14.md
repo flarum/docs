@@ -488,10 +488,6 @@ To use a custom search, you'll want to:
 
 The `moment` library has been removed, and replaced by the `dayjs` library. The global `moment` can still be used for now, but is deprecated. `moment` and `dayjs` have very similar APIs, so very few changes will be needed. Please see the dayjs documentation [for more information](https://day.js.org/en/) on how to use it.
 
-#### Fragment
-
-TODO: Explain what it is, when it should be used, and when it should NOT be used. (only with m.render()).
-
 #### Subtree Retainer
 
 `SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
@@ -616,6 +612,20 @@ class NewWay extends Component {
   }
 }
 ```
+
+#### Fragment
+
+**Warning: For Advanced Use Only**
+
+In some rare cases, we want to have extremely fine grained control over the rendering and display of some significant chunks of the DOM. These are attached with `m.render`, and do not experience automated redraws. Current use cases in core and bundled extensions are:
+
+- The "Reply" button that shows up when selecting text in a post
+- The mentions autocomplete menu that shows up when typing
+- The emoji autocomplete menu that shows up when typing
+
+For this purpose, we provide a helper class (`common/Fragment`), of which you can create an instance, call methods, and render via `m.render(DOM_ROOT, fragmentInstance.render())`. The main benefit of using the helper class is that it allows you to use lifecycle methods, and to access the underlying DOM via `this.$()`, like you would be able to do with a component.
+
+This should only be used when absolutely necessary. If you are unsure, you probably don't need it. If the goal is to not store component instances, the "state pattern" as described above is preferable.
 
 ### How to upgrade a component
 
