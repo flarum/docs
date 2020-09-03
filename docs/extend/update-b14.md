@@ -674,14 +674,12 @@ When you have taken care of the changes above, you should be good to go.
 For the following changes, we have bought you time until the stable release.
 Considering you have to do the changes anyway, why not do them now?
 
-*TODO*
 
 - `this.props` -> `this.attrs`
 - static `initProps()` -> static `initAttrs()`
 - `m.prop` -> `m.stream`
 - `m.withAttr` -> `withAttr` with import
 - `moment` -> `dayjs`
-
 
 ## Backend (PHP)
 
