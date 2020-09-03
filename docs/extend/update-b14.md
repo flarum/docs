@@ -396,6 +396,8 @@ For `forum/components/NotificationList`, the `clear`, `load`, `loadMore`, `parse
 
 Methods for `isLoading` and `hasMoreResults` have been added to `forum/states/NotificationListState`.
 
+`app.cache.notifications` is no longer available; `app.notifications` (which points to an instance of `NotificationListState`) should be used instead.
+
 #### Checkbox
 
 Loading state in the `common/components/Checkbox` component is no longer managed through `this.loading`; it is now passed in as a prop (`this.attrs.loading`).
@@ -435,7 +437,11 @@ A replacement will eventually be introduced.
 
 #### DiscussionListState
 
-TODO
+For `forum/components/DiscussionList`, the `requestParams`, `sortMap`, `refresh`, `loadResults`, `loadMore`, `parseResults`, `removeDiscussion`, and `addDiscussion` methods have been moved to `forum/states/DiscussionListState`.
+
+Methods for `hasDiscussions`, `isLoading`, `isSearchResults`, and `empty` have been added to `forum/states/DiscussionListState`.
+
+`app.cache.discussions` is no longer available; `app.discussions` (which points to an instance of `DiscussionListState`) should be used instead.
 
 #### PageState
 
