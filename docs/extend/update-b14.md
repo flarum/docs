@@ -356,11 +356,37 @@ Any modifications by extensions should accordingly be done to `AlertManagerState
 
 #### Composer
 
-TODO
+Since we don't store a component instances anymore, a number of util methods from `Composer`, `ComposerBody` (and it's subclasses), and `TextEditor` have been moved onto `ComposerState`.
+
+For `forum/components/Composer`, `isFullScreen`, `load`, `clear`, `show`, `hide`, `close`, `minimize`, `fullScreen`, and `exitFullScreen` have been moved to `forum/states/ComposerState`. They all remain accessible via `app.composer.METHOD`
+
+A `bodyMatches` method has been added to `forum/states/ComposerState`, letting you check whether a certain subclass of `ComposerBody` is currently open.
+
+Various input fields are now stored as [Mithril Streams](https://mithril.js.org/stream.html) in `app.composer.fields`. For instance, to get the current composer content, you could use `app.composer.fields.content()`. Previously, it was available on `app.composer.component.content()`. This is a convention that `ComposerBody` subclasses that add inputs should follow.
+
+`app.composer.component` is no longer available.
+
+- Instead of `app.composer.component instanceof X`, use `app.composer.bodyMatches(X)`.
+- Instead of `app.composer.component.props`, use `app.composer.body.attrs`.
+- Instead of `app.composer.component.editor`, use `app.composer.editor`.
+
+For `forum/components/TextEditor`, the `setValue`, `moveCursorTo`, `getSelectionRange`, `insertAtCursor`, `insertAt`, `insertBetween`, `replaceBeforeCursor`, `insertBetween` methods have been moved to `forum/components/SuperTextarea`.
+
+Similarly to Modals and Alerts, `app.composer.load` no longer accepts a component instance. Instead, pass in the body class and any attrs. For instance,
+
+```js
+// Mithril 0.2
+app.composer.load(new DiscussionComposer({user: app.session.user}));
+
+// Mithril 2
+app.composer.load(DiscussionComposer, {user: app.session.user})
+```
+
+Finally, functionality for confirming before unloading a page with an active composer has been moved into the `common/components/ConfirmDocumentUnload` component.
 
 #### Widget and DashboardWidget
 
-The redundant `flarum/admin/components/Widget` component has been removed. `flarum/admin/components/DashboardWidget` should be used instead.
+The redundant `admin/components/Widget` component has been removed. `admin/components/DashboardWidget` should be used instead.
 
 #### NotificationList
 
@@ -368,11 +394,11 @@ TODO
 
 #### Checkbox
 
-Loading state in the `flarum/common/components/Checkbox` component is no longer managed through `this.loading`; it is now passed in as a prop (`this.attrs.loading`).
+Loading state in the `common/components/Checkbox` component is no longer managed through `this.loading`; it is now passed in as a prop (`this.attrs.loading`).
 
 #### Preference Saver
 
-The `preferenceSaver` method of `flarum/forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. For instance:
+The `preferenceSaver` method of `forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. For instance:
 
 ```js
 // Old way
