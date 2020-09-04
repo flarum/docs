@@ -1,4 +1,4 @@
-#  Routes and Content
+# Routes and Content
 
 A fundamental part of extending Flarum is adding routes — both to expose new resources in the JSON-API, and to add new pages to the frontend.
 
@@ -38,7 +38,7 @@ return [
 
 ### Controllers
 
-In Flarum, **Controller** is just another name for a class that implements [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). Put simply, a controller must implement a `handle` method which receives a [Request](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) and must return a [Response](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum includes [zend-diactoros](https://github.com/zendframework/zend-diactoros) which contains `Response` implementations that you can return.
+In Flarum, **Controller** is just another name for a class that implements [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). Put simply, a controller must implement a `handle` method which receives a [Request](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) and must return a [Response](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum includes [laminas-diactoros](https://github.com/laminas/laminas-diactoros) which contains `Response` implementations that you can return.
 
 ```php
 <?php
@@ -59,7 +59,7 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/5.7/container) so you can inject dependencies into their constructors.
+Controllers are resolved from the [container](https://laravel.com/docs/6.x/container) so you can inject dependencies into their constructors.
 
 ### Route Parameters
 
@@ -89,7 +89,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Views
 
-You can inject is Laravel's [View](https://laravel.com/docs/5.7/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/5.7/blade) into your controller's response.
+You can inject is Laravel's [View](https://laravel.com/docs/6.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/6.x/blade) into your controller's response.
 
 First, you will need to tell the factory where it can find your extension's view files by adding a closure to `extend.php`:
 
@@ -154,7 +154,7 @@ Now when `yourforum.com/users` is visited, the forum frontend will be loaded and
 
 ### Route Parameters
 
-Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/archive/v0.2.5/mithril.route.html#defining-routes) is slightly different:
+Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
 
 ```jsx
   new Extend.Routes()

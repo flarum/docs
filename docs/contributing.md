@@ -8,7 +8,7 @@ This document is a guide for developers who want to contribute code to Flarum. I
 
 ## What to Work On
 
-Check out the [Roadmap](https://flarum.org/roadmap/) and [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with.
+Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with.
 
 If you're planning to go ahead and work on something, please comment on the relevant issue or create a new one first. This way we can ensure that your precious work is not in vain.
 
@@ -125,7 +125,7 @@ We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) t
 
 ## Development Tools
 
-Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Sublime Text](https://www.sublimetext.com).
+Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [VSCode](https://code.visualstudio.com/).
 
 To serve a local forum, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), and [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) are popular choices.
 

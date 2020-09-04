@@ -14,7 +14,7 @@ Flarum is made up of three layers:
 
 * Second, the backend exposes a **public API** which allows frontend clients to interface with your forum's data. This is built according to the [JSON:API specification](https://jsonapi.org/).
 
-* Finally, there is the default web interface which we call the **frontend**. This is a [single-page application](https://en.wikipedia.org/wiki/Single-page_application) which consumes the API. It's built with a simple React-like framework called [Mithril.js](https://mithril.js.org/archive/v0.2.5/index.html).
+* Finally, there is the default web interface which we call the **frontend**. This is a [single-page application](https://en.wikipedia.org/wiki/Single-page_application) which consumes the API. It's built with a simple React-like framework called [Mithril.js](https://mithril.js.org).
 
 Extensions will often need to interact with all three of these layers to make things happen. For example, if you wanted to build an extension that adds custom fields to user profiles, you would need to add the appropriate database structures in the **backend**, expose that data in the **public API**, and then display it and allow users to edit it on the **frontend**.
 

@@ -105,7 +105,7 @@ You should develop extensions with debug mode turned **on** in `config.php`. Thi
 
 ## Changing the UI
 
-Flarum's interface is constructed using a JavaScript framework called [Mithril.js](https://mithril.js.org/archive/v0.2.5). If you are familiar with [React](https://reactjs.org), then you'll catch on in no time. But if you are not familiar with any JavaScript frameworks, we suggest you go through a [tutorial](http://ratfactor.com/mithril1/?/shire) to understand the fundamentals before proceeding.
+Flarum's interface is constructed using a JavaScript framework called [Mithril.js](https://mithril.js.org/). If you are familiar with [React](https://reactjs.org), then you'll catch on in no time. But if you are not familiar with any JavaScript frameworks, we suggest you go through a [tutorial](https://mithril.js.org/simple-application.html) to understand the fundamentals before proceeding.
 
 The crux of it is that Flarum generates virtual DOM elements which are a JavaScript representation of HTML. Mithril takes these virtual DOM elements and turns them into real HTML in the most efficient way possible. (That's why Flarum is so speedy!)
 
@@ -161,7 +161,7 @@ DiscussionPage
 └── PostStreamScrubber
 ```
 
-You should familiarize yourself with [Mithril's component API](https://mithril.js.org/archive/v0.2.5/mithril.component.html) and redraw system. Flarum wraps components in ES6 classes which makes them a bit more React-like and a bit easier to work with. The API is similar, but be aware of the following differences:
+You should familiarize yourself with [Mithril's component API](https://mithril.js.org/components.html) and [redraw system](https://mithril.js.org/autoredraw.html). Flarum wraps components in ES6 classes which makes them a bit more React-like and a bit easier to work with. The API is similar, but be aware of the following differences:
 
 * Components must extend the base `Component` class.
 * The component instance _is_ the `controller`. State can be stored in instance variables.
