@@ -67,7 +67,7 @@ You'll likely want to allow a forum admin to change a setting related to your ex
 
 First, setup your admin JS as discussed [here](frontend.md) (replacing forum with admin).
 
-We will continue to use the "Hello World" example, but your `main.js` should look something like this:
+We will continue to use the "Hello World" example, but your `index.js` should look something like this:
 
 ```jsx harmony
 import HelloWorldSettingsModal from "./components/HelloWorldSettingsModal";
@@ -77,7 +77,7 @@ app.initializers.add('acme-hello-world', () => {
 });
 ```
 
-Then create a `components` folder in the same directory as your `main.js`. Next, a file called `HelloWorldSettingsModal.js`:
+Then create a `components` folder in the same directory as your `index.js`. Next, a file called `HelloWorldSettingsModal.js`:
 
 ```jsx harmony
 import SettingsModal from 'flarum/components/SettingsModal';
