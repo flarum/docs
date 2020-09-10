@@ -702,16 +702,15 @@ Considering you have to do the changes anyway, why not do them now?
 
 ### Removals
 
-Warnings to users
-
-No more laravel helpers
-Symfony translator interface should be used, not Laravel's
-Do NOT use the old callback notation for configuring view namespaces. This will break all extensions that boot after your extension. The view extender must be used.
-
-*TODO*
-
-- The following events [deprecated in Beta 13](https://github.com/flarum/core/commit/4efdd2a4f2458c8703aae654f95c6958e3f7b60b) have been removed:
+- Do NOT use the old closure notation for configuring view namespaces. This will break all extensions that boot after your extension. The `View` extender MUST be used instead.
+- app()->url() will no longer work: [`Flarum\Http\UrlGenerator`](routes.md) should be injected and used instead. An instance of `Flarum\Http\UrlGenerator` is available in `blade.php` templates via `$url`.
+- As a part of the Laravel 6 upgrade, the [`array_` and `str_` helpers](https://laravel.com/docs/6.x/upgrade#helpers) have been removed.
+- The Laravel translator interface has been removed; the Symfony translator interface should be used instead: `Symfony\Component\Translation\TranslatorInterface`
+- The following events deprecated in Beta 13 [have been removed](https://github.com/flarum/core/commit/7d1ef9d89161363d1c8dea19cf8aebb30136e9e3#diff-238957b67e42d4e977398cd048c51c73):
   - `AbstractConfigureRoutes`
   - `ConfigureApiRoutes` - Use the `Routes` extender instead
   - `ConfigureForumRoutes` - Use the `Frontend` or `Routes` extenders instead
   - `ConfigureLocales` - Use the `LanguagePack` extender instead
+  - `ConfigureModelDates` - Use the `Model` extender instead
+  - `ConfigureModelDefaultAttributes` - Use the `Model` extender instead
+  - `GetModelRelationship` - Use the `Model` extender instead
