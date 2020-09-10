@@ -115,26 +115,7 @@ return [
 
 ### Relationships
 
-You can add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models by listening for the `GetModelRelationship` event:
-
-```php
-use Flarum\Event\GetModelRelationship;
-use Flarum\User\User;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(GetModelRelationship::class, function (GetModelRelationship $event) {
-            if ($event->isRelationship(User::class, 'phone')) {
-                return $event->model->hasOne('phone', Phone::class);
-            }
-        });
-    }
-]
-```
-
-<!--
-You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`, `hasManyThrough`, `morphMany`, `morphToMany`, and `morphedByMany` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
@@ -144,15 +125,18 @@ You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relations
         ->belongsToMany('role', 'App\Role', 'role_user', 'user_id', 'role_id')
 ```
 
-You may pass a closure as the final argument to customize the relationship object further:
+Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship can be supported by the relationship method:
 
 ```php
     new Extend\Model(User::class)
-        ->hasOne('mobile', 'App\Phone', function (HasOne $relation) {
-            $relation->where('type', 'mobile');
+        ->relationship('mobile', 'App\Phone', function ($user) {
+            // Return any Eloquent relationship here.
+            return $user->belongsToMany(Discussion::class, 'recipients')
+                ->withTimestamps()
+                ->wherePivot('removed_at', null);
         })
 ```
--->
+
 
 ## Serializers
 
