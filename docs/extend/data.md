@@ -538,24 +538,38 @@ export default class Tag extends Model {
 }
 ```
 
-You must then register your new model with the store using the `Model` extender:
+You must then register your new model with the store:
+
+```js
+app.store.models.tags = Tag;
+```
+
+<!-- You must then register your new model with the store using the `Model` extender:
 
 ```js
 export const extend = [
   new Extend.Model('tags', Tag)
 ];
-```
+``` -->
 
 ### Extending Models
 
-To add attributes and relationships to existing models, use the `Model` extender:
+To add attributes and relationships to existing models, modify the model class prototype:
+
+```js
+Discussion.prototype.tags = Model.hasOne('user');
+Discussion.prototype.tags = Model.hasMany('posts');
+Discussion.prototype.canTag = Model.attribute('slug');
+```
+
+<!-- To add attributes and relationships to existing models, use the `Model` extender:
 
 ```js
   new Extend.Model('discussions')
     .attribute('slug')
     .hasOne('user')
     .hasMany('posts')
-```
+``` -->
 
 ### Saving Resources
 
