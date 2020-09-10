@@ -91,15 +91,15 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 You can inject is Laravel's [View](https://laravel.com/docs/6.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/6.x/blade) into your controller's response.
 
-First, you will need to tell the factory where it can find your extension's view files by adding a closure to `extend.php`:
+First, you will need to tell the factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
 ```php
+use Flarum\Extend;
 use Illuminate\Contracts\View\Factory;
 
 return [
-    function (Factory $view) {
-        $view->addNamespace('acme.hello-world', __DIR__.'/views');
-    }
+    (new Extend\View)
+        ->namespace('acme.hello-world', __DIR__.'/views');
 ];
 ```
 
