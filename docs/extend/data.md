@@ -335,7 +335,7 @@ class DeleteTagController extends AbstractDeleteController
 }
 ```
 
-###  Including Relationships
+### Including Relationships
 
 To include relationships when **listing**, **showing**, or **creating** your resource, specify them in the `$include` and `$optionalInclude` properties on your controller:
 
