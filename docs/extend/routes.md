@@ -141,14 +141,20 @@ On the backend, instead of adding your frontend route via the `Routes` extender,
 
 Now when `yourforum.com/users` is visited, the forum frontend will be displayed. However, since the frontend doesn't yet know about the `users` route, the discussion list will still be rendered.
 
-To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
+Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#routing), adding route names and an abstract class for pages (`common/components/Page`). To register a new route, add an object for it to `app.routes`:
+
+```js
+app.routes['acme.users'] = { path: '/users', component: UsersPage };
+```
+
+<!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
 
 ```jsx
 export const extend = [
   new Extend.Routes()
     .add('/users', 'acme.users', <UsersPage />)
 ];
-```
+``` -->
 
 Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area.
 
@@ -157,11 +163,15 @@ Now when `yourforum.com/users` is visited, the forum frontend will be loaded and
 Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
 
 ```jsx
-  new Extend.Routes()
-    .add('/user/:id', 'acme.user', <UsersPage />)
+app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
 
-Route parameters will be passed into the `props` of the route's component.
+<!-- ```jsx
+  new Extend.Routes()
+    .add('/user/:id', 'acme.user', <UsersPage />)
+``` -->
+
+Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 
 ### Generating URLs
 
