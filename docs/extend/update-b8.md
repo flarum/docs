@@ -3,7 +3,7 @@
 All extensions will need to be refactored in order to work with beta 8. Here are the main things you will need to do in order to make your extension compatible.
 
 ::: warning
-This guide is not comprehensive. You may encounter some changes we haven't documented. If you need help, start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/chat/).
+This guide is not comprehensive. You may encounter some changes we haven't documented. If you need help, start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
 :::
 
 ## PHP Namespaces
