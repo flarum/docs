@@ -15,7 +15,7 @@ In order to do this transpilation, you need to be working in a capable environme
 * Node.js and npm ([Download](https://nodejs.org/en/download/))
 * Webpack (`npm install -g webpack`)
 
-This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](https://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](https://discuss.flarum.org) or on the [Discord chat](https://flarum.org/chat/).
+This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](https://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](https://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
 It's time to set up our little JavaScript transpilation project. Create a new folder in your extension called `js`, then pop in a couple of new files:
 
@@ -179,7 +179,7 @@ class Counter extends Component {
   init() {
     this.count = 0;
   }
-  
+
   view() {
     return (
       <div>
@@ -190,7 +190,7 @@ class Counter extends Component {
       </div>
     );
   }
-  
+
   config(isInitialized, context) {
     $element = this.$();
     $button = this.$('button');

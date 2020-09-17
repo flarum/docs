@@ -3,7 +3,7 @@
 Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
 ::: tip
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/chat/).
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
 :::
 
 ## Breaking Changes
@@ -32,7 +32,7 @@ If you need help applying these changes or using new features, please start a di
   - [Event extender](https://github.com/flarum/core/pull/2097)
   - [Mail extender](https://github.com/flarum/core/pull/2012)
   - [Model extender](https://github.com/flarum/core/pull/2100)
-  
+
 ## Deprecations
 
 - Several events [have been marked deprecated](https://github.com/flarum/core/commit/4efdd2a4f2458c8703aae654f95c6958e3f7b60b) to be removed in beta 14.
