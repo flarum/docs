@@ -1,20 +1,20 @@
 # 贡献代码
 
-有兴趣为 Flarum 的发展做贡献吗？那太好了！不论是 [报告错误](bugs.md) 还是发起 Pull Request：我们竭诚欢迎您的贡献。
+有兴趣为 Flarum 的发展做贡献吗？竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！
 
 在贡献之前，请仔细阅读 [行为准则](code-of-conduct.md)。
 
-本文档是为想要向 Flarum 贡献代码的开发者提供的指南。如果您还只是入门，建议您阅读进阶文档中的 [Concepts](https://flarum.org/extend/concepts.md) 文档来了解 Flarum 的工作原理。
+本文档是为想要向 Flarum 贡献代码的开发者提供的，如果您只是入门，建议您阅读进阶文档中的 [Getting Started](https://flarum.org/extend/start.md) 文档了解 Flarum 的工作原理。
 
 ## 如何开始
 
-请查看 [路线图](https://flarum.org/roadmap/) 和 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 应该比较容易上手。
+请查看 [路线图](https://flarum.org/roadmap/) 和 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。
 
-如果您打算着手进行某些工作，请先在相关 Issue 上发表评论或创建一个新的 Issue。这样我们可以确保您的工作不会白费。
+如果您打算着手进行某些工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们，以免做无用功。
 
 ## 开发设置
 
-[flarum/flarum](https://github.com/flarum/flarum) 是一个「骨架」应用程序，它使用 Composer 下载 [核心 flarum/core](https://github.com/flarum/core) 和 [一堆扩展程序](https://github.com/flarum)。为了简化开发时的工作量，我们建议您创建分支并克隆它们到 [Composer 本地路径存储库](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) 是一个「骨架」应用程序，它使用 Composer 下载 [核心 flarum/core](https://github.com/flarum/core) 和 [一堆扩展程序](https://github.com/flarum)。为了简化开发时的工作量，我们建议您创建它们的分支并克隆到 [Composer 本地路径存储库](https://getcomposer.org/doc/05-repositories.md#path)：
 
 ```bash
 git clone https://github.com/flarum/flarum.git
@@ -26,11 +26,11 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-接下来，通过将 `composer.json` 中的 `minimum-stability` 从 `beta` 改为 `dev`，以确保 Composer 可以接受本地副本中的不稳定版本（开发版本）。
+接着，将 `composer.json` 中的 `minimum-stability` 从 `beta` 改为 `dev`，以使 Composer 接受本地副本中的不稳定包版本（开发版本）。
 
 最后，运行 `composer install` 从本地路径存储库完成插件安装。
 
-Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。在开发过程中，您需要使用 [Node.js](https://nodejs.org/) 重新编译 JavaScript。**提交 PR 时，请不要提交产生的 `dist` 文件**，当更改合并到 `master` 分支时，这会自动处理。
+Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。在开发过程中，您需要使用 [Node.js](https://nodejs.org/) 重新编译 JavaScript。**提交 PR 时，请不要提交生成的 `dist` 文件**，当更改合并到 `master` 分支时，会自动编译。
 
 ```bash
 cd packages/core/js
@@ -38,7 +38,7 @@ npm install
 npm run dev
 ```
 
-对于扩展程序，过程是一样的，只是您应该把核心 JavaScript 链接到扩展中，这样您的 IDE 就能理解 `import from '@flarum/core'` 语句。
+对于扩展程序，过程是一样的，只是您需要把核心 JavaScript 链接到扩展中，这样您的 IDE 就能理解 `import from '@flarum/core'` 语句。
 
 ```bash
 cd packages/tags/js
@@ -49,13 +49,13 @@ npm run dev
 
 ## 开发流程
 
-一个典型的贡献工作流如下所示：
+一个典型的贡献流程如下所示：
 
 1. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
     * *Bug 修复* 应当提交合并到最新的稳定分支。
     * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
     * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
-    * 在内部，我们使用 `<initials>/<short-description>` 的命名方案（例如：`tz/refactor-frontend`）。
+    * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🔨 **编写代码**，编写一些代码。
     * 请参见这里的 [编码风格](#coding-style)。
@@ -63,28 +63,29 @@ npm run dev
 1. 🚦 **测试代码**，测试您的代码。
     * 修复错误或添加功能时，请根据需要添加单元测试。
     * 使用相关包文件夹中的 `vendor/bin/phpunit` 运行测试套件。
+
 <!--
-    * 点击 [这里](link-to-core/tests/README.md) 查看有关 Flarum 测试的更多信息。
+   * 点击 [这里](link-to-core/tests/README.md) 查看有关 Flarum 测试的更多信息。
 -->
 
-4. 💾 **提交代码**，并附上一条描述性信息。
-    * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 编号。
-    * 编写一个 [好的提交消息](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
+1. 💾 **提交代码**，并附上一条描述性信息。
+    * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
+    * 编写一个 [好的 commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
 
-5. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
+2. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
     * 填写 Pull Request 模板。
     * 如果您的更改是视觉上的，请附上一张截图或 GIF 来演示变更。
     * 请不要包含 JavaScript `dist` 文件。这些文件会在合并时自动编译。
 
-6. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
+3. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
     * 团队成员将审核您的代码。我们可能会提出一些修改、改进或替代方案，但对于一些小的改动，应该很快就会接受您的 Pull Request。
-    * 在处理反馈时，请另外推送提交，不要覆盖或压缩提交（我们将在合并时压缩）。
+    * 在处理反馈时，请附加 commit，不要覆盖或压缩提交（我们将在合并时压缩）。
 
-7. 🕺 **雀跃吧**，您刚刚向 Flarum 做了贡献。
+4. 🕺 **欢呼雀跃吧**，您刚刚向 Flarum 做了贡献。
 
 ## 代码风格
 
-为了保持 Flarum 代码库的整洁和一致，我们有着一套遵循的编程风格。如果您对此有疑问，请阅读相关源代码。
+为了保持 Flarum 代码库的整洁性和一致性，我们有着一套遵循的编程风格。如果您对此有疑问，请阅读相关源代码。
 
 如果您的代码风格不是很完美，不用担心！在合并 Pull Request 后，StyleCI 会自动修正任何风格的代码，然后合并到 Flarum 项目仓库。这使得我们可以专注在贡献的内容本身，而非代码风格上。
 
@@ -101,23 +102,23 @@ Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accep
 
 Flarum 的 JavaScript 代码大多遵循 [Airbnb 风格指南](https://github.com/airbnb/javascript)。我们使用 [ESDoc](https://esdoc.org/manual/tags.html) 来提供内联文档。
 
-### Database
+### 数据库
 
 **列** 的命名应当根据其数据类型而定：
 * DATETIME 或 TIMESTAMP：`{动词}_at`（例如：created_at，read_at）或 `{动词}_until`（例如：suspended_until）
 * INT 用于计数：`{名词}_count`（例如：comment_count，word_count）
 * 外键：`{动词}_{实体对象}_id`（例如：hidden_user_id）
     * 动词可以使用具有相同意义的主键等替代（例如：帖子作者可以是 `user_id`)
-* 布尔值：`is_{adjective}`（例如：is_locked）
+* 布尔值：`is_{形容词}`（例如：is_locked）
 
 **表** 的命名规则如下：
 * 使用复数形式（`discussions`）
-* 用下划线分隔多个单词（`access_tokens`）
+* 多个单词之间用下划线分隔（`access_tokens`）
 * 对于关系表，请将两个表名用单数的形式连接起来，并按字母顺序排列。（例如：`discussion_user`）
 
 ### CSS
 
-Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) 的格式：`.组件名-后代名--修饰名`.
+Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)：`.组件名-后代名--修饰名`。
 
 ### 翻译
 
