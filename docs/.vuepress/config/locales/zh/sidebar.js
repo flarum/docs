@@ -28,8 +28,10 @@ module.exports = {
         'appearance',
         'extensions',
         'languages',
+        'mail',
         'tags',
-        'permissions'
+        'permissions',
+        'console'
       ]
     }
   ]
