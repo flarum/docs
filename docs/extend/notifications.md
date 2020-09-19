@@ -122,7 +122,7 @@ Similar to the notification blueprint, we need tell Flarum how we want our notif
 First, create a class that extends the notification component. Then, there are 4 functions to add:
 
 * `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
-* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.atrs.notification.subject())`).
+* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
 * `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
 * `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
 
