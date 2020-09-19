@@ -148,7 +148,7 @@ export default class NewPostNotification extends Notification {
   }
 
   content() {
-    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.atrs.notification.sender()});
+    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.sender()});
   }
 }
 ```
