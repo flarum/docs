@@ -125,7 +125,7 @@ You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relations
         ->belongsToMany('role', 'App\Role', 'role_user', 'user_id', 'role_id')
 ```
 
-Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship can be supported by the relationship method:
+Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship is supported by the `relationship` method:
 
 ```php
     new Extend\Model(User::class)
