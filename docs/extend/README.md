@@ -37,4 +37,4 @@ If you are aiming to address a bug or shortcoming of the core, or of an existing
 ### Getting help
 
 - [Official Flarum Dev Community](https://discuss.flarum.org/t/dev)
-- [Join us on #extend in our discord chat](http://flarum.org/discord/)
+- [Join us on #extend in our discord chat](https://flarum.org/discord/)
