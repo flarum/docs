@@ -140,7 +140,7 @@ export default class NewPostNotification extends Notification {
   }
 
   href() {
-    const notification = this.atrs.notification;
+    const notification = this.attrs.notification;
     const discussion = notification.subject();
     const content = notification.content() || {};
 
