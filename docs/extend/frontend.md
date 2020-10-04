@@ -244,11 +244,12 @@ You should familiarize yourself with [Mithril's component API](https://mithril.j
 * Attributes passed to components are available throughout the class via `this.attrs`.
 * The static `initAttrs` method mutates `this.attrs` before setting them, and allows you to set defaults or otherwise modify them before using them in your class. Please note that this doesn't affect the initial `vnode.attrs`.
 * The `$` method returns a jQuery object for the component's root DOM element. You can optionally pass a selector to get DOM children.
-* `super` should be called when using the `oninit`, `oncreate`, and `onbeforeupdate` methods.
 * the `component` static method can be used as an alternative to JSX and the `m` hyperscript. The following are equivalent:
   * `m(CustomComponentClass, attrs, children)`
   * `CustomComponentClass.component(attrs, children)`
   * `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
+
+However, component classes extending `Component` must call `super` when using the `oninit`, `oncreate`, and `onbeforeupdate` methods.
 
 To use Flarum components, simply extend `flarum/Component` in your custom component class.
 
