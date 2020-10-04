@@ -61,6 +61,14 @@ class HelloWorldController implements RequestHandlerInterface
 
 Controllers are resolved from the [container](https://laravel.com/docs/6.x/container) so you can inject dependencies into their constructors.
 
+:::tip What are Controllers?
+The `handle` method of a Controller is the code that runs when someone visits your route (or sends data to it via a form submission). Generally speaking, Controller implementations follow the pattern:
+
+1. Retrieve information (GET params, POST data, the current user, etc) from the Request object.
+2. Do something with that information. For instance, if our controller handles a route for creating posts, we'll want to save a new post object to the database.
+3. Return a response. Most routes will return an HTML webpage, or a JSON api response.
+:::
+
 ### Route Parameters
 
 Sometimes you will need to capture segments of the URI within your route. You may do so by defining route parameters using the [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax:
@@ -89,9 +97,9 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Views
 
-You can inject is Laravel's [View](https://laravel.com/docs/6.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/6.x/blade) into your controller's response.
+You can inject Laravel's [View](https://laravel.com/docs/6.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/6.x/blade) into your controller's response.
 
-First, you will need to tell the factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
+First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -192,7 +200,7 @@ Whenever you visit a frontend route, the backend constructs a HTML document with
 * Adding SEO content and `<meta>` tags
 * Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
 
-You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be dispalyed, and the `Request` object.
+You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 
 ```php
 use Flarum\Frontend\Document;
