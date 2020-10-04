@@ -1,6 +1,6 @@
 # Updating For Beta 14
 
-This release brings a large chunk of breaking changes - hopefully the last chunk of this size.
+This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release.
 In order to prepare the codebase for the upcoming stable release, we decided it was time to modernize / upgrade / exchange some of the underlying JavaScript libraries that are used in the frontend.
 Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
 
@@ -29,13 +29,13 @@ Props passed into component are now referred to as `attrs`, and can be accessed 
 
 Accordingly, `initProps` has been replaced with `initAttrs`, with a similar BC layer.
 
-#### m.prop -> m.stream
+#### m.prop -> `flarum/utils/Stream`
 
-Mithril streams, which were available via `m.prop` in Mithril 0.2, are now available via `m.stream`. `m.prop` will still work for now due to a temporary BC layer.
+Mithril streams, which were available via `m.prop` in Mithril 0.2, are now available via `flarum/utils/Stream`. `m.prop` will still work for now due to a temporary BC layer.
 
 #### m.withAttr -> withAttr
 
-The `m.withAttr` util has been removed from Mithril. We have provided `common/utils/withAttr`, which does the same thing. A temporary BC layer has been added for `m.withAttr`.
+The `m.withAttr` util has been removed from Mithril. We have provided `flarum/utils/withAttr`, which does the same thing. A temporary BC layer has been added for `m.withAttr`.
 
 #### Lifecycle Hooks
 
@@ -158,18 +158,19 @@ app.routes.new_page = { path: '/new', component: NewPage.component() }
 app.routes.new_page = { path: '/new', component: NewPage }
 ```
 
-Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed.
+Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed. The `Link` component should be used instead.
 
 ```js
 // Mithril 0.2
 <a href="/path" config={m.route}>Link Content</a>
 
 // Mithril 2
-<m.route.Link href="/path">Link Content</m.route.Link>
+import Link from 'flarum/components/Link';
 
-// Or, for convenience through a Flarum util:
-<a route="/path">Link Content</a>
+<Link href="/path">Link Content</Link>
 ```
+
+You can also use `Link` to define external links, which will just render as plain `<a href="url">Children</a>` html links.
 
 For a full list of routing-related changes, please see [the mithril documentation](https://mithril.js.org/migration-v02x.html).
 
@@ -352,10 +353,12 @@ Previously, alerts could be opened by providing an `Alert` component instance:
 app.alerts.show(new Alert(type: 'success', children: 'Hello, this is a success alert!'));
 ```
 
-Since we don't store component instances anymore, we pass in children, attrs, and (optionally) a component class separately.
+Since we don't store component instances anymore, we pass in a component class, attrs, children separately. The `show` method has 3 overloads:
 
 ```js
-app.alerts.show('Hello, this is a success alert!', {type: 'success'}, Alert); // 3rd argument is optional, defaults to Alert.
+app.alerts.show('Hello, this is a success alert!');
+app.alerts.show({type: 'success'}, 'Hello, this is a success alert!');
+app.alerts.show(Alert, {type: 'success'}, 'Hello, this is a success alert!');
 ```
 
 Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert.
@@ -656,7 +659,7 @@ Each of these changes has been explained above, this is just a recap of major ch
   - `m.route(name)` -> `m.route.set(name)`
   - register routes with page class, not instance
     - special case when passing props
-  - `<a href={url} config={m.route}>` -> `<a route={url}>`
+  - `<a href={url} config={m.route}>` -> `<Link href={url}>`
 - AJAX
   - `m.request({...})` -> `data:` key split up into `body:` and `params:`
   - `m.deferred` -> native `Promise`
@@ -664,6 +667,7 @@ Each of these changes has been explained above, this is just a recap of major ch
   - `m.redraw(true)` -> `m.redraw.sync()`
   - `m.redraw.strategy('none')` -> `e.redraw = false` in event handler
   - `m.lazyRedraw()` -> `m.redraw()`
+- `m.withAttr` => `flarum/utils/withAttr`
 
 #### Deprecated changes
 
@@ -677,28 +681,77 @@ Considering you have to do the changes anyway, why not do them now?
 
 - `this.props` -> `this.attrs`
 - static `initProps()` -> static `initAttrs()`
-- `m.prop` -> `m.stream`
-- `m.withAttr` -> `withAttr` with import
+- `m.prop` -> `flarum/utils/Stream`
+- `m.withAttr` -> `flarum/utils/withAttr` with import
 - `moment` -> `dayjs`
 
 ## Backend (PHP)
 
 ### New Features
 
-*TODO*
-- We are now on Laravel 6
-- Optional params in url generator now work
-- View Extender
-- User Extender (prepareGroups)
-- Error handler middleware can now be manipulated by middleware extender
-- Display Name Extender
+#### Extension Dependencies
+
+Some extensions are based on, or add features to, other extensions.
+Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them.
+Now, you cannot enable an extension unless all of its dependencies are enabled, and you cannot disable an extension if there are other enabled extensions depending on it.
+
+So, how do we specify dependencies for an extension? Well, all you need to do is add them as composer dependencies to your extension's `composer.json`! For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this:
+
+```json
+{
+  "name": "my/extension",
+  "description": "Cool New Extension",
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^0.1.0-beta.14",
+    "flarum/tags": "^0.1.0-beta.14",  // Will mark tags as a dependency
+    "flarum/mentions": "^0.1.0-beta.14",  // Will mark mentions as a dependency
+  }
+  // other config
+}
+```
+
+#### View Extender
+
+Previously, when extensions needed to register Laravel Blade views, they could inject a view factory in `extend.php` and call it's `addNamespace` method. For instance,
+
+```php
+// extend.php
+use Illuminate\Contracts\View\Factory;
+
+return [
+  function (Factory $view) {
+    $view->addNamespace(NAME, RELATIVE PATH);
+  }
+]
+```
+
+This should NOT be used, as it will break views for all extensions that boot after yours. Instead, the `View` extender should be used:
+
+```php
+// extend.php
+use Flarum\Extend\View;
+
+return [
+  (new View)->namespace(NAME, RELATIVE PATH);
+]
+```
+
+#### Other Changes
+
+- We are now using Laravel 6. Please see [Laravel's upgrade guide](https://laravel.com/docs/6.x/upgrade) for more information. Please note that we do not use all of Laravel.
+- Optional params in url generator now work. For instance, the url generator can now properly generate links to posts in discussions.
+- A User Extender has been added, which replaces the deprecated `PrepareUserGroups` and `GetDisplayName` eventss
+- Error handler middleware can now be manipulated by the middleware extender through the `add`, `remove`, `replace`, etc methods, just like any other middleware.
+- `Flarum/Foundation/Config` and `Flarum/Foundation/Paths` can now be injected where needed; previously their data was accessible through `Flarum/Foundation/Application`
 
 ### Deprecations
 
-*TODO*
-
-- TODO: `url` as array in `config.php` - [PR](https://github.com/flarum/core/pull/2271#discussion_r475930358)
+- `url` provided in `config.php` is now an array, accessible via `$config->url()`, for an instance of `Config` - [PR](https://github.com/flarum/core/pull/2271#discussion_r475930358)
 - AssertPermissionTrait has been deprecated - [Issue](https://github.com/flarum/core/issues/1320)
+- Global path helpers and path methods of `Application` have been deprecated, the injectable `Paths` class should be used instead - [PR](https://github.com/flarum/core/pull/2155)
+- `Flarum\User\Event\GetDisplayName` has been deprecated, the `displayNameDriver` method of the `User` extender should be used instead - [PR](https://github.com/flarum/core/pull/2174)
 
 ### Removals
 
@@ -706,6 +759,7 @@ Considering you have to do the changes anyway, why not do them now?
 - app()->url() will no longer work: [`Flarum\Http\UrlGenerator`](routes.md) should be injected and used instead. An instance of `Flarum\Http\UrlGenerator` is available in `blade.php` templates via `$url`.
 - As a part of the Laravel 6 upgrade, the [`array_` and `str_` helpers](https://laravel.com/docs/6.x/upgrade#helpers) have been removed.
 - The Laravel translator interface has been removed; the Symfony translator interface should be used instead: `Symfony\Component\Translation\TranslatorInterface`
+- The Mandrill mail driver is no longer provided in Laravel 6, and has been removed.
 - The following events deprecated in Beta 13 [have been removed](https://github.com/flarum/core/commit/7d1ef9d89161363d1c8dea19cf8aebb30136e9e3#diff-238957b67e42d4e977398cd048c51c73):
   - `AbstractConfigureRoutes`
   - `ConfigureApiRoutes` - Use the `Routes` extender instead
@@ -714,3 +768,5 @@ Considering you have to do the changes anyway, why not do them now?
   - `ConfigureModelDates` - Use the `Model` extender instead
   - `ConfigureModelDefaultAttributes` - Use the `Model` extender instead
   - `GetModelRelationship` - Use the `Model` extender instead
+  - `Console\Event\Configuring` - Use the `Console` extender instead
+  - `BioChanged` - User bio has not been a core feature for several releases
