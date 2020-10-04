@@ -231,7 +231,8 @@ So whereas before, you might have done something like:
 
 ```js
 class ChildComponent extends Component {
-  init() {
+  oninit(vnode) {
+    super.oninit(vnode);
     this.counter = 0;
   }
 
@@ -240,7 +241,8 @@ class ChildComponent extends Component {
   }
 }
 class ParentComponent extends Component {
-  init() {
+  oninit(vnode) {
+    super.oninit(vnode);
     this.child = new ChildComponent();
   }
 
@@ -267,7 +269,8 @@ class ChildComponent extends Component {
 }
 
 class ParentComponent extends Component {
-  init() {
+  oninit(vnode) {
+    super.oninit(vnode);
     this.counter = 0;
   }
 
