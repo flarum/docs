@@ -193,7 +193,7 @@ You can also add CSS and [LESS](http://lesscss.org/features/) assets to the fron
 You should develop extensions with debug mode turned **on** in `config.php`. This will ensure that Flarum recompiles assets automatically, so you don't have to manually clear the cache every time you make a change to your extension JavaScript.
 :::
 
-## Changing the UI
+## Changing the UI Part 1
 
 Flarum's interface is constructed using a JavaScript framework called [Mithril.js](https://mithril.js.org/). If you are familiar with [React](https://reactjs.org), then you'll catch on in no time. But if you are not familiar with any JavaScript frameworks, we suggest you go through a [tutorial](https://mithril.js.org/simple-application.html) to understand the fundamentals before proceeding.
 
@@ -297,11 +297,11 @@ Now that we have a better understanding of the component system, let's go a bit 
 
 ### ItemList
 
-As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc; exact names depend on the component you are extending) to add, remove, or replace components. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered dictionary. Detailed documentation of its methods is available in [our API documentation](https://api.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 by default), then by key alphabetically where priorities are equal.
+As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 if not provided), then by key alphabetically where priorities are equal.
 
 ### `extend` and `override`
 
-Essentially, pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. For instance:
+Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. For instance:
 
 ```jsx
 // This adds an attribute to the `app` global.
@@ -314,6 +314,8 @@ DiscussionPage.prototype.view = function() {
   return <p>Hello World</p>;
 }
 ```
+
+will turn Flarum's discussion pages into proclamations of "Hello World". How creative!
 
 In most cases, we don't actually want to completely replace the methods we are modifying. For this reason, Flarum includes `extend` and `override` utils. `extend` allows us to add code to run after a method has completed. `override` allows us to replace a method with a new one, while keeping the old method available as a callback. Both are functions that take 3 arguments:
 
@@ -374,4 +376,4 @@ Some potential "advanced" uses include:
 
 ### Flarum Utils
 
-Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our official API documentation](https://api.flarum.org/js/).
+Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our official API documentation](https://api.docs.flarum.org/js/).
