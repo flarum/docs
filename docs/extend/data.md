@@ -506,6 +506,8 @@ const title = discussion.title();
 const posts = discussion.posts(); // array of Post models
 ```
 
+You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
+
 ### Adding New Models
 
 If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
