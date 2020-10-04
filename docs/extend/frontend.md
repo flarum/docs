@@ -257,7 +257,7 @@ All other properties of Mithril components, including [lifecycle methods](https:
 With this in mind, a custom component class might look like this:
 
 ```jsx
-import { Component } from '@flarum/core/forum';
+import Component from 'flarum/Component';
 
 class Counter extends Component {
   oninit(vnode) {
