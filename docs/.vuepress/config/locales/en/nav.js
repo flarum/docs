@@ -1,7 +1,7 @@
 module.exports = [
     { text: 'Guide', link: '/' },
     { text: 'Extend', link: '/extend/' },
-    { text: 'API Reference', link: 'https://api.flarum.dev/' },
+    { text: 'API Reference', link: 'https://api.docs.flarum.org/' },
     {
       text: 'Flarum',
       items: [
@@ -10,5 +10,4 @@ module.exports = [
         { text: 'GitHub', link: 'https://github.com/flarum/flarum/' },
       ]
     }
-  ]   
-  
+  ]
