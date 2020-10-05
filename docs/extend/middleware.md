@@ -2,6 +2,11 @@
 
 Middleware is a nifty way to wrap the handling of HTTP requests in Flarum. This can allow you to modify responses, add your own checks to the request, and much more. The possibilities are endless!
 
+Flarum maintains a middleware "Pipe" through which all requests pass. Each of the three "applications" (`admin`, `forum`, and `api`) have their own subpipe: after being processed through .
+
+A request passes through the middleware layers in order. When the request is handled (a middleware returns something instead of passing the request to the next layer, or throws an exception), the response will move back up the middleware layers in reverse order, before finally being returned to the user. Everything from Flarum's error handler to its authentication logic is implemented as middleware, and so can be supplemented, replaced, reordered, or removed by extensions.
+
+
 ```php
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,9 +15,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class YourMiddleware implements MiddlewareInterface {
   public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {    
-    // Your logic here!
-    return $handler->handle($request);
+  {
+    // Logic to run before the request is processed and later middleware is called.
+    $response = $handler->handle($request);
+    // Logic to run after the request is processed.
+    return $response
   }
 }
 ```
@@ -64,12 +71,12 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
   if ($currentRoute === $routeToRunUnder->getPath()) {
     // Your logic here!
   }
-  
+
   return $handler->handle($request);
 }
 ```
 
-Simple, right?
+Of course, you can use any condition, not just the current route. Simple, right?
 
 ## Returning Your Own Response
 
