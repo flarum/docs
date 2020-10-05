@@ -191,6 +191,26 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://yourforum.com/users/123?foo=bar
 ```
 
+### Linking to Other Pages
+
+A forum wouldn't be very useful if it only had one page.
+While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+
+Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
+
+```js
+import Link from 'flarum/components/Link';
+
+// Link can be used just like any other component:
+<Link href="/route/known/to/mithril">Hello World!</Link>
+
+// You'll frequently use Link with generated routes:
+<Link href={app.route('settings')}>Hello World!</Link>
+
+// Link can even generate external links with the external attr:
+<Link external={true} href="https://google.com">Hello World!</Link>
+```
+
 ## Content
 
 Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
