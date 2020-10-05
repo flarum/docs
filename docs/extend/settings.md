@@ -5,7 +5,7 @@ At some point while making an extension, you might want to read some of the foru
 ## The Settings Repository
 
 Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`.
-Because Flarum uses [Laravel's service container](https://laravel.com/docs/container) (or IoC container), you don't need to worry about where to obtain such a repository, or how to instantiate one.
+Because Flarum uses [Laravel's service container](https://laravel.com/docs/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one.
 Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
 
 ```php
@@ -29,7 +29,7 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` in our class.
+Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` to our class.
 
 ### Reading Settings
 
@@ -59,11 +59,13 @@ The `all()` function returns an array of all known settings.
 
 The `delete($name)` function lets you remove a named setting.
 
-## A Frontend for Your Settings
+## Modifying Settings
 
 ### SettingsModal
 
-You'll likely want to allow a forum admin to change a setting related to your extension to their liking. This can be achieved through the `SettingsModal`
+You'll likely want to allow a forum admin to change a setting related to your extension to their liking. This can be achieved through the `SettingsModal`.
+This is a component that abstracts away logic for saving settings changes to the database.
+Of course, there's no magic here: you can see what's happening under the surface in `SettingModal's [source code](https://github.com/flarum/core/blob/master/js/src/admin/components/SettingsModal.js).
 
 First, setup your admin JS as discussed [here](frontend.md) (replacing forum with admin).
 
@@ -73,9 +75,13 @@ We will continue to use the "Hello World" example, but your `index.js` should lo
 import HelloWorldSettingsModal from "./components/HelloWorldSettingsModal";
 
 app.initializers.add('acme-hello-world', () => {
-    app.extensionSettings['acme-hello-world'] = () => app.modal.show(new HelloWorldSettingsModal());
+    app.extensionSettings['acme-hello-world'] = () => app.modal.show(HelloWorldSettingsModal);
 });
 ```
+
+:::tip Extension ID
+Please note that you must use your extension's ID as the key for `app.extensionSettings`: you can get this by taking your extension's composer package name, replacing the '/' between the vendor and name with a '-', and removing 'flarum-' or 'flarum-ext-' if present. So, `acme/cool-extension` becomes `acme-cool-extension`, and `acme/flarum-ext-cool` becomes `acme-cool`.
+:::
 
 Then create a `components` folder in the same directory as your `index.js`. Next, a file called `HelloWorldSettingsModal.js`:
 
@@ -107,8 +113,8 @@ export default class HelloWorldSettingsModal extends SettingsModal {
 }
 ```
 
-Always remember to use [internationalizations](i18n.md)!
+Always remember to use [internationalizations](i18n.md) for any labels!
 
-Each `Form-group` should contain an individual input. The `bidi` property on the input corresponds to the setting on the Settings table that the input will modify. It will be automatically propagated with the current settings value, and it will change the value once "Save Settings" button is clicked.
+Each `Form-group` should contain an individual input. The `bidi` property on the input corresponds to the setting on the Settings table that the input will modify. It will be automatically propagated with the current settings value, and it will save the value to the database once "Save Settings" button is clicked.
 
 *Oh? What's this?* When you click "Save Settings" the (settings) [Saved](https://github.com/flarum/core/blob/master/src/Settings/Event/Saved.php) event is dispatched? How cool!
