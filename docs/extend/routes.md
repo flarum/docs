@@ -198,7 +198,7 @@ While you could, of course, implement links to other parts of your forum with HT
 
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
-```js
+```jsx
 import Link from 'flarum/components/Link';
 
 // Link can be used just like any other component:
