@@ -367,4 +367,4 @@ class SendNotificationWhenPostIsLiked
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 
-*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord) and someone will be around to lend a hand!
+*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!
