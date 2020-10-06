@@ -111,6 +111,117 @@ class SendNotificationWhenReplyIsPosted
 
 Your notification is coming together nicely! Just a few things left to do!
 
+### Mailable Notifications
+
+In addition to registering our notification to send by email, if we actually want it to send, we need to provide a bit more information: namely, code for generating the email subject and body.
+To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
+This comes with 2 additional methods:
+
+- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/8.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
+
+Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
+
+```php
+<?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+namespace Flarum\Mentions\Notification;
+
+use Flarum\Notification\Blueprint\BlueprintInterface;
+use Flarum\Notification\MailableInterface;
+use Flarum\Post\Post;
+use Symfony\Component\Translation\TranslatorInterface;
+
+class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
+{
+    /**
+     * @var Post
+     */
+    public $post;
+
+    /**
+     * @var Post
+     */
+    public $reply;
+
+    /**
+     * @param Post $post
+     * @param Post $reply
+     */
+    public function __construct(Post $post, Post $reply)
+    {
+        $this->post = $post;
+        $this->reply = $reply;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubject()
+    {
+        return $this->post;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFromUser()
+    {
+        return $this->reply->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData()
+    {
+        return ['replyNumber' => (int) $this->reply->number];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailView()
+    {
+        return ['text' => 'flarum-mentions::emails.postMentioned'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailSubject(TranslatorInterface $translator)
+    {
+        return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
+            '{replier_display_name}' => $this->post->user->display_name,
+            '{title}' => $this->post->discussion->title
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getType()
+    {
+        return 'postMentioned';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubjectModel()
+    {
+        return Post::class;
+    }
+}
+```
+
 ## Rendering Notifications
 
 As with everything in Flarum, what we register in the backend, must be registered in the frontend as well.
