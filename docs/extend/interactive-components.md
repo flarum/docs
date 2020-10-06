@@ -34,7 +34,7 @@ Modals are managed by a global instance of [`ModalManagerState`](https://api.doc
 
 As opposed to alerts, most custom modals will use a custom class, inheriting `flarum/components/Modal`. For example:
 
-```js
+```jsx
 import Modal from 'flarum/components/Modal';
 
 export default class CustomModal extends Modal {

@@ -44,7 +44,7 @@ For example, this is how the Discussion Page makes its [`PostStreamState`](https
 
 You can also check the type and data of a page using `PostStreamState`'s `matches` method. For instance, if we want to know if we are currently on a discussion page:
 
-```js
+```jsx
 import IndexPage from 'flarum/components/DiscussionPage';
 import DiscussionPage from 'flarum/components/DiscussionPage';
 
