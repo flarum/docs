@@ -13,8 +13,10 @@ Quite a few breaking changes remain, though - read more below.
 If you need help with the upgrade, our friendly community will gladly help you out either [on the forum](https://discuss.flarum.org/t/extensibility) or [in chat](https://flarum.org/chat/).
 :::
 
-To ease the process, we've clearly separated the changes to the frontend (JS) from those in the backend (PHP) below.
+To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below.
 If your extension does not change the UI, consider yourself lucky. :-)
+
+A [summary of the frontend changes](#required-frontend-changes-recap) is available towards the end of this guide.
 
 ## Frontend (JavaScript)
 
@@ -643,7 +645,7 @@ For this purpose, we provide a helper class (`common/Fragment`), of which you ca
 
 This should only be used when absolutely necessary. If you are unsure, you probably don't need it. If the goal is to not store component instances, the "state pattern" as described above is preferable.
 
-### Required changes recap
+### Required Frontend Changes Recap
 
 Each of these changes has been explained above, this is just a recap of major changes for your convenience.
 
