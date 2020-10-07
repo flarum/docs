@@ -378,7 +378,7 @@ For `forum/components/Composer`, `isFullScreen`, `load`, `clear`, `show`, `hide`
 
 A `bodyMatches` method has been added to `forum/states/ComposerState`, letting you check whether a certain subclass of `ComposerBody` is currently open.
 
-Various input fields are now stored as [Mithril Streams](https://mithril.js.org/stream.html) in `app.composer.fields`. For instance, to get the current composer content, you could use `app.composer.fields.content()`. Previously, it was available on `app.composer.component.content()`. This is a convention that `ComposerBody` subclasses that add inputs should follow.
+Various input fields are now stored as [Mithril Streams](https://mithril.js.org/stream.html) in `app.composer.fields`. For instance, to get the current composer content, you could use `app.composer.fields.content()`. Previously, it was available on `app.composer.component.content()`. **This is a convention that `ComposerBody` subclasses that add inputs should follow.**
 
 `app.composer.component` is no longer available.
 
@@ -643,20 +643,19 @@ For this purpose, we provide a helper class (`common/Fragment`), of which you ca
 
 This should only be used when absolutely necessary. If you are unsure, you probably don't need it. If the goal is to not store component instances, the "state pattern" as described above is preferable.
 
-### How to upgrade a component
-
-#### Required changes recap
+### Required changes recap
 
 Each of these changes has been explained above, this is just a recap of major changes for your convenience.
 
-- `view()` -> `view(vnode)`
-- Lifecycle
-  - `init()` -> `oninit(vnode)`
-  - `config()` -> Lifecycle hooks `oncreate(vnode)` / `onupdate(vnode)`
-  - `context.onunload()` -> `onremove()`
-  - `SubtreeRetainer` -> `onbeforeupdate()`
-- if present, `attrs()` method needs to be renamed -> convention `elementAttrs()`
-- building component with `MyComponent.component()` -> `children` is now second parameter instead of a named prop/attr (first argument) -> JSX preferred
+- Component Methods:
+  - `view()` -> `view(vnode)`
+  - Lifecycle
+    - `init()` -> `oninit(vnode)`
+    - `config()` -> Lifecycle hooks `oncreate(vnode)` / `onupdate(vnode)`
+    - `context.onunload()` -> `onremove()`
+    - `SubtreeRetainer` -> `onbeforeupdate()`
+  - if present, `attrs()` method needs to be renamed -> convention `elementAttrs()`
+  - building component with `MyComponent.component()` -> `children` is now second parameter instead of a named prop/attr (first argument) -> JSX preferred
 - Routing
   - `m.route()` -> `m.route.get()`
   - `m.route(name)` -> `m.route.set(name)`
@@ -670,7 +669,6 @@ Each of these changes has been explained above, this is just a recap of major ch
   - `m.redraw(true)` -> `m.redraw.sync()`
   - `m.redraw.strategy('none')` -> `e.redraw = false` in event handler
   - `m.lazyRedraw()` -> `m.redraw()`
-- `m.withAttr` => `flarum/utils/withAttr`
 
 #### Deprecated changes
 
@@ -679,13 +677,12 @@ This will be removed in time for the stable release.
 The idea is to let you release a new version that's compatible with Beta 14 to your users as quickly as possible.
 When you have taken care of the changes above, you should be good to go.
 For the following changes, we have bought you time until the stable release.
-Considering you have to do the changes anyway, why not do them now?
-
+Considering you have to make changes anyway, why not do them now?
 
 - `this.props` -> `this.attrs`
 - static `initProps()` -> static `initAttrs()`
 - `m.prop` -> `flarum/utils/Stream`
-- `m.withAttr` -> `flarum/utils/withAttr` with import
+- `m.withAttr` -> `flarum/utils/withAttr`
 - `moment` -> `dayjs`
 
 ## Backend (PHP)
@@ -741,13 +738,21 @@ return [
 ]
 ```
 
+#### Application and Container
+
+Although Flarum uses multiple components of the Laravel framework, it is not a pure Laravel system. In beta 14, the `Flarum\Foundation\Application` class no longer implements `Illuminate\Contracts\Foundation\Application`, and no longer inherits `Illuminate\Container\Container`. Several things to note:
+
+- The `app` helper now points to an instance of `Illuminate\Container\Container`, not `Flarum\Foundation\Application`. You might need to resolve things through the container before using them: for instance, `app()->url()` will no longer work; you'll need to resolve or inject an instance of `Flarum\Foundation\Config` and use that.
+- Injected or resolved instances of `Flarum\Foundation\Application` can no longer resolve things through container methods. `Illuminate\Container\Container` should be used instead.
+- Not all public members of `Illuminate\Contracts\Foundation\Application` are available through `Flarum\Foundation\Application`. Please refer to our [API docs on `Flarum\Foundation\Application`](https://api.docs.flarum.org/php/master/flarum/foundation/application) for more information.
+
 #### Other Changes
 
 - We are now using Laravel 6. Please see [Laravel's upgrade guide](https://laravel.com/docs/6.x/upgrade) for more information. Please note that we do not use all of Laravel.
 - Optional params in url generator now work. For instance, the url generator can now properly generate links to posts in discussions.
-- A User Extender has been added, which replaces the deprecated `PrepareUserGroups` and `GetDisplayName` eventss
+- A User Extender has been added, which replaces the deprecated `PrepareUserGroups` and `GetDisplayName` events.
 - Error handler middleware can now be manipulated by the middleware extender through the `add`, `remove`, `replace`, etc methods, just like any other middleware.
-- `Flarum/Foundation/Config` and `Flarum/Foundation/Paths` can now be injected where needed; previously their data was accessible through `Flarum/Foundation/Application`
+- `Flarum/Foundation/Config` and `Flarum/Foundation/Paths` can now be injected where needed; previously their data was accessible through `Flarum/Foundation/Application`.
 
 ### Deprecations
 
