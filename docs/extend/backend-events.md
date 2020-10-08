@@ -1,6 +1,6 @@
 # Backend Events
 
-Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcast across the framework through [Laravel's event system](https://laravel.com/docs/6.x/events).
+Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/6.x/events).
 
 :::warning Old Event API
 Historically, Flarum has used events for its extension API, emitting events like `GetDisplayName` or `ConfigureApiRoutes` to allow extensions to insert logic into various parts of Flarum. These events are gradually being phased out in favor of the declarative [extender system](start.md#extenders), and will be removed before stable. Domain events will not be removed.
