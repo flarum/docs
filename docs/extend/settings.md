@@ -149,14 +149,8 @@ namespace Acme;
 
 class AddSettingsToPayload
 {
-  /**
-  * @var SettingsRepositoryInterface
-  */
   protected $settings;
 
-  /**
-    * @param SettingsRepositoryInterface $settings
-    */
   public function __construct(SettingsRepositoryInterface $settings)
   {
       $this->settings = $settings;

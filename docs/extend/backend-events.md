@@ -43,7 +43,7 @@ class PostDeletedListener
 }
 ```
 
-As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/6.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance.
+As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/6.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
 
 ## Dispatching Events
 
@@ -83,7 +83,7 @@ class SomeClass
 ## Custom Events
 
 As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension.
-Events are generally just POPOs (Plain Old PHP Objects). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users.
+Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users.
 For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
 
 ```php
@@ -104,7 +104,7 @@ use Flarum\User\User;
 class Deleted
 {
     /**
-     * @var \Flarum\Post\Post
+     * @var Post
      */
     public $post;
 
@@ -114,7 +114,8 @@ class Deleted
     public $actor;
 
     /**
-     * @param \Flarum\Post\Post $post
+     * @param Post $post
+     * @param User $user
      */
     public function __construct(Post $post, User $actor = null)
     {

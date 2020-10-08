@@ -545,7 +545,7 @@ To add attributes and relationships to existing models, modify the model class p
 ```js
 Discussion.prototype.user = Model.hasOne('user');
 Discussion.prototype.posts = Model.hasMany('posts');
-Discussion.prototype.slug= Model.attribute('slug');
+Discussion.prototype.slug = Model.attribute('slug');
 ```
 
 <!-- To add attributes and relationships to existing models, use the `Model` extender:

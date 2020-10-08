@@ -209,6 +209,11 @@ import Link from 'flarum/components/Link';
 
 // Link can even generate external links with the external attr:
 <Link external={true} href="https://google.com">Hello World!</Link>
+
+// The above example with external = true is equivalent to:
+<a href="https://google.com">Hello World!</a>
+// but is provided for flexibility: sometimes you might have links
+// that are conditionally internal or external.
 ```
 
 ## Content
