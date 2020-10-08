@@ -41,7 +41,7 @@ export default class CustomModal extends Modal {
   // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
   static isDismissible = true;
 
-  classname() {
+  className() {
     // Custom CSS classes to apply to the modal
     return 'custom-modal-class';
   }
