@@ -376,4 +376,4 @@ Some potential "advanced" uses include:
 
 ### Flarum Utils
 
-Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our official API documentation](https://api.docs.flarum.org/js/).
+Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
