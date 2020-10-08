@@ -32,7 +32,7 @@ Modals are managed by a global instance of [`ModalManagerState`](https://api.doc
 - `app.modal.show(componentClass, attrs)` will show a modal using the given component class and attrs. If called while a modal is already open, it will replace the currently open modal.
 - `app.modal.close()` will close the modal if one is currently active.
 
-As opposed to alerts, most custom modals will use a custom class, inheriting `flarum/components/Modal`. For example:
+As opposed to alerts, most modals will use a custom class, inheriting `flarum/components/Modal`. For example:
 
 ```jsx
 import Modal from 'flarum/components/Modal';
