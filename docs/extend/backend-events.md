@@ -43,7 +43,7 @@ class PostDeletedListener
 }
 ```
 
-As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/6.x/container) into your listener class.
+As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/6.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance.
 
 ## Dispatching Events
 
