@@ -13,7 +13,7 @@ Please see the linked API documentation for each of these to learn more about it
 - The [`flarum/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
 - The [`flarum/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
 
-You'll typically want to assign logic for reacting to input changes via attrs, not external listeners. For example:
+You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
 
 ```jsx
 import Component from 'flarum/Component';
@@ -109,6 +109,6 @@ Flarum's request system is available globally via `app.request(options)`, and ha
 - It will automatically attach `X-CSRF-Token` headers.
 - It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
 - If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request asynchronously. However, this should almost never be done.
+- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
 
 Otherwise, the API for using `app.request` is the same as that for `m.request`.

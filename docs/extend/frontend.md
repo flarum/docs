@@ -201,7 +201,7 @@ The crux of it is that Flarum generates virtual DOM elements which are a JavaScr
 
 Because the interface is built with JavaScript, it's really easy to hook in and make changes. All you need to do is find the right extender for the part of the interface you want to change, and then add your own virtual DOM into the mix.
 
-Most mutable parts of the interface are really just *list of items*. For example:
+Most mutable parts of the interface are really just *lists of items*. For example:
 
 * The controls that appear on each post (Reply, Like, Edit, Delete)
 * The index sidebar navigation items (All Discussions, Following, Tags)

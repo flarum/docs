@@ -59,7 +59,7 @@ app.current.matches(IndexPage, {routeName: 'following'});
 
 Due to Mithril's routing implementation, `oninit` is NOT called again if a route is changed BUT the same component handles the new route.
 For instance, if you go directly from one discussion's page to another, `oninit` will not be called again, and the page will not be rerendered from scratch.
-See https://mithril.js.org/route.html#key-parameter. In core, we have identified 2 strategies that, when used together, replicate previous behavior.
+See https://mithril.js.org/route.html#key-parameter. In core, we use two 2 strategies to force full component redraws on route change.
 
 - If the route is programatically changed, and we always want to recreate the page component, we can use the `common/utils/setRouteWithForcedRefresh` util. Under the surface, this uses a unique key as per the above Mithril documentation.
 - When creating a page, we can store the current path (or some other identifying parameter) on initialization. Then, in `onbeforeupdate`, if the current value of that identifying parameter isn't the same as what we stored, we can load in new data for this page and re-render. In core, this is done in `IndexPage`, `DiscussionPage`, and `UserPage`. We recommend reading that source code as inspiration IF this is needed.
