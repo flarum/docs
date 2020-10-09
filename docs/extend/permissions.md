@@ -55,9 +55,9 @@ import PermissionGrid from 'flarum/components/PermissionGrid';
 export default function() {
   extend(PermissionGrid.prototype, 'moderateItems', items => {
     items.add('tag', {
-      icon: 'fas fa-tag',
+      icon: 'fas fa-tag',  // CSS classes for the icon. Generally in fontawesome format, although you can use your own custom css too.
       label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'
+      permission: 'discussion.tag'  // The permission string.
     }, 95);
   });
 }
