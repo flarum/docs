@@ -33,6 +33,7 @@ module.exports = {
           'search',
           'settings',
           'testing',
+          'validation',
         ]
       },
       // {
