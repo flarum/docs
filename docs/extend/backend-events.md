@@ -56,27 +56,27 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class SomeClass
 {
-  /**
-    * @var Dispatcher
+    /**
+        * @var Dispatcher
+        */
+    protected $events;
+
+    /**
+    * @param Dispatcher $events
     */
-  protected $events;
+    public function __construct(Dispatcher $events)
+    {
+        $this->events = $events;
+    }
 
-  /**
-   * @param Dispatcher $events
-   */
-  public function __construct(Dispatcher $events)
-  {
-    $this->events = $events;
-  }
-
-  public function someMethod()
-  {
-    // Logic
-    $this->events->dispatch(
-      new Deleted($somePost, $someActor)
-    );
-    // More Logic
-  }
+    public function someMethod()
+    {
+        // Logic
+        $this->events->dispatch(
+        new Deleted($somePost, $someActor)
+        );
+        // More Logic
+    }
 }
 ```
 
