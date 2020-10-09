@@ -16,14 +16,14 @@ use Flarum\Group\GroupValidator;
 
 class SomeClass
 {
-  protected $validator;
-  public function __construct(GroupValidator $validator) {
-    $this->validator = $validator;
-  }
+    protected $validator;
+    public function __construct(GroupValidator $validator) {
+        $this->validator = $validator;
+    }
 
-  public function someMethod() {
-    $this->validator->assertValid($group->getDirty());
-  }
+    public function someMethod() {
+        $this->validator->assertValid($group->getDirty());
+    }
 }
 ```
 
@@ -43,18 +43,18 @@ use Illuminate\Validation\ValidationException;
 
 class SomeClass
 {
-  protected $validatorFactory;
-  public function __construct(Factory $validatorFactory) {
-    $this->validatorFactory = $validatorFactory;
-  }
-
-  public function someMethod() {
-    $validator = $this->validatorFactory->make($input, ['password' => 'required|confirmed']);
-
-    if ($validator->fails()) {
-        throw new ValidationException($validator);
+    protected $validatorFactory;
+    public function __construct(Factory $validatorFactory) {
+        $this->validatorFactory = $validatorFactory;
     }
-  }
+
+    public function someMethod() {
+        $validator = $this->validatorFactory->make($input, ['password' => 'required|confirmed']);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+    }
 }
 ```
 
@@ -143,37 +143,37 @@ use Flarum\User\UserValidator;
 use Illuminate\Support\Str;
 
 return [
-  // Register extenders here
-  (new Extend\Event)->listen(Validating::class, function(Dispatcher $events) {
-    $events->listen(Validating::class, function(Validating $event) {
-      // This modification should only apply to UserValidator
-      if ($event->type instanceof UserValidator) {
-        $rules = $event->validator->getRules();
+    // Register extenders here
+    (new Extend\Event)->listen(Validating::class, function(Dispatcher $events) {
+        $events->listen(Validating::class, function(Validating $event) {
+        // This modification should only apply to UserValidator
+        if ($event->type instanceof UserValidator) {
+            $rules = $event->validator->getRules();
 
-        // In this case, we are tweaking validation logic for the username attribute,
-        // so if that key isn't present in rules, there's nothing we need to do.
-        if (!array_key_exists('username', $rules)) {
-          return;
+            // In this case, we are tweaking validation logic for the username attribute,
+            // so if that key isn't present in rules, there's nothing we need to do.
+            if (!array_key_exists('username', $rules)) {
+            return;
+            }
+
+            // Tweak username validation with a custom regex,
+            // and increase min length to 10 characters.
+            $rules['username'] = array_map(function(string $rule) {
+            if (Str::startsWith($rule, 'regex:')) {
+                return 'regex:/^[.a-z0-9_-]+$/i';
+            }
+
+            if (Str::startsWith($rule, 'min:')) {
+                return 'min:10';
+            }
+
+            return $rule;
+            }, $rules['username']);
+
+            // Update the validator instance with modified rules.
+            $event->validator->setRules($rules);
         }
-
-        // Tweak username validation with a custom regex,
-        // and increase min length to 10 characters.
-        $rules['username'] = array_map(function(string $rule) {
-          if (Str::startsWith($rule, 'regex:')) {
-            return 'regex:/^[.a-z0-9_-]+$/i';
-          }
-
-          if (Str::startsWith($rule, 'min:')) {
-            return 'min:10';
-          }
-
-          return $rule;
-        }, $rules['username']);
-
-        // Update the validator instance with modified rules.
-        $event->validator->setRules($rules);
-      }
-    });
-  }),
+        });
+    }),
 ];
 ```
