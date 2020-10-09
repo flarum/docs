@@ -206,3 +206,16 @@ class TagPolicy extends AbstractPolicy
     }
 }
 ```
+
+## Frontend Authorization
+
+Commonly, you'll want to use authorization results in frontend logic.
+For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint.
+And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
+
+Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending.
+Global permissions (`viewDiscussions`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object.
+For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model.
+It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
+
+For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).
