@@ -1,4 +1,4 @@
-# Mail
+# Email Configuration
 
 Any community needs to send emails to allow for email verification, password resets, notifications, and other communication to users. Configuring your forum to send emails should be one of your first steps as an admin: an incorrect configuration will cause errors when users try to register.
 
