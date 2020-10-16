@@ -9,6 +9,8 @@ module.exports = ctx => ({
   locales: locales.get(),
 
   themeConfig: {
+    logo: "/logo-docs.svg",
+
     algolia: ctx.isProd && {
         apiKey: '8f760cdb850b1e696b72329eed96b01b',
         indexName: 'flarum'
