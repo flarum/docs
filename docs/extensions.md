@@ -9,14 +9,14 @@ This article will focus on managing extensions from a forum admin's perspective.
 
 ## Finding Extensions
 
-Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, go to the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
+Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
 
 ## Installing Extensions
 
-Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using a terminal. To install a typical extension:
+Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
 
 1. `cd` to the folder containing `composer.json`.
-2. Run `composer require COMPOSER_PACKAGE_ID`. This should be provided by the extension's documentation.
+2. Run `composer require COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
 
 ## Managing Extensions
 
