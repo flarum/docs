@@ -74,7 +74,9 @@ There are actually 3 ways to set the component / route resolver when registering
 For example:
 
 ```js
+// See above for a custom page example
 import CustomPage from './components/CustomPage';
+// See below for a custom resolver example
 import CustomPageResolver from './resolvers/CustomPageResolver';
 
 // Use a route resolver instance
