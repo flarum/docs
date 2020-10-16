@@ -3,6 +3,8 @@ const locales = require('./config/locales');
 module.exports = ctx => ({
   base: '/',
 
+  head: require('./config/head'),
+
   plugins: require('./config/plugins'),
   locales: locales.get(),
 
