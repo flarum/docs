@@ -1,4 +1,4 @@
-# Frontend Pages
+# Frontend Pages and Resolvers
 
 As explained in the [Routes and Content](routes.md#frontend-routes) documentation, we can use Mithril's routing system to show different [components](frontend.md#components) for different routes. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component.
 
@@ -55,13 +55,95 @@ app.current.matches(DiscussionPage);
 app.current.matches(IndexPage, {routeName: 'following'});
 ```
 
-## Switching Between Routes
+## Route Resolvers (Advanced)
 
-Due to Mithril's routing implementation, `oninit` is NOT called again if a route is changed BUT the same component handles the new route.
-For instance, if you go directly from one discussion's page to another, `oninit` will not be called again, and the page will not be rerendered from scratch.
-See https://mithril.js.org/route.html#key-parameter. In core, we use two 2 strategies to force full component redraws on route change.
+[Advanced use cases](https://mithril.js.org/route.html#advanced-component-resolution) can take advantage of Mithril's [route resolver system](https://mithril.js.org/route.html#routeresolver).
+Flarum actually already wraps all its components in the `flarum/resolvers/DefaultResolver` resolver. This has the following benefits:
 
-- If the route is programatically changed, and we always want to recreate the page component, we can use the `common/utils/setRouteWithForcedRefresh` util. Under the surface, this uses a unique key as per the above Mithril documentation.
-- When creating a page, we can store the current path (or some other identifying parameter) on initialization. Then, in `onbeforeupdate`, if the current value of that identifying parameter isn't the same as what we stored, we can load in new data for this page and re-render. In core, this is done in `IndexPage`, `DiscussionPage`, and `UserPage`. We recommend reading that source code as inspiration IF this is needed.
+- It passes a `routeName` attr to the current page, which then provides it to `PageState`
+- It assigns a [key](https://mithril.js.org/keys.html#single-child-keyed-fragments) to the top level page component. When the route changes, if the top level component's key has changed, it will be completely rerendered (by default, Mithril does not rerender components when switching from one page to another if both are handled by the same component).
 
-We are planning to provide a cleaner abstraction in future beta releases. In the meantime, please note that this is only necessary for page components that handle multiple routes.
+### Using Route Resolvers
+
+There are actually 3 ways to set the component / route resolver when registering a route:
+
+- the `resolver` key can be used to provide an **instance** of a route resolver. This instance should define which component should be used, and hardcode the route name to be passed into it. This instance will be used without any modifications by Flarum.
+- The `resolverClass` key AND `component` key can be used to provide a **class** that will be used to instantiate a route resolver, to be used instead of Flarum's default one, as well as the component to use. Its constructor should take 2 arguments: `(component, routeName)`.
+- The `component` key can be used alone to provide a component. This will result in the default behavior.
+
+For example:
+
+```js
+import CustomPage from './components/CustomPage';
+import CustomPageResolver from './resolvers/CustomPageResolver';
+
+// Use a route resolver instance
+app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
+  onmatch: function(args) {
+    if (!app.session.user) return m.route.SKIP;
+
+    return CustomPage;
+  }
+}};
+
+// Use a custom route resolver class
+app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
+
+// Use the default resolver class (`flarum/resolvers/DefaultResolver`)
+app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+```
+
+### Custom Resolvers
+
+We strongly encourage custom route resolvers to extend `flarum/resolvers/DefaultResolver`.
+For example, Flarum's `flarum/resolvers/DiscussionPageResolver` assigns the same key to all links to the same discussion (regardless of the current post), and triggers scrolling when using `m.route.set` to go from one post to another on the same discussion page:
+
+```js
+import DefaultResolver from '../../common/resolvers/DefaultResolver';
+
+/**
+ * This isn't exported as it is a temporary measure.
+ * A more robust system will be implemented alongside UTF-8 support in beta 15.
+ */
+function getDiscussionIdFromSlug(slug: string | undefined) {
+  if (!slug) return;
+  return slug.split('-')[0];
+}
+
+/**
+ * A custom route resolver for DiscussionPage that generates the same key to all posts
+ * on the same discussion. It triggers a scroll when going from one post to another
+ * in the same discussion.
+ */
+export default class DiscussionPageResolver extends DefaultResolver {
+  static scrollToPostNumber: number | null = null;
+
+  makeKey() {
+    const params = { ...m.route.param() };
+    if ('near' in params) {
+      delete params.near;
+    }
+    params.id = getDiscussionIdFromSlug(params.id);
+    return this.routeName.replace('.near', '') + JSON.stringify(params);
+  }
+
+  onmatch(args, requestedPath, route) {
+    if (route.includes('/d/:id') && getDiscussionIdFromSlug(args.id) === getDiscussionIdFromSlug(m.route.param('id'))) {
+      DiscussionPageResolver.scrollToPostNumber = parseInt(args.near);
+    }
+
+    return super.onmatch(args, requestedPath, route);
+  }
+
+  render(vnode) {
+    if (DiscussionPageResolver.scrollToPostNumber !== null) {
+      const number = DiscussionPageResolver.scrollToPostNumber;
+      // Scroll after a timeout to avoid clashes with the render.
+      setTimeout(() => app.current.get('stream').goToNumber(number));
+      DiscussionPageResolver.scrollToPostNumber = null;
+    }
+
+    return super.render(vnode);
+  }
+}
+```

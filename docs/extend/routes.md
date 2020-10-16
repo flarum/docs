@@ -166,6 +166,8 @@ export const extend = [
 
 Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area. For more information on frontend pages, please see [that documentation section](frontend-pages.md).
 
+Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
+
 ### Route Parameters
 
 Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
