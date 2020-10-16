@@ -1,6 +1,6 @@
 # Console
 
-In addition to the admin dashboard, Flarum provides several console commands to manage your forum.
+In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
 
 To use the console:
 

@@ -73,16 +73,15 @@ module.exports = {
         ]
       },
       {
-        title: 'Customization',
+        title: 'Management',
         collapsable: false,
         children: [
+          'admin',
           'config',
-          'appearance',
           'extensions',
           'languages',
+          'themes',
           'mail',
-          'tags',
-          'permissions',
           'console'
         ]
       }
