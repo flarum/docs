@@ -31,8 +31,12 @@ If it fails validation, a `Illuminate\Validation\ValidationException` will be th
 
 Remember that you can turn an Eloquent instance into an associative array of attributes via:
 
-- The `$instance->getAttributes()` method if the instance hasn't been saved.
-- The `$instance->getDirty()` method if the instance has been saved.
+- `$instance->getAttributes()` will get all attribute values as they are currently present on the model, saved or not
+- `$instance->getDirty()` will get all attribute values that have been modified and not yet saved. It works for new or existing models
+- `$instance->getChanges()` will get all attributes that were modified and are now saved
+- `$instance->getOriginal()` will get all attribute values that were retrieved from the database
+
+Also, keep in mind that it's generally preferable to validate data before pushing it into the model instance.
 
 We can also create a Laravel validator instance directly by injecting a `Illuminate\Contracts\Validation\Factory` instance. For example:
 
@@ -146,33 +150,33 @@ return [
     // Register extenders here
     (new Extend\Event)->listen(Validating::class, function(Dispatcher $events) {
         $events->listen(Validating::class, function(Validating $event) {
-        // This modification should only apply to UserValidator
-        if ($event->type instanceof UserValidator) {
-            $rules = $event->validator->getRules();
+            // This modification should only apply to UserValidator
+            if ($event->type instanceof UserValidator) {
+                $rules = $event->validator->getRules();
 
-            // In this case, we are tweaking validation logic for the username attribute,
-            // so if that key isn't present in rules, there's nothing we need to do.
-            if (!array_key_exists('username', $rules)) {
-            return;
+                // In this case, we are tweaking validation logic for the username attribute,
+                // so if that key isn't present in rules, there's nothing we need to do.
+                if (!array_key_exists('username', $rules)) {
+                    return;
+                }
+
+                // Tweak username validation with a custom regex,
+                // and increase min length to 10 characters.
+                $rules['username'] = array_map(function(string $rule) {
+                    if (Str::startsWith($rule, 'regex:')) {
+                        return 'regex:/^[.a-z0-9_-]+$/i';
+                    }
+
+                    if (Str::startsWith($rule, 'min:')) {
+                        return 'min:10';
+                    }
+
+                    return $rule;
+                }, $rules['username']);
+
+                // Update the validator instance with modified rules.
+                $event->validator->setRules($rules);
             }
-
-            // Tweak username validation with a custom regex,
-            // and increase min length to 10 characters.
-            $rules['username'] = array_map(function(string $rule) {
-            if (Str::startsWith($rule, 'regex:')) {
-                return 'regex:/^[.a-z0-9_-]+$/i';
-            }
-
-            if (Str::startsWith($rule, 'min:')) {
-                return 'min:10';
-            }
-
-            return $rule;
-            }, $rules['username']);
-
-            // Update the validator instance with modified rules.
-            $event->validator->setRules($rules);
-        }
         });
     }),
 ];
