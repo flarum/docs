@@ -79,6 +79,10 @@ To rename columns, use the `Migration::renameColumns` helper. The `renameColumns
 return Migration::renameColumns('users', ['from' => 'to']);
 ```
 
+### Data Migrations (Advanced)
+
+A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. For instance, you could use migrations to assign [custom permissions](permissions.md) to groups other than Admin, or provide some initial data for a custom Eloquent model. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
+
 ## Backend Models
 
 With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/6.x/eloquent).

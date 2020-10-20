@@ -57,13 +57,13 @@ use Illuminate\Contracts\Events\Dispatcher;
 class SomeClass
 {
     /**
-        * @var Dispatcher
-        */
+      * @var Dispatcher
+      */
     protected $events;
 
     /**
-    * @param Dispatcher $events
-    */
+      * @param Dispatcher $events
+      */
     public function __construct(Dispatcher $events)
     {
         $this->events = $events;
