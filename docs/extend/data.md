@@ -16,7 +16,7 @@ Migrations live inside a folder suitably named `migrations` in your extension's 
 
 ### Migration Structure
 
-In Flarum, migration files should **return an array** with two functions: `up` and `down`. The `up` function is used to add new tables, columns, or indexes to your database, while the `down` function should reverse these operations. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/5.7/migrations#creating-tables) which you can use to alter the database schema:
+In Flarum, migration files should **return an array** with two functions: `up` and `down`. The `up` function is used to add new tables, columns, or indexes to your database, while the `down` function should reverse these operations. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/6.x/migrations#creating-tables) which you can use to alter the database schema:
 
 ```php
 <?php
@@ -48,7 +48,7 @@ return Migration::createTable('users', function (Blueprint $table) {
 });
 ```
 
-When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/5.7/migrations#creating-columns) to define the table's columns.
+When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/6.x/migrations#creating-columns) to define the table's columns.
 
 ### Renaming Tables
 
@@ -81,7 +81,7 @@ return Migration::renameColumns('users', ['from' => 'to']);
 
 ## Backend Models
 
-With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/5.7/eloquent).
+With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/6.x/eloquent).
 
 ### Adding New Models
 
@@ -92,7 +92,7 @@ If you've added a new table, you'll need to set up a new model for it. Rather th
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-If you need to define any attribute [accessors](https://laravel.com/docs/5.7/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/5.7/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/5.7/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/5.7/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/5.7/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+If you need to define any attribute [accessors](https://laravel.com/docs/6.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/6.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/6.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/6.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/6.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
 
 ```php
 use Flarum\Extend;
@@ -115,26 +115,7 @@ return [
 
 ### Relationships
 
-You can add [relationships](https://laravel.com/docs/5.7/eloquent-relationships) to existing models by listening for the `GetModelRelationship` event:
-
-```php
-use Flarum\Event\GetModelRelationship;
-use Flarum\User\User;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(GetModelRelationship::class, function (GetModelRelationship $event) {
-            if ($event->isRelationship(User::class, 'phone')) {
-                return $event->model->hasOne('phone', Phone::class);
-            }
-        });
-    }
-]
-```
-
-<!--
-You can also add [relationships](https://laravel.com/docs/5.7/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`, `hasManyThrough`, `morphMany`, `morphToMany`, and `morphedByMany` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
@@ -144,15 +125,18 @@ You can also add [relationships](https://laravel.com/docs/5.7/eloquent-relations
         ->belongsToMany('role', 'App\Role', 'role_user', 'user_id', 'role_id')
 ```
 
-You may pass a closure as the final argument to customize the relationship object further:
+Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship is supported by the `relationship` method:
 
 ```php
     new Extend\Model(User::class)
-        ->hasOne('mobile', 'App\Phone', function (HasOne $relation) {
-            $relation->where('type', 'mobile');
+        ->relationship('mobile', 'App\Phone', function ($user) {
+            // Return any Eloquent relationship here.
+            return $user->belongsToMany(Discussion::class, 'recipients')
+                ->withTimestamps()
+                ->wherePivot('removed_at', null);
         })
 ```
--->
+
 
 ## Serializers
 
@@ -351,7 +335,7 @@ class DeleteTagController extends AbstractDeleteController
 }
 ```
 
-###  Including Relationships
+### Including Relationships
 
 To include relationships when **listing**, **showing**, or **creating** your resource, specify them in the `$include` and `$optionalInclude` properties on your controller:
 
@@ -496,7 +480,7 @@ Now that you have exposed your data in Flarum's JSON:API, it's finally time to b
 
 ### Fetching Data
 
-Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a [Promise](https://mithril.js.org/archive/v0.2.5/mithril.deferred.html):
+Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
 
 <!-- import { store } from '@flarum/core/forum'; -->
 ```js
@@ -522,6 +506,8 @@ const title = discussion.title();
 const posts = discussion.posts(); // array of Post models
 ```
 
+You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
+
 ### Adding New Models
 
 If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
@@ -538,24 +524,38 @@ export default class Tag extends Model {
 }
 ```
 
-You must then register your new model with the store using the `Model` extender:
+You must then register your new model with the store:
+
+```js
+app.store.models.tags = Tag;
+```
+
+<!-- You must then register your new model with the store using the `Model` extender:
 
 ```js
 export const extend = [
   new Extend.Model('tags', Tag)
 ];
-```
+``` -->
 
 ### Extending Models
 
-To add attributes and relationships to existing models, use the `Model` extender:
+To add attributes and relationships to existing models, modify the model class prototype:
+
+```js
+Discussion.prototype.user = Model.hasOne('user');
+Discussion.prototype.posts = Model.hasMany('posts');
+Discussion.prototype.slug = Model.attribute('slug');
+```
+
+<!-- To add attributes and relationships to existing models, use the `Model` extender:
 
 ```js
   new Extend.Model('discussions')
     .attribute('slug')
     .hasOne('user')
     .hasMany('posts')
-```
+``` -->
 
 ### Saving Resources
 

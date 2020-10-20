@@ -85,10 +85,8 @@ Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/su
 /*
  * This file is part of Flarum.
  *
- * (c) Toby Zerner <toby.zerner@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
 
 namespace Flarum\Subscriptions\Listener;
@@ -113,6 +111,117 @@ class SendNotificationWhenReplyIsPosted
 
 Your notification is coming together nicely! Just a few things left to do!
 
+### Mailable Notifications
+
+In addition to registering our notification to send by email, if we actually want it to send, we need to provide a bit more information: namely, code for generating the email subject and body.
+To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
+This comes with 2 additional methods:
+
+- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/6.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
+
+Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
+
+```php
+<?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+namespace Flarum\Mentions\Notification;
+
+use Flarum\Notification\Blueprint\BlueprintInterface;
+use Flarum\Notification\MailableInterface;
+use Flarum\Post\Post;
+use Symfony\Component\Translation\TranslatorInterface;
+
+class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
+{
+    /**
+     * @var Post
+     */
+    public $post;
+
+    /**
+     * @var Post
+     */
+    public $reply;
+
+    /**
+     * @param Post $post
+     * @param Post $reply
+     */
+    public function __construct(Post $post, Post $reply)
+    {
+        $this->post = $post;
+        $this->reply = $reply;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubject()
+    {
+        return $this->post;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFromUser()
+    {
+        return $this->reply->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData()
+    {
+        return ['replyNumber' => (int) $this->reply->number];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailView()
+    {
+        return ['text' => 'flarum-mentions::emails.postMentioned'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailSubject(TranslatorInterface $translator)
+    {
+        return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
+            '{replier_display_name}' => $this->post->user->display_name,
+            '{title}' => $this->post->discussion->title
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getType()
+    {
+        return 'postMentioned';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubjectModel()
+    {
+        return Post::class;
+    }
+}
+```
+
 ## Rendering Notifications
 
 As with everything in Flarum, what we register in the backend, must be registered in the frontend as well.
@@ -122,7 +231,7 @@ Similar to the notification blueprint, we need tell Flarum how we want our notif
 First, create a class that extends the notification component. Then, there are 4 functions to add:
 
 * `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
-* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.props.notification.subject())`).
+* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
 * `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
 * `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
 
@@ -140,7 +249,7 @@ export default class NewPostNotification extends Notification {
   }
 
   href() {
-    const notification = this.props.notification;
+    const notification = this.attrs.notification;
     const discussion = notification.subject();
     const content = notification.content() || {};
 
@@ -148,7 +257,7 @@ export default class NewPostNotification extends Notification {
   }
 
   content() {
-    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.props.notification.sender()});
+    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.sender()});
   }
 }
 ```
@@ -258,4 +367,4 @@ class SendNotificationWhenPostIsLiked
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 
-*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord) and someone will be around to lend a hand!
+*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!

@@ -4,11 +4,23 @@ If Flarum isn't installing or working as expected, the first thing you should do
 
 Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
-## Step 1: Turn on debug mode
+## Step 0: Turn on debug mode
 
 Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
 If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
+
+## Step 1: Common Fixes
+
+A lot of issues can be fixed with the following:
+
+* Clear your browser cache
+* Clear the backend cache with [`php flarum cache:clear`](console.md).
+* Make sure your database is updated with [`php flarum migrate`](console.md).
+* Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
+* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used.
+
+You'll also want to take a look at the output of [`php flarum info`](console.md) to ensure that nothing major is out of place.
 
 ## Step 2: Reproduce the issue
 
@@ -20,7 +32,7 @@ Somewhere along the way you may get an idea about what's causing your issue, and
 
 ## Step 3: Collect information
 
-If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places: 
+If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places:
 
 * Displayed on the actual page
 * Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
