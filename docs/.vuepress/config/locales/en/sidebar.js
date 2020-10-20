@@ -14,6 +14,7 @@ module.exports = {
         'update-b10',
         'update-b12',
         'update-b13',
+        'update-b14',
       ]
     },
     {
@@ -82,16 +83,15 @@ module.exports = {
       ]
     },
     {
-      title: 'Customization',
+      title: 'Management',
       collapsable: false,
       children: [
+        'admin',
         'config',
-        'appearance',
         'extensions',
         'languages',
+        'themes',
         'mail',
-        'tags',
-        'permissions',
         'console'
       ]
     }
