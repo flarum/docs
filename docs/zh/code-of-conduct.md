@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 行为准则
 
 ### _欢迎光临 Flarum 社区！_

@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 多语言支持
 
 为您的 Flarum 添加新的界面语言很简单。按照下面的说明，下载并安装语言包即可。

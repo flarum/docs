@@ -1,4 +1,4 @@
 module.exports = {
-    lang: 'zh-CN',
+    lang: 'zh-Hans',
     title: 'Flarum 文档',
 }

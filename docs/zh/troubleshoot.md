@@ -1,14 +1,30 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 故障排查
 
-如果 Flarum 没有按照预期那样安装或工作，您 *首先应该检查* 服务器环境是否符合 [系统要求](install.md#server-requirements)。如果您缺少一些 Flarum 运行所需的东西，请先补全内容。
+如果 Flarum 没有按照预期那样安装或工作，您 *首先应该检查* 服务器环境是否符合 [系统要求](install.md#环境要求)。如果您缺少一些 Flarum 运行所需的东西，请先补全内容。
 
 然后，请花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)，有可能该问题已被报告，并且有了解决办法。如果您彻底搜索后，仍然没有找到任何有用的信息，那么就可以开始排查故障了。
 
-## 步骤 1：开启调试模式
+## 步骤 0：开启调试模式
 
 在继续前，您应当启用 Flarum 的调试模式。用文本编辑器打开 **config.php**，将 `debug` 的值改为 `true`，然后保存文件即可。开启后，Flarum 会显示详细的错误报告，方便您了解到底发生了什么。
 
 如果上面的改动不起任何作用，并且论坛所有页面都变成空白，请试试将 **php.ini** 文件中的 `display_errors` 设置为 `On`。
+
+## 步骤 1：常见问题修复
+
+很多问题都可通过以下解决：
+
+* 清除浏览器缓存。
+* 使用 [`php flarum cache:clear`](console.md) 清除后端缓存。
+* 确保以使用 [`php flarum migrate`](console.md) 更新数据库。
+* 确保 [邮箱配置](mail.md) 可用：无效的邮箱配置将导致注册、重置密码、更换用户绑定邮箱以及发送通知时产生错误。
+* 检查 `config.php` 配置是否正确，请确保您使用了正确的 `url`。
+
+您也得看看 [`php flarum info`](console.md) 的输出，以确保没有什么大的问题。
 
 ## 步骤 2：问题重现
 

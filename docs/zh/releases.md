@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 版本说明
 
 <!--
