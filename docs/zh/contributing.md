@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 贡献代码
 
 有兴趣为 Flarum 的发展做贡献吗？竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！
@@ -8,9 +12,9 @@
 
 ## 如何开始
 
-请查看 [路线图](https://flarum.org/roadmap/) 和 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。
+请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。
 
-如果您打算着手进行某些工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们，以免做无用功。
+如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们，以免做无用功。
 
 ## 开发设置
 
@@ -29,6 +33,8 @@ git clone https://github.com/<username>/tags.git packages/tags # etc
 接着，将 `composer.json` 中的 `minimum-stability` 从 `beta` 改为 `dev`，以使 Composer 接受本地副本中的不稳定包版本（开发版本）。
 
 最后，运行 `composer install` 从本地路径存储库完成插件安装。
+
+准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。这样您就能同时看到 Flarum 和 PHP 的详细报错内容。同时，调试模式下，每一次请求都将强制重新编译 Flarum 的静态资源。因此，在扩展程序的 JavaScript 或 CSS 发生变更后，您无需运行 `php flarum cache:clear` 命令。
 
 Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。在开发过程中，您需要使用 [Node.js](https://nodejs.org/) 重新编译 JavaScript。**提交 PR 时，请不要提交生成的 `dist` 文件**，当更改合并到 `master` 分支时，会自动编译。
 
@@ -58,9 +64,9 @@ npm run dev
     * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🔨 **编写代码**，编写一些代码。
-    * 请参见这里的 [编码风格](#coding-style)。
+    * 请参见这里的 [编码风格](#编码风格)。
 
-1. 🚦 **测试代码**，测试您的代码。
+3. 🚦 **测试代码**，测试您的代码。
     * 修复错误或添加功能时，请根据需要添加单元测试。
     * 使用相关包文件夹中的 `vendor/bin/phpunit` 运行测试套件。
 
@@ -68,30 +74,32 @@ npm run dev
    * 点击 [这里](link-to-core/tests/README.md) 查看有关 Flarum 测试的更多信息。
 -->
 
-1. 💾 **提交代码**，并附上一条描述性信息。
+4. 💾 **提交代码**，并附上一条描述性信息。
     * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
     * 编写一个 [好的 commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
 
-2. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
+5. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
     * 填写 Pull Request 模板。
     * 如果您的更改是视觉上的，请附上一张截图或 GIF 来演示变更。
     * 请不要包含 JavaScript `dist` 文件。这些文件会在合并时自动编译。
 
-3. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
+6. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
     * 团队成员将审核您的代码。我们可能会提出一些修改、改进或替代方案，但对于一些小的改动，应该很快就会接受您的 Pull Request。
     * 在处理反馈时，请附加 commit，不要覆盖或压缩提交（我们将在合并时压缩）。
 
-4. 🕺 **欢呼雀跃吧**，您刚刚向 Flarum 做了贡献。
+7. 🕺 **恭喜**，您刚刚向 Flarum 做了贡献。
 
-## 代码风格
+## 编码风格
 
-为了保持 Flarum 代码库的整洁性和一致性，我们有着一套遵循的编程风格。如果您对此有疑问，请阅读相关源代码。
+为了保持 Flarum 代码库的整洁性和一致性，我们有着一套遵循的编码风格。如果您对此有疑问，请阅读相关源代码。
+
+别担心你的代码风格不够漂亮，在合并拉取请求后， StyleCI 将会自动把所有样式进行修正，再合并到 Discuz! Q 存储库中。这使得我们更多的关注贡献的内容而不是代码风格。
 
 如果您的代码风格不是很完美，不用担心！在合并 Pull Request 后，StyleCI 会自动修正任何风格的代码，然后合并到 Flarum 项目仓库。这使得我们可以专注在贡献的内容本身，而非代码风格上。
 
 ### PHP
 
-Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) 编程规范以及 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 自动加载规范。此外，我们还符合 [其他一些风格规范](https://github.com/flarum/core/blob/master/.styleci.yml)。我们尽可能地使用 PHP 7 类型提示和返回类型声明，我们也使用 [PHPDoc](https://docs.phpdoc.org/) 提供内联文档。请您尽量在贡献时模仿其他代码库使用的风格。
+Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) 编码规范和 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 自动加载规范。此外，我们还符合 [其他一些风格规范](https://github.com/flarum/core/blob/master/.styleci.yml)。我们尽可能地使用 PHP 7 类型提示和返回类型声明，我们也使用 [PHPDoc](https://docs.phpdoc.org/) 提供内联文档。请您尽量在贡献时模仿其他代码库使用的风格。
 
 * 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
 * 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
@@ -126,7 +134,7 @@ Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcs
 
 ## 开发工具
 
-大多数 Flarum 贡献者使用 [PHPStorm](https://www.jetbrains.com/phpstorm/download/) 或 [Sublime Text](https://www.sublimetext.com) 开发。
+大多数 Flarum 贡献者使用 [PHPStorm](https://www.jetbrains.com/phpstorm/download/) 或 [VSCode](https://code.visualstudio.com/) 进行开发。
 
 [Laravel Valet](https://laravel.com/docs/master/valet)（MAC）、[XAMPP](https://www.apachefriends.org/index.html)（Windows）以及 [Docker-Flarum](https://github.com/mondediefr/docker-flarum)（Linux）均是搭建本地论坛开发环境的热门选择。
 

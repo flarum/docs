@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 安装
 
 ::: warning 警告
@@ -33,7 +37,7 @@ Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展
 composer create-project flarum/flarum . --stability=beta
 ```
 
-您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/您的/论坛/路径/public`，并按照下面的说明设置 [URL 重写](#url-rewriting)。
+您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/您的/论坛/路径/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
 
 当一切就绪后，在浏览器中访问您的论坛网址，在安装向导的指引下完成安装。
 

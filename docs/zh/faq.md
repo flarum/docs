@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 常见问题
 
 ### Flarum 正式版何时发布？

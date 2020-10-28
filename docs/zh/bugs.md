@@ -1,3 +1,7 @@
+<template>
+  <processing class="blue"></processing>
+</template>
+
 # 提交 Bug
 
 ::: danger 安全漏洞

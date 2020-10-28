@@ -1,14 +1,14 @@
-# 关于 Flarum
+<template>
+  <processing class="blue"></processing>
+</template>
 
-::: tip 友情提示
-中文文档可能更新不及时，最新内容请以英文文档为准。
-:::
+# 关于 Flarum
 
 Flarum 是一款非常简洁的开源论坛软件。它响应快速、简便易用，拥有打造一片成功的社区所需的所有功能。
 
 本用户指南将帮助您使用 Flarum 搭建自己的论坛，并教授您管理社区的基础知识。
 
-## 目标
+## 定位
 
 Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)，她生来就被设计如此：
 

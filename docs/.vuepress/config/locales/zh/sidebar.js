@@ -1,37 +1,70 @@
 module.exports = {
-  '/zh/': [{
+  '/zh/extend/': [
+    {
+      title: '核心概念',
+      collapsable: false,
+      children: [
+        ['','扩展 Flarum']
+      ]
+    },
+    {
+      title: '高级指引',
+      collapsable: false,
+      children: [
+        ['console','控制台'],
+        'post-types',
+        'search',
+        'testing',
+      ]
+    },
+    // {
+    //   title: 'Themes',
+    //   collapsable: false,
+    //   children: [
+    //     'theme',
+    //   ]
+    // },
+    // {
+    //   title: 'Localization',
+    //   collapsable: false,
+    //   children: [
+    //   ]
+    // }
+  ],
+
+  '/zh/': [
+    {
       title: '介绍',
       collapsable: false,
       children: [
-        '',
-        'code-of-conduct',
-        'releases',
-        'contributing',
-        'bugs',
-        'faq'
+        ['','关于 Flarum'],
+        ['code-of-conduct','行为准则'],
+        ['releases','版本说明'],
+        ['contributing','贡献代码'],
+        ['bugs','提交 Bug'],
+        ['faq','常见问题']
       ]
     },
     {
       title: '部署',
       collapsable: false,
       children: [
-        'install',
-        'update',
-        'troubleshoot'
+        ['install','安装'],
+        ['update','更新'],
+        ['troubleshoot','故障排查']
       ]
     },
     {
-      title: '客制化',
+      title: '管理',
       collapsable: false,
       children: [
-        'config',
-        'appearance',
-        'extensions',
-        'languages',
-        'mail',
-        'tags',
-        'permissions',
-        'console'
+        ['admin','后台管理'],
+        ['config','配置文件'],
+        ['extensions','扩展程序'],
+        ['languages','多语言支持'],
+        ['themes','样式主题'],
+        ['mail','配置邮箱'],
+        ['console','控制台']
       ]
     }
   ]
