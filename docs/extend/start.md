@@ -128,8 +128,6 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
   To make this possible, we try to deprecate features for one beta cycle, before removing them for the next one, until we reach stable.
   This gives you two months time to update.
-  
-  \*NOTE: Flarum 0.1.0-beta.14 is scheduled for breaking changes as part of a rewrite of the entire frontend, we recommend the current compatibility scheme for now. 
   :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
