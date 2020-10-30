@@ -19,6 +19,7 @@ module.exports = ctx => ({
         apiKey: '8f760cdb850b1e696b72329eed96b01b',
         indexName: 'flarum'
     },
+    searchPlaceholder: 'Search Docs',
 
     docsRepo: 'flarum/docs',
     docsDir: 'docs',
