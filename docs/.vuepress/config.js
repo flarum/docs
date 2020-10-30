@@ -8,6 +8,10 @@ module.exports = ctx => ({
   plugins: require('./config/plugins'),
   locales: locales.get(),
 
+  head: [
+    ['link', { href: 'https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;600&amp;display=swap', rel: 'stylesheet' }]
+  ],
+
   themeConfig: {
     logo: "/logo-docs.svg",
 
