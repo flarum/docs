@@ -1,13 +1,13 @@
 <template>
-  <processing class="blue"></processing>
+  <outdated class="blue"></outdated>
 </template>
 
 # 安装
 
-::: warning 警告
+::: danger 警告
 Flarum 处于 **测试阶段**。这意味着她有一些 Bug 🐛🐞、功能也有残缺，而且可能在某些时候（迟早）会崩溃。💥
 
-测试版本旨在解决这些问题，并改进 Flarum。**除非您很清楚后果，并对自己的能力很自信，否则请不要在生产环境中使用 Flarum**。如果出了问题，我们无法为您提供支持。另外测试版本是可以升级到后续版本的，不过需要您手动操作。
+测试版本旨在解决这些问题，并改进 Flarum。**除非您很清楚后果，且对自己的能力很有信心，否则请勿在生产环境中使用 Flarum**。如果出了问题，我们无法为您提供支持。另外测试版本是可以升级到后续版本的，不过需要您手动操作。
 :::
 
 ::: tip 即刻测试 Flarum？
@@ -19,7 +19,7 @@ Flarum 处于 **测试阶段**。这意味着她有一些 Bug 🐛🐞、功能�
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
 
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 7.1+**，需要启用 curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
+* **PHP 7.1+**，需要启用 curl, dom, exif, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
 * **允许 SSH（命令行）**，以运行 Composer
 
@@ -59,7 +59,7 @@ Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它�
 
 ### Nginx
 
-Flarum 附带了一个 `.nginx.conf` 文件，请确保它有正确生成。假如您已经在 Nginx 中建立了一个 PHP 站点，您应当在站点配置中添加以下内容，以导入默认的重写规则：
+Flarum 根目录附带了一个 `.nginx.conf` 文件，请确保它有正确生成。假如您已经在 Nginx 中建立了一个 PHP 站点，您应当在站点配置中添加以下内容，以导入默认的重写规则：
 
 ```nginx
 include /您的/论坛/路径/.nginx.conf;
@@ -106,14 +106,14 @@ www.example.com {
 　
 . Flarum 安装根目录
 ├── public _(**公共目录**)_
-│   └── assets _(**资源目录。存放头像、上传的文件等**)_
+│   ├── assets _(**资源目录。存放头像、上传的文件等**)_
+│   └── .htaccess _(**自带 Apache 配置**)_
 │
 ├── storage
 │   └── logs _(**日志**)_
 │
 ├── vendor _(**核心、插件目录**)_
 ├── .nginx.conf _(**自带 Nginx 配置**)_
-├── .htaccess _(**自带 Apache 配置**)_
 ├── composer.json _(**Composer 配置文件**)_
 ├── extend.php _(**自定义扩展文件**)_
 ├── flarum

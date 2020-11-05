@@ -1,5 +1,5 @@
 <template>
-  <processing class="blue"></processing>
+  <outdated class="blue"></outdated>
 </template>
 
 # 电子邮件配置

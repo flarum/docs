@@ -4,7 +4,8 @@ module.exports = {
       title: '核心概念',
       collapsable: false,
       children: [
-        ['','扩展 Flarum']
+        ['','扩展 Flarum'],
+        ['start','起步'],
       ]
     },
     {
