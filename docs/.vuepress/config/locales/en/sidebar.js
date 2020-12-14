@@ -15,6 +15,7 @@ module.exports = {
         'update-b12',
         'update-b13',
         'update-b14',
+        'update-b15',
       ]
     },
     {
@@ -24,25 +25,29 @@ module.exports = {
         'frontend-pages',
         'interactive-components',
         'forms',
-        'backend-events'
+        'backend-events',
+        'admin'
       ]
     },
     {
       title: 'Advanced Guides',
       collapsable: false,
       children: [
+        'admin',
         'authorization',
         'console',
         'formatting',
         'i18n',
         'mail',
         'middleware',
+        'slugging',
         'notifications',
         'permissions',
         'post-types',
         'search',
         'settings',
         'testing',
+        'throttling',
       ]
     },
     // {
