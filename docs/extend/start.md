@@ -89,7 +89,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.14 <0.1.0-beta.15"
+        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -122,7 +122,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
   ::: warning Carefully choose the Flarum version
   While Flarum is still in beta, we recommend that you declare compatibility both with the current ~~and the upcoming beta~~* version of Flarum:
 
-      "flarum/core": ">=0.1.0-beta.14 <0.1.0-beta.15"
+      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
 
   This gives you time to update your extension for new features or changes in Flarum's core, without preventing users from upgrading to the latest Flarum release because your extension is not compatible.
 
