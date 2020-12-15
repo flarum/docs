@@ -251,7 +251,7 @@ Notification drivers are also registered via the `Notification` extender, using 
 
 * `$driverName`: A unique, human readable name for the driver
 * `$driverClass`: The class static of the driver (example: `PostSerializer::class`)
-* `$typesnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
+* `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
 
 Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
 

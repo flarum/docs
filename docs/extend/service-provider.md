@@ -32,12 +32,12 @@ class CustomServiceProvider extends AbstractServiceProvider
 {
     public function register()
     {
-      // custom logic here
+        // custom logic here
     }
 
     public function boot()
     {
-      // custom logic here
+        // custom logic here
     }
 }
 ```

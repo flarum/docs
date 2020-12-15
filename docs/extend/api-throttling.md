@@ -14,8 +14,8 @@ The format for a custom throttler is extremely simple: all you need is a closure
 
 - `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
 - `true`: This marks the request as to be throttled.
-
-Any other outputs will be ignored. If the throttler allows a given request, it should probably return `null` (or not return anything), not `true`.
+- `null`: This means that this throttler doesn't apply.
+Any other outputs will be ignored, with the same effect as `null`.
 
 Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler:
 

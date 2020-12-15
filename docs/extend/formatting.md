@@ -24,8 +24,8 @@ return [
         // Modify raw text before it is parsed.
         // This callback should return the modified text.
         ->parse(function (Parses $parser, $context, $text) {
-          // custom logic here
-          return $newText;
+            // custom logic here
+            return $newText;
         })
         // Modify the XML to be rendered before rendering.
         // This callback should return the new XML.
@@ -33,8 +33,8 @@ return [
         // provide the username and display name of the user being mentioned.
         // Make sure that the last $request argument is nullable (or omitted entirely).
         ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
-          // custom logic here
-          return $newXml;
+            // custom logic here
+            return $newXml;
         })
 ];
 ```
