@@ -91,6 +91,8 @@ return Migration::renameColumns('users', ['from' => 'to']);
 
 A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. For instance, you could use migrations to assign [custom permissions](permissions.md) to groups other than Admin, or provide some initial data for a custom Eloquent model. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
 
+Data migrations are the recommended way to specify default settings and permissions.
+
 ## Backend Models
 
 With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/6.x/eloquent).
@@ -184,59 +186,31 @@ You can also specify relationships for your resource. Simply create a new method
     }
 ```
 
-To add **attributes** to an existing resource type, listen for the `Serializing` event:
-
-```php
-use Flarum\Api\Event\Serializing;
-use Flarum\Api\Serializer\UserSerializer;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(Serializing::class, function (Serializing $event) {
-            if ($event->isSerializer(UserSerializer::class)) {
-                $event->attributes['firstName'] = $user->first_name;
-            }
-        });
-    }
-]
-```
-
-To add **relationships** to an existing resource type, listen for the `GetApiRelationship` event:
-
-```php
-use Flarum\Event\GetApiRelationship;
-use Flarum\Api\Serializer\UserSerializer;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(GetApiRelationship::class, function (GetApiRelationship $event) {
-            if ($event->isRelationship(UserSerializer::class, 'phone')) {
-                return $event->serializer->hasOne($event->model, PhoneSerializer::class);
-            }
-        });
-    }
-]
-```
-
-<!--
-use the `Serializer` extender:
+To add **attributes** and **relationships** to an existing resource type, use the `ApiSerializer` extender:
 
 ```php
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Extend;
 
 return [
-    (new Extend\Serializer(UserSerializer::class))
-        ->attributes(function ($user, &$attributes) {
-            $attributes['firstName'] = $user->first_name;
+    (new Extend\ApiSerializer(UserSerializer::class))
+        // One attribute at a time
+        ->attribute('firstName', function ($serializer, $user, $attributes) {
+                return $user->first_name
         })
+        // Multiple modifications at once, more complex logic
+        ->mutate(function($serializer, $user, $attributes) {
+            $attributes['someAttribute'] = $user->someAttribute;
+            if ($serializer->getActor()->can('administrate')) {
+                $attributes['someDate'] = $serializer->formatDate($user->some_date);
+            }
+
+            return $attributes;
+        })
+        // API relationships
         ->hasOne('phone', PhoneSerializer::class)
-        ->hasMany('comments', CommentSerializer::class)
-];
+        ->hasMany('comments', CommentSerializer::class),
+]
 ```
--->
 
 ## API Endpoints
 
@@ -417,7 +391,7 @@ return $query->get();
 
 ### Extending API Controllers
 
-It is possible to customize all of these options on _existing_ API controllers too by listening for the `WillGetData` event:
+It is possible to customize all of these options on _existing_ API controllers too via the `ApiController` extender
 
 ```php
 use Flarum\Api\Event\WillGetData;
@@ -425,40 +399,22 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    function (Dispatcher $events) {
-        $events->listen(WillGetData::class, function (WillGetData $event) {
-            if ($event->isController(ListDiscussionsController::class)) {
-                $event->setSerializer(MyDiscussionSerializer::class);
-                $event->addInclude('user');
-                $event->addOptionalInclude('posts');
-                $event->setLimit(20);
-                $event->setMaxLimit(50);
-                $event->setSort(['name' => 'asc']);
-                $event->addSortField('firstName');
-            }
-        });
-    }
+    (new Extend\ApiController(ListDiscussionsController::class))
+        ->setSerializer(MyDiscussionSerializer::class)
+        ->addInclude('user')
+        ->addOptionalInclude('posts')
+        ->setLimit(20)
+        ->setMaxLimit(50)
+        ->setSort(['name' => 'asc'])
+        ->addSortField('firstName')
+        ->prepareDataQuery(function ($controller) {
+          // Add custom logic here to modify the controller
+          // before data queries are executed.
+        })
 ]
 ```
 
-<!--
-via the `ApiController` extender:
-
-```php
-return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->serializer(MyDiscussionSerializer::class)
-        ->include('user')
-        ->optionalInclude('posts')
-        ->limit(20)
-        ->maxLimit(50)
-        ->sort(['name' => 'asc'])
-        ->sortField('firstName')
-];
-```
--->
-
-If you need to do anything else to prepare the data from an existing API controller for serialization, you can do so by listening for the `WillSerializeData` event:
+The `ApiController` extendercan also be used to adjust data before serialization
 
 ```php
 use Flarum\Api\Event\WillSerializeData;
@@ -466,25 +422,12 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    function (Dispatcher $events) {
-        $events->listen(WillSerializeData::class, function (WillSerializeData $event) {
-            if ($event->isController(ListDiscussionsController::class)) {
-                $event->data->load('myCustomRelation');
-            }
-        });
-    }
+    (new Extend\ApiController(ListDiscussionsController::class))
+        ->prepareDataForSerialization(function ($controller, $data, $request, $document) {
+          $data->load('myCustomRelation');
+        }),
 ]
 ```
-
-<!--
-```php
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->data(function ($data) {
-            $data->load('myCustomRelation');
-        })
-```
--->
-
 
 ## Frontend Models
 
