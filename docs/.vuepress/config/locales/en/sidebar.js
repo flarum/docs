@@ -27,7 +27,6 @@ module.exports = {
         'interactive-components',
         'forms',
         'backend-events',
-        'admin'
       ]
     },
     {
@@ -46,6 +45,7 @@ module.exports = {
         'permissions',
         'post-types',
         'search',
+        'service-provider',
         'settings',
         'testing',
       ]
