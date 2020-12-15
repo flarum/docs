@@ -52,7 +52,7 @@ return [
 ];
 ```
 
-Tada! Middleware defined.
+Tada! Middleware registered. Remember that order matters.
 
 Now that we've got the basics down, let's run through a few more things:
 
@@ -69,6 +69,19 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
   $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
 
   if ($currentRoute === $routeToRunUnder->getPath()) {
+    // Your logic here!
+  }
+
+  return $handler->handle($request);
+}
+```
+
+If your middleware runs after `Flarum\Http\Middleware\ResolveRoute` (which is recommended if it is route-dependent), you can access the route name via `$request->getAttribute('routeName')`. For example:
+
+```php
+public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+{
+  if ($request->getAttribute('routeName') === 'register') {
     // Your logic here!
   }
 
