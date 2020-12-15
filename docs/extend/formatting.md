@@ -23,7 +23,7 @@ return [
         })
         // Modify raw text before it is parsed.
         // This callback should return the modified text.
-        ->parse(function (Parses $parser, $context, $text) {
+        ->parse(function (Parser $parser, $context, $text) {
             // custom logic here
             return $newText;
         })
