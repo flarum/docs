@@ -18,7 +18,7 @@ If you need help applying these changes or using new features, please start a di
   - Please note that the new notification driver system is not an exact analogue of the old `Sending` event, as it can only add new drivers, not change the functionality of the default notification bell alert driver. If your extension needs to modify **how** or **to whom** notifications are sent, you may need to replace `Flarum\Notification\NotificationSyncer` on the service provider level
 - `Flarum\Event\ConfigureNotificationTypes` has been deprecated, the `type` method of the `Notification` extender should be used instead
 - `Flarum\Event\ConfigurePostTypes` has been deprecated, the `type` method of the `Post` extender should be used instead
-- `Flarum\Post\Event\CheckingForFlooding` has been deprecated, as well as `Flarum\Post\Floodgate`. They have been replaced with a middleware-based throttling system that applies to ALL requests to /api/*, and can be configured via the `ThrottleApi` extender. Please see our [throttling](throttling.md) documentation for more information.
+- `Flarum\Post\Event\CheckingForFlooding` has been deprecated, as well as `Flarum\Post\Floodgate`. They have been replaced with a middleware-based throttling system that applies to ALL requests to /api/*, and can be configured via the `ThrottleApi` extender. Please see our [api-throttling](api-throttling.md) documentation for more information.
 - `Flarum\Event\ConfigureUserPreferences` has been deprecated, the `registerPreference` method of the `User` extender should be used instead
 - `Flarum\Foundation\Event\Validating` has been deprecated, the `configure` method of the `Validator` extender should be used instead
 

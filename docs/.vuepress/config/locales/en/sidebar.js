@@ -22,6 +22,7 @@ module.exports = {
       title: 'Reference Guides',
       collapsable: false,
       children: [
+        'admin',
         'frontend-pages',
         'interactive-components',
         'forms',
@@ -33,7 +34,7 @@ module.exports = {
       title: 'Advanced Guides',
       collapsable: false,
       children: [
-        'admin',
+        'api-throttling',
         'authorization',
         'console',
         'formatting',
@@ -47,7 +48,6 @@ module.exports = {
         'search',
         'settings',
         'testing',
-        'throttling',
       ]
     },
     // {
