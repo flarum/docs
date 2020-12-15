@@ -17,7 +17,7 @@ To understand service providers, you must first understand the order in which Fl
 2. The `register` methods of all core service providers are run.
 3. The `extend` methods of all extenders used by all enabled extensions are run.
 4. The `extend` methods of all extenders used in the Flarum site's local `extend.php` are run.
-5. The `boot` metods of all core service providers are run.
+5. The `boot` methods of all core service providers are run.
 
 ## Custom Service Providers
 
