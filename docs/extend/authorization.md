@@ -5,11 +5,6 @@ As with any framework, Flarum allows certain actions and content to be restricte
 - The authorization process dictates whether a user can take a certain action.
 - Visibility scoping can be applied to a database query to efficiently restrict the records that users can access.
 
-:::warning Upcoming Changes
-We are planning to rewrite the Policy and Visibility Scoping implementations within the next beta release.
-The refactor will be tracked in [this Github issue](https://github.com/flarum/core/issues/2092).
-:::
-
 ## Authorization Process
 
 The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they:
