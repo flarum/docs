@@ -4,11 +4,23 @@ Data is the foundation of any forum, so you're going to need to play nice with i
 
 Flarum makes use of [Laravel's Database component](https://laravel.com/docs/database). You should familiarize yourself with it before proceeding, as it is assumed as prior knowledge in the following documentation.
 
-::: warning
-Many of the APIs described on this page are planned to change in the near future.
-:::
+
+## API Request Lifecycle
+
+Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical data request:
+
+1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
+2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
+3. Any modifications done by extensions to the controller via the [`ApiController` extender](#extending-api-controllers) are applied. This could entail changing sort, adding includes, changing the serializer, etc.
+4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the controller's serializer can process it. Each controller is responsible for implementing its own `data` method. Note that for `PATCH`, `POST`, and `DELETE` requests, `data` will perform the operation in question, and return the modified model instance.
+5. That data is run through any pre-serialization callbacks that extensions register via the [`ApiController` extender](#extending-api-controllers).
+6. The data is passed through a [serializer](#serializers), which converts it from the backend, database-friendly format to the JSON:API format expected by the frontend. It also attaches any related objects, which are run through their own serializers. As we'll explain below, extensions can [add / override relationships and attributes](#attributes-and-relationships) at the serialization level.
+7. The serialized data is returned as a JSON response to the frontend.
+8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](#frontend-models) in the frontend store.
 
 ## Migrations
+
+If we want to use a custom model, or add attributes to an existing one, we will need to modify the database to add tables / columns. We do this via migrations.
 
 Migrations are like version control for your database, allowing you to easily modify Flarum's database schema in a safe way. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/migrations), although there are some differences.
 
@@ -90,6 +102,8 @@ return Migration::renameColumns('users', ['from' => 'to']);
 ### Data Migrations (Advanced)
 
 A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. For instance, you could use migrations to assign [custom permissions](permissions.md) to groups other than Admin, or provide some initial data for a custom Eloquent model. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
+
+Data migrations are the recommended way to specify default settings and permissions.
 
 ## Backend Models
 
@@ -173,7 +187,7 @@ class DiscussionSerializer extends AbstractSerializer
 }
 ```
 
-### Relationships
+### Attributes and Relationships
 
 You can also specify relationships for your resource. Simply create a new method with the same name as the relation on your model, and return a call to `hasOne` or `hasMany` depending on the nature of the relationship. You must pass in the model instance and the name of the serializer to use for the related resources.
 
@@ -184,59 +198,31 @@ You can also specify relationships for your resource. Simply create a new method
     }
 ```
 
-To add **attributes** to an existing resource type, listen for the `Serializing` event:
-
-```php
-use Flarum\Api\Event\Serializing;
-use Flarum\Api\Serializer\UserSerializer;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(Serializing::class, function (Serializing $event) {
-            if ($event->isSerializer(UserSerializer::class)) {
-                $event->attributes['firstName'] = $user->first_name;
-            }
-        });
-    }
-]
-```
-
-To add **relationships** to an existing resource type, listen for the `GetApiRelationship` event:
-
-```php
-use Flarum\Event\GetApiRelationship;
-use Flarum\Api\Serializer\UserSerializer;
-use Illuminate\Contracts\Events\Dispatcher;
-
-return [
-    function (Dispatcher $events) {
-        $events->listen(GetApiRelationship::class, function (GetApiRelationship $event) {
-            if ($event->isRelationship(UserSerializer::class, 'phone')) {
-                return $event->serializer->hasOne($event->model, PhoneSerializer::class);
-            }
-        });
-    }
-]
-```
-
-<!--
-use the `Serializer` extender:
+To add **attributes** and **relationships** to an existing resource type, use the `ApiSerializer` extender:
 
 ```php
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Extend;
 
 return [
-    (new Extend\Serializer(UserSerializer::class))
-        ->attributes(function ($user, &$attributes) {
-            $attributes['firstName'] = $user->first_name;
+    (new Extend\ApiSerializer(UserSerializer::class))
+        // One attribute at a time
+        ->attribute('firstName', function ($serializer, $user, $attributes) {
+                return $user->first_name
         })
+        // Multiple modifications at once, more complex logic
+        ->mutate(function($serializer, $user, $attributes) {
+            $attributes['someAttribute'] = $user->someAttribute;
+            if ($serializer->getActor()->can('administrate')) {
+                $attributes['someDate'] = $serializer->formatDate($user->some_date);
+            }
+
+            return $attributes;
+        })
+        // API relationships
         ->hasOne('phone', PhoneSerializer::class)
-        ->hasMany('comments', CommentSerializer::class)
-];
+        ->hasMany('comments', CommentSerializer::class),
+]
 ```
--->
 
 ## API Endpoints
 
@@ -417,7 +403,7 @@ return $query->get();
 
 ### Extending API Controllers
 
-It is possible to customize all of these options on _existing_ API controllers too by listening for the `WillGetData` event:
+It is possible to customize all of these options on _existing_ API controllers too via the `ApiController` extender
 
 ```php
 use Flarum\Api\Event\WillGetData;
@@ -425,40 +411,22 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    function (Dispatcher $events) {
-        $events->listen(WillGetData::class, function (WillGetData $event) {
-            if ($event->isController(ListDiscussionsController::class)) {
-                $event->setSerializer(MyDiscussionSerializer::class);
-                $event->addInclude('user');
-                $event->addOptionalInclude('posts');
-                $event->setLimit(20);
-                $event->setMaxLimit(50);
-                $event->setSort(['name' => 'asc']);
-                $event->addSortField('firstName');
-            }
-        });
-    }
+    (new Extend\ApiController(ListDiscussionsController::class))
+        ->setSerializer(MyDiscussionSerializer::class)
+        ->addInclude('user')
+        ->addOptionalInclude('posts')
+        ->setLimit(20)
+        ->setMaxLimit(50)
+        ->setSort(['name' => 'asc'])
+        ->addSortField('firstName')
+        ->prepareDataQuery(function ($controller) {
+            // Add custom logic here to modify the controller
+            // before data queries are executed.
+        })
 ]
 ```
 
-<!--
-via the `ApiController` extender:
-
-```php
-return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->serializer(MyDiscussionSerializer::class)
-        ->include('user')
-        ->optionalInclude('posts')
-        ->limit(20)
-        ->maxLimit(50)
-        ->sort(['name' => 'asc'])
-        ->sortField('firstName')
-];
-```
--->
-
-If you need to do anything else to prepare the data from an existing API controller for serialization, you can do so by listening for the `WillSerializeData` event:
+The `ApiController` extendercan also be used to adjust data before serialization
 
 ```php
 use Flarum\Api\Event\WillSerializeData;
@@ -466,25 +434,12 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    function (Dispatcher $events) {
-        $events->listen(WillSerializeData::class, function (WillSerializeData $event) {
-            if ($event->isController(ListDiscussionsController::class)) {
-                $event->data->load('myCustomRelation');
-            }
-        });
-    }
+    (new Extend\ApiController(ListDiscussionsController::class))
+        ->prepareDataForSerialization(function ($controller, $data, $request, $document) {
+            $data->load('myCustomRelation');
+        }),
 ]
 ```
-
-<!--
-```php
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->data(function ($data) {
-            $data->load('myCustomRelation');
-        })
-```
--->
-
 
 ## Frontend Models
 

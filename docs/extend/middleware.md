@@ -14,13 +14,13 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class YourMiddleware implements MiddlewareInterface {
-  public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
-    // Logic to run before the request is processed and later middleware is called.
-    $response = $handler->handle($request);
-    // Logic to run after the request is processed.
-    return $response
-  }
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        // Logic to run before the request is processed and later middleware is called.
+        $response = $handler->handle($request);
+        // Logic to run after the request is processed.
+        return $response
+    }
 }
 ```
 
@@ -33,26 +33,26 @@ use Flarum\Extend;
 // use Flarum\Http\Middleware\CheckCsrfToken;
 
 return [
-  // Add middleware to forum frontend
-  (new Extend\Middleware('forum'))->add(YourMiddleware::class),
-  // Admin frontend
-  (new Extend\Middleware('admin'))->add(YourMiddleware::class),
-  // API frontend
-  (new Extend\Middleware('api'))->add(YourMiddleware::class),
-  
-  (new Extend\Middleware('frontend'))
-    // remove a middleware (e.g. remove CSRF token check 😱)
-    ->remove(CheckCsrfToken::class)
-    // insert before another middleware (e.g. before a CSRF token check)
-    ->insertBefore(CheckCsrfToken::class, YourMiddleware::class)
-    // insert after another middleware (e.g. after a CSRF token check)
-    ->insertAfter(CheckCsrfToken::class, YourMiddleware::class)
-    // replace a middleware (e.g. replace the CSRF check with your own implementation)
-    ->replace(CheckCsrfToken::class, YourMiddleware::class)
+    // Add middleware to forum frontend
+    (new Extend\Middleware('forum'))->add(YourMiddleware::class),
+    // Admin frontend
+    (new Extend\Middleware('admin'))->add(YourMiddleware::class),
+    // API frontend
+    (new Extend\Middleware('api'))->add(YourMiddleware::class),
+
+    (new Extend\Middleware('frontend'))
+        // remove a middleware (e.g. remove CSRF token check 😱)
+        ->remove(CheckCsrfToken::class)
+        // insert before another middleware (e.g. before a CSRF token check)
+        ->insertBefore(CheckCsrfToken::class, YourMiddleware::class)
+        // insert after another middleware (e.g. after a CSRF token check)
+        ->insertAfter(CheckCsrfToken::class, YourMiddleware::class)
+        // replace a middleware (e.g. replace the CSRF check with your own implementation)
+        ->replace(CheckCsrfToken::class, YourMiddleware::class)
 ];
 ```
 
-Tada! Middleware defined.
+Tada! Middleware registered. Remember that order matters.
 
 Now that we've got the basics down, let's run through a few more things:
 
@@ -64,15 +64,28 @@ If you don't need your middleware to execute under every route, you can add an `
 use Laminas\Diactoros\Uri;
 
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+  {
+    $currentRoute = $request->getUri()->getPath();
+    $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
+
+    if ($currentRoute === $routeToRunUnder->getPath()) {
+        // Your logic here!
+    }
+
+    return $handler->handle($request);
+}
+```
+
+If your middleware runs after `Flarum\Http\Middleware\ResolveRoute` (which is recommended if it is route-dependent), you can access the route name via `$request->getAttribute('routeName')`. For example:
+
+```php
+public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 {
-  $currentRoute = $request->getUri()->getPath();
-  $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
+    if ($request->getAttribute('routeName') === 'register') {
+        // Your logic here!
+    }
 
-  if ($currentRoute === $routeToRunUnder->getPath()) {
-    // Your logic here!
-  }
-
-  return $handler->handle($request);
+    return $handler->handle($request);
 }
 ```
 
@@ -89,24 +102,24 @@ use Tobscure\JsonApi\Exception\Handler\ResponseBag;
 
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 {
-  if ($userFoundInDatabase) {
-    $error = new ResponseBag('422', [
-      [
-        'status' => '422',
-        'code' => 'validation_error',
-        'source' => [
-          'pointer' => '/data/attributes/email',
-        ],
-        'detail' => 'Yikes! Your email can\'t be used.',
-      ],
-    ]);
-    $document = new Document();
-    $document->setErrors($error->getErrors());
-  
-    return new JsonApiResponse($document, $error->getStatus());
-  }
+    if ($userFoundInDatabase) {
+        $error = new ResponseBag('422', [
+            [
+                'status' => '422',
+                'code' => 'validation_error',
+                'source' => [
+                    'pointer' => '/data/attributes/email',
+                ],
+                'detail' => 'Yikes! Your email can\'t be used.',
+            ],
+        ]);
+        $document = new Document();
+        $document->setErrors($error->getErrors());
+      
+        return new JsonApiResponse($document, $error->getStatus());
+    }
 
-  return $handler->handle($request);
+    return $handler->handle($request);
 }
 ```
 
@@ -121,12 +134,12 @@ If you'd like to do something with the response after the initial request has be
 ```php
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 {
-  $response = $handler->handle($request);
+    $response = $handler->handle($request);
 
-  // Your logic...
-  $response = $response->withHeader('Content-Type', 'application/json');
-  
-  return $response;
+    // Your logic...
+    $response = $response->withHeader('Content-Type', 'application/json');
+
+    return $response;
 }
 ```
 
