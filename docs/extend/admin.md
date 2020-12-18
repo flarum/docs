@@ -80,6 +80,29 @@ If you use `type: 'select'` the setting object looks a little bit different:
 
 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
+```js
+
+app.initializers.add('interstellar', function(app) {
+
+  app.extensionData
+    .for('acme-interstellar')
+    .registerSetting(function () {
+      if (app.session.user.username() === 'RocketMan') {
+    
+        return (
+          <div className="Form-group">
+            <h1>You are Rocketman!</h1>
+            <label className="checkbox">
+              <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
+                {app.translator.trans('acme-interstellar.admin.rocket_man_label')}
+            </label>
+          </div>
+        );
+      }
+    })
+});
+```
+
 ### Registering Permissions
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
@@ -112,22 +135,37 @@ app.initializers.add('interstellar', function(app) {
 
 ### Chaining Reminder
 
-Remember these functions call all be chained like:
+Remember these functions can all be chained like:
 
 ```js
 app.extensionData
     .for('acme-interstellar')
-    .registerSetting()
-    .registerSetting()
-    .registerPermission()
-    .registerPermission();
+    .registerSetting(...)
+    .registerSetting(...)
+    .registerPermission(...)
+    .registerPermission(...);
 ```
 
 ### Extending/Overriding the Default Page
 
 Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page.
 
-Simply run `registerPage`:
+Create a new class that extends the `Page` or `ExtensionPage` component:
+
+```js
+import ExtensionPage from 'flarum/components/ExtensionPage';
+
+export default class StarPage extends ExtensionPage {
+  content() {
+    return (
+      <h1>Hello from the settings section!</h1>
+    )
+  }
+}
+
+```
+
+Then, simply run `registerPage`:
 
 ```js
 
@@ -149,11 +187,13 @@ You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class
 
 In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
 
+For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+
 | Description                       | Where in composer.json                 |
 | --------------------------------- | -------------------------------------- |
 | discuss.flarum.org discussion link | "forum" key inside "support"           |
 | Documentation                     | "docs" key inside "support"            |
 | Support (email)                   | "email" key inside "support"           |
 | Website                           | "homepage" key                         |
-| Donate                            | "funding" key block (see [flarum/tags](https://github.com/flarum/tags/blob/master/composer.json#L13-L18)) |
+| Donate                            | "funding" key block (Note: Only the first link will be used) |
 | Source                            | "source" key inside "support"          |
