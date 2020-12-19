@@ -70,7 +70,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
   label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
   type: 'select',
   options: {
-    'LOH': 'Liquid Fuel', // The key in this array is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+    'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
     'RDX': 'Solid Fuel',
   },
   default: 'LOH',
