@@ -91,10 +91,10 @@ app.initializers.add('interstellar', function(app) {
     
         return (
           <div className="Form-group">
-            <h1>You are Rocketman!</h1>
+            <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
             <label className="checkbox">
               <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
-                {app.translator.trans('acme-interstellar.admin.rocket_man_label')}
+                {app.translator.trans('acme-interstellar.admin.rocket_man_setting_label')}
             </label>
           </div>
         );
