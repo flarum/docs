@@ -1,47 +1,47 @@
-# Installation
+# Kurulum
 
-::: danger
-Flarum is **beta software**. That means it still has some incomplete features and bugs 🐛🐞, and at some point – sooner or later – it will probably break! 💥
+::: danger Uyarı
+Flarum **beta yazılımıdır**. Bu, hala bazı eksik özelliklere ve hatalara sahip olduğu anlamına gelir 🐛🐞 ve bir noktada - er ya da geç - muhtemelen kırılacaktır! 💥
 
-Beta is all about fixing these issues and improving Flarum. **Please don't use Flarum in production unless you know what you're doing**. We can’t support you if things go awry. Upgrading to subsequent versions will be possible, but might involve getting your hands dirty. 
+Beta, tamamen bu sorunları çözmek ve Flarum'u iyileştirmekle ilgilidir. **Ne yaptığınızı bilmiyorsanız lütfen üretimde Flarum kullanmayın**. İşler ters giderse sizi destekleyemeyiz. Sonraki sürümlere yükseltmek mümkün olacak, ancak ellerinizi kirletmeyi içerebilir.
 :::
 
-::: tip Quick test drive?
-Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
+::: tip Hızlı test?
+Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birinde denemekten çekinmeyin. Veya Flarum ekibine bağlı olmayan ücretsiz bir topluluk hizmeti olan [Free Flarum](https://www.freeflarum.com)'da kendi forumunuzu birkaç saniye içinde kurun.
 :::
 
-## Server Requirements
+## Sunucu Gereksinimleri
 
-Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
+Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
-* **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.2.9+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6+** or **MariaDB 10.0.5+**
-* **SSH (command-line) access** to run Composer
+* **Apache** (mod \ _rewrite etkin) veya **Nginx**
+* **PHP 7.2.9+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **MySQL 5.6 +** veya **MariaDB10.0.5+**
+Composer'ı çalıştırmak için * **SSH (komut satırı) erişimi**
 
-::: tip Shared Hosting
-At this stage, it's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
+::: tip Paylaşımlı Hosting
+Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
 
-This doesn't necessarily mean you need a VPS. Some shared hosts give you SSH access, through which you should be able to install Composer and Flarum just fine. For other hosts without SSH, you can try workarounds such as [Pockethold](https://github.com/andreherberth/pockethold).
+Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Bazı paylaşılan ana bilgisayarlar size, Composer ve Flarum'u sorunsuz bir şekilde yükleyebilmeniz için SSH erişimi sağlar. SSH'siz diğer ana bilgisayarlar için [Pockethold](https://github.com/andreherberth/pockethold) gibi geçici çözümleri deneyebilirsiniz.
 :::
 
-## Installing
+## Yükleme
 
-Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. Before installing Flarum, you will need to [install Composer](https://getcomposer.org) on your machine. Afterwards, run this command in an empty location that you want Flarum to be installed in:
+Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
 ```
 
-While this command is running, you can configure your web server. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
+Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre [URL Yeniden Yazma] (# url-yeniden yazma) ayarlamanız gerekir.
 
-When everything is ready, navigate to your forum in a web browser and follow the instructions to complete the installation.
+Her şey hazır olduğunda, bir web tarayıcısında forumunuza gidin ve kurulumu tamamlamak için talimatları izleyin.
 
-## URL Rewriting
+## URL Yönlendirme
 
 ### Apache
 
-Flarum includes a `.htaccess` file in the `public` directory – make sure it has been uploaded correctly. **Flarum will not function properly if `mod_rewrite` is not enabled or `.htaccess` is not allowed.** Be sure to check with your hosting provider (or your VPS) that these features are enabled. If you're managing your own server, you may need to add the following to your site configuration to enable `.htaccess` files:
+Flarum, `public` dizininde bir `.htaccess` dosyası içerir - doğru şekilde yüklendiğinden emin olun. **`mod_rewrite` etkin değilse veya `.htaccess` e izin verilmiyorsa Flarum düzgün çalışmayacaktır.** Bu özelliklerin etkin olup olmadığını barındırma sağlayıcınıza danışın. Kendi sunucunuzu yönetiyorsanız, `.htaccess` dosyalarını etkinleştirmek için site yapılandırmanıza aşağıdakileri eklemeniz gerekebilir:
 
 ```
 <Directory "/path/to/flarum/public">
@@ -49,13 +49,13 @@ Flarum includes a `.htaccess` file in the `public` directory – make sure it ha
 </Directory>
 ```
 
-This ensures that htaccess overrides are allowed so Flarum can rewrite URLs properly.
+Bu, htaccess geçersiz kılmalarına izin verilmesini sağlar, böylece Flarum URL'leri düzgün şekilde yeniden yazabilir.
 
-Methods for enabling `mod_rewrite` vary depending on your OS. You can enable it by running `sudo a2enmod rewrite` on Ubuntu. `mod_rewrite` is enabled by default on CentOS. Don't forget to restart Apache after making modifications!
+`mod_rewrite` ı etkinleştirme yöntemleri işletim sisteminize bağlı olarak değişir. Ubuntu'da `sudo a2enmod rewrite` çalıştırarak etkinleştirebilirsiniz. CentOS'ta `mod_rewrite` varsayılan olarak etkindir. Değişiklikler yaptıktan sonra Apache'yi yeniden başlatmayı unutmayın!
 
 ### Nginx
 
-Flarum includes a `.nginx.conf` file – make sure it has been uploaded correctly. Then, assuming you have a PHP site set up within Nginx, add the following to your server's configuration block:
+Flarum bir `.nginx.conf` dosyası içerir - doğru şekilde yüklendiğinden emin olun. Ardından, Nginx içinde kurulmuş bir PHP siteniz olduğunu varsayarak, sunucunuzun yapılandırma bloğuna aşağıdakileri ekleyin:
 
 ```nginx
 include /path/to/flarum/.nginx.conf;
@@ -63,7 +63,7 @@ include /path/to/flarum/.nginx.conf;
 
 ### Caddy
 
-Caddy requires a very simple configuration in order for Flarum to work properly. Note that you should replace the URL with your own and the path with the path to your own `public` folder. If you are using a different version of PHP, you wil also need to change the `fastcgi` path to point to your correct PHP install socket or URL.
+Caddy, Flarum'un düzgün çalışması için çok basit bir konfigürasyon gerektirir. URL'yi kendi URL'niz ile ve dizinide de kendi `public` klasörünüzün dizini ile değiştirmeniz gerektiğini unutmayın. PHP'nin farklı bir sürümünü kullanıyorsanız, doğru PHP yükleme soketinize veya URL'nize işaret etmek için `fastcgi` dizinini de değiştirmeniz gerekecektir.
 
 ```
 www.example.com {
@@ -78,49 +78,50 @@ www.example.com {
     encode gzip
 }
 ```
-## Folder Ownership
 
-During installation, Flarum may request that you make certain directories writable. To allow write access to a directory on Linux, execute the following command:
+## Klasör Sahipliği
+
+Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Linux'ta bir dizine yazma erişimine izin vermek için aşağıdaki komutu yürütün:
 
 ```bash
 chmod 775 /path/to/directory
 ```
 
-If Flarum requests write access to both the directory and its contents, you need to add the `-R` flag so that the permissions are updated for all the files and folders within the directory:
+Flarum hem dizine hem de içeriğine yazma erişimi isterse, dizin içindeki tüm dosyalar ve klasörler için izinlerin güncellenmesi için `-R` bayrağını eklemeniz gerekir:
 
 ```bash
 chmod 775 -R /path/to/directory
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. 
+Bu adımları tamamladıktan sonra, Flarum izinleri değiştirmenizi istemeye devam ederse, dosyalarınızın doğru gruba ve kullanıcıya ait olup olmadığını kontrol etmeniz gerekebilir.
 
-By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You can change the folder ownership in most Linux operating systems by running `chown -R www-data:www-data foldername/`. 
+Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de web sunucusunun altında çalıştığı grup ve kullanıcıdır. Çoğu Linux işletim sisteminde klasör sahipliğini, `chown -R www-data:www-data foldername/` komutunu çalıştırarak değiştirebilirsiniz.
 
-To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
+Linux'ta dosya izinleri ve sahipliğinin yanı sıra bu komutlar hakkında daha fazla bilgi edinmek için [bu öğretici](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/)'yi okuyun . Windows'ta Flarum kuruyorsanız cevaplarınızı bulabilirsiniz, [Bu Süper Kullanıcı sorusunun](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) kullanışlı.
 
-::: warning Environments may vary
-Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
+::: uyarı Ortamlar değişiklik gösterebilir
+Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusunun altında çalıştığı uygun kullanıcı ve grup için web sunucusu yapılandırmanıza veya web barındırma sağlayıcınıza danışın.
 :::
 
-::: danger Never use permission 777
-You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group. 
+::: tehlike Asla 777 izin kullanma
+Bu izin düzeyi, kullanıcı veya gruptan bağımsız olarak herkesin klasör ve dosyanın içeriğine erişmesine izin verdiğinden, hiçbir klasör veya dosyayı asla `777` izin düzeyine ayarlamamalısınız.
 :::
 
-## Customizing Paths
+## Dizinleri Özelleştirme
 
-By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
+Varsayılan olarak Flarum'un dizin yapısı, yalnızca herkesin erişebileceği dosyaları içeren bir `public` dizini içerir. Bu, tüm hassas kaynak kodu dosyalarının web kökünden tamamen erişilemez olmasını sağlayan en iyi güvenlik uygulamasıdır.
 
-However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
+Bununla birlikte, Flarum'u bir alt dizinde (`siteniz.com/forum` gibi) barındırmak isterseniz veya sunucunuz web kökünüz üzerinde kontrol sağlamazsa (`public_html` veya `htdocs` gibi), Flarum'u `public` dizini olmadan kurabilirsiniz.
 
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
+Basitçe `public` dizini (`.htaccess` dahil) içindeki tüm dosyaları Flarum'a hizmet vermek istediğiniz dizine taşıyın. Daha sonra hassas kaynakları korumak için `.htaccess` i düzenleyin ve 9-15 satırlarının `#` işaretini kaldırın. Nginx için `.nginx.conf` un 8-11 satırlarının `#` işaretini kaldırın.
 
-You will also need to edit the `index.php` file and change the following line:
+Ayrıca `index.php` dosyasını düzenlemeniz ve aşağıdaki satırı değiştirmeniz gerekecektir:
 
 ```php
 $site = require './site.php';
 ```
 
- Finally, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+Son olarak, `site.php` dosyasını düzenleyin ve aşağıdaki satırlardaki yolları yeni dizin yapınızı yansıtacak şekilde güncelleyin:
 
 ```php
 'base' => __DIR__,
@@ -128,13 +129,13 @@ $site = require './site.php';
 'storage' => __DIR__.'/storage',
 ```
 
-## Importing Data
+## Verileri İçe Aktarma
 
-If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
+Mevcut bir topluluğunuz varsa ve sıfırdan başlamak istemiyorsanız, mevcut verilerinizi Flarum'a aktarabilirsiniz. Henüz resmi uzantı bulunmamakla birlikte, topluluk birkaç resmi olmayan uzantı yaptı:
 
 * [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
 * [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
 * [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
 * [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-These can be used for other forum software as well by migrating to phpBB first, then to Flarum. Be aware that we can't guarantee that these will work nor can we offer support for them.
+Bunlar, önce phpBB'ye, sonra Flarum'a geçerek diğer forum yazılımları için de kullanılabilir. Bunların işe yarayacağını garanti edemeyeceğimizi ve onlar için destek sunamayacağımızı unutmayın.
