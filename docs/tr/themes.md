@@ -1,31 +1,29 @@
-# Theming
+# Tema
 
-While we've worked hard to make Flarum as beautiful as we can, each community will probably want to make some tweaks/modifications to fit their desired style.
+Flarum'u olabildiğince güzel hale getirmek için çok çalışmış olsak da, her topluluk muhtemelen arzu ettikleri stile uyacak bazı ince ayarlar/değişiklikler yapmak isteyecektir.
 
-## Admin Dashboard
+## Yönetici Gösterge Paneli
 
-The [admin dashboard](../admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
+[Yönetici gösterge tablosu](../admin.md)'nda Görünüm sayfası, forumunuzu özelleştirmeye başlamak için harika bir ilk yerdir. Burada yapabilirsin:
 
-- Select theme colors
-- Toggle dark mode and a colored header
-- Upload a logo and favicon (icon shown in browser tabs)
-- Add HTML for custom headers and footers
-- Add [custom LESS/CSS](#css-theming) to change how elements are displayed
+- Tema renklerini seçin
+- Karanlık modu ve renkli üstbilgi değiştir
+- Bir logo ve favicon yükleyin (tarayıcı sekmelerinde gösterilen simge)
+- Özel üstbilgiler ve altbilgiler için HTML ekleyin
+- Öğelerin görüntülenme şeklini değiştirmek için [özel LESS/CSS](#css-theming) ekleyin
 
-## CSS Theming
+## CSS Tema Oluşturma
 
-CSS is a style sheet language that tells browsers how to display elements of a webpage.
-It allows us to modify everything from colors to fonts to element size and positioning to animations.
-Adding custom CSS can be a great way to modify your Flarum installation to match a theme.
+CSS, tarayıcılara bir web sayfasının öğelerinin nasıl görüntüleneceğini söyleyen bir stil sayfası dilidir. Renklerden yazı tiplerine, eleman boyutuna ve konumlandırmadan animasyonlara kadar her şeyi değiştirmemizi sağlar. Özel CSS eklemek, Flarum kurulumunuzu bir temayla eşleşecek şekilde değiştirmenin harika bir yolu olabilir.
 
-A CSS tutorial is beyond the scope of this documentation, but there are plenty of great online resources to learn the basics of CSS.
+Bir CSS eğitimi bu dokümantasyonun kapsamı dışındadır, ancak CSS'nin temellerini öğrenmek için birçok harika çevrimiçi kaynak vardır.
 
-:::tip
-Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+:::İPUCU
+Flarum aslında LESS kullanır, bu da değişkenlere, koşullara ve işlevlere izin vererek CSS yazmayı kolaylaştırır.
 :::
 
-## Extensions
+## Uzantılar
 
-Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum.
-If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go.
-To learn how to make an extension, check out our [extension documentation](extend/README.md)!
+Flarum'un esnek [uzantı sistemi](extensions.md), Flarum'un herhangi bir parçasını pratik olarak eklemenize, çıkarmanıza veya değiştirmenize olanak tanır.
+Renkleri/boyutları/stilleri değiştirmenin ötesinde önemli tema değişiklikleri yapmak istiyorsanız, kesinlikle gitmenin yolu özel bir uzantıdır.
+Bir uzantının nasıl oluşturulacağını öğrenmek için [uzantı belgelerimize](extend/README.md) göz atın!
