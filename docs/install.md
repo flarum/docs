@@ -14,7 +14,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
-* **Apache** (with mod\_rewrite enabled) or **Nginx**
+* **Apache** (with mod\_rewrite enabled), **Nginx**, or **Caddy**
 * **PHP 7.2.9+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
@@ -69,7 +69,8 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 www.example.com {
     root * /var/www/flarum/public
     try_files {path} {path}/ /index.php
-    php_fastcgi / /var/run/php/php7.4-fpm.sock php
+    file_server
+    php_fastcgi unix//run/php/php7.4-fpm.sock
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
