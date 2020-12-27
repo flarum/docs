@@ -37,7 +37,7 @@ Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展
 composer create-project flarum/flarum . --stability=beta
 ```
 
-您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/您的/论坛/路径/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
+您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/path/to/flarum/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
 
 当一切就绪后，在浏览器中访问您的论坛网址，在安装向导的指引下完成安装。
 
@@ -48,7 +48,7 @@ composer create-project flarum/flarum . --stability=beta
 Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它有正确生成。**如果没有启用 `mod_rewrite` 模块，或禁用了 `.htaccess`，Flarum 将无法正常运行。** 请确认您的主机提供商（或您的 VPS）是否启用了这些功能。如果您的服务器由您自行管理，您可能需要在您的网站配置中添加以下内容来启用 `.htaccess` 文件：
 
 ```
-<Directory "/您的/论坛/路径/public">
+<Directory "/path/to/flarum/public">
     AllowOverride All
 </Directory>
 ```
@@ -62,7 +62,7 @@ Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它�
 Flarum 附带了一个 `.nginx.conf` 文件，请确保它有正确生成。假如您已经在 Nginx 中建立了一个 PHP 站点，您应当在站点配置中添加以下内容，以导入默认的重写规则：
 
 ```nginx
-include /您的/论坛/路径/.nginx.conf;
+include /path/to/flarum/.nginx.conf;
 ```
 
 ### Caddy
