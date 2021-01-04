@@ -15,7 +15,7 @@ Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemin
 Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org) aracılığıyla yüklenir. Tipik bir uzantı yüklemek için:
 
 1. `composer.json` dosyasını içeren klasöre `cd` komutuyla gidin.
-2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının dokümantasyonu tarafından sağlanmalıdır.
+2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının belgesi tarafından sağlanmalıdır.
 
 ## Uzantıları Yönetme
 

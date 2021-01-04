@@ -103,7 +103,7 @@ Flarum, [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PS
 
 ### JavaScript
 
-Flarum'un JavaScript'i çoğunlukla [Airbnb Stil Kılavuzu](https://github.com/airbnb/javascript)'nu takip eder. Satır içi dokümantasyon sağlamak için [ESDoc](https://esdoc.org/manual/tags.html) kullanıyoruz.
+Flarum'un JavaScript'i çoğunlukla [Airbnb Stil Kılavuzu](https://github.com/airbnb/javascript)'nu takip eder. Satır içi belge sağlamak için [ESDoc](https://esdoc.org/manual/tags.html) kullanıyoruz.
 
 ### Veritabanı
 
