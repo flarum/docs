@@ -16,7 +16,7 @@ Flarum'u olabildiğince güzel hale getirmek için çok çalışmış olsak da, 
 
 CSS, tarayıcılara bir web sayfasının öğelerinin nasıl görüntüleneceğini söyleyen bir stil sayfası dilidir. Renklerden yazı tiplerine, eleman boyutuna ve konumlandırmadan animasyonlara kadar her şeyi değiştirmemizi sağlar. Özel CSS eklemek, Flarum kurulumunuzu bir temayla eşleşecek şekilde değiştirmenin harika bir yolu olabilir.
 
-Bir CSS eğitimi bu bekgesinin kapsamı dışındadır, ancak CSS'nin temellerini öğrenmek için birçok harika çevrimiçi kaynak vardır.
+Bir CSS eğitimi bu belgesinin kapsamı dışındadır, ancak CSS'nin temellerini öğrenmek için birçok harika çevrimiçi kaynak vardır.
 
 :::İPUCU
 Flarum aslında LESS kullanır, bu da değişkenlere, koşullara ve işlevlere izin vererek CSS yazmayı kolaylaştırır.
