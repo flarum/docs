@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Authorization
+
+**Yakında Türkçe belgeler eklenecektir.**

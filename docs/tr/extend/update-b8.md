@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Updating For Beta 8
+
+**Yakında Türkçe belgeler eklenecektir.**

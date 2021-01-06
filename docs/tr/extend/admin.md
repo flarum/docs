@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Admin Dashboard
+
+**Yakında Türkçe belgeler eklenecektir.**

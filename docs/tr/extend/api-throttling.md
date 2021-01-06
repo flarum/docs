@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# API Throttling
+
+**Yakında Türkçe belgeler eklenecektir.**

@@ -36,7 +36,7 @@ Sorunu çözmek için yardıma ihtiyacınız olacak gibi görünüyorsa, veri to
 
 * Asıl sayfada görüntülenir
 * Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
-* Sunucunun hata günlüğüne kaydedilir (ör. /var/log/nginx/error.log`)
+* Sunucunun hata günlüğüne kaydedilir (ör. `/var/log/nginx/error.log`)
 * PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
 * Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
 

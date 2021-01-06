@@ -1,6 +1,6 @@
 module.exports = [
     { text: 'Kılavuz', link: '/' },
-    { text: 'Extend', link: '/extend/' },
+    { text: 'Genişletme', link: '/extend/' },
     { text: 'API Referansı', link: 'https://api.docs.flarum.org/' },
     {
       text: 'Flarum',

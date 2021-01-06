@@ -14,10 +14,10 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
-* **Apache** (mod \ _rewrite etkin) veya **Nginx**
+* **Apache** (mod_rewrite etkin) veya **Nginx**
 * **PHP 7.2.9+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6 +** veya **MariaDB10.0.5+**
-Composer'ı çalıştırmak için * **SSH (komut satırı) erişimi**
+Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 
 ::: tip Paylaşımlı Hosting
 Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
@@ -99,11 +99,11 @@ Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de w
 
 Linux'ta dosya izinleri ve sahipliğinin yanı sıra bu komutlar hakkında daha fazla bilgi edinmek için [bu öğretici](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/)'yi okuyun . Windows'ta Flarum kuruyorsanız cevaplarınızı bulabilirsiniz, [Bu Süper Kullanıcı sorusunun](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) kullanışlı.
 
-::: uyarı Ortamlar değişiklik gösterebilir
+::: tip Ortamlar değişiklik gösterebilir
 Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusunun altında çalıştığı uygun kullanıcı ve grup için web sunucusu yapılandırmanıza veya web barındırma sağlayıcınıza danışın.
 :::
 
-::: tehlike Asla 777 izin kullanma
+::: danger Asla izinlerde 777 kullanma
 Bu izin düzeyi, kullanıcı veya gruptan bağımsız olarak herkesin klasör ve dosyanın içeriğine erişmesine izin verdiğinden, hiçbir klasör veya dosyayı asla `777` izin düzeyine ayarlamamalısınız.
 :::
 

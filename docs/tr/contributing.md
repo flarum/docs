@@ -55,7 +55,7 @@ npm run dev
 
 Tipik bir katkı iş akışı şuna benzer:
 	
-1. 🌳 ** Uygun **dalı** yeni bir özellik dalına ayırın.
+1. 🌳 Uygun **dalı** yeni bir özellik dalına ayırın.
      * *Hata düzeltmeleri* en son kararlı dala gönderilmelidir.
      * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
      * *Ana* özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
@@ -73,7 +73,7 @@ Tipik bir katkı iş akışı şuna benzer:
 -->
 4. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
      * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-     * Bir [iyi işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
+     * [İyi bir işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
 
 5. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
      * Çekme talebi şablonunu doldurun.
@@ -114,10 +114,10 @@ Flarum'un JavaScript'i çoğunlukla [Airbnb Stil Kılavuzu](https://github.com/a
      * Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
 * BOOL: `is_{adjective}` (ör. is_locked)
 
-** Tablolar ** aşağıdaki şekilde adlandırılmalıdır:
+**Tablolar** aşağıdaki şekilde adlandırılmalıdır:
 * Çoğul biçim kullanın (`discussions`)
 * Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
-* İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`))
+* İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
 
 ### CSS
 
