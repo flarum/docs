@@ -1,5 +1,5 @@
 module.exports = {
-  '/extend/': [
+  '/tr/extend/': [
     {
       title: 'Ana Kavramlar',
       collapsable: false,
@@ -65,7 +65,7 @@ module.exports = {
     // }
   ],
 
-  '/': [
+  '/tr/': [
     {
       title: 'Giriş',
       collapsable: false,
