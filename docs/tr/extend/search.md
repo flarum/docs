@@ -1,3 +1,3 @@
-# Search
+# Arama
 
 **Yakında Türkçe belgeler eklenecektir.**

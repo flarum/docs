@@ -1,3 +1,3 @@
-# Translating Flarum
+# Flarum Çeviri
 
 **Yakında Türkçe belgeler eklenecektir.**

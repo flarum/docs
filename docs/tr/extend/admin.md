@@ -1,3 +1,3 @@
-# Admin Dashboard
+# Yönetici Gösterge Tablosu
 
 **Yakında Türkçe belgeler eklenecektir.**

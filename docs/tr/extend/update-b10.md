@@ -1,3 +1,3 @@
-# Updating For Beta 10
+# Beta 10 için Güncelleme
 
 **Yakında Türkçe belgeler eklenecektir.**

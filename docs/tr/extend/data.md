@@ -1,3 +1,3 @@
-# Working with Data
+# Verilerle Çalışma
 
 **Yakında Türkçe belgeler eklenecektir.**

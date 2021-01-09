@@ -1,3 +1,3 @@
-# Settings
+# Ayarlar
 
 **Yakında Türkçe belgeler eklenecektir.**

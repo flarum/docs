@@ -1,3 +1,3 @@
-# Getting Started
+# Başlangıç
 
 **Yakında Türkçe belgeler eklenecektir.**

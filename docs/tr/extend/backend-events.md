@@ -1,3 +1,3 @@
-# Backend Events
+# Arka Uç Etkinlikleri
 
 **Yakında Türkçe belgeler eklenecektir.**

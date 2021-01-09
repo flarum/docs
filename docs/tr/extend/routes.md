@@ -1,3 +1,3 @@
-# Routes and Content
+# Rotalar ve İçerik
 
 **Yakında Türkçe belgeler eklenecektir.**

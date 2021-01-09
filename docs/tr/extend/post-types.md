@@ -1,3 +1,3 @@
-# Post Types
+# Gönderi Türleri
 
 **Yakında Türkçe belgeler eklenecektir.**

@@ -1,3 +1,3 @@
-# Updating For Beta 13
+# Beta 13 için Güncelleme
 
 **Yakında Türkçe belgeler eklenecektir.**

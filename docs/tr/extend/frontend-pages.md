@@ -1,3 +1,3 @@
-# Frontend Pages and Resolvers
+# Ön Uç Sayfaları ve Çözücüler
 
 **Yakında Türkçe belgeler eklenecektir.**
