@@ -40,8 +40,6 @@ npm install
 npm run dev
 ```
 
-The process is the same for extensions, except you should link the core JavaScript into the extension so that your IDE will understand `import from '@flarum/core'` statements.
-
 Süreç uzantılar için aynıdır, ancak temel JavaScript'i uzantıya bağlamanız gerekir, böylece IDE'niz `import from '@flarum/core'` ifadeleri anlayacaktır.
 
 ```bash
