@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Gruplar ve İzinler
+
+**Yakında Türkçe belgeler eklenecektir.**

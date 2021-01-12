@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# API Azaltma
+
+**Yakında Türkçe belgeler eklenecektir.**

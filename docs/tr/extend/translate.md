@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Flarum Çeviri
+
+**Yakında Türkçe belgeler eklenecektir.**

@@ -16,7 +16,7 @@ Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ay
 
 ### Beta sürümünü üretimde kullanabilir miyim?
 
-[Kurulum talimatları](install.md)'nın buna karşı uyararak başlamasının bir nedeni vardır. Flarum henüz olgunlaşmadı ve bir şeylerin ters gitmesi için bolca yer var. Güvendiğiniz uzantılar, daha yeni beta sürümleri tarafından uyumsuz hale getirilebilir. Hatalar, içerik kaybına veya özel bilgilerin büyük ölçüde İnternete maruz kalmasına neden olabilir. Yetersiz SEO, sitenizin sıralamasına zarar vererek yeni üyelerin ilgisini çekmeyi zorlaştırabilir. Mevcut üyeler performans sorunları veya eksik özelliklerden bıkıp daha yeşil otlaklara yönelebilir. Ve bunun gibi …
+[Kurulum talimatları](install.md)'nın buna karşı uyararak başlamasının bir nedeni vardır. Flarum henüz olgunlaşmadı ve bir şeylerin ters gitmesi için bolca yer var. Güvendiğiniz uzantılar, daha yeni beta sürümleri tarafından uyumsuz hale getirilebilir. Hatalar, içerik kaybına veya özel bilgilerin büyük ölçüde İnternete maruz kalmasına neden olabilir. Yetersiz SEO, sitenizin sıralamasına zarar vererek yeni üyelerin ilgisini çekmeyi zorlaştırabilir. Mevcut üyeler performans sorunları veya eksik özelliklerden bıkıp daha yeşil otlaklara yönelebilir. Ve bunun gibi…
 
 Bu riskleri görmezden gelmeye ve yine de Flarum'u kurmaya karar verebilirsiniz. Bu size kalmış… ancak lütfen işler korkunç derecede ters giderse, onlarla başa çıkmanın sizin sorumluluğunuzda olacağını unutmayın. Sorunlarınızı çözmenize yardımcı olabileceğimizi garanti edemeyiz - çok daha kısa sürede. Bu nedenle, sıraya koyacağınız **siteniz** ve akıllıca seçim yapacağınız unutmayın.
 
@@ -30,7 +30,7 @@ Flarum için sayısız özellik ve uzantı oluşturmayı çok isteriz, ancak her
 
 ### Neden henüz [sorunu buraya ekleyin] sorunu çözmediniz?
 
-Burada yine cevap “ilk önce şeyler” dir. Henüz bir sorunu çözmediysek (veya ona bir kilometre taşı atamadıysak), bunun nedeni aynı derecede önemli olan başka bir şey üzerinde çalıştığımızdır. Lütfen sabırlı olun; yayınlanmadan önce halletmeye çalışacağız. Veya aceleniz varsa, bunu kendiniz düzeltmekten çekinmeyin ve [projeye katkıda bulunun](Contributing.md)!
+Burada yine cevap “ilk önce şeyler”dir. Henüz bir sorunu çözmediysek (veya ona bir kilometre taşı atamadıysak), bunun nedeni aynı derecede önemli olan başka bir şey üzerinde çalıştığımızdır. Lütfen sabırlı olun; yayınlanmadan önce halletmeye çalışacağız. Veya aceleniz varsa, bunu kendiniz düzeltmekten çekinmeyin ve [projeye katkıda bulunun](Contributing.md)!
 
 ### Forumumu Flarum'a taşıyabilecek miyim?
 

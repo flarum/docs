@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Başlangıç
+
+**Yakında Türkçe belgeler eklenecektir.**

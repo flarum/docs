@@ -1,1 +1,3 @@
-# Quick Start
+# Hızlı Başlangıç
+
+**Yakında Türkçe belgeler eklenecektir.**

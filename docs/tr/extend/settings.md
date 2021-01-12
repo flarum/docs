@@ -1,1 +1,3 @@
-Yakında Türkçe belgeler eklenecektir.
+# Ayarlar
+
+**Yakında Türkçe belgeler eklenecektir.**

@@ -1,4 +1,4 @@
-# Extensions
+# Uzantılar
 
 Flarum minimalisttir, ancak aynı zamanda oldukça genişletilebilir. Aslında, Flarum ile birlikte gelen özelliklerin çoğu aslında uzantılardır!
 

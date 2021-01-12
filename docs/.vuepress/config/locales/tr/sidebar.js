@@ -79,7 +79,7 @@ module.exports = {
       ]
     },
     {
-      title: 'Kurulum',
+      title: 'Ayarlama',
       collapsable: false,
       children: [
         'install',
