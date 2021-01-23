@@ -1,13 +1,13 @@
 <template>
-  <processing class="blue"></processing>
+  <outdated class="blue"></outdated>
 </template>
 
 # 安装
 
-::: warning 警告
-Flarum 处于 **测试阶段**。这意味着她有一些 Bug 🐛🐞、功能也有残缺，而且可能在某些时候（迟早）会崩溃。💥
+::: danger 警告
+Flarum 处于 **测试阶段**。所为会存在一些 Bug 🐛🐞、功能上也有残缺，还可能在某些时候（迟早）崩溃。💥
 
-测试版本旨在解决这些问题，并改进 Flarum。**除非您很清楚后果，并对自己的能力很自信，否则请不要在生产环境中使用 Flarum**。如果出了问题，我们无法为您提供支持。另外测试版本是可以升级到后续版本的，不过需要您手动操作。
+测试阶段旨在解决这些问题，并改进 Flarum。**除非您很清楚后果，且对自己的能力很有信心，否则请勿在生产环境中使用 Flarum**。如果出了问题，我们无法为您提供支持。另外测试版本是可以升级到后续版本的，不过需要您手动操作。
 :::
 
 ::: tip 即刻测试 Flarum？
@@ -19,7 +19,7 @@ Flarum 处于 **测试阶段**。这意味着她有一些 Bug 🐛🐞、功能�
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
 
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 7.1+**，需要启用 curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
+* **PHP 7.1+（暂不支持 PHP8）**，需要启用 curl, dom, exif, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
 * **允许 SSH（命令行）**，以运行 Composer
 
@@ -37,9 +37,9 @@ Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展
 composer create-project flarum/flarum . --stability=beta
 ```
 
-您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/您的/论坛/路径/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
+您可以在命令执行期间配置您的 Web 服务器。请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
 
-当一切就绪后，在浏览器中访问您的论坛网址，在安装向导的指引下完成安装。
+当一切就绪后，在浏览器中访问您的论坛网址，根据安装向导完成安装。
 
 ## URL 重写
 
@@ -48,7 +48,7 @@ composer create-project flarum/flarum . --stability=beta
 Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它有正确生成。**如果没有启用 `mod_rewrite` 模块，或禁用了 `.htaccess`，Flarum 将无法正常运行。** 请确认您的主机提供商（或您的 VPS）是否启用了这些功能。如果您的服务器由您自行管理，您可能需要在您的网站配置中添加以下内容来启用 `.htaccess` 文件：
 
 ```
-<Directory "/您的/论坛/路径/public">
+<Directory "/<Flarum 路径>/public">
     AllowOverride All
 </Directory>
 ```
@@ -59,10 +59,10 @@ Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它�
 
 ### Nginx
 
-Flarum 附带了一个 `.nginx.conf` 文件，请确保它有正确生成。假如您已经在 Nginx 中建立了一个 PHP 站点，您应当在站点配置中添加以下内容，以导入默认的重写规则：
+Flarum 根目录附带了一个 `.nginx.conf` 文件，请确保它有正确生成。假如您已经在 Nginx 中建立了一个 PHP 站点，您应当在站点配置中添加以下内容，以导入默认的重写规则：
 
 ```nginx
-include /您的/论坛/路径/.nginx.conf;
+include /<Flarum 路径>/.nginx.conf;
 ```
 
 ### Caddy
@@ -84,10 +84,24 @@ www.example.com {
     gzip
 }
 ```
-## 文件夹权限
-在安装过程中，Flarum 可能会要求您将某些文件夹的权限设为 `755`。如果在设置后，Flarum 仍要求您改变权限，那么您可能需要检查文件(夹)的所有者是否是正确的组或用户。
+## 目录所有权
+在安装过程中，Flarum 可能会要求您将某些目录设置为可写。要使 Linux 上的某个目录可写，可以执行以下命令：
 
-大多数 Linux 的发行版，默认 `www-data` 为 PHP 和 Web 服务器所属的组或用户。您可以运行 `chown -R www-data:www-data 文件夹名/` 命令来改变大多数 Linux 操作系统中文件(夹)的所有者。
+```bash
+chmod 755 /path/to/directory
+```
+
+如果 Flarum 对某个目录及其子目录请求写权限，请添加 `-R` 选项，以递归更新该目录和其内的文件及子目录权限：
+
+```bash
+chmod 755 -R /path/to/directory
+```
+
+如果在完成以上操作后，Flarum 仍要求您改变权限，请先尝试将 755 权限改为 775 试一遍，依然不行的话，您可能需要检查文件（夹）的所有者和所属组群是否正确。
+
+大多数 Linux 发行版，默认 `www-data` 为 PHP 和 Web 服务器所有者和所属组群。您可以运行 `chown -R www-data:www-data 文件夹名/` 命令来改变大多数 Linux 操作系统中文件（夹）的所有者。
+
+要了解关于以上命令的更多信息，以及 Linux 系统下的文件权限和所有权相关信息，请阅读 [英文教程](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/) 或 [中文教程](https://www.runoob.com/linux/linux-comm-chmod.html)。如果您在 Windows 上配置 Flarum，这个 [超级用户问题](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) 可能对您很有用。
 
 ::: warning 环境有别
 您的服务器环境可能会与本文示例不同，请查看您的 Web 服务器配置或咨询 Web 托管提供商，以了解 PHP 和 Web 服务器默认运行在哪个用户或组下。
@@ -106,14 +120,14 @@ www.example.com {
 　
 . Flarum 安装根目录
 ├── public _(**公共目录**)_
-│   └── assets _(**资源目录。存放头像、上传的文件等**)_
+│   ├── assets _(**资源目录。存放头像、上传的文件等**)_
+│   └── .htaccess _(**自带 Apache 配置**)_
 │
 ├── storage
 │   └── logs _(**日志**)_
 │
 ├── vendor _(**核心、插件目录**)_
 ├── .nginx.conf _(**自带 Nginx 配置**)_
-├── .htaccess _(**自带 Apache 配置**)_
 ├── composer.json _(**Composer 配置文件**)_
 ├── extend.php _(**自定义扩展文件**)_
 ├── flarum

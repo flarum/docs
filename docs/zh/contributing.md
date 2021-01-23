@@ -1,5 +1,5 @@
 <template>
-  <processing class="blue"></processing>
+  <outdated class="blue"></outdated>
 </template>
 
 # 贡献代码
@@ -93,9 +93,7 @@ npm run dev
 
 为了保持 Flarum 代码库的整洁性和一致性，我们有着一套遵循的编码风格。如果您对此有疑问，请阅读相关源代码。
 
-别担心你的代码风格不够漂亮，在合并拉取请求后， StyleCI 将会自动把所有样式进行修正，再合并到 Discuz! Q 存储库中。这使得我们更多的关注贡献的内容而不是代码风格。
-
-如果您的代码风格不是很完美，不用担心！在合并 Pull Request 后，StyleCI 会自动修正任何风格的代码，然后合并到 Flarum 项目仓库。这使得我们可以专注在贡献的内容本身，而非代码风格上。
+您不用担心自己的代码风格是否完美，在合并 Pull Request 后，StyleCI 会先自动修正任何风格的代码，然后再合并到 Flarum 项目仓库。这使得我们可以专注在贡献的内容本身，而非代码风格上。
 
 ### PHP
 

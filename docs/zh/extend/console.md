@@ -1,5 +1,5 @@
 <template>
-  <outdated class="blue"></outdated>
+  <processing class="blue"></processing>
 </template>
 
 # 控制台
