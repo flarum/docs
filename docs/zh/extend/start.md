@@ -93,7 +93,7 @@ composer config repositories.0 path "packages/*"
     "description": "向世界问好！",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.15"
+        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -124,14 +124,9 @@ composer config repositories.0 path "packages/*"
   * 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
 
   ::: warning 谨慎指定 Flarum 版本
-  Flarum 仍处于测试阶段，我们建议您声明兼容当前的 Flarum 版本。
+  Flarum 仍处于测试阶段，我们建议您声明只兼容当前的 Flarum 版本。
 
-      "flarum/core": ">=0.1.0-beta.12 <0.1.0-beta.15"
-
-  这使您有时间更新扩展程序以使用 Flarum 的新功能或适配核心的变化，而不会因为扩展程序不兼容导致用户被阻止升级到最新的 Flarum 版本。
-
-  为了良性循环，我们让需要删除的功能提前一个测试周期处于弃用状态，直到达到稳定版本。
-  这给了您两个月的时间来更新扩展程序。
+      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
   :::
 
 * **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。示例的 `src` 目录会在您扩展程序项目的根目录，与 vendor 文件夹同级。此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.

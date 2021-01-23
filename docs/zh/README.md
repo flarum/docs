@@ -16,6 +16,6 @@ Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](h
 
 * **漂亮、响应式。** 专为人设计的论坛程序。Flarum 经过精心设计，完美支持跨平台、开箱即用。
 
-* **强大、高可扩展。** 您可以客制化、扩展或集成 Flarum 以满足您的社区需求。Flarum 拥有非常全面、强大的 [扩展 API](https://docs.flarum.org/extend/)，她的架构及其灵活。
+* **强大、可扩展。** 您可以客制化、扩展或集成 Flarum 以满足您的社区需求。Flarum 拥有非常全面、强大的 [扩展 API](https://docs.flarum.org/extend/)，她的架构及其灵活。
 
 * **免费、开源。** Flarum 基于 [MIT 协议](https://github.com/flarum/flarum/blob/master/LICENSE) 发布。
