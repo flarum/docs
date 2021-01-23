@@ -1,7 +1,7 @@
 module.exports = {
-  '/extend/': [
+  '/tr/extend/': [
     {
-      title: 'Main Concepts',
+      title: 'Ana Kavramlar',
       collapsable: false,
       children: [
         '',
@@ -19,7 +19,7 @@ module.exports = {
       ]
     },
     {
-      title: 'Reference Guides',
+      title: 'Referans Kılavuzları',
       collapsable: false,
       children: [
         'admin',
@@ -30,7 +30,7 @@ module.exports = {
       ]
     },
     {
-      title: 'Advanced Guides',
+      title: 'Gelişmiş Kılavuzlar',
       collapsable: false,
       children: [
         'api-throttling',
@@ -65,9 +65,9 @@ module.exports = {
     // }
   ],
 
-  '/': [
+  '/tr/': [
     {
-      title: 'Introduction',
+      title: 'Giriş',
       collapsable: false,
       children: [
         '',
@@ -79,7 +79,7 @@ module.exports = {
       ]
     },
     {
-      title: 'Setting Up',
+      title: 'Ayarlama',
       collapsable: false,
       children: [
         'install',
@@ -88,7 +88,7 @@ module.exports = {
       ]
     },
     {
-      title: 'Management',
+      title: 'Yönetim',
       collapsable: false,
       children: [
         'admin',

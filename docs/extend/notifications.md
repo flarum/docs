@@ -68,45 +68,27 @@ Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blo
 ### Registering a Notification Type
 
 Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification.
-
-The event you want to listen for is [`ConfigureNotificationTypes`](https://github.com/flarum/core/blob/master/src/Event/ConfigureNotificationTypes.php)
-
-You are going to want to use the `$event->add()` function which accepts 3 arguments:
+We can do this with the `type` method of the `Notification` extender
 
 * `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
 * `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
 * `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
 
-Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/src/Listener/SendNotificationWhenReplyIsPosted.php):
+Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/extend.php):
 
 ```php
 <?php
 
-/*
- * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
- */
-
-namespace Flarum\Subscriptions\Listener;
-
 use Flarum\Api\Serializer\BasicDiscussionSerializer;
-use Flarum\Event\ConfigureNotificationTypes;
+use Flarum\Extend
 use Flarum\Subscriptions\Notification\NewPostBlueprint;
-use Illuminate\Contracts\Events\Dispatcher;
 
-class SendNotificationWhenReplyIsPosted
-{
-    public function subscribe(Dispatcher $events)
-    {
-        $events->listen(ConfigureNotificationTypes::class, [$this, 'addNotificationType']);
-    }
-    public function addNotificationType(ConfigureNotificationTypes $event)
-    {
-        $event->add(NewPostBlueprint::class, BasicDiscussionSerializer::class, ['alert', 'email']);
-    }
-}
+return [
+    // Other extenders
+    (new Extend\Notification())
+        ->type(NewPostBlueprint::class, BasicDiscussionSerializer::class, ['alert', 'email']),
+    // Other extenders
+];
 ```
 
 Your notification is coming together nicely! Just a few things left to do!
@@ -124,13 +106,6 @@ Let's take a look at an example from [Flarum Mentions](https://github.com/flarum
 
 ```php
 <?php
-
-/*
- * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
- */
 
 namespace Flarum\Mentions\Notification;
 
@@ -220,6 +195,78 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
         return Post::class;
     }
 }
+```
+
+### Notification Drivers
+
+In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`.
+The driver should implement `Flarum\Notification\Driver\NotificationDriverInterface`. Let's look at an annotated example from the [Pusher extension](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
+
+```php
+<?php
+
+namespace Flarum\Pusher;
+
+use Flarum\Notification\Blueprint\BlueprintInterface;
+use Flarum\Notification\Driver\NotificationDriverInterface;
+use Illuminate\Contracts\Queue\Queue;
+
+class PusherNotificationDriver implements NotificationDriverInterface
+{
+    /**
+     * @var Queue
+     */
+    protected $queue;
+
+    public function __construct(Queue $queue)
+    {
+        $this->queue = $queue;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function send(BlueprintInterface $blueprint, array $users): void
+    {
+        // The `send` method is responsible for determining any notifications need to be sent.
+        // If not (for example, if there are no users to send to), there's no point in scheduling a job.
+        // We HIGHLY recommend that notifications are sent via a queue job for performance reasons.
+        if (count($users)) {
+            $this->queue->push(new SendPusherNotificationsJob($blueprint, $users));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function registerType(string $blueprintClass, array $driversEnabledByDefault): void
+    {
+        // This method is generally used to register a user preference for this notification.
+        // In the case of pusher, there's no need for this.
+    }
+}
+```
+
+Notification drivers are also registered via the `Notification` extender, using the `driver` method. The following arguments are provided
+
+* `$driverName`: A unique, human readable name for the driver
+* `$driverClass`: The class static of the driver (example: `PostSerializer::class`)
+* `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
+
+Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
+
+```php
+<?php
+
+use Flarum\Extend
+use Flarum\Pusher\PusherNotificationDriver;
+
+return [
+    // Other extenders
+    (new Extend\Notification())
+        ->driver('pusher', PusherNotificationDriver::class),
+    // Other extenders
+];
 ```
 
 ## Rendering Notifications

@@ -10,6 +10,8 @@ We provide `flarum/components/Page` as a base class for pages in both the `admin
 - Automatically closes the modal and drawer when switching from one route to another.
 - Applies `this.bodyClass` (if defined) to the '#app' HTML element when the page renders.
 - It's also good for consistency's sake to use a common base class for all pages.
+- If the page's `scrollTopOnCreate` attribute is set to `false` in `oninit`, the page won't be scrolled to the top when changed.
+- If the page's `useBrowserScrollRestoration` is set to `false` in `oninit`, the browser's automatic scroll restoration won't be used on that page.
 
 Page components work just like any other inherited component. For a (very simple) example:
 
