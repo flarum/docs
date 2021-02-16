@@ -1,48 +1,48 @@
 # FAQ
 
-### When will Flarum be stable?
+### Quando sarà stabile Flarum?
 
-It’s impossible for us to say at the moment – there are too many variables! You can follow our progress on the [Blog](https://discuss.flarum.org/t/blog).
+È impossibile per noi al momento dirlo: ci sono troppe variabili! Puoi seguire i nostri progressi sul [Blog](https://discuss.flarum.org/t/blog).
 
-### Will I be able to upgrade from beta to subsequent releases?
+### Potrò passare dalla beta alle versioni successive?
 
-Yes! However, the upgrade process may require you to get your hands a little dirty. We’ll do our best to ensure it’s as easy as possible.
+Sì! Tuttavia, il processo di aggiornamento potrebbe richiedere di sporcarsi un po' le mani. Faremo del nostro meglio per assicurarci che sia il più semplice possibile.
 
-### Can I donate money to speed up development?
+### Posso donare denaro per accelerare lo sviluppo?
 
-All donations are gratefully received. You can give on [Github Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum).
+Tutte le donazioni sono ben accette. Puoi effettuarle tramite [Github Sponsors](https://github.com/sponsors/flarum) o [OpenCollective](https://opencollective.com/flarum).
 
-However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
+Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [community forums](https://discuss.flarum.org/)... e donando un po di energia positiva generale intorno alla comunità!
 
-### Can I use the beta version in production? Please?
+### Posso utilizzare la versione beta in produzione? Per favore?
 
-There’s a reason the [installation instructions](install.md) begin by warning against this. Flarum is not mature yet, and there is plenty of room for something to go wrong. Extensions you’re relying on could be rendered incompatible by newer beta versions. Bugs could cause a loss of content or expose private information to the Internet at large. Suboptimal SEO could hurt your site’s ranking, making it hard to attract new members. Existing members could get fed up with performance issues or incomplete features and head for greener pastures. And so on …
+C'è una ragione se nelle [istruzioni sull'installazione](install.md)  si viene messi in guardia su questa domanda. Flarum non è ancora maturo e c'è molto spazio perché qualcosa vada storto. Le estensioni su cui fai affidamento potrebbero essere rese incompatibili dalle versioni beta più recenti. I bug potrebbero causare una perdita di contenuto o esporre informazioni private a Internet in generale. Una SEO non ottimale potrebbe danneggiare il posizionamento del tuo sito, rendendo difficile attirare nuovi membri. I membri esistenti potrebbero stufarsi di problemi di prestazioni o funzionalità incomplete e dirigersi verso pascoli più verdi.
 
-You may decide to ignore these risks and install Flarum anyway. That’s up to you … but please be aware that if things go horribly wrong, it will be your responsibility to deal with them. We can’t guarantee we’ll be able to help you fix your problems at all — much less in a timely fashion. So bear in mind that it’s **your** site that you’ll be putting on the line, and choose wisely.
+Puoi decidere di ignorare questi rischi e installare comunque Flarum. Dipende da te ... ma tieni presente che se le cose vanno orribilmente storte, sarà tua responsabilità affrontarle. Non possiamo garantire che saremo in grado di aiutarti a risolvere i tuoi problemi, tanto meno in modo tempestivo. Quindi tieni presente che è il tuo sito che metti in gioco, scegli con saggezza.
 
-### Can I integrate Flarum with WordPress/Laravel/etc.?
+### Posso integrare Flarum con WordPress/Laravel/etc.?
 
-Wouldn’t it be inte-_great_! Right now it’s not possible, but we do hope to work on integrations such as these in the future.
+Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste in futuro.
 
-### Will Flarum have [insert feature here]? When? Why not?
+### Flarum avrà [nome feauture]? Quando? Perchè no?
 
-We would love to build countless features and extensions for Flarum, but first things first: Our focus is on the essentials and stability.
+Ci piacerebbe creare innumerevoli funzionalità ed estensioni per Flarum, ma per prima cosa: il nostro obiettivo è l'essenziale e la stabilità.
 
-### Why haven’t you fixed [insert issue here] yet?
+### Perchè non è stato risolto ancora il [nome problema]?
 
-Here again, the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](contributing.md)!
+Anche in questo caso, la risposta è "prima le prime cose". Se non abbiamo ancora risolto un problema (o gli abbiamo assegnato un traguardo), è perché stiamo lavorando a qualcos'altro che è altrettanto importante. Per favore sii paziente; proveremo a farlo prima del rilascio. Oppure, se hai fretta, sentiti libero di aggiustarlo da solo e [contribuire al progetto](contributing.md)!
 
-### Will I be able to migrate my forum to Flarum?
+### Potrò migrare il mio forum su Flarum?
 
-Yes, but not for a while. Our focus right now is on getting Flarum stable and feature-complete. Once we’re confident that Flarum is ready to be used in production, we’ll start building tools to import data from other forum software like esoTalk, FluxBB, phpBB, Discourse, and others.
+Sì, ma non per ora. Il nostro obiettivo in questo momento è rendere Flarum stabile e completo di funzionalità. Una volta che siamo sicuri che Flarum è pronto per essere utilizzato in produzione, inizieremo a creare strumenti per importare dati da altri software per forum come esoTalk, FluxBB, phpBB, Discourse e altri.
 
-### How do I join the Flarum team?
+### Come posso entrare a far parte del team Flarum?
 
-> "Through an arcane and arduous ordeal, involving mystic rituals, life threatening peril, and adventures to far off lands where many go and few return." ~ jordanjay29
+> "Attraverso un'arcana e ardua prova, che coinvolge rituali mistici, pericolo di vita e avventure in terre lontane dove molti vanno e pochi tornano." ~ jordanjay29
 
-The real answer is that we generally keep an eye on our community for stand-out members who would make good staff. Honestly, for most of our current staff, what they did before becoming staff wasn't much different from what they do now.
+La vera risposta è che generalmente teniamo d'occhio la nostra comunità per i membri eccezionali che potrebbero costituire un buon personale. Onestamente, per la maggior parte del nostro attuale staff, quello che hanno fatto prima di diventare parte del personale non era molto diverso da quello che fanno ora.
 
-Find a passion and contribute however you feel is best. Then let it take its course. You don't have to have a badge to be respected here.
+Trova una passione e contribuisci come ritieni sia opportuno. Non devi avere un badge per essere rispettato qui.
 
 <!--
 ### Why does Flarum use Composer? Why can't I just download a ZIP?

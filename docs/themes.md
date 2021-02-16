@@ -1,31 +1,27 @@
-# Theming
+# Aspetto e Temi
 
-While we've worked hard to make Flarum as beautiful as we can, each community will probably want to make some tweaks/modifications to fit their desired style.
+Anche se abbiamo lavorato duramente per rendere Flarum il più bello possibile, ogni comunità probabilmente vorrà apportare alcune modifiche grafiche o di stile per adattarlo alle proprie esigenze.
 
-## Admin Dashboard
+## Pannello di amministrazione
 
-The [admin dashboard](../admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
+L'aspetto del [pannello di amministrazione](../admin.md) è un ottimo punto da cui iniziare a personalizzare il tuo forum. Da qui infatti si può:
 
-- Select theme colors
-- Toggle dark mode and a colored header
-- Upload a logo and favicon (icon shown in browser tabs)
-- Add HTML for custom headers and footers
-- Add [custom LESS/CSS](#css-theming) to change how elements are displayed
+- Scegliere i colori principali del forum
+- Attivare o meno la dark mode e scegliere il colore dell'header
+- Caricare il tuo logo e favicon (l'icona visualizzata ai browser)
+- Aggiungere html per personalizare header e footer
+- Aggiungere [LESS/CSS](#css-theming) per cambiare la visualizzazione degli elementi
 
-## CSS Theming
+## Il CSS nei temi
 
-CSS is a style sheet language that tells browsers how to display elements of a webpage.
-It allows us to modify everything from colors to fonts to element size and positioning to animations.
-Adding custom CSS can be a great way to modify your Flarum installation to match a theme.
+CSS è un linguaggio per fogli di stile che indica ai browser come visualizzare gli elementi di una pagina web. Ci consente di modificare qualsiasi cosa, dai colori ai caratteri, alla dimensione degli elementi e al posizionamento delle animazioni. L'aggiunta di CSS personalizzati può essere un ottimo modo per modificare l'aspetto di Flarum in modo che corrisponda al tema del tuo sito.
 
-A CSS tutorial is beyond the scope of this documentation, but there are plenty of great online resources to learn the basics of CSS.
+Un tutorial CSS va oltre lo scopo di questa documentazione, ma ci sono molte ottime risorse online per apprendere le basi dei fogli di stile.
 
 :::tip
-Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+Flarum utilizza LESS, il che rende più facile scrivere CSS consentendo variabili, condizionali e funzioni.
 :::
 
-## Extensions
+## Estensioni
 
-Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum.
-If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go.
-To learn how to make an extension, check out our [extension documentation](extend/README.md)!
+La flessibilità di Flarum nel [sistema di estensioni](extensions.md) ti consente di aggiungere, rimuovere o modificare praticamente ogni parte di Flarum. Se si desidera apportare modifiche sostanziali ai temi oltre a cambiare colori / dimensioni / stili, un'estensione personalizzata è sicuramente la strada da percorrere. Per sapere come creare un'estensione, dai un'occhiata alla [documentazione sulle estensioni](extend/README.md)!
