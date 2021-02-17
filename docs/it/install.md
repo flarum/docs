@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # Installazione
 
 ::: danger Attenzione
