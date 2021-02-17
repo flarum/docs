@@ -1,5 +1,5 @@
 module.exports = [
-    { text: 'Guide', link: '/' },
+    { text: 'Guide', link: '/it/' },
     { text: 'Extend', link: '/extend/' },
     { text: 'Referenze API', link: 'https://api.docs.flarum.org/' },
     {
