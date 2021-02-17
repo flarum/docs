@@ -1,5 +1,5 @@
-const langs = ['en', 'zh', 'tr'];
-const paths = { en: '/' };
+const langs = ['en', 'zh', 'tr','it'];
+const paths = { it: '/it/' };
 
 module.exports = {
   get(file = '') {

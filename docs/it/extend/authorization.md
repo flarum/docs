@@ -1,99 +1,101 @@
-# Authorization
+# Autorizzazione
 
-As with any framework, Flarum allows certain actions and content to be restricted to certain users. There are 2 parallel systems for this:
+Come con qualsiasi framework, Flarum consente di limitare determinate azioni e contenuti a determinati utenti. Esistono 2 sistemi paralleli per questo:
 
-- The authorization process dictates whether a user can take a certain action.
-- Visibility scoping can be applied to a database query to efficiently restrict the records that users can access.
+- Il processo di autorizzazione determina se un utente può eseguire una determinata azione.
+- La visibilità può essere applicata a una query di database per limitare in modo efficiente i record a cui gli utenti possono accedere.
 
-## Authorization Process
+## Processo di autorizzazione
 
-The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they:
+Il processo di autorizzazione viene utilizzato per verificare se una persona è autorizzata a eseguire determinate azioni. Ad esempio, vogliamo verificare se un utente è autorizzato prima di:
 
-- Access the admin dashboard
-- Start a discussion
-- Edit a post
-- Update another user's profile
+- Poter accedere al pannello di amministrazione
+- Iniziare una discussione
+- Modificare un post
+- Aggiornare il profilo di un altro utente
 
-Each of these is determined by unique criteria: in some cases a flag is sufficient; otherwise, we might need custom logic.
+Ciascuno di questi è determinato da criteri univoci: in alcuni casi è sufficiente un flag; altrimenti, potremmo aver bisogno di una logica personalizzata.
 
-### How It Works
+### Come funziona
 
-Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
+Le richieste di autorizzazione vengono effettuate con 3 parametri, con logica contenuta in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
 
-1. The actor: the user attempting to perform the action
-2. The ability: a string representing the action the actor is attempting
-3. The arguments: usually an instance of a database model which is the subject of the attempted ability, but could be anything.
+1. L'attore: l'utente che tenta di eseguire l'azione
+2. L'abilità: una stringa che rappresenta l'azione che l'attore sta tentando
+3. Gli argomenti: di solito un'istanza di un modello di database che è l'oggetto dell'azione, ma potrebbe essere qualsiasi cosa.
 
-First, we run the entire request (all three parameters) through all [policies](#policies) registered by extensions and core. Policies are blocks of logic provided by core and extensions that determine whether the actor can perform the ability on the arguments. Policies can return one of the following:
+Per prima cosa, eseguiamo l'intera richiesta (tutti e tre i parametri) attraverso tutte le [policies](#policies) registrate dalle estensioni e dal core. Le policy sono blocchi di logica forniti dal core e dalle estensioni che determinano se l'attore può eseguire l'azione sugli argomenti. I criteri possono restituire uno dei seguenti valori:
 
-- `Flarum\User\Access\AbstractPolicy::ALLOW` (via `$this->allow()`)
-- `Flarum\User\Access\AbstractPolicy::DENY` (via `$this->deny()`)
-- `Flarum\User\Access\AbstractPolicy::FORCE_ALLOW` (via `$this->forceAllow()`)
-- `Flarum\User\Access\AbstractPolicy::FORCE_DENY` (via `$this->forceDeny()`)
+- `Flarum\User\Access\AbstractPolicy::ALLOW` (tramite `$this->allow()`)
+- `Flarum\User\Access\AbstractPolicy::DENY` (tramite `$this->deny()`)
+- `Flarum\User\Access\AbstractPolicy::FORCE_ALLOW` (tramite `$this->forceAllow()`)
+- `Flarum\User\Access\AbstractPolicy::FORCE_DENY` (tramite `$this->forceDeny()`)
 
-Policy results are considered in the priority `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. For example, if a single policy returns `FORCE_DENY`, all other policies will be ignored. If one policy returns `DENY` and 10 policies return `ALLOW`, the request will be denied. This allows decisions to be made regardless of the order in which extensions are booted. Note that policies are extremely powerful: if access is denied at the policy stage, that will override group permissions and even admin privileges.
+I risultati delle policy sono considerati prioritari `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. Ad esempio, se viene restituita una singola policy `FORCE_DENY`, tutte le altre policy verranno ignorate. Se una policy restituisce `DENY` e altre 10 restituiscono `ALLOW`, la richiesta verrà rifiutata. Ciò consente di prendere decisioni indipendentemente dall'ordine in cui le estensioni vengono avviate. Le policy sono estremamente potenti: 
+se l'accesso viene negato in fase di policy, questo sovrascriverà i permessi dei gruppi e i privilegi di amministratore.
 
-Secondly, if all policies return null (or don't return anything), we check if the user is in a group that has a permission equal to the ability (note that both permissions and abilities are represented as strings). If so, we authorize the action.
-See our [Groups and Permissions documentation](permissions.md) for more information on permissions.
+In secondo luogo, se tutte le policy restituiscono null (o non restituiscono nulla), controlliamo se l'utente è in un gruppo che ha un permesso che consenta l'azione (nota che sia i permessi che le azioni sono rappresentati sotto forma di stringhe). In tal caso, autorizziamo l'azione.
+Guarda la [Documentazione su gruppi e permessi](permissions.md) per maggiori informazioni.
 
-Then, if the user is in the admin group, we will authorize the action.
+Quindi, se l'utente è nel gruppo admin, autorizzeremo l'azione.
 
-Finally, as we have exhausted all checks, we will assume that the user is unauthorized and deny the request.
+Infine, poiché abbiamo esaurito tutti i controlli, daremo per scontato che l'utente non sia autorizzato e negheremo la richiesta.
 
-### How To Use Authorization
+### Come utilizzare le autorizzazioni
 
-Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
+Il sistema di autorizzazione di Flarum è accessibile attraverso metodi pubblici delle classi `Flarum\User\User`. I più importanti sono elencati di seguito; altri sono documentati nelle [documentazioni PHP API](https://api.docs.flarum.org/php/master/flarum/user/user).
 
 
-In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'viewDiscussions'` and `'reply'` as examples of abilities, and `$discussion` (instance of `Flarum\Discussion\Discussion`) as an example argument.
+
+In questo esempio, useremo `$actor` come istanza di `Flarum\User\User`, `'viewDiscussions'` e `'reply'` come esempi di abilità, e `$discussion` (istanza di `Flarum\Discussion\Discussion`) come esempio di argomento.
 
 ```php
-// Check whether a user can perform an action.
+// Verifica se un utente può eseguire un'azione.
 $canDoSomething = $actor->can('viewDiscussions');
 
-// Check whether a user can perform an action on a subject.
+// Verifica se un utente può eseguire un'azione su un argomento.
 $canDoSomething = $actor->can('reply', $discussion);
 
-// Raise a PermissionDeniedException if a user cannot perform an action.
+// Genera un'eccezione PermissionDeniedException se un utente non può eseguire un'azione.
 $actor->assertCan('viewDiscussions');
 $actor->assertCan('reply', $discussion);
 
-// Raise a NotAuthenticatedException if the user is not logged in.
+// Genera un'eccezione NotAuthenticatedException se l'utente non ha efettuato il login.
 $actor->assertRegistered();
 
-// Raise a PermissionDeniedException if the user is not an admin.
+// Genera un'eccezione PermissionDeniedException se l'utente non è un amministratore.
 $actpr->assertAdmin();
 
-// Check whether one of the user's groups have a permission.
-// WARNING: this should be used with caution, as it doesn't actually
-// run through the authorization process, so it doesn't account for policies.
-// It is, however, useful in implementing custom policies.
+// Controlla se uno dei gruppi dell'utente dispone di un'autorizzazione.
+// ATTENZIONE: questo dovrebbe essere usato con cautela, poiché in realtà
+// non viene eseguito attraverso il processo di autorizzazione, quindi non tiene conto delle policy.
+// Tuttavia, è utile nell'implementazione di criteri personalizzati.
 $actorHasPermission = $actor->hasPermission(`viewDiscussions`);
 ```
 
-### Custom Policies
+### Policy personalizzate
 
-Policies allow us to use custom logic beyond simple groups and permissions when evaluating authorization for an ability with a subject. For instance:
+I criteri ci consentono di utilizzare una logica personalizzata oltre a semplici gruppi e autorizzazioni quando si valuta l'autorizzazione per un'abilità con un soggetto. Per esempio:
 
-- We want to allow users to edit posts even if they aren't moderators, but only their own posts.
-- Depending on settings, we might allow users to rename their own discussions indefinitely, for a short period of time after posting, or not at all.
+- Vogliamo consentire agli utenti di modificare i post anche se non sono moderatori, ma solo i propri post.
+- A seconda delle impostazioni, potremmo consentire agli utenti di rinominare le proprie discussioni a tempo indeterminato, per un breve periodo di tempo dopo la pubblicazione o per niente.
 
-As described [above](#how-it-works), on any authorization check, we query all policies registered for the target's model, or any parent classes of the target's model.
-If no target is provided, any policies registered as `global` will be applied.
+Come descritto [qui](#how-it-works), ad ogni controllo di autorizzazione, interroghiamo tutte le politiche registrate per il modello del target o qualsiasi classe genitore del modello del target.
+Se non viene fornito alcun target, verranno applicati i criteri egistrati come "global".
 
-So, how does a policy get "checked"?
+Quindi, come viene "verificato" un criterio?
 
-First, we check if the policy class has a method with the same name as the ability being evaluated.
-If so, we run it with the actor and subject as parameters.
-If that method returns a non-null value, we return that result. Otherwise, we continue to the next step (not necessarily the next policy).
+Innanzitutto, controlliamo se la classe del criterio ha un metodo con lo stesso nome dell'abilità che viene valutata.
+In tal caso, lo eseguiamo con l'attore e il soggetto come parametri.
+Se quel metodo restituisce un valore non nullo, restituiamo quel risultato. In caso contrario, si passa alla fase successiva (non necessariamente al criterio successivo).
 
-Then, we check if the policy class has a method called `can`. If so, we run it with the actor, ability, and subject, and return the result.
+Quindi, controlliamo se la classe policy ha un metodo chiamato `can`. In tal caso, lo eseguiamo con l'attore, l'abilità e il soggetto e restituiamo il risultato.
 
-If `can` doesn't exist or returns null, we are done with this policy, and we proceed to the next one.
+Se "can" non esiste o restituisce null, abbiamo finito con questo criterio e procediamo a quello successivo.
 
-#### Example Policies
+#### Criteri di esempio
 
-Let's take a look at an example policy from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):
+Diamo un occhiata ad alcuni esempi di criteri [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):
 
 ```php
 <?php
@@ -129,7 +131,7 @@ class TagPolicy extends AbstractPolicy
 }
 ```
 
-We can also have global policies, which are run when `$user->can()` is called without a target model instance. Again from Tags:
+Possiamo anche avere criteri globali, che vengono eseguiti quando `$ user-> can ()` viene chiamato senza un'istanza del modello di destinazione. Di nuovo dai tag:
 
 ```php
 <?php
@@ -174,9 +176,9 @@ class GlobalPolicy extends AbstractPolicy
 }
 ```
 
-#### Registering Policies
+#### Registrazioni dei criteri
 
-Both model-based and global policies can be registered with the `Policy` extender in your `extend.php` file:
+Sia i criteri basati su modelli che quelli globali possono essere registrati con l'estensione `Policy` nel tuo file` extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -194,9 +196,9 @@ return [
 
 ## Visibility Scoping
 
-When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to.
-We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/6.x/queries) through [Eloquent scoping](https://laravel.com/docs/6.x/eloquent#local-scopes).
-For example:
+Quando un utente visita la pagina ** Tutte le discussioni **, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente ha accesso.
+Lo facciamo tramite il metodo `whereVisibleTo`, definito in `Flarum\Database\ScopeVisibilityTrait`, e disponibile su [Modelli e domande eloquenti](https://laravel.com/docs/6.x/queries) tremite [Eloquent scoping](https://laravel.com/docs/6.x/eloquent#local-scopes).
+Per esempio:
 
 ```php
 use Flarum\Group\Group;
@@ -215,36 +217,36 @@ $query
   ->whereVisibleTo($actor, 'someAbility')
 ```
 
-Please note that visibility scoping can only be used on models that use the `Flarum\Database\ScopeVisibilityTrait` trait.
+Si noti che la visibilità può essere utilizzata solo sui modelli che utilizzano l'estensione `Flarum\Database\ScopeVisibilityTrait`.
 
-### How It's Processed
+### Come viene elaborato
 
-So, what actually happens when we call `whereVisibleTo`?
-This call is handled by Flarum's general model visibility scoping system, which runs the query through a sequence of callbacks, which are called "scopers".
+Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`?
+Questa chiamata è gestita dal sistema di visibilità del modello generale di Flarum, che esegue la query attraverso una sequenza di callback, chiamati "scopers".
 
-The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
+La query verrà eseguita attraverso tutti gli scoper applicabili registrati per il modello della query. Notare che gli scopers di visibilità registrati per una classe genitore (tipo `Flarum\Post\Post`) verranno applicate sulle classi secondarie (come `Flarum\Post\CommentPost`).
 
-Note that scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/6.x/queries).
+Tieni presente che gli scoper non devono restituire nulla, ma piuttosto dovrebbero eseguire mutazioni nei file [Eloquent query object](https://laravel.com/docs/6.x/queries).
 
-### Custom Permission Strings
+### Stringhe di autorizzazione personalizzate
 
-There are actually two types of scopers:
+Esistono in realtà due tipi di scoper:
 
-- ability-based scopers will apply to all queries for the query's model run with a given ability (which defaults to `"view"`). Please note this is not related to ability strings from the [policy system](#how-it-works)
-- "global" scopers will apply to all queries for the query's model. Please note that global scopers will be run on ALL queries for its model, including `view`, which could create infinite loops or errors. Generally, you only want to run these for abilities that don't begin with `view`. You'll see this in the [example below](#custom-visibility-scoper-examples)
+- Gli scopers basati sulle azioni verranno applicati a tutte le query per il modello eseguito con una determinata capacità (che per impostazione predefinita è `"view"`). Si prega di notare che questo non è correlato alle stringhe di abilità del [policy system](#how-it-works)
+- Tieni presente che gli scopers globali verranno eseguiti su TUTTE le query per il relativo modello, inclusi `view`, che potrebbe creare loop infiniti o errori. Generalmente, vengono eseguiti solo per abilità che non iniziano con "view". Puoi vedere qualcosa nell' [esempio sottostante](#custom-visibility-scoper-examples)
 
 
 
-One common use case for this is allowing extensibility inside visibility scoping.
-Let's take a look at an annotated, simple piece of `Flarum\Post\PostPolicy` as an example:
+Un caso d'uso comune per questo è consentire l'estensibilità all'interno dell'ambito della visibilità.
+Diamo un'occhiata a un semplice pezzo di `Flarum\Post\PostPolicy`:
 
 ```php
-// Here, we want to ensure that private posts aren't visible to users by default.
-// The simplest way to do this would be:
+// Qui, vogliamo assicurarci che i post privati non siano visibili agli utenti per impostazione predefinita.
+// Il modo più semplice per farlo sarebbe:
 $query->where('posts.is_private', false);
 
-// However, we recognize that some extensions might have valid use cases for showing private posts.
-// So instead, we include all posts that aren't private, AND all private posts desired by extensions
+// Tuttavia, riconosciamo che alcune estensioni potrebbero avere casi d'uso validi per la visualizzazione di post privati.
+// Quindi, invece, includiamo tutti i post che non sono privati E tutti i post privati desiderati dalle estensioni
 $query->where(function ($query) use ($actor) {
     $query->where('posts.is_private', false)
         ->orWhere(function ($query) use ($actor) {
@@ -273,13 +275,13 @@ class ScopePostVisibility
 }
 ```
 
-Think of calling `whereVisibleTo` with a custom ability as a way for extensions to insert custom code, overriding filters imposed by core (or other extensions).
+Pensa di richiamare `whereVisibleTo` con un azione personalizzata come un modo per le estensioni di inserire codice personalizzato, bypassando i filtri imposti dal core (o altre estensioni).
 
-### Custom Visibility Scoper Examples
+### Esempi
 
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+Diamo un'occhiata ad alcuni esempi tratti da [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
 
-First, a scoper for the `Tag` model with the `view` ability:
+Innanzitutto, uno scoper per il modello `Tag` con l'abilità` view`:
 
 ```php
 <?php
@@ -303,7 +305,7 @@ class ScopeTagVisibility
 }
 ```
 
-And a global scoper for the `Discussion` model:
+ed uno globale per il modelle `Discussion`:
 
 ```php
 <?php
@@ -339,9 +341,9 @@ class ScopeDiscussionVisibilityForAbility
 }
 ```
 
-Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers.
+Nota che, come accennato in precedenza, non lo eseguiamo per le abilità che iniziano con `view`, poiché queste sono gestite dai loro scoper dedicati.
 
-### Registering Custom Visibility Scopers
+### Registrazione di scopers personalizzati
 
 
 
@@ -366,15 +368,15 @@ return [
 ];
 ```
 
-## Frontend Authorization
+## Autorizzazioni del frontend
 
-Commonly, you'll want to use authorization results in frontend logic.
-For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint.
-And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
+Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend.
+Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint.
+E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
 
-Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending.
-Global permissions (`viewDiscussions`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object.
-For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model.
-It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
+Poiché non possiamo eseguire controlli di autorizzazione nel frontend, dobbiamo eseguirli nel backend e allegarli alla serializzazione dei dati che stiamo inviando.
+Permessi globali come (`viewDiscussions`, `viewUserList`) possono essere inclusi in `ForumSerializer`, ma per l'autorizzazione specifica dell'oggetto, potremmo voler includere quelli con altri parametri.
+Ad esempio, quando restituiamo l'elenco delle discussioni, controlliamo se l'utente può rispondere, rinominare, modificare ed eliminarle oggetti, e memorizzare quei dati nel modello di discussione frontend.
+È quindi accessibile tramite `discussion.canReply()` o `discussion.canEdit()`, ma non c'è niente di magico qui: è solo un altro attributo inviato dal serializzatore.
 
-For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).
+Per un esempio di come allegare dati a un serializzatore, vedere [casi simili per la trasmissione delle impostazioni](settings.md#accessing-settings).
