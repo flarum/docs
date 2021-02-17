@@ -1,51 +1,51 @@
-# Codice di Condotta
+# Code of Conduct
 
-### _Benvenuti nella community di Flarum!_
+### _Welcome to the Flarum Community!_
 
-... E grazie di essere con noi! Siamo entusiasti di Flarum, e siamo sempre felici di vedere persone che la pensano come noi. Vogliamo che tutti possiate ottenere il massimo da Flarum e dalla comunità Flarum, quindi vi chiediamo di leggere e seguire queste linee guida. Queste ultime si applicano sia che tu stia utilizzando il nostro forum, la chat di Discord, la comunicazione su GitHub o qualsiasi altra forma di comunicazione senza la comunità di Flarum.
+... And thanks for joining us! We're excited about Flarum, and are always happy to meet people who feel the same way. We want *everyone* to get the most out of Flarum and the Flarum community, so we ask that you please read and follow these guidelines. These apply whether you're using our forum, Discord chat, communicating on GitHub, or any other form of communication without the Flarum community.
 
-### Prima di ogni cosa, sii calmo!
+### Above All, Be Cool!
 
-Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applicazione sempre migliore. Criticare le idee (con ragionevoli argomenti, si intende) è una parte importante per noi. Ma non lasciamo che questo faccia sfociare un post in attacchi personal, la negatività non porta a nulla di buono. Ti chiediamo pertanto di evitare quanto segue:
+We're all here to talk about Flarum, and to work together toward making it an even better application. Criticizing ideas (by means of reasoned arguments, of course) is an important part of that. But let's not get carried away and devolve into personal attacks, because negativity only gets in the way. We ask that you avoid the following:
 
-- Linguaggio scurrile o offensivo, nonché qualsiasi tipo di incitamento all'odio
-- Post destinati a molestare, impersonare o diffamare altri
-- Cancellazione non necessaria del contenuto pubblicato
-- Tentativi di estorcere o esporre le informazioni private di altri
-- Contenuti osceni o sessualmente espliciti
-- Spam, messaggi di phishing e qualsiasi azione intesa a deturpare questo sito
-- Discussione sulla pirateria del software e argomenti simili
+- Offensive or abusive language, as well as any kind of hate speech
+- Posts intended to harass, impersonate, or defame others
+- Unnecessary deletion of posted content
+- Attempts to abuse or expose the private information of others
+- Obscene or sexually explicit content
+- Spam, phishing posts, and any actions intended to deface this site
+- Discussion of software piracy and similar topics
 
-*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se è sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. [admin@flarum.org](mailto:admin@flarum.org).
+*All the above are grounds for moderator action.* If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the *Report* command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation to [admin@flarum.org](mailto:admin@flarum.org).
 
-I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciò, sii sempre gentile e calmo. ðŸ˜Ž
+Our moderators may edit or delete any content that is offensive or disruptive to the flow of communication. Serious or repeated offenses may lead to suspension of the offending user's account. So, you know, *be cool*. ðŸ˜Ž
 
-### Fatti sentire!
+### Make Yourself Heard
 
-Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [our FAQ](faq.md) ae segui i link per assicurarti di essere completamente informato sul progetto. Quindi trascorri un po 'di tempo a navigare nel forum, familiarizza con [il sistema dei TAG](https://discuss.flarum.org/tags), e fai qualche ricerca per parole chiave correlate al tuo argomento: ci potrebbe essere qualcuno che ha già avviato una discussione simile o identica!
+Want to start a new discussion? First, be sure to read [our FAQ](faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: *it could be someone has already started a discussion about it!*
 
-Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente i seguenti punti:
+When you're sure you're ready to start a discussion, please keep the following points in mind:
 
-- Dagli un buon titolo! Otterrai i migliori risultati se il tuo titolo chiarisce di cosa vuoi parlare.
-- Scegli i tag giusti. Ciò aumenterà le probabilità che il tuo post venga letto e riceva risposte più in fretta.
-- Non postare ripetutamente sullo stesso argomento, perché così facendo potresti ottenere l'effetto opposto.
-- Se non utilizzi un tag riservato per l'uso multilingue, pubblica solo in italiano. Non possiamo aiutarti se non possiamo leggerti!
-- Ricorda, non è necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei.
+- Give it a good title! You'll get the best results if your title makes it clear what you want to talk about.
+- Choose the right tag(s). This will increase the likelihood your post will be read and answered promptly.
+- *Donâ€™t* post repeatedly about the same topic, as doing so will tend to have the opposite effect. 
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!
+- Remember, you don't need to sign your posts. We've got your profile to let us know who you are.
 
 Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
 
-### Le tue risposte sono importanti
+### Make Your Reply Count
  
-Ti stai prendendo il tempo per partecipare a una discussione, nella speranza che gli altri leggano le tue idee e le tengano in considerazione. Allora perché non fare lo sforzo di rendere la tua risposta degna di essere letta?
+You're taking the time to participate in a discussion, in the hope that others will read your ideas and take them into consideration. So why not make the effort to make your reply worth reading?
 
-- Non rispondere al titolo. Prenditi un po di tempo per leggere tutto attentamente, ed esamina per bene tutta la conversazione.
-- Chiediti se la tua risposta aggiunge davvero qualcosa alla discussione. In caso contrario, pensaci ancora prima di pubblicare.
-- Evita di rispondere con una sola parola come "grazie" o "ok"; puoi usare il tasto "Mi piace" per questo.
-- Evita di creare più post di seguito quando uno sarebbe sufficiente. Questo è un forum, non una chat room.
-- Se è probabile che la tua risposta possa deviare il corso della discussione, valuta invece di iniziare una nuova discussione.
-- Se vuoi solo pubblicare un po 'di sciocchezze come test, fallo nel apposita sezione di test del forum.
-- Assicurati che le tue risposte forniscano feedback e supporto costruttivi per consentire una comunità inclusiva.
+- Don't reply to a title. Take some time to *read* the OP, and at least *scan* the rest of the conversation first.
+- Ask yourself if your reply adds to the discussion. If it doesn't, give it some more thought before posting.
+- Avoid making one-word posts just to agree with someone; you can use the "Like" button for that.
+- Avoid making multiple posts in a row when one would suffice. This is a forum, not a chat room.
+- If your reply is likely to divert the course of the discussion, consider starting a new discussion instead.
+- If you just want to post a bit of nonsense as a test, please do it in the [Test Posting](https://discuss.flarum.org/t/sandbox) tag instead.
+- Make sure your replies provide constructive feedback and support to allow for an inclusive community.
 
-Nessuno si lamenterà dello scherzo occasionale o dell'osservazione intelligente. Ci piace mantenere l'atmosfera leggera! Ma anche per mantenere le cose produttive, ti chiediamo di cercare di evitare di far deragliare del tutto una discussione.
+No one's going to complain about the occasional joke or smart remark. We like to keep the mood light! But to keep things productive, as well, we ask that you try to avoid derailing a discussion altogether. 
 
-> Grazie a Dominion per il suo aiuto nella stesura delle linee guida.
+> Thanks to Dominion for his help in putting these guidelines together.
