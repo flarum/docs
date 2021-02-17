@@ -65,7 +65,7 @@ module.exports = {
     // }
   ],
 
-  '/': [
+  '/it/': [
     {
       title: 'Introduzione',
       collapsable: false,
