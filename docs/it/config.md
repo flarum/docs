@@ -25,7 +25,7 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
     'port' => '3306', // la porta di connessione, di default 3306 con MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // l' URL di installazione, vorrai cambiarlo se cambi domini
+  'url' => 'https://flarum.localhost', // l'URL di installazione, vorrai cambiarlo se cambi domini
   'paths' =>
   array (
     'api' => 'api', // /api goes to the API
