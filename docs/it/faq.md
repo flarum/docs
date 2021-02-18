@@ -12,7 +12,7 @@ Sì! Tuttavia, il processo di aggiornamento potrebbe richiedere di sporcarsi un 
 
 Tutte le donazioni sono ben accette. Puoi effettuarle tramite [Github Sponsors](https://github.com/sponsors/flarum) o [OpenCollective](https://opencollective.com/flarum).
 
-Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [community forums](https://discuss.flarum.org/)... e donando un po di energia positiva generale intorno alla comunità!
+Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [forum](https://discuss.flarum.org/)... e donando un po di energia positiva generale intorno alla comunità!
 
 ### Posso utilizzare la versione beta in produzione? Per favore?
 

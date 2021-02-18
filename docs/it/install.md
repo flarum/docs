@@ -96,7 +96,7 @@ Se dopo aver completato questi passaggi, Flarum continua a richiedere la modific
 
 Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`. 
 
-Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
+Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
 ::: warning Gli ambienti possono variare
 Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta la configurazione del tuo server web o il provider di hosting web per conoscere l'utente e il gruppo appropriato in cui operano PHP e il server web.

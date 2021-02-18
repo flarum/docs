@@ -10,10 +10,10 @@ Grazie per averci aiutato a testare Flarum. Siamo felici di averti nella squadra
 
 Hai già trovato un bug? Meraviglioso Ci piacerebbe saperlo, ma prima dovresti controllare per assicurarti di non sprecare il tuo tempo su un problema già noto:
 
-- Cerca sul [Support forum](https://discuss.flarum.org/t/support) per vedere se il bug è stato già segnalato.
+- Cerca sul [forum di supporto](https://discuss.flarum.org/t/support) per vedere se il bug è stato già segnalato.
 - Potremmo essere al lavoro su una soluzione, quindi cerca anche sul nostro [issue tracker](https://github.com/flarum/core/issues).
 
-Se hai cercato a fondo e ne sei uscito a mani vuote, saremo lieti di ricevere il tuo rapporto. Se si tratta solo di un problema semplice (ad esempio una parola con errori di ortografia o un problema grafico), passa al paragrafo successivo. Ma se vedi errori o qualcosa è chiaramente un errore, avremo bisogno che tu raccolga prima alcune informazioni. Per favore leggi la guida alla [Troubleshooting](troubleshoot.md)  e seguine le istruzioni. Raccogli più informzioni possibili!
+Se hai cercato a fondo e ne sei uscito a mani vuote, saremo lieti di ricevere il tuo rapporto. Se si tratta solo di un problema semplice (ad esempio una parola con errori di ortografia o un problema grafico), passa al paragrafo successivo. Ma se vedi errori o qualcosa è chiaramente un errore, avremo bisogno che tu raccolga prima alcune informazioni. Per favore leggi la guida alla [Risoluzione dei problemi](troubleshoot.md)  e seguine le istruzioni. Raccogli più informzioni possibili!
 
 ## Segnalare il problema
 

@@ -1,14 +1,14 @@
-# Release Notes
+# Note di rilascio
 
 <!--
 https://github.com/flarum/docs/issues/22
 https://laravel.com/docs/5.7/releases
 
-## Versioning Scheme
+## Schema versioni
 
-## Support Policy
+## Policy di Supporto
 
-## Release Notes
+## Note di rilascio
 -->
 
-Release notes can be found in the [Flarum Community](https://discuss.flarum.org/t/blog?sort=newest).
+Le note di rilascio possono essere trovate facilmente nel [Forum di Flarum](https://discuss.flarum.org/t/blog?sort=newest).

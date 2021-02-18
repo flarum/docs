@@ -4,17 +4,17 @@ Interessato a contribuire allo sviluppo di Flarum? È fantastico! Dalla [segnalaz
 
 Prima di contribuire, leggi il [codice di condotta](code-of-conduct.md).
 
-Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Getting Started](/extend/start.md)  (per ora in inglese) sul funzionamento di Flarum.
+Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Per iniziare](/extend/start.md)  (per ora in inglese) sul funzionamento di Flarum.
 
 ## Su cosa lavorare
 
-Dai un occhiata ai nostri prossimi [Traduardi (in inglese)](https://github.com/flarum/core/milestones) per una panoramica di ciò che deve essere fatto. Consulta le [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) per un elenco di problemi con cui dovrebbe essere relativamente facile iniziare.
+Dai un occhiata ai nostri prossimi [Traduardi (in inglese)](https://github.com/flarum/core/milestones) per una panoramica di ciò che deve essere fatto. Consulta le [Primi problemi](https://github.com/flarum/core/labels/Good%20first%20issue) per un elenco di problemi con cui dovrebbe essere relativamente facile iniziare.
 
 Se hai intenzione di andare avanti e lavorare su qualcosa, commenta il problema pertinente o creane uno nuovo prima. In questo modo possiamo garantire che il tuo prezioso lavoro non sia vano.
 
 ## Setup area di sviluppo
 
-[flarum/flarum](https://github.com/flarum/flarum) è lo "scheletro" dell'applicazione che usa Composer per scaricare [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). Per lavorare su questi, consigliamo di eseguirne il fork e di clonarli in una [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) è lo "scheletro" dell'applicazione che usa Composer per scaricare [flarum/core](https://github.com/flarum/core) e [tantissime estensioni](https://github.com/flarum). Per lavorare su questi, consigliamo di eseguirne il fork e di clonarli in una [Repository di Composer](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
@@ -123,7 +123,7 @@ Le classi CSS di Flarum seguono più o meno il [SUIT CSS naming conventions](http
 
 ### Traduzioni
 
-Utilizziamo [standard key format](/extend/i18n.md#appendix-a-standard-key-format) per denominare le chiavi di traduzione in modo descrittivo e coerente.
+Utilizziamo [formati chiave standard](/extend/i18n.md#appendix-a-standard-key-format) per denominare le chiavi di traduzione in modo descrittivo e coerente.
 
 ## Strumenti di sviluppo
 

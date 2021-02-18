@@ -12,6 +12,6 @@ Flarum è la potente evoluzione di [esoTalk](https://github.com/esotalk/esoTalk)
 
 * **Bello e responsive.**  Il suo design si adatta a dispositivi fissi, mobili e tablet in maniera responsive. Flarum è progettato con cura per essere coerente e intuitivo su tutte le piattaforme..
 
-* **Potente ed estendibile.** Personalizza, estendi e integra Flarum per creare la tua community unica. L'architettura di Flarum è molto flessibile grazie alle sue [powerful Extension API](/extend/).
+* **Potente ed estendibile.** Personalizza, estendi e integra Flarum per creare la tua community unica. L'architettura di Flarum è molto flessibile grazie alle sue [potenti API per le estensioni](/extend/).
 
-* **Gratuito e aperto.** Flarum è totalmente gratuito e rilasciato sotto [MIT license](https://github.com/flarum/flarum/blob/master/LICENSE).
+* **Gratuito e aperto.** Flarum è totalmente gratuito e rilasciato sotto [Licenza MIT](https://github.com/flarum/flarum/blob/master/LICENSE).

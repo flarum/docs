@@ -22,7 +22,7 @@ I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo
 
 ### Fatti sentire!
 
-Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [our FAQ](faq.md) ae segui i link per assicurarti di essere completamente informato sul progetto. Quindi trascorri un po 'di tempo a navigare nel forum, familiarizza con [il sistema dei TAG](https://discuss.flarum.org/tags), e fai qualche ricerca per parole chiave correlate al tuo argomento: ci potrebbe essere qualcuno che ha già avviato una discussione simile o identica!
+Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [nostre FAQ](faq.md) ae segui i link per assicurarti di essere completamente informato sul progetto. Quindi trascorri un po 'di tempo a navigare nel forum, familiarizza con [il sistema dei TAG](https://discuss.flarum.org/tags), e fai qualche ricerca per parole chiave correlate al tuo argomento: ci potrebbe essere qualcuno che ha già avviato una discussione simile o identica!
 
 Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente i seguenti punti:
 

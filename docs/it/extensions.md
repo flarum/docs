@@ -9,7 +9,7 @@ Questo articolo si concentrerà sulla gestione delle estensioni dal punto di vis
 
 ## Trovare le estensioni
 
-Flarum ha un vasto ecosistema di estensioni, molte delle quali sono open source è grautie. Per trovare nuove e fantastiche estensioni, visita il tag [Extensions](https://discuss.flarum.org/t/extensions) sul forum ufficiale di Flarum. Il non ufficiale [Extiverse extension database](https://extiverse.com/) è anch'esso una valida alternativa.
+Flarum ha un vasto ecosistema di estensioni, molte delle quali sono open source è grautie. Per trovare nuove e fantastiche estensioni, visita il tag [Estensioni](https://discuss.flarum.org/t/extensions) sul forum ufficiale di Flarum. Il non ufficiale [Database estensioni Extiverse](https://extiverse.com/) è anch'esso una valida alternativa.
 
 ## Installare le estensioni
 
