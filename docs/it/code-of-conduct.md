@@ -2,13 +2,13 @@
 
 ### _Benvenuti nella community di Flarum!_
 
-... E grazie di essere con noi! Siamo entusiasti di Flarum, e siamo sempre felici di vedere persone che la pensano come noi. Vogliamo che tutti possiate ottenere il massimo da Flarum e dalla comunità Flarum, quindi vi chiediamo di leggere e seguire queste linee guida. Queste ultime si applicano sia che tu stia utilizzando il nostro forum, la chat di Discord, la comunicazione su GitHub o qualsiasi altra forma di comunicazione senza la comunità di Flarum.
+... E grazie di essere con noi! Siamo entusiasti di Flarum, e siamo sempre felici di vedere persone che la pensano come noi. Vogliamo che tutti possiate ottenere il massimo da Flarum e dalla comunitÃ  Flarum, quindi vi chiediamo di leggere e seguire queste linee guida. Queste ultime si applicano sia che tu stia utilizzando il nostro forum, la chat di Discord, la comunicazione su GitHub o qualsiasi altra forma di comunicazione senza la comunitÃ  di Flarum.
 
 ### Prima di ogni cosa, sii calmo!
 
-Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applicazione sempre migliore. Criticare le idee (con ragionevoli argomenti, si intende) è una parte importante per noi. Ma non lasciamo che questo faccia sfociare un post in attacchi personal, la negatività non porta a nulla di buono. Ti chiediamo pertanto di evitare quanto segue:
+Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applicazione sempre migliore. Criticare le idee (con ragionevoli argomenti, si intende) Ã¨ una parte importante per noi. Ma non lasciamo che questo faccia sfociare un post in attacchi personal, la negativitï¿½ non porta a nulla di buono. Ti chiediamo pertanto di evitare quanto segue:
 
-- Linguaggio scurrile o offensivo, nonché qualsiasi tipo di incitamento all'odio
+- Linguaggio scurrile o offensivo, nonchÃ© qualsiasi tipo di incitamento all'odio
 - Post destinati a molestare, impersonare o diffamare altri
 - Cancellazione non necessaria del contenuto pubblicato
 - Tentativi di estorcere o esporre le informazioni private di altri
@@ -16,36 +16,36 @@ Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applic
 - Spam, messaggi di phishing e qualsiasi azione intesa a deturpare questo sito
 - Discussione sulla pirateria del software e argomenti simili
 
-*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se è sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. [admin@flarum.org](mailto:admin@flarum.org).
+*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se Ã¨ sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. [admin@flarum.org](mailto:admin@flarum.org).
 
-I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciò, sii sempre gentile e calmo. ðŸ˜Ž
+I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciÃ², sii sempre gentile e calmo. ðŸ˜Ž
 
 ### Fatti sentire!
 
-Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [nostre FAQ](faq.md) ae segui i link per assicurarti di essere completamente informato sul progetto. Quindi trascorri un po 'di tempo a navigare nel forum, familiarizza con [il sistema dei TAG](https://discuss.flarum.org/tags), e fai qualche ricerca per parole chiave correlate al tuo argomento: ci potrebbe essere qualcuno che ha già avviato una discussione simile o identica!
+Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [nostre FAQ](faq.md) e segui i link per assicurarti di essere completamente informato sul progetto. Quindi trascorri un po' di tempo a navigare nel forum, familiarizza con [il sistema dei tag](https://discuss.flarum.org/tags), e fai qualche ricerca per parole chiave correlate al tuo argomento: ci potrebbe essere qualcuno che ha giÃ  avviato una discussione simile o identica!
 
 Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente i seguenti punti:
 
 - Dagli un buon titolo! Otterrai i migliori risultati se il tuo titolo chiarisce di cosa vuoi parlare.
-- Scegli i tag giusti. Ciò aumenterà le probabilità che il tuo post venga letto e riceva risposte più in fretta.
-- Non postare ripetutamente sullo stesso argomento, perché così facendo potresti ottenere l'effetto opposto.
+- Scegli i tag giusti. CiÃ² aumenterÃ  le probabilitÃ  che il tuo post venga letto e riceva risposte piÃ¹ in fretta.
+- Non postare ripetutamente sullo stesso argomento, perchÃ© cosÃ¬ facendo potresti ottenere l'effetto opposto.
 - Se non utilizzi un tag riservato per l'uso multilingue, pubblica solo in italiano. Non possiamo aiutarti se non possiamo leggerti!
-- Ricorda, non è necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei.
+- Ricorda, non Ã¨ necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei.
 
 Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
 
 ### Le tue risposte sono importanti
  
-Ti stai prendendo il tempo per partecipare a una discussione, nella speranza che gli altri leggano le tue idee e le tengano in considerazione. Allora perché non fare lo sforzo di rendere la tua risposta degna di essere letta?
+Ti stai prendendo il tempo per partecipare a una discussione, nella speranza che gli altri leggano le tue idee e le tengano in considerazione. Allora perchï¿½ non fare lo sforzo di rendere la tua risposta degna di essere letta?
 
 - Non rispondere al titolo. Prenditi un po di tempo per leggere tutto attentamente, ed esamina per bene tutta la conversazione.
 - Chiediti se la tua risposta aggiunge davvero qualcosa alla discussione. In caso contrario, pensaci ancora prima di pubblicare.
 - Evita di rispondere con una sola parola come "grazie" o "ok"; puoi usare il tasto "Mi piace" per questo.
-- Evita di creare più post di seguito quando uno sarebbe sufficiente. Questo è un forum, non una chat room.
-- Se è probabile che la tua risposta possa deviare il corso della discussione, valuta invece di iniziare una nuova discussione.
-- Se vuoi solo pubblicare un po 'di sciocchezze come test, fallo nel apposita sezione di test del forum.
-- Assicurati che le tue risposte forniscano feedback e supporto costruttivi per consentire una comunità inclusiva.
+- Evita di creare piÃ¹ post di seguito quando uno sarebbe sufficiente. Questo Ã¨ un forum, non una chat room.
+- Se Ã¨ probabile che la tua risposta possa deviare il corso della discussione, valuta invece di iniziare una nuova discussione.
+- Se vuoi solo pubblicare un po' di sciocchezze come test, fallo nel apposita sezione di test del forum.
+- Assicurati che le tue risposte forniscano feedback e supporto costruttivi per consentire una comunitÃ  inclusiva.
 
-Nessuno si lamenterà dello scherzo occasionale o dell'osservazione intelligente. Ci piace mantenere l'atmosfera leggera! Ma anche per mantenere le cose produttive, ti chiediamo di cercare di evitare di far deragliare del tutto una discussione.
+Nessuno si lamenterÃ  dello scherzo occasionale o dell'osservazione intelligente. Ci piace mantenere l'atmosfera leggera! Ma anche per mantenere le cose produttive, ti chiediamo di cercare di evitare di far deragliare del tutto una discussione.
 
 > Grazie a Dominion per il suo aiuto nella stesura delle linee guida.
