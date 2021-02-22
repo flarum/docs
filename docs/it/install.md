@@ -1,9 +1,9 @@
 # Installazione
 
 ::: danger Attenzione
-Flarum Ë **un software in fase beta**. CiÚ significa che ha ancora alcune funzionalit‡ incomplete e bug üêõüêû, e ad un certo punto ‚Äì prima o poi ‚Äì probabilmente un errore potr‡ paventarsi! üí•
+Flarum √® **un software in fase beta**. Ci√≤ significa che ha ancora alcune funzionalit√† incomplete e bug üêõüêû, e ad un certo punto ‚Äì prima o poi ‚Äì probabilmente un errore potr√† paventarsi! üí•
 
-La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sar‡ possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. 
+La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sar√† possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. 
 :::
 
 ::: Una veloce prova su strada?
@@ -12,7 +12,7 @@ Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/2
 
 ## Requisiti del server
 
-Prima di installare Flarum, Ë importante verificare che il tuo server soddisfi i requisiti. Per eseguire Flarum, avrai bisogno di:
+Prima di installare Flarum, √® importante verificare che il tuo server soddisfi i requisiti. Per eseguire Flarum, avrai bisogno di:
 
 * **Apache** (con mod\_rewrite abilitayo) o **Nginx**
 * **PHP 7.2.9+** con le seguenti estensioni: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
@@ -20,28 +20,28 @@ Prima di installare Flarum, Ë importante verificare che il tuo server soddisfi i
 * **SSH (accesso su riga di comando)** per lanciare Composer
 
 ::: Hosting condiviso
-In questa fase, non Ë possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perchÈ Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
+In questa fase, non √® possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perch√© Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
 
 Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host condivisi ti danno accesso SSH, attraverso il quale dovresti essere in grado di installare Composer e Flarum senza problemi. Per altri host senza SSH, puoi provare soluzioni alternative come [Pockethold](https://github.com/andreherberth/pockethold).
 :::
 
 ## Installare Flarum
 
-Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar‡ necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
+Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sarÔøΩ necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
 ```
 
-Mentre questo comando Ë in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
+Mentre questo comando ÔøΩ in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
 
-Quando tutto Ë pronto, accedi al tuo forum in un browser web e segui le istruzioni a video per completare l'installazione
+Quando tutto √® pronto, accedi al tuo forum in un browser web e segui le istruzioni a video per completare l'installazione
 
 ## URL Rewriting
 
 ### Apache
 
-Flarum include un file `.htaccess` nella cartella `public` ‚Äì assicurati che sia stato caricato correttamente. **Flarum non funzioner‡ correttamente se  `mod_rewrite` non Ë abilitato o il file `.htaccess` non Ë accessibile.** Assicurati di verificare con il tuo provider di hosting (o il tuo VPS) che queste funzionalit‡ siano abilitate. Se gestisci il tuo server, potresti dover aggiungere quanto segue alla configurazione del tuo sito per abilitare i file `.htaccess`.
+Flarum include un file `.htaccess` nella cartella `public` ‚Äì assicurati che sia stato caricato correttamente. **Flarum non funzioner√† correttamente se  `mod_rewrite` non √® abilitato o il file `.htaccess` non √® accessibile.** Assicurati di verificare con il tuo provider di hosting (o il tuo VPS) che queste funzionalit√† siano abilitate. Se gestisci il tuo server, potresti dover aggiungere quanto segue alla configurazione del tuo sito per abilitare i file `.htaccess`.
 
 ```
 <Directory "/percorso/di/flarum/public">
@@ -49,9 +49,9 @@ Flarum include un file `.htaccess` nella cartella `public` ‚Äì assicurati che si
 </Directory>
 ```
 
-CiÚ garantisce che gli override di htaccess siano consentiti in modo che Flarum possa riscrivere correttamente gli URL.
+Ci√≤ garantisce che gli override di htaccess siano consentiti in modo che Flarum possa riscrivere correttamente gli URL.
 
-I metodi per abilitare `mod_rewrite` dipendono dal tuo OS. Puoi abilitarli eseguendo `sudo a2enmod rewrite` su Ubuntu. `mod_rewrite` Ë abilitato di default su CentOS. Non dimenticare di riavviare Apache dopo aver apportato modifiche!
+I metodi per abilitare `mod_rewrite` dipendono dal tuo OS. Puoi abilitarli eseguendo `sudo a2enmod rewrite` su Ubuntu. `mod_rewrite` √® abilitato di default su CentOS. Non dimenticare di riavviare Apache dopo aver apportato modifiche!
 
 ### Nginx
 
@@ -63,7 +63,7 @@ include /path/to/flarum/.nginx.conf;
 
 ### Caddy
 
-Caddy richiede una configurazione molto semplice affinchÈ Flarum funzioni correttamente. Nota che devi sostituire l'URL con il tuo URL e il percorso con il tuo percorso della cartella `public`. Se stai usando una versione diversa di PHP, dovrai anche cambiare il percorso del file `fastcgi` per puntare al socket o all'URL di installazione PHP corretto.
+Caddy richiede una configurazione molto semplice affinch√© Flarum funzioni correttamente. Nota che devi sostituire l'URL con il tuo URL e il percorso con il tuo percorso della cartella `public`. Se stai usando una versione diversa di PHP, dovrai anche cambiare il percorso del file `fastcgi` per puntare al socket o all'URL di installazione PHP corretto.
 
 ```
 www.esempio.com {
@@ -78,7 +78,7 @@ www.esempio.com {
     encode gzip
 }
 ```
-## Propriet‡ della cartella
+## Propriet√† della cartella
 
 Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune directory. Per consentire l'accesso in scrittura a una directory su Linux, eseguire il seguente comando:
 
@@ -86,31 +86,31 @@ Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune
 chmod 775 /percorso/della/directory
 ```
 
-Se Flarum richiede l'accesso in scrittura sia alla directory che al suo contenuto, Ë necessario aggiungere il comando `-R` in modo che le autorizzazioni siano aggiornate per tutti i file e le cartelle all'interno della directory:
+Se Flarum richiede l'accesso in scrittura sia alla directory che al suo contenuto, √® necessario aggiungere il comando `-R` in modo che le autorizzazioni siano aggiornate per tutti i file e le cartelle all'interno della directory:
 
 ```bash
 chmod 775 -R /percorso/della/directory
 ```
 
-Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di propriet‡ del gruppo e dell'utente corretti. 
+Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di propriet√† del gruppo e dell'utente corretti. 
 
-Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` Ë sia il gruppo che l'utente ad operare sotto PHP. » possibile modificare la propriet‡ della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`. 
+Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` √® sia il gruppo che l'utente ad operare sotto PHP. √à possibile modificare la propriet√† della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`. 
 
-Per saperne di pi˘ su questi comandi, nonchÈ sui permessi dei file e sulla propriet‡ su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
+Per saperne di pi√π su questi comandi, nonch√© sui permessi dei file e sulla propriet√† su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
 ::: warning Gli ambienti possono variare
 Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta la configurazione del tuo server web o il provider di hosting web per conoscere l'utente e il gruppo appropriato in cui operano PHP e il server web.
 :::
 
 ::: danger Non dare mai permessi 777
-Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poichÈ questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. 
+Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poich√© questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. 
 :::
 
 ## Personalizzare i percorsi
 
-Per impostazione predefinita, la struttura delle directory di Flarum include una cartella `public` che contiene solo file accessibili pubblicamente. Questa Ë una best practice per la sicurezza, che garantisce che tutti i file di codice sorgente sensibili siano completamente inaccessibili dalla radice web.
+Per impostazione predefinita, la struttura delle directory di Flarum include una cartella `public` che contiene solo file accessibili pubblicamente. Questa √® una best practice per la sicurezza, che garantisce che tutti i file di codice sorgente sensibili siano completamente inaccessibili dalla radice web.
 
-Tuttavia, se desideri ospitare Flarum in una sottodirectory (tipo `tuosito.com/forum`), o se il tuo host non ti d‡ il controllo sulla tua webroot (sei bloccato con qualcosa di simile `public_html` o `htdocs`), puoi impostare Flarum senza la cartella `public` .
+Tuttavia, se desideri ospitare Flarum in una sottodirectory (tipo `tuosito.com/forum`), o se il tuo host non ti d√† il controllo sulla tua webroot (sei bloccato con qualcosa di simile `public_html` o `htdocs`), puoi impostare Flarum senza la cartella `public` .
 
 Semplicemente sposta tutti i file nella cartella `public` (incluso il file `.htaccess`) nella directory da cui vuoi servire Flarum. Quindi modifica il file `.htaccess`  rimuovi il commento alle linee da 9-15 per proteggere le risorse sensibili. Per Nginx, rimuovi il commento alle linee da 8-11 del file `.nginx.conf`.
 
@@ -120,7 +120,7 @@ Dovrai anche modificare il file `index.php` cambiando le seguenti righe:
 $site = require './site.php';
 ```
 
- Ora, modifica il file `site.php` ed aggiorna i percorsi affinchË rispettino la struttura del tuo sito:
+ Ora, modifica il file `site.php` ed aggiorna i percorsi affinch√© rispettino la struttura del tuo sito:
 
 ```php
 'base' => __DIR__,
@@ -130,7 +130,7 @@ $site = require './site.php';
 
 ## Importazione dati da altro forum
 
-Se hai una comunit‡ esistente e non vuoi ricominciare da zero, potresti essere in grado di importare i tuoi dati esistenti in Flarum. Sebbene non ci siano ancora importatori ufficiali, la comunit‡ ha creato diversi importatori non ufficiali:
+Se hai una comunit√† esistente e non vuoi ricominciare da zero, potresti essere in grado di importare i tuoi dati esistenti in Flarum. Sebbene non ci siano ancora importatori ufficiali, la comunit√† ha creato diversi importatori non ufficiali:
 
 * [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
 * [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)

@@ -44,6 +44,6 @@ Copia i messaggi in un file di testo e prendi nota di quando si è verificato l'
 
 ## Step 4: Prepara un report
 
-Dopo aver raccolto tutte le informazioni possibili sul problema, sei pronto per presentare una segnalazione di bug. Si prega di seguire le istruzioni su [Report di  Bugs](bugs.md).
+Dopo aver raccolto tutte le informazioni possibili sul problema, sei pronto per presentare una segnalazione di bug. Si prega di seguire le istruzioni [per segnalare bug](bugs.md).
 
 Se scopri qualcosa di nuovo sul problema dopo aver inviato la segnalazione, aggiungi tali informazioni in fondo al tuo post originale. È una buona idea presentare un rapporto anche se hai risolto il problema da solo, poiché anche altri utenti potrebbero trarre vantaggio dalla tua soluzione. Se hai trovato una soluzione temporanea al problema, assicurati mettercene a conoscenza.
