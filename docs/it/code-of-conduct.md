@@ -32,7 +32,7 @@ Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente 
 - Se non utilizzi un tag riservato per l'uso multilingue, pubblica solo in italiano. Non possiamo aiutarti se non possiamo leggerti!
 - Ricorda, non è necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei.
 
-Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
+Per favore, sforzati di aiutarci a mantenere le cose organizzate. Il tempo speso a riordinare è tempo che non possiamo dedicare a conoscerti, discutere i tuoi problemi e parlare di Flarum. Che dopotutto è il nostro scopo principale.
 
 ### Le tue risposte sono importanti
  

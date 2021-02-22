@@ -1,5 +1,5 @@
 module.exports = {
-  '/extend/': [
+  '/it/extend/': [
     {
       title: 'Concetti principali',
       collapsable: false,
