@@ -1,19 +1,19 @@
-# Forms and Requests
+# Moduli e richieste
 
-In this article, we'll go over some frontend tools that are available to us for building and managing forms, as well how to send HTTP requests via Flarum.
+In questo articolo, esamineremo alcuni strumenti di frontend che sono a nostra disposizione per la creazione e la gestione di moduli, nonché come inviare richieste HTTP tramite Flarum.
 
-## Form Components
+## Componenti Form
 
-As with any interactive site, you will likely want to include forms in some pages and modals.
-Flarum provides some components to make building (and styling!) these forms easier.
-Please see the linked API documentation for each of these to learn more about its accepted attrs.
+Come con qualsiasi sito interattivo, probabilmente vorrai includere moduli in alcune pagine.
+Flarum fornisce alcuni componenti per rendere più facile la costruzione (e lo styling!) di questi ultimi.
+Si prega di consultare la documentazione API collegata per per saperne di più sugli attributi accettati.
 
-- The [`flarum/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
-- The [`flarum/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
-- The [`flarum/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
+- Il [`flarum/components/FieldSet` componente](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) racchiude i suoi "figli" in un tag fieldset HTML, con una legenda.
+- Il [`flarum/components/Select` componente](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) è un input di selezione stilizzato.
+- [`flarum/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) e [`flarum/components/Checkbox` i componenti](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) sono componenti di input delle caselle di controllo stilizzate. Il loro attributo `loading` può essere impostato su `true` per mostrare un indicatore di caricamento.
+- Il componente [`flarum/components/Button`](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) è un bottone stilizzato, frequentemente utilizzato su Flarum.
 
-You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
+In genere vorrai assegnare la logica per reagire ai cambiamenti di input tramite Mithril e l'attributo `on*`, non listener esterni (come è comune con jQuery o semplice JS). Per esempio:
 
 ```jsx
 import Component from 'flarum/Component';
@@ -67,9 +67,9 @@ value("world!");
 value() === "world!"; // true
 ```
 
-In Flarum forms, streams are frequently used together with the bidi attr.
-Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs.
-This abstracts away input processing in Mithril. For instance:
+Nei form di Flarum, i flussi sono spesso usati insieme all'attributo bidi.
+Bidi sta per associazione bidirezionale ed è un modello comune nei framework di frontend. Flarum applica al Mithril la [`m.attrs.bidi` libreria](https://github.com/tobyzerner/m.attrs.
+Questo astrae l'elaborazione degli input in Mithril. Per esempio:
 
 ```jsx
 import Stream from 'flarum/utils/Stream';
@@ -100,15 +100,15 @@ const value = Stream();
 })}></input>
 ```
 
-## Making Requests
+## Effettuare richieste
 
-In our [models and data](data.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
+Nella nostra [documentazione di modelli e dati](data.md), hai imparato come lavorare con i modelli e salvare la creazione del modello, le modifiche e l'eliminazione nel database tramite l'utilità Store, che è solo un wrapper attorno al sistema di richiesta di Flarum, che a sua volta è un altro wrapper [Sistema di richieste Mithril](https://mithril.js.org/request.html).
 
-Flarum's request system is available globally via `app.request(options)`, and has the following differences from Mithril's `m.request(options)`:
+Il sistema di richiesta di Flarum è disponibile a livello globale tramite `app.request(options)`, e presenta le seguenti differenze rispetto a Mithril `m.request(options)`:
 
-- It will automatically attach `X-CSRF-Token` headers.
-- It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
-- If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
+- Si legherà automaticamente all'header `X-CSRF-Token`.
+- Convertirà richieste `PATCH` e `DELETE` in richieste `POST`, e si legherà all'heder `X-HTTP-Method-Override`.
+- In caso di errore della richiesta, verrà visualizzato un avviso che, se in modalità debug, può essere cliccato per mostrare un modale di errore completo.
+- Puoi fornire anche l'opzione `background: false`, che eseguirà la richiesta in modo sincrono. Tuttavia, questo non dovrebbe quasi mai essere fatto.
 
-Otherwise, the API for using `app.request` is the same as that for `m.request`.
+Altrimenti, l'API per l'utilizzo `app.request` è la medesima di `m.request`.
