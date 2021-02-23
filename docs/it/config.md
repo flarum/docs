@@ -28,8 +28,8 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
   'url' => 'https://flarum.localhost', // l'URL di installazione, vorrai cambiarlo se cambi domini
   'paths' =>
   array (
-    'api' => 'api', // /api goes to the API
-    'admin' => 'admin', // /admin goes to the admin
+    'api' => 'api', // /api punta alle API
+    'admin' => 'admin', // /admin punta al pannello di amministrazione
   ),
 );
 ```
