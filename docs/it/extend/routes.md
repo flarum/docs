@@ -1,28 +1,28 @@
-# Routes and Content
+# Percorsi e contenuti
 
-A fundamental part of extending Flarum is adding routes — both to expose new resources in the JSON-API, and to add new pages to the frontend.
+Una parte fondamentale dell'estensione di Flarum è l'aggiunta di percorsi, sia per esporre nuove risorse nell'API JSON, sia per aggiungere nuove pagine al frontend.
 
-Routing happens on both the PHP backend and the JavaScript frontend.
+Il routing avviene sia sul backend PHP che sul frontend JavaScript.
 
-## Backend Routes
+## Percorsi backend
 
-On the backend, Flarum has three collections of routes:
+Sul backend, Flarum ha tre raccolte di percorsi:
 
-* `forum` These routes are accessible under `yourforum.com/`. They include routes that show pages in the frontend (like `yourforum.com/d/123-title`) and other utility routes (like the reset password route).
+* `forum` Questi percorsi sono accessibili in `yourforum.com/`. Includono percorsi che mostrano pagine nel frontend (come `yourforum.com/d/123-title`) e altri percorsi di utilità (come il percorso di reimpostazione della password).
 
-* `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
+* `admin` Questi percorsi sono accessibili sotto `yourforum.com/admin/`. Di default, c'è solo un percorso `admin` nel backend; il resto del routing amministrativo avviene sul frontend
 
-* `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
+* `api` Questi percorsi sono accessibili sotto `yourforum.com/api/` e compone le JSON:API di Flarum.
 
-### Defining Routes
+### Definizione dei percorsi
 
-You can add routes to any of these collections using the `Routes` extender. Pass the name of the collection in the extender's constructor, then call its methods to add routes.
+Puoi aggiungere percorsi a una qualsiasi di queste raccolte utilizzando l'extender `Routes`. Passa il nome della raccolta nel costruttore dell'extender, quindi chiama i suoi metodi per aggiungerle
 
-There are methods to register routes for any HTTP request method: `get`, `post`, `put`, `patch`, and `delete`. All of these methods accept three arguments:
+Esistono metodi per registrare percorsi di qualsiasi metodo di richiesta HTTP: `get`, `post`, `put`, `patch`, e `delete`. Tutti questi metodi accettano tre argomenti:
 
-* `$path` The route path using [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax.
-* `$name` A unique name for the route, used for generating URLs. To avoid conflicts with other extensions, you should use your vendor name as a namespace.
-* `$handler` The name of the controller class that will handle the request. This will be resolved through the container.
+* `$path` Il percorso che utilizza sintassi [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
+* `$name` Un nome univoco per la rotta, utilizzato per generare URL. Per evitare conflitti con altre estensioni, è necessario utilizzare il nome di chi lo ha fornito.
+* `$handler` Il nome della classe controller che gestirà la richiesta. Quest'ultima verrà risolta tramite il contenitore.
 
 ```php
 <?php
@@ -36,9 +36,9 @@ return [
 ];
 ```
 
-### Controllers
+### Controller
 
-In Flarum, **Controller** is just another name for a class that implements [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). Put simply, a controller must implement a `handle` method which receives a [Request](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) and must return a [Response](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum includes [laminas-diactoros](https://github.com/laminas/laminas-diactoros) which contains `Response` implementations that you can return.
+In Flarum, ** Controller ** è solo un altro nome per una classe che implementa [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). In parole povere, un controller deve implementare un metodo `handle` che riceve una [Richiesta](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) e restituisce una [Risposta](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum include [laminas-diactoros](https://github.com/laminas/laminas-diactoros) che contiene implementazioni di `Response`.
 
 ```php
 <?php
@@ -59,26 +59,26 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/6.x/container) so you can inject dependencies into their constructors.
+I controller vengono risolti dal [contenitore](https://laravel.com/docs/6.x/container) così puoi iniettarci all'interno le tue dipendenze.
 
-:::tip What are Controllers?
-The `handle` method of a Controller is the code that runs when someone visits your route (or sends data to it via a form submission). Generally speaking, Controller implementations follow the pattern:
+:::tip Cosa sono i controller?
+Il metodo `handle` di un Controller è il codice che viene eseguito quando qualcuno visita il tuo percorso (o invia dati ad esso tramite l'invio di un modulo). In generale, le implementazioni del controller seguono lo schema:
 
-1. Retrieve information (GET params, POST data, the current user, etc) from the Request object.
-2. Do something with that information. For instance, if our controller handles a route for creating posts, we'll want to save a new post object to the database.
-3. Return a response. Most routes will return an HTML webpage, or a JSON api response.
+1. Ricevere informazioni (GET params, POST data, l'utente corrente, ecc.) dall'oggetto Request.
+2. Fai qualcosa con quelle informazioni. Ad esempio, se il nostro controller gestisce un percorso per la creazione di post, vorremo salvare un nuovo post nel database.
+3. Restituisci una risposta. La maggior parte dei percorsi restituirà una pagina Web HTML o una risposta API JSON.
 :::
 
-### Route Parameters
+### Parametri percorsi
 
-Sometimes you will need to capture segments of the URI within your route. You may do so by defining route parameters using the [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax:
+A volte sarà necessario acquisire segmenti dell'URI all'interno di un percorso. Puoi farlo definendo i parametri del percorso usando sintassi [FastRoute](https://github.com/nikic/FastRoute#defining-routes):
 
 ```php
     (new Extend\Routes('forum'))
         ->get('/user/{id}', 'acme.user', UserController::class)
 ```
 
-The values of these parameters will be merged with the request's query params, which you can access in your controller by calling `$request->getQueryParams()`:
+I valori di questi parametri verranno uniti ai parametri di query della richiesta, a cui è possibile accedere nel controller richiamando `$request->getQueryParams()`:
 
 ```php
 use Illuminate\Support\Arr;
@@ -86,20 +86,20 @@ use Illuminate\Support\Arr;
 $id = Arr::get($request->getQueryParams(), 'id');
 ```
 
-### Generating URLs
+### Generare URL
 
-You can generate URLs to any of the defined routes using the `Flarum\Http\UrlGenerator` class. Inject an instance of this into your controller or view, and call the `to` method to select a route collection. Then, you can generate a URL to a route using the name you gave it when it was defined. You can pass an array of parameters as the second argument. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
+È possibile generare URL per qualsiasi percorso definito utilizzando la classe `Flarum\Http\UrlGenerator`. Iniettare una sua istanza nel controller o nella visualizzazione e richiamare il metodo `to` per scegliere un percorso. Quindi, puoi generare un URL a un percorso utilizzando il nome che gli hai dato quando è stato definito. È possibile passare un array di parametri come secondo argomento. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 
 ```php
 $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']);
-// http://yourforum.com/user/123?foo=bar
+// http://iltuoforum.com/utente/123?foo=bar
 ```
 
-### Views
+### Visualizzazioni
 
-You can inject Laravel's [View](https://laravel.com/docs/6.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/6.x/blade) into your controller's response.
+Puoi iniettare [Visualizza](https://laravel.com/docs/6.x/views) di Laravel nel tuo controller. Ciò ti consentirà di eseguire il rendering di [Blade template](https://laravel.com/docs/6.x/blade) nella risposta del controller.
 
-First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
+Innanzitutto, dovrai indicare alla view factory dove può trovare i file di visualizzazione della tua estensione aggiungendo l'estender `View` a `extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -111,7 +111,7 @@ return [
 ];
 ```
 
-Then, inject the factory into your controller and render your view into an `HtmlResponse`:
+Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlResponse`:
 
 ```php
 class HelloWorldController implements RequestHandlerInterface
@@ -132,30 +132,30 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-### API Controllers
+### Controller API
 
-The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement new JSON-API resources. See [Working with Data](/extend/data.md) for more information.
+`Flarum\Api\Controller` contiene una serie di classi controller astratte che puoi estendere per implementare facilmente nuove risorse JSON-API. Vedere [Utilizzo dei dati](/extend/data.md) per info più dettagliate.
 
-## Frontend Routes
+## Percorsi Frontend
 
-Adding routes to the frontend actually requires you to register them on _both_ the frontend and the backend. This is because when your route is visited, the backend needs to know to serve up the frontend, and the frontend needs to know what to display on the page.
+L'aggiunta di percorsi al frontend richiede in realtà di registrarl sia su frontend che backend. Questo perché quando il tuo percorso viene visitato, il backend deve avere informazioni per servire il frontend e il frontend analogamente deve sapere cosa visualizzare sulla pagina.
 
-On the backend, instead of adding your frontend route via the `Routes` extender, you should use the `Frontend` extender's `route` method. This always assumes `GET` as the method, and accepts a route path and name as the first two arguments:
+Sul backend, invece di aggiungere il tuo percorso frontend tramite `Routes`, potresti utilizzare l'extender `Frontend` con metodo `route`. Questo presuppone sempre `GET` come metodo, e accetta un percorso e un nome come primi due argomenti:
 
 ```php
     (new Extend\Frontend('forum'))
         ->route('/users', 'acme.users')
 ```
 
-Now when `yourforum.com/users` is visited, the forum frontend will be displayed. However, since the frontend doesn't yet know about the `users` route, the discussion list will still be rendered.
+Ora quando `tuoforum.com/utente` viene visitato, verrà visualizzato il frontend del forum. Tuttavia, poiché il frontend non conosce ancora la rotta `users`, verrà visualizzato l'elenco di discussioni.
 
-Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#routing), adding route names and an abstract class for pages (`common/components/Page`). To register a new route, add an object for it to `app.routes`:
+Flarum si basa sul [sistema di instradamento di Mithril](https://mithril.js.org/index.html#routing), che aggiunge nomi di percorsi e una classe astratta per le pagine (`common/components/Page`). Per registrare un nuovo percorso, aggiungi un oggetto `app.routes`:
 
 ```js
 app.routes['acme.users'] = { path: '/users', component: UsersPage };
 ```
 
-<!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
+<!-- Per registrare percorsi sul frontend, c'è un extender `Routes` che funziona in modo molto simile a quello di backend. Invece di un controller, tuttavia, passi un'istanza del componente come terzo argomento:
 
 ```jsx
 export const extend = [
@@ -164,13 +164,13 @@ export const extend = [
 ];
 ``` -->
 
-Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area. For more information on frontend pages, please see [that documentation section](frontend-pages.md).
+Ora quanto `tuoforum.com/utente`  verrà caricato il frontend del forum ed anche il componente `UsersPage` verrà renderizzato. Per ulteriori informazioni sulle pagine di frontend, vedere [questa sezione della documentazione](frontend-pages.md).
 
 Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
 
-### Route Parameters
+### Parametri percorsi
 
-Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
+I percorsi delfrontend consentono anche di acquisire segmenti dell'URI, ma la [sintassi di Mithril](https://mithril.js.org/route.html) è leggermente diversa:
 
 ```jsx
 app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
@@ -181,24 +181,24 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
 
-Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 
-### Generating URLs
+### Generare URL
 
-To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
+Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 
 <!-- import { app } from '@flarum/core/forum'; -->
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
-// http://yourforum.com/users/123?foo=bar
+// http://tuoforum.com/utente/123?foo=bar
 ```
 
-### Linking to Other Pages
+### Collegamenti ad altre pagine
 
-A forum wouldn't be very useful if it only had one page.
-While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+Un forum non sarebbe molto utile se avesse solo una pagina.
+Sebbene tu possa, ovviamente, implementare link ad altre parti del tuo forum con tag di ancoraggio HTML e link , questi possono essere difficile da mantenere e vanificano lo scopo di Flarum di essere una [Applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application).
 
-Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
+Flarum utilizza l'API di routing di Mithril per fornire un componente `Link` che racchiude in modo ordinato i collegamenti ad altre pagine interne. Il suo utilizzo è abbastanza semplice:
 
 ```jsx
 import Link from 'flarum/components/Link';
@@ -218,16 +218,16 @@ import Link from 'flarum/components/Link';
 // that are conditionally internal or external.
 ```
 
-## Content
+## Contenuto
 
-Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
+Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
 
-* Changing the `<title>` of the page
-* Adding external JavaScript and CSS resources
-* Adding SEO content and `<meta>` tags
-* Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
+* Modificare il "<title>" della pagina
+* Aggiunta di risorse JavaScript e CSS esterne
+* Aggiunta di contenuti SEO e tag "<meta>"
+* Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
-You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
+Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.
 
 ```php
 use Flarum\Frontend\Document;
@@ -241,7 +241,7 @@ return [
 ];
 ```
 
-You can also add content onto your frontend route registrations:
+Puoi anche aggiungere contenuti tuo frontend:
 
 ```php
 return [

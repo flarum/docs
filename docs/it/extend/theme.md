@@ -1,1 +1,1 @@
-# Quick Start
+# Guida rapida
