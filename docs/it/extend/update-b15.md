@@ -3,7 +3,7 @@
 La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboard di amministrazione e molte altre interessanti funzionalità per le estensioni. Come sempre, abbiamo fatto del nostro meglio per fornire livelli di compatibilità con le versioni precedenti e consigliamo di abbandonare i sistemi obsoleti il prima possibile per rendere le estensioni più stabili.
 
 ::: tip
-Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o [sulla chat Discord](https://flarum.org/discord/).
 :::
 
 ## Nuove funzionalità / deprecazioni
