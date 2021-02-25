@@ -1,6 +1,6 @@
 module.exports = [
     { text: 'Guida', link: '/it/' },
-    { text: 'Estendi', link: '/extend/' },
+    { text: 'Estendi', link: '/it/extend/' },
     { text: 'Referenze API', link: 'https://api.docs.flarum.org/' },
     {
       text: 'Flarum',
