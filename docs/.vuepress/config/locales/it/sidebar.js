@@ -10,11 +10,6 @@ module.exports = {
         'routes',
         'data',
         'distribution',
-        'update-b8',
-        'update-b10',
-        'update-b12',
-        'update-b13',
-        'update-b14',
         'update-b15',
       ]
     },
