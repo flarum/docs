@@ -1,4 +1,4 @@
-const langs = ['en', 'zh', 'tr'];
+const langs = ['en', 'zh', 'tr', 'it'];
 const paths = { en: '/' };
 
 module.exports = {
