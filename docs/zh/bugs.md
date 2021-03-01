@@ -1,5 +1,5 @@
 <template>
-  <outdated class="blue"></outdated>
+  <outdated-zh class="blue"></outdated-zh>
 </template>
 
 # 提交 Bug

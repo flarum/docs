@@ -1,5 +1,5 @@
 <template>
-  <outdated class="blue"></outdated>
+  <outdated-zh class="blue"></outdated-zh>
 </template>
 
 # 常见问题

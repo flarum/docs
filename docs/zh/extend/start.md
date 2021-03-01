@@ -1,5 +1,5 @@
 <template>
-  <processing class="blue"></processing>
+  <processing-zh class="blue"></processing-zh>
 </template>
 
 # 开始
