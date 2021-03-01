@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Notifiche
 
 Flarum include un potente sistema di notifica per avvisare gli utenti di nuove attività.

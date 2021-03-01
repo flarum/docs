@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Pannello di amministrazione
 
 Il pannello di amministrazione di Flarum un'interfaccia user-friendly per la gestione del tuo forum.

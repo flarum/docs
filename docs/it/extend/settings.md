@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Impostazioni
 
 Ad un certo punto durante la creazione di un'estensione, potresti voler leggere alcune delle impostazioni del forum o memorizzare determinate impostazioni specifiche per la tua estensione. Per fortuna, Flarum lo rende molto semplice.

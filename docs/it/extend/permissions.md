@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Gruppi e autorizzazioni
 
 Oltre ad etichettare i ruoli, il sistema di gruppo di Flarum è un modo per applicare le autorizzazioni a segmenti di utenti.

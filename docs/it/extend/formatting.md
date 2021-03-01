@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Formattazione
 
 Flarum usa la potente libreria [s9e TextFormatter](https://github.com/s9e/TextFormatter) per formattare i post dal semplice markup in HTML. Dovresti familiarizzare con [come funziona TextFormatter](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) prima di utilizzarlo.

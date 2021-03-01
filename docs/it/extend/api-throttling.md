@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Limitazione delle API
 
 Flarum viene fornito con `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) per limitare le richieste alle API.

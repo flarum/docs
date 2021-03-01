@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Console
 
 Oltre al pannello di amministrazione, Flarum fornisce diversi comandi eseguibili della console per aiutarti a gestire il tuo forum tramite il terminale.

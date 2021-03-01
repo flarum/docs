@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Moduli e richieste
 
 In questo articolo, esamineremo alcuni strumenti di frontend che sono a nostra disposizione per la creazione e la gestione di moduli, nonché come inviare richieste HTTP tramite Flarum.

@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Configurazione Email
 
 Qualsiasi comunità necessita di inviare e-mail per consentire la verifica, reimpostazioni della password, notifiche e altre comunicazioni agli utenti. Configurare il tuo forum per l'invio di email dovrebbe essere uno dei tuoi primi passi come amministratore: una configurazione errata causerà errori quando gli utenti tenteranno di registrarsi.

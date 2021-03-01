@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Componenti interattivi
 
 Spesso, hai necessità di attivare componenti interattivi oltre a qualsiasi contenuto/animazione che hai su una determinata pagina.

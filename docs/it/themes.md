@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Aspetto e Temi
 
 Anche se abbiamo lavorato duramente per rendere Flarum il più bello possibile, ogni comunità probabilmente vorrà apportare alcune modifiche grafiche o di stile per adattarlo alle proprie esigenze.

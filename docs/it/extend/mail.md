@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Mail
 
 Oltre ai [driver predefiniti nel core](../mail.md), Flarum consente di aggiungere nuovi driver di posta tramite estensori. Per creare il tuo driver di posta, dovrai creare una classe che implementa `\Flarum\Mail\DriverInterface`. Flarum si occupa effettivamente del frontend per fornire le impostazioni di posta elettronica: basta dichiarare le impostazioni necessarie e qualsiasi valore predefinito in `availableSettings`.

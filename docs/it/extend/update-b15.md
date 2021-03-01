@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Aggiornamenti Beta 15
 
 La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboard di amministrazione e molte altre interessanti funzionalità per le estensioni. Come sempre, abbiamo fatto del nostro meglio per fornire livelli di compatibilità con le versioni precedenti e consigliamo di abbandonare i sistemi obsoleti il prima possibile per rendere le estensioni più stabili.

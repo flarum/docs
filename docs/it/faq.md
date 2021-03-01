@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # FAQ
 
 ### Quando sarà stabile Flarum?

@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Flarum? Cos'è?
 
 Flarum è una potente software per creare forum di discussione nel suo sito web. Velocissimo e facile da utilizzare con tutte le feauture necessarie per la creazione del tuo forum di successo.

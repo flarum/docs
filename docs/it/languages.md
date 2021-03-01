@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Lingue
 
 È facile aggiungere una nuova lingua all'installazione di base di Flarum. Segui le istruzioni seguenti per scaricare e installare il language pack di tua scelta.

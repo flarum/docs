@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Frontend e Resolver
 
 Come spiegato nella documentazione [percorsi e contenuti](routes.md#frontend-routes), possiamo usare il sistema di routing di Mithril per mostrare diversi [componenti](frontend.md#components) per differenti percorsi. Mithril ti consente di utilizzare qualsiasi componente che ti piace, anche un Modal o Alert, ma ti consigliamo di attenersi alle classi di componenti che ereditano il componente `Page`.

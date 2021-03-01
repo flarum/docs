@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Percorsi e contenuti
 
 Una parte fondamentale dell'estensione di Flarum è l'aggiunta di percorsi, sia per esporre nuove risorse nell'API JSON, sia per aggiungere nuove pagine al frontend.

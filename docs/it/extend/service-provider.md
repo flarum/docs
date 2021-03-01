@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Provider di servizi
 
 Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze.

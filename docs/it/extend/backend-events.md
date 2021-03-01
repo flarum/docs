@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Eventi backend
 
 Spesso, un'estensione vorrà reagire ad alcuni eventi che si verificano da qualche parte in Flarum. Ad esempio, potremmo voler incrementare un contatore quando viene pubblicata una nuova discussione, inviare un'e-mail di benvenuto quando un utente accede per la prima volta o aggiungere tag a una discussione prima di salvarla nel database. Questi eventi sono noti come ** domain events ** e vengono trasmessi attraverso il framework [Laravel's event system](https://laravel.com/docs/6.x/events).

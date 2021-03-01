@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Lavorare con i dati
 
 I dati sono la base di qualsiasi forum, quindi dovrai giocarci bene se vuoi che la tua estensione faccia qualcosa di utile. Questo documento illustra il modo in cui i dati fluiscono in Flarum, dal database all'API JSON al frontend, e di nuovo indietro.

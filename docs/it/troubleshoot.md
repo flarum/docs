@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Risoluzione dei problemi
 
 Se Flarum non si installa o non funziona come previsto, la prima cosa da fare è controllare di nuovo se il proprio ambiente soddisfa [i requisiti necessari](install.md#server-requirements). Se ti manca qualcosa che è necessaria per l'esecuzione di Flarum, dovrai prima rimediare.

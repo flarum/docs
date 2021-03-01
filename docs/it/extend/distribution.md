@@ -1,3 +1,7 @@
+<template>
+  <outdated-it class="blue"></outdated-it>
+</template>
+
 # Distribuzione
 
 Hai scritto una grande estensione e ora vuoi che il mondo intero sia in grado di usarla. Questo documento ti guiderà attraverso il processo di distribuzione, dalla configurazione di un repository Git per la tua estensione, alla pubblicazione su Packagist.
