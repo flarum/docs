@@ -222,9 +222,9 @@ import Link from 'flarum/components/Link';
 
 Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
 
-* Modificare il "<title>" della pagina
+* Modificare il `<title>` della pagina
 * Aggiunta di risorse JavaScript e CSS esterne
-* Aggiunta di contenuti SEO e tag "<meta>"
+* Aggiunta di contenuti SEO e tag `<meta >`
 * Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
 Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.
