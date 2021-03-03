@@ -26,6 +26,74 @@ export default class CustomPage extends Page {
 }
 ```
 
+### Setting Page as Homepage
+
+Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities.
+To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.
+
+An example from the [Tags extension](https://github.com/flarum/tags/blob/master/js/src/admin/addTagsHomePageOption.js):
+
+```js
+import { extend } from 'flarum/extend';
+import BasicsPage from 'flarum/components/BasicsPage';
+
+export default function() {
+  extend(BasicsPage.prototype, 'homePageItems', items => {
+    items.add('tags', {
+      path: '/tags',
+      label: app.translator.trans('flarum-tags.admin.basics.tags_label')
+    });
+  });
+}
+```
+
+To learn how to set up a path/route for your custom page, see the [relevant documentation](routes.md).
+
+### Page Titles
+
+Often, you'll want some custom text to appear in the browser tab's title for your page.
+For instance, a tags page might want to show "Tags - FORUM NAME", or a discussion page might want to show the title of the discussion.
+
+To do this, your page should include calls to `app.setTitle()` and `app.setTitleCount()` in its `oncreate` [lifecycle hook](frontend.md) (or when data is loaded, if it pulls in data from the API).
+
+For example:
+
+```js
+import Page from 'flarum/components/Page';
+
+
+export default class CustomPage extends Page {
+  oncreate(vnode) {
+    super.oncreate(vnode);
+
+    app.setTitle("Cool Page");
+    app.setTitleCount(0);
+  }
+
+  view() {
+    // ...
+  }
+}
+
+export default class CustomPageLoadsData extends Page {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    app.store.find("users", 1).then(user => {
+      app.setTitle(user.displayName());
+      app.setTitleCount(0);
+    })
+  }
+
+  view() {
+    // ...
+  }
+}
+```
+
+Please note that if your page is [set as the homepage](#setting-page-as-homepage), `app.setTitle()` will clear the title for simplicity.
+It should still be called though, to prevent titles from previous pages from carrying over.
+
 ## PageState
 
 Sometimes, we want to get information about the page we're currently on, or the page we've just come from.
