@@ -86,7 +86,7 @@ return [
         // In this example, we'll append a string to it.
 
         return "My Cool Setting: $retrievedValue";
-      }),
+      }, "default value!"),
 ]
 ```
 
