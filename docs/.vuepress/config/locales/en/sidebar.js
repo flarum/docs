@@ -17,10 +17,15 @@ module.exports = {
       collapsable: false,
       children: [
         'admin',
+        'backend-events',
+        'authorization',
         'frontend-pages',
         'interactive-components',
+        'i18n',
         'forms',
-        'backend-events',
+        'permissions',
+        'settings',
+        'testing'
       ]
     },
     {
@@ -28,20 +33,15 @@ module.exports = {
       collapsable: false,
       children: [
         'api-throttling',
-        'authorization',
         'console',
         'formatting',
-        'i18n',
         'mail',
         'middleware',
         'slugging',
         'notifications',
-        'permissions',
         'post-types',
         'search',
-        'service-provider',
-        'settings',
-        'testing',
+        'service-provider'
       ]
     },
     {
