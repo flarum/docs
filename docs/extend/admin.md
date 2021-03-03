@@ -6,10 +6,6 @@ Before beta 15, extension settings were either added in a `SettingsModal` or the
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
-::: warning SettingsModal
-Settings added via the `SettingsModal` will contiune to work in beta 15, but this method **is now deprecated** and will be remove in the next release.
-:::
-
 ## Extension Data API
 
 This new API allows you to add settings to your extension with very few lines of code.
