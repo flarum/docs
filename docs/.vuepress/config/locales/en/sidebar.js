@@ -9,13 +9,7 @@ module.exports = {
         'frontend',
         'routes',
         'data',
-        'distribution',
-        'update-b8',
-        'update-b10',
-        'update-b12',
-        'update-b13',
-        'update-b14',
-        'update-b15',
+        'distribution'
       ]
     },
     {
@@ -48,6 +42,18 @@ module.exports = {
         'service-provider',
         'settings',
         'testing',
+      ]
+    },
+    {
+      title: 'Update Guides',
+      collapsable: false,
+      children: [
+        'update-b15',
+        'update-b14',
+        'update-b13',
+        'update-b12',
+        'update-b10',
+        'update-b8',
       ]
     },
     // {
