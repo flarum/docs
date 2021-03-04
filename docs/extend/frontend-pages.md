@@ -125,6 +125,10 @@ app.current.matches(DiscussionPage);
 app.current.matches(IndexPage, {routeName: 'following'});
 ```
 
+## Admin Pages
+
+See the [Admin Dashboard documentation](admin.md) for more information on tools specifically available to admin pages (and how to override the admin page for your extension).
+
 ## Route Resolvers (Advanced)
 
 [Advanced use cases](https://mithril.js.org/route.html#advanced-component-resolution) can take advantage of Mithril's [route resolver system](https://mithril.js.org/route.html#routeresolver).
