@@ -149,7 +149,7 @@ Sometimes you have more complicated settings that mess with relationships, or ju
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
-import ExtensionPage from 'flarum/components/ExtensionPage';
+import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {

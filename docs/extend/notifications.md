@@ -287,8 +287,8 @@ First, create a class that extends the notification component. Then, there are 4
 From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
 ```jsx harmony
-import Notification from 'flarum/components/Notification';
-import username from 'flarum/helpers/username';
+import Notification from 'flarum/forum/components/Notification';
+import username from 'flarum/common/helpers/username';
 
 export default class NewPostNotification extends Notification {
   icon() {
@@ -324,9 +324,9 @@ Let's give users an option to change their settings for your notification. All y
 From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
 
 ```js
-import { extend } from 'flarum/extend';
-import app from 'flarum/app';
-import NotificationGrid from 'flarum/components/NotificationGrid';
+import { extend } from 'flarum/common/extend';
+import app from 'flarum/forum/app';
+import NotificationGrid from 'flarum/forum/components/NotificationGrid';
 
 import PostLikedNotification from './components/PostLikedNotification';
 

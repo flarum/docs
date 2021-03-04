@@ -4,7 +4,7 @@ As explained in the [Routes and Content](routes.md#frontend-routes) documentatio
 
 ## The Page Component
 
-We provide `flarum/components/Page` as a base class for pages in both the `admin` and `forum` frontends. It has a few benefits:
+We provide `flarum/common/components/Page` as a base class for pages in both the `admin` and `forum` frontends. It has a few benefits:
 
 - Automatically updates [`app.current` and `app.previous` PageState](#pagestate) when switching from one route to another.
 - Automatically closes the modal and drawer when switching from one route to another.
@@ -16,7 +16,7 @@ We provide `flarum/components/Page` as a base class for pages in both the `admin
 Page components work just like any other inherited component. For a (very simple) example:
 
 ```js
-import Page from 'flarum/components/Page';
+import Page from 'flarum/common/components/Page';
 
 
 export default class CustomPage extends Page {
@@ -34,8 +34,8 @@ To add your custom page to the homepage options in Admin, you'll need to extend 
 An example from the [Tags extension](https://github.com/flarum/tags/blob/master/js/src/admin/addTagsHomePageOption.js):
 
 ```js
-import { extend } from 'flarum/extend';
-import BasicsPage from 'flarum/components/BasicsPage';
+import { extend } from 'flarum/common/extend';
+import BasicsPage from 'flarum/common/components/BasicsPage';
 
 export default function() {
   extend(BasicsPage.prototype, 'homePageItems', items => {
@@ -59,7 +59,7 @@ To do this, your page should include calls to `app.setTitle()` and `app.setTitle
 For example:
 
 ```js
-import Page from 'flarum/components/Page';
+import Page from 'flarum/common/components/Page';
 
 
 export default class CustomPage extends Page {
@@ -115,8 +115,8 @@ For example, this is how the Discussion Page makes its [`PostStreamState`](https
 You can also check the type and data of a page using `PostStreamState`'s `matches` method. For instance, if we want to know if we are currently on a discussion page:
 
 ```jsx
-import IndexPage from 'flarum/components/DiscussionPage';
-import DiscussionPage from 'flarum/components/DiscussionPage';
+import IndexPage from 'flarum/forum/components/DiscussionPage';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 
 // To just check page type
 app.current.matches(DiscussionPage);
@@ -128,7 +128,7 @@ app.current.matches(IndexPage, {routeName: 'following'});
 ## Route Resolvers (Advanced)
 
 [Advanced use cases](https://mithril.js.org/route.html#advanced-component-resolution) can take advantage of Mithril's [route resolver system](https://mithril.js.org/route.html#routeresolver).
-Flarum actually already wraps all its components in the `flarum/resolvers/DefaultResolver` resolver. This has the following benefits:
+Flarum actually already wraps all its components in the `flarum/common/resolvers/DefaultResolver` resolver. This has the following benefits:
 
 - It passes a `routeName` attr to the current page, which then provides it to `PageState`
 - It assigns a [key](https://mithril.js.org/keys.html#single-child-keyed-fragments) to the top level page component. When the route changes, if the top level component's key has changed, it will be completely rerendered (by default, Mithril does not rerender components when switching from one page to another if both are handled by the same component).
@@ -161,14 +161,14 @@ app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
 // Use a custom route resolver class
 app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
 
-// Use the default resolver class (`flarum/resolvers/DefaultResolver`)
+// Use the default resolver class (`flarum/common/resolvers/DefaultResolver`)
 app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
 ```
 
 ### Custom Resolvers
 
-We strongly encourage custom route resolvers to extend `flarum/resolvers/DefaultResolver`.
-For example, Flarum's `flarum/resolvers/DiscussionPageResolver` assigns the same key to all links to the same discussion (regardless of the current post), and triggers scrolling when using `m.route.set` to go from one post to another on the same discussion page:
+We strongly encourage custom route resolvers to extend `flarum/common/resolvers/DefaultResolver`.
+For example, Flarum's `flarum/forum/resolvers/DiscussionPageResolver` assigns the same key to all links to the same discussion (regardless of the current post), and triggers scrolling when using `m.route.set` to go from one post to another on the same discussion page:
 
 ```js
 import DefaultResolver from '../../common/resolvers/DefaultResolver';

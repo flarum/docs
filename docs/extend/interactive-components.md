@@ -16,7 +16,7 @@ Alerts are managed by a global instance of [`AlertManagerState`](https://api.doc
 - `app.alerts.dismiss(key)` will dismiss an active alert with the given key, if one exists.
 - `app.alerts.clear()` will dismiss all alerts.
 
-Typically, you won't need a custom component for alerts; however, if you could like, you can provide one. You'll probably want it to inherit `flarum/components/Alert`.
+Typically, you won't need a custom component for alerts; however, if you could like, you can provide one. You'll probably want it to inherit `flarum/common/components/Alert`.
 
 The following attrs are useful to keep in mind:
 
@@ -32,10 +32,10 @@ Modals are managed by a global instance of [`ModalManagerState`](https://api.doc
 - `app.modal.show(componentClass, attrs)` will show a modal using the given component class and attrs. If called while a modal is already open, it will replace the currently open modal.
 - `app.modal.close()` will close the modal if one is currently active.
 
-As opposed to alerts, most modals will use a custom class, inheriting `flarum/components/Modal`. For example:
+As opposed to alerts, most modals will use a custom class, inheriting `flarum/common/components/Modal`. For example:
 
 ```jsx
-import Modal from 'flarum/components/Modal';
+import Modal from 'flarum/common/components/Modal';
 
 export default class CustomModal extends Modal {
   // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
@@ -79,10 +79,10 @@ The composer is managed by a global instance of [`ComposerState`]([https://api.d
 The full list of public methods is documented in the API docs linked above.
 
 Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage.
-This is done by splitting code for each usage into a subclass of `flarum/components/ComposerBody`. This component class must be provided when loading a composer.
+This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
 
 ### Composer Editor
 
-The actual editor is yet another component, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor).
-Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/7d79912d3651f49e045302946b99a562f791b730/js/src/forum/utils/EditorDriverInterface.ts).
+The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor).
+Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/7d79912d3651f49e045302946b99a562f791b730/js/src/common/utils/EditorDriverInterface.ts).
 This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.

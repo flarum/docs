@@ -105,7 +105,7 @@ Please note that this is all simply a recommendation: there's nothing forcing yo
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
 ```js
-import {extend, override} from 'flarum/extend';
+import {extend, override} from 'flarum/common/extend';
 
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
@@ -117,26 +117,12 @@ app.initializers.add('our-extension', function(app) {
 
 We'll go over tools available for extensions below.
 
-<!-- ```js
-import { Extend } from '@flarum/core/forum';
-
-export const extend = [
-  // Your JavaScript extenders go here
-];
-```
-
-Your `forum.js` file is the JavaScript equivalent of `extend.php`. Like its PHP counterpart, it should export an array of extender objects which tell Flarum what you want to do on the frontend. -->
-
 ### Importing
 
 You should familiarize yourself with proper syntax for [importing js modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), as most extensions larger than a few lines will split their js into multiple files.
 
 Pretty much every Flarum extension will need to import *something* from Flarum Core.
-Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. However, it is all exported under `flarum`. To elaborate:
-
-* When developing for `admin`, core exports its `admin` and `common` directories as `flarum`. For instance, `admin/components/AdminLinkButton` is available as `flarum/components/AdminLinkButton`.
-* When developing for `forum`, core exports its `common` and `forum` directories as `flarum`. For instance `forum/states/PostStreamState` is available as `flarum/states/PostStreamState`.
-* In both cases, `common` files are available under `flarum`: `common/Component` is exported as `flarum/Component`.
+Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
 In some cases, an extension may want to extend code from another flarum extension. This is only possible for extensions which explicitly export their contents.
 
@@ -210,8 +196,8 @@ Most mutable parts of the interface are really just *lists of items*. For exampl
 Each item in these lists is given a **name** so you can easily add, remove, and rearrange the items. Simply find the appropriate component for the part of the interface you want to change, and monkey-patch its methods to modify the item list contents. For example, to add a link to Google in the header:
 
 ```jsx
-import { extend } from 'flarum/extend';
-import HeaderPrimary from 'flarum/components/HeaderPrimary';
+import { extend } from 'flarum/common/extend';
+import HeaderPrimary from 'flarum/forum/components/HeaderPrimary';
 
 extend(HeaderPrimary.prototype, 'items', function(items) {
   items.add('google', <a href="https://google.com">Google</a>);
@@ -239,7 +225,7 @@ DiscussionPage
 └── PostStreamScrubber
 ```
 
-You should familiarize yourself with [Mithril's component API](https://mithril.js.org/components.html) and [redraw system](https://mithril.js.org/autoredraw.html). Flarum wraps components in the `flarum/Component` class, which extends Mithril's [class components](https://mithril.js.org/components.html#classes). It provides the following benefits:
+You should familiarize yourself with [Mithril's component API](https://mithril.js.org/components.html) and [redraw system](https://mithril.js.org/autoredraw.html). Flarum wraps components in the `flarum/common/Component` class, which extends Mithril's [class components](https://mithril.js.org/components.html#classes). It provides the following benefits:
 
 * Attributes passed to components are available throughout the class via `this.attrs`.
 * The static `initAttrs` method mutates `this.attrs` before setting them, and allows you to set defaults or otherwise modify them before using them in your class. Please note that this doesn't affect the initial `vnode.attrs`.
@@ -251,13 +237,13 @@ You should familiarize yourself with [Mithril's component API](https://mithril.j
 
 However, component classes extending `Component` must call `super` when using the `oninit`, `oncreate`, and `onbeforeupdate` methods.
 
-To use Flarum components, simply extend `flarum/Component` in your custom component class.
+To use Flarum components, simply extend `flarum/common/Component` in your custom component class.
 
 All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved.
 With this in mind, a custom component class might look like this:
 
 ```jsx
-import Component from 'flarum/Component';
+import Component from 'flarum/common/Component';
 
 class Counter extends Component {
   oninit(vnode) {
@@ -308,7 +294,7 @@ Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.o
 app.googleUrl = "https://google.com";
 
 // This replaces the output of the discussion page with "Hello World"
-import DiscussionPage from 'flarum/components/DiscussionPage';
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 
 DiscussionPage.prototype.view = function() {
   return <p>Hello World</p>;
@@ -332,9 +318,9 @@ Keep in mind that `extend` can only mutate output if the output is mutable (e.g.
 Let's now revisit the original "adding a link to Google to the header" example to demonstrate.
 
 ```jsx
-import { extend, override } from 'flarum/extend';
-import HeaderPrimary from 'flarum/components/HeaderPrimary';
-import ItemList from 'flarum/utils/ItemList';
+import { extend, override } from 'flarum/common/extend';
+import HeaderPrimary from 'flarum/forum/components/HeaderPrimary';
+import ItemList from 'flarum/common/utils/ItemList';
 import CustomComponentClass from './components/CustomComponentClass';
 
 // Here, we add an item to the returned ItemList. We are using a custom component
