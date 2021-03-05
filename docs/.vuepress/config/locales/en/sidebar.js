@@ -34,6 +34,8 @@ module.exports = {
       children: [
         'api-throttling',
         'console',
+        'extending-extensions',
+        'extensibility',
         'formatting',
         'mail',
         'middleware',
