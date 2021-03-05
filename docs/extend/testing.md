@@ -320,6 +320,40 @@ If you want to test custom console commands, you can extend `Flarum\Testing\inte
 - `$this->console()` returns an instance of `Symfony\Component\Console\Application`
 - `$this->runCommand()` takes an array that will be wrapped in `Symfony\Component\Console\Input\ArrayInput`, and run. See the [Symfony code docblock](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22) for more information.
 
+For example:
+
+```php
+<?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+
+namespace CoolExtension\Tests\integration;
+
+use Flarum\Tests\integration\ConsoleTestCase;
+
+class ConsoleTest extends ConsoleTestCase
+{
+    /**
+     * @test
+     */
+    public function command_works()
+    {
+        $input = [
+            'command' => 'some:command',  // The command name, equivalent of `php flarum some:command`
+            'foo' => 'bar',  // arguments
+            '--lorem' => 'ipsum'  // options
+        ];
+
+        $this->assertEquals('Some Output.', $this->runCommand($input));
+    }
+}
+```
+
 ### Using Unit Tests
 
 TODO
