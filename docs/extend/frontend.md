@@ -11,6 +11,10 @@ Flarum has two separate frontend applications:
 
 They share the same foundational code, so once you know how to extend one, you know how to extend both.
 
+:::tip Typings!
+Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+:::
+
 ## Transpilation and File Structure
 
 This portion of the guide will explain the necessary file setup for extensions. Once again, we highly recommend using the unofficial [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to set up the file structure for you. That being said, you should still read this to understand what's going on beneath the surface.
@@ -48,6 +52,9 @@ js
     "flarum-webpack-config": "0.1.0-beta.10",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.7"
+  },
+  "dev-dependencies": {
+    "flarum": "0.1.0-beta.16",
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
