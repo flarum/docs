@@ -15,7 +15,7 @@ Puoi allegare un ascoltatore a un evento utilizzando il file [`Event`](https://a
 ```php
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 return [

@@ -15,7 +15,7 @@ You can attach a listener to an event using the [`Event`](https://api.docs.flaru
 ```php
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 return [
@@ -51,7 +51,7 @@ You can also listen to multiple events at once via an event subscriber. This is 
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
 use Flarum\Post\Event\Saving;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 return [
