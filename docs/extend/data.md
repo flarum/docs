@@ -84,7 +84,7 @@ To add columns to an existing table, use the `Migration::addColumns` helper. The
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'nullable' => true],
+    'email' => ['string', 'length' => 255, 'nullable' => true],
     'discussion_count' => ['integer', 'unsigned' => true]
 ]);
 ```
