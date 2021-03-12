@@ -12,6 +12,7 @@ If you need help applying these changes or using new features, please start a di
 - The `TextEditor` and `TextEditorButton` components, as well as the `BasicEditorDriver` util (which replaces `SuperTextarea`) have been moved from `forum` to `common`.
 - The `forum`, `admin`, and `common` namespaces should be used when importing. So instead of `import Component from 'flarum/Component'`, use `import Component from 'flarum/common/Component`. Support for the old import styles will be deprecated through the stable release, and removed with Flarum 2.0.
 - A typing library has been released to support editor autocomplete for frontend development, and can be installed in your dev environment via `npm install --save-dev flarum@0.1.0-beta.16`.
+- Extension categories have been simplified down to `feature`, `theme`, and `language`.
 
 ## Backend
 
@@ -22,10 +23,21 @@ If you need help applying these changes or using new features, please start a di
 - The `Event` extender now supports registering subscribers for multiple events at once via a `subscribe` method.
 - The `Notification` extender now has a `beforeSending` method, which allows you to adjust the list of recipients before a notification is sent.
 - The `mutate` method of `ApiSerializer` has been deprecated, and renamed to `attributes`.
-- `remove` methods on the `Route` and `Frontend` extenders can be used to remote routes.
+- `remove` methods on the `Route` and `Frontend` extenders can be used to remove (and then replace) routes.
 - A `ModelPrivate` extender replaces the `GetModelIsPrivate` event, which has been deprecated.
 - Methods on the `Auth` extender replace the `CheckingPassword` event, which has been deprecated.
 - All search-related events are now deprecated in favor of the `SimpleFlarumSearch` and `Filter` extenders; this is explained in more detail below.
+
+### Laravel and Symfony
+
+Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions.
+The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
+
+### Helper Functions
+
+The remaining `app` and `event` global helper functions have been deprecated. `app` has been replaced with `resolve`, which takes the name of a container binding and resolves it through the container.
+
+Since some Flarum extensions use Laravel libraries that assume some global helpers exist, we've recreated some commonly used helpers in the [flarum/laravel-helpers](https://github.com/flarum/laravel-helpers) package. These helpers should NOT be used directly in Flarum extension code; they are available so that Laravel-based libraries that expect them to exist don't malfunction.
 
 ### Search Changes
 
@@ -54,6 +66,69 @@ The `flarum/testing` package provides utils for PHPUnit-powered automated backen
 Beta 15 introduced "extension dependencies", which require any extensions listed in your extension's `composer.json`'s `require` section to be enabled before your extension can be enabled.
 
 With beta 16, you can specify "optional dependencies" by listing their composer package names as an array in your extension's `extra.flarum-extension.optional-dependencies`. Any enabled optional dependencies will be booted before your extension, but aren't required for your extension to be enabled.
+
+### Access Token and Authentication Changes
+
+#### Extension API changes
+
+The signature to various method related to authentication have been changed to take `$token` as parameter instead of `$userId`. Other changes are the result of the move from `$lifetime` to `$type`
+
+- `Flarum\Http\AccessToken::generate($userId)` no longer accepts `$lifetime` as a second parameter. Parameter has been kept for backward compatibility but has no effect. It will be removed in beta 17.
+- `Flarum\Http\RememberAccessToken::generate($userId)` should be used to create remember access tokens.
+- `Flarum\Http\DeveloperAccessToken::generate($userId)` should be used to create developer access tokens (don't expire).
+- `Flarum\Http\SessionAccessToken::generate()` can be used as an alias to `Flarum\Http\AccessToken::generate()`. We might deprecate `AccessToken::generate()` in the future.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. In beta 17 the method signature will change to accept only `RememberAccessToken`.
+- `Flarum\Http\Rememberer::rememberUser()` has been deprecated. Instead you should create/retrieve a token manually with `RememberAccessToken::generate()` and pass it to `Rememberer::remember()`
+- `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` second parameter has been deprecated and is replaced with `$token`. Backward compatibility is kept. In beta 17, the second parameter method signature will change to `AccessToken $token`.
+- `AccessToken::generate()` now saves the model to the database before returning it.
+- `AccessToken::find($id)` or `::findOrFail($id)` can no longer be used to find a token, because the primary key was changed from `token` to `id`. Instead you can use `AccessToken::findValid($tokenString)`
+- It's recommended to use `AccessToken::findValid($tokenString): AccessToken` or `AccessToken::whereValid(): Illuminate\Database\Eloquent\Builder` to find a token. This will automatically scope the request to only return valid tokens. On forums with low activity this increases the security since the automatic deletion of outdated tokens only happens every 50 requests on average.
+
+#### Symfony session changes
+
+If you are directly accessing or manipulating the Symfony session object, the following changes have been made:
+
+- `user_id` attribute is no longer used. `access_token` has been added as a replacement. It's a string that maps to the `token` column of the `access_tokens` database table.
+
+To retrieve the current user from inside a Flarum extension, the ideal solution which was already present in Flarum is to use `$request->getAttribute('actor')` which returns a `User` instance (which might be `Guest`)
+
+To retrieve the token instance from Flarum, you can use `Flarum\Http\AccessToken::findValid($tokenString)`
+
+To retrieve the user data from a non-Flarum application, you'll need to make an additional database request to retrieve the token. The user ID is present as `user_id` on the `access_tokens` table.
+
+#### Token creation changes
+
+The `lifetime` property of access tokens has been removed. Tokens are now either `session` tokens with 1h lifetime after last activity, or `session_remember` tokens with 5 years lifetime after last activity.
+
+The `remember` parameter that was previously available on the `POST /login` endpoint has been made available on `POST /api/token`. It doesn't return the remember cookie itself, but the token returned can be used as a remember cookie.
+
+The `lifetime` parameter of `POST /api/token` has been deprecated and will be removed in Flarum beta 17. Partial backward compatibility has been provided where a `lifetime` value longer than 3600 seconds is interpreted like `remember=1`. Values lower than 3600 seconds result in a normal non-remember token.
+
+New `developer` tokens that don't expire have been introduced, however they cannot be currently created through the REST API. Developers can create developer tokens from an extension using `Flarum\Http\DeveloperAccessToken::generate($userId)`.
+
+If you manually created tokens in the database from outside Flarum, the `type` column is now required and must contain `session`, `session_remember` or `developer`. Tokens of unrecognized type cannot be used to authenticate, but won't be deleted by the garbage collector either. In a future version extensions will be able to register custom access token types.
+
+#### Token usage changes
+
+A [security issue in Flarum](https://github.com/flarum/core/issues/2075) previously caused all tokens to never expire. This had limited security impact due to tokens being long unique characters. However custom integrations that saved a token in an external database for later use might find the tokens no longer working if they were not used recently.
+
+If you use short-lived access tokens for any purpose, take note of the expiration time of 1h. The expiration is based on the time of last usage, so it will remain valid as long as it continues to be used.
+
+Due to the large amount of expired tokens accumulated in the database and the fact most tokens weren't ever used more than once during the login process, we have made the choice to delete all access tokens a lifetime of 3600 seconds as part of the migration, All remaining tokens have been converted to `session_remember` tokens.
+
+#### Remember cookie
+
+The remember cookie still works like before, but a few changes have been made that could break unusual implementations.
+
+Now only access tokens created with `remember` option can be used as remember cookie. Any other type of token will be ignored. This means if you create a token with `POST /api/token` and then place it in the cookie manually, make sure you set `remember=1` when creating the token.
+
+#### Web session expiration
+
+In previous versions of Flarum, a session could be kept alive forever until the Symfony session files were deleted from disk.
+
+Now sessions are linked to access tokens. A token being deleted or expiring will automatically end the linked web session.
+
+A token linked to a web session will now be automatically deleted from the database when the user clicks logout. This prevents any stolen token from being re-used, but it could break custom integration that previously used a single access token in both a web session and something else.
 
 ### Miscellaneous
 
