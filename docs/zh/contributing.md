@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 贡献代码
 
 有兴趣为 Flarum 的发展做贡献吗？竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！
@@ -44,7 +40,7 @@ npm install
 npm run dev
 ```
 
-对于扩展程序，过程是一样的，只是您需要把核心 JavaScript 链接到扩展中，这样您的 IDE 就能理解 `import from '@flarum/core'` 语句。
+对于扩展程序，过程是一样的。
 
 ```bash
 cd packages/tags/js

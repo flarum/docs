@@ -1,7 +1,3 @@
-<template>
-  <processing class="blue"></processing>
-</template>
-
 # 控制台
 
 除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。

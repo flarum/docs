@@ -109,6 +109,27 @@ You should never set any folder or file to permission level `777`, as this permi
 
 By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
 
+::: vue
+`Default directory structure`
+　
+. Flarum web root
+├── public
+│   ├── assets _(**static assets, css, avators, uploaded files, etc.**)_
+│   └── .htaccess
+│
+├── storage
+│   └── logs _(**flarum error logs**)_
+│
+├── vendor _(**flarum core, extensions**)_
+├── .nginx.conf _(**Nginx pseudo-static file**)_
+├── composer.json
+├── extend.php
+├── flarum
+├── LICENSE
+├── README.md
+└── site.php
+:::
+
 However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
 Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.

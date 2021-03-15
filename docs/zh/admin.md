@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 后台管理面板
 
 Flarum 管理面板是一个用户友好的论坛管理界面。

@@ -4,7 +4,7 @@ module.exports = {
       title: '核心概念',
       collapsable: false,
       children: [
-        ['','扩展 Flarum'],
+        '',
         ['start','起步'],
       ]
     },
@@ -12,7 +12,7 @@ module.exports = {
       title: '高级指引',
       collapsable: false,
       children: [
-        ['console','控制台'],
+        'console',
         'post-types',
         'search',
         'testing',
@@ -38,21 +38,21 @@ module.exports = {
       title: '介绍',
       collapsable: false,
       children: [
-        ['','关于 Flarum'],
-        ['code-of-conduct','行为准则'],
-        ['releases','版本说明'],
-        ['contributing','贡献代码'],
-        ['bugs','提交 Bug'],
-        ['faq','常见问题']
+        '',
+        'code-of-conduct',
+        'releases',
+        'contributing',
+        'bugs',
+        'faq'
       ]
     },
     {
       title: '部署',
       collapsable: false,
       children: [
-        ['install','安装'],
-        ['update','更新'],
-        ['troubleshoot','故障排查']
+        'install',
+        'update',
+        'troubleshoot'
       ]
     },
     {
@@ -60,12 +60,12 @@ module.exports = {
       collapsable: false,
       children: [
         ['admin','后台管理'],
-        ['config','配置文件'],
-        ['extensions','扩展程序'],
-        ['languages','多语言支持'],
-        ['themes','样式主题'],
+        'config',
+        'extensions',
+        'languages',
+        'themes',
         ['mail','配置邮箱'],
-        ['console','控制台']
+        'console'
       ]
     }
   ]

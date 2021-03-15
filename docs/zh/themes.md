@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 样式主题
 
 尽管我们一直在努力使 Flarum 变得尽可能美丽，但每个社区可能都希望进行一些调整/修改，以适合他们所需的风格。

@@ -1,7 +1,3 @@
-<template>
-  <processing class="blue"></processing>
-</template>
-
 # 开始
 
 想打造一个 Flarum 扩展？来对地方了！本文档将带您了解一些基本概念，之后您将从头开始打造您的第一个 Flarum 扩展。
@@ -41,7 +37,7 @@ Flarum 的构成有三层：
 
 为了保持一致，我们在后端（PHP）和前端（JavaScript）都使用了扩展器的概念。您在扩展中做的 _每一件事_ 都应当通过扩展器来完成，因为扩展器是我们给予您的 **保证** —— 保证 Flarum 小版本更新绝对不破坏您的扩展。
 
-所有 Flarum 核心提供的可用扩展器都可以在 [`Extend` 命名空间](https://github.com/flarum/core/blob/master/src/Extend)[（PHP API 文档）](https://api.docs.flarum.org/php/master/flarum/extend)找到。另外扩展程序也能提供自己的扩展器。
+所有 Flarum 核心提供的可用扩展器都可以在 [`Extend` 命名空间](https://github.com/flarum/core/blob/master/src/Extend)[（PHP API 文档）](https://api.docs.flarum.org/php/master/flarum/extend)找到。另外扩展程序也能提供[自己的扩展器](custom-extenders.md)。
 
 ## Hello World
 

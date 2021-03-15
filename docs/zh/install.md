@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 安装
 
 ::: danger 警告
@@ -71,17 +67,14 @@ Caddy 的配置很简单。您需要将下方代码中的 URL 替换为自己的
 
 ```
 www.example.com {
-    root /var/www/flarum/public
-    rewrite {
-        to {path} {path}/ /index.php
-    }
-    fastcgi / /var/run/php/php7.4-fpm.sock php
+    root * /var/www/flarum/public
+    php_fastcgi unix//var/run/php/php7.4-fpm.sock
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
-        Pragma "public" 
+        Pragma "public"
     }
-    gzip
+    file_server
 }
 ```
 ## 目录所有权
