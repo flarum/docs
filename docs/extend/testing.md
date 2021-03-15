@@ -233,7 +233,7 @@ You can use this to ensure that:
 - Users can't access content they're not supported to access.
 - Permission-based create/edit/delete operations perform as expected.
 - The type and schema of data returned is correct.
-- Some desired side affect is applied when pinging an API.
+- Some desired side effect is applied when pinging an API.
 - The basic API operations needed by your extension aren't erroring, and don't break when you make changes.
 
 `TestCase` provides several utilities:

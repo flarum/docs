@@ -144,7 +144,7 @@ app.extensionData
 
 ### Extending/Overriding the Default Page
 
-Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingsComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage`.
+Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
