@@ -45,22 +45,4 @@ Permissions are just part of the puzzle: if you're enforcing whether a user can 
 
 ### Adding Custom Permissions
 
-Since permissions are just strings, you don't need to formally "register" a permission anywhere: you just need a way for admins to assign that permission to groups.
-We can do this by extending the `flarum/components/PermissionGrid` frontend component. For example:
-
-```js
-import { extend } from 'flarum/extend';
-import PermissionGrid from 'flarum/components/PermissionGrid';
-
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // CSS classes for the icon. Generally in fontawesome format, although you can use your own custom css too.
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // The permission string.
-    }, 95);
-  });
-}
-```
-
-By default, permissions are only granted to admins. If you would like to make a permission available to other groups by default, you'll need to use a [data migration](data.md#migrations) to add rows for the relevant groups. If you want to do this, we **HIGHLY** recommend only assigning default permissions to one of the [reserved groups](#groups).
+To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).

@@ -63,7 +63,7 @@ The `delete($name)` function lets you remove a named setting.
 
 ### Editing Settings
 
-To learn more about managing settings through the admin dashboard, see the [relevant documentation](admin.md).
+To learn more about adding settings through the admin dashboard, see the [relevant documentation](admin.md).
 ### Accessing Settings
 
 All settings are available in the `admin` frontend via the `app.data.settings` global.
@@ -86,7 +86,7 @@ return [
         // In this example, we'll append a string to it.
 
         return "My Cool Setting: $retrievedValue";
-      }),
+      }, "default value!"),
 ]
 ```
 

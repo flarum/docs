@@ -9,13 +9,7 @@ module.exports = {
         'frontend',
         'routes',
         'data',
-        'distribution',
-        'update-b8',
-        'update-b10',
-        'update-b12',
-        'update-b13',
-        'update-b14',
-        'update-b15',
+        'distribution'
       ]
     },
     {
@@ -23,10 +17,15 @@ module.exports = {
       collapsable: false,
       children: [
         'admin',
+        'backend-events',
+        'authorization',
         'frontend-pages',
         'interactive-components',
+        'i18n',
         'forms',
-        'backend-events',
+        'permissions',
+        'settings',
+        'testing'
       ]
     },
     {
@@ -34,20 +33,29 @@ module.exports = {
       collapsable: false,
       children: [
         'api-throttling',
-        'authorization',
         'console',
+        'extending-extensions',
+        'extensibility',
         'formatting',
-        'i18n',
         'mail',
         'middleware',
         'slugging',
         'notifications',
-        'permissions',
         'post-types',
         'search',
-        'service-provider',
-        'settings',
-        'testing',
+        'service-provider'
+      ]
+    },
+    {
+      title: 'Update Guides',
+      collapsable: false,
+      children: [
+        'update-b15',
+        'update-b14',
+        'update-b13',
+        'update-b12',
+        'update-b10',
+        'update-b8',
       ]
     },
     // {

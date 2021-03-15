@@ -187,7 +187,6 @@ Route parameters will be passed into the `attrs` of the route's component. They 
 
 To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
 
-<!-- import { app } from '@flarum/core/forum'; -->
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://yourforum.com/users/123?foo=bar
@@ -201,7 +200,7 @@ While you could, of course, implement links to other parts of your forum with HT
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
 ```jsx
-import Link from 'flarum/components/Link';
+import Link from 'flarum/common/components/Link';
 
 // Link can be used just like any other component:
 <Link href="/route/known/to/mithril">Hello World!</Link>

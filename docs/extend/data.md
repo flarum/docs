@@ -84,7 +84,7 @@ To add columns to an existing table, use the `Migration::addColumns` helper. The
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'nullable' => true],
+    'email' => ['string', 'length' => 255, 'nullable' => true],
     'discussion_count' => ['integer', 'unsigned' => true]
 ]);
 ```
@@ -449,7 +449,6 @@ Now that you have exposed your data in Flarum's JSON:API, it's finally time to b
 
 Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
 
-<!-- import { store } from '@flarum/core/forum'; -->
 ```js
 // GET /api/discussions?sort=createdAt
 app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
@@ -479,9 +478,8 @@ You can learn more about the store in our [API documentation](https://api.docs.f
 
 If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
 
-<!-- import { Model } from '@flarum/core/forum'; -->
 ```js
-import Model from 'flarum/Model';
+import Model from 'flarum/common/Model';
 
 export default class Tag extends Model {
   title = Model.attribute('title');
