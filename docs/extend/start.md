@@ -122,7 +122,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
   ::: warning Carefully choose the Flarum version
   While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
-      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+      "flarum/core": ">=0.1.0-beta.16 <0.1.0"
   :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
