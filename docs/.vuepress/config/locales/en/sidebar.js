@@ -50,6 +50,7 @@ module.exports = {
       title: 'Update Guides',
       collapsable: false,
       children: [
+        'update-b16',
         'update-b15',
         'update-b14',
         'update-b13',
