@@ -15,7 +15,7 @@ You can attach a listener to an event using the [`Event`](https://api.docs.flaru
 ```php
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
 return [
@@ -44,6 +44,48 @@ class PostDeletedListener
 ```
 
 As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/6.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
+
+You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
+
+```php
+use Flarum\Extend;
+use Flarum\Post\Event\Deleted;
+use Flarum\Post\Event\Saving;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+
+return [
+    (new Extend\Event)
+        ->subscribe(PostEventSubscriber::class),
+];
+
+
+class PostEventSubscriber
+{
+  protected $translator;
+
+  public function __construct(TranslatorInterface $translator)
+  {
+      $this->translator = $translator;
+  }
+
+  public function subscribe($events)
+  {
+    $events->listen(Deleted::class, [$this, 'handleDeleted']);
+    $events->listen(Saving::class, [$this, 'handleSaving']);
+  }
+
+  public function handleDeleted(Deleted $event)
+  {
+    // Your logic here
+  }
+
+  public function handleSaving(Saving $event)
+  {
+    // Your logic here
+  }
+}
+```
 
 ## Dispatching Events
 

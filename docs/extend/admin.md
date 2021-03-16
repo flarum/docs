@@ -6,10 +6,6 @@ Before beta 15, extension settings were either added in a `SettingsModal` or the
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
-::: warning SettingsModal
-Settings added via the `SettingsModal` will contiune to work in beta 15, but this method **is now deprecated** and will be remove in the next release.
-:::
-
 ## Extension Data API
 
 This new API allows you to add settings to your extension with very few lines of code.
@@ -148,12 +144,12 @@ app.extensionData
 
 ### Extending/Overriding the Default Page
 
-Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page.
+Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
-import ExtensionPage from 'flarum/components/ExtensionPage';
+import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {

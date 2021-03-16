@@ -37,7 +37,7 @@ You first create an instance of the extender, and then call methods on it for fu
 
 To keep things consistent, we use this concept of extenders in both the backend (in PHP land) and the frontend (in JavaScript land). _Everything_ you do in your extension should be done via extenders, because they are a **guarantee** we are giving to you that a future minor release of Flarum won't break your extension.
 
-All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/core/blob/master/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their own extenders.
+All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/core/blob/master/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](custom-extenders.md).
 
 ## Hello World
 
@@ -89,7 +89,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -122,7 +122,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
   ::: warning Carefully choose the Flarum version
   While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
-      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+      "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
   :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
