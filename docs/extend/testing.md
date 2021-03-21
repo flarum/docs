@@ -12,7 +12,7 @@ It is essentially a collection of utils that allow testing Flarum core and exten
 
 Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
 
-`composer require --dev flarum/testing`
+`composer require --dev flarum/testing:^0.1.0-beta.16`
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
 
@@ -86,18 +86,11 @@ This script will be run to set up a testing database / file structure.
 ```php
 <?php
 
-/*
- * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
- */
-
-use Flarum\Testing\integration\ConfigureSetup;
+use Flarum\Testing\integration\Setup\SetupScript;
 
 require __DIR__.'/../../vendor/autoload.php';
 
-$setup = new ConfigureSetup(__DIR__.'/../../vendor');
+$setup = new SetupScript();
 
 $setup->run();
 ```
@@ -290,10 +283,10 @@ class SomeTest extends TestCase
                             'attributes' => [
                                 'username' => 'test',
                                 'password' => 'too-obscure',
-                                'email' => 'test@machine.local',
-                            ],
+                                'email' => 'test@machine.local'
+                            ]
                         ]
-                    ],
+                    ]
                 ]
             )
         );
