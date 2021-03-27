@@ -308,7 +308,7 @@ DiscussionPage.prototype.view = function() {
 }
 ```
 
-will turn Flarum's discussion pages into proclamations of "Hello World". How creative!
+...will turn Flarum's discussion pages into proclamations of "Hello World". How creative!
 
 In most cases, we don't actually want to completely replace the methods we are modifying. For this reason, Flarum includes `extend` and `override` utils. `extend` allows us to add code to run after a method has completed. `override` allows us to replace a method with a new one, while keeping the old method available as a callback. Both are functions that take 3 arguments:
 
@@ -317,6 +317,14 @@ In most cases, we don't actually want to completely replace the methods we are m
 3. A callback that performs the modification.
    1. For `extend`, the callback receives the output of the original method, as well as any arguments passed to the original method.
    2. For `override`, the callback receives a callable (which can be used to call the original method), as well as any arguments passed to the original method.
+
+:::tip Overriding multiple methods
+With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
+
+```jsx
+extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ });
+```
+:::
 
 Please note that if you are trying to change the output of a method with `override`, you must return the new output.
 If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument).
