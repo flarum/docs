@@ -2,10 +2,12 @@
   "private": true,
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "format": "prettier --write \"**/*.{md,js,less,vue,yml}\""
   },
   "devDependencies": {
-    "vuepress": "^1.7.1",
-    "vuepress-plugin-container": "^2.1.4"
+    "prettier": "^2.2.1",
+    "vuepress": "^1.8.2",
+    "vuepress-plugin-container": "^2.1.5"
   }
 }
