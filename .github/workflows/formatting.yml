@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  prettier:
+    name: Verify formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      # We do it this way so that we can just use the existing package.json script
+      # to make future changes to the formatting script easier
+      - name: Set up Prettier
+        run: npm i -g prettier
+
+      - name: Check formatting
+        run: npm run format -- --check
