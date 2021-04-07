@@ -14,7 +14,7 @@ This new API allows you to add settings to your extension with very few lines of
 
 Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for. 
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').
+Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
 
 For the following example, we will use the fictitious extension 'acme/interstellar':
 
