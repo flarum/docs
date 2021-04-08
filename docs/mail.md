@@ -18,7 +18,7 @@ The `mail` driver will try to use the sendmail / postfix email system included i
 
 This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
 
-To use the mailgun driver, you'll need to install the `guzzle` composer package. You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
 ### Log
 
