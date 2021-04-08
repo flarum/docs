@@ -8,7 +8,8 @@ module.exports = {
         'start',
         'frontend',
         'routes',
-        'data',
+        'models',
+        'api',
         'distribution'
       ]
     },
