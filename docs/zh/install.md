@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 安装
 
 ::: danger 警告
@@ -19,7 +15,7 @@ Flarum 处于 **测试阶段**。所为会存在一些 Bug 🐛🐞、功能上�
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
 
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 7.1+（暂不支持 PHP8）**，需要启用 curl, dom, exif, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
+* **PHP 7.3**，需要启用 **fileinfo**, curl, dom, exif, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
 * **允许 SSH（命令行）**，以运行 Composer
 
@@ -71,17 +67,14 @@ Caddy 的配置很简单。您需要将下方代码中的 URL 替换为自己的
 
 ```
 www.example.com {
-    root /var/www/flarum/public
-    rewrite {
-        to {path} {path}/ /index.php
-    }
-    fastcgi / /var/run/php/php7.4-fpm.sock php
+    root * /var/www/flarum/public
+    php_fastcgi unix//var/run/php/php7.4-fpm.sock
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
-        Pragma "public" 
+        Pragma "public"
     }
-    gzip
+    file_server
 }
 ```
 ## 目录所有权

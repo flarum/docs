@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 扩展程序
 
 Flarum 是简约的，同时也是高度可扩展的。实际上，Flarum 附带的大部分功能都是扩展程序。

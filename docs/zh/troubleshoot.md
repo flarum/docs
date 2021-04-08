@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 故障排查
 
 如果 Flarum 没有按照预期那样安装或工作，您 *首先应该检查* 服务器环境是否符合 [系统要求](install.md#环境要求)。如果您缺少一些 Flarum 运行所需的东西，请先补全内容。

@@ -1,7 +1,7 @@
 module.exports = [
     { text: '指南', link: '/zh/' },
     { text: '进阶', link: '/zh/extend/' },
-  { text: 'API 参考', link: 'https://api.docs.flarum.org/' },
+    { text: 'API 参考', link: 'https://api.docs.flarum.org/' },
     {
       text: 'Flarum',
       items: [

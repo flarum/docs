@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 提交 Bug
 
 ::: danger 安全漏洞

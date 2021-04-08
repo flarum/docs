@@ -1,7 +1,3 @@
-<template>
-  <outdated class="blue"></outdated>
-</template>
-
 # 控制台
 
 除了论坛后台的管理面板，Flarum 还提供了几个控制台命令，以帮助您通过终端管理论坛。
