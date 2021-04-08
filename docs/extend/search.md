@@ -192,8 +192,8 @@ For an example, see core's [UserSearcher](https://github.com/flarum/core/blob/ma
 
 Then, you'll need to use that searcher in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/core/blob/master/src/Api/Controller/ListUsersController.php#L93-L98).
 
-You'll also probably want to create a full text gambit for your model, so that you can actually search it.
-See core's [FulltextGambit for users](https://github.com/flarum/core/blob/master/src/User/Search/Gambit/FulltextGambit.php) as an example.
+Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error.
+See core's [FulltextGambit for users](https://github.com/flarum/core/blob/master/src/User/Search/Gambit/FulltextGambit.php) for an example.
 You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method.
 
 ### Search Drivers
