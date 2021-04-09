@@ -91,6 +91,7 @@ module.exports = {
       title: 'Setting Up',
       collapsable: false,
       children: [
+        'composer',
         'install',
         'update',
         'troubleshoot'
@@ -107,6 +108,13 @@ module.exports = {
         'themes',
         'mail',
         'console'
+      ]
+    },
+    {
+      title: 'Advanced',
+      collapsable: false,
+      children: [
+        'extenders'
       ]
     }
   ],
