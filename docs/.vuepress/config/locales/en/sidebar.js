@@ -25,7 +25,8 @@ module.exports = {
         'forms',
         'permissions',
         'settings',
-        'testing'
+        'testing',
+        'theme'
       ]
     },
     {
