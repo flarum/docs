@@ -146,6 +146,7 @@ Your testcase classes should extend this class.
 
 There are several important utilities available for your test cases:
 
+- The `setting()` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
 - The `extension()` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](dependencies.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
 - The `extend()` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
 - The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
@@ -182,6 +183,8 @@ class SomeTest extends TestCase
     public function setUp(): void
     {
       parent::setUp();
+
+      $this->setting('my.custom.setting', true);
 
       // Let's assume our extension depends on tags.
       // Note that tags will need to be in your extension's composer.json's `require-dev`.
