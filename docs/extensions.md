@@ -15,7 +15,7 @@ Flarum has a wide ecosystem of extensions, most of which are open source and fre
 
 Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
 
-1. `cd` to the folder containing `composer.json`.
+1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
 2. Run `composer require COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
 
 ## Managing Extensions
