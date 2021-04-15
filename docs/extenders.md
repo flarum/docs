@@ -19,5 +19,5 @@ Now you can create new PHP files in an `app` subdirectory using the `App\...` na
 
 ::: tip Local Extenders vs Extensions
 Local extenders can be good for small tweaks, but if you need large customizations, an extension might be a better choice:
-a separate codebase, cleaner handling of many files, developer tooling, and the ability to easily open source are bit benefits.
+a separate codebase, cleaner handling of many files, developer tooling, and the ability to easily open source are big benefits.
 :::
