@@ -39,6 +39,7 @@ module.exports = {
         'formatting',
         'mail',
         'middleware',
+        'model-visibility',
         'slugging',
         'notifications',
         'post-types',
