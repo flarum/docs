@@ -174,7 +174,7 @@ Only one main JavaScript file per extension is permitted. If you need to include
 
 ### CSS
 
-You can also add CSS and [LESS](http://lesscss.org/features/) assets to the frontend using the `Frontend` extender's `css` method:
+You can also add CSS and [LESS](https://lesscss.org/features/) assets to the frontend using the `Frontend` extender's `css` method:
 
 ```php
     (new Extend\Frontend('forum'))
