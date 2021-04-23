@@ -18,7 +18,7 @@ Each of these is determined by unique criteria: in some cases a flag is sufficie
 
 ### How It Works
 
-Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
+Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
 1. The actor: the user attempting to perform the action
 2. The ability: a string representing the action the actor is attempting
@@ -277,7 +277,7 @@ Think of calling `whereVisibleTo` with a custom ability as a way for extensions 
 
 ### Custom Visibility Scoper Examples
 
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
 
 First, a scoper for the `Tag` model with the `view` ability:
 

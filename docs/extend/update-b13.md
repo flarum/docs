@@ -9,7 +9,7 @@ If you need help applying these changes or using new features, please start a di
 ## Breaking Changes
 
 - Dropped support for PHP 7.1.
-- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull#1963).
+- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963).
 - The `Flarum\Util\Str::slug()` method has been removed including the class. Use `Illuminate\Support\Str::slug()` instead.
 - The `Flarum\Event\ConfigureMiddleware` has been removed. Use the [proper replacement](middleware.md).
 - Several events used in Event Listeners have been removed, use their [replacement extender](start.md#extenders) instead.

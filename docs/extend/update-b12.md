@@ -11,7 +11,7 @@ If you need help applying these changes or using new features, please start a di
 
 - **Reminder**: In previous versions of Flarum, an extensions' main file was named `bootstrap.php`. This name will no longer be supported in the stable 0.1 release. Make sure your extension uses the name `extend.php`.
 - PHP 7.1 support will be dropped in beta.13.
-- Using library classes from the `Zend` namespace is now deprecated and will be removed in beta.13. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull#1963).
+- Using library classes from the `Zend` namespace is now deprecated and will be removed in beta.13. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963).
 - The `Flarum\Util\Str::slug()` method has been deprecated. Use `Illuminate\Support\Str::slug()` instead.
 - The `Flarum\Event\ConfigureMiddleware` has been deprecated. We finally have a [proper replacement](middleware.md) - see "New Features" below. Therefore, it will be removed in beta.13.
 - If you implement the `Flarum\Mail\DriverInterface`:
