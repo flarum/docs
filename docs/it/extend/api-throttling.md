@@ -1,23 +1,18 @@
-# Limitazione delle API
+# API Throttling
 
-Flarum viene fornito con `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) per limitare le richieste alle API.
-Questo viene eseguito su ogni percorso API e le estensioni possono aggiungere la propria logica personalizzata per limitarne le richieste.
+Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests.
 
-::: warning Percorsi del forum
-Alcuni percorsi del forum (login, registrazione, password dimenticata, etc) funzionano richiamando un API.
-`ThrottleApi` di middleware attualmente non viene eseguito per queste richieste, ma è in previsione per il futuro.
-:::
+::: warning Forum Routes Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future. :::
 
-## Throttlers personalizzati
+## Custom Throttlers
 
-Il formato per un limitatore personalizzato è estremamente semplice: tutto ciò di cui hai bisogno è una classe di chiusura o invocabile che prenda la richiesta corrente come argomento e ne restituisca uno di:
+The format for a custom throttler is extremely simple: all you need is a closure or invokable class that takes the current request as an argument, and returns one of:
 
-- `false`: Questo ignora esplicitamente la limitazione per questa richiesta, ignorando tutti gli altri limitatori
-- `true`: Questo contrassegna la richiesta come da limitare.
-- `null`: Significa che la limitazione non viene applicata.
-Qualsiasi altra uscita verrà ignorata, con lo stesso effetto di `null`.
+- `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
+- `true`: This marks the request as to be throttled.
+- `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
 
-Le limitazioni si applicano a OGNI richiesta. Ad esempio, considera le limitazioni ai post di Flarum:
+Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler:
 
 ```php
 use DateTime;
@@ -40,7 +35,7 @@ function ($request) {
 };
 ```
 
-Le limitazioni possono essere aggiunte o rimosse tramite `ThrottleApi` in `extend.php`. Per esempio:
+Throttlers can be added or removed via the `ThrottleApi` middleware in `extend.php`. For example:
 
 ```php
 <?php
