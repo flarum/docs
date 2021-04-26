@@ -1,38 +1,38 @@
-# Katkıda Bulunmak
+# Contributing
 
-Flarum gelişimine katkıda bulunmak ister misiniz? Bu harika! [Bir hata raporu açmaktan](bugs.md) bir çekme isteği (PR) oluşturmaya kadar: her katkı takdir edilir ve memnuniyetle karşılanır.
+Interested in contributing to Flarum development? That's great! From [opening a bug report](bugs.md) to creating a pull request: every contribution is appreciated and welcome.
 
-Katkıda bulunmadan önce lütfen [davranış kurallarını](code-of-conduct.md) okuyun.
+Before contributing, please read the [code of conduct](code-of-conduct.md).
 
-Bu belge, Flarum'a kod katkısında bulunmak isteyen geliştiriciler için bir kılavuzdur. Yeni başlıyorsanız, Flarum'un nasıl çalıştığı hakkında biraz daha fazla bilgi edinmek için Uzantı belgelerindeki [Başlarken](/extend/start.md) belgelerini okumanızı öneririz.
+This document is a guide for developers who want to contribute code to Flarum. If you're just getting started, we recommend that you read the [Getting Started](/extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
-## Ne Üzerinde Çalışmalı
+## What to Work On
 
-Nelerin yapılması gerektiğine dair genel bir bakış için [Milestones](https://github.com/flarum/core/milestones) dönüm noktalarına göz atın. Başlaması nispeten kolay olması gereken sorunların bir listesi için [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) etiketine bakın.
+Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with.
 
-Devam etmeyi ve bir şey üzerinde çalışmayı planlıyorsanız, lütfen ilgili konu hakkında yorum yapın veya önce yeni bir sorun oluşturun. Bu şekilde değerli çalışmalarınızın boşuna olmamasını sağlayabiliriz.
+If you're planning to go ahead and work on something, please comment on the relevant issue or create a new one first. This way we can ensure that your precious work is not in vain.
 
-## Geliştirme Kurulumu
+## Development Setup
 
-[flarum/flarum](https://github.com/flarum/flarum) , [flarum/core](https://github.com/flarum/core) ve [bunch of extensions](https://github.com/flarum) indirmek için Composer kullanan bir "iskelet" uygulamasıdır. Bunlar üzerinde çalışmak için, onları bir [Composer dizin deposuna](https://getcomposer.org/doc/05-repositories.md#path) ayırmanızı ve klonlamanızı öneririz:
+[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). In order to work on these, we recommend forking and cloning them into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Flarum paketleri için Composer dizini deposu ayarlayın
+# Set up a Composer path repository for Flarum packages
 composer config repositories.0 path "packages/*"
 git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-Ardından, composer.json'daki `minimum-stability` değerini `beta`dan `dev`e değiştirerek Composer'ın yerel kopyalarınızdan kararsız sürümleri kabul ettiğinden emin olun.
+Next, ensure that Composer accepts unstable releases from your local copies by changing the value of `minimum-stability` from `beta` to `dev` in `composer.json`.
 
-Son olarak, kurulumu dizin havuzlarından tamamlamak için `composer install` çalıştırın.
+Finally, run `composer install` to complete the installation from the path repositories.
 
-Yerel kurulumunuz kurulduktan sonra, **config.php** içinde `debug` modunu etkinleştirdiğinizden ve php yapılandırmanızda `display_errors` u `On` olarak ayarladığınızdan emin olun. Bu, hem Flarum hem de PHP için hata ayrıntılarını görmenize olanak sağlar. Hata ayıklama modu ayrıca, her istekte Flarum'un varlık dosyalarının yeniden derlenmesini zorlayarak, uzantının javascript veya CSS'sindeki her değişiklikten sonra `php flarum cache:clear` i çalıştırma ihtiyacını ortadan kaldırır.
+After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's javascript or CSS.
 
-Flarum'un ön uç kodu ES6'da yazılır ve JavaScript'e aktarılır. Geliştirme sırasında JavaScript'i [Node.js](https://nodejs.org/) kullanarak yeniden derlemeniz gerekecektir. **Lütfen PR gönderirken ortaya çıkan `dist` dosyalarını derlemeyin**; bu, değişiklikler `master` dalında birleştirildiğinde otomatik olarak halledilir.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
 
 ```bash
 cd packages/core/js
@@ -40,7 +40,7 @@ npm install
 npm run dev
 ```
 
-Süreç uzantılar için aynıdır, ancak temel JavaScript'i uzantıya bağlamanız gerekir, böylece IDE'niz `import from '@flarum/core'` ifadeleri anlayacaktır.
+The process is the same for extensions.
 
 ```bash
 cd packages/tags/js
@@ -49,94 +49,93 @@ npm link ../../core/js
 npm run dev
 ```
 
-## Geliştirme İş Akışı
+## Development Workflow
 
-Tipik bir katkı iş akışı şuna benzer:
-	
-1. 🌳 Uygun **dalı** yeni bir özellik dalına ayırın.
-     * *Hata düzeltmeleri* en son kararlı dala gönderilmelidir.
-     * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
-     * *Ana* özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
-     * Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
+A typical contribution workflow looks like this:
 
-2. 🔨 Bir **kod** yazın.
-     * [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
-	
-3. 🚦 **Kodunuzu** test edin.
-     * Hataları giderirken veya özellikler eklerken gerektiği gibi birim testleri ekleyin.
-     * Test paketini ilgili paket klasöründeki `vendor/bin/phpunit` ile çalıştırın.
-	 
-<!--
+1. 🌳 **Branch** off the appropriate branch into a new feature branch.
+    * *Bug fixes* should be sent to the latest stable branch.
+    * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
+    * *Major* features should always be sent to the `master` branch, which contains the upcoming Flarum release.
+    * Internally we use the naming scheme `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
+
+2. 🔨 **Write** some code.
+    * See below about [Coding Style](#coding-style).
+
+1. 🚦 **Test** your code.
+    * Add unit tests as necessary when fixing bugs or adding features.
+    * Run the test suite with `vendor/bin/phpunit` in the relevant package folder. <!--
     * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
 -->
-4. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
-     * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-     * [İyi bir işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
 
-5. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
-     * Çekme talebi şablonunu doldurun.
-     * Değişikliğiniz görselse, değişikliği gösteren bir ekran görüntüsü veya GIF ekleyin.
-     * JavaScript `dist` dosyalarını DERLEMEYİN. Bunlar birleştirme sırasında otomatik olarak derlenecektir.
+4. 💾 **Commit** your code with a descriptive message.
+    * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
+    * Write a [good commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
-6. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
-     * Ekip üyeleri kodunuzu inceleyecek. Bazı değişiklikler veya iyileştirmeler veya alternatifler önerebiliriz, ancak küçük değişiklikler için çekme talebinizin hızla kabul edilmesi gerekir.
-     * Geri bildirimi ele alırken, üzerine yazmak veya ezmek yerine ek taahhütleri itin (birleştireceğiz).
+5. 🎁 **Submit** a Pull Request on GitHub.
+    * Fill out the pull request template.
+    * If your change is visual, include a screenshot or GIF demonstrating the change.
+    * Do NOT check-in the JavaScript `dist` files. These will be compiled automatically on merge.
 
-7. 🕺 **Dans et** tıpkı Flarum'a katkıda bulunduğun gibi.
+6. 🤝 **Engage** with the Flarum team for approval.
+    * Team members will review your code. We may suggest some changes or improvements or alternatives, but for small changes your pull request should be accepted quickly.
+    * When addressing feedback, push additional commits instead of overwriting or squashing (we will squash on merge).
 
-## Kodlama Stili
+7. 🕺 **Dance** like you just contributed to Flarum.
 
-Flarum kod tabanını temiz ve tutarlı tutmak için, takip ettiğimiz bir dizi kodlama stili yönergemiz var. Şüpheye düştüğünüzde kaynak kodunu okuyun.
+## Coding Style
 
-Kod stiliniz mükemmel değilse endişelenmeyin! StyleCI, herhangi bir stil düzeltmesini, çekme istekleri birleştirildikten sonra otomatik olarak Flarum depolarında birleştirir. Bu, kod stiline değil katkının içeriğine odaklanmamızı sağlar.
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
+
+Don't worry if your code styling isn't perfect! StyleCI will automatically merge any style fixes into Flarum repositories after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
 
 ### PHP
 
-Flarum, [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) kodlama standardını ve [PSR- 4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) otomatik yükleme standardı. Bunun da ötesinde, [diğer stil kurallarına](https://github.com/flarum/core/blob/master/.styleci.yml) uyarız. Mümkün olduğunda PHP 7 tür ipucu ve dönüş türü bildirimlerini ve satır içi belgeler sağlamak için [PHPDoc](https://docs.phpdoc.org/) kullanıyoruz. Katkılarınızda kod tabanının geri kalanı tarafından kullanılan stili deneyin ve taklit edin.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
-* Ad alanları tekil olmalıdır (ör. `Flarum\Discussion`, not `Flarum\Discussions`)
-* Arayüzlerin sonuna `Interface` eklenmelidir (ör. `MailableInterface`)
-* Abstract sınıflarının önüne `Abstract` yazılmalıdır (ör `AbstractModel`)
-* Özelliklerin sonuna `Trait` eklenmelidir (ör. `ScopeVisibilityTrait`)
+* Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
+* Interfaces should be suffixed with `Interface` (eg. `MailableInterface`)
+* Abstract classes should be prefixed with `Abstract` (eg. `AbstractModel`)
+* Traits should be suffixed with `Trait` (eg. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
-Flarum'un JavaScript'i çoğunlukla [Airbnb Stil Kılavuzu](https://github.com/airbnb/javascript)'nu takip eder. Satır içi belge sağlamak için [ESDoc](https://esdoc.org/manual/tags.html) kullanıyoruz.
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
 
-### Veritabanı
+### Database
 
-**Sütunlar** veri türlerine göre adlandırılmalıdır:
-* DATETIME veya TIMESTAMP: `{verbed}_at` (ör. created_at, read_at) veya `{verbed}_until` (ör. suspended_until)
-* INT bu bir sayıdır: `{noun}_count` (ör. comment_count, word_count)
-* Yabancı anahtar: `{verbed}_{entity}_id` (ör. hidden_user_id)
-     * Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
-* BOOL: `is_{adjective}` (ör. is_locked)
+**Columns** should be named according to their data type:
+* DATETIME or TIMESTAMP: `{verbed}_at` (eg. created_at, read_at) or `{verbed}_until` (eg. suspended_until)
+* INT that is a count: `{noun}_count` (eg. comment_count, word_count)
+* Foreign key: `{verbed}_{entity}_id` (eg. hidden_user_id)
+    * Verb can be omitted for primary relationship (eg. post author is just `user_id`)
+* BOOL: `is_{adjective}` (eg. is_locked)
 
-**Tablolar** aşağıdaki şekilde adlandırılmalıdır:
-* Çoğul biçim kullanın (`discussions`)
-* Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
-* İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
+**Tables** should be named as follows:
+* Use plural form (`discussions`)
+* Separate multiple words with underscores (`access_tokens`)
+* For relationships tables, join the two table names in singular form with an underscore in alphabetical order (eg. `discussion_user`)
 
 ### CSS
 
-Flarum'un CSS sınıfları, `.ComponentName-descendentName--modifierName`. biçimini kullanarak [SUIT CSS adlandırma kurallarını](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) kabaca izler.
+Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
 
-### Çeviriler
+### Translations
 
-Çeviri anahtarlarını açıklayıcı ve tutarlı bir şekilde adlandırmak için bir [standart anahtar biçimi](/extend/i18n.md#appendix-a-standard-key-format) kullanıyoruz.
+We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
-## Geliştirme araçları
+## Development Tools
 
-Flarum'a katkıda bulunanların çoğu, [PHPStorm](https://www.jetbrains.com/phpstorm/download/) veya [VSCode](https://code.visualstudio.com/) ile geliştirir.
+Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [VSCode](https://code.visualstudio.com/).
 
-Yerel bir forum sunmak için [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows) ve [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) popüler seçeneklerdir.
+To serve a local forum, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), and [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) are popular choices.
 
-## Katılımcı Lisans Sözleşmesi
+## Contributor License Agreement
 
-Kodunuzla Flarum'a katkıda bulunarak, Flarum Foundation'a (Stichting Flarum) ilgili fikri mülkiyet haklarınızın tümü (telif hakkı, patent ve diğer haklar dahil) kapsamında münhasır olmayan, geri alınamaz, dünya çapında, telifsiz, alt lisanslanabilir, devredilebilir bir lisans vermiş olursunuz. Aşağıdakiler dahil ancak bunlarla sınırlı olmamak üzere, herhangi bir lisans koşulunda Katkıları kullanmak, kopyalamak, türev çalışmalarını hazırlamak, dağıtmak ve halka açık olarak gerçekleştirmek ve görüntülemek için: (a) MIT lisansı gibi açık kaynak lisansları; ve (b) ikili, özel veya ticari lisanslar. Burada verilen lisanslar dışında Katkıya ilişkin tüm hakları, unvanları ve menfaatleri saklı tutarsınız.
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
 
-Bize bu hakları verebileceğinizi onaylıyorsunuz. Yukarıdaki lisansı vermeye yasal olarak yetkili olduğunuzu beyan ediyorsunuz. İşvereninizin sizin oluşturduğunuz fikri mülkiyet hakları varsa, Katkıları o işveren adına yapmak için izin aldığınızı veya işvereninizin Katkılar için bu haklardan feragat ettiğini beyan edersiniz.
+You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-Katkıların, sizin orijinal yazarlık eserleriniz olduğunu ve bildiğiniz kadarıyla, başka hiç kimsenin Katkılarla ilgili herhangi bir buluş veya patentte herhangi bir hak iddia etmediğini veya talep etme hakkına sahip olmadığını beyan ediyorsunuz. Ayrıca, bu lisansın şartlarına aykırı herhangi bir şekilde bir anlaşma yaparak veya başka bir şekilde yasal olarak yükümlü olmadığınızı da beyan edersiniz.
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
 
-Flarum Vakfı, bu Sözleşmede açıkça belirtilmediği sürece, sağladığınız herhangi bir Katkının "OLDUĞU GİBİ" ESASINA dayandığını, SINIRLAMA OLMAKSIZIN HERHANGİ BİR GARANTİ VEYA KOŞUL DAHİL, AÇIK VEYA ZIMNİ HERHANGİ BİR GARANTİ VEYA KOŞUL OLMADAN MÜLKİYET, İHLAL OLMAMASI, SATILABİLİRLİK VEYA BELİRLİ BİR AMACA UYGUNLUK.
+The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
