@@ -1,51 +1,51 @@
 # Console
 
-In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
+Oltre al pannello di amministrazione, Flarum fornisce diversi comandi eseguibili della console per aiutarti a gestire il tuo forum tramite il terminale.
 
-To use the console:
+Per utilizzare la console:
 
-1. `ssh` into the server where your flarum installation is hosted
-2. `cd` to the folder that contains a file called `flarum`
-3. Run the command via `php flarum [command]`
+1. `Collegarsi in ssh` nel server in cui è ospitata la tua installazione di flarum
+2. `cd` nella cartella contenente il file chiamato `flarum`
+3. Lancia il comando `php flarum [command]`
 
-## Default Commands
+## Comandi di default
 
 ### list
 
-Lists all available management commands, as well as instructions for using management commands
+Elenca tutti i comandi di gestione disponibili, nonché le istruzioni per l'utilizzo degli stessi
 
 ### help
 
 `php flarum help [command_name]`
 
-Displays help output for a given command.
+Mostra la guida e aiuti sul comando.
 
-You can also output the help in other formats by using the --format option:
+È inoltre possibile visualizzare la guida in altri formati utilizzando il comando --format:
 
 `php flarum help --format=xml list`
 
-To display the list of available commands, please use the list command.
+Per visualizzare l'elenco dei comandi disponibili, utilizzare il comando list
 
 ### info
 
 `php flarum info`
 
-Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
+Raccoglie informazioni sul nucleo di Flarum e sulle estensioni installate. Questo è molto utile per il debug dei problemi e dovrebbe essere condiviso quando si richiede supporto.
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
+Cancella la cache del backend di Flarum, inclusi js / css generati, cache del formattatore di testo e traduzioni memorizzate. Questo comando dovrebbe essere eseguito dopo l'installazione o la rimozione di estensioni e la sua esecuzione dovrebbe essere il primo passaggio da effettuare quando si verificano problemi.
 
 ### migrate
 
 `php flarum migrate`
 
-Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
+Esegue tutte le migrazioni in sospeso. Deve essere utilizzato quando viene aggiunta o aggiornata un'estensione che modifica il database.
 
 ### migrate:reset
 
 `php flarum migrate:reset --extension [extension_id]`
 
-Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
+Reimposta tutte le migrazioni per un'estensione. Viene utilizzato principalmente dagli sviluppatori di estensioni, ma a volte potrebbe essere necessario eseguirlo se si rimuove un'estensione e si desidera cancellare tutti i suoi dati dal database. Tieni presente che l'estensione in questione deve essere attualmente installata (ma non necessariamente abilitata) affinché funzioni.
