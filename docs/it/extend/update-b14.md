@@ -141,7 +141,7 @@ Mithril 2 introduces a few changes in the routing API. Most of these are quite s
 - `m.route(NEW_ROUTE)` to set a new route has been replaced by `m.route.set(NEW_ROUTE)`
 - When registering new routes, a component class should be provided, not a component instance.
 
-For example:
+Per esempio:
 
 ```js
 // Mithril 0.2
@@ -202,7 +202,7 @@ For examples and other AJAX changes, see [the mithril documentation](https://mit
 
 #### Promises
 
-`m.deferred` has been removed, native promises should be used instead. For instance:
+`m.deferred` has been removed, native promises should be used instead. Per esempio:
 
 ```js
 // Mithril 0.2
@@ -252,7 +252,7 @@ class ParentComponent extends Component {
 
 That will no longer work. In fact; the Component class no longer has a render method.
 
-Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance:
+Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. Per esempio:
 
 ```js
 class ChildComponent extends Component {
@@ -278,7 +278,7 @@ class ParentComponent extends Component {
 }
 ```
 
-For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance:
+For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. Per esempio:
 
 ```js
 class Counter {
@@ -323,7 +323,7 @@ This "state pattern" can be found throughout core. Some non-trivial examples are
 
 ### Changes in Core
 
-#### Modals
+#### Modali
 
 Previously, modals could be opened by providing a `Modal` component instance:
 
@@ -339,7 +339,7 @@ app.modal.show(LoginModal, {identification: 'prefilledUsername'});
 
 The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component. Any modifications by extensions should accordingly be done to `ModalManagerState`.
 
-#### Alerts
+#### Avvisi
 
 Previously, alerts could be opened by providing an `Alert` component instance:
 
@@ -409,7 +409,7 @@ Loading state in the `common/components/Checkbox` component is no longer managed
 
 #### Preference Saver
 
-The `preferenceSaver` method of `forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. For instance:
+The `preferenceSaver` method of `forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. Per esempio:
 
 ```js
 // Old way
@@ -492,7 +492,7 @@ The `moment` library has been removed, and replaced by the `dayjs` library. The 
 
 In mithril 0.2, its `retain` method returned a [subtree retain directive](https://mithril.js.org/archive/v0.1.25/mithril.render.html#subtree-directives) if no redraw was necessary.
 
-In mithril 2, we use its `needsRebuild` method in combination with `onbeforeupdate`. For instance:
+In mithril 2, we use its `needsRebuild` method in combination with `onbeforeupdate`. Per esempio:
 
 ```js
 class CustomComponent extends Component {
