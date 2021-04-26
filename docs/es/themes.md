@@ -2,7 +2,7 @@
 
 While we've worked hard to make Flarum as beautiful as we can, each community will probably want to make some tweaks/modifications to fit their desired style.
 
-## Admin Dashboard
+## Panel de Administración
 
 The [admin dashboard](../admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
 
