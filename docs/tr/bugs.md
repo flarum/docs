@@ -1,24 +1,24 @@
-# Reporting Bugs
+# Hataları Bildirme
 
-::: danger Security Vulnerabilities If you discover a security vulnerability within Flarum, please send an email to [security@flarum.org](mailto:security@flarum.org) so we can address it promptly. :::
+::: danger Güvenlik Açıkları Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin. :::
 
-Thank you for helping us test Flarum. We're happy to have you on the team! We need people who can *troubleshoot issues patiently* and *communicate them clearly*. As you probably know, good bug reporting takes some time and effort. If you're fine with that, then let's get started!
+Flarum'u test etmemize yardım ettiğiniz için teşekkür ederiz. Takımda olmanıza sevindik! *Sorunları sabırla giderebilen* ve *bunları net bir şekilde iletebilen* kişilere ihtiyacımız var. Muhtemelen bildiğiniz gibi, iyi hata bildirimi biraz zaman ve çaba gerektirir. Bununla iyiyseniz, o zaman başlayalım!
 
-## Duplicates
+## Yinelenenler
 
-Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
+Zaten bir hata mı buldunuz? Olağanüstü! Bunu duymak isteriz &mdash; ancak önce bilinen bir sorun için zamanınızı boşa harcamadığınızdan emin olmak için kontrol etmelisiniz:
 
-- Search our [Support forum](https://discuss.flarum.org/t/support) to see if it's already been reported.
-- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/core/issues) too.
+- Daha önce bildirilip bildirilmediğini görmek için [Destek forumumuzda](https://discuss.flarum.org/t/support) arama yapın.
+- Bir düzeltme üzerinde çalışıyor olabiliriz, bu nedenle [sorun izleyicimizi](https://github.com/flarum/core/issues) de arayın.
 
-If you've searched *thoroughly* and come up empty-handed, we'll welcome your report. If it's just a simple issue (a misspelled word or graphics glitch, for example) skip to the next paragraph. But if you're seeing errors, or something is clearly broken, we'll need you to gather some information first. Please head over to our [Troubleshooting](troubleshoot.md) guide and follow the instructions there. Collect as much info as you can!
+*Derinlemesine* aradıysanız ve eli boş çıkarsanız, raporunuzu memnuniyetle karşılıyoruz. Sadece basit bir konuysa (örneğin yanlış yazılmış bir kelime veya grafik hatası) sonraki paragrafa geçin. Ancak hatalar görüyorsanız veya bir şey açıkça bozuksa, önce bazı bilgileri toplamanız gerekir. Lütfen [Sorun Giderme](troubleshoot.md) kılavuzumuza gidin ve oradaki talimatları izleyin. Mümkün olduğu kadar çok bilgi toplayın!
 
-## Reporting
+## Raporlama
 
-We track issues on GitHub. Make sure you open your issue in the [correct repository](https://github.com/flarum), and fill out all of the information in the Bug Report template.
+Sorunları GitHub'da izliyoruz. Sorununuzu [doğru depoda](https://github.com/flarum) açtığınızdan emin olun ve Hata Raporu şablonundaki tüm bilgileri doldurun.
 
-If you can, check if the issue is reproducible with the latest version of Flarum. If you are using a pre-release or development version, please indicate the specific version you are using.
+Yapabiliyorsanız, sorunun Flarum'un en son sürümüyle tekrarlanabilir olup olmadığını kontrol edin. Bir ön yayın veya geliştirme sürümü kullanıyorsanız, lütfen kullandığınız belirli sürümü belirtin.
 
-Remember: the goal of a bug report is to make it easy for us to replicate the bug and fix it. You might want to read [this article](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) for some useful tips on how to write an effective bug report. It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues with no clear reprduction steps will not be triaged. If an issue labeled "needs verification" receives no further input from the issue author for more than 5 days, it will be closed.
+Unutmayın: Bir hata raporunun amacı, hatayı kopyalayıp düzeltmemizi kolaylaştırmaktır. Etkili bir hata raporunun nasıl yazılacağına dair bazı yararlı ipuçları için [bu makaleyi](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) okumak isteyebilirsiniz. Karşılaştığınız sorunu yeniden oluşturmak için gerekli adımları net bir şekilde açıklamanız **zorunludur**. Net bir yeniden işleme adımının olmadığı sorunlar önceliklendirilmeyecektir. "needs verification" etiketli bir sorun, sorunun yazarından 5 günden fazla bir süre herhangi bir girdi almazsa kapatılır.
 
-Once you've posted your report, we'd ask that you please *follow the discussion* and wait patiently. We may need to ask for further details or clarification; but we've always got plenty to do, and it could be a while before we can give your report the time it deserves.
+Raporunuzu gönderdikten sonra, sizden lütfen *tartışmayı takip etmenizi* ve sabırla beklemenizi rica ederiz. Daha fazla ayrıntı veya açıklama istememiz gerekebilir; ama her zaman yapacak çok işimiz var ve raporunuza hak ettiği zamanı verebilmemiz biraz zaman alabilir.
