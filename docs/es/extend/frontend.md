@@ -77,7 +77,7 @@ module.exports = config();
 
 ### admin.js and forum.js
 
-These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in `src`, and having these files just export the contents of `src`. For instance:
+These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in `src`, and having these files just export the contents of `src`. Por ejemplo:
 
 ```js
 // admin.js
@@ -183,7 +183,7 @@ The crux of it is that Flarum generates virtual DOM elements which are a JavaScr
 
 Because the interface is built with JavaScript, it's really easy to hook in and make changes. All you need to do is find the right extender for the part of the interface you want to change, and then add your own virtual DOM into the mix.
 
-Most mutable parts of the interface are really just *lists of items*. For example:
+Most mutable parts of the interface are really just *lists of items*. Por ejemplo:
 
 * The controls that appear on each post (Reply, Like, Edit, Delete)
 * The index sidebar navigation items (All Discussions, Following, Tags)
@@ -282,7 +282,7 @@ As noted above, most easily extensible parts of the UI allow you to extend metho
 
 ### `extend` and `override`
 
-Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. For instance:
+Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. Por ejemplo:
 
 ```jsx
 // This adds an attribute to the `app` global.
