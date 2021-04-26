@@ -1,35 +1,34 @@
-# Yapılandırma Dosyası
+# Configuration File
 
-Flarum yapılandırmasının Flarum yönetici panosu (veritabanı hariç) aracılığıyla değiştirilemeyeceği tek bir yer vardır ve bu, Flarum kurulu klasörde bulunan `config.php` dosyasıdır.
+There is only one place where Flarum configuration cannot be modified through the Flarum admin dashboard (excluding the database), and that is the `config.php` file located in the root of your Flarum installation.
 
-Bu dosya küçük de olsa Flarum kurulumunuzun çalışması için çok önemli olan ayrıntıları içerir.
+This file, though small, contains details that are crucial for your Flarum installation to work.
 
-Dosya varsa, Flarum'a zaten kurulu olduğunu söyler.
-Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
-Örnek bir dosyayla her şeyin ne anlama geldiğine dair hızlı bir genel bakış:
+Here's a quick overview of what everything means with an example file:
 
 ```php
 <?php return array (
-  'debug' => false, // sorunları gidermek için kullanılan hata ayıklama modunu etkinleştirir veya devre dışı bırakır
+  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
   'database' =>
   array (
-    'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB...
-    'host' => 'localhost', // bağlantının ana bilgisayarı, harici bir hizmet kullanılmadığı sürece çoğu durumda localhost
-    'database' => 'flarum', // veritabanının adı
-    'username' => 'root', // veritabanı kullanıcı adı
-    'password' => '', // veritabanı şifresi
+    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
+    'host' => 'localhost', // the host of the connection, localhost in most cases unless using an external service
+    'database' => 'flarum', // the name of the database in the instance
+    'username' => 'root', // database username
+    'password' => '', // database password
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
-    'port' => '3306', // veritabanı bağlantısının portu, MySQL ile varsayılan olarak 3306'dır
+    'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
+    'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // URL kurulumu, etki alanlarını değiştirirseniz bunu değiştirmek isteyeceksiniz
+  'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
   'paths' =>
   array (
-    'api' => 'api', // /api , API'ye gider.
-    'admin' => 'admin', // /admin , yönetici paneline gider.
+    'api' => 'api', // /api goes to the API
+    'admin' => 'admin', // /admin goes to the admin
   ),
 );
 ```
