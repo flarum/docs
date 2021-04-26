@@ -1,27 +1,29 @@
-# E-posta Yapılandırması
+# Email Configuration
 
-Herhangi bir topluluğun, e-posta doğrulaması, şifre sıfırlama, bildirim ve kullanıcılara yönelik diğer iletişimlere izin vermek için e-posta göndermesi gerekir. Forumunuzu e-posta gönderecek şekilde yapılandırmak, yönetici olarak ilk adımlarınızdan biri olmalıdır: Yanlış bir yapılandırma, kullanıcılar kaydolmaya çalışırken hatalara neden olur.
+Any community needs to send emails to allow for email verification, password resets, notifications, and other communication to users. Configuring your forum to send emails should be one of your first steps as an admin: an incorrect configuration will cause errors when users try to register.
 
-## Kullanılabilir Sürücüler
+## Available Drivers
 
-Flarum varsayılan olarak birkaç sürücü sağlar, bunlar aşağıda listelenir ve açıklanır. Geliştiriciler ayrıca [uzantılar aracılığıyla özel posta sürücüleri](ext/mail.md) ekleyebilirler.
+Flarum provides several drivers by default, they are listed and explained below. Developers can also add [custom mail drivers through extensions](extend/mail.md).
 
 ### SMTP
 
-Bu muhtemelen en yaygın kullanılan e-posta sürücüsüdür ve harici bir SMTP hizmeti için bir ana bilgisayar, bağlantı noktası/şifreleme, kullanıcı adı ve şifre yapılandırmanıza izin verir. Lütfen şifreleme alanının `ssl` veya `tls` olmasını beklediğini unutmayın.
+This is probably the most commonly used email driver, allowing you to configure a host, port/encryption, username, and password for an external SMTP service. Please note that the encryption field expects either `ssl` or `tls`.
 
-### Posta
+### Mail
 
-`mail` sürücüsü, birçok barındırma sunucusunda bulunan sendmail/postfix e-posta sistemini kullanmaya çalışacaktır. Bunun çalışması için sendmail'i sunucunuza düzgün bir şekilde kurmanız ve yapılandırmanız gerekir.
+The `mail` driver will try to use the sendmail / postfix email system included in many hosting servers. You must properly install and configure sendmail on your server for this to work.
 
 ### Mailgun
 
-Bu sürücü, e-posta göndermek için [Mailgun](https://www.mailgun.com/) hesabınızı kullanır. Mailgun yapılandırmanızdaki etki alanı ve bölgenin yanı sıra gizli bir anahtara ihtiyacınız olacak.
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
 
-### Günlük
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
-Günlük posta sürücüsü POSTA GÖNDERMEZ ve öncelikle geliştiriciler tarafından kullanılır. Herhangi bir e-postanın içeriğini `FLARUM_ROOT_DIRECTORY/storage/logs` içindeki günlük dosyasına yazar.
+### Log
 
-## Test E-postası
+The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
-Bir e-posta yapılandırmasını kaydettikten sonra, yapılandırmanızın çalıştığından emin olmak için yönetici panosunun Posta sayfasındaki "Test Postası Gönder" düğmesini tıklayabilirsiniz. Bir hata görürseniz veya bir e-posta almazsanız, yapılandırmayı ayarlayın ve tekrar deneyin. Herhangi bir hata yoksa, ancak gelen kutunuzda hiçbir şey görünmüyorsa istenmeyen postanızı kontrol ettiğinizden emin olun.
+## Testing Email
+
+Once you've saved an email configuration, you can click the "Send Test Mail" button on the Mail page of the admin dashboard to make sure your configuration works. If you see an error, or do not receive an email, adjust the configuration and try again. Make sure to check your spam if there's no error, but nothing shows up in your inbox.
