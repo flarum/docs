@@ -1,4 +1,4 @@
-# Release Notes
+# 版本说明
 
 
 <!--
@@ -12,4 +12,4 @@ https://laravel.com/docs/5.7/releases
 ## Release Notes
 -->
 
-Release notes can be found in the [Flarum Community](https://discuss.flarum.org/t/blog?sort=newest).
+每个版本的发布说明都可以在 [Flarum 社区](https://discuss.flarum.org/t/blog?sort=newest) 找到。
