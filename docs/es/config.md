@@ -1,34 +1,34 @@
-# Configuration File
+# Archivo de configuración
 
-There is only one place where Flarum configuration cannot be modified through the Flarum admin dashboard (excluding the database), and that is the `config.php` file located in the root of your Flarum installation.
+Sólo hay un lugar donde la configuración de Flarum no puede ser modificada a través del panel de administración de Flarum (excluyendo la base de datos), y es el archivo `config.php` ubicado en la raíz de su instalación de Flarum.
 
-This file, though small, contains details that are crucial for your Flarum installation to work.
+Este archivo, aunque pequeño, contiene detalles que son cruciales para que su instalación de Flarum funcione.
 
-If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
+Si el archivo existe, le dice a Flarum que ya ha sido instalado. También proporciona a Flarum información de la base de datos y más.
 
-Here's a quick overview of what everything means with an example file:
+Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
 ```php
 <?php return array (
-  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
+  'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
   'database' =>
   array (
-    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
-    'host' => 'localhost', // the host of the connection, localhost in most cases unless using an external service
-    'database' => 'flarum', // the name of the database in the instance
-    'username' => 'root', // database username
-    'password' => '', // database password
+    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB... MySQL, MariaDB...
+    'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
+    'database' => 'flarum', // el nombre de la base de datos en la instancia
+    'username' => 'root', // nombre de usuario de la base de datos
+    'password' => '', // contraseña de la base de datos
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
-    'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
+    'prefix' => '', // el prefijo de las tablas, útil si se comparte la misma base de datos con otro servicio
+    'port' => '3306', // el puerto de la conexión, por defecto 3306 con MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
+  'url' => 'https://flarum.localhost', // la configuración de la URL, deberá cambiarla si cambia de dominio
   'paths' =>
   array (
-    'api' => 'api', // /api goes to the API
-    'admin' => 'admin', // /admin goes to the admin
+    'api' => 'api', // /api va a la API
+    'admin' => 'admin', // /admin va a la administración
   ),
 );
 ```
