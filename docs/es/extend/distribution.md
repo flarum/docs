@@ -1,39 +1,39 @@
-# Distribution
+# Distribución
 
-You've written a great extension — and now you want the whole world to be able to use it. This document will take you through the process of distribution, from setting up a Git repository for your extension, to publishing it on Packagist.
+Has escrito una gran extensión y ahora quieres que todo el mundo pueda usarla. Este documento te llevará a través del proceso de distribución, desde la creación de un repositorio Git para tu extensión, hasta su publicación en Packagist.
 
-## Setting Up Git
+## Configurar Git
 
-The first thing you'll need to do is set up a version control system (VCS). The most popular VCS is [Git](https://git-scm.com/). In this guide we'll be using Git, so make sure you have it [installed](https://git-scm.com/downloads) before continuing. If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/).
+Lo primero que tienes que hacer es configurar un sistema de control de versiones (VCS). El VCS más popular es [Git](https://git-scm.com/). En esta guía usaremos Git, así que asegúrate de tenerlo [instalado](https://git-scm.com/downloads) antes de continuar. Si no tienes muchos conocimientos sobre Git, puedes consultar [estos recursos de aprendizaje](https://try.github.io/).
 
-After you have installed Git, you'll need to initialize your repository. You can use `git init` on the command line if you're comfortable, or use a GUI tool like [SourceTree](https://www.sourcetreeapp.com/) or [GitKraken](https://www.gitkraken.com/).
+Después de haber instalado Git, necesitarás inicializar tu repositorio. Puedes usar `git init` en la línea de comandos si te sientes cómodo, o usar una herramienta GUI como [SourceTree](https://www.sourcetreeapp.com/) o [GitKraken](https://www.gitkraken.com/).
 
-Then, you'll need an account in a Git hosting server, the most popular being [GitHub](https://github.com) and [GitLab](https://gitlab.com). These will instruct you on how to hook up your local repository with the online "remote" repository.
+A continuación, necesitarás una cuenta en un servidor de alojamiento de Git, siendo los más populares [GitHub](https://github.com) y [GitLab](https://gitlab.com). Estos te indicarán cómo conectar tu repositorio local con el repositorio "remoto" en línea.
 
-## Tagging a Release
+## Etiquetar una versión
 
-As you are going to be publishing this extension, you'll want to make sure that the information is up to date. Take a minute to revisit `composer.json` and make sure package name, description, and Flarum extension information are all correct. It is recommended to have a `README.md` file in your repository to explain what the extension is, so create one if you haven't already.
+Como vas a publicar esta extensión, querrás asegurarte de que la información está actualizada. Tómese un minuto para revisar `composer.json` y asegurarse de que el nombre del paquete, la descripción y la información de la extensión Flarum son correctos. Se recomienda tener un archivo `README.md` en su repositorio para explicar qué es la extensión, así que cree uno si aún no lo ha hecho.
 
-When you're ready to release, commit your extension's files to the repo and tag your first version:
+Cuando esté listo para publicar, envíe los archivos de su extensión al repositorio y etiquete su primera versión:
 
 ```bash
 git tag v0.1.0
 git push && git push --tags
 ```
 
-## Publishing on Packagist
+## Publicar en Packagist
 
-Composer packages are published to a Composer repository, usually [Packagist](https://packagist.org/). You will need an account to proceed.
+Los paquetes de Composer se publican en un repositorio de Composer, normalmente [Packagist](https://packagist.org/). Necesitarás una cuenta para proceder.
 
-If this is the first release you are publishing of your extension, you will need to [submit your package](https://packagist.org/packages/submit) using its public repository URL. If your extension is located on GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`.
+Si esta es la primera versión que publicas de tu extensión, tendrás que [enviar tu paquete](https://packagist.org/packages/submit) utilizando la URL de su repositorio público. Si tu extensión se encuentra en GitHub, esta URL será algo así como `https://github.com/AUTHOR/NAME.git`.
 
 ### Future Releases
 
 You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages). Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
 
-## Promoting Your Extension
+## Promover su extensión
 
-You will most likely want to create a discussion on the Flarum Community in the [Extensions tag](https://discuss.flarum.org/t/extensions). Other people can install your extension using the following command:
+Lo más probable es que quieras crear una discusión en la Comunidad Flarum en la [etiqueta de extensiones](https://discuss.flarum.org/t/extensions). Otras personas pueden instalar su extensión usando el siguiente comando:
 
 ```bash
 composer require vendor/package
