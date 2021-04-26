@@ -1,29 +1,29 @@
-# Languages
+# Diller
 
-It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
+Temel Flarum kurulumunuza yeni bir dil eklemek kolaydır. Seçtiğiniz dil paketini indirmek ve kurmak için aşağıdaki talimatları uygulamanız yeterlidir.
 
-Once you have added a language pack, you can [set it as the default language](#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack). If you’re using any third-party extensions, be sure to [read this](#third-party-extensions) before you start.
+Bir dil paketi ekledikten sonra, forumunuz için [varsayılan dil olarak ayarlayabilirsiniz](#varsayılan-dili-ayarlama). Ve yüklü dil paketlerinizden birine ihtiyacınız olmadığını anlarsanız, her zaman \[devre dışı bırakabilirsiniz\] (#dil-paketini-devre-dışı-bırakma). Herhangi bir üçüncü taraf uzantısı kullanıyorsanız, başlamadan önce [bunu okuduğunuzdan](#topluluk-uzantıları) emin olun.
 
-## Language Pack Installation
+## Dil Paketi Kurulumu
 
-To begin, visit the [Extensions > Languages](https://discuss.flarum.org/t/languages) tag at the Flarum Community site and find a language pack that you want to install.
+Başlamak için, Flarum Community sitesinde [Extensions > Languages](https://discuss.flarum.org/t/languages) etiketini ziyaret edin ve yüklemek istediğiniz bir dil paketi bulun.
 
-Language packs are installed the same way as [extensions](extensions.md). The language will appear in the **Extensions** page of the admin interface and you can enable it there.
+Dil paketleri, [uzantılar](extensions.md) ile aynı şekilde yüklenir. Dil, yönetici arayüzünün **Uzantılar** sayfasında görünecektir ve orada etkinleştirebilirsiniz.
 
-That’s all there is to it! You should now be able to use the language selector in your site’s header to switch your forum’s display to the new language.
+Hepsi bu kadar! Artık forumunuzun görünümünü yeni dile geçirmek için sitenizin başlığındaki dil seçiciyi kullanabilmeniz gerekir.
 
-## Setting the Default Language
+## Varsayılan Dili Ayarlama
 
-Once you have installed a language pack and made sure it’s working, you may want to set it as the default language for new users and guests. You can do that on the **Basics** page of the admin interface.
+Bir dil paketi yükledikten ve çalıştığından emin olduktan sonra, onu yeni kullanıcılar ve misafirler için varsayılan dil olarak ayarlamak isteyebilirsiniz. Bunu yönetici arayüzünün **Temel Bilgiler** sayfasında yapabilirsiniz.
 
-## Disabling a Language Pack
+## Dil Paketini Devre Dışı Bırakma
 
-If you decide you don’t need to support a certain language, after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
+Belirli bir dili desteklemenize gerek olmadığına karar verirseniz, sonuçta onu kapatabilirsiniz. Yönetici arayüzünün **Uzantılar** sayfasında dil paketini bulun ve devre dışı bırakın.
 
-Disabling a language can be useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
+Tek dilli bir site çalıştırıyorsanız ve dil seçicinin site başlığında görünmesini istemiyorsanız, bir dili devre dışı bırakmak yararlı olabilir. Dil seçici, yalnızca bir dil etkinleştirildiğinde gizlenir.
 
-## Community Extensions
+## Topluluk Uzantıları
 
-While language packs downloaded from the Flarum Community site will generally include translations for all the extensions that come bundled with Flarum, they _will not_ as a rule cover any community extensions you may have installed. It is up to developers to provide and maintain translations for their extensions.
+Flarum Topluluğu sitesinden indirilen dil paketleri genellikle Flarum ile birlikte gelen tüm uzantıların çevirilerini içerecek olsa da, kural olarak yüklemiş olabileceğiniz tüm topluluk uzantılarını kapsamazlar. Uzantılarının çevirilerini sağlamak ve sürdürmek geliştiricilere bağlıdır.
 
-So before you install a community extension, you should check to make sure it includes translations for each language pack you have installed. If you find that an extension doesn’t support a language you need, please contact the developer directly and arrange to have the necessary translations added.
+Bu nedenle, bir topluluk uzantısı yüklemeden önce, yüklediğiniz her dil paketi için çeviriler içerdiğinden emin olmalısınız. Bir uzantının ihtiyacınız olan bir dili desteklemediğini fark ederseniz, lütfen doğrudan geliştiriciyle iletişime geçin ve gerekli çevirilerin eklenmesini sağlayın.
