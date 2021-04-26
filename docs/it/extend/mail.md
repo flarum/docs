@@ -1,8 +1,8 @@
-# Mail
+# Mail Drivers
 
-Oltre ai [driver predefiniti nel core](../mail.md), Flarum consente di aggiungere nuovi driver di posta tramite estensori. Per creare il tuo driver di posta, dovrai creare una classe che implementa `\Flarum\Mail\DriverInterface`. Flarum si occupa effettivamente del frontend per fornire le impostazioni di posta elettronica: basta dichiarare le impostazioni necessarie e qualsiasi valore predefinito in `availableSettings`.
+In addition to the [default drivers in core](../mail.md), Flarum allows new mail drivers to be added through extenders. To create your own mail driver, you'll need to create a class implementing `\Flarum\Mail\DriverInterface`. Flarum actually takes care of the frontend for providing email settings: just declare which settings you need, and any default values, in `availableSettings`.
 
-Per esempio:
+For example:
 
 ```php
 use Flarum\Mail\DriverInterface;
@@ -45,7 +45,7 @@ class MailgunDriver implements DriverInterface
 }
 ```
 
-Per registrare i driver di posta, utilizzare l'estensore `Flarum\Extend\Mail` nel vostro file `extend.php`:
+To register mail drivers, use the `Flarum\Extend\Mail` extender in your extension's `extend.php` file:
 
 ```php
 use Flarum\Extend;
