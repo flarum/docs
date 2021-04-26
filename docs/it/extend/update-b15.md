@@ -1,60 +1,56 @@
-# Aggiornamenti Beta 15
+# Updating For Beta 15
 
-La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboard di amministrazione e molte altre interessanti funzionalità per le estensioni. Come sempre, abbiamo fatto del nostro meglio per fornire livelli di compatibilità con le versioni precedenti e consigliamo di abbandonare i sistemi obsoleti il prima possibile per rendere le estensioni più stabili.
+Beta 15 features multiple new extenders, a total redesign of the admin dashboard, and several other interesting new features for extensions. As before, we have done our best to provide backwards compatibility layers, and we recommend switching away from deprecated systems as soon as possible to make your extensions more stable.
 
-::: tip
-Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o [sulla chat Discord](https://flarum.org/discord/).
-:::
+::: tip If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/). :::
 
-## Nuove funzionalità / deprecazioni
+## New Features / Deprecations
 
-### Extender
+### Extenders
 
-- `Flarum\Api\Event\WillGetData` e `Flarum\Api\Event\WillSerializeData` sono stati deprecati, l'extender `ApiController` va utilizzato al suo posto
-- `Flarum\Api\Event\Serializing` e `Flarum\Event\GetApiRelationship` sono stati deprecati, l'extender `ApiSerializer` va utilizzato al suo posto
-- `Flarum\Formatter\Event\Parsing` è obsoleto, il metodo `parse` di `Formatter` va utilizzato al suo posto
-- `Flarum\Formatter\Event\Rendering` è obsoleto, il metodo `render` di `Formatter` va utilizzato al suo posto
-- `Flarum\Notification\Event\Sending` è obsoleto, il metodo `driver` di `Notification` va utilizzato al suo posto
-  - Si noti che il nuovo sistema di driver di notifica non è un analogo esatto del vecchio evento `Sending`, 
-poiché può solo aggiungere nuovi driver, non modificare la funzionalità del driver di avviso della campana di notifica predefinito. Se l'estensione deve modificare ** come ** o ** a chi ** vengono inviate le notifiche, potrebbe essere necessario sostituire `Flarum\Notification\NotificationSyncer`.
-- `Flarum\Event\ConfigureNotificationTypes` è obsoleto, il metodo `type` di `Notification` va utilizzato al suo posto
-- `Flarum\Event\ConfigurePostTypes` è obsoleto, il metodo `type` di `Post` va utilizzato al suo posto
-- `Flarum\Post\Event\CheckingForFlooding` è ormai obsoleto come `Flarum\Post\Floodgate`. 
-Sono stati sostituiti con un sistema di limitazione basato su middleware che si applica a TUTTE le richieste a / api / * e possono essere configurati tramite il `ThrottleApi`. Per favore guarda la documentazione [limitazioni API](api-throttling.md) per informazioni.
-- `Flarum\Event\ConfigureUserPreferences` è ormai obsoleto, il metodo `registerPreference` di `User` va utilizzato al suo posto
-- `Flarum\Foundation\Event\Validating` è ormai obsoleto, il metodo `configure` di `Validator` va utilizzato al suo posto
+- `Flarum\Api\Event\WillGetData` and `Flarum\Api\Event\WillSerializeData` have been deprecated, the `ApiController` extender should be used instead
+- `Flarum\Api\Event\Serializing` and `Flarum\Event\GetApiRelationship` have been deprecated, the `ApiSerializer` extender should be used instead
+- `Flarum\Formatter\Event\Parsing` has been deprecated, the `parse` method of the `Formatter` extender should be used instead
+- `Flarum\Formatter\Event\Rendering` has been deprecated, the `render` method of the `Formatter` extender should be used instead
+- `Flarum\Notification\Event\Sending` has been deprecated, the `driver` method of the `Notification` extender should be used instead
+  - Please note that the new notification driver system is not an exact analogue of the old `Sending` event, as it can only add new drivers, not change the functionality of the default notification bell alert driver. If your extension needs to modify **how** or **to whom** notifications are sent, you may need to replace `Flarum\Notification\NotificationSyncer` on the service provider level
+- `Flarum\Event\ConfigureNotificationTypes` has been deprecated, the `type` method of the `Notification` extender should be used instead
+- `Flarum\Event\ConfigurePostTypes` has been deprecated, the `type` method of the `Post` extender should be used instead
+- `Flarum\Post\Event\CheckingForFlooding` has been deprecated, as well as `Flarum\Post\Floodgate`. They have been replaced with a middleware-based throttling system that applies to ALL requests to /api/*, and can be configured via the `ThrottleApi` extender. Please see our [api-throttling](api-throttling.md) documentation for more information.
+- `Flarum\Event\ConfigureUserPreferences` has been deprecated, the `registerPreference` method of the `User` extender should be used instead
+- `Flarum\Foundation\Event\Validating` has been deprecated, the `configure` method of the `Validator` extender should be used instead
 
-- Il sistema delle politiche è stato leggermente rielaborato per essere più intuitivo. In precedenza, i criteri contenevano sia i criteri effettivi, che determinano se un utente può eseguire alcune capacità, sia gli ambiti di visibilità del modello, che consentivano un'efficace limitazione delle query solo agli elementi a cui gli utenti hanno accesso. Guarda [documentazione sulle autorizzazioni](authorization.md) per maggiori informazioni su questo sistema. Ora:
-  - `Flarum\Event\ScopeModelVisibility` è ormai obsoleto. Nuovi scopers possono essere registrati tramite l'extender `ModelVisibility`, e ogni query `Eloquent\Builder` può essere richiamata dal metodo `whereVisibleTo`, con l'abilità in questione come secondo argomento opzionale (il valore predefinito è `view`).
-  - `Flarum\Event\GetPermission` è ormai obsoleto. Le policy possono essere registrate tramite extender `Policy`. `Flarum\User\User::can` non è cambiato. Si prega di notare che le nuove policy devono restituire uno dei valori `$this->allow()`, `$this->deny()`, `$this->forceAllow()`, `$this->forceDeny()`, non booleano.
+- The Policy system has been reworked a bit to be more intuitive. Previously, policies contained both actual policies, which determine whether a user can perform some ability, and model visibility scopers, which allowed efficient restriction of queries to only items that users have access to. See the [authorization documentation](authorization.md) for more information on how to use the new systems. Now:
+  - `Flarum\Event\ScopeModelVisibility` has been deprecated. New scopers can be registered via the `ModelVisibility` extender, and any `Eloquent\Builder` query can be scoped by calling the `whereVisibleTo` method on it, with the ability in question as an optional 2nd argument (defaults to `view`).
+  - `Flarum\Event\GetPermission` has been deprecated. Policies can be registered via the `Policy` extender. `Flarum\User\User::can` has not changed. Please note that the new policies must return one of `$this->allow()`, `$this->deny()`, `$this->forceAllow()`, `$this->forceDeny()`, not a boolean.
 
-- L'extender `ModelUrl` è stato aggiunto, consentendo la registrazione di nuovi driver di slug. Ciò accompagna il nuovo sistema di slug di Flarum, che consente alle estensioni di definire strategie personalizzate per i modelli. L'estensore supporta modelli al di fuori del nucleo Flarum. Si prega di consultare il nostro file [model slugging](slugging.md) per informazioni.
-- L'extender `Settings` è stato aggiunto, il metodo `serializeToForum` semplifica la serializzazione di un'impostazione nel forum.
-- L'extender `ServiceProvider` è stato aggiunto. Questo dovrebbe essere usato con estrema cautela solo per casi d'uso avanzati, dove non ci sono alternative. Tieni presente che il livello del fornitore di servizi non è considerato API pubblica ed è soggetto a modifiche in qualsiasi momento, senza preavviso.
+- A `ModelUrl` extender has been added, allowing new slug drivers to be registered. This accompanies Flarum's new slug driving system, which allows for extensions to define custom slugging strategies for sluggable models. The extender supports sluggable models outside of Flarum core. Please see our [model slugging](slugging.md) documentation for more information.
+- A `Settings` extender has been added, whose `serializeToForum` method makes it easy to serialize a setting to the forum.
+- A `ServiceProvider` extender has been added. This should be used with extreme caution for advanced use cases only, where there is no alternative. Please note that the service provider layer is not considered public API, and is liable to change at any time, without notice.
 
-### Pannello Amministrazione ridisegnato
+### Admin UX Redesign
 
-La dashboard dell'amministratore è stata completamente ridisegnata, con l'obiettivo di barre di navigazione per ogni estensione. Anche l'API per le estensioni per registrare impostazioni, autorizzazioni e pagine personalizzate è stata notevolmente semplificata. Ora puoi anche aggiornare la tua estensione `composer.json` per fornire link per finanziamenti, supporto, siti web e così via che verranno visualizzati nella pagina di amministrazione della tua estensione. Guarda [documentazione JS amministrazione](./admin.md) per ulteriori informazioni su come utilizzare il nuovo sistema.
+The admin dashboard has been completely redesigned, with a focus on providing navbar pages for each extension. The API for extensions to register settings, permissions, and custom pages has also been greatly simplified. You can also now update your extension's `composer.json` to provide links for funding, support, website, etc that will show up on your extension's admin page. Please see [our Admin JS documentation](./admin.md) for more information on how to use the new system.
 
-### Altre feauture nuove
+### Other New Features
 
-- Sul backend, il nome del percorso è ora disponibile tramite `$request->getAttribute('routeName')`, e per il middleware che viene eseguito dopo `Flarum\Http\Middleware\ResolveRoute.php`.
-- `Flarum\Api\Controller\UploadImageController.php` può ora essere utilizzato come classe base per i controller che caricano immagini (come per il logo e la favicon).
-- AIl ripristino automatico dello scorrimento del browser ora può essere disabilitato per le singole pagine [vedere la nostra documentazione del frontend per maggiori informazioni](frontend-pages.md).
+- On the backend, the route name is now available via `$request->getAttribute('routeName')` for controllers, and for middleware that run after `Flarum\Http\Middleware\ResolveRoute.php`.
+- `Flarum\Api\Controller\UploadImageController.php` can now be used as a base class for controllers that upload images (like for the logo and favicon).
+- Automatic browser scroll restoration can now be disabled for individual pages [see our frontend page documentation for more info](frontend-pages.md).
 
-## Cambiamenti decisivi
+## Breaking Changes
 
-- I seguenti layer BC deprecati del frontend sono stati rimossi:
-  - `momentjs` non funziona più come alias per `dayjs`
-  - `this.props` e `this.initProps` non più alias di `this.attrs` e `this.initAttrs` per la classe base `Component`
-  - `m.withAttr` e `m.stream` non più alias di `flarum/utils/withAttr` e `flarum/utils/Stream`
-  - `app.cache.discussionList` è stato rimosso
-  - `this.content` e `this.editor` sono stati rimossi da `ComposerBody`
-  - `this.component`, `this.content`, e `this.value` sono stati rimossi da `ComposerState`
-- I seguenti layer BC back-end deprecati sono stati rimossi:
-  - `publicPath`, `storagePath`, e `vendorPath` di `Flarum\Foundation\Application` sono stati rimossi
-  - `base_path`, `public_path`, e `storage_path` sono stati rimossi
-  - `getEmailSubject` di `Flarum\Notification\MailableInterface` DEVE ora prendere un'istanza di traduttore come argomento
-  - `Flarum\User\AssertPermissionTrait` è stato rimosso, i metodi analoghi su `Flarum\User\User` andranno utilizzati al suo posto
-  - `Flarum\Event\PrepareUserGroups` è stato rimosso, usa invece l'extender `User`
-  - `Flarum\User\Event\GetDisplayName` è stato rimosso, usa invece l'extender `User`
+- The following deprecated frontend BC layers were removed:
+  - `momentjs` no longer works as an alias for `dayjs`
+  - `this.props` and `this.initProps` no longer alias `this.attrs` and `this.initAttrs` for the `Component` base class
+  - `m.withAttr` and `m.stream` no longer alias `flarum/utils/withAttr` and `flarum/utils/Stream`
+  - `app.cache.discussionList` has been removed
+  - `this.content` and `this.editor` have been removed from `ComposerBody`
+  - `this.component`, `this.content`, and `this.value` have been removed from `ComposerState`
+- The following deprecated backend BC layers were removed:
+  - The `publicPath`, `storagePath`, and `vendorPath` methods of `Flarum\Foundation\Application` have been removed
+  - The `base_path`, `public_path`, and `storage_path` global helpers have been removed
+  - The `getEmailSubject` method of `Flarum\Notification\MailableInterface` MUST now take a translator instance as an argument
+  - `Flarum\User\AssertPermissionTrait` has been removed, the analogous methods on `Flarum\User\User` should be used instead
+  - The `Flarum\Event\PrepareUserGroups` event has been removed, use the `User` extender instead
+  - The `Flarum\User\Event\GetDisplayName` event has been removed, use the display name driver feature of the `User` extender instead
