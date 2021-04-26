@@ -1,4 +1,4 @@
-# Admin Dashboard
+# 后台管理面板
 
 Beta 15 introduced a completely redesigned admin panel and frontend API. It is now easier than ever to add settings or permissions to your extension.
 
