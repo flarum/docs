@@ -1,1 +1,1 @@
-# Quick Start
+# Hızlı Başlangıç
