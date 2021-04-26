@@ -1,4 +1,4 @@
-# Frontend Pages and Resolvers
+# Ön Uç Sayfaları ve Çözücüler
 
 As explained in the [Routes and Content](routes.md#frontend-routes) documentation, we can use Mithril's routing system to show different [components](frontend.md#components) for different routes. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component.
 
