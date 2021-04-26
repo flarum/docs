@@ -1,51 +1,51 @@
-# Code of Conduct
+# Davranış Kuralları
 
-### _Welcome to the Flarum Community!_
+### _Flarum Topluluğuna Hoş Geldiniz!_
 
-... And thanks for joining us! We're excited about Flarum, and are always happy to meet people who feel the same way. We want *everyone* to get the most out of Flarum and the Flarum community, so we ask that you please read and follow these guidelines. These apply whether you're using our forum, Discord chat, communicating on GitHub, or any other form of communication without the Flarum community.
+... Ve bize katıldığınız için teşekkürler! Flarum için heyecanlıyız ve aynı şekilde hisseden insanlarla tanışmaktan her zaman mutluyuz. *Herkesin* Flarum ve Flarum topluluğundan en iyi şekilde yararlanmasını istiyoruz, bu nedenle bu yönergeleri okuyup uygulamanızı rica ediyoruz. Bunlar, forumumuzu, Discord sohbetini, GitHub'da iletişim kurmayı veya Flarum topluluğu olmadan başka herhangi bir iletişim biçimini kullanıyor olsanız da geçerlidir.
 
-### Above All, Be Cool!
+### Her Şeyden Önce Sakin Olun!
 
-We're all here to talk about Flarum, and to work together toward making it an even better application. Criticizing ideas (by means of reasoned arguments, of course) is an important part of that. But let's not get carried away and devolve into personal attacks, because negativity only gets in the way. We ask that you avoid the following:
+Hepimiz Flarum hakkında konuşmak ve onu daha iyi bir uygulama haline getirmek için birlikte çalışmak için buradayız. Fikirleri eleştirmek (elbette gerekçeli argümanlar aracılığıyla) bunun önemli bir parçasıdır. Ama kendimizi kaptırıp kişisel saldırılara geçmeyelim, çünkü olumsuzluk sadece araya girer. Aşağıdakilerden kaçınmanızı rica ediyoruz:
 
-- Offensive or abusive language, as well as any kind of hate speech
-- Posts intended to harass, impersonate, or defame others
-- Unnecessary deletion of posted content
-- Attempts to abuse or expose the private information of others
-- Obscene or sexually explicit content
-- Spam, phishing posts, and any actions intended to deface this site
-- Discussion of software piracy and similar topics
+- Saldırgan veya taciz edici dil ve ayrıca her türlü nefret söylemi
+- Başkalarını taciz etmeyi, taklit etmeyi veya karalamayı amaçlayan gönderiler
+- Gönderilen içeriğin gereksiz yere silinmesi
+- Başkalarının özel bilgilerini kötüye kullanma veya ifşa etme girişimleri
+- Müstehcen içerik
+- Spam, kimlik avı gönderileri ve bu siteyi tahrif etmeye yönelik her türlü eylem
+- Yazılım korsanlığı ve benzeri konuların tartışılması
 
-*All the above are grounds for moderator action.* If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the *Report* command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation to [admin@flarum.org](mailto:admin@flarum.org).
+*Yukarıdakilerin tümü moderatör eylemi gerekçesidir.* Başka bir üyeyle bir sorununuz varsa, lütfen onlarla kendi başınıza yüzleşmemenizi rica ederiz. Forumdaysa, lütfen söz konusu gönderide *Report* komutunu kullanın, ardından durumla ilgilenmesi için bunu yetkiliye bırakın. Aksi takdirde, ihlali [admin@flarum.org](mailto:admin@flarum.org) adresine bildirin.
 
-Our moderators may edit or delete any content that is offensive or disruptive to the flow of communication. Serious or repeated offenses may lead to suspension of the offending user's account. So, you know, *be cool*. 😎
+Moderatörlerimiz, saldırgan veya iletişim akışını aksatan herhangi bir içeriği düzenleyebilir veya silebilir. Ciddi veya tekrarlanan suçlar, ihlalde bulunan kullanıcının hesabının askıya alınmasına neden olabilir. Yani, bilirsin, *sakin ol*. 😎
 
-### Make Yourself Heard
+### Duyulmasını Sağlayın
 
-Want to start a new discussion? First, be sure to read [our FAQ](faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: *it could be someone has already started a discussion about it!*
+Yeni bir tartışma başlatmak ister misiniz? Öncelikle [SSS](faq.md) bölümünü okuduğunuzdan ve proje hakkında tam olarak bilgi sahibi olduğunuzdan emin olmak için bağlantıları takip ettiğinizden emin olun. Daha sonra foruma göz atmak için biraz zaman ayırın, [etiket sistemi](https://discuss.flarum.org/tags) hakkında bilgi edinin ve konunuzla ilgili anahtar kelimeler için birkaç arama yapın: *birisi çoktan bunun hakkında bir tartışma başlamış olabilir!*
 
-When you're sure you're ready to start a discussion, please keep the following points in mind:
+Bir tartışma başlatmaya hazır olduğunuzdan emin olduğunuzda lütfen aşağıdaki noktaları aklınızda bulundurun:
 
-- Give it a good title! You'll get the best results if your title makes it clear what you want to talk about.
-- Choose the right tag(s). This will increase the likelihood your post will be read and answered promptly.
-- *Don’t* post repeatedly about the same topic, as doing so will tend to have the opposite effect.
-- If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!
-- Remember, you don't need to sign your posts. We've got your profile to let us know who you are.
+- Ona iyi bir başlık ver! Başlığınız ne hakkında konuşmak istediğinizi netleştirirse en iyi sonuçları alırsınız.
+- Doğru etiketleri seçin. Bu, gönderinizin hemen okunma ve yanıtlanma olasılığını artıracaktır.
+- Aynı tartışma ilgili tekrar tekrar *yayınlamayın*, çünkü bunu yapmak ters etki yaratır.
+- Çok dilli kullanım için ayrılmış bir etiket kullanmıyorsanız, *yalnızca İngilizce yayınlayın.* Sizi okuyamazsak yardımcı olamayız!
+- Unutmayın, yazılarınızı imzalamanıza gerek yok. Kim olduğunuzu bize bildirmek için profilinize bakıyoruz.
 
-Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
+Lütfen işleri organize etmemize yardımcı olmak için çaba gösterin. Toparlanmak için harcanan zaman, sizi tanımak, sorunlarınızı tartışmak ve Flarum hakkında konuşmak için harcayamayacağımız zamandır. Ve sonuçta, hepimiz yapmak için buradayız!
 
-### Make Your Reply Count
+### Yanıtınızı Sayın
 
-You're taking the time to participate in a discussion, in the hope that others will read your ideas and take them into consideration. So why not make the effort to make your reply worth reading?
+Başkalarının fikirlerinizi okuyup dikkate alması umuduyla bir tartışmaya katılmak için zaman ayırıyorsunuz. Öyleyse neden yanıtınızı okumaya değer kılmak için çaba harcamıyorsunuz?
 
-- Don't reply to a title. Take some time to *read* the OP, and at least *scan* the rest of the conversation first.
-- Ask yourself if your reply adds to the discussion. If it doesn't, give it some more thought before posting.
-- Avoid making one-word posts just to agree with someone; you can use the "Like" button for that.
-- Avoid making multiple posts in a row when one would suffice. This is a forum, not a chat room.
-- If your reply is likely to divert the course of the discussion, consider starting a new discussion instead.
-- If you just want to post a bit of nonsense as a test, please do it in the [Test Posting](https://discuss.flarum.org/t/sandbox) tag instead.
-- Make sure your replies provide constructive feedback and support to allow for an inclusive community.
+- Bir başlığı yanıtlamayın. İlk gönderiyi *okumak* için biraz zaman ayırın ve en azından tartışmanın geri kalanına *göz atın*.
+- Cevabınızın tartışmaya katkıda bulunup bulunmadığını kendinize sorun. Olmazsa, yayınlamadan önce biraz daha düşünün.
+- Birisiyle aynı fikirde olmak için tek kelimelik yazılar yapmaktan kaçının; bunun için "Like" düğmesini kullanabilirsiniz.
+- Yeterli olduğunda arka arkaya birden fazla gönderi yapmaktan kaçının. Bu bir forum, sohbet odası değil.
+- Cevabınız tartışmanın yönünü değiştirecekse, bunun yerine yeni bir tartışma başlatmayı düşünün.
+- Test olarak biraz saçma sapan yayınlamak istiyorsanız, lütfen bunu [Test Posting](https://discuss.flarum.org/t/sandbox) etiketinde yapın.
+- Yanıtlarınızın, kapsayıcı bir topluluğa izin vermek için yapıcı geri bildirim ve destek sağladığından emin olun.
 
-No one's going to complain about the occasional joke or smart remark. We like to keep the mood light! But to keep things productive, as well, we ask that you try to avoid derailing a discussion altogether.
+Hiç kimse ara sıra yapılan şakadan veya akıllıca sözlerden şikayet etmeyecek. Ruh halini hafif tutmayı seviyoruz! Ama aynı zamanda her şeyi üretken tutmak için, bir tartışmayı tamamen raydan çıkarmaktan kaçınmanızı istiyoruz.
 
-> Thanks to Dominion for his help in putting these guidelines together.
+> Bu kuralları bir araya getirmedeki yardımlarından dolayı Dominion'a teşekkürler.
