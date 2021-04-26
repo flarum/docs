@@ -1,45 +1,45 @@
-# Groups and Permissions
+# Gruppi e autorizzazioni
 
-In addition to labeling roles, Flarum's group system is a way for permissions to be applied to segments of users.
+Oltre ad etichettare i ruoli, il sistema di gruppo di Flarum è un modo per applicare le autorizzazioni a segmenti di utenti.
 
-## Groups
+## Gruppi
 
-Flarum has several "reserved groups":
+Flarum ha diversi "gruppi riservati":
 
-- The administrator group has ID `1`. Users in this group have all permissions.
-- All users (regardless of authentication status) are automatically placed in the Guest group (ID `2`)
-- All logged-in users are automatically placed in the Members group (ID `3`)
+- Il gruppo di amministratori dispone di ID `1`. Gli utenti di questo gruppo dispongono di tutte le autorizzazioni.
+- Tutti gli utenti (indipendentemente dallo stato di autenticazione) vengono automaticamente inseriti nel gruppo Guest (ID `2`)
+- Tutti gli utenti che hanno effettuato l'accesso vengono automaticamente inseriti nel gruppo Membri (ID `3`)
 
-Reserved groups actually function just like any other group, existing as records in the database. They just have special properties in regards to how they're assigned (for guest and members), or what they can do (for administrator).
+I gruppi riservati funzionano effettivamente come qualsiasi altro gruppo, esistente come record nel database. Hanno solo proprietà speciali per quanto riguarda il modo in cui sono assegnati (per ospiti e membri) o cosa possono fare (per amministratore).
 
-On install, Flarum will also create a moderator group with ID `4`, but this is just for convenience: it holds no special meaning.
+Durante l'installazione, Flarum creerà anche un gruppo moderatori con ID `4`, ma questo è solo per comodità: non ha un significato speciale.
 
-Admins can also create new groups through the admin dashboard. Users can be added or removed from groups from their user page.
+Gli amministratori possono anche creare nuovi gruppi tramite la dashboard dell'amministratore. Gli utenti possono essere aggiunti o rimossi dai gruppi dalla loro pagina utente.
 
-## Permissions
+## Permessi
 
-Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same). That's actually all that the permisions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
+I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
 
-There's no direct association between users and permissions: when we check a user's permissions, we're actually enumerating permissions for all the user's groups.
+Non esiste alcuna associazione diretta tra utenti e permessi: quando controlliamo i permessi di un utente, stiamo effettivamente enumerando i permessi per tutti i gruppi dell'utente.
 
-Groups and users have public methods for checking their permissions. Some of the more commonly used ones are:
+I gruppi e gli utenti dispongono di metodi pubblici per controllare le loro autorizzazioni. Alcuni di quelli più comunemente usati sono:
 
 ```php
-// An Eloquent relation to the group's permissions
+// Una relazione eloquente con le autorizzazioni del gruppo
 $group->permissions();
 
-// Check if a group has a permission
+// Controlla se un gruppo dispone di un'autorizzazione
 $group->hasPermission('viewDiscussions');
 
-// Enumerate all the user's permissions
+// Enumera tutte le autorizzazioni dell'utente
 $user->getPermissions();
 
-// Check if the user is in a group with the given permission
+// Controlla se l'utente fa parte di un gruppo con l'autorizzazione fornita
 $user->hasPermission('viewDiscussions');
 ```
 
-:::warning Use Proper Authorization Permissions are just part of the puzzle: if you're enforcing whether a user can perform an action, you should use Flarum's [authorization system](authorization.md). :::
+:::warning Utilizzare l'autorizzazione appropriata Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum. :::
 
-### Adding Custom Permissions
+### Aggiunta di autorizzazioni personalizzate
 
 To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).
