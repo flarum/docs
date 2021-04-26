@@ -1,4 +1,4 @@
-# Release Notes
+# Sürüm Notları
 
 
 <!--
@@ -12,4 +12,4 @@ https://laravel.com/docs/5.7/releases
 ## Release Notes
 -->
 
-Release notes can be found in the [Flarum Community](https://discuss.flarum.org/t/blog?sort=newest).
+Sürüm notları [Flarum Topluluğu](https://discuss.flarum.org/t/blog?sort=newest)'nda bulunabilir.
