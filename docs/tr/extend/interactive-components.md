@@ -1,4 +1,4 @@
-# Interactive Components
+# Etkileşimli Bileşenler
 
 Often, you'll want to trigger interactive components in addition to whatever content/animations you have on a given page. Depending on the nature of your extension, you may want to define custom interactive elements or reuse or extend existing ones.
 
