@@ -1,23 +1,23 @@
-# Forms and Requests
+# Formularios y peticiones
 
-In this article, we'll go over some frontend tools that are available to us for building and managing forms, as well how to send HTTP requests via Flarum.
+En este artículo, repasaremos algunas herramientas de frontend que tenemos a nuestra disposición para construir y gestionar formularios, así como la forma de enviar peticiones HTTP a través de Flarum.
 
-## Form Components
+## Componentes de los formularios
 
-As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
+Como en cualquier sitio interactivo, es probable que quiera incluir formularios en algunas páginas y modales. Flarum proporciona algunos componentes para facilitar la construcción (¡y el estilo!) de estos formularios. Por favor, consulte la documentación de la API vinculada para cada uno de ellos para obtener más información sobre sus atributos aceptados.
 
-- The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
-- The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
-- The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
+- El componente [`flarum/components/FieldSet`](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) envuelve a sus hijos en una etiqueta HTML fieldset, con una leyenda.
+- El componente [`flarum/components/Select`](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) es una entrada de selección estilizada.
+- Los componentes [`flarum/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) y [`flarum/components/Checkbox`](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) son componentes de entrada de casilla de verificación estilizados. Su attr `loading` puede establecerse en `true` para mostrar un indicador de carga.
+- El componente [`flarum/components/Button`](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) es un botón estilizado, y se utiliza frecuentemente en Flarum.
 
-You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
+Normalmente querrás asignar la lógica para reaccionar a los cambios de entrada a través de los attrs `on*` de Mithril, no de los listeners externos (como es común con jQuery o JS simple). Por ejemplo:
 
 ```jsx
-import Component from 'flarum/common/Component';
-import FieldSet from 'flarum/common/components/FieldSet';
-import Button from 'flarum/common/components/Button';
-import Switch from 'flarum/common/components/Switch';
+import Component from 'flarum/Component';
+import FieldSet from 'flarum/components/FieldSet';
+import Button from 'flarum/components/Button';
+import Switch from 'flarum/components/Switch';
 
 
 class FormComponent extends Component {
@@ -41,47 +41,47 @@ class FormComponent extends Component {
   }
 
   onsubmit() {
-    // Some form handling logic here
+    // Lógica de manejo de formularios aquí
   }
 }
 ```
 
-Don't forget to use [translations](translate.md)!
+¡No olvides utilizar [traducciones](translate.md)!
 
 
-## Streams, bidi, and withAttr
+## Streams, bidi, y withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum proporciona [Mithril's Stream](https://mithril.js.org/stream.html) como `flarum/util/Stream`. Esta es una estructura de datos reactiva muy poderosa, pero es más comúnmente usada en Flarum como una envoltura para datos de formularios. Su uso básico es:
 
 ```js
-import Stream from 'flarum/common/utils/Stream';
+import Stream from 'flarum/utils/Stream';
 
 
 const value = Stream("hello!");
-value() === "hello!"; // true
+value() === "hello!"; // verdadero
 value("world!");
-value() === "world!"; // true
+value() === "world!"; // verdadero
 ```
 
-In Flarum forms, streams are frequently used together with the bidi attr. Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs. This abstracts away input processing in Mithril. For instance:
+En los formularios de Flarum, los flujos se utilizan frecuentemente junto con el attr bidi. Bidi significa unión bidireccional, y es un patrón común en los frameworks de frontend. Flarum parchea Mithril con la librería [`m.attrs.bidi`](https://github.com/tobyzerner/m.attrs. Esto abstrae el procesamiento de la entrada en Mithril. Por ejemplo:
 
 ```jsx
-import Stream from 'flarum/common/utils/Stream';
+import Stream from 'flarum/utils/Stream';
 
 const value = Stream();
 
-// Without bidi
+// Sin bidi
 <input type="text" value={value()} oninput={e => value(e.target.value)}></input>
 
-// With bidi
+// Con bidi
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+También puedes utilizar la utilidad `flarum/utils/withAttr` para simplificar el procesamiento de formularios. `withAttr` llama a un callable, proporcionando como argumento algún attr del elemento DOM ligado al componente en cuestión:
 
 ```jsx
-import Stream from 'flarum/common/utils/Stream';
-import withAttr from 'flarum/common/utils/withAttr';
+import Stream from 'flarum/utils/Stream';
+import withAttr from 'flarum/utils/withAttr';
 
 const value = Stream();
 
@@ -94,15 +94,15 @@ const value = Stream();
 })}></input>
 ```
 
-## Making Requests
+## Haciendo peticiones
 
-In our [models and data](data.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
+En nuestra documentación de [modelos y datos](data.md), aprendiste a trabajar con modelos, y a guardar la creación, los cambios y la eliminación de modelos en la base de datos a través de la utilidad Store, que no es más que una envoltura del sistema de peticiones de Flarum, que a su vez no es más que una envoltura del sistema de peticiones de [Mithril](https://mithril.js.org/request.html).
 
-Flarum's request system is available globally via `app.request(options)`, and has the following differences from Mithril's `m.request(options)`:
+El sistema de peticiones de Flarum está disponible globalmente a través de `app.request(options)`, y tiene las siguientes diferencias con respecto a `m.request(options)` de Mithril:
 
-- It will automatically attach `X-CSRF-Token` headers.
-- It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
-- If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
+- Adjuntará automáticamente las cabeceras `X-CSRF-Token`.
+- Convertirá las peticiones `PATCH` y `DELETE` en peticiones `POST`, y adjuntará una cabecera `X-HTTP-Method-Override`.
+- Si la petición da error, mostrará una alerta que, si está en modo de depuración, puede ser pulsada para mostrar un modal de error completo.
+- Puede proporcionar la opción `background: false`, que ejecutará la petición de forma sincronizada. Sin embargo, esto no debería hacerse casi nunca.
 
-Otherwise, the API for using `app.request` is the same as that for `m.request`.
+Por lo demás, la API para utilizar `app.request` es la misma que la de `m.request`.
