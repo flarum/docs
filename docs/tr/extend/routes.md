@@ -1,4 +1,4 @@
-# Routes and Content
+# Rotalar ve İçerik
 
 A fundamental part of extending Flarum is adding routes — both to expose new resources in the JSON-API, and to add new pages to the frontend.
 
