@@ -1,4 +1,4 @@
-# Forms and Requests
+# Formlar ve İstekler
 
 In this article, we'll go over some frontend tools that are available to us for building and managing forms, as well how to send HTTP requests via Flarum.
 
