@@ -1,4 +1,4 @@
-# Notifications
+# Bildirimler
 
 Flarum includes a powerful notification system to alert users to new activity.
 
