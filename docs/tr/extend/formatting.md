@@ -1,4 +1,4 @@
-# Formatting
+# Biçimlendirme
 
 Flarum uses the powerful [s9e TextFormatter](https://github.com/s9e/TextFormatter) library to format posts from plain markup into HTML. You should become familiar with [how TextFormatter works](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) before you attempt to extend it.
 
