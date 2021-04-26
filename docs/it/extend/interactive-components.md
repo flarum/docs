@@ -1,88 +1,84 @@
-# Componenti interattivi
+# Interactive Components
 
-Spesso, hai necessità di attivare componenti interattivi oltre a qualsiasi contenuto/animazione che hai su una determinata pagina.
-A seconda della natura della tua estensione, potresti voler definire elementi interattivi personalizzati o riutilizzare o estendere quelli esistenti.
+Often, you'll want to trigger interactive components in addition to whatever content/animations you have on a given page. Depending on the nature of your extension, you may want to define custom interactive elements or reuse or extend existing ones.
 
-Ricorda che tutti i [componenti](frontend.md#components) utilizzati in Flarum core vengono esportati e resi disponibili per il riutilizzo delle estensioni. Un elenco completo è disponibile nella nostra [documentazione API](https://api.docs.flarum.org/js/master/identifiers.html).
+Remember that all [components](frontend.md#components) used in Flarum core are exported and made available for extensions to reuse. A full list is available in our [API documentation](https://api.docs.flarum.org/js/master/identifiers.html).
 
-## Avvisi
+## Alerts
 
-Gli avvisi sono gestiti da un'istanza globale [`AlertManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/alertmanagerstate.ts~alertmanagerstate), accessibile tramite `app.alerts` sia sul frontend di `forum` che su `admin`.Ha 3 metodi accessibili pubblicamente:
+Alerts are managed by a global instance of [`AlertManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/alertmanagerstate.ts~alertmanagerstate), which is accessible via `app.alerts` on both the `forum` and `admin` frontends. It has 3 publicly accessible methods:
 
-- `app.alerts.show` aggiungerà un nuovo avviso e restituirà una chiave che può essere utilizzata in seguito per ignorarlo. Ha 3 sovraccarichi:
+- `app.alerts.show` will add a new alert, and return a key which can later be used to dismiss that alert. It has 3 overloads:
   - `app.alerts.show(children)`
   - `app.alerts.show(attrs, children)`
   - `app.alerts.show(componentClass, attrs, children)`
-- `app.alerts.dismiss(key)`ignorerà un avviso attivo con la chiave data, se presente.
-- `app.alerts.clear()` ignorerà tutti gli avvisi.
+- `app.alerts.dismiss(key)` will dismiss an active alert with the given key, if one exists.
+- `app.alerts.clear()` will dismiss all alerts.
 
-In genere, non avrai bisogno di un componente personalizzato per gli avvisi; tuttavia, se lo desideri, puoi impostarne uno. Probabilmente vorrai che erediti `flarum/components/Alert`.
+Typically, you won't need a custom component for alerts; however, if you could like, you can provide one. You'll probably want it to inherit `flarum/common/components/Alert`.
 
-I seguenti attributi sono utili da tenere a mente:
+The following attrs are useful to keep in mind:
 
-- L'attributo `type` applicherà la classe css `Alert--{type}`. `success` produrrà un avviso verde, `error` un avviso rosso, ed uno vuoto `type` ne produrrà uno giallo.
-- L'attributo `dismissible` determinerà se verrà visualizzato un pulsante di chiusura.
-- L'attributo `ondismiss` attr può essere utilizzato per fornire un callback che verrà eseguito quando l'avviso viene ignorato.
-- I componenti forniti nell'attributo `controls` verranno mostrati dopo l'avviso.
+- The `type` attr will apply the `Alert--{type}` css class. `success` will yield a green alert, `error` a red alert, and an empty `type` a yellow alert.
+- The `dismissible` attr will dictate whether a dismiss button will be shown.
+- The `ondismiss` attr can be used to provide a callback which will run when the alert is dismissed.
+- Components provided in the `controls` attr will be shown after alert children.
 
-## Modali
+## Modals
 
-I modali sono gestiti da un'istanza globale di [`ModalManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibili tramite `app.modal` sia nel frontend di `forum` che di `admin`. Ha 2 metodi accessibili pubblicamente:
+Modals are managed by a global instance of [`ModalManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.modal` on both the `forum` and `admin` frontends. It has 2 publicly accessible methods:
 
-- `app.modal.show(componentClass, attrs)` mostrerà un modale utilizzando la classe componente e attributi dati. Se chiamato mentre un modale è già aperto, sostituirà il modale attualmente aperto.
-- `app.modal.close()` chiuderà il modale se uno è attualmente attivo.
+- `app.modal.show(componentClass, attrs)` will show a modal using the given component class and attrs. If called while a modal is already open, it will replace the currently open modal.
+- `app.modal.close()` will close the modal if one is currently active.
 
-Al contrario degli avvisi, la maggior parte delle modali utilizzerà una classe personalizzata, che eredita `flarum/components/Modal`. Per esempio:
+As opposed to alerts, most modals will use a custom class, inheriting `flarum/common/components/Modal`. For example:
 
 ```jsx
-import Modal from 'flarum/components/Modal';
+import Modal from 'flarum/common/components/Modal';
 
 export default class CustomModal extends Modal {
-  // Vero per impostazione predefinita, determina se il modale può essere ignorato facendo clic sullo sfondo o nell'angolo in alto a destra.
+  // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
   static isDismissible = true;
 
   className() {
-    // Classi CSS personalizzate da applicare al modale
+    // Custom CSS classes to apply to the modal
     return 'custom-modal-class';
   }
 
   title() {
-    // Contenuto da mostrare nella barra del titolo del modale
+    // Content to show in the modal's title bar
     return <p>Custom Modal</p>;
   }
 
   content() {
-    // Contenuto da mostrare nel corpo del modale
+    // Content to show in the modal's body
     return <p>Hello World!</p>;
   }
 
   onsubmit() {
-    // Se il tuo modale contiene un modulo, puoi aggiungere qui la logica di elaborazione dello stesso.
+    // If your modal contains a form, you can add form processing logic here.
   }
 }
 ```
 
-Ulteriori informazioni sui metodi disponibili per l'override sono disponibili nella nostra [documentazione API](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
+More information about methods available to override is available in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
 
 ## Composer
 
-Poiché Flarum è un forum, abbiamo bisogno di strumenti per consentire agli utenti di creare e modificare post e discussioni. Flarum realizza questo attraverso il componente composer.
+Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component.
 
-Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
+The composer is managed by a global instance of [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
 
-- `app.composer.load(componentClass, attrs)` caricherà un nuovo tipo di compositore. Se un compositore è già attivo, verrà sostituito.
-- `app.composer.show()` mostrerà il compositore se è attualmente nascosto.
-- `app.composer.close()` chiuderà e ripristinerà il compositore dopo aver confermato con l'utente.
-- `app.composer.hide()` chiuderà e ripristinerà il compositore senza confermare con l'utente.
-- `app.composer.bodyMatches(componentClass, attrs)` controllerà se il compositore attualmente attivo è di un certo tipo, e se i suoi attributi corrispondono agli attributi forniti opzionalmente.
+- `app.composer.load(componentClass, attrs)` will load in a new composer type. If a composer is already active, it will be replaced.
+- `app.composer.show()` will show the composer if it is currently hidden.
+- `app.composer.close()` will close and reset the composer after confirming with the user.
+- `app.composer.hide()` will close and reset the composer without confirming with the user.
+- `app.composer.bodyMatches(componentClass, attrs)` will check if the currently active composer is of a certain type, and whether its atts match optionally provided attrs.
 
-L'elenco completo dei metodi pubblici è documentato nei documenti API collegati sopra.
+The full list of public methods is documented in the API docs linked above.
 
-Poiché il compositore può essere utilizzato per varie azioni (avviare una discussione, modificare un post, rispondere a una discussione, ecc.), I suoi campi possono variare a seconda dell'utilizzo.
-Questo viene fatto suddividendo il codice per ogni utilizzo in una sottoclasse di `flarum/components/ComposerBody`. Questa classe di componenti deve essere fornita durante il caricamento di un compositore.
+Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage. This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
 
 ### Composer Editor
 
-L'editor attuale è un altro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor).
-È possibile accedere al suo stato programmaticamente tramite un'istanza di [`SuperTextarea`](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea).
-Questo è accessibile tramite `app.composer.editor`. Ha una varietà di [metodi pubblici](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) che consentono alle estensioni di inserire e modificare programmaticamente i contenuti, le selezioni e la posizione del cursore correnti dell'editor di testo del compositore attivo.
+The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/7d79912d3651f49e045302946b99a562f791b730/js/src/common/utils/EditorDriverInterface.ts). This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.
