@@ -1,4 +1,4 @@
-# Updating For Beta 13
+# Beta 13 için Güncelleme
 
 Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
