@@ -1,4 +1,4 @@
-# Updating For Beta 8
+# Beta 8 için Güncelleme
 
 All extensions will need to be refactored in order to work with beta 8. Here are the main things you will need to do in order to make your extension compatible.
 
