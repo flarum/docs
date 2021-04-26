@@ -1,29 +1,29 @@
-# 多语言支持
+# Languages
 
-为您的 Flarum 添加新的界面语言很简单。按照下面的说明，下载并安装语言包即可。
+It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
 
-在您安装并启用一个语言包后，您可以将其 [设置为您论坛的默认语言](#设置默认语言)。当您可以 [随时禁用](#禁用语言包) 用不到的语言。如果您有使用任何第三方扩展，请务必在开始前 [阅读社区扩展说明](#社区扩展)。
+Once you have added a language pack, you can [set it as the default language](#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack). If you’re using any third-party extensions, be sure to [read this](#third-party-extensions) before you start.
 
-## 安装语言包
+## Language Pack Installation
 
-欲开始，请访问 Flarum 社区上的 [Extensions > Languages](https://discuss.flarum.org/t/languages) 标签，并找到您想要安装的语言包。
+To begin, visit the [Extensions > Languages](https://discuss.flarum.org/t/languages) tag at the Flarum Community site and find a language pack that you want to install.
 
-语言包的安装方式与 [扩展](extensions.md) 相同。语言包安装成功后会出现在后台管理界面的 **Extensions（插件）** 页面中，您可以在该页面启用语言包。
+Language packs are installed the same way as [extensions](extensions.md). The language will appear in the **Extensions** page of the admin interface and you can enable it there.
 
-完成！您现在应该可以点击论坛顶部导航栏的语言选择器，将界面切换到新语言。
+That’s all there is to it! You should now be able to use the language selector in your site’s header to switch your forum’s display to the new language.
 
-## 设置默认语言
+## Setting the Default Language
 
-如果安装的语言包能正常工作，您可能会想要将该语言设置为新用户和访客的默认语言。您可以在后台管理面板的 **Basics（常规）** 页面中进行设置。
+Once you have installed a language pack and made sure it’s working, you may want to set it as the default language for new users and guests. You can do that on the **Basics** page of the admin interface.
 
-## 禁用语言包
+## Disabling a Language Pack
 
-当您不需要某种语言时，您可以选择关闭该语言。只需在后台管理面板的 **Extensions（插件）** 页面中找到该语言包，然后将其关闭该语言包。
+If you decide you don’t need to support a certain language, after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
 
-如果您的网站是单语网站，并且不希望语言选择器出现在论坛顶部的导航栏中，您可以禁用其他语言包。当只有一种语言包处于启用状态时，语言选择器会自动隐藏。
+Disabling a language can be useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
 
-## 社区扩展
+## Community Extensions
 
-虽然从 Flarum 社区中下载的语言包通常是包含所有 Flarum 原生捆绑扩展的翻译的，但是 _并没有规定说_ 语言包必须翻译了所有您安装的社区扩展。是否提供、更新维护这些扩展的翻译取决于开发者的个人意愿。
+While language packs downloaded from the Flarum Community site will generally include translations for all the extensions that come bundled with Flarum, they _will not_ as a rule cover any community extensions you may have installed. It is up to developers to provide and maintain translations for their extensions.
 
-因此，在您安装一个社区扩展前，请检查您使用的语言包是否包含了该扩展的翻译，如果您发现语言包没有翻译该扩展，请直接联系语言包的开发者，让他/她添加翻译。
+So before you install a community extension, you should check to make sure it includes translations for each language pack you have installed. If you find that an extension doesn’t support a language you need, please contact the developer directly and arrange to have the necessary translations added.
