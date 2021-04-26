@@ -1,4 +1,4 @@
-# Working with Data
+# Verilerle Çalışma
 
 Data is the foundation of any forum, so you're going to need to play nice with it if you want your extension to do anything useful. This document runs through how data flows in Flarum, from the database to the JSON-API to the frontend, and all the way back again.
 
