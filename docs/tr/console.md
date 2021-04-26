@@ -1,51 +1,51 @@
-# Konsol
+# Console
 
-Yönetici kontrol paneline ek olarak Flarum, forumunuzu terminal üzerinden yönetmenize yardımcı olmak için çeşitli konsol komutları sağlar.
+In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
 
-Konsolu kullanmak için:
+To use the console:
 
-1. Flarum kurulumunuzun barındırıldığı sunucuya `ssh `ile bağlanın.
-2. Flarum yüklü klasöre `cd` komutu ile gidin.
-3. `php flarum [command]` komutunu çalıştırın.
+1. `ssh` into the server where your flarum installation is hosted
+2. `cd` to the folder that contains a file called `flarum`
+3. Run the command via `php flarum [command]`
 
-## Varsayılan Komutlar
+## Default Commands
 
 ### list
 
-Mevcut tüm yönetim komutlarını ve ayrıca yönetim komutlarını kullanma talimatlarını listeler.
+Lists all available management commands, as well as instructions for using management commands
 
 ### help
 
 `php flarum help [command_name]`
 
-Belirli bir komut için yardım çıktısını görüntüler.
+Displays help output for a given command.
 
-`--format` seçeneğini kullanarak yardımın çıktısını başka formatlarda da yapabilirsiniz:
+You can also output the help in other formats by using the --format option:
 
 `php flarum help --format=xml list`
 
-Mevcut komutların listesini görüntülemek için lütfen `list` komutunu kullanın.
+To display the list of available commands, please use the list command.
 
 ### info
 
 `php flarum info`
 
-Flarum’un çekirdek ve kurulu uzantıları hakkında bilgi toplayın. Bu, hata ayıklama sorunları için çok kullanışlıdır ve destek talep edilirken paylaşılmalıdır.
+Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-Oluşturulan js/css, metin biçimlendirici önbelleği ve önbelleğe alınmış çeviriler dahil olmak üzere arka uç Flarum önbelleğini temizler. Bu, uzantıları yükledikten veya kaldırdıktan sonra çalıştırılmalıdır ve sorun ortaya çıktığında bunu çalıştırmak ilk adım olmalıdır.
+Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
 
 ### migrate
 
 `php flarum migrate`
 
-Bekleyen tüm geçişleri çalıştırır. Bu, veritabanını değiştiren bir uzantı eklendiğinde veya güncellendiğinde kullanılmalıdır.
+Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
 
 ### migrate:reset
 
 `php flarum migrate:reset --extension [extension_id]`
 
-Bir uzantı için tüm geçişleri sıfırlayın. Bu, çoğunlukla uzantı geliştiricileri tarafından kullanılır, ancak bazen, bir uzantıyı kaldırıyorsanız ve tüm verilerini veritabanından temizlemek istiyorsanız bunu çalıştırmanız gerekebilir. Lütfen bunun çalışması için söz konusu uzantının şu anda yüklü olması ancak mutlaka etkinleştirilmesi gerekmediğini unutmayın.
+Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
