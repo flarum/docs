@@ -1,8 +1,8 @@
-# 控制台
+# Console
 
-除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。
+Flarum allows extension developers to add custom console commands in addition to the [default ones](../console.md) provided by flarum core.
 
-所有控制台命令开发都是在后端使用 PHP 完成的。要创建自定义控制台命令，您需要创建一个类实现 `\Flarum\Console\AbstractCommand`。
+All console command development is done in the backend using PHP. To create a custom console command, you'll need to create a class that extends `\Flarum\Console\AbstractCommand`.
 
 ```php
 use Flarum\Console\AbstractCommand;
@@ -10,35 +10,33 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class YourCommand implements AbstractCommand {
+class YourCommand extends AbstractCommand {
   protected function configure()
   {
       $this
-          ->setName('您的命令名')
-          ->setDescription('您的命令描述');
+          ->setName('YOUR COMMAND NAME')
+          ->setDescription('YOUR COMMAND DESCRIPTION');
   }
   protected function fire()
   {
-    // 逻辑实现！
+    // Your logic here!
   }
 }
 ```
 
-## 注册控制台命令
+## Registering Console Commands
 
-要注册控制台命令，请在您插件的 `extend.php` 文件中使用 `Flarum\Extend\Console` 扩展器：
+To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
 
 ```php
 use Flarum\Extend;
 use YourNamespace\Console\CustomCommand;
 
 return [
-  // 其他扩展器
+  // Other extenders
   (new Extend\Console())->command(CustomCommand::class)
-  // 其他扩展器
+  // Other extenders
 ];
 ```
 
-::: tip 定时命令
-[fof/console 库](https://github.com/FriendsOfFlarum/console) 允许您运行定时命令！但是，请注意这是一个社区解决方案。
-:::
+::: tip Scheduled Commands The [fof/console library](https://github.com/FriendsOfFlarum/console) allows you to schedule commands to run on a regular interval! However, please note that this is a community solution. :::
