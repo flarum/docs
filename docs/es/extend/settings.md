@@ -68,7 +68,7 @@ All settings are available in the `admin` frontend via the `app.data.settings` g
 
 Instead, if we want to use settings in the `forum` frontend, we'll need to serialize them and send them alongside the initial forum data payload.
 
-This can be done via the `Settings` extender. For example:
+This can be done via the `Settings` extender. Por ejemplo:
 
 **extend.php**
 
