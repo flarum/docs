@@ -1,4 +1,4 @@
-# Updating For Beta 14
+# Beta 14 için Güncelleme
 
 This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release. In order to prepare the codebase for the upcoming stable release, we decided it was time to modernize / upgrade / exchange some of the underlying JavaScript libraries that are used in the frontend. Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
 
