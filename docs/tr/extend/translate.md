@@ -1,4 +1,4 @@
-# Translating Flarum
+# Flarum Çeviri
 
 ### LanguagePack
 
