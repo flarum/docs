@@ -1,141 +1,134 @@
-# Aggiornamenti per Beta 16
+# Updating For Beta 16
 
-La Beta 16 finalizza l'API extender PHP, introduce una libreria di test e le tipizzazioni JS, passa all'utilizzo di namespace per le importazioni JS, aumenta la robustezza della dipendenza dalle estensioni e consente l'override deli percorsi, tra le altre funzionalità.
+Beta 16 finalizes the PHP extender API, introduces a testing library and JS typings, switches to using namespaces for JS imports, increases extension dependency robustness, and allows overriding routes, among other features.
 
-::: tip
-Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o su [Discord chat](https://flarum.org/discord/).
-:::
+::: tip If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/). :::
 
 ## Frontend
 
-- È stata introdotta una nuova astrazione del driver dell'editor, che consente alle estensioni di sostituire l'editor predefinito basato sull'area di testo con soluzioni più avanzate.
-- I componenti `TextEditor` e `TextEditorButton`, così come `BasicEditorDriver` (che rimpiazza `SuperTextarea`) è stato spostato da `forum` a `common`.
-- I namespace `forum`, `admin`, e `common` dovrebbero essere usati durante l'importazione. Quind invece di `import Component from 'flarum/Component'`, utilizzate `import Component from 'flarum/common/Component`. Il supporto per i vecchi stili di importazione sarà deprecato con la versione stabile e rimosso con Flarum 2.0.
-- È stata rilasciata una libreria di digitazione per supportare il completamento automatico dell'editor per lo sviluppo del frontend, installabile tramite `npm install --save-dev flarum@0.1.0-beta.16`.
-- Le categorie di estensioni sono state semplificate fino a `feature`, `theme`, e `language`.
+- A new editor driver abstraction has been introduced, which allows extensions to override the default textarea-based editor with more advanced solutions.
+- The `TextEditor` and `TextEditorButton` components, as well as the `BasicEditorDriver` util (which replaces `SuperTextarea`) have been moved from `forum` to `common`.
+- The `forum`, `admin`, and `common` namespaces should be used when importing. So instead of `import Component from 'flarum/Component'`, use `import Component from 'flarum/common/Component`. Support for the old import styles will be deprecated through the stable release, and removed with Flarum 2.0.
+- A typing library has been released to support editor autocomplete for frontend development, and can be installed in your dev environment via `npm install --save-dev flarum@0.1.0-beta.16`.
+- Extension categories have been simplified down to `feature`, `theme`, and `language`.
 
 ## Backend
 
-### Estensori
+### Extenders
 
-- Tutti gli extender che supportano callback / chiusure ora supportano funzioni globali come `'boolval'` e funzioni array-type come `[ClassName::class, 'methodName']`.
-- L'estensore `Settings` e metodo `serializeToFrontend` ora supporta un valore predefinito come quarto argomento.
-- L'estensore `Event` ora supporta la registrazione di abbonati a più eventi contemporaneamente tramite metodo `subscribe`.
-- L'estensore `Notification` utilizza ora il metodo `beforeSending`, che consente di modificare l'elenco dei destinatari prima che venga inviata una notifica.
-- Il metodo `mutate` di `ApiSerializer` è ora deprecato, e rinominato come `attributes`.
-- Il metodo `remove` negli estensori `Route` e `Frontend` può essere utilizzato per rimuovere (e quindi sostituire) le rotte.
-- L'estensore `ModelPrivate` rimpiazza l'evento `GetModelIsPrivate`, ormai deprecato.
-- I metodi sull'estensore `Auth` rimpiazzano l'evento `CheckingPassword`, ormai deprecato.
-- Tutti gli eventi relativi alla ricerca sono ora deprecati a favore di estensori quali `SimpleFlarumSearch` e `Filter`; spiegato meglio qui sotto.
+- All extenders that support callbacks/closures now support global functions like `'boolval'` and array-type functions like `[ClassName::class, 'methodName']`.
+- The `Settings` extender's `serializeToFrontend` method now supports a default value as the 4th argument.
+- The `Event` extender now supports registering subscribers for multiple events at once via a `subscribe` method.
+- The `Notification` extender now has a `beforeSending` method, which allows you to adjust the list of recipients before a notification is sent.
+- The `mutate` method of `ApiSerializer` has been deprecated, and renamed to `attributes`.
+- `remove` methods on the `Route` and `Frontend` extenders can be used to remove (and then replace) routes.
+- A `ModelPrivate` extender replaces the `GetModelIsPrivate` event, which has been deprecated.
+- Methods on the `Auth` extender replace the `CheckingPassword` event, which has been deprecated.
+- All search-related events are now deprecated in favor of the `SimpleFlarumSearch` and `Filter` extenders; this is explained in more detail below.
 
-### Laravel e Symfony
+### Laravel and Symfony
 
-Aggiornamenti beta 16 dalla v6.x alla v8.x dei componenti Laravel e dalla v4 alla v5 dei componenti Symfony. Consulta le rispettive guide all'upgrade di ciascuna per le modifiche che potresti dover apportare alle tue estensioni.
-La modifica più sostanziale è la deprecazione di `Symfony\Component\Translation\TranslatorInterface` in favore di `Symfony\Contracts\Translation\TranslatorInterface`. Il primo verrà rimosso nella beta 17.
+Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions. The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
 
-### Funzioni Helper
+### Helper Functions
 
-I rimanenti helper `app` e `event` sono ora deprecati. `app` è stato rimpiazzato con `resolve`.
+The remaining `app` and `event` global helper functions have been deprecated. `app` has been replaced with `resolve`, which takes the name of a container binding and resolves it through the container.
 
-Poiché alcune estensioni Flarum utilizzano librerie Laravel che presumono l'esistenza di alcuni helper globali, abbiamo ricreato alcuni helper comunemente usati nel pacchetto [flarum/laravel-helpers](https://github.com/flarum/laravel-helpers). Questi helper NON dovrebbero essere usati direttamente nel codice di estensione Flarum; sono disponibili in modo che le librerie basate su Laravel che si aspettano che esistano non funzionino male.
+Since some Flarum extensions use Laravel libraries that assume some global helpers exist, we've recreated some commonly used helpers in the [flarum/laravel-helpers](https://github.com/flarum/laravel-helpers) package. These helpers should NOT be used directly in Flarum extension code; they are available so that Laravel-based libraries that expect them to exist don't malfunction.
 
-### Cambiamenti alla Ricerca
+### Search Changes
 
-Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flarum più flessibile, abbiamo rifattorizzato parecchio codice nella beta 16.
-In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati.
-In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
+As part of our ongoing efforts to make Flarum's search system more flexible, we've made several refactors in beta 16. Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders. Essentially, if a query has a `filter[q]` query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a `Query` namespace.
 
-Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`, 
-che è effettivamente un involucro attorno a una collezione di modelli Eloquent.
+Core's filtering and default search (named SimpleFlarumSearch) implementations are quite similar, as both are powered by the database. `List` API controllers call the `search` / `filter` methods on a resource-specific subclass of `Flarum\Search\AbstractSearcher` or `Flarum\Filter\AbstractFilterer`. Arguments are an instance of `Flarum\Query\QueryCriteria`, as well as sort, offset, and limit information. Both systems return an instance of `Flarum\Query\QueryResults`, which is effectively a wrapper around a collection of Eloquent models.
 
-Anche i sistemi predefiniti sono in qualche modo simili nella loro implementazione. `Filterer`applica filtri (implementando `Flarum\Filter\FilterInterface`) in base ai parametri della query nel modulo `filter[FILTER_KEY] = FILTER_VALUE` (o `filter[-FILTER_KEY] = FILTER_VALUE` per filtri negati). SimpleFlarumSearch `Searcher` divide il parametro `filter[q]` da spazi in "termini", applica Gambits (implementando `Flarum\Search\GambitInterface`) che corrispondono ai termini e quindi applicano "Fulltext Gambit" per cercare in base a "termini" che non corrispondono ad un "auxiliary gambit". Entrambi i sistemi applicano quindi l'ordinamento, un offset e un limite di conteggio dei risultati e consentono alle estensioni di modificare il risultato della query tramite `searchMutators` o `filterMutators`.
+The default systems are also somewhat similar in their implementation. `Filterer`s apply Filters (implementing `Flarum\Filter\FilterInterface`) based on query params in the form `filter[FILTER_KEY] = FILTER_VALUE` (or `filter[-FILTER_KEY] = FILTER_VALUE` for negated filters). SimpleFlarumSearch's `Searcher`s split the `filter[q]` param by spaces into "terms", apply Gambits (implementing `Flarum\Search\GambitInterface`) that match the terms, and then apply a "Fulltext Gambit" to search based on any "terms" that don't match an auxiliary gambit. Both systems then apply sorting, an offset, and a result count limit, and allow extensions to modify the query result via `searchMutators` or `filterMutators`.
 
-Le estensioni aggiungono "gambits" e "search mutators" per classi `Searcher` tramite estensore `SimpleFlarumSearch`. Possono aggiungere filtri a classi `Filterer` tramite  estensore`Filter`.
+Extensions add gambits and search mutators and set fulltext gambits for `Searcher` classes via the `SimpleFlarumSearch` extender. They can add filters and filter mutators to `Filterer` classes via the `Filter` extender.
 
-Per quanto riguarda l'aggiornamento, tieni presente quanto segue:
+With regards to upgrading, please note the following:
 
-- Cerca le mutazioni registrate con eventi `Searching`, per le discussioni e gli utenti verranno applicate le ricerche durante la fase di mutazione della ricerca tramite uno strato BC temporaneo. NON verranno applicati ai filtri. Questo è un cambiamento decisivo. Questi eventi sono stati deprecati.
-- Search gambits registrati con eventi `ConfigureUserGambits` e `ConfigureDiscussionGambits` verrà applicato al ricercatore tramite un layer BC temporaneo. NON verranno applicati ai filtri. Questo è un cambiamento decisivo. Questi eventi sono stati deprecati.
-- Filtri post registrati tramite eventi `ConfigurePostsQuery` verrà applicato ai filtri dei post tramite un layer BC temporaneo. Quell'evento è stato deprecato.
+- Search mutations registered by listening to the `Searching` events for discussions and users will be applied as to searches during the search mutation step via a temporary BC layer. They WILL NOT be applied to filters. This is a breaking change. These events have been deprecated.
+- Search gambits registered by listening to the `ConfigureUserGambits` and `ConfigureDiscussionGambits` events will be applied to searcher via a temporary BC layer. They WILL NOT be applied to filters. This is a breaking change. These events have been deprecated.
+- Post filters registered by listening to the `ConfigurePostsQuery` events will be applied to post filters via a temporary BC layer. That event has been deprecated.
 
-### Libreria di test
+### Testing Library
 
-Il pacchetto `flarum/testing` fornisce utilità per test backend automatizzati basati su PHPUnit. Vedi [documentazione test](testing.md) per info.
+The `flarum/testing` package provides utils for PHPUnit-powered automated backend tests. See the [testing documentation](testing.md) for more info.
 
-### Dipendenze opzionali
+### Optional Dependencies
 
-La Beta 15 ha introdotto le "dipendenze delle estensioni", che richiedono tutte le estensioni elencate in `composer.json` e nella sezione `require` da abilitare prima che la tua estensione possa essere utilizzata.
+Beta 15 introduced "extension dependencies", which require any extensions listed in your extension's `composer.json`'s `require` section to be enabled before your extension can be enabled.
 
-Con la beta 16, puoi specificare "dipendenze opzionali" elencando i nomi dei pacchetti del composer come un array nella tua estensione `extra.flarum-extension.optional-dependencies`. Qualsiasi dipendenza facoltativa abilitata verrà avviata prima dell'estensione, ma non è necessaria per l'abilitazione di quest'ultima.
+With beta 16, you can specify "optional dependencies" by listing their composer package names as an array in your extension's `extra.flarum-extension.optional-dependencies`. Any enabled optional dependencies will be booted before your extension, but aren't required for your extension to be enabled.
 
-### Access Token e cambiamenti all'autenticazione
+### Access Token and Authentication Changes
 
-#### Cambiamenti Estensioni API
+#### Extension API changes
 
-La firma per vari metodi relativi all'autenticazione è stata modificata in `$token` come parametro invece di `$userId`. Altre modifiche sono il risultato del passaggio da `$lifetime` a `$type`
+The signature to various method related to authentication have been changed to take `$token` as parameter instead of `$userId`. Other changes are the result of the move from `$lifetime` to `$type`
 
-- `Flarum\Http\AccessToken::generate($userId)` non accetta più `$lifetime` come secondo parametro. Il parametro è stato mantenuto per compatibilità con le versioni precedenti ma non ha alcun effetto. Verrà rimosso nella beta 17.
-- `Flarum\Http\RememberAccessToken::generate($userId)` dovrebbe essere usato per creare token di accesso da ricordare.
-- `Flarum\Http\DeveloperAccessToken::generate($userId)` dovrebbe essere utilizzato per creare token di accesso sviluppatore (non scadono).
-- `Flarum\Http\SessionAccessToken::generate()` può essere utilizzato come alias per `Flarum\Http\AccessToken::generate()`. Verrà deprecato `AccessToken::generate()` in futuro.
-- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passare `AccessToken` è stato deprecato. Passa un'istanza di `RememberAccessToken` al suo posto. Come livello di compatibilità temporaneo, il passaggio di qualsiasi altro tipo di token lo convertirà in un token di ricordo. Nella beta 17 la firma del metodo cambierà per accettare solo `RememberAccessToken`.
-- `Flarum\Http\Rememberer::rememberUser()` è deprecata. Invece dovresti creare / recuperare un token manualmente con `RememberAccessToken::generate()` e passarlo a `Rememberer::remember()`
-- `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` come secondo parametro è stato deprecato ed è stato sostituito con `$token`. Viene mantenuta la compatibilità con le versioni precedenti. Nella beta 17, la firma del secondo metodo del parametro cambierà in `AccessToken $token`.
-- `AccessToken::generate()` ora salva il modello nel database prima di restituirlo.
-- `AccessToken::find($id)` or `::findOrFail($id)` non può più essere utilizzato per trovare un token, perché la chiave primaria è stata modificata da `token` a `id`. Invece puoi utilizzare `AccessToken::findValid($tokenString)`
-- Si consiglia di utilizzare `AccessToken::findValid($tokenString): AccessToken` o `AccessToken::whereValid(): Illuminate\Database\Eloquent\Builder` per trovare un token. Ciò consentirà automaticamente alla richiesta di restituire solo token validi. Sui forum con bassa attività questo aumenta la sicurezza poiché l'eliminazione automatica dei token obsoleti avviene in media solo ogni 50 richieste.
+- `Flarum\Http\AccessToken::generate($userId)` no longer accepts `$lifetime` as a second parameter. Parameter has been kept for backward compatibility but has no effect. It will be removed in beta 17.
+- `Flarum\Http\RememberAccessToken::generate($userId)` should be used to create remember access tokens.
+- `Flarum\Http\DeveloperAccessToken::generate($userId)` should be used to create developer access tokens (don't expire).
+- `Flarum\Http\SessionAccessToken::generate()` can be used as an alias to `Flarum\Http\AccessToken::generate()`. We might deprecate `AccessToken::generate()` in the future.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. In beta 17 the method signature will change to accept only `RememberAccessToken`.
+- `Flarum\Http\Rememberer::rememberUser()` has been deprecated. Instead you should create/retrieve a token manually with `RememberAccessToken::generate()` and pass it to `Rememberer::remember()`
+- `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` second parameter has been deprecated and is replaced with `$token`. Backward compatibility is kept. In beta 17, the second parameter method signature will change to `AccessToken $token`.
+- `AccessToken::generate()` now saves the model to the database before returning it.
+- `AccessToken::find($id)` or `::findOrFail($id)` can no longer be used to find a token, because the primary key was changed from `token` to `id`. Instead you can use `AccessToken::findValid($tokenString)`
+- It's recommended to use `AccessToken::findValid($tokenString): AccessToken` or `AccessToken::whereValid(): Illuminate\Database\Eloquent\Builder` to find a token. This will automatically scope the request to only return valid tokens. On forums with low activity this increases the security since the automatic deletion of outdated tokens only happens every 50 requests on average.
 
-#### Cambiamenti sessioni Symfony
+#### Symfony session changes
 
-Se stai accedendo o manipolando direttamente l'oggetto sessione di Symfony, sono state apportate le seguenti modifiche:
+If you are directly accessing or manipulating the Symfony session object, the following changes have been made:
 
-- L'attributo `user_id` non è più utilizzato. `access_token` è ora utilizzato al suo posto. È una stringa che mappa alla colonna `token` della tabella nel database `access_tokens`.
+- `user_id` attribute is no longer used. `access_token` has been added as a replacement. It's a string that maps to the `token` column of the `access_tokens` database table.
 
-Per recuperare l'utente corrente dall'interno di un'estensione Flarum, la soluzione ideale che era già presente in Flarum è quella di utilizzare `$request->getAttribute('actor')` che restituisce un istanza di `User` (quale potrebbe essere `Guest`)
+To retrieve the current user from inside a Flarum extension, the ideal solution which was already present in Flarum is to use `$request->getAttribute('actor')` which returns a `User` instance (which might be `Guest`)
 
-Per recuperare l'istanza del token da Flarum, puoi usare `Flarum\Http\AccessToken::findValid($tokenString)`
+To retrieve the token instance from Flarum, you can use `Flarum\Http\AccessToken::findValid($tokenString)`
 
-Per recuperare i dati utente da un'applicazione non Flarum, dovrai effettuare una richiesta di database aggiuntiva per recuperare il token. L' user ID è presente come `user_id` nella tabella `access_tokens.
+To retrieve the user data from a non-Flarum application, you'll need to make an additional database request to retrieve the token. The user ID is present as `user_id` on the `access_tokens` table.
 
-#### Cambiamenti creazione Token
+#### Token creation changes
 
-La proprietà `lifetime` degli access token è stata rimossa. I token ora sono token di `session` con durata di 1 ora dopo l'ultima attività, o i token `session_remember` con 5 anni di vita dopo l'ultima attività.
+The `lifetime` property of access tokens has been removed. Tokens are now either `session` tokens with 1h lifetime after last activity, or `session_remember` tokens with 5 years lifetime after last activity.
 
-Il parametro `remember` precedentemente disponibile sull'endopoint `POST /login` è stato redo disponibile in `POST /api/token`. Non restituisce il cookie di memorizzazione stesso, ma il token restituito può essere utilizzato come cookie di memorizzazione.
+The `remember` parameter that was previously available on the `POST /login` endpoint has been made available on `POST /api/token`. It doesn't return the remember cookie itself, but the token returned can be used as a remember cookie.
 
-Il parametro `lifetime` di `POST /api/token` è stato deprecato e verrà rimosso in Flarum beta 17. È stata fornita una compatibilità con le versioni precedenti parziale laddove un valore `lifetime` con più di 3600 secondi viene interpretato come `remember=1`. Valori inferiori a 3600 secondi danno come risultato un normale token di non ricordo.
+The `lifetime` parameter of `POST /api/token` has been deprecated and will be removed in Flarum beta 17. Partial backward compatibility has been provided where a `lifetime` value longer than 3600 seconds is interpreted like `remember=1`. Values lower than 3600 seconds result in a normal non-remember token.
 
-Nuovi token `developer` tokens that don't expire have been introduced, che non scadono sono stati introdotti, tuttavia non possono essere attualmente creati tramite l'API REST. Gli sviluppatori possono creare token per sviluppatori da un'estensione utilizzando `Flarum\Http\DeveloperAccessToken::generate($userId)`.
+New `developer` tokens that don't expire have been introduced, however they cannot be currently created through the REST API. Developers can create developer tokens from an extension using `Flarum\Http\DeveloperAccessToken::generate($userId)`.
 
-Se hai creato manualmente token nel database dall'esterno di Flarum, la colonna `type` è ora richiesta e deve contenere `session`, `session_remember` o `developer`. I token di tipo non riconosciuto non possono essere utilizzati per l'autenticazione, ma non verranno nemmeno eliminati dal garbage collector. In una versione futura le estensioni potranno registrare tipi di token di accesso personalizzati.
+If you manually created tokens in the database from outside Flarum, the `type` column is now required and must contain `session`, `session_remember` or `developer`. Tokens of unrecognized type cannot be used to authenticate, but won't be deleted by the garbage collector either. In a future version extensions will be able to register custom access token types.
 
-#### Cambiamenti all'utilizzo dei token
+#### Token usage changes
 
-I [problemi di sicurezza in Flarum](https://github.com/flarum/core/issues/2075) causavano la non scadenza dei token. Ciò ha avuto un impatto sulla sicurezza limitato poiché i token sono caratteri lunghi e unici. Tuttavia, le integrazioni personalizzate che hanno salvato un token in un database esterno per un uso successivo potrebbero scoprire che i token non funzionano più se non sono stati utilizzati di recente.
+A [security issue in Flarum](https://github.com/flarum/core/issues/2075) previously caused all tokens to never expire. This had limited security impact due to tokens being long unique characters. However custom integrations that saved a token in an external database for later use might find the tokens no longer working if they were not used recently.
 
-Se utilizzi token di accesso di breve durata per qualsiasi scopo, prendi nota del tempo di scadenza di 1 ora. La scadenza si basa sull'ora dell'ultimo utilizzo, quindi rimarrà valida finché continuerà ad essere utilizzata.
+If you use short-lived access tokens for any purpose, take note of the expiration time of 1h. The expiration is based on the time of last usage, so it will remain valid as long as it continues to be used.
 
+Due to the large amount of expired tokens accumulated in the database and the fact most tokens weren't ever used more than once during the login process, we have made the choice to delete all access tokens a lifetime of 3600 seconds as part of the migration, All remaining tokens have been converted to `session_remember` tokens.
 
-A causa della grande quantità di token scaduti accumulati nel database e del fatto che la maggior parte dei token non è mai stata utilizzata più di una volta durante il processo di accesso, abbiamo scelto di eliminare tutti i token di accesso per una durata di 3600 secondi come parte della migrazione , Tutti i token rimanenti sono stati convertiti in `session_remember`.
+#### Remember cookie
 
-#### Ricorda cookie
+The remember cookie still works like before, but a few changes have been made that could break unusual implementations.
 
-Il cookie di memorizzazione funziona ancora come prima, ma sono state apportate alcune modifiche che potrebbero interrompere implementazioni insolite.
+Now only access tokens created with `remember` option can be used as remember cookie. Any other type of token will be ignored. This means if you create a token with `POST /api/token` and then place it in the cookie manually, make sure you set `remember=1` when creating the token.
 
-Ora accedi solo ai token creati con opzione `remember`. Qualsiasi altro tipo di token verrà ignorato. Ciò significa che se crei un token con `POST /api/token` e lo inserisci manualmente nel cookie, devi assicurati di aver impostato `remember=1` durante la sua creazione.
+#### Web session expiration
 
-#### Scadenza della sessione Web
+In previous versions of Flarum, a session could be kept alive forever until the Symfony session files were deleted from disk.
 
-Nelle versioni precedenti di Flarum, una sessione poteva essere mantenuta in vita per sempre fino a quando i file della sessione di Symfony non venivano cancellati dal disco.
+Now sessions are linked to access tokens. A token being deleted or expiring will automatically end the linked web session.
 
-Ora le sessioni sono collegate ai token di accesso. Un token in fase di eliminazione o in scadenza terminerà automaticamente la sessione web collegata.
+A token linked to a web session will now be automatically deleted from the database when the user clicks logout. This prevents any stolen token from being re-used, but it could break custom integration that previously used a single access token in both a web session and something else.
 
-Un token collegato a una sessione Web verrà ora automaticamente eliminato dal database quando l'utente fa clic su Logout. Ciò impedisce il riutilizzo di qualsiasi token rubato, ma potrebbe interrompere l'integrazione personalizzata che in precedenza utilizzava un singolo token di accesso sia in una sessione Web che in qualcos'altro.
+### Miscellaneous
 
-### Varie
-
-- L'indirizzo IP è ora disponibile nelle richieste tramite `$request->getAttribute('ipAddress')`
-- Le policy possono ora restituire `true` e `false` come alias per `$this->allow()` e `$this->deny()`, rispettivamente.
-- I permessi `user.edit` sono stati divisi in `user.editGroups`, `user.editCredentials` (per email, username, e password), e `user.edit` (per altri attributi).
-- Ci sono ora permessi (`bypassTagCounts`) che consentono agli utenti di ignorare i requisiti di conteggio dei tag.
-- Flarum ora supporta PHP 7.3 - PHP 8.0, con supporto per PHP 7.2 ufficialmente abbandonato.
+- The IP address is now available in requests via `$request->getAttribute('ipAddress')`
+- Policies can now return `true` and `false` as aliases for `$this->allow()` and `$this->deny()`, respectively.
+- The `user.edit` permission has been split into `user.editGroups`, `user.editCredentials` (for email, username, and password), and `user.edit` (for other attributes).
+- There are now permissions (`bypassTagCounts`) that allow users to bypass tag count requirements.
+- Flarum now supports PHP 7.3 - PHP 8.0, with support for PHP 7.2 officially dropped.
