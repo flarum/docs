@@ -1,5 +1,3 @@
-# Yönetici Gösterge Tablosu
+# Admin Dashboard
 
-Flarum Yönetici Gösterge Tablosu, forumunuzu yönetmek için kullanıcı dostu bir arayüzdür.
-Yalnızca "Yönetici" [group](permissions.md) içindeki kullanıcılar tarafından kullanılabilir.
-Yönetici kontrol paneline erişmek için, ekranın sağ üst köşesindeki **Adınıza** tıklayın ve **Yönetim**'i seçin.
+The Flarum Admin Dashboard is a user-friendly interface for managing your forum. It is only available to users in the "Admin" [group](permissions.md). To access the Admin dashboard, Click on your **Name** at the at the top right of the screen, and select **Administration**.
