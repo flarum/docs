@@ -1,49 +1,49 @@
-# Risoluzione dei problemi
+# Troubleshooting
 
-Se Flarum non si installa o non funziona come previsto, la prima cosa da fare è controllare di nuovo se il proprio ambiente soddisfa [i requisiti necessari](install.md#server-requirements). Se ti manca qualcosa che è necessaria per l'esecuzione di Flarum, dovrai prima rimediare.
+If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
-Successivamente, dovresti impiegare alcuni minuti per cercare nel [Forum di supporto](https://discuss.flarum.org/t/support) e nell' [issue tracker](https://github.com/flarum/core/issues). È possibile che qualcuno abbia già segnalato il problema e una soluzione sia disponibile o in arrivo. Se hai cercato a fondo e non riesci a trovare alcuna informazione sul problema, è ora di iniziare la risoluzione dei problemi.
+Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
-## Step 0: Attiva il debug mode
+## Step 0: Turn on debug mode
 
-Prima di procedere, dovresti abilitare gli strumenti di debug di Flarum. Apri semplicemente il file **config.php** con un editor di testo, modifica il valore `debug` su `true`, e salva il file. uesto farà sì che Flarum visualizzi messaggi di errore dettagliati, dandoti un'idea di cosa non va.
+Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
-Se hai visto pagine vuote e la modifica sopra non aiuta, prova a impostare `display_errors` su `On` nel file di configurazione **php.ini**.
+If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
 
-## Step 1: Correzioni comuni
+## Step 1: Common Fixes
 
-AMolti problemi possono essere risolti con quanto segue:
+A lot of issues can be fixed with the following:
 
-* Pulisci la cache del browser
-* Pulisci la cache del backend con il comando [`php flarum cache:clear`](console.md).
-* Assicurati che il tuo database sia aggiornato con il comando [`php flarum migrate`](console.md).
-* Assicurati che [la configurazione email](mail.md) nel tuo pannello di amministrazione sia corretta: una configurazione e-mail non valida causerà errori durante la registrazione, la reimpostazione di una password, la modifica delle e-mail e l'invio di notifiche.
-* Controlla che il tuo file `config.php` sia corretto. Ad esempio, assicurati di utilizzare un `url` corretto.
+* Clear your browser cache
+* Clear the backend cache with [`php flarum cache:clear`](console.md).
+* Make sure your database is updated with [`php flarum migrate`](console.md).
+* Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
+* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used.
 
-Dovrai anche dare un'occhiata all'output di [`php flarum info`](console.md) per assicurarti che nulla di importante sia fuori posto.
+You'll also want to take a look at the output of [`php flarum info`](console.md) to ensure that nothing major is out of place.
 
-## Step 2: Riproduci il problema
+## Step 2: Reproduce the issue
 
-Prova a far sì che il problema si ripresenti. Presta molta attenzione a ciò che stai facendo quando si verifica. Succede ogni volta o solo di tanto in tanto? Prova a cambiare un'impostazione che ritieni possa influire sul problema o l'ordine in cui stai facendo le cose. Succede in alcune condizioni, ma non in altre?
+Try to make the problem happen again. Pay careful attention to what you're doing when it occurs. Does it happen every time, or only now and then? Try changing a setting that you think might affect the problem, or the order in which you're doing things. Does it happen under some conditions, but not others?
 
-Se hai recentemente aggiunto o aggiornato un'estensione, dovresti disabilitarla temporaneamente per vedere se questo risolve il problema. Assicurati che tutte le tue estensioni siano destinate ad essere utilizzate con la versione di Flarum che stai utilizzando. Le estensioni obsolete possono causare una serie di problemi.
+If you've recently added or updated an extension, you should disable it temporarily to see if that makes the problem go away. Make sure all of your extensions were meant to be used with the version of Flarum you're running. Outdated extensions can cause a variety of issues.
 
-Da qualche parte lungo la strada potresti avere un'idea di cosa sta causando il tuo problema e trovare un modo per risolverlo. Ma anche se ciò non accade, probabilmente ti imbatterai in alcuni preziosi indizi che ci aiuteranno a capire cosa sta succedendo, una volta che avrai presentato la tua segnalazione di bug.
+Somewhere along the way you may get an idea about what's causing your issue, and figure out a way to fix it. But even if that doesn't happen, you will probably run across a few valuable clues that will help us figure out what's going on, once you've filed your bug report.
 
-## Step 3: Raccogli informazioni
+## Step 3: Collect information
 
-Se sembra che avrai bisogno di aiuto per risolvere il problema, è ora di fare sul serio nella raccolta dei dati. Cerca messaggi di errore o altre informazioni sul problema nei seguenti punti:
+If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places:
 
-* Visualizzato nella pagina attuale
-* Visualizzato nella console del browser (Chrome: More tools -> Developer Tools -> Console)
-* Registrato nel registro degli errori del server (es. `/var/log/nginx/error.log`)
-* Registrato nel log PHP-FPM's (es. `/var/log/php7.x-fpm.log`)
-* Registrato da Flarum (`storage/logs/flarum.log`)
+* Displayed on the actual page
+* Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
+* Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
+* Recorded by Flarum (`storage/logs/flarum.log`)
 
-Copia i messaggi in un file di testo e prendi nota di quando si è verificato l'errore, cosa stavi facendo in quel momento e così via. Assicurati di includere tutti gli approfondimenti che potresti aver raccolto sulle condizioni in cui il problema si verifica e non si verifica. Aggiungi quante più informazioni possibili sul tuo ambiente server: versione del sistema operativo, versione del server web, versione e gestore di PHP, ecc.
+Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
 
-## Step 4: Prepara un report
+## Step 4: Prepare a report
 
-Dopo aver raccolto tutte le informazioni possibili sul problema, sei pronto per presentare una segnalazione di bug. Si prega di seguire le istruzioni [per segnalare bug](bugs.md).
+Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](bugs.md).
 
-Se scopri qualcosa di nuovo sul problema dopo aver inviato la segnalazione, aggiungi tali informazioni in fondo al tuo post originale. È una buona idea presentare un rapporto anche se hai risolto il problema da solo, poiché anche altri utenti potrebbero trarre vantaggio dalla tua soluzione. Se hai trovato una soluzione temporanea al problema, assicurati mettercene a conoscenza.
+If you discover something new about the issue after filing your report, please add that information at the bottom of your original post. It's a good idea to file a report even if you have solved the problem on your own, since other users may also benefit from your solution. If you've found a temporary workaround for the problem, be sure to mention that as well.
