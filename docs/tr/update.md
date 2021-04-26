@@ -1,3 +1,3 @@
-# Updating
+# Güncelleme
 
-While Flarum is in beta, instructions on how to update will be posted in each [release announcement](https://discuss.flarum.org/t/blog?sort=newest).
+Flarum beta sürümündeyken, nasıl güncelleme yapılacağına ilişkin talimatlar her [yayın duyurusunda](https://discuss.flarum.org/t/blog?sort=newest) yayınlanacaktır.
