@@ -1,35 +1,34 @@
-# 配置文件
+# Configuration File
 
-除数据库外，只有一处配置是无法通过后台管理面板修改的，那就是位于 Flarum 安装根目录下的 `config.php` 文件。
+There is only one place where Flarum configuration cannot be modified through the Flarum admin dashboard (excluding the database), and that is the `config.php` file located in the root of your Flarum installation.
 
-虽然这个文件很小，但包含了 Flarum 安装时至关重要的信息。
+This file, though small, contains details that are crucial for your Flarum installation to work.
 
-如果存在这个文件，Flarum 就知道它自己已经被安装了。
-另外这个文件还为 Flarum 提供数据库信息等内容。
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
-下面是一个示例文件，我们来了解一下所有内容的含义：
+Here's a quick overview of what everything means with an example file:
 
 ```php
 <?php return array (
-  'debug' => false, // 启用或禁用调试模式，用于排查问题
+  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
   'database' =>
   array (
-    'driver' => 'mysql', // 数据库驱动，例如 MySQL, MariaDB ……
-    'host' => 'localhost', // 连接的主机，除非使用外部服务，否则多数情况下是 localhost
-    'database' => 'flarum', // 数据库实例名
-    'username' => 'root', // 数据库用户名
-    'password' => '', // 数据库密码
+    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
+    'host' => 'localhost', // the host of the connection, localhost in most cases unless using an external service
+    'database' => 'flarum', // the name of the database in the instance
+    'username' => 'root', // database username
+    'password' => '', // database password
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // 数据表的前缀，如果您和其他服务共享一个数据库，那么添加前缀会很有用
-    'port' => '3306', // 连接数据库的端口，MySQL 默认为 3306
+    'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
+    'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // URL 配置，如果您改变了域名，您需要变更这个
+  'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
   'paths' =>
   array (
-    'api' => 'api', // /api 跳转到 API
-    'admin' => 'admin', // /admin 跳转到 admin
+    'api' => 'api', // /api goes to the API
+    'admin' => 'admin', // /admin goes to the admin
   ),
 );
 ```
