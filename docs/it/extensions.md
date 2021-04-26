@@ -1,26 +1,26 @@
-# Extensions
+# Estensioni
 
-Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
+Flarum è minimalista, ma è anche altamente estensibile. In effetti, la maggior parte delle funzionalità fornite con Flarum sono in realtà estensioni!
 
-This approach makes Flarum extremely customizable: You can disable any features you don't need, and install other extensions to make your forum perfect for your community.
+Questo approccio rende Flarum estremamente personalizzabile: Puoi disabilitare tutte le funzionalità che non ti servono e installare altre estensioni per rendere il tuo forum perfetto per la tua comunità.
 
-For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/README.md). This article will focus on managing extensions from a forum admin's perspective.
+Per ulteriori informazioni sulla filosofia di Flarum su quali funzionalità includiamo nel core o se stai cercando di creare la tua estensione, consulta la  [documentazione estensioni](extend/README.md). Questo articolo si concentrerà sulla gestione delle estensioni dal punto di vista dell'amministratore del forum.
 
-## Finding Extensions
+## Trovare le estensioni
 
-Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
+Flarum ha un vasto ecosistema di estensioni, molte delle quali sono open source è grautie. Per trovare nuove e fantastiche estensioni, visita il tag [Estensioni](https://discuss.flarum.org/t/extensions) sul forum ufficiale di Flarum. Il non ufficiale [Database estensioni Extiverse](https://extiverse.com/) è anch'esso una valida alternativa.
 
-## Installing Extensions
+## Installare le estensioni
 
-Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
+Proprio come Flarum, le estensioni vengono installate tramite [Composer](https://getcomposer.org), usando SSH. Per installare un estensione:
 
-1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
+1. `cd` to your Flarum directory. `cd`  fino alla cartella che contiene  `composer.json`. You can check directory contents via `ls -la`.
+2. Lancia `composer require COMPOSER_PACKAGE_NAME`. Questo solitamente compare nel post o nella documentazione dell'estensione.
 
-## Managing Extensions
+## Gestire le estensioni
 
-The extensions page of the admin dashboard provides a convenient way to manage extensions when they are installed. You can:
+La pagina delle estensioni del pannello di amministrazione offre un modo semplice per gestire le estensioni quando vengono installate. Potrai:
 
-- Enable or disable an extension
-- Access extension settings (although some extensions will use a tab in the main sidebar for settings)
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Uninstall button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
+- Abilitare o disabilitare estensioni
+- Accedere alle impostazioni delle estensioni (sebbene alcune estensioni utilizzino una scheda nella barra laterale principale per le impostazioni)
+- Ripristina le migrazioni di un'estensione per rimuovere eventuali modifiche al database apportate (tramite il tasto disinstalla). Ciò rimuoverà TUTTI i dati associati all'estensione ed è irreversibile. Dovrebbe essere fatto solo quando rimuovi un'estensione e non prevedi di installarla di nuovo. È anche del tutto facoltativo.
