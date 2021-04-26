@@ -1,1 +1,1 @@
-# Post Types
+# Gönderi Türleri
