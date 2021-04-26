@@ -1,27 +1,29 @@
-# Configurazione Email
+# Email Configuration
 
-Qualsiasi comunità necessita di inviare e-mail per consentire la verifica, reimpostazioni della password, notifiche e altre comunicazioni agli utenti. Configurare il tuo forum per l'invio di email dovrebbe essere uno dei tuoi primi passi come amministratore: una configurazione errata causerà errori quando gli utenti tenteranno di registrarsi.
+Any community needs to send emails to allow for email verification, password resets, notifications, and other communication to users. Configuring your forum to send emails should be one of your first steps as an admin: an incorrect configuration will cause errors when users try to register.
 
-## Driver disponibili
+## Available Drivers
 
-Flarum fornisce diversi driver di default, e sono elencati e spiegati di seguito. Gli sviluppatori inoltre possono anche aggiungere [driver personalizzati tramite estensioni](extend/mail.md).
+Flarum provides several drivers by default, they are listed and explained below. Developers can also add [custom mail drivers through extensions](extend/mail.md).
 
 ### SMTP
 
-Questo è probabilmente il driver di posta elettronica più comunemente utilizzato, che consente di configurare un host, una porta / crittografia, un nome utente e una password per un servizio SMTP esterno. Nel campo crittografia sarà possibile utilizzare solamente `ssl` o `tls`.
+This is probably the most commonly used email driver, allowing you to configure a host, port/encryption, username, and password for an external SMTP service. Please note that the encryption field expects either `ssl` or `tls`.
 
 ### Mail
 
-Il driver `mail` proverà a utilizzare il sistema di posta sendmail / postfix incluso in molti server di hosting. Devi installare e configurare correttamente sendmail sul tuo server affinché funzioni.
+The `mail` driver will try to use the sendmail / postfix email system included in many hosting servers. You must properly install and configure sendmail on your server for this to work.
 
 ### Mailgun
 
-Questo driver utilizza il tuo account [Mailgun](https://www.mailgun.com/) per inviare email. Avrai bisogno di una chiave segreta, così come il dominio e la regione reperibili dalla configurazione della tua mailgun.
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
+
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
 ### Log
 
-Il driver Log NON INVIA EMAIL,ed è utilizzato principalmente dagli sviluppatori. Scrive il contenuto di qualsiasi messaggio di posta elettronica nel file di registro in  `DIRECTORY_PRINCIPALE_FLARUM/storage/logs`.
+The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
-## Email di prova
+## Testing Email
 
-Dopo aver salvato una configurazione di posta elettronica, è possibile fare clic sul pulsante "Invia mail di prova" nella pagina Posta del pannello di amministratore per assicurarti che la tua configurazione funzioni. Se visualizzi un errore o non ricevi un'email, modifica la configurazione e riprova. Assicurati di controllare lo spam se non ci sono errori e se non viene visualizzato nulla nella tua posta in arrivo.
+Once you've saved an email configuration, you can click the "Send Test Mail" button on the Mail page of the admin dashboard to make sure your configuration works. If you see an error, or do not receive an email, adjust the configuration and try again. Make sure to check your spam if there's no error, but nothing shows up in your inbox.
