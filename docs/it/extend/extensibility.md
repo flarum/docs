@@ -7,11 +7,11 @@ In some cases, you might want other extensions to [extend your extension](extend
 Extensions extend Flarum Core's backend via two mechanisms:
 
 - [The extender API](start.md#extenders)
-- [Listening to Events](backend-events.md)
+- [Ascolto di eventi](backend-events.md)
 
 Unsurprisingly, you can make your extension extensible via the same mechanisms.
 
-### Custom Events
+### Eventi personalizzati
 
 To learn about dispatching events and defining new ones, see the [relevant documentation](backend-events.md).
 
@@ -21,7 +21,7 @@ Lets say you've developed an extension that adds an alternative search driver to
 
 The implementation of extenders is actually quite simple. There are 3 main steps:
 
-1. Various methods (and the constructor) allow client code to specify options. For example:
+1. Various methods (and the constructor) allow client code to specify options. Per esempio:
   - Which model / API controller / validator should be extended?
   - What modifications should be made?
 2. An `extend` method takes the input from step 1, and applies it by modifying various [container bindings](service-provider.md) and global static variables to achieve the desired effect. This is the "implementation" of the composer. The `extend` methods for all enabled extensions are run as part of Flarum's boot process.
@@ -44,7 +44,7 @@ Before designing your own extenders, we HIGHLY recommend looking through the imp
 
 If you want other extensions to be able to use classes or functions defined in your extension (whether to reuse or modify via the [extend/override utils](frontend.md)), you'll need to export them in your extension's `index.js` (typically the same place where your extension's [initializer](frontend.md) is located).
 
-For example:
+Per esempio:
 
 ```js
 app.initializers.add('your-extension-id', () => {
