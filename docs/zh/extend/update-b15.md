@@ -6,7 +6,7 @@ Beta 15 features multiple new extenders, a total redesign of the admin dashboard
 
 ## New Features / Deprecations
 
-### Extenders
+### 扩展器
 
 - `Flarum\Api\Event\WillGetData` and `Flarum\Api\Event\WillSerializeData` have been deprecated, the `ApiController` extender should be used instead
 - `Flarum\Api\Event\Serializing` and `Flarum\Event\GetApiRelationship` have been deprecated, the `ApiSerializer` extender should be used instead
