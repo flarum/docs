@@ -1,49 +1,49 @@
-# 故障排查
+# Troubleshooting
 
-如果 Flarum 没有按照预期那样安装或工作，您 *首先应该检查* 服务器环境是否符合 [系统要求](install.md#环境要求)。如果您缺少一些 Flarum 运行所需的东西，请先补全内容。
+If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
-然后，请花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)，有可能该问题已被报告，并且有了解决办法。如果您彻底搜索后，仍然没有找到任何有用的信息，那么就可以开始排查故障了。
+Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
-## 步骤 0：开启调试模式
+## Step 0: Turn on debug mode
 
-在继续前，您应当启用 Flarum 的调试模式。用文本编辑器打开 **config.php**，将 `debug` 的值改为 `true`，然后保存文件即可。开启后，Flarum 会显示详细的错误报告，方便您了解到底发生了什么。
+Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
-如果上面的改动不起任何作用，并且论坛所有页面都变成空白，请试试将 **php.ini** 文件中的 `display_errors` 设置为 `On`。
+If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
 
-## 步骤 1：常见问题修复
+## Step 1: Common Fixes
 
-很多问题都可通过以下解决：
+A lot of issues can be fixed with the following:
 
-* 清除浏览器缓存。
-* 使用 [`php flarum cache:clear`](console.md) 清除后端缓存。
-* 确保以使用 [`php flarum migrate`](console.md) 更新数据库。
-* 确保 [邮箱配置](mail.md) 可用：无效的邮箱配置将导致注册、重置密码、更换用户绑定邮箱以及发送通知时产生错误。
-* 检查 `config.php` 配置是否正确，请确保您使用了正确的 `url`。
+* Clear your browser cache
+* Clear the backend cache with [`php flarum cache:clear`](console.md).
+* Make sure your database is updated with [`php flarum migrate`](console.md).
+* Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
+* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used.
 
-您也得看看 [`php flarum info`](console.md) 的输出，以确保没有什么大的问题。
+You'll also want to take a look at the output of [`php flarum info`](console.md) to ensure that nothing major is out of place.
 
-## 步骤 2：问题重现
+## Step 2: Reproduce the issue
 
-请尝试让问题重现。注意问题发生时，您在做什么？是每次都会出现问题，还是仅偶尔出现？尝试调整您觉得可能影响问题出现的设置或参数，或者改变您的操作顺序看看。问题是否在某些情况下会出现，而在某些情况下又不会出现？
+Try to make the problem happen again. Pay careful attention to what you're doing when it occurs. Does it happen every time, or only now and then? Try changing a setting that you think might affect the problem, or the order in which you're doing things. Does it happen under some conditions, but not others?
 
-如果您最近安装或更新了一个扩展程序，请暂时禁用它，然后看看问题有没有消失。请确保您启用的所有扩展程序兼容您使用的 Flarum 版本。过时的扩展会导致各种各样的问题。
+If you've recently added or updated an extension, you should disable it temporarily to see if that makes the problem go away. Make sure all of your extensions were meant to be used with the version of Flarum you're running. Outdated extensions can cause a variety of issues.
 
-在这个过程中，您可能会发现导致问题的原因，并找到了解决办法。即便没有，您也可能会得到一些有价值的线索，您最好在报告中填写好这些信息，这将帮助我们弄清楚出了什么问题。
+Somewhere along the way you may get an idea about what's causing your issue, and figure out a way to fix it. But even if that doesn't happen, you will probably run across a few valuable clues that will help us figure out what's going on, once you've filed your bug report.
 
-## 步骤 3：收集信息
+## Step 3: Collect information
 
-如果您无法解决问题，需要他人的帮助，请从这些地方搜集相关报错内容或其他与问题有关的信息：
+If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places:
 
-* 论坛页面上显示的报错
-* 浏览器控制台中显示的报错（Chrome：更多工具 -> 开发者工具 -> Console)
-* 服务器错误日志中记录的内容（例如：`/var/log/nginx/error.log`）
-* PHP-FPM 错误日志中记录的内容（例如：`/var/log/php7.x-fpm.log`）
-* Flarum 日志记录的报错（`storage/logs/flarum.log`）
+* Displayed on the actual page
+* Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
+* Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
+* Recorded by Flarum (`storage/logs/flarum.log`)
 
-将收集到的所有信息复制到记事本中，整理好并做一些注解，比如错误是 *何时* 发生的、当错误发生时您在 *做什么*、您探索出来的问题发生和不发生的条件。请尽可能详尽地提供服务器环境信息，如操作系统版本、Web 服务器版本、PHP 版本和处理程序等。
+Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
 
-## 步骤 4：准备报告
+## Step 4: Prepare a report
 
-竭尽所能收集相关问题的所有信息后，您就可以提交错误报告了。提交时请遵循 [提交 Bug](bugs.md) 的有关说明。
+Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](bugs.md).
 
-如果您在提交报告后有发现新的情况，请添加到您的原始帖子底部。倘若您已经自行解决了问题，也最好提交一份报告，说不定能帮助到遇到同样问题的其他用户。如果您找到了临时的解决办法，也请告诉我们。
+If you discover something new about the issue after filing your report, please add that information at the bottom of your original post. It's a good idea to file a report even if you have solved the problem on your own, since other users may also benefit from your solution. If you've found a temporary workaround for the problem, be sure to mention that as well.
