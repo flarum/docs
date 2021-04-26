@@ -54,7 +54,7 @@ Often, you'll want some custom text to appear in the browser tab's title for you
 
 To do this, your page should include calls to `app.setTitle()` and `app.setTitleCount()` in its `oncreate` [lifecycle hook](frontend.md) (or when data is loaded, if it pulls in data from the API).
 
-For example:
+Por ejemplo:
 
 ```js
 import Page from 'flarum/common/components/Page';
@@ -139,7 +139,7 @@ There are actually 3 ways to set the component / route resolver when registering
 - The `resolverClass` key AND `component` key can be used to provide a **class** that will be used to instantiate a route resolver, to be used instead of Flarum's default one, as well as the component to use. Its constructor should take 2 arguments: `(component, routeName)`.
 - The `component` key can be used alone to provide a component. This will result in the default behavior.
 
-For example:
+Por ejemplo:
 
 ```js
 // See above for a custom page example
