@@ -16,7 +16,7 @@ To understand service providers, you must first understand the order in which Fl
 
 ## Custom Service Providers
 
-A custom service provider should extend `Flarum\Foundation\AbstractServiceProvider`, and can have a `boot` and a `register` method. For example:
+A custom service provider should extend `Flarum\Foundation\AbstractServiceProvider`, and can have a `boot` and a `register` method. Por ejemplo:
 
 ```php
 <?php
