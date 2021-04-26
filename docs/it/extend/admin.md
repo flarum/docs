@@ -1,20 +1,20 @@
-# Admin Dashboard
+# Pannello amministrazione
 
-Beta 15 introduced a completely redesigned admin panel and frontend API. It is now easier than ever to add settings or permissions to your extension.
+La Beta 15 ha introdotto un pannello di amministrazione e un frontend per le API completamente riprogettati. Ora è più facile che mai aggiungere impostazioni o autorizzazioni alla tua estensione.
 
-Before beta 15, extension settings were either added in a `SettingsModal` or they added a new page for more complex settings. Now, every extension has a page containing info, settings, and the extension's own permissions.
+Prima della beta 15, le impostazioni delle estensioni venivano aggiunte nel file `SettingsModal` o venivano aggiunte in una nuova pagina per impostazioni più complesse. Ora, ogni estensione ha una pagina contenente informazioni, impostazioni e autorizzazioni proprie dell'estensione.
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), oppure fornire la tua pagina completamente personalizzata.
 
 ## Extension Data API
 
 This new API allows you to add settings to your extension with very few lines of code.
 
-### Telling the API about your extension
+### Raccontare all'API la tua estensione
 
-Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
+Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
 
 For the following example, we will use the fictitious extension 'acme/interstellar':
 
@@ -27,15 +27,15 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Once that is done, you can begin adding settings and permissions.
+Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
-:::tip Note All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again. :::
+::: Note Tutte le funzioni di registrazione su `ExtensionData` sono concatenabili, il che significa che puoi chiamarle una dopo l'altra senza eseguire nuovamente`for`. :::
 
-### Registering Settings
+### Registrazione delle impostazioni
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+L'aggiunta di campi delle impostazioni in questo modo è consigliata per elementi semplici. Come regola generale, se hai solo bisogno di memorizzare le cose nella tabella delle impostazioni, questi consigli ti saranno utili.
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+Per aggiungere un campo, richiama la funzione `registerSetting` dopo `for` su `app.extensionData` e passagli un 'setting object' come primo argomento. Dietro le quinte `ExtensionData` trasforma effettivamente le tue impostazioni in un file [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), puoi passare un numero di priorità come secondo argomento.
 
 Here's an example with a switch (boolean) item:
 
@@ -47,16 +47,16 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerSetting(
       {
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
-        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
-        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+        setting: 'acme-interstellar.coordinates', // Questa è la chiave con cui verranno salvate le impostazioni nella tabella delle impostazioni nel database.
+        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // L'etichetta da mostrare che consente all'amministratore di sapere cosa fa l'impostazione.
+        type: 'boolean', // Di che tipo di impostazione si tratta, le opzioni valide sono: boolean, text (o qualsiasi altro tipo di tag <input>) e select. 
       },
-      30 // Optional: Priority
+      30 // Opzionale: Priorità
     )
 });
 ```
 
-If you use `type: 'select'` the setting object looks a little bit different:
+Ecco un esempio con un elemento switch (booleano):
 
 ```js
 {
@@ -64,7 +64,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
   label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
   type: 'select',
   options: {
-    'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+    'LOH': 'Liquid Fuel', // La chiave in questo oggetto è ciò che verrà memorizzato nel database, il valore è l'etichetta che l'amministratore vedrà (ricorda di usare le traduzioni se hanno senso nel tuo contesto).
     'RDX': 'Solid Fuel',
   },
   default: 'LOH',
@@ -72,7 +72,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
 ```
 
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+Se vuoi aggiungere qualcosa alle impostazioni come del testo extra o un input più complicato, puoi anche passare un callback come primo argomento che restituisce JSX. Questo callback verrà eseguito nel contesto di [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) e i valori di impostazione non verranno serializzati automaticamente.
 
 ```js
 
@@ -97,18 +97,18 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-### Registering Permissions
+### Registrazione delle autorizzazioni
 
-New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
+Novità nella beta 15, le autorizzazioni ora possono essere trovate in 2 posizioni. Ora puoi visualizzare le autorizzazioni individuali di ciascuna estensione sulla loro pagina. Tutte le autorizzazioni possono ancora essere trovate nella pagina delle autorizzazioni.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
+Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`.
 
 Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+ * Oggetto autorizzazione
+ * Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
+ * Priorità di `ItemList`
 
-Back to our favorite rocket extension:
+Argomenti:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -117,19 +117,19 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Font-Awesome Icon
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
-        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        icon: 'fas fa-rocket', // Icone Font-Awesome
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etichetta di autorizzazione
+        permission: 'discussion.rocket_fly', // Nome effettivo dell'autorizzazione memorizzato nel database (e utilizzato durante il controllo dell'autorizzazione).
       }, 
-      'start', // Category permission will be added to on the grid
-      95 // Optional: Priority
+      'start', // Il permesso di categoria verrà aggiunto alla griglia
+      95 // Opzional: Priorità
     );
 });
 ```
 
-### Chaining Reminder
+### Promemoria concatenamento
 
-Remember these functions can all be chained like:
+Torniamo alla nostra estensione missilistica preferita:
 
 ```js
 app.extensionData
@@ -140,26 +140,26 @@ app.extensionData
     .registerPermission(...);
 ```
 
-### Extending/Overriding the Default Page
+### Estensione/sovrascrittura della pagina predefinita
 
-Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
+A volte hai impostazioni più complicate che pasticciano con le relazioni o semplicemente desideri che la pagina abbia un aspetto completamente diverso. In questo caso, dovrai dire a `ExtensionData` che vuoi fornire la tua versione della pagina. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
-import ExtensionPage from 'flarum/admin/components/ExtensionPage';
+import ExtensionPage from 'flarum/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {
     return (
-      <h1>Hello from the settings section!</h1>
+      <h1>Ciao dalla sezione impostazioni!</h1>
     )
   }
 }
 
 ```
 
-Then, simply run `registerPage`:
+Crea una nuova classe che estenda il componente `Page` o`ExtensionPage`
 
 ```js
 
@@ -173,21 +173,21 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-This page will be shown instead of the default.
+Quindi lancia `registerPage`:
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+Questa pagina verrà visualizzata al posto di quella predefinita.
 
 ## Composer.json Metadata
 
-In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
+Puoi estendere la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o estendere la base di `Page` e progettare la tua versione.
 
-For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+Nella beta 15, le pagine di estensione lasciano spazio a informazioni aggiuntive che vengono estratte da composer.json .
 
-| Description                        | Where in composer.json                                       |
-| ---------------------------------- | ------------------------------------------------------------ |
-| discuss.flarum.org discussion link | "forum" key inside "support"                                 |
-| Documentation                      | "docs" key inside "support"                                  |
-| Support (email)                    | "email" key inside "support"                                 |
-| Website                            | "homepage" key                                               |
-| Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| Descrizione                        | dovein composer.json                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| discuss.flarum.org discussion link | "forum"   all'interno di "support"                                      |
+| Documentation                      | "docs"    all'interno di "support"                                      |
+| Support (email)                    | "email"   all'interno di "support"                                      |
+| Website                            | "homepage" chiave                                                       |
+| Donate                             | "funding" key block (Nota: verrà utilizzato solo il primo collegamento) |
+| Source                             | "source"  all'interno di "support"                                      |
