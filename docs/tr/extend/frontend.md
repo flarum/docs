@@ -1,4 +1,4 @@
-# Frontend Development
+# Ön Uç Geliştirme
 
 This page describes how to make changes to Flarum's user interface. How to add buttons, marquees, and blinking text. 🤩
 
