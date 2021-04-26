@@ -1,4 +1,4 @@
-# Console
+# 控制台
 
 Flarum allows extension developers to add custom console commands in addition to the [default ones](../console.md) provided by flarum core.
 
