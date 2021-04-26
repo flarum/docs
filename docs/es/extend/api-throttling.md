@@ -1,21 +1,25 @@
-# API Throttling
+# Aceleración de la API
 
-Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests.
+Flarum viene con un `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) para acelerar las peticiones a la API. Esto se ejecuta en cada ruta de la API, y las extensiones pueden añadir su propia lógica personalizada para acelerar las solicitudes.
 
-::: warning Forum Routes Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future. :::
+::: warning Rutas del Foro Algunas rutas del foro (inicio de sesión, registro, olvido de contraseña, etc) funcionan llamando a una ruta de la API bajo la superficie. El middleware `ThrottleApi` no se ejecuta actualmente para estas peticiones, pero está previsto para el futuro. :::
 
-## Custom Throttlers
+## Aceleradores personalizados
 
-The format for a custom throttler is extremely simple: all you need is a closure or invokable class that takes the current request as an argument, and returns one of:
+El formato de un acelerador personalizado es extremadamente simple: todo lo que necesitas es un cierre o clase invocable que tome la petición actual como argumento, y devuelva una de las siguientes opciones
 
-- `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
-- `true`: This marks the request as to be throttled.
-- `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
+- `false`: Esto evita explícitamente el aceleramiento para esta solicitud, anulando todos los demás aceleradores.
+- `true`: Esto marca la solicitud como para ser acelerada.
+- `null`: Esto significa que este acelerador no se aplica. Cualquier otra salida será ignorada, con el mismo efecto que `null`.
 
-Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler:
+Los aceleradores se ejecutarán en TODAS las peticiones, y son responsables de averiguar si se aplican o no. Por ejemplo, considere el acelerador de correos de Flarum:
 
 ```php
 use DateTime;
+use Flarum\Post\Post;
+
+function ($request) {
+    if (! use DateTime;
 use Flarum\Post\Post;
 
 function ($request) {
@@ -35,7 +39,7 @@ function ($request) {
 };
 ```
 
-Throttlers can be added or removed via the `ThrottleApi` middleware in `extend.php`. For example:
+Los aceleradores pueden ser añadidos o eliminados a través del middleware `ThrottleApi` en `extend.php`. Por ejemplo:
 
 ```php
 <?php
