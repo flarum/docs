@@ -1,4 +1,4 @@
-# Distribution
+# Dağıtım
 
 You've written a great extension — and now you want the whole world to be able to use it. This document will take you through the process of distribution, from setting up a Git repository for your extension, to publishing it on Packagist.
 
