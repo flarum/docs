@@ -1,4 +1,4 @@
-# Groups and Permissions
+# Gruplar ve İzinler
 
 In addition to labeling roles, Flarum's group system is a way for permissions to be applied to segments of users.
 
