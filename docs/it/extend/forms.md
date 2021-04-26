@@ -1,25 +1,23 @@
-# Moduli e richieste
+# Forms and Requests
 
-In questo articolo, esamineremo alcuni strumenti di frontend che sono a nostra disposizione per la creazione e la gestione di moduli, nonché come inviare richieste HTTP tramite Flarum.
+In this article, we'll go over some frontend tools that are available to us for building and managing forms, as well how to send HTTP requests via Flarum.
 
-## Componenti Form
+## Form Components
 
-Come con qualsiasi sito interattivo, probabilmente vorrai includere moduli in alcune pagine.
-Flarum fornisce alcuni componenti per rendere più facile la costruzione (e lo styling!) di questi ultimi.
-Si prega di consultare la documentazione API collegata per per saperne di più sugli attributi accettati.
+As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
 
-- Il [`flarum/components/FieldSet` componente](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) racchiude i suoi "figli" in un tag fieldset HTML, con una legenda.
-- Il [`flarum/components/Select` componente](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) è un input di selezione stilizzato.
-- [`flarum/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) e [`flarum/components/Checkbox` i componenti](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) sono componenti di input delle caselle di controllo stilizzate. Il loro attributo `loading` può essere impostato su `true` per mostrare un indicatore di caricamento.
-- Il componente [`flarum/components/Button`](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) è un bottone stilizzato, frequentemente utilizzato su Flarum.
+- The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
+- The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
+- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
+- The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
 
-In genere vorrai assegnare la logica per reagire ai cambiamenti di input tramite Mithril e l'attributo `on*`, non listener esterni (come è comune con jQuery o semplice JS). Per esempio:
+You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
 
 ```jsx
-import Component from 'flarum/Component';
-import FieldSet from 'flarum/components/FieldSet';
-import Button from 'flarum/components/Button';
-import Switch from 'flarum/components/Switch';
+import Component from 'flarum/common/Component';
+import FieldSet from 'flarum/common/components/FieldSet';
+import Button from 'flarum/common/components/Button';
+import Switch from 'flarum/common/components/Switch';
 
 
 class FormComponent extends Component {
@@ -53,12 +51,10 @@ Don't forget to use [translations](translate.md)!
 
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/util/Stream`.
-This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data.
-Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
 
 ```js
-import Stream from 'flarum/utils/Stream';
+import Stream from 'flarum/common/utils/Stream';
 
 
 const value = Stream("hello!");
@@ -67,12 +63,10 @@ value("world!");
 value() === "world!"; // true
 ```
 
-Nei form di Flarum, i flussi sono spesso usati insieme all'attributo bidi.
-Bidi sta per associazione bidirezionale ed è un modello comune nei framework di frontend. Flarum applica al Mithril la [`m.attrs.bidi` libreria](https://github.com/tobyzerner/m.attrs.
-Questo astrae l'elaborazione degli input in Mithril. Per esempio:
+In Flarum forms, streams are frequently used together with the bidi attr. Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs. This abstracts away input processing in Mithril. For instance:
 
 ```jsx
-import Stream from 'flarum/utils/Stream';
+import Stream from 'flarum/common/utils/Stream';
 
 const value = Stream();
 
@@ -83,11 +77,11 @@ const value = Stream();
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
 
 ```jsx
-import Stream from 'flarum/utils/Stream';
-import withAttr from 'flarum/utils/withAttr';
+import Stream from 'flarum/common/utils/Stream';
+import withAttr from 'flarum/common/utils/withAttr';
 
 const value = Stream();
 
@@ -100,15 +94,15 @@ const value = Stream();
 })}></input>
 ```
 
-## Effettuare richieste
+## Making Requests
 
-Nella nostra [documentazione di modelli e dati](data.md), hai imparato come lavorare con i modelli e salvare la creazione del modello, le modifiche e l'eliminazione nel database tramite l'utilità Store, che è solo un wrapper attorno al sistema di richiesta di Flarum, che a sua volta è un altro wrapper [Sistema di richieste Mithril](https://mithril.js.org/request.html).
+In our [models and data](data.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
 
-Il sistema di richiesta di Flarum è disponibile a livello globale tramite `app.request(options)`, e presenta le seguenti differenze rispetto a Mithril `m.request(options)`:
+Flarum's request system is available globally via `app.request(options)`, and has the following differences from Mithril's `m.request(options)`:
 
-- Si legherà automaticamente all'header `X-CSRF-Token`.
-- Convertirà richieste `PATCH` e `DELETE` in richieste `POST`, e si legherà all'heder `X-HTTP-Method-Override`.
-- In caso di errore della richiesta, verrà visualizzato un avviso che, se in modalità debug, può essere cliccato per mostrare un modale di errore completo.
-- Puoi fornire anche l'opzione `background: false`, che eseguirà la richiesta in modo sincrono. Tuttavia, questo non dovrebbe quasi mai essere fatto.
+- It will automatically attach `X-CSRF-Token` headers.
+- It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
+- If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
+- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
 
-Altrimenti, l'API per l'utilizzo `app.request` è la medesima di `m.request`.
+Otherwise, the API for using `app.request` is the same as that for `m.request`.
