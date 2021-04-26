@@ -1,1 +1,1 @@
-# Modello Slugging
+# Model Slugging
