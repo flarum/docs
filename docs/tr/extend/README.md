@@ -1,6 +1,6 @@
 # Extending Flarum
 
-Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
+Flarum minimalisttir, ancak aynı zamanda oldukça genişletilebilir. Aslında, Flarum ile birlikte gelen özelliklerin çoğu aslında uzantılardır!
 
 This approach makes Flarum extremely customizable. A user can disable any features they don't use on their forum, and install other extensions to make a forum perfect for their community.
 
@@ -32,7 +32,7 @@ If you are aiming to address a bug or shortcoming of the core, or of an existing
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Flarum Blank Extension Generator](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
 
-### Getting help
+### Flarum Genişletme
 
 - [Official Flarum Dev Community](https://discuss.flarum.org/t/dev)
 - [Join us on #extend in our discord chat](https://flarum.org/discord/)
