@@ -1,4 +1,4 @@
-# Searching and Filtering
+# Arama
 
 Flarum treats searching and filtering as parallel but distinct processes. Which process is used to handle a request to a [`List` API endpoint](http://localhost:8080/extend/data.html#api-endpoints) depends on the query parameters:
 
