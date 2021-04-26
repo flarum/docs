@@ -1,4 +1,4 @@
-# Authorization
+# Yetki
 
 As with any framework, Flarum allows certain actions and content to be restricted to certain users. There are 2 parallel systems for this:
 
