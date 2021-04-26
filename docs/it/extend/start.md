@@ -1,30 +1,30 @@
-# Getting Started
+# Iniziare
 
-Want to build a Flarum extension? You've come to the right place! This document will take you through some essential concepts, after which you'll build your first Flarum extension from scratch.
+Vuoi costruire un'estensione Flarum? Sei nel posto giusto! Questo documento ti guiderà attraverso alcuni concetti essenziali, dopodiché costruirai la tua prima estensione Flarum da zero.
 
-## Architecture
+## Architettura
 
-In order to understand how to extend Flarum, first we need to understand a bit about how Flarum is built.
+Per capire come estendere Flarum, prima dobbiamo capire un po' come è costruito Flarum.
 
-Be aware that Flarum uses some _modern_ languages and tools. If you've only ever built WordPress plugins before, you might feel a bit out of your depth! That's OK — this is a great time to learn cool new things and extend your skillset. However, we would advise that you become somewhat familiar with the technologies described below before proceeding.
+Tieni presente che Flarum utilizza alcuni linguaggi e strumenti _moderni_. Se hai mai creato solo plugin per WordPress prima, potresti sentirti un po' fuori dal tuo ambiente! Va bene, questo è un ottimo momento per imparare cose nuove e interessanti ed estendere le tue abilità. Tuttavia, ti consigliamo di acquisire familiarità con le tecnologie descritte di seguito prima di procedere.
 
-Flarum is made up of three layers:
+Flarum è composto da tre strati:
 
-* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/6.x/container), which is used throughout our backend.
+* Primo, c'è il ** backend **. Questo è scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
 
-* Second, the backend exposes a **public API** which allows frontend clients to interface with your forum's data. This is built according to the [JSON:API specification](https://jsonapi.org/).
+* Secondo, il backend espone una ** API pubblica ** che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo è costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
 
-* Finally, there is the default web interface which we call the **frontend**. This is a [single-page application](https://en.wikipedia.org/wiki/Single-page_application) which consumes the API. It's built with a simple React-like framework called [Mithril.js](https://mithril.js.org).
+* Ed ultimo, c'è l'interfaccia web predefinita che chiamiamo ** frontend **. Questa è una [applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application) che utilizza le API. È costruito con un semplice framework simile a React chiamato [Mithril.js](https://mithril.js.org).
 
-Extensions will often need to interact with all three of these layers to make things happen. For example, if you wanted to build an extension that adds custom fields to user profiles, you would need to add the appropriate database structures in the **backend**, expose that data in the **public API**, and then display it and allow users to edit it on the **frontend**.
+Le estensioni dovranno spesso interagire con tutti e tre questi livelli per far accadere le cose. Ad esempio, se si desidera creare un'estensione che aggiunga campi personalizzati ai profili utente, è necessario aggiungere le strutture di database appropriate nel ** backend **, esporre tali dati nell '** API pubblica ** e quindi visualizzare e consentire agli utenti di modificarlo sul ** frontend **.
 
-So... how do we extend these layers?
+Allora ... come estendiamo questi livelli?
 
-## Extenders
+## Extender
 
-In order to extend Flarum, we will be using a concept called **extenders**. Extenders are *declarative* objects that describe in plain terms the goals you are trying to achieve (such as adding a new route to your forum, or executing some code when a new discussion was created).
+Per estendere Flarum, useremo un concetto chiamato ** extender **. Gli extender sono oggetti * dichiarativi * che descrivono in termini semplici gli obiettivi che stai cercando di raggiungere (come aggiungere un nuovo percorso al tuo forum o eseguire del codice quando è stata creata una nuova discussione).
 
-Every extender is different. However, they will always look somewhat similar to this:
+Ogni extender è diverso. Tuttavia, saranno sempre in qualche modo simili a questo:
 
 ```php
 // Register a JavaScript and a CSS file to be delivered with the forum frontend
@@ -33,15 +33,15 @@ Every extender is different. However, they will always look somewhat similar to 
     ->css(__DIR__.'/forum-styles.css')
 ```
 
-You first create an instance of the extender, and then call methods on it for further configuration. All of these methods return the extender itself, so that you can achieve your entire configuration just by chaining method calls.
+Creare prima un'istanza dell'extender, quindi chiamare i metodi su di essa per un'ulteriore configurazione. Tutti questi metodi restituiscono l'extender stesso, in modo da poter ottenere l'intera configurazione semplicemente concatenando le chiamate ai metodi.
 
-To keep things consistent, we use this concept of extenders in both the backend (in PHP land) and the frontend (in JavaScript land). _Everything_ you do in your extension should be done via extenders, because they are a **guarantee** we are giving to you that a future minor release of Flarum won't break your extension.
+Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perché sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromperà la tua estensione.
 
-All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/core/blob/master/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
+::: tip Usa [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) per creare automaticamente lo scheletro della tua estensione :::
 
-## Hello World
+## Ciao Mondo
 
-Want to see an extender in action? The `extend.php` file in the root of your Flarum installation is the easiest way to register extenders just for your site. It should return an array of extender objects. Pop it open and add the following:
+Vuoi vedere un extender in azione? Il file `extend.php` nella root della tua installazione di Flarum è il modo più semplice per registrare gli extender per il tuo sito. Dovrebbe restituire un array di oggetti extender. Aprilo e aggiungi quanto segue:
 
 ```php
 <?php
@@ -52,36 +52,36 @@ use Flarum\Frontend\Document;
 return [
     (new Extend\Frontend('forum'))
         ->content(function (Document $document) {
-            $document->head[] = '<script>alert("Hello, world!")</script>';
+            $document->head[] = '<script>alert("Ciao, Mondo!")</script>';
         })
 ];
 ```
 
-Now pay your forum a visit for a pleasant (albeit extremely obtrusive) greeting. 👋
+Ora visita il tuo forum per un saluto piacevole (anche se estremamente invadente). 👋
 
-For simple site-specific customizations – like adding a bit of custom CSS/JavaScript, or integrating with your site's authentication system – the `extend.php` file in your forum's root is great. But at some point, your customization might outgrow it. Or maybe you have wanted to build an extension to share with the community from the get-go. Time to build an extension!
+Per semplici personalizzazioni specifiche del sito come l'aggiunta di un po 'di CSS / JavaScript personalizzato o l'integrazione con il sistema di autenticazione del tuo sito, il file il file `extend.php` è praticamente perfetto. Ma a un certo punto, la tua personalizzazione potrebbe diventare troppo grande. Or maybe you have wanted to build an extension to share with the community from the get-go. È ora di costruire un'estensione!
 
-## Extension Packaging
+## Pacchetto estensione
 
-[Composer](https://getcomposer.org) is a dependency manager for PHP. It allows applications to easily pull in external code libraries and makes it easy to keep them up-to-date so that security and bug fixes are propagated rapidly.
+[Composer](https://getcomposer.org) è un gestore delle dipendenze per PHP. Consente alle applicazioni di inserire facilmente librerie di codice esterne e rende facile mantenerle aggiornate in modo che la sicurezza e le correzioni di bug vengano propagate rapidamente.
 
-As it turns out, every Flarum extension is also a Composer package. That means someone's Flarum installation can "require" a certain extension and Composer will pull it in and keep it up-to-date. Nice!
+A quanto pare, ogni estensione Flarum è anche un pacchetto Composer. Ciò significa che l'installazione di Flarum di qualcuno può "richiedere" una certa estensione e Composer la inserirà e la manterrà aggiornata. Bello no?
 
-During development, you can work on your extensions locally and set up a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path) to install your local copy. Create a new `packages` folder in the root of your Flarum installation, and then run this command to tell Composer that it can find packages in here:
+Durante lo sviluppo, puoi lavorare sulle tue estensioni localmente e configurare un [repository di Composer](https://getcomposer.org/doc/05-repositories.md#path) per installare la tua copia locale. Crea una nuova cartella `packages` nella radice della tua installazione di Flarum, quindi esegui questo comando per dire a Composer che può trovare i pacchetti qui:
 
 ```bash
 composer config repositories.0 path "packages/*"
 ```
 
-Now let's start building our first extension. Make a new folder inside `packages` for your extension called `hello-world`. We'll put two files in it: `extend.php` and `composer.json`. These files serve as the heart and soul of the extension.
+Ora iniziamo a costruire la nostra prima estensione. Crea una nuova cartella all'interno di quella `packages` per la tua estensione, chiamata `hello-world`. Vi inseriremo due file, `extend.php` e `composer.json`. Questi file sono il cuore e l'anima dell'estensione.
 
 ### extend.php
 
-The `extend.php` file is just like the one in the root of your site. It will return an array of extender objects that tell Flarum what you want to do. For now, just move over the `Frontend` extender that you had earlier.
+Il file `extend.php` è proprio come quello nella radice del tuo sito. Restituirà un array di oggetti extender che dicono a Flarum cosa vuoi fare. Per ora, spostati sull'extender `Frontend` fatto prima.
 
 ### composer.json
 
-We need to tell Composer a bit about our package, and we can do this by creating a `composer.json` file:
+Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creando un file `composer.json`:
 
 ```json
 {
@@ -89,7 +89,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -107,45 +107,45 @@ We need to tell Composer a bit about our package, and we can do this by creating
 }
 ```
 
-* **name** is the name of the Composer package in the format `vendor/package`.
-  * You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `acme` as your vendor name.
-  * You should prefix the `package` part with `flarum-` to indicate that it’s a package specifically intended for use with Flarum.
+* ** nome ** è il nome del pacchetto Composer nel formato `creatore/pacchetto`.
+  * Dovresti scegliere un nome fornitore che sia univoco, ad esempio il tuo nome utente GitHub. Ai fini di questo tutorial, supporremo che tu stia utilizzando `acme`come nome creatore.
+  * Dovresti aggiungere il prefisso `package` con `flarum-` per indicare che si tratta di un pacchetto specificamente destinato all'uso con Flarum.
 
-* **description** is a short one-sentence description of what the extension does.
+* **description ** è una breve descrizione composta da una frase che spiega ciò che fa l'estensione.
 
-* **type** MUST be set to `flarum-extension`. This ensures that when someone "requires" your extension, it will be identified as such.
+* **type** DEVE essere impostato su `flarum-extension`. Ciò garantisce che quando qualcuno "richiede" la tua estensione, verrà identificato come tale.
 
-* **require** contains a list of your extension's own dependencies.
-  * You'll want to specify the version of Flarum that your extension is compatible with here.
-  * This is also the place to list other Composer libraries your code needs to work.
+* **require** contiene un elenco delle dipendenze della tua estensione.
+  * Dovrai specificare la versione di Flarum con cui la tua estensione è compatibile qui.
+  * Questo è anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
-  ::: warning Carefully choose the Flarum version While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
+  ::: warning Scegli con cura la versione Flarum Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilità solo con la versione corrente di Flarum:
 
-    "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+    "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
   :::
 
-* **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
+* **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
 
-* **extra.flarum-extension** contains some Flarum-specific information, like your extension's display name and how its icon should look.
-  * **title** is the display name of your extension.
-  * **icon** is an object which defines your extension's icon. The **name** property is a [Font Awesome icon class name](https://fontawesome.com/icons). All other properties are used as the `style` attribute for your extension's icon.
+* **extra.flarum-extension** contiene alcune informazioni specifiche di Flarum, come il nome visualizzato dell'estensione e come dovrebbe apparire la sua icona.
+  * **title** è il nome visualizzato della tua estensione.
+  * **icon** è un oggetto che definisce l'icona della tua estensione. La proprietà ** name ** è un icona [Font Awesome](https://fontawesome.com/icons). Tutte le altre proprietà vengono utilizzate dall'attributo `style` per l'icona della tua estensione.
 
-See [the composer.json schema](https://getcomposer.org/doc/04-schema.md) documentation for information about other properties you can add to `composer.json`.
+Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre proprietà da aggiungere a `composer.json`.
 
 ::: tip Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding. :::
 
-### Installing Your Extension
+### Installare la tua estensione
 
-The final thing we need to do to get up and running is to install your extension. Navigate to the root directory of your Flarum install and run the following command:
+L'ultima cosa che dobbiamo fare per essere operativi è installare la tua estensione. Vai alla directory root della tua installazione Flarum ed esegui il seguente comando
 
 ```bash
 composer require acme/flarum-hello-world *@dev
 ```
 
-Once that's done, go ahead and fire 'er up on your forum's Administration page, then navigate back to your forum.
+Una volta fatto, vai avanti e avvia la pagina di amministrazione del tuo forum.
 
-*whizzing, whirring, metal clunking*
+*crank, ching, crunk*
 
-Woop! Hello to you too, extension!
+Ooplà! Ciao a te estensione Hello World!
 
-We're making good progress. We've learned how to set up our extension and use extenders, which opens up a lot of doors. Read on to learn how to extend Flarum's frontend.
+Stiamo facendo buoni progressi. Abbiamo imparato come impostare la nostra estensione e utilizzare gli estensori, il che apre molte porte. Continua a leggere per scoprire come estendere il frontend di Flarum.
