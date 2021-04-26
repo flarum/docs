@@ -14,7 +14,7 @@ Beta 16 finalizes the PHP extender API, introduces a testing library and JS typi
 
 ## Backend
 
-### Extenders
+### 扩展器
 
 - All extenders that support callbacks/closures now support global functions like `'boolval'` and array-type functions like `[ClassName::class, 'methodName']`.
 - The `Settings` extender's `serializeToFrontend` method now supports a default value as the 4th argument.
