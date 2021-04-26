@@ -1,4 +1,4 @@
-# Getting Started
+# Başlangıç
 
 Want to build a Flarum extension? You've come to the right place! This document will take you through some essential concepts, after which you'll build your first Flarum extension from scratch.
 
