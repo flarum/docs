@@ -1,3 +1,3 @@
-# 更新
+# Updating
 
-Flarum 正处于测试阶段，有关如何更新的说明将在每次 [版本发布公告](https://discuss.flarum.org/t/blog?sort=newest)中公示。
+While Flarum is in beta, instructions on how to update will be posted in each [release announcement](https://discuss.flarum.org/t/blog?sort=newest).
