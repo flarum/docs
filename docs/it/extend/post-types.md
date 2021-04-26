@@ -1,1 +1,1 @@
-# Tipi di post
+# Post Types
