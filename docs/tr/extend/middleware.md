@@ -1,4 +1,4 @@
-# Middleware
+# Ara Yazılım
 
 Middleware is a nifty way to wrap the handling of HTTP requests in Flarum. This can allow you to modify responses, add your own checks to the request, and much more. The possibilities are endless!
 
