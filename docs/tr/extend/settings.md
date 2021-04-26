@@ -1,4 +1,4 @@
-# Settings
+# Ayarlar
 
 At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy.
 
