@@ -1,27 +1,29 @@
-# 电子邮件配置
+# Email Configuration
 
-每个社区都需要发送电子邮件给用户，用来激活账户、重置密码、接收通知以及与其他用户通讯交流。作为论坛管理员，您首先要做的几件事之一就是配置好论坛的邮件服务！配置错误的话，用户在注册时会收到报错。
+Any community needs to send emails to allow for email verification, password resets, notifications, and other communication to users. Configuring your forum to send emails should be one of your first steps as an admin: an incorrect configuration will cause errors when users try to register.
 
-## 支持的邮件驱动
+## Available Drivers
 
-Flarum 默认提供以下所列驱动，若有需要，开发者可自行开发插件添加 [自定义邮件驱动](extend/mail.md)。
+Flarum provides several drivers by default, they are listed and explained below. Developers can also add [custom mail drivers through extensions](extend/mail.md).
 
 ### SMTP
 
-这是最常用的邮件驱动，需要您配置主机地址、端口、加密方式、用户名和密码，以使用外部 SMTP 服务。请注意，加密方式必须为小写的 `ssl` 或 `tls`。
+This is probably the most commonly used email driver, allowing you to configure a host, port/encryption, username, and password for an external SMTP service. Please note that the encryption field expects either `ssl` or `tls`.
 
 ### Mail
 
-`mail` 会用到许多托管服务器上都有的 sendmail / postfix 邮件系统。您必须在服务器上正确安装并配置好 sendmail 才能正常工作。
+The `mail` driver will try to use the sendmail / postfix email system included in many hosting servers. You must properly install and configure sendmail on your server for this to work.
 
 ### Mailgun
 
-通过您的 [Mailgun](https://www.mailgun.com/) 来发送邮件。您需要填写 secret key，以及您在 Mailgun 配置的域名、区域。
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. You'll need a secret key, as well as the domain and region from your mailgun configuration.
+
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
 ### Log
 
-日志模式下 **不会有任何邮件被发出**，该模式多在开发者调试时使用，在这个模式下，任何邮件内容都会被写入日志中（日志路径：`Flarum根目录/storage/logs`）。
+The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
-## 测试邮件
+## Testing Email
 
-在您保存邮件配置后，您可以在后台管理面板的邮件配置页面点击「发送测试邮件」发送一封邮件以检测您的配置是否可用。如果提示错误，或者您没有收到测试邮件，那就意味着配置有误，请检查配置然后重试。如果没有任何报错，邮件也发送出去了，但是您在收件箱中找不到测试邮件，请去垃圾箱看看，它很可能在那边。
+Once you've saved an email configuration, you can click the "Send Test Mail" button on the Mail page of the admin dashboard to make sure your configuration works. If you see an error, or do not receive an email, adjust the configuration and try again. Make sure to check your spam if there's no error, but nothing shows up in your inbox.
