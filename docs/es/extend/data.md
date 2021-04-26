@@ -1,34 +1,34 @@
-# Working with Data
+# Trabajar con datos
 
-Data is the foundation of any forum, so you're going to need to play nice with it if you want your extension to do anything useful. This document runs through how data flows in Flarum, from the database to the JSON-API to the frontend, and all the way back again.
+Los datos son la base de cualquier foro, así que vas a tener que jugar bien con ellos si quieres que tu extensión haga algo útil. Este documento repasa cómo fluyen los datos en Flarum, desde la base de datos hasta el JSON-API y el frontend, y todo el camino de vuelta.
 
-Flarum makes use of [Laravel's Database component](https://laravel.com/docs/database). You should familiarize yourself with it before proceeding, as it is assumed as prior knowledge in the following documentation.
+Flarum utiliza el componente de base de datos de [Laravel](https://laravel.com/docs/database). Debes familiarizarte con él antes de continuar, ya que se asume como conocimiento previo en la siguiente documentación.
 
 
-## API Request Lifecycle
+## Ciclo de vida de las solicitudes de la API
 
-Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical data request:
+Antes de entrar en detalles sobre cómo ampliar la API de datos de Flarum, vale la pena pensar en el ciclo de vida de una solicitud de datos típica:
 
-1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
-2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
-3. Any modifications done by extensions to the controller via the [`ApiController` extender](#extending-api-controllers) are applied. This could entail changing sort, adding includes, changing the serializer, etc.
-4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the controller's serializer can process it. Each controller is responsible for implementing its own `data` method. Note that for `PATCH`, `POST`, and `DELETE` requests, `data` will perform the operation in question, and return the modified model instance.
-5. That data is run through any pre-serialization callbacks that extensions register via the [`ApiController` extender](#extending-api-controllers).
-6. The data is passed through a [serializer](#serializers), which converts it from the backend, database-friendly format to the JSON:API format expected by the frontend. It also attaches any related objects, which are run through their own serializers. As we'll explain below, extensions can [add / override relationships and attributes](#attributes-and-relationships) at the serialization level.
-7. The serialized data is returned as a JSON response to the frontend.
-8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](#frontend-models) in the frontend store.
+1. Se envía una solicitud HTTP a la API de Flarum. Normalmente, esto vendrá del frontend de Flarum, pero los programas externos también pueden interactuar con la API. La API de Flarum sigue en su mayoría la especificación [JSON:API](https://jsonapi.org/), por lo que, en consecuencia, las solicitudes deben seguir [dicha especificación](https://jsonapi.org/format/#fetching).
+2. La solicitud se ejecuta a través de [middleware](middleware.md), y se dirige al controlador adecuado. Puedes aprender más sobre los controladores en su conjunto en nuestra [documentación sobre rutas y contenido](routes.md). Asumiendo que la petición es a la API (que es el caso de esta sección), el controlador que maneja la petición será una subclase de `Flarum\Api\AbstractSerializeController`.
+3. Cualquier modificación realizada por las extensiones del controlador a través del extensor [`ApiController`] (#extending-api-controllers) se aplica. Esto podría suponer el cambio de sort, añadir includes, cambiar el serializador, etc.
+4. Se llama al método `$this->data()` del controlador, obteniendo algunos datos en bruto que deben ser devueltos al cliente. Típicamente, estos datos tomarán la forma de una colección o instancia del modelo de Laravel Eloquent, que ha sido recuperada de la base de datos. Dicho esto, los datos pueden ser cualquier cosa siempre que el serializador del controlador pueda procesarlos. Cada controlador es responsable de implementar su propio método `data`. Ten en cuenta que para las peticiones `PATCH`, `POST` y `DELETE`, `data` realizará la operación en cuestión, y devolverá la instancia del modelo modificado.
+5. Esos datos se ejecutan a través de cualquier callback de preserialización que las extensiones registren a través del extensor [`ApiController`](#extending-api-controllers).
+6. Los datos se pasan a través de un [serializador](#serializers), que los convierte del formato de base de datos del backend al formato JSON: API esperado por el frontend. También adjunta cualquier objeto relacionado, que se ejecuta a través de sus propios serializadores. Como explicaremos más adelante, las extensiones pueden [añadir / anular relaciones y atributos](#attributes-and-relationships) en el nivel de serialización.
+7. Los datos serializados se devuelven como una respuesta JSON al frontend.
+8. Si la solicitud se originó a través de la `Store` del frontend de Flarum, los datos devueltos (incluyendo cualquier objeto relacionado) serán almacenados como [modelos del frontend](#frontend-models) en el almacén del frontend.
 
-## Migrations
+## Migraciones
 
-If we want to use a custom model, or add attributes to an existing one, we will need to modify the database to add tables / columns. We do this via migrations.
+Si queremos utilizar un modelo personalizado, o añadir atributos a uno existente, tendremos que modificar la base de datos para añadir tablas / columnas. Esto lo hacemos a través de las migraciones.
 
-Migrations are like version control for your database, allowing you to easily modify Flarum's database schema in a safe way. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/migrations), although there are some differences.
+Las migraciones son como un control de versiones para su base de datos, permitiéndole modificar fácilmente el esquema de la base de datos de Flarum de forma segura. Las migraciones de Flarum son muy similares a las de [Laravel](https://laravel.com/docs/migrations), aunque hay algunas diferencias.
 
-Migrations live inside a folder suitably named `migrations` in your extension's  directory. Migrations should be named in the format `YYYY_MM_DD_HHMMSS_snake_case_description` so that they are listed and run in order of creation.
+Las migraciones viven dentro de una carpeta convenientemente llamada `migrations` en el directorio de su extensión. Las migraciones deben ser nombradas en el formato `YYY_MM_DD_HHMMSS_snake_case_description` para que sean listadas y ejecutadas en orden de creación.
 
-### Migration Structure
+### Estructura de la migración
 
-In Flarum, migration files should **return an array** with two functions: `up` and `down`. The `up` function is used to add new tables, columns, or indexes to your database, while the `down` function should reverse these operations. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/6.x/migrations#creating-tables) which you can use to alter the database schema:
+En Flarum, los archivos de migración deben **devolver un array** con dos funciones: `up` y `down`. La función `up` se utiliza para añadir nuevas tablas, columnas o índices a tu base de datos, mientras que la función `down` debe revertir estas operaciones. Estas funciones reciben una instancia del [Laravel schema builder](https://laravel.com/docs/6.x/migrations#creating-tables) que puedes usar para alterar el esquema de la base de datos:
 
 ```php
 <?php
@@ -45,19 +45,19 @@ return [
 ];
 ```
 
-For common tasks like creating a table, or adding columns to an existing table, Flarum provides some helpers which construct this array for you, and take care of writing the `down` migration logic while they're at it. These are available as static methods on the `Flarum\Database\Migration` class.
+Para tareas comunes como la creación de una tabla, o la adición de columnas a una tabla existente, Flarum proporciona algunos ayudantes que construyen esta matriz para usted, y se encargan de escribir la lógica de migración `down` mientras están en ello. Están disponibles como métodos estáticos en la clase `Flarum\Database\Migration`.
 
-### Migration Lifecycle
+### Ciclo de vida de las migraciones
 
-Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
+Las migraciones se aplican cuando la extensión se habilita por primera vez o cuando está habilitada y hay algunas migraciones pendientes. Las migraciones ejecutadas se registran en la base de datos, y cuando se encuentran algunas en la carpeta de migraciones de una extensión que no están registradas como completadas todavía, se ejecutarán.
 
-Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Uninstall" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
+Las migraciones también pueden aplicarse manualmente con `php flarum migrate`, que también es necesario para actualizar las migraciones de una extensión ya habilitada. Para deshacer los cambios aplicados por las migraciones, es necesario hacer clic en "Desinstalar" junto a una extensión en la interfaz de administración, o utilizar el comando `php flarum migrate:reset`. No se puede romper nada ejecutando `php flarum migrate` de nuevo si ya has migrado - las migraciones ejecutadas no se ejecutarán de nuevo.
 
-There are currently no composer-level hooks for managing migrations at all (i.e. updating an extension with `composer update` will not run its outstanding migrations).
+Actualmente no hay ganchos a nivel de compositor para gestionar las migraciones en absoluto (es decir, actualizar una extensión con `composer update` no ejecutará sus migraciones pendientes).
 
-### Creating Tables
+### Creación de tablas
 
-To create a table, use the `Migration::createTable` helper. The `createTable` helper accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives a `Blueprint` object that may be used to define the new table:
+Para crear una tabla, utilice el ayudante `Migration::createTable`. El ayudante `createTable` acepta dos argumentos. El primero es el nombre de la tabla, mientras que el segundo es un `Closure` que recibe un objeto `Blueprint` que puede ser utilizado para definir la nueva tabla:
 
 ```php
 use Flarum\Database\Migration;
@@ -68,50 +68,50 @@ return Migration::createTable('users', function (Blueprint $table) {
 });
 ```
 
-When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/6.x/migrations#creating-columns) to define the table's columns.
+Al crear la tabla, puede utilizar cualquiera de los [métodos de columna](https://laravel.com/docs/6.x/migrations#creating-columns) del constructor de esquemas para definir las columnas de la tabla.
 
-### Renaming Tables
+### Renombrar Tablas
 
-To rename an existing database table, use the `Migration::renameTable` helper:
+Para renombrar una tabla de la base de datos existente, utilice el ayudante `Migration::renameTable`:
 
 ```php
 return Migration::renameTable($from, $to);
 ```
 
-### Creating/Dropping Columns
+### Crear/eliminar columnas
 
-To add columns to an existing table, use the `Migration::addColumns` helper. The `addColumns` helper accepts two arguments. The first is the name of the table. The second is an array of column definitions, with the key being the column name. The value of each item is an array with the column definitions, as understood by Laravel's `Illuminate\Database\Schema\Blueprint::addColumn()` method. The first value is the column type, and any other keyed values are passed through to `addColumn`.
+Para añadir columnas a una tabla existente, utilice el ayudante `Migration::addColumns`. El ayudante `addColumns` acepta dos argumentos. El primero es el nombre de la tabla. El segundo es un array de definiciones de columnas, cuya clave es el nombre de la columna. El valor de cada elemento es un array con las definiciones de las columnas, tal y como lo entiende el método `Illuminate\Database\Schema\Blueprint::addColumn()` de Laravel. El primer valor es el tipo de columna, y cualquier otro valor clave se pasa a través de `addColumn`.
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'length' => 255, 'nullable' => true],
+    'email' => ['string', 'nullable' => true],
     'discussion_count' => ['integer', 'unsigned' => true]
 ]);
 ```
 
-To drop columns from an existing table, use the `Migration::dropColumns` helper, which accepts the same arguments as the `addColumns` helper. Just like when dropping tables, you should specify the full column definitions so that the migration can be rolled back cleanly.
+Para eliminar columnas de una tabla existente, utilice el ayudante `Migration::dropColumns`, que acepta los mismos argumentos que el ayudante `addColumns`. Al igual que cuando se eliminan tablas, se deben especificar las definiciones completas de las columnas para que la migración se pueda revertir limpiamente.
 
-### Renaming Columns
+### Renombrar columnas
 
-To rename columns, use the `Migration::renameColumns` helper. The `renameColumns` helper accepts two arguments. The first is the name of the table, while the second is an array of column names to rename:
+Para cambiar el nombre de las columnas, utilice el ayudante `Migration::renameColumns`. El ayudante `renameColumns` acepta dos argumentos. El primero es el nombre de la tabla, mientras que el segundo es un array de nombres de columnas a renombrar:
 
 ```php
 return Migration::renameColumns('users', ['from' => 'to']);
 ```
 
-### Data Migrations (Advanced)
+### Migraciones de Datos (Avanzado)
 
-A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. For instance, you could use migrations to assign [custom permissions](permissions.md) to groups other than Admin, or provide some initial data for a custom Eloquent model. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
+Una migración no tiene por qué cambiar la estructura de la base de datos: puedes utilizar una migración para insertar, actualizar o eliminar filas en una tabla. Por ejemplo, puedes utilizar las migraciones para asignar [permisos personalizados](permissions.md) a otros grupos que no sean el de Administrador, o proporcionar algunos datos iniciales para un modelo personalizado de Eloquent. Dado que tienes acceso al [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), todo es posible (aunque, por supuesto, debes ser extremadamente cauteloso y probar tu extensión extensamente).
 
-Data migrations are the recommended way to specify default settings and permissions.
+Las migraciones de datos son la forma recomendada de especificar la configuración y los permisos por defecto.
 
-## Backend Models
+## Modelos del backend
 
-With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/6.x/eloquent).
+Con todas tus nuevas tablas y columnas de la base de datos, vas a querer una forma de acceder a los datos tanto en el backend como en el frontend. En el backend es bastante sencillo - sólo necesitas estar familiarizado con [Eloquent](https://laravel.com/docs/6.x/eloquent).
 
-### Adding New Models
+### Añadir nuevos modelos
 
-If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions.
+Si has añadido una nueva tabla, tendrás que crear un nuevo modelo para ella. En lugar de extender la clase `Model` de Eloquent directamente, deberías extender `Flarum\Database\AbstractModel` que proporciona un poco de funcionalidad extra para permitir que tus modelos sean extendidos por otras extensiones.
 
 
 <!--
@@ -140,9 +140,9 @@ return [
 ```
 -->
 
-### Relationships
+### Relaciones
 
-You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+También puedes añadir [relaciones](https://laravel.com/docs/6.x/eloquent-relationships) a los modelos existentes utilizando los métodos `hasOne`, `belongsTo`, `hasMany`, `belongsToMany` y `relationship` del extensor `Model`. El primer argumento es el nombre de la relación; el resto de los argumentos se pasan al método equivalente en el modelo, por lo que se puede especificar el nombre del modelo relacionado y, opcionalmente, anular los nombres de las tablas y las claves:
 
 ```php
     new Extend\Model(User::class)
@@ -152,12 +152,12 @@ You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relations
         ->belongsToMany('role', 'App\Role', 'role_user', 'user_id', 'role_id')
 ```
 
-Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship is supported by the `relationship` method:
+Estos 4 métodos deberían cubrir la mayoría de las relaciones, pero a veces se necesita una personalización más fina (por ejemplo, `morphMany`, `morphToMany` y `morphedByMany`). Cualquier relación válida de Eloquent es soportada por el método `relationship`:
 
 ```php
     new Extend\Model(User::class)
         ->relationship('mobile', 'App\Phone', function ($user) {
-            // Return any Eloquent relationship here.
+            // Devuelve aquí cualquier relación Eloquent.
             return $user->belongsToMany(Discussion::class, 'recipients')
                 ->withTimestamps()
                 ->wherePivot('removed_at', null);
@@ -165,11 +165,11 @@ Those 4 should cover the majority of relations, but sometimes, finer-grained cus
 ```
 
 
-## Serializers
+## Serializadores
 
-The next step is to expose your new data in Flarum's JSON:API so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
+El siguiente paso es exponer tus nuevos datos en el JSON: API de Flarum para que puedan ser consumidos por el frontend. Debes familiarizarte con la [especificación JSON: API](https://jsonapi.org/format/). La capa JSON: API de Flarum se alimenta de la biblioteca [tobscure/json-api](https://github.com/tobscure/json-api).
 
-JSON:API resources are defined by **serializers**. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
+Los recursos JSON: API son definidos por **serializadores**. Para definir un nuevo tipo de recurso, crea una nueva clase de serializador que extienda `FlarumApi\Serializer\AbstractSerializer`. Debe especificar un recurso `$type` e implementar el método `getDefaultAttributes` que acepta la instancia del modelo como único argumento:
 
 ```php
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -188,9 +188,9 @@ class DiscussionSerializer extends AbstractSerializer
 }
 ```
 
-### Attributes and Relationships
+### Atributos y relaciones
 
-You can also specify relationships for your resource. Simply create a new method with the same name as the relation on your model, and return a call to `hasOne` or `hasMany` depending on the nature of the relationship. You must pass in the model instance and the name of the serializer to use for the related resources.
+También puedes especificar relaciones para tu recurso. Simplemente crea un nuevo método con el mismo nombre que la relación en tu modelo, y devuelve una llamada a `hasOne` o `hasMany` dependiendo de la naturaleza de la relación. Debes pasar la instancia del modelo y el nombre del serializador a utilizar para los recursos relacionados.
 
 ```php
     protected function user($discussion)
@@ -199,18 +199,18 @@ You can also specify relationships for your resource. Simply create a new method
     }
 ```
 
-To add **attributes** and **relationships** to an existing resource type, use the `ApiSerializer` extender:
+Para añadir **atributos** y **relaciones** a un tipo de recurso existente, utilice el extensor `ApiSerializer`:
 
 ```php
 use Flarum\Api\Serializer\UserSerializer;
 
 return [
     (new Extend\ApiSerializer(UserSerializer::class))
-        // One attribute at a time
+        // Un atributo a la vez
         ->attribute('firstName', function ($serializer, $user, $attributes) {
                 return $user->first_name
         })
-        // Multiple modifications at once, more complex logic
+        // Múltiples modificaciones a la vez, lógica más compleja
         ->mutate(function($serializer, $user, $attributes) {
             $attributes['someAttribute'] = $user->someAttribute;
             if ($serializer->getActor()->can('administrate')) {
@@ -219,7 +219,7 @@ return [
 
             return $attributes;
         })
-        // API relationships
+        // Relaciones de la API
         ->hasOne('phone', PhoneSerializer::class)
         ->hasMany('comments', CommentSerializer::class),
 ]
@@ -227,9 +227,9 @@ return [
 
 ## API Endpoints
 
-Once you have defined your resources in serializers, you will need to expose them as API endpoints by adding routes and controllers.
+Una vez que hayas definido tus recursos en los serializadores, necesitarás exponerlos como puntos finales de la API añadiendo rutas y controladores.
 
-Following JSON-API conventions, you can add five standard routes for your resource type using the `Routes` extender:
+Siguiendo las convenciones de JSON-API, puedes añadir cinco rutas estándar para tu tipo de recurso utilizando el extensor `Routes`:
 
 ```php
     (new Extend\Routes('api'))
@@ -240,11 +240,11 @@ Following JSON-API conventions, you can add five standard routes for your resour
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
+El espacio de nombres `Flarum\Api\Controller` contiene una serie de clases abstractas de controladores que puedes extender para implementar fácilmente tus recursos JSON-API.
 
-### Listing Resources
+### Listado de recursos
 
-For the controller that lists your resource, extend the `Flarum\Api\Controller\AbstractListController` class. At a minimum, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a collection of models. The `data` method accepts the `Request` object and the tobscure/json-api `Document`.
+Para el controlador que enumera su recurso, extienda la clase `FlarumApi\Controller\AbstractListController`. Como mínimo, necesitas especificar el `$serializer` que quieres usar para serializar tus modelos, e implementar un método `data` para devolver una colección de modelos. El método `data` acepta el objeto `Request` y el `Document` tobscure/json-api.
 
 ```php
 use Flarum\Api\Controller\AbstractListController;
@@ -262,9 +262,9 @@ class ListTagsController extends AbstractListController
 }
 ```
 
-### Showing a Resource
+### Mostrar un recurso
 
-For the controller that shows a single resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the list controller, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a single model:
+Para el controlador que muestra un solo recurso, extienda la clase `Flarum\Api\Controller\AbstractShowController`. Al igual que para el controlador de la lista, es necesario especificar el `$serializer` que desea utilizar para serializar sus modelos, e implementar un método `data` para devolver un solo modelo:
 
 ```php
 use Flarum\Api\Controller\AbstractShowController;
@@ -285,9 +285,9 @@ class ShowTagController extends AbstractShowController
 }
 ```
 
-### Creating a Resource
+### Creación de un recurso
 
-For the controller that creates a resource, extend the `Flarum\Api\Controller\AbstractCreateController` class. This is the same as the show controller, except the response status code will automatically be set to `201 Created`. You can access the incoming JSON:API document body via `$request->getParsedBody()`:
+Para el controlador que actualiza un recurso, extienda la clase `Flarum\Api\Controller\AbstractShowController`. Al igual que para el controlador de creación, puedes acceder al cuerpo del documento JSON: API entrante a través de `$request->getParsedBody()`.
 
 ```php
 use Flarum\Api\Controller\AbstractCreateController;
@@ -310,13 +310,13 @@ class CreateTagController extends AbstractCreateController
 }
 ```
 
-### Updating a Resource
+### Actualización de un recurso
 
-For the controller that updates a resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the create controller, you can access the incoming JSON:API document body via `$request->getParsedBody()`.
+Para el controlador que crea un recurso, extienda la clase `Flarum\Api\Controller\AbstractCreateController`. Puede acceder al cuerpo del documento JSON: API entrante a través de `$request->getParsedBody()`:
 
-### Deleting a Resource
+### Borrar un recurso
 
-For the controller that deletes a resource, extend the `Flarum\Api\Controller\AbstractDeleteController` class. You only need to implement a `delete` method which enacts the deletion. The controller will automatically return an empty `204 No Content` response.
+Para el controlador que borra un recurso, extienda la clase `Flarum\Api\Controller\AbstractDeleteController`. Sólo necesitas implementar un método `delete` que ejecute el borrado. El controlador devolverá automáticamente una respuesta vacía `204 No Content`.
 
 ```php
 use Flarum\Api\Controller\AbstractDeleteController;
@@ -334,19 +334,19 @@ class DeleteTagController extends AbstractDeleteController
 }
 ```
 
-### Including Relationships
+### ncluir Relaciones
 
-To include relationships when **listing**, **showing**, or **creating** your resource, specify them in the `$include` and `$optionalInclude` properties on your controller:
+Para incluir las relaciones al **enumerar**, **mostrar** o **crear** su recurso, especifíquelas en las propiedades `$include` y `$optionalInclude` de su controlador:
 
 ```php
-    // The relationships that are included by default.
+    // Las relaciones que se incluyen por defecto.
     public $include = ['user'];
 
-    // Other relationships that are available to be included.
+    // Otras relaciones que están disponibles para ser incluidas.
     public $optionalInclude = ['discussions'];
 ```
 
-You can then get a list of included relationships using the `extractInclude` method. This can be used to eager-load the relationships on your models before they are serialized:
+A continuación, puede obtener una lista de relaciones incluidas utilizando el método `extractInclude`. Esto se puede utilizar para cargar con avidez las relaciones en sus modelos antes de que se serialicen:
 
 ```php
 $relations = $this->extractInclude($request);
@@ -354,19 +354,19 @@ $relations = $this->extractInclude($request);
 return Tag::all()->load($relations);
 ```
 
-### Pagination
+### Paginación
 
-You can allow the number of resources being **listed** to be customized by specifying the `limit` and `maxLimit` properties on your controller:
+Puede permitir que el número de recursos que se **liste** sea personalizado especificando las propiedades `limit` y `maxLimit` en su controlador:
 
 ```php
-    // The number of records included by default.
+    // El número de registros incluidos por defecto.
     public $limit = 20;
 
-    // The maximum number of records that can be requested.
+    // El número máximo de registros que se pueden solicitar.
     public $maxLimit = 50;
 ```
 
-You can then extract pagination information from the request using the `extractLimit` and `extractOffset` methods:
+A continuación, puede extraer la información de paginación de la solicitud utilizando los métodos `extractLimit` y `extractOffset`:
 
 ```php
 $limit = $this->extractLimit($request);
@@ -375,21 +375,21 @@ $offset = $this->extractOffset($request);
 return Tag::skip($offset)->take($limit);
 ```
 
-To add pagination links to the JSON:API document, use the [`Document::addPaginationLinks` method](https://github.com/tobscure/json-api#meta--links).
+Para añadir enlaces de paginación al documento JSON: API, utilice el método [`Document::addPaginationLinks`](https://github.com/tobscure/json-api#meta--links).
 
-### Sorting
+### Clasificación
 
-You can allow the sort order of resources being **listed** to be customized by specifying the `sort` and `sortField` properties on your controller:
+Puede permitir que se personalice el orden de clasificación de los recursos que se **listen** especificando las propiedades `sort` y `sortField` en su controlador:
 
 ```php
-    // The default sort field and order to use.
+    // El campo de clasificación por defecto y el orden a utilizar.
     public $sort = ['name' => 'asc'];
 
-    // The fields that are available to be sorted by.
+    // Los campos que están disponibles para ser ordenados.
     public $sortFields = ['firstName', 'lastName'];
 ```
 
-You can then extract sorting information from the request using the `extractSort` method. This will return an array of sort criteria which you can apply to your query:
+A continuación, puede extraer la información de ordenación de la solicitud utilizando el método `extractSort`. Esto devolverá un array de criterios de ordenación que puedes aplicar a tu consulta:
 
 ```php
 $sort = $this->extractSort($request);
@@ -402,9 +402,9 @@ foreach ($sort as $field => $order) {
 return $query->get();
 ```
 
-### Extending API Controllers
+### Extensión de los controladores de la API
 
-It is possible to customize all of these options on _existing_ API controllers too via the `ApiController` extender
+También es posible personalizar todas estas opciones en controladores de API _existentes_ mediante el extensor `ApiController`.
 
 ```php
 use Flarum\Api\Event\WillGetData;
@@ -421,13 +421,13 @@ return [
         ->setSort(['name' => 'asc'])
         ->addSortField('firstName')
         ->prepareDataQuery(function ($controller) {
-            // Add custom logic here to modify the controller
-            // before data queries are executed.
+            // Añade aquí la lógica personalizada para modificar el controlador
+            // antes de que se ejecuten las consultas de datos.
         })
 ]
 ```
 
-The `ApiController` extendercan also be used to adjust data before serialization
+El extensor `ApiController` también puede utilizarse para ajustar los datos antes de la serialización
 
 ```php
 use Flarum\Api\Event\WillSerializeData;
@@ -442,13 +442,13 @@ return [
 ]
 ```
 
-## Frontend Models
+## Modelos Frontend
 
-Now that you have exposed your data in Flarum's JSON:API, it's finally time to bring it to life and consume it on the frontend.
+Ahora que has expuesto tus datos en el JSON: API de Flarum, es finalmente el momento de darles vida y consumirlos en el frontend.
 
-### Fetching Data
+### Obtención de datos
 
-Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
+El frontend de Flarum contiene un `store` de datos local que proporciona una interfaz para interactuar con el JSON: API. Puedes recuperar recursos de la API usando el método `find`, que siempre devuelve una promesa:
 
 ```js
 // GET /api/discussions?sort=createdAt
@@ -458,29 +458,29 @@ app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
 app.store.find('discussions', 123).then(console.log);
 ```
 
-Once resources have been loaded, they will be cached in the store so you can access them again without hitting the API using the `all` and `getById` methods:
+Una vez cargados los recursos, se guardarán en la caché del almacén para que puedas acceder a ellos de nuevo sin tener que recurrir a la API utilizando los métodos `all` y `getById`:
 
 ```js
 const discussions = app.store.all('discussions');
 const discussion = app.store.getById('discussions', 123);
 ```
 
-The store wraps the raw API resource data in model objects which make it a bit easier to work with. Attributes and relationships can be accessed via pre-defined instance methods:
+El almacén envuelve los datos brutos de los recursos de la API en objetos modelo que facilitan el trabajo. Se puede acceder a los atributos y relaciones a través de métodos de instancia predefinidos:
 
 ```js
 const id = discussion.id();
 const title = discussion.title();
-const posts = discussion.posts(); // array of Post models
+const posts = discussion.posts(); // array de modelos Post
 ```
 
-You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
+Puede obtener más información sobre el almacén en nuestra \[documentación de la API\] (https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
 
-### Adding New Models
+### Añadir nuevos modelos
 
-If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
+Si has añadido un nuevo tipo de recurso, tendrás que definir un nuevo modelo para él. Los modelos deben extender la clase `Model` y redefinir los atributos y relaciones del recurso:
 
 ```js
-import Model from 'flarum/common/Model';
+import Model from 'flarum/Model';
 
 export default class Tag extends Model {
   title = Model.attribute('title');
@@ -490,7 +490,7 @@ export default class Tag extends Model {
 }
 ```
 
-You must then register your new model with the store:
+A continuación, debe registrar su nuevo modelo en el almacén:
 
 ```js
 app.store.models.tags = Tag;
@@ -504,8 +504,8 @@ export const extend = [
   new Extend.Model('tags', Tag)
 ];
 ``` -->
-### Extending Models
-To add attributes and relationships to existing models, modify the model class prototype:
+### Extender los modelos
+Para añadir atributos y relaciones a los modelos existentes, modifique el prototipo de la clase del modelo:
 
 ```js
 Discussion.prototype.user = Model.hasOne('user');
@@ -522,14 +522,14 @@ Discussion.prototype.slug = Model.attribute('slug');
     .hasOne('user')
     .hasMany('posts')
 ``` -->
-### Saving Resources
-To send data back through the API, call the `save` method on a model instance. This method returns a Promise which resolves with the same model instance:
+### Ahorro de recursos
+Para enviar datos a través de la API, llame al método `save` en una instancia del modelo. Este método devuelve una Promise que se resuelve con la misma instancia del modelo:
 
 ```js
 discussion.save({ title: 'Hello, world!' }).then(console.log);
 ```
 
-You can also save relationships by passing them in a `relationships` key. For has-one relationships, pass a single model instance. For has-many relationships, pass an array of model instances.
+También puede guardar las relaciones pasándolas en una clave `relationships`. Para las relaciones has-one, pasa una única instancia del modelo. Para las relaciones has-muchos, pasa una matriz de instancias del modelo.
 
 ```js
 user.save({
@@ -542,9 +542,9 @@ user.save({
 })
 ```
 
-### Creating New Resources
+### Creación de nuevos recursos
 
-To create a new resource, create a new model instance for the resource type using the store's `createRecord` method, then `save` it:
+Para crear un nuevo recurso, cree una nueva instancia del modelo para el tipo de recurso utilizando el método `createRecord` de la tienda, y luego `save`:
 
 ```js
 const discussion = app.store.createRecord('discussions');
@@ -552,9 +552,9 @@ const discussion = app.store.createRecord('discussions');
 discussion.save({ title: 'Hello, world!' }).then(console.log);
 ```
 
-### Deleting Resources
+### Borrar recursos
 
-To delete a resource, call the `delete` method on a model instance. This method returns a Promise:
+Para eliminar un recurso, llame al método `delete` en una instancia del modelo. Este método devuelve una Promise:
 
 ```js
 discussion.delete().then(done);
