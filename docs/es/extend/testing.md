@@ -155,16 +155,16 @@ If your test case needs users beyond the default admin user, you can use the `$t
 
 Of course, since this is all based on PHPUnit, you can use the `setUp()` methods of your test classes for common setup tasks.
 
-For example:
+Por ejemplo:
 
 ```php
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -232,16 +232,16 @@ A common application of automated testing is pinging various HTTP endpoints with
 - The `request()` method constructs a `Psr\Http\Message\ServerRequestInterface` implementing object from a path, a method, and some options, which can be used for authentication, attaching cookies, or configuring the JSON request body. See the [method docblock](https://github.com/flarum/testing/blob/main/src/integration/TestCase.php) for more information on available options.
 - Once you've created a request instance, you can send it (and get a response object back) via the `send()` method.
 
-For example:
+Por ejemplo:
 
 ```php
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -305,16 +305,16 @@ If you want to test custom console commands, you can extend `Flarum\Testing\inte
 - `$this->console()` returns an instance of `Symfony\Component\Console\Application`
 - `$this->runCommand()` takes an array that will be wrapped in `Symfony\Component\Console\Input\ArrayInput`, and run. See the [Symfony code docblock](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22) for more information.
 
-For example:
+Por ejemplo:
 
 ```php
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
