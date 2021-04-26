@@ -1,51 +1,51 @@
-# 控制台
+# Console
 
-除了论坛后台的管理面板，Flarum 还提供了几个控制台命令，以帮助您通过终端管理论坛。
+In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
 
-使用步骤：
+To use the console:
 
-1. `ssh` 连接到安装 Flarum 的服务器
-2. `cd` 进入含有一个叫做 `flarum` 的文件的文件夹中
-3. 执行 `php flarum [命令名]`
+1. `ssh` into the server where your flarum installation is hosted
+2. `cd` to the folder that contains a file called `flarum`
+3. Run the command via `php flarum [command]`
 
-## 默认命令
+## Default Commands
 
 ### list
 
-以列表形式输出所有支持的管理命令，以及每个命令的使用说明。
+Lists all available management commands, as well as instructions for using management commands
 
 ### help
 
-`php flarum help [命令名]`
+`php flarum help [command_name]`
 
-输出指定命令的帮助信息。
+Displays help output for a given command.
 
-要以其他格式输出，请添加 --format 参数：
+You can also output the help in other formats by using the --format option:
 
 `php flarum help --format=xml list`
 
-要显示可用的命令列表，请使用 list 命令。
+To display the list of available commands, please use the list command.
 
 ### info
 
 `php flarum info`
 
-统计 Flarum 核心及已安装插件的信息并输出。调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
+Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-清楚后端 Flarum 缓存，包括已生成的 js/css，文本格式器缓存、翻译缓存。在您安装或卸载插件后，应当运行此命令。另外，在遇到问题的第一时间，请运行此命令看看能否解决问题。
+Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
 
 ### migrate
 
 `php flarum migrate`
 
-执行所有未完成的迁移。当安装或更新一个要修改数据库的插件时，会用到此命令。
+Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
 
 ### migrate:reset
 
-`php flarum migrate:reset --extension [插件ID]`
+`php flarum migrate:reset --extension [extension_id]`
 
-重置指定插件的所有迁移。这个命令大多被插件开发人员使用，如果您要卸载插件，并且想要从数据库中清除该插件的所有数据，也会需要用它。请注意，该命令的被执行插件必须处于已安装状态（插件启用不启用都行）。
+Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
