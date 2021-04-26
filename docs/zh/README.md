@@ -1,17 +1,17 @@
-# About Flarum
+# 关于 Flarum
 
-Flarum is a delightfully simple discussion platform for your website. It's fast and easy to use, with all the features you need to run a successful community.
+Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易用，拥有打造一片成功的社区所需的所有功能。
 
-This user guide will help you to set up your own forum using Flarum and teach you the basics of managing your community.
+本用户指南将帮助您使用 Flarum 搭建自己的论坛，并教授您管理社区的基础知识。
 
-## Goals
+## 定位
 
-Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk) and [FluxBB](https://fluxbb.org). It is designed to be:
+Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)，她生来就被设计如此： It is designed to be:
 
-* **Fast and simple.** No clutter, no bloat, no complex dependencies. Flarum is built with PHP so it’s quick and easy to deploy. The interface is powered by [Mithril](https://mithril.js.org), a performant JavaScript framework with a tiny footprint.
+* **快速、简单。 ** 不杂乱不臃肿，没有复杂的依赖关系。 Flarum 使用 PHP 构建，因此很容易被部署。 同时界面采用高性能 JavaScript 框架 [Mithril](https://mithril.js.org)，因此占用空间很小。
 
-* **Beautiful and responsive.** This is forum software for humans. Flarum is carefully designed to be consistent and intuitive across platforms, out-of-the-box.
+* **漂亮、响应式。 ** 专为人设计的论坛程序。 Flarum is carefully designed to be consistent and intuitive across platforms, out-of-the-box.
 
-* **Powerful and extensible.** Customize, extend, and integrate Flarum to suit your community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](/extend/).
+* **免费、开源。 ** Flarum 基于 [MIT 协议](https://github.com/flarum/flarum/blob/master/LICENSE) 发布。
 
-* **Free and open.** Flarum is released under the [MIT license](https://github.com/flarum/flarum/blob/master/LICENSE).
+* **强大、可扩展。 ** 您可以客制化、扩展或集成 Flarum 以满足您的社区需求。 Flarum 拥有非常全面、强大的 [扩展 API](https://docs.flarum.org/extend/)，她的架构及其灵活。
