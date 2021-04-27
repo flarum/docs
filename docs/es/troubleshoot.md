@@ -24,7 +24,7 @@ También querrás echar un vistazo a la salida de [`php flarum info`](console.md
 
 ## Paso 2: Reproducir el problema
 
-Intenta que el problema se repita. Presta mucha atención a lo que estás haciendo cuando ocurre. ¿Sucede siempre, o sólo de vez en cuando? Intenta cambiar un ajuste que creas que puede afectar al problema, o el orden en que estás haciendo las cosas. ¿Sucede en algunas condiciones, pero no en otras?
+Intenta que el problema se repita. Presta mucha atención a lo que estás haciendo cuando ocurre. Does it happen every time, or only now and then? Try changing a setting that you think might affect the problem, or the order in which you're doing things. ¿Sucede en algunas condiciones, pero no en otras?
 
 Si has añadido o actualizado recientemente una extensión, deberías desactivarla temporalmente para ver si el problema desaparece. Asegúrate de que todas tus extensiones fueron creadas para ser usadas con la versión de Flarum que estás ejecutando. Las extensiones desactualizadas pueden causar una variedad de problemas.
 
