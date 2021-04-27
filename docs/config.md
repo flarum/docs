@@ -12,7 +12,7 @@ Here's a quick overview of what everything means with an example file:
 ```php
 <?php return array (
   'debug' => false, // enables or disables debug mode, used to troubleshoot issues
-  'offline' => false, // enables or disables site maintenance mode
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
     'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
