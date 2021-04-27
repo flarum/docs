@@ -1,14 +1,12 @@
 # Reportando Bugs
 
-::: danger Vulnerabilidades de seguridad
-Si descubre una vulnerabilidad de seguridad en Flarum, por favor envíe un correo electrónico a [security@flarum.org](mailto:security@flarum.org) para que podamos solucionarlo rápidamente.
-:::
+::: danger Vulnerabilidades de seguridad Si descubre una vulnerabilidad de seguridad en Flarum, por favor envíe un correo electrónico a [security@flarum.org](mailto:security@flarum.org) para que podamos solucionarlo rápidamente. :::
 
 Gracias por ayudarnos a testear Flarum. ¡Estamos contentos de tenerte en el equipo! Necesitamos gente que pueda *resolver problemas con paciencia* y *comunicarlos con claridad*. Como probablemente sepas, un buen informe de errores requiere algo de tiempo y esfuerzo. Si te parece bien, ¡empecemos!
 
 ## Duplicados
 
-¿Ya has encontrado un error? ¡Estupendo! Nos encantaría saberlo &mdash; pero primero deberías comprobarlo para asegurarte de que no estás perdiendo el tiempo con un problema conocido:
+¿Ya has encontrado un error? Wonderful! ¡Estupendo! Nos encantaría saberlo &mdash; pero primero deberías comprobarlo para asegurarte de que no estás perdiendo el tiempo con un problema conocido:
 
 - Busca en nuestro [Foro de soporte](https://discuss.flarum.org/t/support) para ver si ya se ha informado de ello.
 - Podríamos estar trabajando en una solución, así que busca también en nuestro [seguimiento de problemas](https://github.com/flarum/core/issues).
