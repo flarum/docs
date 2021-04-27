@@ -1,6 +1,6 @@
 # Searching and Filtering
 
-Flarum treats searching and filtering as parallel but distinct processes. Which process is used to handle a request to a [`List` API endpoint](http://localhost:8080/extend/data.html#api-endpoints) depends on the query parameters:
+Flarum treats searching and filtering as parallel but distinct processes. Which process is used to handle a request to a [`List` API endpoint](/extend/data.html#api-endpoints) depends on the query parameters:
 
 - Filtering is applied when the `filter[q]` query param is omitted. Filters represent **structured** queries: for instance, you might want to only retrieve discussions in a certain category, or users who registered before a certain date. Filtering computes results based entirely on `filter[KEY] = VALUE` query parameters.
 - Searching is applied when the `filter[q]` query param is included. Searches represent **unstructured** queries: the user submits an arbitrary string, and data records that "match" it are returned. For instance, you might want to search discussions based on the content of their posts, or users based on their username. Searching computes results based solely on parsing the `filter[q]` query param: all other `filter[KEY] = VALUE` params are ignored when searching. It's important to note that searches aren't entirely unstructured: the dataset being searched can be constrained by gambits (which are very similar to filters, and will be explained later).

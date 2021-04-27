@@ -18,7 +18,7 @@ Each of these is determined by unique criteria: in some cases a flag is sufficie
 
 ### How It Works
 
-Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
+Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
 1. The actor: the user attempting to perform the action
 2. The ability: a string representing the action the actor is attempting
@@ -195,7 +195,7 @@ return [
 ## Visibility Scoping
 
 When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to.
-We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/6.x/queries) through [Eloquent scoping](https://laravel.com/docs/6.x/eloquent#local-scopes).
+We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes).
 For example:
 
 ```php
@@ -224,7 +224,7 @@ This call is handled by Flarum's general model visibility scoping system, which 
 
 The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
 
-Note that scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/6.x/queries).
+Note that scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
 
 ### Custom Permission Strings
 
@@ -277,7 +277,7 @@ Think of calling `whereVisibleTo` with a custom ability as a way for extensions 
 
 ### Custom Visibility Scoper Examples
 
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
 
 First, a scoper for the `Tag` model with the `view` ability:
 
