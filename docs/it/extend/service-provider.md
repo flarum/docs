@@ -1,13 +1,8 @@
 # Provider di servizi
 
-Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze.
-[I provider di servizi](https://laravel.com/docs/6.x/providers) consentono la configurazione e la modifica del backend Flarum a basso livello.
-Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore.
-Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
+As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection. [Service Providers](https://laravel.com/docs/8.x/providers) allow low-level configuration and modification of the Flarum backend. Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore. Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
 
-::: warning Solo per utenti avanzati!!!
-A differenza di altri estensori, il livello del provider di servizi NON è basato sul caso d'uso e NON è considerato API pubblica. È soggetto a modifiche in qualsiasi momento, senza preavviso. E dovrebbe essere usato solo se sai cosa stai facendo e gli altri extender non soddisfano il tuo caso d'uso.
-:::
+::: warning Solo per utenti avanzati!!! A differenza di altri estensori, il livello del provider di servizi NON è basato sul caso d'uso e NON è considerato API pubblica. È soggetto a modifiche in qualsiasi momento, senza preavviso. E dovrebbe essere usato solo se sai cosa stai facendo e gli altri extender non soddisfano il tuo caso d'uso. :::
 
 ## Processi di Boot di Flarum
 
@@ -42,8 +37,7 @@ class CustomServiceProvider extends AbstractServiceProvider
 }
 ```
 
-Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). 
-In entrambi i metodi, il contenitore è disponibile tramite `$this->app`.
+Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). In entrambi i metodi, il contenitore è disponibile tramite `$this->app`.
 
 Per registrare effettivamente il tuo provider di servizi personalizzato, puoi utilizzare l'extender `ServiceProvider` in `extend.php`:
 
