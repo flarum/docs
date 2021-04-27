@@ -18,8 +18,8 @@ Gli amministratori possono anche creare nuovi gruppi tramite la dashboard dell'a
 
 ## Permessi
 
-I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso).
-Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+
 Non esiste alcuna associazione diretta tra utenti e permessi: quando controlliamo i permessi di un utente, stiamo effettivamente enumerando i permessi per tutti i gruppi dell'utente.
 
 I gruppi e gli utenti dispongono di metodi pubblici per controllare le loro autorizzazioni. Alcuni di quelli più comunemente usati sono:
@@ -38,28 +38,8 @@ $user->getPermissions();
 $user->hasPermission('viewDiscussions');
 ```
 
-:::warning Utilizzare l'autorizzazione appropriata
-Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
-:::
+:::warning Utilizzare l'autorizzazione appropriata Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum. :::
 
 ### Aggiunta di autorizzazioni personalizzate
 
-Poiché le autorizzazioni sono solo stringhe, non è necessario "registrare" formalmente un'autorizzazione ovunque: è necessario solo un modo per gli amministratori di assegnare tale autorizzazione ai gruppi.
-Possiamo farlo estendendo il componente del frontend `flarum/components/PermissionGrid`. Per esempio:
-
-```js
-import { extend } from 'flarum/extend';
-import PermissionGrid from 'flarum/components/PermissionGrid';
-
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Classi CSS per l'icona. Generalmente in formato fontawesome, anche se puoi usare anche il tuo CSS personalizzato.
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La stringa di autorizzazione.
-    }, 95);
-  });
-}
-```
-
-Per impostazione predefinita, le autorizzazioni vengono concesse solo agli amministratori. Se desideri rendere disponibile un'autorizzazione ad altri gruppi per impostazione predefinita, dovrai utilizzare una [migrazione dei dati](data.md#migrations) per aggiungere righe per i gruppi pertinenti. Se desideri eseguire questa operazione, ti consigliamo ** VIVAMENTE ** di assegnare autorizzazioni predefinite solo a uno dei [gruppi riservati](#groups).
+To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).
