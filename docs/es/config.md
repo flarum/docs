@@ -4,8 +4,7 @@ Sólo hay un lugar donde la configuración de Flarum no puede ser modificada a t
 
 Este archivo, aunque pequeño, contiene detalles que son cruciales para que su instalación de Flarum funcione.
 
-Si el archivo existe, le dice a Flarum que ya ha sido instalado.
-También proporciona a Flarum información de la base de datos y más.
+Si el archivo existe, le dice a Flarum que ya ha sido instalado. También proporciona a Flarum información de la base de datos y más.
 
 Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
@@ -14,7 +13,7 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
   'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
   'database' =>
   array (
-    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB...
+    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB... MySQL, MariaDB...
     'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
     'database' => 'flarum', // el nombre de la base de datos en la instancia
     'username' => 'root', // nombre de usuario de la base de datos
