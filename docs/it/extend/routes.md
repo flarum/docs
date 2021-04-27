@@ -59,15 +59,13 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-I controller vengono risolti dal [contenitore](https://laravel.com/docs/6.x/container) così puoi iniettarci all'interno le tue dipendenze.
+Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
 
-:::tip Cosa sono i controller?
-Il metodo `handle` di un Controller è il codice che viene eseguito quando qualcuno visita il tuo percorso (o invia dati ad esso tramite l'invio di un modulo). In generale, le implementazioni del controller seguono lo schema:
+:::tip Cosa sono i controller? Il metodo `handle` di un Controller è il codice che viene eseguito quando qualcuno visita il tuo percorso (o invia dati ad esso tramite l'invio di un modulo). In generale, le implementazioni del controller seguono lo schema:
 
 1. Ricevere informazioni (GET params, POST data, l'utente corrente, ecc.) dall'oggetto Request.
 2. Fai qualcosa con quelle informazioni. Ad esempio, se il nostro controller gestisce un percorso per la creazione di post, vorremo salvare un nuovo post nel database.
-3. Restituisci una risposta. La maggior parte dei percorsi restituirà una pagina Web HTML o una risposta API JSON.
-:::
+3. Restituisci una risposta. La maggior parte dei percorsi restituirà una pagina Web HTML o una risposta API JSON. :::
 
 ### Parametri percorsi
 
@@ -97,7 +95,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Visualizzazioni
 
-Puoi iniettare [Visualizza](https://laravel.com/docs/6.x/views) di Laravel nel tuo controller. Ciò ti consentirà di eseguire il rendering di [Blade template](https://laravel.com/docs/6.x/blade) nella risposta del controller.
+You can inject Laravel's [View](https://laravel.com/docs/8.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/8.x/blade) into your controller's response.
 
 Innanzitutto, dovrai indicare alla view factory dove può trovare i file di visualizzazione della tua estensione aggiungendo l'estender `View` a `extend.php`:
 
@@ -117,16 +115,16 @@ Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlRes
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
-    
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
     }
-    
+
     public function handle(Request $request): Response
     {
         $view = $this->view->make('acme.hello-world::greeting');
-        
+
         return new HtmlResponse($view->render());
     }
 }
@@ -155,7 +153,8 @@ Flarum si basa sul [sistema di instradamento di Mithril](https://mithril.js.org/
 app.routes['acme.users'] = { path: '/users', component: UsersPage };
 ```
 
-<!-- Per registrare percorsi sul frontend, c'è un extender `Routes` che funziona in modo molto simile a quello di backend. Invece di un controller, tuttavia, passi un'istanza del componente come terzo argomento:
+
+<!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
 
 ```jsx
 export const extend = [
@@ -163,31 +162,24 @@ export const extend = [
     .add('/users', 'acme.users', <UsersPage />)
 ];
 ``` -->
-
 Ora quanto `tuoforum.com/utente`  verrà caricato il frontend del forum ed anche il componente `UsersPage` verrà renderizzato. Per ulteriori informazioni sulle pagine di frontend, vedere [questa sezione della documentazione](frontend-pages.md).
-
 Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
-
 ### Parametri percorsi
-
 I percorsi delfrontend consentono anche di acquisire segmenti dell'URI, ma la [sintassi di Mithril](https://mithril.js.org/route.html) è leggermente diversa:
 
 ```jsx
 app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
 
+
 <!-- ```jsx
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-
 I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
-
 ### Generare URL
-
 Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 
-<!-- import { app } from '@flarum/core/forum'; -->
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://tuoforum.com/utente/123?foo=bar
@@ -195,8 +187,7 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 
 ### Collegamenti ad altre pagine
 
-Un forum non sarebbe molto utile se avesse solo una pagina.
-Sebbene tu possa, ovviamente, implementare link ad altre parti del tuo forum con tag di ancoraggio HTML e link , questi possono essere difficile da mantenere e vanificano lo scopo di Flarum di essere una [Applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application).
+Un forum non sarebbe molto utile se avesse solo una pagina. Sebbene tu possa, ovviamente, implementare link ad altre parti del tuo forum con tag di ancoraggio HTML e link , questi possono essere difficile da mantenere e vanificano lo scopo di Flarum di essere una [Applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application).
 
 Flarum utilizza l'API di routing di Mithril per fornire un componente `Link` che racchiude in modo ordinato i collegamenti ad altre pagine interne. Il suo utilizzo è abbastanza semplice:
 
@@ -222,9 +213,10 @@ import Link from 'flarum/components/Link';
 
 Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
 
-* Modificare il "<title>" della pagina
+* Changing the `<title>` of the page
 * Aggiunta di risorse JavaScript e CSS esterne
-* Aggiunta di contenuti SEO e tag "<meta>"
+* Aggiunta di contenuti SEO e tag "<meta />
+  "
 * Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
 Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.
