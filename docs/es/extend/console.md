@@ -22,6 +22,8 @@ class YourCommand implements AbstractCommand {
     // Su lógica aquí
   }
 }
+  }
+}
 ```
 
 ## Registro de los comandos de la consola
@@ -39,6 +41,4 @@ return [
 ];
 ```
 
-::: tip Comandos Programados
-La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular. Sin embargo, tenga en cuenta que se trata de una solución comunitaria.
-:::
+::: tip Comandos Programados La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular. Sin embargo, tenga en cuenta que se trata de una solución comunitaria. :::
