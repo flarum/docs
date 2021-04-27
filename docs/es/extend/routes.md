@@ -12,7 +12,7 @@ En el backend, Flarum tiene tres colecciones de rutas:
 
 * Estas rutas son accesibles en `suforo.com/admin/`. Por defecto, sólo hay una ruta `admin` en el backend; el resto del enrutamiento de administración ocurre en el frontend.
 
-* `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON:API de Flarum.
+* `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON: API de Flarum.
 
 ### Definición de rutas
 
@@ -59,15 +59,13 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Los controladores se resuelven desde el [contenedor](https://laravel.com/docs/6.x/container) para que puedas inyectar dependencias en sus constructores.
+Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
 
-:::tip ¿Qué son los controladores?
-El método `handle` de un Controlador es el código que se ejecuta cuando alguien visita su ruta (o le envía datos a través de un envío de formulario). En general, las implementaciones de Controladores siguen el patrón:
+:::tip What are Controllers? :::tip ¿Qué son los controladores? El método `handle` de un Controlador es el código que se ejecuta cuando alguien visita su ruta (o le envía datos a través de un envío de formulario). En general, las implementaciones de Controladores siguen el patrón:
 
 1. Recuperar la información (parámetros GET, datos POST, el usuario actual, etc) del objeto Request.
 2. Hacer algo con esa información. Por ejemplo, si nuestro controlador maneja una ruta para crear posts, querremos guardar un nuevo objeto post en la base de datos.
-3. Devolver una respuesta. La mayoría de las rutas devolverán una página web HTML, o una respuesta api JSON.
-:::
+3. Devolver una respuesta. La mayoría de las rutas devolverán una página web HTML, o una respuesta api JSON. :::
 
 ### Parámetros de ruta
 
@@ -97,7 +95,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Vistas
 
-Puedes inyectar la fábrica [View](https://laravel.com/docs/6.x/views) de Laravel en tu controlador. Esto te permitirá renderizar una [plantilla Blade](https://laravel.com/docs/6.x/blade) en la respuesta de tu controlador.
+You can inject Laravel's [View](https://laravel.com/docs/8.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/8.x/blade) into your controller's response.
 
 En primer lugar, tendrás que decirle a la fábrica de vistas dónde puede encontrar los archivos de vistas de tu extensión añadiendo un extensor `View` a `extend.php`:
 
@@ -117,16 +115,16 @@ Luego, inyecta la fábrica en tu controlador y renderiza tu vista en un `HtmlRes
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
-    
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
     }
-    
+
     public function handle(Request $request): Response
     {
         $view = $this->view->make('acme.hello-world::greeting');
-        
+
         return new HtmlResponse($view->render());
     }
 }
@@ -155,6 +153,7 @@ Flarum se basa en el [sistema de rutas de Mithril](https://mithril.js.org/index.
 app.routes['acme.users'] = { path: '/users', component: UsersPage };
 ```
 
+
 <!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
 
 ```jsx
@@ -163,31 +162,24 @@ export const extend = [
     .add('/users', 'acme.users', <UsersPage />)
 ];
 ``` -->
-
 Ahora, cuando se visite `suforo.com/usuarios`, se cargará el frontend del foro y se mostrará el componente `UsersPage` en el área de contenido. Para más información sobre las páginas del frontend, por favor vea [esa sección de documentación](frontend-pages.md).
-
 Los casos de uso avanzados también pueden estar interesados en utilizar [route resolvers](frontend-pages.md#route-resolvers-advanced).
-
 ### Parámetros de ruta
-
 Las rutas frontales también permiten capturar segmentos del URI, pero la [sintaxis de la ruta Mithril](https://mithril.js.org/route.html) es ligeramente diferente:
 
 ```jsx
 app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
 
+
 <!-- ```jsx
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-
 Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta. También estarán disponibles a través de [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
-
 ### Generación de URLs
-
 Para generar una URL a una ruta en el frontend, utilice el método `app.route`. Este método acepta dos argumentos: el nombre de la ruta y un hash de parámetros. Los parámetros rellenarán los segmentos de URI que coincidan, de lo contrario se añadirán como parámetros de consulta.
 
-<!-- import { app } from '@flarum/core/forum'; -->
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://tuforo.com/users/123?foo=bar
@@ -195,8 +187,7 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 
 ### Enlaces a otras páginas
 
-Un foro no sería muy útil si sólo tuviera una página.
-Mientras que usted podría, por supuesto, implementar enlaces a otras partes de su foro con etiquetas de anclaje HTML y enlaces codificados, esto puede ser difícil de mantener, y derrota el propósito de que Flarum sea una [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) en primer lugar.
+Un foro no sería muy útil si sólo tuviera una página. Mientras que usted podría, por supuesto, implementar enlaces a otras partes de su foro con etiquetas de anclaje HTML y enlaces codificados, esto puede ser difícil de mantener, y derrota el propósito de que Flarum sea una [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) en primer lugar.
 
 Flarum utiliza la API de enrutamiento de Mithril para proporcionar un componente `Link` que envuelve limpiamente los enlaces a otras páginas internas. Su uso es bastante simple:
 
