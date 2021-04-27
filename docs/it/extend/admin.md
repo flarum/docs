@@ -6,21 +6,17 @@ Prima della beta 15, le impostazioni delle estensioni venivano aggiunte nel file
 
 Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), oppure fornire la tua pagina completamente personalizzata.
 
-::: warning SettingsModal
-Le impostazioni aggiunte tramite `SettingsModal` continueranno a funzionare nella beta 15, ma questo metodo **è ormai obsoleto** e verrà rimosso nelle future release.
-:::
-
 ## Extension Data API
 
-Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
+This new API allows you to add settings to your extension with very few lines of code.
 
 ### Raccontare all'API la tua estensione
 
-Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati. 
+Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
-Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').
+Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
 
-Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
+For the following example, we will use the fictitious extension 'acme/interstellar':
 
 ```js
 
@@ -31,11 +27,9 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Fatto ciò, puoi iniziare ad aggiungere impostazioni e autorizzazioni.
+Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
-::: Note
-Tutte le funzioni di registrazione su `ExtensionData` sono concatenabili, il che significa che puoi chiamarle una dopo l'altra senza eseguire nuovamente` for`.
-:::
+::: Note Tutte le funzioni di registrazione su `ExtensionData` sono concatenabili, il che significa che puoi chiamarle una dopo l'altra senza eseguire nuovamente`for`. :::
 
 ### Registrazione delle impostazioni
 
@@ -43,7 +37,7 @@ L'aggiunta di campi delle impostazioni in questo modo è consigliata per element
 
 Per aggiungere un campo, richiama la funzione `registerSetting` dopo `for` su `app.extensionData` e passagli un 'setting object' come primo argomento. Dietro le quinte `ExtensionData` trasforma effettivamente le tue impostazioni in un file [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), puoi passare un numero di priorità come secondo argomento.
 
-Ecco un esempio con un elemento switch (booleano):
+Here's an example with a switch (boolean) item:
 
 ```js
 
@@ -62,7 +56,7 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Se utilizzi `type: 'select'` l'oggetto ha un aspetto leggermente diverso:
+Ecco un esempio con un elemento switch (booleano):
 
 ```js
 {
@@ -88,7 +82,7 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerSetting(function () {
       if (app.session.user.username() === 'RocketMan') {
-    
+
         return (
           <div className="Form-group">
             <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
@@ -107,14 +101,14 @@ app.initializers.add('interstellar', function(app) {
 
 Novità nella beta 15, le autorizzazioni ora possono essere trovate in 2 posizioni. Ora puoi visualizzare le autorizzazioni individuali di ciascuna estensione sulla loro pagina. Tutte le autorizzazioni possono ancora essere trovate nella pagina delle autorizzazioni.
 
-Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`. 
+Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`.
 
-Argomenti: 
+Arguments:
  * Oggetto autorizzazione
  * Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
  * Priorità di `ItemList`
- 
-Torniamo alla nostra estensione missilistica preferita:
+
+Argomenti:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -135,7 +129,7 @@ app.initializers.add('interstellar', function(app) {
 
 ### Promemoria concatenamento
 
-Ricorda che queste funzioni possono essere tutte concatenate come:
+Torniamo alla nostra estensione missilistica preferita:
 
 ```js
 app.extensionData
@@ -148,9 +142,9 @@ app.extensionData
 
 ### Estensione/sovrascrittura della pagina predefinita
 
-A volte hai impostazioni più complicate che pasticciano con le relazioni o semplicemente desideri che la pagina abbia un aspetto completamente diverso. In questo caso, dovrai dire a `ExtensionData` che vuoi fornire la tua versione della pagina.
+A volte hai impostazioni più complicate che pasticciano con le relazioni o semplicemente desideri che la pagina abbia un aspetto completamente diverso. In questo caso, dovrai dire a `ExtensionData` che vuoi fornire la tua versione della pagina. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
-Crea una nuova classe che estenda il componente `Page` o` ExtensionPage`
+Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
 import ExtensionPage from 'flarum/components/ExtensionPage';
@@ -165,7 +159,7 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-Quindi lancia `registerPage`:
+Crea una nuova classe che estenda il componente `Page` o`ExtensionPage`
 
 ```js
 
@@ -179,21 +173,21 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Questa pagina verrà visualizzata al posto di quella predefinita.
+Quindi lancia `registerPage`:
 
-Puoi estendere la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o estendere la base di `Page` e progettare la tua versione.
+Questa pagina verrà visualizzata al posto di quella predefinita.
 
 ## Composer.json Metadata
 
+Puoi estendere la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o estendere la base di `Page` e progettare la tua versione.
+
 Nella beta 15, le pagine di estensione lasciano spazio a informazioni aggiuntive che vengono estratte da composer.json .
 
-Per maggiori informationi, guarda [composer.json schema](https://getcomposer.org/doc/04-schema.md).
-
-| Descrizione                        | dovein composer.json                       |
-| ---------------------------------  | --------------------------------------     |
-| discuss.flarum.org discussion link | "forum"   all'interno di "support"         |
-| Documentation                      | "docs"    all'interno di "support"         |
-| Support (email)                    | "email"   all'interno di "support"         |
-| Website                            | "homepage" chiave                          |
+| Descrizione                        | dovein composer.json                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| discuss.flarum.org discussion link | "forum"   all'interno di "support"                                      |
+| Documentation                      | "docs"    all'interno di "support"                                      |
+| Support (email)                    | "email"   all'interno di "support"                                      |
+| Website                            | "homepage" chiave                                                       |
 | Donate                             | "funding" key block (Nota: verrà utilizzato solo il primo collegamento) |
-| Source                             | "source"  all'interno di "support"         |
+| Source                             | "source"  all'interno di "support"                                      |
