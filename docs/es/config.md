@@ -10,25 +10,26 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
 ```php
 <?php return array (
-  'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
+  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
-    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB... MySQL, MariaDB...
-    'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
-    'database' => 'flarum', // el nombre de la base de datos en la instancia
-    'username' => 'root', // nombre de usuario de la base de datos
-    'password' => '', // contraseña de la base de datos
+    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
+    'host' => 'localhost', // the host of the connection, localhost in most cases unless using an external service
+    'database' => 'flarum', // the name of the database in the instance
+    'username' => 'root', // database username
+    'password' => '', // database password
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // el prefijo de las tablas, útil si se comparte la misma base de datos con otro servicio
-    'port' => '3306', // el puerto de la conexión, por defecto 3306 con MySQL
+    'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
+    'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // la configuración de la URL, deberá cambiarla si cambia de dominio
+  'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
   'paths' =>
   array (
-    'api' => 'api', // /api va a la API
-    'admin' => 'admin', // /admin va a la administración
+    'api' => 'api', // /api goes to the API
+    'admin' => 'admin', // /admin goes to the admin
   ),
 );
 ```
