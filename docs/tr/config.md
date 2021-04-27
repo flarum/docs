@@ -4,32 +4,32 @@ Flarum yapılandırmasının Flarum yönetici panosu (veritabanı hariç) aracı
 
 Bu dosya küçük de olsa Flarum kurulumunuzun çalışması için çok önemli olan ayrıntıları içerir.
 
-Dosya varsa, Flarum'a zaten kurulu olduğunu söyler.
-Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
+Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
 
 Örnek bir dosyayla her şeyin ne anlama geldiğine dair hızlı bir genel bakış:
 
 ```php
 <?php return array (
-  'debug' => false, // sorunları gidermek için kullanılan hata ayıklama modunu etkinleştirir veya devre dışı bırakır
+  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
-    'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB...
-    'host' => 'localhost', // bağlantının ana bilgisayarı, harici bir hizmet kullanılmadığı sürece çoğu durumda localhost
-    'database' => 'flarum', // veritabanının adı
-    'username' => 'root', // veritabanı kullanıcı adı
-    'password' => '', // veritabanı şifresi
+    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
+    'host' => 'localhost', // the host of the connection, localhost in most cases unless using an external service
+    'database' => 'flarum', // the name of the database in the instance
+    'username' => 'root', // database username
+    'password' => '', // database password
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
-    'port' => '3306', // veritabanı bağlantısının portu, MySQL ile varsayılan olarak 3306'dır
+    'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
+    'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // URL kurulumu, etki alanlarını değiştirirseniz bunu değiştirmek isteyeceksiniz
+  'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
   'paths' =>
   array (
-    'api' => 'api', // /api , API'ye gider.
-    'admin' => 'admin', // /admin , yönetici paneline gider.
+    'api' => 'api', // /api goes to the API
+    'admin' => 'admin', // /admin goes to the admin
   ),
 );
 ```
