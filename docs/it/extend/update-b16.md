@@ -2,9 +2,7 @@
 
 La Beta 16 finalizza l'API extender PHP, introduce una libreria di test e le tipizzazioni JS, passa all'utilizzo di namespace per le importazioni JS, aumenta la robustezza della dipendenza dalle estensioni e consente l'override deli percorsi, tra le altre funzionalità.
 
-::: tip
-Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o su [Discord chat](https://flarum.org/discord/).
-:::
+::: tip Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o su [Discord chat](https://flarum.org/discord/). :::
 
 ## Frontend
 
@@ -30,8 +28,7 @@ Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzio
 
 ### Laravel e Symfony
 
-Aggiornamenti beta 16 dalla v6.x alla v8.x dei componenti Laravel e dalla v4 alla v5 dei componenti Symfony. Consulta le rispettive guide all'upgrade di ciascuna per le modifiche che potresti dover apportare alle tue estensioni.
-La modifica più sostanziale è la deprecazione di `Symfony\Component\Translation\TranslatorInterface` in favore di `Symfony\Contracts\Translation\TranslatorInterface`. Il primo verrà rimosso nella beta 17.
+Aggiornamenti beta 16 dalla v6.x alla v8.x dei componenti Laravel e dalla v4 alla v5 dei componenti Symfony. Consulta le rispettive guide all'upgrade di ciascuna per le modifiche che potresti dover apportare alle tue estensioni. La modifica più sostanziale è la deprecazione di `Symfony\Component\Translation\TranslatorInterface` in favore di `Symfony\Contracts\Translation\TranslatorInterface`. Il primo verrà rimosso nella beta 17.
 
 ### Funzioni Helper
 
@@ -41,12 +38,9 @@ Poiché alcune estensioni Flarum utilizzano librerie Laravel che presumono l'esi
 
 ### Cambiamenti alla Ricerca
 
-Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flarum più flessibile, abbiamo rifattorizzato parecchio codice nella beta 16.
-In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati.
-In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
+Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flarum più flessibile, abbiamo rifattorizzato parecchio codice nella beta 16. In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati. In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
 
-Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`, 
-che è effettivamente un involucro attorno a una collezione di modelli Eloquent.
+Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`, che è effettivamente un involucro attorno a una collezione di modelli Eloquent.
 
 Anche i sistemi predefiniti sono in qualche modo simili nella loro implementazione. `Filterer`applica filtri (implementando `Flarum\Filter\FilterInterface`) in base ai parametri della query nel modulo `filter[FILTER_KEY] = FILTER_VALUE` (o `filter[-FILTER_KEY] = FILTER_VALUE` per filtri negati). SimpleFlarumSearch `Searcher` divide il parametro `filter[q]` da spazi in "termini", applica Gambits (implementando `Flarum\Search\GambitInterface`) che corrispondono ai termini e quindi applicano "Fulltext Gambit" per cercare in base a "termini" che non corrispondono ad un "auxiliary gambit". Entrambi i sistemi applicano quindi l'ordinamento, un offset e un limite di conteggio dei risultati e consentono alle estensioni di modificare il risultato della query tramite `searchMutators` o `filterMutators`.
 
@@ -114,7 +108,6 @@ Se hai creato manualmente token nel database dall'esterno di Flarum, la colonna 
 I [problemi di sicurezza in Flarum](https://github.com/flarum/core/issues/2075) causavano la non scadenza dei token. Ciò ha avuto un impatto sulla sicurezza limitato poiché i token sono caratteri lunghi e unici. Tuttavia, le integrazioni personalizzate che hanno salvato un token in un database esterno per un uso successivo potrebbero scoprire che i token non funzionano più se non sono stati utilizzati di recente.
 
 Se utilizzi token di accesso di breve durata per qualsiasi scopo, prendi nota del tempo di scadenza di 1 ora. La scadenza si basa sull'ora dell'ultimo utilizzo, quindi rimarrà valida finché continuerà ad essere utilizzata.
-
 
 A causa della grande quantità di token scaduti accumulati nel database e del fatto che la maggior parte dei token non è mai stata utilizzata più di una volta durante il processo di accesso, abbiamo scelto di eliminare tutti i token di accesso per una durata di 3600 secondi come parte della migrazione , Tutti i token rimanenti sono stati convertiti in `session_remember`.
 
