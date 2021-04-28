@@ -146,7 +146,7 @@ Some articles on the internet will mention that you can use tools like a PHP she
 
 You'll need to use Composer over the  **C**ommand-**l**ine **i**nterface (CLI). Be sure you can access your server over **S**ecure **Sh**ell (SSH).
 
-Once you have composer installed, you should be able to run composer commands in your SSH terminal via `composer COMMAND`.
+Once you have Composer installed, you should be able to run Composer commands in your SSH terminal via `composer COMMAND`.
 
 ::: Optimizations
 After most commands, you'll want to run `composer dump-autoload -a`. Essentially, this caches PHP files so they run faster.
