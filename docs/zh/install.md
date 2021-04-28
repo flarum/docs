@@ -78,6 +78,7 @@ www.example.com {
 }
 ```
 ## 目录所有权
+
 在安装过程中，Flarum 可能会要求您将某些目录设置为可写。要使 Linux 上的某个目录可写，可以执行以下命令：
 
 ```bash
@@ -141,19 +142,17 @@ $site = require './site.php';
 
  最后，编辑 `site.php` 并更新这几行所指的路径，以体现新的目录结构：
 
-```php
+## ```php
 'base' => __DIR__,
 'public' => __DIR__,
 'storage' => __DIR__.'/storage',
 ```
 
-## 导入数据
+导入数据
 
-如果您想用 Flarum 接续运营现有的一个社区，您可以将该论坛的数据导入到 Flarum 中。虽然目前还没有官方的导入工具，但是社区里已经有人制作了几款非官方的导入工具：
+* [如果您想用 Flarum 接续运营现有的一个社区，您可以将该论坛的数据导入到 Flarum 中。虽然目前还没有官方的导入工具，但是社区里已经有人制作了几款非官方的导入工具：](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
+* [FluxBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
+* [MyBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
+* [phpBB](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-* [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
-* [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
-* [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
-* [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
-
-其他论坛程序也可以导入：先迁移到 phpBB，然后迁移到 Flarum。需要说明的是，我们不能保证这些工具一直能正常使用，也不提供支持服务。
+SMF2
