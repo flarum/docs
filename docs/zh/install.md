@@ -15,13 +15,13 @@
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
 * **允许 SSH（命令行）**，以运行 Composer
 
-::: tip 共享主机 现阶段，您不能通过下载 ZIP 压缩包并将其上传至 Web 服务器来安装 Flarum 的。 这是因为 Flarum 使用了一个叫做 [Composer](https://getcomposer.org) 的依赖管理系统，它需要在命令行上运行。
+::: tip Shared Hosting It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. 这是因为 Flarum 使用了一个叫做 [Composer](https://getcomposer.org) 的依赖管理系统，它需要在命令行上运行。
 
-这并不意味着您需要一个 VPS。 某些共享主机会给予您 SSH 访问权限，这样您就能够安装 Composer 和 Flarum 了。 对于其他不开放 SSH 权限的主机，您可以尝试 [Pockethold](https://github.com/andreherberth/pockethold) 等变通方法。 :::
+这并不意味着您需要一个 VPS。 Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine. :::
 
 ## 开始安装
 
-Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 在安装 Flarum 之前，您需要先在机器上 [安装 Composer](https://getcomposer.org)。 然后，在要安装 Flarum 的空白目录下执行此命令：
+Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. 然后，在要安装 Flarum 的空白目录下执行此命令：
 
 ```bash
 composer create-project flarum/flarum . --stability=beta --stability=beta
