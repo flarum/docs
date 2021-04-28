@@ -44,7 +44,7 @@ When you want to update Flarum or add/update/remove extensions, you'll do so by 
 
 When running `composer.json` commands, make sure to pay attention to the output. If there's an error, it'll probably tell you if it's because of extension incompatibilities, an unsupported PHP version, missing PHP extensions, or something else.
 
-### The composer.json File
+### The `composer.json` File
 
 As mentioned above, the entire composer configuration for your Flarum site is contained inside the `composer.json` file. You can consult the [composer documentation](https://getcomposer.org/doc/04-schema.md) for a specific schema, but for now, let's go over an annotated `composer.json` from `flarum/flarum`:
 
