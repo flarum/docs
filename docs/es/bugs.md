@@ -6,7 +6,7 @@ Gracias por ayudarnos a testear Flarum. ¡Estamos contentos de tenerte en el equ
 
 ## Duplicados
 
-¿Ya has encontrado un error? Wonderful! ¡Estupendo! Nos encantaría saberlo &mdash; pero primero deberías comprobarlo para asegurarte de que no estás perdiendo el tiempo con un problema conocido:
+¿Ya has encontrado un error? ¡Estupendo! ¡Estupendo! Nos encantaría saberlo &mdash; pero primero deberías comprobarlo para asegurarte de que no estás perdiendo el tiempo con un problema conocido:
 
 - Busca en nuestro [Foro de soporte](https://discuss.flarum.org/t/support) para ver si ya se ha informado de ello.
 - Podríamos estar trabajando en una solución, así que busca también en nuestro [seguimiento de problemas](https://github.com/flarum/core/issues).
