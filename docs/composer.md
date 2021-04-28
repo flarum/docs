@@ -1,5 +1,6 @@
 
 # Composer
+
 Flarum uses a program called composer[Composer](https://getcomposer.org) to manage its dependencies and extensions.
 You'll need to use composer if you want to:
 
