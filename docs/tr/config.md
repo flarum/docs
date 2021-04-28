@@ -4,7 +4,7 @@ Flarum yapılandırmasının Flarum yönetici panosu (veritabanı hariç) aracı
 
 Bu dosya küçük de olsa Flarum kurulumunuzun çalışması için çok önemli olan ayrıntıları içerir.
 
-Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
 Örnek bir dosyayla her şeyin ne anlama geldiğine dair hızlı bir genel bakış:
 
