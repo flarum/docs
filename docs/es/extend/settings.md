@@ -64,7 +64,6 @@ La función `delete($name)` permite eliminar una configuración con nombre.
 ### Edición de Ajustes
 
 Para obtener más información sobre la gestión de la configuración a través del panel de administración, consulte la [documentación pertinente](admin.md).
-
 ### Acceso a la Configuración
 
 Todos los ajustes están disponibles en el frontend `admin` a través del global `app.data.settings`.
