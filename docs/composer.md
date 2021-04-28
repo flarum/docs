@@ -21,7 +21,7 @@ Each Flarum installation consists primarily of Flarum Core and a set of [extensi
 
 Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
 
-- Uploading random zip files from the internet tends to be a bad idea. Requiring that extensions be downloaded from a central source like [Packagist](https://packagist.org/) makes it somewhat more tedious to spam malicious code, and ensures that source code is available on Github for free/public extensions.
+- Uploading random zip files from the internet tends to be a bad idea. Requiring that extensions be downloaded from a central source like [Packagist](https://packagist.org/) makes it somewhat more tedious to spam malicious code, and ensures that source code is available on GitHub for free/public extensions.
 - Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
 - Zip files can cause a lot of headache if trying to automate deployments, run automated tests, or scale to multiple server nodes.
 - There is no good way to ensure conflicting extension versions can't be installed, or that system PHP version and extension requirements are met.
