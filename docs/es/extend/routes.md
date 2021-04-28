@@ -117,16 +117,16 @@ Luego, inyecta la fábrica en tu controlador y renderiza tu vista en un `HtmlRes
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
-    
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
     }
-    
+
     public function handle(Request $request): Response
     {
         $view = $this->view->make('acme.hello-world::greeting');
-        
+
         return new HtmlResponse($view->render());
     }
 }
@@ -188,19 +188,20 @@ Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta. 
 Para generar una URL a una ruta en el frontend, utilice el método `app.route`. Este método acepta dos argumentos: el nombre de la ruta y un hash de parámetros. Los parámetros rellenarán los segmentos de URI que coincidan, de lo contrario se añadirán como parámetros de consulta.
 
 <!-- import { app } from '@flarum/core/forum'; -->
-```js
+
+### ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://tuforo.com/users/123?foo=bar
 ```
 
-### Enlaces a otras páginas
+Enlaces a otras páginas
 
 Un foro no sería muy útil si sólo tuviera una página.
 Mientras que usted podría, por supuesto, implementar enlaces a otras partes de su foro con etiquetas de anclaje HTML y enlaces codificados, esto puede ser difícil de mantener, y derrota el propósito de que Flarum sea una [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) en primer lugar.
 
 Flarum utiliza la API de enrutamiento de Mithril para proporcionar un componente `Link` que envuelve limpiamente los enlaces a otras páginas internas. Su uso es bastante simple:
 
-```jsx
+## ```jsx
 import Link from 'flarum/components/Link';
 
 // Link can be used just like any other component:
@@ -218,14 +219,14 @@ import Link from 'flarum/components/Link';
 // that are conditionally internal or external.
 ```
 
-## Contenido
+Contenido
 
-Cada vez que visitas una ruta del frontend, el backend construye un documento HTML con el andamiaje necesario para arrancar la aplicación JavaScript del frontend. Puedes modificar fácilmente este documento para realizar tareas como:
-
+* Cada vez que visitas una ruta del frontend, el backend construye un documento HTML con el andamiaje necesario para arrancar la aplicación JavaScript del frontend. Puedes modificar fácilmente este documento para realizar tareas como:
 * Cambiar el `<title>` de la página
 * Añadir recursos externos de JavaScript y CSS
 * Añadir contenido SEO y etiquetas `<meta>`.
-* Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
+
+Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
 
 Puedes hacer cambios en el frontend usando el método `content` del extensor `Frontend`. Este método acepta un cierre que recibe dos parámetros: un objeto `Flarum\Frontend\Document` que representa el documento HTML que se mostrará, y el objeto `Request`.
 
@@ -242,12 +243,3 @@ return [
 ```
 
 También puede añadir contenido en sus registros de ruta de frontend:
-
-```php
-return [
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users', function (Document $document, Request $request) {
-            $document->title = 'Users';
-        })
-];
-```
