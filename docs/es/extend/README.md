@@ -27,7 +27,7 @@ Si quieres solucionar un error o una deficiencia del núcleo, o de una extensió
 - [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Consejos sobre el espacio de nombres de las extensiones](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Documentación de Mithril js](https://mithril.js.org/)
-- [Documentación de la API de Laravel](https://laravel.com/api/6.x/)
+- [Documentación de la API de Laravel](https://laravel.com/api/8.x/)
 - [Documentación de la API de Flarum](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Generador de extensiones en blanco de Flarum](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
