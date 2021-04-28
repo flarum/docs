@@ -50,6 +50,7 @@ class FormComponent extends Component {
 
 ¡No olvides utilizar [traducciones](translate.md)!
 
+
 ## Streams, bidi, y withAttr
 
 Flarum proporciona [Mithril's Stream](https://mithril.js.org/stream.html) como `flarum/util/Stream`.
