@@ -4,7 +4,7 @@
 
 虽然这个文件很小，但包含了 Flarum 安装时至关重要的信息。
 
-如果存在这个文件，Flarum 就知道它自己已经被安装了。 另外这个文件还为 Flarum 提供数据库信息等内容。
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
 下面是一个示例文件，我们来了解一下所有内容的含义：
 
