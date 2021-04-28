@@ -21,7 +21,7 @@ All this will do is show your extension in the "theme" section in the admin dash
 
 ## Less Variable Customization
 
-You can define new LESS variables in your extension's Less files. There currently isn't an extender to modify Less variable values in the PHP layer, but this is planned for future releases. 
+You can define new Less variables in your extension's Less files. There currently isn't an extender to modify Less variable values in the PHP layer, but this is planned for future releases. 
 
 ## Switching Between Themes
 
