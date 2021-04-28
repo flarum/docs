@@ -5,15 +5,16 @@ Of course, you can use other extenders too: for example, you might want to suppo
 
 You can indicate that your extension is a theme by setting the "extra.flarum-extension.category" key to "theme". For example:
 
-```json
+```jsonc{4}
 {
     // other fields
     "extra": {
         "flarum-extension": {
-        "category": "theme",
+            "category": "theme"
+        }
+    }
     // other fields
 }
-```
 
 All this will do is show your extension in the "theme" section in the admin dashboard extension list.
 
