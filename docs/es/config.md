@@ -4,7 +4,7 @@ Sólo hay un lugar donde la configuración de Flarum no puede ser modificada a t
 
 Este archivo, aunque pequeño, contiene detalles que son cruciales para que su instalación de Flarum funcione.
 
-Si el archivo existe, le dice a Flarum que ya ha sido instalado. También proporciona a Flarum información de la base de datos y más.
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
 Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
