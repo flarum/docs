@@ -15,11 +15,23 @@ Flarum tiene un amplio ecosistema de extensiones, la mayoría de las cuales son 
 Al igual que Flarum, las extensiones se instalan a través de [Composer](https://getcomposer.org), usando SSH. Para instalar una extensión típica:
 
 1. `cd` to your Flarum directory. `cd` a la carpeta que contiene el archivo `composer.json`. You can check directory contents via `ls -la`.
-2. Ejecute `composer require COMPOSER_PACKAGE_NAME`. Esto debería ser proporcionado por la documentación de la extensión.
+2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Esto debería ser proporcionado por la documentación de la extensión.
 
-## Gestión de Extensiones
+## Updating Extensions
 
-La página de extensiones del panel de control del administrador proporciona una manera conveniente de gestionar las extensiones cuando están instaladas. Puede:
+Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+
+## Uninstalling Extensions
+
+Similarly to installation, to remove an extension:
+
+0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+1. `cd` to your Flarum directory.
+2. Run `composer remove COMPOSER_PACKAGE_NAME:*`. Esto debería ser proporcionado por la documentación de la extensión.
+
+## Managing Extensions
+
+The extensions page of the admin dashboard provides a convenient way to manage extensions when they are installed. You can:
 
 - Activar o desactivar una extensión
 - Acceder a la configuración de la extensión (aunque algunas extensiones utilizarán una pestaña en la barra lateral principal para la configuración)
