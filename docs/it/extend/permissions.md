@@ -42,9 +42,9 @@ $user->hasPermission('viewDiscussions');
 Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
 :::
 
-### Aggiunta di autorizzazioni personalizzate
+Aggiunta di autorizzazioni personalizzate
 
-Poiché le autorizzazioni sono solo stringhe, non è necessario "registrare" formalmente un'autorizzazione ovunque: è necessario solo un modo per gli amministratori di assegnare tale autorizzazione ai gruppi.
+### Poiché le autorizzazioni sono solo stringhe, non è necessario "registrare" formalmente un'autorizzazione ovunque: è necessario solo un modo per gli amministratori di assegnare tale autorizzazione ai gruppi.
 Possiamo farlo estendendo il componente del frontend `flarum/components/PermissionGrid`. Per esempio:
 
 ```js
@@ -61,5 +61,3 @@ export default function() {
   });
 }
 ```
-
-Per impostazione predefinita, le autorizzazioni vengono concesse solo agli amministratori. Se desideri rendere disponibile un'autorizzazione ad altri gruppi per impostazione predefinita, dovrai utilizzare una [migrazione dei dati](data.md#migrations) per aggiungere righe per i gruppi pertinenti. Se desideri eseguire questa operazione, ti consigliamo ** VIVAMENTE ** di assegnare autorizzazioni predefinite solo a uno dei [gruppi riservati](#groups).
