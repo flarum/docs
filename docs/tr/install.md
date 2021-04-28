@@ -15,13 +15,13 @@ Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadı
 * **MySQL 5.6 +** veya **MariaDB10.0.5+** Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 * **SSH (command-line) access** to run Composer
 
-::: tip Paylaşımlı Hosting Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
+::: tip Shared Hosting It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
 
-Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Bazı paylaşılan ana bilgisayarlar size, Composer ve Flarum'u sorunsuz bir şekilde yükleyebilmeniz için SSH erişimi sağlar. SSH'siz diğer ana bilgisayarlar için [Pockethold](https://github.com/andreherberth/pockethold) gibi geçici çözümleri deneyebilirsiniz. :::
+Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine. :::
 
 ## Yükleme
 
-Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
+Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
