@@ -18,7 +18,7 @@ Ciascuno di questi è determinato da criteri univoci: in alcuni casi è sufficie
 
 ### Come funziona
 
-Le richieste di autorizzazione vengono effettuate con 3 parametri, con logica contenuta in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
+Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
 1. L'attore: l'utente che tenta di eseguire l'azione
 2. L'abilità: una stringa che rappresenta l'azione che l'attore sta tentando
@@ -31,11 +31,9 @@ Per prima cosa, eseguiamo l'intera richiesta (tutti e tre i parametri) attravers
 - `Flarum\User\Access\AbstractPolicy::FORCE_ALLOW` (tramite `$this->forceAllow()`)
 - `Flarum\User\Access\AbstractPolicy::FORCE_DENY` (tramite `$this->forceDeny()`)
 
-I risultati delle policy sono considerati prioritari `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. Ad esempio, se viene restituita una singola policy `FORCE_DENY`, tutte le altre policy verranno ignorate. Se una policy restituisce `DENY` e altre 10 restituiscono `ALLOW`, la richiesta verrà rifiutata. Ciò consente di prendere decisioni indipendentemente dall'ordine in cui le estensioni vengono avviate. Le policy sono estremamente potenti: 
-se l'accesso viene negato in fase di policy, questo sovrascriverà i permessi dei gruppi e i privilegi di amministratore.
+I risultati delle policy sono considerati prioritari `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. Ad esempio, se viene restituita una singola policy `FORCE_DENY`, tutte le altre policy verranno ignorate. Se una policy restituisce `DENY` e altre 10 restituiscono `ALLOW`, la richiesta verrà rifiutata. Ciò consente di prendere decisioni indipendentemente dall'ordine in cui le estensioni vengono avviate. Le policy sono estremamente potenti: se l'accesso viene negato in fase di policy, questo sovrascriverà i permessi dei gruppi e i privilegi di amministratore.
 
-In secondo luogo, se tutte le policy restituiscono null (o non restituiscono nulla), controlliamo se l'utente è in un gruppo che ha un permesso che consenta l'azione (nota che sia i permessi che le azioni sono rappresentati sotto forma di stringhe). In tal caso, autorizziamo l'azione.
-Guarda la [Documentazione su gruppi e permessi](permissions.md) per maggiori informazioni.
+In secondo luogo, se tutte le policy restituiscono null (o non restituiscono nulla), controlliamo se l'utente è in un gruppo che ha un permesso che consenta l'azione (nota che sia i permessi che le azioni sono rappresentati sotto forma di stringhe). In tal caso, autorizziamo l'azione. Guarda la [Documentazione su gruppi e permessi](permissions.md) per maggiori informazioni.
 
 Quindi, se l'utente è nel gruppo admin, autorizzeremo l'azione.
 
@@ -44,7 +42,6 @@ Infine, poiché abbiamo esaurito tutti i controlli, daremo per scontato che l'ut
 ### Come utilizzare le autorizzazioni
 
 Il sistema di autorizzazione di Flarum è accessibile attraverso metodi pubblici delle classi `Flarum\User\User`. I più importanti sono elencati di seguito; altri sono documentati nelle [documentazioni PHP API](https://api.docs.flarum.org/php/master/flarum/user/user).
-
 
 
 In questo esempio, useremo `$actor` come istanza di `Flarum\User\User`, `'viewDiscussions'` e `'reply'` come esempi di abilità, e `$discussion` (istanza di `Flarum\Discussion\Discussion`) come esempio di argomento.
@@ -80,14 +77,11 @@ I criteri ci consentono di utilizzare una logica personalizzata oltre a semplici
 - Vogliamo consentire agli utenti di modificare i post anche se non sono moderatori, ma solo i propri post.
 - A seconda delle impostazioni, potremmo consentire agli utenti di rinominare le proprie discussioni a tempo indeterminato, per un breve periodo di tempo dopo la pubblicazione o per niente.
 
-Come descritto [qui](#how-it-works), ad ogni controllo di autorizzazione, interroghiamo tutte le politiche registrate per il modello del target o qualsiasi classe genitore del modello del target.
-Se non viene fornito alcun target, verranno applicati i criteri egistrati come "global".
+Come descritto [qui](#how-it-works), ad ogni controllo di autorizzazione, interroghiamo tutte le politiche registrate per il modello del target o qualsiasi classe genitore del modello del target. Se non viene fornito alcun target, verranno applicati i criteri egistrati come "global".
 
 Quindi, come viene "verificato" un criterio?
 
-Innanzitutto, controlliamo se la classe del criterio ha un metodo con lo stesso nome dell'abilità che viene valutata.
-In tal caso, lo eseguiamo con l'attore e il soggetto come parametri.
-Se quel metodo restituisce un valore non nullo, restituiamo quel risultato. In caso contrario, si passa alla fase successiva (non necessariamente al criterio successivo).
+Innanzitutto, controlliamo se la classe del criterio ha un metodo con lo stesso nome dell'abilità che viene valutata. In tal caso, lo eseguiamo con l'attore e il soggetto come parametri. Se quel metodo restituisce un valore non nullo, restituiamo quel risultato. In caso contrario, si passa alla fase successiva (non necessariamente al criterio successivo).
 
 Quindi, controlliamo se la classe policy ha un metodo chiamato `can`. In tal caso, lo eseguiamo con l'attore, l'abilità e il soggetto e restituiamo il risultato.
 
@@ -178,7 +172,7 @@ class GlobalPolicy extends AbstractPolicy
 
 #### Registrazioni dei criteri
 
-Sia i criteri basati su modelli che quelli globali possono essere registrati con l'estensione `Policy` nel tuo file` extend.php`:
+Sia i criteri basati su modelli che quelli globali possono essere registrati con l'estensione `Policy` nel tuo file`extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -196,9 +190,7 @@ return [
 
 ## Visibility Scoping
 
-Quando un utente visita la pagina ** Tutte le discussioni **, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente ha accesso.
-Lo facciamo tramite il metodo `whereVisibleTo`, definito in `Flarum\Database\ScopeVisibilityTrait`, e disponibile su [Modelli e domande eloquenti](https://laravel.com/docs/6.x/queries) tremite [Eloquent scoping](https://laravel.com/docs/6.x/eloquent#local-scopes).
-Per esempio:
+Quando un utente visita la pagina ** Tutte le discussioni **, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente ha accesso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Per esempio:
 
 ```php
 use Flarum\Group\Group;
@@ -221,24 +213,22 @@ Si noti che la visibilità può essere utilizzata solo sui modelli che utilizzan
 
 ### Come viene elaborato
 
-Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`?
-Questa chiamata è gestita dal sistema di visibilità del modello generale di Flarum, che esegue la query attraverso una sequenza di callback, chiamati "scopers".
+Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`? Questa chiamata è gestita dal sistema di visibilità del modello generale di Flarum, che esegue la query attraverso una sequenza di callback, chiamati "scopers".
 
 La query verrà eseguita attraverso tutti gli scoper applicabili registrati per il modello della query. Notare che gli scopers di visibilità registrati per una classe genitore (tipo `Flarum\Post\Post`) verranno applicate sulle classi secondarie (come `Flarum\Post\CommentPost`).
 
-Tieni presente che gli scoper non devono restituire nulla, ma piuttosto dovrebbero eseguire mutazioni nei file [Eloquent query object](https://laravel.com/docs/6.x/queries).
+Note that scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
 
 ### Stringhe di autorizzazione personalizzate
 
 Esistono in realtà due tipi di scoper:
 
 - Gli scopers basati sulle azioni verranno applicati a tutte le query per il modello eseguito con una determinata capacità (che per impostazione predefinita è `"view"`). Si prega di notare che questo non è correlato alle stringhe di abilità del [policy system](#how-it-works)
-- Tieni presente che gli scopers globali verranno eseguiti su TUTTE le query per il relativo modello, inclusi `view`, che potrebbe creare loop infiniti o errori. Generalmente, vengono eseguiti solo per abilità che non iniziano con "view". Puoi vedere qualcosa nell' [esempio sottostante](#custom-visibility-scoper-examples)
+- "global" scopers will apply to all queries for the query's model. Tieni presente che gli scopers globali verranno eseguiti su TUTTE le query per il relativo modello, inclusi `view`, che potrebbe creare loop infiniti o errori. Generalmente, vengono eseguiti solo per abilità che non iniziano con "view". Puoi vedere qualcosa nell' [esempio sottostante](#custom-visibility-scoper-examples)
 
 
 
-Un caso d'uso comune per questo è consentire l'estensibilità all'interno dell'ambito della visibilità.
-Diamo un'occhiata a un semplice pezzo di `Flarum\Post\PostPolicy`:
+Un caso d'uso comune per questo è consentire l'estensibilità all'interno dell'ambito della visibilità. Diamo un'occhiata a un semplice pezzo di `Flarum\Post\PostPolicy`:
 
 ```php
 // Qui, vogliamo assicurarci che i post privati non siano visibili agli utenti per impostazione predefinita.
@@ -255,8 +245,7 @@ $query->where(function ($query) use ($actor) {
 });
 ```
 
-A possible extension further down the line might use something like this to allow some users to some private posts. Note that since
-ScopeModelVisibility was dispatched in `orWhere`, these query modifications ONLY apply to `$query->where('posts.is_private', false)` from the example above.
+A possible extension further down the line might use something like this to allow some users to some private posts. Note that since ScopeModelVisibility was dispatched in `orWhere`, these query modifications ONLY apply to `$query->where('posts.is_private', false)` from the example above.
 
 ```php
 <?php
@@ -279,9 +268,9 @@ Pensa di richiamare `whereVisibleTo` con un azione personalizzata come un modo p
 
 ### Esempi
 
-Diamo un'occhiata ad alcuni esempi tratti da [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
 
-Innanzitutto, uno scoper per il modello `Tag` con l'abilità` view`:
+Innanzitutto, uno scoper per il modello `Tag` con l'abilità`view`:
 
 ```php
 <?php
@@ -345,8 +334,6 @@ Nota che, come accennato in precedenza, non lo eseguiamo per le abilità che ini
 
 ### Registrazione di scopers personalizzati
 
-
-
 ```php
 use Flarum\Extend;
 use Flarum\Discussion\Discussion;
@@ -370,13 +357,8 @@ return [
 
 ## Autorizzazioni del frontend
 
-Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend.
-Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint.
-E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
+Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend. Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint. E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
 
-Poiché non possiamo eseguire controlli di autorizzazione nel frontend, dobbiamo eseguirli nel backend e allegarli alla serializzazione dei dati che stiamo inviando.
-Permessi globali come (`viewDiscussions`, `viewUserList`) possono essere inclusi in `ForumSerializer`, ma per l'autorizzazione specifica dell'oggetto, potremmo voler includere quelli con altri parametri.
-Ad esempio, quando restituiamo l'elenco delle discussioni, controlliamo se l'utente può rispondere, rinominare, modificare ed eliminarle oggetti, e memorizzare quei dati nel modello di discussione frontend.
-È quindi accessibile tramite `discussion.canReply()` o `discussion.canEdit()`, ma non c'è niente di magico qui: è solo un altro attributo inviato dal serializzatore.
+Poiché non possiamo eseguire controlli di autorizzazione nel frontend, dobbiamo eseguirli nel backend e allegarli alla serializzazione dei dati che stiamo inviando. Permessi globali come (`viewDiscussions`, `viewUserList`) possono essere inclusi in `ForumSerializer`, ma per l'autorizzazione specifica dell'oggetto, potremmo voler includere quelli con altri parametri. Ad esempio, quando restituiamo l'elenco delle discussioni, controlliamo se l'utente può rispondere, rinominare, modificare ed eliminarle oggetti, e memorizzare quei dati nel modello di discussione frontend. È quindi accessibile tramite `discussion.canReply()` o `discussion.canEdit()`, ma non c'è niente di magico qui: è solo un altro attributo inviato dal serializzatore.
 
 Per un esempio di come allegare dati a un serializzatore, vedere [casi simili per la trasmissione delle impostazioni](settings.md#accessing-settings).

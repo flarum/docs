@@ -1,14 +1,10 @@
 # Kurulum
 
-::: danger Uyarı
-Flarum **beta yazılımıdır**. Bu, hala bazı eksik özelliklere ve hatalara sahip olduğu anlamına gelir 🐛🐞 ve bir noktada - er ya da geç - muhtemelen kırılacaktır! 💥
+::: danger Uyarı Flarum **beta yazılımıdır**. Bu, hala bazı eksik özelliklere ve hatalara sahip olduğu anlamına gelir 🐛🐞 ve bir noktada - er ya da geç - muhtemelen kırılacaktır! 💥
 
-Beta, tamamen bu sorunları çözmek ve Flarum'u iyileştirmekle ilgilidir. **Ne yaptığınızı bilmiyorsanız lütfen üretimde Flarum kullanmayın**. İşler ters giderse sizi destekleyemeyiz. Sonraki sürümlere yükseltmek mümkün olacak, ancak ellerinizi kirletmeyi içerebilir.
-:::
+Beta, tamamen bu sorunları çözmek ve Flarum'u iyileştirmekle ilgilidir. **Ne yaptığınızı bilmiyorsanız lütfen üretimde Flarum kullanmayın**. İşler ters giderse sizi destekleyemeyiz. Sonraki sürümlere yükseltmek mümkün olacak, ancak ellerinizi kirletmeyi içerebilir. :::
 
-::: tip Hızlı test?
-Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birinde denemekten çekinmeyin. Veya Flarum ekibine bağlı olmayan ücretsiz bir topluluk hizmeti olan [Free Flarum](https://www.freeflarum.com)'da kendi forumunuzu birkaç saniye içinde kurun.
-:::
+::: tip Hızlı test? Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birinde denemekten çekinmeyin. Veya Flarum ekibine bağlı olmayan ücretsiz bir topluluk hizmeti olan [Free Flarum](https://www.freeflarum.com)'da kendi forumunuzu birkaç saniye içinde kurun. :::
 
 ## Sunucu Gereksinimleri
 
@@ -16,24 +12,22 @@ Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadı
 
 * **Apache** (mod_rewrite etkin) veya **Nginx**
 * **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6 +** veya **MariaDB10.0.5+**
-Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
+* **MySQL 5.6 +** veya **MariaDB10.0.5+** Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
+* **SSH (command-line) access** to run Composer
 
-::: tip Paylaşımlı Hosting
-Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
+::: tip Shared Hosting It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
 
-Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Bazı paylaşılan ana bilgisayarlar size, Composer ve Flarum'u sorunsuz bir şekilde yükleyebilmeniz için SSH erişimi sağlar. SSH'siz diğer ana bilgisayarlar için [Pockethold](https://github.com/andreherberth/pockethold) gibi geçici çözümleri deneyebilirsiniz.
-:::
+Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine. :::
 
 ## Yükleme
 
-Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
+Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
 ```
 
-Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre [URL Yeniden Yazma] (# url-yeniden yazma) ayarlamanız gerekir.
+Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre \[URL Yeniden Yazma\] (# url-yeniden yazma) ayarlamanız gerekir.
 
 Her şey hazır olduğunda, bir web tarayıcısında forumunuza gidin ve kurulumu tamamlamak için talimatları izleyin.
 
@@ -78,7 +72,6 @@ www.example.com {
     encode gzip
 }
 ```
-
 ## Klasör Sahipliği
 
 Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Linux'ta bir dizine yazma erişimine izin vermek için aşağıdaki komutu yürütün:
@@ -99,13 +92,9 @@ Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de w
 
 Linux'ta dosya izinleri ve sahipliğinin yanı sıra bu komutlar hakkında daha fazla bilgi edinmek için [bu öğretici](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/)'yi okuyun . Windows'ta Flarum kuruyorsanız cevaplarınızı bulabilirsiniz, [Bu Süper Kullanıcı sorusunun](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) kullanışlı.
 
-::: tip Ortamlar değişiklik gösterebilir
-Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusunun altında çalıştığı uygun kullanıcı ve grup için web sunucusu yapılandırmanıza veya web barındırma sağlayıcınıza danışın.
-:::
+::: tip Ortamlar değişiklik gösterebilir Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusunun altında çalıştığı uygun kullanıcı ve grup için web sunucusu yapılandırmanıza veya web barındırma sağlayıcınıza danışın. :::
 
-::: danger Asla izinlerde 777 kullanma
-Bu izin düzeyi, kullanıcı veya gruptan bağımsız olarak herkesin klasör ve dosyanın içeriğine erişmesine izin verdiğinden, hiçbir klasör veya dosyayı asla `777` izin düzeyine ayarlamamalısınız.
-:::
+::: danger Asla izinlerde 777 kullanma Bu izin düzeyi, kullanıcı veya gruptan bağımsız olarak herkesin klasör ve dosyanın içeriğine erişmesine izin verdiğinden, hiçbir klasör veya dosyayı asla `777` izin düzeyine ayarlamamalısınız. :::
 
 ## Dizinleri Özelleştirme
 
@@ -121,7 +110,7 @@ Ayrıca `index.php` dosyasını düzenlemeniz ve aşağıdaki satırı değişti
 $site = require './site.php';
 ```
 
-Son olarak, `site.php` dosyasını düzenleyin ve aşağıdaki satırlardaki yolları yeni dizin yapınızı yansıtacak şekilde güncelleyin:
+ Son olarak, `site.php` dosyasını düzenleyin ve aşağıdaki satırlardaki yolları yeni dizin yapınızı yansıtacak şekilde güncelleyin:
 
 ```php
 'base' => __DIR__,

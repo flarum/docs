@@ -1,12 +1,10 @@
 # Testing
 
-Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales.
-Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
+Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales. Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
 
 ## Backend Tests
 
-La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas.
-Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
+La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas. Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
 
 ### Configuración
 
@@ -129,7 +127,7 @@ La información de la base de datos de pruebas se configura a través del `DB_HO
 
 Ahora que hemos proporcionado la información necesaria, todo lo que tenemos que hacer es ejecutar `composer test:setup` en el directorio raíz de nuestra extensión, ¡y ya tenemos nuestro entorno de pruebas listo para funcionar!
 
-Dado que [(casi)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListTestWithFulltextSearch.php#L29-L43) todas las operaciones de la base de datos en las pruebas de integración se ejecutan en transacciones, los desarrolladores que trabajan en múltiples extensiones generalmente encontrarán más conveniente usar una base de datos compartida y un directorio tmp para probar todas sus extensiones. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
 
 ### Uso de las pruebas de integración
 
@@ -146,15 +144,14 @@ Sus clases de casos de prueba deben extender esta clase.
 
 Hay varias utilidades importantes disponibles para sus casos de prueba:
 
+- The `setting()` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
 - El método `extension()` tomará los IDs de Flarum de las extensiones a habilitar como argumentos. Su extensión siempre debe llamar a esto con el ID de su extensión al comienzo de los casos de prueba, a menos que el objetivo del caso de prueba en cuestión sea confirmar algún comportamiento presente sin su extensión, y compararlo con el comportamiento cuando su extensión está habilitada. Si su extensión depende de otras extensiones, asegúrese de que están incluidas en el campo `require` de composer.json (o `require-dev` para [dependencias opcionales](dependencies.md)), y también liste los nombres de sus paquetes en composer cuando llame a `extension()`. Ten en cuenta que debes listarlos en un orden válido.
 - El método `extend()` toma instancias de extensores como argumentos, y es útil para probar extensores introducidos por su extensión para que otras extensiones los usen.
 - El método `prepareDatabase()` le permite pre-poblar su base de datos. Esto podría incluir la adición de usuarios, discusiones, mensajes, configuración de permisos, etc. Su argumento es un array asociativo que mapea los nombres de las tablas a arrays de [arrays de registros](https://laravel.com/docs/8.x/queries#insert-statements).
 
 Si su caso de prueba necesita usuarios más allá del usuario administrador por defecto, puede utilizar el método `$this->normalUser()` del trait `Flarum\Testing\integration\RetrievesAuthorizedUsers`.
 
-:::warning
-La clase `TestCase` arrancará una instancia de Flarum la primera vez que se llame a su método `app()`. Cualquier uso de `prepareDatabase`, `extend`, o `extension` después de esto no tendrá efecto. Asegúrate de que has hecho toda la configuración que necesitas en tu caso de prueba antes de llamar a `app()`, o a `database()`, `server()`, o `send()`, que llaman implícitamente a `app()`. Si necesitas hacer modificaciones en la base de datos después de que la aplicación haya arrancado, puedes usar el método regular de guardado de Eloquent, o la instancia `Illuminate\Database\ConnectionInterface` obtenida mediante la llamada al método `database()`.
-:::
+:::warning La clase `TestCase` arrancará una instancia de Flarum la primera vez que se llame a su método `app()`. Cualquier uso de `prepareDatabase`, `extend`, o `extension` después de esto no tendrá efecto. Asegúrate de que has hecho toda la configuración que necesitas en tu caso de prueba antes de llamar a `app()`, o a `database()`, `server()`, o `send()`, que llaman implícitamente a `app()`. Si necesitas hacer modificaciones en la base de datos después de que la aplicación haya arrancado, puedes usar el método regular de guardado de Eloquent, o la instancia `Illuminate\Database\ConnectionInterface` obtenida mediante la llamada al método `database()`. :::
 
 Por supuesto, ya que todo esto se basa en PHPUnit, puede utilizar los métodos `setUp()` de sus clases de prueba para las tareas de configuración comunes.
 
@@ -164,10 +161,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -220,8 +217,7 @@ class SomeTest extends TestCase
 
 #### Envío de solicitudes
 
-Una aplicación común de las pruebas automatizadas es hacer ping a varios puntos finales HTTP con varios datos, autenticados como diferentes usuarios.
-Puedes usar esto para asegurarte de que
+Una aplicación común de las pruebas automatizadas es hacer ping a varios puntos finales HTTP con varios datos, autenticados como diferentes usuarios. Puedes usar esto para asegurarte de que
 
 - Los usuarios no pueden acceder a contenidos a los que no están autorizados a acceder.
 - Las operaciones de creación/edición/borrado basadas en permisos funcionan como se espera.
@@ -240,10 +236,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -296,13 +292,9 @@ class SomeTest extends TestCase
 }
 ```
 
-::: warning
-Si quieres enviar parámetros de consulta en una petición GET, no puedes incluirlos en la ruta; tendrás que añadirlos después con el método `withQueryParams`.
-:::
+::: warning Si quieres enviar parámetros de consulta en una petición GET, no puedes incluirlos en la ruta; tendrás que añadirlos después con el método `withQueryParams`. :::
 
-::: warning
-Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución.
-:::
+::: warning Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución. :::
 
 #### Pruebas de consola
 
@@ -317,10 +309,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -335,8 +327,7 @@ class ConsoleTest extends ConsoleTestCase
     public function command_works()
     {
         $input = [
-            'command' => 'some:command',  // El nombre del comando, equivalente a `php flarum some:command`.
-            'foo' => 'bar',  // argumentos
+            'command' => 'some:command',  // El nombre del comando, equivalente a `php flarum some:command`. 'foo' => 'bar',  // argumentos
             '--lorem' => 'ipsum'  // opciones
         ];
 

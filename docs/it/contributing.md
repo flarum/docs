@@ -64,35 +64,37 @@ Un esempio tipico di flusso di lavoro può essere questo:
 
 1. 🚦 **Testa** il tuo codice.
     * Aggiungi unit test in base alle esigenze durante la correzione di bug o l'aggiunta di funzionalità.
-    * Lancia la suite di test con `vendor/bin/phpunit` nella cartella del pacchetto pertinente. 
+    * Lancia la suite di test con `vendor/bin/phpunit` nella cartella del pacchetto pertinente.
+
+
 <!--
-    * Vedi [qui](link-to-core/tests/README.md) per maggiori informazioni su come testare Flarum.
+    * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
 -->
 
-4. 💾 **Crea dei commit** per il tuo codice con un messaggio descrittivo.
-    * Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
-    * Scrivi un [buon messaggio accompagnatorio](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+4. 💾 **Commit** your code with a descriptive message.
+    * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
+    * Write a [good commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
-5. 🎁 **Invia** una Pull Request su GitHub.
-    * Riempi i campi della richiesta.
-    * Se la modifica è visiva, includi uno screenshot o una GIF che dimostri la modifica.
-    * NON eseguire il check-in di JavaScript nei file `dist` Verra fatto automaticamente una volta uniti.
+5. 🎁 **Submit** a Pull Request on GitHub.
+    * Fill out the pull request template.
+    * If your change is visual, include a screenshot or GIF demonstrating the change.
+    * Do NOT check-in the JavaScript `dist` files. These will be compiled automatically on merge.
 
-6. 🤝 **Coinvolgi il team** di Flarum per l'approvazione.
-    * I membri del team esamineranno il tuo codice. Potremmo suggerire alcune modifiche o miglioramenti o alternative, ma per piccoli cambiamenti la tua richiesta pull dovrebbe essere accettata rapidamente.
-    * Quando lasci un feedback, aggiungi commenti invece di sovrascriverli o eliminarli (li uniremo noi).
+6. 🤝 **Engage** with the Flarum team for approval.
+    * Team members will review your code. We may suggest some changes or improvements or alternatives, but for small changes your pull request should be accepted quickly.
+    * When addressing feedback, push additional commits instead of overwriting or squashing (we will squash on merge).
 
-7. 🕺 **Festeggia** per aver contribuito a Flarum!
+7. 🕺 **Dance** like you just contributed to Flarum.
 
 ## Stile del codice
 
-Al fine di mantenere la base di codice Flarum pulita e coerente, abbiamo una serie di linee guida sullo stile di codifica che seguiamo. In caso di dubbio, leggi il codice sorgente.
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
-Non preoccuparti se lo stile del tuo codice non è perfetto! StyleCI unirà automaticamente tutte le correzioni di stile nei repository Flarum dopo il merge delle pull request. Questo ci permette di concentrarci sul contenuto del contributo e non sullo stile del codice.
+Don't worry if your code styling isn't perfect! StyleCI will automatically merge any style fixes into Flarum repositories after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
 
 ### PHP
 
-Flarum segue gli standard di codice [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) e [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Inoltre, ci conformiamo a una serie di [altre regole di stile](https://github.com/flarum/core/blob/master/.styleci.yml). Usiamo il type hinting di PHP 7 dove possibile, e [PHPDoc](https://docs.phpdoc.org/) per la documentazione inline. Prova a rispettare lo stile utilizzato dal resto del codice nei tuoi contributi.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * Gli spazi dei nomi dovrebbero essere in singolare (es. `Flarum\Discussion`, non `Flarum\Discussions`)
 * Le interfacce dovrebbero avere il suffisso `Interface` (es. `MailableInterface`)
@@ -101,42 +103,42 @@ Flarum segue gli standard di codice [PSR-2](https://github.com/php-fig/fig-stand
 
 ### JavaScript
 
-JavaScript di Flarum segue principalmente la [Airbnb Style Guide](https://github.com/airbnb/javascript). Utilizziamo [ESDoc](https://esdoc.org/manual/tags.html) per fornire documentazione conforme.
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
 
 ### Database
 
-**Le colonne** dovrebbero essere denominate in base al tipo di dati:
+**Columns** should be named according to their data type:
 * DATETIME o TIMESTAMP: `{verbed}_at` (es. created_at, read_at) o `{verbed}_until` (eg. suspended_until)
 * INT considerato come conteggio:  `{noun}_count` (es. comment_count, word_count)
 * Chiave esterna:  `{verbed}_{entity}_id` (es. hidden_user_id)
     * Il verbo può essere omesso per la relazione primaria (es. autore del post � semplicemente `user_id`)
 * BOOL: `is_{adjective}` (es. is_locked)
 
-**Le Tabelle** dovrebbero chiamarsi in questo modo:
+**Tables** should be named as follows:
 * Usa la forma plurale (`discussions`)
 * Separa più parole con il trattino basso (`access_tokens`)
 * Per le tabelle delle relazioni, unisci i due nomi di tabella in forma singolare con un trattino basso in ordine alfabetico (es. `discussion_user`)
 
 ### CSS
 
-Le classi CSS di Flarum seguono più o meno il [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) con il formato  `.ComponentName-descendentName--modifierName`.
+Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
 
 ### Traduzioni
 
-Utilizziamo [formati chiave standard](/extend/i18n.md#appendix-a-standard-key-format) per denominare le chiavi di traduzione in modo descrittivo e coerente.
+We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Strumenti di sviluppo
 
-La maggior parte dei collaboratori di Flarum sviluppa con [PHPStorm](https://www.jetbrains.com/phpstorm/download/) o [VSCode](https://code.visualstudio.com/).
+Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [VSCode](https://code.visualstudio.com/).
 
-Per il forum in locale, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), e [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) sono le scelte più popolari.
+To serve a local forum, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), and [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) are popular choices.
 
 ## Contratto di licenza del collaboratore
 
-Contribuendo con il tuo codice a Flarum, concedi alla Flarum Foundation (Stichting Flarum) una licenza non esclusiva, irrevocabile, mondiale, esente da royalty, cedibile in sublicenza e trasferibile sotto tutti i tuoi diritti di proprietà intellettuale rilevanti (inclusi copyright, brevetto e qualsiasi altro diritto ), per utilizzare, copiare, preparare opere derivate, distribuire ed eseguire pubblicamente e visualizzare i Contributi in base a qualsiasi termine di licenza, inclusi, a titolo esemplificativo: (a) licenze open source come la licenza MIT; e (b) licenze binarie, proprietarie o commerciali. Fatta eccezione per le licenze qui concesse, ti riservi tutti i diritti, titoli e interessi relativi al Contributo.
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
 
-Confermi di essere in grado di concederci questi diritti. Dichiari di essere legalmente autorizzato a concedere la licenza di cui sopra. Se il tuo datore di lavoro ha diritti sulla proprietà intellettuale che crei, dichiari di aver ricevuto il permesso di effettuare i Contributi per conto di quel datore di lavoro, o che il tuo datore di lavoro ha rinunciato a tali diritti per i Contributi.
+You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-Dichiari che i Contributi sono tue opere d'autore originali e, per tua conoscenza, nessun'altra persona può rivendicare, o ha il diritto di rivendicare, alcun diritto su qualsiasi invenzione o brevetto relativo ai Contributi. Dichiari inoltre di non essere legalmente obbligato, sia stipulando un contratto che in altro modo, in qualsiasi circostanza che sia in conflitto con i termini di questa licenza.
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
 
-La Fondazione Flarum riconosce che, ad eccezione di quanto esplicitamente descritto nel presente Accordo, qualsiasi Contributo fornito è "COSÌ COM'È", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO, ESPLICITE O IMPLICITE, INCLUSE, SENZA LIMITAZIONE, ALCUNA GARANZIA O CONDIZIONE DI TITOLO, NON VIOLAZIONE, COMMERCIABILITÀ O IDONEITÀ PER UN PARTICOLARE SCOPO.
+The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.

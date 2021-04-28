@@ -18,9 +18,7 @@ Los administradores también pueden crear nuevos grupos a través del panel de a
 
 ## Permisos
 
-Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de 
-pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo).
-En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
+Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo). En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
 
 No hay una asociación directa entre los usuarios y los permisos: cuando comprobamos los permisos de un usuario, en realidad estamos enumerando los permisos de todos los grupos del usuario.
 
@@ -40,28 +38,8 @@ $user->getPermissions();
 $user->hasPermission('viewDiscussions');
 ```
 
-:::warning Utilizar la Autorización Adecuada
-Los permisos son sólo una parte del rompecabezas: si quieres imponer si un usuario puede realizar una acción, debes utilizar el [sistema de autorización](authorization.md) de Flarum.
-:::
+:::warning Utilizar la Autorización Adecuada Los permisos son sólo una parte del rompecabezas: si quieres imponer si un usuario puede realizar una acción, debes utilizar el [sistema de autorización](authorization.md) de Flarum. :::
 
 ### Añadir Permisos Personalizados
 
-Dado que los permisos son sólo cadenas, no es necesario "registrar" formalmente un permiso en ningún sitio: sólo se necesita una forma de que los administradores asignen ese permiso a los grupos.
-Podemos hacer esto extendiendo el componente frontend `flarum/components/PermissionGrid`. Por ejemplo:
-
-```js
-import { extend } from 'flarum/extend';
-import PermissionGrid from 'flarum/components/PermissionGrid';
-
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Clases CSS para el icono. Generalmente en formato fontawesome, aunque también puedes usar tu propio css 
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La cadena del permiso.
-    }, 95);
-  });
-}
-```
-
-Por defecto, los permisos sólo se conceden a los administradores. Si quieres que un permiso esté disponible para otros grupos por defecto, tendrás que utilizar una [migración de datos](data.md#migrations) para añadir filas para los grupos pertinentes. Si quieres hacer esto, te recomendamos **encarecidamente** que sólo asignes permisos por defecto a uno de los [grupos reservados](#groups).
+To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).

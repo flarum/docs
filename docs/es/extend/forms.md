@@ -4,9 +4,7 @@ En este artículo, repasaremos algunas herramientas de frontend que tenemos a nu
 
 ## Componentes de los formularios
 
-Como en cualquier sitio interactivo, es probable que quiera incluir formularios en algunas páginas y modales.
-Flarum proporciona algunos componentes para facilitar la construcción (¡y el estilo!) de estos formularios.
-Por favor, consulte la documentación de la API vinculada para cada uno de ellos para obtener más información sobre sus atributos aceptados.
+Como en cualquier sitio interactivo, es probable que quiera incluir formularios en algunas páginas y modales. Flarum proporciona algunos componentes para facilitar la construcción (¡y el estilo!) de estos formularios. Por favor, consulte la documentación de la API vinculada para cada uno de ellos para obtener más información sobre sus atributos aceptados.
 
 - El componente [`flarum/components/FieldSet`](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) envuelve a sus hijos en una etiqueta HTML fieldset, con una leyenda.
 - El componente [`flarum/components/Select`](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) es una entrada de selección estilizada.
@@ -50,11 +48,10 @@ class FormComponent extends Component {
 
 ¡No olvides utilizar [traducciones](translate.md)!
 
+
 ## Streams, bidi, y withAttr
 
-Flarum proporciona [Mithril's Stream](https://mithril.js.org/stream.html) como `flarum/util/Stream`.
-Esta es una estructura de datos reactiva muy poderosa, pero es más comúnmente usada en Flarum como una envoltura para datos de formularios.
-Su uso básico es:
+Flarum proporciona [Mithril's Stream](https://mithril.js.org/stream.html) como `flarum/util/Stream`. Esta es una estructura de datos reactiva muy poderosa, pero es más comúnmente usada en Flarum como una envoltura para datos de formularios. Su uso básico es:
 
 ```js
 import Stream from 'flarum/utils/Stream';
@@ -66,9 +63,7 @@ value("world!");
 value() === "world!"; // verdadero
 ```
 
-En los formularios de Flarum, los flujos se utilizan frecuentemente junto con el attr bidi.
-Bidi significa unión bidireccional, y es un patrón común en los frameworks de frontend. Flarum parchea Mithril con la librería [`m.attrs.bidi`](https://github.com/tobyzerner/m.attrs.
-Esto abstrae el procesamiento de la entrada en Mithril. Por ejemplo:
+En los formularios de Flarum, los flujos se utilizan frecuentemente junto con el attr bidi. Bidi significa unión bidireccional, y es un patrón común en los frameworks de frontend. Flarum parchea Mithril con la librería [`m.attrs.bidi`](https://github.com/tobyzerner/m.attrs. Esto abstrae el procesamiento de la entrada en Mithril. Por ejemplo:
 
 ```jsx
 import Stream from 'flarum/utils/Stream';
@@ -101,7 +96,7 @@ const value = Stream();
 
 ## Haciendo peticiones
 
-En nuestra documentación de [modelos y datos](data.md), aprendiste a trabajar con modelos, y a guardar la creación, los cambios y la eliminación de modelos en la base de datos a través de la utilidad Store, que no es más que una envoltura del sistema de peticiones de Flarum, que a su vez no es más que una envoltura del sistema de peticiones de [Mithril](https://mithril.js.org/request.html).
+In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
 
 El sistema de peticiones de Flarum está disponible globalmente a través de `app.request(options)`, y tiene las siguientes diferencias con respecto a `m.request(options)` de Mithril:
 

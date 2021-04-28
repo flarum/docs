@@ -28,7 +28,7 @@ Le migrazioni risiedono all'interno di una cartella opportunamente denominata `m
 
 ### Struttura della migrazioni
 
-In Flarum, i file di migrazione dovrebbero ** restituire un array ** con due funzioni: `up` e `down`. La funzione `up` viene utilizzato per aggiungere nuove tabelle, colonne o indici al database, mentre la funziona `down` dovrebbe invertire queste operazioni. Queste funzioni ricevono un'istanza di [Laravel schema builder](https://laravel.com/docs/6.x/migrations#creating-tables) che puoi usare per modificare lo schema del database:
+In Flarum, i file di migrazione dovrebbero ** restituire un array ** con due funzioni: `up` e `down`. La funzione `up` viene utilizzato per aggiungere nuove tabelle, colonne o indici al database, mentre la funziona `down` dovrebbe invertire queste operazioni. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/8.x/migrations#creating-tables) which you can use to alter the database schema:
 
 ```php
 <?php
@@ -49,7 +49,7 @@ Per attività comuni come la creazione di una tabella o l'aggiunta di colonne a 
 
 ### Ciclo di vita delle migrazioni
 
-Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite. 
+Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite.
 
 Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. Per annullare le modifiche applicate dalle migrazioni, è necessario fare clic su "Disinstalla" accanto a un'estensione nel pannello di amministrazione, o utilizzare in alternativa il comando `php flarum migrate:reset`. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate.
 
@@ -68,8 +68,7 @@ return Migration::createTable('users', function (Blueprint $table) {
 });
 ```
 
-Quando si crea la tabella, è possibile utilizzare uno qualsiasi dei generatori di schemi [column methods](https://laravel.com/docs/6.x/migrations#creating-columns) 
-per definire le colonne della tabella.
+When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/8.x/migrations#creating-columns) to define the table's columns.
 
 ### Rinominare tabelle
 
@@ -81,7 +80,7 @@ return Migration::renameTable($from, $to);
 
 ### Creazione / eliminazione di colonne
 
-Per aggiungere colonne ad una tabella esistente, utilizza l'helper `Migration::addColumns`.`addColumns` accetta due argomenti. Il primo è il nome della tabella. Il secondo è un array di definizioni di colonne, con la chiave che è il nome della colonna. Il valore di ogni elemento è un array con le definizioni della colonna, come inteso dal metodo Laravel `Illuminate\Database\Schema\Blueprint::addColumn()`. Il primo valore è il tipo di colonna a cui vengono passati tutti gli altri valori con `addColumn`.
+Per aggiungere colonne ad una tabella esistente, utilizza l'helper `Migration::addColumns`.`addColumns` accetta due argomenti. The `addColumns` helper accepts two arguments. Il primo è il nome della tabella. Il secondo è un array di definizioni di colonne, con la chiave che è il nome della colonna. Il valore di ogni elemento è un array con le definizioni della colonna, come inteso dal metodo Laravel `Illuminate\Database\Schema\Blueprint::addColumn()`. Il primo valore è il tipo di colonna a cui vengono passati tutti gli altri valori con `addColumn`.
 
 ```php
 return Migration::addColumns('users', [
@@ -94,7 +93,7 @@ Per eliminare colonne da una tabella esistente, utilizzare il domando `Migration
 
 ### Rinominare colonne
 
-Per rinominare le colonne utilizza il comando `Migration::renameColumns`.`renameColumns` accetta due argomenti. Il primo è il nome della tabella, mentre il secondo è un array di nomi di colonne da rinominare:
+To rename columns, use the `Migration::renameColumns` helper. Per rinominare le colonne utilizza il comando `Migration::renameColumns`.`renameColumns` accetta due argomenti. Il primo è il nome della tabella, mentre il secondo è un array di nomi di colonne da rinominare:
 
 ```php
 return Migration::renameColumns('users', ['from' => 'to']);
@@ -102,24 +101,25 @@ return Migration::renameColumns('users', ['from' => 'to']);
 
 ### Migrazioni dei dati (avanzatato)
 
-Una migrazione non deve modificare la struttura del database: è possibile utilizzare una migrazione per inserire, aggiornare o eliminare righe in una tabella. Ad esempio, potresti utilizzare le migrazioni per assegnare [permessi personalizzati](permissions.md) a gruppi diversi da Admin, o fornire alcuni dati iniziali per un modello Eloquent personalizzato. Dato che hai accesso a [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), tutto è possibile (anche se, ovviamente, dovresti essere estremamente cauto e testare ampiamente la tua estensione).
+Una migrazione non deve modificare la struttura del database: è possibile utilizzare una migrazione per inserire, aggiornare o eliminare righe in una tabella. Ad esempio, potresti utilizzare le migrazioni per assegnare [permessi personalizzati](permissions.md) a gruppi diversi da Admin, o fornire alcuni dati iniziali per un modello Eloquent personalizzato. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/8.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
 
 Le migrazioni dei dati sono il modo consigliato per specificare le impostazioni e le autorizzazioni predefinite.
 
 ## Modelli di backend
 
-Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo per accedere ai dati sia nel backend che nel frontend. Sul back-end è piuttosto semplice: devi solo avere familiarità con [Eloquent](https://laravel.com/docs/6.x/eloquent).
+Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo per accedere ai dati sia nel backend che nel frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/8.x/eloquent).
 
 ### Aggiunta di nuovi modelli
 
 Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per essa. Piuttosto che estendere la classe `Model` direttamente, dovrai estendere `Flarum\Database\AbstractModel` che fornisce un po 'di funzionalità extra per consentire ai tuoi modelli di essere estesi da altre estensioni.
 
+
 <!--
-### Modelli estensibili
+### Extending Models
 
-Se hai aggiunto colonne a tabelle esistenti, saranno accessibili sui modelli esistenti. Ad esempio, puoi acquisire dati dalla tabella `users` tremite il modello `Flarum\User\User`.
+If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-Se devi definire qualsiasi attributo [accessori](https://laravel.com/docs/6.x/eloquent-mutators#defining-an-accessor), [mutatori](https://laravel.com/docs/6.x/eloquent-mutators#defining-a-mutator), [date](https://laravel.com/docs/6.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/6.x/eloquent-mutators#attribute-casting), o [valori standard](https://laravel.com/docs/6.x/eloquent#default-attribute-values) su un modello esistente, puoi usare l'estensore `Model`:
+If you need to define any attribute [accessors](https://laravel.com/docs/6.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/6.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/6.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/6.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/6.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
 
 ```php
 use Flarum\Extend;
@@ -142,7 +142,7 @@ return [
 
 ### Relazioni
 
-Puoi aggiungere anche [relazioni](https://laravel.com/docs/6.x/eloquent-relationships) a modelli esistenti utilizzando i metodi `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`e `relationship` sull'estensore `Model`. Il primo argomento è il nome della relazione; il resto degli argomenti viene passato al metodo equivalente sul modello, quindi è possibile specificare il nome del modello correlato e, facoltativamente, sostituire i nomi di tabella e chiave:
+You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. Il primo argomento è il nome della relazione; il resto degli argomenti viene passato al metodo equivalente sul modello, quindi è possibile specificare il nome del modello correlato e, facoltativamente, sostituire i nomi di tabella e chiave:
 
 ```php
     new Extend\Model(User::class)
@@ -254,7 +254,7 @@ use Tobscure\JsonApi\Document;
 class ListTagsController extends AbstractListController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         return Tag::all();
@@ -275,11 +275,11 @@ use Tobscure\JsonApi\Document;
 class ShowTagController extends AbstractShowController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         $id = Arr::get($request->getQueryParams(), 'id');
-        
+
         return Tag::findOrFail($id);
     }
 }
@@ -298,11 +298,11 @@ use Tobscure\JsonApi\Document;
 class CreateTagController extends AbstractCreateController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
-        
+
         return Tag::create([
             'name' => Arr::get($attributes, 'name')
         ]);
@@ -311,7 +311,6 @@ class CreateTagController extends AbstractCreateController
 ```
 
 ### Aggiornare una risorsa
-
 
 Per il controller che aggiorna una risorsa, estendi `Flarum\Api\Controller\AbstractShowController`. Come per il controller di creazione, puoi accedere al corpo del documento JSON:API in entrata tramite `$request->getParsedBody()`.
 
@@ -329,7 +328,7 @@ class DeleteTagController extends AbstractDeleteController
     protected function delete(Request $request)
     {
         $id = Arr::get($request->getQueryParams(), 'id');
-        
+
         Tag::findOrFail($id)->delete();
     }
 }
@@ -342,7 +341,7 @@ Per includere relazioni quando ** elenchi **, ** mostri ** o ** crei ** la tua r
 ```php
     // The relationships that are included by default.
     public $include = ['user'];
-    
+
     // Other relationships that are available to be included.
     public $optionalInclude = ['discussions'];
 ```
@@ -362,7 +361,7 @@ Puoi consentire la personalizzazione del numero di risorse ** elencate ** specif
 ```php
     // Il numero di record inclusi per impostazione predefinita.
     public $limit = 20;
-    
+
     // Il numero massimo di record che possono essere richiesti.
     public $maxLimit = 50;
 ```
@@ -385,7 +384,7 @@ Per aggiungere collegamenti di impaginazione al documento JSON:API, utilizzare i
 ```php
     // Il campo di ordinamento predefinito e l'ordine da utilizzare.
     public $sort = ['name' => 'asc'];
-    
+
     // I campi disponibili per essere ordinati.
     public $sortFields = ['firstName', 'lastName'];
 ```
@@ -451,7 +450,6 @@ Ora che hai esposto i tuoi dati nella JSON:API di Flarum, è finalmente giunto i
 
 Il frontend di Flarum contiene dati locali in `store` che fornisce un'interfaccia per interagire con JSON:API. Puoi recuperare le risorse dall'API utilizzando `find`, che restituisce sempre:
 
-<!-- import { store } from '@flarum/core/forum'; -->
 ```js
 // GET /api/discussions?sort=createdAt
 app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
@@ -481,7 +479,6 @@ Puoi saperne di più su "store" nella nostra [Documentazione API](https://api.do
 
 Se hai aggiunto un nuovo tipo di risorsa, dovrai definirne un nuovo modello. I modelli devono estendere la classe `Model` e ridefinire gli attributi e le relazioni delle risorse:
 
-<!-- import { Model } from '@flarum/core/forum'; -->
 ```js
 import Model from 'flarum/Model';
 
@@ -499,17 +496,15 @@ export default class Tag extends Model {
 app.store.models.tags = Tag;
 ```
 
-<!-- È quindi necessario registrare il nuovo modello con store utilizzando l'estensione `Model`:
+
+<!-- You must then register your new model with the store using the `Model` extender:
 
 ```js
 export const extend = [
   new Extend.Model('tags', Tag)
 ];
-``` 
--->
-
+``` -->
 ### Modelli estensibili
-
 Per aggiungere attributi e relazioni ai modelli esistenti, modificare il prototipo della classe del modello:
 
 ```js
@@ -518,18 +513,16 @@ Discussion.prototype.posts = Model.hasMany('posts');
 Discussion.prototype.slug = Model.attribute('slug');
 ```
 
-<!-- Per aggiungere attributi e relazioni ai modelli esistenti, usa l'estensione `Model`:
+
+<!-- To add attributes and relationships to existing models, use the `Model` extender:
 
 ```js
   new Extend.Model('discussions')
     .attribute('slug')
     .hasOne('user')
     .hasMany('posts')
-``` 
--->
-
+``` -->
 ### Risparmio di risorse
-
 Per inviare di nuovo i dati tramite l'API, chiama il metodo `save` su un'istanza del modello. Questo metodo restituisce un valore che si risolve con la stessa istanza del modello:
 
 ```js

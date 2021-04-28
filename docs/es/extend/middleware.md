@@ -6,6 +6,7 @@ Flarum mantiene un middleware "Pipe" a través del cual pasan todas las solicitu
 
 Una solicitud pasa por las capas de middleware en orden. Cuando la solicitud es manejada (un middleware devuelve algo en lugar de pasar la solicitud a la siguiente capa, o lanza una excepción), la respuesta se moverá de nuevo por las capas de middleware en orden inverso, antes de ser finalmente devuelta al usuario. Todo, desde el manejador de errores de Flarum hasta su lógica de autenticación, se implementa como middleware, por lo que puede ser complementado, reemplazado, reordenado o eliminado por extensiones.
 
+
 ```php
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -51,7 +52,7 @@ return [
 ];
 ```
 
-Listo, Middleware registrado. Recuerda que el orden es importante.
+Tada! Listo, Middleware registrado. Recuerda que el orden es importante.
 
 Ahora que ya tenemos lo básico, vamos a repasar algunas cosas más:
 
@@ -60,18 +61,14 @@ Ahora que ya tenemos lo básico, vamos a repasar algunas cosas más:
 Si no necesitas que tu middleware se ejecute en todas las rutas, puedes añadir un `if` para filtrarlo:
 
 ```php
-use Laminas\Diactoros\Uri;
-
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-  {
-    $currentRoute = $request->getUri()->getPath();
-    $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
+{
+    $response = $handler->handle($request);
 
-    if ($currentRoute === $routeToRunUnder->getPath()) {
-        // ¡Su lógica aquí!
-    }
+    // Your logic...
+    $response = $response->withHeader('Content-Type', 'application/json');
 
-    return $handler->handle($request);
+    return $response;
 }
 ```
 
@@ -86,13 +83,17 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
 
     return $handler->handle($request);
 }
+    $response = $response->withHeader('Content-Type', 'application/json');
+
+    return $response;
+}
 ```
 
 Por supuesto, puede utilizar cualquier condición, no sólo la ruta actual. Simple, ¿verdad?
 
 ## Devolución de su propia respuesta
 
-Volvamos al ejemplo y digamos que estás comprobando un usuario en una base de datos externa durante el registro. Un usuario se registra y se encuentra en esta base de datos. ¡Evitemos que se registre!
+Volvamos al ejemplo y digamos que estás comprobando un usuario en una base de datos externa durante el registro. Un usuario se registra y se encuentra en esta base de datos. Uh-oh! ¡Evitemos que se registre!
 
 ```php
 use Flarum\Api\JsonApiResponse;
@@ -114,7 +115,17 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
         ]);
         $document = new Document();
         $document->setErrors($error->getErrors());
-      
+
+        return new JsonApiResponse($document, $error->getStatus());
+    }
+
+    return $handler->handle($request);
+} Your email can\'t be used.',
+            ],
+        ]);
+        $document = new Document();
+        $document->setErrors($error->getErrors());
+
         return new JsonApiResponse($document, $error->getStatus());
     }
 
@@ -122,13 +133,13 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
 }
 ```
 
-¡Uf! Crisis evitada.
+Phew! ¡Uf! Crisis evitada.
 
 Para saber más sobre los objetos de solicitud y respuesta, consulte la documentación [PSR HTTP message interfaces](https://www.php-fig.org/psr/psr-7/#1-specification).
 
 ## Modificación de la respuesta después de la gestión
 
-Si quieres hacer algo con la respuesta después de que la solicitud inicial haya sido manejada, ¡no hay problema! Simplemente ejecute el manejador de la solicitud y luego su lógica:
+Si quieres hacer algo con la respuesta después de que la solicitud inicial haya sido manejada, ¡no hay problema! Simplemente ejecute el manejador de la solicitud y luego su lógica: Just run the request handler and then your logic:
 
 ```php
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -152,4 +163,4 @@ Una vez que todo está dicho y hecho y no estás devolviendo una respuesta por t
 return $handler->handle($request);
 ```
 
-¡Genial! Ya hemos terminado. ¡Ahora puedes hacer el middleware de tus sueños!
+Great! We're all done here. ¡Ahora puedes hacer el middleware de tus sueños!

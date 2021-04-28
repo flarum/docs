@@ -2,9 +2,7 @@
 
 La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboard di amministrazione e molte altre interessanti funzionalità per le estensioni. Come sempre, abbiamo fatto del nostro meglio per fornire livelli di compatibilità con le versioni precedenti e consigliamo di abbandonare i sistemi obsoleti il prima possibile per rendere le estensioni più stabili.
 
-::: tip
-Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o [sulla chat Discord](https://flarum.org/discord/).
-:::
+::: tip Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o [sulla chat Discord](https://flarum.org/discord/). :::
 
 ## Nuove funzionalità / deprecazioni
 
@@ -15,12 +13,10 @@ Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzio
 - `Flarum\Formatter\Event\Parsing` è obsoleto, il metodo `parse` di `Formatter` va utilizzato al suo posto
 - `Flarum\Formatter\Event\Rendering` è obsoleto, il metodo `render` di `Formatter` va utilizzato al suo posto
 - `Flarum\Notification\Event\Sending` è obsoleto, il metodo `driver` di `Notification` va utilizzato al suo posto
-  - Si noti che il nuovo sistema di driver di notifica non è un analogo esatto del vecchio evento `Sending`, 
-poiché può solo aggiungere nuovi driver, non modificare la funzionalità del driver di avviso della campana di notifica predefinito. Se l'estensione deve modificare ** come ** o ** a chi ** vengono inviate le notifiche, potrebbe essere necessario sostituire `Flarum\Notification\NotificationSyncer`.
+  - Si noti che il nuovo sistema di driver di notifica non è un analogo esatto del vecchio evento `Sending`, poiché può solo aggiungere nuovi driver, non modificare la funzionalità del driver di avviso della campana di notifica predefinito. Se l'estensione deve modificare ** come ** o ** a chi ** vengono inviate le notifiche, potrebbe essere necessario sostituire `Flarum\Notification\NotificationSyncer`.
 - `Flarum\Event\ConfigureNotificationTypes` è obsoleto, il metodo `type` di `Notification` va utilizzato al suo posto
 - `Flarum\Event\ConfigurePostTypes` è obsoleto, il metodo `type` di `Post` va utilizzato al suo posto
-- `Flarum\Post\Event\CheckingForFlooding` è ormai obsoleto come `Flarum\Post\Floodgate`. 
-Sono stati sostituiti con un sistema di limitazione basato su middleware che si applica a TUTTE le richieste a / api / * e possono essere configurati tramite il `ThrottleApi`. Per favore guarda la documentazione [limitazioni API](api-throttling.md) per informazioni.
+- `Flarum\Post\Event\CheckingForFlooding` è ormai obsoleto come `Flarum\Post\Floodgate`. Sono stati sostituiti con un sistema di limitazione basato su middleware che si applica a TUTTE le richieste a / api / * e possono essere configurati tramite il `ThrottleApi`. Per favore guarda la documentazione [limitazioni API](api-throttling.md) per informazioni.
 - `Flarum\Event\ConfigureUserPreferences` è ormai obsoleto, il metodo `registerPreference` di `User` va utilizzato al suo posto
 - `Flarum\Foundation\Event\Validating` è ormai obsoleto, il metodo `configure` di `Validator` va utilizzato al suo posto
 

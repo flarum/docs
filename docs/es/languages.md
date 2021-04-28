@@ -2,8 +2,7 @@
 
 Es fácil añadir un nuevo idioma a tu instalación básica de Flarum. Sólo tienes que seguir las siguientes instrucciones para descargar e instalar el paquete de idioma de tu elección.
 
-Una vez que hayas añadido un paquete de idioma, puedes [establecerlo como idioma por defecto](#setting-the-default-language) para tu foro. Y si alguna vez descubres que no necesitas uno de los paquetes de idiomas instalados, siempre puedes [desactivarlo](#disabling-a-language-pack).
-Si usas extensiones de terceros, asegúrate de [leer esto](#extensiones-de-terceros) antes de empezar.
+Una vez que hayas añadido un paquete de idioma, puedes [establecerlo como idioma por defecto](#setting-the-default-language) para tu foro. Y si alguna vez descubres que no necesitas uno de los paquetes de idiomas instalados, siempre puedes [desactivarlo](#disabling-a-language-pack). Si usas extensiones de terceros, asegúrate de [leer esto](#extensiones-de-terceros) antes de empezar.
 
 ## Instalación del paquete de idioma
 

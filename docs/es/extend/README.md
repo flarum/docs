@@ -6,9 +6,7 @@ Este enfoque hace que Flarum sea extremadamente personalizable. Un usuario puede
 
 Para lograr esta extensibilidad, Flarum ha sido construido con ricas APIs y puntos de extensión. Con algunos conocimientos de programación, puedes aprovechar estas APIs para añadir casi cualquier característica que desees. Esta sección de la documentación pretende enseñarte cómo funciona Flarum, y cómo usar las APIs para que puedas construir tus propias extensiones.
 
-::: warning
-**Tanto la API de extensiones como esta documentación son un trabajo en curso.** ¡Ten en cuenta que las futuras versiones beta pueden romper tus extensiones! Si tienes comentarios, [nos encantaría escucharlos](https://discuss.flarum.org/).
-:::
+::: warning **Tanto la API de extensiones como esta documentación son un trabajo en curso.** ¡Ten en cuenta que las futuras versiones beta pueden romper tus extensiones! Si tienes comentarios, [nos encantaría escucharlos](https://discuss.flarum.org/). :::
 
 ## Core vs. Extensiones
 
@@ -29,7 +27,7 @@ Si quieres solucionar un error o una deficiencia del núcleo, o de una extensió
 - [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Consejos sobre el espacio de nombres de las extensiones](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Documentación de Mithril js](https://mithril.js.org/)
-- [Documentación de la API de Laravel](https://laravel.com/api/6.x/)
+- [Documentación de la API de Laravel](https://laravel.com/api/8.x/)
 - [Documentación de la API de Flarum](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Generador de extensiones en blanco de Flarum](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)

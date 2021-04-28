@@ -12,17 +12,17 @@ Sì! Tuttavia, il processo di aggiornamento potrebbe richiedere di sporcarsi un 
 
 Tutte le donazioni sono ben accette. Puoi effettuarle tramite [Github Sponsors](https://github.com/sponsors/flarum) o [OpenCollective](https://opencollective.com/flarum).
 
-Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [forum](https://discuss.flarum.org/)... e donando un po di energia positiva generale intorno alla comunità!
+Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [forum](https://discuss.flarum.org/)...
 
 ### Posso utilizzare la versione beta in produzione? Per favore?
 
-C'è una ragione se nelle [istruzioni sull'installazione](install.md)  si viene messi in guardia su questa domanda. Flarum non è ancora maturo e c'è molto spazio perché qualcosa vada storto. Le estensioni su cui fai affidamento potrebbero essere rese incompatibili dalle versioni beta più recenti. I bug potrebbero causare una perdita di contenuto o esporre informazioni private a Internet in generale. Una SEO non ottimale potrebbe danneggiare il posizionamento del tuo sito, rendendo difficile attirare nuovi membri. I membri esistenti potrebbero stufarsi di problemi di prestazioni o funzionalità incomplete e dirigersi verso pascoli più verdi.
+C'è una ragione se nelle [istruzioni sull'installazione](install.md)  si viene messi in guardia su questa domanda. Flarum non è ancora maturo e c'è molto spazio perché qualcosa vada storto. Le estensioni su cui fai affidamento potrebbero essere rese incompatibili dalle versioni beta più recenti. I bug potrebbero causare una perdita di contenuto o esporre informazioni private a Internet in generale. Una SEO non ottimale potrebbe danneggiare il posizionamento del tuo sito, rendendo difficile attirare nuovi membri. I membri esistenti potrebbero stufarsi di problemi di prestazioni o funzionalità incomplete e dirigersi verso pascoli più verdi. And so on …
 
-Puoi decidere di ignorare questi rischi e installare comunque Flarum. Dipende da te ... ma tieni presente che se le cose vanno orribilmente storte, sarà tua responsabilità affrontarle. Non possiamo garantire che saremo in grado di aiutarti a risolvere i tuoi problemi, tanto meno in modo tempestivo. Quindi tieni presente che è il tuo sito che metti in gioco, scegli con saggezza.
+Puoi decidere di ignorare questi rischi e installare comunque Flarum. ma tieni presente che se le cose vanno orribilmente storte, sarà tua responsabilità affrontarle. Non possiamo garantire che saremo in grado di aiutarti a risolvere i tuoi problemi, tanto meno in modo tempestivo. So bear in mind that it’s **your** site that you’ll be putting on the line, and choose wisely.
 
 ### Posso integrare Flarum con WordPress/Laravel/etc.?
 
-Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste in futuro.
+Wouldn’t it be inte-_great_! Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste in futuro.
 
 ### Flarum avrà [nome feauture]? Quando? Perchè no?
 
@@ -42,9 +42,4 @@ Sì, ma non per ora. Il nostro obiettivo in questo momento è rendere Flarum sta
 
 La vera risposta è che generalmente teniamo d'occhio la nostra comunità per i membri eccezionali che potrebbero costituire un buon personale. Onestamente, per la maggior parte del nostro attuale staff, quello che hanno fatto prima di diventare parte del personale non era molto diverso da quello che fanno ora.
 
-Trova una passione e contribuisci come ritieni sia opportuno. Non devi avere un badge per essere rispettato qui.
-
-<!--
-### Why does Flarum use Composer? Why can't I just download a ZIP?
-  https://github.com/flarum/docs/issues/20
--->
+Trova una passione e contribuisci come ritieni sia opportuno. Then let it take its course. Non devi avere un badge per essere rispettato qui.

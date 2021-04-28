@@ -2,9 +2,7 @@
 
 La Beta 16 finaliza la API del extensor de PHP, introduce una biblioteca de pruebas y tipificaciones JS, cambia al uso de espacios de nombres para las importaciones JS, aumenta la robustez de las dependencias de la extensión y permite anular rutas, entre otras características.
 
-::: tip
-Si necesitas ayuda para aplicar estos cambios o utilizar las nuevas funciones, inicia un debate en el [foro de la comunidad](https://discuss.flarum.org/t/extensibility) o en el [chat de Discord](https://flarum.org/discord/).
-:::
+::: tip Si necesitas ayuda para aplicar estos cambios o utilizar las nuevas funciones, inicia un debate en el [foro de la comunidad](https://discuss.flarum.org/t/extensibility) o en el [chat de Discord](https://flarum.org/discord/). :::
 
 ## Frontend
 
@@ -30,8 +28,7 @@ Si necesitas ayuda para aplicar estos cambios o utilizar las nuevas funciones, i
 
 ### Laravel y Symfony
 
-La Beta 16 actualiza de la v6.x a la v8.x de los componentes de Laravel y de la v4 a la v5 de los componentes de Symfony. Por favor, consulta las respectivas guías de actualización de cada una de ellas para conocer los cambios que puedes necesitar en tus extensiones.
-El cambio más aplicable es la desaparición de `Symfony\Component\Translation\TranslatorInterface` en favor de `Symfony\Contracts\Translation\TranslatorInterface`. El primero se eliminará en la beta 17.
+La Beta 16 actualiza de la v6.x a la v8.x de los componentes de Laravel y de la v4 a la v5 de los componentes de Symfony. Por favor, consulta las respectivas guías de actualización de cada una de ellas para conocer los cambios que puedes necesitar en tus extensiones. El cambio más aplicable es la desaparición de `Symfony\Component\Translation\TranslatorInterface` en favor de `Symfony\Contracts\Translation\TranslatorInterface`. El primero se eliminará en la beta 17.
 
 ### Funciones de Ayuda
 
@@ -41,9 +38,7 @@ Dado que algunas extensiones de Flarum utilizan bibliotecas de Laravel que asume
 
 ### Cambios en la búsqueda
 
-Como parte de nuestros esfuerzos para hacer el sistema de búsqueda de Flarum más flexible, hemos hecho varias refacciones en la beta 16.
-En particular, el filtrado y la búsqueda se tratan ahora como mecanismos diferentes, y tienen conductos y extensores separados.
-Esencialmente, si una consulta tiene un parámetro de consulta `filter[q]`, será tratada como una búsqueda, y todos los demás parámetros de filtro serán ignorados. En caso contrario, será tratada por el sistema de filtrado. Esto permitirá eventualmente que las búsquedas sean manejadas por controladores alternativos (provistos por extensiones), como ElasticSearch, sin afectar el filtrado (por ejemplo, cargar discusiones recientes). Las clases comunes a ambos sistemas se han trasladado a un espacio de nombres `Query`.
+Como parte de nuestros esfuerzos para hacer el sistema de búsqueda de Flarum más flexible, hemos hecho varias refacciones en la beta 16. En particular, el filtrado y la búsqueda se tratan ahora como mecanismos diferentes, y tienen conductos y extensores separados. Esencialmente, si una consulta tiene un parámetro de consulta `filter[q]`, será tratada como una búsqueda, y todos los demás parámetros de filtro serán ignorados. En caso contrario, será tratada por el sistema de filtrado. Esto permitirá eventualmente que las búsquedas sean manejadas por controladores alternativos (provistos por extensiones), como ElasticSearch, sin afectar el filtrado (por ejemplo, cargar discusiones recientes). Las clases comunes a ambos sistemas se han trasladado a un espacio de nombres `Query`.
 
 Las implementaciones de filtrado y de búsqueda por defecto de Core (denominadas SimpleFlarumSearch) son bastante similares, ya que ambas se alimentan de la base de datos. Los controladores de la API `List` llaman a los métodos `search` / `filter` en una subclase específica de recursos de `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Los argumentos son una instancia de `Flarum\Query\QueryCriteria`, así como información de ordenación, desplazamiento y límite. Ambos sistemas devuelven una instancia de `Flarum\Query\QueryResults`, que es efectivamente una envoltura alrededor de una colección de modelos Eloquent.
 

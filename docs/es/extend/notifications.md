@@ -67,8 +67,7 @@ Echa un vistazo a [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/
 
 ### Registrar un tipo de notificación
 
-A continuación, vamos a registrar su notificación para que Flarum la conozca. Esto permitirá a los usuarios ser capaces de cambiar cómo quieren ser notificados de su notificación.
-Podemos hacer esto con el método `type` del extensor `Notification`.
+A continuación, vamos a registrar su notificación para que Flarum la conozca. Esto permitirá a los usuarios ser capaces de cambiar cómo quieren ser notificados de su notificación. Podemos hacer esto con el método `type` del extensor `Notification`.
 
 * `$blueprint`: Su clase estática (ejemplo: `PostLikedBlueprint::class`)
 * `$serializer`: El serializador de tu modelo de sujeto (ejemplo: `PostSerializer::class`)
@@ -95,11 +94,9 @@ Tu notificación está quedando muy bien. Sólo faltan algunas cosas por hacer.
 
 ### Notificaciones que se pueden enviar por correo
 
-Además de registrar nuestra notificación para que se envíe por correo electrónico, si realmente queremos que se envíe, tenemos que proporcionar un poco más de información: concretamente, el código para generar el asunto y el cuerpo del correo electrónico.
-Para ello, tu blueprint de notificación debe implementar [`Flarum\tification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) además de [`Flarum\tification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
-Esto viene con 2 métodos adicionales:
+Además de registrar nuestra notificación para que se envíe por correo electrónico, si realmente queremos que se envíe, tenemos que proporcionar un poco más de información: concretamente, el código para generar el asunto y el cuerpo del correo electrónico. Para ello, tu blueprint de notificación debe implementar [`Flarum\tification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) además de [`Flarum\tification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface). Esto viene con 2 métodos adicionales:
 
-- `getEmailView()` debe devolver un array de nombres de tipo email a [Blade View](https://laravel.com/docs/6.x/blade). Los espacios de nombres para estas vistas deben [primero ser registrados](routes.md#views). Estos se utilizarán para generar el cuerpo del correo electrónico.
+- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/8.x/blade) names. Los espacios de nombres para estas vistas deben [primero ser registrados](routes.md#views). Estos se utilizarán para generar el cuerpo del correo electrónico.
 - `getEmailSubject(TranslatorInterface $translator)` debe devolver una cadena para el asunto del correo electrónico. Se pasa una instancia del traductor para habilitar los correos electrónicos de notificación traducidos.
 
 Veamos un ejemplo de [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
@@ -199,8 +196,7 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
 
 ### Controladores de notificaciones
 
-Además de registrar tipos de notificación, también podemos añadir nuevos controladores junto a los predeterminados `alert` y `email`.
-El controlador debe implementar `Flarum\Notification\Driver\NotificationDriverInterface`. Veamos un ejemplo anotado de la [extensión Pusher](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
+Además de registrar tipos de notificación, también podemos añadir nuevos controladores junto a los predeterminados `alert` y `email`. El controlador debe implementar `Flarum\Notification\Driver\NotificationDriverInterface`. Veamos un ejemplo anotado de la [extensión Pusher](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
 
 ```php
 <?php

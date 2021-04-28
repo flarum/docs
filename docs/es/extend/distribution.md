@@ -4,8 +4,7 @@ Has escrito una gran extensión y ahora quieres que todo el mundo pueda usarla. 
 
 ## Configurar Git
 
-Lo primero que tienes que hacer es configurar un sistema de control de versiones (VCS).
-El VCS más popular es [Git](https://git-scm.com/). En esta guía usaremos Git, así que asegúrate de tenerlo [instalado](https://git-scm.com/downloads) antes de continuar. Si no tienes muchos conocimientos sobre Git, puedes consultar [estos recursos de aprendizaje](https://try.github.io/).
+Lo primero que tienes que hacer es configurar un sistema de control de versiones (VCS). El VCS más popular es [Git](https://git-scm.com/). En esta guía usaremos Git, así que asegúrate de tenerlo [instalado](https://git-scm.com/downloads) antes de continuar. Si no tienes muchos conocimientos sobre Git, puedes consultar [estos recursos de aprendizaje](https://try.github.io/).
 
 Después de haber instalado Git, necesitarás inicializar tu repositorio. Puedes usar `git init` en la línea de comandos si te sientes cómodo, o usar una herramienta GUI como [SourceTree](https://www.sourcetreeapp.com/) o [GitKraken](https://www.gitkraken.com/).
 
@@ -31,10 +30,6 @@ Si esta es la primera versión que publicas de tu extensión, tendrás que [envi
 ### Future Releases
 
 You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages). Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
-
-Futuros lanzamientos
-
-Puedes configurar Packagist para [actualizar automáticamente los paquetes](https://packagist.org/about#how-to-update-packages). Entonces, para futuras versiones, todo lo que tendrá que hacer con Git es confirmar, etiquetar y enviar al servidor remoto.
 
 ## Promover su extensión
 

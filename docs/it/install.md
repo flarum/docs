@@ -1,14 +1,10 @@
 # Installazione
 
-::: danger Attenzione
-Flarum è **un software in fase beta**. Ciò significa che ha ancora alcune funzionalità incomplete e bug 🐛🐞, e ad un certo punto – prima o poi – probabilmente un errore potrà paventarsi! 💥
+::: danger Attenzione Flarum è **un software in fase beta**. Ciò significa che ha ancora alcune funzionalità incomplete e bug 🐛🐞, e ad un certo punto – prima o poi – probabilmente un errore potrà paventarsi! 💥
 
-La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sarà possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. 
-:::
+La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sarà possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. :::
 
-::: Una veloce prova su strada?
-Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
-:::
+::: Una veloce prova su strada? Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum. :::
 
 ## Requisiti del server
 
@@ -19,15 +15,13 @@ Prima di installare Flarum, è importante verificare che il tuo server soddisfi 
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **SSH (accesso su riga di comando)** per lanciare Composer
 
-::: Hosting condiviso
-In questa fase, non è possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
+::: tip Shared Hosting It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
 
-Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host condivisi ti danno accesso SSH, attraverso il quale dovresti essere in grado di installare Composer e Flarum senza problemi. Per altri host senza SSH, puoi provare soluzioni alternative come [Pockethold](https://github.com/andreherberth/pockethold).
-:::
+Questo non significa necessariamente che tu abbia bisogno di un VPS. Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine. :::
 
 ## Installare Flarum
 
-Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar� necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
+Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
@@ -92,19 +86,15 @@ Se Flarum richiede l'accesso in scrittura sia alla directory che al suo contenut
 chmod 775 -R /percorso/della/directory
 ```
 
-Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di proprietà del gruppo e dell'utente corretti. 
+Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di proprietà del gruppo e dell'utente corretti.
 
-Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`. 
+Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`.
 
 Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
-::: warning Gli ambienti possono variare
-Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta la configurazione del tuo server web o il provider di hosting web per conoscere l'utente e il gruppo appropriato in cui operano PHP e il server web.
-:::
+::: warning Gli ambienti possono variare Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta la configurazione del tuo server web o il provider di hosting web per conoscere l'utente e il gruppo appropriato in cui operano PHP e il server web. :::
 
-::: danger Non dare mai permessi 777
-Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poiché questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. 
-:::
+::: danger Non dare mai permessi 777 Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poiché questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. :::
 
 ## Personalizzare i percorsi
 
