@@ -96,7 +96,7 @@ const value = Stream();
 
 ## Effettuare richieste
 
-Nella nostra [documentazione di modelli e dati](data.md), hai imparato come lavorare con i modelli e salvare la creazione del modello, le modifiche e l'eliminazione nel database tramite l'utilità Store, che è solo un wrapper attorno al sistema di richiesta di Flarum, che a sua volta è un altro wrapper [Sistema di richieste Mithril](https://mithril.js.org/request.html).
+In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
 
 Il sistema di richiesta di Flarum è disponibile a livello globale tramite `app.request(options)`, e presenta le seguenti differenze rispetto a Mithril `m.request(options)`:
 
