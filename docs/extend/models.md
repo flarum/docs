@@ -22,7 +22,7 @@ Migrations live inside a folder suitably named `migrations` in your extension's 
 
 ### Migration Structure
 
-In Flarum, migration files should **return an array** with two functions: `up` and `down`. The `up` function is used to add new tables, columns, or indexes to your database, while the `down` function should reverse these operations. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/6.x/migrations#creating-tables) which you can use to alter the database schema:
+In Flarum, migration files should **return an array** with two functions: `up` and `down`. The `up` function is used to add new tables, columns, or indexes to your database, while the `down` function should reverse these operations. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/8.x/migrations#creating-tables) which you can use to alter the database schema:
 
 ```php
 <?php
@@ -62,7 +62,7 @@ return Migration::createTable('users', function (Blueprint $table) {
 });
 ```
 
-When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/6.x/migrations#creating-columns) to define the table's columns.
+When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/8.x/migrations#creating-columns) to define the table's columns.
 
 ### Renaming Tables
 
@@ -117,11 +117,11 @@ Note that this should only be used then adding **new** permissions or settings. 
 
 ### Data Migrations (Advanced)
 
-A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. The migration helpers that add [defaults for settings/permissions](#default-settings-and-permissions) are just one case of this. For instance, you could use migrations to create default instances of a new model your extension adds. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/6.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
+A migration doesn't have to change database structure: you could use a migration to insert, update, or delete rows in a table. The migration helpers that add [defaults for settings/permissions](#default-settings-and-permissions) are just one case of this. For instance, you could use migrations to create default instances of a new model your extension adds. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/8.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
 
 ## Backend Models
 
-With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/6.x/eloquent).
+With all your snazzy new database tables and columns, you're going to want a way to access the data in both the backend and the frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/8.x/eloquent).
 
 ### Adding New Models
 
@@ -132,7 +132,7 @@ If you've added a new table, you'll need to set up a new model for it. Rather th
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-If you need to define any attribute [accessors](https://laravel.com/docs/6.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/6.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/6.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/6.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/6.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
 
 ```php
 use Flarum\Extend;
@@ -155,7 +155,7 @@ return [
 
 ### Relationships
 
-You can also add [relationships](https://laravel.com/docs/6.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
