@@ -160,4 +160,4 @@ Most decent hosts should provide SSH access for shared hosting. If your host doe
 - Install composer on your computer, and run the `install` command locally. Then upload the files via FTP to your host. To make modifications (updating Flarum, installing/updating/removing extensions), download the current versions of the files, run whatever composer commands you need locally, and then replace the `composer.json` and `composer.lock` files, and the `vendor` directory of your install with your local copy. Make sure to create backups before doing this!
 - Some web hosts might provide a GUI for managing composer. The command line version is generally preferably, but if a GUI is the only possibility, consult your host's documentation for information on how to use it.
 
-Note that these workarounds are not officially supported! The only officially support way to install/manage Flarum is through Composer.
+Note that these workarounds are not officially supported! The only officially supported way to install and manage Flarum is through Composer.
