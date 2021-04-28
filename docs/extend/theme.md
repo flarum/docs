@@ -15,6 +15,7 @@ You can indicate that your extension is a theme by setting the "extra.flarum-ext
     }
     // other fields
 }
+```
 
 All this will do is show your extension in the "theme" section in the admin dashboard extension list.
 
