@@ -98,7 +98,7 @@ src/forum/
 └── index.js
 ```
 
-`components`, `models`, y `utils` son directorios que contienen archivos donde puedes definir [componentes](#components), [modelos](data.md#frontend-models), y funciones de ayuda reutilizables. Tenga en cuenta que todo esto es simplemente una recomendación: no hay nada que le obligue a utilizar esta estructura de archivos en particular (o cualquier otra estructura de archivos).
+`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions. Tenga en cuenta que todo esto es simplemente una recomendación: no hay nada que le obligue a utilizar esta estructura de archivos en particular (o cualquier otra estructura de archivos).
 
 El archivo más importante aquí es `index.js`: todo lo demás es simplemente extraer clases y funciones en sus propios archivos. Repasemos una estructura típica de archivos `index.js`:
 
