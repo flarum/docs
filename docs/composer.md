@@ -10,7 +10,7 @@ You'll need to use composer if you want to:
 This guide is provided as a brief explanation of Composer. We highly recommend consulting the [official documentation](https://getcomposer.org/doc/00-intro.md) for more information.
 
 ::: tip Composer v2
-Historically, composer has caused issues on shared hosting due to huge memory use. In 2020, [Composer v2 was released](https://blog.packagist.com/composer-2-0-is-now-available/) with massive improvements that eliminate these problems. Make sure your server is using composer v2!
+Historically, Composer has caused issues on shared hosting due to huge memory use. In 2020, [Composer v2 was released](https://blog.packagist.com/composer-2-0-is-now-available/) with massive performance and memory usage improvements that eliminate these problems. Make sure your server is using Composer v2!
 :::
 
 ## What is Composer?
