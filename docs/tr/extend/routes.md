@@ -132,7 +132,7 @@ class HelloWorldController implements RequestHandlerInterface
 
 ### API Controllers
 
-The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement new JSON-API resources. See [Working with Data](/extend/data.md) for more information.
+The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement new JSON-API resources. See [Working with Data](api.md) for more information.
 
 ## Frontend Routes
 
