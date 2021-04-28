@@ -117,16 +117,16 @@ Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlRes
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
-    
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
     }
-    
+
     public function handle(Request $request): Response
     {
         $view = $this->view->make('acme.hello-world::greeting');
-        
+
         return new HtmlResponse($view->render());
     }
 }
@@ -188,19 +188,20 @@ I parametri del percorso verranno passati in `attrs` del componente. Saranno dis
 Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 
 <!-- import { app } from '@flarum/core/forum'; -->
-```js
+
+### ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://tuoforum.com/utente/123?foo=bar
 ```
 
-### Collegamenti ad altre pagine
+Collegamenti ad altre pagine
 
 Un forum non sarebbe molto utile se avesse solo una pagina.
 Sebbene tu possa, ovviamente, implementare link ad altre parti del tuo forum con tag di ancoraggio HTML e link , questi possono essere difficile da mantenere e vanificano lo scopo di Flarum di essere una [Applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application).
 
 Flarum utilizza l'API di routing di Mithril per fornire un componente `Link` che racchiude in modo ordinato i collegamenti ad altre pagine interne. Il suo utilizzo è abbastanza semplice:
 
-```jsx
+## ```jsx
 import Link from 'flarum/components/Link';
 
 // Link can be used just like any other component:
@@ -218,14 +219,14 @@ import Link from 'flarum/components/Link';
 // that are conditionally internal or external.
 ```
 
-## Contenuto
+Contenuto
 
-Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
-
+* Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
 * Modificare il "<title>" della pagina
 * Aggiunta di risorse JavaScript e CSS esterne
 * Aggiunta di contenuti SEO e tag "<meta>"
-* Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
+
+Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
 Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.
 
@@ -242,12 +243,3 @@ return [
 ```
 
 Puoi anche aggiungere contenuti tuo frontend:
-
-```php
-return [
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users', function (Document $document, Request $request) {
-            $document->title = 'Users';
-        })
-];
-```
