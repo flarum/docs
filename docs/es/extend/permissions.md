@@ -48,20 +48,3 @@ Los permisos son sólo una parte del rompecabezas: si quieres imponer si un usua
 
 Dado que los permisos son sólo cadenas, no es necesario "registrar" formalmente un permiso en ningún sitio: sólo se necesita una forma de que los administradores asignen ese permiso a los grupos.
 Podemos hacer esto extendiendo el componente frontend `flarum/components/PermissionGrid`. Por ejemplo:
-
-```js
-import { extend } from 'flarum/extend';
-import PermissionGrid from 'flarum/components/PermissionGrid';
-
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Clases CSS para el icono. Generalmente en formato fontawesome, aunque también puedes usar tu propio css 
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La cadena del permiso.
-    }, 95);
-  });
-}
-```
-
-Por defecto, los permisos sólo se conceden a los administradores. Si quieres que un permiso esté disponible para otros grupos por defecto, tendrás que utilizar una [migración de datos](data.md#migrations) para añadir filas para los grupos pertinentes. Si quieres hacer esto, te recomendamos **encarecidamente** que sólo asignes permisos por defecto a uno de los [grupos reservados](#groups).
