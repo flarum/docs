@@ -12,9 +12,9 @@ Evet! Ancak, yükseltme işlemi biraz sorunlu geçebilir. Mümkün olduğunca ko
 
 Tüm bağışlar minnetle alındı. [Github Sponsors](https://github.com/sponsors/flarum) veya [OpenCollective](https://opencollective.com/flarum) üzerinden verebilirsiniz.
 
-Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz.  ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
+Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz. ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
 
-### Beta sürümünü üretimde kullanabilir miyim?
+### Beta sürümünü üretimde kullanabilir miyim? Please?
 
 [Kurulum talimatları](install.md)'nın buna karşı uyararak başlamasının bir nedeni vardır. Flarum henüz olgunlaşmadı ve bir şeylerin ters gitmesi için bolca yer var. Güvendiğiniz uzantılar, daha yeni beta sürümleri tarafından uyumsuz hale getirilebilir. Hatalar, içerik kaybına veya özel bilgilerin büyük ölçüde İnternete maruz kalmasına neden olabilir. Yetersiz SEO, sitenizin sıralamasına zarar vererek yeni üyelerin ilgisini çekmeyi zorlaştırabilir. Mevcut üyeler performans sorunları veya eksik özelliklerden bıkıp daha yeşil otlaklara yönelebilir. Ve bunun gibi…
 
@@ -43,8 +43,3 @@ Evet ama bir süreliğine değil. Şu anda odak noktamız, Flarum'u kararlı ve 
 Gerçek cevap, genel olarak topluluğumuza iyi personel olacak öne çıkan üyeler için göz kulak olmamızdır. Açıkçası, mevcut çalışanlarımızın çoğu için, personel olmadan önce yaptıkları, şu anda yaptıklarından çok da farklı değildi.
 
 Bir tutku bulun ve en iyi olduğunu düşündüğünüz şekilde katkıda bulunun. O zaman kendi yoluna gitmesine izin verin. Burada saygı duymak için bir rozete sahip olmanız gerekmiyor.
-
-<!--
-### Why does Flarum use Composer? Why can't I just download a ZIP?
-  https://github.com/flarum/docs/issues/20
--->
