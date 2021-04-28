@@ -14,12 +14,24 @@ Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemin
 
 Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org) aracılığıyla yüklenir. Tipik bir uzantı yüklemek için:
 
-1. `composer.json` dosyasını içeren klasöre `cd` komutuyla gidin.
-2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının belgesi tarafından sağlanmalıdır.
+1. `cd` to your Flarum directory. `composer.json` dosyasını içeren klasöre `cd` komutuyla gidin. You can check directory contents via `ls -la`.
+2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Bu, uzantının belgesi tarafından sağlanmalıdır.
 
-## Uzantıları Yönetme
+## Updating Extensions
 
-Yönetici panosunun uzantılar sayfası, yüklendiklerinde uzantıları yönetmek için uygun bir yol sağlar. Yapabilecekleriniz:
+Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+
+## Uninstalling Extensions
+
+Similarly to installation, to remove an extension:
+
+0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+1. `cd` to your Flarum directory.
+2. Run `composer remove COMPOSER_PACKAGE_NAME:*`. Bu, uzantının belgesi tarafından sağlanmalıdır.
+
+## Managing Extensions
+
+The extensions page of the admin dashboard provides a convenient way to manage extensions when they are installed. You can:
 
 - Bir uzantıyı etkinleştirin veya devre dışı bırakın
 - Uzantı ayarlarına erişin (ancak bazı uzantılar ayarlar için ana kenar çubuğunda bir sekme kullanacak olsa da)
