@@ -43,9 +43,3 @@ Sí, pero no por un tiempo. Nuestro objetivo ahora mismo es conseguir que Flarum
 La respuesta real es que, por lo general, echamos un ojo a nuestra comunidad en busca de miembros destacados que puedan ser un buen personal. Honestamente, para la mayoría de nuestro personal actual, lo que hacían antes de convertirse en personal no era muy diferente de lo que hacen ahora.
 
 Encuentra una pasión y contribuye de la manera que creas más conveniente. Luego deja que siga su curso. No hace falta tener una insignia para ser respetado aquí.
-
-
-<!--
-### Why does Flarum use Composer? Why can't I just download a ZIP?
-  https://github.com/flarum/docs/issues/20
--->
