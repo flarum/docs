@@ -96,7 +96,7 @@ const value = Stream();
 
 ## Haciendo peticiones
 
-En nuestra documentación de [modelos y datos](data.md), aprendiste a trabajar con modelos, y a guardar la creación, los cambios y la eliminación de modelos en la base de datos a través de la utilidad Store, que no es más que una envoltura del sistema de peticiones de Flarum, que a su vez no es más que una envoltura del sistema de peticiones de [Mithril](https://mithril.js.org/request.html).
+In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
 
 El sistema de peticiones de Flarum está disponible globalmente a través de `app.request(options)`, y tiene las siguientes diferencias con respecto a `m.request(options)` de Mithril:
 
