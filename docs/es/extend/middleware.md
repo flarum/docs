@@ -6,6 +6,7 @@ Flarum mantiene un middleware "Pipe" a través del cual pasan todas las solicitu
 
 Una solicitud pasa por las capas de middleware en orden. Cuando la solicitud es manejada (un middleware devuelve algo en lugar de pasar la solicitud a la siguiente capa, o lanza una excepción), la respuesta se moverá de nuevo por las capas de middleware en orden inverso, antes de ser finalmente devuelta al usuario. Todo, desde el manejador de errores de Flarum hasta su lógica de autenticación, se implementa como middleware, por lo que puede ser complementado, reemplazado, reordenado o eliminado por extensiones.
 
+
 ```php
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -114,7 +115,7 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
         ]);
         $document = new Document();
         $document->setErrors($error->getErrors());
-      
+
         return new JsonApiResponse($document, $error->getStatus());
     }
 
