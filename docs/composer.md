@@ -17,7 +17,7 @@ Historically, Composer has caused issues on shared hosting due to huge memory us
 
 > Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction]([https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-Each Flarum installation consists primarily of Flarum Core and a set of [extensions](extensions.md).Each of these has its own dependencies and releases.
+Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md).Each of these has its own dependencies and releases.
 
 Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
 
@@ -25,7 +25,7 @@ Back in the day, forum frameworks would manage extensions by having users upload
 - Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
 - Zip files can cause a lot of headache if trying to automate deployments, run automated tests, or scale to multiple server nodes.
 - There is no good way to ensure conflicting extension versions can't be installed, or that system PHP version and extension requirements are met.
-- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum Core? And how can we ensure that extensions can declare which versions of core they're compatible with?
+- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
 
 Composer takes care of all these issues, and more!
 
@@ -34,7 +34,7 @@ Composer takes care of all these issues, and more!
 When you go to [install Flarum](install.md#installing), you're actually doing 2 things:
 
 1. Downloading a boilerplate "skeleton" for Flarum. This includes an `index.php` file that handles web requests, a `flarum` file that provides a CLI, and a bunch of web server config and folder setup. This is taken from the [`flarum/flarum` github repository](https://github.com/flarum/flarum), and doesn't actually contain any of the code necessary for Flarum to run.
-2. Installing `composer` packages necessary for Flarum, namely Flarum Core, and several bundled extensions. These are called by the `index.php` and `flarum` files from step 1, and are the implementation of Flarum. These are specified in a `composer.json` file included in the skeleton.
+2. Installing `composer` packages necessary for Flarum, namely Flarum core, and several bundled extensions. These are called by the `index.php` and `flarum` files from step 1, and are the implementation of Flarum. These are specified in a `composer.json` file included in the skeleton.
 
 When you want to update Flarum or add/update/remove extensions, you'll do so by running `composer` commands. Each command is different, but all commands follow the same general process:
 
