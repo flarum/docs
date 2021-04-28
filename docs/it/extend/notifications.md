@@ -282,7 +282,7 @@ Innanzitutto, crea una classe che estenda il componente di notifica. Quindi, ci 
 * `content()`: Cosa dovrebbe mostrare la notifica stessa. Dovrebbe dire il nome utente e quindi l'azione. Sarà seguito da quando è stata inviata la notifica (assicurati di utilizzare le traduzioni).
 * `exerpt()`: (opzionale) Un piccolo estratto che viene mostrato sotto la notifica (comunemente un estratto di un post).
 
-* Diamo un'occhiata al nostro esempio, vero? *
+Diamo un'occhiata al nostro esempio, vero? *
 
 Dall'estensione [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), quando viene pubblicato un nuovo post in una discussione successiva:
 
@@ -346,7 +346,7 @@ Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che d
 
 ## Sending Notifications
 
-* I dati non vengono visualizzati nel database solo magicamente *
+I dati non vengono visualizzati nel database solo magicamente *
 
 Ora che hai configurato tutte le notifiche, è il momento di inviare effettivamente la notifica all'utente!
 
@@ -414,5 +414,4 @@ class SendNotificationWhenPostIsLiked
 
 ** Fantastico! ** Ora puoi inviare spam agli utenti con aggiornamenti sugli avvenimenti nel forum!
 
-
-* Hai provato di tutto? * Beh, se hai provato di tutto allora immagino ... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.
+Hai provato di tutto? * Beh, se hai provato di tutto allora immagino ... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.
