@@ -127,8 +127,6 @@ composer config repositories.0 path "packages/*"
 
 * **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。示例的 `src` 目录会在您扩展程序项目的根目录，与 vendor 文件夹同级。此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.
 
-
-
 * **extra.flarum-extension**，包含一些 Flarum 特有的信息，比如您扩展程序在论坛的显示名称以及图标。
   * **title** 您的扩展程序的显示名称。
   * **icon** 是一个定义您扩展程序图标的对象。**name** 属性是 [Font Awesome 图标名](https://fontawesome.com/icons)。剩下的都被用作图标的 `style` 属性。
