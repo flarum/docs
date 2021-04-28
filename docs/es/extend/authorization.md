@@ -44,6 +44,7 @@ Finalmente, como hemos agotado todas las comprobaciones, asumiremos que el usuar
 
 El sistema de autorización de Flarum es accesible a través de los métodos públicos de la clase `Flarum\User\User`. Los más importantes se enumeran a continuación; otros están documentados en nuestra [documentación de la API de PHP](https://api.docs.flarum.org/php/master/flarum/user/user).
 
+
 En este ejemplo, usaremos `$actor` como una instancia de `Flarum\User\User`, `'viewDiscussions'` y `'reply'` como ejemplos de habilidades, y `$discussion` (instancia de `Flarum\Discussion\Discussion`) como argumento de ejemplo.
 
 ```php
@@ -232,6 +233,8 @@ Hay dos tipos de scopers:
 - Los scopers basados en la capacidad se aplicarán a todas las consultas del modelo de consulta que se ejecute con una capacidad determinada (que por defecto es `"view"`). Tenga en cuenta que esto no está relacionado con las cadenas de habilidades del [sistema de políticas](#how-it-works)
 - Los scopers "globales" se aplicarán a todas las consultas del modelo de la consulta. Tenga en cuenta que los ámbitos globales se ejecutarán en TODAS las consultas para su modelo, incluyendo `view`, lo que podría crear bucles infinitos o errores. Generalmente, sólo querrá ejecutarlos para las capacidades que no empiecen por `view`. Lo verás en el [ejemplo de abajo](#custom-visibility-scoper-examples)
 
+
+
 Un caso de uso común para esto es permitir la extensibilidad dentro del alcance de la visibilidad.
 Echemos un vistazo a una pieza simple y anotada de `Flarum\Post\PostPolicy` como ejemplo:
 
@@ -338,6 +341,8 @@ class ScopeDiscussionVisibilityForAbility
 Tenga en cuenta que, como se mencionó anteriormente, no ejecutamos esto para las habilidades que comienzan con `view`, ya que estas son manejadas por sus propios visores dedicados.
 
 ### Registro de Scopers de Visibilidad Personalizados
+
+
 
 ```php
 use Flarum\Extend;
