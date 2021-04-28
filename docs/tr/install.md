@@ -17,7 +17,7 @@ Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadı
 * **Apache** (mod_rewrite etkin) veya **Nginx**
 * **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6 +** veya **MariaDB10.0.5+**
-Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
+* Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 
 ::: tip Paylaşımlı Hosting
 Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
@@ -78,7 +78,6 @@ www.example.com {
     encode gzip
 }
 ```
-
 ## Klasör Sahipliği
 
 Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Linux'ta bir dizine yazma erişimine izin vermek için aşağıdaki komutu yürütün:
