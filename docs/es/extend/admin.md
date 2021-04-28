@@ -73,6 +73,7 @@ Si se utiliza `type: 'select'` el objeto de ajuste tiene un aspecto un poco dife
 }
 ```
 
+
 Si quieres añadir algo a los ajustes como algún texto extra o una entrada más complicada, también puedes pasar una devolución de llamada como primer argumento que devuelva JSX. Este callback se ejecutará en el contexto de [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) y los valores de configuración no se serializarán automáticamente.
 
 ```js
@@ -83,7 +84,7 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerSetting(function () {
       if (app.session.user.username() === 'RocketMan') {
-    
+
         return (
           <div className="Form-group">
             <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
@@ -108,7 +109,7 @@ Argumentos:
  * Objeto de permiso
  * Qué tipo de permiso - ver las funciones de [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) para los tipos (eliminar elementos del nombre)
  * Prioridad de `ItemList`
- 
+
 Volvemos a nuestra extensión favorita del rocket:
 
 ```js
@@ -188,7 +189,7 @@ Para más información, consulte el esquema [composer.json](https://getcomposer.
 | --------------------------------- | -------------------------------------- |
 | Enlace de discusión discuss.flarum.org | Clave "forum" dentro de "support"           |
 | Documentación                     | Clave "docs" dentro de "support"            |
-| Soporte (correo electrónico)      | Clave "email" dentro de "support"           |
-| Sitio web                         | Clave "homepage"                         |
-| Donación                          | Bloque de claves "funding" (Nota: Sólo se utilizará el primer enlace) |
+| Soporte (correo electrónico)                   | Clave "email" dentro de "support"           |
+| Sitio web                           | Clave "homepage"                         |
+| Donación                            | Bloque de claves "funding" (Nota: Sólo se utilizará el primer enlace) |
 | Fuente                            | Clave "source" dentro de "support"          |
