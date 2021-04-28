@@ -27,7 +27,7 @@ Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione i
 - [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Suggerimenti per il namespace delle estensioni](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Documentazione js di Mithril](https://mithril.js.org/)
-- [Documenti API Laravel](https://laravel.com/api/6.x/)
+- [Documenti API Laravel](https://laravel.com/api/8.x/)
 - [Documenti delle API di Flarum](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Generatore di estensioni vuote Flarum](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
