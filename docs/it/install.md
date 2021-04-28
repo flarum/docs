@@ -15,13 +15,13 @@ Prima di installare Flarum, è importante verificare che il tuo server soddisfi 
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **SSH (accesso su riga di comando)** per lanciare Composer
 
-::: Hosting condiviso In questa fase, non è possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
+::: tip Shared Hosting It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
 
-Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host condivisi ti danno accesso SSH, attraverso il quale dovresti essere in grado di installare Composer e Flarum senza problemi. Per altri host senza SSH, puoi provare soluzioni alternative come [Pockethold](https://github.com/andreherberth/pockethold). :::
+Questo non significa necessariamente che tu abbia bisogno di un VPS. Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine. :::
 
 ## Installare Flarum
 
-Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar� necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
+Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
 composer create-project flarum/flarum . --stability=beta
