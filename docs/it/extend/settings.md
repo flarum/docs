@@ -64,7 +64,6 @@ La funzione `delete($name)` ti consente di rimuovere un'impostazione con nome.
 ### Modifica delle impostazioni
 
 Per ulteriori informazioni sulla gestione delle impostazioni tramite la dashboard dell'amministratore, consultare la [documentazione pertinente](admin.md).
-
 ### Accesso alle impostazioni
 
 Tutte le impostazioni sono disponibili nel frontend `admin` tramite `app.data.settings`.
