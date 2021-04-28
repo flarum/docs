@@ -139,7 +139,7 @@ In this case you can install composer as recommended in the Composer [guide]([ht
 If Composer is not preinstalled (you can check this by running `composer --version`), you can use a [manual installation](https://getcomposer.org/composer-stable.phar). Just upload the composer.phar to your folder and run `/path/to/your/php7 composer.phar COMMAND` for any command documented as `composer COMMAND`.
 
 ::: danger
-Some articles on the internet will mention that you can use tools like a php shell. If you are not sure what you are doing or what they are talking - be careful! An unprotected web shell is extremely dangerous.
+Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
 :::
 
 ## How do I use Composer?
