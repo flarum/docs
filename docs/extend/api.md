@@ -127,9 +127,7 @@ Read our [searching and filtering](search.md) guide for more information!
 
 ### Showing a Resource
 
-For the controller that shows a single resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the list controller, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a single model.
-We'll learn about serializers [in just a bit](#serializers). 
-
+For the controller that shows a single resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the list controller, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a single model. We'll learn about serializers [in just a bit](#serializers).
 
 ```php
 use Flarum\Api\Controller\AbstractShowController;
