@@ -115,7 +115,6 @@ I [problemi di sicurezza in Flarum](https://github.com/flarum/core/issues/2075) 
 
 Se utilizzi token di accesso di breve durata per qualsiasi scopo, prendi nota del tempo di scadenza di 1 ora. La scadenza si basa sull'ora dell'ultimo utilizzo, quindi rimarrà valida finché continuerà ad essere utilizzata.
 
-
 A causa della grande quantità di token scaduti accumulati nel database e del fatto che la maggior parte dei token non è mai stata utilizzata più di una volta durante il processo di accesso, abbiamo scelto di eliminare tutti i token di accesso per una durata di 3600 secondi come parte della migrazione , Tutti i token rimanenti sono stati convertiti in `session_remember`.
 
 #### Ricorda cookie
