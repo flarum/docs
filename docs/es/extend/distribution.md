@@ -32,14 +32,8 @@ Si esta es la primera versión que publicas de tu extensión, tendrás que [envi
 
 You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages). Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
 
-Futuros lanzamientos
+## Futuros lanzamientos
 
 Puedes configurar Packagist para [actualizar automáticamente los paquetes](https://packagist.org/about#how-to-update-packages). Entonces, para futuras versiones, todo lo que tendrá que hacer con Git es confirmar, etiquetar y enviar al servidor remoto.
 
-## Promover su extensión
-
-Lo más probable es que quieras crear una discusión en la Comunidad Flarum en la [etiqueta de extensiones](https://discuss.flarum.org/t/extensions). Otras personas pueden instalar su extensión usando el siguiente comando:
-
-```bash
-composer require vendor/package
-```
+Promover su extensión
