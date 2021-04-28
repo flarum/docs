@@ -27,7 +27,7 @@ Flarum 的核心和扩展之间有清晰的界限吗？ 为什么有些功能核
 - [开发者讲解：扩展开发的工作流程](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [扩展名空间小贴士](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Mithril js 文档](https://mithril.js.org/)
-- [Laravel API 文档](https://laravel.com/api/6.x/)
+- [Laravel API 文档](https://laravel.com/api/8.x/)
 - [Flarum API 文档](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Flarum 空白扩展生成器](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
