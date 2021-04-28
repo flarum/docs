@@ -18,9 +18,9 @@ El controlador `mail` intentará utilizar el sistema de correo electrónico send
 
 Este controlador utiliza su cuenta [Mailgun](https://www.mailgun.com/) para enviar correos electrónicos. Necesitarás una clave secreta, así como el dominio y la región de tu configuración de mailgun.
 
-### Log
+Log
 
-The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
+### The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
 El controlador de correo log NO ENVÍA CORREO, y es utilizado principalmente por los desarrolladores. Escribe el contenido de cualquier correo electrónico en el archivo de log en `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
