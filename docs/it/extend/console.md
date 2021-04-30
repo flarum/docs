@@ -39,4 +39,8 @@ return [
 ];
 ```
 
-::: tip Comandi pianificati La [fof/console library](https://github.com/FriendsOfFlarum/console) consente di programmare l'esecuzione dei comandi a intervalli regolari! Tuttavia, tieni presente che questa è una soluzione per la community. :::
+::: tip Scheduled Commands
+
+The [fof/console library](https://github.com/FriendsOfFlarum/console) allows you to schedule commands to run on a regular interval! However, please note that this is a community solution.
+
+:::
