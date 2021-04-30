@@ -13,9 +13,17 @@ One key advantage of this split is that it allows searching to be implemented vi
 
 Remember that the [JSON:API schema](https://jsonapi.org/format) is used for all API requests.
 
-:::tip Reuse Code Often, you might want to use the same class as both a `Filter` and a `Gambit` (both explained below). Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/core/blob/master/src/Discussion/Query/UnreadFilterGambit.php) for an example. :::
+:::tip Reuse Code
 
-:::tip Query Builder vs Eloquent Builder `Filter`s, `Gambit`s, filter mutators, and gambit mutators (all explained below) receive a "state" parameter, which wraps :::
+Often, you might want to use the same class as both a `Filter` and a `Gambit` (both explained below). Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/core/blob/master/src/Discussion/Query/UnreadFilterGambit.php) for an example.
+
+:::
+
+:::tip Query Builder vs Eloquent Builder
+
+`Filter`s, `Gambit`s, filter mutators, and gambit mutators (all explained below) receive a "state" parameter, which wraps
+
+:::
 
 ## Filtering
 
@@ -134,11 +142,19 @@ class CountryGambit extends AbstractRegexGambit
 }
 ```
 
-:::warning No Spaces in Gambit Patterns! Flarum splits the `filter[q]` string into tokens by splitting it at spaces. This means that your custom gambits can NOT use spaces as part of their pattern. :::
+:::warning No Spaces in Gambit Patterns!
 
-:::tip AbstractRegexGambit All a gambit needs to do is implement `Flarum\Search\GambitInterface`, which receives the search state and a token. It should return if this gambit applies for the given token, and if so, make whatever mutations are necessary to the query builder accessible as `$searchState->getQuery()`.
+Flarum splits the `filter[q]` string into tokens by splitting it at spaces. This means that your custom gambits can NOT use spaces as part of their pattern.
 
-However, for most gambits, the `AbstractRegexGambit` abstract class (used above) should be used as a base class. This makes it a lot simpler to match and apply gambits. :::
+:::
+
+:::tip AbstractRegexGambit
+
+All a gambit needs to do is implement `Flarum\Search\GambitInterface`, which receives the search state and a token. It should return if this gambit applies for the given token, and if so, make whatever mutations are necessary to the query builder accessible as `$searchState->getQuery()`.
+
+However, for most gambits, the `AbstractRegexGambit` abstract class (used above) should be used as a base class. This makes it a lot simpler to match and apply gambits.
+
+:::
 
 Similarly, the search mutator we need is almost identical to the filter mutator from before:
 
