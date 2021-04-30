@@ -18,8 +18,12 @@ El CSS es un lenguaje de hojas de estilo que indica a los navegadores cómo most
 
 Un tutorial de CSS está más allá del alcance de esta documentación, pero hay muchos recursos en línea para aprender los fundamentos de CSS.
 
-:::tip Flarum utiliza LESS, que facilita la escritura de CSS al permitir variables, condicionales y funciones. :::
+:::tip
+
+Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+
+:::
 
 ## Extensiones
 
-El flexible [sistema de extensiones](extensions.md) de Flarum te permite añadir, eliminar o modificar prácticamente cualquier parte de Flarum. Si quieres hacer modificaciones temáticas sustanciales más allá de cambiar colores/tamaños/estilos, una extensión personalizada es definitivamente el camino a seguir. Para aprender cómo hacer una extensión, ¡consulta nuestra [documentación de extensiones](extend/README.md)!
+Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum. If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go. To learn how to make an extension, check out our [extension documentation](extend/README.md)!
