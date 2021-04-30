@@ -39,4 +39,8 @@ return [
 ];
 ```
 
-::: tip Scheduled Commands The [fof/console library](https://github.com/FriendsOfFlarum/console) allows you to schedule commands to run on a regular interval! However, please note that this is a community solution. :::
+::: tip Scheduled Commands
+
+The [fof/console library](https://github.com/FriendsOfFlarum/console) allows you to schedule commands to run on a regular interval! However, please note that this is a community solution.
+
+:::
