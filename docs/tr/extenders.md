@@ -16,4 +16,8 @@ If you need to create new files (when adding a custom class to be imported for e
 
 Now you can create new PHP files in an `app` subdirectory using the `App\...` namespace.
 
-::: tip Local Extenders vs Extensions Local extenders can be good for small tweaks, but if you need large customizations, an extension might be a better choice: a separate codebase, cleaner handling of many files, developer tooling, and the ability to easily open source are big benefits. :::
+::: tip Local Extenders vs Extensions
+
+Local extenders can be good for small tweaks, but if you need large customizations, an extension might be a better choice: a separate codebase, cleaner handling of many files, developer tooling, and the ability to easily open source are big benefits.
+
+:::
