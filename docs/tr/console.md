@@ -4,7 +4,7 @@ Yönetici kontrol paneline ek olarak Flarum, forumunuzu terminal üzerinden yön
 
 Konsolu kullanmak için:
 
-1. Flarum kurulumunuzun barındırıldığı sunucuya `ssh `ile bağlanın.
+1. Flarum kurulumunuzun barındırıldığı sunucuya `ssh`ile bağlanın.
 2. Flarum yüklü klasöre `cd` komutu ile gidin.
 3. `php flarum [command]` komutunu çalıştırın.
 
