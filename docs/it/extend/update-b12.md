@@ -2,7 +2,11 @@
 
 Beta 12 packs several new features for extension developers, but also continues our cleanup efforts which results in a few changes, so please read this guide carefully to find out whether your extensions are affected. We invested extra effort to introduce new functionality in a backward-compatible manner or first deprecate functionality before it will be removed in the next release, in line with our [versioning recommendations](start.md#composer-json).
 
-::: tip If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/). :::
+::: tip
+
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
+:::
 
 ## Deprecations / Upcoming breaking changes
 
