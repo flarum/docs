@@ -2,7 +2,11 @@
 
 Flarum extensions aren't just for adding features to core: extensions can extend other extensions!
 
-::: tip To learn how to make your extension extensible, see the [relevant documentation](extensibility.md) :::
+::: tip
+
+To learn how to make your extension extensible, see the [relevant documentation](extensibility.md)
+
+:::
 
 ## Dependencies
 
