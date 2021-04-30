@@ -29,7 +29,11 @@ app.initializers.add('interstellar', function(app) {
 
 Once that is done, you can begin adding settings and permissions.
 
-:::tip Note All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again. :::
+:::tip Note
+
+All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+
+:::
 
 ### Registering Settings
 
