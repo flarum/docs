@@ -6,19 +6,23 @@ Flarum 虽小，五脏俱全。 事实上 Flarum 自带的大多数功能，都�
 
 In order to achieve this extensibility, Flarum has been built with rich APIs and extension points. 为了实现这种可扩展性，Flarum 已经构建了丰富的 API 和扩展点，您只要掌握一些编程知识，就可以利用这些 API 来添加几乎所有您想拥有的功能。 本章节将为您介绍 Flarum 的工作方式和如何使用 API，以便您构建自己的扩展程序。
 
-::: warning 警告 **扩展程序 API 和文档仍处于更新、完善阶段。 ** 您现在开发的扩展，有可能不受未来的新版本兼容！ 如果您有任何想法或意见，[欢迎您告诉我们](https://discuss.flarum.org/)。 :::
+::: warning
+
+**Both the Extension API and this documentation is a work in progress.** Be aware that future beta releases may break your extensions! If you have feedback, [we'd love to hear it](https://discuss.flarum.org/).
+
+:::
 
 ## 核心 vs 扩展
 
-Flarum 的核心和扩展之间有清晰的界限吗？ 为什么有些功能核心里有，而有些又没有？ 了解这种区别非常有助于我们在 Flarum 的生态系统中保持一致性和高质量。
+Where do we draw the line between Flarum's core and its extensions? Why are some features included in the core, and others aren't? It is important to understand this distinction so that we can maintain consistency and quality within Flarum's ecosystem.
 
-**Flarum 的核心** 不会拥有所有功能。 Rather, it is a scaffold, or a framework, which provides a reliable foundation on which extensions can build. It contains only basic, unopinionated functionality that is essential to a forum: discussions, posts, users, groups, and notifications.
+**Flarum's core** is not intended to be packed full of features. Rather, it is a scaffold, or a framework, which provides a reliable foundation on which extensions can build. It contains only basic, unopinionated functionality that is essential to a forum: discussions, posts, users, groups, and notifications.
 
-**捆绑扩展** 又称原生扩展，是与核心打包到一块、默认启用的。 它们和其他扩展一样，可以被禁用或卸载。 我们的想法是使其具有良好的通用性、可配置性，以满足大多数人的需求，因此，捆绑扩展无法满足一切使用需求。
+**Bundled extensions** are features that are packaged with Flarum and enabled by default. They are extensions just like any other, and may be disabled and uninstalled. While their scope is not intended to address all use-cases, the idea is to make them generic and configurable enough that they can satisfy the majority.
 
-**第三方扩展** 由他人开发，Flarum 团队也不会提供官方支持。 他们大多用于解决特定的需求。
+**Third-party extensions** are features which are made by others and are not officially supported by the Flarum team. They can be built and used to address more specific use-cases.
 
-如果您想要解决核心或现有捆绑扩展的 Bug 或功能缺陷，我们建议您 *直接为对应的项目贡献代码*，这要比分散精力去开发一个新的第三方扩展更合适一些。 您可以在 [Flarum 社区](https://discuss.flarum.org/) 发帖与 Flarum 开发者交流有关事宜。
+If you are aiming to address a bug or shortcoming of the core, or of an existing bundled extension, it may be appropriate to *contribute to the respective project* rather than disperse effort on a new third-party extension. It is a good idea to start a discussion on the [Flarum Community](https://discuss.flarum.org/) to get the perspective of the Flarum developers.
 
 ## 资料推荐
 
