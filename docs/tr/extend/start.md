@@ -119,9 +119,12 @@ We need to tell Composer a bit about our package, and we can do this by creating
   * You'll want to specify the version of Flarum that your extension is compatible with here.
   * This is also the place to list other Composer libraries your code needs to work.
 
-  ::: warning Carefully choose the Flarum version While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
+  ::: warning Carefully choose the Flarum version
+
+  While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
     "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+
   :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
@@ -132,7 +135,11 @@ We need to tell Composer a bit about our package, and we can do this by creating
 
 See [the composer.json schema](https://getcomposer.org/doc/04-schema.md) documentation for information about other properties you can add to `composer.json`.
 
-::: tip Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding. :::
+::: tip
+
+Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+
+:::
 
 ### Installing Your Extension
 
