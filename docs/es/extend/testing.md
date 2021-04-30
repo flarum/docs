@@ -151,9 +151,13 @@ Hay varias utilidades importantes disponibles para sus casos de prueba:
 
 Si su caso de prueba necesita usuarios más allá del usuario administrador por defecto, puede utilizar el método `$this->normalUser()` del trait `Flarum\Testing\integration\RetrievesAuthorizedUsers`.
 
-:::warning La clase `TestCase` arrancará una instancia de Flarum la primera vez que se llame a su método `app()`. Cualquier uso de `prepareDatabase`, `extend`, o `extension` después de esto no tendrá efecto. Asegúrate de que has hecho toda la configuración que necesitas en tu caso de prueba antes de llamar a `app()`, o a `database()`, `server()`, o `send()`, que llaman implícitamente a `app()`. Si necesitas hacer modificaciones en la base de datos después de que la aplicación haya arrancado, puedes usar el método regular de guardado de Eloquent, o la instancia `Illuminate\Database\ConnectionInterface` obtenida mediante la llamada al método `database()`. :::
+:::warning
 
-Por supuesto, ya que todo esto se basa en PHPUnit, puede utilizar los métodos `setUp()` de sus clases de prueba para las tareas de configuración comunes.
+The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
+
+:::
+
+Of course, since this is all based on PHPUnit, you can use the `setUp()` methods of your test classes for common setup tasks.
 
 Por ejemplo:
 
@@ -217,7 +221,7 @@ class SomeTest extends TestCase
 
 #### Envío de solicitudes
 
-Una aplicación común de las pruebas automatizadas es hacer ping a varios puntos finales HTTP con varios datos, autenticados como diferentes usuarios. Puedes usar esto para asegurarte de que
+A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that:
 
 - Los usuarios no pueden acceder a contenidos a los que no están autorizados a acceder.
 - Las operaciones de creación/edición/borrado basadas en permisos funcionan como se espera.
@@ -225,7 +229,7 @@ Una aplicación común de las pruebas automatizadas es hacer ping a varios punto
 - Se aplica algún efecto secundario deseado al hacer ping a una API.
 - Las operaciones básicas de la API que necesita tu extensión no dan errores y no se rompen cuando haces cambios.
 
-`TestCase` proporciona varias utilidades:
+`TestCase` provides several utilities:
 
 - El método `request()` construye un objeto de implementación `Psr\Http\Message\ServerRequestInterface` a partir de una ruta, un método, y algunas opciones, que pueden utilizarse para la autenticación, adjuntar cookies, o configurar el cuerpo de la petición JSON. Consulta el [method docblock](https://github.com/flarum/testing/blob/main/src/integration/TestCase.php) para obtener más información sobre las opciones disponibles.
 - Una vez que hayas creado una instancia de petición, puedes enviarla (y obtener un objeto de respuesta de vuelta) a través del método `send()`.
@@ -292,13 +296,21 @@ class SomeTest extends TestCase
 }
 ```
 
-::: warning Si quieres enviar parámetros de consulta en una petición GET, no puedes incluirlos en la ruta; tendrás que añadirlos después con el método `withQueryParams`. :::
+::: warning
 
-::: warning Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución. :::
+If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
+
+:::
+
+::: warning
+
+This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
+
+:::
 
 #### Pruebas de consola
 
-Si quieres probar comandos de consola personalizados, puedes extender `Flarum\Testing\integration\ConsoleTestCase` (que a su vez extiende el regular `Flarum\Testing\integration\TestCase`). Proporciona 2 métodos útiles:
+If you want to test custom console commands, you can extend `Flarum\Testing\integration\ConsoleTestCase` (which itself extends the regular `Flarum\Testing\integration\TestCase`). It provides 2 useful methods:
 
 - `$this->console()` devuelve una instancia de `Symfony\Component\Console\Application`.
 - `$this->runCommand()` toma un array que será envuelto en `Symfony\Component\ConsoleInput\ArrayInput`, y lo ejecuta. Para más información, consulte el [bloque de documentos de código Symfony](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22).
@@ -342,8 +354,8 @@ TODO
 
 ## Frontend Tests
 
-¡Muy pronto!
+Coming Soon!
 
 ## E2E Tests
 
-¡Muy pronto!
+Coming Soon!
