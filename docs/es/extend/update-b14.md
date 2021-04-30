@@ -4,7 +4,11 @@ This release brings a large chunk of breaking changes - hopefully the last chunk
 
 On the bright side, this overdue upgrade brings us closer to the conventions of best practices of [Mithril.js](https://mithril.js.org/), the mini-framework used for Flarum's UI. Mithril's 2.0 release sports a more consistent component interface, which should be a solid foundation for years to come. Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition. Quite a few breaking changes remain, though - read more below.
 
-::: tip If you need help with the upgrade, our friendly community will gladly help you out either [on the forum](https://discuss.flarum.org/t/extensibility) or [in chat](https://flarum.org/chat/). :::
+::: tip
+
+If you need help with the upgrade, our friendly community will gladly help you out either [on the forum](https://discuss.flarum.org/t/extensibility) or [in chat](https://flarum.org/chat/).
+
+:::
 
 To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below. If your extension does not change the UI, consider yourself lucky. :-)
 
