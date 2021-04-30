@@ -29,15 +29,19 @@ app.initializers.add('interstellar', function(app) {
 
 Una vez hecho esto, puedes empezar a añadir configuraciones y permisos.
 
-::: Note Todas las funciones de registro en `ExtensionData` son encadenables, lo que significa que puedes llamarlas una tras otra sin tener que volver a ejecutar `for`. :::
+:::tip Note
+
+All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+
+:::
 
 ### Registro de ajustes
 
-Se recomienda añadir campos de configuración para los elementos simples. Como regla general, si sólo necesitas almacenar cosas en la tabla de ajustes, esto debería ser suficiente para ti.
+Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
 
-Para añadir un campo, llama a la función `registerSetting` después de `for` en `app.extensionData` y pasa un 'setting object' como primer argumento. Detrás de las escenas `ExtensionData` en realidad convierte su configuración en un [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), puede pasar un número de prioridad como el segundo argumento.
+To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
 
-Aquí hay un ejemplo con un elemento switch (booleano):
+Here's an example with a switch (boolean) item:
 
 ```js
 
@@ -56,7 +60,7 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Si se utiliza `type: 'select'` el objeto de ajuste tiene un aspecto un poco diferente:
+If you use `type: 'select'` the setting object looks a little bit different:
 
 ```js
 {
@@ -72,7 +76,7 @@ Si se utiliza `type: 'select'` el objeto de ajuste tiene un aspecto un poco dife
 ```
 
 
-Si quieres añadir algo a los ajustes como algún texto extra o una entrada más complicada, también puedes pasar una devolución de llamada como primer argumento que devuelva JSX. Este callback se ejecutará en el contexto de [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) y los valores de configuración no se serializarán automáticamente.
+If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -99,16 +103,16 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registro de Permisos
 
-Como novedad en la beta 15, los permisos pueden encontrarse ahora en dos lugares. Ahora, puedes ver los permisos individuales de cada extensión en su página. Todos los permisos se pueden seguir encontrando en la página de permisos.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Esto se hace de forma similar a la configuración, llamando a `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
-Argumentos:
+Arguments:
  * Objeto de permiso
  * Qué tipo de permiso - ver las funciones de [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) para los tipos (eliminar elementos del nombre)
  * Prioridad de `ItemList`
 
-Volvemos a nuestra extensión favorita del rocket:
+Back to our favorite rocket extension:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -129,7 +133,7 @@ app.initializers.add('interstellar', function(app) {
 
 ### Recordatorio de Encadenamiento
 
-Recuerda que todas estas funciones se pueden encadenar como:
+Remember these functions can all be chained like:
 
 ```js
 app.extensionData
@@ -145,9 +149,9 @@ app.extensionData
 
 ### Extending/Overriding de la Página por Defecto
 
-A veces tienes configuraciones más complicadas que se mezclan con las relaciones, o simplemente quieres que la página se vea completamente diferente. En este caso, necesitarás decirle a `ExtensionData` que quieres proporcionar tu propia página. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
+Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
-Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
+Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
 import ExtensionPage from 'flarum/components/ExtensionPage';
@@ -162,7 +166,7 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-Entonces, simplemente ejecute `registerPage`:
+Then, simply run `registerPage`:
 
 ```js
 
@@ -176,15 +180,15 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Esta página se mostrará en lugar de la predeterminada.
+This page will be shown instead of the default.
 
-¡Puedes extender la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o extender la `Page` base y diseñar la tuya propia!
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
 
 ## Metadatos del Composer.json
 
-En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
+In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
 
-Para más información, consulte el esquema [composer.json](https://getcomposer.org/doc/04-schema.md).
+For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
 | Descripción                            | Dónde en composer.json                                                |
 | -------------------------------------- | --------------------------------------------------------------------- |
