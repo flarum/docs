@@ -6,19 +6,23 @@ Este enfoque hace que Flarum sea extremadamente personalizable. Un usuario puede
 
 Para lograr esta extensibilidad, Flarum ha sido construido con ricas APIs y puntos de extensión. Con algunos conocimientos de programación, puedes aprovechar estas APIs para añadir casi cualquier característica que desees. Esta sección de la documentación pretende enseñarte cómo funciona Flarum, y cómo usar las APIs para que puedas construir tus propias extensiones.
 
-::: warning **Tanto la API de extensiones como esta documentación son un trabajo en curso.** ¡Ten en cuenta que las futuras versiones beta pueden romper tus extensiones! Si tienes comentarios, [nos encantaría escucharlos](https://discuss.flarum.org/). :::
+::: warning
+
+**Both the Extension API and this documentation is a work in progress.** Be aware that future beta releases may break your extensions! If you have feedback, [we'd love to hear it](https://discuss.flarum.org/).
+
+:::
 
 ## Core vs. Extensiones
 
-¿Dónde trazamos la línea entre el core de Flarum y sus extensiones? ¿Por qué algunas características se incluyen en el core y otras no? Es importante entender esta distinción para que podamos mantener la consistencia y la calidad dentro del ecosistema de Flarum.
+Where do we draw the line between Flarum's core and its extensions? Why are some features included in the core, and others aren't? It is important to understand this distinction so that we can maintain consistency and quality within Flarum's ecosystem.
 
-**El core de Flarum** no pretende estar lleno de características. Más bien, es un andamio, o un marco, que proporciona una base fiable sobre la que se pueden construir extensiones. Contiene sólo las funcionalidades básicas, no opinables, que son esenciales para un foro: discusiones, mensajes, usuarios, grupos y notificaciones.
+**Flarum's core** is not intended to be packed full of features. Rather, it is a scaffold, or a framework, which provides a reliable foundation on which extensions can build. It contains only basic, unopinionated functionality that is essential to a forum: discussions, posts, users, groups, and notifications.
 
-**Las extensiones incluidas** son características que vienen empaquetadas con Flarum y están activadas por defecto. Son extensiones como cualquier otra, y pueden ser desactivadas y desinstaladas. Si bien su alcance no pretende abordar todos los casos de uso, la idea es hacerlas lo suficientemente genéricas y configurables para que puedan satisfacer a la mayoría.
+**Bundled extensions** are features that are packaged with Flarum and enabled by default. They are extensions just like any other, and may be disabled and uninstalled. While their scope is not intended to address all use-cases, the idea is to make them generic and configurable enough that they can satisfy the majority.
 
-**Las extensiones de terceros** son características creadas por otros y no están oficialmente soportadas por el equipo de Flarum. Pueden ser construidas y usadas para abordar casos de uso más específicos.
+**Third-party extensions** are features which are made by others and are not officially supported by the Flarum team. They can be built and used to address more specific use-cases.
 
-Si quieres solucionar un error o una deficiencia del núcleo, o de una extensión ya existente, puede ser apropiado *contribuir al proyecto respectivo* en lugar de dispersar el esfuerzo en una nueva extensión de terceros. Es una buena idea comenzar una discusión en la [Comunidad Flarum](https://discuss.flarum.org/) para obtener la perspectiva de los desarrolladores de Flarum.
+If you are aiming to address a bug or shortcoming of the core, or of an existing bundled extension, it may be appropriate to *contribute to the respective project* rather than disperse effort on a new third-party extension. It is a good idea to start a discussion on the [Flarum Community](https://discuss.flarum.org/) to get the perspective of the Flarum developers.
 
 ## Recursos útiles
 
