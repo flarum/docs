@@ -40,13 +40,17 @@ We'll go over each type of controler shortly, but once they're written, you can 
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-::: warning Paths to API endpoints are not arbitrary! To support interactions with frontend models:
+::: warning
+
+Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 
 - The path should either be `/prefix/{id}` for get/update/delete, or `/prefix` for list/create.
 - the prefix (`tags` in the example above) must correspond to the JSON:API model type. You'll also use this model type in your serializer's `$type` attribute, and when registering the frontend model (`app.store.models.TYPE = MODEL_CLASS`).
 - The methods must match the example above.
 
-Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique! :::
+Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
+
+:::
 
 The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
 
