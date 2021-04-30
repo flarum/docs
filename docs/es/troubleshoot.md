@@ -6,7 +6,11 @@ A continuación, deberías tomarte unos minutos para buscar en el [foro de sopor
 
 ## Paso 0: Activar el modo de depuración
 
-::: danger Skip on Production These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment. :::
+::: danger Skip on Production
+
+These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+
+:::
 
 Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
