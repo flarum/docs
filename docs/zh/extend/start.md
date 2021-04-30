@@ -119,9 +119,12 @@ composer config repositories.0 path "packages/*"
   * 您需要在这里指定您的扩展程序所兼容的 Flarum 版本。
   * 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
 
-  ::: warning 谨慎指定 Flarum 版本 Flarum 仍处于测试阶段，我们建议您声明只兼容当前的 Flarum 版本。
+  ::: warning Carefully choose the Flarum version
+
+  While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
     "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+
   :::
 
 * **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。 此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.
@@ -132,20 +135,24 @@ composer config repositories.0 path "packages/*"
 
 请参阅 [composer.json 模式](https://getcomposer.org/doc/04-schema.md) 文档，以获取有关可以添加到 `composer.json` 中的其他属性的信息。
 
-::: tip 小提示 使用 [FoF 扩展生成器](https://github.com/FriendsOfFlarum/extension-generator) 自动创建扩展程序的基架。 :::
+::: tip
+
+Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+
+:::
 
 ### 安装您的扩展
 
-最后一步就是安装您的扩展。 进入 Flarum 安装根目录，执行以下命令：
+The final thing we need to do to get up and running is to install your extension. Navigate to the root directory of your Flarum install and run the following command:
 
 ```bash
 composer require acme/flarum-hello-world *@dev
 ```
 
-执行完成后，前往您论坛后台管理面板启用插件，最后回到您的论坛。
+Once that's done, go ahead and fire 'er up on your forum's Administration page, then navigate back to your forum.
 
 *whizzing, whirring, metal clunking*
 
-哇！ 你好，扩展！
+Woop! Hello to you too, extension!
 
-很好，我们取得了一些进展。 我们学习了如何设置扩展和使用扩展，打开了新世界的大门。 继续阅读以了解如何扩展 Flarum 的前端。
+We're making good progress. We've learned how to set up our extension and use extenders, which opens up a lot of doors. Read on to learn how to extend Flarum's frontend.
