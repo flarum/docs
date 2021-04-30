@@ -119,9 +119,12 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
   * Dovrai specificare la versione di Flarum con cui la tua estensione è compatibile qui.
   * Questo è anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
-  ::: warning Scegli con cura la versione Flarum Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilità solo con la versione corrente di Flarum:
+  ::: warning Carefully choose the Flarum version
+
+  While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
     "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+
   :::
 
 * **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
@@ -132,20 +135,24 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
 
 Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre proprietà da aggiungere a `composer.json`.
 
-::: tip Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding. :::
+::: tip
+
+Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+
+:::
 
 ### Installare la tua estensione
 
-L'ultima cosa che dobbiamo fare per essere operativi è installare la tua estensione. Vai alla directory root della tua installazione Flarum ed esegui il seguente comando
+The final thing we need to do to get up and running is to install your extension. Navigate to the root directory of your Flarum install and run the following command:
 
 ```bash
 composer require acme/flarum-hello-world *@dev
 ```
 
-Una volta fatto, vai avanti e avvia la pagina di amministrazione del tuo forum.
+Once that's done, go ahead and fire 'er up on your forum's Administration page, then navigate back to your forum.
 
-*crank, ching, crunk*
+*whizzing, whirring, metal clunking*
 
-Ooplà! Ciao a te estensione Hello World!
+Woop! Hello to you too, extension!
 
-Stiamo facendo buoni progressi. Abbiamo imparato come impostare la nostra estensione e utilizzare gli estensori, il che apre molte porte. Continua a leggere per scoprire come estendere il frontend di Flarum.
+We're making good progress. We've learned how to set up our extension and use extenders, which opens up a lot of doors. Read on to learn how to extend Flarum's frontend.
