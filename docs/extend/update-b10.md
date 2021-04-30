@@ -3,7 +3,9 @@
 Beta 10 further solidifies the core architecture, offering new extenders as a stable, use-case-driven API for extending Flarum's core. A few small changes may necessitate updates to your extensions to make them compatible with Beta 10. These are detailed below.
 
 ::: tip
+
 If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
 :::
 
 ## Breaking Changes

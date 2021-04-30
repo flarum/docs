@@ -153,7 +153,9 @@ Hay varias utilidades importantes disponibles para sus casos de prueba:
 Si su caso de prueba necesita usuarios más allá del usuario administrador por defecto, puede utilizar el método `$this->normalUser()` del trait `Flarum\Testing\integration\RetrievesAuthorizedUsers`.
 
 :::warning
+
 La clase `TestCase` arrancará una instancia de Flarum la primera vez que se llame a su método `app()`. Cualquier uso de `prepareDatabase`, `extend`, o `extension` después de esto no tendrá efecto. Asegúrate de que has hecho toda la configuración que necesitas en tu caso de prueba antes de llamar a `app()`, o a `database()`, `server()`, o `send()`, que llaman implícitamente a `app()`. Si necesitas hacer modificaciones en la base de datos después de que la aplicación haya arrancado, puedes usar el método regular de guardado de Eloquent, o la instancia `Illuminate\Database\ConnectionInterface` obtenida mediante la llamada al método `database()`.
+
 :::
 
 Por supuesto, ya que todo esto se basa en PHPUnit, puede utilizar los métodos `setUp()` de sus clases de prueba para las tareas de configuración comunes.
@@ -297,11 +299,15 @@ class SomeTest extends TestCase
 ```
 
 ::: warning
+
 Si quieres enviar parámetros de consulta en una petición GET, no puedes incluirlos en la ruta; tendrás que añadirlos después con el método `withQueryParams`.
+
 :::
 
 ::: warning
+
 Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución.
+
 :::
 
 #### Pruebas de consola

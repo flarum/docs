@@ -6,7 +6,9 @@ Il caso d'uso più comune per i provider di servizi è creare, modificare o sost
 Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
 
 ::: warning Solo per utenti avanzati!!!
+
 A differenza di altri estensori, il livello del provider di servizi NON è basato sul caso d'uso e NON è considerato API pubblica. È soggetto a modifiche in qualsiasi momento, senza preavviso. E dovrebbe essere usato solo se sai cosa stai facendo e gli altri extender non soddisfano il tuo caso d'uso.
+
 :::
 
 ## Processi di Boot di Flarum

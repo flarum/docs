@@ -3,7 +3,9 @@
 Beta 16 finalizes the PHP extender API, introduces a testing library and JS typings, switches to using namespaces for JS imports, increases extension dependency robustness, and allows overriding routes, among other features.
 
 ::: tip
+
 If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
 :::
 
 ## Frontend

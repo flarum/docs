@@ -21,7 +21,9 @@ Añadir CSS personalizado puede ser una gran manera de modificar su instalación
 Un tutorial de CSS está más allá del alcance de esta documentación, pero hay muchos recursos en línea para aprender los fundamentos de CSS.
 
 :::tip
+
 Flarum utiliza LESS, que facilita la escritura de CSS al permitir variables, condicionales y funciones.
+
 :::
 
 ## Extensiones

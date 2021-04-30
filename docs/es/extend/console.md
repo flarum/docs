@@ -40,5 +40,7 @@ return [
 ```
 
 ::: tip Comandos Programados
+
 La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular. Sin embargo, tenga en cuenta que se trata de una solución comunitaria.
+
 :::

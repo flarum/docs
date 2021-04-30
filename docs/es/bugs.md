@@ -1,7 +1,9 @@
 # Reportando Bugs
 
 ::: danger Vulnerabilidades de seguridad
+
 Si descubre una vulnerabilidad de seguridad en Flarum, por favor envíe un correo electrónico a [security@flarum.org](mailto:security@flarum.org) para que podamos solucionarlo rápidamente.
+
 :::
 
 Gracias por ayudarnos a testear Flarum. ¡Estamos contentos de tenerte en el equipo! Necesitamos gente que pueda *resolver problemas con paciencia* y *comunicarlos con claridad*. Como probablemente sepas, un buen informe de errores requiere algo de tiempo y esfuerzo. Si te parece bien, ¡empecemos!

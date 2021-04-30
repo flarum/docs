@@ -3,7 +3,9 @@
 A menudo, una extensión querrá reaccionar a algunos eventos que ocurren en otra parte de Flarum. Por ejemplo, podríamos querer incrementar un contador cuando se publica una nueva discusión, enviar un email de bienvenida cuando un usuario se conecta por primera vez, o añadir etiquetas a una discusión antes de guardarla en la base de datos. Estos eventos se conocen como **eventos de dominio**, y se transmiten a todo el framework a través del [sistema de eventos de Laravel](https://laravel.com/docs/6.x/events).
 
 :::warning Antigua API de eventos
+
 Históricamente, Flarum ha utilizado eventos para su API de extensión, emitiendo eventos como `GetDisplayName` o `ConfigureApiRoutes` para permitir a las extensiones insertar lógica en varias partes de Flarum. Estos eventos se están eliminando gradualmente en favor del sistema declarativo [extender] (start.md#extenders), y se eliminarán antes de que sea estable. Los eventos de dominio no serán eliminados.
+
 :::
 
 Para obtener una lista completa de los eventos del backend, consulte nuestra [documentación de la API](https://api.docs.flarum.org/php/master/search.html?search=Event). Las clases de eventos del dominio están organizadas por espacio de nombres, normalmente `Flarum\TYPE\Event`.

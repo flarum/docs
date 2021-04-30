@@ -39,7 +39,9 @@ $user->hasPermission('viewDiscussions');
 ```
 
 :::warning Utilizzare l'autorizzazione appropriata
+
 Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
+
 :::
 
 ### Aggiunta di autorizzazioni personalizzate

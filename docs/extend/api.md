@@ -42,6 +42,7 @@ We'll go over each type of controler shortly, but once they're written, you can 
 ```
 
 ::: warning
+
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 
 - The path should either be `/prefix/{id}` for get/update/delete, or `/prefix` for list/create.
@@ -49,6 +50,7 @@ Paths to API endpoints are not arbitrary! To support interactions with frontend 
 - The methods must match the example above.
 
 Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
+
 :::
 
 The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.

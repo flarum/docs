@@ -62,11 +62,13 @@ class HelloWorldController implements RequestHandlerInterface
 Los controladores se resuelven desde el [contenedor](https://laravel.com/docs/6.x/container) para que puedas inyectar dependencias en sus constructores.
 
 :::tip ¿Qué son los controladores?
+
 El método `handle` de un Controlador es el código que se ejecuta cuando alguien visita su ruta (o le envía datos a través de un envío de formulario). En general, las implementaciones de Controladores siguen el patrón:
 
 1. Recuperar la información (parámetros GET, datos POST, el usuario actual, etc) del objeto Request.
 2. Hacer algo con esa información. Por ejemplo, si nuestro controlador maneja una ruta para crear posts, querremos guardar un nuevo objeto post en la base de datos.
 3. Devolver una respuesta. La mayoría de las rutas devolverán una página web HTML, o una respuesta api JSON.
+
 :::
 
 ### Parámetros de ruta

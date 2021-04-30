@@ -41,7 +41,9 @@ $user->hasPermission('viewDiscussions');
 ```
 
 :::warning Utilizar la Autorización Adecuada
+
 Los permisos son sólo una parte del rompecabezas: si quieres imponer si un usuario puede realizar una acción, debes utilizar el [sistema de autorización](authorization.md) de Flarum.
+
 :::
 
 ### Añadir Permisos Personalizados

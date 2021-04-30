@@ -120,9 +120,11 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
   * Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
 
   ::: warning Elige cuidadosamente la versión de Flarum
+
   Mientras Flarum esté todavía en fase beta, le recomendamos que declare la compatibilidad sólo con la versión actual de Flarum:
 
       "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+
   :::
 
 * **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
@@ -134,7 +136,9 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 
 ::: tip
+
 Utilice el [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) para crear automáticamente el andamiaje de su extensión.
+
 :::
 
 ### Instalación de la extensión

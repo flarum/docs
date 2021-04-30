@@ -62,11 +62,13 @@ class HelloWorldController implements RequestHandlerInterface
 Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
 
 :::tip What are Controllers?
+
 The `handle` method of a Controller is the code that runs when someone visits your route (or sends data to it via a form submission). Generally speaking, Controller implementations follow the pattern:
 
 1. Retrieve information (GET params, POST data, the current user, etc) from the Request object.
 2. Do something with that information. For instance, if our controller handles a route for creating posts, we'll want to save a new post object to the database.
 3. Return a response. Most routes will return an HTML webpage, or a JSON api response.
+
 :::
 
 ### Route Parameters
