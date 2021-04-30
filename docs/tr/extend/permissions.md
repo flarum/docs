@@ -38,7 +38,11 @@ $user->getPermissions();
 $user->hasPermission('viewDiscussions');
 ```
 
-:::warning Use Proper Authorization Permissions are just part of the puzzle: if you're enforcing whether a user can perform an action, you should use Flarum's [authorization system](authorization.md). :::
+:::warning Use Proper Authorization
+
+Permissions are just part of the puzzle: if you're enforcing whether a user can perform an action, you should use Flarum's [authorization system](authorization.md).
+
+:::
 
 ### Adding Custom Permissions
 
