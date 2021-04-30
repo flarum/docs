@@ -18,8 +18,12 @@ CSS 是一种样式表语言，它告诉浏览器如何显示网页的元素。 
 
 CSS 教程不在本文档的讨论范围之内，但是有大量的优质在线资源可供您学习 CSS 的基础知识。
 
-::: tip 小提示 Flarum 其实使用了 LESS，它支持变量、条件和函数，可以让您更轻松地编写 CSS。 :::
+:::tip
+
+Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+
+:::
 
 ## 扩展
 
-Flarum 灵活的 [扩展系统](extensions.md) 允许您添加、删除或修改 Flarum 的任何部分。 如果您想做实质性的主题修改，除了改变颜色/大小/样式之外，一个自定义的扩展绝对是您的最佳选择。 要学习如何制作扩展，请查看我们的 [扩展文档](extension/README.md)！
+Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum. If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go. To learn how to make an extension, check out our [extension documentation](extend/README.md)!
