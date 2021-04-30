@@ -11,7 +11,11 @@ Flarum has two separate frontend applications:
 
 They share the same foundational code, so once you know how to extend one, you know how to extend both.
 
-:::tip Typings! Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier! :::
+:::tip Typings!
+
+Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+
+:::
 
 ## Transpilation and File Structure
 
@@ -161,7 +165,11 @@ return [
 
 Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. Thus, you may choose to expose your own public API for other extensions to interact with.
 
-::: tip External Libraries Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document. :::
+::: tip External Libraries
+
+Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
+
+:::
 
 ### CSS
 
@@ -173,7 +181,11 @@ You can also add CSS and [LESS](https://lesscss.org/features/) assets to the fro
         ->css(__DIR__.'/less/forum.less')
 ```
 
-::: tip You should develop extensions with debug mode turned **on** in `config.php`. This will ensure that Flarum recompiles assets automatically, so you don't have to manually clear the cache every time you make a change to your extension JavaScript. :::
+::: tip
+
+You should develop extensions with debug mode turned **on** in `config.php`. This will ensure that Flarum recompiles assets automatically, so you don't have to manually clear the cache every time you make a change to your extension JavaScript.
+
+:::
 
 ## Changing the UI Part 1
 
@@ -306,11 +318,14 @@ In most cases, we don't actually want to completely replace the methods we are m
    1. For `extend`, the callback receives the output of the original method, as well as any arguments passed to the original method.
    2. For `override`, the callback receives a callable (which can be used to call the original method), as well as any arguments passed to the original method.
 
-:::tip Overriding multiple methods With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
+:::tip Overriding multiple methods
+
+With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
 
 ```jsx
 extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ });
 ```
+
 :::
 
 Please note that if you are trying to change the output of a method with `override`, you must return the new output. If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument). Keep in mind that `extend` can only mutate output if the output is mutable (e.g. an object or array, and not a number/string).
