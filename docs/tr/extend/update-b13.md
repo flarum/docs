@@ -2,7 +2,11 @@
 
 Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
-::: tip If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/). :::
+::: tip
+
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
+:::
 
 ## Breaking Changes
 
