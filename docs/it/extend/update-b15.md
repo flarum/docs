@@ -2,7 +2,11 @@
 
 La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboard di amministrazione e molte altre interessanti funzionalità per le estensioni. Come sempre, abbiamo fatto del nostro meglio per fornire livelli di compatibilità con le versioni precedenti e consigliamo di abbandonare i sistemi obsoleti il prima possibile per rendere le estensioni più stabili.
 
-::: tip Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o [sulla chat Discord](https://flarum.org/discord/). :::
+::: tip
+
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
+:::
 
 ## Nuove funzionalità / deprecazioni
 
@@ -30,7 +34,7 @@ La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboa
 
 ### Pannello Amministrazione ridisegnato
 
-La dashboard dell'amministratore è stata completamente ridisegnata, con l'obiettivo di barre di navigazione per ogni estensione. Anche l'API per le estensioni per registrare impostazioni, autorizzazioni e pagine personalizzate è stata notevolmente semplificata. Ora puoi anche aggiornare la tua estensione `composer.json` per fornire link per finanziamenti, supporto, siti web e così via che verranno visualizzati nella pagina di amministrazione della tua estensione. Guarda [documentazione JS amministrazione](./admin.md) per ulteriori informazioni su come utilizzare il nuovo sistema.
+The admin dashboard has been completely redesigned, with a focus on providing navbar pages for each extension. The API for extensions to register settings, permissions, and custom pages has also been greatly simplified. You can also now update your extension's `composer.json` to provide links for funding, support, website, etc that will show up on your extension's admin page. Please see [our Admin JS documentation](./admin.md) for more information on how to use the new system.
 
 ### Altre feauture nuove
 
