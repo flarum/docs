@@ -2,11 +2,15 @@
 
 As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection. [Service Providers](https://laravel.com/docs/8.x/providers) allow low-level configuration and modification of the Flarum backend. Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore. Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
 
-::: warning Solo per utenti avanzati!!! A differenza di altri estensori, il livello del provider di servizi NON è basato sul caso d'uso e NON è considerato API pubblica. È soggetto a modifiche in qualsiasi momento, senza preavviso. E dovrebbe essere usato solo se sai cosa stai facendo e gli altri extender non soddisfano il tuo caso d'uso. :::
+::: warning Advanced Use Only!!!
+
+Unlike with other extenders, the Service Provider layer is NOT use-case driven, and is NOT considered public API. It is subject to change at any time, without notice or deprecation. This should only be used if you know what you're doing, and the other extenders don't satisfy your use case.
+
+:::
 
 ## Processi di Boot di Flarum
 
-Per comprendere i provider di servizi, devi prima capire l'ordine in cui Flarum si avvia. La maggior parte di questo accade in [Flarum\Foundation\InstalledSite](https://github.com/flarum/core/blob/master/src/Foundation/InstalledSite.php)
+To understand service providers, you must first understand the order in which Flarum boots. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/core/blob/master/src/Foundation/InstalledSite.php)
 
 1. Il contenitore e l'applicazione vengono inizializzati e vengono registrati i collegamenti essenziali (configurazione, ambiente, logger)
 2. Il metodo `register` di tutti i principali provider di servizi viene eseguito.
@@ -16,7 +20,7 @@ Per comprendere i provider di servizi, devi prima capire l'ordine in cui Flarum 
 
 ## Provider di servizi personalizzato
 
-Un provider di servizi personalizzato dovrebbe estendersi in `Flarum\Foundation\AbstractServiceProvider`, e può avere metodi `boot` e `register`. Per esempio:
+A custom service provider should extend `Flarum\Foundation\AbstractServiceProvider`, and can have a `boot` and a `register` method. Per esempio:
 
 ```php
 <?php
@@ -37,9 +41,9 @@ class CustomServiceProvider extends AbstractServiceProvider
 }
 ```
 
-Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). In entrambi i metodi, il contenitore è disponibile tramite `$this->app`.
+The `register` method will run during step (3) above, and the `boot` method will run during step (5) above. In both methods, the container is available via `$this->app`.
 
-Per registrare effettivamente il tuo provider di servizi personalizzato, puoi utilizzare l'extender `ServiceProvider` in `extend.php`:
+To actually register your custom service provider, you can use the `ServiceProvider` extender in `extend.php`:
 
 ```php
 <?php
