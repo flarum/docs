@@ -104,27 +104,27 @@ use Flarum\User\User;
 
 class TagPolicy extends AbstractPolicy
 {
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function startDiscussion(User $actor, Tag $tag)
-    {
-        if ($tag->is_restricted) {
-            return $actor->hasPermission('tag'.$tag->id.'.startDiscussion') ? $this->allow() : $this->deny();
-        }
+  /**
+   * @param User $actor
+   * @param Tag $tag
+   * @return bool|null
+   */
+  public function startDiscussion(User $actor, Tag $tag)
+  {
+    if ($tag->is_restricted) {
+      return $actor->hasPermission('tag' . $tag->id . '.startDiscussion') ? $this->allow() : $this->deny();
     }
+  }
 
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function addToDiscussion(User $actor, Tag $tag)
-    {
-        return $this->startDiscussion($actor, $tag);
-    }
+  /**
+   * @param User $actor
+   * @param Tag $tag
+   * @return bool|null
+   */
+  public function addToDiscussion(User $actor, Tag $tag)
+  {
+    return $this->startDiscussion($actor, $tag);
+  }
 }
 ```
 
@@ -142,34 +142,34 @@ use Flarum\User\User;
 
 class GlobalPolicy extends AbstractPolicy
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
+  /**
+   * @var SettingsRepositoryInterface
+   */
+  protected $settings;
 
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
+  public function __construct(SettingsRepositoryInterface $settings)
+  {
+    $this->settings = $settings;
+  }
+
+  /**
+   * @param Flarum\User\User $actor
+   * @param string $ability
+   * @return bool|void
+   */
+  public function can(User $actor, string $ability)
+  {
+    if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
+      $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
+      $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
+
+      if ($enoughPrimary && $enoughSecondary) {
+        return $this->allow();
+      } else {
+        return $this->deny();
+      }
     }
-
-    /**
-     * @param Flarum\User\User $actor
-     * @param string $ability
-     * @return bool|void
-     */
-    public function can(User $actor, string $ability)
-    {
-        if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
-            $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
-            $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
-
-            if ($enoughPrimary && $enoughSecondary) {
-                return $this->allow();
-            } else {
-                return $this->deny();
-            }
-        }
-    }
+  }
 }
 ```
 
@@ -184,9 +184,7 @@ use YourNamespace\Access;
 
 return [
   // Otros extensores
-  (new Extend\Policy())
-    ->modelPolicy(Tag::class, Access\TagPolicy::class)
-    ->globalPolicy(Access\GlobalPolicy::class),
+  (new Extend\Policy())->modelPolicy(Tag::class, Access\TagPolicy::class)->globalPolicy(Access\GlobalPolicy::class),
   // Otros extensores
 ];
 ```
@@ -243,10 +241,9 @@ $query->where('posts.is_private', false);
 // Sin embargo, reconocemos que algunas extensiones podrían tener casos de uso válidos para mostrar publicaciones privadas.
 // Así que en su lugar, incluimos todos los mensajes que no son privados, Y todos los mensajes privados deseados por las extensiones.
 $query->where(function ($query) use ($actor) {
-    $query->where('posts.is_private', false)
-        ->orWhere(function ($query) use ($actor) {
-            $query->whereVisibleTo($actor, 'viewPrivate');
-        });
+  $query->where('posts.is_private', false)->orWhere(function ($query) use ($actor) {
+    $query->whereVisibleTo($actor, 'viewPrivate');
+  });
 });
 ```
 
@@ -260,12 +257,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopePostVisibility
 {
-    public function __invoke(User $actor, $query)
-    {
-      if ($actor->can('posts.viewPrivate')) {
-        $query->whereRaw("1=1");
-      }
+  public function __invoke(User $actor, $query)
+  {
+    if ($actor->can('posts.viewPrivate')) {
+      $query->whereRaw('1=1');
     }
+  }
 }
 ```
 
@@ -288,14 +285,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopeTagVisibility
 {
-    /**
-     * @param User $actor
-     * @param Builder $query
-     */
-    public function __invoke(User $actor, Builder $query)
-    {
-        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
-    }
+  /**
+   * @param User $actor
+   * @param Builder $query
+   */
+  public function __invoke(User $actor, Builder $query)
+  {
+    $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+  }
 }
 ```
 
@@ -312,26 +309,27 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopeDiscussionVisibilityForAbility
 {
-    /**
-     * @param User $actor
-     * @param Builder $query
-     * @param string $ability
-     */
-    public function __invoke(User $actor, Builder $query, $ability)
-    {
-        if (substr($ability, 0, 4) === 'view') {
-            return;
-        }
-
-        // Si una discusión requiere un determinado permiso para que sea
-        // visible, entonces podemos comprobar si el usuario tiene concedido ese
-        // permiso para cualquiera de las etiquetas de la discusión.
-        $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
-        });
+  /**
+   * @param User $actor
+   * @param Builder $query
+   * @param string $ability
+   */
+  public function __invoke(User $actor, Builder $query, $ability)
+  {
+    if (substr($ability, 0, 4) === 'view') {
+      return;
     }
+
+    // Si una discusión requiere un determinado permiso para que sea
+    // visible, entonces podemos comprobar si el usuario tiene concedido ese
+    // permiso para cualquiera de las etiquetas de la discusión.
+    $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
+      return $query
+        ->select('discussion_id')
+        ->from('discussion_tag')
+        ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.' . $ability));
+    });
+  }
 }
 ```
 
@@ -351,11 +349,9 @@ return [
   // 'view' es opcional aquí, ya que es el valor por defecto para el argumento de la habilidad.
   // Sin embargo, si estuviéramos aplicando esto a una habilidad diferente, como `viewPrivate`,
   // tendríamos que especificarlo explícitamente.
-  (new Extend\ModelVisibility(Tag::class))
-    ->scope(Access\ScopeTagVisibility::class, 'view'),
+  (new Extend\ModelVisibility(Tag::class))->scope(Access\ScopeTagVisibility::class, 'view'),
 
-  (new Extend\ModelVisibility(Discussion::class))
-    ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
+  (new Extend\ModelVisibility(Discussion::class))->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
   // Otros extensores
 ];
 ```

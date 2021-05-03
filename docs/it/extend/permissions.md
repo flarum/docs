@@ -53,13 +53,17 @@ Possiamo farlo estendendo il componente del frontend `flarum/components/Permissi
 import { extend } from 'flarum/extend';
 import PermissionGrid from 'flarum/components/PermissionGrid';
 
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Classi CSS per l'icona. Generalmente in formato fontawesome, anche se puoi usare anche il tuo CSS personalizzato.
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La stringa di autorizzazione.
-    }, 95);
+export default function () {
+  extend(PermissionGrid.prototype, 'moderateItems', (items) => {
+    items.add(
+      'tag',
+      {
+        icon: 'fas fa-tag', // Classi CSS per l'icona. Generalmente in formato fontawesome, anche se puoi usare anche il tuo CSS personalizzato.
+        label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
+        permission: 'discussion.tag', // La stringa di autorizzazione.
+      },
+      95
+    );
   });
 }
 ```

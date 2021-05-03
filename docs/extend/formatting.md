@@ -16,26 +16,26 @@ use s9e\TextFormatter\Parser;
 use s9e\TextFormatter\Renderer;
 
 return [
-    (new Extend\Formatter)
-        // Add custom text formatter configuration
-        ->configure(function (Configurator $config) {
-            $config->BBCodes->addFromRepository('B');
-        })
-        // Modify raw text before it is parsed.
-        // This callback should return the modified text.
-        ->parse(function (Parser $parser, $context, $text) {
-            // custom logic here
-            return $newText;
-        })
-        // Modify the XML to be rendered before rendering.
-        // This callback should return the new XML.
-        // For example, in the mentions extension, this is used to
-        // provide the username and display name of the user being mentioned.
-        // Make sure that the last $request argument is nullable (or omitted entirely).
-        ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
-            // custom logic here
-            return $newXml;
-        })
+  (new Extend\Formatter())
+    // Add custom text formatter configuration
+    ->configure(function (Configurator $config) {
+      $config->BBCodes->addFromRepository('B');
+    })
+    // Modify raw text before it is parsed.
+    // This callback should return the modified text.
+    ->parse(function (Parser $parser, $context, $text) {
+      // custom logic here
+      return $newText;
+    })
+    // Modify the XML to be rendered before rendering.
+    // This callback should return the new XML.
+    // For example, in the mentions extension, this is used to
+    // provide the username and display name of the user being mentioned.
+    // Make sure that the last $request argument is nullable (or omitted entirely).
+    ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
+      // custom logic here
+      return $newXml;
+    }),
 ];
 ```
 

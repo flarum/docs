@@ -11,11 +11,10 @@ Ecco un esempio veloce dal pacchetto [Flarum English](https://github.com/flarum/
 ```php
 <?php
 
-return new Flarum\Extend\LanguagePack;
+return new Flarum\Extend\LanguagePack();
 ```
 
-*Facile, giusto?*
-
+_Facile, giusto?_
 
 ### Pacchetti di traduzione
 
@@ -24,10 +23,10 @@ Tuttavia, il processo è leggermente diverso per i pacchetti di traduzione. Con 
 ```php
 <?php
 
-return new Flarum\Extend\LanguagePack;
+return new Flarum\Extend\LanguagePack();
 ```
 
-`composer.json` andraà aggiornato. Ora avrà bisogno di un oggetto `flarum-locale` in `extra`, come per `flarum-extension`. 
+`composer.json` andraà aggiornato. Ora avrà bisogno di un oggetto `flarum-locale` in `extra`, come per `flarum-extension`.
 Puoi semplicemente inserire quanto segue sotto `flarum-extension` pur rimanendo dentro `extra`:
 
 ```json

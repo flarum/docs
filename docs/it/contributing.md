@@ -4,7 +4,7 @@ Interessato a contribuire allo sviluppo di Flarum? È fantastico! Dalla [segnala
 
 Prima di contribuire, leggi il [codice di condotta](code-of-conduct.md).
 
-Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Per iniziare](/extend/start.md)  (per ora in inglese) sul funzionamento di Flarum.
+Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Per iniziare](/extend/start.md) (per ora in inglese) sul funzionamento di Flarum.
 
 ## Su cosa lavorare
 
@@ -54,33 +54,38 @@ npm run dev
 Un esempio tipico di flusso di lavoro può essere questo:
 
 1. 🌳 **Crea un branch** per le funzionalità partendo da un branch appropriato.
-    * * Le correzioni di bug* dovrebbero essere inviate all'ultimo branch stabile.
-    * *Funzionalità minori* che sono completamente retrocompatibili con l'attuale versione di Flarum possono essere inviate all'ultimo branch stabile.
-    * *Funzionalità importanti* devono essere sempre inviate al branch `master` che contiene la successiva versione di Flarum.
-    * Internamente usiamo lo schema di denominazione `<iniziali>/<breve-descrizione>` (es. `tz/refactor-frontend`).
+
+   - - Le correzioni di bug\* dovrebbero essere inviate all'ultimo branch stabile.
+   - _Funzionalità minori_ che sono completamente retrocompatibili con l'attuale versione di Flarum possono essere inviate all'ultimo branch stabile.
+   - _Funzionalità importanti_ devono essere sempre inviate al branch `master` che contiene la successiva versione di Flarum.
+   - Internamente usiamo lo schema di denominazione `<iniziali>/<breve-descrizione>` (es. `tz/refactor-frontend`).
 
 2. 🔨 **Scrivi** un po' di codice.
-    * Vedi sotto per lo [stile del codice](#stile-del-codice).
 
-1. 🚦 **Testa** il tuo codice.
-    * Aggiungi unit test in base alle esigenze durante la correzione di bug o l'aggiunta di funzionalità.
-    * Lancia la suite di test con `vendor/bin/phpunit` nella cartella del pacchetto pertinente. 
+   - Vedi sotto per lo [stile del codice](#stile-del-codice).
+
+3. 🚦 **Testa** il tuo codice.
+_ Aggiungi unit test in base alle esigenze durante la correzione di bug o l'aggiunta di funzionalità.
+_ Lancia la suite di test con `vendor/bin/phpunit` nella cartella del pacchetto pertinente.
 <!--
     * Vedi [qui](link-to-core/tests/README.md) per maggiori informazioni su come testare Flarum.
 -->
 
 4. 💾 **Crea dei commit** per il tuo codice con un messaggio descrittivo.
-    * Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
-    * Scrivi un [buon messaggio accompagnatorio](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+
+   - Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
+   - Scrivi un [buon messaggio accompagnatorio](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
 5. 🎁 **Invia** una Pull Request su GitHub.
-    * Riempi i campi della richiesta.
-    * Se la modifica è visiva, includi uno screenshot o una GIF che dimostri la modifica.
-    * NON eseguire il check-in di JavaScript nei file `dist` Verra fatto automaticamente una volta uniti.
+
+   - Riempi i campi della richiesta.
+   - Se la modifica è visiva, includi uno screenshot o una GIF che dimostri la modifica.
+   - NON eseguire il check-in di JavaScript nei file `dist` Verra fatto automaticamente una volta uniti.
 
 6. 🤝 **Coinvolgi il team** di Flarum per l'approvazione.
-    * I membri del team esamineranno il tuo codice. Potremmo suggerire alcune modifiche o miglioramenti o alternative, ma per piccoli cambiamenti la tua richiesta pull dovrebbe essere accettata rapidamente.
-    * Quando lasci un feedback, aggiungi commenti invece di sovrascriverli o eliminarli (li uniremo noi).
+
+   - I membri del team esamineranno il tuo codice. Potremmo suggerire alcune modifiche o miglioramenti o alternative, ma per piccoli cambiamenti la tua richiesta pull dovrebbe essere accettata rapidamente.
+   - Quando lasci un feedback, aggiungi commenti invece di sovrascriverli o eliminarli (li uniremo noi).
 
 7. 🕺 **Festeggia** per aver contribuito a Flarum!
 
@@ -94,10 +99,10 @@ Non preoccuparti se lo stile del tuo codice non è perfetto! StyleCI unirà auto
 
 Flarum segue gli standard di codice [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) e [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Inoltre, ci conformiamo a una serie di [altre regole di stile](https://github.com/flarum/core/blob/master/.styleci.yml). Usiamo il type hinting di PHP 7 dove possibile, e [PHPDoc](https://docs.phpdoc.org/) per la documentazione inline. Prova a rispettare lo stile utilizzato dal resto del codice nei tuoi contributi.
 
-* Gli spazi dei nomi dovrebbero essere in singolare (es. `Flarum\Discussion`, non `Flarum\Discussions`)
-* Le interfacce dovrebbero avere il suffisso `Interface` (es. `MailableInterface`)
-* Le classi astratte dovrebbero essere precedute da `Abstract` (es. `AbstractModel`)
-* I tratti dovrebbero essere suffissi con `Trait` (es. `ScopeVisibilityTrait`)
+- Gli spazi dei nomi dovrebbero essere in singolare (es. `Flarum\Discussion`, non `Flarum\Discussions`)
+- Le interfacce dovrebbero avere il suffisso `Interface` (es. `MailableInterface`)
+- Le classi astratte dovrebbero essere precedute da `Abstract` (es. `AbstractModel`)
+- I tratti dovrebbero essere suffissi con `Trait` (es. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
@@ -106,20 +111,22 @@ JavaScript di Flarum segue principalmente la [Airbnb Style Guide](https://github
 ### Database
 
 **Le colonne** dovrebbero essere denominate in base al tipo di dati:
-* DATETIME o TIMESTAMP: `{verbed}_at` (es. created_at, read_at) o `{verbed}_until` (eg. suspended_until)
-* INT considerato come conteggio:  `{noun}_count` (es. comment_count, word_count)
-* Chiave esterna:  `{verbed}_{entity}_id` (es. hidden_user_id)
-    * Il verbo può essere omesso per la relazione primaria (es. autore del post � semplicemente `user_id`)
-* BOOL: `is_{adjective}` (es. is_locked)
+
+- DATETIME o TIMESTAMP: `{verbed}_at` (es. created_at, read_at) o `{verbed}_until` (eg. suspended_until)
+- INT considerato come conteggio: `{noun}_count` (es. comment_count, word_count)
+- Chiave esterna: `{verbed}_{entity}_id` (es. hidden_user_id)
+  - Il verbo può essere omesso per la relazione primaria (es. autore del post � semplicemente `user_id`)
+- BOOL: `is_{adjective}` (es. is_locked)
 
 **Le Tabelle** dovrebbero chiamarsi in questo modo:
-* Usa la forma plurale (`discussions`)
-* Separa più parole con il trattino basso (`access_tokens`)
-* Per le tabelle delle relazioni, unisci i due nomi di tabella in forma singolare con un trattino basso in ordine alfabetico (es. `discussion_user`)
+
+- Usa la forma plurale (`discussions`)
+- Separa più parole con il trattino basso (`access_tokens`)
+- Per le tabelle delle relazioni, unisci i due nomi di tabella in forma singolare con un trattino basso in ordine alfabetico (es. `discussion_user`)
 
 ### CSS
 
-Le classi CSS di Flarum seguono più o meno il [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) con il formato  `.ComponentName-descendentName--modifierName`.
+Le classi CSS di Flarum seguono più o meno il [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) con il formato `.ComponentName-descendentName--modifierName`.
 
 ### Traduzioni
 

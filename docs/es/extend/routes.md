@@ -8,11 +8,11 @@ El enrutamiento ocurre tanto en el backend de PHP como en el frontend de JavaScr
 
 En el backend, Flarum tiene tres colecciones de rutas:
 
-* `forum` Estas rutas son accesibles bajo `suforo.com/`. Incluyen rutas que muestran páginas en el frontend (como `suforo.com/d/123-título`) y otras rutas de utilidad (como la ruta de restablecimiento de contraseña).
+- `forum` Estas rutas son accesibles bajo `suforo.com/`. Incluyen rutas que muestran páginas en el frontend (como `suforo.com/d/123-título`) y otras rutas de utilidad (como la ruta de restablecimiento de contraseña).
 
-* Estas rutas son accesibles en `suforo.com/admin/`. Por defecto, sólo hay una ruta `admin` en el backend; el resto del enrutamiento de administración ocurre en el frontend.
+- Estas rutas son accesibles en `suforo.com/admin/`. Por defecto, sólo hay una ruta `admin` en el backend; el resto del enrutamiento de administración ocurre en el frontend.
 
-* `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON:API de Flarum.
+- `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON:API de Flarum.
 
 ### Definición de rutas
 
@@ -20,9 +20,9 @@ Puedes añadir rutas a cualquiera de estas colecciones utilizando el extensor `R
 
 Hay métodos para registrar rutas para cualquier método de petición HTTP: `get`, `post`, `put`, `patch` y `delete`. Todos estos métodos aceptan tres argumentos:
 
-* `$path` La ruta utilizando la sintaxis [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
-* `$name` Nombre único para la ruta, utilizado para generar URLs. Para evitar conflictos con otras extensiones, debe utilizar el nombre de su proveedor como espacio de nombres.
-* `$handler` El nombre de la clase del controlador que manejará la solicitud. Esto se resolverá a través del contenedor.
+- `$path` La ruta utilizando la sintaxis [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
+- `$name` Nombre único para la ruta, utilizado para generar URLs. Para evitar conflictos con otras extensiones, debe utilizar el nombre de su proveedor como espacio de nombres.
+- `$handler` El nombre de la clase del controlador que manejará la solicitud. Esto se resolverá a través del contenedor.
 
 ```php
 <?php
@@ -30,10 +30,7 @@ Hay métodos para registrar rutas para cualquier método de petición HTTP: `get
 use Flarum\Extend;
 use Acme\HelloWorld\HelloWorldController;
 
-return [
-    (new Extend\Routes('forum'))
-        ->get('/hello-world', 'acme.hello-world', HelloWorldController::class)
-];
+return [(new Extend\Routes('forum'))->get('/hello-world', 'acme.hello-world', HelloWorldController::class)];
 ```
 
 ### Controladores
@@ -52,10 +49,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class HelloWorldController implements RequestHandlerInterface
 {
-    public function handle(Request $request): Response
-    {
-        return new HtmlResponse('<h1>Hello, world!</h1>');
-    }
+  public function handle(Request $request): Response
+  {
+    return new HtmlResponse('<h1>Hello, world!</h1>');
+  }
 }
 ```
 
@@ -76,8 +73,7 @@ El método `handle` de un Controlador es el código que se ejecuta cuando alguie
 A veces necesitará capturar segmentos del URI dentro de su ruta. Puede hacerlo definiendo parámetros de ruta utilizando la sintaxis [FastRoute](https://github.com/nikic/FastRoute#defining-routes):
 
 ```php
-    (new Extend\Routes('forum'))
-        ->get('/user/{id}', 'acme.user', UserController::class)
+(new Extend\Routes('forum'))->get('/user/{id}', 'acme.user', UserController::class);
 ```
 
 Los valores de estos parámetros se combinarán con los parámetros de consulta de la solicitud, a los que puede acceder en su controlador llamando a `$request->getQueryParams()`:
@@ -118,19 +114,19 @@ Luego, inyecta la fábrica en tu controlador y renderiza tu vista en un `HtmlRes
 ```php
 class HelloWorldController implements RequestHandlerInterface
 {
-    protected $view;
-    
-    public function __construct(Factory $view)
-    {
-        $this->view = $view;
-    }
-    
-    public function handle(Request $request): Response
-    {
-        $view = $this->view->make('acme.hello-world::greeting');
-        
-        return new HtmlResponse($view->render());
-    }
+  protected $view;
+
+  public function __construct(Factory $view)
+  {
+    $this->view = $view;
+  }
+
+  public function handle(Request $request): Response
+  {
+    $view = $this->view->make('acme.hello-world::greeting');
+
+    return new HtmlResponse($view->render());
+  }
 }
 ```
 
@@ -145,8 +141,7 @@ Para añadir rutas al frontend es necesario registrarlas _tanto_ en el frontend 
 En el backend, en lugar de añadir tu ruta del frontend a través del extensor `Routes`, debes utilizar el método `route` del extensor `Frontend`. Esto siempre asume `GET` como el método, y acepta una ruta y un nombre como los dos primeros argumentos:
 
 ```php
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users')
+(new Extend\Frontend('forum'))->route('/users', 'acme.users');
 ```
 
 Ahora, cuando se visite `suforo.com/usuarios`, se mostrará el frontend del foro. Sin embargo, dado que el frontend no conoce todavía la ruta `users`, la lista de discusión se seguirá mostrando.
@@ -190,6 +185,7 @@ Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta. 
 Para generar una URL a una ruta en el frontend, utilice el método `app.route`. Este método acepta dos argumentos: el nombre de la ruta y un hash de parámetros. Los parámetros rellenarán los segmentos de URI que coincidan, de lo contrario se añadirán como parámetros de consulta.
 
 <!-- import { app } from '@flarum/core/forum'; -->
+
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://tuforo.com/users/123?foo=bar
@@ -224,10 +220,10 @@ import Link from 'flarum/components/Link';
 
 Cada vez que visitas una ruta del frontend, el backend construye un documento HTML con el andamiaje necesario para arrancar la aplicación JavaScript del frontend. Puedes modificar fácilmente este documento para realizar tareas como:
 
-* Cambiar el `<title>` de la página
-* Añadir recursos externos de JavaScript y CSS
-* Añadir contenido SEO y etiquetas `<meta>`.
-* Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
+- Cambiar el `<title>` de la página
+- Añadir recursos externos de JavaScript y CSS
+- Añadir contenido SEO y etiquetas `<meta>`.
+- Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
 
 Puedes hacer cambios en el frontend usando el método `content` del extensor `Frontend`. Este método acepta un cierre que recibe dos parámetros: un objeto `Flarum\Frontend\Document` que representa el documento HTML que se mostrará, y el objeto `Request`.
 
@@ -236,10 +232,9 @@ use Flarum\Frontend\Document;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->content(function (Document $document, Request $request) {
-            $document->head[] = '<script>alert("Hello, world!")</script>';
-        })
+  (new Extend\Frontend('forum'))->content(function (Document $document, Request $request) {
+    $document->head[] = '<script>alert("Hello, world!")</script>';
+  }),
 ];
 ```
 
@@ -247,9 +242,8 @@ También puede añadir contenido en sus registros de ruta de frontend:
 
 ```php
 return [
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users', function (Document $document, Request $request) {
-            $document->title = 'Users';
-        })
+  (new Extend\Frontend('forum'))->route('/users', 'acme.users', function (Document $document, Request $request) {
+    $document->title = 'Users';
+  }),
 ];
 ```

@@ -18,10 +18,9 @@ I componenti della pagina funzionano esattamente come qualsiasi altro componente
 ```js
 import Page from 'flarum/components/Page';
 
-
 export default class CustomPage extends Page {
   view() {
-    return <p>Hello!</p>
+    return <p>Hello!</p>;
   }
 }
 ```
@@ -54,7 +53,7 @@ import DiscussionPage from 'flarum/components/DiscussionPage';
 app.current.matches(DiscussionPage);
 
 // To check page type and some data
-app.current.matches(IndexPage, {routeName: 'following'});
+app.current.matches(IndexPage, { routeName: 'following' });
 ```
 
 ## Route resolver (avanzato)
@@ -82,19 +81,22 @@ import CustomPage from './components/CustomPage';
 import CustomPageResolver from './resolvers/CustomPageResolver';
 
 // Utilizza un'istanza del resolver di percorsi
-app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
-  onmatch: function(args) {
-    if (!app.session.user) return m.route.SKIP;
+app.routes['resolverInstance'] = {
+  path: '/custom/path/1',
+  resolver: {
+    onmatch: function (args) {
+      if (!app.session.user) return m.route.SKIP;
 
-    return CustomPage;
-  }
-}};
+      return CustomPage;
+    },
+  },
+};
 
 // Usa una classe di resolver di percorsi personalizzata
-app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage };
 
 // Usa la classe di default (`flarum/resolvers/DefaultResolver`)
-app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', component: CustomPage };
 ```
 
 ### Resolvers personalizzati

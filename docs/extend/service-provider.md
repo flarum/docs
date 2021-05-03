@@ -32,15 +32,15 @@ use Flarum\Foundation\AbstractServiceProvider;
 
 class CustomServiceProvider extends AbstractServiceProvider
 {
-    public function register()
-    {
-        // custom logic here
-    }
+  public function register()
+  {
+    // custom logic here
+  }
 
-    public function boot()
-    {
-        // custom logic here
-    }
+  public function boot()
+  {
+    // custom logic here
+  }
 }
 ```
 
@@ -54,9 +54,8 @@ To actually register your custom service provider, you can use the `ServiceProvi
 use Flarum\Extend;
 
 return [
-    // Other extenders
-    (new Extend\ServiceProvider())
-        ->register(CustomServiceProvider::class),
-    // Other extenders
+  // Other extenders
+  (new Extend\ServiceProvider())->register(CustomServiceProvider::class),
+  // Other extenders
 ];
 ```

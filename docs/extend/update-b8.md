@@ -28,28 +28,28 @@ Beta 8 introduces a new concept called **extenders** that replace the most commo
 use Flarum\Extend;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less')
-        ->route('/t/{slug}', 'tag')
-        ->route('/tags', 'tags'),
+  (new Extend\Frontend('forum'))
+    ->js(__DIR__ . '/js/dist/forum.js')
+    ->css(__DIR__ . '/less/forum.less')
+    ->route('/t/{slug}', 'tag')
+    ->route('/tags', 'tags'),
 
-    function (Dispatcher $events) {
-        $events->subscribe(Listener\AddForumTagsRelationship::class);
-    }
-]
+  function (Dispatcher $events) {
+    $events->subscribe(Listener\AddForumTagsRelationship::class);
+  },
+];
 ```
 
 If you're listening for any of the following events, you'll need to update your code to use an extender instead. See the relevant docs for more information.
 
-| Event                               | Extender                  |
-| ----------------------------------- | ------------------------- |
-| `Flarum\Event\ConfigureFormatter`*  | `Flarum\Extend\Formatter` |
-| `Flarum\Event\ConfigureWebApp`*     | `Flarum\Extend\Frontend`  |
-| `Flarum\Event\ConfigureClientView`* | `Flarum\Extend\Frontend`  |
-| `Flarum\Event\ConfigureLocales`     | `Flarum\Extend\Locales`   |
-| `Flarum\Event\ConfigureApiRoutes`   | `Flarum\Extend\Routes`    |
-| `Flarum\Event\ConfigureForumRoutes` | `Flarum\Extend\Routes`    |
+| Event                                | Extender                  |
+| ------------------------------------ | ------------------------- |
+| `Flarum\Event\ConfigureFormatter`\*  | `Flarum\Extend\Formatter` |
+| `Flarum\Event\ConfigureWebApp`\*     | `Flarum\Extend\Frontend`  |
+| `Flarum\Event\ConfigureClientView`\* | `Flarum\Extend\Frontend`  |
+| `Flarum\Event\ConfigureLocales`      | `Flarum\Extend\Locales`   |
+| `Flarum\Event\ConfigureApiRoutes`    | `Flarum\Extend\Routes`    |
+| `Flarum\Event\ConfigureForumRoutes`  | `Flarum\Extend\Routes`    |
 
 _\* class no longer exists_
 
@@ -81,9 +81,9 @@ You'll need to make the following changes:
 
 1. Update `package.json` and create `webpack.config.js`, `forum.js`, and `admin.js` files using [these templates](frontend.html#transpilation).
 
-2. Inside your `admin` and `forum` *folders*, delete `Gulpfile.js`, `package.json`, and `dist`. Then inside each `src` folder, rename `main.js` to `index.js`. Now move all of the `src` files outside of `src` folder and delete it.
+2. Inside your `admin` and `forum` _folders_, delete `Gulpfile.js`, `package.json`, and `dist`. Then inside each `src` folder, rename `main.js` to `index.js`. Now move all of the `src` files outside of `src` folder and delete it.
 
-3. In the root `js` folder create a folder called `src` and move your `admin` and `forum` *folders* into it.
+3. In the root `js` folder create a folder called `src` and move your `admin` and `forum` _folders_ into it.
 
 4. While still in your root `js` folder, run `npm install` and then `npm run build` to build the new JS dist files.
 

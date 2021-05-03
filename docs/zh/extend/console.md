@@ -10,12 +10,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class YourCommand implements AbstractCommand {
+class YourCommand implements AbstractCommand
+{
   protected function configure()
   {
-      $this
-          ->setName('您的命令名')
-          ->setDescription('您的命令描述');
+    $this->setName('您的命令名')->setDescription('您的命令描述');
   }
   protected function fire()
   {
@@ -34,7 +33,7 @@ use YourNamespace\Console\CustomCommand;
 
 return [
   // 其他扩展器
-  (new Extend\Console())->command(CustomCommand::class)
+  (new Extend\Console())->command(CustomCommand::class),
   // 其他扩展器
 ];
 ```

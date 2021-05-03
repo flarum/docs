@@ -4,7 +4,7 @@
 
 Flarum es un **software beta**. ¡Eso significa que todavía tiene algunas características incompletas y errores 🐛🐞, y en algún momento - tarde o temprano - probablemente se romperá! 💥
 
-La beta consiste en arreglar estos problemas y mejorar Flarum. **Por favor, no uses Flarum en producción a menos que sepas lo que estás haciendo**. No podemos apoyarte si las cosas van mal. La actualización a versiones posteriores será posible, pero podría implicar ensuciarse las manos. 
+La beta consiste en arreglar estos problemas y mejorar Flarum. **Por favor, no uses Flarum en producción a menos que sepas lo que estás haciendo**. No podemos apoyarte si las cosas van mal. La actualización a versiones posteriores será posible, pero podría implicar ensuciarse las manos.
 
 :::
 
@@ -18,10 +18,10 @@ No dude en probar Flarum en uno de nuestros [foros de demostración](https://dis
 
 Antes de instalar Flarum, es importante comprobar que tu servidor cumple los requisitos. Para ejecutar Flarum, necesitarás:
 
-* **Apache** (con mod\_rewrite activado) o **Nginx**.
-* **PHP 7.3+** con las siguientes extensiones: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6+** o **MariaDB 10.0.5+**
-* **Acceso a SSH (línea de comandos)** para ejecutar Composer
+- **Apache** (con mod_rewrite activado) o **Nginx**.
+- **PHP 7.3+** con las siguientes extensiones: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
+- **MySQL 5.6+** o **MariaDB 10.0.5+**
+- **Acceso a SSH (línea de comandos)** para ejecutar Composer
 
 ::: tip Alojamiento Compartido (Shared Hosting)
 
@@ -83,6 +83,7 @@ www.ejemplo.com {
     file_server
 }
 ```
+
 ## Propiedad de la Carpeta
 
 Durante la instalación, Flarum puede solicitar que se permita la escritura en ciertos directorios. Para permitir el acceso de escritura a un directorio en Linux, ejecute el siguiente comando:
@@ -97,9 +98,9 @@ Si Flarum solicita acceso de escritura tanto al directorio como a su contenido, 
 chmod 775 -R /ruta/al/directorio
 ```
 
-Si después de completar estos pasos, Flarum continúa solicitando que cambie los permisos, puede que necesite comprobar que sus archivos son propiedad del grupo y usuario correctos. 
+Si después de completar estos pasos, Flarum continúa solicitando que cambie los permisos, puede que necesite comprobar que sus archivos son propiedad del grupo y usuario correctos.
 
-Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grupo y el usuario bajo el que operan tanto PHP como el servidor web. Puede cambiar la propiedad de la carpeta en la mayoría de los sistemas operativos Linux ejecutando `chown -R www-data:www-data nombrecarpeta/`. 
+Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grupo y el usuario bajo el que operan tanto PHP como el servidor web. Puede cambiar la propiedad de la carpeta en la mayoría de los sistemas operativos Linux ejecutando `chown -R www-data:www-data nombrecarpeta/`.
 
 Para saber más sobre estos comandos, así como sobre los permisos y la propiedad de los archivos en Linux, lea [este tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Si está configurando Flarum en Windows, puede encontrar útiles las respuestas a [esta pregunta de Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
@@ -111,7 +112,7 @@ Su entorno puede variar con respecto a la documentación proporcionada, por favo
 
 ::: danger Nunca utilice el permiso 777
 
-Nunca debes establecer ninguna carpeta o archivo con el nivel de permiso `777`, ya que este nivel de permiso permite a cualquiera acceder al contenido de la carpeta y el archivo sin importar el usuario o el grupo. 
+Nunca debes establecer ninguna carpeta o archivo con el nivel de permiso `777`, ya que este nivel de permiso permite a cualquiera acceder al contenido de la carpeta y el archivo sin importar el usuario o el grupo.
 
 :::
 
@@ -141,9 +142,9 @@ Finalmente, edite el `site.php` y actualice las rutas en las siguientes líneas 
 
 Si tienes una comunidad existente y no quieres empezar de cero, puedes importar tus datos existentes a Flarum. Aunque todavía no hay importadores oficiales, la comunidad ha hecho varios importadores no oficiales:
 
-* [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
-* [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
-* [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
-* [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
+- [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
+- [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
+- [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
+- [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
 Estos pueden ser utilizados para otro software de foro también mediante la migración a phpBB primero, y luego a Flarum. Tenga en cuenta que no podemos garantizar que estos funcionen ni podemos ofrecer soporte para ellos.

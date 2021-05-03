@@ -23,8 +23,10 @@ A custom extender could be a good way to accomplish this.
 The implementation of extenders is actually quite simple. There are 3 main steps:
 
 1. Various methods (and the constructor) allow client code to specify options. For example:
-  - Which model / API controller / validator should be extended?
-  - What modifications should be made?
+
+- Which model / API controller / validator should be extended?
+- What modifications should be made?
+
 2. An `extend` method takes the input from step 1, and applies it by modifying various [container bindings](service-provider.md) and global static variables to achieve the desired effect. This is the "implementation" of the composer. The `extend` methods for all enabled extensions are run as part of Flarum's boot process.
 3. Optionally, extenders implementing `Flarum\Extend\LifecycleInterface` can have `onEnable` and `onDisable` methods, which are run when extensions that use the extender are enabled/disabled, and are useful for tasks like clearing various caches.
 
@@ -60,9 +62,8 @@ For example:
 ```js
 app.initializers.add('your-extension-id', () => {
   // Your Extension Code Here
-})
+});
 
-export {
-  // Put all the stuff you want to export here.
-}
+export // Put all the stuff you want to export here.
+ {};
 ```

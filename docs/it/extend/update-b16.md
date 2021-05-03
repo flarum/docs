@@ -47,12 +47,12 @@ Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flaru
 In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati.
 In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
 
-Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`, 
+Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`,
 che è effettivamente un involucro attorno a una collezione di modelli Eloquent.
 
 Anche i sistemi predefiniti sono in qualche modo simili nella loro implementazione. `Filterer`applica filtri (implementando `Flarum\Filter\FilterInterface`) in base ai parametri della query nel modulo `filter[FILTER_KEY] = FILTER_VALUE` (o `filter[-FILTER_KEY] = FILTER_VALUE` per filtri negati). SimpleFlarumSearch `Searcher` divide il parametro `filter[q]` da spazi in "termini", applica Gambits (implementando `Flarum\Search\GambitInterface`) che corrispondono ai termini e quindi applicano "Fulltext Gambit" per cercare in base a "termini" che non corrispondono ad un "auxiliary gambit". Entrambi i sistemi applicano quindi l'ordinamento, un offset e un limite di conteggio dei risultati e consentono alle estensioni di modificare il risultato della query tramite `searchMutators` o `filterMutators`.
 
-Le estensioni aggiungono "gambits" e "search mutators" per classi `Searcher` tramite estensore `SimpleFlarumSearch`. Possono aggiungere filtri a classi `Filterer` tramite  estensore`Filter`.
+Le estensioni aggiungono "gambits" e "search mutators" per classi `Searcher` tramite estensore `SimpleFlarumSearch`. Possono aggiungere filtri a classi `Filterer` tramite estensore`Filter`.
 
 Per quanto riguarda l'aggiornamento, tieni presente quanto segue:
 
@@ -116,7 +116,6 @@ Se hai creato manualmente token nel database dall'esterno di Flarum, la colonna 
 I [problemi di sicurezza in Flarum](https://github.com/flarum/core/issues/2075) causavano la non scadenza dei token. Ciò ha avuto un impatto sulla sicurezza limitato poiché i token sono caratteri lunghi e unici. Tuttavia, le integrazioni personalizzate che hanno salvato un token in un database esterno per un uso successivo potrebbero scoprire che i token non funzionano più se non sono stati utilizzati di recente.
 
 Se utilizzi token di accesso di breve durata per qualsiasi scopo, prendi nota del tempo di scadenza di 1 ora. La scadenza si basa sull'ora dell'ultimo utilizzo, quindi rimarrà valida finché continuerà ad essere utilizzata.
-
 
 A causa della grande quantità di token scaduti accumulati nel database e del fatto che la maggior parte dei token non è mai stata utilizzata più di una volta durante il processo di accesso, abbiamo scelto di eliminare tutti i token di accesso per una durata di 3600 secondi come parte della migrazione , Tutti i token rimanenti sono stati convertiti in `session_remember`.
 

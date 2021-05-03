@@ -1,12 +1,12 @@
 module.exports = {
-    selectText: 'Idiomas',
-    label: 'Español',
+  selectText: 'Idiomas',
+  label: 'Español',
 
-    searchPlaceholder: 'Buscar Documentos',
-    
-    editLinkText: 'Editar esta página',
-    lastUpdated: 'Última actualización',
+  searchPlaceholder: 'Buscar Documentos',
 
-    nav: require('./nav'),
-    sidebar: require('./sidebar'),
-}
+  editLinkText: 'Editar esta página',
+  lastUpdated: 'Última actualización',
+
+  nav: require('./nav'),
+  sidebar: require('./sidebar'),
+};

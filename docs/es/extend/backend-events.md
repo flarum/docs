@@ -19,15 +19,13 @@ use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 return [
-    (new Extend\Event)
-        ->listen(Deleted::class, function($event) {
-          // haz algo aquí
-        })
-        ->listen(Deleted::class, PostDeletedListener::class)
+  (new Extend\Event())
+    ->listen(Deleted::class, function ($event) {
+      // haz algo aquí
+    })
+    ->listen(Deleted::class, PostDeletedListener::class),
 ];
-
 
 class PostDeletedListener
 {
@@ -35,7 +33,7 @@ class PostDeletedListener
 
   public function __construct(TranslatorInterface $translator)
   {
-      $this->translator = $translator;
+    $this->translator = $translator;
   }
 
   public function handle(Deleted $event)
@@ -55,30 +53,27 @@ Despachar eventos es muy sencillo. Todo lo que necesitas hacer es inyectar `Illu
 use Flarum\Post\Event\Deleted;
 use Illuminate\Contracts\Events\Dispatcher;
 
-
 class SomeClass
 {
-    /**
-      * @var Dispatcher
-      */
-    protected $events;
+  /**
+   * @var Dispatcher
+   */
+  protected $events;
 
-    /**
-      * @param Dispatcher $events
-      */
-    public function __construct(Dispatcher $events)
-    {
-        $this->events = $events;
-    }
+  /**
+   * @param Dispatcher $events
+   */
+  public function __construct(Dispatcher $events)
+  {
+    $this->events = $events;
+  }
 
-    public function someMethod()
-    {
-        // Lógica
-        $this->events->dispatch(
-        new Deleted($somePost, $someActor)
-        );
-        // Más lógica
-    }
+  public function someMethod()
+  {
+    // Lógica
+    $this->events->dispatch(new Deleted($somePost, $someActor));
+    // Más lógica
+  }
 }
 ```
 
@@ -105,24 +100,24 @@ use Flarum\User\User;
 
 class Deleted
 {
-    /**
-     * @var Post
-     */
-    public $post;
+  /**
+   * @var Post
+   */
+  public $post;
 
-    /**
-     * @var User
-     */
-    public $actor;
+  /**
+   * @var User
+   */
+  public $actor;
 
-    /**
-     * @param Post $post
-     * @param User $user
-     */
-    public function __construct(Post $post, User $actor = null)
-    {
-        $this->post = $post;
-        $this->actor = $actor;
-    }
+  /**
+   * @param Post $post
+   * @param User $user
+   */
+  public function __construct(Post $post, User $actor = null)
+  {
+    $this->post = $post;
+    $this->actor = $actor;
+  }
 }
 ```

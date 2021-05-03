@@ -16,18 +16,12 @@ module.exports = {
         'update-b13',
         'update-b14',
         'update-b15',
-      ]
+      ],
     },
     {
       title: 'Referans Kılavuzları',
       collapsable: false,
-      children: [
-        'admin',
-        'frontend-pages',
-        'interactive-components',
-        'forms',
-        'backend-events',
-      ]
+      children: ['admin', 'frontend-pages', 'interactive-components', 'forms', 'backend-events'],
     },
     {
       title: 'Gelişmiş Kılavuzlar',
@@ -48,7 +42,7 @@ module.exports = {
         'service-provider',
         'settings',
         'testing',
-      ]
+      ],
     },
     // {
     //   title: 'Themes',
@@ -69,36 +63,17 @@ module.exports = {
     {
       title: 'Giriş',
       collapsable: false,
-      children: [
-        '',
-        'code-of-conduct',
-        'releases',
-        'contributing',
-        'bugs',
-        'faq'
-      ]
+      children: ['', 'code-of-conduct', 'releases', 'contributing', 'bugs', 'faq'],
     },
     {
       title: 'Ayarlama',
       collapsable: false,
-      children: [
-        'install',
-        'update',
-        'troubleshoot'
-      ]
+      children: ['install', 'update', 'troubleshoot'],
     },
     {
       title: 'Yönetim',
       collapsable: false,
-      children: [
-        'admin',
-        'config',
-        'extensions',
-        'languages',
-        'themes',
-        'mail',
-        'console'
-      ]
-    }
+      children: ['admin', 'config', 'extensions', 'languages', 'themes', 'mail', 'console'],
+    },
   ],
-}
+};

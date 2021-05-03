@@ -4,7 +4,7 @@ Spesso, un'estensione vorrà reagire ad alcuni eventi che si verificano da qualc
 
 :::warning Precedente Event API
 
-Storicamente, Flarum ha utilizzato eventi per le sue estensioni API, come `GetDisplayName` o `ConfigureApiRoutes` per consentire alle estensioni di inserire  logica in varie parti di Flarum. Questi eventi vengono gradualmente eliminati a favore del dichiarativo [extender system](start.md#extenders), e verrà rimosso prima di una versione stabile. Gli eventi di dominio non verranno rimossi.
+Storicamente, Flarum ha utilizzato eventi per le sue estensioni API, come `GetDisplayName` o `ConfigureApiRoutes` per consentire alle estensioni di inserire logica in varie parti di Flarum. Questi eventi vengono gradualmente eliminati a favore del dichiarativo [extender system](start.md#extenders), e verrà rimosso prima di una versione stabile. Gli eventi di dominio non verranno rimossi.
 
 :::
 
@@ -19,15 +19,13 @@ use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 return [
-    (new Extend\Event)
-        ->listen(Deleted::class, function($event) {
-          // do something here
-        })
-        ->listen(Deleted::class, PostDeletedListener::class)
+  (new Extend\Event())
+    ->listen(Deleted::class, function ($event) {
+      // do something here
+    })
+    ->listen(Deleted::class, PostDeletedListener::class),
 ];
-
 
 class PostDeletedListener
 {
@@ -35,7 +33,7 @@ class PostDeletedListener
 
   public function __construct(TranslatorInterface $translator)
   {
-      $this->translator = $translator;
+    $this->translator = $translator;
   }
 
   public function handle(Deleted $event)
@@ -55,30 +53,27 @@ L'invio di eventi è molto semplice. Tutto quello che devi fare è iniettare `Il
 use Flarum\Post\Event\Deleted;
 use Illuminate\Contracts\Events\Dispatcher;
 
-
 class SomeClass
 {
-    /**
-      * @var Dispatcher
-      */
-    protected $events;
+  /**
+   * @var Dispatcher
+   */
+  protected $events;
 
-    /**
-      * @param Dispatcher $events
-      */
-    public function __construct(Dispatcher $events)
-    {
-        $this->events = $events;
-    }
+  /**
+   * @param Dispatcher $events
+   */
+  public function __construct(Dispatcher $events)
+  {
+    $this->events = $events;
+  }
 
-    public function someMethod()
-    {
-        // Logic
-        $this->events->dispatch(
-        new Deleted($somePost, $someActor)
-        );
-        // More Logic
-    }
+  public function someMethod()
+  {
+    // Logic
+    $this->events->dispatch(new Deleted($somePost, $someActor));
+    // More Logic
+  }
 }
 ```
 
@@ -105,24 +100,24 @@ use Flarum\User\User;
 
 class Deleted
 {
-    /**
-     * @var Post
-     */
-    public $post;
+  /**
+   * @var Post
+   */
+  public $post;
 
-    /**
-     * @var User
-     */
-    public $actor;
+  /**
+   * @var User
+   */
+  public $actor;
 
-    /**
-     * @param Post $post
-     * @param User $user
-     */
-    public function __construct(Post $post, User $actor = null)
-    {
-        $this->post = $post;
-        $this->actor = $actor;
-    }
+  /**
+   * @param Post $post
+   * @param User $user
+   */
+  public function __construct(Post $post, User $actor = null)
+  {
+    $this->post = $post;
+    $this->actor = $actor;
+  }
 }
 ```

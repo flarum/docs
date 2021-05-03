@@ -32,19 +32,19 @@ use Flarum\Foundation\AbstractServiceProvider;
 
 class CustomServiceProvider extends AbstractServiceProvider
 {
-    public function register()
-    {
-        // custom logic here
-    }
+  public function register()
+  {
+    // custom logic here
+  }
 
-    public function boot()
-    {
-        // custom logic here
-    }
+  public function boot()
+  {
+    // custom logic here
+  }
 }
 ```
 
-Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). 
+Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5).
 In entrambi i metodi, il contenitore è disponibile tramite `$this->app`.
 
 Per registrare effettivamente il tuo provider di servizi personalizzato, puoi utilizzare l'extender `ServiceProvider` in `extend.php`:
@@ -55,9 +55,8 @@ Per registrare effettivamente il tuo provider di servizi personalizzato, puoi ut
 use Flarum\Extend;
 
 return [
-    // Other extenders
-    (new Extend\ServiceProvider())
-        ->register(CustomServiceProvider::class),
-    // Other extenders
+  // Other extenders
+  (new Extend\ServiceProvider())->register(CustomServiceProvider::class),
+  // Other extenders
 ];
 ```

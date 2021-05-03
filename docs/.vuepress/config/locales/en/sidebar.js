@@ -3,15 +3,7 @@ module.exports = {
     {
       title: 'Main Concepts',
       collapsable: false,
-      children: [
-        '',
-        'start',
-        'frontend',
-        'routes',
-        'models',
-        'api',
-        'distribution'
-      ]
+      children: ['', 'start', 'frontend', 'routes', 'models', 'api', 'distribution'],
     },
     {
       title: 'Reference Guides',
@@ -27,8 +19,8 @@ module.exports = {
         'permissions',
         'settings',
         'testing',
-        'theme'
-      ]
+        'theme',
+      ],
     },
     {
       title: 'Advanced Guides',
@@ -45,21 +37,13 @@ module.exports = {
         'notifications',
         'post-types',
         'search',
-        'service-provider'
-      ]
+        'service-provider',
+      ],
     },
     {
       title: 'Update Guides',
       collapsable: false,
-      children: [
-        'update-b16',
-        'update-b15',
-        'update-b14',
-        'update-b13',
-        'update-b12',
-        'update-b10',
-        'update-b8',
-      ]
+      children: ['update-b16', 'update-b15', 'update-b14', 'update-b13', 'update-b12', 'update-b10', 'update-b8'],
     },
     // {
     //   title: 'Themes',
@@ -80,44 +64,22 @@ module.exports = {
     {
       title: 'Introduction',
       collapsable: false,
-      children: [
-        '',
-        'code-of-conduct',
-        'releases',
-        'contributing',
-        'bugs',
-        'faq'
-      ]
+      children: ['', 'code-of-conduct', 'releases', 'contributing', 'bugs', 'faq'],
     },
     {
       title: 'Setting Up',
       collapsable: false,
-      children: [
-        'composer',
-        'install',
-        'update',
-        'troubleshoot'
-      ]
+      children: ['composer', 'install', 'update', 'troubleshoot'],
     },
     {
       title: 'Management',
       collapsable: false,
-      children: [
-        'admin',
-        'config',
-        'extensions',
-        'languages',
-        'themes',
-        'mail',
-        'console'
-      ]
+      children: ['admin', 'config', 'extensions', 'languages', 'themes', 'mail', 'console'],
     },
     {
       title: 'Advanced',
       collapsable: false,
-      children: [
-        'extenders'
-      ]
-    }
+      children: ['extenders'],
+    },
   ],
-}
+};

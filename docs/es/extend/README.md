@@ -22,7 +22,7 @@ Para lograr esta extensibilidad, Flarum ha sido construido con ricas APIs y punt
 
 **Las extensiones de terceros** son características creadas por otros y no están oficialmente soportadas por el equipo de Flarum. Pueden ser construidas y usadas para abordar casos de uso más específicos.
 
-Si quieres solucionar un error o una deficiencia del núcleo, o de una extensión ya existente, puede ser apropiado *contribuir al proyecto respectivo* en lugar de dispersar el esfuerzo en una nueva extensión de terceros. Es una buena idea comenzar una discusión en la [Comunidad Flarum](https://discuss.flarum.org/) para obtener la perspectiva de los desarrolladores de Flarum.
+Si quieres solucionar un error o una deficiencia del núcleo, o de una extensión ya existente, puede ser apropiado _contribuir al proyecto respectivo_ en lugar de dispersar el esfuerzo en una nueva extensión de terceros. Es una buena idea comenzar una discusión en la [Comunidad Flarum](https://discuss.flarum.org/) para obtener la perspectiva de los desarrolladores de Flarum.
 
 ## Recursos útiles
 

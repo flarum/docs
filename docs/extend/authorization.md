@@ -44,7 +44,6 @@ Finally, as we have exhausted all checks, we will assume that the user is unauth
 
 Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
 
-
 In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'viewDiscussions'` and `'reply'` as examples of abilities, and `$discussion` (instance of `Flarum\Discussion\Discussion`) as an example argument.
 
 ```php
@@ -105,27 +104,27 @@ use Flarum\User\User;
 
 class TagPolicy extends AbstractPolicy
 {
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function startDiscussion(User $actor, Tag $tag)
-    {
-        if ($tag->is_restricted) {
-            return $actor->hasPermission('tag'.$tag->id.'.startDiscussion') ? $this->allow() : $this->deny();
-        }
+  /**
+   * @param User $actor
+   * @param Tag $tag
+   * @return bool|null
+   */
+  public function startDiscussion(User $actor, Tag $tag)
+  {
+    if ($tag->is_restricted) {
+      return $actor->hasPermission('tag' . $tag->id . '.startDiscussion') ? $this->allow() : $this->deny();
     }
+  }
 
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function addToDiscussion(User $actor, Tag $tag)
-    {
-        return $this->startDiscussion($actor, $tag);
-    }
+  /**
+   * @param User $actor
+   * @param Tag $tag
+   * @return bool|null
+   */
+  public function addToDiscussion(User $actor, Tag $tag)
+  {
+    return $this->startDiscussion($actor, $tag);
+  }
 }
 ```
 
@@ -143,34 +142,34 @@ use Flarum\User\User;
 
 class GlobalPolicy extends AbstractPolicy
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
+  /**
+   * @var SettingsRepositoryInterface
+   */
+  protected $settings;
 
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
+  public function __construct(SettingsRepositoryInterface $settings)
+  {
+    $this->settings = $settings;
+  }
+
+  /**
+   * @param Flarum\User\User $actor
+   * @param string $ability
+   * @return bool|void
+   */
+  public function can(User $actor, string $ability)
+  {
+    if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
+      $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
+      $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
+
+      if ($enoughPrimary && $enoughSecondary) {
+        return $this->allow();
+      } else {
+        return $this->deny();
+      }
     }
-
-    /**
-     * @param Flarum\User\User $actor
-     * @param string $ability
-     * @return bool|void
-     */
-    public function can(User $actor, string $ability)
-    {
-        if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
-            $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
-            $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
-
-            if ($enoughPrimary && $enoughSecondary) {
-                return $this->allow();
-            } else {
-                return $this->deny();
-            }
-        }
-    }
+  }
 }
 ```
 
@@ -185,9 +184,7 @@ use YourNamespace\Access;
 
 return [
   // Other extenders
-  (new Extend\Policy())
-    ->modelPolicy(Tag::class, Access\TagPolicy::class)
-    ->globalPolicy(Access\GlobalPolicy::class),
+  (new Extend\Policy())->modelPolicy(Tag::class, Access\TagPolicy::class)->globalPolicy(Access\GlobalPolicy::class),
   // Other extenders
 ];
 ```
@@ -233,8 +230,6 @@ There are actually two types of scopers:
 - ability-based scopers will apply to all queries for the query's model run with a given ability (which defaults to `"view"`). Please note this is not related to ability strings from the [policy system](#how-it-works)
 - "global" scopers will apply to all queries for the query's model. Please note that global scopers will be run on ALL queries for its model, including `view`, which could create infinite loops or errors. Generally, you only want to run these for abilities that don't begin with `view`. You'll see this in the [example below](#custom-visibility-scoper-examples)
 
-
-
 One common use case for this is allowing extensibility inside visibility scoping.
 Let's take a look at an annotated, simple piece of `Flarum\Post\PostPolicy` as an example:
 
@@ -246,10 +241,9 @@ $query->where('posts.is_private', false);
 // However, we recognize that some extensions might have valid use cases for showing private posts.
 // So instead, we include all posts that aren't private, AND all private posts desired by extensions
 $query->where(function ($query) use ($actor) {
-    $query->where('posts.is_private', false)
-        ->orWhere(function ($query) use ($actor) {
-            $query->whereVisibleTo($actor, 'viewPrivate');
-        });
+  $query->where('posts.is_private', false)->orWhere(function ($query) use ($actor) {
+    $query->whereVisibleTo($actor, 'viewPrivate');
+  });
 });
 ```
 
@@ -264,12 +258,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopePostVisibility
 {
-    public function __invoke(User $actor, $query)
-    {
-      if ($actor->can('posts.viewPrivate')) {
-        $query->whereRaw("1=1");
-      }
+  public function __invoke(User $actor, $query)
+  {
+    if ($actor->can('posts.viewPrivate')) {
+      $query->whereRaw('1=1');
     }
+  }
 }
 ```
 
@@ -292,14 +286,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopeTagVisibility
 {
-    /**
-     * @param User $actor
-     * @param Builder $query
-     */
-    public function __invoke(User $actor, Builder $query)
-    {
-        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
-    }
+  /**
+   * @param User $actor
+   * @param Builder $query
+   */
+  public function __invoke(User $actor, Builder $query)
+  {
+    $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+  }
 }
 ```
 
@@ -316,34 +310,33 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ScopeDiscussionVisibilityForAbility
 {
-    /**
-     * @param User $actor
-     * @param Builder $query
-     * @param string $ability
-     */
-    public function __invoke(User $actor, Builder $query, $ability)
-    {
-        if (substr($ability, 0, 4) === 'view') {
-            return;
-        }
-
-        // If a discussion requires a certain permission in order for it to be
-        // visible, then we can check if the user has been granted that
-        // permission for any of the discussion's tags.
-        $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
-        });
+  /**
+   * @param User $actor
+   * @param Builder $query
+   * @param string $ability
+   */
+  public function __invoke(User $actor, Builder $query, $ability)
+  {
+    if (substr($ability, 0, 4) === 'view') {
+      return;
     }
+
+    // If a discussion requires a certain permission in order for it to be
+    // visible, then we can check if the user has been granted that
+    // permission for any of the discussion's tags.
+    $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
+      return $query
+        ->select('discussion_id')
+        ->from('discussion_tag')
+        ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.' . $ability));
+    });
+  }
 }
 ```
 
 Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers.
 
 ### Registering Custom Visibility Scopers
-
-
 
 ```php
 use Flarum\Extend;
@@ -357,11 +350,9 @@ return [
   // 'view' is optional here, since that's the default value for the ability argument.
   // However, if we were applying this to a different ability, such as `viewPrivate`,
   // would need to explicitly specify that.
-  (new Extend\ModelVisibility(Tag::class))
-    ->scope(Access\ScopeTagVisibility::class, 'view'),
+  (new Extend\ModelVisibility(Tag::class))->scope(Access\ScopeTagVisibility::class, 'view'),
 
-  (new Extend\ModelVisibility(Discussion::class))
-    ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
+  (new Extend\ModelVisibility(Discussion::class))->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
   // Other extenders
 ];
 ```

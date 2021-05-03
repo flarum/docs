@@ -54,34 +54,39 @@ npm run dev
 一个典型的贡献流程如下所示：
 
 1. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
-    * *Bug 修复* 应当提交合并到最新的稳定分支。
-    * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
-    * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
-    * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
+
+   - _Bug 修复_ 应当提交合并到最新的稳定分支。
+   - 与当前 Flarum 版本完全向后兼容的 _次要_ 功能可以提交合并到最新的稳定分支。
+   - _主要_ 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
+   - 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🔨 **编写代码**，编写一些代码。
-    * 请参见这里的 [编码风格](#编码风格)。
+
+   - 请参见这里的 [编码风格](#编码风格)。
 
 3. 🚦 **测试代码**，测试您的代码。
-    * 修复错误或添加功能时，请根据需要添加单元测试。
-    * 使用相关包文件夹中的 `vendor/bin/phpunit` 运行测试套件。
+   - 修复错误或添加功能时，请根据需要添加单元测试。
+   - 使用相关包文件夹中的 `vendor/bin/phpunit` 运行测试套件。
 
 <!--
    * 点击 [这里](link-to-core/tests/README.md) 查看有关 Flarum 测试的更多信息。
 -->
 
 4. 💾 **提交代码**，并附上一条描述性信息。
-    * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
-    * 编写一个 [好的 commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
+
+   - 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
+   - 编写一个 [好的 commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
 
 5. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
-    * 填写 Pull Request 模板。
-    * 如果您的更改是视觉上的，请附上一张截图或 GIF 来演示变更。
-    * 请不要包含 JavaScript `dist` 文件。这些文件会在合并时自动编译。
+
+   - 填写 Pull Request 模板。
+   - 如果您的更改是视觉上的，请附上一张截图或 GIF 来演示变更。
+   - 请不要包含 JavaScript `dist` 文件。这些文件会在合并时自动编译。
 
 6. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
-    * 团队成员将审核您的代码。我们可能会提出一些修改、改进或替代方案，但对于一些小的改动，应该很快就会接受您的 Pull Request。
-    * 在处理反馈时，请附加 commit，不要覆盖或压缩提交（我们将在合并时压缩）。
+
+   - 团队成员将审核您的代码。我们可能会提出一些修改、改进或替代方案，但对于一些小的改动，应该很快就会接受您的 Pull Request。
+   - 在处理反馈时，请附加 commit，不要覆盖或压缩提交（我们将在合并时压缩）。
 
 7. 🕺 **恭喜**，您刚刚向 Flarum 做了贡献。
 
@@ -95,10 +100,10 @@ npm run dev
 
 Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) 编码规范和 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 自动加载规范。此外，我们还符合 [其他一些风格规范](https://github.com/flarum/core/blob/master/.styleci.yml)。我们尽可能地使用 PHP 7 类型提示和返回类型声明，我们也使用 [PHPDoc](https://docs.phpdoc.org/) 提供内联文档。请您尽量在贡献时模仿其他代码库使用的风格。
 
-* 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
-* 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
-* 抽象类命名应当以 `Abstract` 开头（例如：`AbstractModel`）
-* Trait 命名应当以 `Trait` 结尾（例如：`ScopeVisibilityTrait`）
+- 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
+- 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
+- 抽象类命名应当以 `Abstract` 开头（例如：`AbstractModel`）
+- Trait 命名应当以 `Trait` 结尾（例如：`ScopeVisibilityTrait`）
 
 ### JavaScript
 
@@ -107,16 +112,18 @@ Flarum 的 JavaScript 代码大多遵循 [Airbnb 风格指南](https://github.co
 ### 数据库
 
 **列** 的命名应当根据其数据类型而定：
-* DATETIME 或 TIMESTAMP：`{动词}_at`（例如：created_at，read_at）或 `{动词}_until`（例如：suspended_until）
-* INT 用于计数：`{名词}_count`（例如：comment_count，word_count）
-* 外键：`{动词}_{实体对象}_id`（例如：hidden_user_id）
-    * 动词可以使用具有相同意义的主键等替代（例如：帖子作者可以是 `user_id`)
-* 布尔值：`is_{形容词}`（例如：is_locked）
+
+- DATETIME 或 TIMESTAMP：`{动词}_at`（例如：created_at，read_at）或 `{动词}_until`（例如：suspended_until）
+- INT 用于计数：`{名词}_count`（例如：comment_count，word_count）
+- 外键：`{动词}_{实体对象}_id`（例如：hidden_user_id）
+  - 动词可以使用具有相同意义的主键等替代（例如：帖子作者可以是 `user_id`)
+- 布尔值：`is_{形容词}`（例如：is_locked）
 
 **表** 的命名规则如下：
-* 使用复数形式（`discussions`）
-* 多个单词之间用下划线分隔（`access_tokens`）
-* 对于关系表，请将两个表名用单数的形式连接起来，并按字母顺序排列。（例如：`discussion_user`）
+
+- 使用复数形式（`discussions`）
+- 多个单词之间用下划线分隔（`access_tokens`）
+- 对于关系表，请将两个表名用单数的形式连接起来，并按字母顺序排列。（例如：`discussion_user`）
 
 ### CSS
 

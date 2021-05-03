@@ -1,7 +1,7 @@
 # Updating For Beta 12
 
 Beta 12 packs several new features for extension developers, but also continues our cleanup efforts which results in a few changes, so please read this guide carefully to find out whether
- your extensions are affected. We invested extra effort to introduce new functionality in a backward-compatible manner or first deprecate functionality before it will be removed in the next release, in line with our [versioning recommendations](start.md#composer-json).
+your extensions are affected. We invested extra effort to introduce new functionality in a backward-compatible manner or first deprecate functionality before it will be removed in the next release, in line with our [versioning recommendations](start.md#composer-json).
 
 ::: tip
 
@@ -32,4 +32,4 @@ If you need help applying these changes or using new features, please start a di
 ## Other changes / Recommendations
 
 - The `TextFormatter` library has been updated to (at least) version 2.3.6. If you are using it (likely through our own `Flarum\Formatter\Formatter` class), we recommend scanning [the library's changelog](https://github.com/s9e/TextFormatter/blob/2.3.6/CHANGELOG.md).
-- The JS `slug()` helper from the `flarum/utils/string` module should only be used to *suggest* slugs to users, not enforce them. It does not employ any sophisticated transliteration logic like its PHP counterpart.
+- The JS `slug()` helper from the `flarum/utils/string` module should only be used to _suggest_ slugs to users, not enforce them. It does not employ any sophisticated transliteration logic like its PHP counterpart.

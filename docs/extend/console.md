@@ -10,12 +10,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class YourCommand extends AbstractCommand {
+class YourCommand extends AbstractCommand
+{
   protected function configure()
   {
-      $this
-          ->setName('YOUR COMMAND NAME')
-          ->setDescription('YOUR COMMAND DESCRIPTION');
+    $this->setName('YOUR COMMAND NAME')->setDescription('YOUR COMMAND DESCRIPTION');
   }
   protected function fire()
   {
@@ -34,7 +33,7 @@ use YourNamespace\Console\CustomCommand;
 
 return [
   // Other extenders
-  (new Extend\Console())->command(CustomCommand::class)
+  (new Extend\Console())->command(CustomCommand::class),
   // Other extenders
 ];
 ```

@@ -20,7 +20,7 @@ Questo driver utilizza il tuo account [Mailgun](https://www.mailgun.com/) per in
 
 ### Log
 
-Il driver Log NON INVIA EMAIL,ed è utilizzato principalmente dagli sviluppatori. Scrive il contenuto di qualsiasi messaggio di posta elettronica nel file di registro in  `DIRECTORY_PRINCIPALE_FLARUM/storage/logs`.
+Il driver Log NON INVIA EMAIL,ed è utilizzato principalmente dagli sviluppatori. Scrive il contenuto di qualsiasi messaggio di posta elettronica nel file di registro in `DIRECTORY_PRINCIPALE_FLARUM/storage/logs`.
 
 ## Email di prova
 

@@ -4,7 +4,7 @@ Flarum è minimalista, ma è anche altamente estensibile. In effetti, la maggior
 
 Questo approccio rende Flarum estremamente personalizzabile: Puoi disabilitare tutte le funzionalità che non ti servono e installare altre estensioni per rendere il tuo forum perfetto per la tua comunità.
 
-Per ulteriori informazioni sulla filosofia di Flarum su quali funzionalità includiamo nel core o se stai cercando di creare la tua estensione, consulta la  [documentazione estensioni](extend/README.md).
+Per ulteriori informazioni sulla filosofia di Flarum su quali funzionalità includiamo nel core o se stai cercando di creare la tua estensione, consulta la [documentazione estensioni](extend/README.md).
 Questo articolo si concentrerà sulla gestione delle estensioni dal punto di vista dell'amministratore del forum.
 
 ## Trovare le estensioni
@@ -15,7 +15,7 @@ Flarum ha un vasto ecosistema di estensioni, molte delle quali sono open source 
 
 Proprio come Flarum, le estensioni vengono installate tramite [Composer](https://getcomposer.org), usando SSH. Per installare un estensione:
 
-1. `cd`  fino alla cartella che contiene  `composer.json`.
+1. `cd` fino alla cartella che contiene `composer.json`.
 2. Lancia `composer require COMPOSER_PACKAGE_NAME`. Questo solitamente compare nel post o nella documentazione dell'estensione.
 
 ## Gestire le estensioni

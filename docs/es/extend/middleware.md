@@ -32,22 +32,22 @@ use Flarum\Extend;
 // use Flarum\Http\Middleware\CheckCsrfToken;
 
 return [
-    // Add middleware to forum frontend
-    (new Extend\Middleware('forum'))->add(YourMiddleware::class),
-    // Admin frontend
-    (new Extend\Middleware('admin'))->add(YourMiddleware::class),
-    // API frontend
-    (new Extend\Middleware('api'))->add(YourMiddleware::class),
+  // Add middleware to forum frontend
+  (new Extend\Middleware('forum'))->add(YourMiddleware::class),
+  // Admin frontend
+  (new Extend\Middleware('admin'))->add(YourMiddleware::class),
+  // API frontend
+  (new Extend\Middleware('api'))->add(YourMiddleware::class),
 
-    (new Extend\Middleware('frontend'))
-        // remove a middleware (e.g. remove CSRF token check 😱)
-        ->remove(CheckCsrfToken::class)
-        // insert before another middleware (e.g. before a CSRF token check)
-        ->insertBefore(CheckCsrfToken::class, YourMiddleware::class)
-        // insert after another middleware (e.g. after a CSRF token check)
-        ->insertAfter(CheckCsrfToken::class, YourMiddleware::class)
-        // replace a middleware (e.g. replace the CSRF check with your own implementation)
-        ->replace(CheckCsrfToken::class, YourMiddleware::class)
+  (new Extend\Middleware('frontend'))
+    // remove a middleware (e.g. remove CSRF token check 😱)
+    ->remove(CheckCsrfToken::class)
+    // insert before another middleware (e.g. before a CSRF token check)
+    ->insertBefore(CheckCsrfToken::class, YourMiddleware::class)
+    // insert after another middleware (e.g. after a CSRF token check)
+    ->insertAfter(CheckCsrfToken::class, YourMiddleware::class)
+    // replace a middleware (e.g. replace the CSRF check with your own implementation)
+    ->replace(CheckCsrfToken::class, YourMiddleware::class),
 ];
 ```
 
@@ -114,7 +114,7 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
         ]);
         $document = new Document();
         $document->setErrors($error->getErrors());
-      
+
         return new JsonApiResponse($document, $error->getStatus());
     }
 

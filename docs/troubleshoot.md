@@ -1,6 +1,6 @@
 # Troubleshooting
 
-If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
+If Flarum isn't installing or working as expected, the first thing you should do is _check again_ whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
 Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
@@ -21,12 +21,12 @@ If you've been seeing blank pages and the above change doesn't help, try setting
 
 A lot of issues can be fixed with the following:
 
-* Clear your browser cache
-* Clear the backend cache with [`php flarum cache:clear`](console.md).
-* Make sure your database is updated with [`php flarum migrate`](console.md).
-* Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
-* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).
-* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
+- Clear your browser cache
+- Clear the backend cache with [`php flarum cache:clear`](console.md).
+- Make sure your database is updated with [`php flarum migrate`](console.md).
+- Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
+- Check that your `config.php` is correct. For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).
+- One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 You'll also want to take a look at the output of [`php flarum info`](console.md) to ensure that nothing major is out of place.
 
@@ -42,13 +42,13 @@ Somewhere along the way you may get an idea about what's causing your issue, and
 
 If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places:
 
-* Displayed on the actual page
-* Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
-* Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
-* Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
-* Recorded by Flarum (`storage/logs`)
+- Displayed on the actual page
+- Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
+- Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
+- Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
+- Recorded by Flarum (`storage/logs`)
 
-Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
+Copy any messages to a text file and jot down a few notes about _when_ the error occurred, _what_ you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
 
 ## Step 4: Prepare a report
 

@@ -10,10 +10,9 @@ También proporciona a Flarum información de la base de datos y más.
 Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
 ```php
-<?php return array (
+<?php return [
   'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
-  'database' =>
-  array (
+  'database' => [
     'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB...
     'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
     'database' => 'flarum', // el nombre de la base de datos en la instancia
@@ -24,12 +23,11 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
     'prefix' => '', // el prefijo de las tablas, útil si se comparte la misma base de datos con otro servicio
     'port' => '3306', // el puerto de la conexión, por defecto 3306 con MySQL
     'strict' => false,
-  ),
+  ],
   'url' => 'https://flarum.localhost', // la configuración de la URL, deberá cambiarla si cambia de dominio
-  'paths' =>
-  array (
+  'paths' => [
     'api' => 'api', // /api va a la API
     'admin' => 'admin', // /admin va a la administración
-  ),
-);
+  ],
+];
 ```

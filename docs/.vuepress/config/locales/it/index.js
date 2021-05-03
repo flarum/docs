@@ -1,4 +1,4 @@
 module.exports = {
-    lang: 'it',
-    title: 'Documentazione di Flarum',
-}
+  lang: 'it',
+  title: 'Documentazione di Flarum',
+};
