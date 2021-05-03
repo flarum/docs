@@ -17,7 +17,7 @@ Il formato per un limitatore personalizzato è estremamente semplice: tutto ciò
 - `false`: Questo ignora esplicitamente la limitazione per questa richiesta, ignorando tutti gli altri limitatori
 - `true`: Questo contrassegna la richiesta come da limitare.
 - `null`: Significa che la limitazione non viene applicata.
-Qualsiasi altra uscita verrà ignorata, con lo stesso effetto di `null`.
+  Qualsiasi altra uscita verrà ignorata, con lo stesso effetto di `null`.
 
 Le limitazioni si applicano a OGNI richiesta. Ad esempio, considera le limitazioni ai post di Flarum:
 
@@ -25,21 +25,26 @@ Le limitazioni si applicano a OGNI richiesta. Ad esempio, considera le limitazio
 use DateTime;
 use Flarum\Post\Post;
 
-function ($request) {
-    if (! in_array($request->getAttribute('routeName'), ['discussions.create', 'posts.create'])) {
-        return;
-    }
+function ($request)
+{
+  if (!in_array($request->getAttribute('routeName'), ['discussions.create', 'posts.create'])) {
+    return;
+  }
 
-    $actor = $request->getAttribute('actor');
+  $actor = $request->getAttribute('actor');
 
-    if ($actor->can('postWithoutThrottle')) {
-        return false;
-    }
+  if ($actor->can('postWithoutThrottle')) {
+    return false;
+  }
 
-    if (Post::where('user_id', $actor->id)->where('created_at', '>=', new DateTime('-10 seconds'))->exists()) {
-        return true;
-    }
-};
+  if (
+    Post::where('user_id', $actor->id)
+      ->where('created_at', '>=', new DateTime('-10 seconds'))
+      ->exists()
+  ) {
+    return true;
+  }
+}
 ```
 
 Le limitazioni possono essere aggiunte o rimosse tramite `ThrottleApi` in `extend.php`. Per esempio:
@@ -50,12 +55,12 @@ Le limitazioni possono essere aggiunte o rimosse tramite `ThrottleApi` in `exten
 use Flarum\Extend;
 
 return [
-    // Other extenders
-    (new Extend\ThrottleApi())
-        ->set('throttleAll', function () {
-          return false;
-        })
-        ->remove('bypassThrottlingAttribute'),
-    // Other extenders
+  // Other extenders
+  (new Extend\ThrottleApi())
+    ->set('throttleAll', function () {
+      return false;
+    })
+    ->remove('bypassThrottlingAttribute'),
+  // Other extenders
 ];
 ```

@@ -24,9 +24,9 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 {
   // ...
   "require": {
-    "flarum/core": "^0.1.0-beta.15",  // Since all extensions need to require core.
-    "flarum/tags": "^0.1.0-beta.15"  // This tells Flarum to treat tags as a dependency of your extension.
-  },
+    "flarum/core": "^0.1.0-beta.15", // Since all extensions need to require core.
+    "flarum/tags": "^0.1.0-beta.15" // This tells Flarum to treat tags as a dependency of your extension.
+  }
   // ...
 }
 ```
@@ -41,7 +41,7 @@ The first step here is detecting whether extension B is enabled. In the frontend
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
-    // do something
+  // do something
 }
 ```
 
@@ -52,18 +52,19 @@ In the backend, you'll need to inject an instance of `Flarum\Extension\Extension
 
 use Flarum\Extension\ExtensionManager;
 
-class SomeClass {
-    public function __construct(ExtensionManager $extensions)
-    {
-        $this->extensions = $extensions;
-    }
+class SomeClass
+{
+  public function __construct(ExtensionManager $extensions)
+  {
+    $this->extensions = $extensions;
+  }
 
-    public function someMethod()
-    {
-        if ($this->extensions->isEnabled('some-extension-id')) {
-            // do something.
-        }
+  public function someMethod()
+  {
+    if ($this->extensions->isEnabled('some-extension-id')) {
+      // do something.
     }
+  }
 }
 ```
 
@@ -77,11 +78,9 @@ For instance:
   // ...
   "extra": {
     "flarum-extension": {
-      "optional-dependencies": [
-        "flarum/tags"
-      ]
+      "optional-dependencies": ["flarum/tags"]
     }
-  },
+  }
   // ...
 }
 ```
@@ -97,10 +96,10 @@ use Flarum\Tags\Tag;
 
 class SomeClass
 {
-    public function someMethod()
-    {
-        return new Tag();  // This is not the correct way to instantiate models, it's just here for example of importing.
-    }
+  public function someMethod()
+  {
+    return new Tag(); // This is not the correct way to instantiate models, it's just here for example of importing.
+  }
 }
 ```
 
@@ -112,9 +111,9 @@ In the frontend, you can only import things that have been explicitly exported. 
 
 ```js
 module.exports = require('flarum-webpack-config')({
-    // Provide the extension IDs of all extensions from which your extension will be importing.
-    // Do this for both full and optional dependencies.
-    useExtensions: ['flarum-tags']
+  // Provide the extension IDs of all extensions from which your extension will be importing.
+  // Do this for both full and optional dependencies.
+  useExtensions: ['flarum-tags'],
 });
 ```
 

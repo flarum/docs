@@ -6,8 +6,8 @@ Esta página describe cómo realizar cambios en la interfaz de usuario de Flarum
 
 Flarum tiene dos aplicaciones frontales separadas:
 
-* `forum`, el lado público de su foro donde los usuarios crean discusiones y mensajes.
-* `admin`, el lado privado de tu foro donde, como administrador de tu foro, configuras tu instalación de Flarum.
+- `forum`, el lado público de su foro donde los usuarios crean discusiones y mensajes.
+- `admin`, el lado privado de tu foro donde, como administrador de tu foro, configuras tu instalación de Flarum.
 
 Comparten el mismo código fundacional, así que una vez que sabes cómo extender uno, sabes cómo extender ambos.
 
@@ -19,8 +19,8 @@ Antes de que podamos escribir cualquier JavaScript, necesitamos configurar un **
 
 Para hacer esta transpilación, tienes que trabajar en un entorno capaz. No, no se trata de un entorno doméstico o de oficina, ¡puedes trabajar en el baño por lo que a mí respecta! Me refiero a las herramientas instaladas en tu sistema. Necesitarás:
 
-* Node.js y npm ([Descarga](https://nodejs.org/en/download/))
-* Webpack (`npm install -g webpack`)
+- Node.js y npm ([Descarga](https://nodejs.org/en/download/))
+- Webpack (`npm install -g webpack`)
 
 Esto puede ser complicado porque cada sistema es diferente. Desde el sistema operativo que usas, hasta las versiones de los programas que tienes instalados, pasando por los permisos de acceso de los usuarios... ¡me dan escalofríos sólo de pensarlo! Si tienes problemas, ~~dale recuerdos~~ utiliza [Google](https://google.com) para ver si alguien se ha encontrado con el mismo error que tú y ha encontrado una solución. Si no, pide ayuda en la [Comunidad Flarum](https://discuss.flarum.org) o en el [chat de Discord](https://flarum.org/discord/).
 
@@ -105,13 +105,13 @@ Tenga en cuenta que todo esto es simplemente una recomendación: no hay nada que
 El archivo más importante aquí es `index.js`: todo lo demás es simplemente extraer clases y funciones en sus propios archivos. Repasemos una estructura típica de archivos `index.js`:
 
 ```js
-import {extend, override} from 'flarum/extend';
+import { extend, override } from 'flarum/extend';
 
 // Proporcionamos nuestro código de extensión en forma de un "inicializador".
 // Este es un callback que se ejecutará después de que el núcleo haya arrancado.
-app.initializers.add('our-extension', function(app) {
+app.initializers.add('our-extension', function (app) {
   // Su código de extensión aquí
-  console.log("EXTENSION NAME is working!");
+  console.log('EXTENSION NAME is working!');
 });
 ```
 
@@ -131,17 +131,17 @@ Your `forum.js` file is the JavaScript equivalent of `extend.php`. Like its PHP 
 
 Deberías familiarizarte con la sintaxis adecuada para [importar módulos js](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), ya que la mayoría de las extensiones más grandes que unas pocas líneas dividirán su js en múltiples archivos.
 
-Casi todas las extensiones de Flarum necesitarán importar *algo* de Flarum Core.
+Casi todas las extensiones de Flarum necesitarán importar _algo_ de Flarum Core.
 Como la mayoría de las extensiones, el código fuente JS del núcleo está dividido en las carpetas `admin`, `common` y `forum`. Sin embargo, todo se exporta bajo `flarum`. Para elaborar:
 
-* Cuando se desarrolla para `admin`, core exporta sus directorios `admin` y `common` como `flarum`. Por ejemplo, `admin/components/AdminLinkButton` está disponible como `flarum/components/AdminLinkButton`.
-* Cuando se desarrolla para `forum`, core exporta sus directorios `common` y `forum` como `flarum`. Por ejemplo, `forum/states/PostStreamState` está disponible como `flarum/states/PostStreamState`.
-* En ambos casos, los archivos `common` están disponibles bajo `flarum`: `common/Component` se exporta como `flarum/Component`.
+- Cuando se desarrolla para `admin`, core exporta sus directorios `admin` y `common` como `flarum`. Por ejemplo, `admin/components/AdminLinkButton` está disponible como `flarum/components/AdminLinkButton`.
+- Cuando se desarrolla para `forum`, core exporta sus directorios `common` y `forum` como `flarum`. Por ejemplo, `forum/states/PostStreamState` está disponible como `flarum/states/PostStreamState`.
+- En ambos casos, los archivos `common` están disponibles bajo `flarum`: `common/Component` se exporta como `flarum/Component`.
 
 En algunos casos, una extensión puede querer extender el código de otra extensión de flarum. Esto sólo es posible para las extensiones que exportan explícitamente su contenido.
 
-* `flarum/tags` y `flarum/flags` son actualmente las únicas extensiones empaquetadas que permiten extender su JS. Puedes importar sus contenidos desde `flarum/{EXT_NAME}/PATH` (por ejemplo, `flarum/tags/components/TagHero`).
-* El proceso para extender cada extensión comunitaria es diferente; debe consultar la documentación de cada extensión individual.
+- `flarum/tags` y `flarum/flags` son actualmente las únicas extensiones empaquetadas que permiten extender su JS. Puedes importar sus contenidos desde `flarum/{EXT_NAME}/PATH` (por ejemplo, `flarum/tags/components/TagHero`).
+- El proceso para extender cada extensión comunitaria es diferente; debe consultar la documentación de cada extensión individual.
 
 ### Transpilación
 
@@ -167,10 +167,7 @@ Para que el JavaScript de tu extensión se cargue en el frontend, necesitamos de
 
 use Flarum\Extend;
 
-return [
-    (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-];
+return [(new Extend\Frontend('forum'))->js(__DIR__ . '/js/dist/forum.js')];
 ```
 
 Flarum hará que cualquier cosa que haga `export` desde `forum.js` esté disponible en el objeto global `flarum.extensions['acme-hello-world']`. Por lo tanto, puede elegir exponer su propia API pública para que otras extensiones interactúen con ella.
@@ -186,9 +183,7 @@ Sólo se permite un archivo JavaScript principal por extensión. Si necesitas in
 También puedes añadir activos CSS y [LESS](http://lesscss.org/features/) al frontend utilizando el método `css` del extensor `Frontend`:
 
 ```php
-    (new Extend\Frontend('forum'))
-        ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less')
+(new Extend\Frontend('forum'))->js(__DIR__ . '/js/dist/forum.js')->css(__DIR__ . '/less/forum.less');
 ```
 
 ::: tip
@@ -205,11 +200,11 @@ El quid de la cuestión es que Flarum genera elementos virtuales del DOM que son
 
 Debido a que la interfaz está construida con JavaScript, es realmente fácil engancharse y hacer cambios. Todo lo que tienes que hacer es encontrar el extensor adecuado para la parte de la interfaz que quieres cambiar, y luego añadir tu propio DOM virtual a la mezcla.
 
-La mayoría de las partes mutables de la interfaz son en realidad *listas de elementos*. Por ejemplo:
+La mayoría de las partes mutables de la interfaz son en realidad _listas de elementos_. Por ejemplo:
 
-* Los controles que aparecen en cada entrada (Responder, Me gusta, Editar, Borrar)
-* Los elementos de navegación de la barra lateral del índice (Todos los debates, Seguir, Etiquetas)
-* Los elementos de la cabecera (Búsqueda, Notificaciones, Menú de usuario)
+- Los controles que aparecen en cada entrada (Responder, Me gusta, Editar, Borrar)
+- Los elementos de navegación de la barra lateral del índice (Todos los debates, Seguir, Etiquetas)
+- Los elementos de la cabecera (Búsqueda, Notificaciones, Menú de usuario)
 
 Cada elemento de estas listas recibe un **nombre** para que puedas añadir, eliminar y reorganizar los elementos fácilmente. Simplemente encuentre el componente apropiado para la parte de la interfaz que desea cambiar, y monkey-patch sus métodos para modificar el contenido de la lista de elementos. Por ejemplo, para añadir un enlace a Google en la cabecera:
 
@@ -217,7 +212,7 @@ Cada elemento de estas listas recibe un **nombre** para que puedas añadir, elim
 import { extend } from 'flarum/extend';
 import HeaderPrimary from 'flarum/components/HeaderPrimary';
 
-extend(HeaderPrimary.prototype, 'items', function(items) {
+extend(HeaderPrimary.prototype, 'items', function (items) {
   items.add('google', <a href="https://google.com">Google</a>);
 });
 ```
@@ -245,13 +240,13 @@ DiscussionPage
 
 Deberías familiarizarte con la [API de componentes de Mithril](https://mithril.js.org/components.html) y el [sistema de redraw](https://mithril.js.org/autoredraw.html). Flarum envuelve los componentes en la clase `flarum/Component`, que extiende la [clase componentes](https://mithril.js.org/components.html#classes) de Mithril. Proporciona las siguientes ventajas:
 
-* Los atributos pasados a los componentes están disponibles en toda la clase a través de `this.attrs`.
-* El método estático `initAttrs` muta `this.attrs` antes de establecerlos, y te permite establecer valores por defecto o modificarlos de alguna manera antes de usarlos en tu clase. Ten en cuenta que esto no afecta al `vnode.attrs` inicial.
-* El método `$` devuelve un objeto jQuery para el elemento DOM raíz del componente. Opcionalmente se puede pasar un selector para obtener los hijos del DOM.
-* el método estático `component` puede ser utilizado como una alternativa a JSX y al hyperscript `m`. Los siguientes son equivalentes:
-  * `m(CustomComponentClass, attrs, children)`
-  * `CustomComponentClass.component(attrs, children)`
-  * `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
+- Los atributos pasados a los componentes están disponibles en toda la clase a través de `this.attrs`.
+- El método estático `initAttrs` muta `this.attrs` antes de establecerlos, y te permite establecer valores por defecto o modificarlos de alguna manera antes de usarlos en tu clase. Ten en cuenta que esto no afecta al `vnode.attrs` inicial.
+- El método `$` devuelve un objeto jQuery para el elemento DOM raíz del componente. Opcionalmente se puede pasar un selector para obtener los hijos del DOM.
+- el método estático `component` puede ser utilizado como una alternativa a JSX y al hyperscript `m`. Los siguientes son equivalentes:
+  - `m(CustomComponentClass, attrs, children)`
+  - `CustomComponentClass.component(attrs, children)`
+  - `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
 
 Sin embargo, las clases de componentes que extienden `Component` deben llamar a `super` cuando utilizan los métodos `oninit`, `oncreate` y `onbeforeupdate`.
 
@@ -274,9 +269,7 @@ class Counter extends Component {
     return (
       <div>
         Count: {this.count}
-        <button onclick={e => this.count++}>
-          {this.attrs.buttonLabel}
-        </button>
+        <button onclick={(e) => this.count++}>{this.attrs.buttonLabel}</button>
       </div>
     );
   }
@@ -309,14 +302,14 @@ Casi todas las extensiones del frontend utilizan [monkey patching](https://en.wi
 
 ```jsx
 // Esto añade un atributo al global `app`.
-app.googleUrl = "https://google.com";
+app.googleUrl = 'https://google.com';
 
 // Esto reemplaza la salida de la página de discusión con "Hello World"
 import DiscussionPage from 'flarum/components/DiscussionPage';
 
-DiscussionPage.prototype.view = function() {
+DiscussionPage.prototype.view = function () {
   return <p>Hello World</p>;
-}
+};
 ```
 
 convertirá las páginas de discusión de Flarum en anuncios de "Hola Mundo". ¡Qué creativo!
@@ -344,7 +337,7 @@ import CustomComponentClass from './components/CustomComponentClass';
 // Aquí, añadimos un elemento a la lista de elementos devuelta. Estamos utilizando un componente personalizado
 // como se ha comentado anteriormente. También hemos especificado una prioridad como tercer argumento,
 // que se utilizará para ordenar estos elementos. Ten en cuenta que no necesitamos devolver nada.
-extend(HeaderPrimary.prototype, 'items', function(items) {
+extend(HeaderPrimary.prototype, 'items', function (items) {
   items.add(
     'google',
     <CustomComponentClass>
@@ -357,7 +350,7 @@ extend(HeaderPrimary.prototype, 'items', function(items) {
 // Aquí, utilizamos condicionalmente la salida original de un método,
 // o creamos nuestro propio ItemList, y luego añadimos un elemento a él.
 // Ten en cuenta que DEBEMOS devolver nuestra salida personalizada.
-override(HeaderPrimary.prototype, 'items', function(original) {
+override(HeaderPrimary.prototype, 'items', function (original) {
   let items;
 
   if (someArbitraryCondition) {
@@ -375,8 +368,8 @@ override(HeaderPrimary.prototype, 'items', function(original) {
 Dado que todos los componentes y utilidades de Flarum están representados por clases, `extend`, `override`, y el típico JS significa que podemos enganchar o reemplazar cualquier método en cualquier parte de Flarum.
 Algunos usos potenciales "avanzados" incluyen:
 
-* Extender o anular `view` para cambiar (o redefinir completamente) la estructura html de los componentes de Flarum. Esto abre a Flarum a una tematización ilimitada
-* Engancharse a los métodos de los componentes Mithril para añadir escuchas de eventos JS, o redefinir la lógica del negocio.
+- Extender o anular `view` para cambiar (o redefinir completamente) la estructura html de los componentes de Flarum. Esto abre a Flarum a una tematización ilimitada
+- Engancharse a los métodos de los componentes Mithril para añadir escuchas de eventos JS, o redefinir la lógica del negocio.
 
 ### Utilidades de Flarum
 

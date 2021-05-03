@@ -18,7 +18,7 @@ If we want to use a custom model, or add attributes to an existing one, we will 
 
 Migrations are like version control for your database, allowing you to easily modify Flarum's database schema in a safe way. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/migrations), although there are some differences.
 
-Migrations live inside a folder suitably named `migrations` in your extension's  directory. Migrations should be named in the format `YYYY_MM_DD_HHMMSS_snake_case_description` so that they are listed and run in order of creation.
+Migrations live inside a folder suitably named `migrations` in your extension's directory. Migrations should be named in the format `YYYY_MM_DD_HHMMSS_snake_case_description` so that they are listed and run in order of creation.
 
 ### Migration Structure
 
@@ -30,12 +30,12 @@ In Flarum, migration files should **return an array** with two functions: `up` a
 use Illuminate\Database\Schema\Builder;
 
 return [
-    'up' => function (Builder $schema) {
-        // up migration
-    },
-    'down' => function (Builder $schema) {
-        // down migration
-    }
+  'up' => function (Builder $schema) {
+    // up migration
+  },
+  'down' => function (Builder $schema) {
+    // down migration
+  },
 ];
 ```
 
@@ -43,7 +43,7 @@ For common tasks like creating a table, or adding columns to an existing table, 
 
 ### Migration Lifecycle
 
-Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed. 
+Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
 
 Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Uninstall" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
 
@@ -58,7 +58,7 @@ use Flarum\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 return Migration::createTable('users', function (Blueprint $table) {
-    $table->increments('id');
+  $table->increments('id');
 });
 ```
 
@@ -78,8 +78,8 @@ To add columns to an existing table, use the `Migration::addColumns` helper. The
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'length' => 255, 'nullable' => true],
-    'discussion_count' => ['integer', 'unsigned' => true]
+  'email' => ['string', 'length' => 255, 'nullable' => true],
+  'discussion_count' => ['integer', 'unsigned' => true],
 ]);
 ```
 
@@ -99,7 +99,7 @@ Data migrations are the recommended way to specify default settings and permissi
 
 ```php
 return Migration::addSettings([
-    'foo' => 'bar',
+  'foo' => 'bar',
 ]);
 ```
 
@@ -109,7 +109,7 @@ and
 use Flarum\Group\Group;
 
 return Migration::addPermissions([
-    'some.permission' => Group::MODERATOR_ID
+  'some.permission' => Group::MODERATOR_ID,
 ]);
 ```
 
@@ -155,7 +155,7 @@ return [
 
 ### Relationships
 
-You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`, `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
@@ -190,7 +190,7 @@ Flarum's frontend contains a local data `store` which provides an interface to i
 
 ```js
 // GET /api/discussions?sort=createdAt
-app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
+app.store.find('discussions', { sort: 'createdAt' }).then(console.log);
 
 // GET /api/discussions/123
 app.store.find('discussions', 123).then(console.log);
@@ -274,12 +274,9 @@ You can also save relationships by passing them in a `relationships` key. For ha
 ```js
 user.save({
   relationships: {
-    groups: [
-      store.getById('groups', 1),
-      store.getById('groups', 2)
-    ]
-  }
-})
+    groups: [store.getById('groups', 1), store.getById('groups', 2)],
+  },
+});
 ```
 
 ### Creating New Resources

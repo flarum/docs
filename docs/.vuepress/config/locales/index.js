@@ -3,14 +3,14 @@ const paths = { en: '/' };
 
 module.exports = {
   get(file = '') {
-      return langs.reduce((locales, name) => {
-        locales[paths[name] || `/${name}/`] = require(`./${name}${file}`);
+    return langs.reduce((locales, name) => {
+      locales[paths[name] || `/${name}/`] = require(`./${name}${file}`);
 
-        return locales;
-      }, {});
+      return locales;
+    }, {});
   },
 
   theme() {
     return this.get('/theme');
-  }
-}
+  },
+};

@@ -16,9 +16,9 @@ Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applic
 - Spam, messaggi di phishing e qualsiasi azione intesa a deturpare questo sito
 - Discussione sulla pirateria del software e argomenti simili
 
-*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se Ã¨ sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. [admin@flarum.org](mailto:admin@flarum.org).
+\*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se Ã¨ sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. [admin@flarum.org](mailto:admin@flarum.org).
 
-I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciò, sii sempre gentile e calmo. ðŸ˜Ž
+I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciï¿½, sii sempre gentile e calmo. ðŸ˜Ž
 
 ### Fatti sentire!
 
@@ -27,25 +27,25 @@ Vuoi iniziare una nuova discussione? Innanzitutto, assicurati di leggere le [nos
 Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente i seguenti punti:
 
 - Dagli un buon titolo! Otterrai i migliori risultati se il tuo titolo chiarisce di cosa vuoi parlare.
-- Scegli i tag giusti. Ciò aumenterà  le probabilità  che il tuo post venga letto e riceva risposte piÃ¹ in fretta.
-- Non postare ripetutamente sullo stesso argomento, perchè così facendo potresti ottenere l'effetto opposto.
+- Scegli i tag giusti. Ciï¿½ aumenterï¿½ le probabilitï¿½ che il tuo post venga letto e riceva risposte piÃ¹ in fretta.
+- Non postare ripetutamente sullo stesso argomento, perchï¿½ cosï¿½ facendo potresti ottenere l'effetto opposto.
 - Se non utilizzi un tag riservato per l'uso multilingue, pubblica solo in italiano. Non possiamo aiutarti se non possiamo leggerti!
 - Ricorda, non Ã¨ necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei.
 
-Per favore, sforzati di aiutarci a mantenere le cose organizzate. Il tempo speso a riordinare è tempo che non possiamo dedicare a conoscerti, discutere i tuoi problemi e parlare di Flarum. Che dopotutto è il nostro scopo principale.
+Per favore, sforzati di aiutarci a mantenere le cose organizzate. Il tempo speso a riordinare ï¿½ tempo che non possiamo dedicare a conoscerti, discutere i tuoi problemi e parlare di Flarum. Che dopotutto ï¿½ il nostro scopo principale.
 
 ### Le tue risposte sono importanti
- 
+
 Ti stai prendendo il tempo per partecipare a una discussione, nella speranza che gli altri leggano le tue idee e le tengano in considerazione. Allora perchï¿½ non fare lo sforzo di rendere la tua risposta degna di essere letta?
 
 - Non rispondere al titolo. Prenditi un po di tempo per leggere tutto attentamente, ed esamina per bene tutta la conversazione.
 - Chiediti se la tua risposta aggiunge davvero qualcosa alla discussione. In caso contrario, pensaci ancora prima di pubblicare.
 - Evita di rispondere con una sola parola come "grazie" o "ok"; puoi usare il tasto "Mi piace" per questo.
-- Evita di creare più¹ post di seguito quando uno sarebbe sufficiente. Questo Ã¨ un forum, non una chat room.
+- Evita di creare piï¿½ï¿½ post di seguito quando uno sarebbe sufficiente. Questo Ã¨ un forum, non una chat room.
 - Se Ã¨ probabile che la tua risposta possa deviare il corso della discussione, valuta invece di iniziare una nuova discussione.
 - Se vuoi solo pubblicare un po' di sciocchezze come test, fallo nel apposita sezione di test del forum.
-- Assicurati che le tue risposte forniscano feedback e supporto costruttivi per consentire una comunità  inclusiva.
+- Assicurati che le tue risposte forniscano feedback e supporto costruttivi per consentire una comunitï¿½ inclusiva.
 
-Nessuno si lamenterà  dello scherzo occasionale o dell'osservazione intelligente. Ci piace mantenere l'atmosfera leggera! Ma anche per mantenere le cose produttive, ti chiediamo di cercare di evitare di far deragliare del tutto una discussione.
+Nessuno si lamenterï¿½ dello scherzo occasionale o dell'osservazione intelligente. Ci piace mantenere l'atmosfera leggera! Ma anche per mantenere le cose produttive, ti chiediamo di cercare di evitare di far deragliare del tutto una discussione.
 
 > Grazie a Dominion per il suo aiuto nella stesura delle linee guida.

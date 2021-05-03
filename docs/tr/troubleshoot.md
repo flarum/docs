@@ -1,6 +1,6 @@
 # Sorun Giderme
 
-Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken ilk şey ortamınızın [sistem gereksinimlerini](install.md#sunucu-gereksinimleri) karşılayıp karşılamadığını *tekrar kontrol etmektir.* Flarum'un çalıştırması gereken bir şeyi kaçırıyorsanız, onu düzeltmeniz gerekir.
+Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken ilk şey ortamınızın [sistem gereksinimlerini](install.md#sunucu-gereksinimleri) karşılayıp karşılamadığını _tekrar kontrol etmektir._ Flarum'un çalıştırması gereken bir şeyi kaçırıyorsanız, onu düzeltmeniz gerekir.
 
 Ayrıca, [Destek forumunu](https://discuss.flarum.org/t/support) ve [sorun izleyiciyi](https://github.com/flarum/core/issues) aramak için birkaç dakikanızı ayırmalısınız. Birisi sorunu zaten bildirmiş olabilir ve bir düzeltme mevcut veya yolda. İyice araştırdıysanız ve sorunla ilgili herhangi bir bilgi bulamıyorsanız, sorun gidermeye başlamanın zamanı geldi.
 
@@ -14,11 +14,11 @@ Boş sayfalar görüyorsanız ve yukarıdaki değişiklik yardımcı olmuyorsa, 
 
 Aşağıdakilerle birçok sorun çözülebilir:
 
-* Tarayıcınızın önbelleğini temizleyin
-* Arka uç önbelleğini [`php flarum cache:clear`](console.md) ile temizleyin.
-* Veritabanınızın [`php flarum migrate`](console.md) ile güncellendiğinden emin olun.
-* Yönetici panonuzdaki [e-posta yapılandırmasının](mail.md) doğru olduğundan emin olun: geçersiz e-posta yapılandırması kayıt olurken, parolayı sıfırlarken, e-postaları değiştirirken ve bildirim gönderirken hatalara neden olur.
-* `config.php` dosyanızın doğru olup olmadığını kontrol edin. Örneğin, doğru `url` nin kullanıldığından emin olun.
+- Tarayıcınızın önbelleğini temizleyin
+- Arka uç önbelleğini [`php flarum cache:clear`](console.md) ile temizleyin.
+- Veritabanınızın [`php flarum migrate`](console.md) ile güncellendiğinden emin olun.
+- Yönetici panonuzdaki [e-posta yapılandırmasının](mail.md) doğru olduğundan emin olun: geçersiz e-posta yapılandırması kayıt olurken, parolayı sıfırlarken, e-postaları değiştirirken ve bildirim gönderirken hatalara neden olur.
+- `config.php` dosyanızın doğru olup olmadığını kontrol edin. Örneğin, doğru `url` nin kullanıldığından emin olun.
 
 Ayrıca önemli hiçbir şeyin yerinde olmadığından emin olmak için [`php flarum info`](console.md) çıktısına da göz atmak isteyeceksiniz.
 
@@ -34,13 +34,13 @@ Yol boyunca bir yerlerde sorununuza neyin sebep olduğu hakkında bir fikir edin
 
 Sorunu çözmek için yardıma ihtiyacınız olacak gibi görünüyorsa, veri toplama konusunda ciddi olmanın zamanı geldi. Aşağıdaki yerlerde hata mesajlarını veya sorunla ilgili diğer bilgileri arayın:
 
-* Asıl sayfada görüntülenir
-* Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
-* Sunucunun hata günlüğüne kaydedilir (ör. `/var/log/nginx/error.log`)
-* PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
-* Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
+- Asıl sayfada görüntülenir
+- Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
+- Sunucunun hata günlüğüne kaydedilir (ör. `/var/log/nginx/error.log`)
+- PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
+- Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
 
-Herhangi bir mesajı bir metin dosyasına kopyalayın ve hatanın *ne zaman* oluştuğu, o sırada *ne yaptığınız* vb. Hakkında birkaç not alın. Sorunun meydana geldiği ve oluşmadığı koşullar hakkında derlemiş olabileceğiniz tüm bilgileri eklediğinizden emin olun. Sunucu ortamınız hakkında olabildiğince fazla bilgi ekleyin: İşletim sistemi sürümü, web sunucusu sürümü, PHP sürümü ve işleyici, vb.
+Herhangi bir mesajı bir metin dosyasına kopyalayın ve hatanın _ne zaman_ oluştuğu, o sırada _ne yaptığınız_ vb. Hakkında birkaç not alın. Sorunun meydana geldiği ve oluşmadığı koşullar hakkında derlemiş olabileceğiniz tüm bilgileri eklediğinizden emin olun. Sunucu ortamınız hakkında olabildiğince fazla bilgi ekleyin: İşletim sistemi sürümü, web sunucusu sürümü, PHP sürümü ve işleyici, vb.
 
 ## 4. Adım: Bir rapor hazırlayın
 

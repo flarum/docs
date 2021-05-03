@@ -16,26 +16,26 @@ use s9e\TextFormatter\Parser;
 use s9e\TextFormatter\Renderer;
 
 return [
-    (new Extend\Formatter)
-        // Aggiungi la configurazione del formattatore di testo personalizzato
-        ->configure(function (Configurator $config) {
-            $config->BBCodes->addFromRepository('B');
-        })
-        // Modifica il testo grezzo prima che venga analizzato.
-        // Questa callback dovrebbe restituire il testo modificato.
-        ->parse(function (Parser $parser, $context, $text) {
-            // logica personalizzata qui
-            return $newText;
-        })
-        //Modificare l'XML di cui eseguire il rendering.
-        // il suo callback dovrebbe restituire il nuovo XML.
-        // Ad esempio, nell'estensione menzioni, viene utilizzato per
-        // fornire il nome utente e il nome visualizzato dell'utente menzionato.
-        // Assicurati che l'ultimo argomento $request sia annullabile (o omesso completamente).
-        ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
-            // logica personalizzata qui
-            return $newXml;
-        })
+  (new Extend\Formatter())
+    // Aggiungi la configurazione del formattatore di testo personalizzato
+    ->configure(function (Configurator $config) {
+      $config->BBCodes->addFromRepository('B');
+    })
+    // Modifica il testo grezzo prima che venga analizzato.
+    // Questa callback dovrebbe restituire il testo modificato.
+    ->parse(function (Parser $parser, $context, $text) {
+      // logica personalizzata qui
+      return $newText;
+    })
+    //Modificare l'XML di cui eseguire il rendering.
+    // il suo callback dovrebbe restituire il nuovo XML.
+    // Ad esempio, nell'estensione menzioni, viene utilizzato per
+    // fornire il nome utente e il nome visualizzato dell'utente menzionato.
+    // Assicurati che l'ultimo argomento $request sia annullabile (o omesso completamente).
+    ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
+      // logica personalizzata qui
+      return $newXml;
+    }),
 ];
 ```
 

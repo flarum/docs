@@ -18,10 +18,10 @@ Flarum 处于 **测试阶段**。所为会存在一些 Bug 🐛🐞、功能上�
 
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
 
-* **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 7.3**，需要启用 **fileinfo**, curl, dom, exif, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
-* **MySQL 5.6+** 或 **MariaDB 10.0.5+**
-* **允许 SSH（命令行）**，以运行 Composer
+- **Apache**（需要启用 mod_rewrite 重写模块) 或 **Nginx**
+- **PHP 7.3**，需要启用 **fileinfo**, curl, dom, exif, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip 扩展
+- **MySQL 5.6+** 或 **MariaDB 10.0.5+**
+- **允许 SSH（命令行）**，以运行 Composer
 
 ::: tip 共享主机
 
@@ -83,7 +83,9 @@ www.example.com {
     file_server
 }
 ```
+
 ## 目录所有权
+
 在安装过程中，Flarum 可能会要求您将某些目录设置为可写。要使 Linux 上的某个目录可写，可以执行以下命令：
 
 ```bash
@@ -121,14 +123,14 @@ chmod 755 -R /path/to/directory
 ::: vue
 
 `默认目录结构`
-　
+
 . Flarum 安装根目录
 ├── public _(**公共目录**)_
-│   ├── assets _(**资源目录。存放头像、上传的文件等**)_
-│   └── .htaccess _(**自带 Apache 配置**)_
+│ ├── assets _(**资源目录。存放头像、上传的文件等**)_
+│ └── .htaccess _(**自带 Apache 配置**)_
 │
 ├── storage
-│   └── logs _(**日志**)_
+│ └── logs _(**日志**)_
 │
 ├── vendor _(**核心、插件目录**)_
 ├── .nginx.conf _(**自带 Nginx 配置**)_
@@ -151,7 +153,7 @@ chmod 755 -R /path/to/directory
 $site = require './site.php';
 ```
 
- 最后，编辑 `site.php` 并更新这几行所指的路径，以体现新的目录结构：
+最后，编辑 `site.php` 并更新这几行所指的路径，以体现新的目录结构：
 
 ```php
 'base' => __DIR__,
@@ -163,9 +165,9 @@ $site = require './site.php';
 
 如果您想用 Flarum 接续运营现有的一个社区，您可以将该论坛的数据导入到 Flarum 中。虽然目前还没有官方的导入工具，但是社区里已经有人制作了几款非官方的导入工具：
 
-* [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
-* [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
-* [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
-* [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
+- [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
+- [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
+- [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
+- [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
 其他论坛程序也可以导入：先迁移到 phpBB，然后迁移到 Flarum。需要说明的是，我们不能保证这些工具一直能正常使用，也不提供支持服务。

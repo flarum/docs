@@ -1,4 +1,4 @@
 module.exports = {
-    lang: 'tr',
-    title: 'Flarum Belgeleri',
-}
+  lang: 'tr',
+  title: 'Flarum Belgeleri',
+};

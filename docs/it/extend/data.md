@@ -4,7 +4,6 @@ I dati sono la base di qualsiasi forum, quindi dovrai giocarci bene se vuoi che 
 
 Flarum fa uso di [componenti Database Laravel](https://laravel.com/docs/database). È necessario familiarizzare con questi componenti prima di procedere, poiché si presume che la conoscenza di questi sia assodata.
 
-
 ## Ciclo di vita delle richieste API
 
 Prima di entrare nei dettagli su come estendere l'API di dati di Flarum, vale la pena pensare al ciclo di vita di una tipica richiesta di dati:
@@ -36,12 +35,12 @@ In Flarum, i file di migrazione dovrebbero ** restituire un array ** con due fun
 use Illuminate\Database\Schema\Builder;
 
 return [
-    'up' => function (Builder $schema) {
-        // up migration
-    },
-    'down' => function (Builder $schema) {
-        // down migration
-    }
+  'up' => function (Builder $schema) {
+    // up migration
+  },
+  'down' => function (Builder $schema) {
+    // down migration
+  },
 ];
 ```
 
@@ -49,7 +48,7 @@ Per attività comuni come la creazione di una tabella o l'aggiunta di colonne a 
 
 ### Ciclo di vita delle migrazioni
 
-Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite. 
+Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite.
 
 Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. Per annullare le modifiche applicate dalle migrazioni, è necessario fare clic su "Disinstalla" accanto a un'estensione nel pannello di amministrazione, o utilizzare in alternativa il comando `php flarum migrate:reset`. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate.
 
@@ -64,11 +63,11 @@ use Flarum\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 return Migration::createTable('users', function (Blueprint $table) {
-    $table->increments('id');
+  $table->increments('id');
 });
 ```
 
-Quando si crea la tabella, è possibile utilizzare uno qualsiasi dei generatori di schemi [column methods](https://laravel.com/docs/6.x/migrations#creating-columns) 
+Quando si crea la tabella, è possibile utilizzare uno qualsiasi dei generatori di schemi [column methods](https://laravel.com/docs/6.x/migrations#creating-columns)
 per definire le colonne della tabella.
 
 ### Rinominare tabelle
@@ -85,8 +84,8 @@ Per aggiungere colonne ad una tabella esistente, utilizza l'helper `Migration::a
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'nullable' => true],
-    'discussion_count' => ['integer', 'unsigned' => true]
+  'email' => ['string', 'nullable' => true],
+  'discussion_count' => ['integer', 'unsigned' => true],
 ]);
 ```
 
@@ -142,7 +141,7 @@ return [
 
 ### Relazioni
 
-Puoi aggiungere anche [relazioni](https://laravel.com/docs/6.x/eloquent-relationships) a modelli esistenti utilizzando i metodi `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`e `relationship` sull'estensore `Model`. Il primo argomento è il nome della relazione; il resto degli argomenti viene passato al metodo equivalente sul modello, quindi è possibile specificare il nome del modello correlato e, facoltativamente, sostituire i nomi di tabella e chiave:
+Puoi aggiungere anche [relazioni](https://laravel.com/docs/6.x/eloquent-relationships) a modelli esistenti utilizzando i metodi `hasOne`, `belongsTo`, `hasMany`, `belongsToMany`e `relationship` sull'estensore `Model`. Il primo argomento è il nome della relazione; il resto degli argomenti viene passato al metodo equivalente sul modello, quindi è possibile specificare il nome del modello correlato e, facoltativamente, sostituire i nomi di tabella e chiave:
 
 ```php
     new Extend\Model(User::class)
@@ -164,7 +163,6 @@ Questi 4 dovrebbero coprire la maggior parte delle relazioni, ma a volte è nece
         })
 ```
 
-
 ## Serializzatori
 
 Il passaggio successivo consiste nell'esposizione dei nuovi dati nella JSON: API di Flarum in modo che possano essere utilizzati dal frontend. Dovresti acquisire familiarità con le [specifiche JSON:API](https://jsonapi.org/format/). JSON: API di Flarum è alimentato dalla libreria [tobscure/json-api](https://github.com/tobscure/json-api).
@@ -177,14 +175,14 @@ use Flarum\Api\Serializer\UserSerializer;
 
 class DiscussionSerializer extends AbstractSerializer
 {
-    protected $type = 'discussions';
+  protected $type = 'discussions';
 
-    protected function getDefaultAttributes($discussion)
-    {
-        return [
-            'title' => $discussion->title,
-        ];
-    }
+  protected function getDefaultAttributes($discussion)
+  {
+    return [
+      'title' => $discussion->title,
+    ];
+  }
 }
 ```
 
@@ -232,12 +230,12 @@ Dopo aver definito le risorse nei serializzatori, sarà necessario esporle come 
 Seguendo le convenzioni dell'API JSON, puoi aggiungere cinque itinerari standard per il tuo tipo di risorsa utilizzando l'estensore `Routes`:
 
 ```php
-    (new Extend\Routes('api'))
-        ->get('/tags', 'tags.index', ListTagsController::class)
-        ->get('/tags/{id}', 'tags.show', ShowTagController::class)
-        ->post('/tags', 'tags.create', CreateTagController::class)
-        ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
-        ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
+(new Extend\Routes('api'))
+  ->get('/tags', 'tags.index', ListTagsController::class)
+  ->get('/tags/{id}', 'tags.show', ShowTagController::class)
+  ->post('/tags', 'tags.create', CreateTagController::class)
+  ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
+  ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class);
 ```
 
 Lo spazio dei nomi `Flarum\Api\Controller` contiene un numero di classi astratte che puoi estendere per implementare facilmente le tue risorse JSON-API.
@@ -253,12 +251,12 @@ use Tobscure\JsonApi\Document;
 
 class ListTagsController extends AbstractListController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        return Tag::all();
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    return Tag::all();
+  }
 }
 ```
 
@@ -274,14 +272,14 @@ use Tobscure\JsonApi\Document;
 
 class ShowTagController extends AbstractShowController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        return Tag::findOrFail($id);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    return Tag::findOrFail($id);
+  }
 }
 ```
 
@@ -297,21 +295,20 @@ use Tobscure\JsonApi\Document;
 
 class CreateTagController extends AbstractCreateController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
-        
-        return Tag::create([
-            'name' => Arr::get($attributes, 'name')
-        ]);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
+
+    return Tag::create([
+      'name' => Arr::get($attributes, 'name'),
+    ]);
+  }
 }
 ```
 
 ### Aggiornare una risorsa
-
 
 Per il controller che aggiorna una risorsa, estendi `Flarum\Api\Controller\AbstractShowController`. Come per il controller di creazione, puoi accedere al corpo del documento JSON:API in entrata tramite `$request->getParsedBody()`.
 
@@ -325,13 +322,13 @@ use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DeleteTagController extends AbstractDeleteController
-{    
-    protected function delete(Request $request)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        Tag::findOrFail($id)->delete();
-    }
+{
+  protected function delete(Request $request)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    Tag::findOrFail($id)->delete();
+  }
 }
 ```
 
@@ -342,7 +339,7 @@ Per includere relazioni quando ** elenchi **, ** mostri ** o ** crei ** la tua r
 ```php
     // The relationships that are included by default.
     public $include = ['user'];
-    
+
     // Other relationships that are available to be included.
     public $optionalInclude = ['discussions'];
 ```
@@ -362,7 +359,7 @@ Puoi consentire la personalizzazione del numero di risorse ** elencate ** specif
 ```php
     // Il numero di record inclusi per impostazione predefinita.
     public $limit = 20;
-    
+
     // Il numero massimo di record che possono essere richiesti.
     public $maxLimit = 50;
 ```
@@ -385,7 +382,7 @@ Per aggiungere collegamenti di impaginazione al documento JSON:API, utilizzare i
 ```php
     // Il campo di ordinamento predefinito e l'ordine da utilizzare.
     public $sort = ['name' => 'asc'];
-    
+
     // I campi disponibili per essere ordinati.
     public $sortFields = ['firstName', 'lastName'];
 ```
@@ -397,7 +394,7 @@ $sort = $this->extractSort($request);
 $query = Tag::query();
 
 foreach ($sort as $field => $order) {
-    $query->orderBy(snake_case($field), $order);
+  $query->orderBy(snake_case($field), $order);
 }
 
 return $query->get();
@@ -413,19 +410,19 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->setSerializer(MyDiscussionSerializer::class)
-        ->addInclude('user')
-        ->addOptionalInclude('posts')
-        ->setLimit(20)
-        ->setMaxLimit(50)
-        ->setSort(['name' => 'asc'])
-        ->addSortField('firstName')
-        ->prepareDataQuery(function ($controller) {
-            // Add custom logic here to modify the controller
-            // before data queries are executed.
-        })
-]
+  (new Extend\ApiController(ListDiscussionsController::class))
+    ->setSerializer(MyDiscussionSerializer::class)
+    ->addInclude('user')
+    ->addOptionalInclude('posts')
+    ->setLimit(20)
+    ->setMaxLimit(50)
+    ->setSort(['name' => 'asc'])
+    ->addSortField('firstName')
+    ->prepareDataQuery(function ($controller) {
+      // Add custom logic here to modify the controller
+      // before data queries are executed.
+    }),
+];
 ```
 
 `ApiController` può essere utilizzato anche per regolare i dati prima della serializzazione:
@@ -436,11 +433,10 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->prepareDataForSerialization(function ($controller, $data, $request, $document) {
-            $data->load('myCustomRelation');
-        }),
-]
+  (new Extend\ApiController(ListDiscussionsController::class))->prepareDataForSerialization(function ($controller, $data, $request, $document) {
+    $data->load('myCustomRelation');
+  }),
+];
 ```
 
 ## Modelli frontend
@@ -452,9 +448,10 @@ Ora che hai esposto i tuoi dati nella JSON:API di Flarum, è finalmente giunto i
 Il frontend di Flarum contiene dati locali in `store` che fornisce un'interfaccia per interagire con JSON:API. Puoi recuperare le risorse dall'API utilizzando `find`, che restituisce sempre:
 
 <!-- import { store } from '@flarum/core/forum'; -->
+
 ```js
 // GET /api/discussions?sort=createdAt
-app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
+app.store.find('discussions', { sort: 'createdAt' }).then(console.log);
 
 // GET /api/discussions/123
 app.store.find('discussions', 123).then(console.log);
@@ -482,6 +479,7 @@ Puoi saperne di più su "store" nella nostra [Documentazione API](https://api.do
 Se hai aggiunto un nuovo tipo di risorsa, dovrai definirne un nuovo modello. I modelli devono estendere la classe `Model` e ridefinire gli attributi e le relazioni delle risorse:
 
 <!-- import { Model } from '@flarum/core/forum'; -->
+
 ```js
 import Model from 'flarum/Model';
 
@@ -505,7 +503,7 @@ app.store.models.tags = Tag;
 export const extend = [
   new Extend.Model('tags', Tag)
 ];
-``` 
+```
 -->
 
 ### Modelli estensibili
@@ -525,7 +523,7 @@ Discussion.prototype.slug = Model.attribute('slug');
     .attribute('slug')
     .hasOne('user')
     .hasMany('posts')
-``` 
+```
 -->
 
 ### Risparmio di risorse
@@ -541,12 +539,9 @@ Puoi anche salvare le relazioni passandole in `relationships`. Per le relazioni 
 ```js
 user.save({
   relationships: {
-    groups: [
-      store.getById('groups', 1),
-      store.getById('groups', 2)
-    ]
-  }
-})
+    groups: [store.getById('groups', 1), store.getById('groups', 2)],
+  },
+});
 ```
 
 ### Creazione di nuove risorse

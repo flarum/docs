@@ -18,10 +18,9 @@ Page components work just like any other inherited component. For a (very simple
 ```js
 import Page from 'flarum/common/components/Page';
 
-
 export default class CustomPage extends Page {
   view() {
-    return <p>Hello!</p>
+    return <p>Hello!</p>;
   }
 }
 ```
@@ -37,11 +36,11 @@ An example from the [Tags extension](https://github.com/flarum/tags/blob/master/
 import { extend } from 'flarum/common/extend';
 import BasicsPage from 'flarum/common/components/BasicsPage';
 
-export default function() {
-  extend(BasicsPage.prototype, 'homePageItems', items => {
+export default function () {
+  extend(BasicsPage.prototype, 'homePageItems', (items) => {
     items.add('tags', {
       path: '/tags',
-      label: app.translator.trans('flarum-tags.admin.basics.tags_label')
+      label: app.translator.trans('flarum-tags.admin.basics.tags_label'),
     });
   });
 }
@@ -61,12 +60,11 @@ For example:
 ```js
 import Page from 'flarum/common/components/Page';
 
-
 export default class CustomPage extends Page {
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    app.setTitle("Cool Page");
+    app.setTitle('Cool Page');
     app.setTitleCount(0);
   }
 
@@ -79,10 +77,10 @@ export default class CustomPageLoadsData extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    app.store.find("users", 1).then(user => {
+    app.store.find('users', 1).then((user) => {
       app.setTitle(user.displayName());
       app.setTitleCount(0);
-    })
+    });
   }
 
   view() {
@@ -122,7 +120,7 @@ import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 app.current.matches(DiscussionPage);
 
 // To check page type and some data
-app.current.matches(IndexPage, {routeName: 'following'});
+app.current.matches(IndexPage, { routeName: 'following' });
 ```
 
 ## Admin Pages
@@ -154,19 +152,22 @@ import CustomPage from './components/CustomPage';
 import CustomPageResolver from './resolvers/CustomPageResolver';
 
 // Use a route resolver instance
-app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
-  onmatch: function(args) {
-    if (!app.session.user) return m.route.SKIP;
+app.routes['resolverInstance'] = {
+  path: '/custom/path/1',
+  resolver: {
+    onmatch: function (args) {
+      if (!app.session.user) return m.route.SKIP;
 
-    return CustomPage;
-  }
-}};
+      return CustomPage;
+    },
+  },
+};
 
 // Use a custom route resolver class
-app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage };
 
 // Use the default resolver class (`flarum/common/resolvers/DefaultResolver`)
-app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', component: CustomPage };
 ```
 
 ### Custom Resolvers

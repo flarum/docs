@@ -18,10 +18,9 @@ Los componentes de página funcionan como cualquier otro componente heredado. Pa
 ```js
 import Page from 'flarum/components/Page';
 
-
 export default class CustomPage extends Page {
   view() {
-    return <p>¡Hola!</p>
+    return <p>¡Hola!</p>;
   }
 }
 ```
@@ -54,7 +53,7 @@ import DiscussionPage from 'flarum/components/DiscussionPage';
 app.current.matches(DiscussionPage);
 
 // Para comprobar el tipo de página y algunos datos
-app.current.matches(IndexPage, {routeName: 'following'});
+app.current.matches(IndexPage, { routeName: 'following' });
 ```
 
 ## Resolvers de rutas (avanzado)
@@ -82,19 +81,22 @@ import CustomPage from './components/CustomPage';
 import CustomPageResolver from './resolvers/CustomPageResolver';
 
 // Utilizar una instancia de resolución de rutas
-app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
-  onmatch: function(args) {
-    if (!app.session.user) return m.route.SKIP;
+app.routes['resolverInstance'] = {
+  path: '/custom/path/1',
+  resolver: {
+    onmatch: function (args) {
+      if (!app.session.user) return m.route.SKIP;
 
-    return CustomPage;
-  }
-}};
+      return CustomPage;
+    },
+  },
+};
 
 // Utilizar una clase de resolución de rutas personalizada
-app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage };
 
 // Utilizar la clase de resolución por defecto (`flarum/resolvers/DefaultResolver`)
-app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+app.routes['resolverClass'] = { path: '/custom/path/2', component: CustomPage };
 ```
 
 ### Resolvers personalizados

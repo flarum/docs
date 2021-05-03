@@ -14,7 +14,7 @@ Si estás planeando seguir adelante y trabajar en algo, por favor comenta en el 
 
 ## Configuración de desarrollo
 
-[flarum/flarum](https://github.com/flarum/flarum) es una aplicación "esqueleto" que para descargar utiliza Composer  [flarum/core](https://github.com/flarum/core) y un [conjunto de extensiones](https://github.com/flarum). Para poder trabajar con ellas, se recomienda hacer un fork y clonarlas en el [repositorio de la ruta del Composer](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) es una aplicación "esqueleto" que para descargar utiliza Composer [flarum/core](https://github.com/flarum/core) y un [conjunto de extensiones](https://github.com/flarum). Para poder trabajar con ellas, se recomienda hacer un fork y clonarlas en el [repositorio de la ruta del Composer](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
@@ -54,33 +54,38 @@ npm run dev
 Un flujo de trabajo de contribución típico es el siguiente:
 
 1. 🌳 Se bifurca el **Branch** apropiado en un nuevo branch de características.
-    * *Correcciones de Bugs* debe enviarse al ultimo branch estable.
-    * Características *menores* que son totalmente compatibles con la versión actual de Flarum pueden ser enviadas al ultimo branch estable.
-    * Características *mayores* deben enviarse siempre al branch `master`, que contiene la próxima versión de Flarum.
-    * Internamente utilizamos el scheme de nomenclatura  `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
+
+   - _Correcciones de Bugs_ debe enviarse al ultimo branch estable.
+   - Características _menores_ que son totalmente compatibles con la versión actual de Flarum pueden ser enviadas al ultimo branch estable.
+   - Características _mayores_ deben enviarse siempre al branch `master`, que contiene la próxima versión de Flarum.
+   - Internamente utilizamos el scheme de nomenclatura `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
 
 2. 🔨 **Escribe** algo de código.
-    *  Ver abajo sobre el [Estilo de codificación](#coding-style).
 
-1. 🚦 **Prueba** el código.
-    * Añade pruebas unitarias según sea necesario cuando arregles errores o añadas características.
-    * Ejecute el conjunto de pruebas con `vendor/bin/phpunit` en la carpeta del paquete correspondiente.
+   - Ver abajo sobre el [Estilo de codificación](#coding-style).
+
+3. 🚦 **Prueba** el código.
+_ Añade pruebas unitarias según sea necesario cuando arregles errores o añadas características.
+_ Ejecute el conjunto de pruebas con `vendor/bin/phpunit` en la carpeta del paquete correspondiente.
 <!--
     * Ver [aquí](link-to-core/tests/README.md) para más información sobre las pruebas en Flarum.
 -->
 
 4. 💾 Haz el **commit** de su código con un mensaje descriptivo.
-    * Si su cambio resuelve un problema existente (por lo general, debería) incluir "Fixes #123" en una nueva línea, donde 123 es el número del issue.
-    * Escriba un [buen mensaje en el commit](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+
+   - Si su cambio resuelve un problema existente (por lo general, debería) incluir "Fixes #123" en una nueva línea, donde 123 es el número del issue.
+   - Escriba un [buen mensaje en el commit](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
 5. 🎁 **Envia** un Pull Request en GitHub.
-    * Rellene la plantilla del pull request.
-    * Si su cambio es visual, incluya una captura de pantalla o GIF que muestre el cambio.
-    * NO registre los archivos `dist` de JavaScript. Éstos se compilarán automáticamente en el merge.
+
+   - Rellene la plantilla del pull request.
+   - Si su cambio es visual, incluya una captura de pantalla o GIF que muestre el cambio.
+   - NO registre los archivos `dist` de JavaScript. Éstos se compilarán automáticamente en el merge.
 
 6. 🤝 **Intercambio** con el equipo de Flarum para su aprobación.
-    * Los miembros del equipo revisarán su código. Podemos sugerir algunos cambios o mejoras o alternativas, pero para los pequeños cambios su pull request debería ser aceptado rápidamente.
-    * Cuando se aborda la retroalimentación, envíe commits adicionales en lugar de sobrescribir o aplastar (vamos a aplastar en la fusión).
+
+   - Los miembros del equipo revisarán su código. Podemos sugerir algunos cambios o mejoras o alternativas, pero para los pequeños cambios su pull request debería ser aceptado rápidamente.
+   - Cuando se aborda la retroalimentación, envíe commits adicionales en lugar de sobrescribir o aplastar (vamos a aplastar en la fusión).
 
 7. 🕺 **Baila** como si acabaras de contribuir a Flarum.
 
@@ -88,16 +93,16 @@ Un flujo de trabajo de contribución típico es el siguiente:
 
 Para mantener el código base de Flarum limpio y consistente, tenemos una serie de pautas de estilo de codificación que seguimos. En caso de duda, lee el código fuente.
 
-No te preocupes si el estilo de tu código no es perfecto. StyleCI fusionará automáticamente cualquier corrección de estilo en los repositorios de Flarum después de fusionar las solicitudes de extracción. Esto nos permite centrarnos en el contenido de la contribución y no en el estilo 
+No te preocupes si el estilo de tu código no es perfecto. StyleCI fusionará automáticamente cualquier corrección de estilo en los repositorios de Flarum después de fusionar las solicitudes de extracción. Esto nos permite centrarnos en el contenido de la contribución y no en el estilo
 
 ### PHP
 
 Flarum sigue el estándar de codificación [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) y el estándar de carga automática [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Además de esto, nos ajustamos a una serie de [otras reglas de estilo](https://github.com/flarum/core/blob/master/.styleci.yml). Usamos las declaraciones de tipo y de retorno de PHP 7 cuando es posible, y [PHPDoc](https://docs.phpdoc.org/) para proporcionar documentación en línea. Intenta imitar el estilo utilizado por el resto del código base en tus contribuciones.
 
-* Los espacios de nombres deben ser singulares (p. ej. `Flarum-Discussion`, no `Flarum-Discussions`).
-* Las interfaces deben llevar el sufijo `Interface` (p. ej. `MailableInterface`)
-* Las clases abstractas deben llevar el prefijo `Abstract` (p. ej. `AbstractModel`)
-* Los rasgos deben llevar el sufijo `Trait` (p. ej. `ScopeVisibilityTrait`)
+- Los espacios de nombres deben ser singulares (p. ej. `Flarum-Discussion`, no `Flarum-Discussions`).
+- Las interfaces deben llevar el sufijo `Interface` (p. ej. `MailableInterface`)
+- Las clases abstractas deben llevar el prefijo `Abstract` (p. ej. `AbstractModel`)
+- Los rasgos deben llevar el sufijo `Trait` (p. ej. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
@@ -106,16 +111,18 @@ El JavaScript de Flarum sigue en su mayoría la [Guía de estilo de Airbnb](http
 ### Base de datos
 
 **Columnas** deben nombrarse según su tipo de datos:
-* DATETIME o TIMESTAMP: `{verbed}_at` (ej. created_at, read_at) o `{verbed}_until` (ej. suspended_until)
-* INT que es un recuento: `{noun}_count` (ej. comment_count, word_count)
-* Clave foránea: `{verbed}_{entity}_id` (ej. hidden_user_id)
-    * Se puede omitir el término para la relación primaria (por ejemplo, el autor del post es sólo `user_id`)
-* BOOL: `is_{adjective}` (ej. is_locked)
+
+- DATETIME o TIMESTAMP: `{verbed}_at` (ej. created_at, read_at) o `{verbed}_until` (ej. suspended_until)
+- INT que es un recuento: `{noun}_count` (ej. comment_count, word_count)
+- Clave foránea: `{verbed}_{entity}_id` (ej. hidden_user_id)
+  - Se puede omitir el término para la relación primaria (por ejemplo, el autor del post es sólo `user_id`)
+- BOOL: `is_{adjective}` (ej. is_locked)
 
 **Tablas** deben ser nombradas de la siguiente manera:
-* Utilizar la forma plural (`discussions`)
-* Separe las palabras múltiples con guiones bajos (`access_tokens`)
-* Para las tablas de relaciones, unir los dos nombres de las tablas en singular con un guión bajo en orden alfabético (ej. `discussion_user`)
+
+- Utilizar la forma plural (`discussions`)
+- Separe las palabras múltiples con guiones bajos (`access_tokens`)
+- Para las tablas de relaciones, unir los dos nombres de las tablas en singular con un guión bajo en orden alfabético (ej. `discussion_user`)
 
 ### CSS
 

@@ -10,10 +10,9 @@
 下面是一个示例文件，我们来了解一下所有内容的含义：
 
 ```php
-<?php return array (
+<?php return [
   'debug' => false, // 启用或禁用调试模式，用于排查问题
-  'database' =>
-  array (
+  'database' => [
     'driver' => 'mysql', // 数据库驱动，例如 MySQL, MariaDB ……
     'host' => 'localhost', // 连接的主机，除非使用外部服务，否则多数情况下是 localhost
     'database' => 'flarum', // 数据库实例名
@@ -24,12 +23,11 @@
     'prefix' => '', // 数据表的前缀，如果您和其他服务共享一个数据库，那么添加前缀会很有用
     'port' => '3306', // 连接数据库的端口，MySQL 默认为 3306
     'strict' => false,
-  ),
+  ],
   'url' => 'https://flarum.localhost', // URL 配置，如果您改变了域名，您需要变更这个
-  'paths' =>
-  array (
+  'paths' => [
     'api' => 'api', // /api 跳转到 API
     'admin' => 'admin', // /admin 跳转到 admin
-  ),
-);
+  ],
+];
 ```

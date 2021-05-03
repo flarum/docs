@@ -52,35 +52,39 @@ npm run dev
 ## Geliştirme İş Akışı
 
 Tipik bir katkı iş akışı şuna benzer:
-	
+
 1. 🌳 Uygun **dalı** yeni bir özellik dalına ayırın.
-     * *Hata düzeltmeleri* en son kararlı dala gönderilmelidir.
-     * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
-     * *Ana* özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
-     * Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
+
+   - _Hata düzeltmeleri_ en son kararlı dala gönderilmelidir.
+   - Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan _Küçük_ özellikler, en son kararlı dala gönderilebilir.
+   - _Ana_ özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
+   - Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
 
 2. 🔨 Bir **kod** yazın.
-     * [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
-	
+   - [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
 3. 🚦 **Kodunuzu** test edin.
-     * Hataları giderirken veya özellikler eklerken gerektiği gibi birim testleri ekleyin.
-     * Test paketini ilgili paket klasöründeki `vendor/bin/phpunit` ile çalıştırın.
-	 
+   - Hataları giderirken veya özellikler eklerken gerektiği gibi birim testleri ekleyin.
+   - Test paketini ilgili paket klasöründeki `vendor/bin/phpunit` ile çalıştırın.
+
 <!--
     * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
 -->
+
 4. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
-     * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-     * [İyi bir işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
+
+   - Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
+   - [İyi bir işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
 
 5. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
-     * Çekme talebi şablonunu doldurun.
-     * Değişikliğiniz görselse, değişikliği gösteren bir ekran görüntüsü veya GIF ekleyin.
-     * JavaScript `dist` dosyalarını DERLEMEYİN. Bunlar birleştirme sırasında otomatik olarak derlenecektir.
+
+   - Çekme talebi şablonunu doldurun.
+   - Değişikliğiniz görselse, değişikliği gösteren bir ekran görüntüsü veya GIF ekleyin.
+   - JavaScript `dist` dosyalarını DERLEMEYİN. Bunlar birleştirme sırasında otomatik olarak derlenecektir.
 
 6. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
-     * Ekip üyeleri kodunuzu inceleyecek. Bazı değişiklikler veya iyileştirmeler veya alternatifler önerebiliriz, ancak küçük değişiklikler için çekme talebinizin hızla kabul edilmesi gerekir.
-     * Geri bildirimi ele alırken, üzerine yazmak veya ezmek yerine ek taahhütleri itin (birleştireceğiz).
+
+   - Ekip üyeleri kodunuzu inceleyecek. Bazı değişiklikler veya iyileştirmeler veya alternatifler önerebiliriz, ancak küçük değişiklikler için çekme talebinizin hızla kabul edilmesi gerekir.
+   - Geri bildirimi ele alırken, üzerine yazmak veya ezmek yerine ek taahhütleri itin (birleştireceğiz).
 
 7. 🕺 **Dans et** tıpkı Flarum'a katkıda bulunduğun gibi.
 
@@ -94,10 +98,10 @@ Kod stiliniz mükemmel değilse endişelenmeyin! StyleCI, herhangi bir stil düz
 
 Flarum, [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) kodlama standardını ve [PSR- 4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) otomatik yükleme standardı. Bunun da ötesinde, [diğer stil kurallarına](https://github.com/flarum/core/blob/master/.styleci.yml) uyarız. Mümkün olduğunda PHP 7 tür ipucu ve dönüş türü bildirimlerini ve satır içi belgeler sağlamak için [PHPDoc](https://docs.phpdoc.org/) kullanıyoruz. Katkılarınızda kod tabanının geri kalanı tarafından kullanılan stili deneyin ve taklit edin.
 
-* Ad alanları tekil olmalıdır (ör. `Flarum\Discussion`, not `Flarum\Discussions`)
-* Arayüzlerin sonuna `Interface` eklenmelidir (ör. `MailableInterface`)
-* Abstract sınıflarının önüne `Abstract` yazılmalıdır (ör `AbstractModel`)
-* Özelliklerin sonuna `Trait` eklenmelidir (ör. `ScopeVisibilityTrait`)
+- Ad alanları tekil olmalıdır (ör. `Flarum\Discussion`, not `Flarum\Discussions`)
+- Arayüzlerin sonuna `Interface` eklenmelidir (ör. `MailableInterface`)
+- Abstract sınıflarının önüne `Abstract` yazılmalıdır (ör `AbstractModel`)
+- Özelliklerin sonuna `Trait` eklenmelidir (ör. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
@@ -106,16 +110,18 @@ Flarum'un JavaScript'i çoğunlukla [Airbnb Stil Kılavuzu](https://github.com/a
 ### Veritabanı
 
 **Sütunlar** veri türlerine göre adlandırılmalıdır:
-* DATETIME veya TIMESTAMP: `{verbed}_at` (ör. created_at, read_at) veya `{verbed}_until` (ör. suspended_until)
-* INT bu bir sayıdır: `{noun}_count` (ör. comment_count, word_count)
-* Yabancı anahtar: `{verbed}_{entity}_id` (ör. hidden_user_id)
-     * Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
-* BOOL: `is_{adjective}` (ör. is_locked)
+
+- DATETIME veya TIMESTAMP: `{verbed}_at` (ör. created_at, read_at) veya `{verbed}_until` (ör. suspended_until)
+- INT bu bir sayıdır: `{noun}_count` (ör. comment_count, word_count)
+- Yabancı anahtar: `{verbed}_{entity}_id` (ör. hidden_user_id)
+  - Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
+- BOOL: `is_{adjective}` (ör. is_locked)
 
 **Tablolar** aşağıdaki şekilde adlandırılmalıdır:
-* Çoğul biçim kullanın (`discussions`)
-* Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
-* İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
+
+- Çoğul biçim kullanın (`discussions`)
+- Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
+- İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
 
 ### CSS
 

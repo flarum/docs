@@ -10,11 +10,11 @@ Ten en cuenta que Flarum utiliza algunos lenguajes y herramientas _modernas_. Si
 
 Flarum se compone de tres capas:
 
-* En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). También querrás familiarizarte con el concepto de [Dependency Injection](https://laravel.com/docs/6.x/container), que se utiliza en todo nuestro backend.
+- En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). También querrás familiarizarte con el concepto de [Dependency Injection](https://laravel.com/docs/6.x/container), que se utiliza en todo nuestro backend.
 
-* En segundo lugar, el backend expone una **API pública** que permite a los clientes del frontend interactuar con los datos de tu foro. Está construida de acuerdo con la especificación [JSON:API](https://jsonapi.org/).
+- En segundo lugar, el backend expone una **API pública** que permite a los clientes del frontend interactuar con los datos de tu foro. Está construida de acuerdo con la especificación [JSON:API](https://jsonapi.org/).
 
-* Por último, está la interfaz web por defecto que llamamos **frontend**. Esta es una [single-page application](https://en.wikipedia.org/wiki/Single-page_application) que consume la API. Está construida con un sencillo framework tipo React llamado [Mithril.js](https://mithril.js.org).
+- Por último, está la interfaz web por defecto que llamamos **frontend**. Esta es una [single-page application](https://en.wikipedia.org/wiki/Single-page_application) que consume la API. Está construida con un sencillo framework tipo React llamado [Mithril.js](https://mithril.js.org).
 
 Las extensiones a menudo necesitarán interactuar con estas tres capas para hacer que las cosas sucedan. Por ejemplo, si quieres construir una extensión que añada campos personalizados a los perfiles de los usuarios, tendrías que añadir las estructuras de base de datos apropiadas en el **backend**, exponer esos datos en la **public API**, y luego mostrarlos y permitir a los usuarios editarlos en el **frontend**.
 
@@ -22,15 +22,13 @@ Así que... ¿cómo extendemos estas capas?
 
 ## Extensores
 
-Para extender Flarum, usaremos un concepto llamado **extensores**. Los extensores son objetos *declarativos* que describen en términos sencillos los objetivos que se pretenden alcanzar (como añadir una nueva ruta a tu foro, o ejecutar algún código cuando se crea una nueva discusión).
+Para extender Flarum, usaremos un concepto llamado **extensores**. Los extensores son objetos _declarativos_ que describen en términos sencillos los objetivos que se pretenden alcanzar (como añadir una nueva ruta a tu foro, o ejecutar algún código cuando se crea una nueva discusión).
 
 Cada extensor es diferente. Sin embargo, siempre tendrán un aspecto similar a este:
 
 ```php
 // Registrar un archivo JavaScript y un archivo CSS para ser entregado con el frontend del foro
-(new Extend\Frontend('forum'))
-    ->js(__DIR__.'/forum-scripts.js')
-    ->css(__DIR__.'/forum-styles.css')
+(new Extend\Frontend('forum'))->js(__DIR__ . '/forum-scripts.js')->css(__DIR__ . '/forum-styles.css');
 ```
 
 Primero se crea una instancia del extensor, y luego se llama a los métodos en él para la configuración adicional. Todos estos métodos devuelven el propio extensor, de modo que puedes conseguir toda la configuración simplemente encadenando llamadas a métodos.
@@ -50,10 +48,9 @@ use Flarum\Extend;
 use Flarum\Frontend\Document;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->content(function (Document $document) {
-            $document->head[] = '<script>alert("Hello, world!")</script>';
-        })
+  (new Extend\Frontend('forum'))->content(function (Document $document) {
+    $document->head[] = '<script>alert("Hello, world!")</script>';
+  }),
 ];
 ```
 
@@ -85,39 +82,41 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 
 ```json
 {
-    "name": "acme/flarum-hello-world",
-    "description": "Say hello to the world!",
-    "type": "flarum-extension",
-    "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
-    },
-    "autoload": {
-        "psr-4": {"Acme\\HelloWorld\\": "src/"}
-    },
-    "extra": {
-        "flarum-extension": {
-            "title": "Hello World",
-            "icon": {
-                "name": "fas fa-smile",
-                "backgroundColor": "#238c59",
-                "color": "#fff"
-            }
-        }
+  "name": "acme/flarum-hello-world",
+  "description": "Say hello to the world!",
+  "type": "flarum-extension",
+  "require": {
+    "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+  },
+  "autoload": {
+    "psr-4": { "Acme\\HelloWorld\\": "src/" }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Hello World",
+      "icon": {
+        "name": "fas fa-smile",
+        "backgroundColor": "#238c59",
+        "color": "#fff"
+      }
     }
+  }
 }
 ```
 
-* **name** es el nombre del paquete de Composer en el formato `vendedor/paquete`.
-  * Debes elegir un nombre de proveedor que sea único para ti - tu nombre de usuario de GitHub, por ejemplo. Para los propósitos de este tutorial, asumiremos que estás usando `acme` como tu nombre de proveedor.
-  * Debes anteponer a la parte del `package` el prefijo `flarum-` para indicar que se trata de un paquete específicamente destinado a ser utilizado con Flarum.
+- **name** es el nombre del paquete de Composer en el formato `vendedor/paquete`.
 
-* **description** es una breve descripción de una frase de lo que hace la extensión.
+  - Debes elegir un nombre de proveedor que sea único para ti - tu nombre de usuario de GitHub, por ejemplo. Para los propósitos de este tutorial, asumiremos que estás usando `acme` como tu nombre de proveedor.
+  - Debes anteponer a la parte del `package` el prefijo `flarum-` para indicar que se trata de un paquete específicamente destinado a ser utilizado con Flarum.
 
-* **type** debe ser establecido como `flarum-extension`. Esto asegura que cuando alguien "requiera" su extensión, será identificada como tal.
+- **description** es una breve descripción de una frase de lo que hace la extensión.
 
-* **require** contiene una lista de las dependencias propias de su extensión.
-  * Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
-  * Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
+- **type** debe ser establecido como `flarum-extension`. Esto asegura que cuando alguien "requiera" su extensión, será identificada como tal.
+
+- **require** contiene una lista de las dependencias propias de su extensión.
+
+  - Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
+  - Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
 
   ::: warning Elige cuidadosamente la versión de Flarum
 
@@ -127,11 +126,11 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 
   :::
 
-* **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
+- **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
 
-* **extra.flarum-extension** contiene alguna información específica de Flarum, como el nombre de su extensión y el aspecto de su icono.
-  * **title** es el nombre de su extensión.
-  * **icon** es un objeto que define el icono de tu extensión. La propiedad **name** es un [nombre de clase de icono de Font Awesome](https://fontawesome.com/icons). Todas las demás propiedades se utilizan como el atributo `style` para el icono de su extensión.
+- **extra.flarum-extension** contiene alguna información específica de Flarum, como el nombre de su extensión y el aspecto de su icono.
+  - **title** es el nombre de su extensión.
+  - **icon** es un objeto que define el icono de tu extensión. La propiedad **name** es un [nombre de clase de icono de Font Awesome](https://fontawesome.com/icons). Todas las demás propiedades se utilizan como el atributo `style` para el icono de su extensión.
 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 

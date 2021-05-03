@@ -18,10 +18,10 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
-* **Apache** (mod_rewrite etkin) veya **Nginx**
-* **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6 +** veya **MariaDB10.0.5+**
-Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
+- **Apache** (mod_rewrite etkin) veya **Nginx**
+- **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
+- **MySQL 5.6 +** veya **MariaDB10.0.5+**
+  Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 
 ::: tip Paylaşımlı Hosting
 
@@ -79,7 +79,7 @@ www.example.com {
     header /assets {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
-        Pragma "public" 
+        Pragma "public"
     }
     encode gzip
 }
@@ -143,9 +143,9 @@ Son olarak, `site.php` dosyasını düzenleyin ve aşağıdaki satırlardaki yol
 
 Mevcut bir topluluğunuz varsa ve sıfırdan başlamak istemiyorsanız, mevcut verilerinizi Flarum'a aktarabilirsiniz. Henüz resmi uzantı bulunmamakla birlikte, topluluk birkaç resmi olmayan uzantı yaptı:
 
-* [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
-* [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
-* [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
-* [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
+- [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
+- [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
+- [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
+- [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
 Bunlar, önce phpBB'ye, sonra Flarum'a geçerek diğer forum yazılımları için de kullanılabilir. Bunların işe yarayacağını garanti edemeyeceğimizi ve onlar için destek sunamayacağımızı unutmayın.

@@ -1,11 +1,10 @@
-
 # Composer
 
 Flarum uses a program called composer[Composer](https://getcomposer.org) to manage its dependencies and extensions.
 You'll need to use composer if you want to:
 
 - Install or update Flarum
-- Install, update, or remove Flarum extensions 
+- Install, update, or remove Flarum extensions
 
 This guide is provided as a brief explanation of Composer. We highly recommend consulting the [official documentation](https://getcomposer.org/doc/00-intro.md) for more information.
 
@@ -17,7 +16,7 @@ Historically, Composer has caused issues on shared hosting due to huge memory us
 
 ## What is Composer?
 
-> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction]([https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](<[https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)>)
 
 Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md).Each of these has its own dependencies and releases.
 
@@ -52,70 +51,67 @@ As mentioned above, the entire composer configuration for your Flarum site is co
 
 ```jsonc
 {
-    // This following section is mostly just metadata about the package.
-    // For forum admins, this doesn't really matter.
-    "name": "flarum/flarum",
-    "description": "Delightfully simple forum software.",
-    "type": "project",
-    "keywords": [
-        "forum",
-        "discussion"
-    ],
-    "homepage": "https://flarum.org/",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Flarum",
-            "email": "info@flarum.org",
-            "homepage": "https://flarum.org/team"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/flarum/core/issues",
-        "source": "https://github.com/flarum/flarum",
-        "docs": "https://flarum.org/docs/"
-    },
-    // End of metadata
+  // This following section is mostly just metadata about the package.
+  // For forum admins, this doesn't really matter.
+  "name": "flarum/flarum",
+  "description": "Delightfully simple forum software.",
+  "type": "project",
+  "keywords": ["forum", "discussion"],
+  "homepage": "https://flarum.org/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Flarum",
+      "email": "info@flarum.org",
+      "homepage": "https://flarum.org/team"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/flarum/core/issues",
+    "source": "https://github.com/flarum/flarum",
+    "docs": "https://flarum.org/docs/"
+  },
+  // End of metadata
 
-    // This next section is the one we care about the most.
-    // It's a list of packages we want, and the versions for each.
-    // We'll discuss this shortly.
-    "require": {
-        "flarum/core": "^0.1.0",
-        "flarum/approval": "^0.1.0",
-        "flarum/bbcode": "^0.1.0",
-        "flarum/emoji": "^0.1.0",
-        "flarum/lang-english": "^0.1.0",
-        "flarum/flags": "^0.1.0",
-        "flarum/likes": "^0.1.0",
-        "flarum/lock": "^0.1.0",
-        "flarum/markdown": "^0.1.0",
-        "flarum/mentions": "^0.1.0",
-        "flarum/nicknames": "^0.1.0",
-        "flarum/pusher": "^0.1.0",
-        "flarum/statistics": "^0.1.0",
-        "flarum/sticky": "^0.1.0",
-        "flarum/subscriptions": "^0.1.0",
-        "flarum/suspend": "^0.1.0",
-        "flarum/tags": "^0.1.0"
-    },
+  // This next section is the one we care about the most.
+  // It's a list of packages we want, and the versions for each.
+  // We'll discuss this shortly.
+  "require": {
+    "flarum/core": "^0.1.0",
+    "flarum/approval": "^0.1.0",
+    "flarum/bbcode": "^0.1.0",
+    "flarum/emoji": "^0.1.0",
+    "flarum/lang-english": "^0.1.0",
+    "flarum/flags": "^0.1.0",
+    "flarum/likes": "^0.1.0",
+    "flarum/lock": "^0.1.0",
+    "flarum/markdown": "^0.1.0",
+    "flarum/mentions": "^0.1.0",
+    "flarum/nicknames": "^0.1.0",
+    "flarum/pusher": "^0.1.0",
+    "flarum/statistics": "^0.1.0",
+    "flarum/sticky": "^0.1.0",
+    "flarum/subscriptions": "^0.1.0",
+    "flarum/suspend": "^0.1.0",
+    "flarum/tags": "^0.1.0"
+  },
 
-    // Various composer config. The ones here are sensible defaults.
-    // See https://getcomposer.org/doc/06-config.md for a list of options.
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
+  // Various composer config. The ones here are sensible defaults.
+  // See https://getcomposer.org/doc/06-config.md for a list of options.
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
 
-    // Since Flarum is still in beta, this tells composer that it's ok
-    // to install beta packages. Once a stable version is tagged, this
-    // line can be removed.
-    "minimum-stability": "beta",
+  // Since Flarum is still in beta, this tells composer that it's ok
+  // to install beta packages. Once a stable version is tagged, this
+  // line can be removed.
+  "minimum-stability": "beta",
 
-    // If composer can find a stable (not dev, alpha, or beta) version
-    // of a package, it should use that. Generally speaking, production
-    // sites shouldn't run beta software unless you know what you're doing.
-    "prefer-stable": true
+  // If composer can find a stable (not dev, alpha, or beta) version
+  // of a package, it should use that. Generally speaking, production
+  // sites shouldn't run beta software unless you know what you're doing.
+  "prefer-stable": true
 }
 ```
 
@@ -134,7 +130,7 @@ As with any other software, Composer must first be [installed]([https://getcompo
 
 ### Dedicated Web Server
 
-In this case you can install composer as recommended in the Composer [guide]([https://getcomposer.org/doc/00-intro.md#system-requirements) 
+In this case you can install composer as recommended in the Composer [guide]([https://getcomposer.org/doc/00-intro.md#system-requirements)
 
 ### Managed / Shared hosting
 
@@ -148,7 +144,7 @@ Some articles on the internet will mention that you can use tools like a PHP she
 
 ## How do I use Composer?
 
-You'll need to use Composer over the  **C**ommand-**l**ine **i**nterface (CLI). Be sure you can access your server over **S**ecure **Sh**ell (SSH).
+You'll need to use Composer over the **C**ommand-**l**ine **i**nterface (CLI). Be sure you can access your server over **S**ecure **Sh**ell (SSH).
 
 Once you have Composer installed, you should be able to run Composer commands in your SSH terminal via `composer COMMAND`.
 

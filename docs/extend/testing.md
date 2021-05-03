@@ -88,7 +88,7 @@ This script will be run to set up a testing database / file structure.
 
 use Flarum\Testing\integration\Setup\SetupScript;
 
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 $setup = new SetupScript();
 
@@ -182,44 +182,60 @@ class SomeTest extends TestCase
 {
   use RetrievesAuthorizedUsers;
 
-    public function setUp(): void
-    {
-      parent::setUp();
+  public function setUp(): void
+  {
+    parent::setUp();
 
-      $this->setting('my.custom.setting', true);
+    $this->setting('my.custom.setting', true);
 
-      // Let's assume our extension depends on tags.
-      // Note that tags will need to be in your extension's composer.json's `require-dev`.
-      // Also, make sure you include the ID of the extension currently being tested, unless you're
-      // testing the baseline without your extension.
-      $this->extension('flarum-tags', 'my-cool-extension');
+    // Let's assume our extension depends on tags.
+    // Note that tags will need to be in your extension's composer.json's `require-dev`.
+    // Also, make sure you include the ID of the extension currently being tested, unless you're
+    // testing the baseline without your extension.
+    $this->extension('flarum-tags', 'my-cool-extension');
 
-      // Note that this input isn't validated: make sure you're populating with valid, representative data.
-      $this->prepareDatabase([
-        'users' => [
-          $this->normalUser()  // Available for convenience.
+    // Note that this input isn't validated: make sure you're populating with valid, representative data.
+    $this->prepareDatabase([
+      'users' => [
+        $this->normalUser(), // Available for convenience.
+      ],
+      'discussions' => [
+        [
+          'id' => 1,
+          'title' => 'some title',
+          'created_at' => Carbon::now(),
+          'last_posted_at' => Carbon::now(),
+          'user_id' => 1,
+          'first_post_id' => 1,
+          'comment_count' => 1,
         ],
-        'discussions' => [
-          ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
+      ],
+      'posts' => [
+        [
+          'id' => 1,
+          'number' => 1,
+          'discussion_id' => 1,
+          'created_at' => Carbon::now(),
+          'user_id' => 1,
+          'type' => 'comment',
+          'content' => '<t><p>something</p></t>',
         ],
-        'posts' => [
-          ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
-        ]
-      ]);
+      ],
+    ]);
 
-      // Most test cases won't need to test extenders, but if you want to, you can.
-      $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
-    }
+    // Most test cases won't need to test extenders, but if you want to, you can.
+    $this->extend((new CoolExtensionExtender())->doSomething('hello world'));
+  }
 
-    /**
-     * @test
-     */
-    public function some_phpunit_test_case()
-    {
-        // ...
-    }
-
+  /**
+   * @test
+   */
+  public function some_phpunit_test_case()
+  {
     // ...
+  }
+
+  // ...
 }
 ```
 
@@ -241,8 +257,6 @@ You can use this to ensure that:
 
 For example:
 
-
-
 ```php
 <?php
 
@@ -259,47 +273,42 @@ use Flarum\Testing\integration\TestCase;
 
 class SomeTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function can_search_users()
-    {
-        $response = $this->send(
-          $this->request('GET', '/api/users', ['authenticatedAs' => 1])
-               ->withQueryParams(['filter' => ['q' => 'john group:1'], 'sort' => 'username'])
-        );
+  /**
+   * @test
+   */
+  public function can_search_users()
+  {
+    $response = $this->send(
+      $this->request('GET', '/api/users', ['authenticatedAs' => 1])->withQueryParams(['filter' => ['q' => 'john group:1'], 'sort' => 'username'])
+    );
 
-        $this->assertEquals(200, $response->getStatusCode());
-    }
+    $this->assertEquals(200, $response->getStatusCode());
+  }
 
-    /**
-     * @test
-     */
-    public function can_create_user()
-    {
-        $response = $this->send(
-          $this->request(
-                'POST',
-                '/api/users',
-                [
-                    'authenticatedAs' => 1,
-                    'json' => [
-                        'data' => [
-                            'attributes' => [
-                                'username' => 'test',
-                                'password' => 'too-obscure',
-                                'email' => 'test@machine.local'
-                            ]
-                        ]
-                    ]
-                ]
-            )
-        );
+  /**
+   * @test
+   */
+  public function can_create_user()
+  {
+    $response = $this->send(
+      $this->request('POST', '/api/users', [
+        'authenticatedAs' => 1,
+        'json' => [
+          'data' => [
+            'attributes' => [
+              'username' => 'test',
+              'password' => 'too-obscure',
+              'email' => 'test@machine.local',
+            ],
+          ],
+        ],
+      ])
+    );
 
-        $this->assertEquals(200, $response->getStatusCode());
-    }
+    $this->assertEquals(200, $response->getStatusCode());
+  }
 
-    // ...
+  // ...
 }
 ```
 
@@ -340,19 +349,19 @@ use Flarum\Tests\integration\ConsoleTestCase;
 
 class ConsoleTest extends ConsoleTestCase
 {
-    /**
-     * @test
-     */
-    public function command_works()
-    {
-        $input = [
-            'command' => 'some:command',  // The command name, equivalent of `php flarum some:command`
-            'foo' => 'bar',  // arguments
-            '--lorem' => 'ipsum'  // options
-        ];
+  /**
+   * @test
+   */
+  public function command_works()
+  {
+    $input = [
+      'command' => 'some:command', // The command name, equivalent of `php flarum some:command`
+      'foo' => 'bar', // arguments
+      '--lorem' => 'ipsum', // options
+    ];
 
-        $this->assertEquals('Some Output.', $this->runCommand($input));
-    }
+    $this->assertEquals('Some Output.', $this->runCommand($input));
+  }
 }
 ```
 

@@ -19,15 +19,13 @@ use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
 return [
-    (new Extend\Event)
-        ->listen(Deleted::class, function($event) {
-          // do something here
-        })
-        ->listen(Deleted::class, PostDeletedListener::class)
+  (new Extend\Event())
+    ->listen(Deleted::class, function ($event) {
+      // do something here
+    })
+    ->listen(Deleted::class, PostDeletedListener::class),
 ];
-
 
 class PostDeletedListener
 {
@@ -35,7 +33,7 @@ class PostDeletedListener
 
   public function __construct(TranslatorInterface $translator)
   {
-      $this->translator = $translator;
+    $this->translator = $translator;
   }
 
   public function handle(Deleted $event)
@@ -55,12 +53,7 @@ use Flarum\Post\Event\Deleted;
 use Flarum\Post\Event\Saving;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-
-return [
-    (new Extend\Event)
-        ->subscribe(PostEventSubscriber::class),
-];
-
+return [(new Extend\Event())->subscribe(PostEventSubscriber::class)];
 
 class PostEventSubscriber
 {
@@ -68,7 +61,7 @@ class PostEventSubscriber
 
   public function __construct(TranslatorInterface $translator)
   {
-      $this->translator = $translator;
+    $this->translator = $translator;
   }
 
   public function subscribe($events)
@@ -97,30 +90,27 @@ Dispatching events is very simple. All you need to do is inject `Illuminate\Cont
 use Flarum\Post\Event\Deleted;
 use Illuminate\Contracts\Events\Dispatcher;
 
-
 class SomeClass
 {
-    /**
-      * @var Dispatcher
-      */
-    protected $events;
+  /**
+   * @var Dispatcher
+   */
+  protected $events;
 
-    /**
-      * @param Dispatcher $events
-      */
-    public function __construct(Dispatcher $events)
-    {
-        $this->events = $events;
-    }
+  /**
+   * @param Dispatcher $events
+   */
+  public function __construct(Dispatcher $events)
+  {
+    $this->events = $events;
+  }
 
-    public function someMethod()
-    {
-        // Logic
-        $this->events->dispatch(
-        new Deleted($somePost, $someActor)
-        );
-        // More Logic
-    }
+  public function someMethod()
+  {
+    // Logic
+    $this->events->dispatch(new Deleted($somePost, $someActor));
+    // More Logic
+  }
 }
 ```
 
@@ -147,24 +137,24 @@ use Flarum\User\User;
 
 class Deleted
 {
-    /**
-     * @var Post
-     */
-    public $post;
+  /**
+   * @var Post
+   */
+  public $post;
 
-    /**
-     * @var User
-     */
-    public $actor;
+  /**
+   * @var User
+   */
+  public $actor;
 
-    /**
-     * @param Post $post
-     * @param User $user
-     */
-    public function __construct(Post $post, User $actor = null)
-    {
-        $this->post = $post;
-        $this->actor = $actor;
-    }
+  /**
+   * @param Post $post
+   * @param User $user
+   */
+  public function __construct(Post $post, User $actor = null)
+  {
+    $this->post = $post;
+    $this->actor = $actor;
+  }
 }
 ```

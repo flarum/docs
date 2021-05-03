@@ -17,15 +17,15 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class ClassInterfacesWithSettings
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
+  /**
+   * @var SettingsRepositoryInterface
+   */
+  protected $settings;
 
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
-    }
+  public function __construct(SettingsRepositoryInterface $settings)
+  {
+    $this->settings = $settings;
+  }
 }
 ```
 
@@ -64,6 +64,7 @@ The `delete($name)` function lets you remove a named setting.
 ### Editing Settings
 
 To learn more about adding settings through the admin dashboard, see the [relevant documentation](admin.md).
+
 ### Accessing Settings
 
 All settings are available in the `admin` frontend via the `app.data.settings` global.
@@ -79,15 +80,18 @@ This can be done via the `Settings` extender. For example:
 use Flarum\Extend;
 
 return [
-   (new Extend\Settings)
-      ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
-      ->serializeToForum('myCoolSettingModified', 'my.cool.setting.key', function ($retrievedValue) {
-        // This third argument is optional, and allows us to pass the retrieved setting through some custom logic.
-        // In this example, we'll append a string to it.
+  (new Extend\Settings())->serializeToForum('myCoolSetting', 'my.cool.setting.key')->serializeToForum(
+    'myCoolSettingModified',
+    'my.cool.setting.key',
+    function ($retrievedValue) {
+      // This third argument is optional, and allows us to pass the retrieved setting through some custom logic.
+      // In this example, we'll append a string to it.
 
-        return "My Cool Setting: $retrievedValue";
-      }, "default value!"),
-]
+      return "My Cool Setting: $retrievedValue";
+    },
+    'default value!'
+  ),
+];
 ```
 
 Now, the `my.cool.setting.key` setting will be accessible in the frontend as `app.forum.attribute("myCoolSetting")`, and our modified value will be accessible via `app.forum.attribute("myCoolSettingModified")`.

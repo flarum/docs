@@ -8,11 +8,11 @@ Flarum includes a powerful notification system to alert users to new activity.
 
 To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface`. This class will define your notification's content and behaviour through the following methods:
 
-* `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
-* `getSender()` The `User` model for the user that triggered the notification.
-* `getData()` Any other data you might wish to include for access on the frontend (eg. the old discussion title when renamed).
-* `getType()` This is where you name your notification, this will be important for later steps.
-* `getSubjectModal()`: Specify the type of model the subject is (from `getSubject`).
+- `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
+- `getSender()` The `User` model for the user that triggered the notification.
+- `getData()` Any other data you might wish to include for access on the frontend (eg. the old discussion title when renamed).
+- `getType()` This is where you name your notification, this will be important for later steps.
+- `getSubjectModal()`: Specify the type of model the subject is (from `getSubject`).
 
 Lets take a look at an example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Notification/PostLikedBlueprint.php):
 
@@ -27,39 +27,39 @@ use Flarum\User\User;
 
 class PostLikedBlueprint implements BlueprintInterface
 {
-    public $post;
+  public $post;
 
-    public $user;
+  public $user;
 
-    public function __construct(Post $post, User $user)
-    {
-        $this->post = $post;
-        $this->user = $user;
-    }
+  public function __construct(Post $post, User $user)
+  {
+    $this->post = $post;
+    $this->user = $user;
+  }
 
-    public function getSubject()
-    {
-        return $this->post;
-    }
+  public function getSubject()
+  {
+    return $this->post;
+  }
 
-    public function getSender()
-    {
-        return $this->user;
-    }
+  public function getSender()
+  {
+    return $this->user;
+  }
 
-    public function getData()
-    {
-    }
+  public function getData()
+  {
+  }
 
-    public static function getType()
-    {
-        return 'postLiked';
-    }
+  public static function getType()
+  {
+    return 'postLiked';
+  }
 
-    public static function getSubjectModel()
-    {
-        return Post::class;
-    }
+  public static function getSubjectModel()
+  {
+    return Post::class;
+  }
 }
 ```
 
@@ -70,9 +70,9 @@ Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blo
 Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification.
 We can do this with the `type` method of the `Notification` extender
 
-* `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
-* `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
-* `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
+- `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
+- `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
+- `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
 
 Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/extend.php):
 
@@ -116,84 +116,84 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
 {
-    /**
-     * @var Post
-     */
-    public $post;
+  /**
+   * @var Post
+   */
+  public $post;
 
-    /**
-     * @var Post
-     */
-    public $reply;
+  /**
+   * @var Post
+   */
+  public $reply;
 
-    /**
-     * @param Post $post
-     * @param Post $reply
-     */
-    public function __construct(Post $post, Post $reply)
-    {
-        $this->post = $post;
-        $this->reply = $reply;
-    }
+  /**
+   * @param Post $post
+   * @param Post $reply
+   */
+  public function __construct(Post $post, Post $reply)
+  {
+    $this->post = $post;
+    $this->reply = $reply;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubject()
-    {
-        return $this->post;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getSubject()
+  {
+    return $this->post;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFromUser()
-    {
-        return $this->reply->user;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getFromUser()
+  {
+    return $this->reply->user;
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getData()
-    {
-        return ['replyNumber' => (int) $this->reply->number];
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getData()
+  {
+    return ['replyNumber' => (int) $this->reply->number];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailView()
-    {
-        return ['text' => 'flarum-mentions::emails.postMentioned'];
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getEmailView()
+  {
+    return ['text' => 'flarum-mentions::emails.postMentioned'];
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailSubject(TranslatorInterface $translator)
-    {
-        return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
-            '{replier_display_name}' => $this->post->user->display_name,
-            '{title}' => $this->post->discussion->title
-        ]);
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function getEmailSubject(TranslatorInterface $translator)
+  {
+    return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
+      '{replier_display_name}' => $this->post->user->display_name,
+      '{title}' => $this->post->discussion->title,
+    ]);
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getType()
-    {
-        return 'postMentioned';
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public static function getType()
+  {
+    return 'postMentioned';
+  }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubjectModel()
-    {
-        return Post::class;
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubjectModel()
+  {
+    return Post::class;
+  }
 }
 ```
 
@@ -213,45 +213,45 @@ use Illuminate\Contracts\Queue\Queue;
 
 class PusherNotificationDriver implements NotificationDriverInterface
 {
-    /**
-     * @var Queue
-     */
-    protected $queue;
+  /**
+   * @var Queue
+   */
+  protected $queue;
 
-    public function __construct(Queue $queue)
-    {
-        $this->queue = $queue;
-    }
+  public function __construct(Queue $queue)
+  {
+    $this->queue = $queue;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function send(BlueprintInterface $blueprint, array $users): void
-    {
-        // The `send` method is responsible for determining any notifications need to be sent.
-        // If not (for example, if there are no users to send to), there's no point in scheduling a job.
-        // We HIGHLY recommend that notifications are sent via a queue job for performance reasons.
-        if (count($users)) {
-            $this->queue->push(new SendPusherNotificationsJob($blueprint, $users));
-        }
+  /**
+   * {@inheritDoc}
+   */
+  public function send(BlueprintInterface $blueprint, array $users): void
+  {
+    // The `send` method is responsible for determining any notifications need to be sent.
+    // If not (for example, if there are no users to send to), there's no point in scheduling a job.
+    // We HIGHLY recommend that notifications are sent via a queue job for performance reasons.
+    if (count($users)) {
+      $this->queue->push(new SendPusherNotificationsJob($blueprint, $users));
     }
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function registerType(string $blueprintClass, array $driversEnabledByDefault): void
-    {
-        // This method is generally used to register a user preference for this notification.
-        // In the case of pusher, there's no need for this.
-    }
+  /**
+   * {@inheritDoc}
+   */
+  public function registerType(string $blueprintClass, array $driversEnabledByDefault): void
+  {
+    // This method is generally used to register a user preference for this notification.
+    // In the case of pusher, there's no need for this.
+  }
 }
 ```
 
 Notification drivers are also registered via the `Notification` extender, using the `driver` method. The following arguments are provided
 
-* `$driverName`: A unique, human readable name for the driver
-* `$driverClass`: The class static of the driver (example: `PostSerializer::class`)
-* `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
+- `$driverName`: A unique, human readable name for the driver
+- `$driverClass`: The class static of the driver (example: `PostSerializer::class`)
+- `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
 
 Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
 
@@ -277,12 +277,12 @@ Similar to the notification blueprint, we need tell Flarum how we want our notif
 
 First, create a class that extends the notification component. Then, there are 4 functions to add:
 
-* `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
-* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
-* `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
-* `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
+- `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
+- `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
+- `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
+- `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
 
-*Let take a look at our example shall we?*
+_Let take a look at our example shall we?_
 
 From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
@@ -304,7 +304,7 @@ export default class NewPostNotification extends Notification {
   }
 
   content() {
-    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.sender()});
+    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', { user: this.attrs.notification.sender() });
   }
 }
 ```
@@ -337,25 +337,26 @@ app.initializers.add('flarum-likes', () => {
     items.add('postLiked', {
       name: 'postLiked',
       icon: 'far fa-thumbs-up',
-      label: app.translator.trans('flarum-likes.forum.settings.notify_post_liked_label')
+      label: app.translator.trans('flarum-likes.forum.settings.notify_post_liked_label'),
     });
   });
 });
 ```
+
 Simply add the name of your notification (from the blueprint), an icon you want to show, and a description of the notification and you are all set!
 
 ## Sending Notifications
 
-*Data doesn't just appear in the database magically*
+_Data doesn't just appear in the database magically_
 
 Now that you have your notification all setup, it's time to actually send the notification to the user!
 
 Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/core/blob/master/src/Notification/NotificationSyncer.php)'s sync function. It accepts 2 arguments:
 
-* `BlueprintInterface`: This is the blueprint to be instantiated we made in the first step, you must include all variables that are used on the blueprint (example: if a user likes a post you must include the `user` model that liked the post).
-* `$users`: This accepts an array of `user` modals that should receive the notification
+- `BlueprintInterface`: This is the blueprint to be instantiated we made in the first step, you must include all variables that are used on the blueprint (example: if a user likes a post you must include the `user` model that liked the post).
+- `$users`: This accepts an array of `user` modals that should receive the notification
 
-*Whats that? You want to be able to delete notifications too?* The easiest way to remove a notification is to pass the exact same data as sending a notification, except with an empty array of recipients.
+_Whats that? You want to be able to delete notifications too?_ The easiest way to remove a notification is to pass the exact same data as sending a notification, except with an empty array of recipients.
 
 Lets take a look at our **final** example for today:
 
@@ -377,41 +378,38 @@ use Illuminate\Contracts\Events\Dispatcher;
 
 class SendNotificationWhenPostIsLiked
 {
-    protected $notifications;
+  protected $notifications;
 
-    public function __construct(NotificationSyncer $notifications)
-    {
-        $this->notifications = $notifications;
-    }
+  public function __construct(NotificationSyncer $notifications)
+  {
+    $this->notifications = $notifications;
+  }
 
-    public function subscribe(Dispatcher $events)
-    {
-        $events->listen(PostWasLiked::class, [$this, 'whenPostWasLiked']);
-        $events->listen(PostWasUnliked::class, [$this, 'whenPostWasUnliked']);
-    }
+  public function subscribe(Dispatcher $events)
+  {
+    $events->listen(PostWasLiked::class, [$this, 'whenPostWasLiked']);
+    $events->listen(PostWasUnliked::class, [$this, 'whenPostWasUnliked']);
+  }
 
-    public function whenPostWasLiked(PostWasLiked $event)
-    {
-        $this->syncNotification($event->post, $event->user, [$event->post->user]);
-    }
+  public function whenPostWasLiked(PostWasLiked $event)
+  {
+    $this->syncNotification($event->post, $event->user, [$event->post->user]);
+  }
 
-    public function whenPostWasUnliked(PostWasUnliked $event)
-    {
-        $this->syncNotification($event->post, $event->user, []);
-    }
+  public function whenPostWasUnliked(PostWasUnliked $event)
+  {
+    $this->syncNotification($event->post, $event->user, []);
+  }
 
-    public function syncNotification(Post $post, User $user, array $recipients)
-    {
-        if ($post->user->id != $user->id) {
-            $this->notifications->sync(
-                new PostLikedBlueprint($post, $user),
-                $recipients
-            );
-        }
+  public function syncNotification(Post $post, User $user, array $recipients)
+  {
+    if ($post->user->id != $user->id) {
+      $this->notifications->sync(new PostLikedBlueprint($post, $user), $recipients);
     }
+  }
 }
 ```
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 
-*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!
+_Tried everything?_ Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!

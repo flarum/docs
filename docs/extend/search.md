@@ -5,7 +5,7 @@ Flarum treats searching and filtering as parallel but distinct processes. Which 
 - Filtering is applied when the `filter[q]` query param is omitted. Filters represent **structured** queries: for instance, you might want to only retrieve discussions in a certain category, or users who registered before a certain date. Filtering computes results based entirely on `filter[KEY] = VALUE` query parameters.
 - Searching is applied when the `filter[q]` query param is included. Searches represent **unstructured** queries: the user submits an arbitrary string, and data records that "match" it are returned. For instance, you might want to search discussions based on the content of their posts, or users based on their username. Searching computes results based solely on parsing the `filter[q]` query param: all other `filter[KEY] = VALUE` params are ignored when searching. It's important to note that searches aren't entirely unstructured: the dataset being searched can be constrained by gambits (which are very similar to filters, and will be explained later).
 
-This distinction is important because searches and filters have very different use cases: filters represent *browsing*: that is, the user is passively looking through some category of content. In contrast, searches represent, well, *searching*: the user is actively looking for content based on some criteria.
+This distinction is important because searches and filters have very different use cases: filters represent _browsing_: that is, the user is passively looking through some category of content. In contrast, searches represent, well, _searching_: the user is actively looking for content based on some criteria.
 
 Flarum implements searching and filtering via per-model `Searcher` and `Filterer` classes (discussed in more detail below). Both classes accept a [`Flarum\Query\QueryCriteria`](https://api.docs.flarum.org/php/master/flarum/query/querycriteria) instance (a wrapper around the user and query params), and return a [`Flarum\Query\QueryResults`](https://api.docs.flarum.org/php/master/flarum/query/queryresults) instance (a wrapper around an Eloquent model collection). This common interface means that adding search/filter support to models is quite easy.
 
@@ -22,7 +22,7 @@ Your classes can implement both interface; see Flarum core's [`UnreadFilterGambi
 
 :::tip Query Builder vs Eloquent Builder
 
-`Filter`s, `Gambit`s, filter mutators, and gambit mutators (all explained below) receive a "state" parameter, which wraps 
+`Filter`s, `Gambit`s, filter mutators, and gambit mutators (all explained below) receive a "state" parameter, which wraps
 
 :::
 
@@ -52,17 +52,17 @@ use Flarum\Filter\FilterState;
 
 class CountryFilter implements FilterInterface
 {
-    public function getFilterKey(): string
-    {
-        return 'country';
-    }
+  public function getFilterKey(): string
+  {
+    return 'country';
+  }
 
-    public function filter(FilterState $filterState, string $filterValue, bool $negate)
-    {
-        $country = trim($filterValue, '"');
+  public function filter(FilterState $filterState, string $filterValue, bool $negate)
+  {
+    $country = trim($filterValue, '"');
 
-        $filterState->getQuery()->where('users.country', $negate ? '!=' : '=', $country);
-    }
+    $filterState->getQuery()->where('users.country', $negate ? '!=' : '=', $country);
+  }
 }
 ```
 
@@ -81,10 +81,10 @@ use Flarum\Query\QueryCriteria;
 
 class OnlySameCountryFilterMutator
 {
-    public function __invoke(FilterState $filterState, QueryCriteria $queryCriteria)
-    {
-        $filterState->getQuery()->where('users.country', $filterState->getActor()->country);
-    }
+  public function __invoke(FilterState $filterState, QueryCriteria $queryCriteria)
+  {
+    $filterState->getQuery()->where('users.country', $filterState->getActor()->country);
+  }
 }
 ```
 
@@ -132,17 +132,17 @@ use Flarum\Search\SearchState;
 
 class CountryGambit extends AbstractRegexGambit
 {
-    public function getGambitPattern(): string
-    {
-        return 'country:(.+)';
-    }
+  public function getGambitPattern(): string
+  {
+    return 'country:(.+)';
+  }
 
-    public function conditions(SearchState $search, array $matches, bool $negate)
-    {
-        $country = trim($matches[1], '"');
+  public function conditions(SearchState $search, array $matches, bool $negate)
+  {
+    $country = trim($matches[1], '"');
 
-        $search->getQuery()->where('users.country', $negate ? '!=' : '=', $country);
-    }
+    $search->getQuery()->where('users.country', $negate ? '!=' : '=', $country);
+  }
 }
 ```
 
@@ -176,10 +176,10 @@ use Flarum\Search\SearchState;
 
 class OnlySameCountrySearchMutator
 {
-    public function __invoke(SearchState $searchState, QueryCriteria $queryCriteria)
-    {
-        $searchState->getQuery()->where('users.country', $filterState->getActor()->country);
-    }
+  public function __invoke(SearchState $searchState, QueryCriteria $queryCriteria)
+  {
+    $searchState->getQuery()->where('users.country', $filterState->getActor()->country);
+  }
 }
 ```
 

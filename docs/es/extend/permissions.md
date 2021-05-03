@@ -18,7 +18,7 @@ Los administradores también pueden crear nuevos grupos a través del panel de a
 
 ## Permisos
 
-Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de 
+Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de
 pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo).
 En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
 
@@ -55,13 +55,17 @@ Podemos hacer esto extendiendo el componente frontend `flarum/components/Permiss
 import { extend } from 'flarum/extend';
 import PermissionGrid from 'flarum/components/PermissionGrid';
 
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Clases CSS para el icono. Generalmente en formato fontawesome, aunque también puedes usar tu propio css 
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La cadena del permiso.
-    }, 95);
+export default function () {
+  extend(PermissionGrid.prototype, 'moderateItems', (items) => {
+    items.add(
+      'tag',
+      {
+        icon: 'fas fa-tag', // Clases CSS para el icono. Generalmente en formato fontawesome, aunque también puedes usar tu propio css
+        label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
+        permission: 'discussion.tag', // La cadena del permiso.
+      },
+      95
+    );
   });
 }
 ```

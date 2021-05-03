@@ -17,15 +17,15 @@ use Flarum\Settings\SettingsRepositoryInterface;
 
 class ClassInterfacesWithSettings
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
+  /**
+   * @var SettingsRepositoryInterface
+   */
+  protected $settings;
 
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
-    }
+  public function __construct(SettingsRepositoryInterface $settings)
+  {
+    $this->settings = $settings;
+  }
 }
 ```
 
@@ -80,15 +80,15 @@ Esto se puede hacer a través del extensor `Settings`. Por ejemplo:
 use Flarum\Extend;
 
 return [
-   (new Extend\Settings)
-      ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
-      ->serializeToForum('myCoolSettingModified', 'my.cool.setting.key', function ($retrievedValue) {
-        // Este tercer argumento es opcional, y nos permite pasar la configuración recuperada a través de alguna lógica personalizada.
-        // En este ejemplo, le añadiremos una cadena.
+  (new Extend\Settings())
+    ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
+    ->serializeToForum('myCoolSettingModified', 'my.cool.setting.key', function ($retrievedValue) {
+      // Este tercer argumento es opcional, y nos permite pasar la configuración recuperada a través de alguna lógica personalizada.
+      // En este ejemplo, le añadiremos una cadena.
 
-        return "My Cool Setting: $retrievedValue";
-      }),
-]
+      return "My Cool Setting: $retrievedValue";
+    }),
+];
 ```
 
 Ahora, el ajuste `my.cool.setting.key` será accesible en el frontend como `app.forum.attribute("myCoolSetting")`, y nuestro valor modificado será accesible a través de `app.forum.attribute("myCoolSettingModified")`.

@@ -49,7 +49,6 @@ In mithril 0.2, we had 2 "lifecycle hooks":
 
 `config`, which ran when components were created, and on every redraw.
 
-
 Mithril 2 has the following hooks; each of which take `vnode` as an argument:
 
 - `oninit`
@@ -80,7 +79,7 @@ class OldMithrilComponent extends Component {
 
     context.onunload = () => {
       console.log('Code to run when the component is removed from the DOM');
-    }
+    };
   }
 
   view() {
@@ -133,7 +132,7 @@ class NewMithrilComponent extends Component {
   }
 
   onremove(vnode) {
-      console.log('Code to run when the component is removed from the DOM');
+    console.log('Code to run when the component is removed from the DOM');
   }
 }
 ```
@@ -156,22 +155,24 @@ For example:
 
 ```js
 // Mithril 0.2
-app.routes.new_page = { path: '/new', component: NewPage.component() }
+app.routes.new_page = { path: '/new', component: NewPage.component() };
 
 // Mithril 2.0
-app.routes.new_page = { path: '/new', component: NewPage }
+app.routes.new_page = { path: '/new', component: NewPage };
 ```
 
 Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed. The `Link` component should be used instead.
 
 ```js
 // Mithril 0.2
-<a href="/path" config={m.route}>Link Content</a>
+<a href="/path" config={m.route}>
+  Link Content
+</a>;
 
 // Mithril 2
 import Link from 'flarum/components/Link';
 
-<Link href="/path">Link Content</Link>
+<Link href="/path">Link Content</Link>;
 ```
 
 You can also use `Link` to define external links, which will just render as plain `<a href="url">Children</a>` html links.
@@ -219,7 +220,7 @@ For examples and other AJAX changes, see [the mithril documentation](https://mit
 // Mithril 0.2
 const deferred = m.deferred();
 
-app.store.find('posts').then(result => deferred.resolve(result));
+app.store.find('posts').then((result) => deferred.resolve(result));
 
 return deferred.promise;
 
@@ -253,10 +254,10 @@ class ParentComponent extends Component {
   view() {
     return (
       <div>
-        <button onclick={() => this.child.counter += 1}></button>
+        <button onclick={() => (this.child.counter += 1)}></button>
         {this.child.render()}
       </div>
-    )
+    );
   }
 }
 ```
@@ -281,10 +282,10 @@ class ParentComponent extends Component {
   view() {
     return (
       <div>
-        <button onclick={() => this.counter += 1}></button>
+        <button onclick={() => (this.counter += 1)}></button>
         <ChildComponent counter={this.counter}></ChildComponent>
       </div>
-    )
+    );
   }
 }
 ```
@@ -309,21 +310,23 @@ class Counter {
 
 app.counter = new Counter();
 
-extend(HeaderSecondary.prototype, 'items', function(items) {
-  items.add('counterDisplay',
+extend(HeaderSecondary.prototype, 'items', function (items) {
+  items.add(
+    'counterDisplay',
     <div>
       <p>Counter: {app.counter.getCount()}</p>
     </div>
   );
-})
+});
 
-extend(HeaderPrimary.prototype, 'items', function(items) {
-  items.add('counterButton',
+extend(HeaderPrimary.prototype, 'items', function (items) {
+  items.add(
+    'counterButton',
     <div>
       <button onclick={() => app.counter.increaseCounter()}>Increase Counter</button>
     </div>
   );
-})
+});
 ```
 
 This "state pattern" can be found throughout core. Some non-trivial examples are:
@@ -340,13 +343,13 @@ This "state pattern" can be found throughout core. Some non-trivial examples are
 Previously, modals could be opened by providing a `Modal` component instance:
 
 ```js
-app.modal.show(new LoginModal(identification: 'prefilledUsername'));
+app.modal.show(new LoginModal((identification: 'prefilledUsername')));
 ```
 
 Since we don't store component instances anymore, we pass in the component class and any attrs separately.
 
 ```js
-app.modal.show(LoginModal, {identification: 'prefilledUsername'});
+app.modal.show(LoginModal, { identification: 'prefilledUsername' });
 ```
 
 The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component.
@@ -357,15 +360,15 @@ Any modifications by extensions should accordingly be done to `ModalManagerState
 Previously, alerts could be opened by providing an `Alert` component instance:
 
 ```js
-app.alerts.show(new Alert(type: 'success', children: 'Hello, this is a success alert!'));
+app.alerts.show(new Alert((type: 'success'), (children: 'Hello, this is a success alert!')));
 ```
 
 Since we don't store component instances anymore, we pass in a component class, attrs, children separately. The `show` method has 3 overloads:
 
 ```js
 app.alerts.show('Hello, this is a success alert!');
-app.alerts.show({type: 'success'}, 'Hello, this is a success alert!');
-app.alerts.show(Alert, {type: 'success'}, 'Hello, this is a success alert!');
+app.alerts.show({ type: 'success' }, 'Hello, this is a success alert!');
+app.alerts.show(Alert, { type: 'success' }, 'Hello, this is a success alert!');
 ```
 
 Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert.
@@ -398,10 +401,10 @@ Similarly to Modals and Alerts, `app.composer.load` no longer accepts a componen
 
 ```js
 // Mithril 0.2
-app.composer.load(new DiscussionComposer({user: app.session.user}));
+app.composer.load(new DiscussionComposer({ user: app.session.user }));
 
 // Mithril 2
-app.composer.load(DiscussionComposer, {user: app.session.user})
+app.composer.load(DiscussionComposer, { user: app.session.user });
 ```
 
 Finally, functionality for confirming before unloading a page with an active composer has been moved into the `common/components/ConfirmDocumentUnload` component.
@@ -435,7 +438,7 @@ Switch.component({
     this.user.pushAttributes({ lastSeenAt: null });
     this.preferenceSaver('discloseOnline')(value, component);
   },
-})
+});
 
 // Without preferenceSaver
 Switch.component({
@@ -450,7 +453,7 @@ Switch.component({
     });
   },
   loading: this.discloseOnlineLoading,
-})
+});
 ```
 
 A replacement will eventually be introduced.
@@ -480,7 +483,7 @@ Methods for `disabled` and `viewingEnd` have been added to `forum/states/PostStr
 
 #### SearchState and GlobalSearchState
 
-As with other components, we no longer store instances of `forum/components/Search`. As such, every `Search` component instance should be paired with a `forum/states/SearchState` instance. 
+As with other components, we no longer store instances of `forum/components/Search`. As such, every `Search` component instance should be paired with a `forum/states/SearchState` instance.
 
 At the minimum, `SearchState` contains the following methods:
 
@@ -517,9 +520,7 @@ class CustomComponent extends Component {
 
     this.showContent = false;
 
-    this.subtree = new SubtreeRetainer(
-      () => this.showContent,
-    )
+    this.subtree = new SubtreeRetainer(() => this.showContent);
   }
 
   onbeforeupdate() {
@@ -529,10 +530,12 @@ class CustomComponent extends Component {
   }
 
   view(vnode) {
-    return <div>
-      <button onclick={() => this.showContent = !this.showContent}>Toggle Extra Content</button>
-      <p>Hello World!{this.showContent ? ' Extra Content!' : ''}</p>
-    </div>;
+    return (
+      <div>
+        <button onclick={() => (this.showContent = !this.showContent)}>Toggle Extra Content</button>
+        <p>Hello World!{this.showContent ? ' Extra Content!' : ''}</p>
+      </div>
+    );
   }
 }
 ```
@@ -544,7 +547,11 @@ Previously, some components would have an attrs() method, which provided an exte
 ```js
 class CustomComponent extends Component {
   view() {
-    return <div {...this.attrs()}><p>Hello World!</p></div>;
+    return (
+      <div {...this.attrs()}>
+        <p>Hello World!</p>
+      </div>
+    );
   }
 
   attrs() {
@@ -565,22 +572,25 @@ Previously, an element could be created with child elements by passing those in 
 ```js
 Button.component({
   className: 'Button Button--primary',
-  children: 'Button Text'
+  children: 'Button Text',
 });
 ```
 
 This will no longer work, and will actually result in errors. Instead, the 2nd argument of the `component` method should be used:
 
 ```js
-Button.component({
-  className: 'Button Button--primary'
-}, 'Button Text');
+Button.component(
+  {
+    className: 'Button Button--primary',
+  },
+  'Button Text'
+);
 ```
 
 Children can still be passed in through JSX:
 
 ```js
-<Button className='Button Button--primary'>Button Text</Button>
+<Button className="Button Button--primary">Button Text</Button>
 ```
 
 #### Tag attr
@@ -595,33 +605,37 @@ The `affixSidebar` util has been removed. Instead, if you want to affix a sideba
 ```js
 class OldWay extends Component {
   view() {
-    return <div>
-      <div className="container">
-        <div className="sideNavContainer">
-          <nav className="sideNav" config={affixSidebar}>
-            <p>Affixed Sidebar</p>
-          </nav>
-          <div className="sideNavOffset">Actual Page Content</div>
+    return (
+      <div>
+        <div className="container">
+          <div className="sideNavContainer">
+            <nav className="sideNav" config={affixSidebar}>
+              <p>Affixed Sidebar</p>
+            </nav>
+            <div className="sideNavOffset">Actual Page Content</div>
+          </div>
         </div>
       </div>
-    </div>;
+    );
   }
 }
 
 class NewWay extends Component {
   view() {
-    return <div>
-      <div className="container">
-        <div className="sideNavContainer">
-          <AffixedSidebar>
-            <nav className="sideNav">
-              <p>Affixed Sidebar</p>
-            </nav>
-          </AffixedSidebar>
-          <div className="sideNavOffset">Actual Page Content</div>
+    return (
+      <div>
+        <div className="container">
+          <div className="sideNavContainer">
+            <AffixedSidebar>
+              <nav className="sideNav">
+                <p>Affixed Sidebar</p>
+              </nav>
+            </AffixedSidebar>
+            <div className="sideNavOffset">Actual Page Content</div>
+          </div>
         </div>
       </div>
-    </div>;
+    );
   }
 }
 ```
@@ -702,8 +716,8 @@ So, how do we specify dependencies for an extension? Well, all you need to do is
   "license": "MIT",
   "require": {
     "flarum/core": "^0.1.0-beta.14",
-    "flarum/tags": "^0.1.0-beta.14",  // Will mark tags as a dependency
-    "flarum/mentions": "^0.1.0-beta.14",  // Will mark mentions as a dependency
+    "flarum/tags": "^0.1.0-beta.14", // Will mark tags as a dependency
+    "flarum/mentions": "^0.1.0-beta.14" // Will mark mentions as a dependency
   }
   // other config
 }

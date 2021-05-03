@@ -22,7 +22,7 @@ Le ** estensioni in bundle ** sono funzionalità incluse in Flarum e abilitate p
 
 ** Le estensioni di terze parti ** sono funzionalità create da altri e non sono ufficialmente supportate dal team di Flarum. Possono essere costruite e utilizzate per affrontare casi d'uso più specifici.
 
-Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione in bundle esistente, potrebbe essere appropriato * contribuire al rispettivo progetto * piuttosto che disperdere gli sforzi su una nuova estensione di terze parti. È una buona idea iniziare una discussione sulla [Community di Flarum](https://discuss.flarum.org/) per avere opinioni anche dagli sviluppatori di Flarum.
+Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione in bundle esistente, potrebbe essere appropriato _ contribuire al rispettivo progetto _ piuttosto che disperdere gli sforzi su una nuova estensione di terze parti. È una buona idea iniziare una discussione sulla [Community di Flarum](https://discuss.flarum.org/) per avere opinioni anche dagli sviluppatori di Flarum.
 
 ## Risorse utili
 

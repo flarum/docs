@@ -10,11 +10,11 @@
 
 Flarum 的构成有三层：
 
-* 第一层，**后端**。后端用 [面向对象的 PHP 语言](https://laracasts.com/series/object-oriented-bootcamp-in-php)编写，并通过 [Composer](https://getcomposer.org/) 使用了大量的 [Laravel](https://laravel.com/) 组件和其他资源包。您还需要熟悉 [依赖项注入](https://laravel.com/docs/6.x/container) 的概念，它在整个后端中都有使用。
+- 第一层，**后端**。后端用 [面向对象的 PHP 语言](https://laracasts.com/series/object-oriented-bootcamp-in-php)编写，并通过 [Composer](https://getcomposer.org/) 使用了大量的 [Laravel](https://laravel.com/) 组件和其他资源包。您还需要熟悉 [依赖项注入](https://laravel.com/docs/6.x/container) 的概念，它在整个后端中都有使用。
 
-* 第二层，后端开放的一个 **公共 API**，允许前端客户端与论坛数据进行交互。该接口根据 [JSON:API 规范](https://jsonapi.org/) 构建。
+- 第二层，后端开放的一个 **公共 API**，允许前端客户端与论坛数据进行交互。该接口根据 [JSON:API 规范](https://jsonapi.org/) 构建。
 
-* 第三层，默认的 Web 界面，俗称 **前端**。这是一个使用 API 的 [单页应用](https://en.wikipedia.org/wiki/Single-page_application)，由一个简单的类 React 框架 [Mithril.js](https://mithril.js.org/) 构建。
+- 第三层，默认的 Web 界面，俗称 **前端**。这是一个使用 API 的 [单页应用](https://en.wikipedia.org/wiki/Single-page_application)，由一个简单的类 React 框架 [Mithril.js](https://mithril.js.org/) 构建。
 
 扩展程序通常需要与这三层都进行交互才能有所为。例如，如果您想创建一个可以在用户资料中添加新属性的扩展，则需要在 **后端** 中添加相应的数据库结构，通过 **公共 API** 调用该数据，然后在 **前端** 显示这个数据并允许用户修改它。
 
@@ -22,15 +22,13 @@ Flarum 的构成有三层：
 
 ## 扩展器
 
-为了扩展 Flarum，我们需要用到 **扩展器**，让我们先了解一下它的概念。扩展器其实就是 *声明性* 对象，您可以通过简单的方式描述想要实现的内容（比如向论坛添加新的路由，或者在创建新主题帖时执行某些代码）。
+为了扩展 Flarum，我们需要用到 **扩展器**，让我们先了解一下它的概念。扩展器其实就是 _声明性_ 对象，您可以通过简单的方式描述想要实现的内容（比如向论坛添加新的路由，或者在创建新主题帖时执行某些代码）。
 
 每个扩展器都是不同的，但是大体上长这样：
 
 ```php
 // 注册要交付给前端的 JavaScript 和 CSS 文件
-(new Extend\Frontend('forum'))
-    ->js(__DIR__.'/forum-scripts.js')
-    ->css(__DIR__.'/forum-styles.css')
+(new Extend\Frontend('forum'))->js(__DIR__ . '/forum-scripts.js')->css(__DIR__ . '/forum-styles.css');
 ```
 
 您首先创建一个扩展器实例，然后调用方法以对其进行进一步配置。所有方法都将返回结果到该扩展器本身，因此您只需要通过链式方法调用就可以实现您的整个配置。
@@ -50,10 +48,9 @@ use Flarum\Extend;
 use Flarum\Frontend\Document;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->content(function (Document $document) {
-            $document->head[] = '<script>alert("你好，世界！")</script>';
-        })
+  (new Extend\Frontend('forum'))->content(function (Document $document) {
+    $document->head[] = '<script>alert("你好，世界！")</script>';
+  }),
 ];
 ```
 
@@ -85,55 +82,55 @@ composer config repositories.0 path "packages/*"
 
 ```json
 {
-    "name": "acme/flarum-hello-world",
-    "description": "向世界问好！",
-    "type": "flarum-extension",
-    "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
-    },
-    "autoload": {
-        "psr-4": {"Acme\\HelloWorld\\": "src/"}
-    },
-    "extra": {
-        "flarum-extension": {
-            "title": "Hello World",
-            "icon": {
-                "name": "fas fa-smile",
-                "backgroundColor": "#238c59",
-                "color": "#fff"
-            }
-        }
+  "name": "acme/flarum-hello-world",
+  "description": "向世界问好！",
+  "type": "flarum-extension",
+  "require": {
+    "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+  },
+  "autoload": {
+    "psr-4": { "Acme\\HelloWorld\\": "src/" }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "Hello World",
+      "icon": {
+        "name": "fas fa-smile",
+        "backgroundColor": "#238c59",
+        "color": "#fff"
+      }
     }
+  }
 }
 ```
 
-* **name**，名字。是 Composer 软件包的名字。格式是 `供应商/包名`。
-  * 您需要起一个全世界独一无二的供应商名，或者可以直接沿用 GitHub 的用户名。以本教程为例，这里我们假设 `acme` 是您的供应商名。
-  * 您应该给包 `包名` 加上 `flarum-` 前缀，以指明此包是专门给 Flarum 用的。
+- **name**，名字。是 Composer 软件包的名字。格式是 `供应商/包名`。
 
-* **description**，描述。用一句话描述这个扩展程序的作用是什么。
+  - 您需要起一个全世界独一无二的供应商名，或者可以直接沿用 GitHub 的用户名。以本教程为例，这里我们假设 `acme` 是您的供应商名。
+  - 您应该给包 `包名` 加上 `flarum-` 前缀，以指明此包是专门给 Flarum 用的。
 
-* **type**，类型。只能是 `flarum-extension`。这确保了当别人「require」您的扩展程序时，能被正确识别。
+- **description**，描述。用一句话描述这个扩展程序的作用是什么。
 
-* **require**，依赖。描述您的扩展程序自身的依赖关系。
-  * 您需要在这里指定您的扩展程序所兼容的 Flarum 版本。
-  * 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
+- **type**，类型。只能是 `flarum-extension`。这确保了当别人「require」您的扩展程序时，能被正确识别。
+
+- **require**，依赖。描述您的扩展程序自身的依赖关系。
+
+  - 您需要在这里指定您的扩展程序所兼容的 Flarum 版本。
+  - 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
 
   ::: warning 谨慎指定 Flarum 版本
-  
+
   Flarum 仍处于测试阶段，我们建议您声明只兼容当前的 Flarum 版本。
 
       "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
-      
+
   :::
 
-* **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。示例的 `src` 目录会在您扩展程序项目的根目录，与 vendor 文件夹同级。此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.
+- **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。示例的 `src` 目录会在您扩展程序项目的根目录，与 vendor 文件夹同级。此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.
 
-
-
-* **extra.flarum-extension**，包含一些 Flarum 特有的信息，比如您扩展程序在论坛的显示名称以及图标。
-  * **title** 您的扩展程序的显示名称。
-  * **icon** 是一个定义您扩展程序图标的对象。**name** 属性是 [Font Awesome 图标名](https://fontawesome.com/icons)。剩下的都被用作图标的 `style` 属性。
+- **extra.flarum-extension**，包含一些 Flarum 特有的信息，比如您扩展程序在论坛的显示名称以及图标。
+  - **title** 您的扩展程序的显示名称。
+  - **icon** 是一个定义您扩展程序图标的对象。**name** 属性是 [Font Awesome 图标名](https://fontawesome.com/icons)。剩下的都被用作图标的 `style` 属性。
 
 请参阅 [composer.json 模式](https://getcomposer.org/doc/04-schema.md) 文档，以获取有关可以添加到 `composer.json` 中的其他属性的信息。
 
@@ -153,7 +150,7 @@ composer require acme/flarum-hello-world *@dev
 
 执行完成后，前往您论坛后台管理面板启用插件，最后回到您的论坛。
 
-*whizzing, whirring, metal clunking*
+_whizzing, whirring, metal clunking_
 
 哇！你好，扩展！
 

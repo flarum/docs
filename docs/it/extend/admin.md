@@ -18,18 +18,15 @@ Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con 
 
 ### Raccontare all'API la tua estensione
 
-Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati. 
+Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati.
 
 Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').
 
 Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
 ```js
-
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
+app.initializers.add('interstellar', function (app) {
+  app.extensionData.for('acme-interstellar');
 });
 ```
 
@@ -50,19 +47,15 @@ Per aggiungere un campo, richiama la funzione `registerSetting` dopo `for` su `a
 Ecco un esempio con un elemento switch (booleano):
 
 ```js
-
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerSetting(
-      {
-        setting: 'acme-interstellar.coordinates', // Questa è la chiave con cui verranno salvate le impostazioni nella tabella delle impostazioni nel database.
-        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // L'etichetta da mostrare che consente all'amministratore di sapere cosa fa l'impostazione.
-        type: 'boolean', // Di che tipo di impostazione si tratta, le opzioni valide sono: boolean, text (o qualsiasi altro tipo di tag <input>) e select. 
-      },
-      30 // Opzionale: Priorità
-    )
+app.initializers.add('interstellar', function (app) {
+  app.extensionData.for('acme-interstellar').registerSetting(
+    {
+      setting: 'acme-interstellar.coordinates', // Questa è la chiave con cui verranno salvate le impostazioni nella tabella delle impostazioni nel database.
+      label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // L'etichetta da mostrare che consente all'amministratore di sapere cosa fa l'impostazione.
+      type: 'boolean', // Di che tipo di impostazione si tratta, le opzioni valide sono: boolean, text (o qualsiasi altro tipo di tag <input>) e select.
+    },
+    30 // Opzionale: Priorità
+  );
 });
 ```
 
@@ -81,29 +74,23 @@ Se utilizzi `type: 'select'` l'oggetto ha un aspetto leggermente diverso:
 }
 ```
 
-
 Se vuoi aggiungere qualcosa alle impostazioni come del testo extra o un input più complicato, puoi anche passare un callback come primo argomento che restituisce JSX. Questo callback verrà eseguito nel contesto di [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) e i valori di impostazione non verranno serializzati automaticamente.
 
 ```js
-
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerSetting(function () {
-      if (app.session.user.username() === 'RocketMan') {
-    
-        return (
-          <div className="Form-group">
-            <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
-            <label className="checkbox">
-              <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
-                {app.translator.trans('acme-interstellar.admin.rocket_man_setting_label')}
-            </label>
-          </div>
-        );
-      }
-    })
+app.initializers.add('interstellar', function (app) {
+  app.extensionData.for('acme-interstellar').registerSetting(function () {
+    if (app.session.user.username() === 'RocketMan') {
+      return (
+        <div className="Form-group">
+          <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
+          <label className="checkbox">
+            <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')} />
+            {app.translator.trans('acme-interstellar.admin.rocket_man_setting_label')}
+          </label>
+        </div>
+      );
+    }
+  });
 });
 ```
 
@@ -111,29 +98,27 @@ app.initializers.add('interstellar', function(app) {
 
 Novità nella beta 15, le autorizzazioni ora possono essere trovate in 2 posizioni. Ora puoi visualizzare le autorizzazioni individuali di ciascuna estensione sulla loro pagina. Tutte le autorizzazioni possono ancora essere trovate nella pagina delle autorizzazioni.
 
-Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`. 
+Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`.
 
-Argomenti: 
- * Oggetto autorizzazione
- * Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
- * Priorità di `ItemList`
- 
+Argomenti:
+
+- Oggetto autorizzazione
+- Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
+- Priorità di `ItemList`
+
 Torniamo alla nostra estensione missilistica preferita:
 
 ```js
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerPermission(
-      {
-        icon: 'fas fa-rocket', // Icone Font-Awesome
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etichetta di autorizzazione
-        permission: 'discussion.rocket_fly', // Nome effettivo dell'autorizzazione memorizzato nel database (e utilizzato durante il controllo dell'autorizzazione).
-      }, 
-      'start', // Il permesso di categoria verrà aggiunto alla griglia
-      95 // Opzional: Priorità
-    );
+app.initializers.add('interstellar', function (app) {
+  app.extensionData.for('acme-interstellar').registerPermission(
+    {
+      icon: 'fas fa-rocket', // Icone Font-Awesome
+      label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etichetta di autorizzazione
+      permission: 'discussion.rocket_fly', // Nome effettivo dell'autorizzazione memorizzato nel database (e utilizzato durante il controllo dell'autorizzazione).
+    },
+    'start', // Il permesso di categoria verrà aggiunto alla griglia
+    95 // Opzional: Priorità
+  );
 });
 ```
 
@@ -161,25 +146,18 @@ import ExtensionPage from 'flarum/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {
-    return (
-      <h1>Ciao dalla sezione impostazioni!</h1>
-    )
+    return <h1>Ciao dalla sezione impostazioni!</h1>;
   }
 }
-
 ```
 
 Quindi lancia `registerPage`:
 
 ```js
-
 import StarPage from './components/StarPage';
 
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerPage(StarPage);
+app.initializers.add('interstellar', function (app) {
+  app.extensionData.for('acme-interstellar').registerPage(StarPage);
 });
 ```
 
@@ -193,11 +171,11 @@ Nella beta 15, le pagine di estensione lasciano spazio a informazioni aggiuntive
 
 Per maggiori informationi, guarda [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Descrizione                        | dovein composer.json                       |
-| ---------------------------------  | --------------------------------------     |
-| discuss.flarum.org discussion link | "forum"   all'interno di "support"         |
-| Documentation                      | "docs"    all'interno di "support"         |
-| Support (email)                    | "email"   all'interno di "support"         |
-| Website                            | "homepage" chiave                          |
+| Descrizione                        | dovein composer.json                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------- |
+| discuss.flarum.org discussion link | "forum" all'interno di "support"                                        |
+| Documentation                      | "docs" all'interno di "support"                                         |
+| Support (email)                    | "email" all'interno di "support"                                        |
+| Website                            | "homepage" chiave                                                       |
 | Donate                             | "funding" key block (Nota: verrà utilizzato solo il primo collegamento) |
-| Source                             | "source"  all'interno di "support"         |
+| Source                             | "source" all'interno di "support"                                       |

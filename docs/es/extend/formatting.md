@@ -16,26 +16,26 @@ use s9e\TextFormatter\Parser;
 use s9e\TextFormatter\Renderer;
 
 return [
-    (new Extend\Formatter)
-        // Añadir la configuración del formateador de texto personalizado
-        ->configure(function (Configurator $config) {
-            $config->BBCodes->addFromRepository('B');
-        })
-        // Modificar el texto en bruto antes de analizarlo.
-        // Esta llamada de retorno debe devolver el texto modificado.
-        ->parse(function (Parser $parser, $context, $text) {
-            // lógica personalizada aquí
-            return $newText;
-        })
-        // Modificar el XML a renderizar antes de renderizar.
-        // Esta llamada de retorno debe devolver el nuevo XML.
-        // Por ejemplo, en la extensión de menciones, esto se utiliza para
-        // proporcionar el nombre de usuario y el nombre para mostrar del usuario que está siendo mencionado.
-        // Asegúrese de que el último argumento $request sea nulo (u omitido por completo).
-        ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
-            // lógica personalizada aquí
-            return $newXml;
-        })
+  (new Extend\Formatter())
+    // Añadir la configuración del formateador de texto personalizado
+    ->configure(function (Configurator $config) {
+      $config->BBCodes->addFromRepository('B');
+    })
+    // Modificar el texto en bruto antes de analizarlo.
+    // Esta llamada de retorno debe devolver el texto modificado.
+    ->parse(function (Parser $parser, $context, $text) {
+      // lógica personalizada aquí
+      return $newText;
+    })
+    // Modificar el XML a renderizar antes de renderizar.
+    // Esta llamada de retorno debe devolver el nuevo XML.
+    // Por ejemplo, en la extensión de menciones, esto se utiliza para
+    // proporcionar el nombre de usuario y el nombre para mostrar del usuario que está siendo mencionado.
+    // Asegúrese de que el último argumento $request sea nulo (u omitido por completo).
+    ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
+      // lógica personalizada aquí
+      return $newXml;
+    }),
 ];
 ```
 

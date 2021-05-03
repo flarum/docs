@@ -35,12 +35,12 @@ En Flarum, los archivos de migración deben **devolver un array** con dos funcio
 use Illuminate\Database\Schema\Builder;
 
 return [
-    'up' => function (Builder $schema) {
-        // up migration
-    },
-    'down' => function (Builder $schema) {
-        // down migration
-    }
+  'up' => function (Builder $schema) {
+    // up migration
+  },
+  'down' => function (Builder $schema) {
+    // down migration
+  },
 ];
 ```
 
@@ -48,7 +48,7 @@ Para tareas comunes como la creación de una tabla, o la adición de columnas a 
 
 ### Ciclo de vida de las migraciones
 
-Las migraciones se aplican cuando la extensión se habilita por primera vez o cuando está habilitada y hay algunas migraciones pendientes. Las migraciones ejecutadas se registran en la base de datos, y cuando se encuentran algunas en la carpeta de migraciones de una extensión que no están registradas como completadas todavía, se ejecutarán. 
+Las migraciones se aplican cuando la extensión se habilita por primera vez o cuando está habilitada y hay algunas migraciones pendientes. Las migraciones ejecutadas se registran en la base de datos, y cuando se encuentran algunas en la carpeta de migraciones de una extensión que no están registradas como completadas todavía, se ejecutarán.
 
 Las migraciones también pueden aplicarse manualmente con `php flarum migrate`, que también es necesario para actualizar las migraciones de una extensión ya habilitada. Para deshacer los cambios aplicados por las migraciones, es necesario hacer clic en "Desinstalar" junto a una extensión en la interfaz de administración, o utilizar el comando `php flarum migrate:reset`. No se puede romper nada ejecutando `php flarum migrate` de nuevo si ya has migrado - las migraciones ejecutadas no se ejecutarán de nuevo.
 
@@ -63,7 +63,7 @@ use Flarum\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
 return Migration::createTable('users', function (Blueprint $table) {
-    $table->increments('id');
+  $table->increments('id');
 });
 ```
 
@@ -83,8 +83,8 @@ Para añadir columnas a una tabla existente, utilice el ayudante `Migration::add
 
 ```php
 return Migration::addColumns('users', [
-    'email' => ['string', 'nullable' => true],
-    'discussion_count' => ['integer', 'unsigned' => true]
+  'email' => ['string', 'nullable' => true],
+  'discussion_count' => ['integer', 'unsigned' => true],
 ]);
 ```
 
@@ -174,14 +174,14 @@ use Flarum\Api\Serializer\UserSerializer;
 
 class DiscussionSerializer extends AbstractSerializer
 {
-    protected $type = 'discussions';
+  protected $type = 'discussions';
 
-    protected function getDefaultAttributes($discussion)
-    {
-        return [
-            'title' => $discussion->title,
-        ];
-    }
+  protected function getDefaultAttributes($discussion)
+  {
+    return [
+      'title' => $discussion->title,
+    ];
+  }
 }
 ```
 
@@ -229,12 +229,12 @@ Una vez que hayas definido tus recursos en los serializadores, necesitarás expo
 Siguiendo las convenciones de JSON-API, puedes añadir cinco rutas estándar para tu tipo de recurso utilizando el extensor `Routes`:
 
 ```php
-    (new Extend\Routes('api'))
-        ->get('/tags', 'tags.index', ListTagsController::class)
-        ->get('/tags/{id}', 'tags.show', ShowTagController::class)
-        ->post('/tags', 'tags.create', CreateTagController::class)
-        ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
-        ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
+(new Extend\Routes('api'))
+  ->get('/tags', 'tags.index', ListTagsController::class)
+  ->get('/tags/{id}', 'tags.show', ShowTagController::class)
+  ->post('/tags', 'tags.create', CreateTagController::class)
+  ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
+  ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class);
 ```
 
 El espacio de nombres `Flarum\Api\Controller` contiene una serie de clases abstractas de controladores que puedes extender para implementar fácilmente tus recursos JSON-API.
@@ -250,12 +250,12 @@ use Tobscure\JsonApi\Document;
 
 class ListTagsController extends AbstractListController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        return Tag::all();
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    return Tag::all();
+  }
 }
 ```
 
@@ -271,14 +271,14 @@ use Tobscure\JsonApi\Document;
 
 class ShowTagController extends AbstractShowController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        return Tag::findOrFail($id);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    return Tag::findOrFail($id);
+  }
 }
 ```
 
@@ -294,16 +294,16 @@ use Tobscure\JsonApi\Document;
 
 class CreateTagController extends AbstractCreateController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
-        
-        return Tag::create([
-            'name' => Arr::get($attributes, 'name')
-        ]);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
+
+    return Tag::create([
+      'name' => Arr::get($attributes, 'name'),
+    ]);
+  }
 }
 ```
 
@@ -321,13 +321,13 @@ use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DeleteTagController extends AbstractDeleteController
-{    
-    protected function delete(Request $request)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        Tag::findOrFail($id)->delete();
-    }
+{
+  protected function delete(Request $request)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    Tag::findOrFail($id)->delete();
+  }
 }
 ```
 
@@ -338,7 +338,7 @@ Para incluir las relaciones al **enumerar**, **mostrar** o **crear** su recurso,
 ```php
     // Las relaciones que se incluyen por defecto.
     public $include = ['user'];
-    
+
     // Otras relaciones que están disponibles para ser incluidas.
     public $optionalInclude = ['discussions'];
 ```
@@ -358,7 +358,7 @@ Puede permitir que el número de recursos que se **liste** sea personalizado esp
 ```php
     // El número de registros incluidos por defecto.
     public $limit = 20;
-    
+
     // El número máximo de registros que se pueden solicitar.
     public $maxLimit = 50;
 ```
@@ -381,7 +381,7 @@ Puede permitir que se personalice el orden de clasificación de los recursos que
 ```php
     // El campo de clasificación por defecto y el orden a utilizar.
     public $sort = ['name' => 'asc'];
-    
+
     // Los campos que están disponibles para ser ordenados.
     public $sortFields = ['firstName', 'lastName'];
 ```
@@ -393,7 +393,7 @@ $sort = $this->extractSort($request);
 $query = Tag::query();
 
 foreach ($sort as $field => $order) {
-    $query->orderBy(snake_case($field), $order);
+  $query->orderBy(snake_case($field), $order);
 }
 
 return $query->get();
@@ -409,19 +409,19 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->setSerializer(MyDiscussionSerializer::class)
-        ->addInclude('user')
-        ->addOptionalInclude('posts')
-        ->setLimit(20)
-        ->setMaxLimit(50)
-        ->setSort(['name' => 'asc'])
-        ->addSortField('firstName')
-        ->prepareDataQuery(function ($controller) {
-            // Añade aquí la lógica personalizada para modificar el controlador
-            // antes de que se ejecuten las consultas de datos.
-        })
-]
+  (new Extend\ApiController(ListDiscussionsController::class))
+    ->setSerializer(MyDiscussionSerializer::class)
+    ->addInclude('user')
+    ->addOptionalInclude('posts')
+    ->setLimit(20)
+    ->setMaxLimit(50)
+    ->setSort(['name' => 'asc'])
+    ->addSortField('firstName')
+    ->prepareDataQuery(function ($controller) {
+      // Añade aquí la lógica personalizada para modificar el controlador
+      // antes de que se ejecuten las consultas de datos.
+    }),
+];
 ```
 
 El extensor `ApiController` también puede utilizarse para ajustar los datos antes de la serialización
@@ -432,11 +432,10 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->prepareDataForSerialization(function ($controller, $data, $request, $document) {
-            $data->load('myCustomRelation');
-        }),
-]
+  (new Extend\ApiController(ListDiscussionsController::class))->prepareDataForSerialization(function ($controller, $data, $request, $document) {
+    $data->load('myCustomRelation');
+  }),
+];
 ```
 
 ## Modelos Frontend
@@ -448,9 +447,10 @@ Ahora que has expuesto tus datos en el JSON:API de Flarum, es finalmente el mome
 El frontend de Flarum contiene un `store` de datos local que proporciona una interfaz para interactuar con el JSON:API. Puedes recuperar recursos de la API usando el método `find`, que siempre devuelve una promesa:
 
 <!-- import { store } from '@flarum/core/forum'; -->
+
 ```js
 // GET /api/discussions?sort=createdAt
-app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
+app.store.find('discussions', { sort: 'createdAt' }).then(console.log);
 
 // GET /api/discussions/123
 app.store.find('discussions', 123).then(console.log);
@@ -478,6 +478,7 @@ Puede obtener más información sobre el almacén en nuestra [documentación de 
 Si has añadido un nuevo tipo de recurso, tendrás que definir un nuevo modelo para él. Los modelos deben extender la clase `Model` y redefinir los atributos y relaciones del recurso:
 
 <!-- import { Model } from '@flarum/core/forum'; -->
+
 ```js
 import Model from 'flarum/Model';
 
@@ -535,12 +536,9 @@ También puede guardar las relaciones pasándolas en una clave `relationships`. 
 ```js
 user.save({
   relationships: {
-    groups: [
-      store.getById('groups', 1),
-      store.getById('groups', 2)
-    ]
-  }
-})
+    groups: [store.getById('groups', 1), store.getById('groups', 2)],
+  },
+});
 ```
 
 ### Creación de nuevos recursos

@@ -11,11 +11,10 @@ Aquí hay un ejemplo rápido de [Flarum English](https://github.com/flarum/lang-
 ```php
 <?php
 
-return new Flarum\Extend\LanguagePack;
+return new Flarum\Extend\LanguagePack();
 ```
 
-*Fácil, ¿verdad?*
-
+_Fácil, ¿verdad?_
 
 ### Paquetes de Idiomas
 
@@ -24,7 +23,7 @@ Sin embargo, el proceso es un poco diferente para los paquetes de idiomas. Con u
 ```php
 <?php
 
-return new Flarum\Extend\LanguagePack;
+return new Flarum\Extend\LanguagePack();
 ```
 
 El `composer.json` también tendrá que ser actualizado. Ahora necesita un objeto informativo `flarum-locale` en `extra`, como `flarum-extension`. Puede simplemente insertar lo siguiente debajo del valor de `flarum-extension` mientras permanece dentro de `extra`:

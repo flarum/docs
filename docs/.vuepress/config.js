@@ -1,6 +1,6 @@
 const locales = require('./config/locales');
 
-module.exports = ctx => ({
+module.exports = (ctx) => ({
   base: '/',
 
   head: require('./config/head'),
@@ -10,21 +10,25 @@ module.exports = ctx => ({
 
   head: [
     ['link', { href: 'https://fonts.googleapis.com/css2?family=Mukta:wght@200;400;600&amp;display=swap', rel: 'stylesheet' }],
-    ['script', {id: "scriptImporter"}, `
+    [
+      'script',
+      { id: 'scriptImporter' },
+      `
         (function() { 
         var script = document.createElement("script"); 
         script.src = "/js/i18n.js";
         setTimeout(() => document.body.append(script))
         })(); 
-    `]
+    `,
+    ],
   ],
 
   themeConfig: {
-    logo: "/logo-docs.svg",
+    logo: '/logo-docs.svg',
 
     algolia: ctx.isProd && {
-        apiKey: '8f760cdb850b1e696b72329eed96b01b',
-        indexName: 'flarum'
+      apiKey: '8f760cdb850b1e696b72329eed96b01b',
+      indexName: 'flarum',
     },
     searchPlaceholder: 'Search Docs',
 
@@ -34,4 +38,4 @@ module.exports = ctx => ({
 
     locales: locales.theme(),
   },
-})
+});

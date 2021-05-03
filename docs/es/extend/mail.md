@@ -1,6 +1,6 @@
 # Correo
 
-Además de los [controladores por defecto en el núcleo](../mail.md), Flarum permite añadir nuevos controladores de correo a través de extensores. Para crear su propio controlador de correo, necesitará crear una clase que implemente ``Flarum\Mail\DriverInterface``. Flarum se encarga de proporcionar la configuración del correo electrónico: sólo tiene que declarar la configuración que necesita, y los valores por defecto, en `availableSettings`.
+Además de los [controladores por defecto en el núcleo](../mail.md), Flarum permite añadir nuevos controladores de correo a través de extensores. Para crear su propio controlador de correo, necesitará crear una clase que implemente `Flarum\Mail\DriverInterface`. Flarum se encarga de proporcionar la configuración del correo electrónico: sólo tiene que declarar la configuración que necesita, y los valores por defecto, en `availableSettings`.
 
 Por ejemplo:
 
@@ -13,35 +13,37 @@ use Swift_Transport;
 
 class MailgunDriver implements DriverInterface
 {
-    public function availableSettings(): array
-    {
-        return [
-            'setting_one' => '',
-            'setting_two' => 'defaultValue',
-            'dropdown_setting' => [
-                'option_one_val' => 'Option One Display',
-                'option_two_val' => 'Option Two Display',
-            ],
-        ];
-    }
+  public function availableSettings(): array
+  {
+    return [
+      'setting_one' => '',
+      'setting_two' => 'defaultValue',
+      'dropdown_setting' => [
+        'option_one_val' => 'Option One Display',
+        'option_two_val' => 'Option Two Display',
+      ],
+    ];
+  }
 
-    public function validate(SettingsRepositoryInterface $settings, Factory $validator): MessageBag
-    {
-        $validator->make($settings->all(), [
-            'setting_one' => 'required',
-            'setting_two' => 'nullable|integer',
-        ])->errors();
-    }
+  public function validate(SettingsRepositoryInterface $settings, Factory $validator): MessageBag
+  {
+    $validator
+      ->make($settings->all(), [
+        'setting_one' => 'required',
+        'setting_two' => 'nullable|integer',
+      ])
+      ->errors();
+  }
 
-    public function canSend(): bool
-    {
-        return true;
-    }
+  public function canSend(): bool
+  {
+    return true;
+  }
 
-    public function buildTransport(SettingsRepositoryInterface $settings): Swift_Transport
-    {
-        // Devuelve un transporte de correo que implementa Swift Transport
-    }
+  public function buildTransport(SettingsRepositoryInterface $settings): Swift_Transport
+  {
+    // Devuelve un transporte de correo que implementa Swift Transport
+  }
 }
 ```
 
@@ -53,7 +55,7 @@ use YourNamespace\Mail\CustomDriver;
 
 return [
   // Otros extensores
-  (new Extend\Mail())->driver(CustomDriver::class)
+  (new Extend\Mail())->driver(CustomDriver::class),
   // Otros extensores
 ];
 ```

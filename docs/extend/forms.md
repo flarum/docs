@@ -21,10 +21,9 @@ import FieldSet from 'flarum/common/components/FieldSet';
 import Button from 'flarum/common/components/Button';
 import Switch from 'flarum/common/components/Switch';
 
-
 class FormComponent extends Component {
   oninit(vnode) {
-    this.textInput = "";
+    this.textInput = '';
     this.booleanInput = false;
   }
 
@@ -32,14 +31,12 @@ class FormComponent extends Component {
     return (
       <form onsubmit={this.onsubmit.bind(this)}>
         <FieldSet label={app.translator.trans('fake-extension.form.fieldset_label')}>
-          <input className="FormControl" value={this.textInput} oninput={e => this.textInput = e.target.value}>
-          </input>
-          <Switch state={this.booleanInput} onchange={val => this.booleanInput = val}>
-          </Switch>
+          <input className="FormControl" value={this.textInput} oninput={(e) => (this.textInput = e.target.value)}></input>
+          <Switch state={this.booleanInput} onchange={(val) => (this.booleanInput = val)}></Switch>
         </FieldSet>
         <Button type="submit">{app.translator.trans('core.admin.basics.submit_button')}</Button>
       </form>
-    )
+    );
   }
 
   onsubmit() {
@@ -50,7 +47,6 @@ class FormComponent extends Component {
 
 Don't forget to use [translations](translate.md)!
 
-
 ## Streams, bidi, and withAttr
 
 Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`.
@@ -60,11 +56,10 @@ Its basic usage is:
 ```js
 import Stream from 'flarum/common/utils/Stream';
 
-
-const value = Stream("hello!");
-value() === "hello!"; // true
-value("world!");
-value() === "world!"; // true
+const value = Stream('hello!');
+value() === 'hello!'; // true
+value('world!');
+value() === 'world!'; // true
 ```
 
 In Flarum forms, streams are frequently used together with the bidi attr.

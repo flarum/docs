@@ -8,11 +8,11 @@ Routing happens on both the PHP backend and the JavaScript frontend.
 
 On the backend, Flarum has three collections of routes:
 
-* `forum` These routes are accessible under `yourforum.com/`. They include routes that show pages in the frontend (like `yourforum.com/d/123-title`) and other utility routes (like the reset password route).
+- `forum` These routes are accessible under `yourforum.com/`. They include routes that show pages in the frontend (like `yourforum.com/d/123-title`) and other utility routes (like the reset password route).
 
-* `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
+- `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
 
-* `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
+- `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
 
 ### Defining Routes
 
@@ -20,9 +20,9 @@ You can add routes to any of these collections using the `Routes` extender. Pass
 
 There are methods to register routes for any HTTP request method: `get`, `post`, `put`, `patch`, and `delete`. All of these methods accept three arguments:
 
-* `$path` The route path using [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax.
-* `$name` A unique name for the route, used for generating URLs. To avoid conflicts with other extensions, you should use your vendor name as a namespace.
-* `$handler` The name of the controller class that will handle the request. This will be resolved through the container.
+- `$path` The route path using [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax.
+- `$name` A unique name for the route, used for generating URLs. To avoid conflicts with other extensions, you should use your vendor name as a namespace.
+- `$handler` The name of the controller class that will handle the request. This will be resolved through the container.
 
 ```php
 <?php
@@ -30,10 +30,7 @@ There are methods to register routes for any HTTP request method: `get`, `post`,
 use Flarum\Extend;
 use Acme\HelloWorld\HelloWorldController;
 
-return [
-    (new Extend\Routes('forum'))
-        ->get('/hello-world', 'acme.hello-world', HelloWorldController::class)
-];
+return [(new Extend\Routes('forum'))->get('/hello-world', 'acme.hello-world', HelloWorldController::class)];
 ```
 
 ### Controllers
@@ -52,10 +49,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class HelloWorldController implements RequestHandlerInterface
 {
-    public function handle(Request $request): Response
-    {
-        return new HtmlResponse('<h1>Hello, world!</h1>');
-    }
+  public function handle(Request $request): Response
+  {
+    return new HtmlResponse('<h1>Hello, world!</h1>');
+  }
 }
 ```
 
@@ -76,8 +73,7 @@ The `handle` method of a Controller is the code that runs when someone visits yo
 Sometimes you will need to capture segments of the URI within your route. You may do so by defining route parameters using the [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax:
 
 ```php
-    (new Extend\Routes('forum'))
-        ->get('/user/{id}', 'acme.user', UserController::class)
+(new Extend\Routes('forum'))->get('/user/{id}', 'acme.user', UserController::class);
 ```
 
 The values of these parameters will be merged with the request's query params, which you can access in your controller by calling `$request->getQueryParams()`:
@@ -118,19 +114,19 @@ Then, inject the factory into your controller and render your view into an `Html
 ```php
 class HelloWorldController implements RequestHandlerInterface
 {
-    protected $view;
-    
-    public function __construct(Factory $view)
-    {
-        $this->view = $view;
-    }
-    
-    public function handle(Request $request): Response
-    {
-        $view = $this->view->make('acme.hello-world::greeting');
-        
-        return new HtmlResponse($view->render());
-    }
+  protected $view;
+
+  public function __construct(Factory $view)
+  {
+    $this->view = $view;
+  }
+
+  public function handle(Request $request): Response
+  {
+    $view = $this->view->make('acme.hello-world::greeting');
+
+    return new HtmlResponse($view->render());
+  }
 }
 ```
 
@@ -145,8 +141,7 @@ Adding routes to the frontend actually requires you to register them on _both_ t
 On the backend, instead of adding your frontend route via the `Routes` extender, you should use the `Frontend` extender's `route` method. This always assumes `GET` as the method, and accepts a route path and name as the first two arguments:
 
 ```php
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users')
+(new Extend\Frontend('forum'))->route('/users', 'acme.users');
 ```
 
 Now when `yourforum.com/users` is visited, the forum frontend will be displayed. However, since the frontend doesn't yet know about the `users` route, the discussion list will still be rendered.
@@ -223,10 +218,10 @@ import Link from 'flarum/common/components/Link';
 
 Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
 
-* Changing the `<title>` of the page
-* Adding external JavaScript and CSS resources
-* Adding SEO content and `<meta>` tags
-* Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
+- Changing the `<title>` of the page
+- Adding external JavaScript and CSS resources
+- Adding SEO content and `<meta>` tags
+- Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
 
 You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 
@@ -235,10 +230,9 @@ use Flarum\Frontend\Document;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 return [
-    (new Extend\Frontend('forum'))
-        ->content(function (Document $document, Request $request) {
-            $document->head[] = '<script>alert("Hello, world!")</script>';
-        })
+  (new Extend\Frontend('forum'))->content(function (Document $document, Request $request) {
+    $document->head[] = '<script>alert("Hello, world!")</script>';
+  }),
 ];
 ```
 
@@ -246,9 +240,8 @@ You can also add content onto your frontend route registrations:
 
 ```php
 return [
-    (new Extend\Frontend('forum'))
-        ->route('/users', 'acme.users', function (Document $document, Request $request) {
-            $document->title = 'Users';
-        })
+  (new Extend\Frontend('forum'))->route('/users', 'acme.users', function (Document $document, Request $request) {
+    $document->title = 'Users';
+  }),
 ];
 ```

@@ -1,6 +1,6 @@
 # API and Data Flow
 
-In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again. 
+In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
 
 ## API Request Lifecycle
 
@@ -20,7 +20,7 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 ## API Endpoints
 
 We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend.
-We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints. 
+We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
 
 As per the JSON:API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
 
@@ -33,12 +33,12 @@ As per the JSON:API convention, we'll want to add separate endpoints for each op
 We'll go over each type of controler shortly, but once they're written, you can add these five standard endpoints (or a subset of them) using the `Routes` extender:
 
 ```php
-    (new Extend\Routes('api'))
-        ->get('/tags', 'tags.index', ListTagsController::class)
-        ->get('/tags/{id}', 'tags.show', ShowTagController::class)
-        ->post('/tags', 'tags.create', CreateTagController::class)
-        ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
-        ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
+(new Extend\Routes('api'))
+  ->get('/tags', 'tags.index', ListTagsController::class)
+  ->get('/tags/{id}', 'tags.show', ShowTagController::class)
+  ->post('/tags', 'tags.create', CreateTagController::class)
+  ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
+  ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class);
 ```
 
 ::: warning
@@ -66,12 +66,12 @@ use Tobscure\JsonApi\Document;
 
 class ListTagsController extends AbstractListController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        return Tag::all();
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    return Tag::all();
+  }
 }
 ```
 
@@ -82,7 +82,7 @@ You can allow the number of resources being **listed** to be customized by speci
 ```php
     // The number of records included by default.
     public $limit = 20;
-    
+
     // The maximum number of records that can be requested.
     public $maxLimit = 50;
 ```
@@ -105,7 +105,7 @@ You can allow the sort order of resources being **listed** to be customized by s
 ```php
     // The default sort field and order to use.
     public $sort = ['name' => 'asc'];
-    
+
     // The fields that are available to be sorted by.
     public $sortFields = ['firstName', 'lastName'];
 ```
@@ -117,7 +117,7 @@ $sort = $this->extractSort($request);
 $query = Tag::query();
 
 foreach ($sort as $field => $order) {
-    $query->orderBy(snake_case($field), $order);
+  $query->orderBy(snake_case($field), $order);
 }
 
 return $query->get();
@@ -139,14 +139,14 @@ use Tobscure\JsonApi\Document;
 
 class ShowTagController extends AbstractShowController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        return Tag::findOrFail($id);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    return Tag::findOrFail($id);
+  }
 }
 ```
 
@@ -162,16 +162,16 @@ use Tobscure\JsonApi\Document;
 
 class CreateTagController extends AbstractCreateController
 {
-    public $serializer = TagSerializer::class;
-    
-    protected function data(Request $request, Document $document)
-    {
-        $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
-        
-        return Tag::create([
-            'name' => Arr::get($attributes, 'name')
-        ]);
-    }
+  public $serializer = TagSerializer::class;
+
+  protected function data(Request $request, Document $document)
+  {
+    $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
+
+    return Tag::create([
+      'name' => Arr::get($attributes, 'name'),
+    ]);
+  }
 }
 ```
 
@@ -189,13 +189,13 @@ use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DeleteTagController extends AbstractDeleteController
-{    
-    protected function delete(Request $request)
-    {
-        $id = Arr::get($request->getQueryParams(), 'id');
-        
-        Tag::findOrFail($id)->delete();
-    }
+{
+  protected function delete(Request $request)
+  {
+    $id = Arr::get($request->getQueryParams(), 'id');
+
+    Tag::findOrFail($id)->delete();
+  }
 }
 ```
 
@@ -206,7 +206,7 @@ To include relationships when **listing**, **showing**, or **creating** your res
 ```php
     // The relationships that are included by default.
     public $include = ['user'];
-    
+
     // Other relationships that are available to be included.
     public $optionalInclude = ['discussions'];
 ```
@@ -229,19 +229,19 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->setSerializer(MyDiscussionSerializer::class)
-        ->addInclude('user')
-        ->addOptionalInclude('posts')
-        ->setLimit(20)
-        ->setMaxLimit(50)
-        ->setSort(['name' => 'asc'])
-        ->addSortField('firstName')
-        ->prepareDataQuery(function ($controller) {
-            // Add custom logic here to modify the controller
-            // before data queries are executed.
-        })
-]
+  (new Extend\ApiController(ListDiscussionsController::class))
+    ->setSerializer(MyDiscussionSerializer::class)
+    ->addInclude('user')
+    ->addOptionalInclude('posts')
+    ->setLimit(20)
+    ->setMaxLimit(50)
+    ->setSort(['name' => 'asc'])
+    ->addSortField('firstName')
+    ->prepareDataQuery(function ($controller) {
+      // Add custom logic here to modify the controller
+      // before data queries are executed.
+    }),
+];
 ```
 
 The `ApiController` extender can also be used to adjust data before serialization
@@ -252,11 +252,10 @@ use Flarum\Api\Controller\ListDiscussionsController;
 use Illuminate\Contracts\Events\Dispatcher;
 
 return [
-    (new Extend\ApiController(ListDiscussionsController::class))
-        ->prepareDataForSerialization(function ($controller, $data, $request, $document) {
-            $data->load('myCustomRelation');
-        }),
-]
+  (new Extend\ApiController(ListDiscussionsController::class))->prepareDataForSerialization(function ($controller, $data, $request, $document) {
+    $data->load('myCustomRelation');
+  }),
+];
 ```
 
 ## Serializers
@@ -275,14 +274,14 @@ use Flarum\Api\Serializer\UserSerializer;
 
 class DiscussionSerializer extends AbstractSerializer
 {
-    protected $type = 'discussions';
+  protected $type = 'discussions';
 
-    protected function getDefaultAttributes($discussion)
-    {
-        return [
-            'title' => $discussion->title,
-        ];
-    }
+  protected function getDefaultAttributes($discussion)
+  {
+    return [
+      'title' => $discussion->title,
+    ];
+  }
 }
 ```
 

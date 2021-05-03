@@ -12,7 +12,7 @@ Evet! Ancak, yükseltme işlemi biraz sorunlu geçebilir. Mümkün olduğunca ko
 
 Tüm bağışlar minnetle alındı. [Github Sponsors](https://github.com/sponsors/flarum) veya [OpenCollective](https://opencollective.com/flarum) üzerinden verebilirsiniz.
 
-Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz.  ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
+Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz. ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
 
 ### Beta sürümünü üretimde kullanabilir miyim?
 

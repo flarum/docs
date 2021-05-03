@@ -1,6 +1,6 @@
 # Resolución de problemas
 
-Si Flarum no se instala o no funciona como se espera, lo primero que debes hacer es *comprobar de nuevo* si tu entorno cumple los [requisitos del sistema](install.md#server-requirements). Si te falta algo que Flarum necesita para funcionar, tendrás que remediarlo primero.
+Si Flarum no se instala o no funciona como se espera, lo primero que debes hacer es _comprobar de nuevo_ si tu entorno cumple los [requisitos del sistema](install.md#server-requirements). Si te falta algo que Flarum necesita para funcionar, tendrás que remediarlo primero.
 
 A continuación, deberías tomarte unos minutos para buscar en el [foro de soporte](https://discuss.flarum.org/t/support) y en el [issue tracker](https://github.com/flarum/core/issues). Es posible que alguien ya haya informado del problema y que haya una solución disponible o en camino. Si has buscado a fondo y no puedes encontrar ninguna información sobre el problema, es hora de empezar a solucionar el problema.
 
@@ -14,11 +14,11 @@ Si ha estado viendo páginas en blanco y el cambio anterior no ayuda, intente es
 
 Muchos problemas se pueden solucionar con lo siguiente:
 
-* Borrar la caché del navegador
-* Borrar la caché del backend con [`php flarum cache:clear`](console.md).
-* Asegúrese de que su base de datos está actualizada con [`php flarum migrate`](console.md).
-* Asegúrese de que la [configuración de correo electrónico](mail.md) en su panel de administración es correcta: una configuración de correo electrónico no válida causará errores al registrarse, restablecer una contraseña, cambiar correos electrónicos y enviar notificaciones.
-* Comprueba que su `config.php` es correcto. Por ejemplo, asegúrate de que se utiliza la "url" correcta.
+- Borrar la caché del navegador
+- Borrar la caché del backend con [`php flarum cache:clear`](console.md).
+- Asegúrese de que su base de datos está actualizada con [`php flarum migrate`](console.md).
+- Asegúrese de que la [configuración de correo electrónico](mail.md) en su panel de administración es correcta: una configuración de correo electrónico no válida causará errores al registrarse, restablecer una contraseña, cambiar correos electrónicos y enviar notificaciones.
+- Comprueba que su `config.php` es correcto. Por ejemplo, asegúrate de que se utiliza la "url" correcta.
 
 También querrás echar un vistazo a la salida de [`php flarum info`](console.md) para asegurarte de que nada importante está fuera de lugar.
 
@@ -34,13 +34,13 @@ En algún momento puedes tener una idea de lo que está causando tu problema, y 
 
 Si parece que vas a necesitar ayuda para resolver el problema, es hora de ponerse a recopilar datos. Busca mensajes de error u otra información sobre el problema en los siguientes lugares:
 
-* En la propia página
-* En la consola del navegador (Chrome: Más herramientas -> Herramientas de desarrollo -> Consola)
-* Registrados en el registro de errores del servidor (p. ej. `/var/log/nginx/error.log`)
-* Registrado en el registro de errores de PHP-FPM (p. ej. `/var/log/php7.x-fpm.log`)
-* Registrados por Flarum (`storage/logs/flarum.log`)
+- En la propia página
+- En la consola del navegador (Chrome: Más herramientas -> Herramientas de desarrollo -> Consola)
+- Registrados en el registro de errores del servidor (p. ej. `/var/log/nginx/error.log`)
+- Registrado en el registro de errores de PHP-FPM (p. ej. `/var/log/php7.x-fpm.log`)
+- Registrados por Flarum (`storage/logs/flarum.log`)
 
-Copie cualquier mensaje en un archivo de texto y anote algunas notas sobre *cuando* se produjo el error, *qué* estaba haciendo en ese momento, etc. Asegúrate de incluir cualquier información que hayas obtenido sobre las condiciones en las que se produce el problema y en las que no. Añade toda la información posible sobre el entorno de tu servidor: Versión del sistema operativo, versión del servidor web, versión y manejador de PHP, etc.
+Copie cualquier mensaje en un archivo de texto y anote algunas notas sobre _cuando_ se produjo el error, _qué_ estaba haciendo en ese momento, etc. Asegúrate de incluir cualquier información que hayas obtenido sobre las condiciones en las que se produce el problema y en las que no. Añade toda la información posible sobre el entorno de tu servidor: Versión del sistema operativo, versión del servidor web, versión y manejador de PHP, etc.
 
 ## Paso 4: Preparar un informe
 
