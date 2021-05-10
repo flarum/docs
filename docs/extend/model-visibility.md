@@ -3,7 +3,7 @@
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
 When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to.
-We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/6.x/queries) through [Eloquent scoping](https://laravel.com/docs/6.x/eloquent#local-scopes).
+We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes).
 For example:
 
 ```php
