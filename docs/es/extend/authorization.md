@@ -3,7 +3,7 @@
 Como todo framework, Flarum permite restringir ciertas acciones y contenidos a determinados usuarios. Hay dos sistemas paralelos para esto:
 
 - El proceso de autorización dicta si un usuario puede realizar una determinada acción.
-- El alcance de la visibilidad puede aplicarse a una consulta de la base de datos para restringir eficazmente los registros a los que los usuarios pueden acceder.
+- Visibility scoping can be applied to a database query to efficiently restrict the records that users can access. This is documented in our [model visibility](model-visibility.md) article.
 
 ## Proceso de Autorización
 
@@ -16,7 +16,7 @@ El proceso de autorización se utiliza para comprobar si una persona está autor
 
 Cada uno de ellos está determinado por un criterio único: en algunos casos, un flag es suficiente; de lo contrario, podríamos necesitar una lógica personalizada.
 
-### Cómo funciona
+## How It Works
 
 Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
@@ -39,7 +39,7 @@ Luego, si el usuario está en el grupo de administradores, autorizaremos la acci
 
 Finalmente, como hemos agotado todas las comprobaciones, asumiremos que el usuario no está autorizado y denegaremos la solicitud.
 
-### Cómo usar la autorización
+## How To Use Authorization
 
 El sistema de autorización de Flarum es accesible a través de los métodos públicos de la clase `Flarum\User\User`. Los más importantes se enumeran a continuación; otros están documentados en nuestra [documentación de la API de PHP](https://api.docs.flarum.org/php/master/flarum/user/user).
 
@@ -70,7 +70,7 @@ $actpr->assertAdmin();
 $actorHasPermission = $actor->hasPermission(`viewDiscussions`);
 ```
 
-### Políticas personalizadas
+## Custom Policies
 
 Las políticas nos permiten utilizar una lógica personalizada más allá de los simples grupos y permisos cuando se evalúa la autorización de una habilidad con un sujeto. Por ejemplo:
 
@@ -87,7 +87,7 @@ A continuación, comprobamos si la clase de política tiene un método llamado `
 
 Si `can` no existe o devuelve null, hemos terminado con esta política, y pasamos a la siguiente.
 
-#### Políticas de ejemplo
+### Example Policies
 
 Veamos una política de ejemplo de [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):
 
@@ -169,7 +169,7 @@ class GlobalPolicy extends AbstractPolicy
 }
 ```
 
-#### Registro de políticas
+### Registering Policies
 
 Tanto las políticas basadas en el modelo como las globales pueden registrarse con el extensor `Policy` en su archivo `extend.php`:
 
@@ -187,183 +187,10 @@ return [
 ];
 ```
 
-## Alcance de la visibilidad
+## Frontend Authorization
 
-Cuando un usuario visita la página **Discusiones**, queremos mostrarle rápidamente los debates recientes a los que tiene acceso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Por ejemplo:
+Commonly, you'll want to use authorization results in frontend logic. For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint. And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
 
-```php
-use Flarum\Group\Group;
+Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending. Global permissions (`viewDiscussions`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object. For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model. It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
 
-// Construye y ejecuta una consulta para todos los grupos que un determinado usuario puede ver.
-$groups = Group::whereVisibleTo($actor)->get();
-
-// Aplicar el alcance de la visibilidad a una consulta existente.
-More eloquent filters can be added after this.
-$query
-  ->whereVisibleTo($actor)
-  ->whereRaw('1=1');
-
-// Aplica el alcance de la visibilidad con una capacidad
-$query
-  ->whereVisibleTo($actor, 'someAbility')
-```
-
-Tenga en cuenta que el alcance de la visibilidad sólo se puede utilizar en los modelos que utilizan el rasgo `Flarum\Database\ScopeVisibilityTrait`.
-
-### Cómo se procesa
-
-So, what actually happens when we call `whereVisibleTo`? ¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
-
-La consulta se ejecutará a través de todos los visores aplicables registrados para el modelo de la consulta. Tenga en cuenta que los scopers de visibilidad registrados para una clase padre (como `Flarum\Post\Post`) también se aplicarán a cualquier clase hija (como `Flarum\Post\CommentPost`).
-
-Note that scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
-
-### Cadenas de Permisos Personalizadas
-
-Hay dos tipos de scopers:
-
-- Los scopers basados en la capacidad se aplicarán a todas las consultas del modelo de consulta que se ejecute con una capacidad determinada (que por defecto es `"view"`). Tenga en cuenta que esto no está relacionado con las cadenas de habilidades del [sistema de políticas](#how-it-works)
-- Los scopers "globales" se aplicarán a todas las consultas del modelo de la consulta. Tenga en cuenta que los ámbitos globales se ejecutarán en TODAS las consultas para su modelo, incluyendo `view`, lo que podría crear bucles infinitos o errores. Generalmente, sólo querrá ejecutarlos para las capacidades que no empiecen por `view`. Lo verás en el [ejemplo de abajo](#custom-visibility-scoper-examples)
-
-
-
-Un caso de uso común para esto es permitir la extensibilidad dentro del alcance de la visibilidad. Echemos un vistazo a una pieza simple y anotada de `Flarum\Post\PostPolicy` como ejemplo:
-
-```php
-// Aquí queremos asegurarnos de que las publicaciones privadas no sean visibles para los usuarios por defecto.
-// La forma más simple de hacer esto sería:
-$query->where('posts.is_private', false);
-
-// Sin embargo, reconocemos que algunas extensiones podrían tener casos de uso válidos para mostrar publicaciones privadas.
-// Así que en su lugar, incluimos todos los mensajes que no son privados, Y todos los mensajes privados deseados por las extensiones. $query->where(function ($query) use ($actor) {
-    $query->where('posts.is_private', false)
-        ->orWhere(function ($query) use ($actor) {
-            $query->whereVisibleTo($actor, 'viewPrivate');
-        });
-});
-```
-
-Una posible extensión más adelante podría utilizar algo como esto para permitir a algunos usuarios algunos mensajes privados. Tenga en cuenta que desde que ScopeModelVisibility fue despachado en `orWhere`, estas modificaciones a la consulta SOLO se aplican a `$query->where('posts.is_private', false)` del ejemplo anterior.
-
-```php
-<?php
-
-use Flarum\User\User;
-use Illuminate\Database\Eloquent\Builder;
-
-class ScopePostVisibility
-{
-    public function __invoke(User $actor, $query)
-    {
-      if ($actor->can('posts.viewPrivate')) {
-        $query->whereRaw("1=1");
-      }
-    }
-}
-```
-
-Piense en llamar a `whereVisibleTo` con una habilidad personalizada como una forma de que las extensiones inserten código personalizado, anulando los filtros impuestos por el núcleo (u otras extensiones).
-
-### Ejemplos del Scoper de Visibilidad Personalizada
-
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
-
-Primero, un scoper para el modelo `Tag` con la habilidad `view`:
-
-```php
-<?php
-
-namespace Flarum\Tags\Access;
-
-use Flarum\Tags\Tag;
-use Flarum\User\User;
-use Illuminate\Database\Eloquent\Builder;
-
-class ScopeTagVisibility
-{
-    /**
-     * @param User $actor
-     * @param Builder $query
-     */
-    public function __invoke(User $actor, Builder $query)
-    {
-        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
-    }
-}
-```
-
-Y un scoper global para el modelo `Discussion`:
-
-```php
-<?php
-namespace Flarum\Tags\Access;
-
-use Flarum\Tags\Tag;
-use Flarum\User\Access\AbstractPolicy;
-use Flarum\User\User;
-
-class TagPolicy extends AbstractPolicy
-{
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function startDiscussion(User $actor, Tag $tag)
-    {
-        if ($tag->is_restricted) {
-            return $actor->hasPermission('tag'.$tag->id.'.startDiscussion') ? $this->allow() : $this->deny();
-        }
-    }
-
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function addToDiscussion(User $actor, Tag $tag)
-    {
-        return $this->startDiscussion($actor, $tag);
-    }
-}
-        $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
-        });
-    }
-}
-```
-
-Tenga en cuenta que, como se mencionó anteriormente, no ejecutamos esto para las habilidades que comienzan con `view`, ya que estas son manejadas por sus propios visores dedicados.
-
-### Registro de Scopers de Visibilidad Personalizados
-
-```php
-use Flarum\Extend;
-use Flarum\Discussion\Discussion;
-use Flarum\Tags\Tag;
-use YourNamespace\Access;
-
-return [
-  // Otros extensores
-
-  // 'view' es opcional aquí, ya que es el valor por defecto para el argumento de la habilidad.
-  // Sin embargo, si estuviéramos aplicando esto a una habilidad diferente, como `viewPrivate`,
-  // tendríamos que especificarlo explícitamente.
-  (new Extend\ModelVisibility(Tag::class))
-    ->scope(Access\ScopeTagVisibility::class, 'view'),
-
-  (new Extend\ModelVisibility(Discussion::class))
-    ->scopeAll(Access\ScopeDiscussionVisibilityForAbility::class),
-  // Otros extensores
-];
-```
-
-## Autorización en el Frontend
-
-Comúnmente, querrás usar los resultados de la autorización en la lógica del frontend. Por ejemplo, si un usuario no tiene permiso para ver usuarios de búsqueda, no deberíamos enviar solicitudes a ese punto final. Y si un usuario no tiene permiso para editar usuarios, no deberíamos mostrar elementos del menú para ello.
-
-Como no podemos hacer comprobaciones de autorización en el frontend, tenemos que realizarlas en el backend, y adjuntarlas a la serialización de los datos que estamos enviando. Los permisos globales (`viewDiscussions`, `viewUserList`) pueden incluirse en el `ForumSerializer`, pero para la autorización específica de un objeto, podemos querer incluirlos con el objeto sujeto. Por ejemplo, cuando devolvemos listas de discusiones, comprobamos si el usuario puede responder, renombrar, editar y borrar, y almacenamos esos datos en el modelo de discusión del frontend. Entonces es accesible a través de `discussion.canReply()` o `discussion.canEdit()`, pero no hay nada mágico ahí: es sólo otro atributo enviado por el serializador.
-
-Para un ejemplo de cómo adjuntar datos a un serializador, vea un [caso similar para transmitir ajustes](settings.md#accessing-settings).
+For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).
