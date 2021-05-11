@@ -19,7 +19,9 @@ CSS è un linguaggio per fogli di stile che indica ai browser come visualizzare 
 Un tutorial CSS va oltre lo scopo di questa documentazione, ma ci sono molte ottime risorse online per apprendere le basi dei fogli di stile.
 
 :::tip
+
 Flarum utilizza LESS, il che rende più facile scrivere CSS consentendo variabili, condizionali e funzioni.
+
 :::
 
 ## Estensioni

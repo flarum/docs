@@ -3,7 +3,9 @@
 Beta 15 features multiple new extenders, a total redesign of the admin dashboard, and several other interesting new features for extensions. As before, we have done our best to provide backwards compatibility layers, and we recommend switching away from deprecated systems as soon as possible to make your extensions more stable.
 
 ::: tip
+
 If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
 :::
 
 ## New Features / Deprecations

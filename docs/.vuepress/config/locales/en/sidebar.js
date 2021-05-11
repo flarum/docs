@@ -8,7 +8,8 @@ module.exports = {
         'start',
         'frontend',
         'routes',
-        'data',
+        'models',
+        'api',
         'distribution'
       ]
     },
@@ -25,7 +26,8 @@ module.exports = {
         'forms',
         'permissions',
         'settings',
-        'testing'
+        'testing',
+        'theme'
       ]
     },
     {
@@ -92,6 +94,7 @@ module.exports = {
       title: 'Setting Up',
       collapsable: false,
       children: [
+        'composer',
         'install',
         'update',
         'troubleshoot'
@@ -108,6 +111,13 @@ module.exports = {
         'themes',
         'mail',
         'console'
+      ]
+    },
+    {
+      title: 'Advanced',
+      collapsable: false,
+      children: [
+        'extenders'
       ]
     }
   ],

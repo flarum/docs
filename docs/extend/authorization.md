@@ -18,7 +18,7 @@ Each of these is determined by unique criteria: in some cases a flag is sufficie
 
 ## How It Works
 
-Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
+Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
 1. The actor: the user attempting to perform the action
 2. The ability: a string representing the action the actor is attempting

@@ -38,13 +38,17 @@ Accordingly, to create a custom extender, all you need to do is:
 Before designing your own extenders, we HIGHLY recommend looking through the implementations of [core's extenders](https://github.com/flarum/core/tree/master/src/Extend).
 
 :::tip
+
 Custom extenders introduced by your extension should be considered public API.
 You can add automated tests for them via our [backend testing package](testing.md).
+
 :::
 
 ::: warning
+
 Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md).
 An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.
+
 :::
 
 ## Frontend

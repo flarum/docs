@@ -1,7 +1,9 @@
 # Report dei Bugs
 
 ::: Vulnerabilità di sicurezza
+
 Se scopri una vulnerabilità di sicurezza all'interno di Flarum, invia un'e-mail a [security@flarum.org](mailto:security@flarum.org) così da ripararla subito.
+
 :::
 
 Grazie per averci aiutato a testare Flarum. Siamo felici di averti nella squadra! Abbiamo bisogno di persone che sappiano risolvere i problemi con pazienza e comunicarli chiaramente. Come probabilmente saprai, una buona segnalazione di bug richiede tempo e impegno. Se ti va bene, allora cominciamo!

@@ -129,7 +129,7 @@ Testing database information is configured via the `DB_HOST` (defaults to `local
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListTestWithFulltextSearch.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
@@ -154,7 +154,9 @@ There are several important utilities available for your test cases:
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
 :::warning
+
 The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
+
 :::
 
 Of course, since this is all based on PHPUnit, you can use the `setUp()` methods of your test classes for common setup tasks.
@@ -302,11 +304,15 @@ class SomeTest extends TestCase
 ```
 
 ::: warning
+
 If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
+
 :::
 
 ::: warning
+
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
+
 :::
 
 #### Console Tests

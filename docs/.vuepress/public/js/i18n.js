@@ -22,6 +22,11 @@ function initTip(locale) {
             processing_tip = 'The translation of extend documents is still a work in progress, please refer to the <a>English document</a> for the latest information. If you have problems with the translation, please <a>let us know</a>.';
             is_processing = true;
             break;
+        case 'es':
+            outdated_tip = 'La traducción de esta página podría no estar actualizada, por favor consulte el <a>documento en Inglés</a> para obtener la información más reciente. Si hay algún problema con la traducción, por favor <a>háganoslo saber</a>.';
+            processing_tip = 'La traducción de los documentos de extensión aún está en desarrollo, por favor, consulte el <a>documento en Inglés</a> para obtener la información más reciente. Si tiene problemas con la traducción, por favor <a>háganoslo saber</a>.';
+            is_processing = true;
+            break;
         default:
             break;
     }

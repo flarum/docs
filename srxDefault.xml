@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<srx xmlns="http://www.lisa.org/srx20" version="2.0">
+    <header segmentsubflows="yes" cascade="no">
+        <formathandle type="start" include="no"></formathandle>
+        <formathandle type="end" include="yes"></formathandle>
+        <formathandle type="isolated" include="no"></formathandle>
+    </header>
+    <body>
+        <languagerules>
+            <languagerule languagerulename="default">
+                <!-- Start of VuePress containers -->
+                <rule break="yes">
+                    <beforebreak>:::[a-zA-Z ]*\n</beforebreak>
+                    <afterbreak></afterbreak>
+                </rule>
+
+                <!-- Start of VuePress containers -->
+                <rule break="yes">
+                    <beforebreak>:::[ ]?[a-zA-Z]*[ ]?</beforebreak>
+                    <afterbreak></afterbreak>
+                </rule>
+
+                <!-- End of VuePress containers -->
+                <rule break="yes">
+                    <beforebreak>.*</beforebreak>
+                    <afterbreak>(\n:::\n|\n:::$)</afterbreak>
+                </rule>
+
+                <!-- After PHP Line Comments (has to go before the next one) -->
+                <rule break="yes">
+                    <beforebreak>//.*\n</beforebreak>
+                    <afterbreak></afterbreak>
+                </rule>
+
+                <!-- PHP Line Comments () -->
+                <rule break="yes">
+                    <beforebreak>//</beforebreak>
+                    <afterbreak></afterbreak>
+                </rule>
+            </languagerule>
+        </languagerules>
+        <maprules>
+            <languagemap languagepattern=".*" languagerulename="default"></languagemap>
+        </maprules>
+    </body>
+</srx>
