@@ -41,7 +41,7 @@ This call is handled by Flarum's general model visibility scoping system, which 
 
 The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
 
-Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/6.x/queries).
+Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
 
 ## Custom Scopers
 
@@ -122,7 +122,7 @@ See how the top-level statements are the equivalent of `where`s, but their sub-s
 
 ### Custom Scoper Examples
 
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
 
 First, a scoper for the `Tag` model with the `view` ability:
 
@@ -143,7 +143,9 @@ class ScopeTagVisibility
      */
     public function __invoke(User $actor, Builder $query)
     {
-        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+        $query->whereIn('id', function ($query) use ($actor) {
+            Tag::query()->setQuery($query->from('tags'))->whereHasPermission($actor, 'viewDiscussions')->select('tags.id');
+        });
     }
 }
 ```
@@ -168,18 +170,47 @@ class ScopeDiscussionVisibilityForAbility
      */
     public function __invoke(User $actor, Builder $query, $ability)
     {
-        if (substr($ability, 0, 4) === 'view') {
+        // Automatic scoping should be applied to the global `view` ability,
+        // and to arbitrary abilities that aren't subqueries of `view`.
+        // For example, if we want to scope discussions where the user can
+        // edit posts, this should apply.
+        // But if we are expanding a restriction of `view` (for example,
+        // `viewPrivate`), we shouldn't apply this query again.
+        if (substr($ability, 0, 4) === 'view' && $ability !== 'view') {
             return;
         }
 
-        // If a discussion requires a certain permission in order for it to be
-        // visible, then we can check if the user has been granted that
-        // permission for any of the discussion's tags.
-        $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
+        // Avoid an infinite recursive loop.
+        if (Str::endsWith($ability, 'InRestrictedTags')) {
+            return;
+        }
+
+        // `view` is a special case where the permission string is represented by `viewDiscussions`.
+        $permission = $ability === 'view' ? 'viewDiscussions' : $ability;
+
+        // Restrict discussions where users don't have necessary permissions in all tags.
+        // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
+        // not just one.
+        $query->where(function ($query) use ($actor, $permission) {
+            $query
+                ->whereNotIn('discussions.id', function ($query) use ($actor, $permission) {
+                    return $query->select('discussion_id')
+                        ->from('discussion_tag')
+                        ->whereNotIn('tag_id', function ($query) use ($actor, $permission) {
+                            Tag::query()->setQuery($query->from('tags'))->whereHasPermission($actor, $permission)->select('tags.id');
+                        });
+                })
+                ->orWhere(function ($query) use ($actor, $permission) {
+                    // Allow extensions a way to override scoping for any given permission.
+                    $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
+                });
         });
+
+        // Hide discussions with no tags if the user doesn't have that global
+        // permission.
+        if (! $actor->hasPermission($permission)) {
+            $query->has('tags');
+        }
     }
 }
 ```
