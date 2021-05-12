@@ -136,7 +136,7 @@ app.initializers.add('interstellar', function(app) {
         icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
-        tagScoped: false, // Should it be possible to apply this permission on tags, not just globally?
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
