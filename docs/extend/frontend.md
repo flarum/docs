@@ -389,7 +389,7 @@ Flarum defines (and provides) quite a few util and helper functions, which you m
 
 - `flarum/common/utils/Stream` provides [Mithril Streams](https://mithril.js.org/stream.html), and is useful in [forms](forms.md).
 - `flarum/common/utils/classList` provides the [clsx library](https://www.npmjs.com/package/clsx), which is great for dynamically assembling a list of CSS classes for your components
-- `flarum/common/utils/extractText` extracts text as a string from Mithril component vnode instances.
+- `flarum/common/utils/extractText` extracts text as a string from Mithril component vnode instances (or translation vnodes).
 - `flarum/common/utils/throttleDebounce` provides the [throttle-debounce](https://www.npmjs.com/package/throttle-debounce) library
 - `flarum/common/helpers/avatar` displays a user's avatar
 - `flarum/common/helpers/highlight` highlights text in strings: great for search results!
