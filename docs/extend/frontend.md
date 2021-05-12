@@ -385,9 +385,7 @@ Some potential "advanced" uses include:
 
 ### Flarum Utils
 
-Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
-
-A few particularly useful ones:
+Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. A few particularly useful ones:
 
 - `flarum/common/utils/Stream` provides [Mithril Streams](https://mithril.js.org/stream.html), and is useful in [forms](forms.md).
 - `flarum/common/utils/classList` provides the [clsx library](https://www.npmjs.com/package/clsx), which is great for dynamically assembling a list of CSS classes for your components
@@ -398,4 +396,4 @@ A few particularly useful ones:
 - `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
-And there's a bunch more! Some are covered elsewhere in the docs, but 
+And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
