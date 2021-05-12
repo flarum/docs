@@ -29,7 +29,7 @@ In v5, Symfony dropped their proprietary `transChoice` system in favor of the mo
 
 - `transChoice` should not be used at all; instead, the variable passed for pluralization should be included in the data.
 - Keys for backend translations no longer need to be surrounded by curly braces.
-- Translations can now use the [`select` and `plural`](https://symfony.com/doc/current/translation/message_format.html) formatter syntaxes. For the `plural` formatter, the `offset` parameter and `#` magic variables are supported
+- Translations can now use the [`select` and `plural`](https://symfony.com/doc/5.2/translation/message_format.html) formatter syntaxes. For the `plural` formatter, the `offset` parameter and `#` magic variables are supported.
 - These `select` and `plural` syntaxes can be nested to arbitrary depth. This is often a bad idea though (beyond, say, 2 levels), as things can get unnecessarily complex.
 
 No change to translation file naming is necessary (Symfony docs say that an `+intl-icu` suffix is necessary, but Flarum will now interpret all translation files as internationalized).
