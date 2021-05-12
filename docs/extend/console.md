@@ -50,11 +50,11 @@ use YourNamespace\Console\CustomCommand;
 use Illuminate\Console\Scheduling\Event;
 
 return [
-  // Other extenders
-  (new Extend\Console())->schedule('cache:clear', function (Event $event) {
-      $event->everyMinute();
-  }, ['Arg1', '--option1', '--option2']),
-  // Other extenders
+    // Other extenders
+    (new Extend\Console())->schedule('cache:clear', function (Event $event) {
+        $event->everyMinute();
+    }, ['Arg1', '--option1', '--option2']),
+    // Other extenders
 ];
 ```
 
