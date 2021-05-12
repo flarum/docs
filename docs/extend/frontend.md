@@ -248,7 +248,7 @@ You should familiarize yourself with [Mithril's component API](https://mithril.j
   * `CustomComponentClass.component(attrs, children)`
   * `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
 
-However, component classes extending `Component` must call `super` when using the `oninit`, `oncreate`, and `onbeforeupdate` methods.
+However, component classes extending `Component` must call `super` when using the lifecycle methods (`oninit`, `oncreate`, `onbeforeupdate`, `onupdate`, `onbeforeremove`, and `onremove`).
 
 To use Flarum components, simply extend `flarum/common/Component` in your custom component class.
 
