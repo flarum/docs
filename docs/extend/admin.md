@@ -136,12 +136,17 @@ app.initializers.add('interstellar', function(app) {
         icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        tagScoped: false, // Should it be possible to apply this permission on tags, not just globally?
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
     );
 });
 ```
+
+If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
+
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Chaining Reminder
 
