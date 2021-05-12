@@ -77,7 +77,7 @@ class DeleteLogoController extends AbstractDeleteController
 }
 ```
 
-The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/7.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
+The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
 
 ### Declaring new disks
 
