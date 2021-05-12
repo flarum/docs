@@ -38,6 +38,7 @@ module.exports = {
         'console',
         'extending-extensions',
         'extensibility',
+        'filesystem',
         'formatting',
         'mail',
         'middleware',
