@@ -107,6 +107,11 @@ As mentioned above, the entire composer configuration for your Flarum site is co
         "sort-packages": true
     },
 
+    // Since Flarum is still in beta, this tells composer that it's ok
+    // to install beta packages. Once a stable version is tagged, this
+    // line can be removed.
+    "minimum-stability": "beta",
+
     // If composer can find a stable (not dev, alpha, or beta) version
     // of a package, it should use that. Generally speaking, production
     // sites shouldn't run beta software unless you know what you're doing.
@@ -119,7 +124,7 @@ To read more about version strings, see the relevant [composer documentation](ht
 
 For Flarum projects, there's several types of entries you'll see in the `require` section of your root install's `flarum/core`:
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0.0`.
+- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum beta versions, this would be `^0.1.0`.
 - You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
