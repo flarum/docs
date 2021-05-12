@@ -61,7 +61,7 @@ You may have seen some calls to `$actor->can` that don't use the full name of a 
 
 This is done in core to make authorization calls shorter and simpler. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
 
-This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the $discussion argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
+This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
 These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discusssion)` on the post's discussion.
 
