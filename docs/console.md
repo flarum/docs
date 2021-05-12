@@ -49,3 +49,23 @@ Runs all outstanding migrations. This should be used when an extension that modi
 `php flarum migrate:reset --extension [extension_id]`
 
 Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
+
+### schedule:run
+
+`php flarum schedule:run`
+
+Many extensions use scheduled jobs to run tasks on a regular interval. This could include database cleanups, posting scheduled drafts, generating sitemaps, etc. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
+
+```
+* * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
+```
+
+This command should generally not be run manually.
+
+Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
+
+### schedule:list
+
+`php flarum schedule:list`
+
+This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
