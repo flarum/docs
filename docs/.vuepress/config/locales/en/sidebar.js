@@ -23,6 +23,7 @@ module.exports = {
         'frontend-pages',
         'interactive-components',
         'i18n',
+        'language-packs',
         'forms',
         'permissions',
         'settings',
