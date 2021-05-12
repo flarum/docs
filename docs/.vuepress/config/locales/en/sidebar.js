@@ -36,6 +36,7 @@ module.exports = {
       collapsable: false,
       children: [
         'api-throttling',
+        'assets',
         'console',
         'extending-extensions',
         'extensibility',
