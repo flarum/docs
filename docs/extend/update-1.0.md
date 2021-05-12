@@ -25,7 +25,7 @@ Historically, Flarum has used Symfony for backend translations, and a port for f
 
 ### New System
 
-In v5, Symfony dropped their proprietary `transChoice` system in favor of the more-or-less standard [ICU MessageFormat](https://symfony.com/doc/current/translation/message_format.html). This solves pretty much every single one of the aforementioned issues. In this release, Flarum will be fully switching to ICU MessageFormat as well. What does this mean for extensions?
+In v5, Symfony dropped their proprietary `transChoice` system in favor of the more-or-less standard [ICU MessageFormat](https://symfony.com/doc/5.2/translation/message_format.html). This solves pretty much every single one of the aforementioned issues. In this release, Flarum will be fully switching to ICU MessageFormat as well. What does this mean for extensions?
 
 - `transChoice` should not be used at all; instead, the variable passed for pluralization should be included in the data
 - Keys for backend translations no longer need to be surrounded by curly braces.
