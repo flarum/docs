@@ -76,6 +76,17 @@ If you use `type: 'select'` the setting object looks a little bit different:
 }
 ```
 
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+
+```js
+{
+  setting: 'acme-interstellar.crew_count',
+  label: app.translator.trans('acme-interstellar.admin.crew_count_label'),
+  type: 'number',
+  min: 1,
+  max: 10
+}
+```
 
 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
