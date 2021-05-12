@@ -29,22 +29,28 @@ A custom service provider should extend `Flarum\Foundation\AbstractServiceProvid
 <?php
 
 use Flarum\Foundation\AbstractServiceProvider;
+use Illuminate\Contracts\Container\Container;
 
 class CustomServiceProvider extends AbstractServiceProvider
 {
     public function register()
     {
-        // custom logic here
+        // custom logic here, for example:
+        $this->container->resolving(SomeClass::class, function ($container) {
+            return new SomeClass($container->make('some.binding'));
+        })
     }
 
-    public function boot()
+    public function boot(Container $container)
     {
         // custom logic here
     }
 }
 ```
 
-The `register` method will run during step (3) above, and the `boot` method will run during step (5) above. In both methods, the container is available via `$this->app`.
+The `register` method will run during step (3) above, and the `boot` method will run during step (5) above. In the `register` method, the container is available via `$this->container`. In the `boot` method, the container (or any other arguments), should be injected via typehinted method arguments.
+
+Flarum does not currently support Laravel Octane, but some [best practices](https://github.com/laravel/octane#dependency-injection--octane), like not injecting the container and using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used.
 
 To actually register your custom service provider, you can use the `ServiceProvider` extender in `extend.php`:
 
