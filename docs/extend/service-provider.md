@@ -50,7 +50,7 @@ class CustomServiceProvider extends AbstractServiceProvider
 
 The `register` method will run during step (3) above, and the `boot` method will run during step (5) above. In the `register` method, the container is available via `$this->container`. In the `boot` method, the container (or any other arguments), should be injected via typehinted method arguments.
 
-Flarum does not currently support Laravel Octane, but some [best practices](https://github.com/laravel/octane#dependency-injection--octane), like not injecting the container and using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used.
+Flarum does not currently support Laravel Octane, but some [best practices](https://laravel.com/docs/8.x/octane#dependency-injection-and-octane), like using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used. See the [Octane documentation](https://laravel.com/docs/8.x/octane#dependency-injection-and-octane) for more information.
 
 To actually register your custom service provider, you can use the `ServiceProvider` extender in `extend.php`:
 
