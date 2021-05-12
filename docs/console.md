@@ -38,6 +38,12 @@ Gather information about Flarum's core and installed extensions. This is very us
 
 Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
 
+### assets:publish
+
+`php flarum assets:publish`
+
+Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
+
 ### migrate
 
 `php flarum migrate`
