@@ -53,9 +53,10 @@ app.initializers.add('interstellar', function(app) {
       {
         setting: 'acme-interstellar.coordinates', // Questa è la chiave con cui verranno salvate le impostazioni nella tabella delle impostazioni nel database.
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // L'etichetta da mostrare che consente all'amministratore di sapere cosa fa l'impostazione.
-        type: 'boolean', // Di che tipo di impostazione si tratta, le opzioni valide sono: boolean, text (o qualsiasi altro tipo di tag <input>) e select. 
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
+        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
       },
-      30 // Opzionale: Priorità
+      30 // Optional: Priority
     )
 });
 ```
@@ -75,6 +76,17 @@ If you use `type: 'select'` the setting object looks a little bit different:
 }
 ```
 
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+
+```js
+{
+  setting: 'acme-interstellar.crew_count',
+  label: app.translator.trans('acme-interstellar.admin.crew_count_label'),
+  type: 'number',
+  min: 1,
+  max: 10
+}
+```
 
 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
@@ -121,15 +133,20 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Icone Font-Awesome
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etichetta di autorizzazione
-        permission: 'discussion.rocket_fly', // Nome effettivo dell'autorizzazione memorizzato nel database (e utilizzato durante il controllo dell'autorizzazione).
+        icon: 'fas fa-rocket', // Font-Awesome Icon
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
+        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
       }, 
-      'start', // Il permesso di categoria verrà aggiunto alla griglia
-      95 // Opzional: Priorità
+      'start', // Category permission will be added to on the grid
+      95 // Optional: Priority
     );
 });
 ```
+
+If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
+
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Promemoria concatenamento
 
@@ -151,12 +168,12 @@ Sometimes you have more complicated settings that mess with relationships, or ju
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
-import ExtensionPage from 'flarum/components/ExtensionPage';
+import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {
     return (
-      <h1>Ciao dalla sezione impostazioni!</h1>
+      <h1>Hello from the settings section!</h1>
     )
   }
 }
