@@ -56,6 +56,7 @@ module.exports = {
       title: 'Update Guides',
       collapsable: false,
       children: [
+        'update-1.0',
         'update-b16',
         'update-b15',
         'update-b14',
