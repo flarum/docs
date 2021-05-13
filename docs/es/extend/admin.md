@@ -53,9 +53,10 @@ app.initializers.add('interstellar', function(app) {
       {
         setting: 'acme-interstellar.coordinates', // Esta es la clave con la que se guardarán los ajustes en la tabla de ajustes de la base de datos.
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // La etiqueta que se mostrará para que el administrador sepa lo que hace el ajuste.
-        type: 'boolean', // Qué tipo de ajuste es, las opciones válidas son: booleano, texto (o cualquier otro tipo de etiqueta <input>), y seleccionar. 
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
+        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
       },
-      30 // Opcional: Prioridad
+      30 // Optional: Priority
     )
 });
 ```
@@ -75,6 +76,17 @@ If you use `type: 'select'` the setting object looks a little bit different:
 }
 ```
 
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+
+```js
+{
+  setting: 'acme-interstellar.crew_count',
+  label: app.translator.trans('acme-interstellar.admin.crew_count_label'),
+  type: 'number',
+  min: 1,
+  max: 10
+}
+```
 
 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
@@ -121,15 +133,20 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Icono Font-Awesome
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etiqueta de permiso
-        permission: 'discussion.rocket_fly', // Nombre real del permiso almacenado en la base de datos (y utilizado al comprobar el permiso).
+        icon: 'fas fa-rocket', // Font-Awesome Icon
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
+        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
       }, 
-      'start', // Se añadirá el permiso de la categoría en el grid
-      95 // Opcional: Prioridad
+      'start', // Category permission will be added to on the grid
+      95 // Optional: Priority
     );
 });
 ```
+
+If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
+
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Recordatorio de Encadenamiento
 
@@ -142,9 +159,6 @@ app.extensionData
     .registerSetting(...)
     .registerPermission(...)
     .registerPermission(...);
-    .registerSetting(...)
-    .registerPermission(...)
-    .registerPermission(...);
 ```
 
 ### Extending/Overriding de la Página por Defecto
@@ -154,12 +168,12 @@ Sometimes you have more complicated settings that mess with relationships, or ju
 Create a new class that extends the `Page` or `ExtensionPage` component:
 
 ```js
-import ExtensionPage from 'flarum/components/ExtensionPage';
+import ExtensionPage from 'flarum/admin/components/ExtensionPage';
 
 export default class StarPage extends ExtensionPage {
   content() {
     return (
-      <h1>¡Hola desde la sección de ajustes!</h1>
+      <h1>Hello from the settings section!</h1>
     )
   }
 }
