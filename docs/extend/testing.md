@@ -129,7 +129,7 @@ Testing database information is configured via the `DB_HOST` (defaults to `local
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListTestWithFulltextSearch.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
@@ -146,15 +146,18 @@ Your testcase classes should extend this class.
 
 There are several important utilities available for your test cases:
 
-- The `setting()` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
-- The `extension()` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](dependencies.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
-- The `extend()` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
+- The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
+- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](dependencies.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
+- The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
 - The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
 :::warning
+
 The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
+
 :::
 
 Of course, since this is all based on PHPUnit, you can use the `setUp()` methods of your test classes for common setup tasks.
@@ -302,11 +305,15 @@ class SomeTest extends TestCase
 ```
 
 ::: warning
+
 If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
+
 :::
 
 ::: warning
+
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
+
 :::
 
 #### Console Tests
