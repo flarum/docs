@@ -12,7 +12,9 @@ Flarum has two separate frontend applications:
 They share the same foundational code, so once you know how to extend one, you know how to extend both.
 
 :::tip Typings!
+
 Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+
 :::
 
 ## Transpilation and File Structure
@@ -106,7 +108,7 @@ src/forum/
 └── index.js
 ```
 
-`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](data.md#frontend-models), and reusable util helper functions.
+`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions.
 Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
 
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
@@ -169,12 +171,14 @@ return [
 Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. Thus, you may choose to expose your own public API for other extensions to interact with.
 
 ::: tip External Libraries
+
 Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
+
 :::
 
 ### CSS
 
-You can also add CSS and [LESS](http://lesscss.org/features/) assets to the frontend using the `Frontend` extender's `css` method:
+You can also add CSS and [LESS](https://lesscss.org/features/) assets to the frontend using the `Frontend` extender's `css` method:
 
 ```php
     (new Extend\Frontend('forum'))
@@ -183,7 +187,9 @@ You can also add CSS and [LESS](http://lesscss.org/features/) assets to the fron
 ```
 
 ::: tip
+
 You should develop extensions with debug mode turned **on** in `config.php`. This will ensure that Flarum recompiles assets automatically, so you don't have to manually clear the cache every time you make a change to your extension JavaScript.
+
 :::
 
 ## Changing the UI Part 1
@@ -242,7 +248,7 @@ You should familiarize yourself with [Mithril's component API](https://mithril.j
   * `CustomComponentClass.component(attrs, children)`
   * `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
 
-However, component classes extending `Component` must call `super` when using the `oninit`, `oncreate`, and `onbeforeupdate` methods.
+However, component classes extending `Component` must call `super` when using the lifecycle methods (`oninit`, `oncreate`, `onbeforeupdate`, `onupdate`, `onbeforeremove`, and `onremove`).
 
 To use Flarum components, simply extend `flarum/common/Component` in your custom component class.
 
@@ -319,11 +325,13 @@ In most cases, we don't actually want to completely replace the methods we are m
    2. For `override`, the callback receives a callable (which can be used to call the original method), as well as any arguments passed to the original method.
 
 :::tip Overriding multiple methods
+
 With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
 
 ```jsx
 extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ });
 ```
+
 :::
 
 Please note that if you are trying to change the output of a method with `override`, you must return the new output.
@@ -377,4 +385,15 @@ Some potential "advanced" uses include:
 
 ### Flarum Utils
 
-Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. The best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
+Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. A few particularly useful ones:
+
+- `flarum/common/utils/Stream` provides [Mithril Streams](https://mithril.js.org/stream.html), and is useful in [forms](forms.md).
+- `flarum/common/utils/classList` provides the [clsx library](https://www.npmjs.com/package/clsx), which is great for dynamically assembling a list of CSS classes for your components
+- `flarum/common/utils/extractText` extracts text as a string from Mithril component vnode instances (or translation vnodes).
+- `flarum/common/utils/throttleDebounce` provides the [throttle-debounce](https://www.npmjs.com/package/throttle-debounce) library
+- `flarum/common/helpers/avatar` displays a user's avatar
+- `flarum/common/helpers/highlight` highlights text in strings: great for search results!
+- `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
+- `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
+
+And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
