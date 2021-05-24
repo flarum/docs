@@ -7,7 +7,9 @@ This approach makes Flarum extremely customizable. A user can disable any featur
 In order to achieve this extensibility, Flarum has been built with rich APIs and extension points. With some programming knowledge, you can leverage these APIs to add just about any feature you want. This section of the documentation aims to teach you how Flarum works, and how to use the APIs so that you can build your own extensions.
 
 ::: warning
+
 **Both the Extension API and this documentation is a work in progress.** Be aware that future beta releases may break your extensions! If you have feedback, [we'd love to hear it](https://discuss.flarum.org/).
+
 :::
 
 ## Core vs. Extensions
@@ -29,7 +31,7 @@ If you are aiming to address a bug or shortcoming of the core, or of an existing
 - [Developers explaining their workflow for extension development](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Extension namespace tips](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Mithril js documentation](https://mithril.js.org/)
-- [Laravel API Docs](https://laravel.com/api/6.x/)
+- [Laravel API Docs](https://laravel.com/api/8.x/)
 - [Flarum API Docs](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 - [Flarum Blank Extension Generator](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
