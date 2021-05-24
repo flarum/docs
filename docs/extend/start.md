@@ -10,7 +10,7 @@ Be aware that Flarum uses some _modern_ languages and tools. If you've only ever
 
 Flarum is made up of three layers:
 
-* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/6.x/container), which is used throughout our backend.
+* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/8.x/container), which is used throughout our backend.
 
 * Second, the backend exposes a **public API** which allows frontend clients to interface with your forum's data. This is built according to the [JSON:API specification](https://jsonapi.org/).
 
@@ -120,9 +120,11 @@ We need to tell Composer a bit about our package, and we can do this by creating
   * This is also the place to list other Composer libraries your code needs to work.
 
   ::: warning Carefully choose the Flarum version
+
   While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
 
       "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+
   :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
@@ -134,7 +136,9 @@ We need to tell Composer a bit about our package, and we can do this by creating
 See [the composer.json schema](https://getcomposer.org/doc/04-schema.md) documentation for information about other properties you can add to `composer.json`.
 
 ::: tip
+
 Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+
 :::
 
 ### Installing Your Extension
