@@ -65,6 +65,7 @@ A typical contribution workflow looks like this:
 1. 🚦 **Test** your code.
     * Add unit tests as necessary when fixing bugs or adding features.
     * Run the test suite with `vendor/bin/phpunit` in the relevant package folder.
+
 <!--
     * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
 -->
