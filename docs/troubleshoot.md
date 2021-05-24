@@ -6,6 +6,13 @@ Next, you should take a few minutes to search the [Support forum](https://discus
 
 ## Step 0: Turn on debug mode
 
+::: danger Skip on Production
+
+These debugging tools are very useful, but can expose information that shouldn't be public.
+These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+
+:::
+
 Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
 If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
@@ -18,7 +25,8 @@ A lot of issues can be fixed with the following:
 * Clear the backend cache with [`php flarum cache:clear`](console.md).
 * Make sure your database is updated with [`php flarum migrate`](console.md).
 * Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
-* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used.
+* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).
+* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 You'll also want to take a look at the output of [`php flarum info`](console.md) to ensure that nothing major is out of place.
 
@@ -38,7 +46,7 @@ If it looks like you're going to need help solving the problem, it's time to get
 * Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
 * Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
 * Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
-* Recorded by Flarum (`storage/logs/flarum.log`)
+* Recorded by Flarum (`storage/logs`)
 
 Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
 
