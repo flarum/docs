@@ -102,7 +102,7 @@ const value = Stream();
 
 ## Making Requests
 
-In our [models and data](data.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
+In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
 
 Flarum's request system is available globally via `app.request(options)`, and has the following differences from Mithril's `m.request(options)`:
 
