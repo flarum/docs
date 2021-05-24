@@ -43,8 +43,3 @@ Yes, but not for a while. Our focus right now is on getting Flarum stable and fe
 The real answer is that we generally keep an eye on our community for stand-out members who would make good staff. Honestly, for most of our current staff, what they did before becoming staff wasn't much different from what they do now.
 
 Find a passion and contribute however you feel is best. Then let it take its course. You don't have to have a badge to be respected here.
-
-<!--
-### Why does Flarum use Composer? Why can't I just download a ZIP?
-  https://github.com/flarum/docs/issues/20
--->
