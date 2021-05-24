@@ -3,13 +3,15 @@
 Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
 ::: tip
+
 If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+
 :::
 
 ## Breaking Changes
 
 - Dropped support for PHP 7.1.
-- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull#1963).
+- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963).
 - The `Flarum\Util\Str::slug()` method has been removed including the class. Use `Illuminate\Support\Str::slug()` instead.
 - The `Flarum\Event\ConfigureMiddleware` has been removed. Use the [proper replacement](middleware.md).
 - Several events used in Event Listeners have been removed, use their [replacement extender](start.md#extenders) instead.
