@@ -26,7 +26,7 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-Ardından, composer.json'daki `minimum-stability` değerini `beta`dan `dev`e değiştirerek Composer'ın yerel kopyalarınızdan kararsız sürümleri kabul ettiğinden emin olun.
+Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 Son olarak, kurulumu dizin havuzlarından tamamlamak için `composer install` çalıştırın.
 
