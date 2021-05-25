@@ -26,7 +26,7 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-接着，将 `composer.json` 中的 `minimum-stability` 从 `beta` 改为 `dev`，以使 Composer 接受本地副本中的不稳定包版本（开发版本）。
+Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 最后，运行 `composer install` 从本地路径存储库完成插件安装。
 
