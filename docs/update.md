@@ -32,7 +32,7 @@ php flarum cache:clear
 
 1. Do steps 1-5 above.
 2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^0.1.0` to `*`.
-3. Change `flarum/core`'s version string in `composer.json` from `^0.1.0` to `^1.0.0`.
+3. Change `flarum/core`'s version string in `composer.json` from `^0.1.0` to `^1.0`.
 4. Remove the `"minimum-stability": "beta",` line from your `composer.json`
 5. Do steps 6 and 7 above.
 
