@@ -1,12 +1,12 @@
 # SSS
 
-### Flarum ne zaman kararlı olacak?
+### Is Flarum Stable?
 
-Şu anda şunu söylememiz imkansız - çok fazla değişken var! İlerlememizi [Blog](https://discuss.flarum.org/t/blog)'dan takip edebilirsiniz.
+Yes! After 6 years of development, Flarum 1.0.0 is finally here.
 
-### Beta'dan sonraki sürümlere geçiş yapabilecek miyim?
+### What's next after stable?
 
-Evet! Ancak, yükseltme işlemi biraz sorunlu geçebilir. Mümkün olduğunca kolay olmasını sağlamak için elimizden geleni yapacağız.
+We're still working on a formal roadmap. We have a lot of plans and ideas, and look forward to sharing a more thorough milestone with the community.
 
 ### Geliştirmeyi hızlandırmak için para bağışlayabilir miyim?
 
@@ -14,32 +14,26 @@ Tüm bağışlar minnetle alındı. [Github Sponsors](https://github.com/sponsor
 
 Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz. ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
 
-### Beta sürümünü üretimde kullanabilir miyim? Please?
+### Can I integrate Flarum with WordPress/Laravel/etc.?
 
-[Kurulum talimatları](install.md)'nın buna karşı uyararak başlamasının bir nedeni vardır. Flarum henüz olgunlaşmadı ve bir şeylerin ters gitmesi için bolca yer var. Güvendiğiniz uzantılar, daha yeni beta sürümleri tarafından uyumsuz hale getirilebilir. Hatalar, içerik kaybına veya özel bilgilerin büyük ölçüde İnternete maruz kalmasına neden olabilir. Yetersiz SEO, sitenizin sıralamasına zarar vererek yeni üyelerin ilgisini çekmeyi zorlaştırabilir. Mevcut üyeler performans sorunları veya eksik özelliklerden bıkıp daha yeşil otlaklara yönelebilir. Ve bunun gibi…
+Wouldn’t it be inte-_great_! Right now it’s not possible, but we do hope to work on integrations such as these in the future.
 
-Bu riskleri görmezden gelmeye ve yine de Flarum'u kurmaya karar verebilirsiniz. Bu size kalmış… ancak lütfen işler korkunç derecede ters giderse, onlarla başa çıkmanın sizin sorumluluğunuzda olacağını unutmayın. Sorunlarınızı çözmenize yardımcı olabileceğimizi garanti edemeyiz - çok daha kısa sürede. Bu nedenle, sıraya koyacağınız **siteniz** ve akıllıca seçim yapacağınız unutmayın.
+### Will Flarum have [insert feature here]? When? Why not?
 
-### Flarum'u WordPress/Laravel/vb. ile entegre edebilir miyim?
+We would love to build countless features and extensions for Flarum, but first things first: Our focus is on the essentials and stability.
 
-İnanılmaz olmaz mıydı! Şu anda bu mümkün değil, ancak gelecekte bunun gibi entegrasyonlar üzerinde çalışmayı umuyoruz.
+### Why haven’t you fixed [insert issue here] yet?
 
-### Flarum'da [özelliği buraya ekleyin] olacak mı? Ne zaman? Neden olmasın?
+Here again, the answer is “first things first”. If we haven’t fixed an issue (or assigned it a milestone) yet, it’s because we’re working on something else that’s just as important. Please be patient; we’ll try to get it done before release. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](contributing.md)!
 
-Flarum için sayısız özellik ve uzantı oluşturmayı çok isteriz, ancak her şeyden önce: Odak noktamız temeller ve kararlılıktır.
+### Will I be able to migrate my forum to Flarum?
 
-### Neden henüz [sorunu buraya ekleyin] sorunu çözmediniz?
+We don't currently provide official migrators, but there are many community solutions out there. Relatively soon, we’ll start building tools to import data from other forum software like esoTalk, FluxBB, phpBB, Discourse, and others.
 
-Burada yine cevap “ilk önce şeyler”dir. Henüz bir sorunu çözmediysek (veya ona bir kilometre taşı atamadıysak), bunun nedeni aynı derecede önemli olan başka bir şey üzerinde çalıştığımızdır. Lütfen sabırlı olun; yayınlanmadan önce halletmeye çalışacağız. Veya aceleniz varsa, bunu kendiniz düzeltmekten çekinmeyin ve [projeye katkıda bulunun](Contributing.md)!
-
-### Forumumu Flarum'a taşıyabilecek miyim?
-
-Evet ama bir süreliğine değil. Şu anda odak noktamız, Flarum'u kararlı ve eksiksiz hale getirmek. Flarum'un üretimde kullanılmaya hazır olduğundan emin olduktan sonra, esoTalk, FluxBB, phpBB, Discourse ve diğerleri gibi diğer forum yazılımlarından verileri içeri aktarmak için araçlar oluşturmaya başlayacağız.
-
-### Flarum ekibine nasıl katılırım?
+### How do I join the Flarum team?
 
 > "Mistik ritüeller, yaşamı tehdit eden tehlikeler ve birçoğunun gittiği ve çok azının geri döndüğü uzak diyarlara maceralar içeren gizemli ve zorlu bir çileden geçerek." ~ jordanjay29
 
-Gerçek cevap, genel olarak topluluğumuza iyi personel olacak öne çıkan üyeler için göz kulak olmamızdır. Açıkçası, mevcut çalışanlarımızın çoğu için, personel olmadan önce yaptıkları, şu anda yaptıklarından çok da farklı değildi.
+The real answer is that we generally keep an eye on our community for stand-out members who would make good staff. Honestly, for most of our current staff, what they did before becoming staff wasn't much different from what they do now.
 
-Bir tutku bulun ve en iyi olduğunu düşündüğünüz şekilde katkıda bulunun. O zaman kendi yoluna gitmesine izin verin. Burada saygı duymak için bir rozete sahip olmanız gerekmiyor.
+Find a passion and contribute however you feel is best. Then let it take its course. You don't have to have a badge to be respected here.
