@@ -26,7 +26,7 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-Successivamente, assicurati che Composer accetti le versioni instabili dalle tue copie locali modificando il valore di `minimum-stability` da `beta` a `dev` in `composer.json`.
+Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 Infine, lancia `composer install` per completare l'installazione dal percorso della repository.
 
