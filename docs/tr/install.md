@@ -1,13 +1,5 @@
 # Kurulum
 
-::: danger Uyarı
-
-Flarum **beta yazılımıdır**. Bu, hala bazı eksik özelliklere ve hatalara sahip olduğu anlamına gelir 🐛🐞 ve bir noktada - er ya da geç - muhtemelen kırılacaktır! 💥
-
-Beta, tamamen bu sorunları çözmek ve Flarum'u iyileştirmekle ilgilidir. **Ne yaptığınızı bilmiyorsanız lütfen üretimde Flarum kullanmayın**. İşler ters giderse sizi destekleyemeyiz. Sonraki sürümlere yükseltmek mümkün olacak, ancak ellerinizi kirletmeyi içerebilir.
-
-:::
-
 ::: tip Hızlı test?
 
 Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birinde denemekten çekinmeyin. Veya Flarum ekibine bağlı olmayan ücretsiz bir topluluk hizmeti olan [Free Flarum](https://www.freeflarum.com)'da kendi forumunuzu birkaç saniye içinde kurun.
@@ -36,10 +28,10 @@ Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Bazı paylaşılan
 Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
-composer create-project flarum/flarum . --stability=beta
+composer create-project flarum/flarum .
 ```
 
-Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre [URL Yeniden Yazma] (# url-yeniden yazma) ayarlamanız gerekir.
+Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre [URL Yönlendirme](#url-yonlendirme) ayarlamanız gerekir.
 
 Her şey hazır olduğunda, bir web tarayıcısında forumunuza gidin ve kurulumu tamamlamak için talimatları izleyin.
 

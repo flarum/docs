@@ -17,6 +17,18 @@ Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org)
 1. `composer.json` dosyasını içeren klasöre `cd` komutuyla gidin.
 2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının belgesi tarafından sağlanmalıdır.
 
+## Updating Extensions
+
+Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+
+## Uninstalling Extensions
+
+Similarly to installation, to remove an extension:
+
+0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+1. `cd` to your Flarum directory.
+2. Run `composer remove COMPOSER_PACKAGE_NAME:*`. This should be provided by the extension's documentation.
+
 ## Uzantıları Yönetme
 
 Yönetici panosunun uzantılar sayfası, yüklendiklerinde uzantıları yönetmek için uygun bir yol sağlar. Yapabilecekleriniz:
