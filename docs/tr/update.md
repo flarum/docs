@@ -52,7 +52,7 @@ If the output is short and contains:
 Nothing to modify in lock file
 ```
 
-Or does not list `flarum/core as an updated package, and you are not on the latest flarum version:
+Or does not list `flarum/core` as an updated package, and you are not on the latest flarum version:
 
 - Revisit step 2 above, make sure that all third party extensions have an asterisk for their version string.
 - Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above.
