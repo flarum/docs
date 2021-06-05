@@ -10,7 +10,7 @@ La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones 
 
 En primer lugar, necesitarás requerir el paquete composer `flarum/testing` como dependencia de desarrollo para tu extensión:
 
-`composer require --dev flarum/testing:^0.1.0-beta.16`
+`composer require --dev flarum/testing:^1.0`
 
 A continuación, tendrá que establecer una estructura de archivos para las pruebas, y añadir la configuración de PHPUnit:
 
@@ -127,7 +127,7 @@ La información de la base de datos de pruebas se configura a través del `DB_HO
 
 Ahora que hemos proporcionado la información necesaria, todo lo que tenemos que hacer es ejecutar `composer test:setup` en el directorio raíz de nuestra extensión, ¡y ya tenemos nuestro entorno de pruebas listo para funcionar!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
 
 ### Uso de las pruebas de integración
 
@@ -179,33 +179,35 @@ use Flarum\Testing\integration\TestCase;
 
 class SomeTest extends TestCase
 {
-  use RetrievesAuthorizedUsers;
+    use RetrievesAuthorizedUsers;
 
     public function setUp(): void
     {
-      parent::setUp();
+        parent::setUp();
 
-      // Supongamos que nuestra extensión depende de las etiquetas.
-      // Ten en cuenta que las etiquetas tendrán que estar en el composer.json de tu extensión `require-dev`.
-      // Además, asegúrate de incluir el ID de la extensión que se está probando actualmente, a menos que estés
-      // probando la línea de base sin su extensión.
-      $this->extension('flarum-tags', 'my-cool-extension');
+        $this->setting('my.custom.setting', true);
 
-      // Tenga en cuenta que esta entrada no está validada: asegúrese de que está rellenando con datos válidos y representativos.
-      $this->prepareDatabase([
-        'users' => [
-          $this->normalUser()  // Disponible para su comodidad.
-        ],
-        'discussions' => [
-          ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
-        ],
-        'posts' => [
-          ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
-        ]
-      ]);
+        // Let's assume our extension depends on tags.
+        // Ten en cuenta que las etiquetas tendrán que estar en el composer.json de tu extensión `require-dev`.
+        // Also, make sure you include the ID of the extension currently being tested, unless you're
+        // testing the baseline without your extension.
+        $this->extension('flarum-tags', 'my-cool-extension');
 
-      // La mayoría de los casos de prueba no necesitarán probar los extensores, pero si quieres, puedes hacerlo.
-      $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
+        // Note that this input isn't validated: make sure you're populating with valid, representative data.
+        $this->prepareDatabase([
+            'users' => [
+                $this->normalUser() // Available for convenience.
+            ],
+            'discussions' => [
+                ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
+            ],
+            'posts' => [
+                ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
+            ]
+        ]);
+
+        // Most test cases won't need to test extenders, but if you want to, you can.
+        $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
     /**
