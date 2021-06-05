@@ -12,7 +12,7 @@ It is essentially a collection of utils that allow testing Flarum core and exten
 
 Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
 
-`composer require --dev flarum/testing:^0.1.0-beta.16`
+`composer require --dev flarum/testing:^1.0`
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
 
@@ -129,7 +129,7 @@ Testing database information is configured via the `DB_HOST` (defaults to `local
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
@@ -181,35 +181,35 @@ use Flarum\Testing\integration\TestCase;
 
 class SomeTest extends TestCase
 {
-  use RetrievesAuthorizedUsers;
+    use RetrievesAuthorizedUsers;
 
     public function setUp(): void
     {
-      parent::setUp();
+        parent::setUp();
 
-      $this->setting('my.custom.setting', true);
+        $this->setting('my.custom.setting', true);
 
-      // Let's assume our extension depends on tags.
-      // Note that tags will need to be in your extension's composer.json's `require-dev`.
-      // Also, make sure you include the ID of the extension currently being tested, unless you're
-      // testing the baseline without your extension.
-      $this->extension('flarum-tags', 'my-cool-extension');
+        // Let's assume our extension depends on tags.
+        // Note that tags will need to be in your extension's composer.json's `require-dev`.
+        // Also, make sure you include the ID of the extension currently being tested, unless you're
+        // testing the baseline without your extension.
+        $this->extension('flarum-tags', 'my-cool-extension');
 
-      // Note that this input isn't validated: make sure you're populating with valid, representative data.
-      $this->prepareDatabase([
-        'users' => [
-          $this->normalUser()  // Available for convenience.
-        ],
-        'discussions' => [
-          ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
-        ],
-        'posts' => [
-          ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
-        ]
-      ]);
+        // Note that this input isn't validated: make sure you're populating with valid, representative data.
+        $this->prepareDatabase([
+            'users' => [
+                $this->normalUser() // Available for convenience.
+            ],
+            'discussions' => [
+                ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
+            ],
+            'posts' => [
+                ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
+            ]
+        ]);
 
-      // Most test cases won't need to test extenders, but if you want to, you can.
-      $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
+        // Most test cases won't need to test extenders, but if you want to, you can.
+        $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
     /**
