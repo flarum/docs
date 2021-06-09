@@ -62,7 +62,7 @@ $actor->assertCan('reply', $discussion);
 $actor->assertRegistered();
 
 // Raise a PermissionDeniedException if the user is not an admin.
-$actpr->assertAdmin();
+$actor->assertAdmin();
 
 // Check whether one of the user's groups have a permission.
 // WARNING: this should be used with caution, as it doesn't actually
