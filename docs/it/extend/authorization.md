@@ -61,9 +61,9 @@ $actor->assertCan('reply', $discussion);
 $actor->assertRegistered();
 
 // Genera un'eccezione PermissionDeniedException se l'utente non è un amministratore.
-$actpr->assertAdmin();
+$actor->assertAdmin();
 
-// Controlla se uno dei gruppi dell'utente dispone di un'autorizzazione.
+// Check whether one of the user's groups have a permission.
 // ATTENZIONE: questo dovrebbe essere usato con cautela, poiché in realtà
 // non viene eseguito attraverso il processo di autorizzazione, quindi non tiene conto delle policy.
 // Tuttavia, è utile nell'implementazione di criteri personalizzati.
