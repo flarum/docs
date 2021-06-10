@@ -2,7 +2,7 @@
 
 ::: danger Security Vulnerabilities
 
-If you discover a security vulnerability within Flarum, please send an email to [security@flarum.org](mailto:security@flarum.org) so we can address it promptly.
+If you discover a security vulnerability within Flarum, please follow our [security policy](https://github.com/flarum/core/security/policy) so we can address it promptly.
 
 :::
 
