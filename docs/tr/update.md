@@ -10,7 +10,7 @@ If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), 
 
 **Step 2:** Take a look at your `composer.json` file. Unless you have a reason to require specific versions of extensions or libraries, you should set the version string of everything except `flarum/core` to `*` (including `flarum/tags`, `flarum/mentions`, and other bundled extensions). Make sure `flarum/core` is NOT set to `*`. If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v0.1.0-beta.16`). If you just want the most recent version, use `"flarum/core": "^1.0"`.
 
-**Step 4:** If your local install uses [local extenders](extenders.md), make sure they are up to date with changes in Flarum.
+**Step 3:** If your local install uses [local extenders](extenders.md), make sure they are up to date with changes in Flarum.
 
 **Step 4:** We recommend disabling third-party extensions in the admin dashboard before updating. This isn't strictly required, but will make debugging easier if you run into issues.
 
