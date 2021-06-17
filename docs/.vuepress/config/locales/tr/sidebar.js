@@ -1,5 +1,5 @@
 module.exports = {
-  '/tr/extend/': [
+  '/extend/': [
     {
       title: 'Ana Kavramlar',
       collapsable: false,
@@ -8,14 +8,9 @@ module.exports = {
         'start',
         'frontend',
         'routes',
-        'data',
-        'distribution',
-        'update-b8',
-        'update-b10',
-        'update-b12',
-        'update-b13',
-        'update-b14',
-        'update-b15',
+        'models',
+        'api',
+        'distribution'
       ]
     },
     {
@@ -23,10 +18,17 @@ module.exports = {
       collapsable: false,
       children: [
         'admin',
+        'backend-events',
+        'authorization',
         'frontend-pages',
         'interactive-components',
+        'i18n',
+        'language-packs',
         'forms',
-        'backend-events',
+        'permissions',
+        'settings',
+        'testing',
+        'theme'
       ]
     },
     {
@@ -34,20 +36,34 @@ module.exports = {
       collapsable: false,
       children: [
         'api-throttling',
-        'authorization',
+        'assets',
         'console',
+        'extending-extensions',
+        'extensibility',
+        'filesystem',
         'formatting',
-        'i18n',
         'mail',
         'middleware',
+        'model-visibility',
         'slugging',
         'notifications',
-        'permissions',
         'post-types',
         'search',
-        'service-provider',
-        'settings',
-        'testing',
+        'service-provider'
+      ]
+    },
+    {
+      title: 'Güncelleme Kılavuzları',
+      collapsable: false,
+      children: [
+        'update-1.0',
+        'update-b16',
+        'update-b15',
+        'update-b14',
+        'update-b13',
+        'update-b12',
+        'update-b10',
+        'update-b8',
       ]
     },
     // {
@@ -65,7 +81,7 @@ module.exports = {
     // }
   ],
 
-  '/tr/': [
+  '/': [
     {
       title: 'Giriş',
       collapsable: false,
@@ -79,25 +95,33 @@ module.exports = {
       ]
     },
     {
-      title: 'Ayarlama',
+      title: 'Kurulum',
       collapsable: false,
       children: [
+        'composer',
         'install',
         'update',
         'troubleshoot'
       ]
     },
     {
-      title: 'Yönetim',
+      title: 'Yönetims',
       collapsable: false,
       children: [
         'admin',
         'config',
-        'extensions',
+        'extensisons',
         'languages',
         'themes',
         'mail',
         'console'
+      ]
+    },
+    {
+      title: 'İleri',
+      collapsable: false,
+      children: [
+        'extenders'
       ]
     }
   ],
