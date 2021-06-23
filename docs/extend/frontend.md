@@ -41,7 +41,7 @@ js
 ├── admin.js
 ├── forum.js
 ├── package.json
-└── webpack.config.json
+└── webpack.config.js
 ```
 
 ### package.json
@@ -55,7 +55,7 @@ js
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.7"
   },
-  "dev-dependencies": {
+  "devDependencies": {
     "flarum": "0.1.0-beta.16",
   },
   "scripts": {
