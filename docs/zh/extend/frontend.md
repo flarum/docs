@@ -56,7 +56,7 @@ js
     "webpack-cli": "^3.0.7"
   },
   "dev-dependencies": {
-    "flarum": "0.1.0-beta.16",
+    "flarum": "0.1.0-beta.16"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
