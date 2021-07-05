@@ -27,7 +27,7 @@ Similarly to installation, to remove an extension:
 
 0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
-2. Run `composer remove COMPOSER_PACKAGE_NAME:*`. Esto debería ser proporcionado por la documentación de la extensión.
+2. Run `composer remove COMPOSER_PACKAGE_NAME`. Esto debería ser proporcionado por la documentación de la extensión.
 
 ## Managing Extensions
 
