@@ -103,7 +103,9 @@ This is a standard configuration file to enable support for Typescript with the 
 Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
 include this configuration file so that your IDE can infer types for our core JS.
 
-To get the typings working, you need to run `composer update` in your extension folder, to download the latest copy of Flarum's core into a `vendor` folder. Remember not to commit this folder, if you're using a version control system such as Git.
+To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
+
+You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete.
 
 ### admin.js and forum.js
 
