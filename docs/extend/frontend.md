@@ -21,7 +21,7 @@ Along with new TypeScript support, we have a [`tsconfig` package](https://www.np
 
 This portion of the guide will explain the necessary file setup for extensions. Once again, we highly recommend using the unofficial [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to set up the file structure for you. That being said, you should still read this to understand what's going on beneath the surface.
 
-Before we can write any JavaScript, we need to set up a **transpiler**. This allows us to use [Typescript](https://www.typescriptlang.org/) and its magic in Flarum core and extensions.
+Before we can write any JavaScript, we need to set up a **transpiler**. This allows us to use [TypeScript](https://www.typescriptlang.org/) and its magic in Flarum core and extensions.
 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
@@ -100,7 +100,7 @@ To work properly, our extensions should use the [official flarum webpack config]
 
 This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
 
-Even if you choose not to use Typescript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
+Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
 include this configuration file so that your IDE can infer types for our core JS.
 
 To get the typings working, you need to run `composer update` in your extension folder, to download the latest copy of Flarum's core into a `vendor` folder. Remember not to commit this folder, if you're using a version control system such as Git.
