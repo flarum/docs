@@ -13,7 +13,7 @@ They share the same foundational code, so once you know how to extend one, you k
 
 :::tip Typings!
 
-Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the package's README to configure typings support.
 
 :::
 
@@ -21,7 +21,7 @@ Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev depe
 
 This portion of the guide will explain the necessary file setup for extensions. Once again, we highly recommend using the unofficial [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to set up the file structure for you. That being said, you should still read this to understand what's going on beneath the surface.
 
-Before we can write any JavaScript, we need to set up a **transpiler**. This allows us to use [TypeScript](https://www.typescriptlang.org/) and its magic in Flarum core and extensions.
+Before we can write any JavaScript, we need to set up a **transpiler**. This allows us to use [Typescript](https://www.typescriptlang.org/) and its magic in Flarum core and extensions.
 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
@@ -51,12 +51,12 @@ js
   "private": true,
   "name": "@acme/flarum-hello-world",
   "dependencies": {
-    "flarum-webpack-config": "0.1.0-beta.10",
+    "flarum-webpack-config": "^1.0.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.7"
   },
   "dev-dependencies": {
-    "flarum": "0.1.0-beta.16"
+    "flarum-tsconfig": "^1.0.0"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
@@ -79,6 +79,31 @@ module.exports = config();
 
 [Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension.
 To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
+
+### tsconfig.json
+
+```jsonc
+{
+  // Use Flarum's tsconfig as a starting point
+  "extends": "flarum-tsconfig",
+  // This will match all .ts, .tsx, .d.ts, .js, .jsx files
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    // This will output typings to `dist-typings`
+    "declarationDir": "./dist-typings",
+    "paths": {
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+    }
+  }
+}
+```
+
+This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
+
+Even if you choose not to use Typescript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
+include this configuration file so that your IDE can infer types for our core JS.
+
+To get the typings working, you need to run `composer update` in your extension folder, to download the latest copy of Flarum's core into a `vendor` folder. Remember not to commit this folder, if you're using a version control system such as Git.
 
 ### admin.js and forum.js
 
@@ -114,11 +139,11 @@ Please note that this is all simply a recommendation: there's nothing forcing yo
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
 ```js
-import {extend, override} from 'flarum/common/extend';
+import { extend, override } from 'flarum/common/extend';
 
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
-app.initializers.add('our-extension', function(app) {
+app.initializers.add('acme-flarum-hello-world', function(app) {
   // Your Extension Code Here
   console.log("EXTENSION NAME is working!");
 });
