@@ -91,6 +91,7 @@ To work properly, our extensions should use the [official flarum webpack config]
   "compilerOptions": {
     // This will output typings to `dist-typings`
     "declarationDir": "./dist-typings",
+    "baseUrl": ".",
     "paths": {
       "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
     }
