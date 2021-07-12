@@ -11,4 +11,4 @@ https://laravel.com/docs/5.7/releases
 ## 发布说明
 -->
 
-每个版本的发布说明都可以在 [Flarum 社区](https://discuss.flarum.org/t/blog?sort=newest) 找到。
+每个版本的发布帖都可以在 [Flarum 社区博客标签](https://discuss.flarum.org/t/blog?sort=newest) 找到。
