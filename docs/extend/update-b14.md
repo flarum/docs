@@ -10,7 +10,9 @@ Where possible, we replicated old APIs, to ease the upgrade and give you time to
 Quite a few breaking changes remain, though - read more below.
 
 ::: tip
+
 If you need help with the upgrade, our friendly community will gladly help you out either [on the forum](https://discuss.flarum.org/t/extensibility) or [in chat](https://flarum.org/chat/).
+
 :::
 
 To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below.

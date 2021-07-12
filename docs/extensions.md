@@ -15,8 +15,20 @@ Flarum has a wide ecosystem of extensions, most of which are open source and fre
 
 Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
 
-1. `cd` to the folder containing `composer.json`.
-2. Run `composer require COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
+1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
+2. Run `composer require COMPOSER_PACKAGE_NAME:*`. This should be provided by the extension's documentation.
+
+## Updating Extensions
+
+Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+
+## Uninstalling Extensions
+
+Similarly to installation, to remove an extension:
+
+0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+1. `cd` to your Flarum directory.
+2. Run `composer remove COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
 
 ## Managing Extensions
 

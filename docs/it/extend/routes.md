@@ -62,11 +62,13 @@ class HelloWorldController implements RequestHandlerInterface
 I controller vengono risolti dal [contenitore](https://laravel.com/docs/6.x/container) così puoi iniettarci all'interno le tue dipendenze.
 
 :::tip Cosa sono i controller?
+
 Il metodo `handle` di un Controller è il codice che viene eseguito quando qualcuno visita il tuo percorso (o invia dati ad esso tramite l'invio di un modulo). In generale, le implementazioni del controller seguono lo schema:
 
 1. Ricevere informazioni (GET params, POST data, l'utente corrente, ecc.) dall'oggetto Request.
 2. Fai qualcosa con quelle informazioni. Ad esempio, se il nostro controller gestisce un percorso per la creazione di post, vorremo salvare un nuovo post nel database.
 3. Restituisci una risposta. La maggior parte dei percorsi restituirà una pagina Web HTML o una risposta API JSON.
+
 :::
 
 ### Parametri percorsi

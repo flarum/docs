@@ -1,7 +1,9 @@
 # Reporting Bugs
 
 ::: danger Security Vulnerabilities
-If you discover a security vulnerability within Flarum, please send an email to [security@flarum.org](mailto:security@flarum.org) so we can address it promptly.
+
+If you discover a security vulnerability within Flarum, please follow our [security policy](https://github.com/flarum/core/security/policy) so we can address it promptly.
+
 :::
 
 Thank you for helping us test Flarum. We're happy to have you on the team! We need people who can *troubleshoot issues patiently* and *communicate them clearly*. As you probably know, good bug reporting takes some time and effort. If you're fine with that, then let's get started!

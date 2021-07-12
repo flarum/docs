@@ -10,7 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class YourCommand implements AbstractCommand {
+class YourCommand extends AbstractCommand {
   protected function configure()
   {
       $this
@@ -39,6 +39,23 @@ return [
 ];
 ```
 
-::: tip Scheduled Commands
-The [fof/console library](https://github.com/FriendsOfFlarum/console) allows you to schedule commands to run on a regular interval! However, please note that this is a community solution.
-:::
+## Scheduled Commands
+
+The `Flarum\Extend\Console`'s `schedule` method allows extension developers to create scheduled commands that run on an interval:
+
+
+```php
+use Flarum\Extend;
+use YourNamespace\Console\CustomCommand;
+use Illuminate\Console\Scheduling\Event;
+
+return [
+    // Other extenders
+    (new Extend\Console())->schedule('cache:clear', function (Event $event) {
+        $event->everyMinute();
+    }, ['Arg1', '--option1', '--option2']),
+    // Other extenders
+];
+```
+
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) for more information.

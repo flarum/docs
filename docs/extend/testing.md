@@ -12,7 +12,7 @@ It is essentially a collection of utils that allow testing Flarum core and exten
 
 Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
 
-`composer require --dev flarum/testing`
+`composer require --dev flarum/testing:^1.0`
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
 
@@ -86,18 +86,11 @@ This script will be run to set up a testing database / file structure.
 ```php
 <?php
 
-/*
- * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
- */
-
-use Flarum\Testing\integration\ConfigureSetup;
+use Flarum\Testing\integration\Setup\SetupScript;
 
 require __DIR__.'/../../vendor/autoload.php';
 
-$setup = new ConfigureSetup(__DIR__.'/../../vendor');
+$setup = new SetupScript();
 
 $setup->run();
 ```
@@ -136,7 +129,7 @@ Testing database information is configured via the `DB_HOST` (defaults to `local
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListTestWithFulltextSearch.php#L29-L43) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
@@ -153,14 +146,18 @@ Your testcase classes should extend this class.
 
 There are several important utilities available for your test cases:
 
-- The `extension()` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](dependencies.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
-- The `extend()` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
+- The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
+- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](dependencies.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
+- The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
 - The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
 :::warning
+
 The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
+
 :::
 
 Of course, since this is all based on PHPUnit, you can use the `setUp()` methods of your test classes for common setup tasks.
@@ -184,33 +181,35 @@ use Flarum\Testing\integration\TestCase;
 
 class SomeTest extends TestCase
 {
-  use RetrievesAuthorizedUsers;
+    use RetrievesAuthorizedUsers;
 
     public function setUp(): void
     {
-      parent::setUp();
+        parent::setUp();
 
-      // Let's assume our extension depends on tags.
-      // Note that tags will need to be in your extension's composer.json's `require-dev`.
-      // Also, make sure you include the ID of the extension currently being tested, unless you're
-      // testing the baseline without your extension.
-      $this->extension('flarum-tags', 'my-cool-extension');
+        $this->setting('my.custom.setting', true);
 
-      // Note that this input isn't validated: make sure you're populating with valid, representative data.
-      $this->prepareDatabase([
-        'users' => [
-          $this->normalUser()  // Available for convenience.
-        ],
-        'discussions' => [
-          ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
-        ],
-        'posts' => [
-          ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
-        ]
-      ]);
+        // Let's assume our extension depends on tags.
+        // Note that tags will need to be in your extension's composer.json's `require-dev`.
+        // Also, make sure you include the ID of the extension currently being tested, unless you're
+        // testing the baseline without your extension.
+        $this->extension('flarum-tags', 'my-cool-extension');
 
-      // Most test cases won't need to test extenders, but if you want to, you can.
-      $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
+        // Note that this input isn't validated: make sure you're populating with valid, representative data.
+        $this->prepareDatabase([
+            'users' => [
+                $this->normalUser() // Available for convenience.
+            ],
+            'discussions' => [
+                ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
+            ],
+            'posts' => [
+                ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
+            ]
+        ]);
+
+        // Most test cases won't need to test extenders, but if you want to, you can.
+        $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
     /**
@@ -290,10 +289,10 @@ class SomeTest extends TestCase
                             'attributes' => [
                                 'username' => 'test',
                                 'password' => 'too-obscure',
-                                'email' => 'test@machine.local',
-                            ],
+                                'email' => 'test@machine.local'
+                            ]
                         ]
-                    ],
+                    ]
                 ]
             )
         );
@@ -306,11 +305,15 @@ class SomeTest extends TestCase
 ```
 
 ::: warning
+
 If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
+
 :::
 
 ::: warning
+
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
+
 :::
 
 #### Console Tests

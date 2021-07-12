@@ -68,7 +68,7 @@ More information about methods available to override is available in our [API do
 
 Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component.
 
-The composer is managed by a global instance of [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
+The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
 
 - `app.composer.load(componentClass, attrs)` will load in a new composer type. If a composer is already active, it will be replaced.
 - `app.composer.show()` will show the composer if it is currently hidden.
@@ -84,5 +84,5 @@ This is done by splitting code for each usage into a subclass of `flarum/forum/c
 ### Composer Editor
 
 The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor).
-Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/7d79912d3651f49e045302946b99a562f791b730/js/src/common/utils/EditorDriverInterface.ts).
+Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/master/js/src/common/utils/EditorDriverInterface.ts).
 This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.

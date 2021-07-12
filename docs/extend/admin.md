@@ -14,7 +14,7 @@ This new API allows you to add settings to your extension with very few lines of
 
 Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for. 
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').
+Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
 
 For the following example, we will use the fictitious extension 'acme/interstellar':
 
@@ -29,8 +29,10 @@ app.initializers.add('interstellar', function(app) {
 
 Once that is done, you can begin adding settings and permissions. 
 
-::: Note
+:::tip Note
+
 All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+
 :::
 
 ### Registering Settings
@@ -51,6 +53,7 @@ app.initializers.add('interstellar', function(app) {
       {
         setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
         type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
       },
       30 // Optional: Priority
@@ -73,6 +76,17 @@ If you use `type: 'select'` the setting object looks a little bit different:
 }
 ```
 
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+
+```js
+{
+  setting: 'acme-interstellar.crew_count',
+  label: app.translator.trans('acme-interstellar.admin.crew_count_label'),
+  type: 'number',
+  min: 1,
+  max: 10
+}
+```
 
 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
@@ -122,12 +136,17 @@ app.initializers.add('interstellar', function(app) {
         icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
     );
 });
 ```
+
+If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
+
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Chaining Reminder
 

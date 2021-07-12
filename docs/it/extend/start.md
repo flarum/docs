@@ -1,30 +1,30 @@
 # Iniziare
 
-Vuoi costruire un'estensione Flarum? Sei nel posto giusto! Questo documento ti guiderà attraverso alcuni concetti essenziali, dopodiché costruirai la tua prima estensione Flarum da zero.
+Vuoi costruire un'estensione Flarum? Sei nel posto giusto! Questo documento ti guiderï¿½ attraverso alcuni concetti essenziali, dopodichï¿½ costruirai la tua prima estensione Flarum da zero.
 
 ## Architettura
 
-Per capire come estendere Flarum, prima dobbiamo capire un po' come è costruito Flarum.
+Per capire come estendere Flarum, prima dobbiamo capire un po' come ï¿½ costruito Flarum.
 
-Tieni presente che Flarum utilizza alcuni linguaggi e strumenti _moderni_. Se hai mai creato solo plugin per WordPress prima, potresti sentirti un po' fuori dal tuo ambiente! Va bene, questo è un ottimo momento per imparare cose nuove e interessanti ed estendere le tue abilità. Tuttavia, ti consigliamo di acquisire familiarità con le tecnologie descritte di seguito prima di procedere.
+Tieni presente che Flarum utilizza alcuni linguaggi e strumenti _moderni_. Se hai mai creato solo plugin per WordPress prima, potresti sentirti un po' fuori dal tuo ambiente! Va bene, questo ï¿½ un ottimo momento per imparare cose nuove e interessanti ed estendere le tue abilitï¿½. Tuttavia, ti consigliamo di acquisire familiaritï¿½ con le tecnologie descritte di seguito prima di procedere.
 
-Flarum è composto da tre strati:
+Flarum ï¿½ composto da tre strati:
 
-* Primo, c'è il ** backend **. Questo è scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
+* Primo, c'ï¿½ il ** backend **. Questo ï¿½ scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
 
-* Secondo, il backend espone una ** API pubblica ** che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo è costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
+* Secondo, il backend espone una ** API pubblica ** che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo ï¿½ costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
 
-* Ed ultimo, c'è l'interfaccia web predefinita che chiamiamo ** frontend **. Questa è una [applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application) che utilizza le API. È costruito con un semplice framework simile a React chiamato [Mithril.js](https://mithril.js.org).
+* Ed ultimo, c'ï¿½ l'interfaccia web predefinita che chiamiamo ** frontend **. Questa ï¿½ una [applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application) che utilizza le API. ï¿½ costruito con un semplice framework simile a React chiamato [Mithril.js](https://mithril.js.org).
 
-Le estensioni dovranno spesso interagire con tutti e tre questi livelli per far accadere le cose. Ad esempio, se si desidera creare un'estensione che aggiunga campi personalizzati ai profili utente, è necessario aggiungere le strutture di database appropriate nel ** backend **, esporre tali dati nell '** API pubblica ** e quindi visualizzare e consentire agli utenti di modificarlo sul ** frontend **.
+Le estensioni dovranno spesso interagire con tutti e tre questi livelli per far accadere le cose. Ad esempio, se si desidera creare un'estensione che aggiunga campi personalizzati ai profili utente, ï¿½ necessario aggiungere le strutture di database appropriate nel ** backend **, esporre tali dati nell '** API pubblica ** e quindi visualizzare e consentire agli utenti di modificarlo sul ** frontend **.
 
 Allora ... come estendiamo questi livelli?
 
 ## Extender
 
-Per estendere Flarum, useremo un concetto chiamato ** extender **. Gli extender sono oggetti * dichiarativi * che descrivono in termini semplici gli obiettivi che stai cercando di raggiungere (come aggiungere un nuovo percorso al tuo forum o eseguire del codice quando è stata creata una nuova discussione).
+Per estendere Flarum, useremo un concetto chiamato ** extender **. Gli extender sono oggetti * dichiarativi * che descrivono in termini semplici gli obiettivi che stai cercando di raggiungere (come aggiungere un nuovo percorso al tuo forum o eseguire del codice quando ï¿½ stata creata una nuova discussione).
 
-Ogni extender è diverso. Tuttavia, saranno sempre in qualche modo simili a questo:
+Ogni extender ï¿½ diverso. Tuttavia, saranno sempre in qualche modo simili a questo:
 
 ```php
 // Register a JavaScript and a CSS file to be delivered with the forum frontend
@@ -36,13 +36,13 @@ Ogni extender è diverso. Tuttavia, saranno sempre in qualche modo simili a quest
 Creare prima un'istanza dell'extender, quindi chiamare i metodi su di essa per un'ulteriore configurazione. Tutti questi metodi restituiscono l'extender stesso, in modo da poter ottenere l'intera configurazione semplicemente concatenando le chiamate ai metodi.
 
 
-Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perché sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromperà la tua estensione.
+Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perchï¿½ sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromperï¿½ la tua estensione.
 
-Tutti gli estensori attualmente disponibili dal core di Flarum possono essere trovati sotto la voce [`Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(documentazione PHP API)](https://api.docs.flarum.org/php/master/flarum/extend). Ogni estensione potrà avere anche extender proprietari.
+Tutti gli estensori attualmente disponibili dal core di Flarum possono essere trovati sotto la voce [`Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(documentazione PHP API)](https://api.docs.flarum.org/php/master/flarum/extend). Ogni estensione potrï¿½ avere anche extender proprietari.
 
 ## Ciao Mondo
 
-Vuoi vedere un extender in azione? Il file `extend.php` nella root della tua installazione di Flarum è il modo più semplice per registrare gli extender per il tuo sito. Dovrebbe restituire un array di oggetti extender. Aprilo e aggiungi quanto segue:
+Vuoi vedere un extender in azione? Il file `extend.php` nella root della tua installazione di Flarum ï¿½ il modo piï¿½ semplice per registrare gli extender per il tuo sito. Dovrebbe restituire un array di oggetti extender. Aprilo e aggiungi quanto segue:
 
 ```php
 <?php
@@ -60,15 +60,15 @@ return [
 
 Ora visita il tuo forum per un saluto piacevole (anche se estremamente invadente).
 
-Per semplici personalizzazioni specifiche del sito come l'aggiunta di un po 'di CSS / JavaScript personalizzato o l'integrazione con il sistema di autenticazione del tuo sito, il file il file `extend.php` è praticamente perfetto. Ma a un certo punto, la tua personalizzazione potrebbe diventare troppo grande. È ora di costruire un'estensione!
+Per semplici personalizzazioni specifiche del sito come l'aggiunta di un po 'di CSS / JavaScript personalizzato o l'integrazione con il sistema di autenticazione del tuo sito, il file il file `extend.php` ï¿½ praticamente perfetto. Ma a un certo punto, la tua personalizzazione potrebbe diventare troppo grande. ï¿½ ora di costruire un'estensione!
 
 ## Pacchetto estensione
 
-[Composer](https://getcomposer.org) è un gestore delle dipendenze per PHP. Consente alle applicazioni di inserire facilmente librerie di codice esterne e rende facile mantenerle aggiornate in modo che la sicurezza e le correzioni di bug vengano propagate rapidamente.
+[Composer](https://getcomposer.org) ï¿½ un gestore delle dipendenze per PHP. Consente alle applicazioni di inserire facilmente librerie di codice esterne e rende facile mantenerle aggiornate in modo che la sicurezza e le correzioni di bug vengano propagate rapidamente.
 
-A quanto pare, ogni estensione Flarum è anche un pacchetto Composer. Ciò significa che l'installazione di Flarum di qualcuno può "richiedere" una certa estensione e Composer la inserirà e la manterrà aggiornata. Bello no?
+A quanto pare, ogni estensione Flarum ï¿½ anche un pacchetto Composer. Ciï¿½ significa che l'installazione di Flarum di qualcuno puï¿½ "richiedere" una certa estensione e Composer la inserirï¿½ e la manterrï¿½ aggiornata. Bello no?
 
-Durante lo sviluppo, puoi lavorare sulle tue estensioni localmente e configurare un [repository di Composer](https://getcomposer.org/doc/05-repositories.md#path) per installare la tua copia locale. Crea una nuova cartella `packages` nella radice della tua installazione di Flarum, quindi esegui questo comando per dire a Composer che può trovare i pacchetti qui:
+Durante lo sviluppo, puoi lavorare sulle tue estensioni localmente e configurare un [repository di Composer](https://getcomposer.org/doc/05-repositories.md#path) per installare la tua copia locale. Crea una nuova cartella `packages` nella radice della tua installazione di Flarum, quindi esegui questo comando per dire a Composer che puï¿½ trovare i pacchetti qui:
 
 ```bash
 composer config repositories.0 path "packages/*"
@@ -78,7 +78,7 @@ Ora iniziamo a costruire la nostra prima estensione. Crea una nuova cartella all
 
 ### extend.php
 
-Il file `extend.php` è proprio come quello nella radice del tuo sito. Restituirà un array di oggetti extender che dicono a Flarum cosa vuoi fare. Per ora, spostati sull'extender `Frontend` fatto prima.
+Il file `extend.php` ï¿½ proprio come quello nella radice del tuo sito. Restituirï¿½ un array di oggetti extender che dicono a Flarum cosa vuoi fare. Per ora, spostati sull'extender `Frontend` fatto prima.
 
 ### composer.json
 
@@ -108,39 +108,43 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
 }
 ```
 
-* ** nome ** è il nome del pacchetto Composer nel formato `creatore/pacchetto`.
+* ** nome ** ï¿½ il nome del pacchetto Composer nel formato `creatore/pacchetto`.
   * Dovresti scegliere un nome fornitore che sia univoco, ad esempio il tuo nome utente GitHub. Ai fini di questo tutorial, supporremo che tu stia utilizzando `acme`come nome creatore.
   * Dovresti aggiungere il prefisso `package` con `flarum-` per indicare che si tratta di un pacchetto specificamente destinato all'uso con Flarum.
 
-* **description ** è una breve descrizione composta da una frase che spiega ciò che fa l'estensione.
+* **description ** ï¿½ una breve descrizione composta da una frase che spiega ciï¿½ che fa l'estensione.
 
-* **type** DEVE essere impostato su `flarum-extension`. Ciò garantisce che quando qualcuno "richiede" la tua estensione, verrà identificato come tale.
+* **type** DEVE essere impostato su `flarum-extension`. Ciï¿½ garantisce che quando qualcuno "richiede" la tua estensione, verrï¿½ identificato come tale.
 
 * **require** contiene un elenco delle dipendenze della tua estensione.
-  * Dovrai specificare la versione di Flarum con cui la tua estensione è compatibile qui.
-  * Questo è anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
+  * Dovrai specificare la versione di Flarum con cui la tua estensione ï¿½ compatibile qui.
+  * Questo ï¿½ anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
   ::: warning Scegli con cura la versione Flarum
- Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilità solo con la versione corrente di Flarum:
+  
+ Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilitï¿½ solo con la versione corrente di Flarum:
 
       "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+      
   :::
 
 * **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
 
 * **extra.flarum-extension** contiene alcune informazioni specifiche di Flarum, come il nome visualizzato dell'estensione e come dovrebbe apparire la sua icona.
-  * **title** è il nome visualizzato della tua estensione.
-  * **icon** è un oggetto che definisce l'icona della tua estensione. La proprietà ** name ** è un icona [Font Awesome](https://fontawesome.com/icons). Tutte le altre proprietà vengono utilizzate dall'attributo `style` per l'icona della tua estensione.
+  * **title** ï¿½ il nome visualizzato della tua estensione.
+  * **icon** ï¿½ un oggetto che definisce l'icona della tua estensione. La proprietï¿½ ** name ** ï¿½ un icona [Font Awesome](https://fontawesome.com/icons). Tutte le altre proprietï¿½ vengono utilizzate dall'attributo `style` per l'icona della tua estensione.
 
-Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre proprietà da aggiungere a `composer.json`.
+Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre proprietï¿½ da aggiungere a `composer.json`.
 
 ::: tip
+
 Usa [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) per creare automaticamente lo scheletro della tua estensione
+
 :::
 
 ### Installare la tua estensione
 
-L'ultima cosa che dobbiamo fare per essere operativi è installare la tua estensione. Vai alla directory root della tua installazione Flarum ed esegui il seguente comando
+L'ultima cosa che dobbiamo fare per essere operativi ï¿½ installare la tua estensione. Vai alla directory root della tua installazione Flarum ed esegui il seguente comando
 
 ```bash
 composer require acme/flarum-hello-world *@dev
@@ -150,6 +154,6 @@ Una volta fatto, vai avanti e avvia la pagina di amministrazione del tuo forum.
 
 *crank, ching, crunk*
 
-Ooplà! Ciao a te estensione Hello World!
+Ooplï¿½! Ciao a te estensione Hello World!
 
 Stiamo facendo buoni progressi. Abbiamo imparato come impostare la nostra estensione e utilizzare gli estensori, il che apre molte porte. Continua a leggere per scoprire come estendere il frontend di Flarum.

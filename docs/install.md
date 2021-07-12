@@ -1,13 +1,9 @@
 # Installation
 
-::: danger
-Flarum is **beta software**. That means it still has some incomplete features and bugs 🐛🐞, and at some point – sooner or later – it will probably break! 💥
-
-Beta is all about fixing these issues and improving Flarum. **Please don't use Flarum in production unless you know what you're doing**. We can’t support you if things go awry. Upgrading to subsequent versions will be possible, but might involve getting your hands dirty. 
-:::
-
 ::: tip Quick test drive?
+
 Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
+
 :::
 
 ## Server Requirements
@@ -20,17 +16,19 @@ Before you install Flarum, it's important to check that your server meets the re
 * **SSH (command-line) access** to run Composer
 
 ::: tip Shared Hosting
-At this stage, it's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
 
-This doesn't necessarily mean you need a VPS. Some shared hosts give you SSH access, through which you should be able to install Composer and Flarum just fine. For other hosts without SSH, you can try workarounds such as [Pockethold](https://github.com/andreherberth/pockethold).
+It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
+
+This doesn't necessarily mean you need a VPS. Most decent hosts support SSH access, through which you should be able to install Composer and Flarum just fine.
+
 :::
 
 ## Installing
 
-Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. Before installing Flarum, you will need to [install Composer](https://getcomposer.org) on your machine. Afterwards, run this command in an empty location that you want Flarum to be installed in:
+Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Afterwards, run this command in an empty location that you want Flarum to be installed in:
 
 ```bash
-composer create-project flarum/flarum . --stability=beta
+composer create-project flarum/flarum .
 ```
 
 While this command is running, you can configure your web server. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
@@ -98,11 +96,15 @@ By default, in most Linux distributions `www-data` is the group and user that bo
 To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
 
 ::: warning Environments may vary
+
 Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
+
 :::
 
 ::: danger Never use permission 777
+
 You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group. 
+
 :::
 
 ## Customizing Paths

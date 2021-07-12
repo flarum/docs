@@ -21,7 +21,9 @@ Adding custom CSS can be a great way to modify your Flarum installation to match
 A CSS tutorial is beyond the scope of this documentation, but there are plenty of great online resources to learn the basics of CSS.
 
 :::tip
+
 Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+
 :::
 
 ## Extensions

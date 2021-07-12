@@ -8,7 +8,8 @@ module.exports = {
         'start',
         'frontend',
         'routes',
-        'data',
+        'models',
+        'api',
         'distribution'
       ]
     },
@@ -22,10 +23,12 @@ module.exports = {
         'frontend-pages',
         'interactive-components',
         'i18n',
+        'language-packs',
         'forms',
         'permissions',
         'settings',
-        'testing'
+        'testing',
+        'theme'
       ]
     },
     {
@@ -33,12 +36,15 @@ module.exports = {
       collapsable: false,
       children: [
         'api-throttling',
+        'assets',
         'console',
         'extending-extensions',
         'extensibility',
+        'filesystem',
         'formatting',
         'mail',
         'middleware',
+        'model-visibility',
         'slugging',
         'notifications',
         'post-types',
@@ -50,6 +56,7 @@ module.exports = {
       title: 'Update Guides',
       collapsable: false,
       children: [
+        'update-1.0',
         'update-b16',
         'update-b15',
         'update-b14',
@@ -91,6 +98,7 @@ module.exports = {
       title: 'Setting Up',
       collapsable: false,
       children: [
+        'composer',
         'install',
         'update',
         'troubleshoot'
@@ -107,6 +115,13 @@ module.exports = {
         'themes',
         'mail',
         'console'
+      ]
+    },
+    {
+      title: 'Advanced',
+      collapsable: false,
+      children: [
+        'extenders'
       ]
     }
   ],

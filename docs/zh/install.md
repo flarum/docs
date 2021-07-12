@@ -1,7 +1,9 @@
 # 安装
 
 ::: tip 即刻测试 Flarum？
+
 欢迎前往我们的 [演示站点](https://discuss.flarum.org/d/21101) 试用 Flarum。您也可以用几秒钟在 [Free Flarum](https://www.freeflarum.com)（一个免费的非官方社区托管服务）建立属于您自己的论坛。
+
 :::
 
 ## 服务器环境要求
@@ -14,9 +16,11 @@
 * **允许 SSH（命令行）**，以运行 Composer
 
 ::: tip 共享主机
+
 您不能通过下载 ZIP 压缩包并将其上传至 Web 服务器来安装 Flarum。这是因为 Flarum 使用了一个叫做 [Composer](https://getcomposer.org) 的依赖管理系统，它需要在命令行上运行。
 
 这并不意味着您需要一个 VPS。多数大厂共享主机是开放 SSH 访问权限的，您可以正常安装 Composer 和 Flarum。
+
 :::
 
 ## 开始安装
@@ -91,11 +95,15 @@ chmod 755 -R /目录路径
 要了解关于以上命令的更多信息，以及 Linux 系统下的文件权限和所有权相关信息，请阅读 [英文教程](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/) 或 [中文教程](https://www.runoob.com/linux/linux-comm-chmod.html)。如果您在 Windows 上配置 Flarum，这个 [超级用户提问](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) 可能对您很有用。
 
 ::: warning 环境有别
+
 您的服务器环境可能会与本文示例不同，请查看您的 Web 服务器配置或咨询 Web 托管提供商，以了解 PHP 和 Web 服务器默认运行在哪个用户或组群下。
+
 :::
 
 ::: danger 权限禁忌 777
+
 绝不要将任何文件夹或文件的权限设置为 `777` 级别，这个权限允许任何人（无论用户还是组群）随意访问文件夹和文件的内容，严重威胁安全。
+
 :::
 
 ## 自定义路径
@@ -103,6 +111,7 @@ chmod 755 -R /目录路径
 默认情况下，Flarum 的目录结构包含一个 `public` 目录，该目录存放可公开访问的文件。这样的保护措施，可以确保所有敏感代码文件无法通过 Web 根路径访问。
 
 ::: vue
+
 `默认目录结构`
 　
 . Flarum 安装根目录
@@ -121,6 +130,7 @@ chmod 755 -R /目录路径
 ├── LICENSE
 ├── README.md
 └── site.php
+
 :::
 
 如果您想把 Flarum 放到网站的子目录下（比如 `example.com/forum`），或者您没有控制网站根目录的权利（只能使用 `public_html` 或 `htdocs` 之类的目录），那么您可以设置 Flarum 以在没有 `public` 目录的情况下运行。

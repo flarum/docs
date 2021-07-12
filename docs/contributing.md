@@ -26,7 +26,7 @@ git clone https://github.com/<username>/core.git packages/core
 git clone https://github.com/<username>/tags.git packages/tags # etc
 ```
 
-Next, ensure that Composer accepts unstable releases from your local copies by changing the value of `minimum-stability` from `beta` to `dev` in `composer.json`.
+Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 Finally, run `composer install` to complete the installation from the path repositories.
 
@@ -65,6 +65,7 @@ A typical contribution workflow looks like this:
 1. 🚦 **Test** your code.
     * Add unit tests as necessary when fixing bugs or adding features.
     * Run the test suite with `vendor/bin/phpunit` in the relevant package folder.
+
 <!--
     * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
 -->

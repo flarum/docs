@@ -5,7 +5,7 @@ At some point while making an extension, you might want to read some of the foru
 ## The Settings Repository
 
 Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`.
-Because Flarum uses [Laravel's service container](https://laravel.com/docs/6.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one.
+Because Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one.
 Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
 
 ```php
