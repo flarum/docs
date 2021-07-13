@@ -13,7 +13,7 @@ They share the same foundational code, so once you know how to extend one, you k
 
 :::tip Typings!
 
-Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the package's README to configure typings support.
+Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the [package's README](https://github.com/flarum/flarum-tsconfig#readme) to configure typings support.
 
 :::
 
@@ -41,6 +41,7 @@ js
 ├── admin.js
 ├── forum.js
 ├── package.json
+├── tsconfig.json
 └── webpack.config.json
 ```
 
