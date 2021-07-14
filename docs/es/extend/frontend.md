@@ -13,7 +13,7 @@ Comparten el mismo código fundacional, así que una vez que sabes cómo extende
 
 :::tip Typings!
 
-Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the [package's README](https://github.com/flarum/flarum-tsconfig#readme) to configure typings support.
 
 :::
 
@@ -41,6 +41,7 @@ js
 ├── admin.js
 ├── forum.js
 ├── package.json
+├── tsconfig.json
 └── webpack.config.json
 ```
 
@@ -51,12 +52,12 @@ js
   "private": true,
   "name": "@acme/flarum-hello-world",
   "dependencies": {
-    "flarum-webpack-config": "0.1.0-beta.10",
+    "flarum-webpack-config": "^1.0.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.7"
   },
   "dev-dependencies": {
-    "flarum": "0.1.0-beta.16"
+    "flarum-tsconfig": "^1.0.0"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
@@ -78,6 +79,33 @@ module.exports = config();
 ```
 
 [Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension. To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
+
+### tsconfig.json
+
+```jsonc
+{
+  // Use Flarum's tsconfig as a starting point
+  "extends": "flarum-tsconfig",
+  // This will match all .ts, .tsx, .d.ts, .js, .jsx files
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    // This will output typings to `dist-typings`
+    "declarationDir": "./dist-typings",
+    "baseUrl": ".",
+    "paths": {
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+    }
+  }
+}
+```
+
+This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
+
+Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to include this configuration file so that your IDE can infer types for our core JS.
+
+To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
+
+You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete.
 
 ### admin.js and forum.js
 
@@ -110,19 +138,19 @@ src/forum/
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
 ```js
-import {extend, override} from 'flarum/extend';
+import { extend, override } from 'flarum/common/extend';
 
-// Proporcionamos nuestro código de extensión en forma de un "inicializador".
-// Este es un callback que se ejecutará después de que el núcleo haya arrancado.
-app.initializers.add('our-extension', function(app) {
-  // Su código de extensión aquí
+// We provide our extension code in the form of an "initializer".
+// This is a callback that will run after the core has booted.
+app.initializers.add('acme-flarum-hello-world', function(app) {
+  // Your Extension Code Here
   console.log("EXTENSION NAME is working!");
 });
 ```
 
 We'll go over tools available for extensions below.
 
-### Importación
+### Importing
 
 You should familiarize yourself with proper syntax for [importing js modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), as most extensions larger than a few lines will split their js into multiple files.
 
@@ -133,7 +161,7 @@ In some cases, an extension may want to extend code from another flarum extensio
 * `flarum/tags` y `flarum/flags` son actualmente las únicas extensiones empaquetadas que permiten extender su JS. Puedes importar sus contenidos desde `flarum/{EXT_NAME}/PATH` (por ejemplo, `flarum/tags/components/TagHero`).
 * The process for extending each community extension is different; you should consult documentation for each individual extension.
 
-### Transpilación
+### Transpilation
 
 OK, time to fire up the transpiler. Run the following commands in the `js` directory:
 
@@ -204,8 +232,8 @@ Most mutable parts of the interface are really just *lists of items*. Por ejempl
 Each item in these lists is given a **name** so you can easily add, remove, and rearrange the items. Simply find the appropriate component for the part of the interface you want to change, and monkey-patch its methods to modify the item list contents. For example, to add a link to Google in the header:
 
 ```jsx
-import { extend } from 'flarum/extend';
-import HeaderPrimary from 'flarum/components/HeaderPrimary';
+import { extend } from 'flarum/common/extend';
+import HeaderPrimary from 'flarum/forum/components/HeaderPrimary';
 
 extend(HeaderPrimary.prototype, 'items', function(items) {
   items.add('google', <a href="https://google.com">Google</a>);
@@ -250,7 +278,7 @@ To use Flarum components, simply extend `flarum/common/Component` in your custom
 All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved. With this in mind, a custom component class might look like this:
 
 ```jsx
-import Component from 'flarum/Component';
+import Component from 'flarum/common/Component';
 
 class Counter extends Component {
   oninit(vnode) {
@@ -273,9 +301,9 @@ class Counter extends Component {
   oncreate(vnode) {
     super.oncreate(vnode);
 
-    // En realidad no estamos haciendo nada aquí, pero este sería
-    // un buen lugar para adjuntar manejadores de eventos, inicializar librerías
-    // como sortable, o hacer otras modificaciones en el DOM.
+    // We aren't actually doing anything here, but this would
+    // be a good place to attach event handlers, initialize libraries
+    // like sortable, or make other DOM modifications.
     $element = this.$();
     $button = this.$('button');
   }
@@ -292,16 +320,16 @@ Now that we have a better understanding of the component system, let's go a bit 
 
 As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 if not provided), then by key alphabetically where priorities are equal.
 
-### `extend` y `override`
+### `extend` and `override`
 
 Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. Por ejemplo:
 
 ```jsx
-// Esto añade un atributo al global `app`.
+// This adds an attribute to the `app` global.
 app.googleUrl = "https://google.com";
 
-// Esto reemplaza la salida de la página de discusión con "Hello World"
-import DiscussionPage from 'flarum/components/DiscussionPage';
+// This replaces the output of the discussion page with "Hello World"
+import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 
 DiscussionPage.prototype.view = function() {
   return <p>Hello World</p>;
@@ -333,14 +361,14 @@ Please note that if you are trying to change the output of a method with `overri
 Let's now revisit the original "adding a link to Google to the header" example to demonstrate.
 
 ```jsx
-import { extend, override } from 'flarum/extend';
-import HeaderPrimary from 'flarum/components/HeaderPrimary';
-import ItemList from 'flarum/utils/ItemList';
+import { extend, override } from 'flarum/common/extend';
+import HeaderPrimary from 'flarum/forum/components/HeaderPrimary';
+import ItemList from 'flarum/common/utils/ItemList';
 import CustomComponentClass from './components/CustomComponentClass';
 
-// Aquí, añadimos un elemento a la lista de elementos devuelta. Estamos utilizando un componente personalizado
-// como se ha comentado anteriormente. También hemos especificado una prioridad como tercer argumento,
-// que se utilizará para ordenar estos elementos. Ten en cuenta que no necesitamos devolver nada.
+// Here, we add an item to the returned ItemList. We are using a custom component
+// as discussed above. We've also specified a priority as the third argument,
+// which will be used to order these items. Note that we don't need to return anything.
 extend(HeaderPrimary.prototype, 'items', function(items) {
   items.add(
     'google',
@@ -351,9 +379,9 @@ extend(HeaderPrimary.prototype, 'items', function(items) {
   );
 });
 
-// Aquí, utilizamos condicionalmente la salida original de un método,
-// o creamos nuestro propio ItemList, y luego añadimos un elemento a él.
-// Ten en cuenta que DEBEMOS devolver nuestra salida personalizada.
+// Here, we conditionally use the original output of a method,
+// or create our own ItemList, and then add an item to it.
+// Note that we MUST return our custom output.
 override(HeaderPrimary.prototype, 'items', function(original) {
   let items;
 
@@ -374,7 +402,7 @@ Since all Flarum components and utils are represented by classes, `extend`, `ove
 * Extender o anular `view` para cambiar (o redefinir completamente) la estructura html de los componentes de Flarum. Esto abre a Flarum a una tematización ilimitada
 * Engancharse a los métodos de los componentes Mithril para añadir escuchas de eventos JS, o redefinir la lógica del negocio.
 
-### Utilidades de Flarum
+### Flarum Utils
 
 Flarum defines (and provides) quite a few util and helper functions, which you may want to use in your extensions. A few particularly useful ones:
 
