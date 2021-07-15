@@ -2,7 +2,7 @@
 
 ::: tip
 
-The Flarum Foundation have created the "flarum-lang" organization to support translators and ensure continuous availability of language packs. You can learn all about this by visiting the [GitHub repository](https://github.com/flarum-lang/about). If you want to support an existing language pack or start a new translation, it's best to [get in touch with the flarum-lang team](https://discuss.flarum.org/d/27519-the-flarum-language-project).
+The Flarum Foundation has created the "flarum-lang" organization to support translators and ensure continuous availability of language packs. You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about). If you want to support an existing language pack or start a new translation, it's best to [get in touch with the `flarum-lang` team](https://discuss.flarum.org/d/27519-the-flarum-language-project).
 
 An important starting place also used by "flarum-lang" is [Weblate](https://discuss.flarum.org/d/20807-simplify-translation-process-with-weblate) which is an online platform used to simplify the translation process. 
 
