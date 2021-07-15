@@ -2,9 +2,9 @@
 
 ::: tip
 
-To make this process easier, we **strongly** recommend using the community-led [weblate](https://discuss.flarum.org/d/20807-simplify-translation-process-with-weblate) initiative to contribute to existing language packs, or create new ones. This automates checking for changes in the extension's used translations.
+The Flarum Foundation has created the "flarum-lang" organization to support translators and ensure continuous availability of language packs. You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about). If you want to support an existing language pack or start a new translation, it's best to [get in touch with the `flarum-lang` team](https://discuss.flarum.org/d/27519-the-flarum-language-project).
 
-See [this GitHub page](https://github.com/rob006-software/flarum-lang-template/wiki) for a guide to getting started.
+An important starting place also used by "flarum-lang" is [Weblate](https://discuss.flarum.org/d/20807-simplify-translation-process-with-weblate) which is an online platform used to simplify the translation process.
 
 :::
 
