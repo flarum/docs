@@ -1,12 +1,12 @@
 # FAQ
 
-### Quando sarà stabile Flarum?
+### Flarum è stabile?
 
-È impossibile per noi al momento dirlo: ci sono troppe variabili! Puoi seguire i nostri progressi sul [Blog](https://discuss.flarum.org/t/blog).
+Sì! Dopo 6 anni di sviluppo, Flarum 1.0.0 è finalmente arrivato.
 
-### Potrò passare dalla beta alle versioni successive?
+### Cosa succede dopo la versione stabile di Flarum?
 
-Sì! Tuttavia, il processo di aggiornamento potrebbe richiedere di sporcarsi un po' le mani. Faremo del nostro meglio per assicurarci che sia il più semplice possibile.
+Stiamo ancora lavorando ad una roadmap formale. Abbiamo molti piani e idee e non vediamo l'ora di condividere un traguardo più approfondito con la community.
 
 ### Posso donare denaro per accelerare lo sviluppo?
 
