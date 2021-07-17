@@ -1,13 +1,5 @@
 # Installazione
 
-::: danger Attenzione
-
-Flarum è **un software in fase beta**. Ciò significa che ha ancora alcune funzionalità incomplete e bug 🐛🐞, e ad un certo punto – prima o poi – probabilmente un errore potrà paventarsi! 💥
-
-La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sarà possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. 
-
-:::
-
 ::: Una veloce prova su strada?
 
 Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
