@@ -10,7 +10,7 @@ Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/2
 
 Prima di installare Flarum, è importante verificare che il tuo server soddisfi i requisiti. Per eseguire Flarum, avrai bisogno di:
 
-* **Apache** (con mod\_rewrite abilitayo) o **Nginx**
+* **Apache** (con mod\_rewrite abilitato) o **Nginx**
 * **PHP 7.3+** con le seguenti estensioni: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **SSH (accesso su riga di comando)** per lanciare Composer
@@ -31,7 +31,7 @@ Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed 
 composer create-project flarum/flarum .
 ```
 
-Mentre questo comando � in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
+Mentre questo comando è in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
 
 Quando tutto è pronto, accedi al tuo forum in un browser web e segui le istruzioni a video per completare l'installazione
 
