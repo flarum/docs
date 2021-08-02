@@ -89,7 +89,7 @@ We need to tell Composer a bit about our package, and we can do this by creating
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+        "flarum/core": "^1.0.0"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -118,14 +118,6 @@ We need to tell Composer a bit about our package, and we can do this by creating
 * **require** contains a list of your extension's own dependencies.
   * You'll want to specify the version of Flarum that your extension is compatible with here.
   * This is also the place to list other Composer libraries your code needs to work.
-
-  ::: warning Carefully choose the Flarum version
-
-  While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
-
-      "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
-
-  :::
 
 * **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
 
