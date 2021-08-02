@@ -86,10 +86,10 @@ composer config repositories.0 path "packages/*"
 ```json
 {
     "name": "acme/flarum-hello-world",
-    "description": "向世界问好！",
+    "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+        "flarum/core": "^1.0.0"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -118,14 +118,6 @@ composer config repositories.0 path "packages/*"
 * **require**，依赖。 描述您的扩展程序自身的依赖关系。
   * 您需要在这里指定您的扩展程序所兼容的 Flarum 版本。
   * 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
-
-  ::: warning Carefully choose the Flarum version
-
-  While Flarum is still in beta, we recommend that you declare compatibility only with the current version of Flarum:
-
-    "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
-
-  :::
 
 * **autoload**，定义一个从命名空间到目录的映射，告诉 Composer 在哪里可以找到扩展程序的类。 此处的命名空间应以 驼<font size=2>峰</font>写<font size=2>法</font> 反映扩展程序的供应商和包名.
 
