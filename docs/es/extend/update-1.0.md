@@ -155,7 +155,7 @@ See [the source code](https://github.com/flarum/core/blob/master/js/src/admin/co
 - Components should now call `super` for ALL Mithril lifecycle methods they define. Before, this was only needed for `oninit`, `onbeforeupdate`, and `oncreate`. Now, it is also needed in `onupdate`, `onbeforeremove`, and `onremove`. See [this GitHub issue](https://github.com/flarum/core/issues/2446) for information on why this change was made.
 - The `flarum/common/utils/insertText` and `flarum/common/utils/styleSelectedText` utils have been moved to core from `flarum/markdown`. See `flarum/markdown` for an example of usage.
 - The `extend` and `override` utils can now modify several methods at once by passing in an array of method names instead of a single method name string as the second argument. This is useful for extending the `oncreate` and `onupdate` methods at once.
-- The `EditUserModal` component is no longer available through the `flarum/forum` namespace, it has been moved to `flarum/admin`. Imports should be adjusted.
+- The `EditUserModal` component is no longer available through the `flarum/forum` namespace, it has been moved to `flarum/common`. Imports should be adjusted.
 - The `Model` and `Route` JS extenders have been removed for now. There aren't currently used in any extensions that we know of. We will be reintroducing JS extenders during v1.x releases.
 - The `Search` component can now be used with the `SearchState` state class. Previously, `SearchState` was missing the `getInitialSearch` method expected by the `Search` component.
 
