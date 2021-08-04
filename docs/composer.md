@@ -1,7 +1,7 @@
 
 # Composer
 
-Flarum uses a program called composer[Composer](https://getcomposer.org) to manage its dependencies and extensions.
+Flarum uses a program called [Composer](https://getcomposer.org) to manage its dependencies and extensions.
 You'll need to use composer if you want to:
 
 - Install or update Flarum
