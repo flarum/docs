@@ -128,7 +128,11 @@ $site = require './site.php';
 'public' => __DIR__,
 'storage' => __DIR__.'/storage',
 ```
+Once you done everything properly, you have to edit `config.php` line 18 to the following:
 
+```
+'url' => 'domain.com/"index.php directory"/',
+```
 ## Importing Data
 
 If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
