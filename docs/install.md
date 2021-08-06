@@ -121,18 +121,15 @@ You will also need to edit the `index.php` file and change the following line:
 $site = require './site.php';
 ```
 
-**Note*:* If you have previously installed and configured flarum, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+ Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
 'public' => __DIR__,
 'storage' => __DIR__.'/storage',
 ```
-Once you done everything properly, you have to edit `config.php` line 18 to the following:
 
-```
-'url' => 'domain.com/"index.php directory"/',
-```
+Finally, check `config.php` and make sure the `url` value is correct.
 ## Importing Data
 
 If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
