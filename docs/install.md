@@ -121,7 +121,7 @@ You will also need to edit the `index.php` file and change the following line:
 $site = require './site.php';
 ```
 
-If you have previously installed and configured flarum, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+**Note*:* If you have previously installed and configured flarum, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
