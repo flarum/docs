@@ -130,6 +130,7 @@ $site = require './site.php';
 ```
 
 Finally, check `config.php` and make sure the `url` value is correct.
+
 ## Importing Data
 
 If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
