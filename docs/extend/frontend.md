@@ -51,12 +51,12 @@ js
   "private": true,
   "name": "@acme/flarum-hello-world",
   "dependencies": {
-    "flarum-webpack-config": "0.1.0-beta.10",
+    "flarum-webpack-config": "^1.0.0",
     "webpack": "^4.0.0",
-    "webpack-cli": "^3.0.7"
+    "webpack-cli": "^4.0.0"
   },
   "devDependencies": {
-    "flarum": "0.1.0-beta.16",
+    "flarum-tsconfig": "^1.0.0",
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
@@ -114,7 +114,7 @@ Please note that this is all simply a recommendation: there's nothing forcing yo
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
 ```js
-import {extend, override} from 'flarum/common/extend';
+import { extend, override } from 'flarum/common/extend';
 
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
