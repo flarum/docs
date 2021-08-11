@@ -57,7 +57,7 @@ js
     "webpack-cli": "^4.0.0"
   },
   "devDependencies": {
-    "flarum-tsconfig": "^1.0.0",
+    "flarum-tsconfig": "^1.0.0"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
