@@ -42,7 +42,7 @@ js
 ├── forum.js
 ├── package.json
 ├── tsconfig.json
-└── webpack.config.json
+└── webpack.config.js
 ```
 
 ### package.json
@@ -54,9 +54,9 @@ js
   "dependencies": {
     "flarum-webpack-config": "^1.0.0",
     "webpack": "^4.0.0",
-    "webpack-cli": "^3.0.7"
+    "webpack-cli": "^4.0.0"
   },
-  "dev-dependencies": {
+  "devDependencies": {
     "flarum-tsconfig": "^1.0.0"
   },
   "scripts": {
