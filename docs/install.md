@@ -121,13 +121,15 @@ You will also need to edit the `index.php` file and change the following line:
 $site = require './site.php';
 ```
 
- Finally, edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+ Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
 'public' => __DIR__,
 'storage' => __DIR__.'/storage',
 ```
+
+Finally, check `config.php` and make sure the `url` value is correct.
 
 ## Importing Data
 

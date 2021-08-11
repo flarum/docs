@@ -13,7 +13,7 @@ They share the same foundational code, so once you know how to extend one, you k
 
 :::tip Typings!
 
-Use our new [Typing Library](https://www.npmjs.com/package/flarum) as a dev dependency for editor autocomplete to make frontend development easier!
+Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the [package's README](https://github.com/flarum/flarum-tsconfig#readme) to configure typings support.
 
 :::
 
@@ -41,6 +41,7 @@ js
 ├── admin.js
 ├── forum.js
 ├── package.json
+├── tsconfig.json
 └── webpack.config.js
 ```
 
@@ -80,6 +81,34 @@ module.exports = config();
 [Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension.
 To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
 
+### tsconfig.json
+
+```jsonc
+{
+  // Use Flarum's tsconfig as a starting point
+  "extends": "flarum-tsconfig",
+  // This will match all .ts, .tsx, .d.ts, .js, .jsx files
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    // This will output typings to `dist-typings`
+    "declarationDir": "./dist-typings",
+    "baseUrl": ".",
+    "paths": {
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+    }
+  }
+}
+```
+
+This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
+
+Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
+include this configuration file so that your IDE can infer types for our core JS.
+
+To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
+
+You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete.
+
 ### admin.js and forum.js
 
 These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual
@@ -118,7 +147,7 @@ import { extend, override } from 'flarum/common/extend';
 
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
-app.initializers.add('our-extension', function(app) {
+app.initializers.add('acme-flarum-hello-world', function(app) {
   // Your Extension Code Here
   console.log("EXTENSION NAME is working!");
 });
