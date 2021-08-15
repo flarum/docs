@@ -87,8 +87,10 @@ To work properly, our extensions should use the [official flarum webpack config]
 {
   // Use Flarum's tsconfig as a starting point
   "extends": "flarum-tsconfig",
-  // This will match all .ts, .tsx, .d.ts, .js, .jsx files
-  "include": ["src/**/*"],
+  // This will match all .ts, .tsx, .d.ts, .js, .jsx files in your `src` folder
+  // and also tells your Typescript server to read core's global typings for
+  // access to `dayjs` and `$` in the global namespace.
+  "include": ["src/**/*", "../vendor/flarum/core/js/dist-typings/@types/**/*"],
   "compilerOptions": {
     // This will output typings to `dist-typings`
     "declarationDir": "./dist-typings",
@@ -102,8 +104,9 @@ To work properly, our extensions should use the [official flarum webpack config]
 
 This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
 
-Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to
-include this configuration file so that your IDE can infer types for our core JS.
+Always ensure you're using the latest version of this file: https://github.com/flarum/flarum-tsconfig#readme.
+
+Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to include this configuration file so that your IDE can infer types for our core JS.
 
 To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
 
