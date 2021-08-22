@@ -8,8 +8,8 @@ Flarum incluye un potente sistema de notificaciones para alertar a los usuarios 
 
 Para definir un tipo de notificación, tendrá que crear una nueva clase que implemente `Flarum\Notification\Blueprint\BlueprintInterface`. Esta clase definirá el contenido y el comportamiento de su notificación a través de los siguientes métodos:
 
-* `getSubject()` El modelo sobre el que trata la notificación (por ejemplo, el post que le ha gustado).
-* `getSender()` El modelo del usuario que ha activado la notificación.
+* `getFromUser()` The `User` model for the user that triggered the notification.
+* `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
 * `getData()` Cualquier otro dato que desee incluir para el acceso en el frontend (por ejemplo, el título de la antigua discusión cuando se renombra).
 * `getType()` Aquí es donde se nombra la notificación, esto será importante para los pasos posteriores.
 * `getSubjectModal()`: Especifica el tipo de modelo que es el sujeto (desde `getSubject`).
@@ -42,7 +42,7 @@ class PostLikedBlueprint implements BlueprintInterface
         return $this->post;
     }
 
-    public function getSender()
+    public function getFromUser()
     {
         return $this->user;
     }
@@ -283,8 +283,8 @@ Primero, crear una clase que extienda el componente de notificación. Entonces, 
 De [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), cuando se publica un nuevo post en una discusión seguida:
 
 ```jsx harmony
-import Notification from 'flarum/components/Notification';
-import username from 'flarum/helpers/username';
+import Notification from 'flarum/forum/components/Notification';
+import username from 'flarum/common/helpers/username';
 
 export default class NewPostNotification extends Notification {
   icon() {
@@ -300,7 +300,7 @@ export default class NewPostNotification extends Notification {
   }
 
   content() {
-    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.sender()});
+    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.fromUser()});
   }
 }
 ```
