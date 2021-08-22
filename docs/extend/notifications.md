@@ -8,8 +8,8 @@ Flarum includes a powerful notification system to alert users to new activity.
 
 To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface`. This class will define your notification's content and behaviour through the following methods:
 
+* `getFromUser()` The `User` model for the user that triggered the notification.
 * `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
-* `getSender()` The `User` model for the user that triggered the notification.
 * `getData()` Any other data you might wish to include for access on the frontend (eg. the old discussion title when renamed).
 * `getType()` This is where you name your notification, this will be important for later steps.
 * `getSubjectModal()`: Specify the type of model the subject is (from `getSubject`).
@@ -42,7 +42,7 @@ class PostLikedBlueprint implements BlueprintInterface
         return $this->post;
     }
 
-    public function getSender()
+    public function getFromUser()
     {
         return $this->user;
     }
@@ -304,7 +304,7 @@ export default class NewPostNotification extends Notification {
   }
 
   content() {
-    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.sender()});
+    return app.translator.trans('flarum-subscriptions.forum.notifications.new_post_text', {user: this.attrs.notification.fromUser()});
   }
 }
 ```
