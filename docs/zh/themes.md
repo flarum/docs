@@ -20,10 +20,10 @@ CSS 教程不在本文档的讨论范围之内，但是有大量的优质在线�
 
 :::tip
 
-Flarum actually uses LESS, which makes it easier to write CSS by allowing for variables, conditionals, and functions.
+Flarum 实际上在使用 LESS，它允许变量、条件判断和函数，写起 CSS 来更加简单。
 
 :::
 
 ## 扩展
 
-Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum. If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go. To learn how to make an extension, check out our [extension documentation](extend/README.md)!
+Flarum 灵活的 [扩展系统](extensions.md) 允许你添加、删除或修改 Flarum 的几乎所有部分。 如果你想做出了修改颜色/尺寸/样式外的大量主题修改，写一个自定义扩展绝对是不二之选。 想要学习如何写扩展，请参考我们的 [扩展文档](extend/README.md)。
