@@ -1,14 +1,15 @@
-# 版本说明
+# 发布说明
+
 
 <!--
 https://github.com/flarum/docs/issues/22
 https://laravel.com/docs/5.7/releases
 
-## 版本计划
+## Versioning Scheme
 
-## 支持政策
+## Support Policy
 
-## 发布说明
+## Release Notes
 -->
 
-每个版本的发布说明都可以在 [Flarum 社区](https://discuss.flarum.org/t/blog?sort=newest) 找到。
+发布说明可以在 [Flarum 社区](https://discuss.flarum.org/t/blog?sort=newest) 找到。
