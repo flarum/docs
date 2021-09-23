@@ -1,7 +1,7 @@
 
 # Composer
 
-Flarum uses a program called composer[Composer](https://getcomposer.org) to manage its dependencies and extensions.
+Flarum uses a program called [Composer](https://getcomposer.org) to manage its dependencies and extensions.
 You'll need to use composer if you want to:
 
 - Install or update Flarum
@@ -125,7 +125,7 @@ For Flarum projects, there's several types of entries you'll see in the `require
 
 ## How to install Composer?
 
-As with any other software, Composer must first be [installed]([https://getcomposer.org/download/) on the server where Flarum is running. There are several options depending on the type of web hosting you have.
+As with any other software, Composer must first be [installed](https://getcomposer.org/download/) on the server where Flarum is running. There are several options depending on the type of web hosting you have.
 
 ### Dedicated Web Server
 

@@ -1,13 +1,5 @@
 # Installazione
 
-::: danger Attenzione
-
-Flarum è **un software in fase beta**. Ciò significa che ha ancora alcune funzionalità incomplete e bug 🐛🐞, e ad un certo punto – prima o poi – probabilmente un errore potrà paventarsi! 💥
-
-La beta serve a risolvere questi problemi e migliorare Flarum. **Per favore, non utilizzare Flarum in produzione a meno che tu non sappia cosa stai facendo**. Non possiamo supportarti se le cose vanno male. Sarà possibile eseguire l'aggiornamento alle versioni successive, ma potrebbe essere necessario sporcarsi le mani. 
-
-:::
-
 ::: Una veloce prova su strada?
 
 Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
@@ -18,7 +10,7 @@ Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/2
 
 Prima di installare Flarum, è importante verificare che il tuo server soddisfi i requisiti. Per eseguire Flarum, avrai bisogno di:
 
-* **Apache** (con mod\_rewrite abilitayo) o **Nginx**
+* **Apache** (con mod\_rewrite abilitato) o **Nginx**
 * **PHP 7.3+** con le seguenti estensioni: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **SSH (accesso su riga di comando)** per lanciare Composer
@@ -36,10 +28,10 @@ Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host
 Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar� necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
-composer create-project flarum/flarum . --stability=beta
+composer create-project flarum/flarum .
 ```
 
-Mentre questo comando � in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
+Mentre questo comando è in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
 
 Quando tutto è pronto, accedi al tuo forum in un browser web e segui le istruzioni a video per completare l'installazione
 
