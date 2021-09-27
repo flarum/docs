@@ -1,3 +1,7 @@
+---
+slug: '/extend'
+---
+
 # Extending Flarum
 
 Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
