@@ -6,7 +6,6 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-font-color-base: #111;
   --ifm-color-primary: #c84a27;
   --ifm-color-primary-dark: #b44323;
   --ifm-color-primary-darker: #aa3f21;
@@ -19,6 +18,17 @@
   --ifm-h1-font-size: 2.2rem;
   --ifm-h2-font-size: 1.65rem;
   --ifm-h3-font-size: 1.35rem;
+
+  --ifm-container-width: 950px;
+  --ifm-container-width-xl: 1125px;
+}
+
+html[data-theme='light'] {
+  --ifm-font-color-base: #222;
+}
+
+html[data-theme='dark'] {
+  --ifm-font-color-base: #ddd;
 }
 
 /* Nice styes from VuePress we should keep */
@@ -73,6 +83,11 @@ blockquote {
 
 .DocSearch.DocSearch-Button input::placeholder {
   opacity: 1;
+}
+
+.DocSearch-Button-Placeholder {
+  text-align: start;
+  width: 130px;
 }
 
 /* Other Docusaurus conf */
