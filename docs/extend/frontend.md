@@ -202,7 +202,7 @@ return [
 
 Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. Thus, you may choose to expose your own public API for other extensions to interact with.
 
-::: tip External Libraries
+:::tip External Libraries
 
 Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
@@ -218,7 +218,7 @@ You can also add CSS and [LESS](https://lesscss.org/features/) assets to the fro
         ->css(__DIR__.'/less/forum.less')
 ```
 
-::: tip
+:::tip
 
 You should develop extensions with debug mode turned **on** in `config.php`. This will ensure that Flarum recompiles assets automatically, so you don't have to manually clear the cache every time you make a change to your extension JavaScript.
 

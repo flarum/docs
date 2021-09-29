@@ -175,7 +175,7 @@ return [
 
 Flarum hará que cualquier cosa que haga `export` desde `forum.js` esté disponible en el objeto global `flarum.extensions['acme-hello-world']`. Por lo tanto, puede elegir exponer su propia API pública para que otras extensiones interactúen con ella.
 
-::: tip Bibliotecas externas
+:::tip Bibliotecas externas
 
 Sólo se permite un archivo JavaScript principal por extensión. Si necesitas incluir alguna librería JavaScript externa, instálala con NPM e `import` para que se compile en tu archivo JavaScript, o consulta [Rutas y Contenido](/extend/routes.md) para saber cómo añadir etiquetas `<script>` adicionales al documento del frontend.
 
@@ -191,7 +191,7 @@ También puedes añadir activos CSS y [LESS](http://lesscss.org/features/) al fr
         ->css(__DIR__.'/less/forum.less')
 ```
 
-::: tip
+:::tip
 
 Debes desarrollar las extensiones con el modo de depuración **activado** en `config.php`. Esto asegurará que Flarum recompile los activos de forma automática, por lo que no tendrás que limpiar manualmente la caché cada vez que hagas un cambio en el JavaScript de tu extensión.
 

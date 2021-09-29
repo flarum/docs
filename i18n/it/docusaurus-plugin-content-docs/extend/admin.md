@@ -6,7 +6,7 @@ Prima della beta 15, le impostazioni delle estensioni venivano aggiunte nel file
 
 Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), oppure fornire la tua pagina completamente personalizzata.
 
-::: warning SettingsModal
+:::caution SettingsModal
 
 Le impostazioni aggiunte tramite `SettingsModal` continueranno a funzionare nella beta 15, ma questo metodo **è ormai obsoleto** e verrà rimosso nelle future release.
 
@@ -35,7 +35,7 @@ app.initializers.add('interstellar', function(app) {
 
 Fatto ciò, puoi iniziare ad aggiungere impostazioni e autorizzazioni.
 
-::: Note
+:::info Note
 
 Tutte le funzioni di registrazione su `ExtensionData` sono concatenabili, il che significa che puoi chiamarle una dopo l'altra senza eseguire nuovamente` for`.
 

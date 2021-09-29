@@ -9,7 +9,7 @@ Mithril's 2.0 release sports a more consistent component interface, which should
 Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition.
 Quite a few breaking changes remain, though - read more below.
 
-::: tip
+:::tip
 
 If you need help with the upgrade, our friendly community will gladly help you out either [on the forum](https://discuss.flarum.org/t/extensibility) or [in chat](https://flarum.org/chat/).
 

@@ -2,7 +2,7 @@
 
 La Beta 16 finaliza la API del extensor de PHP, introduce una biblioteca de pruebas y tipificaciones JS, cambia al uso de espacios de nombres para las importaciones JS, aumenta la robustez de las dependencias de la extensión y permite anular rutas, entre otras características.
 
-::: tip
+:::tip
 
 Si necesitas ayuda para aplicar estos cambios o utilizar las nuevas funciones, inicia un debate en el [foro de la comunidad](https://discuss.flarum.org/t/extensibility) o en el [chat de Discord](https://flarum.org/discord/).
 

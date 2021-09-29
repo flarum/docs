@@ -118,7 +118,7 @@ return [
 
 Filesystem storage drivers are a very powerful tool that allows you to completely customize file storage locations, attach arbitrary CDNs, and otherwise extend the filesystem / cloud storage integration layer.
 
-::: danger
+:::danger
 
 Some drivers might try to index their filesystem every time the driver is instantiated, even if only the `url` method is needed. This can have serious performance implications. In most cases, you'll want to ensure that your driver's `url` method does not ping the remote filesystem. Similarly, the remote filesystem should usually not be accessed until operations are actually executed.
 

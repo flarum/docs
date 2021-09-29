@@ -1,6 +1,6 @@
 # 提交 Bug
 
-::: danger 安全漏洞
+:::danger 安全漏洞
 
 如果您发现 Flarum 存在安全漏洞，请发送邮件至 [security@flarum.org](mailto:security@flarum.org) ，我们会及时处理。
 

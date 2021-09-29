@@ -1,6 +1,6 @@
 # Installation
 
-::: tip Quick test drive?
+:::tip Quick test drive?
 
 Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
 
@@ -15,7 +15,7 @@ Before you install Flarum, it's important to check that your server meets the re
 * **MySQL 5.6+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
-::: tip Shared Hosting
+:::tip Shared Hosting
 
 It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
 
@@ -95,13 +95,13 @@ By default, in most Linux distributions `www-data` is the group and user that bo
 
 To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
 
-::: warning Environments may vary
+:::caution Environments may vary
 
 Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
 
 :::
 
-::: danger Never use permission 777
+:::danger Never use permission 777
 
 You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group. 
 

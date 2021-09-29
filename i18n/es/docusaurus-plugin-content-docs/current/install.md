@@ -1,6 +1,6 @@
 # Instalación
 
-::: danger
+:::danger
 
 Flarum es un **software beta**. ¡Eso significa que todavía tiene algunas características incompletas y errores 🐛🐞, y en algún momento - tarde o temprano - probablemente se romperá! 💥
 
@@ -8,7 +8,7 @@ La beta consiste en arreglar estos problemas y mejorar Flarum. **Por favor, no u
 
 :::
 
-::: tip ¿Prueba rápida?
+:::tip ¿Prueba rápida?
 
 No dude en probar Flarum en uno de nuestros [foros de demostración](https://discuss.flarum.org/d/21101). O bien, configure su propio foro en segundos en [Free Flarum](https://www.freeflarum.com), un servicio comunitario gratuito no afiliado al equipo de Flarum.
 
@@ -23,7 +23,7 @@ Antes de instalar Flarum, es importante comprobar que tu servidor cumple los req
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **Acceso a SSH (línea de comandos)** para ejecutar Composer
 
-::: tip Alojamiento Compartido (Shared Hosting)
+:::tip Alojamiento Compartido (Shared Hosting)
 
 En este momento, no es posible instalar Flarum descargando un archivo ZIP y subiendo los archivos a su servidor web. Esto se debe a que Flarum utiliza un sistema de gestión de dependencias llamado [Composer](https://getcomposer.org) que necesita ejecutarse en la línea de comandos.
 
@@ -103,13 +103,13 @@ Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grup
 
 Para saber más sobre estos comandos, así como sobre los permisos y la propiedad de los archivos en Linux, lea [este tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Si está configurando Flarum en Windows, puede encontrar útiles las respuestas a [esta pregunta de Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
-::: warning Los entornos pueden variar
+:::caution Los entornos pueden variar
 
 Su entorno puede variar con respecto a la documentación proporcionada, por favor consulte la configuración de su servidor web o su proveedor de alojamiento web para conocer el usuario y grupo adecuados con los que PHP y el servidor web operan.
 
 :::
 
-::: danger Nunca utilice el permiso 777
+:::danger Nunca utilice el permiso 777
 
 Nunca debes establecer ninguna carpeta o archivo con el nivel de permiso `777`, ya que este nivel de permiso permite a cualquiera acceder al contenido de la carpeta y el archivo sin importar el usuario o el grupo. 
 

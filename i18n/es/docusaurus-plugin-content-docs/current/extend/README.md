@@ -6,7 +6,7 @@ Este enfoque hace que Flarum sea extremadamente personalizable. Un usuario puede
 
 Para lograr esta extensibilidad, Flarum ha sido construido con ricas APIs y puntos de extensión. Con algunos conocimientos de programación, puedes aprovechar estas APIs para añadir casi cualquier característica que desees. Esta sección de la documentación pretende enseñarte cómo funciona Flarum, y cómo usar las APIs para que puedas construir tus propias extensiones.
 
-::: warning
+:::caution
 
 **Tanto la API de extensiones como esta documentación son un trabajo en curso.** ¡Ten en cuenta que las futuras versiones beta pueden romper tus extensiones! Si tienes comentarios, [nos encantaría escucharlos](https://discuss.flarum.org/).
 

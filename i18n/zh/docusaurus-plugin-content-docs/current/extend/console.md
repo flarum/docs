@@ -39,7 +39,7 @@ return [
 ];
 ```
 
-::: tip 定时命令
+:::tip 定时命令
 
 [fof/console 库](https://github.com/FriendsOfFlarum/console) 允许您运行定时命令！但是，请注意这是一个社区解决方案。
 

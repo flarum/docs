@@ -175,7 +175,7 @@ return [
 
 Flarum render� tutto ci� che esporti con `export` da `forum.js` disponibile nell'oggetto `flarum.extensions['acme-hello-world']`. TInoltre, puoi scegliere di esporre la tua API pubblica per consentire ad altre estensioni di interagire.
 
-::: tip Librerie esterne
+:::tip Librerie esterne
 
 � consentito un solo file JavaScript principale per estensione. Se � necessario includere librerie JavaScript esterne, installarle con NPM e importale con `import` in modo che vengano compilati nel tuo file JavaScript, o guarda [Percorsi e contenuti](/extend/routes.md) per imparere come aggiungere contenuti nei tag `<script>` al frontend.
 
@@ -191,7 +191,7 @@ Puoi anche aggiungere CSS e asset [LESS](http://lesscss.org/features/) al fronte
         ->css(__DIR__.'/less/forum.less')
 ```
 
-::: tip
+:::tip
 
 Dovresti sviluppare estensioni con la modalit� di debug ** attiva ** in `config.php`. Ci� garantir� che Flarum ricompili automaticamente le risorse, quindi non devi svuotare manualmente la cache ogni volta che apporti una modifica al JavaScript dell'estensione.
 

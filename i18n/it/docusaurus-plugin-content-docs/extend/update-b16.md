@@ -2,7 +2,7 @@
 
 La Beta 16 finalizza l'API extender PHP, introduce una libreria di test e le tipizzazioni JS, passa all'utilizzo di namespace per le importazioni JS, aumenta la robustezza della dipendenza dalle estensioni e consente l'override deli percorsi, tra le altre funzionalità.
 
-::: tip
+:::tip
 
 Se hai bisogno di aiuto per applicare queste modifiche o utilizzare nuove funzionalità, avvia una discussione sul [forum](https://discuss.flarum.org/t/extensibility) o su [Discord chat](https://flarum.org/discord/).
 

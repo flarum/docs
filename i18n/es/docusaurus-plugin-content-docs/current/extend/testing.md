@@ -298,13 +298,13 @@ class SomeTest extends TestCase
 }
 ```
 
-::: warning
+:::caution
 
 Si quieres enviar parámetros de consulta en una petición GET, no puedes incluirlos en la ruta; tendrás que añadirlos después con el método `withQueryParams`.
 
 :::
 
-::: warning
+:::caution
 
 Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución.
 

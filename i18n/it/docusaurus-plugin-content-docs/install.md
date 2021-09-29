@@ -1,6 +1,6 @@
 # Installazione
 
-::: Una veloce prova su strada?
+:::info Una veloce prova su strada?
 
 Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
 
@@ -15,7 +15,7 @@ Prima di installare Flarum, è importante verificare che il tuo server soddisfi 
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **SSH (accesso su riga di comando)** per lanciare Composer
 
-::: Hosting condiviso
+:::info Hosting condiviso
 
 In questa fase, non è possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
 
@@ -96,13 +96,13 @@ Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www
 
 Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
-::: warning Gli ambienti possono variare
+:::caution Gli ambienti possono variare
 
 Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta la configurazione del tuo server web o il provider di hosting web per conoscere l'utente e il gruppo appropriato in cui operano PHP e il server web.
 
 :::
 
-::: danger Non dare mai permessi 777
+:::danger Non dare mai permessi 777
 
 Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poiché questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. 
 

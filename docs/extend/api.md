@@ -41,7 +41,7 @@ We'll go over each type of controller shortly, but once they're written, you can
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-::: warning
+:::caution
 
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 

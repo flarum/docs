@@ -5,7 +5,7 @@ As noted throughout this documentation, Flarum uses [Laravel's service container
 The most common use case for service providers is to create, modify, or replace container bindings.
 That being said, service providers allow you full access to run whatever logic you need during application boot with access to the container.
 
-::: warning Advanced Use Only!!!
+:::caution Advanced Use Only!!!
 
 Unlike with other extenders, the Service Provider layer is NOT use-case driven, and is NOT considered public API. It is subject to change at any time, without notice or deprecation. This should only be used if you know what you're doing, and the other extenders don't satisfy your use case.
 

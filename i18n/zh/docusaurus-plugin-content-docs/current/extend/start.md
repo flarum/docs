@@ -119,7 +119,7 @@ composer config repositories.0 path "packages/*"
   * 您需要在这里指定您的扩展程序所兼容的 Flarum 版本。
   * 这里也是列出您的代码需要使用的 Composer 外部工具库的地方。
 
-  ::: warning 谨慎指定 Flarum 版本
+  :::caution 谨慎指定 Flarum 版本
   
   Flarum 仍处于测试阶段，我们建议您声明只兼容当前的 Flarum 版本。
 
@@ -137,7 +137,7 @@ composer config repositories.0 path "packages/*"
 
 请参阅 [composer.json 模式](https://getcomposer.org/doc/04-schema.md) 文档，以获取有关可以添加到 `composer.json` 中的其他属性的信息。
 
-::: tip 小提示
+:::tip 小提示
 
 使用 [FoF 扩展生成器](https://github.com/FriendsOfFlarum/extension-generator) 自动创建扩展程序的基架。
 

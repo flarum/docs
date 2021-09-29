@@ -3,7 +3,7 @@
 Flarum viene fornito con `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) per limitare le richieste alle API.
 Questo viene eseguito su ogni percorso API e le estensioni possono aggiungere la propria logica personalizzata per limitarne le richieste.
 
-::: warning Percorsi del forum
+:::caution Percorsi del forum
 
 Alcuni percorsi del forum (login, registrazione, password dimenticata, etc) funzionano richiamando un API.
 `ThrottleApi` di middleware attualmente non viene eseguito per queste richieste, ma è in previsione per il futuro.

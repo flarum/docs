@@ -3,7 +3,7 @@
 Flarum viene con un `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) para acelerar las peticiones a la API.
 Esto se ejecuta en cada ruta de la API, y las extensiones pueden añadir su propia lógica personalizada para acelerar las solicitudes.
 
-::: warning Rutas del Foro
+:::caution Rutas del Foro
 
 Algunas rutas del foro (inicio de sesión, registro, olvido de contraseña, etc) funcionan llamando a una ruta de la API bajo la superficie.
 El middleware `ThrottleApi` no se ejecuta actualmente para estas peticiones, pero está previsto para el futuro.

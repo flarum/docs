@@ -1,6 +1,6 @@
 # Hataları Bildirme
 
-::: danger Güvenlik Açıkları
+:::danger Güvenlik Açıkları
 
 Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin.
 

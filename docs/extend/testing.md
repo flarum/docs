@@ -304,13 +304,13 @@ class SomeTest extends TestCase
 }
 ```
 
-::: warning
+:::caution
 
 If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
 
 :::
 
-::: warning
+:::caution
 
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
 

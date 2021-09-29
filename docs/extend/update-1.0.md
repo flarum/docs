@@ -2,7 +2,7 @@
 
 Flarum version 1.0 is the long-awaited stable release! This release brings a number of refactors, cleanup, and small improvements that should make your Flarum experience just a bit better!
 
-::: tip
+:::tip
 
 If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
 

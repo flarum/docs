@@ -120,7 +120,7 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
   * Dovrai specificare la versione di Flarum con cui la tua estensione � compatibile qui.
   * Questo � anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
-  ::: warning Scegli con cura la versione Flarum
+  :::caution Scegli con cura la versione Flarum
   
  Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilit� solo con la versione corrente di Flarum:
 
@@ -136,7 +136,7 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
 
 Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre propriet� da aggiungere a `composer.json`.
 
-::: tip
+:::tip
 
 Usa [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) per creare automaticamente lo scheletro della tua estensione
 

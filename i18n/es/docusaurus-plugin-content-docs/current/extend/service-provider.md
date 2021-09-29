@@ -5,7 +5,7 @@ Los [Service Providers](https://laravel.com/docs/6.x/providers) permiten la conf
 El caso de uso más común para los proveedores de servicio es crear, modificar o reemplazar los enlaces del contenedor.
 Dicho esto, los proveedores de servicios le permiten un acceso completo para ejecutar cualquier lógica que necesite durante el arranque de la aplicación con acceso al contenedor.
 
-::: warning ¡¡¡Sólo para uso avanzado!!!
+:::caution ¡¡¡Sólo para uso avanzado!!!
 
 A diferencia de otros extensores, la capa del proveedor de servicios NO está orientada a los casos de uso y NO se considera una API pública. Está sujeta a cambios en cualquier momento, sin previo aviso o depreciación. Esto sólo debe ser utilizado si usted sabe lo que está haciendo, y los otros extensores no satisfacen su caso de uso.
 

@@ -29,7 +29,7 @@ app.initializers.add('interstellar', function(app) {
 
 Una vez hecho esto, puedes empezar a añadir configuraciones y permisos. 
 
-::: Note
+:::info Note
 
 Todas las funciones de registro en `ExtensionData` son encadenables, lo que significa que puedes llamarlas una tras otra sin tener que volver a ejecutar `for`. 
 

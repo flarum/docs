@@ -119,7 +119,7 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
   * Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
   * Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
 
-  ::: warning Elige cuidadosamente la versión de Flarum
+  :::caution Elige cuidadosamente la versión de Flarum
 
   Mientras Flarum esté todavía en fase beta, le recomendamos que declare la compatibilidad sólo con la versión actual de Flarum:
 
@@ -135,7 +135,7 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 
-::: tip
+:::tip
 
 Utilice el [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) para crear automáticamente el andamiaje de su extensión.
 
