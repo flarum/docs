@@ -16,6 +16,6 @@ Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk
 
 * **Beautiful and responsive.** This is forum software for humans. Flarum is carefully designed to be consistent and intuitive across platforms, out-of-the-box.
 
-* **Powerful and extensible.** Customize, extend, and integrate Flarum to suit your community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](/extend/intro.md).
+* **Powerful and extensible.** Customize, extend, and integrate Flarum to suit your community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](/extend/README.md).
 
 * **Free and open.** Flarum is released under the [MIT license](https://github.com/flarum/flarum/blob/master/LICENSE).

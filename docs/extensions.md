@@ -4,7 +4,7 @@ Flarum is minimalistic, but it's also highly extensible. In fact, most of the fe
 
 This approach makes Flarum extremely customizable: You can disable any features you don't need, and install other extensions to make your forum perfect for your community.
 
-For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/intro.md).
+For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/README.md).
 This article will focus on managing extensions from a forum admin's perspective.
 
 ## Finding Extensions

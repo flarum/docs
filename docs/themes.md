@@ -30,4 +30,4 @@ Flarum actually uses LESS, which makes it easier to write CSS by allowing for va
 
 Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum.
 If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go.
-To learn how to make an extension, check out our [extension documentation](extend/intro.md)!
+To learn how to make an extension, check out our [extension documentation](extend/README.md)!

@@ -1,5 +1,5 @@
 files:
-  - source: /docs/*.md
-    translation: /docs/%two_letters_code%/%original_file_name%
-  - source: /docs/extend/*.md
-    translation: /docs/%two_letters_code%/extend/%original_file_name%
+  - source: /i18n/en/**/*
+    translation: /i18n/%two_letters_code%/**/%original_file_name%
+  - source: /docs/**/*
+    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
