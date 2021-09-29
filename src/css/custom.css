@@ -6,6 +6,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-font-color-base: #111;
   --ifm-color-primary: #c84a27;
   --ifm-color-primary-dark: #b44323;
   --ifm-color-primary-darker: #aa3f21;
@@ -57,6 +58,21 @@ blockquote {
 .theme-doc-sidebar-item-category>a.menu__link {
   font-weight: bold;
   margin-top: 10px;
+}
+
+/* Search bar */
+
+.DocSearch.DocSearch-Button {
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.DocSearch.DocSearch-Button input:focus {
+  border-color: var(--ifm-color-primary);
+}
+
+.DocSearch.DocSearch-Button input::placeholder {
+  opacity: 1;
 }
 
 /* Other Docusaurus conf */
