@@ -4,8 +4,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
-  title: 'Flarum Docs',
-  tagline: 'Dinosaurs are cool',
+  title: 'Flarum Documentation',
+  tagline: 'Forums made simple.',
   url: 'https://flarum.org',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -44,8 +44,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
+          sidebarCollapsible: false,
+          editUrl: 'https://github.com/flarum/docs/tree/master',
         },
         blog: false,
         theme: {
