@@ -29,6 +29,18 @@
     "微软雅黑";
 }
 
+.markdown h1:first-child {
+  --ifm-h1-font-size: 2.2rem !important;
+}
+
+.markdown>h2 {
+  --ifm-h2-font-size: 1.65rem !important;
+}
+
+.markdown>h3 {
+  --ifm-h2-font-size: 1.35rem !important;
+}
+
 h2 {
   padding-bottom: .3rem;
   border-bottom: 1px solid #eaecef;
@@ -40,6 +52,11 @@ blockquote {
   border-left: .2rem solid #dfe2e5;
   margin: 1rem 0;
   padding: .25rem 0 .25rem 1rem;
+}
+
+.theme-doc-sidebar-item-category>a.menu__link {
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* Other Docusaurus conf */
