@@ -127,7 +127,7 @@ module.exports = {
       label: 'Internal Docs',
       collapsible: false,
       items: [
-        'extend/README'
+        'internal/README'
       ]
     },
   ]
