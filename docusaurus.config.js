@@ -72,19 +72,20 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             to: 'intro',
             label: 'Guide',
             position: 'right',
-            activeBaseRegex: `docs\/[^\/]+`,
+            // Anything that isn't `extend`, `'internal`, or contain a slash.
+            activeBaseRegex: '^\/(?!(extend|internal|.*\/.*)$).*',
           },
           {
             to: 'extend',
             label: 'Extend',
             position: 'right',
-            activeBaseRegex: `extend`,
+            activeBasePath: `extend`,
           },
           {
             to: 'internal',
             label: 'Internal',
             position: 'right',
-            activeBaseRegex: `internal`,
+            activeBasePath: `internal`,
           },
           {
             href: 'https://github.com/facebook/docusaurus',
