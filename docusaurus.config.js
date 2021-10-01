@@ -88,10 +88,30 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             activeBasePath: `internal`,
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            href: 'https://api.docs.flarum.org/',
+            label: 'API Reference',
             position: 'right',
-          }, {
+          },
+          {
+            type: 'dropdown',
+            label: 'Flarum',
+            position: 'right',
+            items: [
+
+              {
+                href: 'https://flarum.org/',
+                label: 'Home'
+              },
+              {
+                href: 'https://discuss.flarum.org/',
+                label: 'Community'
+              },
+              {
+                href: 'https://github.com/flarum/core/',
+                label: 'Github'
+              },
+            ]
+          },{
             type: 'localeDropdown',
             position: 'right',
           },

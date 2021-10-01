@@ -33,6 +33,10 @@ html[data-theme='dark'] {
 
 /* Nice styes from VuePress we should keep */
 
+.navbar {
+  font-size: .9rem;
+}
+
 .body {
   font-family: 'Mukta',
     'Noto Sans SC',
