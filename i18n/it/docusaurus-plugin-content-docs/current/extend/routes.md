@@ -157,15 +157,6 @@ Flarum si basa sul [sistema di instradamento di Mithril](https://mithril.js.org/
 app.routes['acme.users'] = { path: '/users', component: UsersPage };
 ```
 
-<!-- Per registrare percorsi sul frontend, c'è un extender `Routes` che funziona in modo molto simile a quello di backend. Invece di un controller, tuttavia, passi un'istanza del componente come terzo argomento:
-
-```jsx
-export const extend = [
-  new Extend.Routes()
-    .add('/users', 'acme.users', <UsersPage />)
-];
-``` -->
-
 Ora quanto `tuoforum.com/utente`  verrà caricato il frontend del forum ed anche il componente `UsersPage` verrà renderizzato. Per ulteriori informazioni sulle pagine di frontend, vedere [questa sezione della documentazione](frontend-pages.md).
 
 Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
@@ -177,11 +168,6 @@ I percorsi delfrontend consentono anche di acquisire segmenti dell'URI, ma la [s
 ```jsx
 app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
-
-<!-- ```jsx
-  new Extend.Routes()
-    .add('/user/:id', 'acme.user', <UsersPage />)
-``` -->
 
 I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 
@@ -224,9 +210,9 @@ import Link from 'flarum/components/Link';
 
 Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
 
-* Modificare il "<title>" della pagina
+* Modificare il `<title>` della pagina
 * Aggiunta di risorse JavaScript e CSS esterne
-* Aggiunta di contenuti SEO e tag "<meta>"
+* Aggiunta di contenuti SEO e tag `<meta>`
 * Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
 Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.

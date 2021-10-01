@@ -1,5 +1,5 @@
 ---
-slug: intro
+slug: /
 ---
 
 # About Flarum

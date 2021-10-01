@@ -1,3 +1,7 @@
+---
+slug: /extend
+---
+
 # Estensioni di Flarum
 
 Flarum è minimalista, ma è anche altamente estensibile. In effetti, la maggior parte delle funzionalità fornite con Flarum sono in realtà estensioni!

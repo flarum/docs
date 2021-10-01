@@ -1,3 +1,7 @@
+---
+slug: /
+---
+
 # Acerca de Flarum
 
 Flarum es una plataforma de discusión increíblemente sencilla para su sitio web. Es rápido y fácil de usar, con todas las características que necesitas para dirigir una comunidad exitosa.

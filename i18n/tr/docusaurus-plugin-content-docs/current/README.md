@@ -1,3 +1,7 @@
+---
+slug: /
+---
+
 # Flarum Hakkında
 
 Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarılı bir topluluk yürütmek için ihtiyacınız olan tüm özelliklerle birlikte kullanımı hızlı ve kolaydır.

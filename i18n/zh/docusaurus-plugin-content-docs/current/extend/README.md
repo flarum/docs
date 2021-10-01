@@ -1,3 +1,7 @@
+---
+slug: /extend
+---
+
 # 扩展 Flarum
 
 Flarum 虽小，五脏俱全。事实上 Flarum 自带的大多数功能，都以扩展的形式实现。

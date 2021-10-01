@@ -69,11 +69,12 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             position: 'right',
           },
           {
-            to: 'intro',
+            to: '/',
             label: 'Guide',
             position: 'right',
             // Anything that isn't `extend`, `'internal`, or contain a slash.
-            activeBaseRegex: '^\/(?!(extend|internal|.*\/.*)$).*',
+            // Account for local 2-char code at the start.
+            activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend|internal|.*\/.*)$).*',
           },
           {
             to: 'extend',
