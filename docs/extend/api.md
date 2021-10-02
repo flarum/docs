@@ -30,7 +30,7 @@ As per the JSON:API convention, we'll want to add separate endpoints for each op
 - Updating a model instance
 - Deleting a single model instance
 
-We'll go over each type of controler shortly, but once they're written, you can add these five standard endpoints (or a subset of them) using the `Routes` extender:
+We'll go over each type of controller shortly, but once they're written, you can add these five standard endpoints (or a subset of them) using the `Routes` extender:
 
 ```php
     (new Extend\Routes('api'))
