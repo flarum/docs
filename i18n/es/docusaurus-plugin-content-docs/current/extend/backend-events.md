@@ -2,13 +2,17 @@
 
 A menudo, una extensión querrá reaccionar a algunos eventos que ocurren en otra parte de Flarum. Por ejemplo, podríamos querer incrementar un contador cuando se publica una nueva discusión, enviar un email de bienvenida cuando un usuario se conecta por primera vez, o añadir etiquetas a una discusión antes de guardarla en la base de datos. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/8.x/events).
 
-:::warning Old Event API
+For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
-Historically, Flarum has used events for its extension API, emitting events like `GetDisplayName` or `ConfigureApiRoutes` to allow extensions to insert logic into various parts of Flarum. These events are gradually being phased out in favor of the declarative [extender system](start.md#extenders), and will be removed before stable. Domain events will not be removed.
+
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate event listeners:
+```bash
+$ flarum-cli make backend event-listener
+```
 
 :::
-
-For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
 ## Escuchar eventos
 
@@ -23,25 +27,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 return [
     (new Extend\Event)
         ->listen(Deleted::class, function($event) {
-          // haz algo aquí
+            // do something here
         })
         ->listen(Deleted::class, PostDeletedListener::class)
 ];
-
-
+```
+```php
 class PostDeletedListener
 {
-  protected $translator;
+    protected $translator;
 
-  public function __construct(TranslatorInterface $translator)
-  {
-      $this->translator = $translator;
-  }
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
-  public function handle(Deleted $event)
-  {
-    // Su lógica aquí
-  }
+    public function handle(Deleted $event)
+    {
+        // Your logic here
+    }
 }
 ```
 
@@ -50,32 +54,41 @@ As shown above, a listener class can be used instead of a callback. This allows 
 You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
 
 ```php
+use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
-use Illuminate\Contracts\Events\Dispatcher;
+use Flarum\Post\Event\Saving;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 
-class SomeClass
+return [
+    (new Extend\Event)
+        ->subscribe(PostEventSubscriber::class),
+];
+```
+```php
+class PostEventSubscriber
 {
-    /**
-      * @var Dispatcher
-      */
-    protected $events;
+    protected $translator;
 
-    /**
-      * @param Dispatcher $events
-      */
-    public function __construct(Dispatcher $events)
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->events = $events;
+        $this->translator = $translator;
     }
 
-    public function someMethod()
+    public function subscribe($events)
     {
-        // Lógica
-        $this->events->dispatch(
-        new Deleted($somePost, $someActor)
-        );
-        // Más lógica
+        $events->listen(Deleted::class, [$this, 'handleDeleted']);
+        $events->listen(Saving::class, [$this, 'handleSaving']);
+    }
+
+    public function handleDeleted(Deleted $event)
+    {
+        // Your logic here
+    }
+
+    public function handleSaving(Saving $event)
+    {
+        // Your logic here
     }
 }
 ```
@@ -108,7 +121,7 @@ class SomeClass
     {
         // Logic
         $this->events->dispatch(
-        new Deleted($somePost, $someActor)
+            new Deleted($somePost, $someActor)
         );
         // More Logic
     }
