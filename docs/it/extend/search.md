@@ -104,7 +104,7 @@ Then, you'll need to use that filterer in your model's `List` controller. For an
 
 ## Searching
 
-Searchng constrains queries by applying `Gambit`s, which are classes that implement `Flarum\Search\GambitInterface`, based on the `filter[q]` query param. After searching is complete, a set of callbacks called "search mutators" run for every search request.
+Searching constrains queries by applying `Gambit`s, which are classes that implement `Flarum\Search\GambitInterface`, based on the `filter[q]` query param. After searching is complete, a set of callbacks called "search mutators" run for every search request.
 
 When the `search` method on a `Searcher` class is called, the following process takes place ([relevant code](https://github.com/flarum/core/blob/master/src/Search/AbstractSearcher.php#L55-L79)):
 
