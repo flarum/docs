@@ -127,9 +127,12 @@ composer config repositories.0 path "packages/*"
 
 请参阅 [composer.json 模式](https://getcomposer.org/doc/04-schema.md) 文档，以获取有关可以添加到 `composer.json` 中的其他属性的信息。
 
-:::tip
+:::info [Flarum CLI](https://github.com/flarum/cli)
 
-Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+Use the CLI to automatically create your extension's scaffolding:
+```bash
+$ flarum-cli init
+```
 
 :::
 
