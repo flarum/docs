@@ -18,7 +18,7 @@ Admins can also create new groups through the admin dashboard. Users can be adde
 
 ## Permissions
 
-Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same). That's actually all that the permisions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
+Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same). That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
 
 There's no direct association between users and permissions: when we check a user's permissions, we're actually enumerating permissions for all the user's groups.
 
@@ -62,7 +62,7 @@ This is done in core to make authorization calls shorter and simpler. Essentiall
 
 This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
-These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discusssion)` on the post's discussion.
+These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discussion)` on the post's discussion.
 
 If you want to use authorization checks with an ability name that differs from the backing permission name, and these cases do not apply to your permission's naming, you'll have to use a custom policy.
 
