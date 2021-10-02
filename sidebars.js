@@ -109,7 +109,7 @@ module.exports = {
       label: 'Update Guides',
       collapsible: false,
       items: [
-        'extend/update-1.0',
+        'extend/update-1_0',
         'extend/update-b16',
         'extend/update-b15',
         'extend/update-b14',
