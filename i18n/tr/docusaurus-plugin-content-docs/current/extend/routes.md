@@ -36,6 +36,15 @@ return [
 ];
 ```
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate your routes:
+```bash
+$ flarum-cli make backend route
+```
+
+:::
+
 ### Controllers
 
 In Flarum, **Controller** is just another name for a class that implements [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). Put simply, a controller must implement a `handle` method which receives a [Request](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) and must return a [Response](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum includes [laminas-diactoros](https://github.com/laminas/laminas-diactoros) which contains `Response` implementations that you can return.
