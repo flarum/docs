@@ -18,7 +18,7 @@ Gli amministratori possono anche creare nuovi gruppi tramite la dashboard dell'a
 
 ## Permessi
 
-I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
 
 Non esiste alcuna associazione diretta tra utenti e permessi: quando controlliamo i permessi di un utente, stiamo effettivamente enumerando i permessi per tutti i gruppi dell'utente.
 
@@ -62,7 +62,7 @@ This is done in core to make authorization calls shorter and simpler. Essentiall
 
 This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
-These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discusssion)` on the post's discussion.
+These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discussion)` on the post's discussion.
 
 If you want to use authorization checks with an ability name that differs from the backing permission name, and these cases do not apply to your permission's naming, you'll have to use a custom policy.
 
