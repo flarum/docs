@@ -127,9 +127,12 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 
-:::tip
+:::info [Flarum CLI](https://github.com/flarum/cli)
 
-Use the [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to automatically create your extension's scaffolding.
+Use the CLI to automatically create your extension's scaffolding:
+```bash
+$ flarum-cli init
+```
 
 :::
 
