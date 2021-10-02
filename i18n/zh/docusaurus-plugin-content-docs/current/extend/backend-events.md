@@ -2,13 +2,17 @@
 
 Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/8.x/events).
 
-:::warning Old Event API
+For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
-Historically, Flarum has used events for its extension API, emitting events like `GetDisplayName` or `ConfigureApiRoutes` to allow extensions to insert logic into various parts of Flarum. These events are gradually being phased out in favor of the declarative [extender system](start.md#extenders), and will be removed before stable. Domain events will not be removed.
+
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate event listeners:
+```bash
+$ flarum-cli make backend event-listener
+```
 
 :::
-
-For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
 ## Listening to Events
 
@@ -23,25 +27,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 return [
     (new Extend\Event)
         ->listen(Deleted::class, function($event) {
-          // do something here
+            // do something here
         })
         ->listen(Deleted::class, PostDeletedListener::class)
 ];
-
-
+```
+```php
 class PostDeletedListener
 {
-  protected $translator;
+    protected $translator;
 
-  public function __construct(TranslatorInterface $translator)
-  {
-      $this->translator = $translator;
-  }
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
-  public function handle(Deleted $event)
-  {
-    // Your logic here
-  }
+    public function handle(Deleted $event)
+    {
+        // Your logic here
+    }
 }
 ```
 
@@ -60,32 +64,32 @@ return [
     (new Extend\Event)
         ->subscribe(PostEventSubscriber::class),
 ];
-
-
+```
+```php
 class PostEventSubscriber
 {
-  protected $translator;
+    protected $translator;
 
-  public function __construct(TranslatorInterface $translator)
-  {
-      $this->translator = $translator;
-  }
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
-  public function subscribe($events)
-  {
-    $events->listen(Deleted::class, [$this, 'handleDeleted']);
-    $events->listen(Saving::class, [$this, 'handleSaving']);
-  }
+    public function subscribe($events)
+    {
+        $events->listen(Deleted::class, [$this, 'handleDeleted']);
+        $events->listen(Saving::class, [$this, 'handleSaving']);
+    }
 
-  public function handleDeleted(Deleted $event)
-  {
-    // Your logic here
-  }
+    public function handleDeleted(Deleted $event)
+    {
+        // Your logic here
+    }
 
-  public function handleSaving(Saving $event)
-  {
-    // Your logic here
-  }
+    public function handleSaving(Saving $event)
+    {
+        // Your logic here
+    }
 }
 ```
 
@@ -117,7 +121,7 @@ class SomeClass
     {
         // Logic
         $this->events->dispatch(
-        new Deleted($somePost, $someActor)
+            new Deleted($somePost, $someActor)
         );
         // More Logic
     }
