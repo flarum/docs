@@ -15,8 +15,8 @@ If you need help applying these changes or using new features, please start a di
 - The `assertGuest()` method of the `Flarum\User\AssertPermissionTrait` has been removed without replacement.
 - Old error handling middleware and exception handler classes were removed (see "New Features" for more details):
   - `Flarum\Api\Middleware\HandleErrors`
-  - `Flarum\Http\Middlware\HandleErrorsWithView`
-  - `Flarum\Http\Middlware\HandleErrorsWithWhoops`
+  - `Flarum\Http\Middleware\HandleErrorsWithView`
+  - `Flarum\Http\Middleware\HandleErrorsWithWhoops`
   - `Flarum\Api\ErrorHandler`
   - `Flarum\Api\ExceptionHandler\FallbackExceptionHandler`
   - `Flarum\Api\ExceptionHandler\FloodingExceptionHandler`
