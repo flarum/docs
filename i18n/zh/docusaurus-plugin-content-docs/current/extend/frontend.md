@@ -19,7 +19,7 @@ Along with new TypeScript support, we have a [`tsconfig` package](https://www.np
 
 ## Transpilation and File Structure
 
-This portion of the guide will explain the necessary file setup for extensions. Once again, we highly recommend using the unofficial [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) to set up the file structure for you. That being said, you should still read this to understand what's going on beneath the surface.
+This portion of the guide will explain the necessary file setup for extensions. Once again, we highly recommend using the [Flarum CLI](https://github.com/flarum/cli) to set up the file structure for you. That being said, you should still read this to understand what's going on beneath the surface.
 
 Before we can write any JavaScript, we need to set up a **transpiler**. This allows us to use [TypeScript](https://www.typescriptlang.org/) and its magic in Flarum core and extensions.
 
