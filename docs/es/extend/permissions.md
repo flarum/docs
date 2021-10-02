@@ -18,7 +18,7 @@ Los administradores también pueden crear nuevos grupos a través del panel de a
 
 ## Permisos
 
-Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo). En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
+Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo). That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
 
 No hay una asociación directa entre los usuarios y los permisos: cuando comprobamos los permisos de un usuario, en realidad estamos enumerando los permisos de todos los grupos del usuario.
 
@@ -62,7 +62,7 @@ This is done in core to make authorization calls shorter and simpler. Essentiall
 
 This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
-These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discusssion)` on the post's discussion.
+These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discussion)` on the post's discussion.
 
 If you want to use authorization checks with an ability name that differs from the backing permission name, and these cases do not apply to your permission's naming, you'll have to use a custom policy.
 
