@@ -36,9 +36,18 @@ return [
 ];
 ```
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate your routes:
+```bash
+$ flarum-cli make backend route
+```
+
+:::
+
 ### Controller
 
-In Flarum, ** Controller ** è solo un altro nome per una classe che implementa [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). In parole povere, un controller deve implementare un metodo `handle` che riceve una [Richiesta](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) e restituisce una [Risposta](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum include [laminas-diactoros](https://github.com/laminas/laminas-diactoros) che contiene implementazioni di `Response`.
+In Flarum, **Controller** is just another name for a class that implements [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). Put simply, a controller must implement a `handle` method which receives a [Request](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) and must return a [Response](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum includes [laminas-diactoros](https://github.com/laminas/laminas-diactoros) which contains `Response` implementations that you can return.
 
 ```php
 <?php
@@ -94,7 +103,7 @@ You can generate URLs to any of the defined routes using the `Flarum\Http\UrlGen
 
 ```php
 $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']);
-// http://iltuoforum.com/utente/123?foo=bar
+// http://yourforum.com/user/123?foo=bar
 ```
 
 ### Visualizzazioni
@@ -186,7 +195,7 @@ To generate a URL to a route on the frontend, use the `app.route` method. This a
 
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
-// http://tuoforum.com/utente/123?foo=bar
+// http://yourforum.com/users/123?foo=bar
 ```
 
 ### Collegamenti ad altre pagine
@@ -196,7 +205,7 @@ A forum wouldn't be very useful if it only had one page. While you could, of cou
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
 ```jsx
-import Link from 'flarum/components/Link';
+import Link from 'flarum/common/components/Link';
 
 // Link can be used just like any other component:
 <Link href="/route/known/to/mithril">Hello World!</Link>
