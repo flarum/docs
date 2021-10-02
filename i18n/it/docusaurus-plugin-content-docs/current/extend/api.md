@@ -1,10 +1,10 @@
-# API and Data Flow
+# API e flusso di dati
 
-In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
+Nel [precedente articolo](models.md)abbiamo appreso come Flarum utilizza i modelli per interagire con i dati. Qui impareremo come ottenere questi dati dal database in formato JSON-API nel frontend, e farli ritornare al backend.
 
-## Ciclo di vita delle richieste API
+## Lifecycle delle richieste API
 
-Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
+Prima di entrare nei dettagli su come estendere i dati di Flarum con le API, vale la pena pensare al lifecycle di una tipica richiesta API:
 
 ![Flarum API Flowchart](/en/img/api_flowchart.png)
 
@@ -19,40 +19,40 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 
 ## API Endpoints
 
-We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend. We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
+Abbiamo imparato come utilizzare i modelli per interagire con i dati, ma abbiamo ancora bisogno di ottenere quei dati dal backend al frontend. Lo facciamo scrivendo un API Controller [route](routes.md), che implementa la logica per gli endpoint API.
 
-As per the JSON:API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
+Secondo la convenzione JSON:API, vorremo aggiungere endpoint separati per ogni operazione che eseguiamo. Le operazioni comuni sono:
 
-- Listing instances of a model (possibly including searching/filtering)
-- Getting a single model instance
-- Creating a model instance
-- Updating a model instance
-- Deleting a single model instance
+- Elencare le istanze di un modello (possibilmente anche ricerca/filtraggio)
+- Ottenere una singola istanza del modello
+- Creare un'istanza del modello
+- Aggiornare l'istanza del modello
+- Eliminazione di una singola istanza di modello
 
-We'll go over each type of controller shortly, but once they're written, you can add these five standard endpoints (or a subset of them) using the `Routes` extender:
+A breve entreremo nel merito dei differenti tipi di controller, ma una volta scritti, sarà possibile aggiungere questi cinque endpoint standard (o un loro sottoinsieme) utilizzando l'extender `Routes`:
 
 ```php
     (new Extend\Routes('api'))
-        ->get('/tags', 'tags.index', ListTagsController::class)
-        ->get('/tags/{id}', 'tags.show', ShowTagController::class)
-        ->post('/tags', 'tags.create', CreateTagController::class)
-        ->patch('/tags/{id}', 'tags.update', UpdateTagController::class)
+        ->get('/tags', 'tags. ndex', ListTagsController::class)
+        ->get('/tags/{id}', 'tags. come', ShowTagController::class)
+        ->post('/tags', 'tags. reate', CreateTagController::class)
+        ->patch('/tags/{id}', 'tags. pdate', UpdateTagController::class)
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-:::caution
+:::cautela
 
-Paths to API endpoints are not arbitrary! To support interactions with frontend models:
+I percorsi agli endpoint API non sono arbitrari! Per supportare le interazioni con modelli di frontend:
 
-- The path should either be `/prefix/{id}` for get/update/delete, or `/prefix` for list/create.
-- the prefix (`tags` in the example above) must correspond to the JSON:API model type. You'll also use this model type in your serializer's `$type` attribute, and when registering the frontend model (`app.store.models.TYPE = MODEL_CLASS`).
-- The methods must match the example above.
+- Il percorso può essere `/prefix/{id}` per get/update/delete, o `/prefix` per list/create.
+- il prefisso (`tags` nell'esempio sopra) deve corrispondere al modello JSON:API. Utilizzerai anche questo tipo di modello nell'attributo `$type` del tuo serializer, e durante la registrazione del modello frontend (`app. tore.models.TYPE = MODEL_CLASS`).
+- I metodi devono corrispondere all'esempio sopra.
 
-Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
+Inoltre, ricorda che i nomi dei percorsi (`tags.index`, `tags.show`, etc) devono essere unici!
 
 :::
 
-The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
+`Flarum\Api\Controller` contiene una serie di controller astratti che puoi estendere per implementare facilmente nuove risorse JSON-API.
 
 ### Elenco risorse
 
