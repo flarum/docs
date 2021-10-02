@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.guideSidebar.category.Introduction": {
+    "message": "介绍",
+    "description": "The label for category Introduction in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Setting Up": {
+    "message": "部署",
+    "description": "The label for category Setting Up in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Management": {
+    "message": "管理",
+    "description": "The label for category Management in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Advanced": {
+    "message": "Advanced",
+    "description": "The label for category Advanced in sidebar guideSidebar"
+  },
+  "sidebar.extendSidebar.category.Main Concepts": {
+    "message": "Main 核心概念",
+    "description": "The label for category Main Concepts in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Reference Guides": {
+    "message": "高级指引",
+    "description": "The label for category Reference Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Advanced Guides": {
+    "message": "Advanced Guides",
+    "description": "The label for category Advanced Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Update Guides": {
+    "message": "Update Guides",
+    "description": "The label for category Update Guides in sidebar extendSidebar"
+  },
+  "sidebar.internalSidebar.category.Internal Docs": {
+    "message": "Internal Docs",
+    "description": "The label for category Internal Docs in sidebar internalSidebar"
+  }
+}

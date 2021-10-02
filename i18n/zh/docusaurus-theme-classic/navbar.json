@@ -1,10 +1,10 @@
 {
   "item.label.Guide": {
-    "message": "Guide",
+    "message": "指南",
     "description": "Navbar item with label Guide"
   },
   "item.label.Extend": {
-    "message": "Extend",
+    "message": "进阶",
     "description": "Navbar item with label Extend"
   },
   "item.label.Internal": {
@@ -12,7 +12,7 @@
     "description": "Navbar item with label Internal"
   },
   "item.label.API Reference": {
-    "message": "API Reference",
+    "message": "API 参考",
     "description": "Navbar item with label API Reference"
   },
   "item.label.Flarum": {
@@ -20,11 +20,11 @@
     "description": "Navbar item with label Flarum"
   },
   "item.label.Home": {
-    "message": "Home",
+    "message": "首页",
     "description": "Navbar item with label Home"
   },
   "item.label.Community": {
-    "message": "Community",
+    "message": "社区",
     "description": "Navbar item with label Community"
   },
   "item.label.Github": {

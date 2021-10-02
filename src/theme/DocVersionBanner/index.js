@@ -8,124 +8,11 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import {
   useAlternatePageUtils, ThemeClassNames,
-  useDocsPreferredVersion,
 } from '@docusaurus/theme-common';
 import Translate from '@docusaurus/Translate';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useActivePlugin, useDocVersionSuggestions } from '@theme/hooks/useDocs';
+import OriginalDocVersionBanner from '@theme-original/DocVersionBanner';
 import clsx from 'clsx';
-
-function UnreleasedVersionLabel({ siteTitle, versionMetadata }) {
-  return (
-    <Translate
-      id="theme.docs.versions.unreleasedVersionLabel"
-      description="The label used to tell the user that he's browsing an unreleased doc version"
-      values={{
-        siteTitle,
-        versionLabel: <b>{versionMetadata.label}</b>,
-      }}>
-      {
-        'This is unreleased documentation for {siteTitle} {versionLabel} version.'
-      }
-    </Translate>
-  );
-}
-
-function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
-  return (
-    <Translate
-      id="theme.docs.versions.unmaintainedVersionLabel"
-      description="The label used to tell the user that he's browsing an unmaintained doc version"
-      values={{
-        siteTitle,
-        versionLabel: <b>{versionMetadata.label}</b>,
-      }}>
-      {
-        'This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained.'
-      }
-    </Translate>
-  );
-}
-
-const BannerLabelComponents = {
-  unreleased: UnreleasedVersionLabel,
-  unmaintained: UnmaintainedVersionLabel,
-};
-
-function BannerLabel(props) {
-  const BannerLabelComponent =
-    BannerLabelComponents[props.versionMetadata.banner];
-  return <BannerLabelComponent {...props} />;
-}
-
-function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
-  return (
-    <Translate
-      id="theme.docs.versions.latestVersionSuggestionLabel"
-      description="The label used to tell the user to check the latest version"
-      values={{
-        versionLabel,
-        latestVersionLink: (
-          <b>
-            <Link to={to} onClick={onClick}>
-              <Translate
-                id="theme.docs.versions.latestVersionLinkLabel"
-                description="The label used for the latest version suggestion link label">
-                latest version
-              </Translate>
-            </Link>
-          </b>
-        ),
-      }}>
-      {
-        'For up-to-date documentation, see the {latestVersionLink} ({versionLabel}).'
-      }
-    </Translate>
-  );
-}
-
-function DocVersionBannerEnabled({ versionMetadata }) {
-  const {
-    siteConfig: { title: siteTitle },
-  } = useDocusaurusContext();
-  const { pluginId } = useActivePlugin({
-    failfast: true,
-  });
-
-  const getVersionMainDoc = (version) =>
-    version.docs.find((doc) => doc.id === version.mainDocId);
-
-  const { savePreferredVersionName } = useDocsPreferredVersion(pluginId);
-  const {
-    latestDocSuggestion,
-    latestVersionSuggestion,
-  } = useDocVersionSuggestions(pluginId); // try to link to same doc in latest version (not always possible)
-  // fallback to main doc of latest version
-
-  const latestVersionSuggestedDoc =
-    latestDocSuggestion ?? getVersionMainDoc(latestVersionSuggestion);
-  return (
-    <div
-      className={clsx(
-        ThemeClassNames.docs.docVersionBanner,
-        'alert alert--warning margin-bottom--md',
-      )}
-      role="alert">
-      <div>
-        <BannerLabel siteTitle={siteTitle} versionMetadata={versionMetadata} />
-      </div>
-      <div className="margin-top--md">
-        <LatestVersionSuggestionLabel
-          versionLabel={latestVersionSuggestion.label}
-          to={latestVersionSuggestedDoc.path}
-          onClick={() => savePreferredVersionName(latestVersionSuggestion.name)}
-        />
-      </div>
-    </div>
-  );
-}
-
 
 function NonDefaultLangLabel({ defaultLocale }) {
   const alternatePageUtils = useAlternatePageUtils();
@@ -134,19 +21,17 @@ function NonDefaultLangLabel({ defaultLocale }) {
     locale: defaultLocale,
     fullyQualified: false,
   })}`;
-
-  console.log(toDefaultLocale)
-
+  
   return (
     <Translate
-      id="theme.docs.lang.nonDefaultLangLabel"
+      id="customtheme.docs.lang.nonDefaultLangLabel"
       description="The label used to tell the user that they're browsing translated docs that might be out of sync"
       values={{
         defaultLocaleLink: (
           <b>
             <Link href={toDefaultLocale} autoAddBaseUrl={false} target='_self'>
               <Translate
-                id="theme.docs.lang.defaultLocaleLinkLabel"
+                id="customtheme.docs.lang.defaultLocaleLinkLabel"
                 description="The label used for the latest version suggestion link label">
                 default locale version
               </Translate>
@@ -157,7 +42,7 @@ function NonDefaultLangLabel({ defaultLocale }) {
           <b>
             <Link to="https://crowdin.com/project/flarum-docs">
               <Translate
-                id="theme.docs.versions.crowdinLinkLabel"
+                id="customtheme.docs.versions.crowdinLinkLabel"
                 description="The label used for Crowdin link label">
                 via Crowdin
               </Translate>
@@ -173,7 +58,7 @@ function NonDefaultLangLabel({ defaultLocale }) {
 }
 
 
-function DocLangBannerEnabled({ versionMetadata }) {
+function DocLangBannerEnabled() {
   const {
     i18n: { defaultLocale, currentLocale },
   } = useDocusaurusContext();
@@ -198,14 +83,10 @@ function DocLangBannerEnabled({ versionMetadata }) {
   );
 }
 
+// Hack language warning into version warning.
 function DocVersionBanner({ versionMetadata }) {
-  let versionBanner;
-  if (versionMetadata.banner) {
-    versionBanner = <DocVersionBannerEnabled versionMetadata={versionMetadata} />;
-  }
-
   return <>
-    {versionBanner}
+    <OriginalDocVersionBanner versionMetadata={versionMetadata} />
     <DocLangBannerEnabled />
   </>;
 }

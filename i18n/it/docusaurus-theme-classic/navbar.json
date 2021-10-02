@@ -1,10 +1,10 @@
 {
   "item.label.Guide": {
-    "message": "Guide",
+    "message": "Guida",
     "description": "Navbar item with label Guide"
   },
   "item.label.Extend": {
-    "message": "Extend",
+    "message": "Estendi",
     "description": "Navbar item with label Extend"
   },
   "item.label.Internal": {
@@ -12,7 +12,7 @@
     "description": "Navbar item with label Internal"
   },
   "item.label.API Reference": {
-    "message": "API Reference",
+    "message": "Referenze API",
     "description": "Navbar item with label API Reference"
   },
   "item.label.Flarum": {
