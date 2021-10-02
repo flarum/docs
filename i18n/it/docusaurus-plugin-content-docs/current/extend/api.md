@@ -54,6 +54,15 @@ Inoltre, ricorda che i nomi dei percorsi (`tags.index`, `tags.show`, etc) devono
 
 `Flarum\Api\Controller` contiene una serie di controller astratti che puoi estendere per implementare facilmente nuove risorse JSON-API.
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your endpoint controllers:
+```bash
+$ flarum-cli make backend api-controller
+```
+
+:::
+
 ### Elenco risorse
 
 For the controller that lists your resource, extend the `Flarum\Api\Controller\AbstractListController` class. At a minimum, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a collection of models. The `data` method accepts the `Request` object and the tobscure/json-api `Document`.
@@ -79,10 +88,10 @@ class ListTagsController extends AbstractListController
 You can allow the number of resources being **listed** to be customized by specifying the `limit` and `maxLimit` properties on your controller:
 
 ```php
-    // Il numero di record inclusi per impostazione predefinita.
+    // The number of records included by default.
     public $limit = 20;
 
-    // Il numero massimo di record che possono essere richiesti.
+    // The maximum number of records that can be requested.
     public $maxLimit = 50;
 ```
 
@@ -102,10 +111,10 @@ To add pagination links to the JSON:API document, use the `Document::addPaginati
 You can allow the sort order of resources being **listed** to be customized by specifying the `sort` and `sortField` properties on your controller:
 
 ```php
-    // Il campo di ordinamento predefinito e l'ordine da utilizzare.
+    // The default sort field and order to use.
     public $sort = ['name' => 'asc'];
 
-    // I campi disponibili per essere ordinati.
+    // The fields that are available to be sorted by.
     public $sortFields = ['firstName', 'lastName'];
 ```
 
@@ -280,6 +289,15 @@ class DiscussionSerializer extends AbstractSerializer
     }
 }
 ```
+
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your serializer:
+```bash
+$ flarum-cli make backend api-serializer
+```
+
+:::
 
 ### Attributi e relazioni
 
