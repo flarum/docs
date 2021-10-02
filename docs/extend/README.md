@@ -26,13 +26,13 @@ If you are aiming to address a bug or shortcoming of the core, or of an existing
 
 - [This Documentation](start.md)
 - [Tips for Beginning Developers](https://discuss.flarum.org/d/5512-extension-development-tips)
+- [Flarum CLI](https://github.com/flarum/cli)
 - [Developers explaining their workflow for extension development](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Extension namespace tips](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Mithril js documentation](https://mithril.js.org/)
 - [Laravel API Docs](https://laravel.com/api/8.x/)
 - [Flarum API Docs](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
-- [Flarum Blank Extension Generator](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
 
 ### Getting help
 

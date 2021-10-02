@@ -55,6 +55,15 @@ Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
 
 The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your endpoint controllers:
+```bash
+$ flarum-cli make backend api-controller
+```
+
+:::
+
 ### Listing Resources
 
 For the controller that lists your resource, extend the `Flarum\Api\Controller\AbstractListController` class. At a minimum, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a collection of models. The `data` method accepts the `Request` object and the tobscure/json-api `Document`.
@@ -285,6 +294,15 @@ class DiscussionSerializer extends AbstractSerializer
     }
 }
 ```
+
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your serializer:
+```bash
+$ flarum-cli make backend api-serializer
+```
+
+:::
 
 ### Attributes and Relationships
 

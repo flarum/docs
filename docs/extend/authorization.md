@@ -91,6 +91,15 @@ Then, we check if the policy class has a method called `can`. If so, we run it w
 
 If `can` doesn't exist or returns null, we are done with this policy, and we proceed to the next one.
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate policies:
+```bash
+$ flarum-cli make backend policy
+```
+
+:::
+
 ### Example Policies
 
 Let's take a look at an example policy from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):

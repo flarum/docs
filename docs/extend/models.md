@@ -12,6 +12,16 @@ Before we delve into implementation details, let's define some key concepts.
 
 **Models** provide a convenient, code-based API for creating, reading, updating, and deleting data. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database. On the frontend, they are represented by JS classes, and are used to interact with the [JSON:API](api.md), which we'll discuss in the next article.
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your model:
+```bash
+$ flarum-cli make backend model
+$ flarum-cli make frontend model
+```
+
+:::
+
 ## Migrations
 
 If we want to use a custom model, or add attributes to an existing one, we will need to modify the database to add tables / columns. We do this via migrations.
