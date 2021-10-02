@@ -6,17 +6,17 @@ Prima della beta 15, le impostazioni delle estensioni venivano aggiunte nel file
 
 Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), oppure fornire la tua pagina completamente personalizzata.
 
-## Extension Data API
+## API Dati Estensione
 
-This new API allows you to add settings to your extension with very few lines of code.
+Questa nuova API ti permette di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
 ### Raccontare all'API la tua estensione
 
 Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
-Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Le estensioni che contengono nel nome `flarum-` e/o `flarum-ext-` verranno troncate (esempio: 'webbinaro/flarum-calendar' diventa 'webbinaro-calendar').
 
-For the following example, we will use the fictitious extension 'acme/interstellar':
+Per l'esempio seguente, useremo l'estensione fittizia 'acme/interstellar':
 
 ```js
 
@@ -29,19 +29,19 @@ app.initializers.add('interstellar', function(app) {
 
 Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
-:::tip Note
+:::tip Nota
 
-All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+Tutte le funzioni di registrazione su `ExtensionData` sono concatenabili, il che significa che puoi chiamarle una dopo l'altra senza eseguire nuovamente`for`.
 
 :::
 
 ### Registrazione delle impostazioni
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+L'aggiunta di campi alle impostazioni in questo modo è consigliata per elementi semplici. Come regola generale, se hai solo bisogno di memorizzare qualcosa nella tabella delle impostazioni, questi consigli ti saranno utili.
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+Per aggiungere un campo, richiama la funzione `registerSetting` dopo `for` su `app.extensionData` e passagli un 'setting object' come primo argomento. Dietro le quinte `ExtensionData` trasforma effettivamente le tue impostazioni in un file [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), puoi passare un numero relativo alla priorità come secondo argomento.
 
-Here's an example with a switch (boolean) item:
+Ecco un esempio con un tasto switch (booleano):
 
 ```js
 
@@ -53,7 +53,7 @@ app.initializers.add('interstellar', function(app) {
       {
         setting: 'acme-interstellar.coordinates', // Questa è la chiave con cui verranno salvate le impostazioni nella tabella delle impostazioni nel database.
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // L'etichetta da mostrare che consente all'amministratore di sapere cosa fa l'impostazione.
-        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Testo di aiuto opzionale dove poter commentare l'impostazione.
         type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
       },
       30 // Optional: Priority
