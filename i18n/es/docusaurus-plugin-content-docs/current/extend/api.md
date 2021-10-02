@@ -54,6 +54,15 @@ Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
 
 The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your endpoint controllers:
+```bash
+$ flarum-cli make backend api-controller
+```
+
+:::
+
 ### Listado de recursos
 
 For the controller that lists your resource, extend the `Flarum\Api\Controller\AbstractListController` class. At a minimum, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a collection of models. The `data` method accepts the `Request` object and the tobscure/json-api `Document`.
@@ -79,10 +88,10 @@ class ListTagsController extends AbstractListController
 You can allow the number of resources being **listed** to be customized by specifying the `limit` and `maxLimit` properties on your controller:
 
 ```php
-    // El número de registros incluidos por defecto.
+    // The number of records included by default.
     public $limit = 20;
 
-    // El número máximo de registros que se pueden solicitar.
+    // The maximum number of records that can be requested.
     public $maxLimit = 50;
 ```
 
@@ -102,10 +111,10 @@ To add pagination links to the JSON:API document, use the `Document::addPaginati
 You can allow the sort order of resources being **listed** to be customized by specifying the `sort` and `sortField` properties on your controller:
 
 ```php
-    // El campo de clasificación por defecto y el orden a utilizar.
+    // The default sort field and order to use.
     public $sort = ['name' => 'asc'];
 
-    // Los campos que están disponibles para ser ordenados.
+    // The fields that are available to be sorted by.
     public $sortFields = ['firstName', 'lastName'];
 ```
 
@@ -203,10 +212,10 @@ class DeleteTagController extends AbstractDeleteController
 To include relationships when **listing**, **showing**, or **creating** your resource, specify them in the `$include` and `$optionalInclude` properties on your controller:
 
 ```php
-    // Las relaciones que se incluyen por defecto.
+    // The relationships that are included by default.
     public $include = ['user'];
 
-    // Otras relaciones que están disponibles para ser incluidas.
+    // Other relationships that are available to be included.
     public $optionalInclude = ['discussions'];
 ```
 
@@ -237,8 +246,8 @@ return [
         ->setSort(['name' => 'asc'])
         ->addSortField('firstName')
         ->prepareDataQuery(function ($controller) {
-            // Añade aquí la lógica personalizada para modificar el controlador
-            // antes de que se ejecuten las consultas de datos.
+            // Add custom logic here to modify the controller
+            // before data queries are executed.
         })
 ]
 ```
@@ -281,6 +290,15 @@ class DiscussionSerializer extends AbstractSerializer
 }
 ```
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically create your serializer:
+```bash
+$ flarum-cli make backend api-serializer
+```
+
+:::
+
 ### Atributos y relaciones
 
 You can also specify relationships for your resource. Simply create a new method with the same name as the relation on your model, and return a call to `hasOne` or `hasMany` depending on the nature of the relationship. You must pass in the model instance and the name of the serializer to use for the related resources.
@@ -301,11 +319,11 @@ use Flarum\Api\Serializer\UserSerializer;
 
 return [
     (new Extend\ApiSerializer(UserSerializer::class))
-        // Un atributo a la vez
+        // One attribute at a time
         ->attribute('firstName', function ($serializer, $user, $attributes) {
                 return $user->first_name
         })
-        // Múltiples modificaciones a la vez, lógica más compleja
+        // Multiple modifications at once, more complex logic
         ->mutate(function($serializer, $user, $attributes) {
             $attributes['someAttribute'] = $user->someAttribute;
             if ($serializer->getActor()->can('administrate')) {
@@ -314,7 +332,7 @@ return [
 
             return $attributes;
         })
-        // Relaciones de la API
+        // API relationships
         ->hasOne('phone', PhoneSerializer::class)
         ->hasMany('comments', CommentSerializer::class),
 ]
