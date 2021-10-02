@@ -167,7 +167,7 @@ In this release, we refactored our use of the filesystem to more consistently us
 
 ### Compat and Closure Extenders
 
-In early Flarum versions, the `extend.php` file allowed arbitrary functions that allowed exection of arbitrary code one extension boot. Por ejemplo:
+In early Flarum versions, the `extend.php` file allowed arbitrary functions that allowed execution of arbitrary code one extension boot. Por ejemplo:
 
 ```php
 return [
