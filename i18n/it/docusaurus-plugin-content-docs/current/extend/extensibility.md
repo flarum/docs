@@ -42,7 +42,7 @@ Custom extenders introduced by your extension should be considered public API. Y
 
 :::
 
-:::caution
+:::cautela
 
 Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md). An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.
 
