@@ -64,6 +64,15 @@ export default class CustomModal extends Modal {
 
 More information about methods available to override is available in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate a modal:
+```bash
+$ flarum-cli make frontend modal
+```
+
+:::
+
 ## Composer
 
 Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component.

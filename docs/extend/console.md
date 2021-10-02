@@ -24,6 +24,15 @@ class YourCommand extends AbstractCommand {
 }
 ```
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate and register a console command:
+```bash
+$ flarum-cli make backend command
+```
+
+:::
+
 ## Registering Console Commands
 
 To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
