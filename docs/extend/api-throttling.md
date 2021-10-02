@@ -3,7 +3,7 @@
 Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API.
 This runs on every API route, and extensions can add their own custom logic to throttle requests.
 
-::: warning Forum Routes
+:::caution Forum Routes
 
 Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface.
 The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future.

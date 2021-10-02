@@ -1,6 +1,6 @@
 # Reporting Bugs
 
-::: danger Security Vulnerabilities
+:::danger Security Vulnerabilities
 
 If you discover a security vulnerability within Flarum, please follow our [security policy](https://github.com/flarum/core/security/policy) so we can address it promptly.
 

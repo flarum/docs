@@ -6,7 +6,7 @@ Next, you should take a few minutes to search the [Support forum](https://discus
 
 ## Step 0: Turn on debug mode
 
-::: danger Skip on Production
+:::danger Skip on Production
 
 These debugging tools are very useful, but can expose information that shouldn't be public.
 These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.

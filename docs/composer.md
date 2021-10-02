@@ -9,7 +9,7 @@ You'll need to use composer if you want to:
 
 This guide is provided as a brief explanation of Composer. We highly recommend consulting the [official documentation](https://getcomposer.org/doc/00-intro.md) for more information.
 
-::: tip Composer v2
+:::tip Composer v2
 
 Historically, Composer has caused issues on shared hosting due to huge memory use. In 2020, [Composer v2 was released](https://blog.packagist.com/composer-2-0-is-now-available/) with massive performance and memory usage improvements that eliminate these problems. Make sure your server is using Composer v2!
 
@@ -17,7 +17,7 @@ Historically, Composer has caused issues on shared hosting due to huge memory us
 
 ## What is Composer?
 
-> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction]([https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
 Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md).Each of these has its own dependencies and releases.
 
@@ -129,13 +129,13 @@ As with any other software, Composer must first be [installed](https://getcompos
 
 ### Dedicated Web Server
 
-In this case you can install composer as recommended in the Composer [guide]([https://getcomposer.org/doc/00-intro.md#system-requirements) 
+In this case you can install composer as recommended in the Composer [guide](https://getcomposer.org/doc/00-intro.md#system-requirements) 
 
 ### Managed / Shared hosting
 
 If Composer is not preinstalled (you can check this by running `composer --version`), you can use a [manual installation](https://getcomposer.org/composer-stable.phar). Just upload the composer.phar to your folder and run `/path/to/your/php7 composer.phar COMMAND` for any command documented as `composer COMMAND`.
 
-::: danger
+:::danger
 
 Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
 
@@ -147,7 +147,7 @@ You'll need to use Composer over the  **C**ommand-**l**ine **i**nterface (CLI). 
 
 Once you have Composer installed, you should be able to run Composer commands in your SSH terminal via `composer COMMAND`.
 
-::: Optimizations
+:::info Optimizations
 
 After most commands, you'll want to run `composer dump-autoload -a`. Essentially, this caches PHP files so they run faster.
 

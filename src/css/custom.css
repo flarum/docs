@@ -1,0 +1,108 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #c84a27;
+  --ifm-color-primary-dark: #b44323;
+  --ifm-color-primary-darker: #aa3f21;
+  --ifm-color-primary-darkest: #8c341b;
+  --ifm-color-primary-light: #d75430;
+  --ifm-color-primary-lighter: #d95d3a;
+  --ifm-color-primary-lightest: #de7558;
+  --ifm-code-font-size: 95%;
+
+  --ifm-h1-font-size: 2.2rem;
+  --ifm-h2-font-size: 1.65rem;
+  --ifm-h3-font-size: 1.35rem;
+
+  --ifm-container-width: 950px;
+  --ifm-container-width-xl: 1125px;
+}
+
+html[data-theme='light'] {
+  --ifm-font-color-base: #222;
+}
+
+html[data-theme='dark'] {
+  --ifm-font-color-base: #ddd;
+}
+
+/* Nice styes from VuePress we should keep */
+
+.navbar {
+  font-size: .9rem;
+}
+
+.body {
+  font-family: 'Mukta',
+    'Noto Sans SC',
+    sans-serif,
+    "微软雅黑";
+}
+
+.markdown h1:first-child {
+  --ifm-h1-font-size: 2.2rem !important;
+}
+
+.markdown>h2 {
+  --ifm-h2-font-size: 1.65rem !important;
+}
+
+.markdown>h3 {
+  --ifm-h2-font-size: 1.35rem !important;
+}
+
+h2 {
+  padding-bottom: .3rem;
+  border-bottom: 1px solid #eaecef;
+}
+
+blockquote {
+  font-size: 1rem;
+  color: #999;
+  border-left: .2rem solid #dfe2e5;
+  margin: 1rem 0;
+  padding: .25rem 0 .25rem 1rem;
+}
+
+.theme-doc-sidebar-item-category>a.menu__link {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Search bar */
+
+.DocSearch.DocSearch-Button {
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.DocSearch.DocSearch-Button input:focus {
+  border-color: var(--ifm-color-primary);
+}
+
+.DocSearch.DocSearch-Button input::placeholder {
+  opacity: 1;
+}
+
+.DocSearch-Button-Placeholder {
+  text-align: start;
+  width: 130px;
+}
+
+/* Other Docusaurus conf */
+
+.docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+html[data-theme='dark'] .docusaurus-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.3);
+}

@@ -48,7 +48,7 @@ class FormComponent extends Component {
 }
 ```
 
-Don't forget to use [translations](translate.md)!
+Don't forget to use [translations](i18n.md)!
 
 
 ## Streams, bidi, and withAttr

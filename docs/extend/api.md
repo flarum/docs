@@ -6,7 +6,7 @@ In the [previous article](models.md), we learned how Flarum uses models to inter
 
 Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
 
-![Flarum API Flowchart](/en/api_flowchart.png)
+![Flarum API Flowchart](/en/img/api_flowchart.png)
 
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
@@ -41,7 +41,7 @@ We'll go over each type of controller shortly, but once they're written, you can
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-::: warning
+:::caution
 
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 

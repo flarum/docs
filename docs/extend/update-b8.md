@@ -2,7 +2,7 @@
 
 All extensions will need to be refactored in order to work with beta 8. Here are the main things you will need to do in order to make your extension compatible.
 
-::: warning
+:::caution
 
 This guide is not comprehensive. You may encounter some changes we haven't documented. If you need help, start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
 
@@ -79,7 +79,7 @@ js
 
 You'll need to make the following changes:
 
-1. Update `package.json` and create `webpack.config.js`, `forum.js`, and `admin.js` files using [these templates](frontend.html#transpilation).
+1. Update `package.json` and create `webpack.config.js`, `forum.js`, and `admin.js` files using [these templates](frontend.md#transpilation).
 
 2. Inside your `admin` and `forum` *folders*, delete `Gulpfile.js`, `package.json`, and `dist`. Then inside each `src` folder, rename `main.js` to `index.js`. Now move all of the `src` files outside of `src` folder and delete it.
 

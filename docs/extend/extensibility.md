@@ -44,7 +44,7 @@ You can add automated tests for them via our [backend testing package](testing.m
 
 :::
 
-::: warning
+:::caution
 
 Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md).
 An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.

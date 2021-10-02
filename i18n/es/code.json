@@ -1,0 +1,14 @@
+{
+  "customtheme.docs.lang.nonDefaultLangLabel": {
+    "message": "La traducción de esta página podría no estar actualizada, por favor consulte el {defaultLocaleLink} for the latest information. para obtener la información más reciente. Si quieres contribuir, por favor {crowdinLink}.",
+    "description": "The label used to tell the user that they're browsing translated docs that might be out of sync"
+  },
+  "customtheme.docs.lang.defaultLocaleLinkLabel": {
+    "message": "documento en Inglés",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "customtheme.docs.versions.crowdinLinkLabel": {
+    "message": "usa Crowdin",
+    "description": "The label used for Crowdin link label"
+  }
+}

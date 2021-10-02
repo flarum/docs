@@ -4,7 +4,7 @@ While we've worked hard to make Flarum as beautiful as we can, each community wi
 
 ## Admin Dashboard
 
-The [admin dashboard](../admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
+The [admin dashboard](./admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
 
 - Select theme colors
 - Toggle dark mode and a colored header
