@@ -18,7 +18,12 @@ module.exports = {
       collapsible: false,
       items: [
         'contributing',
-        'contributing-other',
+        'contributing-docs-translations',
+        {
+          type: 'link',
+          'label': 'Other Ways to Help',
+          'href': '/#help-the-flarum-project'
+        }
       ]
     },
     {

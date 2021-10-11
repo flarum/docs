@@ -22,7 +22,7 @@ Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) f
 
 If you're planning to go ahead and work on something, please comment on the relevant issue or create a new one first. This way we can ensure that your precious work is not in vain.
 
-Since Flarum is so extension-drive, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should at least read [the introduction](extend/README.md) for a better understanding of our extension philosophy.
+Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
 
 ## Development Setup
 
