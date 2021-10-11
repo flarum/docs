@@ -36,6 +36,6 @@ We are not a for-profit company, nor do we charge any license fee. Flarum is [fr
 
 🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people!
 
-📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaged with Flarum, and therefore more activity, better extensions, and faster development.
+📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
 
 Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-other.md) docs for more information.
