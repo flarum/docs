@@ -8,9 +8,22 @@ module.exports = {
         'README',
         'code-of-conduct',
         'releases',
-        'contributing',
         'bugs',
         'faq'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Contribute',
+      collapsible: false,
+      items: [
+        'contributing',
+        'contributing-docs-translations',
+        {
+          type: 'link',
+          'label': 'Other Ways to Help',
+          'href': '/#help-the-flarum-project'
+        }
       ]
     },
     {
