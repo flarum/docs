@@ -12,7 +12,7 @@ Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements f
 
 ### Frontend
 
-- Flarum now has an organization-wide prettier config package under `@flarum/prettier-config`
+- Flarum now has an organization-wide prettier config package under [`@flarum/prettier-config`](https://github.com/flarum/prettier-config).
 - Most custom (setting or data based) coloring in core is now done via [css variables](https://github.com/flarum/core/pull/3001)
 - Typehinting for Flarum's globals are now [supported in extensions](https://github.com/flarum/core/pull/2992).
 - You can now pass extra attrs to the `Select` component, and they will be [passed through to the DOM](https://github.com/flarum/core/pull/2959).
