@@ -8,9 +8,17 @@ module.exports = {
         'README',
         'code-of-conduct',
         'releases',
-        'contributing',
         'bugs',
         'faq'
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Contribute',
+      collapsible: false,
+      items: [
+        'contributing',
+        'contributing-other',
       ]
     },
     {

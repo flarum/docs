@@ -14,10 +14,6 @@ All donations are gratefully received. You can give on [Github Sponsors](https:/
 
 However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
-### Can I integrate Flarum with WordPress/Laravel/etc.?
-
-Wouldn’t it be inte-_great_! Right now it’s not possible, but we do hope to work on integrations such as these in the future.
-
 ### Will Flarum have [insert feature here]? When? Why not?
 
 We would love to build countless features and extensions for Flarum, but first things first: Our focus is on the essentials and stability.
