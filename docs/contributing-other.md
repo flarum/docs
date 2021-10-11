@@ -36,7 +36,7 @@ Join [our community](https://discuss.flarum.org) to talk about Flarum developmen
 
 ## Donate to Flarum
 
-The Flarum Foundation doesn't make money off of Flarum, but do have bills to pay. Donations via [Github Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This couldn't be possible without your financial support.
+The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [Github Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This couldn't be possible without your financial support.
 
 ## Spread the Word!
 
