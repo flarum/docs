@@ -21,5 +21,5 @@ Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements f
 
 ### Backend
 
-- Flarum now comes with a [Preload](https://github.com/flarum/core/pull/3057) extender, so you can preload any metadata.
+- Flarum now comes with a [Preload extender](https://github.com/flarum/core/pull/3057) for preloading any custom frontend assets.
 - A new [Theme](https://github.com/flarum/core/pull/3008) extender now allows overriding LESS files and internal imports. This allows themes to more easily completely replace LESS modules.
