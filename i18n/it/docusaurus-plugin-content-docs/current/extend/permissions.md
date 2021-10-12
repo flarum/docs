@@ -29,13 +29,13 @@ I gruppi e gli utenti dispongono di metodi pubblici per controllare le loro auto
 $group->permissions();
 
 // Controlla se un gruppo dispone di un'autorizzazione
-$group->hasPermission('viewDiscussions');
+$group->hasPermission('viewForum');
 
 // Enumera tutte le autorizzazioni dell'utente
 $user->getPermissions();
 
 // Controlla se l'utente fa parte di un gruppo con l'autorizzazione fornita
-$user->hasPermission('viewDiscussions');
+$user->hasPermission('viewForum');
 ```
 
 :::warning Utilizzare l'autorizzazione appropriata

@@ -44,17 +44,17 @@ Finalmente, como hemos agotado todas las comprobaciones, asumiremos que el usuar
 
 El sistema de autorización de Flarum es accesible a través de los métodos públicos de la clase `Flarum\User\User`. Los más importantes se enumeran a continuación; otros están documentados en nuestra [documentación de la API de PHP](https://api.docs.flarum.org/php/master/flarum/user/user).
 
-En este ejemplo, usaremos `$actor` como una instancia de `Flarum\User\User`, `'viewDiscussions'` y `'reply'` como ejemplos de habilidades, y `$discussion` (instancia de `Flarum\Discussion\Discussion`) como argumento de ejemplo.
+En este ejemplo, usaremos `$actor` como una instancia de `Flarum\User\User`, `'viewForum'` y `'reply'` como ejemplos de habilidades, y `$discussion` (instancia de `Flarum\Discussion\Discussion`) como argumento de ejemplo.
 
 ```php
 // Comprueba si un usuario puede realizar una acción.
-$canDoSomething = $actor->can('viewDiscussions');
+$canDoSomething = $actor->can('viewForum');
 
 // Comprueba si un usuario puede realizar una acción sobre un tema.
 $canDoSomething = $actor->can('reply', $discussion);
 
 // Lanza una PermissionDeniedException si un usuario no puede realizar una acción.
-$actor->assertCan('viewDiscussions');
+$actor->assertCan('viewForum');
 $actor->assertCan('reply', $discussion);
 
 // Lanza una NotAuthenticatedException si el usuario no está conectado.
@@ -67,7 +67,7 @@ $actpr->assertAdmin();
 // ADVERTENCIA: esto debe ser utilizado con precaución, ya que no
 // ejecuta el proceso de autorización, por lo que no tiene en cuenta las políticas.
 // Sin embargo, es útil para implementar políticas personalizadas.
-$actorHasPermission = $actor->hasPermission(`viewDiscussions`);
+$actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
 ### Políticas personalizadas
@@ -159,7 +159,7 @@ class GlobalPolicy extends AbstractPolicy
      */
     public function can(User $actor, string $ability)
     {
-        if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
+        if (in_array($ability, ['viewForum', 'startDiscussion'])) {
             $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
             $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
 
@@ -294,7 +294,7 @@ class ScopeTagVisibility
      */
     public function __invoke(User $actor, Builder $query)
     {
-        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewDiscussions'));
+        $query->whereNotIn('id', Tag::getIdsWhereCannot($actor, 'viewForum'));
     }
 }
 ```
@@ -367,7 +367,7 @@ Por ejemplo, si un usuario no tiene permiso para ver usuarios de búsqueda, no d
 Y si un usuario no tiene permiso para editar usuarios, no deberíamos mostrar elementos del menú para ello.
 
 Como no podemos hacer comprobaciones de autorización en el frontend, tenemos que realizarlas en el backend, y adjuntarlas a la serialización de los datos que estamos enviando.
-Los permisos globales (`viewDiscussions`, `viewUserList`) pueden incluirse en el `ForumSerializer`, pero para la autorización específica de un objeto, podemos querer incluirlos con el objeto sujeto.
+Los permisos globales (`viewForum`, `viewUserList`) pueden incluirse en el `ForumSerializer`, pero para la autorización específica de un objeto, podemos querer incluirlos con el objeto sujeto.
 Por ejemplo, cuando devolvemos listas de discusiones, comprobamos si el usuario puede responder, renombrar, editar y borrar, y almacenamos esos datos en el modelo de discusión del frontend.
 Entonces es accesible a través de `discussion.canReply()` o `discussion.canEdit()`, pero no hay nada mágico ahí: es sólo otro atributo enviado por el serializador.
 

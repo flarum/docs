@@ -30,13 +30,13 @@ Groups and users have public methods for checking their permissions. Some of the
 $group->permissions();
 
 // Check if a group has a permission
-$group->hasPermission('viewDiscussions');
+$group->hasPermission('viewForum');
 
 // Enumerate all the user's permissions
 $user->getPermissions();
 
 // Check if the user is in a group with the given permission
-$user->hasPermission('viewDiscussions');
+$user->hasPermission('viewForum');
 ```
 
 :::warning Use Proper Authorization

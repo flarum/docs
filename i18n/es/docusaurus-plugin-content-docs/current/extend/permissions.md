@@ -31,13 +31,13 @@ Los grupos y los usuarios tienen métodos públicos para comprobar sus permisos.
 $group->permissions();
 
 // Comprobar si un grupo tiene un permiso
-$group->hasPermission('viewDiscussions');
+$group->hasPermission('viewForum');
 
 // Enumerar todos los permisos del usuario
 $user->getPermissions();
 
 // Comprueba si el usuario está en un grupo con el permiso dado
-$user->hasPermission('viewDiscussions');
+$user->hasPermission('viewForum');
 ```
 
 :::warning Utilizar la Autorización Adecuada
