@@ -13,6 +13,20 @@ Adding documentation can help countless future Flarum users. A few ideas of what
 
 A good way to find topics to write about is to look for common questions in the [support tag](https://discuss.flarum.org/t/support) of our community.
 
+## Translate Documentation
+
+Translating the documentation contributes to the understanding of a every person:
+
+### Install required dependencies
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run start
+```
+
 ## Translate Flarum
 
 We want Flarum to be accessible to everyone, regardless of language! By contributing translations, you make it possible for many more people to enjoy Flarum. Best of all, we use user-friendly GUIs for translations, so no technical skills are necessary to help!
