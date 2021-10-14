@@ -2,6 +2,8 @@
 slug: /
 ---
 
+![GitHub](https://img.shields.io/github/license/flarum/docs)
+
 # About Flarum
 
 Flarum is a delightfully simple discussion platform for your website. It's fast, free, and easy to use, with all the features you need to run a successful community. It's also extremely extensible, allowing for ultimate customizability.
@@ -43,3 +45,19 @@ Flarum is [free, open source](https://github.com/flarum/core) software, maintain
 📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
 
 Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-docs-translations.md) docs for more information.
+
+## Or Translating Flarum
+
+🌐 If you speak multiple languages, you could [contribute translations](extend/language-packs.md) to could help make Flarum accessible to countless users around the world.
+
+🌐 Or the Flarum Wiki:
+
+### Install required dependencies
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run start
+```
