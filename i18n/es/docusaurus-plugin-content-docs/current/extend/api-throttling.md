@@ -1,7 +1,7 @@
-# Aceleración de la API
+# Regulador de la API
 
-Flarum viene con un `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) para acelerar las peticiones a la API.
-Esto se ejecuta en cada ruta de la API, y las extensiones pueden añadir su propia lógica personalizada para acelerar las solicitudes.
+Flarum viene con un `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) para regular las peticiones a la API.
+Esto se ejecuta en cada ruta de la API, y las extensiones pueden añadir su propia lógica personalizada para regular las solicitudes.
 
 :::caution Rutas del Foro
 
@@ -10,16 +10,16 @@ El middleware `ThrottleApi` no se ejecuta actualmente para estas peticiones, per
 
 :::
 
-## Aceleradores personalizados
+## Reguladores personalizados
 
-El formato de un acelerador personalizado es extremadamente simple: todo lo que necesitas es un cierre o clase invocable que tome la petición actual como argumento, y devuelva una de las siguientes opciones
+El formato de un regulador personalizado es extremadamente simple: todo lo que necesitas es un closure o clase invocable que tome la petición actual como argumento, y devuelva una de las siguientes opciones
 
-- `false`: Esto evita explícitamente el aceleramiento para esta solicitud, anulando todos los demás aceleradores.
-- `true`: Esto marca la solicitud como para ser acelerada.
-- `null`: Esto significa que este acelerador no se aplica.
+- `false`: Esto evita explícitamente la regulación para esta solicitud, anulando todos los demás reguladores.
+- `true`: Esto marca la solicitud como para ser regulada.
+- `null`: Esto significa que este regulador no se aplica.
 Cualquier otra salida será ignorada, con el mismo efecto que `null`.
 
-Los aceleradores se ejecutarán en TODAS las peticiones, y son responsables de averiguar si se aplican o no. Por ejemplo, considere el acelerador de correos de Flarum:
+Los reguladores se ejecutarán en TODAS las peticiones, y son responsables de averiguar si se aplican o no. Por ejemplo, considere el regulador de post de Flarum:
 
 ```php
 use DateTime;
@@ -42,7 +42,7 @@ function ($request) {
 };
 ```
 
-Los aceleradores pueden ser añadidos o eliminados a través del middleware `ThrottleApi` en `extend.php`. Por ejemplo:
+Los reguladores pueden ser añadidos o eliminados a través del middleware `ThrottleApi` en `extend.php`. Por ejemplo:
 
 ```php
 <?php

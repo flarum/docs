@@ -16,7 +16,7 @@ Todos estamos aquí para hablar de Flarum, y para trabajar juntos para hacer una
 - Spam, suplantación de identidad y cualquier otra acción que pretenda desprestigiar este sitio
 - Discusión de la piratería de software y temas similares
 
-*Todo lo anterior es motivo de acción por parte de los moderadores.* Si tienes un problema con otro miembro, te pedimos que no te enfrentes a él. Si es en el foro, utiliza el comando *Informar* en el mensaje en cuestión, y luego deja que el personal se encargue de la situación. De lo contrario, informa de la infracción a [admin@flarum.org](mailto:admin@flarum.org).
+*Todo lo anterior es motivo de acción por parte de los moderadores.* Si tienes un problema con otro miembro, te pedimos que no te enfrentes a él. Si es en el foro, utiliza el comando *Reportar* en el mensaje en cuestión, y luego deja que el personal se encargue de la situación. De lo contrario, informa de la infracción a [admin@flarum.org](mailto:admin@flarum.org).
 
 Nuestros moderadores pueden editar o borrar cualquier contenido que sea ofensivo o que interrumpa el flujo de comunicación. Las infracciones graves o repetidas pueden llevar a la suspensión de la cuenta del usuario infractor. Así que, ya sabes, *sé guay*. 😎
 
