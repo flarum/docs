@@ -6,9 +6,7 @@
  */
 import React from 'react';
 import Link from '@docusaurus/Link';
-import {
-  useAlternatePageUtils, ThemeClassNames,
-} from '@docusaurus/theme-common';
+import { useAlternatePageUtils, ThemeClassNames } from '@docusaurus/theme-common';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OriginalDocVersionBanner from '@theme-original/DocVersionBanner';
@@ -21,7 +19,7 @@ function NonDefaultLangLabel({ defaultLocale }) {
     locale: defaultLocale,
     fullyQualified: false,
   })}`;
-  
+
   return (
     <Translate
       id="customtheme.docs.lang.nonDefaultLangLabel"
@@ -29,10 +27,8 @@ function NonDefaultLangLabel({ defaultLocale }) {
       values={{
         defaultLocaleLink: (
           <b>
-            <Link href={toDefaultLocale} autoAddBaseUrl={false} target='_self'>
-              <Translate
-                id="customtheme.docs.lang.defaultLocaleLinkLabel"
-                description="The label used for the latest version suggestion link label">
+            <Link href={toDefaultLocale} autoAddBaseUrl={false} target="_self">
+              <Translate id="customtheme.docs.lang.defaultLocaleLinkLabel" description="The label used for the latest version suggestion link label">
                 default locale version
               </Translate>
             </Link>
@@ -41,22 +37,20 @@ function NonDefaultLangLabel({ defaultLocale }) {
         crowdinLink: (
           <b>
             <Link to="https://crowdin.com/project/flarum-docs">
-              <Translate
-                id="customtheme.docs.versions.crowdinLinkLabel"
-                description="The label used for Crowdin link label">
+              <Translate id="customtheme.docs.versions.crowdinLinkLabel" description="The label used for Crowdin link label">
                 via Crowdin
               </Translate>
             </Link>
           </b>
         ),
-      }}>
+      }}
+    >
       {
         'The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, we are coordinating translation {crowdinLink}.'
       }
     </Translate>
   );
 }
-
 
 function DocLangBannerEnabled() {
   const {
@@ -68,16 +62,9 @@ function DocLangBannerEnabled() {
   }
 
   return (
-    <div
-      className={clsx(
-        ThemeClassNames.docs.docVersionBanner,
-        'alert alert--warning margin-bottom--md',
-      )}
-      role="alert">
+    <div className={clsx(ThemeClassNames.docs.docVersionBanner, 'alert alert--warning margin-bottom--md')} role="alert">
       <div>
-        <NonDefaultLangLabel
-          defaultLocale={defaultLocale}
-        />
+        <NonDefaultLangLabel defaultLocale={defaultLocale} />
       </div>
     </div>
   );
@@ -85,10 +72,12 @@ function DocLangBannerEnabled() {
 
 // Hack language warning into version warning.
 function DocVersionBanner({ versionMetadata }) {
-  return <>
-    <OriginalDocVersionBanner versionMetadata={versionMetadata} />
-    <DocLangBannerEnabled />
-  </>;
+  return (
+    <>
+      <OriginalDocVersionBanner versionMetadata={versionMetadata} />
+      <DocLangBannerEnabled />
+    </>
+  );
 }
 
 export default DocVersionBanner;

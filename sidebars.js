@@ -4,13 +4,7 @@ module.exports = {
       type: 'category',
       label: 'Introduction',
       collapsible: false,
-      items: [
-        'README',
-        'code-of-conduct',
-        'releases',
-        'bugs',
-        'faq'
-      ]
+      items: ['README', 'code-of-conduct', 'releases', 'bugs', 'faq'],
     },
     {
       type: 'category',
@@ -21,43 +15,28 @@ module.exports = {
         'contributing-docs-translations',
         {
           type: 'link',
-          'label': 'Other Ways to Help',
-          'href': '/#help-the-flarum-project'
-        }
-      ]
+          label: 'Other Ways to Help',
+          href: '/#help-the-flarum-project',
+        },
+      ],
     },
     {
       type: 'category',
       label: 'Setting Up',
       collapsible: false,
-      items: [
-        'composer',
-        'install',
-        'update',
-        'troubleshoot'
-      ]
+      items: ['composer', 'install', 'update', 'troubleshoot'],
     },
     {
       type: 'category',
       label: 'Management',
       collapsible: false,
-      items: [
-        'admin',
-        'config',
-        'extensions',
-        'languages',
-        'themes',
-        'mail',
-        'console'
-      ]
+      items: ['admin', 'config', 'extensions', 'languages', 'themes', 'mail', 'console'],
     },
     {
       type: 'category',
       label: 'Advanced',
       collapsible: false,
-      items: [
-        'extenders'
-      ]
+      items: ['extenders'],
     },
   ],
 
@@ -66,15 +45,7 @@ module.exports = {
       type: 'category',
       label: 'Main Concepts',
       collapsible: false,
-      items: [
-        'extend/README',
-        'extend/start',
-        'extend/frontend',
-        'extend/routes',
-        'extend/models',
-        'extend/api',
-        'extend/distribution'
-      ]
+      items: ['extend/README', 'extend/start', 'extend/frontend', 'extend/routes', 'extend/models', 'extend/api', 'extend/distribution'],
     },
     {
       type: 'category',
@@ -92,8 +63,8 @@ module.exports = {
         'extend/permissions',
         'extend/settings',
         'extend/testing',
-        'extend/theme'
-      ]
+        'extend/theme',
+      ],
     },
     {
       type: 'category',
@@ -114,8 +85,8 @@ module.exports = {
         'extend/notifications',
         'extend/post-types',
         'extend/search',
-        'extend/service-provider'
-      ]
+        'extend/service-provider',
+      ],
     },
     {
       type: 'category',
@@ -131,7 +102,7 @@ module.exports = {
         'extend/update-b12',
         'extend/update-b10',
         'extend/update-b8',
-      ]
+      ],
     },
   ],
 
@@ -140,9 +111,7 @@ module.exports = {
       type: 'category',
       label: 'Internal Docs',
       collapsible: false,
-      items: [
-        'internal/README'
-      ]
+      items: ['internal/README'],
     },
-  ]
+  ],
 };
