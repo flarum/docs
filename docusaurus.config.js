@@ -1,9 +1,11 @@
+// @ts-check
+
 const lightCodeTheme = require('prism-react-renderer/themes/dracula');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
-(module.exports = {
+/** @type {import('@docusaurus/types').Config} */
+const config = {
   title: 'Flarum Documentation',
   tagline: 'Forums made simple.',
   url: 'https://flarum.org',
@@ -32,8 +34,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
       },
       zh: {
         label: '简体中文',
-      }
-    }
+      },
+    },
   },
 
   presets: [
@@ -74,7 +76,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             position: 'right',
             // Anything that isn't `extend`, `'internal`, or contain a slash.
             // Account for local 2-char code at the start.
-            activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend\/?|internal\/?|)$).*',
+            activeBaseRegex: '^(\\/[a-z][a-z])?\\/(?!(extend\\/?|internal\\/?|)$).*',
           },
           {
             to: 'extend',
@@ -98,21 +100,21 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Flarum',
             position: 'right',
             items: [
-
               {
                 href: 'https://flarum.org/',
-                label: 'Home'
+                label: 'Home',
               },
               {
                 href: 'https://discuss.flarum.org/',
-                label: 'Community'
+                label: 'Community',
               },
               {
                 href: 'https://github.com/flarum/core/',
-                label: 'Github'
+                label: 'Github',
               },
-            ]
-          },{
+            ],
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
@@ -130,6 +132,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
       algolia: {
         apiKey: '8f760cdb850b1e696b72329eed96b01b',
         indexName: 'flarum',
-      }
+      },
     }),
-});
+};
+
+module.exports = config;
