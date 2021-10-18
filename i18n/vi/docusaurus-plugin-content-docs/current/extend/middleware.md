@@ -115,7 +115,7 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
         ]);
         $document = new Document();
         $document->setErrors($error->getErrors());
-      
+
         return new JsonApiResponse($document, $error->getStatus());
     }
 
