@@ -2,7 +2,7 @@
 
 ### _¡Bienvenido a la Comunidad de Flarum!_
 
-... ¡Y gracias por unirte a nosotros! Estamos entusiasmados con Flarum, y siempre estamos contentos de conocer a personas que sienten lo mismo. Queremos que *todos* aprovechen al máximo Flarum y la comunidad de Flarum, por lo que te pedimos que leas y sigas estas directrices. Estas se aplican ya sea que estés usando nuestro foro, el chat de Discord, comunicándote en GitHub, o cualquier otra forma de comunicación sin la comunidad de Flarum.
+... And thanks for joining us! We're excited about Flarum, and are always happy to meet people who feel the same way. Queremos que *todos* aprovechen al máximo Flarum y la comunidad de Flarum, por lo que te pedimos que leas y sigas estas directrices. Estas se aplican ya sea que estés usando nuestro foro, el chat de Discord, comunicándote en GitHub, o cualquier otra forma de comunicación sin la comunidad de Flarum.
 
 ### Por encima de todo, ¡mantén la calma!
 
@@ -28,7 +28,7 @@ Cuando estés seguro de que estás preparado para iniciar una discusión, ten en
 
 - ¡Dale un buen título! Obtendrás mejores resultados si tu título deja claro de qué quieres hablar.
 - Elige la(s) etiqueta(s) adecuada(s). Esto aumentará la probabilidad de que tu mensaje sea leído y respondido rápidamente.
-- *No* publiques repetidamente sobre el mismo tema, ya que esto tiende a tener el efecto contrario. 
+- *No* publiques repetidamente sobre el mismo tema, ya que esto tiende a tener el efecto contrario.
 - Si no utilizas una etiqueta reservada para uso multilingüe, *publica sólo en inglés.* ¡No podemos ayudarte si no podemos leerte!
 - Recuerda que no es necesario que firmes tus mensajes. Tenemos tu perfil para saber quién eres.
 
@@ -46,6 +46,6 @@ Te tomas el tiempo de participar en una discusión, con la esperanza de que los 
 - Si sólo quieres publicar una tontería como prueba, hazlo en la etiqueta [Test Posting](https://discuss.flarum.org/t/sandbox).
 - Asegúrate de que tus respuestas aportan comentarios constructivos y apoyo para permitir una comunidad inclusiva.
 
-Nadie se va a quejar por una broma o un comentario inteligente ocasional. Nos gusta que el ambiente sea distendido. Pero para que las cosas sigan siendo productivas, te pedimos que trates de evitar el descarrilamiento de la discusión. 
+Nadie se va a quejar por una broma o un comentario inteligente ocasional. Nos gusta que el ambiente sea distendido. Pero para que las cosas sigan siendo productivas, te pedimos que trates de evitar el descarrilamiento de la discusión.
 
 > Gracias a Dominion por su ayuda en la elaboración de estas directrices.

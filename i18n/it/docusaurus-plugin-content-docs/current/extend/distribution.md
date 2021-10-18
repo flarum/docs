@@ -4,8 +4,7 @@ Hai scritto una grande estensione e ora vuoi che il mondo intero sia in grado di
 
 ## Configurazione di Git
 
-La prima cosa che devi fare è configurare un sistema di controllo della versione (VCS).
-Il VCS più popolare è [Git](https://git-scm.com/). In questa guida useremo Git, quindi assicurati di [installarlo](https://git-scm.com/downloads) prima di continuiare. Se non hai molta conoscenza di Git, ti consigliamo di controllare [queste risorse di apprendimento](https://try.github.io/).
+La prima cosa che devi fare è configurare un sistema di controllo della versione (VCS). Il VCS più popolare è [Git](https://git-scm.com/). In questa guida useremo Git, quindi assicurati di [installarlo](https://git-scm.com/downloads) prima di continuiare. Se non hai molta conoscenza di Git, ti consigliamo di controllare [queste risorse di apprendimento](https://try.github.io/).
 
 Dopo aver installato Git, dovrai inizializzare il tuo repository. Puoi utilizzare `git init` su riga di comando se ti è più familiare, o un interfaccia tipo [SourceTree](https://www.sourcetreeapp.com/) o [GitKraken](https://www.gitkraken.com/).
 

@@ -2,7 +2,7 @@
 
 :::danger 安全漏洞
 
-如果您发现 Flarum 存在安全漏洞，请发送邮件至 [security@flarum.org](mailto:security@flarum.org) ，我们会及时处理。
+如果您发现 Flarum 存在安全漏洞，请发送邮件至 [security@flarum.org](mailto:security@flarum.org) ，我们会及时处理。github.com/flarum/core/security/policy">安全政策</a> 上报漏洞，以便我们迅速处理。
 
 :::
 

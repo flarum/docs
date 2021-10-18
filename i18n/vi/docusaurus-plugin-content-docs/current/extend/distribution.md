@@ -4,8 +4,7 @@ You've written a great extension — and now you want the whole world to be abl
 
 ## Cài đặt Git
 
-The first thing you'll need to do is set up a version control system (VCS).
-The most popular VCS is [Git](https://git-scm.com/). In this guide we'll be using Git, so make sure you have it [installed](https://git-scm.com/downloads) before continuing. If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/).
+The first thing you'll need to do is set up a version control system (VCS). The most popular VCS is [Git](https://git-scm.com/). In this guide we'll be using Git, so make sure you have it [installed](https://git-scm.com/downloads) before continuing. If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/).
 
 After you have installed Git, you'll need to initialize your repository. You can use `git init` on the command line if you're comfortable, or use a GUI tool like [SourceTree](https://www.sourcetreeapp.com/) or [GitKraken](https://www.gitkraken.com/).
 

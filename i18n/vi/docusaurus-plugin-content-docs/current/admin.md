@@ -1,6 +1,3 @@
 # Trang quản trị
 
-Bảng điều khiển quản trị Flarum là một giao diện thân thiện với người dùng để quản lý diễn đàn của mình.
-
-Nó chỉ có thể truy cập được khi người dùng có trong nhóm "Quản trị viên".
-Để truy cập vào Bảng điều khiển quản trị, nhấp vào **Tên** của bạn phía trên bên phải màn hình và chọn **Trang quản trị**.
+The Flarum Admin Dashboard is a user-friendly interface for managing your forum. It is only available to users in the "Admin" group. To access the Admin dashboard, Click on your **Name** at the at the top right of the screen, and select **Administration**.

@@ -4,14 +4,14 @@ Sólo hay un lugar donde la configuración de Flarum no puede ser modificada a t
 
 Este archivo, aunque pequeño, contiene detalles que son cruciales para que su instalación de Flarum funcione.
 
-Si el archivo existe, le dice a Flarum que ya ha sido instalado.
-También proporciona a Flarum información de la base de datos y más.
+Si el archivo existe, le dice a Flarum que ya ha sido instalado. También proporciona a Flarum información de la base de datos y más.
 
 Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 
 ```php
 <?php return array (
   'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
     'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB...

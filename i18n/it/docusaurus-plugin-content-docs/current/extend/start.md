@@ -35,7 +35,6 @@ Ogni extender � diverso. Tuttavia, saranno sempre in qualche modo simili a que
 
 Creare prima un'istanza dell'extender, quindi chiamare i metodi su di essa per un'ulteriore configurazione. Tutti questi metodi restituiscono l'extender stesso, in modo da poter ottenere l'intera configurazione semplicemente concatenando le chiamate ai metodi.
 
-
 Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perch� sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromper� la tua estensione.
 
 Tutti gli estensori attualmente disponibili dal core di Flarum possono essere trovati sotto la voce [`Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(documentazione PHP API)](https://api.docs.flarum.org/php/master/flarum/extend). Ogni estensione potr� avere anche extender proprietari.
@@ -58,9 +57,9 @@ return [
 ];
 ```
 
-Ora visita il tuo forum per un saluto piacevole (anche se estremamente invadente).
+Ora visita il tuo forum per un saluto piacevole (anche se estremamente invadente). 👋
 
-Per semplici personalizzazioni specifiche del sito come l'aggiunta di un po 'di CSS / JavaScript personalizzato o l'integrazione con il sistema di autenticazione del tuo sito, il file il file `extend.php` � praticamente perfetto. Ma a un certo punto, la tua personalizzazione potrebbe diventare troppo grande. � ora di costruire un'estensione!
+Per semplici personalizzazioni specifiche del sito come l'aggiunta di un po 'di CSS / JavaScript personalizzato o l'integrazione con il sistema di autenticazione del tuo sito, il file il file `extend.php` � praticamente perfetto. Ma a un certo punto, la tua personalizzazione potrebbe diventare troppo grande. Or maybe you have wanted to build an extension to share with the community from the get-go. � ora di costruire un'estensione!
 
 ## Pacchetto estensione
 
@@ -120,14 +119,6 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
   * Dovrai specificare la versione di Flarum con cui la tua estensione � compatibile qui.
   * Questo � anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
-  :::caution Scegli con cura la versione Flarum
-  
- Sebbene Flarum sia ancora in beta, ti consigliamo di dichiarare la compatibilit� solo con la versione corrente di Flarum:
-
-      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
-      
-  :::
-
 * **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
 
 * **extra.flarum-extension** contiene alcune informazioni specifiche di Flarum, come il nome visualizzato dell'estensione e come dovrebbe apparire la sua icona.
@@ -136,9 +127,12 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
 
 Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre propriet� da aggiungere a `composer.json`.
 
-:::tip
+:::info [Flarum CLI](https://github.com/flarum/cli)
 
 Usa [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) per creare automaticamente lo scheletro della tua estensione
+```bash
+$ flarum-cli init
+```
 
 :::
 

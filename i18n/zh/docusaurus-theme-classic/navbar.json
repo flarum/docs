@@ -8,7 +8,7 @@
     "description": "Navbar item with label Extend"
   },
   "item.label.Internal": {
-    "message": "Internal",
+    "message": "内部",
     "description": "Navbar item with label Internal"
   },
   "item.label.API Reference": {
@@ -27,8 +27,8 @@
     "message": "社区",
     "description": "Navbar item with label Community"
   },
-  "item.label.Github": {
-    "message": "Github",
-    "description": "Navbar item with label Github"
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
   }
 }

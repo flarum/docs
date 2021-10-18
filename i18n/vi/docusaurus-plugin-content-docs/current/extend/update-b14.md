@@ -1,13 +1,8 @@
 # Cập nhật cho Beta 14
 
-This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release.
-In order to prepare the codebase for the upcoming stable release, we decided it was time to modernize / upgrade / exchange some of the underlying JavaScript libraries that are used in the frontend.
-Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
+This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release. In order to prepare the codebase for the upcoming stable release, we decided it was time to modernize / upgrade / exchange some of the underlying JavaScript libraries that are used in the frontend. Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
 
-On the bright side, this overdue upgrade brings us closer to the conventions of best practices of [Mithril.js](https://mithril.js.org/), the mini-framework used for Flarum's UI.
-Mithril's 2.0 release sports a more consistent component interface, which should be a solid foundation for years to come.
-Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition.
-Quite a few breaking changes remain, though - read more below.
+On the bright side, this overdue upgrade brings us closer to the conventions of best practices of [Mithril.js](https://mithril.js.org/), the mini-framework used for Flarum's UI. Mithril's 2.0 release sports a more consistent component interface, which should be a solid foundation for years to come. Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition. Quite a few breaking changes remain, though - read more below.
 
 :::tip
 
@@ -15,8 +10,7 @@ If you need help with the upgrade, our friendly community will gladly help you o
 
 :::
 
-To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below.
-If your extension does not change the UI, consider yourself lucky. :-)
+To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below. If your extension does not change the UI, consider yourself lucky. :-)
 
 A [summary of the frontend changes](#required-frontend-changes-recap) is available towards the end of this guide.
 
@@ -24,8 +18,7 @@ A [summary of the frontend changes](#required-frontend-changes-recap) is availab
 
 ### Mithril 2.0: Concepts
 
-Most breaking changes required by beta 14 are prompted by changes in Mithril 2.
-[Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
+Most breaking changes required by beta 14 are prompted by changes in Mithril 2. [Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
 
 #### props -> attrs; initProps -> initAttrs
 
@@ -289,8 +282,7 @@ class ParentComponent extends Component {
 }
 ```
 
-For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components.
-In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance:
+For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance:
 
 ```js
 class Counter {
@@ -349,8 +341,7 @@ Since we don't store component instances anymore, we pass in the component class
 app.modal.show(LoginModal, {identification: 'prefilledUsername'});
 ```
 
-The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component.
-Any modifications by extensions should accordingly be done to `ModalManagerState`.
+The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component. Any modifications by extensions should accordingly be done to `ModalManagerState`.
 
 #### Alerts
 
@@ -368,11 +359,9 @@ app.alerts.show({type: 'success'}, 'Hello, this is a success alert!');
 app.alerts.show(Alert, {type: 'success'}, 'Hello, this is a success alert!');
 ```
 
-Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert.
-This replaces the old method of passing the alert instance itself to `dismiss`.
+Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert. This replaces the old method of passing the alert instance itself to `dismiss`.
 
-The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component.
-Any modifications by extensions should accordingly be done to `AlertManagerState`.
+The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component. Any modifications by extensions should accordingly be done to `AlertManagerState`.
 
 #### Composer
 
@@ -480,7 +469,7 @@ Methods for `disabled` and `viewingEnd` have been added to `forum/states/PostStr
 
 #### SearchState and GlobalSearchState
 
-As with other components, we no longer store instances of `forum/components/Search`. As such, every `Search` component instance should be paired with a `forum/states/SearchState` instance. 
+As with other components, we no longer store instances of `forum/components/Search`. As such, every `Search` component instance should be paired with a `forum/states/SearchState` instance.
 
 At the minimum, `SearchState` contains the following methods:
 
@@ -503,8 +492,7 @@ The `moment` library has been removed, and replaced by the `dayjs` library. The 
 
 #### Subtree Retainer
 
-`SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
-When called, it checks if any of the data has changed; if not, it indicates that a redraw is not necessary.
+`SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data. When called, it checks if any of the data has changed; if not, it indicates that a redraw is not necessary.
 
 In mithril 0.2, its `retain` method returned a [subtree retain directive](https://mithril.js.org/archive/v0.1.25/mithril.render.html#subtree-directives) if no redraw was necessary.
 
@@ -585,8 +573,7 @@ Children can still be passed in through JSX:
 
 #### Tag attr
 
-Because mithril uses 'tag' to indicate the actual html tag (or component class) used for a vnode, you can no longer pass `tag` as an attr to components
-extending Flarum's `Component` helper class. The best workaround here is to just use another name for this attr.
+Because mithril uses 'tag' to indicate the actual html tag (or component class) used for a vnode, you can no longer pass `tag` as an attr to components extending Flarum's `Component` helper class. The best workaround here is to just use another name for this attr.
 
 #### affixSidebar
 
@@ -669,12 +656,7 @@ Each of these changes has been explained above, this is just a recap of major ch
 
 #### Deprecated changes
 
-For the following changes, we currently provide a backwards-compatibility layer.
-This will be removed in time for the stable release.
-The idea is to let you release a new version that's compatible with Beta 14 to your users as quickly as possible.
-When you have taken care of the changes above, you should be good to go.
-For the following changes, we have bought you time until the stable release.
-Considering you have to make changes anyway, why not do them now?
+For the following changes, we currently provide a backwards-compatibility layer. This will be removed in time for the stable release. The idea is to let you release a new version that's compatible with Beta 14 to your users as quickly as possible. When you have taken care of the changes above, you should be good to go. For the following changes, we have bought you time until the stable release. Considering you have to make changes anyway, why not do them now?
 
 - `this.props` -> `this.attrs`
 - static `initProps()` -> static `initAttrs()`
@@ -688,9 +670,7 @@ Considering you have to make changes anyway, why not do them now?
 
 #### Extension Dependencies
 
-Some extensions are based on, or add features to, other extensions.
-Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them.
-Now, you cannot enable an extension unless all of its dependencies are enabled, and you cannot disable an extension if there are other enabled extensions depending on it.
+Some extensions are based on, or add features to, other extensions. Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them. Now, you cannot enable an extension unless all of its dependencies are enabled, and you cannot disable an extension if there are other enabled extensions depending on it.
 
 So, how do we specify dependencies for an extension? Well, all you need to do is add them as composer dependencies to your extension's `composer.json`! For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this:
 

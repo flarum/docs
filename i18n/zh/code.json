@@ -1,0 +1,14 @@
+{
+  "customtheme.docs.lang.nonDefaultLangLabel": {
+    "message": "此页面的翻译可能更新不及时，最新信息请以{defaultLocaleLink}为准。如果您想贡献翻译，请前往 {crowdinLink}。",
+    "description": "The label used to tell the user that they're browsing translated docs that might be out of sync"
+  },
+  "customtheme.docs.lang.defaultLocaleLinkLabel": {
+    "message": "英文文档",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "customtheme.docs.versions.crowdinLinkLabel": {
+    "message": "Crowdin",
+    "description": "The label used for Crowdin link label"
+  }
+}

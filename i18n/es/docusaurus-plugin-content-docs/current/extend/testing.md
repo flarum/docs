@@ -1,12 +1,10 @@
 # Testing
 
-Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales.
-Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
+Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales. Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
 
 ## Backend Tests
 
-La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas.
-Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
+La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas. Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
 
 ### Configuración
 
@@ -146,6 +144,8 @@ Sus clases de casos de prueba deben extender esta clase.
 
 Hay varias utilidades importantes disponibles para sus casos de prueba:
 
+- The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
+- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
 - El método `extension()` tomará los IDs de Flarum de las extensiones a habilitar como argumentos. Su extensión siempre debe llamar a esto con el ID de su extensión al comienzo de los casos de prueba, a menos que el objetivo del caso de prueba en cuestión sea confirmar algún comportamiento presente sin su extensión, y compararlo con el comportamiento cuando su extensión está habilitada. Si su extensión depende de otras extensiones, asegúrese de que están incluidas en el campo `require` de composer.json (o `require-dev` para [dependencias opcionales](dependencies.md)), y también liste los nombres de sus paquetes en composer cuando llame a `extension()`. Ten en cuenta que debes listarlos en un orden válido.
 - El método `extend()` toma instancias de extensores como argumentos, y es útil para probar extensores introducidos por su extensión para que otras extensiones los usen.
 - El método `prepareDatabase()` le permite pre-poblar su base de datos. Esto podría incluir la adición de usuarios, discusiones, mensajes, configuración de permisos, etc. Su argumento es un array asociativo que mapea los nombres de las tablas a arrays de [arrays de registros](https://laravel.com/docs/8.x/queries#insert-statements).
@@ -166,10 +166,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -186,16 +186,16 @@ class SomeTest extends TestCase
       parent::setUp();
 
       // Supongamos que nuestra extensión depende de las etiquetas.
-      // Ten en cuenta que las etiquetas tendrán que estar en el composer.json de tu extensión `require-dev`.
-      // Además, asegúrate de incluir el ID de la extensión que se está probando actualmente, a menos que estés
+        // Ten en cuenta que las etiquetas tendrán que estar en el composer.json de tu extensión `require-dev`.
+        // Además, asegúrate de incluir el ID de la extensión que se está probando actualmente, a menos que estés
       // probando la línea de base sin su extensión.
-      $this->extension('flarum-tags', 'my-cool-extension');
+        $this->extension('flarum-tags', 'my-cool-extension');
 
       // Tenga en cuenta que esta entrada no está validada: asegúrese de que está rellenando con datos válidos y representativos.
-      $this->prepareDatabase([
+        $this->prepareDatabase([
         'users' => [
           $this->normalUser()  // Disponible para su comodidad.
-        ],
+            ],
         'discussions' => [
           ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
         ],
@@ -205,7 +205,7 @@ class SomeTest extends TestCase
       ]);
 
       // La mayoría de los casos de prueba no necesitarán probar los extensores, pero si quieres, puedes hacerlo.
-      $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
+        $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
     /**
@@ -222,8 +222,7 @@ class SomeTest extends TestCase
 
 #### Envío de solicitudes
 
-Una aplicación común de las pruebas automatizadas es hacer ping a varios puntos finales HTTP con varios datos, autenticados como diferentes usuarios.
-Puedes usar esto para asegurarte de que
+Una aplicación común de las pruebas automatizadas es hacer ping a varios puntos finales HTTP con varios datos, autenticados como diferentes usuarios. Puedes usar esto para asegurarte de que
 
 - Los usuarios no pueden acceder a contenidos a los que no están autorizados a acceder.
 - Las operaciones de creación/edición/borrado basadas en permisos funcionan como se espera.
@@ -242,10 +241,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -323,10 +322,10 @@ Por ejemplo:
 <?php
 
 /*
- * This file is part of Flarum.
+ * Este archivo forma parte de Flarum.
  *
- * For detailed copyright and license information, please view the
- * LICENSE file that was distributed with this source code.
+ * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
+ * archivo LICENSE que se distribuyó con este código fuente.
  */
 
 namespace CoolExtension\Tests\integration;
@@ -341,8 +340,7 @@ class ConsoleTest extends ConsoleTestCase
     public function command_works()
     {
         $input = [
-            'command' => 'some:command',  // El nombre del comando, equivalente a `php flarum some:command`.
-            'foo' => 'bar',  // argumentos
+            'command' => 'some:command',  // El nombre del comando, equivalente a `php flarum some:command`. 'foo' => 'bar',  // argumentos
             '--lorem' => 'ipsum'  // opciones
         ];
 

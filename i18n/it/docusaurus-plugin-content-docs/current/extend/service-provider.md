@@ -1,9 +1,6 @@
 # Provider di servizi
 
-Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze.
-[I provider di servizi](https://laravel.com/docs/6.x/providers) consentono la configurazione e la modifica del backend Flarum a basso livello.
-Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore.
-Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
+Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze. [I provider di servizi](https://laravel.com/docs/6.x/providers) consentono la configurazione e la modifica del backend Flarum a basso livello. Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore. Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
 
 :::caution Solo per utenti avanzati!!!
 
@@ -44,8 +41,9 @@ class CustomServiceProvider extends AbstractServiceProvider
 }
 ```
 
-Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). 
-In entrambi i metodi, il contenitore è disponibile tramite `$this->app`.
+Il metodo `register` verrà eseguito durante il passaggio (3) qui sopra, e il metodo `boot` verrà eseguito durante la fase (5). In entrambi i metodi, il contenitore è disponibile tramite `$this->app`. In the `boot` method, the container (or any other arguments), should be injected via typehinted method arguments.
+
+Flarum does not currently support Laravel Octane, but some [best practices](https://laravel.com/docs/8.x/octane#dependency-injection-and-octane), like using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used. See the [Octane documentation](https://laravel.com/docs/8.x/octane#dependency-injection-and-octane) for more information.
 
 Per registrare effettivamente il tuo provider di servizi personalizzato, puoi utilizzare l'extender `ServiceProvider` in `extend.php`:
 

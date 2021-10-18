@@ -128,16 +128,16 @@ Then, inject the factory into your controller and render your view into an `Html
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
-    
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
     }
-    
+
     public function handle(Request $request): Response
     {
         $view = $this->view->make('acme.hello-world::greeting');
-        
+
         return new HtmlResponse($view->render());
     }
 }
@@ -166,6 +166,7 @@ Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#ro
 app.routes['acme.users'] = { path: '/users', component: UsersPage };
 ```
 
+
 <!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
 
 ```jsx
@@ -174,28 +175,22 @@ export const extend = [
     .add('/users', 'acme.users', <UsersPage />)
 ];
 ``` -->
-
 Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area. For more information on frontend pages, please see [that documentation section](frontend-pages.md).
-
 Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
-
-### Tham số Route
-
+### Các tham số Route
 Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
 
 ```jsx
 app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
 
+
 <!-- ```jsx
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-
 Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
-
 ### Tạo URLs
-
 To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
 
 ```js
@@ -205,8 +200,7 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 
 ### Liên kết đến trang khác
 
-A forum wouldn't be very useful if it only had one page.
-While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+A forum wouldn't be very useful if it only had one page. While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
 
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 

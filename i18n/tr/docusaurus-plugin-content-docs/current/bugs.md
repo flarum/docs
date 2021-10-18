@@ -2,7 +2,7 @@
 
 :::danger Güvenlik Açıkları
 
-Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin.
+Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin.github.com/flarum/core/security/policy">security policy</a> so we can address it promptly.
 
 :::
 
@@ -12,8 +12,8 @@ Flarum'u test etmemize yardım ettiğiniz için teşekkür ederiz. Takımda olma
 
 Zaten bir hata mı buldunuz? Olağanüstü! Bunu duymak isteriz &mdash; ancak önce bilinen bir sorun için zamanınızı boşa harcamadığınızdan emin olmak için kontrol etmelisiniz:
 
-- Daha önce bildirilip bildirilmediğini görmek için [Destek forumumuzda](https://discuss.flarum.org/t/support) arama yapın.
 - Bir düzeltme üzerinde çalışıyor olabiliriz, bu nedenle [sorun izleyicimizi](https://github.com/flarum/core/issues) de arayın.
+- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/core/issues) too.
 
 *Derinlemesine* aradıysanız ve eli boş çıkarsanız, raporunuzu memnuniyetle karşılıyoruz. Sadece basit bir konuysa (örneğin yanlış yazılmış bir kelime veya grafik hatası) sonraki paragrafa geçin. Ancak hatalar görüyorsanız veya bir şey açıkça bozuksa, önce bazı bilgileri toplamanız gerekir. Lütfen [Sorun Giderme](troubleshoot.md) kılavuzumuza gidin ve oradaki talimatları izleyin. Mümkün olduğu kadar çok bilgi toplayın!
 

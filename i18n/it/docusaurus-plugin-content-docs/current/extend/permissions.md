@@ -18,8 +18,8 @@ Gli amministratori possono anche creare nuovi gruppi tramite la dashboard dell'a
 
 ## Permessi
 
-I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso).
-Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+
 Non esiste alcuna associazione diretta tra utenti e permessi: quando controlliamo i permessi di un utente, stiamo effettivamente enumerando i permessi per tutti i gruppi dell'utente.
 
 I gruppi e gli utenti dispongono di metodi pubblici per controllare le loro autorizzazioni. Alcuni di quelli più comunemente usati sono:
@@ -38,30 +38,36 @@ $user->getPermissions();
 $user->hasPermission('viewForum');
 ```
 
-:::warning Utilizzare l'autorizzazione appropriata
-
 Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
+
+Permissions are just part of the puzzle: if you're enforcing whether a user can perform an action, you should use Flarum's [authorization system](authorization.md).
 
 :::
 
+## Permission Naming Conventions
+
+Nothing is enforced, but we generally recommend the following convention for permission naming:
+
+`extension-namespace.model-prefix.ability-name`.
+
+The extension namespace ensures that your permission won't collide with other extensions.
+
+The model prefix is useful in case you have different models but similar permissions (`flarum-sponsors.discussion.sponsor` vs `flarum-sponsors.post.sponsor`).
+
 ### Aggiunta di autorizzazioni personalizzate
 
-Poiché le autorizzazioni sono solo stringhe, non è necessario "registrare" formalmente un'autorizzazione ovunque: è necessario solo un modo per gli amministratori di assegnare tale autorizzazione ai gruppi.
-Possiamo farlo estendendo il componente del frontend `flarum/components/PermissionGrid`. Per esempio:
+You may have seen some calls to `$actor->can` that don't use the full name of a permission; for example, `$actor->can('reply', $discussion)`, where the backing permission is actually called `discussion.reply`.
 
-```js
-import { extend } from 'flarum/extend';
-import PermissionGrid from 'flarum/components/PermissionGrid';
+This is done in core to make authorization calls shorter and simpler. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
 
-export default function() {
-  extend(PermissionGrid.prototype, 'moderateItems', items => {
-    items.add('tag', {
-      icon: 'fas fa-tag',  // Classi CSS per l'icona. Generalmente in formato fontawesome, anche se puoi usare anche il tuo CSS personalizzato.
-      label: app.translator.trans('flarum-tags.admin.permissions.tag_discussions_label'),
-      permission: 'discussion.tag'  // La stringa di autorizzazione.
-    }, 95);
-  });
-}
-```
+This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
-Per impostazione predefinita, le autorizzazioni vengono concesse solo agli amministratori. Se desideri rendere disponibile un'autorizzazione ad altri gruppi per impostazione predefinita, dovrai utilizzare una [migrazione dei dati](data.md#migrations) per aggiungere righe per i gruppi pertinenti. Se desideri eseguire questa operazione, ti consigliamo ** VIVAMENTE ** di assegnare autorizzazioni predefinite solo a uno dei [gruppi riservati](#groups).
+These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discussion)` on the post's discussion.
+
+If you want to use authorization checks with an ability name that differs from the backing permission name, and these cases do not apply to your permission's naming, you'll have to use a custom policy.
+
+See our [authorization documentation](authorization.md) for more information on the `can` method, policies, and how authorization checks are processed.
+
+## Adding Custom Permissions
+
+To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).

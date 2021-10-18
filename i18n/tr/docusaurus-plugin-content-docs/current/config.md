@@ -4,14 +4,14 @@ Flarum yapılandırmasının Flarum yönetici panosu (veritabanı hariç) aracı
 
 Bu dosya küçük de olsa Flarum kurulumunuzun çalışması için çok önemli olan ayrıntıları içerir.
 
-Dosya varsa, Flarum'a zaten kurulu olduğunu söyler.
-Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
+Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritabanı bilgisi ve daha fazlasını sağlar.
 
 Örnek bir dosyayla her şeyin ne anlama geldiğine dair hızlı bir genel bakış:
 
 ```php
 <?php return array (
   'debug' => false, // sorunları gidermek için kullanılan hata ayıklama modunu etkinleştirir veya devre dışı bırakır
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
     'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB...

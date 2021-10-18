@@ -2,8 +2,7 @@
 
 Temel Flarum kurulumunuza yeni bir dil eklemek kolaydır. Seçtiğiniz dil paketini indirmek ve kurmak için aşağıdaki talimatları uygulamanız yeterlidir.
 
-Bir dil paketi ekledikten sonra, forumunuz için [varsayılan dil olarak ayarlayabilirsiniz](#varsayılan-dili-ayarlama). Ve yüklü dil paketlerinizden birine ihtiyacınız olmadığını anlarsanız, her zaman [devre dışı bırakabilirsiniz] (#dil-paketini-devre-dışı-bırakma).
-Herhangi bir üçüncü taraf uzantısı kullanıyorsanız, başlamadan önce [bunu okuduğunuzdan](#topluluk-uzantıları) emin olun.
+Bir dil paketi ekledikten sonra, forumunuz için [varsayılan dil olarak ayarlayabilirsiniz](#varsayılan-dili-ayarlama). Ve yüklü dil paketlerinizden birine ihtiyacınız olmadığını anlarsanız, her zaman \[devre dışı bırakabilirsiniz\] (#dil-paketini-devre-dışı-bırakma). Herhangi bir üçüncü taraf uzantısı kullanıyorsanız, başlamadan önce [bunu okuduğunuzdan](#topluluk-uzantıları) emin olun.
 
 ## Dil Paketi Kurulumu
 

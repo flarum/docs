@@ -1,26 +1,26 @@
----
+- - -
 slug: '/extend'
----
+- - -
 
 # Mở rộng Flarum
 
-Flarum là tối giản, nhưng nó cũng có khả năng mở rộng cao. Trên thực tế, hầu hết các tính năng đi kèm với Flarum thực sự là phần mở rộng!
+Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
 
-Cách tiếp cận này làm cho Flarum có thể tùy biến cực kỳ tốt. Người dùng có thể tắt bất kỳ tính năng nào mà họ không sử dụng trên diễn đàn của họ và cài đặt các tiện ích mở rộng khác để tạo diễn đàn hoàn hảo cho cộng đồng của họ.
+This approach makes Flarum extremely customizable. A user can disable any features they don't use on their forum, and install other extensions to make a forum perfect for their community.
 
-Để đạt được khả năng mở rộng này, Flarum đã được xây dựng với các API và điểm mở rộng phong phú. Với một số kiến ​​thức lập trình, bạn có thể tận dụng các API này để thêm bất kỳ tính năng nào bạn muốn. Phần này của tài liệu nhằm mục đích hướng dẫn bạn cách hoạt động của Flarum và cách sử dụng các API để bạn có thể tạo các tiện ích mở rộng của riêng mình.
+In order to achieve this extensibility, Flarum has been built with rich APIs and extension points. With some programming knowledge, you can leverage these APIs to add just about any feature you want. This section of the documentation aims to teach you how Flarum works, and how to use the APIs so that you can build your own extensions.
 
 ## Core với Tiện ích mở rộng
 
-Chúng ta vẽ ranh giới giữa lõi của Flarum và các phần mở rộng của nó ở đâu? Tại sao một số tính năng được bao gồm trong lõi, còn những tính năng khác thì không? Điều quan trọng là phải hiểu sự khác biệt này để chúng tôi có thể duy trì tính nhất quán và chất lượng trong hệ sinh thái của Flarum.
+Where do we draw the line between Flarum's core and its extensions? Why are some features included in the core, and others aren't? It is important to understand this distinction so that we can maintain consistency and quality within Flarum's ecosystem.
 
-**Cốt lõi của Flarum** không nhằm mục đích có đầy đủ các tính năng. Thay vào đó, nó là một khung, hoặc một khuôn khổ, cung cấp một nền tảng đáng tin cậy để các tiện ích mở rộng có thể xây dựng. Nó chỉ chứa chức năng cơ bản, chưa được tích hợp, cần thiết cho một diễn đàn: thảo luận, bài đăng, người dùng, nhóm và thông báo.
+**Flarum's core** is not intended to be packed full of features. Rather, it is a scaffold, or a framework, which provides a reliable foundation on which extensions can build. It contains only basic, unopinionated functionality that is essential to a forum: discussions, posts, users, groups, and notifications.
 
-**Tiện ích mở rộng đi kèm** là các tính năng được đóng gói cùng với Flarum và được bật theo mặc định. Chúng là các tiện ích mở rộng giống như bất kỳ tiện ích mở rộng nào khác và có thể bị vô hiệu hóa và gỡ cài đặt. Mặc dù phạm vi của chúng không nhằm giải quyết tất cả các trường hợp sử dụng, nhưng ý tưởng là làm cho chúng đủ chung chung và có thể cấu hình để có thể đáp ứng số đông.
+**Bundled extensions** are features that are packaged with Flarum and enabled by default. They are extensions just like any other, and may be disabled and uninstalled. While their scope is not intended to address all use-cases, the idea is to make them generic and configurable enough that they can satisfy the majority.
 
-**Tiện ích mở rộng của bên thứ ba** là các tính năng do những người khác tạo ra và không được nhóm Flarum hỗ trợ chính thức. Chúng có thể được xây dựng và sử dụng để giải quyết các trường hợp sử dụng cụ thể hơn.
+**Third-party extensions** are features which are made by others and are not officially supported by the Flarum team. They can be built and used to address more specific use-cases.
 
-Nếu bạn đang muốn giải quyết một lỗi hoặc thiếu sót của lõi hoặc của một tiện ích mở rộng đi kèm hiện có, bạn có thể * đóng góp cho dự án tương ứng * hơn là phân tán nỗ lực vào một tiện ích mở rộng mới của bên thứ ba. Bạn nên bắt đầu thảo luận trên [Cộng đồng Flarum](https://discuss.flarum.org/) để có được góc nhìn của các nhà phát triển Flarum.
+If you are aiming to address a bug or shortcoming of the core, or of an existing bundled extension, it may be appropriate to *contribute to the respective project* rather than disperse effort on a new third-party extension. It is a good idea to start a discussion on the [Flarum Community](https://discuss.flarum.org/) to get the perspective of the Flarum developers.
 
 ## Tài nguyên hữu dụng
 

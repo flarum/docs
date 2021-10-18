@@ -44,9 +44,7 @@ In the future, this will serve as a basis for additional features:
 
 #### Changes Needed in Extensions
 
-The `transChoice` methods in the frontend and backend have been removed.
-The `trans` method should always be used for translating, regardless of pluralization.
-If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
+The `transChoice` methods in the frontend and backend have been removed. The `trans` method should always be used for translating, regardless of pluralization. If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
 
 In the frontend, code that looked like this:
 
@@ -73,8 +71,7 @@ should be changed to:
 $translator->trans('some-translation', ['host' => $hostName, 'guestCount' => $guestCount]);
 ```
 
-Note that in the backend, translation keys were previously wrapped in curly braces.
-This is no longer needed.
+Note that in the backend, translation keys were previously wrapped in curly braces. This is no longer needed.
 
 #### Changes Needed in Translations
 
@@ -101,8 +98,7 @@ For a long time, the `viewDiscussions` and `viewUserList` permissions have been 
 - `viewDiscussions` controls viewing both discussions and users.
 - `viewUserList` controls searching users, not viewing user profiles.
 
-To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively.
-A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
+To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively. A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
 
 We have also slightly improved tag scoping for permissions. Currently, permissions can be applied to tags if:
 

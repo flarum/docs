@@ -78,8 +78,7 @@ const config = require('flarum-webpack-config');
 module.exports = config();
 ```
 
-[Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension.
-To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
+[Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension. To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
 
 ### tsconfig.json
 
@@ -114,8 +113,7 @@ You may also need to restart your IDE's TypeScript server. In Visual Studio Code
 
 ### admin.js và forum.js
 
-These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual
-source code in `src`, and having these files just export the contents of `src`. For instance:
+These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in `src`, and having these files just export the contents of `src`. For instance:
 
 ```js
 // admin.js
@@ -127,8 +125,7 @@ export * from './src/forum';
 
 ### src
 
-If following the recommendations for `admin.js` and `forum.js`, we'll want to have 2 subfolders here: one for `admin` frontend code, and one for `forum` frontend code.
-If you have components, models, utils, or other code that is shared across both frontends, you may want to create a `common` subfolder and place it there.
+If following the recommendations for `admin.js` and `forum.js`, we'll want to have 2 subfolders here: one for `admin` frontend code, and one for `forum` frontend code. If you have components, models, utils, or other code that is shared across both frontends, you may want to create a `common` subfolder and place it there.
 
 Structure for `admin` and `forum` is identical, so we'll just show it for `forum` here:
 
@@ -140,8 +137,7 @@ src/forum/
 └── index.js
 ```
 
-`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions.
-Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
+`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions. Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
 
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
@@ -151,7 +147,7 @@ import { extend, override } from 'flarum/common/extend';
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
 app.initializers.add('acme-flarum-hello-world', function(app) {
-  // Code tiện ích mở rộng của bạn ở đây
+  // Your Extension Code Here
   console.log("EXTENSION NAME is working!");
 });
 ```
@@ -162,8 +158,7 @@ We'll go over tools available for extensions below.
 
 You should familiarize yourself with proper syntax for [importing js modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), as most extensions larger than a few lines will split their js into multiple files.
 
-Pretty much every Flarum extension will need to import *something* from Flarum Core.
-Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
+Pretty much every Flarum extension will need to import *something* from Flarum Core. Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
 In some cases, an extension may want to extend code from another flarum extension. This is only possible for extensions which explicitly export their contents.
 
@@ -284,8 +279,7 @@ However, component classes extending `Component` must call `super` when using th
 
 To use Flarum components, simply extend `flarum/common/Component` in your custom component class.
 
-All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved.
-With this in mind, a custom component class might look like this:
+All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved. With this in mind, a custom component class might look like this:
 
 ```jsx
 import Component from 'flarum/common/Component';
@@ -366,9 +360,7 @@ extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ }
 
 :::
 
-Please note that if you are trying to change the output of a method with `override`, you must return the new output.
-If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument).
-Keep in mind that `extend` can only mutate output if the output is mutable (e.g. an object or array, and not a number/string).
+Please note that if you are trying to change the output of a method with `override`, you must return the new output. If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument). Keep in mind that `extend` can only mutate output if the output is mutable (e.g. an object or array, and not a number/string).
 
 Let's now revisit the original "adding a link to Google to the header" example to demonstrate.
 
@@ -409,8 +401,7 @@ override(HeaderPrimary.prototype, 'items', function(original) {
 });
 ```
 
-Since all Flarum components and utils are represented by classes, `extend`, `override`, and regular old JS mean that we can hook into, or replace, ANY method in any part of Flarum.
-Some potential "advanced" uses include:
+Since all Flarum components and utils are represented by classes, `extend`, `override`, and regular old JS mean that we can hook into, or replace, ANY method in any part of Flarum. Some potential "advanced" uses include:
 
 * Extending or overriding `view` to change (or completely redefine) the html structure of Flarum components. This opens Flarum up to unlimited theming
 * Hooking into Mithril component methods to add JS event listeners, or otherwise redefine business logic.

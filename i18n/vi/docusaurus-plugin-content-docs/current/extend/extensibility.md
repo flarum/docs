@@ -17,8 +17,7 @@ To learn about dispatching events and defining new ones, see the [relevant docum
 
 ### Custom Extenders
 
-Lets say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts.
-A custom extender could be a good way to accomplish this.
+Lets say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts. A custom extender could be a good way to accomplish this.
 
 The implementation of extenders is actually quite simple. There are 3 main steps:
 
@@ -39,15 +38,13 @@ Before designing your own extenders, we HIGHLY recommend looking through the imp
 
 :::tip
 
-Custom extenders introduced by your extension should be considered public API.
-You can add automated tests for them via our [backend testing package](testing.md).
+Custom extenders introduced by your extension should be considered public API. You can add automated tests for them via our [backend testing package](testing.md).
 
 :::
 
 :::caution
 
-Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md).
-An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.
+Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md). An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.
 
 :::
 

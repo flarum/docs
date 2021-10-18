@@ -1,30 +1,30 @@
 # Bắt đầu
 
-Bạn muốn xây dựng một tiện ích mở rộng Flarum? Bạn đã đến đúng nơi! Tài liệu này sẽ đưa bạn qua một số khái niệm cần thiết, sau đó bạn sẽ xây dựng tiện ích mở rộng Flarum đầu tiên của mình từ đầu.
+Want to build a Flarum extension? You've come to the right place! This document will take you through some essential concepts, after which you'll build your first Flarum extension from scratch.
 
 ## Cấu tạo
 
 Để hiểu cách mở rộng Flarum, trước tiên chúng ta cần hiểu một chút về cách Flarum được xây dựng.
 
-Cần biết rằng Flarum sử dụng một số ngôn ngữ và công cụ _modern_. Nếu bạn chỉ từng xây dựng các plugin WordPress trước đây, bạn có thể cảm thấy hơi thiếu chuyên sâu của mình! Không sao cả - đây là thời điểm tuyệt vời để học những điều mới mẻ và mở rộng bộ kỹ năng của bạn. Tuy nhiên, chúng tôi khuyên bạn nên làm quen với các công nghệ được mô tả bên dưới trước khi tiếp tục.
+Be aware that Flarum uses some _modern_ languages and tools. If you've only ever built WordPress plugins before, you might feel a bit out of your depth! That's OK — this is a great time to learn cool new things and extend your skillset. However, we would advise that you become somewhat familiar with the technologies described below before proceeding.
 
 Flarum được tạo thành từ ba lớp:
 
-* Đầu tiên, là **backend**. Được viết bằng [PHP hướng đối tượng](https://laracasts.com/series/object-oriented-bootcamp-in-php), và sử dụng một loạt các thành phần [Laravel](https://laravel.com/) và các gói khác thông qua [Composer](https://getcomposer.org/). Bạn cũng sẽ muốn làm quen với khái niệm [Dependency Injection](https://laravel.com/docs/8.x/container), được sử dụng trong suốt chương trình backend của chúng tôi.
+* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/8.x/container), which is used throughout our backend.
 
-* Thứ hai, phần backend hiển thị **API công khai** cho phép các ứng dụng khách giao diện người dùng với dữ liệu của diễn đàn của bạn. Điều này được xây dựng theo [JSON:API](https://jsonapi.org/).
+* Second, the backend exposes a **public API** which allows frontend clients to interface with your forum's data. This is built according to the [JSON:API specification](https://jsonapi.org/).
 
-* Cuối cùng, có giao diện web mặc định mà chúng tôi gọi là **frontend**. Đây là một [ứng dụng một trang](https://en.wikipedia.org/wiki/Single-page_application) sử dụng API. Nó được xây dựng với một khung công tác giống React đơn giản được gọi là [Mithril.js](https://mithril.js.org).
+* Finally, there is the default web interface which we call the **frontend**. This is a [single-page application](https://en.wikipedia.org/wiki/Single-page_application) which consumes the API. It's built with a simple React-like framework called [Mithril.js](https://mithril.js.org).
 
-Các tiện ích mở rộng thường sẽ cần phải tương tác với cả ba lớp này để làm cho mọi thứ xảy ra. Ví dụ: nếu bạn muốn tạo một tiện ích mở rộng thêm các trường tùy chỉnh vào hồ sơ người dùng, bạn sẽ cần thêm cấu trúc cơ sở dữ liệu thích hợp trong **backend**, hiển thị dữ liệu đó trong **API công khai**, rồi hiển thị nó và cho phép người dùng chỉnh sửa nó trên **frontend**.
+Extensions will often need to interact with all three of these layers to make things happen. For example, if you wanted to build an extension that adds custom fields to user profiles, you would need to add the appropriate database structures in the **backend**, expose that data in the **public API**, and then display it and allow users to edit it on the **frontend**.
 
-Vậy ... làm cách nào để chúng ta mở rộng các lớp này?
+So... how do we extend these layers?
 
 ## Bộ mở rộng
 
-Để mở rộng Flarum, chúng tôi sẽ sử dụng một khái niệm được gọi là **bộ mở rộng**. Phần mở rộng là các đối tượng *khai báo* mô tả một cách đơn giản các mục tiêu mà bạn đang cố gắng đạt được (chẳng hạn như thêm một tuyến đường mới vào diễn đàn của bạn hoặc thực thi một số mã khi một cuộc thảo luận mới được tạo).
+In order to extend Flarum, we will be using a concept called **extenders**. Extenders are *declarative* objects that describe in plain terms the goals you are trying to achieve (such as adding a new route to your forum, or executing some code when a new discussion was created).
 
-Mỗi bộ mở rộng đều khác nhau. Tuy nhiên, chúng sẽ luôn trông giống như thế này:
+Every extender is different. However, they will always look somewhat similar to this:
 
 ```php
 // Đăng ký JavaScript và tệp CSS để được gửi bằng frontend của diễn đàn
@@ -33,15 +33,15 @@ Mỗi bộ mở rộng đều khác nhau. Tuy nhiên, chúng sẽ luôn trông g
     ->css(__DIR__.'/forum-styles.css')
 ```
 
-Trước tiên, bạn tạo một phiên bản của bộ mở rộng, sau đó gọi các phương thức trên nó để cấu hình thêm. Tất cả các phương thức này đều trả về chính bộ mở rộng, do đó bạn có thể đạt được toàn bộ cấu hình của mình chỉ bằng cách gọi phương thức chuỗi.
+You first create an instance of the extender, and then call methods on it for further configuration. All of these methods return the extender itself, so that you can achieve your entire configuration just by chaining method calls.
 
-Để giữ cho mọi thứ nhất quán, chúng tôi sử dụng khái niệm về bộ mở rộng này trong cả phần phụ trợ (trong vùng đất PHP) và giao diện người dùng (trong vùng đất JavaScript). _Mọi thứ_ bạn làm trong tiện ích mở rộng của mình nên được thực hiện thông qua các bộ mở rộng, bởi vì chúng là một **đảm bảo** mà chúng tôi cung cấp cho bạn rằng một bản phát hành nhỏ trong tương lai của Flarum sẽ không phá vỡ tiện ích mở rộng của bạn.
+To keep things consistent, we use this concept of extenders in both the backend (in PHP land) and the frontend (in JavaScript land). _Everything_ you do in your extension should be done via extenders, because they are a **guarantee** we are giving to you that a future minor release of Flarum won't break your extension.
 
 Tất cả các bộ mở rộng hiện có sẵn cho bạn từ lõi của Flarum có thể được tìm thấy trong [namespace `Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(tài liệu PHP API)](https://api.docs.flarum.org/php/master/flarum/extend) Các tiện ích mở rộng cũng có thể cung cấp các [bộ mở rộng của riêng](extensibility.md#custom-extenders) chúng.
 
 ## Hello World
 
-Bạn muốn xem một bộ mở rộng hoạt động? Tệp `extend.php` trong thư mục gốc của cài đặt Flarum của bạn là cách dễ nhất để đăng ký các bộ mở rộng chỉ dành cho trang web của bạn. Nó sẽ trả về một mảng các đối tượng bộ mở rộng. Mở nó ra và thêm những thứ sau:
+Want to see an extender in action? The `extend.php` file in the root of your Flarum installation is the easiest way to register extenders just for your site. It should return an array of extender objects. Pop it open and add the following:
 
 ```php
 <?php
@@ -57,27 +57,27 @@ return [
 ];
 ```
 
-Bây giờ hãy ghé thăm diễn đàn của bạn để có một lời chào dễ chịu (mặc dù cực kỳ khó chịu). 👋
+Now pay your forum a visit for a pleasant (albeit extremely obtrusive) greeting. 👋
 
-Đối với các tùy chỉnh đơn giản dành riêng cho trang web - như thêm một chút CSS / JavaScript tùy chỉnh hoặc tích hợp với hệ thống xác thực trang web của bạn - tệp tin `extend.php` trong gốc diễn đàn của bạn là rất tốt. Nhưng tại một số thời điểm, khả năng tùy chỉnh của bạn có thể phát triển nhanh hơn. Hoặc có thể bạn muốn tạo một tiện ích mở rộng để chia sẻ với cộng đồng ngay từ đầu. Đã đến lúc tạo tiện ích mở rộng!
+For simple site-specific customizations – like adding a bit of custom CSS/JavaScript, or integrating with your site's authentication system – the `extend.php` file in your forum's root is great. But at some point, your customization might outgrow it. Or maybe you have wanted to build an extension to share with the community from the get-go. Time to build an extension!
 
 ## Gói Tiện ích mở rộng
 
-[Composer](https://getcomposer.org) là một trình quản lý phụ thuộc cho PHP. Nó cho phép các ứng dụng dễ dàng lấy thư viện mã bên ngoài và giúp dễ dàng cập nhật chúng để bảo mật và sửa lỗi được phổ biến nhanh chóng.
+[Composer](https://getcomposer.org) is a dependency manager for PHP. It allows applications to easily pull in external code libraries and makes it easy to keep them up-to-date so that security and bug fixes are propagated rapidly.
 
-Hóa ra, mọi phần mở rộng của Flarum cũng là một gói Composer. Điều đó có nghĩa là cài đặt Flarum của ai đó có thể "yêu cầu" một phần mở rộng nhất định và Composer sẽ kéo nó vào và cập nhật nó. Đẹp!
+As it turns out, every Flarum extension is also a Composer package. That means someone's Flarum installation can "require" a certain extension and Composer will pull it in and keep it up-to-date. Nice!
 
-Trong quá trình phát triển, bạn có thể làm việc trên các tiện ích mở rộng của mình cục bộ và thiết lập [Kho lưu trữ đường dẫn của composer](https://getcomposer.org/doc/05-repositories.md#path) để cài đặt bản sao cục bộ của bạn. Tạo một thư mục `packages` mới trong thư mục gốc của cài đặt Flarum của bạn, sau đó chạy lệnh này để cho Composer biết rằng nó có thể tìm thấy các gói trong đây:
+During development, you can work on your extensions locally and set up a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path) to install your local copy. Create a new `packages` folder in the root of your Flarum installation, and then run this command to tell Composer that it can find packages in here:
 
 ```bash
 composer config repositories.0 path "packages/*"
 ```
 
-Bây giờ chúng ta hãy bắt đầu xây dựng tiện ích mở rộng đầu tiên của chúng tôi. Tạo một thư mục mới bên trong `packages` cho tiện ích mở rộng của bạn có tên là `hello-world`. Chúng tôi sẽ đặt hai tệp trong đó: `extend.php` và `composer.json`. Các tệp này đóng vai trò là trái tim và linh hồn của tiện ích mở rộng.
+Now let's start building our first extension. Make a new folder inside `packages` for your extension called `hello-world`. We'll put two files in it: `extend.php` and `composer.json`. These files serve as the heart and soul of the extension.
 
 ### extend.php
 
-Tệp `extend.php` giống như tệp trong thư mục gốc của trang web của bạn. Nó sẽ trả về một mảng các đối tượng bộ mở rộng cho Flarum biết bạn muốn làm gì. Bây giờ, chỉ cần di chuyển qua bộ mở rộng `Frontend` mà bạn đã có trước đó.
+The `extend.php` file is just like the one in the root of your site. It will return an array of extender objects that tell Flarum what you want to do. For now, just move over the `Frontend` extender that you had earlier.
 
 ### composer.json
 
@@ -108,22 +108,22 @@ Chúng tôi cần cho Composer biết một chút về gói của chúng tôi v�
 ```
 
 * **name** là tên của gói Composer ở định dạng `vendor/package`.
-  * Bạn nên chọn tên vendor dành riêng cho bạn - ví dụ: tên người dùng GitHub của bạn. Vì mục đích của hướng dẫn này, chúng tôi sẽ giả sử bạn đang sử dụng `acme` làm tên vendor của mình.
+  * You should choose a vendor name that’s unique to you — your GitHub username, for example. For the purposes of this tutorial, we’ll assume you’re using `acme` as your vendor name.
   * Bạn nên đặt tiền tố phần `package` bằng `flarum-`để cho biết rằng đó là một gói được thiết kế đặc biệt để sử dụng với Flarum.
 
 * **description** là một mô tả ngắn một câu về chức năng của tiện ích.
 
-* **type** PHẢI được đặt thành `flarum-extension`. Điều này đảm bảo rằng khi ai đó "require" tiện ích mở rộng của bạn, nó sẽ được xác định như vậy.
+* **type** MUST be set to `flarum-extension`. This ensures that when someone "requires" your extension, it will be identified as such.
 
 * **require** chứa danh sách các phần phụ thuộc của tiện ích mở rộng của bạn.
   * Bạn sẽ muốn chỉ định phiên bản Flarum mà tiện ích mở rộng của bạn tương thích tại đây.
   * Đây cũng là nơi liệt kê các thư viện Composer khác mà mã của bạn cần để hoạt động.
 
-* **autoload** cho Composer biết nơi tìm các lớp của tiện ích mở rộng của bạn. Namespace trong đây phải phản ánh vendor tiện ích mở rộng và tên gói của bạn trong CamelCase.
+* **autoload** tells Composer where to find your extension's classes. The namespace in here should reflect your extensions' vendor and package name in CamelCase.
 
 * **extra.flarum-extension** chứa một số thông tin cụ thể về Flarum, như tên hiển thị của tiện ích mở rộng của bạn và biểu tượng của nó trông như thế nào.
   * **title** là tên hiển thị của tiện ích mở rộng của bạn.
-  * **icon** là một đối tượng xác định biểu tượng của tiện ích mở rộng của bạn. Thuộc tính **name** là tên lớp của biểu tượng [Font Awesome icon](https://fontawesome.com/icons). Tất cả các thuộc tính khác được sử dụng làm thuộc tính `style` cho biểu tượng của tiện ích mở rộng của bạn.
+  * **icon** is an object which defines your extension's icon. The **name** property is a [Font Awesome icon class name](https://fontawesome.com/icons). All other properties are used as the `style` attribute for your extension's icon.
 
 Xem tài liệu [lược đồ composer.json](https://getcomposer.org/doc/04-schema.md) để biết thông tin về các thuộc tính khác mà bạn có thể thêm vào `composer.json`.
 
@@ -138,7 +138,7 @@ $ flarum-cli init
 
 ### Cài đặt Tiện ích mở rộng của bạn
 
-Điều cuối cùng chúng tôi cần làm để thiết lập và chạy là cài đặt tiện ích mở rộng của bạn. Điều hướng đến thư mục gốc của cài đặt Flarum của bạn và chạy lệnh sau:
+The final thing we need to do to get up and running is to install your extension. Navigate to the root directory of your Flarum install and run the following command:
 
 ```bash
 composer require acme/flarum-hello-world *@dev
@@ -148,6 +148,6 @@ Sau khi hoàn tất, hãy tiếp tục và kích hoạt trên trang Quản trị
 
 *tiếng vù vù, vù vù, tiếng kêu kim loại*
 
-Woop! Xin chào bạn, phần mở rộng!
+Woop! Hello to you too, extension!
 
-Chúng tôi đang tiến triển tốt. Chúng tôi đã học cách thiết lập tiện ích mở rộng của mình và sử dụng bộ mở rộng, điều này mở ra rất nhiều cánh cửa. Đọc tiếp để tìm hiểu cách mở rộng giao diện người dùng của Flarum.
+We're making good progress. We've learned how to set up our extension and use extenders, which opens up a lot of doors. Read on to learn how to extend Flarum's frontend.
