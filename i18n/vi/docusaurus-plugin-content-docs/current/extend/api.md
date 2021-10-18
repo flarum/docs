@@ -1,6 +1,6 @@
 # API và Luồng dữ liệu
 
-In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again. 
+In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
 
 ## Vòng đời API Request
 
@@ -19,8 +19,7 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 
 ## API Endpoints
 
-We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend.
-We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints. 
+We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend. We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
 
 As per the JSON:API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
 
@@ -76,7 +75,7 @@ use Tobscure\JsonApi\Document;
 class ListTagsController extends AbstractListController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         return Tag::all();
@@ -91,7 +90,7 @@ You can allow the number of resources being **listed** to be customized by speci
 ```php
     // The number of records included by default.
     public $limit = 20;
-    
+
     // The maximum number of records that can be requested.
     public $maxLimit = 50;
 ```
@@ -114,7 +113,7 @@ You can allow the sort order of resources being **listed** to be customized by s
 ```php
     // The default sort field and order to use.
     public $sort = ['name' => 'asc'];
-    
+
     // The fields that are available to be sorted by.
     public $sortFields = ['firstName', 'lastName'];
 ```
@@ -132,7 +131,7 @@ foreach ($sort as $field => $order) {
 return $query->get();
 ```
 
-#### Searching and Filtering
+#### Tìm kiếm và Lọc
 
 Read our [searching and filtering](search.md) guide for more information!
 
@@ -149,11 +148,11 @@ use Tobscure\JsonApi\Document;
 class ShowTagController extends AbstractShowController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         $id = Arr::get($request->getQueryParams(), 'id');
-        
+
         return Tag::findOrFail($id);
     }
 }
@@ -172,11 +171,11 @@ use Tobscure\JsonApi\Document;
 class CreateTagController extends AbstractCreateController
 {
     public $serializer = TagSerializer::class;
-    
+
     protected function data(Request $request, Document $document)
     {
         $attributes = Arr::get($request->getParsedBody(), 'data.attributes');
-        
+
         return Tag::create([
             'name' => Arr::get($attributes, 'name')
         ]);
@@ -202,7 +201,7 @@ class DeleteTagController extends AbstractDeleteController
     protected function delete(Request $request)
     {
         $id = Arr::get($request->getQueryParams(), 'id');
-        
+
         Tag::findOrFail($id)->delete();
     }
 }
@@ -215,7 +214,7 @@ To include relationships when **listing**, **showing**, or **creating** your res
 ```php
     // The relationships that are included by default.
     public $include = ['user'];
-    
+
     // Other relationships that are available to be included.
     public $optionalInclude = ['discussions'];
 ```
@@ -270,13 +269,9 @@ return [
 
 ## Serializers
 
-Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend.
-You should become familiar with the [JSON:API specification](https://jsonapi.org/format/).
-Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
+Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
 
-A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API.
-Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information.
-To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
+A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API. Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
 
 ```php
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -345,5 +340,4 @@ return [
 
 ### Non-Model Serializers and `ForumSerializer`
 
-Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything.
-For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
+Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything. For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
