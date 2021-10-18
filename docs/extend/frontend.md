@@ -83,7 +83,7 @@ To work properly, our extensions should use the [official flarum webpack config]
 
 ### tsconfig.json
 
-```jsonc
+```json
 {
   // Use Flarum's tsconfig as a starting point
   "extends": "flarum-tsconfig",

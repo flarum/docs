@@ -50,7 +50,7 @@ When running `composer.json` commands, make sure to pay attention to the output.
 
 As mentioned above, the entire composer configuration for your Flarum site is contained inside the `composer.json` file. You can consult the [composer documentation](https://getcomposer.org/doc/04-schema.md) for a specific schema, but for now, let's go over an annotated `composer.json` from `flarum/flarum`:
 
-```jsonc
+```json
 {
     // This following section is mostly just metadata about the package.
     // For forum admins, this doesn't really matter.

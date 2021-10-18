@@ -117,9 +117,9 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
 }
 ```
 
-#### Github Testing Workflow
+#### GitHub Testing Workflow
 
-In public repos, Github Actions allow you to run all your tests on every commit and pull request for free. You can copy [Flarum core's Github Actions](https://github.com/flarum/core/blob/master/.github/workflows/test.yml) testing workflow into your extension's `.github/workflows` folder to enable this.
+In public repos, GitHub Actions allow you to run all your tests on every commit and pull request for free. You can copy [Flarum core's GitHub Actions](https://github.com/flarum/core/blob/master/.github/workflows/test.yml) testing workflow into your extension's `.github/workflows` folder to enable this.
 
 ---
 
@@ -129,7 +129,7 @@ Testing database information is configured via the `DB_HOST` (defaults to `local
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via Github Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
