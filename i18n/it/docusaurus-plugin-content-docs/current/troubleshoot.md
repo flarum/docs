@@ -6,19 +6,26 @@ Successivamente, dovresti impiegare alcuni minuti per cercare nel [Forum di supp
 
 ## Step 0: Attiva il debug mode
 
+:::danger Skip on Production
+
+These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+
+:::
+
 Prima di procedere, dovresti abilitare gli strumenti di debug di Flarum. Apri semplicemente il file **config.php** con un editor di testo, modifica il valore `debug` su `true`, e salva il file. uesto farà sì che Flarum visualizzi messaggi di errore dettagliati, dandoti un'idea di cosa non va.
 
 Se hai visto pagine vuote e la modifica sopra non aiuta, prova a impostare `display_errors` su `On` nel file di configurazione **php.ini**.
 
 ## Step 1: Correzioni comuni
 
-AMolti problemi possono essere risolti con quanto segue:
+A lot of issues can be fixed with the following:
 
 * Pulisci la cache del browser
 * Pulisci la cache del backend con il comando [`php flarum cache:clear`](console.md).
 * Assicurati che il tuo database sia aggiornato con il comando [`php flarum migrate`](console.md).
 * Assicurati che [la configurazione email](mail.md) nel tuo pannello di amministrazione sia corretta: una configurazione e-mail non valida causerà errori durante la registrazione, la reimpostazione di una password, la modifica delle e-mail e l'invio di notifiche.
 * Controlla che il tuo file `config.php` sia corretto. Ad esempio, assicurati di utilizzare un `url` corretto.
+* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 Dovrai anche dare un'occhiata all'output di [`php flarum info`](console.md) per assicurarti che nulla di importante sia fuori posto.
 
