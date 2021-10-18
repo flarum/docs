@@ -1,0 +1,50 @@
+{
+  "version.label": {
+    "message": "Tiếp theo",
+    "description": "The label for version current"
+  },
+  "sidebar.guideSidebar.category.Introduction": {
+    "message": "Giới thiệu",
+    "description": "The label for category Introduction in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Contribute": {
+    "message": "Đóng góp",
+    "description": "The label for category Contribute in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Setting Up": {
+    "message": "Cài đặt",
+    "description": "The label for category Setting Up in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Management": {
+    "message": "Quản lý",
+    "description": "The label for category Management in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Advanced": {
+    "message": "Nâng cao",
+    "description": "The label for category Advanced in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.link.Other Ways to Help": {
+    "message": "Trợ giúp bằng cách khác",
+    "description": "The label for link Other Ways to Help in sidebar guideSidebar, linking to /#help-the-flarum-project"
+  },
+  "sidebar.extendSidebar.category.Main Concepts": {
+    "message": "Khái niệm chính",
+    "description": "The label for category Main Concepts in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Reference Guides": {
+    "message": "Hướng dẫn Tham khảo",
+    "description": "The label for category Reference Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Advanced Guides": {
+    "message": "Hướng dẫn nâng cao",
+    "description": "The label for category Advanced Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Update Guides": {
+    "message": "Hướng dẫn nâng cấp",
+    "description": "The label for category Update Guides in sidebar extendSidebar"
+  },
+  "sidebar.internalSidebar.category.Internal Docs": {
+    "message": "Tài liệu nội bộ",
+    "description": "The label for category Internal Docs in sidebar internalSidebar"
+  }
+}
