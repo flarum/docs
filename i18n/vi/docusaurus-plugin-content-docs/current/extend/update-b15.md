@@ -10,7 +10,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## New Features / Deprecations
 
-### Extenders
+### Bộ mở rộng
 
 - `Flarum\Api\Event\WillGetData` and `Flarum\Api\Event\WillSerializeData` have been deprecated, the `ApiController` extender should be used instead
 - `Flarum\Api\Event\Serializing` and `Flarum\Event\GetApiRelationship` have been deprecated, the `ApiSerializer` extender should be used instead
