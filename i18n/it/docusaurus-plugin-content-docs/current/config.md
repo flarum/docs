@@ -4,14 +4,14 @@ C'è solo un un eccezione in cui la configurazione di Flarum non può essere mod
 
 Questo file, sebbene piccolo, contiene dettagli cruciali per il corretto funzionamento dell'installazione di Flarum.
 
-Se il file esiste, dice a Flarum che è già stato installato.
-Fornisce inoltre a Flarum informazioni importanti sul database e altro ancora.
+Se il file esiste, dice a Flarum che è già stato installato. Fornisce inoltre a Flarum informazioni importanti sul database e altro ancora.
 
 Ecco una rapida panoramica di cosa significa con un file di esempio:
 
 ```php
 <?php return array (
   'debug' => false, // abilita o disabilita il debug mode, utilizzato per la risoluzione dei problemi
+  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
     'driver' => 'mysql', // il driver del database, es. MySQL, MariaDB...
