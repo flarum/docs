@@ -4,9 +4,7 @@ Ad un certo punto durante la creazione di un'estensione, potresti voler leggere 
 
 ## La repository Impostazioni
 
-La lettura o la modifica delle impostazioni può essere eseguita utilizzando un'implementazione di `SettingsRepositoryInterface`.
-Poichè Flarum utilizza [il contenitore di servizi di Laravel](https://laravel.com/docs/6.x/container) (o IoC container)per l'inserimento di dipendenze, non è necessario preoccuparsi di dove ottenere tale repository o di come istanziarne una.
-Invece, puoi fare affidamento sul contenitore per istanziare la tua classe e inserire le dipendenze corrette.
+La lettura o la modifica delle impostazioni può essere eseguita utilizzando un'implementazione di `SettingsRepositoryInterface`. Invece, puoi fare affidamento sul contenitore per istanziare la tua classe e inserire le dipendenze corrette. Poichè Flarum utilizza [il contenitore di servizi di Laravel](https://laravel.com/docs/6.x/container) (o IoC container)per l'inserimento di dipendenze, non è necessario preoccuparsi di dove ottenere tale repository o di come istanziarne una.
 
 ```php
 <?php
@@ -29,7 +27,7 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Perfetto, ora `SettingsRepositoryInterface` è disponibile tramite la classe `$this->settings`.
+Grande! Perfetto, ora `SettingsRepositoryInterface` è disponibile tramite la classe `$this->settings`.
 
 ### Leggere le impostazioni
 
@@ -64,11 +62,9 @@ La funzione `delete($name)` ti consente di rimuovere un'impostazione con nome.
 ### Modifica delle impostazioni
 
 Per ulteriori informazioni sulla gestione delle impostazioni tramite la dashboard dell'amministratore, consultare la [documentazione pertinente](admin.md).
-
 ### Accesso alle impostazioni
 
-Tutte le impostazioni sono disponibili nel frontend `admin` tramite `app.data.settings`.
-Tuttavia, questo non viene mostrato nel frontend `forum`, poiché chiunque può accedervi e non vorrai perdere tutte le tue impostazioni! (Scherzi a parte, potrebbe essere una violazione dei dati molto problematica).
+Tutte le impostazioni sono disponibili nel frontend `admin` tramite `app.data.settings`. Tuttavia, questo non viene mostrato nel frontend `forum`, poiché chiunque può accedervi e non vorrai perdere tutte le tue impostazioni! (Scherzi a parte, potrebbe essere una violazione dei dati molto problematica).
 
 Se invece vogliamo utilizzare le impostazioni nel frontend `forum`, dovremo serializzarli e inviarli insieme al payload iniziale dei dati del forum.
 
