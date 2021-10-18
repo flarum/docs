@@ -22,13 +22,14 @@ class YourCommand implements AbstractCommand {
     // Su lógica aquí
   }
 }
+  }
+}
 ```
 
-## Registro de los comandos de la consola
+:::info [Flarum CLI](https://github.com/flarum/cli)
 
-Para registrar los comandos de la consola, utilice el extensor `Flarum\Extend\Console` en el archivo `extend.php` de su extensión:
-
-```php
+:::tip Comandos Programados
+```bash
 use Flarum\Extend;
 use YourNamespace\Console\CustomCommand;
 
@@ -39,8 +40,40 @@ return [
 ];
 ```
 
-:::tip Comandos Programados
-
-La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular. Sin embargo, tenga en cuenta que se trata de una solución comunitaria.
-
 :::
+
+## Registro de los comandos de la consola
+
+To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
+
+```php
+use Flarum\Extend;
+use YourNamespace\Console\CustomCommand;
+
+return [
+  // Other extenders
+  (new Extend\Console())->command(CustomCommand::class)
+  // Other extenders
+];
+```
+
+## Scheduled Commands
+
+La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular.
+
+
+```php
+use Flarum\Extend;
+use YourNamespace\Console\CustomCommand;
+use Illuminate\Console\Scheduling\Event;
+
+return [
+    // Other extenders
+    (new Extend\Console())->schedule('cache:clear', function (Event $event) {
+        $event->everyMinute();
+    }, ['Arg1', '--option1', '--option2']),
+    // Other extenders
+];
+```
+
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) for more information.
