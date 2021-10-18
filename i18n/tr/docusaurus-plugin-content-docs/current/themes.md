@@ -18,7 +18,7 @@ CSS, tarayıcılara bir web sayfasının öğelerinin nasıl görüntüleneceği
 
 Bir CSS eğitimi bu belgesinin kapsamı dışındadır, ancak CSS'nin temellerini öğrenmek için birçok harika çevrimiçi kaynak vardır.
 
-:::İPUCU
+:::tip
 
 Flarum aslında LESS kullanır, bu da değişkenlere, koşullara ve işlevlere izin vererek CSS yazmayı kolaylaştırır.
 
@@ -26,6 +26,4 @@ Flarum aslında LESS kullanır, bu da değişkenlere, koşullara ve işlevlere i
 
 ## Uzantılar
 
-Flarum'un esnek [uzantı sistemi](extensions.md), Flarum'un herhangi bir parçasını pratik olarak eklemenize, çıkarmanıza veya değiştirmenize olanak tanır.
-Renkleri/boyutları/stilleri değiştirmenin ötesinde önemli tema değişiklikleri yapmak istiyorsanız, kesinlikle gitmenin yolu özel bir uzantıdır.
-Bir uzantının nasıl oluşturulacağını öğrenmek için [uzantı belgelerimize](extend/README.md) göz atın!
+Flarum'un esnek [uzantı sistemi](extensions.md), Flarum'un herhangi bir parçasını pratik olarak eklemenize, çıkarmanıza veya değiştirmenize olanak tanır. Renkleri/boyutları/stilleri değiştirmenin ötesinde önemli tema değişiklikleri yapmak istiyorsanız, kesinlikle gitmenin yolu özel bir uzantıdır. Bir uzantının nasıl oluşturulacağını öğrenmek için [uzantı belgelerimize](extend/README.md) göz atın!
