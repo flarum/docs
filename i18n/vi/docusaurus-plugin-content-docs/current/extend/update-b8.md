@@ -18,7 +18,7 @@ Beta 8 comes with large changes to the overall structure of the PHP backend. You
 
 Many database columns and JSON:API attributes have been renamed to conform to a [convention](/contributing.md#database). You will need to update any instances where your extension interacts with core data. You can see the changes in [#1344](https://github.com/flarum/core/pull/1344/files).
 
-## Extenders
+## Bộ mở rộng
 
 Beta 8 introduces a new concept called **extenders** that replace the most common event listeners. You can learn more about how they work in the [updated extension docs](start.md#extenders).
 
@@ -42,8 +42,8 @@ return [
 
 If you're listening for any of the following events, you'll need to update your code to use an extender instead. See the relevant docs for more information.
 
-| Event                               | Extender                  |
-| ----------------------------------- | ------------------------- |
+| Event                                 | Extender                    |
+| ------------------------------------- | --------------------------- |
 | `Flarum\Event\ConfigureFormatter`*  | `Flarum\Extend\Formatter` |
 | `Flarum\Event\ConfigureWebApp`*     | `Flarum\Extend\Frontend`  |
 | `Flarum\Event\ConfigureClientView`* | `Flarum\Extend\Frontend`  |
