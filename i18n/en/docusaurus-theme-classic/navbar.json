@@ -27,8 +27,8 @@
     "message": "Community",
     "description": "Navbar item with label Community"
   },
-  "item.label.GitHub": {
-    "message": "GitHub",
-    "description": "Navbar item with label GitHub"
+  "item.label.Github": {
+    "message": "Github",
+    "description": "Navbar item with label Github"
   }
 }
