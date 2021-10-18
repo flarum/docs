@@ -6,25 +6,32 @@ A continuación, deberías tomarte unos minutos para buscar en el [foro de sopor
 
 ## Paso 0: Activar el modo de depuración
 
+:::danger Skip on Production
+
+These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+
+:::
+
 Antes de continuar, debes habilitar las herramientas de depuración de Flarum. Simplemente abre **config.php** con un editor de texto, cambia el valor de `debug` a `true`, y guarda el archivo. Esto hará que Flarum muestre mensajes de error detallados, dándote una idea de lo que está fallando.
 
 Si ha estado viendo páginas en blanco y el cambio anterior no ayuda, intente establecer `display_errors` a `On` en su archivo de configuración **php.ini**.
 
 ## Paso 1: Arreglos comunes
 
-Muchos problemas se pueden solucionar con lo siguiente:
+A lot of issues can be fixed with the following:
 
 * Borrar la caché del navegador
 * Borrar la caché del backend con [`php flarum cache:clear`](console.md).
 * Asegúrese de que su base de datos está actualizada con [`php flarum migrate`](console.md).
 * Asegúrese de que la [configuración de correo electrónico](mail.md) en su panel de administración es correcta: una configuración de correo electrónico no válida causará errores al registrarse, restablecer una contraseña, cambiar correos electrónicos y enviar notificaciones.
 * Comprueba que su `config.php` es correcto. Por ejemplo, asegúrate de que se utiliza la "url" correcta.
+* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 También querrás echar un vistazo a la salida de [`php flarum info`](console.md) para asegurarte de que nada importante está fuera de lugar.
 
 ## Paso 2: Reproducir el problema
 
-Intenta que el problema se repita. Presta mucha atención a lo que estás haciendo cuando ocurre. ¿Sucede siempre, o sólo de vez en cuando? Intenta cambiar un ajuste que creas que puede afectar al problema, o el orden en que estás haciendo las cosas. ¿Sucede en algunas condiciones, pero no en otras?
+Intenta que el problema se repita. Presta mucha atención a lo que estás haciendo cuando ocurre. Does it happen every time, or only now and then? Try changing a setting that you think might affect the problem, or the order in which you're doing things. ¿Sucede en algunas condiciones, pero no en otras?
 
 Si has añadido o actualizado recientemente una extensión, deberías desactivarla temporalmente para ver si el problema desaparece. Asegúrate de que todas tus extensiones fueron creadas para ser usadas con la versión de Flarum que estás ejecutando. Las extensiones desactualizadas pueden causar una variedad de problemas.
 
