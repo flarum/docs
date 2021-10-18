@@ -19,7 +19,7 @@ Historically, Composer has caused issues on shared hosting due to huge memory us
 
 > Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md). Each of these has its own dependencies and releases.
+Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md).Each of these has its own dependencies and releases.
 
 Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
 
@@ -50,7 +50,7 @@ When running `composer.json` commands, make sure to pay attention to the output.
 
 As mentioned above, the entire composer configuration for your Flarum site is contained inside the `composer.json` file. You can consult the [composer documentation](https://getcomposer.org/doc/04-schema.md) for a specific schema, but for now, let's go over an annotated `composer.json` from `flarum/flarum`:
 
-```json
+```jsonc
 {
     // This following section is mostly just metadata about the package.
     // For forum admins, this doesn't really matter.
@@ -81,23 +81,23 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     // It's a list of packages we want, and the versions for each.
     // We'll discuss this shortly.
     "require": {
-        "flarum/core": "^1.0",
-        "flarum/approval": "*",
-        "flarum/bbcode": "*",
-        "flarum/emoji": "*",
-        "flarum/lang-english": "*",
-        "flarum/flags": "*",
-        "flarum/likes": "*",
-        "flarum/lock": "*",
-        "flarum/markdown": "*",
-        "flarum/mentions": "*",
-        "flarum/nicknames": "*",
-        "flarum/pusher": "*",
-        "flarum/statistics": "*",
-        "flarum/sticky": "*",
-        "flarum/subscriptions": "*",
-        "flarum/suspend": "*",
-        "flarum/tags": "*"
+        "flarum/core": "^0.1.0",
+        "flarum/approval": "^0.1.0",
+        "flarum/bbcode": "^0.1.0",
+        "flarum/emoji": "^0.1.0",
+        "flarum/lang-english": "^0.1.0",
+        "flarum/flags": "^0.1.0",
+        "flarum/likes": "^0.1.0",
+        "flarum/lock": "^0.1.0",
+        "flarum/markdown": "^0.1.0",
+        "flarum/mentions": "^0.1.0",
+        "flarum/nicknames": "^0.1.0",
+        "flarum/pusher": "^0.1.0",
+        "flarum/statistics": "^0.1.0",
+        "flarum/sticky": "^0.1.0",
+        "flarum/subscriptions": "^0.1.0",
+        "flarum/suspend": "^0.1.0",
+        "flarum/tags": "^0.1.0"
     },
 
     // Various composer config. The ones here are sensible defaults.
@@ -119,7 +119,7 @@ To read more about version strings, see the relevant [composer documentation](ht
 
 For Flarum projects, there's several types of entries you'll see in the `require` section of your root install's `flarum/core`:
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0`.
+- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0.0`.
 - You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
