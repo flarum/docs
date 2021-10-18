@@ -27,8 +27,8 @@
     "message": "Cộng đồng",
     "description": "Navbar item with label Community"
   },
-  "item.label.Github": {
-    "message": "Github",
-    "description": "Navbar item with label Github"
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
   }
 }
