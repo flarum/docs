@@ -53,7 +53,7 @@ For common tasks like creating a table, or adding columns to an existing table, 
 
 ### Vòng đời Migration
 
-Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed. 
+Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
 
 Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Uninstall" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
 
@@ -136,6 +136,7 @@ With all your snazzy new database tables and columns, you're going to want a way
 ### Thêm Models mới
 
 If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions. See the Eloquent docs linked above for examples of what your model class should look like.
+
 
 <!--
 ### Extending Models
@@ -223,7 +224,7 @@ const posts = discussion.posts(); // array of Post models
 
 You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
 
-### Thêm Model mới
+### Thêm Models mới
 
 If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
 
@@ -244,6 +245,7 @@ You must then register your new model with the store:
 app.store.models.tags = Tag;
 ```
 
+
 <!-- You must then register your new model with the store using the `Model` extender:
 
 ```js
@@ -251,9 +253,7 @@ export const extend = [
   new Extend.Model('tags', Tag)
 ];
 ``` -->
-
 ### Model mở rộng
-
 To add attributes and relationships to existing models, modify the model class prototype:
 
 ```js
@@ -261,6 +261,7 @@ Discussion.prototype.user = Model.hasOne('user');
 Discussion.prototype.posts = Model.hasMany('posts');
 Discussion.prototype.slug = Model.attribute('slug');
 ```
+
 
 <!-- To add attributes and relationships to existing models, use the `Model` extender:
 
@@ -270,9 +271,7 @@ Discussion.prototype.slug = Model.attribute('slug');
     .hasOne('user')
     .hasMany('posts')
 ``` -->
-
 ### Lưu tài nguyên
-
 To send data back through the API, call the `save` method on a model instance. This method returns a Promise which resolves with the same model instance:
 
 ```js
