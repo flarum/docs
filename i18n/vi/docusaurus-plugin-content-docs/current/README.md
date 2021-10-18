@@ -1,22 +1,22 @@
----
+- - -
 slug: /
----
+- - -
 
 # Về Flarum
 
-Flarum là một nền tảng diễn đàn đơn giản cho trang web của bạn. Nó nhanh chóng, miễn phí và dễ sử dụng, với tất cả các tính năng bạn cần để điều hành một cộng đồng thành công. Nó cũng có thể mở rộng, cho phép khả năng tùy chỉnh cao nhất.
+Flarum is a delightfully simple discussion platform for your website. It's fast, free, and easy to use, with all the features you need to run a successful community. It's also extremely extensible, allowing for ultimate customizability.
 
 ![Flarum Home Screenshot](/en/img/home_screenshot.png)
 
 ## Mục tiêu
 
-Flarum là sự kế thừa kết hợp giữa [esoTalk](https://github.com/esotalk/esoTalk) và [FluxBB](https://fluxbb.org). Nó được thiết kế để:
+Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk) and [FluxBB](https://fluxbb.org). It is designed to be:
 
-* **Nhanh và đơn giản.** Không lộn xộn, không cồng kềnh, không phụ thuộc phức tạp. Flarum được xây dựng bằng PHP nên rất nhanh chóng và dễ dàng triển khai. Giao diện được cung cấp bởi [Mithril](https://mithril.js.org/), một khung JavaScript hiệu quả với một dấu ấn nhỏ.
+* **Fast and simple.** No clutter, no bloat, no complex dependencies. Flarum is built with PHP so it’s quick and easy to deploy. The interface is powered by [Mithril](https://mithril.js.org), a performant JavaScript framework with a tiny footprint.
 
-* **Đẹp và đáp ứng.** Đây là phần mềm diễn đàn dành cho mọi người. Ngay từ đầu, Flarum được thiết kế cẩn thận để nhất quán và trực quan trên các nền tảng.
+* **Beautiful and responsive.** This is forum software for humans. Flarum is carefully designed to be consistent and intuitive across platforms, out-of-the-box.
 
-* **Mạnh mẽ và có thể mở rộng.** Tuỳ chỉnh, mở rộng và tích hợp Flarum để phù hợp với cộng đồng của bạn. Kiến trúc của Flarum linh hoạt một cách đáng kinh ngạc, với [API tiện ích mở rộng mạnh mẽ](/extend/README.md).
+* **Powerful and extensible.** Customize, extend, and integrate Flarum to suit your community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](/extend/README.md).
 
 * **Miễn phí và mở.** Flarum được phát hành theo [giấy phép MIT](https://github.com/flarum/flarum/blob/master/LICENSE).
 
@@ -24,9 +24,9 @@ Bạn có thể đọc thêm về [triết lý và giá trị của chúng tôi 
 
 ## Trợ giúp dự án Flarum
 
-Flarum là phần mềm [miễn phí, mã nguồn mở](https://github.com/flarum/core), được duy trì và quản lý bởi các tình nguyện viên. Chúng tôi dựa vào sự đóng góp của cộng đồng để giúp chúng tôi cải thiện và mở rộng Flarum.
+Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
 
-🧑‍💻 Nếu bạn là lập trình viên, xem xét [đóng góp vào các phần mở rộng cốt lõi hoặc đi kèm của Flarum](contributing.md). Đây là cách hiệu quả nhất để trợ giúp Flarum và công việc của bạn có thể có nhiều tác động: có hàng nghìn trang web của Flarum trên mạng, với tổng số hàng triệu người dùng cuối.
+🧑‍💻 If you're a developer, consider [contributing to Flarum's core or bundled extensions](contributing.md). This is **the** most efficient way to help Flarum, and your work can have a lot of impact: there are thousands of Flarum sites out there, with millions of total end users.
 
 🧩 Nếu thiếu tính năng bạn đang tìm kiếm hoặc ý tưởng chủ đề bạn có, [viết một phần mở rộng tùy chỉnh](extend/README.md) sẽ làm cho Flarum tốt hơn nhiều cho bạn và những người khác.
 
@@ -34,12 +34,12 @@ Flarum là phần mềm [miễn phí, mã nguồn mở](https://github.com/flaru
 
 🌐 Nếu bạn thông thạo được nhiều ngôn ngữ, bạn có thể [đóng góp bản dịch](extend/language-packs.md) để giúp Flarum tiếp cận đến được nhiều người trên thế giới hơn.
 
-💸 Flarum Foundation không kiếm tiền từ Flarum, nhưng có các hóa đơn phải trả. Đóng góp qua [Nhà tài trợ Github](https://github.com/sponsors/flarum) hoặc [OpenCollective](https://opencollective.com/flarum) luôn được đón nhận một cách biết ơn. Trước đây, chúng tôi cũng đã có thể hỗ trợ tài chính cho một số nhà phát triển cốt lõi của mình, để họ có thể làm việc bán thời gian trên Flarum. Điều này sẽ không thể thực hiện được nếu không có sự hỗ trợ tài chính của bạn.
+💸 The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This wouldn't be possible without your financial support.
 
-🧑‍🤝‍🧑 Tham gia [cộng đồng của chúng tôi](https://discuss.flarum.org) để trò chuyệN về sự phát triển của Flarum, nhận trợ giúp về phiên bản của bạn hoặc chỉ gặp gỡ những người thú vị! Nếu bạn có kinh nghiệm với Flarum, bạn cũng có thể giúp đỡ những người mới bắt đầu!
+🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners!
 
-🐛 Nếu có một lỗi nào đó đang làm phiền bạn hoặc một ý tưởng tính năng trong đầu bạn, chúng tôi không thể biết về nó trừ khi bạn cho chúng tôi biết! Chúng tôi theo dõi lỗi, đề xuất và kế hoạch phát triển trong tương lai [thông qua các vấn đề GitHub](https://github.com/flarum/core/issues). Nếu đã có một vấn đề đang mở, việc thêm lượt thích và thông tin bổ sung (mang tính xây dựng) có thể rất hữu ích!
+🐛 If there's a bug that's bothering you, or a feature idea on your mind, we can't know about it unless you tell us! We track bugs, suggestions, and future development plans [via GitHub issues](https://github.com/flarum/core/issues). If there's already an issue open, adding likes and (constructive) additional information can be very helpful!
 
-📣 Và nếu bạn thích Flarum, hãy cân nhắc viết blog/tweet/nói về nó! Nhiều người biết đến Flarum hơn dẫn đến nhiều người tương tác với Flarum hơn, và do đó có nhiều hoạt động hơn, tiện ích mở rộng tốt hơn và phát triển nhanh hơn.
+📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
 
-Flarum sẽ không thể thực hiện được nếu không có cộng đồng hiện tượng của chúng tôi. Nếu bạn muốn đóng góp, hãy xem tài liệu [đóng góp của nhà phát triển](contributing.md) và [đóng góp khác](contributing-docs-translations.md) của chúng tôi để biết thêm thông tin.
+Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-docs-translations.md) docs for more information.
