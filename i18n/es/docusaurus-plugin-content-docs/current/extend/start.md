@@ -1,6 +1,6 @@
 # Cómo empezar
 
-¿Quieres construir una extensión de Flarum? ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
+¿Quieres construir una extensión de Flarum? You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
 
 ## Arquitectura
 
@@ -119,14 +119,6 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
   * Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
   * Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
 
-  :::caution Elige cuidadosamente la versión de Flarum
-
-  Mientras Flarum esté todavía en fase beta, le recomendamos que declare la compatibilidad sólo con la versión actual de Flarum:
-
-      "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
-
-  :::
-
 * **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
 
 * **extra.flarum-extension** contiene alguna información específica de Flarum, como el nombre de su extensión y el aspecto de su icono.
@@ -135,9 +127,12 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 
-:::tip
+:::info [Flarum CLI](https://github.com/flarum/cli)
 
 Utilice el [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) para crear automáticamente el andamiaje de su extensión.
+```bash
+$ flarum-cli init
+```
 
 :::
 
@@ -151,6 +146,8 @@ composer require acme/flarum-hello-world *@dev
 
 Una vez hecho esto, sigue adelante y activa la extension en la página de administración de tu foro, luego navega de nuevo a tu foro.
 
-¡Listo!
+*whizzing, whirring, metal clunking*
+
+Woop! Hello to you too, extension!
 
 Estamos haciendo buenos progresos. Hemos aprendido a configurar nuestra extensión y a utilizar los extensores, lo que nos abre muchas puertas. Sigue leyendo para aprender a extender el frontend de Flarum.
