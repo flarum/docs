@@ -7,10 +7,6 @@
     "message": "Giới thiệu",
     "description": "The label for category Introduction in sidebar guideSidebar"
   },
-  "sidebar.guideSidebar.category.Contribute": {
-    "message": "Đóng góp",
-    "description": "The label for category Contribute in sidebar guideSidebar"
-  },
   "sidebar.guideSidebar.category.Setting Up": {
     "message": "Cài đặt",
     "description": "The label for category Setting Up in sidebar guideSidebar"
@@ -22,10 +18,6 @@
   "sidebar.guideSidebar.category.Advanced": {
     "message": "Nâng cao",
     "description": "The label for category Advanced in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.link.Other Ways to Help": {
-    "message": "Trợ giúp bằng cách khác",
-    "description": "The label for link Other Ways to Help in sidebar guideSidebar, linking to /#help-the-flarum-project"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
     "message": "Khái niệm chính",
