@@ -1,9 +1,6 @@
 # Service Provider
 
-As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection.
-[Service Providers](https://laravel.com/docs/8.x/providers) allow low-level configuration and modification of the Flarum backend.
-The most common use case for service providers is to create, modify, or replace container bindings.
-That being said, service providers allow you full access to run whatever logic you need during application boot with access to the container.
+As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection. [Service Providers](https://laravel.com/docs/8.x/providers) allow low-level configuration and modification of the Flarum backend. The most common use case for service providers is to create, modify, or replace container bindings. That being said, service providers allow you full access to run whatever logic you need during application boot with access to the container.
 
 :::caution Advanced Use Only!!!
 
