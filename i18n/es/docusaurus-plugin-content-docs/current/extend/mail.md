@@ -1,6 +1,6 @@
 # Correo
 
-Además de los [controladores por defecto en el núcleo](../mail.md), Flarum permite añadir nuevos controladores de correo a través de extensores. Para crear su propio controlador de correo, necesitará crear una clase que implemente ``Flarum\Mail\DriverInterface``. Flarum se encarga de proporcionar la configuración del correo electrónico: sólo tiene que declarar la configuración que necesita, y los valores por defecto, en `availableSettings`.
+Además de los [controladores por defecto en el núcleo](../mail.md), Flarum permite añadir nuevos controladores de correo a través de extensores. Para crear su propio controlador de correo, necesitará crear una clase que implemente `Flarum\Mail\DriverInterface`. Flarum se encarga de proporcionar la configuración del correo electrónico: sólo tiene que declarar la configuración que necesita, y los valores por defecto, en `availableSettings`.
 
 Por ejemplo:
 
