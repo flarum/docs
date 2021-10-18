@@ -18,6 +18,8 @@ Il driver `mail` proverà a utilizzare il sistema di posta sendmail / postfix in
 
 Questo driver utilizza il tuo account [Mailgun](https://www.mailgun.com/) per inviare email. Avrai bisogno di una chiave segreta, così come il dominio e la regione reperibili dalla configurazione della tua mailgun.
 
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
+
 ### Log
 
 Il driver Log NON INVIA EMAIL,ed è utilizzato principalmente dagli sviluppatori. Scrive il contenuto di qualsiasi messaggio di posta elettronica nel file di registro in  `DIRECTORY_PRINCIPALE_FLARUM/storage/logs`.
