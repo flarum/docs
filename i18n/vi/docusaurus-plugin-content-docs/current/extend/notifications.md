@@ -67,8 +67,7 @@ Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blo
 
 ### Registering a Notification Type
 
-Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification.
-We can do this with the `type` method of the `Notification` extender
+Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification. We can do this with the `type` method of the `Notification` extender
 
 * `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
 * `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
@@ -95,9 +94,7 @@ Your notification is coming together nicely! Just a few things left to do!
 
 ### Mailable Notifications
 
-In addition to registering our notification to send by email, if we actually want it to send, we need to provide a bit more information: namely, code for generating the email subject and body.
-To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
-This comes with 2 additional methods:
+In addition to registering our notification to send by email, if we actually want it to send, we need to provide a bit more information: namely, code for generating the email subject and body. To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface). This comes with 2 additional methods:
 
 - `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/8.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
@@ -199,8 +196,7 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
 
 ### Notification Drivers
 
-In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`.
-The driver should implement `Flarum\Notification\Driver\NotificationDriverInterface`. Let's look at an annotated example from the [Pusher extension](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
+In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`. The driver should implement `Flarum\Notification\Driver\NotificationDriverInterface`. Let's look at an annotated example from the [Pusher extension](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
 
 ```php
 <?php
