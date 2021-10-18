@@ -18,6 +18,8 @@ Bu muhtemelen en yaygın kullanılan e-posta sürücüsüdür ve harici bir SMTP
 
 Bu sürücü, e-posta göndermek için [Mailgun](https://www.mailgun.com/) hesabınızı kullanır. Mailgun yapılandırmanızdaki etki alanı ve bölgenin yanı sıra gizli bir anahtara ihtiyacınız olacak.
 
+To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
+
 ### Günlük
 
 Günlük posta sürücüsü POSTA GÖNDERMEZ ve öncelikle geliştiriciler tarafından kullanılır. Herhangi bir e-postanın içeriğini `FLARUM_ROOT_DIRECTORY/storage/logs` içindeki günlük dosyasına yazar.
