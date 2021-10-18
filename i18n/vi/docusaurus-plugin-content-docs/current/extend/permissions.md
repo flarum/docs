@@ -18,8 +18,7 @@ Admins can also create new groups through the admin dashboard. Users can be adde
 
 ## Permissions
 
-Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same).
-That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
+Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same). That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
 
 There's no direct association between users and permissions: when we check a user's permissions, we're actually enumerating permissions for all the user's groups.
 
