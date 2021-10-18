@@ -1,32 +1,18 @@
-# Help Build Flarum
+# Contributing
 
-Interested in contributing to Flarum development? That's great! From [opening a bug report](bugs.md) to creating a pull request: every single one is appreciated and welcome. Flarum wouldn't be possible without our community contributions.
+Interested in contributing to Flarum development? That's great! From [opening a bug report](bugs.md) to creating a pull request: every contribution is appreciated and welcome.
 
 Before contributing, please read the [code of conduct](code-of-conduct.md).
 
 This document is a guide for developers who want to contribute code to Flarum. If you're just getting started, we recommend that you read the [Getting Started](/extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
-## Why Contribute to Flarum?
-
-⚡ **Have Real Impact.** There are thousands of Flarum instances, with millions of aggregate end users. By contributing to Flarum, your code will have a positive impact on all of them.
-
-🔮 **Shape the Future of Flarum.** We have a long backlog, and limited time. If you're willing to champion a feature or change, it's much more likely to happen, and you'll be able to enact your vision for it. Plus, our roadmap and milestones are set by our [core development team](https://flarum.org/team), and all of us started as contributors. The best road to influence is contributing.
-
-🧑‍💻 **Become a Better Engineer.** Our codebase is modern, and we heavily value good engineering and clean code. There's also a lot of interesting, challenging problems to solve regarding design, infrastructure, performance, and extensibility. Especially if you're a student or early in your career, working on Flarum is a great opportunity to build development skills.
-
-🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
-
 ## What to Work On
 
-Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
+Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with.
 
 If you're planning to go ahead and work on something, please comment on the relevant issue or create a new one first. This way we can ensure that your precious work is not in vain.
 
-Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
-
 ## Development Setup
-
-### Setting Up a Local Codebase
 
 [flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). In order to work on these, we recommend forking and cloning them into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
@@ -63,22 +49,9 @@ npm link ../../core/js
 npm run dev
 ```
 
-### Development Tools
-
-After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes.
-Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
-
-Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
-
-Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
-
 ## Development Workflow
 
 A typical contribution workflow looks like this:
-
-0. 🧭 **Plan** out your contribution
-    * Figure out [which issue you want to tackle](#what-to-work-on)
-    * Set up a [development environment](#setting-up-a-local-codebase)
 
 1. 🌳 **Branch** off the appropriate branch into a new feature branch.
     * *Bug fixes* should be sent to the latest stable branch.
@@ -89,10 +62,13 @@ A typical contribution workflow looks like this:
 2. 🔨 **Write** some code.
     * See below about [Coding Style](#coding-style).
 
-3. 🚦 **Test** your code.
+1. 🚦 **Test** your code.
     * Add unit tests as necessary when fixing bugs or adding features.
     * Run the test suite with `vendor/bin/phpunit` in the relevant package folder.
-    * See [here](extend/testing.md) for more information about testing in Flarum.
+
+<!--
+    * See [here](link-to-core/tests/README.md) for more information about testing in Flarum.
+-->
 
 4. 💾 **Commit** your code with a descriptive message.
     * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
@@ -113,7 +89,7 @@ A typical contribution workflow looks like this:
 
 In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
-Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
+Don't worry if your code styling isn't perfect! StyleCI will automatically merge any style fixes into Flarum repositories after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
 
 ### PHP
 
@@ -149,6 +125,12 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 ### Translations
 
 We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+
+## Development Tools
+
+Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [VSCode](https://code.visualstudio.com/).
+
+To serve a local forum, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), and [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) are popular choices.
 
 ## Contributor License Agreement
 
