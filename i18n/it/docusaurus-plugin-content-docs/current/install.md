@@ -19,7 +19,7 @@ Prima di installare Flarum, è importante verificare che il tuo server soddisfi 
 
 In questa fase, non è possibile installare Flarum scaricando un file ZIP e caricando i file sul tuo server web. Questo perché Flarum utilizza un sistema di gestione delle dipendenze chiamato [Composer](https://getcomposer.org) che viene lanciato da riga di comando.
 
-Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host condivisi ti danno accesso SSH, attraverso il quale dovresti essere in grado di installare Composer e Flarum senza problemi. Per altri host senza SSH, puoi provare soluzioni alternative come [Pockethold](https://github.com/andreherberth/pockethold).
+Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host condivisi ti danno accesso SSH, attraverso il quale dovresti essere in grado di installare Composer e Flarum senza problemi.
 
 :::
 
@@ -90,9 +90,9 @@ Se Flarum richiede l'accesso in scrittura sia alla directory che al suo contenut
 chmod 775 -R /percorso/della/directory
 ```
 
-Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di proprietà del gruppo e dell'utente corretti. 
+Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di proprietà del gruppo e dell'utente corretti.
 
-Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`. 
+Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`.
 
 Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
@@ -104,7 +104,7 @@ Il tuo ambiente potrebbe variare rispetto alla documentazione fornita, consulta 
 
 :::danger Non dare mai permessi 777
 
-Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poiché questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo. 
+Non impostare mai alcuna cartella o file a livello di autorizzazione su `777`, poiché questo livello di autorizzazione consente a chiunque di accedere al contenuto della cartella e del file indipendentemente dall'utente o dal gruppo.
 
 :::
 
@@ -129,6 +129,8 @@ $site = require './site.php';
 'public' => __DIR__,
 'storage' => __DIR__.'/storage',
 ```
+
+Finally, check `config.php` and make sure the `url` value is correct.
 
 ## Importazione dati da altro forum
 
