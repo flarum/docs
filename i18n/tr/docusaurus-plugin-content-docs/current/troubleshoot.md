@@ -1,10 +1,16 @@
 # Sorun Giderme
 
-Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken ilk şey ortamınızın [sistem gereksinimlerini](install.md#sunucu-gereksinimleri) karşılayıp karşılamadığını *tekrar kontrol etmektir.* Flarum'un çalıştırması gereken bir şeyi kaçırıyorsanız, onu düzeltmeniz gerekir.
+Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken ilk şey ortamınızın [sistem gereksinimlerini](install.md#sunucu-gereksinimleri) karşılayıp karşılamadığını *tekrar kontrol etmektir.* Flarum'un çalıştırması gereken bir şeyi kaçırıyorsanız, onu düzeltmeniz gerekir. If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
 Ayrıca, [Destek forumunu](https://discuss.flarum.org/t/support) ve [sorun izleyiciyi](https://github.com/flarum/core/issues) aramak için birkaç dakikanızı ayırmalısınız. Birisi sorunu zaten bildirmiş olabilir ve bir düzeltme mevcut veya yolda. İyice araştırdıysanız ve sorunla ilgili herhangi bir bilgi bulamıyorsanız, sorun gidermeye başlamanın zamanı geldi.
 
 ## Adım 0: Hata ayıklama modunu açın
+
+:::danger Skip on Production
+
+These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+
+:::
 
 Devam etmeden önce, Flarum'un hata ayıklama araçlarını etkinleştirmelisiniz. Basitçe bir metin düzenleyiciyle **config.php** açın, `debug` değerini `true` olarak değiştirin ve dosyayı kaydedin. Bu, Flarum'un ayrıntılı hata mesajları göstermesine neden olarak size neyin yanlış gittiğine dair bir fikir verecektir.
 
@@ -12,13 +18,14 @@ Boş sayfalar görüyorsanız ve yukarıdaki değişiklik yardımcı olmuyorsa, 
 
 ## 1. Adım: Yaygın düzeltmeler
 
-Aşağıdakilerle birçok sorun çözülebilir:
+A lot of issues can be fixed with the following:
 
 * Tarayıcınızın önbelleğini temizleyin
 * Arka uç önbelleğini [`php flarum cache:clear`](console.md) ile temizleyin.
 * Veritabanınızın [`php flarum migrate`](console.md) ile güncellendiğinden emin olun.
 * Yönetici panonuzdaki [e-posta yapılandırmasının](mail.md) doğru olduğundan emin olun: geçersiz e-posta yapılandırması kayıt olurken, parolayı sıfırlarken, e-postaları değiştirirken ve bildirim gönderirken hatalara neden olur.
 * `config.php` dosyanızın doğru olup olmadığını kontrol edin. Örneğin, doğru `url` nin kullanıldığından emin olun.
+* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 Ayrıca önemli hiçbir şeyin yerinde olmadığından emin olmak için [`php flarum info`](console.md) çıktısına da göz atmak isteyeceksiniz.
 
@@ -36,7 +43,7 @@ Sorunu çözmek için yardıma ihtiyacınız olacak gibi görünüyorsa, veri to
 
 * Asıl sayfada görüntülenir
 * Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
-* Sunucunun hata günlüğüne kaydedilir (ör. `/var/log/nginx/error.log`)
+* `/var/log/nginx/error.log`)
 * PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
 * Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
 
