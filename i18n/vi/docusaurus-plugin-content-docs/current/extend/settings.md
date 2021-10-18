@@ -4,9 +4,7 @@ At some point while making an extension, you might want to read some of the foru
 
 ## The Settings Repository
 
-Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`.
-Because Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one.
-Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
+Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`. Because Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one. Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
 
 ```php
 <?php
@@ -66,8 +64,7 @@ The `delete($name)` function lets you remove a named setting.
 To learn more about adding settings through the admin dashboard, see the [relevant documentation](admin.md).
 ### Accessing Settings
 
-All settings are available in the `admin` frontend via the `app.data.settings` global.
-However, this is not done in the `forum` frontend, as anyone can access it, and you wouldn't want to leak all your settings! (Seriously, that could be a very problematic data breach).
+All settings are available in the `admin` frontend via the `app.data.settings` global. However, this is not done in the `forum` frontend, as anyone can access it, and you wouldn't want to leak all your settings! (Seriously, that could be a very problematic data breach).
 
 Instead, if we want to use settings in the `forum` frontend, we'll need to serialize them and send them alongside the initial forum data payload.
 
