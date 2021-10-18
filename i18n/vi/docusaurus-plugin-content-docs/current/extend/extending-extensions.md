@@ -33,9 +33,7 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 
 ## Optional Dependencies
 
-Sometimes, extension A might want to extend extension B only if extension B is enabled.
-In this case, we call B an "Optional Dependency" of A.
-For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
+Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
 
 The first step here is detecting whether extension B is enabled. In the frontend, this is easy: if extension B does anything in the frontend, its extension ID will appear as a key in the `flarum.extensions` global object. For instance:
 
@@ -67,8 +65,7 @@ class SomeClass {
 }
 ```
 
-Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies.
-You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
+Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies. You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
 
 For instance:
 
