@@ -10,9 +10,13 @@ We're still working on a formal roadmap. We have a lot of plans and ideas, and l
 
 ### Can I donate money to speed up development?
 
-All donations are gratefully received. You can give on [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum).
+All donations are gratefully received. You can give on [Github Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum).
 
 However, donations will not directly impact the speed of development on Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
+
+### Can I integrate Flarum with WordPress/Laravel/etc.?
+
+Wouldn’t it be inte-_great_! Right now it’s not possible, but we do hope to work on integrations such as these in the future.
 
 ### Will Flarum have [insert feature here]? When? Why not?
 
