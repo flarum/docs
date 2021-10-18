@@ -2,9 +2,7 @@
 
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
-When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to.
-We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes).
-For example:
+When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). For example:
 
 ```php
 use Flarum\Group\Group;
@@ -36,8 +34,7 @@ Please note that visibility scoping can only be used on models that use the `Fla
 
 ## How It's Processed
 
-So, what actually happens when we call `whereVisibleTo`?
-This call is handled by Flarum's general model visibility scoping system, which runs the query through a sequence of callbacks, which are called "scopers".
+So, what actually happens when we call `whereVisibleTo`? This call is handled by Flarum's general model visibility scoping system, which runs the query through a sequence of callbacks, which are called "scopers".
 
 The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
 
@@ -50,8 +47,7 @@ There are actually two types of scopers:
 - ability-based scopers will apply to all queries for the query's model run with a given ability (which defaults to `"view"`). Please note this is not related to ability strings from the [policy system](authorization.md#how-it-works)
 - "global" scopers will apply to all queries for the query's model. Please note that global scopers will be run on ALL queries for its model, including `view`, which could create infinite loops or errors. Generally, you only want to run these for abilities that don't begin with `view`. You'll see this in the [example below](#custom-visibility-scoper-examples)
 
-One common use case for this is allowing extensibility inside visibility scoping.
-Let's take a look at an annotated, simple piece of `Flarum\Post\PostPolicy` as an example:
+One common use case for this is allowing extensibility inside visibility scoping. Let's take a look at an annotated, simple piece of `Flarum\Post\PostPolicy` as an example:
 
 ```php
 // Here, we want to ensure that private posts aren't visible to users by default.
@@ -68,8 +64,7 @@ $query->where(function ($query) use ($actor) {
 });
 ```
 
-A possible extension further down the line might use something like this to allow some users to some private posts. Note that since
-ScopeModelVisibility was dispatched in `orWhere`, these query modifications ONLY apply to `$query->where('posts.is_private', false)` from the example above.
+A possible extension further down the line might use something like this to allow some users to some private posts. Note that since ScopeModelVisibility was dispatched in `orWhere`, these query modifications ONLY apply to `$query->where('posts.is_private', false)` from the example above.
 
 ```php
 <?php
