@@ -1,13 +1,12 @@
 # Componenti interattivi
 
-Spesso, hai necessità di attivare componenti interattivi oltre a qualsiasi contenuto/animazione che hai su una determinata pagina.
-A seconda della natura della tua estensione, potresti voler definire elementi interattivi personalizzati o riutilizzare o estendere quelli esistenti.
+Spesso, hai necessità di attivare componenti interattivi oltre a qualsiasi contenuto/animazione che hai su una determinata pagina. A seconda della natura della tua estensione, potresti voler definire elementi interattivi personalizzati o riutilizzare o estendere quelli esistenti.
 
 Ricorda che tutti i [componenti](frontend.md#components) utilizzati in Flarum core vengono esportati e resi disponibili per il riutilizzo delle estensioni. Un elenco completo è disponibile nella nostra [documentazione API](https://api.docs.flarum.org/js/master/identifiers.html).
 
 ## Avvisi
 
-Gli avvisi sono gestiti da un'istanza globale [`AlertManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/alertmanagerstate.ts~alertmanagerstate), accessibile tramite `app.alerts` sia sul frontend di `forum` che su `admin`.Ha 3 metodi accessibili pubblicamente:
+I modali sono gestiti da un'istanza globale di [`ModalManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibili tramite `app.modal` sia nel frontend di `forum` che di `admin`. Ha 2 metodi accessibili pubblicamente:
 
 - `app.alerts.show` aggiungerà un nuovo avviso e restituirà una chiave che può essere utilizzata in seguito per ignorarlo. Ha 3 sovraccarichi:
   - `app.alerts.show(children)`
@@ -27,7 +26,7 @@ I seguenti attributi sono utili da tenere a mente:
 
 ## Modali
 
-I modali sono gestiti da un'istanza globale di [`ModalManagerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibili tramite `app.modal` sia nel frontend di `forum` che di `admin`. Ha 2 metodi accessibili pubblicamente:
+Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
 
 - `app.modal.show(componentClass, attrs)` mostrerà un modale utilizzando la classe componente e attributi dati. Se chiamato mentre un modale è già aperto, sostituirà il modale attualmente aperto.
 - `app.modal.close()` chiuderà il modale se uno è attualmente attivo.
@@ -64,11 +63,20 @@ export default class CustomModal extends Modal {
 
 Ulteriori informazioni sui metodi disponibili per l'override sono disponibili nella nostra [documentazione API](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate a modal:
+```bash
+$ flarum-cli make frontend modal
+```
+
+:::
+
 ## Composer
 
 Poiché Flarum è un forum, abbiamo bisogno di strumenti per consentire agli utenti di creare e modificare post e discussioni. Flarum realizza questo attraverso il componente composer.
 
-Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
+The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
 
 - `app.composer.load(componentClass, attrs)` caricherà un nuovo tipo di compositore. Se un compositore è già attivo, verrà sostituito.
 - `app.composer.show()` mostrerà il compositore se è attualmente nascosto.
@@ -76,13 +84,10 @@ Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs
 - `app.composer.hide()` chiuderà e ripristinerà il compositore senza confermare con l'utente.
 - `app.composer.bodyMatches(componentClass, attrs)` controllerà se il compositore attualmente attivo è di un certo tipo, e se i suoi attributi corrispondono agli attributi forniti opzionalmente.
 
-L'elenco completo dei metodi pubblici è documentato nei documenti API collegati sopra.
+The full list of public methods is documented in the API docs linked above.
 
-Poiché il compositore può essere utilizzato per varie azioni (avviare una discussione, modificare un post, rispondere a una discussione, ecc.), I suoi campi possono variare a seconda dell'utilizzo.
-Questo viene fatto suddividendo il codice per ogni utilizzo in una sottoclasse di `flarum/components/ComposerBody`. Questa classe di componenti deve essere fornita durante il caricamento di un compositore.
+Poiché il compositore può essere utilizzato per varie azioni (avviare una discussione, modificare un post, rispondere a una discussione, ecc.), I suoi campi possono variare a seconda dell'utilizzo. Questo viene fatto suddividendo il codice per ogni utilizzo in una sottoclasse di `flarum/components/ComposerBody`. Questa classe di componenti deve essere fornita durante il caricamento di un compositore.
 
 ### Composer Editor
 
-L'editor attuale è un altro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor).
-È possibile accedere al suo stato programmaticamente tramite un'istanza di [`SuperTextarea`](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea).
-Questo è accessibile tramite `app.composer.editor`. Ha una varietà di [metodi pubblici](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) che consentono alle estensioni di inserire e modificare programmaticamente i contenuti, le selezioni e la posizione del cursore correnti dell'editor di testo del compositore attivo.
+L'editor attuale è un altro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/master/js/src/common/utils/EditorDriverInterface.ts). Questo è accessibile tramite `app.composer.editor`. Ha una varietà di [metodi pubblici](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) che consentono alle estensioni di inserire e modificare programmaticamente i contenuti, le selezioni e la posizione del cursore correnti dell'editor di testo del compositore attivo.
