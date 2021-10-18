@@ -45,17 +45,17 @@ Finally, as we have exhausted all checks, we will assume that the user is unauth
 Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
 
 
-In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'viewForum'` and `'reply'` as examples of abilities, and `$discussion` (instance of `Flarum\Discussion\Discussion`) as an example argument.
+In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'viewDiscussions'` and `'reply'` as examples of abilities, and `$discussion` (instance of `Flarum\Discussion\Discussion`) as an example argument.
 
 ```php
 // Check whether a user can perform an action.
-$canDoSomething = $actor->can('viewForum');
+$canDoSomething = $actor->can('viewDiscussions');
 
 // Check whether a user can perform an action on a subject.
 $canDoSomething = $actor->can('reply', $discussion);
 
 // Raise a PermissionDeniedException if a user cannot perform an action.
-$actor->assertCan('viewForum');
+$actor->assertCan('viewDiscussions');
 $actor->assertCan('reply', $discussion);
 
 // Raise a NotAuthenticatedException if the user is not logged in.
@@ -68,7 +68,7 @@ $actor->assertAdmin();
 // WARNING: this should be used with caution, as it doesn't actually
 // run through the authorization process, so it doesn't account for policies.
 // It is, however, useful in implementing custom policies.
-$actorHasPermission = $actor->hasPermission(`viewForum`);
+$actorHasPermission = $actor->hasPermission(`viewDiscussions`);
 ```
 
 ## Custom Policies
@@ -169,7 +169,7 @@ class GlobalPolicy extends AbstractPolicy
      */
     public function can(User $actor, string $ability)
     {
-        if (in_array($ability, ['viewForum', 'startDiscussion'])) {
+        if (in_array($ability, ['viewDiscussions', 'startDiscussion'])) {
             $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
             $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
 
@@ -208,7 +208,7 @@ For example, if a user doesn't have permission to see search users, we shouldn't
 And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
 
 Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending.
-Global permissions (`viewForum`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object.
+Global permissions (`viewDiscussions`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object.
 For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model.
 It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
 
