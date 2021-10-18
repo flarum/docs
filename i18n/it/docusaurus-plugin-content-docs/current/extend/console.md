@@ -24,9 +24,18 @@ class YourCommand implements AbstractCommand {
 }
 ```
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+:::tip Comandi pianificati
+```bash
+$ flarum-cli make backend command
+```
+
+:::
+
 ## Registrazione dei comandi della Console
 
-Per registrare i comandi della console, usa l'estensore `Flarum\Extend\Console` nel file `extend.php` della tua estensione:
+To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
 
 ```php
 use Flarum\Extend;
@@ -39,8 +48,23 @@ return [
 ];
 ```
 
-:::tip Comandi pianificati
+## Scheduled Commands
 
-La [fof/console library](https://github.com/FriendsOfFlarum/console) consente di programmare l'esecuzione dei comandi a intervalli regolari! Tuttavia, tieni presente che questa è una soluzione per la community.
+La [fof/console library](https://github.com/FriendsOfFlarum/console) consente di programmare l'esecuzione dei comandi a intervalli regolari!
 
-:::
+
+```php
+use Flarum\Extend;
+use YourNamespace\Console\CustomCommand;
+use Illuminate\Console\Scheduling\Event;
+
+return [
+    // Other extenders
+    (new Extend\Console())->schedule('cache:clear', function (Event $event) {
+        $event->everyMinute();
+    }, ['Arg1', '--option1', '--option2']),
+    // Other extenders
+];
+```
+
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) for more information.
