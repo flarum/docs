@@ -2,7 +2,7 @@
 
 While we've worked hard to make Flarum as beautiful as we can, each community will probably want to make some tweaks/modifications to fit their desired style.
 
-## Admin Dashboard
+## Panel de Administración
 
 The [admin dashboard](../admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
 
@@ -14,9 +14,7 @@ The [admin dashboard](../admin.md)'s Appearance page is a great first place to s
 
 ## CSS Theming
 
-El CSS es un lenguaje de hojas de estilo que indica a los navegadores cómo mostrar los elementos de una página web.
-Nos permite modificar todo, desde los colores hasta las fuentes, el tamaño de los elementos y su posicionamiento, y las animaciones.
-Añadir CSS personalizado puede ser una gran manera de modificar su instalación de Flarum para que coincida con un tema.
+El CSS es un lenguaje de hojas de estilo que indica a los navegadores cómo mostrar los elementos de una página web. Nos permite modificar todo, desde los colores hasta las fuentes, el tamaño de los elementos y su posicionamiento, y las animaciones. Añadir CSS personalizado puede ser una gran manera de modificar su instalación de Flarum para que coincida con un tema.
 
 Un tutorial de CSS está más allá del alcance de esta documentación, pero hay muchos recursos en línea para aprender los fundamentos de CSS.
 
@@ -28,6 +26,4 @@ Flarum utiliza LESS, que facilita la escritura de CSS al permitir variables, con
 
 ## Extensiones
 
-El flexible [sistema de extensiones](extensions.md) de Flarum te permite añadir, eliminar o modificar prácticamente cualquier parte de Flarum.
-Si quieres hacer modificaciones temáticas sustanciales más allá de cambiar colores/tamaños/estilos, una extensión personalizada es definitivamente el camino a seguir.
-Para aprender cómo hacer una extensión, ¡consulta nuestra [documentación de extensiones](extend/README.md)!
+El flexible [sistema de extensiones](extensions.md) de Flarum te permite añadir, eliminar o modificar prácticamente cualquier parte de Flarum. Si quieres hacer modificaciones temáticas sustanciales más allá de cambiar colores/tamaños/estilos, una extensión personalizada es definitivamente el camino a seguir. Para aprender cómo hacer una extensión, ¡consulta nuestra [documentación de extensiones](extend/README.md)!
