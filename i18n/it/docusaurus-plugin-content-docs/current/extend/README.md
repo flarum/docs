@@ -1,6 +1,6 @@
----
+- - -
 slug: /extend
----
+- - -
 
 # Estensioni di Flarum
 
@@ -9,12 +9,6 @@ Flarum è minimalista, ma è anche altamente estensibile. In effetti, la maggior
 Questo approccio rende Flarum estremamente personalizzabile. Un utente può disabilitare tutte le funzionalità che non utilizza sul proprio forum e installare altre estensioni per creare un forum "cucito" su misura per la sua community.
 
 Per ottenere questa estensibilità, Flarum è stato costruito con ricche API e punti di estensione. Con alcune conoscenze di programmazione, puoi sfruttare queste API per aggiungere quasi tutte le funzionalità che desideri. Questa sezione della documentazione ha lo scopo di insegnarti come funziona Flarum e come utilizzare le API in modo da poter creare le tue estensioni.
-
-:::caution
-
-**Sia l'API di estensione che questa documentazione sono in fase di elaborazione.** Tieni presente che le future versioni beta potrebbero interrompere le estensioni! Se hai feedback, [ci piacerebbe leggerli](https://discuss.flarum.org/).
-
-:::
 
 ## Core vs. Estensioni
 
@@ -32,13 +26,13 @@ Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione i
 
 - [Questa documentazione](start.md)
 - [Suggerimenti per sviluppatori principianti](https://discuss.flarum.org/d/5512-extension-development-tips)
-- [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
-- [Suggerimenti per il namespace delle estensioni](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
-- [Documentazione js di Mithril](https://mithril.js.org/)
-- [Documenti API Laravel](https://laravel.com/api/6.x/)
-- [Documenti delle API di Flarum](https://api.flarum.org)
+- [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
+- [Suggerimenti per il namespace delle estensioni](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
+- [Documentazione js di Mithril](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
+- [Documenti API Laravel](https://mithril.js.org/)
+- [Documenti delle API di Flarum](https://laravel.com/api/8.x/)
+- [Flarum API Docs](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
-- [Generatore di estensioni vuote Flarum](https://discuss.flarum.org/d/11333-flarum-extension-generator-by-reflar/)
 
 ### Supporto
 
