@@ -1,7 +1,6 @@
 # Componentes Interactivos
 
-A menudo, querrá activar componentes interactivos además de cualquier contenido/animación que tenga en una página determinada.
-Dependiendo de la naturaleza de su extensión, puede querer definir elementos interactivos personalizados o reutilizar o extender los existentes.
+A menudo, querrá activar componentes interactivos además de cualquier contenido/animación que tenga en una página determinada. Dependiendo de la naturaleza de su extensión, puede querer definir elementos interactivos personalizados o reutilizar o extender los existentes.
 
 Recuerde que todos los [componentes](frontend.md#components) utilizados en el núcleo de Flarum son exportados y puestos a disposición de las extensiones para su reutilización. Una lista completa está disponible en nuestra [documentación de la API](https://api.docs.flarum.org/js/master/identifiers.html).
 
@@ -64,6 +63,15 @@ export default class CustomModal extends Modal {
 
 Hay más información sobre los métodos disponibles para anular en nuestra [documentación de la API](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
 
+:::info [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically generate a modal:
+```bash
+$ flarum-cli make frontend modal
+```
+
+:::
+
 ## Composer
 
 Como Flarum es un foro, necesitamos herramientas para que los usuarios puedan crear y editar mensajes y discusiones. Flarum logra esto a través del componente compositor flotante.
@@ -76,13 +84,10 @@ El compositor es gestionado por una instancia global de [`ComposerState`]([https
 - `app.composer.hide()` cerrará y reiniciará el compositor sin confirmar con el usuario.
 - `app.composer.bodyMatches(componentClass, attrs)` comprobará si el compositor actualmente activo es de un tipo determinado, y si sus atts coinciden con los attrs proporcionados opcionalmente.
 
-La lista completa de métodos públicos está documentada en los documentos de la API enlazados anteriormente.
+The full list of public methods is documented in the API docs linked above.
 
-Debido a que el compositor puede ser utilizado para varias acciones diferentes (iniciar una discusión, editar un mensaje, responder a una discusión, etc.), sus campos pueden variar dependiendo del uso.
-Esto se hace dividiendo el código para cada uso en una subclase de `flarum/components/ComposerBody`. Esta clase de componente debe ser proporcionada cuando se carga un compositor.
+Debido a que el compositor puede ser utilizado para varias acciones diferentes (iniciar una discusión, editar un mensaje, responder a una discusión, etc.), sus campos pueden variar dependiendo del uso. Esto se hace dividiendo el código para cada uso en una subclase de `flarum/components/ComposerBody`. Esta clase de componente debe ser proporcionada cuando se carga un compositor.
 
 ### Editor del Composer
 
-El editor actual es otro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor).
-Se puede acceder a su estado mediante una instancia de [`SuperTextarea`](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea).
-Está disponible globalmente para el compositor actual a través de `app.composer.editor`. Tiene una variedad de [métodos públicos](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) que permiten a las extensiones insertar y modificar mediante programación el contenido actual, las selecciones y la posición del cursor del editor de texto del compositor activo.
+El editor actual es otro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/master/js/src/common/utils/EditorDriverInterface.ts). Está disponible globalmente para el compositor actual a través de `app.composer.editor`. Tiene una variedad de [métodos públicos](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) que permiten a las extensiones insertar y modificar mediante programación el contenido actual, las selecciones y la posición del cursor del editor de texto del compositor activo.
