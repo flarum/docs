@@ -30,37 +30,37 @@ Bạn cũng có thể xuất ra trợ giúp ở các định dạng khác bằng
 
 `php flarum info`
 
-Thu thập thông tin về cốt lõi của Flarum và các phần mở rộng đã cài đặt. Điều này rất hữu ích cho việc gỡ lỗi các vấn đề và nên được chia sẻ khi yêu cầu hỗ trợ.
+Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-Xóa bộ đệm ẩn phụ trợ, bao gồm js/css đã tạo, bộ đệm định dạng văn bản và các bản dịch đã lưu trong bộ nhớ cache. Thao tác này sẽ được chạy sau khi cài đặt hoặc gỡ bỏ các tiện ích mở rộng và việc chạy này phải là bước đầu tiên khi sự cố xảy ra.
+Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
 
 ### assets:publish
 
 `php flarum assets:publish`
 
-Xuất bản nội dung từ lõi và tiện ích mở rộng (ví dụ: JS / CSS đã biên dịch, biểu tượng bootstrap, biểu trưng, ​​v.v.). Điều này hữu ích nếu nội dung của bạn đã bị hỏng hoặc nếu bạn đã chuyển đổi [trình điều khiển filesystem](extend/filesystem.md) cho đĩa `flarum-asset`.
+Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
 
 ### migrate
 
 `php flarum migrate`
 
-Chạy tất cả các lần migrations chưa thực hiện. Điều này sẽ được sử dụng khi một tiện ích mở rộng sửa đổi cơ sở dữ liệu được thêm vào hoặc cập nhật.
+Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
 
 ### migrate:reset
 
 `php flarum migrate:reset --extension [extension_id]`
 
-Đặt lại tất cả migrations cho tiện ích mở rộng. Điều này chủ yếu được sử dụng bởi các nhà phát triển tiện ích mở rộng, nhưng đôi khi, bạn có thể cần phải chạy điều này nếu bạn đang xóa một tiện ích mở rộng và muốn xóa tất cả dữ liệu của nó khỏi cơ sở dữ liệu. Xin lưu ý rằng tiện ích mở rộng được đề cập hiện phải được cài đặt (nhưng không nhất thiết phải được bật) để tiện ích này hoạt động.
+Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
 
 ### schedule:run
 
 `php flarum schedule:run`
 
-Nhiều tiện ích mở rộng sử dụng các công việc đã lên lịch để chạy các tác vụ theo chu kỳ. Điều này có thể bao gồm dọn dẹp cơ sở dữ liệu, đăng các bản nháp đã lên lịch, tạo sơ đồ trang web, v.v. Nếu bất kỳ tiện ích mở rộng nào của bạn sử dụng các công việc đã lên lịch, bạn nên thêm một [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) để chạy lệnh này trong một khoảng thời gian đều đặn:
+Many extensions use scheduled jobs to run tasks on a regular interval. This could include database cleanups, posting scheduled drafts, generating sitemaps, etc. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
@@ -68,10 +68,10 @@ Nhiều tiện ích mở rộng sử dụng các công việc đã lên lịch �
 
 Nói chung không nên chạy lệnh này theo cách thủ công.
 
-Lưu ý rằng một số máy chủ không cho phép bạn chỉnh sửa cấu hình cron trực tiếp. Trong trường hợp này, bạn nên tham khảo ý kiến ​​chủ nhà của mình để biết thêm thông tin về cách lên lịch công việc cho cron.
+Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
 
 ### schedule:list
 
 `php flarum schedule:list`
 
-Lệnh này trả về một danh sách các lệnh đã lên lịch (xem `schedule:run` để biết thêm thông tin). Điều này hữu ích để xác nhận rằng các lệnh do tiện ích mở rộng của bạn cung cấp đã được đăng ký đúng cách. Điều này **không thể** kiểm tra xem các công việc cron đã được lên lịch thành công hay đang được chạy.
+This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
