@@ -35,7 +35,7 @@ Bir tartışma başlatmaya hazır olduğunuzdan emin olduğunuzda lütfen aşağ
 Lütfen işleri organize etmemize yardımcı olmak için çaba gösterin. Toparlanmak için harcanan zaman, sizi tanımak, sorunlarınızı tartışmak ve Flarum hakkında konuşmak için harcayamayacağımız zamandır. Ve sonuçta, hepimiz yapmak için buradayız!
 
 ### Yanıtınızı Sayın
- 
+
 Başkalarının fikirlerinizi okuyup dikkate alması umuduyla bir tartışmaya katılmak için zaman ayırıyorsunuz. Öyleyse neden yanıtınızı okumaya değer kılmak için çaba harcamıyorsunuz?
 
 - Bir başlığı yanıtlamayın. İlk gönderiyi *okumak* için biraz zaman ayırın ve en azından tartışmanın geri kalanına *göz atın*.
