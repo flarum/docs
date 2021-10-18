@@ -11,6 +11,12 @@ Flarum ha due applicazioni frontend separate:
 
 Condividono lo stesso codice di base, quindi una volta che sai come estenderne uno, sai come estenderli entrambi.
 
+:::tip Typings!
+
+Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the [package's README](https://github.com/flarum/flarum-tsconfig#readme) to configure typings support.
+
+:::
+
 ## Struttura dei File
 
 Questa parte della guida spiegher� la configurazione dei file necessaria per le estensioni. Ancora una volta, consigliamo vivamente di utilizzare [FoF extension generator (non ufficiale)](https://github.com/FriendsOfFlarum/extension-generator) per impostare la struttura di base per te. Detto questo, dovresti comunque leggere questa guida per capire cosa accade sotto la superficie.
@@ -68,13 +74,42 @@ const config = require('flarum-webpack-config');
 module.exports = config();
 ```
 
-[Webpack](https://webpack.js.org/concepts/) � il sistema che effettivamente compila e raggruppa tutto il javascript (e le sue dipendenze) per la nostra estensione.
-Per funzionare correttamente, le nostre estensioni dovrebbero utilizzare il [Webpack ufficiale di configurazione Flarum](https://github.com/flarum/flarum-webpack-config) (mostrato nell'esempio sopra).
+[Webpack](https://webpack.js.org/concepts/) � il sistema che effettivamente compila e raggruppa tutto il javascript (e le sue dipendenze) per la nostra estensione. Per funzionare correttamente, le nostre estensioni dovrebbero utilizzare il [Webpack ufficiale di configurazione Flarum](https://github.com/flarum/flarum-webpack-config) (mostrato nell'esempio sopra).
 
 ### admin.js e forum.js
 
-Questi file contengono la radice del nostro JS di frontend effettivo. Potresti mettere qui l'intera estensione, ma non sarebbe ben organizzata. Per questo motivo, consigliamo di inserire il codice sorgente
-attuale in `src`, e avendo questi file solo esportare il contenuto di `src`. Per esempio:
+```json
+{
+  // Use Flarum's tsconfig as a starting point
+  "extends": "flarum-tsconfig",
+  // This will match all .ts, .tsx, .d.ts, .js, .jsx files in your `src` folder
+  // and also tells your Typescript server to read core's global typings for
+  // access to `dayjs` and `$` in the global namespace.
+  "include": ["src/**/*", "../vendor/flarum/core/js/dist-typings/@types/**/*"],
+  "compilerOptions": {
+    // This will output typings to `dist-typings`
+    "declarationDir": "./dist-typings",
+    "baseUrl": ".",
+    "paths": {
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+    }
+  }
+}
+```
+
+This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
+
+Always ensure you're using the latest version of this file: https://github.com/flarum/flarum-tsconfig#readme.
+
+Di seguito esamineremo gli strumenti disponibili per le estensioni.
+
+To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
+
+You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete.
+
+### admin.js and forum.js
+
+Questi file contengono la radice del nostro JS di frontend effettivo. Potresti mettere qui l'intera estensione, ma non sarebbe ben organizzata. Per questo motivo, consigliamo di inserire il codice sorgente attuale in `src`, e avendo questi file solo esportare il contenuto di `src`. Per esempio:
 
 ```js
 // admin.js
@@ -86,8 +121,7 @@ export * from './src/forum';
 
 ### src
 
-Se si seguono le raccomandazioni per `admin.js` e `forum.js`, dovremmo avere 2 sottocartelle: una per il codice frontend di `admin`, ed una per il frontend fi `forum`.
-Se disponi di componenti, modelli, utilit� o altro codice condiviso tra entrambi i frontend, potresti voler creare un file `common` in una sottocartella.
+Se si seguono le raccomandazioni per `admin.js` e `forum.js`, dovremmo avere 2 sottocartelle: una per il codice frontend di `admin`, ed una per il frontend fi `forum`. Se disponi di componenti, modelli, utilit� o altro codice condiviso tra entrambi i frontend, potresti voler creare un file `common` in una sottocartella.
 
 La struttura per `admin` e `forum` � identica, vi mostriamo quella di `forum` qui:
 
@@ -99,8 +133,7 @@ src/forum/
 └── index.js
 ```
 
-`components`, `models`, e `utils` sono directory che contengono file in cui � possibile definire [componenti personalizzati](#components), [modelli](data.md#frontend-models), e funzioni utili riutilizzabili.
-Tieni presente che questo � semplicemente un consiglio: non c'� nulla che ti costringa a utilizzare questa particolare struttura di file (o qualsiasi altra struttura di file).
+`components`, `models`, e `utils` sono directory che contengono file in cui � possibile definire [componenti personalizzati](#components), [modelli](data.md#frontend-models), e funzioni utili riutilizzabili. Tieni presente che questo � semplicemente un consiglio: non c'� nulla che ti costringa a utilizzare questa particolare struttura di file (o qualsiasi altra struttura di file).
 
 Il file pi� importante qui � `index.js`: tutto il resto � solo l'estrazione di classi e funzioni nei propri file. Esaminiamo un tipico `index.js`:
 
@@ -115,35 +148,20 @@ app.initializers.add('our-extension', function(app) {
 });
 ```
 
-Di seguito esamineremo gli strumenti disponibili per le estensioni.
+We'll go over tools available for extensions below.
 
-<!-- ```js
-import { Extend } from '@flarum/core/forum';
+### Transpilazione
 
-export const extend = [
-  // Your JavaScript extenders go here
-];
-```
+:::tip Librerie esterne
 
-Il tuo file `forum.js` � l'equivalente javascript di `extend.php`.Come la sua controparte PHP, dovrebbe esportare un array di oggetti extender che dicono a Flarum cosa vuoi fare sul frontend. -->
-
-### Importazione
-
-Dovresti familiarizzare con la sintassi corretta per [importare moduli Js](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), poich� la maggior parte delle estensioni pi� grandi di poche righe divider� i loro js in pi� file.
-
-Praticamente ogni estensione Flarum dovr� importare * qualcosa * da Flarum Core.
-Come la maggior parte delle estensioni, il codice sorgente JS di core � suddiviso in cartelle `admin`, `common`, e `forum`. Tuttavia, viene esportato tutto in `flarum`. Per elaborare:
-
-* Durante lo sviluppo di `admin`, il core esporta le directory `admin` e `common` come `flarum`. Per esempio, `admin/components/AdminLinkButton` � disponibile come `flarum/components/AdminLinkButton`.
-* Durante lo sviluppo di `forum`, il core esporta le directory `common` e `forum` come `flarum`. Per esempio `forum/states/PostStreamState` � disponibile come `flarum/states/PostStreamState`.
-* In entrambi i casi, i file `common` sono disponibili in `flarum`: `common/Component` viene esportato come `flarum/Component`.
+Praticamente ogni estensione Flarum dovr� importare * qualcosa * da Flarum Core. Come la maggior parte delle estensioni, il codice sorgente JS di core � suddiviso in cartelle `admin`, `common`, e `forum`. Tuttavia, viene esportato tutto in `flarum`. Per elaborare:
 
 In alcuni casi, un'estensione potrebbe voler estendere il codice da un'altra estensione flarum. Questo � possibile solo per le estensioni che esportano esplicitamente il loro contenuto.
 
 * `flarum/tags` e `flarum/flags` sono attualmente le uniche estensioni in bundle che consentono di estendere il proprio JS. Puoi importare i loro contenuti da `flarum/{EXT_NAME}/PATH` (es. `flarum/tags/components/TagHero`).
-* TIl processo per estendere ciascuna estensione della comunit� � diverso; dovresti consultare la documentazione per ogni singola estensione.
+* The process for extending each community extension is different; you should consult documentation for each individual extension.
 
-### Transpilazione
+### Transpilation
 
 OK, � ora di accendere il transpiler. Esegui i seguenti comandi nella directory `js`:
 
@@ -175,7 +193,7 @@ return [
 
 Flarum render� tutto ci� che esporti con `export` da `forum.js` disponibile nell'oggetto `flarum.extensions['acme-hello-world']`. TInoltre, puoi scegliere di esporre la tua API pubblica per consentire ad altre estensioni di interagire.
 
-:::tip Librerie esterne
+:::tip External Libraries
 
 � consentito un solo file JavaScript principale per estensione. Se � necessario includere librerie JavaScript esterne, installarle con NPM e importale con `import` in modo che vengano compilati nel tuo file JavaScript, o guarda [Percorsi e contenuti](/extend/routes.md) per imparere come aggiungere contenuti nei tag `<script>` al frontend.
 
@@ -207,8 +225,8 @@ Poich� l'interfaccia � costruita con JavaScript, � davvero facile collegar
 
 La maggior parte delle parti modificabili dell'interfaccia sono in realt� solo * elenchi di elementi *. Per esempio:
 
-* I controlli che appaiono in ogni post (Rispondi, Mi piace, Modifica, Elimina)
-* Gli elementi di navigazione della barra laterale dell'indice (Tutte le discussioni, Seguito, Tag)
+* The controls that appear on each post (Reply, Like, Edit, Delete)
+* TIl processo per estendere ciascuna estensione della comunit� � diverso; dovresti consultare la documentazione per ogni singola estensione.
 * Gli elementi nell'intestazione (Cerca, Notifiche, Menu utente)
 
 A ciascun elemento in questi elenchi viene assegnato un ** nome ** in modo da poter aggiungere, rimuovere e riorganizzare facilmente gli elementi. Trova semplicemente il componente appropriato per la parte dell'interfaccia che desideri modificare, e usa uno metodi per modificare il contenuto dell'elenco degli elementi. Ad esempio, per aggiungere un collegamento a Google nell'intestazione:
@@ -245,8 +263,8 @@ DiscussionPage
 
 Dovresti familiarizzare con [Componenti API di Mithril](https://mithril.js.org/components.html) e [sistema redraw](https://mithril.js.org/autoredraw.html). Flarum avvolge i componenti in classi `flarum/Component`, che estende a sua volta le [classi dei componenti](https://mithril.js.org/components.html#classes). Offre i seguenti vantaggi:
 
-* Gli attributi passati ai componenti sono disponibili in tutta la classe tramite `this.attrs`.
-* I metodi statici `initAttrs` mutano `this.attrs` prima di impostarli, e ti consente di impostare i valori predefiniti o di modificarli in altro modo prima di utilizzarli nella tua classe.Tieni presente che ci� non influisce sull'iniziale `vnode.attrs`.
+* I controlli che appaiono in ogni post (Rispondi, Mi piace, Modifica, Elimina)
+* The static `initAttrs` method mutates `this.attrs` before setting them, and allows you to set defaults or otherwise modify them before using them in your class. Please note that this doesn't affect the initial `vnode.attrs`.
 * Il metodo `$` restituisce un oggetto jQuery per l'elemento DOM radice del componente. Facoltativamente, puoi passare un selettore per ottenere dei sotto DOM.
 * l metodo statico `component` pu� essere utilizzato come alternativa a JSX ed a `m`. I seguenti sono identici:
   * `m(CustomComponentClass, attrs, children)`
@@ -255,10 +273,9 @@ Dovresti familiarizzare con [Componenti API di Mithril](https://mithril.js.org/c
 
 Tuttavia, le classi di componenti che  estendono `Component` devono richiamare `super` quando utilizzano `oninit`, `oncreate`, e metodi `onbeforeupdate` .
 
-Per utilizzare i componenti Flarum, � sufficiente estendere `flarum/Component` nella tua classe di componenti personalizzati.
+Rivisitiamo ora l'originale "aggiunta di un collegamento a Google all'intestazione" per dimostrarlo.
 
-Tutte le altre propriet� dei componenti di Mithril, incluso [ciclo di vita dei metodi](https://mithril.js.org/lifecycle-methods.html) (con cui dovresti familiarizzare), vengono conservati.
-Con questo in mente, una classe di componenti personalizzati potrebbe essere simile a questa:
+Tutte le altre propriet� dei componenti di Mithril, incluso [ciclo di vita dei metodi](https://mithril.js.org/lifecycle-methods.html) (con cui dovresti familiarizzare), vengono conservati. Con questo in mente, una classe di componenti personalizzati potrebbe essere simile a questa:
 
 ```jsx
 import Component from 'flarum/Component';
@@ -303,7 +320,7 @@ Ora che abbiamo una migliore comprensione del sistema dei componenti, andiamo un
 
 Come notato sopra, le parti pi� facilmente estendibili dell'interfaccia utente consentono di estendere i metodi chiamati `items` o similari (es. `controlItems`, `accountItems`, `toolbarItems`, etc. I nomi esatti dipendono dal componente che si sta estendendo) per aggiungere, rimuovere o sostituire elementi. Sotto la superficie, questi metodi restituiscono un istanza `utils/ItemList`, che � essenzialmente un oggetto ordinato. La documentazione dettagliata dei metodi � disponibile nella [nostra documentazione API](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). Quanto il metodo `toArray` di ItemList viene chiamato, gli elementi vengono restituiti in ordine crescente di priorit� (0 se non fornito), quindi in ordine alfabetico dove le priorit� sono uguali.
 
-### `extend` e `override`
+### Utilit� di Flarum
 
 Praticamente tutte le estensioni di frontend usano [il monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) per aggiungere, modificare o rimuovere un comportamento. Per esempio:
 
@@ -329,12 +346,19 @@ Nella maggior parte dei casi, in realt� non vogliamo sostituire completamente 
    1. Per `extend`, il callback riceve l'output del metodo originale, cos� come tutti gli argomenti passati al metodo originale.
    2. Per `override`, il callback riceve un chiamabile (che pu� essere utilizzato per chiamare il metodo originale), cos� come tutti gli argomenti passati al metodo originale.
 
+:::tip Overriding multiple methods
 
-Tieni presente che se stai cercando di modificare l'output di un metodo con `override`, � necessario restituire il nuovo output.
-Se stai modificando l'output con `extend`, dovresti semplicemente modificare l'output originale (che viene ricevuto come primo argomento).
-Tieni a mente che `extend` cpu� solo mutare l'output se l'output � modificabile (ad esempio un oggetto o un array e non un numero / stringa).
+With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
 
-Rivisitiamo ora l'originale "aggiunta di un collegamento a Google all'intestazione" per dimostrarlo.
+```jsx
+extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ });
+```
+
+:::
+
+Tieni presente che se stai cercando di modificare l'output di un metodo con `override`, � necessario restituire il nuovo output. Se stai modificando l'output con `extend`, dovresti semplicemente modificare l'output originale (che viene ricevuto come primo argomento). Tieni a mente che `extend` cpu� solo mutare l'output se l'output � modificabile (ad esempio un oggetto o un array e non un numero / stringa).
+
+Let's now revisit the original "adding a link to Google to the header" example to demonstrate.
 
 ```jsx
 import { extend, override } from 'flarum/extend';
@@ -373,12 +397,22 @@ override(HeaderPrimary.prototype, 'items', function(original) {
 });
 ```
 
-Poich� tutti i componenti e le utilit� di Flarum sono rappresentati da classi, `extend`, `override`, e il vecchio JS, il che significa che possiamo agganciarci, o sostituire, QUALSIASI metodo in qualsiasi parte di Flarum.
-Alcuni potenziali usi "avanzati" includono:
+Poich� tutti i componenti e le utilit� di Flarum sono rappresentati da classi, `extend`, `override`, e il vecchio JS, il che significa che possiamo agganciarci, o sostituire, QUALSIASI metodo in qualsiasi parte di Flarum. Alcuni potenziali usi "avanzati" includono:
 
 * Estendere o sovrascrivere `view` per cambiare (o ridefinire completamente) la struttura html dei componenti Flarum. Questo apre Flarum a temi illimitati.
-* Collegati ai metodi dei componenti Mithril per aggiungere listener di eventi JS o ridefinire in altro modo la logica aziendale.
+* I metodi statici `initAttrs` mutano `this.attrs` prima di impostarli, e ti consente di impostare i valori predefiniti o di modificarli in altro modo prima di utilizzarli nella tua classe.Tieni presente che ci� non influisce sull'iniziale `vnode.attrs`.
 
-### Utilit� di Flarum
+### Flarum Utils
 
-Flarum definisce (e fornisce) alcune funzioni utili e helper, che potresti voler usare nelle tue estensioni. Il modo migliore per conoscerli � attraverso [il codice sorgente](https://github.com/flarum/core/tree/master/js) o [la nostra documentazione API JavaScript](https://api.docs.flarum.org/js/).
+Flarum definisce (e fornisce) alcune funzioni utili e helper, che potresti voler usare nelle tue estensioni. A few particularly useful ones:
+
+- `flarum/common/utils/Stream` provides [Mithril Streams](https://mithril.js.org/stream.html), and is useful in [forms](forms.md).
+- Collegati ai metodi dei componenti Mithril per aggiungere listener di eventi JS o ridefinire in altro modo la logica aziendale.
+- `flarum/common/utils/extractText` extracts text as a string from Mithril component vnode instances (or translation vnodes).
+- `flarum/common/utils/throttleDebounce` provides the [throttle-debounce](https://www.npmjs.com/package/throttle-debounce) library
+- `flarum/common/helpers/avatar` displays a user's avatar
+- `flarum/common/helpers/highlight` highlights text in strings: great for search results!
+- `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
+- `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
+
+And there's a bunch more! Il modo migliore per conoscerli � attraverso [il codice sorgente](https://github.com/flarum/core/tree/master/js) o [la nostra documentazione API JavaScript](https://api.docs.flarum.org/js/).
