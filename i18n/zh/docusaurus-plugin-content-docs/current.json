@@ -1,6 +1,6 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "下一节",
     "description": "The label for version current"
   },
   "sidebar.guideSidebar.category.Introduction": {
@@ -16,7 +16,7 @@
     "description": "The label for category Management in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Advanced": {
-    "message": "Advanced",
+    "message": "高级",
     "description": "The label for category Advanced in sidebar guideSidebar"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
@@ -28,15 +28,15 @@
     "description": "The label for category Reference Guides in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Advanced Guides": {
-    "message": "Advanced Guides",
+    "message": "进阶指南",
     "description": "The label for category Advanced Guides in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Update Guides": {
-    "message": "Update Guides",
+    "message": "更新指南",
     "description": "The label for category Update Guides in sidebar extendSidebar"
   },
   "sidebar.internalSidebar.category.Internal Docs": {
-    "message": "Internal Docs",
+    "message": "内部文档",
     "description": "The label for category Internal Docs in sidebar internalSidebar"
   }
 }
