@@ -1,34 +1,34 @@
 # Giúp xây dựng Flarum
 
-Bạn quan tâm đến việc đóng góp vào sự phát triển của Flarum? Thật tuyệt! Từ [mở báo cáo lỗi](bugs.md) để tạo ra một yêu cầu kéo: mỗi một yêu cầu đều được đánh giá cao và chào đón. Flarum sẽ không thể thực hiện được nếu không có sự đóng góp của cộng đồng.
+Interested in contributing to Flarum development? That's great! From [opening a bug report](bugs.md) to creating a pull request: every single one is appreciated and welcome. Flarum wouldn't be possible without our community contributions.
 
 Trước khi đóng góp, vui lòng đọc [quy tắc ứng xử](code-of-conduct.md).
 
-Tài liệu này là hướng dẫn cho các nhà phát triển muốn đóng góp mã cho Flarum. Nếu bạn chỉ mới bắt đầu, chúng tôi khuyên bạn nên đọc tài liệu [Bắt đầu](/extend/start.md) trong tài liệu Tiện ích mở rộng để hiểu thêm một chút về cách hoạt động của Flarum.
+This document is a guide for developers who want to contribute code to Flarum. If you're just getting started, we recommend that you read the [Getting Started](/extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## Tại sao lại đóng góp Flarum?
 
-⚡ **Có tác động thực sự.** Có hàng nghìn phiên bản Flarum, với hàng triệu người dùng cuối tổng hợp. Bằng cách đóng góp cho Flarum, mã của bạn sẽ có tác động tích cực đến tất cả chúng.
+⚡ **Have Real Impact.** There are thousands of Flarum instances, with millions of aggregate end users. By contributing to Flarum, your code will have a positive impact on all of them.
 
-🔮 **Định hình tương lai của Flarum.** Chúng tôi có một công việc tồn đọng lâu dài và thời gian có hạn. Nếu bạn sẵn sàng ủng hộ một tính năng hoặc thay đổi, thì điều đó có nhiều khả năng xảy ra hơn và bạn sẽ có thể đưa ra tầm nhìn của mình cho nó. Ngoài ra, lộ trình và các cột mốc quan trọng của chúng tôi được thiết lập bởi [nhóm phát triển cốt lõi của chúng tôi](https://flarum.org/team), và tất cả chúng tôi đều bắt đầu với tư cách là những người đóng góp. Con đường tốt nhất để tạo ảnh hưởng là đóng góp.
+🔮 **Shape the Future of Flarum.** We have a long backlog, and limited time. If you're willing to champion a feature or change, it's much more likely to happen, and you'll be able to enact your vision for it. Plus, our roadmap and milestones are set by our [core development team](https://flarum.org/team), and all of us started as contributors. The best road to influence is contributing.
 
-🧑‍💻 **Trở thành một kỹ sư giỏi hơn.** codebase của chúng tôi hiện đại và chúng tôi đánh giá cao kỹ thuật tốt và mã sạch. Ngoài ra còn có rất nhiều vấn đề thú vị, đầy thách thức cần giải quyết liên quan đến thiết kế, cơ sở hạ tầng, hiệu suất và khả năng mở rộng. Đặc biệt nếu bạn là sinh viên hoặc mới bắt đầu sự nghiệp, làm việc trên Flarum là một cơ hội tuyệt vời để xây dựng các kỹ năng phát triển.
+🧑‍💻 **Become a Better Engineer.** Our codebase is modern, and we heavily value good engineering and clean code. There's also a lot of interesting, challenging problems to solve regarding design, infrastructure, performance, and extensibility. Especially if you're a student or early in your career, working on Flarum is a great opportunity to build development skills.
 
-🎠 **Thật thú vị!** Chúng tôi thực sự thích làm việc trên Flarum: có rất nhiều thử thách thú vị và các tính năng thú vị để xây dựng. Chúng tôi cũng có một cộng đồng tích cực trên [diễn đàn của chúng tôi](https://discuss.flarum.org) và [máy chủ Discord](https://flarum.org/chat).
+🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
 
 ## Những gì cần làm
 
-Kiểm tra [Các cột mốc sắp tới của chúng tôi](https://github.com/flarum/core/milestones) để có cái nhìn tổng quan về những việc cần phải làm. Xem nhãn [Issue đầu tiên](https://github.com/flarum/core/labels/Good%20first%20issue) cho danh sách các vấn đề tương đối dễ bắt đầu. Nếu có bất cứ điều gì bạn không chắc chắn, đừng ngần ngại hỏi! Tất cả chúng tôi chỉ mới bắt đầu một lần.
+Check out our upcoming [Milestones](https://github.com/flarum/core/milestones) for an overview of what needs to be done. See the [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) label for a list of issues that should be relatively easy to get started with. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
 
-Nếu bạn đang lên kế hoạch tiếp tục làm việc gì đó, vui lòng nhận xét về vấn đề có liên quan hoặc tạo một vấn đề mới trước. Bằng cách này, chúng tôi có thể đảm bảo rằng công việc quý giá của bạn không trở nên vô ích.
+If you're planning to go ahead and work on something, please comment on the relevant issue or create a new one first. This way we can ensure that your precious work is not in vain.
 
-Vì Flarum rất hướng đến tiện ích mở rộng, chúng tôi thực sự khuyên bạn nên [tài liệu về tiện ích mở rộng của chúng tôi](extend/README.md) như một tài liệu tham khảo khi làm việc trên lõi, cũng như cho các tiện ích mở rộng đi kèm. Bạn nên bắt đầu với [phần giới thiệu](extend/README.md) để hiểu rõ hơn về triết lý mở rộng của chúng tôi.
+Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
 
 ## Thiết lập môi trường
 
 ### Thiết lập Codebase cục bộ
 
-[flarum/flarum](https://github.com/flarum/flarum) là một ứng dụng "khung" sử dụng Composer để tải xuống [flarum/core](https://github.com/flarum/core) và [nhiều tiện ích mở rộng](https://github.com/flarum). Để giải quyết những vấn đề này, chúng tôi khuyên bạn nên tạo và sao chép chúng vào [Kho lưu trữ đường dẫn của Composer](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). In order to work on these, we recommend forking and cloning them into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
@@ -44,9 +44,9 @@ Tiếp theo, hãy đảm bảo rằng Composer chấp nhận các bản phát h�
 
 Cuối cùng, chạy `composer install` để hoàn tất cài đặt từ kho đường dẫn.
 
-Sau khi cài đặt cục bộ của bạn được thiết lập, hãy đảm bảo rằng bạn đã bật chế độ `debug` trong **config.php** và đặt `display_errors` thành `On` trong cấu hình php của bạn. Điều này sẽ cho phép bạn xem chi tiết lỗi cho cả Flarum và PHP. Chế độ gỡ lỗi cũng buộc phải biên dịch lại các tệp nội dung của Flarum theo từng yêu cầu, loại bỏ nhu cầu gọi `php flarum cache: clear` sau mỗi lần thay đổi đối với javascript hoặc CSS của tiện ích mở rộng.
+After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's javascript or CSS.
 
-Mã front-end của Flarum được viết bằng ES6 và được chuyển sang JavaScript. Trong quá trình phát triển, bạn sẽ cần phải biên dịch lại JavaScript bằng cách sử dụng [Node.js](https://nodejs.org/). **Vui lòng không commit kết quả các tệp trong `dist` khi gửi PRs**; điều này sẽ tự động được xử lý khi các thay đổi được hợp nhất vào branch `master`.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
 
 ```bash
 cd packages/core/js
@@ -65,7 +65,7 @@ npm run dev
 
 ### Công cụ phát triển
 
-Sau khi bạn đã tách và nhân bản các kho lưu trữ mà bạn sẽ làm việc, bạn sẽ cần thiết lập lưu trữ cục bộ để có thể kiểm tra các thay đổi của mình. Flarum hiện không đi kèm với máy chủ phát triển, vì vậy bạn sẽ cần thiết lập Apache/NGINX/Caddy/vv để cài đặt máy chủ Flarum cục bộ này.
+After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
 
 Ngoài ra, bạn có thể sử dụng các công cụ như, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), hoặc [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) để máy chủ diễn đàn cục bộ.
 
@@ -100,23 +100,23 @@ Quy trình đóng góp điển hình trông giống như sau:
 5. 🎁 **Gửi** một Pull Request trên GitHub.
     * Điền vào mẫu pull request.
     * Nếu thay đổi của bạn là trực quan, hãy bao gồm ảnh chụp màn hình hoặc GIF thể hiện thay đổi.
-    * KHÔNG đăng ký các tệp `dist` JavaScript. Chúng sẽ được biên dịch tự động khi hợp nhất.
+    * Do NOT check-in the JavaScript `dist` files. These will be compiled automatically on merge.
 
 6. 🤝 **Đính hôn** với nhóm Flarum để được chấp thuận.
-    * Các thành viên trong nhóm sẽ xem xét mã của bạn. Chúng tôi có thể đề xuất một số thay đổi hoặc cải tiến hoặc lựa chọn thay thế, nhưng đối với những thay đổi nhỏ, yêu cầu kéo của bạn sẽ được chấp nhận nhanh chóng.
+    * Team members will review your code. We may suggest some changes or improvements or alternatives, but for small changes your pull request should be accepted quickly.
     * Khi giải quyết phản hồi, hãy đẩy các commit bổ sung thay vì ghi đè hoặc cắt bỏ (chúng tôi sẽ xóa khi hợp nhất).
 
 7. 🕺 **Nhảy** giống như bạn vừa đóng góp cho Flarum.
 
 ## Kiểu coding
 
-Để giữ cho codebase Flarum sạch sẽ và nhất quán, chúng tôi có một số nguyên tắc về kiểu coding mà chúng tôi tuân theo. Khi nghi ngờ, hãy đọc mã nguồn.
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
-Đừng lo lắng nếu kiểu mã của bạn không hoàn hảo! StyleCI và Prettier sẽ tự động kiểm tra định dạng cho mọi yêu cầu kéo. Điều này cho phép chúng tôi tập trung vào nội dung của đóng góp, không phải kiểu coding.
+Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
 
 ### PHP
 
-Flarum tuân theo tiêu chuẩn mã hóa [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) và tiêu chuẩn autoloading [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Trên hết, chúng tôi tuân thủ một số [quy tắc phong cách khác](https://github.com/flarum/core/blob/master/.styleci.yml). Chúng tôi sử dụng gợi ý kiểu PHP 7 và khai báo kiểu trả về nếu có thể và [PHPDoc](https://docs.phpdoc.org/) để cung cấp tài liệu nội tuyến. Hãy thử và bắt chước kiểu được sử dụng bởi phần còn lại của codebase trong các đóng góp của bạn.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * Namespaces phải là số ít (ví dụ: `Flarum\Discussion`, không phải `Flarum\Discussions`)
 * Interfaces phải được gắn với `Interface` (ví dụ: `MailableInterface`)
@@ -125,7 +125,7 @@ Flarum tuân theo tiêu chuẩn mã hóa [PSR-2](https://github.com/php-fig/fig-
 
 ### JavaScript
 
-JavaScript của Flarum chủ yếu tuân theo [Hướng dẫn kiểu Airbnb](https://github.com/airbnb/javascript). Chúng tôi sử dụng [ESDoc](https://esdoc.org/manual/tags.html) để cung cấp tài liệu nội tuyến.
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
 
 ### Cơ sở dữ liệu
 
@@ -151,10 +151,10 @@ Chúng tôi sử dụng [định dạng khóa tiêu chuẩn](/extend/i18n.md#app
 
 ## Thỏa thuận cấp phép cộng tác viên
 
-Bằng cách đóng góp mã của bạn cho Flarum, bạn cấp cho Flarum Foundation (Stichting Flarum) một giấy phép không độc quyền, không thể thu hồi, trên toàn thế giới, miễn phí bản quyền, có thể cấp phép lại, có thể chuyển nhượng theo tất cả các quyền sở hữu trí tuệ liên quan của bạn (bao gồm bản quyền, bằng sáng chế và bất kỳ quyền nào khác ), để sử dụng, sao chép, chuẩn bị các sản phẩm phái sinh, phân phối và trình diễn công khai và hiển thị các Đóng góp theo bất kỳ điều khoản cấp phép nào, bao gồm nhưng không giới hạn: (a) giấy phép nguồn mở như giấy phép MIT; và (b) giấy phép nhị phân, độc quyền hoặc thương mại. Ngoại trừ các giấy phép được cấp ở đây, Bạn bảo lưu mọi quyền, quyền sở hữu và lợi ích đối với và đối với Khoản đóng góp.
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
 
-Bạn xác nhận rằng bạn có thể cấp cho chúng tôi các quyền này. Bạn tuyên bố rằng Bạn có quyền hợp pháp để cấp giấy phép trên. Nếu chủ lao động của Bạn có quyền đối với tài sản trí tuệ mà Bạn tạo ra, Bạn tuyên bố rằng Bạn đã nhận được sự cho phép để thực hiện các Đóng góp thay mặt cho chủ lao động đó, hoặc chủ lao động của Bạn đã từ bỏ các quyền đó đối với các Đóng góp đó.
+You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-Bạn tuyên bố rằng Đóng góp là tác phẩm gốc của bạn về quyền tác giả và theo hiểu biết của Bạn, không có người khác yêu cầu hoặc có quyền yêu cầu, bất kỳ quyền nào trong bất kỳ phát minh hoặc bằng sáng chế nào liên quan đến Đóng góp. Bạn cũng tuyên bố rằng Bạn không bị ràng buộc về mặt pháp lý, cho dù bằng cách ký kết thỏa thuận hay bằng cách khác, theo bất kỳ cách nào xung đột với các điều khoản của giấy phép này.
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
 
 Flarum Foundation thừa nhận rằng, ngoại trừ được mô tả rõ ràng trong Thỏa thuận này, bất kỳ Khoản đóng góp nào mà bạn cung cấp đều dựa trên CƠ SỞ "NGUYÊN TRẠNG", KHÔNG CÓ BẢO ĐẢM HOẶC ĐIỀU KIỆN BẤT KỲ HÌNH THỨC NÀO, RÕ RÀNG HOẶC NGỤ Ý, BAO GỒM, KHÔNG GIỚI HẠN, BẤT KỲ BẢO ĐẢM HOẶC ĐIỀU KIỆN NÀO CÓ TIÊU ĐỀ, KHÔNG VI PHẠM, KHẢ NĂNG DI ĐỘNG HOẶC PHÙ HỢP VỚI MỤC ĐÍCH CỤ THỂ.
