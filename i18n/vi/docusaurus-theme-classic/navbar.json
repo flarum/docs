@@ -1,0 +1,34 @@
+{
+  "item.label.Guide": {
+    "message": "Hướng dẫn",
+    "description": "Navbar item with label Guide"
+  },
+  "item.label.Extend": {
+    "message": "Mở rộng",
+    "description": "Navbar item with label Extend"
+  },
+  "item.label.Internal": {
+    "message": "Nội bộ",
+    "description": "Navbar item with label Internal"
+  },
+  "item.label.API Reference": {
+    "message": "Tham chiếu API",
+    "description": "Navbar item with label API Reference"
+  },
+  "item.label.Flarum": {
+    "message": "Flarum",
+    "description": "Navbar item with label Flarum"
+  },
+  "item.label.Home": {
+    "message": "Trang chủ",
+    "description": "Navbar item with label Home"
+  },
+  "item.label.Community": {
+    "message": "Cộng đồng",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.Github": {
+    "message": "Github",
+    "description": "Navbar item with label Github"
+  }
+}
