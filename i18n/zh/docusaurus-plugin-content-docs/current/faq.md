@@ -2,46 +2,34 @@
 
 ### Flarum 现在是正式版吗？
 
-是的！经过 6 年的开发之后，Flarum 1.0.0 最终来了。
+是的！ 经过 6 年的开发之后，Flarum 1.0.0 最终来了。
 
 ### 展望未来，下一阶段 Flarum 会做些什么？
 
-相应的计划还在制定中。不过我们已经有了很多很多想法，期待届时在社区中分享给大家。
+相应的计划还在制定中。 不过我们已经有了很多很多想法，期待届时在社区中分享给大家。
 
 ### 我可以捐款以加快开发进展吗？
 
-首先，非常感谢您有捐款意向，您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。
+All donations are gratefully received. 首先，非常感谢您有捐款意向，您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。
 
-其次，很抱歉，捐款并不会直接影响 Flarum 的开发速度。我们也鼓励用户在其他方面做出贡献，比如 [贡献代码](contributing.md)、[开发扩展](/extend/)、编写文档、将 Flarum 翻译成其他语言，或在 [社区论坛](https://discuss.flarum.org/) 上提供帮助和支持，成为社区里的中坚力量！
+其次，很抱歉，捐款并不会直接影响 Flarum 的开发速度。 我们也鼓励用户在其他方面做出贡献，比如 [贡献代码](contributing.md)、[开发扩展](/extend/)、编写文档、将 Flarum 翻译成其他语言，或在 [社区论坛](https://discuss.flarum.org/) 上提供帮助和支持，成为社区里的中坚力量！
 
-### 我可以在生产环境中使用测试版本吗？
-
-我们在 [安装说明](install.md) 有警告不要这样做，是有原因的。Flarum 还不成熟，有很多地方可能会出错——您所使用的扩展程序可能不与较新的测试版本兼容；Bug 可能会导致内容丢失，或将私人信息暴露在互联网上；欠佳的 SEO 可能会降低您的网站排名，使其难以吸引新会员；现有的会员可能会受性能问题或功能不完善困扰，从而流失到其他优质社区。等等等等……
-
-您可能无所谓这些风险，这完全取决于您个人…… 不过我们还是希望您能明白，如果使用过程中出现重大问题，应对这些风险是您的责任，我们不能保证一定能帮您解决问题，更不能保证可以及时解决问题。做出明智的选择并使您的网站稳定工作是 **您** 分内的事情。
-
-### 我可以将 Flarum 与 WordPress/Laravel/等等集成吗？
-
-这是 _非常棒_ 的想法！但是现在还不可能，希望我们在未来能推出此类功能。
-
-### Flarum 会有****的功能吗？什么时候有？为什么还没做呢？
+### Flarum 会有****的功能吗？ 什么时候有？ 为什么还没做呢？
 
 我们很想让 Flarum 的功能和插件应有尽有、一应俱全，但现阶段，基本功能和稳定性才是重点。
 
-### 为什么你们还没有修复****的问题？
+### 我可以将 Flarum 与 WordPress/Laravel/等等集成吗？
 
-同样，答案是「要事先为」。如果我们还没有解决一个 Issue（或给它分配了一个里程碑），那是因为我们正在处理其他同样重要的事情，所以请耐心等待。我们会尽量在新版本发布前搞定它。如果您很着急，可以自行修复它 [并为项目做出贡献](contributing.md)！
+同样，答案是「要事先为」。 如果我们还没有解决一个 Issue（或给它分配了一个里程碑），那是因为我们正在处理其他同样重要的事情，所以请耐心等待。 我们会尽量在新版本发布前搞定它。 如果您很着急，可以自行修复它 [并为项目做出贡献](contributing.md)！
 
 ### 我可以将我的论坛迁移到 Flarum 上吗？
 
-可以，但是现在不能。我们现在的工作重心全面转向保证 Flarum 的稳定和基本功能的完善完整。一旦我们有信心 Flarum 可以用于生产环境，我们将打造从其他论坛软件（例如 esoTalk、FluxBB、phpBB、Discourse等）导入数据的工具。
+We don't currently provide official migrators, but there are many community solutions out there. 一旦我们有信心 Flarum 可以用于生产环境，我们将打造从其他论坛软件（例如 esoTalk、FluxBB、phpBB、Discourse等）导入数据的工具。
 
-### 我如何加入 Flarum 团队？
+### 为什么你们还没有修复****的问题？
 
-> 「这，是一次神秘而又险峻的考验。要到达那块遥远的彼岸，等待你的将会是未知的旅途和一次又一次死里逃生、惊心动魄的瞬间。曾有许多勇士奋勇直前，然少有人平安归来。你，准备好了吗？」 —— jordanjay29
+> "Through an arcane and arduous ordeal, involving mystic rituals, life threatening peril, and adventures to far off lands where many go and few return." ~ jordanjay29
 
-好了，认真地说，我们一般都会留意社区里出类拔萃的成员，他们或许能够成为优秀的员工。就拿我们目前的多数员工来说，他们现在做的事情与成为正式员工前没有什么两样。
+好了，认真地说，我们一般都会留意社区里出类拔萃的成员，他们或许能够成为优秀的员工。 就拿我们目前的多数员工来说，他们现在做的事情与成为正式员工前没有什么两样。
 
-因此，找到属于您的激情，并以您觉得最好的方式做出贡献，然后顺其自然。在这里，不论您有没有获得荣誉徽章，都能获得一样的尊重和掌声。
-
-
+因此，找到属于您的激情，并以您觉得最好的方式做出贡献，然后顺其自然。 Then let it take its course. You don't have to have a badge to be respected here.
