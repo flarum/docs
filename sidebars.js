@@ -141,7 +141,8 @@ module.exports = {
       label: 'Internal Docs',
       collapsible: false,
       items: [
-        'internal/README'
+        'internal/README',
+        'internal/merging',
       ]
     },
   ]
