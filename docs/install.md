@@ -87,18 +87,18 @@ The user that Flarum is running as MUST have read + write access to:
 
 Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
 
-There are several commands you'll need to run in order to set up file permissions.
+There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
 
 First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
-sudo chmod 775 -R /path/to/directory
+chmod 775 -R /path/to/directory
 ```
 
 If that isn't enough, you may need to check that your files are owned by the correct group and user. By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You'll need to look into the specifics of your distro and web server setup to make sure. You can change the folder ownership in most Linux operating systems by running:
 
 ```bash
-sudo chown -R www-data:www-data /path/to/directory
+chown -R www-data:www-data /path/to/directory
 ```
 
 With `www-data` changed to something else if a different user/group is used for your web server.
@@ -106,7 +106,7 @@ With `www-data` changed to something else if a different user/group is used for 
 Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
 
 ```bash
-sudo chcon -R -t httpd_sys_rw_content_t /path/to/directory
+chcon -R -t httpd_sys_rw_content_t /path/to/directory
 ```
 
 To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
