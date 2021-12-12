@@ -122,11 +122,15 @@ You can allow the sort order of resources being **listed** to be customized by s
 You can then extract sorting information from the request using the `extractSort` method. This will return an array of sort criteria which you can apply to your query:
 
 ```php
+use Illuminate\Support\Str;
+
+// ...
+
 $sort = $this->extractSort($request);
 $query = Tag::query();
 
 foreach ($sort as $field => $order) {
-    $query->orderBy(snake_case($field), $order);
+    $query->orderBy(Str::snake($field), $order);
 }
 
 return $query->get();
