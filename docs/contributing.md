@@ -96,7 +96,8 @@ A typical contribution workflow looks like this:
 
 4. 💾 **Commit** your code with a descriptive message.
     * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
-    * Write a [good commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * *Fix* commits should describe the issue fixed, not the fix.
 
 5. 🎁 **Submit** a Pull Request on GitHub.
     * Fill out the pull request template.
