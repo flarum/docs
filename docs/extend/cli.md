@@ -5,7 +5,7 @@ This is a very powerful and flexible paradigm, but it also brings the maintenanc
 
 We've created the Flarum CLI (command line interface) as a tool to help developers by automating some repetitive and menial tasks, and allow them to get into the actual work without much hassle.
 
-Major updates about Flarum CLI will be published [on this thread](https://discuss.flarum.org/d/28427-flarum-cli-v10).
+Major updates about Flarum CLI will be published [on this discussion](https://discuss.flarum.org/d/28427-flarum-cli-v10).
 
 See the [package's readme](https://github.com/flarum/cli) for information on:
 
