@@ -20,7 +20,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 - A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
 - Extensions can now [modify the minimum search length](https://github.com/flarum/core/pull/3130) of the `Search` component.
 - The following components are now extensible:
-  - The "colors" part of the Appearance page in admin: https://github.com/flarum/core/pull/3186
+  - The "colors" part of the Appearance page in the admin dashboard: https://github.com/flarum/core/pull/3186
   - The `StatusWidget` dropdown in the admin dashboard: https://github.com/flarum/core/pull/3189
   - `primaryControls` in the notification list: https://github.com/flarum/core/pull/3204
 - Extensions now have finer control over positioning when adding elements to the DiscussionPage sidebar items: https://github.com/flarum/core/pull/3165
