@@ -29,7 +29,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 ### Backend
 
 - An [extender for settings defaults](https://github.com/flarum/core/pull/3127) has been added. This should be used instead of the `addSettings` migration helper, which has been deprecated.
-- You can now [generate LESS variables from setting values](https://github.com/flarum/core/pull/3011) via the `Settings` extender.
+- You can now [generate Less variables from setting values](https://github.com/flarum/core/pull/3011) via the `Settings` extender.
 - Extensions can now [override/supplement blade template namespaces](https://github.com/flarum/core/pull/3167) through the `View` extender, meaning custom blade templates can be used instead of the default ones added by core or extensions.
 - You can now define [custom LESS functions through PHP](https://github.com/flarum/core/pull/3190), allowing you to use some backend logic in your LESS theming.
 - Extensions can now create [custom page title drivers](https://github.com/flarum/core/pull/3109/files) for titles in server-returned HTML.
