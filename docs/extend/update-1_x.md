@@ -16,7 +16,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 - Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
 - Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
-- You can now use webpack v5 to bundle your extension's code.
+- You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements.
 - A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
 - Extensions can now [modify the minimum search length](https://github.com/flarum/core/pull/3130) of the `Search` component.
 - The following components are now extensible:
