@@ -13,7 +13,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 ### Frontend
 
 - Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
-- Instead of directly using LESS variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the LESS variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
+- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
 - Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
 - You can now use webpack v5 to bundle your extension's code.
