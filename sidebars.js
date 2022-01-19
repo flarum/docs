@@ -93,7 +93,8 @@ module.exports = {
         'extend/permissions',
         'extend/settings',
         'extend/testing',
-        'extend/theme'
+        'extend/theme',
+        'extend/views'
       ]
     },
     {
