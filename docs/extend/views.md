@@ -7,7 +7,7 @@ server-side generated templates are still used throughout Flarum. Most notably, 
 It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/).
 [Views](https://laravel.com/docs/8.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables.
 
-For our purposes, views are directories containing `.blade.php` template files (possible contained in subdirectories).
+For our purposes, views are directories containing `.blade.php` template files (possibly contained in subdirectories).
 
 ## Adding Views
 
@@ -19,7 +19,7 @@ use Illuminate\Contracts\View\Factory;
 
 return [
     (new Extend\View)
-        ->namespace('acme.hello-world', __DIR__.'/views');
+        ->namespace('acme.hello-world', __DIR__.'/views'),
 ];
 ```
 
@@ -28,7 +28,7 @@ return [
 
 To learn about the syntax for Blade templates, read [Laravel's documentation](https://laravel.com/docs/8.x/blade).
 
-Once you've set up your views, you'll can render them to strings:
+Once you've set up your views, you can render them to strings:
 
 ```php
 // Here, $view is of type `Illuminate\Contracts\View\Factory`
@@ -40,17 +40,17 @@ $renderedString = $view->make('acme.hello-world::greeting', ['varName' => true])
 
 You can obtain the view factory instance through dependency injection.
 
-The format is "VIEW_NAMESPACE::VIEW_NAME". If the view folder is organized as subdirectories, replace `/` with `.` in the pack.
-So if you have a file at "forum/error.blade.php" in a namespace called "custom-views", you would use "custom-views::forum.error".
+The format is `"VIEW_NAMESPACE::VIEW_NAME"`. If the view folder is organized as subdirectories, replace `/` with `.` in the pack.
+So if you have a file at `"forum/error.blade.php"` in a namespace called `"custom-views"`, you would use `"custom-views::forum.error"`.
 
 Note that all Blade templates rendered this way automatically have access to the following variables:
 
-- $url: a [URL generator](routes.md#generating-urls) instance.
-- $translator: a [Translator](i18n#server-side-translation) instance.
-- $settings: a [SettingsInterface](settings.md) instance.
-- $slugManager: a [SlugManager](slugging.md) instance.
+- `$url`: a [URL generator](routes.md#generating-urls) instance.
+- `$translator`: a [Translator](i18n#server-side-translation) instance.
+- `$settings`: a [SettingsInterface](settings.md) instance.
+- `$slugManager`: a [SlugManager](slugging.md) instance.
 
-Additionally, templates used by [content logic](routes#content)
+Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/core/tree/master/src/Api/Serializer/ForumSerializer.php#L19-L19).
 
 ## Overriding Views
 
