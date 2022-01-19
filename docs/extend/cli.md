@@ -7,7 +7,7 @@ We've created the Flarum CLI (command line interface) as a tool to help develope
 
 Major updates about Flarum CLI will be published [on this discussion](https://discuss.flarum.org/d/28427-flarum-cli-v10).
 
-See the [package's readme](https://github.com/flarum/cli) for information on:
+See the [package's readme](https://github.com/flarum/cli#readme) for information on:
 
 - Installation
 - Usage
