@@ -1,6 +1,6 @@
 # Views and Blade
 
-Although the Flarum UI you know and love is powered by our [Mithril frontend](frontend.md),
+Although the Flarum UI you know and love is powered by our [Mithril frontend](frontend),
 server-side generated templates are still used throughout Flarum. Most notably, the HTML skeleton of the forum, which includes various SEO meta tags, as well as the no-js view of the forum, is implemented through the Views and Blade systems.
 
 [Blade](https://laravel.com/docs/8.x/blade) is Laravel's templating engine, which allows you to conveniently generate HTML (or other static content) from PHP.
@@ -45,10 +45,10 @@ So if you have a file at `"forum/error.blade.php"` in a namespace called `"custo
 
 Note that all Blade templates rendered this way automatically have access to the following variables:
 
-- `$url`: a [URL generator](routes.md#generating-urls) instance.
+- `$url`: a [URL generator](routes#generating-urls) instance.
 - `$translator`: a [Translator](i18n#server-side-translation) instance.
-- `$settings`: a [SettingsInterface](settings.md) instance.
-- `$slugManager`: a [SlugManager](slugging.md) instance.
+- `$settings`: a [SettingsInterface](settings) instance.
+- `$slugManager`: a [SlugManager](slugging) instance.
 
 Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/core/tree/master/src/Api/Serializer/ForumSerializer.php#L19-L19).
 
@@ -62,6 +62,6 @@ use Illuminate\Contracts\View\Factory;
 
 return [
     (new Extend\View)
-        ->extendNamespace('acme.hello-world', __DIR__.'/override_views'),
+        ->extendNamespace('acme.hello-world', __DIR__.'/override_views');
 ];
 ```
