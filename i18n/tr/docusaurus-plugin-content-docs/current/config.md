@@ -14,7 +14,7 @@ Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritaban
   'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
-    'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB...
+    'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB... MySQL, MariaDB...
     'host' => 'localhost', // bağlantının ana bilgisayarı, harici bir hizmet kullanılmadığı sürece çoğu durumda localhost
     'database' => 'flarum', // veritabanının adı
     'username' => 'root', // veritabanı kullanıcı adı
@@ -29,7 +29,4 @@ Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritaban
   'paths' =>
   array (
     'api' => 'api', // /api , API'ye gider.
-    'admin' => 'admin', // /admin , yönetici paneline gider.
-  ),
-);
 ```
