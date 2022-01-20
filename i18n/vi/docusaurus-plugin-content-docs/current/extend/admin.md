@@ -1,22 +1,22 @@
 # Trang quản trị
 
-Beta 15 introduced a completely redesigned admin panel and frontend API. It is now easier than ever to add settings or permissions to your extension.
+Beta 15 với trang quản trị admin và API frontend được thiết kế mới. Bây giờ có thể dễ dàng thêm thiết lập hoặc quyền vào tiện ích mở rộng của bạn.
 
-Before beta 15, extension settings were either added in a `SettingsModal` or they added a new page for more complex settings. Now, every extension has a page containing info, settings, and the extension's own permissions.
+Trước beta 15, thiết lập tiện ích mở rộng đã được thêm vào `SettingModal` hoặc họ đã thêm vào một trang mới để phức tạp việc thiết lập hơn. Bây giờ toàn bộ tiện ích mở rộng đã có trang chứa thông tin, thiết lập và quyền của tiện ích mở rộng cho riêng mình.
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+Bạn có thể dễ dàng đăng ký settings, extend [`Extension Page`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) hoặc cung cấp trang hoàn chỉnh của riêng mình.
 
-## Extension Data API
+## API dữ liệu tiện ích mở rộng
 
-This new API allows you to add settings to your extension with very few lines of code.
+Đây là API mới cho phép bạn thêm settings vào tiện ích mở rộng chỉ với vài dòng mã.
 
-### Telling the API about your extension
+### Nói với API về tiện ích mở rộng của bạn
 
-Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
+Trước khi đăng ký setting nào đó, bạn cần cho `ExtensionData` hiểu rằng nó lấy dữ liệu cho tiện ích mở rộng nào.
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+Chỉ cần thêm hàm `for` vào sau `app.extensionData` và truyền id tiện ích mở rộng của bạn vào. Để tìm id tiện ích mở rộng, hãy lấy tên composer và thay thế dấu gạch chéo thành dấu gạch ngang (ví dụ: 'fof/merge-discussions' thành 'fof-merge-discussions').  Tiện ích mở rộng có `flarum-` và `flarum-ext-` sẽ bị xoá các phần đó khỏi tên (ví dụ: 'webbinaro/flarum-calendar' thành 'webbinaro-calendar').
 
-For the following example, we will use the fictitious extension 'acme/interstellar':
+Đối với ví dụ sau, chúng tôi sẽ sử dụng tiện ích mở rộng có id là 'acme/interstellar':
 
 ```js
 
@@ -27,21 +27,21 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Once that is done, you can begin adding settings and permissions.
+Như vậy là xong, bây giờ bạn có thể thêm settings và permissions vào.
 
-:::tip Note
+:::tip Lưu ý
 
-All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+Tất cả hàm đăng ký trong `ExtensionData` đều có thể sử dụng được, có nghĩa là bạn có thể thêm từng cái vào mà không cần thêm `for` nữa.
 
 :::
 
-### Registering Settings
+### Đăng ký Settings
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+Thêm các trường settings theo cách này được khuyến khích cho các mục đơn giản. Theo nguyên tắc chung, nếu bạn chỉ cần lưu trữ những thứ trong bảng cài đặt, điều này là đủ cho bạn.
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+Để thêm một trường, gọi hàm `registerSetting` sau đó là `for` sau đó là `app.extensionData` và truyền 'object setting' vào dưới dạng tham số thứ nhất. Phía sau `ExtensionData` đã chuyển settings của bạn thành [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), bạn có thể truyền một số ưu tiên làm đối số thứ hai.
 
-Here's an example with a switch (boolean) item:
+Đây là ví dụ với trường switch (boolean):
 
 ```js
 
@@ -51,17 +51,17 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerSetting(
       {
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
-        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
-        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
-        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+        setting: 'acme-interstellar.coordinates', // Đây là key mà settings sẽ được lưu trong bảng settings trong cơ sở dữ liệu.
+        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // Label được hiển thị cho phép quản trị viên biết cài đặt này hoạt động như thế nào.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Văn bản trợ giúp tùy chọn có thể giải thích dài hơn về cài đặt.
+        type: 'boolean', // Đây là kiểu setting, các tùy chọn hợp lệ là: boolean, text (hoặc bất kỳ kiểu của <input>), và select. 
       },
-      30 // Optional: Priority
+      30 // Không bắt buộc: Ưu tiên
     )
 });
 ```
 
-If you use `type: 'select'` the setting object looks a little bit different:
+Nếu bạn sử dụng `type: 'select'` đối tượng setting trông hơi khác một chút:
 
 ```js
 {
@@ -69,14 +69,14 @@ If you use `type: 'select'` the setting object looks a little bit different:
   label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
   type: 'select',
   options: {
-    'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+    'LOH': 'Liquid Fuel', // Key trong đối tượng này là setting sẽ được lưu trữ trong cơ sở dữ liệu, giá trị là nhãn mà quản trị viên sẽ nhìn thấy (hãy nhớ sử dụng bản dịch nếu chúng có ý nghĩa trong ngữ cảnh của bạn).
     'RDX': 'Solid Fuel',
   },
   default: 'LOH',
 }
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+Ngoài ra, hãy lưu ý rằng các mục bổ sung trong đối tượng setting sẽ được sử dụng làm phần đính kèm component. This can be used for placeholders, min/max restrictions, etc:
 
 ```js
 {
@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
+In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
 
 Arguments:
  * Permission object
@@ -133,13 +133,14 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Font-Awesome Icon
+        icon: 'fas fa-rocket', // Any FontAwesome 5 icon class
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
         tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
+        allowGuest: false, // Whether this permission can be granted to guests
       }, 
       'start', // Category permission will be added to on the grid
-      95 // Optional: Priority
+      95 // Priority (optional)
     );
 });
 ```
