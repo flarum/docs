@@ -1,6 +1,6 @@
 # Contribuire a Flarum
 
-Interessato a contribuire allo sviluppo di Flarum? È fantastico! Dalla [segnalazione di un bug](bugs.md) alla creazione di richieste particolari: ogni contributo è apprezzato e utile. Flarum wouldn't be possible without our community contributions.
+Interessato a contribuire allo sviluppo di Flarum? È fantastico! Dalla [segnalazione di un bug](bugs.md) alla creazione di richieste particolari: ogni contributo è apprezzato e utile. Flarum non sarebbe qui senza la nostra fenomenale community.
 
 Prima di contribuire, leggi il [codice di condotta](code-of-conduct.md).
 
@@ -18,15 +18,15 @@ Questo documento è una guida per gli sviluppatori che vogliono contribuire con 
 
 ## Setup area di sviluppo
 
-Dai un occhiata ai nostri prossimi [Traduardi (in inglese)](https://github.com/flarum/core/milestones) per una panoramica di ciò che deve essere fatto. Consulta le [Primi problemi](https://github.com/flarum/core/labels/Good%20first%20issue) per un elenco di problemi con cui dovrebbe essere relativamente facile iniziare. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
+Dai un occhiata ai nostri prossimi [Traduardi (in inglese)](https://github.com/flarum/core/milestones) per una panoramica di ciò che deve essere fatto. Consulta le [Primi problemi](https://github.com/flarum/core/labels/Good%20first%20issue) per un elenco di problemi con cui dovrebbe essere relativamente facile iniziare. Se c'è qualcosa di cui non sei sicuro, non esitare a chiedere! Abbiamo tutti cominciato dal principio.
 
 Se hai intenzione di andare avanti e lavorare su qualcosa, commenta il problema pertinente o creane uno nuovo prima. In questo modo possiamo garantire che il tuo prezioso lavoro non sia vano.
 
-Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
+Dal momento che Flarum è così estendibile, consigliamo vivamente [i nostri documenti per le estensioni](extend/README.md) come riferimento quando si lavora sul core, così come per le estensioni in bundle. Si dovrebbe iniziare con [l'introduzione](extend/README.md) per una migliore comprensione della nostra filosofia di estensibilità.
 
 ## Flusso di lavoro nello sviluppo
 
-### Setting Up a Local Codebase
+### Impostare un codice locale
 
 [flarum/flarum](https://github.com/flarum/flarum) è lo "scheletro" dell'applicazione che usa Composer per scaricare [flarum/core](https://github.com/flarum/core) e [tantissime estensioni](https://github.com/flarum). Per lavorare su questi, consigliamo di eseguirne il fork e di clonarli in una [Repository di Composer](https://getcomposer.org/doc/05-repositories.md#path):
 
@@ -54,7 +54,7 @@ npm install
 npm run dev
 ```
 
-The process is the same for extensions.
+Il processo è lo stesso per le estensioni.
 
 ```bash
 cd packages/tags/js
@@ -63,9 +63,9 @@ npm link ../../core/js
 npm run dev
 ```
 
-### Development Tools
+### Strumenti di sviluppo
 
-After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
+Dopo aver effettuato un fork e clonato la repository su cui lavorerai, dovrai impostare l'hosting locale in modo da poter testare le modifiche. Flarum attualmente non viene fornito con un server di sviluppo, quindi dovrai impostare Apache/NGINX/Caddy/etc per installare Flarum in locale.
 
 **Le Tabelle** dovrebbero chiamarsi in questo modo:
 
@@ -81,7 +81,7 @@ Utilizziamo [formati chiave standard](/extend/i18n.md#appendix-a-standard-key-fo
 
 1. 🔨 **Scrivi** un po' di codice.
     * Vedi sotto per lo [stile del codice](#stile-del-codice).
-    * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
+    * *Funzionalità minori* che sono completamente retrocompatibili con l'attuale versione di Flarum possono essere inviate all'ultimo branch stabile.
     * *Funzionalità importanti* devono essere sempre inviate al branch `master` che contiene la successiva versione di Flarum.
     * Internamente usiamo lo schema di denominazione `<iniziali>/<breve-descrizione>` (es. `tz/refactor-frontend`).
 
@@ -91,22 +91,22 @@ Utilizziamo [formati chiave standard](/extend/i18n.md#appendix-a-standard-key-fo
 3. 💾 **Crea dei commit** per il tuo codice con un messaggio descrittivo.
     * Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
     * Scrivi un [buon messaggio accompagnatorio](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
-    * See [here](extend/testing.md) for more information about testing in Flarum.
+    * Vedi [qui](extend/testing.md) per maggiori informazioni sui test in Flarum.
 
 4. 🎁 **Invia** una Pull Request su GitHub.
     * Riempi i campi della richiesta.
     * Se la modifica è visiva, includi uno screenshot o una GIF che dimostri la modifica.
 
 5. 🤝 **Coinvolgi il team** di Flarum per l'approvazione.
-    * Fill out the pull request template.
+    * Riempi i campi della richiesta (pull request).
     * Quando lasci un feedback, aggiungi commenti invece di sovrascriverli o eliminarli (li uniremo noi).
-    * NON eseguire il check-in di JavaScript nei file `dist` Verra fatto automaticamente una volta uniti. These will be compiled automatically on merge.
+    * NON eseguire il check-in di JavaScript nei file `dist` Verra fatto automaticamente una volta uniti. Verrà compilato tutto automaticamente durante la fusione.
 
 6. 🕺 **Festeggia** per aver contribuito a Flarum!
     * I membri del team esamineranno il tuo codice. Potremmo suggerire alcune modifiche o miglioramenti o alternative, ma per piccoli cambiamenti la tua richiesta pull dovrebbe essere accettata rapidamente.
-    * When addressing feedback, push additional commits instead of overwriting or squashing (we will squash on merge).
+    * Quando lasci un feedback, aggiungi commenti invece di sovrascriverli o eliminarli (li uniremo noi).
 
-7. 🕺 **Dance** like you just contributed to Flarum.
+7. 🕺 **Festeggia** per aver contribuito a Flarum.
 
 ## Strumenti di sviluppo
 
@@ -143,11 +143,11 @@ La Fondazione Flarum riconosce che, ad eccezione di quanto esplicitamente descri
 
 ### CSS
 
-Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
+Le classi CSS di Flarum seguono più o meno il [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) con il formato `.ComponentName-descendentName--modifierName`.
 
 ### Traduzioni
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+Utilizziamo [formati chiave standard](/extend/i18n.md#appendix-a-standard-key-format) per denominare le chiavi di traduzione in modo descrittivo e coerente.
 
 ## Contratto di licenza del collaboratore
 
@@ -157,4 +157,4 @@ Confermi di essere in grado di concederci questi diritti. Dichiari di essere leg
 
 Dichiari che i Contributi sono tue opere d'autore originali e, per tua conoscenza, nessun'altra persona può rivendicare, o ha il diritto di rivendicare, alcun diritto su qualsiasi invenzione o brevetto relativo ai Contributi. Dichiari inoltre di non essere legalmente obbligato, sia stipulando un contratto che in altro modo, in qualsiasi circostanza che sia in conflitto con i termini di questa licenza.
 
-The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
+La Fondazione Flarum riconosce che, ad eccezione di quanto esplicitamente descritto nel presente Accordo, qualsiasi Contributo fornito è "COSÌ COM'È", SENZA GARANZIE O CONDIZIONI DI ALCUN TIPO, ESPLICITE O IMPLICITE, INCLUSE, SENZA LIMITAZIONE, ALCUNA GARANZIA O CONDIZIONE DI TITOLO, NON VIOLAZIONE, COMMERCIABILITÀ O IDONEITÀ PER UN PARTICOLARE SCOPO.
