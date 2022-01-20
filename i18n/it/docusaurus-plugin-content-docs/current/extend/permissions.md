@@ -40,34 +40,34 @@ $user->hasPermission('viewForum');
 
 Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
 
-Permissions are just part of the puzzle: if you're enforcing whether a user can perform an action, you should use Flarum's [authorization system](authorization.md).
+I permessi sono solo parte del puzzle: se stai decidendo se un utente puù o non può eseguire un azione, dovresti usare il [sistema di autorizzazioni di Flarum](authorization.md).
 
 :::
 
-## Permission Naming Conventions
+## Permessi e Nomi Convenzionali
 
-Nothing is enforced, but we generally recommend the following convention for permission naming:
+Non sei obbligato, ma generalmente raccomandiamo di seguire una convenzione per i nomi dei permessi:
 
 `extension-namespace.model-prefix.ability-name`.
 
-The extension namespace ensures that your permission won't collide with other extensions.
+Il namespace delle estensioni assicura che il tuo permesso non collida con altre estensioni.
 
-The model prefix is useful in case you have different models but similar permissions (`flarum-sponsors.discussion.sponsor` vs `flarum-sponsors.post.sponsor`).
+Il prefisso del modello è utile nel caso in cui tu abbia diversi modelli ma permessi simili (`flarum-sponsors.discussion.sponsor` vs `flarum-sponsors.post.sponsor`).
 
-### Aggiunta di autorizzazioni personalizzate
+### Namespaces "Magici"
 
-You may have seen some calls to `$actor->can` that don't use the full name of a permission; for example, `$actor->can('reply', $discussion)`, where the backing permission is actually called `discussion.reply`.
+Potresti aver visto alcune call a `$actor->can` che non usano il nome completo di un'autorizzazione; ad esempio, `$actor->can('reply', $discussion)`, dove il permesso è effettivamente chiamato `discussion.reply`.
 
-This is done in core to make authorization calls shorter and simpler. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
+Questo viene fatto nel core per rendere le call di autorizzazione più brevi e più semplici. In sostanza, se il secondo argomento è una discussione, la [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) del core controllerà automaticamente l'autorizzazione `discussione.PROVIDED_ABILITY`.
 
-This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
+Può essere usato per le estensioni quando il namespace di un modello non è presente: per esempio, `$actor->can('someAbility, $discussion)` controllerà il permesso di `discussion.someAbility` se l'argomento `$discussion` è un'istanza del modello `Discussion`. Tuttavia, questo significa che non è possibile prefissare i permessi con i namespace delle estensioni (o è necessario mettere il namespace delle estensioni alla fine).
 
-These magic model-based conversions are applied to discussion, group, and user authorization checks. For posts, the logic is slightly different: `$actor->can('ability', $post)` will check `$actor->('abilityPosts, $post->discussion)` on the post's discussion.
+Queste conversioni magiche basate su modelli sono applicate ai controlli di discussione, gruppo e autorizzazione utente. Per i post, la logica è leggermente diversa: `$actor->can('ability', $post)` controllerà  `$actor->('abilityPosts, $post->discussion)`  sulla discussione del post.
 
-If you want to use authorization checks with an ability name that differs from the backing permission name, and these cases do not apply to your permission's naming, you'll have to use a custom policy.
+Se si desidera utilizzare permessi e autorizzazioni aventi un nome diverso dal nome dell'autorizzazione di backing, si dovrà usare una permesso personalizzato.
 
-See our [authorization documentation](authorization.md) for more information on the `can` method, policies, and how authorization checks are processed.
+Vedi la nostra [documentazione sulle autorizzazioni](authorization.md) per maggiori informazioni sul metodo `can`, le politiche e il modo in cui vengono elaborati i controlli di autorizzazione.
 
-## Adding Custom Permissions
+## Aggiunta di permessi personalizzati
 
-To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).
+Per saperne di più sull'aggiunta dei permessi tramite il pannello di amministrazione, consulta la [documentazione pertinente](admin.md).
