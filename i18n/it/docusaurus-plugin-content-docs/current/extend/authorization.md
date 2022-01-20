@@ -3,7 +3,7 @@
 Come con qualsiasi framework, Flarum consente di limitare determinate azioni e contenuti a determinati utenti. Esistono 2 sistemi paralleli per questo:
 
 - Il processo di autorizzazione determina se un utente può eseguire una determinata azione.
-- La visibilità può essere applicata a una query di database per limitare in modo efficiente i record a cui gli utenti possono accedere. This is documented in our [model visibility](model-visibility.md) article.
+- La visibilità può essere applicata a una query di database per limitare in modo efficiente i record a cui gli utenti possono accedere. Questo è documentato nel nostro articolo [modelli di visibilità](model-visibility.md).
 
 ## Processo di autorizzazione
 
@@ -89,7 +89,7 @@ Se "can" non esiste o restituisce null, abbiamo finito con questo criterio e pro
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
-You can use the CLI to automatically generate policies:
+È possibile utilizzare la CLI per generare automaticamente i criteri:
 ```bash
 $ flarum-cli make backend policy
 ```
@@ -197,7 +197,7 @@ return [
 ];
 ```
 
-## Frontend Authorization
+## Autorizzazioni del frontend
 
 Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend. Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint. E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
 
