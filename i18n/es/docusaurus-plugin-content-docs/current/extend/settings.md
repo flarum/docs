@@ -27,7 +27,7 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Muy bien. Ahora la `SettingsRepositoryInterface` está disponible a través de `$this->settings` para nuestra clase.
+Great! Ahora la `SettingsRepositoryInterface` está disponible a través de `$this->settings` para nuestra clase.
 
 ### Lectura de la configuración
 
