@@ -1,30 +1,30 @@
 
 # Composer
 
-Flarum uses a program called [Composer](https://getcomposer.org) to manage its dependencies and extensions. You'll need to use composer if you want to:
+Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Dovrai usare composer per:
 
-- Install or update Flarum
-- Install, update, or remove Flarum extensions
+- Installare o aggiornare Flarum
+- Installare, aggiornare o rimuovere le estensioni di Flarum
 
-This guide is provided as a brief explanation of Composer. We highly recommend consulting the [official documentation](https://getcomposer.org/doc/00-intro.md) for more information.
+Questa guida è una piccola base per l'utilizzo di Composer. Raccomandiamo vivamente di consultare la  [documentazione ufficiale](https://getcomposer.org/doc/00-intro.md) per maggiori informazioni.
 
 :::tip Composer v2
 
-Historically, Composer has caused issues on shared hosting due to huge memory use. In 2020, [Composer v2 was released](https://blog.packagist.com/composer-2-0-is-now-available/) with massive performance and memory usage improvements that eliminate these problems. Make sure your server is using Composer v2!
+Storicamente, Composer ha causato problemi sull'hosting condiviso a causa di un uso enorme della memoria. Nel 2020, [Composer v2 è stato rilasciato](https://blog.packagist.com/composer-2-0-is-now-available/) con enormi miglioramenti di utilizzo delle prestazioni e della memoria che eliminano questi problemi. Assicurati che il tuo server stia usando Composer v2!
 
 :::
 
-## What is Composer?
+## Che cos’è Composer?
 
-> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Il compositore è uno strumento per la gestione delle dipendenze in PHP. Ti permette di dichiarare le librerie su cui dipende il tuo progetto e le gestirà (installazione/aggiornamento) per te. — [Introduzione a Composer](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md). Each of these has its own dependencies and releases.
+Ogni installazione di Flarum consiste principalmente nell'installazione di Flarum core e una serie di [estensioni](extensions.md). Ognuna di queste ha le sue dipendenze.
 
-Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
+In principio, il framework del forum gestiva le estensioni manualmente, caricando file zip contenenti il codice delle estensioni. Sembrava abbastanza semplice, ma i problemi divennero subito evidenti:
 
-- Uploading random zip files from the internet tends to be a bad idea. Requiring that extensions be downloaded from a central source like [Packagist](https://packagist.org/) makes it somewhat more tedious to spam malicious code, and ensures that source code is available on GitHub for free/public extensions.
-- Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
-- Zip files can cause a lot of headache if trying to automate deployments, run automated tests, or scale to multiple server nodes.
+- Il caricamento di file zip casuali da internet tende ad essere una cattiva idea. Richiedere che le estensioni vengano scaricate da una fonte come [Packagist](https://packagist.org/) rende un rende lo spam o codice malevolo difficile da scaricare, e assicura che il codice sorgente sia disponibile su GitHub per estensioni gratuite/pubbliche.
+- Diciamo che l'estensione A richiede la versione v4 di alcune librerie, e l'estensione B richiede la versione v5 di quella stessa libreria. Con una soluzione basata su zip, una delle due dipendenze potrebbe prevalere sull'altra, causando una serie di problemi. Oppure entrambi tenterebbero di funzionare contemporaneamente, il che causerebbe il crash di PHP (non è possibile dichiarare la stessa classe due volte).
+- I file zip possono causare molti mal di testa se si tenta di automatizzare le distribuzioni, eseguire test automatici o scalare su più nodi del server.
 - There is no good way to ensure conflicting extension versions can't be installed, or that system PHP version and extension requirements are met.
 - Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
 
