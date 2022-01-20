@@ -4,7 +4,7 @@ Herhangi bir topluluğun, e-posta doğrulaması, şifre sıfırlama, bildirim ve
 
 ## Kullanılabilir Sürücüler
 
-Flarum varsayılan olarak birkaç sürücü sağlar, bunlar aşağıda listelenir ve açıklanır. Geliştiriciler ayrıca [uzantılar aracılığıyla özel posta sürücüleri](ext/mail.md) ekleyebilirler.
+Flarum varsayılan olarak birkaç sürücü sağlar, bunlar aşağıda listelenir ve açıklanır. Geliştiriciler ayrıca [uzantılar aracılığıyla özel posta sürücüleri](extend/mail.md) ekleyebilirler.
 
 ### SMTP
 

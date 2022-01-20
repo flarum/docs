@@ -2,7 +2,7 @@
 
 ### _欢迎光临 Flarum 社区！_
 
-... 感谢您的加入! 我们对 Flarum 充满信心与激情，也很高兴认识同样的人。 我们希望 *每个人* 都能从 Flarum 及其社区中得到最大的帮助，因此请阅读并遵守下列准则。 我们希望每位用户都能充分利用 Flarum 和 Flarum 社区，因此，请您阅读并遵守以下准则。 无论您是使用我们的论坛，还是在 Discord、GitHub 上交流，亦或是在其他平台进行任何形式的交流，这些准则均适用。
+感谢加入! 我们对 Flarum 充满信心与激情，也很高兴认识同样的人。 We want *everyone* to get the most out of Flarum and the Flarum community, so we ask that you please read and follow these guidelines. 我们希望每位用户都能充分利用 Flarum 和 Flarum 社区，因此，请您阅读并遵守以下准则。 无论您是使用我们的论坛，还是在 Discord、GitHub 上交流，亦或是在其他平台进行任何形式的交流，这些准则均适用。
 
 ### 重中之重，为人友善！
 
@@ -22,7 +22,7 @@
 
 ### 提高自己的曝光度
 
-想发起一个新讨论？ 请务必先阅读我们的 [常见问题](faq.md)，通过其中的相关链接充分了解这个项目。 然后花一些时间浏览论坛，熟悉一下 [标签系统](https://discuss.flarum.org/tags)，并搜索一些关键词，*可能您想讨论的早已被大家讨论过。</p>
+想发起一个新讨论？ 请务必先阅读我们的 [常见问题](faq.md)，通过其中的相关链接充分了解这个项目。 然后花一些时间浏览论坛，熟悉一下 [标签系统](https://discuss.flarum.org/tags)，并搜索一些关键词，*可能您想讨论的早已被大家讨论过
 
 当您确定要发起一个讨论时，请牢记：
 

@@ -2,7 +2,7 @@
 
 :::danger Güvenlik Açıkları
 
-Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin.github.com/flarum/core/security/policy">security policy</a> so we can address it promptly.
+Flarum içinde bir güvenlik açığı keşfederseniz, lütfen derhal ele alabilmemiz için [security@flarum.org](mailto:security@flarum.org) adresine bir e-posta gönderin.
 
 :::
 
