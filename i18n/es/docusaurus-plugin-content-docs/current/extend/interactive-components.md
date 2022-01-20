@@ -76,7 +76,7 @@ $ flarum-cli make frontend modal
 
 Como Flarum es un foro, necesitamos herramientas para que los usuarios puedan crear y editar mensajes y discusiones. Flarum logra esto a través del componente compositor flotante.
 
-El compositor es gestionado por una instancia global de [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), que es accesible a través de `app.composer` en el frontend de `forum`. Sus métodos públicos más importantes son:
+El compositor es gestionado por una instancia global de [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), que es accesible a través de `app.composer` en el frontend de `forum`. Sus métodos públicos más importantes son:
 
 - `app.composer.load(componentClass, attrs)` cargará un nuevo tipo de compositor. Si un compositor ya está activo, será reemplazado.
 - `app.composer.show()` mostrará el compositor si está actualmente oculto.
