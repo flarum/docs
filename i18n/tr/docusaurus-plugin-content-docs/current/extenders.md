@@ -1,4 +1,4 @@
-# Local Extenders
+# Yerel Genişleticiler
 
 If there are customizations you want to make to your site without distributing an entire extension, you can do so by using **local extenders**. Each Flarum installation comes with an `extend.php` file where you can add extender instances, just like in a full extension.
 
