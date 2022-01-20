@@ -77,21 +77,37 @@ www.example.com {
 ```
 ## 目录所有权
 
-在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 要使 Linux 上的某个目录可写，可以执行以下命令：
+在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-```bash
-chmod 755 /path/to/directory
-```
+- 然后编辑 `index.php` 文件，修改这一行：
+- The `storage` subdirectory, so Flarum can edit logs and store cached data.
+- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
 如果您想把 Flarum 放到网站的子目录下（比如 `example.com/forum`），或者您没有控制网站根目录的权利（只能使用 `public_html` 或 `htdocs` 之类的目录），那么您可以设置 Flarum 以在没有 `public` 目录的情况下运行。
+
+There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+
+First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
 chmod 755 -R /path/to/directory
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user.
+If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. 大多数 Linux 发行版，默认 `www-data` 为 PHP 和 Web 服务器所有者和所属组群。 You'll need to look into the specifics of your distro and web server setup to make sure. 您可以运行 `chown -R www-data:www-data 文件夹名/` 命令来改变大多数 Linux 操作系统中文件（夹）的所有者。
 
-大多数 Linux 发行版，默认 `www-data` 为 PHP 和 Web 服务器所有者和所属组群。 您可以运行 `chown -R www-data:www-data 文件夹名/` 命令来改变大多数 Linux 操作系统中文件（夹）的所有者。
+```bash
+chmod 755 -R /path/to/directory
+```
+
+如果 Flarum 对某个目录及其子目录请求写权限，请添加 `-R` 选项，以递归更新该目录和其内的文件及子目录权限：
+
+Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
+
+Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
+
+```bash
+chcon -R -t httpd_sys_rw_content_t /path/to/directory
+```
 
 要了解关于以上命令的更多信息，以及 Linux 系统下的文件权限和所有权相关信息，请阅读 [英文教程](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/) 或 [中文教程](https://www.runoob.com/linux/linux-comm-chmod.html)。 如果您在 Windows 上配置 Flarum，这个 [超级用户问题](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) 可能对您很有用。
 
