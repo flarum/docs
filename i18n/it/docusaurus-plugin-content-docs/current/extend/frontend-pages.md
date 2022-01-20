@@ -28,7 +28,7 @@ export default class CustomPage extends Page {
 
 ### Usare i Route Resolvers
 
-Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities. To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.
+Flarum utilizza un'impostazione per determinare quale pagina dovrebbe essere la homepage: questo dà flessibilità agli amministratori per personalizzare le loro community. Per aggiungere una pagina personalizzata alla homepage in Admin, è necessario estendere il metodo `BasicsPage.homePageItems` con il percorso della tua nuova pagina.
 
 I dati possono essere impostati e recuperati dallo stato della pagina utilizzando:
 
@@ -47,11 +47,11 @@ Ad esempio, questo è il modo in cui la pagina di discussione fa la sua istanza 
 
 ### Resolvers personalizzati
 
-Often, you'll want some custom text to appear in the browser tab's title for your page. For instance, a tags page might want to show "Tags - FORUM NAME", or a discussion page might want to show the title of the discussion.
+Spesso, la prima cosa che si modifica è il testo personalizzato che appare nel titolo della scheda del browser. Per esempio, una pagina di tag potrebbe voler mostrare "Tag - NOME FORUM", o una pagina di discussione potrebbe voler mostrare il titolo della discussione.
 
-To do this, your page should include calls to `app.setTitle()` and `app.setTitleCount()` in its `oncreate` [lifecycle hook](frontend.md) (or when data is loaded, if it pulls in data from the API).
+Per fare ciò, dovrai aggiungere alla tua pagina la call `app.setTitle()` e `app.setTitleCount()` nel metodo `oncreate` del [lifecycle hook](frontend.md) (o quando i dati sono stati caricati, se richiesti tramite API).
 
-In realtà ci sono 3 modi per impostare il resolver di componenti / percorsi durante la registrazione di una route:
+Per esempio:
 
 ```js
 import Page from 'flarum/common/components/Page';
@@ -86,7 +86,7 @@ export default class CustomPageLoadsData extends Page {
 }
 ```
 
-Please note that if your page is [set as the homepage](#setting-page-as-homepage), `app.setTitle()` will clear the title for simplicity. It should still be called though, to prevent titles from previous pages from carrying over.
+Si prega di notare che se la pagina è [impostata come homepage](#setting-page-as-homepage), `app.setTitle()` cancellerà il titolo per semplicità. Dovrebbe comunque essere impostato, per evitare che i titoli delle pagine precedenti vengano applicati.
 
 ## PageState
 
@@ -95,14 +95,14 @@ A volte, vogliamo ottenere informazioni sulla pagina in cui ci troviamo attualme
 - La classe del componente utilizzata per la pagina
 - Una raccolta di dati che ogni pagina imposta su se stessa. Il nome della rotta corrente è sempre incluso.
 
-Data can be set to, and retrieved from, Page State using:
+I dati possono essere impostati e recuperati da Page State utilizzando:
 
 ```js
 app.current.set(KEY, DATA);
 app.current.get(KEY);
 ```
 
-For example, this is how the Discussion Page makes its [`PostStreamState`](https://api.docs.flarum.org/js/master/class/src/forum/states/poststreamstate.js~poststreamstate) instance globally available.
+Ad esempio, ecco come la Pagina di Discussione rende [`PostStreamState`](https://api.docs.flarum.org/js/master/class/src/forum/states/poststreamstate.js~poststreamstate) disponibile globalmente.
 
 Puoi anche controllare il tipo e i dati di una pagina usando `PostStreamState` ed il metodo `matches`. Ad esempio, se vogliamo sapere se siamo attualmente su una pagina di discussione:
 
@@ -130,18 +130,18 @@ app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
 
 ## Route resolver (avanzato)
 
-See the [Admin Dashboard documentation](admin.md) for more information on tools specifically available to admin pages (and how to override the admin page for your extension).
+Vedi la documentazione [Pannello di amministrazione](admin.md) per ulteriori informazioni sugli strumenti disponibili per le pagine di amministrazione (e su come sovrascrivere la pagina di amministrazione per la tua estensione).
 
-## Route Resolvers (Advanced)
+## Route Resolvers (Avanzato)
 
 [Casi d'uso avanzati](https://mithril.js.org/route.html#advanced-component-resolution) possono ottenere vantaggi dal [sistema di risoluzione dei percorsi di Mithril](https://mithril.js.org/route.html#routeresolver). Flarum in realtà avvolge già tutti i suoi componenti nel resolver `flarum/resolvers/DefaultResolver`. Ciò ha i seguenti vantaggi:
 
 - Passa un attributo `routeName` alla pagina corrente, che poi lo fornisce a`PageState`
 - Assegna una [chiave](https://mithril.js.org/keys.html#single-child-keyed-fragments) al componente della pagina di primo livello. Quando il percorso cambia, se la chiave del componente di primo livello è cambiata, verrà riprodotto completamente (per impostazione predefinita, Mithril non esegue il rendering dei componenti quando si passa da una pagina all'altra se entrambi sono gestiti dallo stesso componente).
 
-### Using Route Resolvers
+### Usare i Route Resolvers
 
-There are actually 3 ways to set the component / route resolver when registering a route:
+Ci sono in realtà 3 modi per impostare il componente/route resolver durante la registrazione di un nuovo percorso:
 
 - la chiave `resolver` può essere usata per fornire un ** istanza ** di un risolutore di percorsi. Questa istanza dovrebbe definire quale componente deve essere utilizzato e codificare il nome del percorso da passare al suo interno. Questa istanza verrà utilizzata senza alcuna modifica da Flarum.
 - Le chiavi `resolverClass` e `component` possono essere usate per fornire una ** classe ** che sarà utilizzata per istanziare un risolutore di percorsi, da usare al posto di quella predefinita di Flarum, così come il componente da usare. Il suo costrutto dovrebbe avere 2 argomenti: `(component, routeName)`.
@@ -150,12 +150,12 @@ There are actually 3 ways to set the component / route resolver when registering
 Per esempio:
 
 ```js
-// See above for a custom page example
+//Guarda in alto per le pagine personalizzate
 import CustomPage from './components/CustomPage';
-// See below for a custom resolver example
+// Guarda in basso per i resolver personalizzati di esempio
 import CustomPageResolver from './resolvers/CustomPageResolver';
 
-// Use a route resolver instance
+// Usa un route resolver
 app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
   onmatch: function(args) {
     if (!app.session.user) return m.route.SKIP;
@@ -164,14 +164,14 @@ app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
   }
 }};
 
-// Use a custom route resolver class
+// Utilizza un resolver personalizzato
 app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
 
-// Use the default resolver class (`flarum/common/resolvers/DefaultResolver`)
+// Usa la classe di default (`flarum/common/resolvers/DefaultResolver`)
 app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
 ```
 
-### Custom Resolvers
+### Resolver Personalizzati
 
 Consigliamo vivamente di estendere i risolutori di percorsi personalizzati `flarum/resolvers/DefaultResolver`. Per esempio, Flarum `flarum/resolvers/DiscussionPageResolver` assegna la stessa chiave a tutti i collegamenti alla stessa discussione (indipendentemente dal post corrente) e attiva lo scorrimento quando si utilizza `m.route.set` per passare da un post all'altro nella stessa pagina di discussione:
 
