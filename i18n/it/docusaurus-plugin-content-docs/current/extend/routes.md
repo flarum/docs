@@ -110,7 +110,9 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 Puoi iniettare [Visualizza](https://laravel.com/docs/6.x/views) di Laravel nel tuo controller. Ciò ti consentirà di eseguire il rendering di [Blade template](https://laravel.com/docs/6.x/blade) nella risposta del controller.
 
-First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
+First, you'll need to register the view. See [the relevant article](views.md) for more information on this.
+
+Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlResponse`:
 
 ```php
 use Flarum\Extend;
@@ -120,27 +122,6 @@ return [
     (new Extend\View)
         ->namespace('acme.hello-world', __DIR__.'/views');
 ];
-```
-
-Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlResponse`:
-
-```php
-class HelloWorldController implements RequestHandlerInterface
-{
-    protected $view;
-
-    public function __construct(Factory $view)
-    {
-        $this->view = $view;
-    }
-
-    public function handle(Request $request): Response
-    {
-        $view = $this->view->make('acme.hello-world::greeting');
-
-        return new HtmlResponse($view->render());
-    }
-}
 ```
 
 ### Controller API
@@ -176,7 +157,7 @@ export const extend = [
 ];
 ``` -->
 Ora quanto `tuoforum.com/utente`  verrà caricato il frontend del forum ed anche il componente `UsersPage` verrà renderizzato. Per ulteriori informazioni sulle pagine di frontend, vedere [questa sezione della documentazione](frontend-pages.md).
-Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
+I casi di utilizzo avanzato potrebbero anche essere interessati a guardare i [risolutori di percorsi](frontend-pages.md#route-resolvers-advanced).
 ### Parametri percorsi
 I percorsi delfrontend consentono anche di acquisire segmenti dell'URI, ma la [sintassi di Mithril](https://mithril.js.org/route.html) è leggermente diversa:
 
@@ -189,7 +170,7 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+I parametri del percorso verranno passati in `attrs` del componente. I parametri del percorso verranno passati in `attrs` del componente.
 ### Generare URL
 Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 
@@ -220,19 +201,19 @@ Flarum utilizza l'API di routing di Mithril per fornire un componente `Link` che
 ```jsx
 import Link from 'flarum/common/components/Link';
 
-// Link can be used just like any other component:
-<Link href="/route/known/to/mithril">Hello World!</Link>
+// Link può essere usato come qualsiasi altro componente:
+<Link href="/route/known/to/mithril">Ciao Mondo!</Link>
 
-// You'll frequently use Link with generated routes:
-<Link href={app.route('settings')}>Hello World!</Link>
+// Utilizzerai frequentemente Link con itinerari generati:
+<Link href={app.route('settings')}>Ciao Mondo!</Link>
 
-// Link can even generate external links with the external attr:
-<Link external={true} href="https://google.com">Hello World!</Link>
+// Il link può anche generare collegamenti esterni con attributi esterni:
+<Link external={true} href="https://google.com">Ciao Mondo!</Link>
 
-// The above example with external = true is equivalent to:
-<a href="https://google.com">Hello World!</a>
-// but is provided for flexibility: sometimes you might have links
-// that are conditionally internal or external.
+// L'esempio precedente con esterno = true equivale a:
+<a href="https://google.com">Ciao Mondo!</a>
+// ma è previsto per flessibilità: a volte si possono avere link
+// che sono condizionalmente interni o esterni.
 ```
 
 ## Contenuto
