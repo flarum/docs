@@ -51,7 +51,7 @@ Often, you'll want some custom text to appear in the browser tab's title for you
 
 To do this, your page should include calls to `app.setTitle()` and `app.setTitleCount()` in its `oncreate` [lifecycle hook](frontend.md) (or when data is loaded, if it pulls in data from the API).
 
-En realidad hay 3 formas de establecer el componente / resolvedor de rutas cuando se registra una ruta:
+Por ejemplo:
 
 ```js
 import Page from 'flarum/common/components/Page';
