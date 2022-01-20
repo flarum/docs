@@ -1,24 +1,24 @@
 
 # Composer
 
-Flarum uses a program called [Composer](https://getcomposer.org) to manage its dependencies and extensions. You'll need to use composer if you want to:
+Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其依赖包和扩展程序。 你需要 Composer 以实现:
 
-- Install or update Flarum
-- Install, update, or remove Flarum extensions
+- 安装或更新 Flarum
+- 安装，更新或删除 Flarum 扩展
 
-This guide is provided as a brief explanation of Composer. We highly recommend consulting the [official documentation](https://getcomposer.org/doc/00-intro.md) for more information.
+本指南会简单阐述 Composer 的使用。 我们强烈建议查阅 [官方文件](https://getcomposer.org/doc/00-intro.md) 以获取更多信息。
 
 :::tip Composer v2
 
-Historically, Composer has caused issues on shared hosting due to huge memory use. In 2020, [Composer v2 was released](https://blog.packagist.com/composer-2-0-is-now-available/) with massive performance and memory usage improvements that eliminate these problems. Make sure your server is using Composer v2!
+在过去，Composer 在虚拟主机上有引发内存占用过高的问题。 在 2020 年，[Composer v2 发布了](https://blog.packagist.com/composer-2-0-is-now-available/)。其大大改善了性能和内存占用并且解决了上述问题。 所以确保您的服务器正在使用Composer v2！
 
 :::
 
-## What is Composer?
+## 什么是 Composer？
 
-> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Composer 是一个 PHP 依赖管理工具。 它允许您声明项目所依赖的库，并管理 (安装/更新) 这些库 。 — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md). Each of these has its own dependencies and releases.
+每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。
 
 Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
 
