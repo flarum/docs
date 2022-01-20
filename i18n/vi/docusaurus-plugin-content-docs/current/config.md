@@ -4,7 +4,7 @@ Chỉ có một số nơi không thể cấu hình thông qua bảng điều khi
 
 Tệp này mặc dù rất nhẹ, nhưng nó chứa các thông tin quan trọng để Flarum của bạn hoạt động.
 
-Nếu tệp tồn tại, điều đó cho biết rằng Flarum đã được cài đặt. Nó cũng cung cấp cho Flarum với thông tin database và nhiều hơn nữa.
+If the file exists, it tells Flarum that it has already been installed. It also provides Flarum with database info and more.
 
 Dưới đây là tổng quan nhanh về những thứ có trong tệp cấu hình:
 
