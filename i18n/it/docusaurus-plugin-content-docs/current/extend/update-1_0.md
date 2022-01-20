@@ -1,6 +1,6 @@
 # Updating For 1.0
 
-Flarum version 1.0 is the long-awaited stable release! This release brings a number of refactors, cleanup, and small improvements that should make your Flarum experience just a bit better!
+Flarum versione 1.0 è l'attesissima release stabile! Questa versione porta una serie di refactor, pulizia e piccoli miglioramenti che dovrebbero rendere la vostra esperienza su Flarum migliore!
 
 :::tip
 
@@ -10,35 +10,35 @@ If you need help applying these changes or using new features, please start a di
 
 ## Full Stack
 
-### Translations and transChoice
+### Traduzioni e transChoice
 
-#### Background
+#### Retroscena
 
-Historically, Flarum has used Symfony for backend translations, and a port for frontend translations to keep format consistent. There are a few limitations to this approach though:
+Storicamente, Flarum ha usato Symfony per le traduzioni del backend, ed anche nel frontend per mantenere il formato coerente. Ci sono tuttavia alcuni limiti a questo approccio:
 
-- Developers need to decide between using `trans` or `transChoice` for pluralization
-- The pluralization format is proprietary to Symfony
-- We have to maintain the JS port ourselves
-- Keys for values provided to backend translations need to be wrapped in curly braces. (e.g. `$this->translator->trans('some.translation', ['{username}' => 'Some Username!'])`).
-- There's no support for complex applications (nested pluralization, non-number-based selection)
-- As a result of the previous point, genderization is impossible. And that's kinda important for a lot of languages.
+- Gli sviluppatori devono decidere se utilizzare `trans` o `transChoice` per la pluralizzazione
+- Il formato di pluralizzazione è proprietario di Symfony
+- E dobbiamo mantenerlo in autonomia
+- Le chiavi per i valori forniti per le traduzioni del backend devono essere avvolte in parentesi graffe. (e.g. `$this->translator->trans('some.translation', ['{username}' => 'Some Username!'])`).
+- Non c'è supporto per applicazioni complesse (pluralizzazione nidificata, selezione non basata su numero)
+- Come risultato del punto precedente, la genderizzazione è impossibile. E questo è importante per molte lingue.
 
-### New System
+### Nuovo sistema
 
-In v5, Symfony dropped their proprietary `transChoice` system in favor of the more-or-less standard [ICU MessageFormat](https://symfony.com/doc/5.2/translation/message_format.html). This solves pretty much every single one of the aforementioned issues. In this release, Flarum will be fully switching to ICU MessageFormat as well. What does this mean for extensions?
+In v5, Symfony ha abbandonato il suo sistema proprietario `transChoice` a favore dello standard [ICU MessageFormat](https://symfony.com/doc/5.2/translation/message_format.html). Questo risolve praticamente ogni singolo problema sopra menzionato. In questa versione, Flarum passerà completamente a ICU MessageFormat. Cosa significa questo per le estensioni?
 
-- `transChoice` should not be used at all; instead, the variable passed for pluralization should be included in the data.
-- Keys for backend translations no longer need to be surrounded by curly braces.
-- Translations can now use the [`select` and `plural`](https://symfony.com/doc/5.2/translation/message_format.html) formatter syntaxes. For the `plural` formatter, the `offset` parameter and `#` magic variables are supported.
-- These `select` and `plural` syntaxes can be nested to arbitrary depth. This is often a bad idea though (beyond, say, 2 levels), as things can get unnecessarily complex.
+- `transChoice` non dovrebbe essere usato affatto; invece, la variabile passata per la pluralizzazione dovrebbe essere inclusa nei dati.
+- Le chiavi per le traduzioni del backend non hanno più bisogno di essere circondate da parentesi graffe.
+- Le traduzioni possono ora utilizzare le sintassi [`select` e `plural`](https://symfony.com/doc/5.2/translation/message_format.html). Per `plural`, sono supportati il parametro `offset` e le variabili `#`.
+- Queste sintassi `select` e `plural` possono essere annidate. Questa è spesso una cattiva idea anche se (oltre, ad esempio, 2 livelli), in quanto le cose possono diventare inutilmente complesse.
 
-No change to translation file naming is necessary (Symfony docs say that an `+intl-icu` suffix is necessary, but Flarum will now interpret all translation files as internationalized).
+Non è necessario alcun cambiamento nella denominazione del file di traduzione (Symfony docs dice che è necessario un suffisso `+intl-icu`, ma Flarum interpreterà tutti i file di traduzione come internazionalizzati).
 
-#### Future Changes
+#### Cambiamenti Futuri
 
-In the future, this will serve as a basis for additional features:
+In futuro ciò servirà da base per ulteriori caratteristiche:
 
-- Translator preprocessors will allow extensions to modify arguments passed to translations. This will enable genderization (extensions could automatically extract a gender field from any objects of type "user" passed in).
+- I preprocessori consentiranno alle estensioni di modificare gli argomenti passati alle traduzioni. Questo abiliterà la genderizzazione (le estensioni potrebbero estrarre automaticamente un campo di genere da qualsiasi oggetto di tipo "utente" passato).
 - We could support internationalized "magic variables" for numbers: currently, `one` is supported, but others (`few`, `many`, etc) currently aren't.
 - We could support ordinal formatting in additional to just plural formatting.
 
