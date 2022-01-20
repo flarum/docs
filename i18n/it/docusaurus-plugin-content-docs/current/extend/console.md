@@ -35,7 +35,7 @@ $ flarum-cli make backend command
 
 ## Registrazione dei comandi della Console
 
-To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
+Per registrare i comandi della console, usa l'estensore `Flarum\Extend\Console` nel file `extend.php` della tua estensione:
 
 ```php
 use Flarum\Extend;
@@ -67,4 +67,4 @@ return [
 ];
 ```
 
-In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) for more information.
+Nella callback fornita come secondo argomento, puoi chiamare metodi sull'oggetto [$event](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) per pianificare operazioni ricorrenti (o applicare altre opzioni). Vedi la documentazione [Laravel](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) per maggiori informazioni.
