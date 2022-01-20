@@ -19,7 +19,7 @@ We want Flarum to be accessible to everyone, regardless of language! By contribu
 
 Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum/).
 
-Translations for this documentation are managed through [Crowdin](https://crowdin.com/project/flarum-docs).
+Translations for this documentation are managed through [Crowdin](https://crowdin.com/project/flarum-docs). Please do not contribute translations via GitHub pull requests, as it is very likely that Crowdin will fail to fully sync your work, and your changes will be lost.
 
 The Flarum Foundation has created the "flarum-lang" organization to support translators and ensure continuous availability of language packs. You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about).
 
