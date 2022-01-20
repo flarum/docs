@@ -6,9 +6,9 @@ Successivamente, dovresti impiegare alcuni minuti per cercare nel [Forum di supp
 
 ## Step 0: Attiva il debug mode
 
-:::danger Skip on Production
+:::danger Salta in produzione
 
-These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+Questi strumenti di debug sono molto utili, ma possono esporre informazioni che non dovrebbero essere pubbliche. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
 
 :::
 
