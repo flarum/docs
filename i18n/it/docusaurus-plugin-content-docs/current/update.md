@@ -95,6 +95,6 @@ It is very likely that some of your extensions have not yet been updated.
 
 If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
 
-### Errors After Updating
+### Errori Dopo L'Aggiornamento
 
-If you are unable to access your forum after updating, follow our [troubleshooting instructions](troubleshoot.md).
+Se non riesci ad accedere al tuo forum dopo l'aggiornamento, segui le nostre [istruzioni per la risoluzione dei problemi](troubleshoot.md).
