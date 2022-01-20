@@ -77,21 +77,37 @@ www.ejemplo.com {
 ```
 ## Propiedad de la Carpeta
 
-Durante la instalación, Flarum puede solicitar que se permita la escritura en ciertos directorios. Para permitir el acceso de escritura a un directorio en Linux, ejecute el siguiente comando:
+Durante la instalación, Flarum puede solicitar que se permita la escritura en ciertos directorios. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-```bash
-chmod 775 /ruta/al/directorio
-```
+- Finalmente, edite el `site.php` y actualice las rutas en las siguientes líneas para reflejar su nueva estructura de directorios:
+- The `storage` subdirectory, so Flarum can edit logs and store cached data.
+- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
 If Flarum requests write access to both the directory and its contents, you need to add the `-R` flag so that the permissions are updated for all the files and folders within the directory:
+
+There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+
+First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
 chmod 775 -R /ruta/al/directorio
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user.
+If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grupo y el usuario bajo el que operan tanto PHP como el servidor web. You'll need to look into the specifics of your distro and web server setup to make sure. Puede cambiar la propiedad de la carpeta en la mayoría de los sistemas operativos Linux ejecutando `chown -R www-data:www-data nombrecarpeta/`.
 
-Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grupo y el usuario bajo el que operan tanto PHP como el servidor web. Puede cambiar la propiedad de la carpeta en la mayoría de los sistemas operativos Linux ejecutando `chown -R www-data:www-data nombrecarpeta/`.
+```bash
+chmod 775 -R /ruta/al/directorio
+```
+
+Si Flarum solicita acceso de escritura tanto al directorio como a su contenido, es necesario añadir la etiqueta `-R` para que los permisos se actualicen para todos los archivos y carpetas dentro del directorio:
+
+Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
+
+Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
+
+```bash
+chcon -R -t httpd_sys_rw_content_t /path/to/directory
+```
 
 Para saber más sobre estos comandos, así como sobre los permisos y la propiedad de los archivos en Linux, lea [este tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Si está configurando Flarum en Windows, puede encontrar útiles las respuestas a [esta pregunta de Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
