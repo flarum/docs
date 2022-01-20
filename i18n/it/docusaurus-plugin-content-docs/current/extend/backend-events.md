@@ -7,7 +7,7 @@ Per un elenco completo degli eventi di backend, vedere la nostra [API documentat
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
-You can use the CLI to automatically generate event listeners:
+È possibile utilizzare la CLI per generare automaticamente gli Event Listener:
 ```bash
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
@@ -94,7 +94,7 @@ class PostDeletedListener
 
 Come mostrato sopra, è possibile utilizzare una classe listener invece di un callback. Questo ti permette di [iniettare dipendenze](https://laravel.com/docs/6.x/container) alcune classi. In questo esempio risolviamo un'istanza di un traduttore, ma possiamo iniettare tutto ciò che vogliamo/di cui abbiamo bisogno.
 
-You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
+È inoltre possibile ascoltare più eventi in una sola volta tramite un event subscriber. Questo è utile per raggruppare le funzionalità comuni; per esempio, se si desidera aggiornare alcuni metadati sulle modifiche ai post:
 
 ```php
 use Flarum\Extend;
