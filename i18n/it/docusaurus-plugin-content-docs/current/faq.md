@@ -18,13 +18,13 @@ Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di svilupp
 
 Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste in futuro.
 
-### Why haven’t you fixed [insert issue here] yet?
+### Perchè non è stato risolto ancora il [nome problema]?
 
 Anche in questo caso, la risposta è "prima le prime cose". Se non abbiamo ancora risolto un problema (o gli abbiamo assegnato un traguardo), è perché stiamo lavorando a qualcos'altro che è altrettanto importante. Per favore sii paziente; proveremo a farlo prima del rilascio. Oppure, se hai fretta, sentiti libero di aggiustarlo da solo e [contribuire al progetto](contributing.md)!
 
 ### Perchè non è stato risolto ancora il [nome problema]?
 
-We don't currently provide official migrators, but there are many community solutions out there. Una volta che siamo sicuri che Flarum è pronto per essere utilizzato in produzione, inizieremo a creare strumenti per importare dati da altri software per forum come esoTalk, FluxBB, phpBB, Discourse e altri.
+Attualmente non forniamo software di migrazione ufficiali, ma ci sono molte soluzioni della comunità già pronte all'uso. Una volta che siamo sicuri che Flarum è pronto per essere utilizzato in produzione, inizieremo a creare strumenti per importare dati da altri software per forum come esoTalk, FluxBB, phpBB, Discourse e altri.
 
 ### Potrò migrare il mio forum su Flarum?
 
@@ -32,4 +32,4 @@ We don't currently provide official migrators, but there are many community solu
 
 La vera risposta è che generalmente teniamo d'occhio la nostra comunità per i membri eccezionali che potrebbero costituire un buon personale. Onestamente, per la maggior parte del nostro attuale staff, quello che hanno fatto prima di diventare parte del personale non era molto diverso da quello che fanno ora.
 
-Trova una passione e contribuisci come ritieni sia opportuno. Then let it take its course. Non devi avere un badge per essere rispettato qui.
+Trova una passione e contribuisci come ritieni sia opportuno. Quindi lasciate che prenda il suo corso. Non devi avere un badge per essere rispettato qui.
