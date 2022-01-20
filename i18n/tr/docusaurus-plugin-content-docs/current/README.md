@@ -1,6 +1,6 @@
-- - -
+---
 slug: /
-- - -
+---
 
 # Flarum Hakkında
 
@@ -22,7 +22,7 @@ Flarum, [esoTalk](https://github.com/esotalk/esoTalk) ve [FluxBB](https://fluxbb
 
 You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
 
-## Help the Flarum Project
+## Flarum Projesine Yardım Edin
 
 Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
 
