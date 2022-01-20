@@ -54,6 +54,6 @@ use YourNamespace\Mail\CustomDriver;
 return [
   // Other extenders
   (new Extend\Mail())->driver(CustomDriver::class)
-  // Other extenders
+  // Altri estensori
 ];
 ```
