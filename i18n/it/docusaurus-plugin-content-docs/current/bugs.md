@@ -10,7 +10,7 @@ Grazie per averci aiutato a testare Flarum. Siamo felici di averti nella squadra
 
 ## Duplicati
 
-Hai già trovato un bug? Meraviglioso Ci piacerebbe saperlo, ma prima dovresti controllare per assicurarti di non sprecare il tuo tempo su un problema già noto:
+Hai già trovato un bug? Wonderful! Meraviglioso Ci piacerebbe saperlo, ma prima dovresti controllare per assicurarti di non sprecare il tuo tempo su un problema già noto:
 
 - Cerca sul [forum di supporto](https://discuss.flarum.org/t/support) per vedere se il bug è stato già segnalato.
 - Potremmo essere già al lavoro su una soluzione, quindi cerca anche sul nostro [sistema di gestione degli *issue*](https://github.com/flarum/core/issues).

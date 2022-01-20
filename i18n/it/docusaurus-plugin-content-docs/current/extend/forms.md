@@ -49,9 +49,9 @@ class FormComponent extends Component {
 Don't forget to use [translations](translate.md)!
 
 
-## Streams, bidi, and withAttr
+## Streams, bidi, e withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/util/Stream`. Questa è una struttura di dati molto potente, ma è più comunemente usata in Flarum come wrapper per i dati dei moduli form. Il suo utilizzo di base è:
 
 ```js
 import Stream from 'flarum/utils/Stream';
@@ -77,7 +77,7 @@ const value = Stream();
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+You can also use the `flarum/utils/withAttr` util for simplified form processing. `withAttr` chiama un callable, fornendo come argomento qualche attr dell'elemento DOM legato al componente in questione:
 
 ```jsx
 import Stream from 'flarum/utils/Stream';

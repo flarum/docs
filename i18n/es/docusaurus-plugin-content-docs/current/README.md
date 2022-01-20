@@ -1,6 +1,6 @@
-- - -
+---
 slug: /
-- - -
+---
 
 # Acerca de Flarum
 

@@ -1,49 +1,49 @@
-# Extending Extensions
+# Estendere le Estensioni
 
-Flarum extensions aren't just for adding features to core: extensions can extend other extensions!
+Le estensioni di Flarum non prevedono solo l'aggiunta di funzionalità al core: le estensioni possono estendere anche altre estensioni!
 
 :::tip
 
-To learn how to make your extension extensible, see the [relevant documentation](extensibility.md)
+Per imparare a rendere estensibile la tua estensione, consulta la [documentazione pertinente](extensibility.md)
 
 :::
 
-## Dependencies
+## Dipendenze
 
-If your extension relies on another extension, you'll want to ensure that:
+Se la tua estensione si basa su un'altra estensione, ti assicurerai che:
 
-- The other extension is installed and enabled before yours can be.
-- The other extension can't be disabled while yours is enabled.
-- The other extension is booted before your extension.
+- L'altra estensione è installata e abilitata prima della tua attuale estensione.
+- L'altra estensione non può essere disabilitata mentre la tua è abilitata.
+- L'altra estensione viene avviata prima della tua estensione.
 
-Flarum makes this very easy: just add the other extension to your extension's `composer.json`'s `require` section.
+Flarum rende tutto ciò molto facile: basta aggiungere l'altra estensione al file `composer.json`della tua estensione o nella sezione `require`.
 
-For example, if you were building a new theme for the Flarum Tags extension, your `composer.json` would look like this:
+Ad esempio, se stai sviluppando un nuovo tema per l'estensione Tag Flarum, il tuo `composer.json` dovrebbe essere simile a questo:
 
 ```json
 {
   // ...
   "require": {
-    "flarum/core": "^0.1.0-beta.15",  // Since all extensions need to require core.
-    "flarum/tags": "^0.1.0-beta.15"  // This tells Flarum to treat tags as a dependency of your extension.
+    "flarum/core": "^1.0.0",  // Perchè tutte le estensioni necessitano del Core di Flarum.
+    "flarum/tags": "^1.1.0"  //  Questo dice a Flarum di trattare i tag come dipendenza della tua estensione.
   },
   // ...
 }
 ```
 
-## Optional Dependencies
+## Dipendenze opzionali
 
-Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
+A volte, l'estensione A potrebbe voler estendere l'estensione B solo se l'estensione B è abilitata. In questo caso, chiamiamo B una "Dipendenza opzionale" di A. Per esempio, l'estensione "Drafts" potrebbe voler aggiungere il supporto per salvare bozze di discussione private, ma solo se l'estensione di discussione privata è abilitata.
 
-The first step here is detecting whether extension B is enabled. In the frontend, this is easy: if extension B does anything in the frontend, its extension ID will appear as a key in the `flarum.extensions` global object. Per esempio:
+Il primo passo quindi è quello di rilevare se l'estensione B è abilitata. Nel frontend,  è facile: se l'estensione B fa qualcosa nel frontend, il suo ID di estensione apparirà come chiave nell'oggetto globale `flarum.extensions` . Per esempio:
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
-    // do something
+    // fai qualcosa
 }
 ```
 
-In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. Per esempio:
+Nel backend, dovrai iniettare un'istanza di `Flarum\Extension\ExtensionManager`e usare il metodo `isEnabled()`. Per esempio:
 
 ```php
 <?php
@@ -59,13 +59,13 @@ class SomeClass {
     public function someMethod()
     {
         if ($this->extensions->isEnabled('some-extension-id')) {
-            // do something.
+            // fai qualcosa.
         }
     }
 }
 ```
 
-Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies. You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
+Generalmente, se la tua estensione ha dipendenze opzionali, vorrai che venga avviata dopo queste dipendenze opzionali. Tutto ciò è possibile farlo anche specificando i nomi dei pacchetti composer (NON ID dell' estensione flarum) in un array `extra.flarum-extension.optional-dependencies` del tuo file composer.json.
 
 Per esempio:
 
@@ -83,9 +83,9 @@ Per esempio:
 }
 ```
 
-## Importing from Extensions
+## Importazione da estensioni
 
-In the backend, you can import the classes you need via regular PHP `use` statements:
+Nel backend, puoi importare le classi di cui hai bisogno tramite la dichiarazione PHP `use`:
 
 ```php
 <?php
@@ -96,27 +96,27 @@ class SomeClass
 {
     public function someMethod()
     {
-        return new Tag();  // This is not the correct way to instantiate models, it's just here for example of importing.
+        return new Tag();  // Questa non è la maniera corretta di istanziare modelli, E' solo un esempio.
     }
 }
 ```
 
-Note that if you're importing from an optional dependency which might not be installed, you'll need to check that the class in question exists via the `class_exists` function.
+Nota che se stai importando da una dipendenza opzionale che potrebbe non essere installata, dovrai controllare che la classe in questione esista tramite la funzione `class_exists`.
 
-In the frontend, you can only import things that have been explicitly exported. However, first you'll need to configure your extension's webpack to allow these imports:
+Nel frontend, è possibile importare solo cose che sono state esplicitamente esportate. Tuttavia, per prima cosa dovrai configurare il webpack della tua estensione per consentire queste importazioni:
 
 #### webpack.config.js
 
 ```js
 module.exports = require('flarum-webpack-config')({
-    // Provide the extension IDs of all extensions from which your extension will be importing.
-    // Do this for both full and optional dependencies.
+    // Fornire gli ID di estensione di tutte le estensioni da cui la tua estensione verrà importata.
+    // Fai questo sia per le dipendenze complete che opzionali.
     useExtensions: ['flarum-tags']
 });
 ```
 
-Once this is done, you can import with:
+Una volta fatto questo, è possibile importare con:
 
 ```js
-const allThingsExportedBySomeExtension = require('@flarum-tags');
+const tutteLeCoseEsportateDaQualcheEstensione = require('@flarum-tags');
 ```

@@ -110,7 +110,9 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 You can inject Laravel's [View](https://laravel.com/docs/8.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/8.x/blade) into your controller's response.
 
-First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
+First, you'll need to register the view. See [the relevant article](views.md) for more information on this.
+
+Then, inject the factory into your controller and render your view into an `HtmlResponse`:
 
 ```php
 use Flarum\Extend;
@@ -120,27 +122,6 @@ return [
     (new Extend\View)
         ->namespace('acme.hello-world', __DIR__.'/views');
 ];
-```
-
-Then, inject the factory into your controller and render your view into an `HtmlResponse`:
-
-```php
-class HelloWorldController implements RequestHandlerInterface
-{
-    protected $view;
-
-    public function __construct(Factory $view)
-    {
-        $this->view = $view;
-    }
-
-    public function handle(Request $request): Response
-    {
-        $view = $this->view->make('acme.hello-world::greeting');
-
-        return new HtmlResponse($view->render());
-    }
-}
 ```
 
 ### API Controllers
@@ -189,7 +170,7 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+Route parameters will be passed into the `attrs` of the route's component. Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 ### Generating URLs
 To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
 

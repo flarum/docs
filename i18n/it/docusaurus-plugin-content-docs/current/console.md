@@ -10,11 +10,11 @@ Per utilizzare la console:
 
 ## Comandi di default
 
-### list
+### elenco
 
 Elenca tutti i comandi di gestione disponibili, nonché le istruzioni per l'utilizzo degli stessi
 
-### help
+### aiuto
 
 `php flarum help [command_name]`
 

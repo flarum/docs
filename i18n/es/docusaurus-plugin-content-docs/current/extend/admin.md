@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registro de Permisos
 
-Como novedad en la beta 15, los permisos pueden encontrarse ahora en dos lugares. Ahora, puedes ver los permisos individuales de cada extensión en su página. Todos los permisos se pueden seguir encontrando en la página de permisos.
+In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
 
-Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Esto se hace de forma similar a la configuración, llamando a `registerPermission`.
+Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`.
 
 Volvemos a nuestra extensión favorita del rocket:
  * Objeto de permiso
@@ -136,8 +136,8 @@ app.initializers.add('interstellar', function(app) {
         icon: 'fas fa-rocket', // Icono Font-Awesome
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etiqueta de permiso
         permission: 'discussion.rocket_fly', // Nombre real del permiso almacenado en la base de datos (y utilizado al comprobar el permiso).
-        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-      }, 
+        tagScoped: true, // Si es posible aplicar este permiso en las etiquetas, no sólo globalmente. Se explica en el siguiente párrafo.
+        }, 
       'start', // Se añadirá el permiso de la categoría en el grid
       95 // Opcional: Prioridad
     );
@@ -203,9 +203,9 @@ You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class
 
 ## Metadatos del Composer.json
 
-In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
+En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
 
-For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+Para más información, consulte el esquema (schema) [composer.json](https://getcomposer.org/doc/04-schema.md).
 
 | Descripción                            | Dónde en composer.json                                                |
 | -------------------------------------- | --------------------------------------------------------------------- |

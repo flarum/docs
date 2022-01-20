@@ -2,7 +2,7 @@
 
 :::info Una veloce prova su strada?
 
-Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
+Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/21101) o sulla community verificata italiana [Flarum.it](https://flarum.it). Oppure crea il tuo forum in pochi secondi su [Free Flarum](https://www.freeflarum.com), un servizio gratuito non affiliato al team Flarum.
 
 :::
 
@@ -28,14 +28,14 @@ Questo non significa necessariamente che tu abbia bisogno di un VPS. Alcuni host
 Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar� necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
-composer create-project flarum/flarum .
+compositore create-project flarum/flarum .
 ```
 
 Mentre questo comando è in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
 
 Quando tutto è pronto, accedi al tuo forum in un browser web e segui le istruzioni a video per completare l'installazione
 
-## URL Rewriting
+## Riscrittura URL
 
 ### Apache
 
@@ -78,21 +78,37 @@ www.esempio.com {
 ```
 ## Proprietà della cartella
 
-Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune directory. Per consentire l'accesso in scrittura a una directory su Linux, eseguire il seguente comando:
+Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune directory. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-```bash
-chmod 775 /percorso/della/directory
-```
+- The root install directory, so Flarum can edit `config.php`.
+- The `storage` subdirectory, so Flarum can edit logs and store cached data.
+- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
 Se Flarum richiede l'accesso in scrittura sia alla directory che al suo contenuto, è necessario aggiungere il comando `-R` in modo che le autorizzazioni siano aggiornate per tutti i file e le cartelle all'interno della directory:
+
+There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+
+First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
 chmod 775 -R /percorso/della/directory
 ```
 
-Se dopo aver completato questi passaggi, Flarum continua a richiedere la modifica delle autorizzazioni, potrebbe essere necessario verificare che i file siano di proprietà del gruppo e dell'utente corretti.
+If that isn't enough, you may need to check that your files are owned by the correct group and user. Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. You'll need to look into the specifics of your distro and web server setup to make sure. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`.
 
-Per impostazione predefinita, nella maggior parte delle distribuzioni Linux `www-data` è sia il gruppo che l'utente ad operare sotto PHP. È possibile modificare la proprietà della cartella nella maggior parte dei sistemi operativi Linux eseguendo `chown -R www-data:www-data nomecartella/`.
+```bash
+chmod 775 -R /percorso/della/directory
+```
+
+:::caution Gli ambienti possono variare
+
+Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
+
+Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
+
+```bash
+chcon -R -t httpd_sys_rw_content_t /path/to/directory
+```
 
 Per saperne di più su questi comandi, nonché sui permessi dei file e sulla proprietà su Linux, leggi [questo tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Se stai configurando Flarum su Windows, potresti trovare le risposte [domande su Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
 
@@ -130,7 +146,7 @@ $site = require './site.php';
 'storage' => __DIR__.'/storage',
 ```
 
-Finally, check `config.php` and make sure the `url` value is correct.
+Infine, controlla `config.php` e assicurati che il valore `url` sia corretto.
 
 ## Importazione dati da altro forum
 

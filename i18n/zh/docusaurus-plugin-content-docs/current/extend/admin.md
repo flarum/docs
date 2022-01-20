@@ -117,7 +117,7 @@ app.initializers.add('interstellar', function(app) {
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
 
 Arguments:
  * Permission object
@@ -140,6 +140,13 @@ app.initializers.add('interstellar', function(app) {
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
+    );
+});
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
+        allowGuest: false, // Whether this permission can be granted to guests
+      }, 
+      'start', // Category permission will be added to on the grid
+      95 // Priority (optional)
     );
 });
 ```

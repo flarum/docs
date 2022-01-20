@@ -1,0 +1,34 @@
+{
+  "item.label.Guide": {
+    "message": "Leitfäden",
+    "description": "Navbar item with label Guide"
+  },
+  "item.label.Extend": {
+    "message": "Erweitern",
+    "description": "Navbar item with label Extend"
+  },
+  "item.label.Internal": {
+    "message": "Intern",
+    "description": "Navbar item with label Internal"
+  },
+  "item.label.API Reference": {
+    "message": "API-Referenz",
+    "description": "Navbar item with label API Reference"
+  },
+  "item.label.Flarum": {
+    "message": "Flarum",
+    "description": "Navbar item with label Flarum"
+  },
+  "item.label.Home": {
+    "message": "Startseite",
+    "description": "Navbar item with label Home"
+  },
+  "item.label.Community": {
+    "message": "Community",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}

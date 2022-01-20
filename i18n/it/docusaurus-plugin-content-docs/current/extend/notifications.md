@@ -226,7 +226,7 @@ class PusherNotificationDriver implements NotificationDriverInterface
     {
         // The `send` method is responsible for determining any notifications need to be sent.
         // If not (for example, if there are no users to send to), there's no point in scheduling a job.
-        // We HIGHLY recommend that notifications are sent via a queue job for performance reasons.
+        // Consigliamo ALTAMENTE che le notifiche vengano inviate tramite una coda per motivi di prestazioni.
         if (count($users)) {
             $this->queue->push(new SendPusherNotificationsJob($blueprint, $users));
         }
@@ -237,7 +237,7 @@ class PusherNotificationDriver implements NotificationDriverInterface
      */
     public function registerType(string $blueprintClass, array $driversEnabledByDefault): void
     {
-        // Questo metodo viene generalmente utilizzato per registrare una preferenza utente per questa notifica.
+        // Questo metodo è generalmente utilizzato per registrare una preferenza utente per questa notifica.
         // Nel caso di Pusher, non ce n'è bisogno.
     }
 }
@@ -307,7 +307,7 @@ export default class NewPostNotification extends Notification {
 
 Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica del frontend che abbiamo appena creato.
 
-Next, we need to tell Flarum that the notification you send in the backend corresponds to the frontend notification we just created.
+Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica frontend che abbiamo appena creato.
 
 Apri il tuo index.js (quello del forum) e inizia importando il modello di notifica appena creato. Quindi aggiungi la seguente riga:
 
@@ -340,18 +340,18 @@ app.initializers.add('flarum-likes', () => {
 ```
 Ora che hai configurato tutte le notifiche, è il momento di inviare effettivamente la notifica all'utente!
 
-## Sending Notifications
+## Inviare Notifiche
 
-*Data doesn't just appear in the database magically*
+*I dati non appaiono solo magicamente nel database*
 
-Now that you have your notification all setup, it's time to actually send the notification to the user!
+Ora che hai configurato la tua notifica, è il momento di inviarla all'utente!
 
 Per fortuna, questa è la parte più semplice, usa semplicemente la funzione [`NotificationSyncer`](https://github.com/flarum/core/blob/master/src/Notification/NotificationSyncer.php). Accetta due argomenti:
 
 * I dati non vengono visualizzati nel database solo magicamente *
 * `$users`: Questo accetta un array di `user` che dovrebbe ricevere la notifica
 
-*Whats that? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.</p>
+*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.</p>
 
 Diamo un'occhiata al nostro ** ultimo ** esempio di oggi:
 
@@ -408,6 +408,6 @@ class SendNotificationWhenPostIsLiked
 }
 ```
 
-**Awesome!** Now you can spam users with updates on happenings around the forum!
+**Fantastico!** Ora puoi spammare gli utenti con aggiornamenti sugli eventi del forum!
 
-*Tried everything?* Well if you've tried everything then I guess... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.
+*Provato tutto?* Beh, se hai provato tutto allora indovino... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.

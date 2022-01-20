@@ -1,7 +1,7 @@
-# Extension Assets
+# Risorse Estensione
 
-Some extensions might want to include assets like images or JSON files in their source code (note that this is not the same as uploads, which would probably require a [filesystem disk](filesystem.md)).
+Alcune estensioni potrebbero voler includere asset come immagini o file JSON nel loro codice sorgente (non si tratta di upload, che richiederebbe probabilmente un apposito [filesystem](filesystem.md)).
 
-This is actually very easy to do. Just create an `assets` folder at the root of your extension, and place any asset files there. Flarum will then automatically copy those files to its own `assets` directory (or other storage location if [one is offered by extensions](filesystem.md)) every time the extension is enabled or [`php flarum assets:publish`](../console.md) is executed.
+Lavorare con gli asset è in realtà molto semplice. Basta creare una cartella `assets` nella radice principale della tua estensione, e posizionare tutti i file al suo interno. Flarum copierà automaticamente tali file nella propria directory `assets` (o altra posizione di archiviazione se [impostata da un estensione](filesystem.md)) ogni volta che l'estensione è abilitata o [`php flarum assets:publish`](../console.md) viene eseguito.
 
-If using the default storage driver, assets will be available at `https://FORUM_URL/assets/extensions/EXTENSION_ID/file.path`. However, since other extensions might use remote filesystems, we recommend serializing the url to assets you need in the backend. See [Flarum's serialization of the logo and favicon URLs](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Api/Serializer/ForumSerializer.php#L85-L86) for an example.
+Se si utilizza il driver di archiviazione predefinito, le risorse saranno disponibili all'url `https://FORUM_URL/assets/extensions/EXTENSION_ID/file.path`. Tuttavia, poiché altre estensioni potrebbero usare filesystem remoti, si consiglia di serializzare l'url alle risorse di cui hai bisogno nel backend. Vedi per esempio la serializzazione del [logo di Flarum e degli URL delle favicon](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Api/Serializer/ForumSerializer.php#L85-L86).

@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "Nächste",
+    "description": "The label for version current"
+  },
+  "sidebar.guideSidebar.category.Introduction": {
+    "message": "Einführung",
+    "description": "The label for category Introduction in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Setting Up": {
+    "message": "Einrichten",
+    "description": "The label for category Setting Up in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Management": {
+    "message": "Verwaltung",
+    "description": "The label for category Management in sidebar guideSidebar"
+  },
+  "sidebar.guideSidebar.category.Advanced": {
+    "message": "Fortgeschrittene",
+    "description": "The label for category Advanced in sidebar guideSidebar"
+  },
+  "sidebar.extendSidebar.category.Main Concepts": {
+    "message": "Main Concepts",
+    "description": "The label for category Main Concepts in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Reference Guides": {
+    "message": "Referenz Leitfäden",
+    "description": "The label for category Reference Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Advanced Guides": {
+    "message": "Fortgeschrittene Leitfäden",
+    "description": "The label for category Advanced Guides in sidebar extendSidebar"
+  },
+  "sidebar.extendSidebar.category.Update Guides": {
+    "message": "Update Leitfäden",
+    "description": "The label for category Update Guides in sidebar extendSidebar"
+  },
+  "sidebar.internalSidebar.category.Internal Docs": {
+    "message": "Interne Dokumentation",
+    "description": "The label for category Internal Docs in sidebar internalSidebar"
+  }
+}

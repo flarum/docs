@@ -2,7 +2,7 @@
 
 È facile aggiungere una nuova lingua all'installazione di base di Flarum. Segui le istruzioni seguenti per scaricare e installare il language pack di tua scelta.
 
-Dopo aver aggiunto un language pack, puoi [impostarlo come lingua principale](#setting-the-default-language) del tuo forum.E se ti accorgi di non aver bisogno di uno dei tuoi language pack installati, puoi sempre [disabilitarlo](#disabling-a-language-pack). And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack). Se stai utilizzando estensioni di terze parti, assicurati di [leggere qui](#third-party-extensions) prima di iniziare.
+Dopo aver aggiunto un language pack, puoi [impostarlo come lingua principale](#setting-the-default-language) del tuo forum.E se ti accorgi di non aver bisogno di uno dei tuoi language pack installati, puoi sempre [disabilitarlo](#disabling-a-language-pack). E se non hai mai bisogno di uno dei language pack installati, puoi sempre [disattivarlo](#disabling-a-language-pack). Se stai utilizzando estensioni di terze parti, assicurati di [leggere qui](#third-party-extensions) prima di iniziare.
 
 ## Installazione language pack
 

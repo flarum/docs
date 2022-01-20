@@ -14,7 +14,7 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
   'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
   'database' =>
   array (
-    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB...
+    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB... MySQL, MariaDB...
     'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
     'database' => 'flarum', // el nombre de la base de datos en la instancia
     'username' => 'root', // nombre de usuario de la base de datos

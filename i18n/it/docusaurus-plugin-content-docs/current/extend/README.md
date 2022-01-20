@@ -1,6 +1,6 @@
-- - -
-slug: /extend
-- - -
+---
+slug: '/extend'
+---
 
 # Estensioni di Flarum
 
@@ -31,7 +31,7 @@ Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione i
 - [Documentazione js di Mithril](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Documenti API Laravel](https://mithril.js.org/)
 - [Documenti delle API di Flarum](https://laravel.com/api/8.x/)
-- [Flarum API Docs](https://api.flarum.org)
+- [Documenti delle API di Flarum](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 
 ### Supporto

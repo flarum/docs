@@ -1,65 +1,65 @@
-# Extensibility
+# Estensibilità
 
-In some cases, you might want other extensions to [extend your extension](extending-extensions.md).
+In alcuni casi, potresti aver bisogno di altre estensioni per [estendere la tua estensione](extending-extensions.md).
 
 ## Backend
 
-Extensions extend Flarum Core's backend via two mechanisms:
+Le estensioni estendono il backend di Flarum Core tramite due meccanismi:
 
-- [The extender API](start.md#extenders)
+- [L'API extender](start.md#extenders)
 - [Ascolto di eventi](backend-events.md)
 
-Unsurprisingly, you can make your extension extensible via the same mechanisms.
+Non a caso, puoi rendere estensibile la tua estensione tramite gli stessi meccanismi.
 
 ### Eventi personalizzati
 
-To learn about dispatching events and defining new ones, see the [relevant documentation](backend-events.md).
+Per conoscere gli eventi di dispatching e definirne di nuovi, consultare la [documentazione pertinente](backend-events.md).
 
-### Custom Extenders
+### Extenders Personalizzati
 
-Lets say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts. A custom extender could be a good way to accomplish this.
+Diciamo che hai sviluppato un'estensione che aggiunge un driver di ricerca alternativo a Flarum, ma vuoi consentire ad altre estensioni di aggiungere il supporto per filtri personalizzati/ordinamento. Un estensore personalizzato potrebbe essere un la via giusta da seguire.
 
-The implementation of extenders is actually quite simple. There are 3 main steps:
+L'implementazione degli extender è in realtà abbastanza semplice. Queste sono le 3 fasi principali:
 
-1. Various methods (and the constructor) allow client code to specify options. Per esempio:
-  - Which model / API controller / validator should be extended?
-  - What modifications should be made?
-2. An `extend` method takes the input from step 1, and applies it by modifying various [container bindings](service-provider.md) and global static variables to achieve the desired effect. This is the "implementation" of the composer. The `extend` methods for all enabled extensions are run as part of Flarum's boot process.
-3. Optionally, extenders implementing `Flarum\Extend\LifecycleInterface` can have `onEnable` and `onDisable` methods, which are run when extensions that use the extender are enabled/disabled, and are useful for tasks like clearing various caches.
+1. Vari metodi (e il costruttore) consentono al codice client di specificare le opzioni. Per esempio:
+  - Quale modello/controller API/validatore dovrebbe essere esteso?
+  - Quali modifiche si dovrebbero apportare?
+2. Un metodo `extend` prende l'input dal passaggio 1, e lo applica modificando varie [container bindings](service-provider.md) e variabili statiche globali per ottenere l'effetto desiderato. Questa è la "implementazione" del composer. I metodi `extend` per tutte le estensioni abilitate vengono eseguiti come parte del processo di avvio di Flarum.
+3. Facoltativamente, gli extender che implementano `Flarum\Extend\LifecycleInterface` possono avere i metodi `onEnable` e `onDisable`, che vengono eseguiti quando le estensioni che usano l'extender sono abilitate/disabilitate, e sono utili per attività come la cancellazione di varie cache.
 
-Accordingly, to create a custom extender, all you need to do is:
+Di conseguenza, per creare un estensore personalizzato, tutto ciò che devi fare è:
 
-0. Define a class that implements `Flarum\Extend\ExtenderInterface`.
-1. Accept arguments in the constructor, and various methods. Those methods should represent concrete "modifications".
-2. Implement an `extend` method that modifies your extension (or Flarum), typically via extending/modifying container bindings.
-3. Optionally, implement `Flarum\Extend\LifecycleInterface` if cleanup is needed on enable/disable.
+0. Definire una classe che implementa `Flarum\Extend\ExtenderInterface`.
+1. Definire argomenti nel costruttore, e vari metodi. Tali metodi dovrebbero rappresentare "modifiche" concrete.
+2. Implementa un metodo `extend` che modifica l'estensione (o Flarum), tipicamente estendendo/modificando i binding del container.
+3. Facoltativamente, implementa `Flarum\Extend\LifecycleInterface` se è necessaria una pulizia su enable/disable.
 
-Before designing your own extenders, we HIGHLY recommend looking through the implementations of [core's extenders](https://github.com/flarum/core/tree/master/src/Extend).
+Prima di progettare i tuoi estensori, raccomandiamo ALTAMENTE di guardare attraverso le implementazioni degli estensori del [core](https://github.com/flarum/core/tree/master/src/Extend) di Flarum.
 
 :::tip
 
-Custom extenders introduced by your extension should be considered public API. You can add automated tests for them via our [backend testing package](testing.md).
+Gli estensori personalizzati introdotti dalla tua estensione dovrebbero essere considerati API pubbliche. È possibile aggiungere test automatici tramite il nostro [pacchetto di test backend](testing.md).
 
 :::
 
 :::cautela
 
-Custom extenders should NOT be used to run arbitrary logic during the Flarum boot process. That's a job for [Service Providers](service-provider.md). An easy way to check: if you're using extenders that you have defined in your own extension, you're probably doing something wrong.
+Gli estensori personalizzati NON devono essere usati per eseguire logiche arbitrarie durante il processo di avvio di Flarum. Questo è un lavoro per il [Service Providers](service-provider.md). Un modo semplice per controllare: se stai usando gli estensori che hai definito nella tua estensione, probabilmente stai facendo qualcosa di sbagliato.
 
 :::
 
 ## Frontend
 
-If you want other extensions to be able to use classes or functions defined in your extension (whether to reuse or modify via the [extend/override utils](frontend.md)), you'll need to export them in your extension's `index.js` (typically the same place where your extension's [initializer](frontend.md) is located).
+Se vuoi che altre estensioni siano in grado di utilizzare classi o funzioni definite nella tua estensione (riutilizzare o modificare tramite gli utils [extend/override](frontend.md)), dovrai esportarli nell'indice di `index.js` (tipicamente lo stesso luogo in cui si trova il tag [initializer](frontend.md) della tua estensione).
 
 Per esempio:
 
 ```js
 app.initializers.add('your-extension-id', () => {
-  // Your Extension Code Here
+  // Il codice della tua estensione andrà qui
 })
 
 export {
-  // Put all the stuff you want to export here.
+  // Tutto ciò che vuoi esportare invece andrà qui.
 }
 ```

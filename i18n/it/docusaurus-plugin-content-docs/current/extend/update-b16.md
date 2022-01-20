@@ -18,7 +18,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## Backend
 
-### Estensori
+### Extender
 
 - Tutti gli extender che supportano callback / chiusure ora supportano funzioni globali come `'boolval'` e funzioni array-type come `[ClassName::class, 'methodName']`.
 - L'estensore `Settings` e metodo `serializeToFrontend` ora supporta un valore predefinito come quarto argomento.

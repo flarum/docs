@@ -56,7 +56,7 @@ Inoltre, ricorda che i nomi dei percorsi (`tags.index`, `tags.show`, etc) devono
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
-You can use the CLI to automatically create your endpoint controllers:
+È possibile utilizzare la CLI per creare automaticamente i tuoi endpoint controller:
 ```bash
 $ flarum-cli make backend api-controller
 ```
@@ -65,7 +65,7 @@ $ flarum-cli make backend api-controller
 
 ### Elenco risorse
 
-For the controller that lists your resource, extend the `Flarum\Api\Controller\AbstractListController` class. At a minimum, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a collection of models. The `data` method accepts the `Request` object and the tobscure/json-api `Document`.
+Per il controller che elenca le tua risorse, estendi la classe `Flarum\Api\Controller\AbstractListController`. Come minimo, è necessario specificare quale tipo di `$serializer` vuoi utilizzare per serializzare i tuoi modelli, e implementare il metodo `data` per restituire una raccolta di modelli. Il metodo `data` accetta l'oggetto `Request` e il  `Documento` tobscure/json-api.
 
 ```php
 use Flarum\Api\Controller\AbstractListController;
@@ -85,17 +85,17 @@ class ListTagsController extends AbstractListController
 
 #### Impaginazione
 
-You can allow the number of resources being **listed** to be customized by specifying the `limit` and `maxLimit` properties on your controller:
+Puoi permettere che il numero di risorse che sono **elencate** sia personalizzato specificando le proprietà `limit` e `maxLimit` sul tuo controller:
 
 ```php
-    // The number of records included by default.
+    // Il numero di record inclusi di default.
     public $limit = 20;
 
-    // The maximum number of records that can be requested.
+    // Il numero massimo di record che possono essere richiesti.
     public $maxLimit = 50;
 ```
 
-You can then extract pagination information from the request using the `extractLimit` and `extractOffset` methods:
+È quindi possibile estrarre le informazioni sull'impaginazione dalla richiesta utilizzando i metodi `extractLimit` e `extractOffset`:
 
 ```php
 $limit = $this->extractLimit($request);
@@ -104,23 +104,27 @@ $offset = $this->extractOffset($request);
 return Tag::skip($offset)->take($limit);
 ```
 
-To add pagination links to the JSON:API document, use the `Document::addPaginationLinks` method.
+Per aggiungere link di paginazione al documento JSON:API, utilizzare il metodo `Document::addPaginationLinks`.
 
 #### Ordinamento
 
-You can allow the sort order of resources being **listed** to be customized by specifying the `sort` and `sortField` properties on your controller:
+Puoi consentire che l'ordinamento delle risorse  **elencate** sia personalizzato specificando le proprietà `limit` e `maxLimit` sul tuo controller:
 
 ```php
-    // The default sort field and order to use.
+    // ordinamento predefinito e l'ordine da usare.
     public $sort = ['name' => 'asc'];
 
-    // The fields that are available to be sorted by.
+    // I campi disponibili per essere ordinati.
     public $sortFields = ['firstName', 'lastName'];
 ```
 
-You can then extract sorting information from the request using the `extractSort` method. This will return an array of sort criteria which you can apply to your query:
+È quindi possibile estrarre le informazioni sull'ordinamento dalla richiesta utilizzando il metodo `extractSort`. Questo restituirà un array di criteri che puoi applicare alla tua query:
 
 ```php
+use Illuminate\Support\Str;
+
+// ...
+
 $sort = $this->extractSort($request);
 $query = Tag::query();
 
@@ -133,11 +137,11 @@ return $query->get();
 
 #### Cerca
 
-Read our [searching and filtering](search.md) guide for more information!
+Leggi la nostra [guida per la ricerca e il filtraggio](search.md) per maggiori informazioni!
 
-### Mostra una risorsa
+### Mostrare una risorsa
 
-For the controller that shows a single resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the list controller, you need to specify the `$serializer` you want to use to serialize your models, and implement a `data` method to return a single model. We'll learn about serializers [in just a bit](#serializers).
+Per il controller che mostra una singola risorsa, estendi `Flarum\Api\Controller\AbstractShowController`. Come per il controller di elenco, è necessario specificare il `$serializer` che vuoi usare per serializzare i tuoi modelli, implementando `data` per restituire un singolo modello. Impareremo i serializer [ in un attimo](#serializers).
 
 ```php
 use Flarum\Api\Controller\AbstractShowController;
@@ -160,7 +164,7 @@ class ShowTagController extends AbstractShowController
 
 ### Creare una risorsa
 
-For the controller that creates a resource, extend the `Flarum\Api\Controller\AbstractCreateController` class. This is the same as the show controller, except the response status code will automatically be set to `201 Created`. You can access the incoming JSON:API document body via `$request->getParsedBody()`:
+Per il controller che crea una risorsa, estendi `Flarum\Api\Controller\AbstractCreateController`. Il funzionamento è identico a quello del controller "show", tranne per il fatto che il codice di stato della risposta verrà impostato automaticamente su `201 Created`. È possibile accedere al corpo del documento JSON:API tramite `$request->getParsedBody()`:
 
 ```php
 use Flarum\Api\Controller\AbstractCreateController;
@@ -185,11 +189,11 @@ class CreateTagController extends AbstractCreateController
 
 ### Aggiornare una risorsa
 
-For the controller that updates a resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the create controller, you can access the incoming JSON:API document body via `$request->getParsedBody()`.
+Per il controller che aggiorna una risorsa, estendi `Flarum\Api\Controller\AbstractShowController`. Come per il controller di creazione, puoi accedere al corpo del documento JSON:API in entrata tramite `$request->getParsedBody()`.
 
 ### Cancellare una risorsa
 
-For the controller that deletes a resource, extend the `Flarum\Api\Controller\AbstractDeleteController` class. You only need to implement a `delete` method which enacts the deletion. The controller will automatically return an empty `204 No Content` response.
+Per il controller che elimina una risorsa, estendi `Flarum\Api\Controller\AbstractDeleteController`. Dovrai solo implementarci `delete` che attua la cancellazione. Il controller restituirà automaticamente una risposta `204 No Content`.
 
 ```php
 use Flarum\Api\Controller\AbstractDeleteController;
@@ -209,17 +213,17 @@ class DeleteTagController extends AbstractDeleteController
 
 ### Includere Relazioni
 
-To include relationships when **listing**, **showing**, or **creating** your resource, specify them in the `$include` and `$optionalInclude` properties on your controller:
+Per includere le relazioni quando **elenchi**, **mostri**o **crei** la tua risorsa, specificale nelle proprietà `$include` e `$optionalInclude` del tuo controller:
 
 ```php
-    // The relationships that are included by default.
+    // Le relazioni che sono incluse di default.
     public $include = ['user'];
 
-    // Other relationships that are available to be included.
+    // Altre relazioni disponibili per essere incluse.
     public $optionalInclude = ['discussions'];
 ```
 
-You can then get a list of included relationships using the `extractInclude` method. This can be used to eager-load the relationships on your models before they are serialized:
+È quindi possibile ottenere un elenco delle relazioni incluse utilizzando il metodo `extractInclude`. Questo può essere utilizzato per caricare le relazioni sui modelli prima che questi vengano serializzati:
 
 ```php
 $relations = $this->extractInclude($request);
@@ -229,7 +233,7 @@ return Tag::all()->load($relations);
 
 ### Estensione dei controller API
 
-It is possible to customize all of these options on _existing_ API controllers too via the `ApiController` extender
+È possibile personalizzare tutte queste opzioni sul controller API _esistente_ tramite `ApiController`
 
 ```php
 use Flarum\Api\Event\WillGetData;
@@ -246,13 +250,13 @@ return [
         ->setSort(['name' => 'asc'])
         ->addSortField('firstName')
         ->prepareDataQuery(function ($controller) {
-            // Add custom logic here to modify the controller
-            // before data queries are executed.
+            // Aggiungi la tua logica per personalizzare il controller
+            // prima che le query vengano eseguite.
         })
 ]
 ```
 
-The `ApiController` extender can also be used to adjust data before serialization
+L'estensore `ApiController` può essere utilizzato anche per regolare i dati prima della serializzazione
 
 ```php
 use Flarum\Api\Event\WillSerializeData;
@@ -267,11 +271,11 @@ return [
 ]
 ```
 
-## Serializzatori
+## Serializers
 
-Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
+Prima di poter inviare i nostri dati al frontend, abbiamo bisogno di convertirlo in formato JSON:API in modo che possa essere gestito dal frontend stesso. Dovresti acquisire familiarità con le [specifiche JSON:API](https://jsonapi.org/format/). Lo strato JSON:API di Flarum è alimentato dalla libreria [tobscure/json-api](https://github.com/tobscure/json-api).
 
-A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API. Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
+Un serializzatore è solo una classe che converte alcuni dati (di solito [modelli Eloquent](models.md#backend-models)) in JSON:API. I serializzatori fungono da intermediari tra modelli di backend e di fronend: vedi la [documentazione sui modelli ](models.md) per maggiori informazioni. Per definire un nuovo tipo di risorsa, creare un nuovo classe per un serializer estendendo `Flarum\Api\Serializer\AbstractSerializer`. Dovrai specificare la risorsa `$type` e implementare il metodo `getDefaultAttributes` che accetta l'istanza del modello come unico argomento:
 
 ```php
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -292,7 +296,7 @@ class DiscussionSerializer extends AbstractSerializer
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
-You can use the CLI to automatically create your serializer:
+È possibile utilizzare la CLI per creare automaticamente il tuo serializer:
 ```bash
 $ flarum-cli make backend api-serializer
 ```
@@ -301,7 +305,7 @@ $ flarum-cli make backend api-serializer
 
 ### Attributi e relazioni
 
-You can also specify relationships for your resource. Simply create a new method with the same name as the relation on your model, and return a call to `hasOne` or `hasMany` depending on the nature of the relationship. You must pass in the model instance and the name of the serializer to use for the related resources.
+Puoi anche specificare le relazioni per la tua risorsa. Crea semplicemente un nuovo metodo con lo stesso nome della relazione sul tuo modello e restituisci una call a `hasOne` o `hasMany` a seconda della natura della relazione. È necessario passare l'istanza del modello e il nome del serializzatore da utilizzare per le risorse correlate.
 
 ```php
     protected function user($discussion)
@@ -310,9 +314,9 @@ You can also specify relationships for your resource. Simply create a new method
     }
 ```
 
-### Extending Serializers
+### Estendere i Serializers
 
-To add **attributes** and **relationships** to an existing resource type, use the `ApiSerializer` extender:
+Per aggiungere **attributi** e **relazioni** a un tipo di risorsa esistente, utilizzare l'estensore `ApiSerializer`:
 
 ```php
 use Flarum\Api\Serializer\UserSerializer;
@@ -338,6 +342,6 @@ return [
 ]
 ```
 
-### Non-Model Serializers and `ForumSerializer`
+### Serializzatori Non-Model e `ForumSerializer`
 
-Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything. For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
+I serializzatori non devono corrispondere ai modelli Eloquent: puoi definire le risorse JSON:API per qualsiasi cosa. Per esempio, Flarum core utilizza il [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) per inviare un payload iniziale al frontend. Questo può anche includere le impostazioni, se l'utente corrente può eseguire determinate azioni e altri dati. Molte estensioni aggiungono dati al payload estendendo gli attributi di `ForumSerializer`.

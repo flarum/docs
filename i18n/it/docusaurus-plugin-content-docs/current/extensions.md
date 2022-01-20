@@ -14,22 +14,22 @@ Flarum ha un vasto ecosistema di estensioni, molte delle quali sono open source 
 
 Proprio come Flarum, le estensioni vengono installate tramite [Composer](https://getcomposer.org), usando SSH. Per installare un estensione:
 
-1. `cd` to your Flarum directory. `cd`  fino alla cartella che contiene  `composer.json`. You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Questo solitamente compare nel post o nella documentazione dell'estensione.
+1. `cd` nella tua directory Flarum. `cd`  fino alla cartella che contiene  `composer.json`. Puoi controllare i contenuti della directory tramite `ls -la`.
+2. Lancia `composer require COMPOSER_PACKAGE_NAME:*`. Questo solitamente compare nel post o nella documentazione dell'estensione.
 
 ## Gestire le estensioni
 
-Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+Seguire le istruzioni fornite dagli sviluppatori di estensioni. Se stai usando `*` come stringa di versione per le estensioni ([come raccomandato](composer.md)), eseguire i comandi elencati nella guida di aggiornamento di [Flarum](update.md) dovrebbe aggiornare tutte le estensioni.
 
-## Uninstalling Extensions
+## Disinstallazione Delle Estensioni
 
-Similarly to installation, to remove an extension:
+Analogamente all'installazione, per rimuovere un'estensione:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
-1. `cd` to your Flarum directory.
+0. Se si desidera rimuovere tutte le tabelle del database create dall'estensione, fare clic sul pulsante "Disinstalla" nella dashboard di amministrazione. Per maggiori informazioni, vedere [qui sotto](#managing-extensions).
+1. `cd` nella tua directory Flarum.
 2. Lancia `composer require COMPOSER_PACKAGE_NAME`. Questo solitamente compare nel post o nella documentazione dell'estensione.
 
-## Managing Extensions
+## Gestire le estensioni
 
 La pagina delle estensioni del pannello di amministrazione offre un modo semplice per gestire le estensioni quando vengono installate. Potrai:
 
