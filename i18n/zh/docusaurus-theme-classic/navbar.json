@@ -4,7 +4,7 @@
     "description": "Navbar item with label Guide"
   },
   "item.label.Extend": {
-    "message": "进阶",
+    "message": "扩展",
     "description": "Navbar item with label Extend"
   },
   "item.label.Internal": {
