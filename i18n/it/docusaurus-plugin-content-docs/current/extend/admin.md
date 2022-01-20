@@ -1,4 +1,4 @@
-# Pannello amministrazione
+# Pannello di amministrazione
 
 La Beta 15 ha introdotto un pannello di amministrazione e un frontend per le API completamente riprogettati. Ora è più facile che mai aggiungere impostazioni o autorizzazioni alla tua estensione.
 
@@ -117,7 +117,7 @@ app.initializers.add('interstellar', function(app) {
 
 Novità nella beta 15, le autorizzazioni ora possono essere trovate in 2 posizioni. Ora puoi visualizzare le autorizzazioni individuali di ciascuna estensione sulla loro pagina. Tutte le autorizzazioni possono ancora essere trovate nella pagina delle autorizzazioni.
 
-Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`.
+Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`.
 
 Argomenti:
  * Permessi Oggetto
@@ -137,7 +137,7 @@ app.initializers.add('interstellar', function(app) {
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etichetta di autorizzazione
         permission: 'discussion.rocket_fly', // Nome effettivo dell'autorizzazione memorizzato nel database (e utilizzato durante il controllo dell'autorizzazione).
         tagScoped: true, // Se è possibile applicare questo permesso ai Tag, non solo in maniera globale. Spiegato nel paragrafo successivo.
-      }, 
+        }, 
       'start', // Il permesso di categoria verrà aggiunto alla griglia
       95 // Opzional: Priorità
     );
