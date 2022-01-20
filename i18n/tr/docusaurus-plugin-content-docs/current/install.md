@@ -1,4 +1,4 @@
-# Kurulum
+# Kurulum Belgeleri
 
 :::danger Uyarı
 
@@ -11,13 +11,13 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
 * **Apache** (mod_rewrite etkin) veya **Nginx**
-* **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6 +** veya **MariaDB10.0.5+** Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
-* **SSH (command-line) access** to run Composer
+* **PHP 7.3+** şu uzantılar aktif olmalı: curl, dom, gd, json, mbstring, openssl, pdo_mysql, tokenizer, zip
+* **MySQL 5.6+/8.0.23+** veya **MariaDB10.0.5+** Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
+* Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 
-:::tip Hızlı test?
+:::tip Paylaşımlı Hosting
 
-Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum'u kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
+Bu aşamada, bir ZIP dosyası indirerek ve dosyaları web sunucunuza yükleyerek Flarum kurmanız mümkün değildir. Bunun nedeni, Flarum'un komut satırında çalışması gereken [Composer](https://getcomposer.org) adlı bir bağımlılık yönetim sistemi kullanmasıdır.
 
 Bu mutlaka bir VPS'ye ihtiyacınız olduğu anlamına gelmez. Bazı paylaşılan ana bilgisayarlar size, Composer ve Flarum'u sorunsuz bir şekilde yükleyebilmeniz için SSH erişimi sağlar.
 
@@ -78,21 +78,37 @@ www.example.com {
 ```
 ## Klasör Sahipliği
 
-Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Linux'ta bir dizine yazma erişimine izin vermek için aşağıdaki komutu yürütün:
+Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-```bash
-chmod 775 /path/to/directory
-```
+- The root install directory, so Flarum can edit `config.php`.
+- The `storage` subdirectory, so Flarum can edit logs and store cached data.
+- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
 If Flarum requests write access to both the directory and its contents, you need to add the `-R` flag so that the permissions are updated for all the files and folders within the directory:
+
+There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+
+First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
 chmod 775 -R /path/to/directory
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user.
+If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de web sunucusunun altında çalıştığı grup ve kullanıcıdır. You'll need to look into the specifics of your distro and web server setup to make sure. Çoğu Linux işletim sisteminde klasör sahipliğini, `chown -R www-data:www-data foldername/` komutunu çalıştırarak değiştirebilirsiniz.
 
-Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de web sunucusunun altında çalıştığı grup ve kullanıcıdır. Çoğu Linux işletim sisteminde klasör sahipliğini, `chown -R www-data:www-data foldername/` komutunu çalıştırarak değiştirebilirsiniz.
+```bash
+chown -R www-data:www-data /path/to/directory
+```
+
+Flarum hem dizine hem de içeriğine yazma erişimi isterse, dizin içindeki tüm dosyalar ve klasörler için izinlerin güncellenmesi için `-R` bayrağını eklemeniz gerekir:
+
+Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
+
+Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
+
+```bash
+chmod 775 /path/to/directory
+```
 
 Linux'ta dosya izinleri ve sahipliğinin yanı sıra bu komutlar hakkında daha fazla bilgi edinmek için [bu öğretici](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/)'yi okuyun . Windows'ta Flarum kuruyorsanız cevaplarınızı bulabilirsiniz, [Bu Süper Kullanıcı sorusunun](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) kullanışlı.
 
