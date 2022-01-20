@@ -60,7 +60,7 @@ Con respecto a la actualización, tenga en cuenta lo siguiente:
 
 El paquete `flarum/testing` proporciona utilidades para las pruebas automatizadas de backend impulsadas por PHPUnit. Vea la [documentación de pruebas](testing.md) para más información.
 
-### Dependencias Opcionales
+### Optional Dependencies
 
 La beta 15 introdujo las "dependencias de la extensión", que requieren que cualquier extensión listada en la sección `composer.json` de tu extensión esté habilitada antes de que tu extensión pueda ser activada.
 
