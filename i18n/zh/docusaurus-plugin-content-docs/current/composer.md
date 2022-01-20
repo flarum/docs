@@ -10,7 +10,7 @@ Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其
 
 :::tip Composer v2
 
-在过去，Composer 在虚拟主机上有引发内存占用过高的问题。 在 2020 年，[Composer v2 发布了](https://blog.packagist.com/composer-2-0-is-now-available/)。其大大改善了性能和内存占用并且解决了上述问题。 所以确保您的服务器正在使用Composer v2！
+Composer 曾经由于巨大的内存占用，其在共享主机上引起过问题。 在 2020 年，[Composer v2 发布了](https://blog.packagist.com/composer-2-0-is-now-available/)。其大大改善了性能和内存占用并且解决了上述问题。 所以确保您的服务器正在使用Composer v2！
 
 :::
 
@@ -20,7 +20,7 @@ Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其
 
 每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。
 
-Back in the day, forum frameworks would manage extensions by having users upload zip files with the extension code. That seems simple enough, but issues quickly become evident:
+在过去，论坛框架会通过让用户上传带有拓展代码的压缩文件来管理拓展。 这看上去很简单，但问题会很快显现出来：
 
 - Uploading random zip files from the internet tends to be a bad idea. Requiring that extensions be downloaded from a central source like [Packagist](https://packagist.org/) makes it somewhat more tedious to spam malicious code, and ensures that source code is available on GitHub for free/public extensions.
 - Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
