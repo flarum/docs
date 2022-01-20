@@ -1,6 +1,6 @@
 # Güncelleme
 
-To update Flarum, you'll need to use [Composer](https://getcomposer.org). If you're not familiar with it (although you should be, because you need it to install Flarum), read [our guide](composer.md) for information on what it is and how to set it up.
+Flarum'u güncellemek için [Composer](https://getcomposer.org) kullanmanız gerekir. Eğer aşina değilseniz (olmanız gerekir, çünkü Flarum'u kurmak için buna ihtiyacınız vardır), ne olduğu ve nasıl kurulacağı hakkında bilgi için [kılavuzumuzu](composer.md) okuyun.
 
 If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
 
