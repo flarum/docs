@@ -1,6 +1,6 @@
-# API and Data Flow
+# 接口与数据流
 
-In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
+在[上一篇文章中](models.md), 我们学习了Flarum是如何通过模型与数据交互的。 Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
 
 ## API Request Lifecycle
 
