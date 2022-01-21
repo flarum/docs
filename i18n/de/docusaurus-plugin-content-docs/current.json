@@ -20,7 +20,7 @@
     "description": "The label for category Advanced in sidebar guideSidebar"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
-    "message": "Main Concepts",
+    "message": "Hauptkonzepte",
     "description": "The label for category Main Concepts in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Reference Guides": {
