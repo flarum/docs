@@ -1,4 +1,4 @@
-# Admin Dashboard
+# Admin-Dashboard
 
 Beta 15 führte ein komplett neu gestaltetes Admin-Panel und eine Frontend-API ein. Es ist jetzt einfacher denn je, Deiner Erweiterung Einstellungen oder Berechtigungen hinzuzufügen.
 
