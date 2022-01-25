@@ -1,16 +1,16 @@
 # Ngôn ngữ
 
-It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
+Thật dễ dàng để thêm một ngôn ngữ mới vào cài đặt Flarum cơ bản của bạn. Chỉ cần làm theo hướng dẫn bên dưới để tải xuống và cài đặt gói ngôn ngữ bạn chọn.
 
-Once you have added a language pack, you can [set it as the default language](#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack). If you’re using any third-party extensions, be sure to [read this](#third-party-extensions) before you start.
+Khi bạn đã thêm gói ngôn ngữ, bạn có thể [ đặt nó làm ngôn ngữ mặc định ](#setting-the-default-language) cho diễn đàn của mình. Và nếu bạn thấy mình không cần một trong các gói ngôn ngữ đã cài đặt, bạn luôn có thể [ tắt nó ](#disabling-a-language-pack). Nếu bạn đang sử dụng bất kỳ tiện ích mở rộng nào của bên thứ ba, hãy nhớ [ đọc phần này ](#third-party-extensions) trước khi bắt đầu.
 
 ## Cài đặt Gói ngôn ngữ
 
 Để bắt đầu, hãy truy cập thẻ [Extensions > Languages](https://discuss.flarum.org/t/languages) tại trang Cộng đồng Flarum và tìm gói ngôn ngữ mà bạn muốn cài đặt.
 
-Language packs are installed the same way as [extensions](extensions.md). The language will appear in the **Extensions** page of the admin interface and you can enable it there.
+Gói ngôn ngữ được cài đặt giống như [ phần mở rộng ](extensions.md). Ngôn ngữ sẽ xuất hiện trong trang ** Tiện ích mở rộng ** của giao diện quản trị và bạn có thể bật ngôn ngữ đó ở đó.
 
-That’s all there is to it! You should now be able to use the language selector in your site’s header to switch your forum’s display to the new language.
+That’s all there is to it! Giờ đây, bạn có thể sử dụng công cụ chọn ngôn ngữ trong tiêu đề trang web của mình để chuyển hiển thị của diễn đàn sang ngôn ngữ mới.
 
 ## Thiết lập ngôn ngữ mặc định
 
