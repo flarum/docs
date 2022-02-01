@@ -363,9 +363,10 @@ Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit
 
 When writing unit tests in Flarum, here are some helpful tips.
 
-#### Common Services & Mocking
+#### Mocking Flarum Services
 
-Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or weird models we'd get handed for free in the app suddenly become a question.  Instead of trying to reimplement the container, we _mock_ just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.  
+Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.  
+
 ```php
     public function setUp(): void
     {
@@ -388,8 +389,7 @@ Some aspects require more mocks. If you're validating authorization interactions
     $this->actor->shouldReceive('SOME PERMISSION')->andReturn(true/false);
 ```
 
-
-TIP: If you find your extension needs _lots and lots_ of mocks, or mocks that feel unrelated, it might be an opportunity to simplify your code, perhaps moving key logic into their own smaller functions (that dont require mocks).  
+NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that feel unrelated, it might be an opportunity to simplify your code, perhaps moving key logic into their own smaller functions (that dont require mocks).  
 
 ## Frontend Tests
 
