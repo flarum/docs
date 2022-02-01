@@ -359,7 +359,37 @@ class ConsoleTest extends ConsoleTestCase
 
 ### Using Unit Tests
 
-TODO
+Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit-9.html) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
+
+When writing unit tests in Flarum, here are some helpful tips.
+
+#### Common Services & Mocking
+
+Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or weird models we'd get handed for free in the app suddenly become a question.  Instead of trying to reimplement the container, we _mock_ just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.  
+```php
+    public function setUp(): void
+    {
+        parent::setUp();
+        // example - if our setting needs settings, we can mock the settings repository
+        $settingsRepo = m::mock(SettingsRepositoryInterface::class);
+        // and then control specific return values for each setting key
+        $settingsRepo->shouldReceive('get')->with('some-plugin-key')->andReturn('some-value-useful-for-testing');
+        // construct your class under test, passing mocked services as needed
+        $this->serializer = new YourClassUnderTest($settingsRepo);
+    }
+```
+
+Some aspects require more mocks. If you're validating authorization interactions for instance you might need to mock your users `User::class` and the request's method that provides them as well!
+
+```
+    $this->actor = m::mock(User::class);
+    $request = m::mock(Request::class)->makePartial();
+    $request->shouldReceive('getAttribute->getActor')->andReturn($this->actor);
+    $this->actor->shouldReceive('SOME PERMISSION')->andReturn(true/false);
+```
+
+
+TIP: If you find your extension needs _lots and lots_ of mocks, or mocks that feel unrelated, it might be an opportunity to simplify your code, perhaps moving key logic into their own smaller functions (that dont require mocks).  
 
 ## Frontend Tests
 
