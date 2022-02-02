@@ -95,7 +95,8 @@ Quy trình đóng góp điển hình trông giống như sau:
 
 4. 💾 **Commit** code của bạn với một thông điệp mô tả.
     * Nếu thay đổi của bạn giải quyết được sự cố hiện có (thông thường, nó phải) bao gồm "Bản sửa lỗi số 123" trên một dòng mới, trong đó 123 là số sự cố.
-    * Viết một [thông điệp commit tốt](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * *Fix* commits should describe the issue fixed, not how it was fixed.
 
 5. 🎁 **Gửi** một Pull Request trên GitHub.
     * Điền vào mẫu pull request.
