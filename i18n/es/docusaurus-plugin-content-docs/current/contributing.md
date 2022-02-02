@@ -95,7 +95,8 @@ Utilizamos un [formato de clave estándar](/extend/i18n.md#appendix-a-standard-k
 
 4. 🎁 **Envia** un Pull Request en GitHub.
     * Rellene la plantilla del pull request.
-    * Si su cambio es visual, incluya una captura de pantalla o GIF que muestre el cambio.
+    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * *Fix* commits should describe the issue fixed, not how it was fixed.
 
 5. 🤝 **Intercambio** con el equipo de Flarum para su aprobación.
     * Fill out the pull request template.
