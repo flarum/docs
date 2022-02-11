@@ -145,6 +145,7 @@ module.exports = {
       items: [
         'internal/README',
         'internal/merging',
+        'internal/bundled-extensions-policy',
       ]
     },
   ]
