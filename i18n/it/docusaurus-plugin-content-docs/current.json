@@ -7,6 +7,10 @@
     "message": "Introduction",
     "description": "The label for category Introduction in sidebar guideSidebar"
   },
+  "sidebar.guideSidebar.category.Contribute": {
+    "message": "Contribute",
+    "description": "The label for category Contribute in sidebar guideSidebar"
+  },
   "sidebar.guideSidebar.category.Setting Up": {
     "message": "Setting Up",
     "description": "The label for category Setting Up in sidebar guideSidebar"

@@ -16,7 +16,7 @@ Historically, Composer has caused issues on shared hosting due to huge memory us
 
 ## Composer là gì?
 
-> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md)
 
 Each Flarum installation consists primarily of Flarum core and a set of [extensions](extensions.md). Each of these has its own dependencies and releases.
 
@@ -153,10 +153,10 @@ After most commands, you'll want to run `composer dump-autoload -a`. Essentially
 
 ## Tôi không thể truy cập SSH
 
-Most decent hosts should provide SSH access for shared hosting. If your host doesn't (and you can't switch to a good host that does offer it), hope might not yet be lost. You have several options:
+Hầu hết các máy chủ để cung cấp truy cập SSH dành cho shared hosting. Nếu host của bạn không có (hoặc bạn không đủ tiền để chuyển sang host tốt hơn). Bạn có một số tùy chọn:
 
-- Use alternatives like [Pockethold](https://github.com/UvUno/pockethold) to install Flarum. Note that you'll still need composer (and SSH) to install extensions.
-- Install composer on your computer, and run the `install` command locally. Then upload the files via FTP to your host. To make modifications (updating Flarum, installing/updating/removing extensions), download the current versions of the files, run whatever composer commands you need locally, and then replace the `composer.json` and `composer.lock` files, and the `vendor` directory of your install with your local copy. Make sure to create backups before doing this!
-- Some web hosts might provide a GUI for managing composer. The command line version is generally preferably, but if a GUI is the only possibility, consult your host's documentation for information on how to use it.
+- Sử dụng lựa chọn thay thế như [ Pockethold](https://github.com/UvUno/pockethold) để cài đặt Flarum. Lưu ý rằng bạn vẫn sẽ cần composer (hoặc SSH) để cài đặt tiện ích mở rộng.
+- Cài đặt composer trên máy tính và chạy lệnh `install`. Sau đó tải các tệp lên host bằng FTP. Để thực hiện sửa đổi (cập nhật Flarum, cài đặt/cập nhật/xóa tiện ích mở rộng), hãy tải xuống phiên bản hiện tại của tệp, chạy bất kỳ lệnh trình soạn nhạc nào bạn cần cục bộ, sau đó thay thế `composer.json`, `composer.lock` và thư mục `vendor` trong bản cài đặt của bạn bằng bản sao cục bộ của bạn. Đảm bảo rằng bạn đã sao lưu trước khi thực hiện điều này!
+- Vài web host có thể cung cấp GUI để quản lý composer. Phiên bản dòng lệnh nói chung là tốt nhất, nhưng nếu GUI là khả năng duy nhất, hãy tham khảo tài liệu của máy chủ của bạn để biết thông tin về cách sử dụng nó.
 
-Note that these workarounds are not officially supported! The only officially supported way to install and manage Flarum is through Composer.
+Lưu ý rằng những cách giải quyết này không được hỗ trợ chính thức! Cách duy nhất được hỗ trợ chính thức để cài đặt và quản lý Flarum là thông qua Composer.

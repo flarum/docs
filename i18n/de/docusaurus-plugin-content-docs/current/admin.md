@@ -1,3 +1,3 @@
-# Admin Dashboard
+# Admin-Dashboard
 
-The Flarum Admin Dashboard is a user-friendly interface for managing your forum. It is only available to users in the "Admin" group. To access the Admin dashboard, Click on your **Name** at the at the top right of the screen, and select **Administration**.
+Das Flarum Admin Dashboard ist eine benutzerfreundliche Oberfläche zur Verwaltung Deines Forums. Es ist nur für Benutzer in der Gruppe „Admin“ verfügbar. Um auf das Admin-Dashboard zuzugreifen, klicke oben rechts auf dem Bildschirm auf Deinen **Namen** und wähle **Administration** aus.

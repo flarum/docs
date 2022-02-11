@@ -7,6 +7,10 @@
     "message": "Einführung",
     "description": "The label for category Introduction in sidebar guideSidebar"
   },
+  "sidebar.guideSidebar.category.Contribute": {
+    "message": "Contribute",
+    "description": "The label for category Contribute in sidebar guideSidebar"
+  },
   "sidebar.guideSidebar.category.Setting Up": {
     "message": "Einrichten",
     "description": "The label for category Setting Up in sidebar guideSidebar"
@@ -20,7 +24,7 @@
     "description": "The label for category Advanced in sidebar guideSidebar"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
-    "message": "Main Concepts",
+    "message": "Hauptkonzepte",
     "description": "The label for category Main Concepts in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Reference Guides": {

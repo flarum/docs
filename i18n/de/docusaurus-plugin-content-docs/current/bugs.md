@@ -1,4 +1,4 @@
-# Reporting Bugs
+# Fehler melden
 
 :::danger Security Vulnerabilities
 

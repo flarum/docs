@@ -1,4 +1,4 @@
-# Báo cáo Bugs
+# Báo cáo lỗi
 
 :::danger Security Vulnerabilities
 

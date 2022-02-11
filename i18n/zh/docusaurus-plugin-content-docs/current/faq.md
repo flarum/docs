@@ -2,11 +2,11 @@
 
 ### Flarum 现在是正式版吗？
 
-是的！ 经过 6 年的开发之后，Flarum 1.0.0 最终来了。
+是的！ After 6 years of development, Flarum 1.0.0 was finally released in 2021. You can find more information about the most up-to-date versions of Flarum in the [community](https://discuss.flarum.org/t/meta).
 
 ### 展望未来，下一阶段 Flarum 会做些什么？
 
-相应的计划还在制定中。 不过我们已经有了很多很多想法，期待届时在社区中分享给大家。
+A formal [Flarum roadmap](https://discuss.flarum.org/d/29931-the-future-of-flarum-a-roadmap) is available on the discussion board. We have a lot of plans and ideas, and look forward to sharing more milestones with the community.
 
 ### 我可以捐款以加快开发进展吗？
 

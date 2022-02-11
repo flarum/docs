@@ -6,15 +6,15 @@ If you need help applying these changes or using new features, please start a di
 
 :::
 
-## 1.2 Changes
+## Các thay đổi 1.2
 
-Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers:
+Flarum v1.2 bao gồm một số bản sửa lỗi, tái cấu trúc nội bộ và các tính năng mới. Sau đây tóm tắt những thay đổi quan trọng nhất đối với các nhà phát triển tiện ích mở rộng:
 
-### Frontend
+### Giao diện người dùng
 
-- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
-- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
-- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
+- Bây giờ lõi Flarum vượt qua kiểm tra kiểu TypeScript (trên phần được viết bằng TypeScript). Ngoài ra, các phần chính của giao diện người dùng (model, phiên bản ứng dụng và các phần khác) hiện được viết bằng TypeScript. Những thay đổi này sẽ làm cho việc viết các phần mở rộng trong TypeScript trở nên dễ dàng và hiệu quả hơn nhiều.
+- Thay vì sử dụng trực tiếp biến Less trong mã CSS, giờ đây lõi sử dụng các biến CSS. Đối với hầu hết các phần, chúng tôi vừa tạo các biến CSS và đặt giá trị của chúng thành các biến Less. Điều này sẽ làm cho chúng và tùy chỉnh CSS dễ dàng hơn rất nhiều. https://github.com/flarum/core/pull/3146.
+- Danh sách thả xuống hiện có thể được vẽ lười biếng để cải thiện hiệu suất. Bạn có thể thực hiện việc này bằng cách đặt lazy draw thành "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
 - You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements.
 - A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.

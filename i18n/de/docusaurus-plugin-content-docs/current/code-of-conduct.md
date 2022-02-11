@@ -1,32 +1,32 @@
 # Code of Conduct
 
-### _Welcome to the Flarum Community!_
+### _Willkommen in der Flarum-Community!_
 
-... And thanks for joining us! We're excited about Flarum, and are always happy to meet people who feel the same way. We want *everyone* to get the most out of Flarum and the Flarum community, so we ask that you please read and follow these guidelines. These apply whether you're using our forum, Discord chat, communicating on GitHub, or any other form of communication without the Flarum community.
+... Und danke, dass du dabei bist! Wir sind begeistert von Flarum und freuen uns immer, Menschen zu treffen, denen es genauso geht. Wir möchten, dass *jeder* das Beste aus Flarum und der Flarum-Community herausholt, daher bitten wir Dich, diese Richtlinien zu lesen und zu befolgen. Diese gelten unabhängig davon, ob Du unser Forum, den Discord-Chat, die Kommunikation auf GitHub oder eine andere Form der Kommunikation ohne die Flarum-Community verwendest.
 
-### Above All, Be Cool!
+### Sei vor allem cool!
 
-We're all here to talk about Flarum, and to work together toward making it an even better application. Criticizing ideas (by means of reasoned arguments, of course) is an important part of that. But let's not get carried away and devolve into personal attacks, because negativity only gets in the way. We ask that you avoid the following:
+Wir sind alle hier, um über Flarum zu sprechen und gemeinsam daran zu arbeiten, es zu einer noch besseren Anwendung zu machen. Ideen zu kritisieren (natürlich durch begründete Argumente) ist ein wichtiger Teil davon. Aber lassen wir uns nicht hinreißen und verfallen in persönliche Angriffe, denn Negativität steht nur im Weg. Wir bitten Dich, Folgendes zu vermeiden:
 
-- Offensive or abusive language, as well as any kind of hate speech
-- Posts intended to harass, impersonate, or defame others
-- Unnecessary deletion of posted content
-- Attempts to abuse or expose the private information of others
-- Obscene or sexually explicit content
-- Spam, phishing posts, and any actions intended to deface this site
-- Discussion of software piracy and similar topics
+- Beleidigende oder beleidigende Sprache sowie jede Art von Hassrede
+- Beiträge, die darauf abzielen, andere zu belästigen, sich auszugeben oder zu diffamieren
+- Unnötiges Löschen von geposteten Inhalten
+- Versuche, die privaten Informationen anderer zu missbrauchen oder offenzulegen
+- Obszöne oder sexuell explizite Inhalte
+- Spam, Phishing-Posts und alle Aktionen, die darauf abzielen, diese Website zu verunstalten
+- Diskussion über Softwarepiraterie und ähnliche Themen
 
-*All the above are grounds for moderator action.* If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the *Report* command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation to [admin@flarum.org](mailto:admin@flarum.org).
+*Alles oben Genannte sind Gründe für Moderatormaßnahmen.* Wenn Duein Problem mit einem anderen Mitglied habst, bitten wir Dich, dieses nicht selbst zu konfrontieren. Wenn es sich um das Forum handelt, verwende bitte den Befehl *Melden* für den betreffenden Beitrag und überlasse es dann den Mitarbeitern, sich mit der Situation zu befassen. Andernfalls melde den Verstoß an [admin@flarum.org](mailto:admin@flarum.org).
 
-Our moderators may edit or delete any content that is offensive or disruptive to the flow of communication. Serious or repeated offenses may lead to suspension of the offending user's account. So, you know, *be cool*. 😎
+Unsere Moderatoren können Inhalte bearbeiten oder löschen, die anstößig sind oder den Kommunikationsfluss stören. Unsere Moderatoren können Inhalte bearbeiten oder löschen, die anstößig sind oder den Kommunikationsfluss stören. Also, weißt du, *sei cool*. 😎
 
-### Make Yourself Heard
+### Verschaffe Dir Gehör
 
-Want to start a new discussion? First, be sure to read [our FAQ](faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: *it could be someone has already started a discussion about it!*
+Möchtest Du eine neue Diskussion beginnen? Lese zuerst unsere [FAQ](faq.md) und folge den Links, um sicherzustellen, dass Du vollständig über das Projekt informiert bist. Dann verbringe einige Zeit damit, das Forum zu durchsuchen, mache Dich mit [dem Tag-System](https://discuss.flarum.org/tags) vertraut und führe ein paar Suchen nach Schlüsselwörtern durch, die mit Deinem Thema zu tun haben: *Es könnte sein, dass jemand bereits eine Diskussion darüber begonnen hat!*
 
-When you're sure you're ready to start a discussion, please keep the following points in mind:
+Wenn Du sicher bist, dass Du bereit bist, eine Diskussion zu beginnen, beachte bitte die folgenden Punkte:
 
-- Give it a good title! You'll get the best results if your title makes it clear what you want to talk about.
+- Gib ihm einen guten Titel! Die besten Ergebnisse erzielst Du, wenn Dein Titel deutlich macht, worüber Du sprechen möchtest.
 - Choose the right tag(s). This will increase the likelihood your post will be read and answered promptly.
 - *Don’t* post repeatedly about the same topic, as doing so will tend to have the opposite effect.
 - If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!

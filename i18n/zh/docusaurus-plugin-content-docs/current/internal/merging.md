@@ -1,7 +1,7 @@
-# PR Merging Workflow
+# PR 合并工作流程
 
 
-## Implementation Review Criteria
+## 执行审查标准
 
 - Adheres to our conventions or can be patched up easily after merging, follows proper code style.
 - Are there any implementation details that could be done better through alternate technologies/technical approaches?
@@ -12,16 +12,18 @@
 
 If all of the checks in the template are met, **any** core developer may merge this PR. If the PR is authored by a core developer, they should probably be the ones to merge it.
 
-- Merging:
+- 合并：
   - GitHub offers several ways to merge a PR. Choose between the following strategies:
     - **Merge** when the PR branch consists of atomic, well-described commits that are nice to have in the version history.
-    - **Squash** when lots of cleanup commits have accumulated. Please make sure to write a [good commit message](https://chris.beams.io/posts/git-commit/) for the squash commit.
+    - **Squash** when lots of cleanup commits have accumulated. Please make sure to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) spec for the squash commit.
 
-- After merging:
-  - Make sure the *issue* (if none exists, the PR - but not both) belongs to the appropriate milestone. PRs in extensions cannot be assigned to core milestones, so assign it to the current release's project board instead.
+- 合并后：
+  - Make sure the *issue* (if none exists, the PR - but not both) belongs to the appropriate milestone and project board.
+  - PRs in extensions cannot be assigned to core milestones, so create a core issue that references it and add it to the milestone.
   - Close all relevant issues (*if* they are closed completely).
+  - Regressions should be labeled as such and removed from the project board and milestone after merging.
   - Check for follow-up tasks:
-    - Merge related PRs (language files, extensions, documentations)
-    - Documentation updates
+    - Merge related PRs (language files, extensions, documentations).
+    - Documentation updates.
   - Create issues for further follow-up tasks, if necessary.
 

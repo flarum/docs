@@ -95,7 +95,8 @@ Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcs
 
 4. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
     * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
-    * 编写一个 [好的 commit message](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)。
+    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * *Fix* commits should describe the issue fixed, not how it was fixed.
 
 5. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
     * 填写 Pull Request 模板。

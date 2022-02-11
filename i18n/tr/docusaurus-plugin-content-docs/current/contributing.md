@@ -95,7 +95,8 @@ A typical contribution workflow looks like this:
 
 4. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
     * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-    * [İyi bir işlem mesajı](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) yazın.
+    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * *Fix* commits should describe the issue fixed, not how it was fixed.
 
 5. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
     * Çekme talebi şablonunu doldurun.
