@@ -1,7 +1,7 @@
 # Package Manager
 This contains an explanation of how the package manager works and what it has to offer.
 
-## Features
+## Contents
 * Installing, Updating, and Removing Extensions.
 * [Checking for Updates](#checking-for-updates).
 * [Global Flarum Update](#global-flarum-updates).
