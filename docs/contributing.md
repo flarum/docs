@@ -28,16 +28,15 @@ Since Flarum is so extension-driven, we highly recommend [our extension docs](ex
 
 ### Setting Up a Local Codebase
 
-[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). In order to work on these, we recommend forking and cloning them into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions within the monorepo [flarum/framework](https://github.com/flarum/framework). In order to work on these, we recommend forking and cloning the repository into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Set up a Composer path repository for Flarum packages
-composer config repositories.0 path "packages/*"
-git clone https://github.com/<username>/core.git packages/core
-git clone https://github.com/<username>/tags.git packages/tags # etc
+# Set up a Composer path repository for Flarum monorepo packages
+composer config repositories.0 path "packages/framework/*"
+git clone https://github.com/<username>/framework.git packages/framework
 ```
 
 Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
@@ -49,7 +48,7 @@ After your local installation is set up, make sure you've enabled `debug` mode i
 Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
 
 ```bash
-cd packages/core/js
+cd packages/framework/framework/core/js
 npm install
 npm run dev
 ```
@@ -57,9 +56,9 @@ npm run dev
 The process is the same for extensions.
 
 ```bash
-cd packages/tags/js
+cd packages/framework/extensions/tags/js
 npm install
-npm link ../../core/js
+npm link ../../../../framework/core/js
 npm run dev
 ```
 
