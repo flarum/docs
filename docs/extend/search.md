@@ -16,7 +16,7 @@ Remember that the [JSON:API schema](https://jsonapi.org/format) is used for all 
 :::tip Reuse Code
 
 Often, you might want to use the same class as both a `Filter` and a `Gambit` (both explained below).
-Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/core/blob/master/src/Discussion/Query/UnreadFilterGambit.php) for an example.
+Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/framework/blob/main/framework/core/src/Discussion/Query/UnreadFilterGambit.php) for an example.
 
 :::
 
@@ -30,7 +30,7 @@ Your classes can implement both interface; see Flarum core's [`UnreadFilterGambi
 
 Filtering constrains queries based on `Filters` (highlighted in code to avoid confusion with the process of filtering), which are classes that implement `Flarum\Filter\FilterInterface` and run depending on query parameters. After filtering is complete, a set of callbacks called "filter mutators" run for every filter request.
 
-When the `filter` method on a `Filterer` class is called, the following process takes place ([relevant code](https://github.com/flarum/core/blob/master/src/Filter/AbstractFilterer.php#L50-L93)):
+When the `filter` method on a `Filterer` class is called, the following process takes place ([relevant code](https://github.com/flarum/framework/blob/main/framework/core/src/Filter/AbstractFilterer.php#L50-L93)):
 
 1. An Eloquent query builder instance for the model is obtained. This is provided by the per-model `{MODEL_NAME}Filterer` class's `getQuery()` method.
 2. We loop through all `filter[KEY] = VALUE` query params. For each of these, any `Filter`s registered to the model whose `getFilterKey()` method matches the query param `KEY` is applied. `Filter`s can be negated by providing the query param as `filter[-KEY] = VALUE`. Whether or not a `Filter` is negated is passed to it as an argument: implementing negation is up to the `Filter`s.
@@ -101,16 +101,16 @@ Now, all we need to do is register these via the Filter extender:
 ### Add Filtering to a New Model
 
 To filter a model that doesn't support filtering, you'll need to create a subclass of `Flarum/Filter/AbstractFilterer` for that model.
-For an example, see core's [UserFilterer](https://github.com/flarum/core/blob/master/src/User/Filter/UserFilterer.php).
+For an example, see core's [UserFilterer](https://github.com/flarum/framework/blob/main/framework/core/src/User/Filter/UserFilterer.php).
 
-Then, you'll need to use that filterer in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/core/blob/master/src/Api/Controller/ListUsersController.php#L93-L98).
+Then, you'll need to use that filterer in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Controller/ListUsersController.php#L93-L98).
 
 ## Searching
 
 Searching constrains queries by applying `Gambit`s, which are classes that implement `Flarum\Search\GambitInterface`, based on the `filter[q]` query param.
 After searching is complete, a set of callbacks called "search mutators" run for every search request.
 
-When the `search` method on a `Searcher` class is called, the following process takes place ([relevant code](https://github.com/flarum/core/blob/master/src/Search/AbstractSearcher.php#L55-L79)):
+When the `search` method on a `Searcher` class is called, the following process takes place ([relevant code](https://github.com/flarum/framework/blob/main/framework/core/src/Search/AbstractSearcher.php#L55-L79)):
 
 1. An Eloquent query builder instance for the model is obtained. This is provided by the per-model `{MODEL_NAME}Searcher` class's `getQuery()` method.
 2. The `filter[q]` param is split by spaces into "tokens". Each token is matched against the model's registered `Gambit`s (each gambit has a `match` method). For any tokens that match a gambit, that gambit is applied, and the token is removed from the query string. Once all regular `Gambit`s have ran, all remaining unmatched tokens are passed to the model's `FullTextGambit`, which implements the actual searching logic. For example if searching discussions, in the `filter[q]` string `'author:1 hello is:hidden' world`, `author:1` and `is:hidden` would get matched by core's Author and Hidden gambits, and `'hello world'` (the remaining tokens) would be passed to the `DiscussionFulltextGambit`.
@@ -196,12 +196,12 @@ We can register these via the `SimpleFlarumSearch` extender (in the future, the 
 ### Add Searching to a New Model
 
 To support searching for a model, you'll need to create a subclass of `Flarum/Search/AbstractSearcher` for that model.
-For an example, see core's [UserSearcher](https://github.com/flarum/core/blob/master/src/User/Search/UserSearcher.php).
+For an example, see core's [UserSearcher](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/UserSearcher.php).
 
-Then, you'll need to use that searcher in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/core/blob/master/src/Api/Controller/ListUsersController.php#L93-L98).
+Then, you'll need to use that searcher in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Controller/ListUsersController.php#L93-L98).
 
 Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error.
-See core's [FulltextGambit for users](https://github.com/flarum/core/blob/master/src/User/Search/Gambit/FulltextGambit.php) for an example.
+See core's [FulltextGambit for users](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/Gambit/FulltextGambit.php) for an example.
 You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method.
 
 ### Search Drivers

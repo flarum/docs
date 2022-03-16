@@ -13,7 +13,7 @@ Unlike with other extenders, the Service Provider layer is NOT use-case driven, 
 
 ## Flarum Boot Process
 
-To understand service providers, you must first understand the order in which Flarum boots. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/core/blob/master/src/Foundation/InstalledSite.php)
+To understand service providers, you must first understand the order in which Flarum boots. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/framework/blob/main/framework/core/src/Foundation/InstalledSite.php)
 
 1. The container and application are initialized, and essential bindings (config, environment, logger) are registered
 2. The `register` methods of all core service providers are run.
