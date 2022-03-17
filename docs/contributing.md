@@ -43,23 +43,29 @@ Next, ensure that Composer accepts unstable releases from your local copies by s
 
 Finally, run `composer install` to complete the installation from the path repositories.
 
-After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's javascript or CSS.
+After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
 
-Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+
+To contribute to the frontend, first install the JavaScript dependencies. The monorepo uses [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/) to easily install JS dependencies across all packages within.
 
 ```bash
-cd packages/framework/framework/core/js
-npm install
-npm run dev
+cd packages/framework
+yarn install
+```
+
+Then you can watch JavaScript files for changes during development:
+
+```bash
+cd framework/core/js
+yarn dev
 ```
 
 The process is the same for extensions.
 
 ```bash
-cd packages/framework/extensions/tags/js
-npm install
-npm link ../../../../framework/core/js
-npm run dev
+cd extensions/tags/js
+yarn dev
 ```
 
 ### Development Tools
