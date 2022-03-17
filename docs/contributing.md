@@ -45,7 +45,7 @@ Finally, run `composer install` to complete the installation from the path repos
 
 After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's javascript or CSS.
 
-Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
 
 ```bash
 cd packages/framework/framework/core/js
@@ -82,7 +82,7 @@ A typical contribution workflow looks like this:
 1. 🌳 **Branch** off the appropriate branch into a new feature branch.
     * *Bug fixes* should be sent to the latest stable branch.
     * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
-    * *Major* features should always be sent to the `master` branch, which contains the upcoming Flarum release.
+    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * Internally we use the naming scheme `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
 
 2. 🔨 **Write** some code.
