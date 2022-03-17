@@ -36,7 +36,7 @@ cd flarum
 
 # Set up a Composer path repository for Flarum monorepo packages
 composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
-git clone https://github.com/<username>/framework.git packages/framework
+git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
 
 Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
