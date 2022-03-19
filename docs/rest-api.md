@@ -39,7 +39,7 @@ The remaining attributes are either automatically filled or currently not used:
 Attach your key value to each API request using the `Authorization` header.
 Then provide the user ID you want to interact as at the end of the header:
 
-    Authorization: Token yourApiKeyValue; userId=1
+    Authorization: Token YOUR_API_KEY_VALUE; userId=1
 
 If a `user_id` value has been set for the key in the database, `userId=` will be ignored.
 Otherwise, it can be set to any valid user ID that exists in the database.
