@@ -56,6 +56,7 @@ module.exports = {
       label: 'Advanced',
       collapsible: false,
       items: [
+        'rest-api',
         'extenders'
       ]
     },
