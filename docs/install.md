@@ -67,7 +67,7 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 www.example.com {
     root * /var/www/flarum/public
     php_fastcgi unix//var/run/php/php7.4-fpm.sock
-    header /assets {
+    header /assets* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public"
