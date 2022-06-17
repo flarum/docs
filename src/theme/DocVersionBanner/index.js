@@ -44,14 +44,14 @@ function NonDefaultLangLabel({ defaultLocale }) {
               <Translate
                 id="customtheme.docs.versions.crowdinLinkLabel"
                 description="The label used for Crowdin link label">
-                via Crowdin
+                on our Crowdin project
               </Translate>
             </Link>
           </b>
         ),
       }}>
       {
-        'The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, we are coordinating translation {crowdinLink}.'
+        'The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, you can do so {crowdinLink}, where we coordinate the translations.'
       }
     </Translate>
   );

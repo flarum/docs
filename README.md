@@ -9,5 +9,7 @@ In order to avoid conflicts and corruption during translation synchronization, w
 Our documentation is generated with [Docusaurus](https://docusaurus.io/docs).
 Use Yarn to install the dependencies and start Docusaurus in a local webserver:
 
-    yarn install
-    yarn run start
+```bash
+yarn install
+yarn run start
+```
