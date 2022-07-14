@@ -25,7 +25,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Similarly to installation, to remove an extension:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
 2. Ejecute `composer require COMPOSER_PACKAGE_NAME`. Esto debería ser proporcionado por la documentación de la extensión.
 
@@ -35,4 +35,4 @@ La página de extensiones del panel de control del administrador proporciona una
 
 - Activar o desactivar una extensión
 - Acceder a la configuración de la extensión (aunque algunas extensiones utilizarán una pestaña en la barra lateral principal para la configuración)
-- Revertir las migraciones de una extensión para eliminar cualquier modificación de la base de datos que haya hecho (esto se puede hacer con el botón de desinstalación). Esto eliminará TODOS los datos asociados a la extensión, y es irreversible. Sólo se debe hacer cuando se está eliminando una extensión, y no se planea instalarla de nuevo. Es totalmente opcional.
+- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). Esto eliminará TODOS los datos asociados a la extensión, y es irreversible. Sólo se debe hacer cuando se está eliminando una extensión, y no se planea instalarla de nuevo. Es totalmente opcional.
