@@ -13,7 +13,9 @@ Condividono lo stesso codice di base, quindi una volta che sai come estenderne u
 
 :::tip Typings!
 
-Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel README del pacchetto per configurare il supporto ai typings.
+Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel </a>README del pacchetto
+
+ per configurare il supporto ai typings.</p> 
 
 :::
 
@@ -497,4 +499,4 @@ Flarum definisce (e fornisce) alcune funzioni utili e helper, che potresti voler
 - `flarum/common/helpers/icon` visualizza un'icona, solitamente usata per FontAwesome.
 - `flarum/common/helpers/username` mostra il nome del display dell'utente o il testo "cancellato" se l'utente è stato eliminato.
 
-E ce ne sono ancora! Il modo migliore per conoscerli è attraverso il [codice sorgente](https://github.com/flarum/core/tree/master/js) o la [nostra documentazione API JavaScript](https://api.docs.flarum.org/js/).
+E ce ne sono ancora! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
