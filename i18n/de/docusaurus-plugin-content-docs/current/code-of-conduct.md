@@ -1,4 +1,4 @@
-# Code of Conduct
+# Verhaltenskodex
 
 ### _Willkommen in der Flarum-Community!_
 
