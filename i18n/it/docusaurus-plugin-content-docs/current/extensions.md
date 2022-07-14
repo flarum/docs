@@ -25,7 +25,7 @@ Seguire le istruzioni fornite dagli sviluppatori di estensioni. Se stai usando `
 
 Analogamente all'installazione, per rimuovere un'estensione:
 
-0. Se si desidera rimuovere tutte le tabelle del database create dall'estensione, fare clic sul pulsante "Disinstalla" nella dashboard di amministrazione. Per maggiori informazioni, vedere [qui sotto](#managing-extensions).
+0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. Per maggiori informazioni, vedere [qui sotto](#managing-extensions).
 1. `cd` nella tua directory Flarum.
 2. Lancia `composer require COMPOSER_PACKAGE_NAME`. Questo solitamente compare nel post o nella documentazione dell'estensione.
 
@@ -35,4 +35,4 @@ La pagina delle estensioni del pannello di amministrazione offre un modo semplic
 
 - Abilitare o disabilitare estensioni
 - Accedere alle impostazioni delle estensioni (sebbene alcune estensioni utilizzino una scheda nella barra laterale principale per le impostazioni)
-- Ripristina le migrazioni di un'estensione per rimuovere eventuali modifiche al database apportate (tramite il tasto disinstalla). Ciò rimuoverà TUTTI i dati associati all'estensione ed è irreversibile. Dovrebbe essere fatto solo quando rimuovi un'estensione e non prevedi di installarla di nuovo. È anche del tutto facoltativo.
+- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). Ciò rimuoverà TUTTI i dati associati all'estensione ed è irreversibile. Dovrebbe essere fatto solo quando rimuovi un'estensione e non prevedi di installarla di nuovo. È anche del tutto facoltativo.
