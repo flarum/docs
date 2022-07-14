@@ -63,7 +63,7 @@ class PostLikedBlueprint implements BlueprintInterface
 }
 ```
 
-Dai un occhiata a [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blob/master/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) per altri esempi.
+Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
 ### Registrazione di un tipo di notifica
 
@@ -315,7 +315,7 @@ Apri il tuo index.js (quello del forum) e inizia importando il modello di notifi
 
 Assicurati di sostituire `{nameOfNotification}`con il nome della notifica nel tuo progetto PHP (`getType()`) e sostituisci `{NotificationTemplate}` con il nome del modello di notifica JS che abbiamo appena creato! (Assicurati che sia importato!)
 
-Diamo agli utenti un'opzione per modificare le loro impostazioni per la tua notifica. Tutto quello che devi fare è estendere la funzione [`notificationGird`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js) e [`notificationTypes()`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js#L204)
+Diamo agli utenti un'opzione per modificare le loro impostazioni per la tua notifica. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
 Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che desideri mostrare e una descrizione della notifica e il gioco è fatto!
 
@@ -346,12 +346,12 @@ Ora che hai configurato tutte le notifiche, è il momento di inviare effettivame
 
 Ora che hai configurato la tua notifica, è il momento di inviarla all'utente!
 
-Per fortuna, questa è la parte più semplice, usa semplicemente la funzione [`NotificationSyncer`](https://github.com/flarum/core/blob/master/src/Notification/NotificationSyncer.php). Accetta due argomenti:
+Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. Accetta due argomenti:
 
 * I dati non vengono visualizzati nel database solo magicamente *
 * `$users`: Questo accetta un array di `user` che dovrebbe ricevere la notifica
 
-*Whats that? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.
+*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.</p>
 
 Diamo un'occhiata al nostro ** ultimo ** esempio di oggi:
 
