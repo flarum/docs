@@ -419,4 +419,4 @@ Flarum defines (and provides) quite a few util and helper functions, which you m
 - `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
-这样的函数还有更多！ 有些会在文档其他地方被提到， 但了解它们的最佳方式是通过阅读 [源代码](https://github.com/flarum/core/tree/master/js) 或 [我们的Javascript API 文档](https://api.docs.flarum.org/js/)。
+这样的函数还有更多！ Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
