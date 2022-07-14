@@ -37,7 +37,7 @@ Primero se crea una instancia del extensor, y luego se llama a los métodos en �
 
 Para mantener la coherencia, utilizamos este concepto de extensores tanto en el backend (en la tierra de PHP) como en el frontend (en la tierra de JavaScript). _Todo_ lo que haga en su extensión debe ser hecho a través de extensores, porque son una **garantía** que le estamos dando de que una futura versión menor de Flarum no romperá su extensión.
 
-Todos los extensores disponibles actualmente en el núcleo de Flarum pueden encontrarse en el espacio de nombres [`Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(documentación de la API de PHP)](https://api.docs.flarum.org/php/master/flarum/extend) Las extensiones también pueden ofrecer sus propios extensores.
+All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/framework/blob/main/framework/core/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
 
 ## Hola Mundo
 
