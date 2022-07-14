@@ -1,26 +1,26 @@
-# Docs and Translation
+# Dokumente und Übersetzung
 
-## Add Documentation
+## Dokumentation hinzufügen
 
-Adding documentation can help countless future Flarum users. A few ideas of what to work on:
+Das Hinzufügen von Dokumentation kann unzähligen zukünftigen Flarum-Benutzern helfen. Ein paar Ideen, woran man arbeiten könnte:
 
-- User guides to help Flarum end users with some advanced Flarum features.
-- More [frequently asked questions](faq.md).
-- Expanded [troubleshooting](troubleshoot.md) steps.
-- Step-by-step tutorials for Flarum development or installation.
-- [Technical reference guides](extend/README.md) for extension developers.
-- Improving literally anything else you think we should elaborate on or explain better.
+- Benutzerhandbücher, um Flarum-Endbenutzern mit einigen erweiterten Flarum-Funktionen zu helfen.
+- Mehr [häufig gestellte Fragen](faq.md).
+- Erweiterte [Fehlerbehebung](troubleshoot.md)s Schritte.
+- Schritt-für-Schritt-Tutorials für die Entwicklung oder Installation von Flarum.
+- [Technische Referenzhandbücher](extend/README.md) für Entwickler von Erweiterungen.
+- Wir verbessern buchstäblich alles andere, von dem Du glaubst, dass wir es näher erläutern oder besser erklären sollten.
 
-A good way to find topics to write about is to look for common questions in the [support tag](https://discuss.flarum.org/t/support) of our community.
+Eine gute Möglichkeit, Themen zu finden, über die Sie schreiben können, besteht darin, im [Support-Tag](https://discuss.flarum.org/t/support) unserer Community nach häufig gestellten Fragen zu suchen.
 
-## Translate Flarum
+## Flarum übersetzen
 
-We want Flarum to be accessible to everyone, regardless of language! By contributing translations, you make it possible for many more people to enjoy Flarum. Best of all, we use user-friendly GUIs for translations, so no technical skills are necessary to help!
+Wir möchten, dass Flarum für alle zugänglich ist, unabhängig von der Sprache! Indem Du Übersetzungen beisteuerst, tust Du es viel mehr Menschen möglich, Flarum zu genießen. Das Beste ist, dass wir benutzerfreundliche GUIs für Übersetzungen verwenden, sodass keine technischen Kenntnisse erforderlich sind, um zu helfen!
 
-Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum/).
+Übersetzungen für Flarum Core, gebündelte Erweiterungen und Community-Erweiterungen werden über [Weblate](https://weblate.rob006.net/projects/flarum/) verwaltet.
 
-Translations for this documentation are managed through [Crowdin](https://crowdin.com/project/flarum-docs). Please do not contribute translations via GitHub pull requests, as it is very likely that Crowdin will fail to fully sync your work, and your changes will be lost.
+Übersetzungen für diese Dokumentation werden über [Crowdin](https://crowdin.com/project/flarum-docs) verwaltet.
 
-The Flarum Foundation has created the "flarum-lang" organization to support translators and ensure continuous availability of language packs. You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about).
+Die Flarum Foundation hat die Organisation "flarum-lang" gegründet, um Übersetzer zu unterstützen und die kontinuierliche Verfügbarkeit von Sprachpaketen sicherzustellen. Du kannst mehr darüber erfahren, indem Du das [GitHub-Repository](https://github.com/flarum-lang/about) besuchst.
 
-If you want to support an existing language pack, start a new translation, or you run into issues using weblate or crowdin, it's best to [get in touch with the `flarum-lang` team](https://discuss.flarum.org/d/27519-the-flarum-language-project).
+Wenn Du ein vorhandenes Sprachpaket unterstützen, eine neue Übersetzung starten möchtest oder bei der Verwendung von Weblate oder Crowdin auf Probleme stößt, [wende dich am besten an das `flarum-lang`-Team](https://discuss.flarum.org/d/27519-the-flarum-language-project).
