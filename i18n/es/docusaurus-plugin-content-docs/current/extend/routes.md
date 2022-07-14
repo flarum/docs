@@ -110,9 +110,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 Puedes inyectar la fábrica [View](https://laravel.com/docs/6.x/views) de Laravel en tu controlador. Esto te permitirá renderizar una [plantilla Blade](https://laravel.com/docs/6.x/blade) en la respuesta de tu controlador.
 
-First, you'll need to register the view. See [the relevant article](views.md) for more information on this.
-
-Luego, inyecta la fábrica en tu controlador y renderiza tu vista en un `HtmlResponse`:
+First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -122,6 +120,27 @@ return [
     (new Extend\View)
         ->namespace('acme.hello-world', __DIR__.'/views');
 ];
+```
+
+Luego, inyecta la fábrica en tu controlador y renderiza tu vista en un `HtmlResponse`:
+
+```php
+class HelloWorldController implements RequestHandlerInterface
+{
+    protected $view;
+
+    public function __construct(Factory $view)
+    {
+        $this->view = $view;
+    }
+
+    public function handle(Request $request): Response
+    {
+        $view = $this->view->make('acme.hello-world::greeting');
+
+        return new HtmlResponse($view->render());
+    }
+}
 ```
 
 ### Controladores API
@@ -170,7 +189,7 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta. Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta.
+Los parámetros de la ruta se pasarán a los `attrs` del componente de la ruta. También estarán disponibles a través de [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 ### Generación de URLs
 Para generar una URL a una ruta en el frontend, utilice el método `app.route`. Este método acepta dos argumentos: el nombre de la ruta y un hash de parámetros. Los parámetros rellenarán los segmentos de URI que coincidan, de lo contrario se añadirán como parámetros de consulta.
 
