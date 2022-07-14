@@ -63,7 +63,7 @@ class PostLikedBlueprint implements BlueprintInterface
 }
 ```
 
-Echa un vistazo a [`DiscussionRenamedBlueprint`](https://github.com/flarum/core/blob/master/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) si quieres otro ejemplo.
+Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
 ### Registrar un tipo de notificación
 
@@ -315,7 +315,7 @@ Abre tu index.js (el del foro) y empieza importando tu plantilla de notificació
 
 Asegúrate de sustituir `{nameOfNotification}` por el nombre de la notificación en tu plano PHP (`getType()`) y sustituye `{NotificationTemplate}` por el nombre de la plantilla de notificación JS que acabamos de crear. (¡Asegúrate de que se importa!)
 
-Vamos a dar a los usuarios una opción para cambiar la configuración de su notificación. Todo lo que tienes que hacer es extender la funciones [`notificationGird`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js) [`notificationTypes()`](https://github.com/flarum/core/blob/master/js/src/forum/components/NotificationGrid.js#L204)
+Vamos a dar a los usuarios una opción para cambiar la configuración de su notificación. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
 De [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
 
@@ -346,7 +346,7 @@ Sólo tienes que añadir el nombre de tu notificación (desde el plano), un icon
 
 Ahora que tienes tu notificación configurada, es el momento de enviar la notificación al usuario.
 
-Afortunadamente, esta es la parte más fácil, simplemente usa la función de sincronización de [`NotificationSyncer`](https://github.com/flarum/core/blob/master/src/Notification/NotificationSyncer.php). Acepta 2 argumentos:
+Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. Acepta 2 argumentos:
 
 * `BlueprintInterface`: Este es el blueprint a instanciar que hicimos en el primer paso, debes incluir todas las variables que se usan en el blueprint (ejemplo: si a un usuario le gusta un post debes incluir el modelo `user` que le gustó el post).
 * `$users`: Acepta un array de modelos de `user` que deben recibir la notificación
