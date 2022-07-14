@@ -1,6 +1,6 @@
----
-slug: '/extend'
----
+- - -
+slug: /extend
+- - -
 
 # Estensioni di Flarum
 
