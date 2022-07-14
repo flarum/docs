@@ -1,10 +1,10 @@
----
+- - -
 slug: '/extend'
----
+- - -
 
 # Mở rộng Flarum
 
-Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
+Flarum là tối giản, nhưng nó cũng có khả năng mở rộng cao. Trên thực tế, hầu hết các tính năng đi kèm với Flarum thực sự là phần mở rộng!
 
 This approach makes Flarum extremely customizable. A user can disable any features they don't use on their forum, and install other extensions to make a forum perfect for their community.
 
