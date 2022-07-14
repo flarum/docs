@@ -51,7 +51,7 @@ Spesso, la prima cosa che si modifica è il testo personalizzato che appare nel 
 
 Per fare ciò, dovrai aggiungere alla tua pagina la call `app.setTitle()` e `app.setTitleCount()` nel metodo `oncreate` del [lifecycle hook](frontend.md) (o quando i dati sono stati caricati, se richiesti tramite API).
 
-Per esempio:
+In realtà ci sono 3 modi per impostare il resolver di componenti / percorsi durante la registrazione di una route:
 
 ```js
 import Page from 'flarum/common/components/Page';
