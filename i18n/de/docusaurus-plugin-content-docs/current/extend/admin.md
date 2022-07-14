@@ -1,6 +1,6 @@
 # Admin-Dashboard
 
-Beta 15 führte ein komplett neu gestaltetes Admin-Panel und eine Frontend-API ein. Es ist jetzt einfacher denn je, Deiner Erweiterung Einstellungen oder Berechtigungen hinzuzufügen.
+Beta 15 führte ein komplett neu gestaltetes Admin-Panel und eine Frontend-API ein. Es ist jetzt einfacher denn je, deiner Erweiterung Einstellungen oder Berechtigungen hinzuzufügen.
 
 Before beta 15, extension settings were either added in a `SettingsModal` or they added a new page for more complex settings. Now, every extension has a page containing info, settings, and the extension's own permissions.
 
@@ -29,7 +29,7 @@ app.initializers.add('interstellar', function(app) {
 
 Once that is done, you can begin adding settings and permissions.
 
-:::tip Note
+:::tip Hinweis
 
 All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
 
@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
  * Permission object
@@ -133,14 +133,13 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Any FontAwesome 5 icon class
+        icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
         tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-        allowGuest: false, // Whether this permission can be granted to guests
       }, 
       'start', // Category permission will be added to on the grid
-      95 // Priority (optional)
+      95 // Optional: Priority
     );
 });
 ```
