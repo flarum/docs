@@ -1,4 +1,4 @@
-# Languages
+# Sprachen
 
 It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
 
