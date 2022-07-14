@@ -1,6 +1,6 @@
 # Trang quản trị
 
-Beta 15 với trang quản trị admin và API frontend được thiết kế mới. Bây giờ có thể dễ dàng thêm thiết lập hoặc quyền vào tiện ích mở rộng của bạn.
+Beta 15 với trang quản trị và API giao diện người dùng được thiết kế mới. Bây giờ có thể dễ dàng thêm thiết lập hoặc quyền vào tiện ích mở rộng của bạn.
 
 Trước beta 15, thiết lập tiện ích mở rộng đã được thêm vào `SettingModal` hoặc họ đã thêm vào một trang mới để phức tạp việc thiết lập hơn. Bây giờ toàn bộ tiện ích mở rộng đã có trang chứa thông tin, thiết lập và quyền của tiện ích mở rộng cho riêng mình.
 
@@ -76,7 +76,7 @@ Nếu bạn sử dụng `type: 'select'` đối tượng setting trông hơi kh�
 }
 ```
 
-Ngoài ra, hãy lưu ý rằng các mục bổ sung trong đối tượng setting sẽ được sử dụng làm phần đính kèm component. This can be used for placeholders, min/max restrictions, etc:
+Ngoài ra, hãy lưu ý rằng các mục bổ sung trong đối tượng setting sẽ được sử dụng làm phần đính kèm component. Điều này có thể được sử dụng cho trình giữ chỗ, hạn chế tối thiểu / tối đa, v.v.:
 
 ```js
 {
@@ -88,7 +88,7 @@ Ngoài ra, hãy lưu ý rằng các mục bổ sung trong đối tượng settin
 }
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+Nếu bạn muốn thêm thứ gì đó vào cài đặt như một số văn bản bổ sung hoặc đầu vào phức tạp hơn, bạn cũng có thể chuyển một lệnh gọi lại làm đối số đầu tiên trả về JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
  * Permission object
@@ -133,14 +133,13 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Any FontAwesome 5 icon class
+        icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
         tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-        allowGuest: false, // Whether this permission can be granted to guests
       }, 
       'start', // Category permission will be added to on the grid
-      95 // Priority (optional)
+      95 // Optional: Priority
     );
 });
 ```
