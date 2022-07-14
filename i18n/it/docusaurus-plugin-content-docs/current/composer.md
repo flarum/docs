@@ -16,7 +16,7 @@ Storicamente, Composer ha causato problemi sull'hosting condiviso a causa di un 
 
 ## Che cos’è Composer?
 
-> Il compositore è uno strumento per la gestione delle dipendenze in PHP. Ti permette di dichiarare le librerie su cui dipende il tuo progetto e le gestirà (installazione/aggiornamento) per te. — [Composer Introduction](https://getcomposer.org/doc/00-intro.md)
+> Il compositore è uno strumento per la gestione delle dipendenze in PHP. Ti permette di dichiarare le librerie su cui dipende il tuo progetto e le gestirà (installazione/aggiornamento) per te. — [Introduzione a Composer](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
 Ogni installazione di Flarum consiste principalmente nell'installazione di Flarum core e una serie di [estensioni](extensions.md). Ognuna di queste ha le sue dipendenze.
 
