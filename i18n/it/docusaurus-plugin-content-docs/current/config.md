@@ -11,14 +11,14 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
 ```php
 <?php return array (
   'debug' => false, // abilita o disabilita il debug mode, utilizzato per la risoluzione dei problemi
-  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
+  'offline' => false, // abilita o disabilita la modalità di manutenzione del sito. Questo rende il tuo sito inaccessibile a tutti gli utenti (compresi gli amministratori).
   'database' =>
   array (
     'driver' => 'mysql', // il driver del database, es. MySQL, MariaDB...
     'host' => 'localhost', // l'host della connessione, localhost nella maggior parte dei casi a meno di non utilizzare un servizio esterno
     'database' => 'flarum', // il nome del database nell'istanza
-    'username' => 'root', // database username
-    'password' => '', // database password
+    'username' => 'root', // nome utente del database
+    'password' => '', // password del database
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'prefix' => '', // il prefisso delle tabelle, utile se condividi lo stesso database con altri servizi
