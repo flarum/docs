@@ -10,7 +10,7 @@ This documentation covers the technical structure of language packs. Read [this 
 
 Language packs should be their own extensions, with no other code / logic included.
 
-The [`LanguagePack` extender](https://github.com/flarum/core/blob/master/src/Extend/LanguagePack.php) allows you to define that your extension is a language pack.
+The [`LanguagePack` extender](https://github.com/flarum/framework/blob/main/framework/core/src/Extend/LanguagePack.php) allows you to define that your extension is a language pack.
 
 This extender has no setters. All you have to do is instantiate it, make sure you language pack is in the `locale` folder, and you're done!
 
