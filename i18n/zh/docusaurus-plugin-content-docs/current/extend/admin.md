@@ -1,4 +1,4 @@
-# 管理面板
+# 后台管理面板
 
 Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比以往任何时候都更容易为您的扩展添加设置或权限。
 
@@ -117,7 +117,7 @@ app.initializers.add('interstellar', function(app) {
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
  * Permission object
@@ -140,13 +140,6 @@ app.initializers.add('interstellar', function(app) {
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
-    );
-});
-        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-        allowGuest: false, // Whether this permission can be granted to guests
-      }, 
-      'start', // Category permission will be added to on the grid
-      95 // Priority (optional)
     );
 });
 ```
