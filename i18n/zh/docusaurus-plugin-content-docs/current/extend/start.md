@@ -37,7 +37,7 @@ Flarum 的构成有三层：
 
 为了保持一致，我们在后端（PHP）和前端（JavaScript）都使用了扩展器的概念。 您在扩展中做的 _每一件事_ 都应当通过扩展器来完成，因为扩展器是我们给予您的 **保证** —— 保证 Flarum 小版本更新绝对不破坏您的扩展。
 
-所有 Flarum 核心提供的可用扩展器都可以在 [`Extend` 命名空间](https://github.com/flarum/core/blob/master/src/Extend)[（PHP API 文档）](https://api.docs.flarum.org/php/master/flarum/extend)找到。
+All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/framework/blob/main/framework/core/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
 
 ## Hello World
 
