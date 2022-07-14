@@ -6,6 +6,25 @@ If you need help applying these changes or using new features, please start a di
 
 :::
 
+## 1.3 Changes
+
+Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers:
+
+### Frontend
+
+- More portions of the frontend are now written in TypeScript, providing a better extension development experience.
+- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
+- The markdown toolbar can now be used on the admin side.
+
+### Backend
+
+- Calculation of the `number` attribute on `posts` has changed and no longer relies on the discussion model's `post_number_index` attribute which is now deprecated and will be removed in 2.0
+- Extension event listeners are now added after core even listeners, this should generally cause no changes in behavior.
+
+### Tooling
+
+- The backend tests workflow now automatically fails tests if there are any PHP warnings and notices.
+
 ## 1.2 Changes
 
 Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers:
@@ -29,7 +48,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 ### Backend
 
 - An [extender for settings defaults](https://github.com/flarum/core/pull/3127) has been added. This should be used instead of the `addSettings` migration helper, which has been deprecated.
-- A new [Theme](https://github.com/flarum/core/pull/3008) extender now allows overriding Less files and internal imports. This allows themes to more easily completely replace Less modules.
+- You can now [generate Less variables from setting values](https://github.com/flarum/core/pull/3011) via the `Settings` extender.
 - Extensions can now [override/supplement blade template namespaces](https://github.com/flarum/core/pull/3167) through the `View` extender, meaning custom blade templates can be used instead of the default ones added by core or extensions.
 - You can now define [custom Less functions through PHP](https://github.com/flarum/core/pull/3190), allowing you to use some backend logic in your Less theming.
 - Extensions can now create [custom page title drivers](https://github.com/flarum/core/pull/3109/files) for titles in server-returned HTML.
