@@ -11,7 +11,7 @@
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum： 以便顺利的安装和运行 Flarum：
 
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 7.3**，需要启用 **fileinfo**, curl, dom, exif, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip 扩展
+* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
 * **允许 SSH（命令行）**，以运行 Composer
 
@@ -28,7 +28,7 @@
 Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 在安装 Flarum 之前，您需要先在机器上 [安装 Composer](https://getcomposer.org)。 然后，在要安装 Flarum 的空白目录下执行此命令：
 
 ```bash
-composer create-project flarum/flarum . --stability=beta
+composer create-project flarum/flarum .
 ```
 
 您可以在命令执行期间配置您的 Web 服务器。 请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
@@ -67,7 +67,7 @@ Caddy 的配置很简单。 您需要将下方代码中的 URL 替换为自己�
 www.example.com {
     root * /var/www/flarum/public
     php_fastcgi unix//var/run/php/php7.4-fpm.sock
-    header /assets {
+    header /assets/* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public"
@@ -77,29 +77,29 @@ www.example.com {
 ```
 ## 目录所有权
 
-在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
+在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-- 然后编辑 `index.php` 文件，修改这一行：
+- The root install directory, so Flarum can edit `config.php`.
 - The `storage` subdirectory, so Flarum can edit logs and store cached data.
 - The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
-如果您想把 Flarum 放到网站的子目录下（比如 `example.com/forum`），或者您没有控制网站根目录的权利（只能使用 `public_html` 或 `htdocs` 之类的目录），那么您可以设置 Flarum 以在没有 `public` 目录的情况下运行。
+Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
 
 There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
 
 First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
-chmod 755 -R /path/to/directory
+chmod 775 -R /path/to/directory
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. 大多数 Linux 发行版，默认 `www-data` 为 PHP 和 Web 服务器所有者和所属组群。 You'll need to look into the specifics of your distro and web server setup to make sure. 您可以运行 `chown -R www-data:www-data 文件夹名/` 命令来改变大多数 Linux 操作系统中文件（夹）的所有者。
+If that isn't enough, you may need to check that your files are owned by the correct group and user. By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You'll need to look into the specifics of your distro and web server setup to make sure. You can change the folder ownership in most Linux operating systems by running:
 
 ```bash
-chmod 755 -R /path/to/directory
+chown -R www-data:www-data /path/to/directory
 ```
 
-如果 Flarum 对某个目录及其子目录请求写权限，请添加 `-R` 选项，以递归更新该目录和其内的文件及子目录权限：
+With `www-data` changed to something else if a different user/group is used for your web server.
 
 Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
 
@@ -109,35 +109,35 @@ Finally, if that doesn't work, you might need to configure [SELinux](https://www
 chcon -R -t httpd_sys_rw_content_t /path/to/directory
 ```
 
-要了解关于以上命令的更多信息，以及 Linux 系统下的文件权限和所有权相关信息，请阅读 [英文教程](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/) 或 [中文教程](https://www.runoob.com/linux/linux-comm-chmod.html)。 如果您在 Windows 上配置 Flarum，这个 [超级用户问题](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) 可能对您很有用。
+To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
 
-如果 Flarum 对某个目录及其子目录请求写权限，请添加 `-R` 选项，以递归更新该目录和其内的文件及子目录权限：
+:::caution Environments may vary
 
-如果在完成以上操作后，Flarum 仍要求您改变权限，请先尝试将 755 权限改为 775 试一遍，依然不行的话，您可能需要检查文件（夹）的所有者和所属组群是否正确。
+Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
 
 :::
 
 :::danger Never use permission 777
 
-:::caution 环境有别
+You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group.
 
 :::
 
 ## 自定义路径
 
-默认情况下，Flarum 的目录结构包含一个 `public` 目录，该目录存放可公开访问的文件。 这样的保护措施，可以确保所有敏感代码文件都无法通过 web 根路径访问。
+By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
 
-:::danger 权限禁忌 777
+However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
-这种情况下，您需要将 `public` 目录中的所有文件（包括 `.htaccess`）全部移动到要安装 Flarum 的目录中。 然后编辑 `.htaccess` 并取消注释用来保护敏感文件的第 9-15 行代码。 如果是 Nginx，则取消注释 `.nginx.conf` 文件的第 8-11 行。
+Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
 
-然后编辑 `index.php` 文件，修改这一行：
+You will also need to edit the `index.php` file and change the following line:
 
 ```php
 $site = require './site.php';
 ```
 
- 最后，编辑 `site.php` 并更新这几行所指的路径，以体现新的目录结构：
+ Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
@@ -145,15 +145,15 @@ $site = require './site.php';
 'storage' => __DIR__.'/storage',
 ```
 
-:::info vue
+Finally, check `config.php` and make sure the `url` value is correct.
 
 ## 导入数据
 
-如果您想用 Flarum 接续运营现有的一个社区，您可以将该论坛的数据导入到 Flarum 中。 虽然目前还没有官方的导入工具，但是社区里已经有人制作了几款非官方的导入工具：
+If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
 
 * [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
 * [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
 * [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
 * [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-其他论坛程序也可以导入：先迁移到 phpBB，然后迁移到 Flarum。 需要说明的是，我们不能保证这些工具一直能正常使用，也不提供支持服务。
+These can be used for other forum software as well by migrating to phpBB first, then to Flarum. Be aware that we can't guarantee that these will work nor can we offer support for them.
