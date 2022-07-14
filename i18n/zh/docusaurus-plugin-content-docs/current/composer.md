@@ -16,7 +16,7 @@ Composer 曾经由于巨大的内存占用，其在共享主机上引起过问�
 
 ## 什么是 Composer？
 
-> Composer 是一个 PHP 依赖管理工具。 它允许您声明项目所依赖的库，并管理 (安装/更新) 这些库 。 — [Composer Introduction](https://getcomposer.org/doc/00-intro.md)
+> Composer 是一个 PHP 依赖管理工具。 它允许您声明项目所依赖的库，并管理 (安装/更新) 这些库 。 — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
 每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。
 
@@ -121,17 +121,17 @@ Composer 解决了所有这些，乃至更多的问题!
 - You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
-## How to install Composer?
+## 如何安装 Composer？
 
-As with any other software, Composer must first be [installed](https://getcomposer.org/download/) on the server where Flarum is running. There are several options depending on the type of web hosting you have.
+就像其他的软件一样，Composer需要先安装在你要安装Flarum的服务器上 这里有很多选项，取决于你使用网站服务的类型
 
-### Dedicated Web Server
+### 独立服务器
 
-In this case you can install composer as recommended in the Composer [guide](https://getcomposer.org/doc/00-intro.md#system-requirements)
+在这种情况下，你可以安装Composer通过阅读[Composer Guide](https://getcomposer.org/doc/00-intro.md#system-requirements)
 
-### Managed / Shared hosting
+### 共享服务器
 
-If Composer is not preinstalled (you can check this by running `composer --version`), you can use a [manual installation](https://getcomposer.org/composer-stable.phar). Just upload the composer.phar to your folder and run `/path/to/your/php7 composer.phar COMMAND` for any command documented as `composer COMMAND`.
+如果Composer没有预先安装（你可以通过执行`composer --version`命令来判断），你可以查阅[手动安装手册](https://getcomposer.org/composer-stable.phar) 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行
 
 :::danger
 
@@ -139,11 +139,11 @@ Some articles on the internet will mention that you can use tools like a PHP she
 
 :::
 
-## How do I use Composer?
+## 如何使用Composer
 
 You'll need to use Composer over the  **C**ommand-**l**ine **i**nterface (CLI). Be sure you can access your server over **S**ecure **Sh**ell (SSH).
 
-Once you have Composer installed, you should be able to run Composer commands in your SSH terminal via `composer COMMAND`.
+一旦您安装了作曲家，您应该能够通过 `作曲家COMMAND` 在您的 SSH 终端中运行作曲者命令。
 
 :::info Optimizations
 
