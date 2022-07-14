@@ -1,10 +1,10 @@
----
+- - -
 slug: '/extend'
----
+- - -
 
 # Extending Flarum
 
-Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
+Flarum ist minimalistisch, aber auch sehr erweiterbar. Tatsächlich sind die meisten Funktionen, die mit Flarum geliefert werden, tatsächlich Erweiterungen!
 
 This approach makes Flarum extremely customizable. A user can disable any features they don't use on their forum, and install other extensions to make a forum perfect for their community.
 
