@@ -4,7 +4,7 @@ Flarum versione 1.0 è l'attesissima release stabile! Questa versione porta una 
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+Se hai bisogno di aiuto per alcune modifiche o utilizzare le nuove funzionalità, si prega di avviare una discussione sul [forum della community](https://discuss.flarum.org/t/extensibility) o nella [chat Discord](https://flarum.org/discord/).
 
 :::
 
