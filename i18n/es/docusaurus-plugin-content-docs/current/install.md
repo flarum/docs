@@ -11,7 +11,7 @@ No dude en probar Flarum en uno de nuestros [foros de demostración](https://dis
 Antes de instalar Flarum, es importante comprobar que tu servidor cumple los requisitos. Para ejecutar Flarum, necesitarás:
 
 * **Apache** (con mod\_rewrite activado) o **Nginx**.
-* **PHP 7.3+** con las siguientes extensiones: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+** o **MariaDB 10.0.5+**
 * **Acceso a SSH (línea de comandos)** para ejecutar Composer
 
@@ -64,10 +64,10 @@ include /ruta/para/flarum/.nginx.conf;
 Caddy requiere una configuración muy sencilla para que Flarum funcione correctamente. Tenga en cuenta que debe reemplazar la URL con la suya propia y la ruta con la ruta a su propia carpeta `public`. Si está usando una versión diferente de PHP, también necesitará cambiar la ruta `fastcgi` para que apunte a su socket o URL de instalación de PHP correcta.
 
 ```
-www.ejemplo.com {
+www.example.com {
     root * /var/www/flarum/public
     php_fastcgi unix//var/run/php/php7.4-fpm.sock
-    header /assets {
+    header /assets/* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public"
@@ -77,29 +77,29 @@ www.ejemplo.com {
 ```
 ## Propiedad de la Carpeta
 
-Durante la instalación, Flarum puede solicitar que se permita la escritura en ciertos directorios. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
+Durante la instalación, Flarum puede solicitar que se permita la escritura en ciertos directorios. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
 
-- Finalmente, edite el `site.php` y actualice las rutas en las siguientes líneas para reflejar su nueva estructura de directorios:
+- The root install directory, so Flarum can edit `config.php`.
 - The `storage` subdirectory, so Flarum can edit logs and store cached data.
 - The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
 
-If Flarum requests write access to both the directory and its contents, you need to add the `-R` flag so that the permissions are updated for all the files and folders within the directory:
+Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
 
 There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
 
 First, you'll need to allow write access to the directory. On Linux:
 
 ```bash
-chmod 775 -R /ruta/al/directorio
+chmod 775 -R /path/to/directory
 ```
 
-If after completing these steps, Flarum continues to request that you change the permissions you may need to check that your files are owned by the correct group and user. Por defecto, en la mayoría de las distribuciones de Linux `www-data` es el grupo y el usuario bajo el que operan tanto PHP como el servidor web. You'll need to look into the specifics of your distro and web server setup to make sure. Puede cambiar la propiedad de la carpeta en la mayoría de los sistemas operativos Linux ejecutando `chown -R www-data:www-data nombrecarpeta/`.
+If that isn't enough, you may need to check that your files are owned by the correct group and user. By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You'll need to look into the specifics of your distro and web server setup to make sure. You can change the folder ownership in most Linux operating systems by running:
 
 ```bash
-chmod 775 -R /ruta/al/directorio
+chown -R www-data:www-data /path/to/directory
 ```
 
-Si Flarum solicita acceso de escritura tanto al directorio como a su contenido, es necesario añadir la etiqueta `-R` para que los permisos se actualicen para todos los archivos y carpetas dentro del directorio:
+With `www-data` changed to something else if a different user/group is used for your web server.
 
 Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
 
@@ -109,35 +109,35 @@ Finally, if that doesn't work, you might need to configure [SELinux](https://www
 chcon -R -t httpd_sys_rw_content_t /path/to/directory
 ```
 
-Para saber más sobre estos comandos, así como sobre los permisos y la propiedad de los archivos en Linux, lea [este tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). Si está configurando Flarum en Windows, puede encontrar útiles las respuestas a [esta pregunta de Super User](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows).
+To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
 
-Si Flarum solicita acceso de escritura tanto al directorio como a su contenido, es necesario añadir la etiqueta `-R` para que los permisos se actualicen para todos los archivos y carpetas dentro del directorio:
+:::caution Environments may vary
 
-Si después de completar estos pasos, Flarum continúa solicitando que cambie los permisos, puede que necesite comprobar que sus archivos son propiedad del grupo y usuario correctos.
+Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
 
 :::
 
 :::danger Never use permission 777
 
-:::caution Los entornos pueden variar
+You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group.
 
 :::
 
 ## Personalización de las Rutas
 
-Por defecto, la estructura de directorios de Flarum incluye un directorio `public` que contiene sólo archivos de acceso público. Esta es una buena práctica de seguridad, asegurando que todos los archivos sensibles del código fuente son completamente inaccesibles desde la raíz de la web.
+By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
 
-:::danger Nunca utilice el permiso 777
+However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
-Simplemente mueve todos los archivos dentro del directorio `public` (incluyendo `.htaccess`) al directorio desde el que quieres servir a Flarum. Luego edita `.htaccess` y descomenta las líneas 9-15 para proteger los recursos sensibles. Para Nginx, descomente las líneas 8-11 de `.nginx.conf`.
+Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
 
-También tendrá que editar el archivo `index.php` y cambiar la siguiente línea:
+You will also need to edit the `index.php` file and change the following line:
 
 ```php
 $site = require './site.php';
 ```
 
- Finalmente, edite el `site.php` y actualice las rutas en las siguientes líneas para reflejar su nueva estructura de directorios:
+ Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
 
 ```php
 'base' => __DIR__,
@@ -145,15 +145,15 @@ $site = require './site.php';
 'storage' => __DIR__.'/storage',
 ```
 
-Sin embargo, si desea alojar Flarum en un subdirectorio (como `susitioweb.com/forum`), o si su anfitrión no le da control sobre su raíz web (está atado a algo como `public_html` o `htdocs`), puede configurar Flarum sin el directorio `public`.
+Finally, check `config.php` and make sure the `url` value is correct.
 
 ## Importar datos
 
-Si tienes una comunidad existente y no quieres empezar de cero, puedes importar tus datos existentes a Flarum. Aunque todavía no hay importadores oficiales, la comunidad ha hecho varios importadores no oficiales:
+If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
 
 * [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
 * [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
 * [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
 * [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-Estos pueden ser utilizados para otro software de foro también mediante la migración a phpBB primero, y luego a Flarum. Tenga en cuenta que no podemos garantizar que estos funcionen ni podemos ofrecer soporte para ellos.
+These can be used for other forum software as well by migrating to phpBB first, then to Flarum. Be aware that we can't guarantee that these will work nor can we offer support for them.
