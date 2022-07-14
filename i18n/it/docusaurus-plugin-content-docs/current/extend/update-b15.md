@@ -42,7 +42,7 @@ La dashboard dell'amministratore è stata completamente ridisegnata, con l'obiet
 - `Flarum\Api\Controller\UploadImageController.php` può ora essere utilizzato come classe base per i controller che caricano immagini (come per il logo e la favicon).
 - AIl ripristino automatico dello scorrimento del browser ora può essere disabilitato per le singole pagine [vedere la nostra documentazione del frontend per maggiori informazioni](frontend-pages.md).
 
-## Breaking Changes
+## Cambiamenti decisivi
 
 - I seguenti layer BC deprecati del frontend sono stati rimossi:
   - `momentjs` non funziona più come alias per `dayjs`
