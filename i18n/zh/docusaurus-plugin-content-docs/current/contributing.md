@@ -28,52 +28,57 @@ Since Flarum is so extension-driven, we highly recommend [our extension docs](ex
 
 ### Setting Up a Local Codebase
 
-[flarum/flarum](https://github.com/flarum/flarum) 是一个「骨架」应用程序，它使用 Composer 下载 [核心 flarum/core](https://github.com/flarum/core) 和 [一堆扩展程序](https://github.com/flarum)。 为了简化开发时的工作量，我们建议您创建它们的分支并克隆到 [Composer 本地路径存储库](https://getcomposer.org/doc/05-repositories.md#path)：
+[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions. Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# 为 Flarum 包设置一个 Composer 本地路径存储库
-composer config repositories.0 path "packages/*"
-git clone https://github.com/<username>/core.git packages/core
-git clone https://github.com/<username>/tags.git packages/tags # etc
+# Set up a Composer path repository for Flarum monorepo packages
+composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
+git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
 
 一个典型的贡献流程如下所示：
 
 最后，运行 `composer install` 从本地路径存储库完成插件安装。
 
-准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 同时，调试模式下，每一次请求都将强制重新编译 Flarum 的静态资源。 因此，在扩展程序的 JavaScript 或 CSS 发生变更后，您无需运行 `php flarum cache:clear` 命令。
+准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
 
-Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 在开发过程中，您需要使用 [Node.js](https://nodejs.org/) 重新编译 JavaScript。 **提交 PR 时，请不要提交生成的 `dist` 文件**，当更改合并到 `master` 分支时，会自动编译。
+Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+
+To contribute to the frontend, first install the JavaScript dependencies. The monorepo uses [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/) to easily install JS dependencies across all packages within.
 
 ```bash
-cd packages/core/js
-npm install
-npm run dev
+cd packages/framework
+yarn install
 ```
 
-对于扩展程序，过程是一样的。
+Then you can watch JavaScript files for changes during development:
 
 ```bash
-cd packages/tags/js
-npm install
-npm link ../../core/js
-npm run dev
+cd framework/core/js
+yarn dev
+```
+
+The process is the same for extensions.
+
+```bash
+cd extensions/tags/js
+yarn dev
 ```
 
 ### Development Tools
 
 After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
 
-**列** 的命名应当根据其数据类型而定：
+Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
 
-**表** 的命名规则如下：
+Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
 
 ## 编码风格
 
-Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)：`.组件名-后代名--修饰名`。
+A typical contribution workflow looks like this:
 
 0. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
     * *Bug 修复* 应当提交合并到最新的稳定分支。
@@ -82,7 +87,7 @@ Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcs
 1. 🔨 **编写代码**，编写一些代码。
     * 请参见这里的 [编码风格](#编码风格)。
     * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
-    * *Major* features should always be sent to the `master` branch, which contains the upcoming Flarum release.
+    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🚦 **测试代码**，测试您的代码。
@@ -111,13 +116,13 @@ Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规范](https://github.com/suitcs
 
 ## 开发工具
 
-为了保持 Flarum 代码库的整洁性和一致性，我们有着一套遵循的编码风格。 如果您对此有疑问，请阅读相关源代码。
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
-Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. 这使得我们可以专注在贡献的内容本身，而非代码风格上。
+Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
 
 ### PHP
 
-Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) 编码规范和 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 自动加载规范。 此外，我们还符合 [其他一些风格规范](https://github.com/flarum/core/blob/master/.styleci.yml)。 我们尽可能地使用 PHP 7 类型提示和返回类型声明，我们也使用 [PHPDoc](https://docs.phpdoc.org/) 提供内联文档。 请您尽量在贡献时模仿其他代码库使用的风格。
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
 * 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
@@ -126,7 +131,7 @@ Flarum 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accep
 
 ### JavaScript
 
-Flarum 的 JavaScript 代码大多遵循 [Airbnb 风格指南](https://github.com/airbnb/javascript)。 我们使用 [ESDoc](https://esdoc.org/manual/tags.html) 来提供内联文档。
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
 
 ### 翻译
 
@@ -144,18 +149,18 @@ Flarum 的 JavaScript 代码大多遵循 [Airbnb 风格指南](https://github.co
 
 ### CSS
 
-Flarum 基金会确认，除非本协议中有明确的描述，您提供的任何贡献都是以「现状」为基础的，不附带任何形式的无论明示或暗示的保证或条件，包括但不限于任何关于所有权、非侵权、适销性或特定用途的适用性的保证或条件。
+Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
 
 ### Translations
 
-我们使用 [标准的键名格式](/extend/i18n.md#appendix-a-standard-key-format) 来确保翻译键以一致的方式被准确命名。
+We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## 贡献者许可协议
 
-通过向 Flarum 贡献您的代码，您授予 Flarum 基金会（Stichting Flarum）您的所有相关知识产权（包括版权、专利和任何其他权利）的非独占的、不可撤销的、全球性的、免版税的、可再许可且可转让的许可，以便我们在任何许可条款下使用、复制、准备衍生作品、分发、公开执行和展示此等贡献，包括但不限于以下条款：(a) 开放源码许可证，如 MIT 许可证；以及 (b) 二进制、专有或商业许可证。 除本协议授权的许可外，您保留与此等贡献有关的所有权利、所有权和利益。
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
 
-您确认，您能够授予我们这些权利。 您声明，您在法律上有权授予上述许可。 如果您的雇主对您所创造的知识产权拥有权利，您声明您已获得许可代表该雇主做出贡献，或者您的雇主已放弃了此等贡献的以上权利。
+You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-您声明，此等贡献是您的原创作品，而且据您所知，没有其他人主张或有权主张此等贡献有关的任何发明或专利的任何权利。 您还声明，无论是通过签订协议还是其他方式，您都没有任何与本许可条款相冲突的法律义务。
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
 
 The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
