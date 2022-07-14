@@ -1,15 +1,21 @@
 # API và Luồng dữ liệu
 
-Trong [bài viết trước](models.md), chúng ta đã tìm hiểu cách Flarum sử dụng các model để tương tác với dữ liệu. Tại đây, bạn sẽ học được cách lấy dữ liệu từ cơ sở dữ liệu bằng JSON-API đến giao diện người dùng.
+In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
+
+:::info
+
+To use the built-in REST API as part of an integration, see [Consuming the REST API](../rest-api.md).
+
+:::
 
 ## Vòng đời API Request
 
-Trước khi chúng ta đi vào chi tiết về cách mở rộng API dữ liệu của Flarum, chúng ta nên suy nghĩ về vòng đời của một yêu cầu API cơ bản:
+Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
 
 ![Flarum API Flowchart](/en/img/api_flowchart.png)
 
-1. Một yêu cầu HTTP được gửi đến API của Flarum. Thông thường, điều này sẽ đến từ giao diện người dùng Flarum, nhưng các chương trình bên ngoài cũng có thể tương tác với API. API của Flarum chủ yếu tuân theo đặc điểm kỹ thuật của [JSON:API](https://jsonapi.org/), do đó, các request phải tuân theo [thông số kỹ thuật](https://jsonapi.org/format/#fetching).
-2. Request được chạy thông qua [middleware](middleware.md) và được chuyển đến controller thích hợp. Bạn có thể tìm hiểu thêm về controller cơ bản trên [tài liệu routes và content](routes.md) của chúng tôi. Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
+1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
+2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
 3. Any modifications done by extensions to the controller via the [`ApiController` extender](#extending-api-controllers) are applied. This could entail changing sort, adding includes, changing the serializer, etc.
 4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the controller's serializer can process it. Each controller is responsible for implementing its own `data` method. Note that for `PATCH`, `POST`, and `DELETE` requests, `data` will perform the operation in question, and return the modified model instance.
 5. That data is run through any pre-serialization callbacks that extensions register via the [`ApiController` extender](#extending-api-controllers).
