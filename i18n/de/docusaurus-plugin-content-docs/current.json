@@ -1,15 +1,11 @@
 {
   "version.label": {
-    "message": "Nächste",
+    "message": "Weiter",
     "description": "The label for version current"
   },
   "sidebar.guideSidebar.category.Introduction": {
     "message": "Einführung",
     "description": "The label for category Introduction in sidebar guideSidebar"
-  },
-  "sidebar.guideSidebar.category.Contribute": {
-    "message": "Contribute",
-    "description": "The label for category Contribute in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Setting Up": {
     "message": "Einrichten",
@@ -20,7 +16,7 @@
     "description": "The label for category Management in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Advanced": {
-    "message": "Fortgeschrittene",
+    "message": "Fortgeschritten",
     "description": "The label for category Advanced in sidebar guideSidebar"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
@@ -28,15 +24,15 @@
     "description": "The label for category Main Concepts in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Reference Guides": {
-    "message": "Referenz Leitfäden",
+    "message": "Referenz Anleitungen",
     "description": "The label for category Reference Guides in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Advanced Guides": {
-    "message": "Fortgeschrittene Leitfäden",
+    "message": "Fortgeschrittene Anleitungen",
     "description": "The label for category Advanced Guides in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Update Guides": {
-    "message": "Update Leitfäden",
+    "message": "Update Anleitungen",
     "description": "The label for category Update Guides in sidebar extendSidebar"
   },
   "sidebar.internalSidebar.category.Internal Docs": {
