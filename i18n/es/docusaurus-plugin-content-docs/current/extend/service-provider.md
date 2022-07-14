@@ -10,7 +10,7 @@ A diferencia de otros extensores, la capa del proveedor de servicios NO está or
 
 ## Proceso de arranque de Flarum
 
-Para entender los proveedores de servicios, primero hay que entender el orden en que Flarum arranca. La mayor parte de esto sucede en [Flarum\Foundation\InstalledSite](https://github.com/flarum/core/blob/master/src/Foundation/InstalledSite.php)
+Para entender los proveedores de servicios, primero hay que entender el orden en que Flarum arranca. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/framework/blob/main/framework/core/src/Foundation/InstalledSite.php)
 
 1. El contenedor y la aplicación se inicializan, y se registran los bindings esenciales (config, environment, logger)
 2. Se ejecutan los métodos `register` de todos los proveedores de servicios esenciales.
