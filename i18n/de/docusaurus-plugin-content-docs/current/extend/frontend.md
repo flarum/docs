@@ -11,7 +11,7 @@ Flarum has two separate frontend applications:
 
 They share the same foundational code, so once you know how to extend one, you know how to extend both.
 
-:::tip Typings!
+:::tip Schreiben!
 
 Along with new TypeScript support, we have a [`tsconfig` package](https://www.npmjs.com/package/flarum-tsconfig) available, which you should install as a dev dependency to gain access to our typings. Make sure you follow the instructions in the [package's README](https://github.com/flarum/flarum-tsconfig#readme) to configure typings support.
 
@@ -197,7 +197,7 @@ return [
 
 Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. Thus, you may choose to expose your own public API for other extensions to interact with.
 
-:::tip External Libraries
+:::tip Externe Bibliotheken
 
 Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
@@ -350,7 +350,7 @@ In most cases, we don't actually want to completely replace the methods we are m
    1. For `extend`, the callback receives the output of the original method, as well as any arguments passed to the original method.
    2. For `override`, the callback receives a callable (which can be used to call the original method), as well as any arguments passed to the original method.
 
-:::tip Overriding multiple methods
+:::tip Überschreiben mehrerer Methoden
 
 With `extend` and `override`, you can also pass an array of multiple methods that you want to patch. This will apply the same modifications to all of the methods you provide:
 
@@ -419,4 +419,4 @@ Flarum defines (and provides) quite a few util and helper functions, which you m
 - `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
-And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/core/tree/master/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
+And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
