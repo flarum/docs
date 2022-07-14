@@ -10,7 +10,7 @@ A differenza di altri estensori, il livello del provider di servizi NON è basat
 
 ## Processi di Boot di Flarum
 
-Per comprendere i provider di servizi, devi prima capire l'ordine in cui Flarum si avvia. La maggior parte di questo accade in [Flarum\Foundation\InstalledSite](https://github.com/flarum/core/blob/master/src/Foundation/InstalledSite.php)
+Per comprendere i provider di servizi, devi prima capire l'ordine in cui Flarum si avvia. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/framework/blob/main/framework/core/src/Foundation/InstalledSite.php)
 
 1. Il contenitore e l'applicazione vengono inizializzati e vengono registrati i collegamenti essenziali (configurazione, ambiente, logger)
 2. Il metodo `register` di tutti i principali provider di servizi viene eseguito.
