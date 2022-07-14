@@ -2,11 +2,11 @@
 
 ### Flarum è stabile?
 
-Sì! After 6 years of development, Flarum 1.0.0 was finally released in 2021. You can find more information about the most up-to-date versions of Flarum in the [community](https://discuss.flarum.org/t/meta).
+Sì! Dopo 6 anni di sviluppo, Flarum 1.0.0 è finalmente arrivato.
 
 ### Cosa succede dopo la versione stabile di Flarum?
 
-A formal [Flarum roadmap](https://discuss.flarum.org/d/29931-the-future-of-flarum-a-roadmap) is available on the discussion board. We have a lot of plans and ideas, and look forward to sharing more milestones with the community.
+Stiamo ancora lavorando ad una roadmap formale. Abbiamo molti piani e idee e non vediamo l'ora di condividere un traguardo più approfondito con la community.
 
 ### Posso donare denaro per accelerare lo sviluppo?
 
