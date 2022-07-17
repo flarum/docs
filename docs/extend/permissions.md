@@ -59,7 +59,7 @@ The model prefix is useful in case you have different models but similar permiss
 
 You may have seen some calls to `$actor->can` that don't use the full name of a permission; for example, `$actor->can('reply', $discussion)`, where the backing permission is actually called `discussion.reply`.
 
-This is done in core to make authorization calls shorter and simpler. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
+This is done in core to make authorization calls shorter and simpler. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
 
 This can be used by extensions when a model namespace isn't present: for example, `$actor->can('someAbility, $discussion)` will check the `discussion.someAbility` permission if the `$discussion` argument is an instance of the `Discussion` model. However, this means you can't prefix your permissions with extension namespaces (or you have to put the extension namespace at the end).
 
