@@ -26,7 +26,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Similarly to installation, to remove an extension:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
 2. Run `composer remove COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
 
@@ -36,4 +36,4 @@ The extensions page of the admin dashboard provides a convenient way to manage e
 
 - Enable or disable an extension
 - Access extension settings (although some extensions will use a tab in the main sidebar for settings)
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Uninstall button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
+- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
