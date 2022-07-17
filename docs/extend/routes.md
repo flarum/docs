@@ -110,14 +110,21 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 You can inject Laravel's [View](https://laravel.com/docs/8.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/8.x/blade) into your controller's response.
 
-First, you'll need to register the view. See [the relevant article](views.md) for more information on this.
+First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
+
+```php
+use Flarum\Extend;
+use Illuminate\Contracts\View\Factory;
+
+return [
+    (new Extend\View)
+        ->namespace('acme.hello-world', __DIR__.'/views');
+];
+```
 
 Then, inject the factory into your controller and render your view into an `HtmlResponse`:
 
 ```php
-use Illuminate\Contracts\View\Factory;
-
-
 class HelloWorldController implements RequestHandlerInterface
 {
     protected $view;
@@ -185,7 +192,7 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
 
-Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam).
+Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 
 ### Generating URLs
 
