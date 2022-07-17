@@ -11,7 +11,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.3+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+/8.0.23+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
@@ -67,7 +67,7 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 www.example.com {
     root * /var/www/flarum/public
     php_fastcgi unix//var/run/php/php7.4-fpm.sock
-    header /assets {
+    header /assets/* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public"
@@ -78,7 +78,7 @@ www.example.com {
 ## Folder Ownership
 
 During installation, Flarum may request that you make certain directories writable.
-Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as.
+Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as.
 The user that Flarum is running as MUST have read + write access to:
 
 - The root install directory, so Flarum can edit `config.php`.
