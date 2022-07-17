@@ -2,6 +2,12 @@
 
 In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again. 
 
+:::info
+
+To use the built-in REST API as part of an integration, see [Consuming the REST API](../rest-api.md).
+
+:::
+
 ## API Request Lifecycle
 
 Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
