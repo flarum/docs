@@ -28,13 +28,13 @@ Vì Flarum hướng đến tiện ích mở rộng, chúng tôi thực sự khuy
 
 ### Thiết lập Codebase cục bộ
 
-[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions. Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) là một ứng dụng "skeleton" sử dụng Composer để tải xuống gói cốt lõi và một loạt các phần mở rộng. Mã nguồn cho Flarum cốt lõi, phần mở rộng và tất cả các gói được sử dụng bởi phần nói trên nằm trong Flarum monorepo [flarum/framework](https://github.com/flarum/framework). Để đóng góp vào những điều này, bạn sẽ cần phải phân nhánh và sao chép cục bộ kho lưu trữ monorepo, sau đó thêm nó vào môi trường phát triển của bạn dưới dạng [đường dẫn kho lưu trữ Composer](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Set up a Composer path repository for Flarum monorepo packages
+# Thiết lập đường dẫn kho lưu trữ Composer cho các gói Flarum monorepo
 composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
 git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
@@ -45,7 +45,7 @@ Cuối cùng, chạy `composer install` để hoàn tất cài đặt từ kho �
 
 Sau khi cài đặt cục bộ của bạn được thiết lập, hãy đảm bảo rằng bạn đã bật chế độ `debug` trong **config.php** và đặt `display_errors` thành `On` trong cấu hình php của bạn. Điều này sẽ cho phép bạn xem chi tiết lỗi cho cả Flarum và PHP. Chế độ gỡ lỗi cũng buộc biên dịch lại các tệp nội dung của Flarum theo từng yêu cầu, loại bỏ nhu cầu gọi `php flarum cache: clear` sau mỗi lần thay đổi đối với JavaScript hoặc CSS của tiện ích mở rộng.
 
-Mã front-end của Flarum được viết bằng ES6 và được chuyển sang JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+Mã front-end của Flarum được viết bằng ES6 và được chuyển sang JavaScript. Trong quá trình phát triển, bạn sẽ cần phải biên dịch lại JavaScript bằng cách sử dụng [Node.js](https://nodejs.org/) và [`yarn`](https://yarnpkg.com/). **Vui lòng không gửi các tệp `dist` khi gửi PR**; điều này sẽ tự động được xử lý khi các thay đổi được hợp nhất vào nhánh `main`.
 
 Để đóng góp cho giao diện người dùng, trước tiên hãy cài đặt các phụ thuộc JavaScript. Monorepo sử dụng [không gian làm việc của yarn](https://classic.yarnpkg.com/lang/en/docs/workspaces/) để dễ dàng cài đặt các phần phụ thuộc JS trên tất cả các gói bên trong.
 
@@ -72,9 +72,9 @@ yarn dev
 
 Sau khi bạn đã tách và nhân bản các kho lưu trữ mà bạn sẽ làm việc, bạn sẽ cần thiết lập lưu trữ cục bộ để có thể kiểm tra các thay đổi của mình. Flarum hiện không đi kèm với máy chủ phát triển, vì vậy bạn sẽ cần thiết lập Apache/NGINX/Caddy/etc để chạy cài đặt Flarum cục bộ này.
 
-Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
+Ngoài ra, bạn có thể sử dụng các công cụ như, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), hoặc [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) để làm máy chủ diễn đàn cục bộ.
 
-Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
+Hầu hết những người đóng góp cho Flarum đều phát triển với [PHPStorm](https://www.jetbrains.com/phpstorm/download/) hoặc [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Quy trình phát triển
 
@@ -87,7 +87,7 @@ Quy trình đóng góp điển hình trông giống như sau:
 1. 🌳 **Branch** tách branch thích hợp thành một branch tính năng mới.
     * *Bug fixes* nên được gửi đến branch ổn định mới nhất.
     * *Minor* các tính năng hoàn toàn tương thích ngược với bản phát hành Flarum hiện tại có thể được gửi đến nhánh ổn định mới nhất.
-    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
+    * *Major* các tính năng phải luôn được gửi đến nhánh `main`, chứa bản phát hành Flarum sắp tới.
     * Nội bộ chúng tôi sử dụng lược đồ đặt tên `<initials>/<short-description>` (ví dụ: `tz/refactor-frontend`).
 
 2. 🔨 **Viết** code.
@@ -122,7 +122,7 @@ Quy trình đóng góp điển hình trông giống như sau:
 
 ### PHP
 
-Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
+Flarum tuân theo [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) tiêu chuẩn mã hóa và tiêu chuẩn tự động tải [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md). Trên hết, chúng tôi tuân thủ một số [các quy tắc kiểu khác](https://github.com/flarum/framework/blob/main/.styleci.yml). Chúng tôi sử dụng gợi ý loại PHP 7 và khai báo loại trả về nếu có thể và [PHPDoc](https://docs.phpdoc.org/) để cung cấp tài liệu nội tuyến. Hãy thử và bắt chước kiểu được sử dụng bởi phần còn lại của cơ sở mã trong các đóng góp của bạn.
 
 * Namespaces phải là số ít (ví dụ: `Flarum\Discussion`, không phải `Flarum\Discussions`)
 * Interfaces phải được gắn với `Interface` (ví dụ: `MailableInterface`)
@@ -131,11 +131,11 @@ Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/
 
 ### JavaScript
 
-Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
+JavaScript của Flarum chủ yếu tuân theo [Hướng dẫn tạo kiểu Airbnb](https://github.com/airbnb/javascript). Chúng tôi sử dụng [ESDoc](https://esdoc.org/manual/tags.html) để cung cấp tài liệu nội tuyến.
 
 ### Cơ sở dữ liệu
 
-**Columns** should be named according to their data type:
+**Cột** nên được đặt tên theo kiểu dữ liệu:
 * DATETIME hoặc TIMESTAMP: `{verbed}_at` (ví dụ: created_at, read_at) hoặc `{verbed}_until` (ví dụ: suspended_until)
 * INT là một số: `{noun}_count` (ví dụ: comment_count, word_count)
 * Khoá ngoại: `{verbed}_{entity}_id` (ví dụ: hidden_user_id)
