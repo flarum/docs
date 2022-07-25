@@ -25,7 +25,7 @@ Thực hiện theo các hướng dẫn do nhà phát triển tiện ích mở r�
 
 Tương tự như cài đặt, để xóa tiện ích mở rộng:
 
-0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. Xem [bên dưới](#managing-extensions) để biết thêm thông tin.
+0. Nếu bạn muốn xóa tất cả các bảng cơ sở dữ liệu được tạo bởi tiện ích mở rộng, hãy nhấp vào nút "Gỡ cài đặt" trong trang tổng quan quản trị. Xem [bên dưới](#managing-extensions) để biết thêm thông tin.
 1. `cd` vào thư mục Flarum của bạn.
 2. Chạy `composer remove TÊN_GÓI_COMPOSER`. Điều này sẽ được cung cấp bởi tài liệu của phần mở rộng.
 
@@ -35,4 +35,4 @@ Trang tiện ích mở rộng của bảng điều khiển quản trị cung c�
 
 - Bật hoặc tắt tiện ích mở rộng
 - Truy cập cài đặt tiện ích mở rộng (mặc dù một số tiện ích mở rộng sẽ sử dụng một tab trong thanh bên chính để cài đặt)
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). Thao tác này sẽ xóa TẤT CẢ dữ liệu được liên kết với tiện ích mở rộng và không thể hoàn tác được. Việc này chỉ nên được thực hiện khi bạn đang xóa một tiện ích mở rộng và không có kế hoạch cài đặt lại. Nó cũng hoàn toàn là tùy chọn.
+- Hoàn tác quá trình di chuyển của tiện ích mở rộng để xóa bất kỳ sửa đổi cơ sở dữ liệu nào mà nó đã thực hiện (điều này có thể được thực hiện bằng nút Gỡ cài đặt). Thao tác này sẽ xóa TẤT CẢ dữ liệu được liên kết với tiện ích mở rộng và không thể hoàn tác được. Việc này chỉ nên được thực hiện khi bạn đang xóa một tiện ích mở rộng và không có kế hoạch cài đặt lại. Nó cũng hoàn toàn là tùy chọn.
