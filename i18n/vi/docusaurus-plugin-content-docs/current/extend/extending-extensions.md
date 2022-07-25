@@ -18,7 +18,7 @@ If your extension relies on another extension, you'll want to ensure that:
 
 Flarum makes this very easy: just add the other extension to your extension's `composer.json`'s `require` section.
 
-For example, if you were building a new theme for the Flarum Tags extension, your `composer.json` would look like this:
+Ví dụ: nếu bạn đang tạo chủ đề mới cho tiện ích mở rộng thẻ Flarum, thì `composer.json` của bạn sẽ trông giống như sau:
 
 ```json
 {
