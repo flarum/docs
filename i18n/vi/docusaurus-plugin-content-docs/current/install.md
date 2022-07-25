@@ -77,7 +77,7 @@ www.example.com {
 ```
 ## Quyền sở hữu thư mục
 
-Trong khi cài đặt, Flarum có thể yêu cầu bạn làm cho một số thư mục có thể ghi được. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. Người dùng mà Flarum đang chạy PHẢI có quyền đọc + ghi đối với:
+Trong khi cài đặt, Flarum có thể yêu cầu bạn làm cho một số thư mục có thể ghi được. Các hệ điều hành hiện nay thường có nhiều tài khoản, có nghĩa là tài khoản bạn đăng nhập không giống với tài khoản mà Flarum đang chạy. Tài khoản mà Flarum đang chạy PHẢI có quyền đọc + ghi đối với:
 
 - Thư mục cài đặt gốc, vì vậy Flarum có thể chỉnh sửa `config.php`.
 - Thư mục `storage`, vì vậy Flarum có thể chỉnh sửa nhật ký và lưu trữ dữ liệu đã lưu trong bộ nhớ cache.
