@@ -4,7 +4,7 @@ Beta 15 với trang quản trị và API giao diện người dùng được thi
 
 Trước beta 15, thiết lập tiện ích mở rộng đã được thêm vào `SettingModal` hoặc họ đã thêm vào một trang mới để phức tạp việc thiết lập hơn. Bây giờ toàn bộ tiện ích mở rộng đã có trang chứa thông tin, thiết lập và quyền của tiện ích mở rộng cho riêng mình.
 
-Bạn có thể dễ dàng đăng ký settings, extend [`Extension Page`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) hoặc cung cấp trang hoàn chỉnh của riêng mình.
+Bạn có thể chỉ cần đăng ký cài đặt, mở rộng [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) cơ sở hoặc cung cấp trang hoàn toàn tùy chỉnh của riêng bạn.
 
 ## API dữ liệu tiện ích mở rộng
 
@@ -88,7 +88,7 @@ Ngoài ra, hãy lưu ý rằng các mục bổ sung trong đối tượng settin
 }
 ```
 
-Nếu bạn muốn thêm thứ gì đó vào cài đặt như một số văn bản bổ sung hoặc đầu vào phức tạp hơn, bạn cũng có thể chuyển một lệnh gọi lại làm đối số đầu tiên trả về JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+Nếu bạn muốn thêm thứ gì đó vào cài đặt như một số văn bản bổ sung hoặc đầu vào phức tạp hơn, bạn cũng có thể chuyển một lệnh gọi lại làm đối số đầu tiên trả về JSX. Lệnh gọi lại này sẽ được thực thi trong ngữ cảnh của [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) và các giá trị cài đặt sẽ không được tự động tuần tự hóa.
 
 ```js
 
@@ -115,16 +115,16 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
+Tính năng mới trong bản beta 15, hiện có thể tìm thấy quyền ở 2 nơi. Giờ đây, bạn có thể xem các quyền riêng lẻ của từng tiện ích mở rộng trên trang của chúng. Tất cả các quyền vẫn có thể được tìm thấy trên trang quyền.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
+Để điều đó xảy ra, các quyền phải được đăng ký với `ExtensionData`. Điều này được thực hiện theo cách tương tự như cài đặt, hãy gọi `registerPermission`.
 
 Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+ * Đối tượng quyền
+ * Loại quyền nào - xem các chức năng của[`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) để biết các loại (xóa các mục khỏi tên)
+ * Mức độ ưu tiên của `ItemList`
 
-Back to our favorite rocket extension:
+Quay lại phần mở rộng tên lửa yêu thích của chúng tôi:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -136,7 +136,7 @@ app.initializers.add('interstellar', function(app) {
         icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
-        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Giải thích trong đoạn tiếp theo.
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
@@ -144,13 +144,13 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
+Nếu tiện ích của bạn tương tác với [phần mở rộng thẻ](https://github.com/flarum/tags) (điều này khá phổ biến), bạn có thể muốn một quyền để thẻ có thể mở rộng phạm vi (nghĩa là được áp dụng ở cấp thẻ, không chỉ trên toàn bộ). Bạn có thể thực hiện việc này bằng cách thêm thuộc tính `tagScoped`, như đã thấy ở trên. Các quyền bắt đầu bằng `discussion.` sẽ tự động được gắn thẻ trong phạm vi trừ khi `tagScoped: false` được chỉ định.
 
-To learn more about Flarum permissions, see [the relevant docs](permissions.md).
+Để tìm hiểu thêm về các quyền của Flarum, hãy xem [tài liệu liên quan](permissions.md).
 
 ### Chaining Reminder
 
-Remember these functions can all be chained like:
+Hãy nhớ rằng tất cả các hàm này có thể được xâu chuỗi như:
 
 ```js
 app.extensionData
@@ -161,11 +161,11 @@ app.extensionData
     .registerPermission(...);
 ```
 
-### Extending/Overriding the Default Page
+### Mở rộng/Ghi đè trang mặc định
 
-Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
+Đôi khi bạn có những cài đặt phức tạp hơn gây rối cho các mối quan hệ hoặc chỉ muốn trang trông hoàn toàn khác. Trong trường hợp này, bạn cần cho `ExtensionData` biết rằng bạn muốn cung cấp trang của riêng mình. Lưu ý rằng `buildSettingComponent`, công dụng được sử dụng để đăng ký cài đặt bằng cách cung cấp đối tượng mô tả, có sẵn dưới dạng một phương thức trên `ExtensionPage` (mở rộng từ `AdminPage`, là cơ sở chung cho tất cả các trang quản trị với một số phương pháp sử dụng).
 
-Create a new class that extends the `Page` or `ExtensionPage` component:
+Tạo một lớp mới mở rộng thành phần `Page` hoặc `ExtensionPage`:
 
 ```js
 import ExtensionPage from 'flarum/admin/components/ExtensionPage';
@@ -180,7 +180,7 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-Then, simply run `registerPage`:
+Sau đó, chỉ cần chạy`registerPage`:
 
 ```js
 
@@ -194,21 +194,21 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-This page will be shown instead of the default.
+Trang này sẽ được hiển thị thay vì mặc định.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+Bạn có thể mở rộng [ `ExtensionPage` ](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) hoặc `Page` cơ sở và tự thiết kế!
 
 ## Composer.json Metadata
 
-In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
+Trong phiên bản beta 15, các trang tiện ích mở rộng dành chỗ cho thông tin bổ sung được lấy từ composer.json của tiện ích mở rộng.
 
-For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+Để biết thêm thông tin, hãy xem [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Description                        | Where in composer.json                                       |
-| ---------------------------------- | ------------------------------------------------------------ |
-| discuss.flarum.org discussion link | "forum" key inside "support"                                 |
-| Documentation                      | "docs" key inside "support"                                  |
-| Support (email)                    | "email" key inside "support"                                 |
-| Website                            | "homepage" key                                               |
-| Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| Mô tả                              | Bên trong composer.json                                            |
+| ---------------------------------- | ------------------------------------------------------------------ |
+| discuss.flarum.org discussion link | khóa "forum" bên trong "support"                                   |
+| Tài liệu                           | khóa "docs" bên trong "support"                                    |
+| Hỗ trợ (email)                     | khóa "email" bên trong "support"                                   |
+| Trang web                          | khóa "homepage"                                                    |
+| Quyên góp                          | khối khóa "funding" (Lưu ý: Chỉ liên kết đầu tiên sẽ được sử dụng) |
+| Nguồn                              | khóa "source" bên trong "support"                                  |
