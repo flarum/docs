@@ -7,21 +7,21 @@ As with any framework, Flarum allows certain actions and content to be restricte
 
 ## Quy trình ủy quyền
 
-The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they:
+Quá trình ủy quyền được sử dụng để kiểm tra xem một người có được phép thực hiện các hành động nhất định hay không. Ví dụ: chúng tôi muốn kiểm tra xem người dùng có được ủy quyền hay không trước khi họ:
 
 - Access the admin dashboard
-- Start a discussion
-- Edit a post
-- Update another user's profile
+- Bắt đầu một cuộc thảo luận
+- Chỉnh sửa bài viết
+- Cập nhật hồ sơ của người dùng khác
 
 Each of these is determined by unique criteria: in some cases a flag is sufficient; otherwise, we might need custom logic.
 
 ## Cách nó hoạt động
 
-Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
+Truy vấn ủy quyền được thực hiện với 3 tham số, với logic có trong [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
-1. The actor: the user attempting to perform the action
-2. The ability: a string representing the action the actor is attempting
+1. Tác nhân: người dùng cố gắng thực hiện hành động
+2. Khả năng: một chuỗi đại diện cho hành động mà tác nhân đang cố gắng
 3. The arguments: usually an instance of a database model which is the subject of the attempted ability, but could be anything.
 
 First, we run the entire request (all three parameters) through all [policies](#policies) registered by extensions and core. Policies are blocks of logic provided by core and extensions that determine whether the actor can perform the ability on the arguments. Policies can return one of the following:
@@ -81,7 +81,7 @@ As described [above](#how-it-works), on any authorization check, we query all po
 
 So, how does a policy get "checked"?
 
-First, we check if the policy class has a method with the same name as the ability being evaluated. If so, we run it with the actor and subject as parameters. If that method returns a non-null value, we return that result. Otherwise, we continue to the next step (not necessarily the next policy).
+First, we check if the policy class has a method with the same name as the ability being evaluated. If so, we run it with the actor and subject as parameters. Nếu phương thức đó trả về giá trị khác rỗng, chúng tôi trả về kết quả đó. Otherwise, we continue to the next step (not necessarily the next policy).
 
 Then, we check if the policy class has a method called `can`. If so, we run it with the actor, ability, and subject, and return the result.
 
