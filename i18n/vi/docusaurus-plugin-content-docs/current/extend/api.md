@@ -1,16 +1,16 @@
 # API và Luồng dữ liệu
 
-In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
+Trong [bài viết trước](models.md), chúng ta đã tìm hiểu cách Flarum sử dụng các mô hình để tương tác với dữ liệu. Ở đây, chúng ta sẽ tìm hiểu cách lấy dữ liệu đó từ cơ sở dữ liệu đến JSON-API đến giao diện người dùng và quay lại tất cả các cách.
 
 :::info
 
-To use the built-in REST API as part of an integration, see [Consuming the REST API](../rest-api.md).
+Để sử dụng REST API tích hợp sẵn như một phần của tích hợp, hãy xem [Sử dụng REST API](../rest-api.md).
 
 :::
 
 ## Vòng đời API Request
 
-Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
+Trước khi chúng ta đi vào chi tiết về cách mở rộng API dữ liệu của Flarum, chúng ta nên suy nghĩ về vòng đời của một yêu cầu API điển hình:
 
 ![Flarum API Flowchart](/en/img/api_flowchart.png)
 
