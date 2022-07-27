@@ -29,7 +29,7 @@ Wenn Du sicher bist, dass Du bereit bist, eine Diskussion zu beginnen, beachte b
 - Gib ihm einen guten Titel! Die besten Ergebnisse erzielst Du, wenn Dein Titel deutlich macht, worüber Du sprechen möchtest.
 - Richtige Tags auswählen. Dies erhöht die Wahrscheinlichkeit, dass dein Beitrag gelesen und zeitnah beantwortet wird.
 - *Poste nicht* wiederholt über dasselbe Thema, da dies eher den gegenteiligen Effekt hat.
-- Wenn du keinen Tag verwendest, das für die mehrsprachige Verwendung vorgesehen ist, *posten nur auf Englisch.* Wir können dir nicht helfen, wenn wir dich nicht lesen können!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Denken daran, dass du deine Beiträge nicht unterschreiben musst. Wir haben dein Profil, damit wir wissen, wer du bist.
 
 Bitte bemühen dich, uns bei der Organisation zu helfen. Die Zeit, die wir mit Aufräumen verbringen, ist Zeit, die wir nicht damit verbringen können, dich kennenzulernen, deine Probleme zu besprechen und über Flarum zu sprechen. Und dafür sind wir schließlich alle hier!
