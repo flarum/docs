@@ -2,10 +2,10 @@
 
 In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
 
-To use the console:
+Using the console:
 
 1. `ssh` into the server where your flarum installation is hosted
-2. `cd` to the folder that contains a file called `flarum`
+2. `cd` to the folder that contains the file `flarum`
 3. Run the command via `php flarum [command]`
 
 ## Default Commands
@@ -30,7 +30,7 @@ To display the list of available commands, please use the list command.
 
 `php flarum info`
 
-Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
+Get information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
 ### cache:clear
 
