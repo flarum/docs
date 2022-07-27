@@ -29,7 +29,7 @@ Cuando estés seguro de que estás preparado para iniciar una discusión, ten en
 - ¡Dale un buen título! Obtendrás mejores resultados si tu título deja claro de qué quieres hablar.
 - Elige la(s) etiqueta(s) adecuada(s). Esto aumentará la probabilidad de que tu mensaje sea leído y respondido rápidamente.
 - *No* publiques repetidamente sobre el mismo tema, ya que esto tiende a tener el efecto contrario.
-- Si no utilizas una etiqueta reservada para uso multilingüe, *publica sólo en inglés.* ¡No podemos ayudarte si no podemos leerte!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Recuerda que no es necesario que firmes tus mensajes. Tenemos tu perfil para saber quién eres.
 
 Por favor, haz el esfuerzo de ayudarnos a mantener las cosas organizadas. El tiempo que pasamos ordenando es tiempo que no podemos dedicar a conocerte, a discutir tus asuntos y a hablar de Flarum. Y eso, al fin y al cabo, es lo que hemos venido a hacer.
