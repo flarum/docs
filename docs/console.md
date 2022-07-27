@@ -2,7 +2,7 @@
 
 In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
 
-To use the console:
+Using the console:
 
 1. `ssh` into the server where your flarum installation is hosted
 2. `cd` to the folder that contains a file called `flarum`
