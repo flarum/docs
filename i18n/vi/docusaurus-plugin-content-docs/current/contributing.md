@@ -34,7 +34,11 @@ Vì Flarum hướng đến tiện ích mở rộng, chúng tôi thực sự khuy
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Thiết lập đường dẫn kho lưu trữ Composer cho các gói Flarum monorepo
+# Or, when you want to clone directly into the current directory
+git clone https://github.com/flarum/flarum.git .
+# Note, the directory must empty
+
+# Set up a Composer path repository for Flarum monorepo packages
 composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
 git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
