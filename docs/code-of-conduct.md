@@ -29,7 +29,7 @@ When you're sure you're ready to start a discussion, please keep the following p
 - Give it a good title! You'll get the best results if your title makes it clear what you want to talk about.
 - Choose the right tag(s). This will increase the likelihood your post will be read and answered promptly.
 - *Don’t* post repeatedly about the same topic, as doing so will tend to have the opposite effect. 
-- If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts
 - Remember, you don't need to sign your posts. We've got your profile to let us know who you are.
 
 Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
