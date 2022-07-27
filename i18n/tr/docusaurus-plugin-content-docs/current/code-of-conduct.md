@@ -29,7 +29,7 @@ Bir tartışma başlatmaya hazır olduğunuzdan emin olduğunuzda lütfen aşağ
 - Ona iyi bir başlık ver! Başlığınız ne hakkında konuşmak istediğinizi netleştirirse en iyi sonuçları alırsınız.
 - Doğru etiketleri seçin. Bu, gönderinizin hemen okunma ve yanıtlanma olasılığını artıracaktır.
 - Aynı tartışma ilgili tekrar tekrar *yayınlamayın*, çünkü bunu yapmak ters etki yaratır.
-- Çok dilli kullanım için ayrılmış bir etiket kullanmıyorsanız, *yalnızca İngilizce yayınlayın.* Sizi okuyamazsak yardımcı olamayız!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Unutmayın, yazılarınızı imzalamanıza gerek yok. Kim olduğunuzu bize bildirmek için profilinize bakıyoruz.
 
 Lütfen işleri organize etmemize yardımcı olmak için çaba gösterin. Toparlanmak için harcanan zaman, sizi tanımak, sorunlarınızı tartışmak ve Flarum hakkında konuşmak için harcayamayacağımız zamandır. Ve sonuçta, hepimiz yapmak için buradayız!
