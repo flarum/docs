@@ -29,23 +29,23 @@ Wenn Du sicher bist, dass Du bereit bist, eine Diskussion zu beginnen, beachte b
 - Gib ihm einen guten Titel! Die besten Ergebnisse erzielst Du, wenn Dein Titel deutlich macht, worüber Du sprechen möchtest.
 - Richtige Tags auswählen. Dies erhöht die Wahrscheinlichkeit, dass dein Beitrag gelesen und zeitnah beantwortet wird.
 - *Poste nicht* wiederholt über dasselbe Thema, da dies eher den gegenteiligen Effekt hat.
-- If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!
-- Remember, you don't need to sign your posts. We've got your profile to let us know who you are.
+- Wenn du keinen Tag verwendest, das für die mehrsprachige Verwendung vorgesehen ist, *posten nur auf Englisch.* Wir können dir nicht helfen, wenn wir dich nicht lesen können!
+- Denken daran, dass du deine Beiträge nicht unterschreiben musst. Wir haben dein Profil, damit wir wissen, wer du bist.
 
-Please make the effort to help us keep things organized. Time spent tidying up is time that we can't spend getting to know you, discussing your issues, and talking about Flarum. And that, after all, is what we're all here to do!
+Bitte bemühen dich, uns bei der Organisation zu helfen. Die Zeit, die wir mit Aufräumen verbringen, ist Zeit, die wir nicht damit verbringen können, dich kennenzulernen, deine Probleme zu besprechen und über Flarum zu sprechen. Und dafür sind wir schließlich alle hier!
 
-### Make Your Reply Count
+### Lasse deine Antwort zählen
 
-You're taking the time to participate in a discussion, in the hope that others will read your ideas and take them into consideration. So why not make the effort to make your reply worth reading?
+Du nimmst dir die Zeit, an einer Diskussion teilzunehmen, in der Hoffnung, dass andere deine Ideen lesen und berücksichtigen. Warum sich also nicht die Mühe machen, deine Antwort lesenswert zu machen?
 
-- Don't reply to a title. Take some time to *read* the OP, and at least *scan* the rest of the conversation first.
-- Ask yourself if your reply adds to the discussion. If it doesn't, give it some more thought before posting.
-- Avoid making one-word posts just to agree with someone; you can use the "Like" button for that.
-- Avoid making multiple posts in a row when one would suffice. This is a forum, not a chat room.
-- If your reply is likely to divert the course of the discussion, consider starting a new discussion instead.
-- If you just want to post a bit of nonsense as a test, please do it in the [Test Posting](https://discuss.flarum.org/t/sandbox) tag instead.
-- Make sure your replies provide constructive feedback and support to allow for an inclusive community.
+- Antworte nicht auf einen Titel. Nehmen dir etwas Zeit, um das OP zu *lesen*, und mindestens den Rest des Gesprächs zuerst zu *scannen*.
+- Fragen dich, ob deine Antwort zur Diskussion beiträgt. Wenn dies nicht der Fall ist, denke vor dem Posten noch einmal darüber nach.
+- Vermeide Ein-Wort-Beiträge, nur um jemandem zuzustimmen; Du kannst dafür den 'Gefällt mir'-Button verwenden.
+- Vermeide mehrere Posts hintereinander, wenn einer ausreichen würde. Dies ist ein Forum, kein Chatroom.
+- Wenn deine Antwort wahrscheinlich den Verlauf der Diskussion ablenken wird, solltest du stattdessen eine neue Diskussion beginnen.
+- Wenn du nur testweise ein bisschen Unsinn posten möchtest, tu dies bitte stattdessen im [Test-Posting](https://discuss.flarum.org/t/sandbox)-Tag.
+- Stelle sicher, dass deine Antworten konstruktives Feedback und Unterstützung bieten, um eine integrative Community zu ermöglichen.
 
-No one's going to complain about the occasional joke or smart remark. We like to keep the mood light! But to keep things productive, as well, we ask that you try to avoid derailing a discussion altogether.
+Niemand wird sich über den gelegentlichen Witz oder die kluge Bemerkung beschweren. Wir mögen es, die Stimmung leicht zu halten! Aber auch um die Dinge produktiv zu halten, bitten wir dich, zu vermeiden, dass eine Diskussion insgesamt entgleist.
 
-> Thanks to Dominion for his help in putting these guidelines together.
+> Vielen Dank an Dominion für seine Hilfe bei der Zusammenstellung dieser Richtlinien.
