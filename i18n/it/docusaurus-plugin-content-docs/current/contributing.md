@@ -34,6 +34,10 @@ Dal momento che Flarum è così estendibile, consigliamo vivamente [i nostri doc
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
+# Or, when you want to clone directly into the current directory
+git clone https://github.com/flarum/flarum.git .
+# Note, the directory must empty
+
 # Set up a Composer path repository for Flarum monorepo packages
 composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
 git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
