@@ -2,10 +2,10 @@
 
 Yönetici kontrol paneline ek olarak Flarum, forumunuzu terminal üzerinden yönetmenize yardımcı olmak için çeşitli konsol komutları sağlar.
 
-Konsolu kullanmak için:
+Using the console:
 
 1. Flarum kurulumunuzun barındırıldığı sunucuya `ssh`ile bağlanın.
-2. Flarum yüklü klasöre `cd` komutu ile gidin.
+2. `cd` to the folder that contains the file `flarum`
 3. `php flarum [command]` komutunu çalıştırın.
 
 ## Varsayılan Komutlar
@@ -30,7 +30,7 @@ Mevcut komutların listesini görüntülemek için lütfen `list` komutunu kulla
 
 `php flarum info`
 
-Flarum’un çekirdek ve kurulu uzantıları hakkında bilgi toplayın. Bu, hata ayıklama sorunları için çok kullanışlıdır ve destek talep edilirken paylaşılmalıdır.
+Get information about Flarum's core and installed extensions. Bu, hata ayıklama sorunları için çok kullanışlıdır ve destek talep edilirken paylaşılmalıdır.
 
 ### cache:clear
 
