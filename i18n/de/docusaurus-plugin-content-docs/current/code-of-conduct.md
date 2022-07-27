@@ -27,8 +27,8 @@ Möchtest Du eine neue Diskussion beginnen? Lese zuerst unsere [FAQ](faq.md) und
 Wenn Du sicher bist, dass Du bereit bist, eine Diskussion zu beginnen, beachte bitte die folgenden Punkte:
 
 - Gib ihm einen guten Titel! Die besten Ergebnisse erzielst Du, wenn Dein Titel deutlich macht, worüber Du sprechen möchtest.
-- Choose the right tag(s). This will increase the likelihood your post will be read and answered promptly.
-- *Don’t* post repeatedly about the same topic, as doing so will tend to have the opposite effect.
+- Richtige Tags auswählen. Dies erhöht die Wahrscheinlichkeit, dass dein Beitrag gelesen und zeitnah beantwortet wird.
+- *Poste nicht* wiederholt über dasselbe Thema, da dies eher den gegenteiligen Effekt hat.
 - If not using a tag set aside for multilingual use, *post in English only.* We can't help if we can't read you!
 - Remember, you don't need to sign your posts. We've got your profile to let us know who you are.
 
