@@ -29,7 +29,7 @@ Khi bạn chắc chắn rằng mình đã sẵn sàng để bắt đầu một c
 - Đặt cho nó một tiêu đề tốt! Bạn sẽ nhận được kết quả tốt nhất nếu tiêu đề của bạn thể hiện rõ điều bạn muốn nói.
 - Chọn (các) thẻ phù hợp. Điều này sẽ làm tăng khả năng bài viết của bạn sẽ được đọc và trả lời kịp thời.
 - *Đừng* đăng nhiều lần về cùng một chủ đề, vì làm như vậy sẽ có tác dụng ngược lại.
-- Nếu không sử dụng thẻ dành riêng cho việc sử dụng đa ngôn ngữ, *chỉ đăng bằng tiếng Anh.* Chúng tôi không thể giúp bạn nếu chúng tôi không thể đọc được bạn!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Hãy nhớ rằng, bạn không cần phải ký vào các bài viết của mình. Chúng tôi có hồ sơ của bạn để cho chúng tôi biết bạn là ai.
 
 Hãy cố gắng giúp chúng tôi giữ mọi thứ ngăn nắp. Thời gian dành cho việc thu dọn là thời gian mà chúng tôi không thể dành để tìm hiểu bạn, thảo luận các vấn đề của bạn và nói về Flarum. Và đó, sau tất cả, là những gì tất cả chúng ta ở đây để làm!
