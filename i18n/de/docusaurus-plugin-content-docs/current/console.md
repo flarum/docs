@@ -2,10 +2,10 @@
 
 Zusätzlich zum Admin-Dashboard bietet Flarum mehrere Konsolenbefehle, mit denen du dein Forum über das Terminal verwalten kannst.
 
-Verwendung der Konsole:
+Using the console:
 
 1. `ssh` in den Server, auf dem deine Flarum-Installation gehostet wird
-2. `cd` in den Ordner, der die Datei `flarum` enthält
+2. `cd` to the folder that contains the file `flarum`
 3. Befehl über `php flarum [command]` ausführen
 
 ## Standardbefehle
@@ -30,7 +30,7 @@ Um die Liste der verfügbaren Befehle anzuzeigen, verwende bitte den list-Befehl
 
 `php flarum info`
 
-Informationen über Flarums Kern und installierte Erweiterungen erhalten. Dies ist sehr nützlich zum Debuggen von Problemen und sollte bei Supportanfragen mitgeteilt werden.
+Get information about Flarum's core and installed extensions. Dies ist sehr nützlich zum Debuggen von Problemen und sollte bei Supportanfragen mitgeteilt werden.
 
 ### cache:clear
 
