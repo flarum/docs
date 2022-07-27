@@ -2,10 +2,10 @@
 
 Ngoài bảng điều khiển quản trị, Flarum cung cấp một số lệnh console để giúp quản lý diễn đàn của bạn qua thiết bị đầu cuối
 
-Để sử dụng console:
+Using the console:
 
 1. `ssh` vào máy chủ nơi lưu trữ cài đặt flarum của bạn
-2. `cd` vào thư mục chứa một tệp có tên là `flarum`
+2. `cd` to the folder that contains the file `flarum`
 3. Chạy lệnh `php flarum [command]`
 
 ## Lệnh mặc định
@@ -30,7 +30,7 @@ Bạn cũng có thể xuất ra trợ giúp ở các định dạng khác bằng
 
 `php flarum info`
 
-Thu thập thông tin về cốt lõi của Flarum và các phần mở rộng đã cài đặt. Điều này rất hữu ích cho các sự cố gỡ lỗi và nên được chia sẻ khi yêu cầu hỗ trợ.
+Get information about Flarum's core and installed extensions. Điều này rất hữu ích cho các sự cố gỡ lỗi và nên được chia sẻ khi yêu cầu hỗ trợ.
 
 ### cache:clear
 
