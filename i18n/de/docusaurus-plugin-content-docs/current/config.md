@@ -11,7 +11,7 @@ Hier ist ein kurzer Überblick darüber, was alles mit einer Beispieldatei bedeu
 ```php
 <?php return array (
   'debug' => false, // aktiviert oder deaktiviert den Debug-Modus, der zum Beheben von Problemen verwendet wird
-  'offline' => false, // aktiviert oder deaktiviert den Site-Wartungsmodus. Dadurch wird Ihre Website für alle Benutzer (einschließlich Administratoren) unzugänglich.
+  'offline' => false, // aktiviert oder deaktiviert den Site-Wartungsmodus. Dadurch wird deine Website für alle Benutzer (einschließlich Administratoren) unzugänglich.
   'database' =>
   array (
     'driver' => 'mysql', // der Datenbanktreiber, d.h. MySQL, MariaDB...
@@ -21,11 +21,11 @@ Hier ist ein kurzer Überblick darüber, was alles mit einer Beispieldatei bedeu
     'password' => '', // Datenbank Passwort
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // das Präfix für die Tabellen, nützlich, wenn Du dieselbe Datenbank mit einem anderen Dienst teilst
+    'prefix' => '', // das Präfix für die Tabellen, nützlich, wenn du dieselbe Datenbank mit einem anderen Dienst teilst
     'port' => '3306', // der Port der Verbindung, standardmäßig 3306 bei MySQL
     'strict' => false,
   ),
-  'url' => 'https://flarum.localhost', // die URL-Installation, Du solltest dies ändern, wenn Du die Domain wechselst
+  'url' => 'https://flarum.localhost', // die URL-Installation, du solltest dies ändern, wenn du die Domain wechselst
   'paths' =>
   array (
     'api' => 'api', // /api geht zur API
