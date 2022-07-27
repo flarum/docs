@@ -30,7 +30,7 @@ To display the list of available commands, please use the list command.
 
 `php flarum info`
 
-Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
+Get information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
 ### cache:clear
 
