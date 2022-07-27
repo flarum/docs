@@ -29,7 +29,7 @@ Quando sei sicuro di essere pronto per iniziare una discussione, tieni presente 
 - Dagli un buon titolo! Otterrai i migliori risultati se il tuo titolo chiarisce di cosa vuoi parlare.
 - Scegli i tag giusti. Ciò aumenterà  le probabilità  che il tuo post venga letto e riceva risposte più in fretta.
 - Non postare ripetutamente sullo stesso argomento, perchè così facendo potresti ottenere l'effetto opposto.
-- Se non utilizzi un tag riservato per l'uso multilingue, pubblica solo in italiano. Non possiamo aiutarti se non possiamo leggerti!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Ricorda, non è necessario firmare i tuoi post. Abbiamo il tuo profilo per farci sapere chi sei. Abbiamo il tuo profilo per farci sapere chi sei.
 
 Per favore, sforzati di aiutarci a mantenere le cose organizzate. Il tempo speso a riordinare è tempo che non possiamo dedicare a conoscerti, discutere i tuoi problemi e parlare di Flarum. Che dopotutto è il nostro scopo principale.
