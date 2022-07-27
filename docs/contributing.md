@@ -55,7 +55,7 @@ To contribute to the frontend, first install the JavaScript dependencies. The mo
 
 ```bash
 cd packages/framework
-yarn
+yarn install
 ```
 
 Then you can watch JavaScript files for changes during development:
