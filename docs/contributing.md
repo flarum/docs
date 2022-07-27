@@ -34,7 +34,7 @@ Since Flarum is so extension-driven, we highly recommend [our extension docs](ex
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Or, when you want to clone in the actually directory
+# Or, when you want to clone directly into the current directory
 git clone https://github.com/flarum/flarum.git .
 # Note, the directory must empty
 
