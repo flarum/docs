@@ -1,6 +1,6 @@
 {
   "customtheme.docs.lang.nonDefaultLangLabel": {
-    "message": "此页面的翻译可能更新不及时，最新信息请以{defaultLocaleLink}为准。如果您想贡献翻译，请前往 {crowdinLink}。",
+    "message": "The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, you can do so {crowdinLink}, where we coordinate the translations.",
     "description": "The label used to tell the user that they're browsing translated docs that might be out of sync"
   },
   "customtheme.docs.lang.defaultLocaleLinkLabel": {
