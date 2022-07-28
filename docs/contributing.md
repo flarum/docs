@@ -36,7 +36,7 @@ cd flarum
 
 # Or, when you want to clone directly into the current directory
 git clone https://github.com/flarum/flarum.git .
-# Note, the directory must empty
+# Note, the directory must be empty
 
 # Set up a Composer path repository for Flarum monorepo packages
 composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
