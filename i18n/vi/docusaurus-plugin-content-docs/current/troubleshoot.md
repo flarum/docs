@@ -4,7 +4,7 @@ Nếu Flarum không cài đặt hoặc hoạt động như mong đợi, điều 
 
 Tiếp theo, bạn nên dành vài phút để tìm kiếm trong [Diễn đàn hỗ trợ](https://discuss.flarum.org/t/support) và [trình theo dõi vấn đề](https://github.com/flarum/core/issues). Có thể ai đó đã báo cáo sự cố và bản sửa lỗi đã có sẵn hoặc đang được xử lý. Nếu bạn đã tìm kiếm kỹ lưỡng và không thể tìm thấy bất kỳ thông tin nào về vấn đề, đã đến lúc bắt đầu khắc phục sự cố.
 
-## Bước 0: Bật chế độ gỡ lỗi
+## Step 0: Activate debug mode
 
 :::danger Bỏ qua phần Sản xuất
 
