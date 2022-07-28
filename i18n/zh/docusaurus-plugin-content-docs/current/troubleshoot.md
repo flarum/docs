@@ -4,7 +4,7 @@
 
 然后，请花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)，有可能该问题已被报告，并且有了解决办法。 It's possible that someone has already reported the problem, and a fix is either available or on the way. 如果您彻底搜索后，仍然没有找到任何有用的信息，那么就可以开始排查故障了。
 
-## 步骤 0：开启调试模式
+## Step 0: Activate debug mode
 
 :::danger Skip on Production
 
