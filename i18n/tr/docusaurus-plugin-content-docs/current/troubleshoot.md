@@ -4,7 +4,7 @@ Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken 
 
 Ayrıca, [Destek forumunu](https://discuss.flarum.org/t/support) ve [sorun izleyiciyi](https://github.com/flarum/core/issues) aramak için birkaç dakikanızı ayırmalısınız. Birisi sorunu zaten bildirmiş olabilir ve bir düzeltme mevcut veya yolda. İyice araştırdıysanız ve sorunla ilgili herhangi bir bilgi bulamıyorsanız, sorun gidermeye başlamanın zamanı geldi.
 
-## Adım 0: Hata ayıklama modunu açın
+## Step 0: Activate debug mode
 
 :::danger Skip on Production
 
