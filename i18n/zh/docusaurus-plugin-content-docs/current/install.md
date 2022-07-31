@@ -1,6 +1,6 @@
 # 安装
 
-:::danger 警告
+:::tip 即刻测试 Flarum？
 
 欢迎前往我们的 [演示站点](https://discuss.flarum.org/d/21101) 试用 Flarum。 您也可以用几秒钟在 [Free Flarum](https://www.freeflarum.com)（一个免费的非官方社区托管服务）建立属于您自己的论坛。
 
@@ -31,7 +31,7 @@ Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展
 composer create-project flarum/flarum .
 ```
 
-您可以在命令执行期间配置您的 Web 服务器。 请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-重写)。
+您可以在命令执行期间配置您的 Web 服务器。 请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-rewriting)。
 
 当一切就绪后，在浏览器中访问您的论坛网址，根据安装向导完成安装。
 
@@ -42,14 +42,14 @@ composer create-project flarum/flarum .
 Flarum 在 `public` 目录中附带了一个 `.htaccess` 文件，请确保它有正确生成。 **如果没有启用 `mod_rewrite` 模块，或禁用了 `.htaccess`，Flarum 将无法正常运行。 ** 请确认您的主机提供商（或您的 VPS）是否启用了这些功能。 如果您的服务器由您自行管理，您可能需要在您的网站配置中添加以下内容来启用 `.htaccess` 文件：
 
 ```
-<Directory "/<Flarum 路径>/public">
+<Directory "/path/to/flarum/public">
     AllowOverride All
 </Directory>
 ```
 
 以上确保了覆盖 htaccess 是被允许的，因此 Flarum 可以正确地重写 URL。
 
-启用 `mod_rewrite` 的方法会因操作系统的不同而不同。 在 Ubuntu 上，您可以通过运行 `sudo a2enmod rewrite` 命令来启用它，而在 CentOS 上 `mod_rewrite` 是默认启用的。 `mod_rewrite` is enabled by default on CentOS. 请不要忘记在修改配置后重启 Apache！
+启用 `mod_rewrite` 的方法会因操作系统的不同而不同。 在 Ubuntu 上，您可以通过运行 `sudo a2enmod rewrite` 命令来启用它。 而在 CentOS 上 `mod_rewrite` 是默认启用的。 请不要忘记在修改配置后重启 Apache！
 
 ### Nginx
 
@@ -131,7 +131,7 @@ However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`
 
 Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
 
-You will also need to edit the `index.php` file and change the following line:
+然后编辑 `index.php` 文件，修改这一行：
 
 ```php
 $site = require './site.php';
