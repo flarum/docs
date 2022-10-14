@@ -43,7 +43,7 @@ API keys 是脚本、工具和集成与 Flarum 交互的主要方式。
 
     Authorization: Token YOUR_API_KEY_VALUE; userId=1
 
-If a `user_id` value has been set for the key in the database, `userId=` will be ignored. 否则，它可以设置为数据库中的任何有效的用户ID。
+如果数据库中为密钥设置了 `user_id` 值， `userId=` 将被忽略。 否则，它可以设置为数据库中的任何有效的用户ID。
 
 ### Access Tokens
 
