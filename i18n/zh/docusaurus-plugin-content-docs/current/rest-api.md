@@ -1,8 +1,8 @@
 # Consuming the REST API
 
-Flarum exposes a REST API which is used by the single page application but also available for external scripts.
+Flarum 暴露了一个 REST API，可用于单页应用程序，也可用于外部脚本。
 
-The API follows the best practices defined by the [JSON:API](https://jsonapi.org/) specification.
+API遵循了 [JSON ：API](https://jsonapi.org/) 规范定义的最佳做法。
 
 :::info
 
