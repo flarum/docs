@@ -1,4 +1,4 @@
-# Consuming the REST API
+# 使用 REST API
 
 Flarum 暴露了一个 REST API，可用于单页应用程序，也可用于外部脚本。
 
@@ -6,52 +6,52 @@ API遵循了 [JSON ：API](https://jsonapi.org/) 规范定义的最佳做法。
 
 :::info
 
-To extend the REST API with new endpoints, see [API and Data Flow](extend/api.md) in the developer documentation.
+若要使用扩展 REST API with new endpoints，请在开发者文档中查看 [API 和数据流](extend/api.md)。
 
 :::
 
-## Authentication
+## 身份认证
 
-The single page app uses session cookies to authenticate against the API. External scripts can use stateless authentication using [API Keys](#api-keys) or [Access Tokens](#access-tokens).
+单页应用程序使用 session cookie to authenticate against the API。 外部脚本可以通过 [API Keys](#api-keys) 或 [Access Tokens](#access-tokens) 使用无状态认证。
 
-`GET` endpoints can be used without authentication. Only content visible to guests will be returned. Other endpoints generally cannot be used without authentication because of the [CSRF protection](#csrf-protection).
+`GET` endpoints 可以在没有身份认证的情况下使用。 只返回游客可见的内容。 由于 [CSRF 保护](#csrf-protection) ，其他 endpoints 通常不能在没有身份验证的情况下使用。
 
 ### API keys
 
-API Keys are the primary way for scripts, tools and integrations to interact with Flarum.
+API keys 是脚本、工具和集成与 Flarum 交互的主要方式。
 
-#### Creation
+#### 创建
 
-There is currently no UI to manage API Keys, but they can be created manually in the `api_keys` table of the database.
+目前没有用户界面来管理 API 密钥，但它们可以在数据库的 `api_key` 表中手动创建。
 
-The following attributes can be filled:
+以下属性可以填写：
 
-- `key`: Generate a long unique token (recommended: alpha-numerical, 40 characters) and set it here, this will be the token used in the `Authorization` header.
-- `user_id`: Optional. If set, the key can only be used to act as the given user.
+- `key`：生成并设置一个长的唯一的 token (建议：字母和数字，40个字符)，这是 `Authorization` header 中使用的令牌。
+- `user_id`：可选的。 如果设置，key 只能被制定的的用户使用。
 
-The remaining attributes are either automatically filled or currently not used:
+其余属性自动填写或暂未使用：
 
-- `id`: Will be filled by MySQL auto-increment.
-- `allowed_ips`: Not implemented.
-- `scopes`: Not implemented.
-- `created_at`: Can be set to any date, but is meant for the date of creation of the key.
-- `last_activity_at`: Will be updated automatically when the token is used.
+- `id`：将被 MySQL 自动递增填写。
+- `allowed_ips`：未实现。
+- `scopes`：未实现。
+- `created_at`：可以设置为任何日期，但它指的是 key 的创建日期。
+- `last_activity_at`：当 key 被使用时将自动更新。
 
-#### Usage
+#### 使用
 
-Attach your key value to each API request using the `Authorization` header. Then provide the user ID you want to interact as at the end of the header:
+使用 `Authorization` header 将您的 key 值添加到每个 API 请求中。 然后在 header 末尾提供你想要交互的 user ID：
 
     Authorization: Token YOUR_API_KEY_VALUE; userId=1
 
-If a `user_id` value has been set for the key in the database, `userId=` will be ignored. Otherwise, it can be set to any valid user ID that exists in the database.
+If a `user_id` value has been set for the key in the database, `userId=` will be ignored. 否则，它可以设置为数据库中的任何有效的用户ID。
 
 ### Access Tokens
 
-Access Tokens are short-lived tokens that belong to a specific user.
+Access Tokens 是属于一个特定用户的短期令牌。
 
-Those tokens are used behind the scenes for cookie sessions. Their use in stateless API requests has the same effect as a regular session. The user last activity will be updated each time the token is used.
+这些令牌被用于后台的 cookie sessions。 Their use in stateless API requests has the same effect as a regular session. The user last activity will be updated each time the token is used.
 
-#### Creation
+#### 创建
 
 All users are allowed to create access tokens. To create a token, use the `/api/token` endpoint with the credentials of your user:
 
@@ -79,7 +79,7 @@ At the moment, 3 token types exist, although only 2 types can be created via the
 
 **All access tokens are deleted when the user logs out** (this includes `developer` tokens, although it is planned to change it).
 
-#### Usage
+#### 使用
 
 Attach the returned `token` value to each API request using the `Authorization` header:
 
