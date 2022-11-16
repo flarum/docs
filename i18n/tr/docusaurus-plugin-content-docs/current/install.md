@@ -117,27 +117,27 @@ Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusun
 
 :::
 
-:::danger Never use permission 777
+:::danger 777 iznini asla kullanmayın
 
-You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group.
+Herhangi bir klasör veya dosyayı asla `777` izin düzeyine ayarlamamalısınız. Çünkü bu izin düzeyi, kullanıcı veya gruptan bağımsız olarak herkesin klasör ve dosyanın içeriğine erişmesine izin verir.
 
 :::
 
 ## Dizinleri Özelleştirme
 
-By default Flarum's directory structure includes a `public` directory which contains only publicly-accessible files. This is a security best-practice, ensuring that all sensitive source code files are completely inaccessible from the web root.
+Varsayılan olarak Flarum'un dizin yapısı, yalnızca herkesin erişebileceği dosyaları içeren bir `public` dizini içerir. Bu, tüm hassas kaynak kodu dosyalarına web kökünden tamamen erişilemez olmasını sağlayan en iyi güvenlik uygulamasıdır.
 
-However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
+Ancak, Flarum'u bir alt dizinde (`domain.tld/forum` gibi) barındırmak istiyorsanız veya barındırıcınız size web kökünüz üzerinde kontrol sağlamıyorsa (gibi bir şeye takılıp kalırsınız) `public_html` veya `htdocs`, Flarum'u `public` dizini olmadan kurabilirsiniz.
 
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
+`public` dizini içindeki tüm dosyaları (`.htaccess` dahil) Flarum'a hizmet vermek istediğiniz dizine taşımanız yeterlidir. Ardından, hassas kaynakları korumak için `.htaccess` dosyasını düzenleyin ve 9-15 satırlarındaki açıklamaları kaldırın. Nginx için, `.nginx.conf`'un 8-11. satırlarındaki yorumları kaldırın.
 
-You will also need to edit the `index.php` file and change the following line:
+Ayrıca `index.php` dosyasını düzenlemeniz ve aşağıdaki satırı değiştirmeniz gerekecektir:
 
 ```php
 $site = require './site.php';
 ```
 
- Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+ `site.php` dosyasını düzenleyin ve aşağıdaki satırlardaki yolları yeni dizin yapınızı yansıtacak şekilde güncelleyin:
 
 ```php
 'base' => __DIR__,
@@ -145,15 +145,15 @@ $site = require './site.php';
 'storage' => __DIR__.'/storage',
 ```
 
-Finally, check `config.php` and make sure the `url` value is correct.
+Son olarak, `config.php`'yi kontrol edin ve `url` değerinin doğru olduğundan emin olun.
 
 ## Verileri İçe Aktarma
 
-If you have an existing community and don't want to start from scratch, you may be able to import your existing data into Flarum. While there are no official importers yet, the community has made several unofficial importers:
+Mevcut bir topluluğunuz varsa ve sıfırdan başlamak istemiyorsanız, mevcut verilerinizi Flarum'a aktarabilirsiniz. Henüz resmi bir ithalatçı olmasa da, topluluk birkaç resmi olmayan ithalatçı yaptı:
 
 * [FluxBB](https://discuss.flarum.org/d/3867-fluxbb-to-flarum-migration-tool)
 * [MyBB](https://discuss.flarum.org/d/5506-mybb-migrate-script)
 * [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
 * [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-These can be used for other forum software as well by migrating to phpBB first, then to Flarum. Be aware that we can't guarantee that these will work nor can we offer support for them.
+Bunlar, önce phpBB'ye, ardından Flarum'a geçirilerek diğer forum yazılımları için de kullanılabilir. Bunların çalışacağını garanti edemeyeceğimizi ve onlar için destek sağlayamayacağımızı unutmayın.
