@@ -4,7 +4,7 @@ Mặc dù chúng tôi đã làm việc chăm chỉ để làm cho Flarum đẹp 
 
 ## Bảng điều khiển Quản trị
 
-Trang Giao diện của [bảng điều khiển quản trị](./admin.md) là nơi đầu tiên tuyệt vời để bắt đầu tùy chỉnh diễn đàn của bạn. Tại đây, bạn có thể:
+The [admin dashboard](admin.md)'s Appearance page is a great first place to start customizing your forum. Tại đây, bạn có thể:
 
 - Chọn màu chủ đề
 - Chuyển đổi chế độ tối và màu đầu trang
