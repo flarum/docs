@@ -132,11 +132,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         additionalLanguages: ['php'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-      },
-      algolia: {
-        apiKey: '8f760cdb850b1e696b72329eed96b01b',
-        indexName: 'flarum',
-        contextualSearch: true,
       }
     }),
 });
