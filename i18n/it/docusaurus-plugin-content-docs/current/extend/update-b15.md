@@ -34,7 +34,7 @@ If you need help applying these changes or using new features, please start a di
 
 ### Pannello Amministrazione ridisegnato
 
-La dashboard dell'amministratore è stata completamente ridisegnata, con l'obiettivo di barre di navigazione per ogni estensione. Anche l'API per le estensioni per registrare impostazioni, autorizzazioni e pagine personalizzate è stata notevolmente semplificata. Ora puoi anche aggiornare la tua estensione `composer.json` per fornire link per finanziamenti, supporto, siti web e così via che verranno visualizzati nella pagina di amministrazione della tua estensione. Guarda [documentazione JS amministrazione](./admin.md) per ulteriori informazioni su come utilizzare il nuovo sistema.
+La dashboard dell'amministratore è stata completamente ridisegnata, con l'obiettivo di barre di navigazione per ogni estensione. Anche l'API per le estensioni per registrare impostazioni, autorizzazioni e pagine personalizzate è stata notevolmente semplificata. Ora puoi anche aggiornare la tua estensione `composer.json` per fornire link per finanziamenti, supporto, siti web e così via che verranno visualizzati nella pagina di amministrazione della tua estensione. Please see [our Admin JS documentation](admin.md) for more information on how to use the new system.
 
 ### Altre feauture nuove
 
