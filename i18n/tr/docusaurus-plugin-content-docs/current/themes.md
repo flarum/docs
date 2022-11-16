@@ -4,7 +4,7 @@ Flarum'u olabildiğince güzel hale getirmek için çok çalışmış olsak da, 
 
 ## Yönetici Gösterge Tablosu
 
-[Yönetici gösterge tablosu](../admin.md)'nda Görünüm sayfası, forumunuzu özelleştirmeye başlamak için harika bir ilk yerdir. Burada yapabilirsin:
+[Yönetici gösterge tablosu](admin.md)'nda Görünüm sayfası, forumunuzu özelleştirmeye başlamak için harika bir ilk yerdir. Burada yapabilirsin:
 
 - Tema renklerini seçin
 - Karanlık modu ve renkli üstbilgi değiştir
