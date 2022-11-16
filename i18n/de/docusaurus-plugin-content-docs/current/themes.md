@@ -4,7 +4,7 @@ Obwohl wir hart daran gearbeitet haben, Flarum so schön wie möglich zu machen,
 
 ## Admin-Dashboard
 
-Die [Admin-Dashboard](./admin.md)s Erscheinungsbildseite ist ein großartiger erster Ort, um mit der Anpassung deines Forums zu beginnen. Hier kannst Du:
+The [admin dashboard](admin.md)'s Appearance page is a great first place to start customizing your forum. Hier kannst Du:
 
 - Designfarben auswählen
 - Dunkelmodus und eine farbige Kopfzeile umschalten
