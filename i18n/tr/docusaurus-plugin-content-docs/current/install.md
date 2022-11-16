@@ -11,7 +11,7 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
 * **Apache** (mod_rewrite etkin) veya **Nginx**
-* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.3+** şu uzantılara sahip: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+/8.0.23+** veya **MariaDB10.0.5+** Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 * Composer'ı çalıştırmak için **SSH (komut satırı) erişimi**
 
@@ -77,43 +77,43 @@ www.example.com {
 ```
 ## Klasör Sahipliği
 
-Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
+Kurulum sırasında Flarum, belirli dizinleri yazılabilir hale getirmenizi isteyebilir. Modern işletim sistemleri genellikle çok kullanıcılıdır, yani oturum açtığınız kullanıcı ile Flarum'un çalıştığı kullanıcı aynı değildir. Flarum'un çalıştığı kullanıcı, aşağıdakiler için okuma + yazma erişimine sahip olmalıdır:
 
-- The root install directory, so Flarum can edit `config.php`.
-- The `storage` subdirectory, so Flarum can edit logs and store cached data.
-- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
+- Flarum'un `config.php` dosyasını düzenleyebilmesi için kök kurulum dizini.
+- `storage` alt dizini, böylece Flarum günlükleri düzenleyebilir ve önbelleğe alınmış verileri saklayabilir.
+- Logoların ve avatarların dosya sistemine yüklenebilmesi için `assets` alt dizini.
 
-Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
+Uzantılar başka dizinler gerektirebilir, bu nedenle Flarum kök kurulum dizininin tamamına tekrar tekrar yazma erişimi vermek isteyebilirsiniz.
 
-There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+Dosya izinlerini ayarlamak için çalıştırmanız gereken birkaç komut vardır. Yüklemeniz bunlardan yalnızca bazılarını yürüttükten sonra uyarı göstermiyorsa geri kalanını çalıştırmanıza gerek olmadığını lütfen unutmayın.
 
-First, you'll need to allow write access to the directory. On Linux:
+Öncelikle, dizine yazma erişimine izin vermeniz gerekir. Linux'ta:
 
 ```bash
 chmod 775 -R /path/to/directory
 ```
 
-If that isn't enough, you may need to check that your files are owned by the correct group and user. By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You'll need to look into the specifics of your distro and web server setup to make sure. You can change the folder ownership in most Linux operating systems by running:
+Bu yeterli değilse, dosyalarınızın doğru grup ve kullanıcıya ait olup olmadığını kontrol etmeniz gerekebilir. Varsayılan olarak, çoğu Linux dağıtımında `www-data` hem PHP'nin hem de web sunucusunun altında çalıştığı grup ve kullanıcıdır. Emin olmak için dağıtım ve web sunucusu kurulumunuzun özelliklerini incelemeniz gerekir. Çoğu Linux işletim sisteminde klasör sahipliğini aşağıdakileri çalıştırarak değiştirebilirsiniz:
 
 ```bash
 chown -R www-data:www-data /path/to/directory
 ```
 
-With `www-data` changed to something else if a different user/group is used for your web server.
+Web sunucunuz için farklı bir kullanıcı/grup kullanılıyorsa, `www-data` başka bir şeye değiştirildi.
 
-Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
+Ek olarak, uzantıları kurabilmeniz ve CLI aracılığıyla Flarum kurulumunu yönetebilmeniz için CLI kullanıcınızın (terminalde oturum açtığınız kişi) sahip olduğundan emin olmanız gerekir. Bunu yapmak için mevcut kullanıcınızı (`whoami`) `usermod -a -G www-data YOUR_USERNAME` aracılığıyla web sunucusu grubuna (genellikle `www-data`) ekleyin. Bu değişikliğin etkili olması için muhtemelen oturumu kapatıp tekrar açmanız gerekecek.
 
-Finally, if that doesn't work, you might need to configure [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux) to allow the web server to write to the directory. To do so, run:
+Son olarak, bu işe yaramazsa, web sunucusunun dizine yazmasına izin vermek için [SELinux](https://www.redhat.com/en/topics/linux/what-is-selinux)'u yapılandırmanız gerekebilir. Bunu yapmak için şunu çalıştırın:
 
 ```bash
 chcon -R -t httpd_sys_rw_content_t /path/to/directory
 ```
 
-To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
+Bu komutların yanı sıra Linux'ta dosya izinleri ve sahiplik hakkında daha fazla bilgi edinmek için [bu öğreticiyi](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/) okuyun. Flarum'u Windows'ta kuruyorsanız, [bu Süper Kullanıcı sorusunun](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) yanıtlarını faydalı bulabilirsiniz.
 
-:::caution Environments may vary
+:::caution Ortamlar değişebilir
 
-Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
+Ortamınız sağlanan belgelerden farklı olabilir, lütfen PHP ve web sunucusunun altında çalıştığı uygun kullanıcı ve grup için web sunucusu yapılandırmanıza veya web barındırma sağlayıcınıza danışın.
 
 :::
 
