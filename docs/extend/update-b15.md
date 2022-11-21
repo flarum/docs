@@ -34,7 +34,7 @@ If you need help applying these changes or using new features, please start a di
 
 ### Admin UX Redesign
 
-The admin dashboard has been completely redesigned, with a focus on providing navbar pages for each extension. The API for extensions to register settings, permissions, and custom pages has also been greatly simplified. You can also now update your extension's `composer.json` to provide links for funding, support, website, etc that will show up on your extension's admin page. Please see [our Admin JS documentation](./admin.md) for more information on how to use the new system.
+The admin dashboard has been completely redesigned, with a focus on providing navbar pages for each extension. The API for extensions to register settings, permissions, and custom pages has also been greatly simplified. You can also now update your extension's `composer.json` to provide links for funding, support, website, etc that will show up on your extension's admin page. Please see [our Admin JS documentation](admin.md) for more information on how to use the new system.
 
 ### Other New Features
 
