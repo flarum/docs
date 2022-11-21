@@ -95,7 +95,8 @@ module.exports = {
         'extend/settings',
         'extend/testing',
         'extend/theme',
-        'extend/views'
+        'extend/views',
+        'extend/github-actions'
       ]
     },
     {

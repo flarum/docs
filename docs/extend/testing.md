@@ -119,7 +119,7 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
 
 #### GitHub Testing Workflow
 
-In public repos, GitHub Actions allow you to run all your tests on every commit and pull request for free. You can copy [Flarum core's GitHub Actions](https://github.com/flarum/core/blob/master/.github/workflows/test.yml) testing workflow into your extension's `.github/workflows` folder to enable this.
+To run tests on every commit and pull request, check out the [GitHub Actions](github-actions.md) page.
 
 ---
 
