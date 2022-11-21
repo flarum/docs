@@ -93,6 +93,7 @@ module.exports = {
         'extend/forms',
         'extend/permissions',
         'extend/settings',
+        'extend/static-code-analysis',
         'extend/testing',
         'extend/theme',
         'extend/views',
