@@ -1,6 +1,6 @@
 # Bundled Extensions Policy
 
-This document is to assist in deciding what extensions should be bundled or maintained by the Flarum project team.
+This document is to assist in deciding what core features should be bundled or maintained by the Flarum project team.
 
 Understand that Flarum aims to have a lean and efficient team. To guarantee a transparent workload, we intentionally have a "this could be an extension" mentality. The acronym D.O.R.C. spells out our decision-making process.
 
