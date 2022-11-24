@@ -145,7 +145,7 @@ module.exports = {
       collapsible: false,
       items: [
         'internal/README',
-        'internal/merging',
+        'internal/merging-policy',
         'internal/bundled-extensions-policy',
         'internal/package-manager',
       ]
