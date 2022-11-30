@@ -14,7 +14,7 @@ In order to achieve this extensibility, Flarum has been built with rich APIs and
 
 Flarum 的核心和扩展之间有清晰的界限吗？ 为什么有些功能核心里有，而有些又没有？ 了解这种区别非常有助于我们在 Flarum 的生态系统中保持一致性和高质量。
 
-**Flarum 的核心** 不会拥有所有功能。 Rather, it is a scaffold, or a framework, which provides a reliable foundation on which extensions can build. It contains only basic, unopinionated functionality that is essential to a forum: discussions, posts, users, groups, and notifications.
+**Flarum 的核心** 不会拥有所有功能。 相反，它是一个基础或一个框架，为扩展提供了一个可靠的基础。 它只包含对论坛至关重要的基本的、未提出意见的功能：讨论、帖子、用户群组和通知。
 
 **捆绑扩展** 又称原生扩展，是与核心打包到一块、默认启用的。 它们和其他扩展一样，可以被禁用或卸载。 我们的想法是使其具有良好的通用性、可配置性，以满足大多数人的需求，因此，捆绑扩展无法满足一切使用需求。
 
