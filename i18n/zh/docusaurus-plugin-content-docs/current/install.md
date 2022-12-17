@@ -79,27 +79,27 @@ www.example.com {
 
 在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 现代操作系统通常是多用户的，意味着您所登录的用户与Flarum所运行在的用户不同。 Flarum所运行在的用户必须拥有以下文件的读+写权限：
 
-- 根安装目录，让Flarum 用来编辑 `config.php`。
-- `storage` 子目录，让Flarum 用来编辑日志并存储缓存数据。
-- `assets` 子目录，以便标志和头像可以上传到文件系统。
+- 根安装目录，以便Flarum 编辑 `config.php`。
+- `storage` 子目录，以便Flarum 编辑日志并存储缓存数据。
+- `assets` 子目录，以便Logo和头像可以被上传到文件系统。
 
-Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
+扩展程序可能需要其它目录，所以你可能需要递归地授予整个Flarum 根安装目录的写权限。
 
-There are several commands you'll need to run in order to set up file permissions. Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+您需要运行几个命令来设置文件权限。 Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
 
-First, you'll need to allow write access to the directory. On Linux:
+首先，您需要允许写访问目录。 在 Linux 上：
 
 ```bash
 chmod 775 -R /path/to/directory
 ```
 
-If that isn't enough, you may need to check that your files are owned by the correct group and user. By default, in most Linux distributions `www-data` is the group and user that both PHP and the web server operate under. You'll need to look into the specifics of your distro and web server setup to make sure. You can change the folder ownership in most Linux operating systems by running:
+如果这还不够，您可能需要检查您的文件所属者是否为正确的群组和用户。 大多数 Linux 发行版，默认 `www-data` 为 PHP 和 Web 服务器所有者和所属组群。 您需要查看您的 distro 和 web 服务器设置的具体细节才能做出确定。 您可以运行下面这条命令来改变大多数 Linux 操作系统中文件夹的所有者。
 
 ```bash
 chown -R www-data:www-data /path/to/directory
 ```
 
-With `www-data` changed to something else if a different user/group is used for your web server.
+如果您的网页服务器使用了不同的用户/群组，请将 `www-data` 更改为对应的内容。
 
 Additionally, you'll need to ensure that your CLI user (the one you're logged into the terminal as) has ownership, so that you can install extensions and manage the Flarum installation via CLI. To do this, add your current user (`whoami`) to the web server group (usually `www-data`) via `usermod -a -G www-data YOUR_USERNAME`. You will likely need to log out and back in for this change to take effect.
 
@@ -156,4 +156,4 @@ If you have an existing community and don't want to start from scratch, you may 
 * [phpBB](https://discuss.flarum.org/d/1117-phpbb-migrate-script-updated-for-beta-5)
 * [SMF2](https://github.com/ItalianSpaceAstronauticsAssociation/smf2_to_flarum)
 
-These can be used for other forum software as well by migrating to phpBB first, then to Flarum. Be aware that we can't guarantee that these will work nor can we offer support for them.
+These can be used for other forum software as well by migrating to phpBB first, then to Flarum. 需要说明的是，我们不能保证这些工具一直能正常使用，也不能为他们提供支持服务。
