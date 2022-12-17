@@ -77,11 +77,11 @@ www.example.com {
 ```
 ## 目录所有权
 
-在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
+在安装过程中，Flarum 可能会要求您将某些目录设置为可写。 现代操作系统通常是多用户的，意味着您所登录的用户与Flarum所运行在的用户不同。 Flarum所运行在的用户必须拥有以下文件的读+写权限：
 
-- The root install directory, so Flarum can edit `config.php`.
-- The `storage` subdirectory, so Flarum can edit logs and store cached data.
-- The `assets` subdirectory, so that logos and avatars can be uploaded to the filesystem.
+- 根安装目录，让Flarum 用来编辑 `config.php`。
+- `storage` 子目录，让Flarum 用来编辑日志并存储缓存数据。
+- `assets` 子目录，以便标志和头像可以上传到文件系统。
 
 Extensions might require other directories, so you might want to recursively grant write access to the entire Flarum root install directory.
 
