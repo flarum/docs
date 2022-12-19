@@ -1,14 +1,14 @@
 # 贡献代码
 
-有兴趣为 Flarum 的发展做贡献吗？ That's great! 竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！ Flarum wouldn't be possible without our community contributions.
+有兴趣为 Flarum 的发展做贡献吗？ 那太好了！ 竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！ 没有我们社区的贡献，Flarum就不会有今天。
 
 在贡献之前，请仔细阅读 [行为准则](code-of-conduct.md)。
 
-This document is a guide for developers who want to contribute code to Flarum. 本文档是为想要向 Flarum 贡献代码的开发者提供的，如果您只是入门，建议您阅读进阶文档中的 [Getting Started](https://flarum.org/extend/start.md) 文档了解 Flarum 的工作原理。
+本文档是想要为 Flarum 贡献代码的开发者的指南。 如果您只是入门，建议您阅读进阶文档中的 [Getting Started](https://flarum.org/extend/start.md) 文档了解 Flarum 的工作原理。
 
-## 如何开始
+## 为什么要为Flarum做贡献？
 
-⚡ **Have Real Impact.** There are thousands of Flarum instances, with millions of aggregate end users. By contributing to Flarum, your code will have a positive impact on all of them.
+⚡ **作出实际影响。** 成千上万的Flarum实例，和数百万的累积最终用户， 都会因为你的贡献而受益。
 
 🔮 **Shape the Future of Flarum.** We have a long backlog, and limited time. If you're willing to champion a feature or change, it's much more likely to happen, and you'll be able to enact your vision for it. Plus, our roadmap and milestones are set by our [core development team](https://flarum.org/team), and all of us started as contributors. The best road to influence is contributing.
 
