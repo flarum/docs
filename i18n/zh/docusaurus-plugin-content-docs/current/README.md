@@ -22,9 +22,9 @@ Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](h
 
 You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
 
-## Help the Flarum Project
+## 帮助Flarum项目
 
-Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
+Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. 我们依靠社区的贡献来帮助我们改进和拓展 Flarum。
 
 🧑‍💻 If you're a developer, consider [contributing to Flarum's core or bundled extensions](contributing.md). This is **the** most efficient way to help Flarum, and your work can have a lot of impact: there are thousands of Flarum sites out there, with millions of total end users.
 
