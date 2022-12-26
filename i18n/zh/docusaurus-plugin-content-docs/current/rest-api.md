@@ -1,35 +1,35 @@
 # 使用 REST API
 
-Flarum 暴露了一个 REST API，可用于单页应用程序，也可用于外部脚本。
+Flarum 提供了 REST API，它可以被单页应用程序使用，也可供外部应用程序或外部服务使用。
 
-API遵循了 [JSON ：API](https://jsonapi.org/) 规范定义的最佳做法。
+API遵循了 [JSON:API](https://jsonapi.org/) 所规范定义的最佳做法。
 
 :::info
 
-若要使用扩展 REST API with new endpoints，请在开发者文档中查看 [API 和数据流](extend/api.md)。
+若要使用扩展 REST API 和新的接口，请在开发者文档中查看 [API 和数据流](extend/api.md)。
 
 :::
 
 ## 身份认证
 
-单页应用程序使用 session cookie to authenticate against the API。 外部脚本可以通过 [API Keys](#api-keys) 或 [Access Tokens](#access-tokens) 使用无状态认证。
+单页应用程序可以使用 会话cookies 来进行 API 的身份验证。 外部脚本可以通过 [API密钥](#api-keys) 或 [访问令牌](#access-tokens) 使用使用无状态身份验证。
 
-`GET` endpoints 可以在没有身份认证的情况下使用。 只返回游客可见的内容。 由于 [CSRF 保护](#csrf-protection) ，其他 endpoints 通常不能在没有身份验证的情况下使用。
+`GET` 接口可以在不进行身份认证的情况下使用， 只会返回游客可见的内容。 由于 [CSRF保护](#csrf-protection)（跨站请求伪造保护），其他接口通常不能在没有身份验证的情况下使用。
 
-### API keys
+### API密钥
 
-API keys 是脚本、工具和集成与 Flarum 交互的主要方式。
+API密钥 是脚本、工具和其他应用程序与 Flarum 交互的主要方式。
 
 #### 创建
 
-目前没有用户界面来管理 API 密钥，但它们可以在数据库的 `api_key` 表中手动创建。
+目前没有用于管理 API密钥 的界面，但是可以在数据库的 `api_keys` 表中手动创建。
 
-以下属性可以填写：
+需要提供以下参数：
 
-- `key`：生成并设置一个长的唯一的 token (建议：字母和数字，40个字符)，这是 `Authorization` header 中使用的令牌。
-- `user_id`：可选的。 如果设置，key 只能被制定的的用户使用。
+- `key`：生成并设置一个长而唯一的 token（推荐使用字母数字组合，长度为 40 个字符），这将是在 `Authorization` 请求头中使用的令牌。
+- `user_id`：可选项。 如果设置了该值，则该 key 只能由被指定的用户使用。
 
-其余属性自动填写或暂未使用：
+剩余的属性将自动填充，或者目前暂未被使用：
 
 - `id`：将被 MySQL 自动递增填写。
 - `allowed_ips`：未实现。
@@ -39,21 +39,21 @@ API keys 是脚本、工具和集成与 Flarum 交互的主要方式。
 
 #### 使用
 
-使用 `Authorization` header 将您的 key 值添加到每个 API 请求中。 然后在 header 末尾提供你想要交互的 user ID：
+使用 `Authorization` 请求头将您的 key 添加到每个 API请求 中。 然后在请求头的末尾提供你想要交互的用户 ID：
 
     Authorization: Token YOUR_API_KEY_VALUE; userId=1
 
 如果数据库中为密钥设置了 `user_id` 值， `userId=` 将被忽略。 否则，它可以设置为数据库中的任何有效的用户ID。
 
-### Access Tokens
+### 访问令牌
 
-Access Tokens 是属于一个特定用户的短期令牌。
+访问令牌（Access Tokens）是属于特定用户的短期令牌。
 
-这些令牌被用于后台的 cookie sessions。 Their use in stateless API requests has the same effect as a regular session. The user last activity will be updated each time the token is used.
+这些令牌被用于后台的 cookie sessions。 在无状态 API 请求中使用它们具有与常规会话相同的效果。 每当使用访问令牌时，用户的最后一次活动都会被更新。
 
 #### 创建
 
-All users are allowed to create access tokens. To create a token, use the `/api/token` endpoint with the credentials of your user:
+所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 接口并提供你的用户的凭据：
 
 ```
 POST /api/token HTTP/1.1
@@ -71,35 +71,35 @@ HTTP/1.1 200 OK
 }
 ```
 
-At the moment, 3 token types exist, although only 2 types can be created via the REST API.
+目前存在 3 种令牌类型，但是只有 2 种类型可以通过 REST API 创建。
 
-- `session` tokens expire after 1h of inactivity. This is the default token type.
-- `session_remember` tokens expire after 5 years of inactivity. They can be obtained by specifying `remember=1` in the request attributes.
-- `developer` tokens never expire. They can only be created manually in the database at the moment.
+- `session` 令牌在 1小时内 没有活动之后即会过期。 这是默认的令牌类型。
+- `session` 令牌在 5年内 没有活动之后即会过期。 可以通过在请求属性中指定 `remember=1` 来获取这种令牌。
+- `developer` 令牌永不过期。 目前，只能在数据库中手动创建这种令牌。
 
-**All access tokens are deleted when the user logs out** (this includes `developer` tokens, although it is planned to change it).
+**所有访问令牌在用户注销时被删除**（包括 `developer` 令牌，不过我们计划更改这种情况）。
 
 #### 使用
 
-Attach the returned `token` value to each API request using the `Authorization` header:
+使用 `Authorization` 请求头将返回的 `token` 值（令牌值）附加到每个 API 请求：
 
     Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
 
-### CSRF Protection
+### CSRF 保护
 
-Most of the `POST`/`PUT`/`DELETE` API endpoints are protected against [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery). This means stateless requests are not possible without authentication.
+大多数 `POST`/`PUT`/`DELETE` API接口 都有 [跨站请求伪造](https://en.wikipedia.org/wiki/Cross-site_request_forgery)（Cross-site request forgery，缩写CSRF）的保护。 这意味着没有身份验证就不可能发出无状态请求。
 
-When using an API Key or Access Token, CSRF protection is bypassed.
+使用 API密钥 或访问令牌时，可以通过 CSRF 保护。
 
-## Endpoints
+## 接口
 
-This part of the documentation is still in progress. We are researching options to provide an automated documentation of the endpoints.
+这部分文档仍在编写中。 我们正在研究为接口提供自动化文档的选项。
 
-Every extension adds new endpoints and attributes so it's difficult to provide a complete documentation of all endpoints. A good way to discover endpoints is to use the browser development tools to inspect requests made by the single page application.
+每个扩展都会添加新的接口和属性，因此很难提供所有接口的完整文档。 发现接口的一个好方法是使用浏览器开发工具来检查单页应用程序发出的请求。
 
-Below are a few examples of commonly used endpoints. JSON has been truncated to make reading easier.
+下面是一些常用接口的示例。 为了方便阅读，已截短 JSON。
 
-### List discussions
+### 列出主题（discussions）
 
     GET /api/discussions
 
@@ -177,7 +177,7 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
         // [...]
       }
     },
-    // [...] more discussions
+    // [...] 更多主题
   ],
   "included": [
     {
@@ -204,8 +204,8 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
       "type": "tags",
       "id": "3",
       "attributes": {
-        "name": "Welcome",
-        "description": "Post interesting things here",
+        "name": "欢迎",
+        "description": "在这里发送一些有趣的玩意儿",
         "slug": "welcome",
         "color": "#888",
         "backgroundUrl": null,
@@ -229,15 +229,15 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
         "number": 1,
         "createdAt": "2022-01-01T10:20:30+00:00",
         "contentType": "comment",
-        "contentHtml": "<p>Hello World</p>"
+        "contentHtml": "<p>你好，世界！</p>"
       }
     },
-    // [...] more includes for the other discussions
+    // [...] 包含更多的主题
   ]
 }
 ```
 
-### Create discussion
+### 发布主题
 
     POST /api/discussions
 
@@ -246,8 +246,8 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
   "data":{
     "type": "discussions",
     "attributes": {
-      "title": "Lorem Ipsum",
-      "content": "Hello World"
+      "title": "这里是标题",
+      "content": "你好，世界！"
     },
     "relationships": {
       "tags": {
@@ -263,7 +263,7 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
 }
 ```
 
-The response includes the ID of the new discussion:
+响应中会包含新主题的 ID：
 
 ```json
 {
@@ -271,10 +271,10 @@ The response includes the ID of the new discussion:
     "type": "discussions",
     "id": "42",
     "attributes": {
-      "title": "Lorem Ipsum",
+      "title": "这里是标题",
       "slug": "42-lorem-ipsum",
       "commentCount": 1
-      // [...] other attributes
+      // [...] 其他属性
     },
     "relationships": {
       "posts": {
@@ -291,7 +291,7 @@ The response includes the ID of the new discussion:
           "id": "1"
         }
       },
-      // [...] other relationships
+      // [...] 其他关联（relationships）
     }
   },
   "included":[
@@ -301,16 +301,16 @@ The response includes the ID of the new discussion:
       "attributes": {
         "number": 1,
         "contentType": "comment",
-        "contentHtml": "\u003Cp\u003EHello World\u003C\/p\u003E"
-        // [...] other attributes
+        "contentHtml": "\u003Cp\u003E你好，世界！\u003C\/p\u003E"
+        // [...] 其他属性
       }
     }
-    // [...] other includes
+    // [...] 其他
   ]
 }
 ```
 
-### Create user
+### 注册用户
 
     POST /api/users
 
@@ -326,15 +326,15 @@ The response includes the ID of the new discussion:
 }
 ```
 
-## Errors
+## 错误
 
-Flarum uses various HTTP status code and includes error descriptions that follow the [JSON:API error spec](https://jsonapi.org/format/#errors).
+Flarum 使用了各种 HTTP 状态码和遵循 [JSON:API 错误规范](https://jsonapi.org/format/#errors) 的错误描述。
 
-Below are a few common errors you might encounter when using the REST API:
+下面是您在使用 REST API 时可能遇到的一些常见错误：
 
-### CSRF Token Mismatch
+### CSRF 令牌不匹配
 
-If you receive a 400 HTTP error with `csrf_token_mismatch` message, it means the `Authorization` header is absent or invalid and Flarum attempted to authenticate through the session cookie.
+如果您收到了消息为 `csrf_token_mismatch` 的 400 HTTP 错误， 这意味着 `Authorization` 请求头缺失或无效，并且 Flarum 尝试通过会话 cookie 进行身份验证。
 
 ```json
 {
@@ -347,9 +347,9 @@ If you receive a 400 HTTP error with `csrf_token_mismatch` message, it means the
 }
 ```
 
-### Validation errors
+### 验证错误
 
-Validation errors are returned with 422 HTTP status code. The name of the invalid field is returned as the `pointer` value. There can be multiple errors for a single field at the same time.
+验证错误会返回 HTTP 状态码 422。 无效字段的名称会以 `pointer` 值返回。 单个字段可能同时出现多个错误。
 
 ```json
 {
