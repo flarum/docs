@@ -4,7 +4,7 @@
 
 ## 管理面板
 
-The [admin dashboard](admin.md)'s Appearance page is a great first place to start customizing your forum. 在这里，您可以：
+[管理面板](admin.md) 的「外观」页面是自定义论坛的绝佳起点。 在这里，您可以：
 
 - 选择主题颜色
 - 切换夜间模式和彩色导航栏。
