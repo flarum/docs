@@ -4,7 +4,7 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+您可以简单地注册设置，扩展基础 [`扩展页面`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage)，或者提供您自己完全自定义的页面。
 
 ## Extension Data API
 
