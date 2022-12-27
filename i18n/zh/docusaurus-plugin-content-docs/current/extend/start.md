@@ -146,7 +146,7 @@ composer require acme/flarum-hello-world *@dev
 
 执行完成后，前往您论坛后台管理面板启用插件，最后回到您的论坛。
 
-*whizzing, whirring, metal clunking*
+*啾，咻，铮铛*
 
 哇！ 你好，扩展！
 
