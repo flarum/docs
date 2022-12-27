@@ -4,7 +4,7 @@ slug: /
 
 # 关于 Flarum
 
-Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易用，拥有打造一片成功的社区所需的所有功能。 It's also extremely extensible, allowing for ultimate customizability.
+Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易用，拥有打造一片成功的社区所需的所有功能。 它也极其可扩展，允许达到终极的可定制性。
 
 ![Flarum Home Screenshot](/en/img/home_screenshot.png)
 
@@ -20,13 +20,13 @@ Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](h
 
 * **免费、开源。 ** Flarum 以 [MIT 许可证](https://github.com/flarum/flarum/blob/master/LICENSE) 发布。
 
-You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
+你可以在这里阅读更多关于我们 [对于 Flarum 的哲学和价值观](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values) 的信息。
 
 ## 帮助Flarum项目
 
-Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. 我们依靠社区的贡献来帮助我们改进和拓展 Flarum。
+Flarum 是 [免费、开源](https://github.com/flarum/core) 的软件，由志愿者们维护和管理。 我们依靠社区的贡献来帮助我们改进和拓展 Flarum。
 
-🧑‍💻 If you're a developer, consider [contributing to Flarum's core or bundled extensions](contributing.md). This is **the** most efficient way to help Flarum, and your work can have a lot of impact: there are thousands of Flarum sites out there, with millions of total end users.
+🧑‍💻 如果你是一个开发者，可以考虑 [为Flarum或者其扩展做出贡献](contributing.md)。 这是帮助 Flarum 的**最有效的方式**，而且您的帮助可能会产生很大的影响：市面上有成千上万的Flarum站点，拥有数百万的最终用户。
 
 🧩 If there's a feature you're missing, or a theme idea you have, [writing a custom extension](extend/README.md) will make Flarum that much better for you and others.
 
