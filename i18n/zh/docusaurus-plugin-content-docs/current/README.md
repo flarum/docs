@@ -10,7 +10,7 @@ Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易
 
 ## 目标
 
-Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)，她生来就被设计如此： 她生来就被设计如此：
+Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)， 她生来就被设计如此：
 
 * **快速、简单。 ** 不杂乱不臃肿，没有复杂的依赖关系。 Flarum 使用 PHP 构建，因此很容易被部署。 界面采用高性能且小巧的 JavaScript 框架 [Mithril](https://mithril.js.org)。
 
@@ -28,18 +28,18 @@ Flarum 是 [免费、开源](https://github.com/flarum/core) 的软件，由志�
 
 🧑‍💻 如果你是一个开发者，可以考虑 [为Flarum或者其扩展做出贡献](contributing.md)。 这是帮助 Flarum 的**最有效的方式**，而且您的帮助可能会产生很大的影响：市面上有成千上万的Flarum站点，拥有数百万的最终用户。
 
-🧩 If there's a feature you're missing, or a theme idea you have, [writing a custom extension](extend/README.md) will make Flarum that much better for you and others.
+🧩 如果有您缺少的功能，或您有一些新的想法，[编写一个自定义扩展](extend/README.md) 将使 Flarum 更适合您和其他人使用。
 
-本用户指南将帮助您使用 Flarum 搭建自己的论坛，并教授您管理社区的基础知识。
+✒️ 如果您在技术写作方面有经验，那么您对[我们文档](https://github.com/flarum/docs/issues)的贡献将有助于未来的用户、管理员和开发人员充分利用 Flarum。
 
-🌐 If you speak multiple languages, you could [contribute translations](extend/language-packs.md) to could help make Flarum accessible to countless users around the world.
+🌐 如果您会说多种语言，那么您可以 [为Flarum提供翻译](extend/language-packs.md)，从而帮助世界各地无数用户访问 Flarum。
 
-💸 The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This wouldn't be possible without your financial support.
+💸 Flarum基金会 并不通过Flarum赚钱，但确实有账单要付。 首先，非常感谢您有捐款意向，您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。 在过去，我们还能够在财务上支持一些核心开发人员，这样他们就可以兼职工作于 Flarum。 如果没有您的财政支持，这是不可能的。
 
-🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners!
+🧑‍🤝‍🧑 加入 [我们的社区](https://discuss.flarum.org) 来讨论 Flarum 的发展，获得实例帮助，或者遇见一些很酷的人！ 如果您熟悉 Flarum，您还可以帮助初学者！
 
-🐛 If there's a bug that's bothering you, or a feature idea on your mind, we can't know about it unless you tell us! We track bugs, suggestions, and future development plans [via GitHub issues](https://github.com/flarum/core/issues). If there's already an issue open, adding likes and (constructive) additional information can be very helpful!
+🐛 如果有 bug 困扰着您，或者您脑海中有一个功能的想法，在您告诉我们之前我们是不会知道的！ 我们通过 [GitHub issues](https://github.com/flarum/core/issues) 跟踪错误、建议和未来的开发计划。 如果已经有 issue 被打开，点个赞和添加一些（建设性的）额外信息可能对我们非常有帮助！
 
-📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
+📣 如果您喜欢 Flarum ，请考虑在博客/推特/聊天中提到它！ 更多的人认识到 Flarum，就会有更多的人参与 Flarum，从而带来更多的活动、更好的扩展和更快的发展。
 
-Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-docs-translations.md) docs for more information.
+没有我们社区的贡献，Flarum就不会有今天。 如果您有意贡献，请参阅我们的 [开发人员贡献](contributing.md) 和 [其他贡献](contributing-docs-translations.md) 文档以获取更多信息。
