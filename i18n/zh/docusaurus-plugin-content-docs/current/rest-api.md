@@ -1,20 +1,20 @@
 # 使用 REST API
 
-Flarum 提供了 REST API，它可以被单页应用程序使用，也可供外部应用程序或外部服务使用。
+Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可供外部程序调用。
 
-API遵循了 [JSON:API](https://jsonapi.org/) 所规范定义的最佳做法。
+我们的 API 采用 [JSON:API](https://jsonapi.org/) 规范定义的最佳实践。
 
 :::info
 
-若要使用扩展 REST API 和新的接口，请在开发者文档中查看 [API 和数据流](extend/api.md)。
+若要扩展 REST API 以实现新的应用，请查看开发者文档《[API 与数据流](extend/api.md)》。
 
 :::
 
-## 身份认证
+## 身份验证
 
-单页应用程序可以使用 会话cookies 来进行 API 的身份验证。 外部脚本可以通过 [API密钥](#api-keys) 或 [访问令牌](#access-tokens) 使用使用无状态身份验证。
+我们的单页应用使用会话 Cookies 进行 API 的身份验证。 外部程序可使用 [API 密钥](#api-keys) 或 [访问令牌](#access-tokens) 的无状态身份验证。
 
-`GET` 接口可以在不进行身份认证的情况下使用， 只会返回游客可见的内容。 由于 [CSRF保护](#csrf-protection)（跨站请求伪造保护），其他接口通常不能在没有身份验证的情况下使用。
+`GET` 接口无需身份验证即可使用， 只会返回游客可见的内容。 由于 [CSRF保护](#csrf-protection)（跨站请求伪造保护），其他接口通常不能在没有身份验证的情况下使用。
 
 ### API密钥
 
