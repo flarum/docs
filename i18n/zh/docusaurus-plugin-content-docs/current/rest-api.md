@@ -14,53 +14,53 @@ Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可�
 
 我们的单页应用使用会话 Cookies 进行 API 的身份验证。 外部程序可使用 [API 密钥](#api-keys) 或 [访问令牌](#access-tokens) 的无状态身份验证。
 
-`GET` 接口无需身份验证即可使用， 但此时只会返回游客可见的内容。 由于 [CSRF保护](#csrf-protection)（跨站请求伪造保护），其他接口通常不能在没有身份验证的情况下使用。
+`GET` 接口无需身份验证即可使用， 但此时只会返回游客可见的内容。 为防止 [CSRF 攻击](#csrf-protection)，其他接口均需身份验证方可使用。
 
-### API密钥
+### API 密钥
 
-API密钥 是脚本、工具和其他应用程序与 Flarum 交互的主要方式。
+脚本、工具与集成应用和 Flarum 的交互应当采用 API 秘钥作为首选方案。
 
 #### 创建
 
-目前没有用于管理 API密钥 的界面，但是可以在数据库的 `api_keys` 表中手动创建。
+目前没有用于管理 API 密钥的操作界面，您只能在数据库 `api_keys` 表中手动创建。
 
-需要提供以下参数：
+以下参数可在创建时提供：
 
-- `key`：生成并设置一个长而唯一的 token（推荐使用字母数字组合，长度为 40 个字符），这将是在 `Authorization` 请求头中使用的令牌。
-- `user_id`：可选项。 如果设置了该值，则该 key 只能由被指定的用户使用。
+- `key`：秘钥。您需要自行生成一个独一无二的长字符串（推荐长度 40 的字母数字组合），秘钥将作为 `Authorization` 请求头的值。
+- `user_id`：用户 ID，可选项。 如果设置了此值，秘钥会被充当为指定的用户。
 
-剩余的属性将自动填充，或者目前暂未被使用：
+以下属性会被自动填充，部分作为保留字段尚未使用：
 
-- `id`：将被 MySQL 自动递增填写。
-- `allowed_ips`：未实现。
-- `scopes`：未实现。
-- `created_at`：可以设置为任何日期，但它指的是 key 的创建日期。
-- `last_activity_at`：当 key 被使用时将自动更新。
+- `id`：主键。由 MySQL 自动递增填写。
+- `allowed_ips`：IP 白名单。保留字段，尚未使用。
+- `scopes`：范围。保留字段，尚未使用。
+- `created_at`：创建时间。虽然可设置任意日期值，但理应表示秘钥的创建日期。
+- `last_activity_at`：上次使用时间。秘钥被使用时自动更新。
 
 #### 使用
 
-使用 `Authorization` 请求头将您的 key 添加到每个 API请求 中。 然后在请求头的末尾提供你想要交互的用户 ID：
+发起 API 请求时，将秘钥添加到 `Authorization` 请求头即可。 如需指定扮演用户角色，可在请求头末尾添加。
 
-    Authorization: Token YOUR_API_KEY_VALUE; userId=1
+    Authorization: Token 你的_API_秘钥_值; userId=1
 
-如果数据库中为密钥设置了 `user_id` 值， `userId=` 将被忽略。 否则，它可以设置为数据库中的任何有效的用户ID。
+如果在数据库中为密钥设置了 `user_id` 值，请求头中的 `userId=` 将被忽略。 否则，任何有效的用户 ID 都可起作用。
 
 ### 访问令牌
 
-访问令牌（Access Tokens）是属于特定用户的短期令牌。
+访问令牌（Access Tokens）是基于用户的短效令牌。
 
-这些令牌被用于后台的 cookie sessions。 在无状态 API 请求中使用它们具有与常规会话相同的效果。 每当使用访问令牌时，用户的最后一次活动都会被更新。
+这些令牌用于 Cookie 会话， 使用他们与常规会话别无二致。 用户的上次在线时间会随访问令牌的使用而更新。
 
 #### 创建
 
-所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 接口并提供你的用户的凭据：
+所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 接口并提供用户凭证：
 
 ```
 POST /api/token HTTP/1.1
 
 {
-    "identification": "Toby",
-    "password": "pass7word"
+    "identification": "张三",
+    "password": "张三的密码"
 }
 
 HTTP/1.1 200 OK
@@ -71,17 +71,17 @@ HTTP/1.1 200 OK
 }
 ```
 
-目前存在 3 种令牌类型，但是只有 2 种类型可以通过 REST API 创建。
+我们目前存在 3 种令牌类型，其中 2 种可以通过 REST API 创建。
 
-- `session` 令牌在 1小时内 没有活动之后即会过期。 这是默认的令牌类型。
-- `session` 令牌在 5年内 没有活动之后即会过期。 可以通过在请求属性中指定 `remember=1` 来获取这种令牌。
-- `developer` 令牌永不过期。 目前，只能在数据库中手动创建这种令牌。
+- `session` 令牌在 1 小时没有活动后即会过期。 这是默认的令牌类型。
+- `session_remember` 令牌在 5 年没有活动后即会过期。 在请求体中添加 `remember=1` 属性即可获取这种令牌。
+- `developer` 令牌永不过期。 目前只可通过数据库手动创建这种令牌。
 
-**所有访问令牌在用户注销时被删除**（包括 `developer` 令牌，不过我们计划更改这种情况）。
+**所有令牌将在用户注销时一并失效**（包括 `developer` 令牌，不过我们计划改变这种状况）。
 
 #### 使用
 
-使用 `Authorization` 请求头将返回的 `token` 值（令牌值）附加到每个 API 请求：
+发起 API 请求时，将上一步取得的 `token` 添加到 `Authorization` 请求头即可：
 
     Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
 
