@@ -93,13 +93,13 @@ HTTP/1.1 200 OK
 
 ## 端点
 
-这部分文档仍在编写中。 我们正在研究为接口提供自动化文档的选项。
+这部分文档仍在编写中。 我们正在研究如何为端点实现自动化文档。
 
-每个扩展都会添加新的接口和属性，因此很难提供所有接口的完整文档。 发现接口的一个好方法是使用浏览器开发工具来检查单页应用程序发出的请求。
+每个扩展程序都可自行添加新的端点和属性，因此提供涵盖所有端点的文档。 若要查看端点，您可以使用浏览器的开发者工具检查单页应用发起的请求。
 
-下面是一些常用接口的示例。 为了方便阅读，已截短 JSON。
+下面是一些常用接口的示例。 为方便阅读，部分 JSON 字段已略去。
 
-### 列出主题（discussions）
+### 列出全部主题帖
 
     GET /api/discussions
 
@@ -112,22 +112,22 @@ HTTP/1.1 200 OK
   "data": [
     {
       "type": "discussions",
-      "id": "234",
+      "id": "227",
       "attributes": {
-        "title": "Lorem Ipsum",
-        "slug": "234-lorem-ipsum",
+        "title": "出师表",
+        "slug": "227-chu-shi-biao",
         "commentCount": 10,
         "participantCount": 3,
-        "createdAt": "2022-01-01T10:20:30+00:00",
-        "lastPostedAt": "2022-01-05T10:20:30+00:00",
+        "createdAt": "0227-01-01T00:10:30+08:00",
+        "lastPostedAt": "0227-01-05T00:10:30+08:00",
         "lastPostNumber": 10,
         "canReply": true,
         "canRename": true,
         "canDelete": true,
         "canHide": true,
         "isHidden": true,
-        "hiddenAt": "2022-01-06T10:20:30+00:00",
-        "lastReadAt": "2022-01-02T10:20:30+00:00",
+        "hiddenAt": "0227-01-01T00:10:30+08:00",
+        "lastReadAt": "0227-01-01T00:10:30+08:00",
         "lastReadPostNumber": 2,
         "isApproved": true,
         "canTag": true,
@@ -184,8 +184,8 @@ HTTP/1.1 200 OK
       "type": "users",
       "id": "1",
       "attributes": {
-        "username": "Admin",
-        "displayName": "Admin",
+        "username": "Zhugeliang",
+        "displayName": "诸葛亮",
         "avatarUrl": null,
         "slug": "1"
       }
@@ -232,7 +232,7 @@ HTTP/1.1 200 OK
         "contentHtml": "<p>你好，世界！</p>"
       }
     },
-    // [...] 包含更多的主题
+    // [...] 其他包含内容
   ]
 }
 ```
@@ -263,7 +263,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-响应中会包含新主题的 ID：
+服务器响应含有新主题的 ID：
 
 ```json
 {
@@ -272,7 +272,7 @@ HTTP/1.1 200 OK
     "id": "42",
     "attributes": {
       "title": "这里是标题",
-      "slug": "42-lorem-ipsum",
+      "slug": "42-gu-ding-lian-jie",
       "commentCount": 1
       // [...] 其他属性
     },
@@ -291,7 +291,7 @@ HTTP/1.1 200 OK
           "id": "1"
         }
       },
-      // [...] 其他关联（relationships）
+      // [...] 其他关联内容
     }
   },
   "included":[
@@ -305,7 +305,7 @@ HTTP/1.1 200 OK
         // [...] 其他属性
       }
     }
-    // [...] 其他
+    // [...] 其他包含内容
   ]
 }
 ```
@@ -318,9 +318,9 @@ HTTP/1.1 200 OK
 {
   "data": {
     "attributes": {
-      "username": "Flarum",
+      "username": "YongHuMing",
       "email": "flarum@example.com",
-      "password": "correcthorsebatterystaple"
+      "password": "MiMa"
     }
   }
 }
@@ -328,13 +328,13 @@ HTTP/1.1 200 OK
 
 ## 错误
 
-Flarum 使用了各种 HTTP 状态码和遵循 [JSON:API 错误规范](https://jsonapi.org/format/#errors) 的错误描述。
+Flarum 使用不同的 HTTP 状态码进行错误应答，所有错误表述均符合 [JSON:API 错误规范](https://jsonapi.org/format/#errors)。
 
-下面是您在使用 REST API 时可能遇到的一些常见错误：
+下面是您使用 REST API 时可能遇到的一些常见错误：
 
 ### CSRF 令牌不匹配
 
-如果您收到了消息为 `csrf_token_mismatch` 的 400 HTTP 错误， 这意味着 `Authorization` 请求头缺失或无效，并且 Flarum 尝试通过会话 cookie 进行身份验证。
+如果您收到了消息为 `csrf_token_mismatch` 的 400 HTTP 错误，这意味着 `Authorization` 请求头缺失或无效，导致 Flarum 尝试通过会话 Cookie 进行身份验证。
 
 ```json
 {
@@ -349,7 +349,7 @@ Flarum 使用了各种 HTTP 状态码和遵循 [JSON:API 错误规范](https://j
 
 ### 验证错误
 
-验证错误会返回 HTTP 状态码 422。 无效字段的名称会以 `pointer` 值返回。 单个字段可能同时出现多个错误。
+验证错误会返回一个 HTTP 状态码 422 的响应。 无效字段的名称会以 `pointer` 值返回。 在同一时间，单个字段可能出现多个错误。
 
 ```json
 {
@@ -357,7 +357,7 @@ Flarum 使用了各种 HTTP 状态码和遵循 [JSON:API 错误规范](https://j
     {
       "status": "422",
       "code": "validation_error",
-      "detail": "The username has already been taken.",
+      "detail": "The username has already been taken.", // 用户名已被使用
       "source":{
         "pointer":"\/data\/attributes\/username"
       }
@@ -365,7 +365,7 @@ Flarum 使用了各种 HTTP 状态码和遵循 [JSON:API 错误规范](https://j
     {
       "status": "422",
       "code": "validation_error",
-      "detail": "The email has already been taken.",
+      "detail": "The email has already been taken.", // 邮箱地址已被使用
       "source": {
         "pointer":"\/data\/attributes\/email"
       }
