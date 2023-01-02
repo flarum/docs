@@ -14,7 +14,7 @@ Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可�
 
 我们的单页应用使用会话 Cookies 进行 API 的身份验证。 外部程序可使用 [API 密钥](#api-keys) 或 [访问令牌](#access-tokens) 的无状态身份验证。
 
-`GET` 接口无需身份验证即可使用， 但此时只会返回游客可见的内容。 为防止 [CSRF 攻击](#csrf-protection)，其他接口均需身份验证方可使用。
+`GET` 端点无需身份验证即可使用， 但此时只会返回游客可见的内容。 为防止 [CSRF 攻击](#csrf-protection)，其他端点均需身份验证方可使用。
 
 ### API 密钥
 
@@ -53,7 +53,7 @@ Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可�
 
 #### 创建
 
-所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 接口并提供用户凭证：
+所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 端点并提供用户凭证：
 
 ```
 POST /api/token HTTP/1.1
@@ -87,11 +87,11 @@ HTTP/1.1 200 OK
 
 ### CSRF 保护
 
-大多数 `POST`/`PUT`/`DELETE` API接口 都有 [跨站请求伪造](https://en.wikipedia.org/wiki/Cross-site_request_forgery)（Cross-site request forgery，缩写CSRF）的保护。 这意味着没有身份验证就不可能发出无状态请求。
+多数 `POST`/`PUT`/`DELETE` API 端点都有 [跨站请求伪造](https://en.wikipedia.org/wiki/Cross-site_request_forgery)（Cross-site request forgery，缩写 CSRF）保护功能。 因此，要发出无状态请求，必须进行身份验证。
 
-使用 API密钥 或访问令牌时，可以通过 CSRF 保护。
+使用 API 密钥或访问令牌时，可跳过 CSRF 保护。
 
-## 接口
+## 端点
 
 这部分文档仍在编写中。 我们正在研究为接口提供自动化文档的选项。
 
