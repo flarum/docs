@@ -10,9 +10,9 @@
 
 ### 我可以捐款以加快开发进展吗？
 
-All donations are gratefully received. 首先，非常感谢您有捐款意向，您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。
+衷心感谢所有的捐款。 您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。
 
-其次，很抱歉，捐款并不会直接影响 Flarum 的开发速度。 我们也鼓励用户在其他方面做出贡献，比如 [贡献代码](contributing.md)、[开发扩展](/extend/)、编写文档、将 Flarum 翻译成其他语言，或在 [社区论坛](https://discuss.flarum.org/) 上提供帮助和支持，成为社区里的中坚力量！
+但是，捐款并不会直接影响 Flarum 的开发速度。 我们也鼓励用户在其他方面做出贡献，比如 [贡献代码](contributing.md)、[开发扩展](/extend/)、编写文档、将 Flarum 翻译成其他语言，或在 [社区论坛](https://discuss.flarum.org/) 上提供帮助和支持，成为社区里的中坚力量！
 
 ### Flarum 会有****的功能吗？ 什么时候有？ 为什么还没做呢？
 
