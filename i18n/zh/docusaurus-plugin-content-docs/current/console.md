@@ -44,7 +44,7 @@ Get information about Flarum's core and installed extensions. 调试问题时这
 
 Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
 
-### migrate
+### 迁移
 
 `php flarum migrate`
 
