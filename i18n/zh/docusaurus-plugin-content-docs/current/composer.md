@@ -51,8 +51,8 @@ Composer 解决了所有这些，乃至更多的问题!
 
 ```json
 {
-    // This following section is mostly just metadata about the package.
-    // For forum admins, this doesn't really matter.
+    // 以下章节大部分只是关于包的元数据。
+    // 对论坛管理员来说，这并不重要。
     "name": "flarum/flarum",
     "description": "Delightfully simple forum software.",
     "type": "project",
@@ -74,10 +74,10 @@ Composer 解决了所有这些，乃至更多的问题!
         "source": "https://github.com/flarum/flarum",
         "docs": "https://flarum.org/docs/"
     },
-    // End of metadata
+    // 元数据结束
 
-    // This next section is the one we care about the most.
-    // It's a list of packages we want, and the versions for each.
+    // 下面是我们最关心的部分
+    // 这是我们想要的包清单和每个包的版本。
     // We'll discuss this shortly.
     "require": {
         "flarum/core": "^1.0",
