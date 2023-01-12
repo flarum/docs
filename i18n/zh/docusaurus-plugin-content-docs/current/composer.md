@@ -78,7 +78,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
     // 下面是我们最关心的部分
     // 这是我们想要的包清单和每个包的版本。
-    // We'll discuss this shortly.
+    // 我们会简单略过他们
     "require": {
         "flarum/core": "^1.0",
         "flarum/approval": "*",
@@ -99,16 +99,16 @@ Composer 解决了所有这些，乃至更多的问题!
         "flarum/tags": "*"
     },
 
-    // Various composer config. The ones here are sensible defaults.
-    // See https://getcomposer.org/doc/06-config.md for a list of options.
+    // Composer 的配置多种多样。 这是合理的默认值。
+    // 您可在 https://getcomposer.org/doc/06-config.md 找到选项列表。
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
     },
 
-    // If composer can find a stable (not dev, alpha, or beta) version
-    // of a package, it should use that. Generally speaking, production
-    // sites shouldn't run beta software unless you know what you're doing.
+    // 如果 composer 可以找到一个软件包的稳定（而非测试）版本，
+    // 它应当使用它。 一般来说，生产站点不应运行测试版软件，
+    // 除非你明白自己在做什么。
     "prefer-stable": true
 }
 ```
@@ -117,9 +117,9 @@ Composer 解决了所有这些，乃至更多的问题!
 
 对于 Flarum 项目来说，在安装 `flarum/core` 的 `require` 字段中，你会看到有几种类型的条目：
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0`.
-- You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
-- Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
+- 你必须有一个 `flarum/core` 节点。 这应该包含一个与您想要安装的版本相对应的明确的版本字段。 对于 1.x 版本的 Flarum，这应是 `^1.0`。
+- 你应该为你安装的每个扩展配备一个节点。 一些内置扩展（比如 `flarum/tags` 和 `flarum/suspend` 等）已被默认包含，[其他的由您通过 composer 指令添加](extensions.md)。 除非你有其它原因（比如正在测试一个包的测试版本），我们建议使用星号作为扩展的版本字段（`*`）。 它的意思是“安装与我的 flarum/core 相适配的最新版本”。
+- 某些扩展/功能可能需要 PHP 包，而不是 Flarum 扩展。 比如，你需要 guzzle 库来使用 [Mailgun 邮件驱动器](mail.md)。 在这种情况下，该扩展/功能的说明应该解释使用哪个版本字段。
 
 ## 如何安装 Composer？
 
@@ -135,28 +135,28 @@ Composer 解决了所有这些，乃至更多的问题!
 
 :::danger
 
-Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
+互联网上的一些文章会提到你可以使用像 PHP shell 这样的工具。 如果你不知道你在做什么或他们在说什么，请小心！ 无保护的 web shell 是 **极危险的**。
 
 :::
 
 ## 如何使用Composer
 
-You'll need to use Composer over the  **C**ommand-**l**ine **i**nterface (CLI). Be sure you can access your server over **S**ecure **Sh**ell (SSH).
+你需要在命令行界面（CLI）上运行 Composer。 请确保你可以通过 SSH 访问你的服务器。
 
-一旦您安装了作曲家，您应该能够通过 `作曲家COMMAND` 在您的 SSH 终端中运行作曲者命令。
+一旦你安装了 Composer，你应该能够通过 `composer COMMAND` 在您的 SSH 终端中运行 composer 命令。
 
-:::info Optimizations
+:::info 优化
 
-After most commands, you'll want to run `composer dump-autoload -a`. Essentially, this caches PHP files so they run faster.
+在大多数命令后，你可以运行 `composer dump-autoload -a`。 基本上，这会缓存 PHP 文件使他们运行得更快。
 
 :::
 
-## I don't have SSH access
+## 我没有 SSH 权限
 
-Most decent hosts should provide SSH access for shared hosting. If your host doesn't (and you can't switch to a good host that does offer it), hope might not yet be lost. You have several options:
+大多数像样的主机提供商都应当为共享主机提供 SSH 权限。 如果你的主机商不提供（而且你无法选择一个好的提供它的主机商），还有希望。 你有几个选择：
 
-- Use alternatives like [Pockethold](https://github.com/UvUno/pockethold) to install Flarum. Note that you'll still need composer (and SSH) to install extensions.
-- Install composer on your computer, and run the `install` command locally. Then upload the files via FTP to your host. To make modifications (updating Flarum, installing/updating/removing extensions), download the current versions of the files, run whatever composer commands you need locally, and then replace the `composer.json` and `composer.lock` files, and the `vendor` directory of your install with your local copy. Make sure to create backups before doing this!
-- Some web hosts might provide a GUI for managing composer. The command line version is generally preferably, but if a GUI is the only possibility, consult your host's documentation for information on how to use it.
+- 使用如 [Pockethold](https://github.com/UvUno/pockethold) 等的备选方案来安装 Flarum。 注意你依旧需要 composer（和 SSH）来安装扩展。
+- 在你的电脑上安装 composer，本地运行 `install` 指令。 然后使用 FTP 把文件上传到你的主机。 要做修改的话（升级 Flarum、安装/升级/移除扩展），下载当前版本的文件，本地运行你需要的 composer 指令，然后替换 `composer.json` 和 `composer.lock` 文件，以及你本地副本安装的 `vendor` 目录。 请在进行这些操作之前备份！
+- 一些网络主机商可能会提供一个管理 composer 的 GUI。 命令行版本通常比较可取，但如果 GUI 是唯一选择，参阅你主机商的文档以了解如何使用它。
 
-Note that these workarounds are not officially supported! The only officially supported way to install and manage Flarum is through Composer.
+请注意这些操作是不被官方支持的！ 官方唯一支持的安装和管理 Flarum 的方法是通过 Composer。
