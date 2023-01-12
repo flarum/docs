@@ -1,38 +1,38 @@
-# PR Merging Policy
+# PR 合并方针
 
-Technical contributions to the Flarum source code go through a review process. Over the years we have tuned this process based on our experiences, our targeted development speed and availability.
+对 Flarum 源代码的技术性贡献需要经过审查流程。 多年来，我们依据我们的经验、我们目标明确的开发速度和可得性来调整这一流程。
 
-## What makes a great Pull Request?
+## 什么造就了优秀的 Pull Request？
 
-Great pull requests:
+优秀的 Pull Requests：
 
-- Have the [Pull Request template](https://github.com/flarum/.github/blob/main/PULL_REQUEST_TEMPLATE.md) filled out completely when opening a pull request.
-- Do not combine different changes. Although tempting, don't change formatting of unrelated code. Stick to the one feature or change you wish to contribute.
-- Have a related issue where the technical implementation has been agreed upon by the core team, or has been approved on by the core team through discussion on the official forums or other channels like Discord.
-- Clearly explain the need for the change and list the areas where the pull request requires discussion.
+- 在发起 pull request 时，完整填写 [Pull Request 模板](https://github.com/flarum/.github/blob/main/PULL_REQUEST_TEMPLATE.md)。
+- 不合并不同的更改。 不要修改无关代码的格式，即使它很有吸引力。 专注于你想贡献的单一功能或变更。
+- 有一个相关的已被核心团队认可的技术实行方案的 issue，或者该技术实行方案已经被核心团队通过官方论坛的讨论或类似于 Discord 的其他渠道同意。
+- 清楚地解释此更改的必要性并列出此 pull request 需要讨论的地方。
 
-## Implementation Review Criteria
+## 执行审查标准
 
-- Adheres to our conventions or can be patched up easily after merging, follows proper code style.
-- Are there any implementation details that could be done better through alternate technologies/technical approaches?
-- Does not touch any lines outside of the intended changes, eg through formatting or compilation.
-- If the changes are to code intended as a public API, has a proper doc block been included?
+- 遵循我们的公约或者可以轻松地在合并后修补，遵循适当的代码风格。
+- 是否有任何实行细节可以通过替代技术/技术办法做得更好？
+- 不触及预定更改之外的任何行，例如通过格式化或编译。
+- 如果修改了公共 API 代码，是否有适当的文档部分？
 
-## Merge Time!
+## 合并时间！
 
-If all the checks in the template are met, **any** core developer may merge this PR. If the PR is authored by a core developer, they should probably be the ones to merge it.
+如果符合所有模板中的检查，**任何**核心开发者都可以合并这个 PR。 如果此 PR 由一名核心开发者编写，他们可能是合并它的人。
 
-- Merging:
-  - GitHub offers several ways to merge a PR. Choose between the following strategies:
-    - **Merge** when the PR branch consists of atomic, well-described commits that are nice to have in the version history.
-    - **Squash** when lots of cleanup commits have accumulated. Please make sure to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) spec for the squash commit. We usually find several commits from bots like StyleCI in these prefabricated commit messages, their commit messages should be removed.
+- 合并：
+  - GitHub 提供了合并 PR 的几种方式。 在以下策略中选择：
+    - 当 PR 分支由单个的描述细致的提交组成，并且适合出现在版本列表中，选择 **Merge**。
+    - 当积攒了大量提交时，**Squash** 是个好选择。 请务必按照 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 规范来 squash 提交。 我们通常会在这些预制的提交信息中发现一些来自StyleCI等机器人的提交，他们的提交信息应该被删除。
 
-- After merging:
-  - Assign the related issue (if none exists, the pull request itself, but never both) to the appropriate milestone.
-  - Close all relevant issues (*if* they are closed completely).
-  - Regressions should be labeled as such and removed from the project board and milestone after merging.
-  - Check for follow-up tasks:
-    - Merge related PRs (language files, extensions, documentations).
-    - Documentation updates.
-  - Create issues for further follow-up tasks, if necessary.
+- 在合并之后：
+  - 将相关的 issue（如果没有，则是 pull request 本身，但绝不是两者同时）分配给适当的里程碑。
+  - 关闭所有相关 issue（它们*是否*被全部关闭）。
+  - 回归应按此标明，并在合并后从项目板和里程碑中删除。
+  - 检查后续任务：
+    - 合并相关的 PR（语言文件、扩展、文档）。
+    - 更新文档。
+  - 如有必要，为进一步的后续任务创建一个 issue。
 
