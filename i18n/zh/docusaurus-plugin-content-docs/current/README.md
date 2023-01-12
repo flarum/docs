@@ -10,7 +10,7 @@ Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易
 
 ## 目标
 
-Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)， 她生来就被设计如此：
+Flarum 的前身是 [esoTalk](https://github.com/esotalk/esoTalk) 和 [FluxBB](https://fluxbb.org)， 它生来就被设计如此：
 
 * **快速、简单。 ** 不杂乱不臃肿，没有复杂的依赖关系。 Flarum 使用 PHP 构建，因此很容易被部署。 界面采用高性能且小巧的 JavaScript 框架 [Mithril](https://mithril.js.org)。
 
