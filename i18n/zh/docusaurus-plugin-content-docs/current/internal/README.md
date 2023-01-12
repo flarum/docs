@@ -4,4 +4,4 @@ slug: '/internal'
 
 # 团队内部文档
 
-这是一个全新的单元，我们将在这里发布一些内部文档。 This is a new documentation section, where we will be posting some docs used internally by the Flarum team. We are starting this section to provide our community with transparency as to how Flarum is run, and to help those hoping to contribute to Flarum.
+这是一个全新的部分，我们将在这里发布一些 Flarum 团队内部使用的文档。 我们开始此部分以向我们的社区提供有关 Flarum 如何运作的透明度，与帮助想要为 Flarum 贡献的人们。
