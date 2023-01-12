@@ -85,7 +85,7 @@ www.example.com {
 
 扩展程序可能需要其它目录，所以你可能需要递归地授予整个Flarum 根安装目录的写权限。
 
-您需要运行几个命令来设置文件权限。 Please note that if your install doesn't show warnings after executing just some of these, you don't need to run the rest.
+您需要运行几个命令来设置文件权限。 请注意，如果您在执行一部分安装后没有显示警告，您无需运行其余部分。
 
 首先，您需要允许写访问目录。 在 Linux 上：
 
