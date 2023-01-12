@@ -1,6 +1,6 @@
 # 更新
 
-您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它(尽管你是熟悉的, 因为你需要它来安装Flarum), 阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
+您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
 
 如果跨主要版本进行更新(如 <=0.1.0 to 1.x.x, 1.x.x 到 2.x.x.x, ... )，请确保在运行一般升级步骤之前阅读相应的“主要版本更新指南”。
 
