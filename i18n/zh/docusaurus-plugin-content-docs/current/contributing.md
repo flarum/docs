@@ -82,9 +82,9 @@ Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpst
 
 ## 编码风格
 
-A typical contribution workflow looks like this:
+典型的作出贡献的工作流会像这样：
 
-0. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
+0. 🧭 **计划** 为你的贡献做计划。
     * *Bug 修复* 应当提交合并到最新的稳定分支。
     * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
 
