@@ -18,17 +18,17 @@
 
 ## 开发设置
 
-请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。 您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。 If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
+请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。 您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。 有任何您不确定的问题，不要犹豫，直接提问！ All of us were just starting out once.
 
-如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们，以免做无用功。 This way we can ensure that your precious work is not in vain.
+如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们， 以免做无用功。
 
 Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
 
 ## 开发流程
 
-### Setting Up a Local Codebase
+### 建立本地代码库
 
-[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions. Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum 是一个「骨架」应用程序，它使用 Composer 下载核心包 和 一堆扩展程序](https://github.com/flarum/flarum)。 Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
@@ -88,35 +88,35 @@ A typical contribution workflow looks like this:
     * *Bug 修复* 应当提交合并到最新的稳定分支。
     * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
 
-1. 🔨 **编写代码**，编写一些代码。
+1. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
     * 请参见这里的 [编码风格](#编码风格)。
     * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
     * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
-2. 🚦 **测试代码**，测试您的代码。
+2. 🔨 **编写代码**，编写一些代码。
     * 修复错误或添加功能时，请根据需要添加单元测试。
 
-3. 💾 **提交代码**，并附上一条描述性信息。
-    * Add unit tests as necessary when fixing bugs or adding features.
+3. 🚦 **测试代码**，测试您的代码。
+    * 修复错误或添加功能时，请根据需要添加单元测试。
     * 使用相关包文件夹中的 `vendor/bin/phpunit` 运行测试套件。
-    * See [here](extend/testing.md) for more information about testing in Flarum.
+    * 查看 [这里 ](extend/testing.md) 来获取更多在Flarum中测试的信息。
 
-4. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
+4. 💾 **提交代码**，并附上一条描述性信息。
     * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
-    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * 请务必按照 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 规范提交。
     * *Fix* commits should describe the issue fixed, not how it was fixed.
 
-5. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
+5. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
     * 填写 Pull Request 模板。
     * 如果您的更改是视觉上的，请附上一张截图或 GIF 来演示变更。
     * 请不要包含 JavaScript `dist` 文件。 这些文件会在合并时自动编译。
 
-6. 🕺 **恭喜**，您刚刚向 Flarum 做了贡献。
+6. 🤝 **合作共赢**，等待 Flarum 团队批准您的请求。
     * 团队成员将审核您的代码。 我们可能会提出一些修改、改进或替代方案，但对于一些小的改动，应该很快就会接受您的 Pull Request。
     * 在处理反馈时，请附加 commit，不要覆盖或压缩提交（我们将在合并时压缩）。
 
-7. 🕺 **Dance** like you just contributed to Flarum.
+7. 🕺 **恭喜**，您刚刚向 Flarum 做了贡献。
 
 ## 开发工具
 
