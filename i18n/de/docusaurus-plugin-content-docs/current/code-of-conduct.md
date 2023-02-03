@@ -16,7 +16,7 @@ Wir sind alle hier, um über Flarum zu sprechen und gemeinsam daran zu arbeiten,
 - Spam, Phishing-Posts und alle Aktionen, die darauf abzielen, diese Website zu verunstalten
 - Diskussion über Softwarepiraterie und ähnliche Themen
 
-*Alles oben Genannte sind Gründe für Moderatormaßnahmen.* Wenn Duein Problem mit einem anderen Mitglied habst, bitten wir Dich, dieses nicht selbst zu konfrontieren. Wenn es sich um das Forum handelt, verwende bitte den Befehl *Melden* für den betreffenden Beitrag und überlasse es dann den Mitarbeitern, sich mit der Situation zu befassen. Andernfalls melde den Verstoß an [admin@flarum.org](mailto:admin@flarum.org).
+*Alles oben Genannte sind Gründe für Moderatormaßnahmen.* Wenn Duein Problem mit einem anderen Mitglied habst, bitten wir Dich, dieses nicht selbst zu konfrontieren. Wenn es sich um das Forum handelt, verwende bitte den Befehl *Melden* für den betreffenden Beitrag und überlasse es dann den Mitarbeitern, sich mit der Situation zu befassen. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Unsere Moderatoren können Inhalte bearbeiten oder löschen, die anstößig sind oder den Kommunikationsfluss stören. Unsere Moderatoren können Inhalte bearbeiten oder löschen, die anstößig sind oder den Kommunikationsfluss stören. Also, weißt du, *sei cool*. 😎
 
