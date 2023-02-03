@@ -16,7 +16,7 @@ Siamo tutti qui per parlare di Flarum, e lavorare insieme per renderlo un'applic
 - Spam, messaggi di phishing e qualsiasi azione intesa a deturpare questo sito
 - Discussione sulla pirateria del software e argomenti simili
 
-*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se è sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. Altrimenti, segnalare la violazione a [admin@flarum.org](mailto:admin@flarum.org).
+*Tutte queste azioni sono passibili di azione da parte dei moderatori. Se hai un problema con un altro membro, ti chiediamo di non affrontarlo da solo. Se è sul forum, utilizza il comando Segnala sul post in questione, quindi lascia che sia lo staff a occuparsi della situazione. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 I nostri moderatori possono modificare o eliminare qualsiasi contenuto offensivo o di disturbo al flusso di comunicazione. Reati gravi o ripetuti possono portare alla sospensione dell'account dell'utente offensivo. Detto ciò, sii sempre gentile e calmo. 😎
 
