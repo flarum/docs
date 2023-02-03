@@ -16,7 +16,7 @@ Tất cả chúng ta ở đây để nói về Flarum và cùng nhau làm việc
 - Thư rác, bài đăng lừa đảo và bất kỳ hành động nào nhằm làm xấu mặt trang web này
 - Thảo luận về vi phạm bản quyền phần mềm và các chủ đề tương tự
 
-*Tất cả những điều trên là cơ sở để người kiểm duyệt hành động.* Nếu bạn gặp vấn đề với một thành viên khác, chúng tôi yêu cầu bạn không tự mình đối mặt với họ. Nếu là trên diễn đàn, vui lòng sử dụng lệnh *Báo cáo* trên bài đăng được đề cập, sau đó giao cho nhân viên xử lý tình huống. Nếu không, hãy báo cáo vi phạm tới [admin@flarum.org](mailto:admin@flarum.org).
+*Tất cả những điều trên là cơ sở để người kiểm duyệt hành động.* Nếu bạn gặp vấn đề với một thành viên khác, chúng tôi yêu cầu bạn không tự mình đối mặt với họ. Nếu là trên diễn đàn, vui lòng sử dụng lệnh *Báo cáo* trên bài đăng được đề cập, sau đó giao cho nhân viên xử lý tình huống. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Người kiểm duyệt của chúng tôi có thể chỉnh sửa hoặc xóa bất kỳ nội dung nào gây khó chịu hoặc làm gián đoạn luồng giao tiếp. Các hành vi vi phạm nghiêm trọng hoặc nhiều lần có thể dẫn đến việc tạm ngưng tài khoản của người dùng vi phạm. Vì vậy, bạn biết đấy, *hãy thật tuyệt*. 😎
 
