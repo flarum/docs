@@ -16,7 +16,7 @@ Hepimiz Flarum hakkında konuşmak ve onu daha iyi bir uygulama haline getirmek 
 - Spam, kimlik avı gönderileri ve bu siteyi tahrif etmeye yönelik her türlü eylem
 - Yazılım korsanlığı ve benzeri konuların tartışılması
 
-*Yukarıdakilerin tümü moderatör eylemi gerekçesidir.* Başka bir üyeyle bir sorununuz varsa, lütfen onlarla kendi başınıza yüzleşmemenizi rica ederiz. Forumdaysa, lütfen söz konusu gönderide *Report* komutunu kullanın, ardından durumla ilgilenmesi için bunu yetkiliye bırakın. Aksi takdirde, ihlali [admin@flarum.org](mailto:admin@flarum.org) adresine bildirin.
+*Yukarıdakilerin tümü moderatör eylemi gerekçesidir.* Başka bir üyeyle bir sorununuz varsa, lütfen onlarla kendi başınıza yüzleşmemenizi rica ederiz. Forumdaysa, lütfen söz konusu gönderide *Report* komutunu kullanın, ardından durumla ilgilenmesi için bunu yetkiliye bırakın. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Moderatörlerimiz, saldırgan veya iletişim akışını aksatan herhangi bir içeriği düzenleyebilir veya silebilir. Ciddi veya tekrarlanan suçlar, ihlalde bulunan kullanıcının hesabının askıya alınmasına neden olabilir. Yani, bilirsin, *sakin ol*. 😎
 
