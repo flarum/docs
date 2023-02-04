@@ -16,7 +16,7 @@ We're all here to talk about Flarum, and to work together toward making it an ev
 - Spam, phishing posts, and any actions intended to deface this site
 - Discussion of software piracy and similar topics
 
-*All the above are grounds for moderator action.* If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the *Report* command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation to [admin@flarum.org](mailto:admin@flarum.org).
+*All the above are grounds for moderator action.* If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the *Report* command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Our moderators may edit or delete any content that is offensive or disruptive to the flow of communication. Serious or repeated offenses may lead to suspension of the offending user's account. So, you know, *be cool*. 😎
 
