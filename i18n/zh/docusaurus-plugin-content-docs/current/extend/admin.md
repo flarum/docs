@@ -6,11 +6,11 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
-## Extension Data API
+## 扩展数据API
 
 这个新的 API 允许您用极少的代码添加设置到扩展中。
 
-### Telling the API about your extension
+### 告诉API您扩展的信息
 
 Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
 
