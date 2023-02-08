@@ -26,7 +26,7 @@ Next, you need to create a `phpstan.neon` file in the root of your extension. Th
 
 ```neon
 includes:
-  - vendor/php-packages/phpstan/extension.neon
+  - vendor/flarum/phpstan/extension.neon
 
 parameters:
 	# The level will be increased in Flarum 2.0
@@ -37,7 +37,7 @@ parameters:
 	excludePaths:
 		- *.blade.php
 	checkMissingIterableValueType: false
-	databaseMigrationsPath: ['framework/core/migrations']
+	databaseMigrationsPath: ['migrations']
 ```
 
 Finally, you need to add the following script to your `composer.json` file:

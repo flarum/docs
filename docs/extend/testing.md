@@ -23,7 +23,7 @@ $ flarum-cli infra backendTesting
 Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
 
 ```bash
-composer require --dev flarum/testing:^1.0`
+composer require --dev flarum/testing:^1.0
 ```
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
