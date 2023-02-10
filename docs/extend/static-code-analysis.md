@@ -29,15 +29,15 @@ includes:
   - vendor/flarum/phpstan/extension.neon
 
 parameters:
-	# The level will be increased in Flarum 2.0
-	level: 5
-	paths:
-	  - src
-	  - extend.php
-	excludePaths:
-		- *.blade.php
-	checkMissingIterableValueType: false
-	databaseMigrationsPath: ['migrations']
+  # The level will be increased in Flarum 2.0
+  level: 5
+  paths:
+    - src
+    - extend.php
+  excludePaths:
+    - *.blade.php
+  checkMissingIterableValueType: false
+  databaseMigrationsPath: ['migrations']
 ```
 
 Finally, you need to add the following script to your `composer.json` file:
