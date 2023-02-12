@@ -7,21 +7,17 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import {
-  useAlternatePageUtils, ThemeClassNames,
+  ThemeClassNames,
 } from '@docusaurus/theme-common';
 import Translate from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import OriginalDocVersionBanner from '@theme-original/DocVersionBanner';
 import clsx from 'clsx';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
-function NonDefaultLangLabel({ defaultLocale }) {
-  const alternatePageUtils = useAlternatePageUtils();
+function NonDefaultLangLabel({ locale }) {
+  const toPath = location.pathname.replace('/' + locale + '/', '/');
 
-  const toDefaultLocale = `${alternatePageUtils.createUrl({
-    locale: defaultLocale,
-    fullyQualified: false,
-  })}`;
-  
   return (
     <Translate
       id="customtheme.docs.lang.nonDefaultLangLabel"
@@ -29,7 +25,7 @@ function NonDefaultLangLabel({ defaultLocale }) {
       values={{
         defaultLocaleLink: (
           <b>
-            <Link href={toDefaultLocale} autoAddBaseUrl={false} target='_self'>
+            <Link href={toPath} target='_self'>
               <Translate
                 id="customtheme.docs.lang.defaultLocaleLinkLabel"
                 description="The label used for the latest version suggestion link label">
@@ -44,14 +40,14 @@ function NonDefaultLangLabel({ defaultLocale }) {
               <Translate
                 id="customtheme.docs.versions.crowdinLinkLabel"
                 description="The label used for Crowdin link label">
-                via Crowdin
+                on our Crowdin project
               </Translate>
             </Link>
           </b>
         ),
       }}>
       {
-        'The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, we are coordinating translation {crowdinLink}.'
+        'The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, you can do so {crowdinLink}, where we coordinate the translations.'
       }
     </Translate>
   );
@@ -63,7 +59,7 @@ function DocLangBannerEnabled() {
     i18n: { defaultLocale, currentLocale },
   } = useDocusaurusContext();
 
-  if (defaultLocale == currentLocale) {
+  if (ExecutionEnvironment.canUseDOM === false || defaultLocale === currentLocale) {
     return '';
   }
 
@@ -76,7 +72,7 @@ function DocLangBannerEnabled() {
       role="alert">
       <div>
         <NonDefaultLangLabel
-          defaultLocale={defaultLocale}
+          locale={currentLocale}
         />
       </div>
     </div>
