@@ -238,38 +238,37 @@ export default class Tag extends Model {
 }
 ```
 
-You must then register your new model with the store:
+You must then register your new model with the store using the frontend `Store` extender in a new `extend.js` module:
 
 ```js
-app.store.models.tags = Tag;
+import Extend from 'flarum/common/extenders';
+
+export default [
+  new Extend.Store()
+    .add('tags', Tag),
+];
 ```
 
-<!-- You must then register your new model with the store using the `Model` extender:
+:::info
+
+Remember to export the `extend` module from your entry `index.js` file:
 
 ```js
-export const extend = [
-  new Extend.Model('tags', Tag)
-];
-``` -->
+export { default as extend } from './extend';
+```
+
+:::
 
 ### Extending Models
 
-To add attributes and relationships to existing models, modify the model class prototype:
+To add attributes and relationships to existing models, use the `Model` extender:
 
-```js
-Discussion.prototype.user = Model.hasOne('user');
-Discussion.prototype.posts = Model.hasMany('posts');
-Discussion.prototype.slug = Model.attribute('slug');
-```
-
-<!-- To add attributes and relationships to existing models, use the `Model` extender:
-
-```js
-  new Extend.Model('discussions')
-    .attribute('slug')
-    .hasOne('user')
-    .hasMany('posts')
-``` -->
+```ts
+  new Extend.Model(Discussion)
+    .attribute<string>('slug')
+    .hasOne<User>('user')
+    .hasMany<Post>('posts')
+``` 
 
 ### Saving Resources
 
