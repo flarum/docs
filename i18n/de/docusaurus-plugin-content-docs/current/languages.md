@@ -1,29 +1,29 @@
-# Languages
+# Sprachen
 
-It’s easy to add a new language to your basic Flarum installation. Just follow the instructions below to download and install the language pack of your choice.
+Es ist ganz einfach, deiner Flarum-Basisinstallation eine neue Sprache hinzuzufügen. Befolgen einfach die nachstehenden Anweisungen, um das Sprachpaket deiner Wahl herunterzuladen und zu installieren.
 
-Once you have added a language pack, you can [set it as the default language](#setting-the-default-language) for your forum. And if you ever find you don’t need one of your installed language packs, you can always [disable it](#disabling-a-language-pack). If you’re using any third-party extensions, be sure to [read this](#third-party-extensions) before you start.
+Nachdem du ein Sprachpaket hinzugefügt hast, kannst du es als [Standardsprache](#setting-the-default-language) für dein Forum festlegen. Und wenn du jemals feststellst, dass du eines deiner installierten Sprachpakete nicht benötigst, kannst du es jederzeit [deaktivieren](#disabling-a-language-pack). Wenn du Erweiterungen von Drittanbietern verwendest, stelle sicher, dass du [dies liest](#third-party-extensions), bevor du beginnst.
 
-## Language Pack Installation
+## Installation des Sprachpakets
 
-To begin, visit the [Extensions > Languages](https://discuss.flarum.org/t/languages) tag at the Flarum Community site and find a language pack that you want to install.
+Besuche zunächst das Tag [Extensions > Languages](https://discuss.flarum.org/t/languages) auf der Flarum Community-Site und suche ein Sprachpaket, das du installieren möchtest.
 
-Language packs are installed the same way as [extensions](extensions.md). The language will appear in the **Extensions** page of the admin interface and you can enable it there.
+Sprachpakete werden auf die gleiche Weise installiert wie [Erweiterungen](extensions.md). Die Sprache wird auf der Seite **Erweiterungen** der Admin-Oberfläche angezeigt und du kannst sie dort aktivieren.
 
-That’s all there is to it! You should now be able to use the language selector in your site’s header to switch your forum’s display to the new language.
+Das ist alles dazu! Du solltest jetzt in der Lage sein, die Sprachauswahl in der Kopfzeile deiner Website zu verwenden, um die Anzeige deines Forums auf die neue Sprache umzustellen.
 
-## Setting the Default Language
+## Festlegen der Standardsprache
 
-Once you have installed a language pack and made sure it’s working, you may want to set it as the default language for new users and guests. You can do that on the **Basics** page of the admin interface.
+Nachdem du ein Sprachpaket installiert und sichergestellt hast, dass es funktioniert, möchtest du es möglicherweise als Standardsprache für neue Benutzer und Gäste festlegen. Du kannst dies auf der Seite **Grundeinstellungen** der Admin-Oberfläche tun.
 
-## Disabling a Language Pack
+## Deaktivieren eines Sprachpakets
 
-If you decide you don’t need to support a certain language, after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
+Wenn du entscheidest, dass du eine bestimmte Sprache nicht unterstützen musst, kannst du sie schließlich deaktivieren. Suche einfach das Sprachpaket auf der Seite **Erweiterungen** der Admin-Oberfläche und deaktiviere es.
 
-Disabling a language can be useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
+Das Deaktivieren einer Sprache kann nützlich sein, wenn du eine einsprachige Website betreiben und nicht möchtest, dass die Sprachauswahl im Website-Header angezeigt wird. Die Sprachauswahl ist ausgeblendet, wenn nur eine Sprache aktiviert ist.
 
-## Community Extensions
+## Community-Erweiterungen
 
-While language packs downloaded from the Flarum Community site will generally include translations for all the extensions that come bundled with Flarum, they _will not_ as a rule cover any community extensions you may have installed. It is up to developers to provide and maintain translations for their extensions.
+Während Sprachpakete, die von der Flarum Community-Site heruntergeladen werden, im Allgemeinen Übersetzungen für alle Erweiterungen enthalten, die mit Flarum gebündelt sind, decken sie in der Regel _keine_ Community-Erweiterungen ab, die du möglicherweise installiert hast. Es ist Sache der Entwickler, Übersetzungen für ihre Erweiterungen bereitzustellen und zu pflegen.
 
-So before you install a community extension, you should check to make sure it includes translations for each language pack you have installed. If you find that an extension doesn’t support a language you need, please contact the developer directly and arrange to have the necessary translations added.
+Bevor du also eine Community-Erweiterung installierst, sollten du überprüfen, ob sie Übersetzungen für jedes von dir installierte Sprachpaket enthält. Wenn du feststellst, dass eine Erweiterung eine von dir benötigte Sprache nicht unterstützt, wende dich bitte direkt an den Entwickler und veranlasse, dass die erforderlichen Übersetzungen hinzugefügt werden.

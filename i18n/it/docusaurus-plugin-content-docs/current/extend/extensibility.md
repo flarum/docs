@@ -34,7 +34,7 @@ Di conseguenza, per creare un estensore personalizzato, tutto ciò che devi fare
 2. Implementa un metodo `extend` che modifica l'estensione (o Flarum), tipicamente estendendo/modificando i binding del container.
 3. Facoltativamente, implementa `Flarum\Extend\LifecycleInterface` se è necessaria una pulizia su enable/disable.
 
-Prima di progettare i tuoi estensori, raccomandiamo ALTAMENTE di guardare attraverso le implementazioni degli estensori del [core](https://github.com/flarum/core/tree/master/src/Extend) di Flarum.
+Before designing your own extenders, we HIGHLY recommend looking through the implementations of [core's extenders](https://github.com/flarum/framework/tree/main/framework/core/src/Extend).
 
 :::tip
 

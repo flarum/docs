@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registro de Permisos
 
-In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
+Como novedad en la beta 15, los permisos pueden encontrarse ahora en dos lugares. Ahora, puedes ver los permisos individuales de cada extensión en su página. Todos los permisos se pueden seguir encontrando en la página de permisos.
 
-Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`.
+Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Esto se hace de forma similar a la configuración, llamando a `registerPermission`.
 
 Volvemos a nuestra extensión favorita del rocket:
  * Objeto de permiso
@@ -137,8 +137,8 @@ app.initializers.add('interstellar', function(app) {
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etiqueta de permiso
         permission: 'discussion.rocket_fly', // Nombre real del permiso almacenado en la base de datos (y utilizado al comprobar el permiso).
         tagScoped: true, // Si es posible aplicar este permiso en las etiquetas, no sólo globalmente. Se explica en el siguiente párrafo.
-        }, 
-      'start', // Se añadirá el permiso de la categoría en el grid
+      }, 
+      'start', // El permiso de la categoría se añadirá a la cuadrícula (grid)
       95 // Opcional: Prioridad
     );
 });

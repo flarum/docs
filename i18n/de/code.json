@@ -1,6 +1,6 @@
 {
   "customtheme.docs.lang.nonDefaultLangLabel": {
-    "message": "Die Übersetzung dieser Seite ist möglicherweise nicht auf dem neuesten Stand. Die neuesten Informationen findest Du unter {defaultLocaleLink}. Wenn Du einen Beitrag leisten möchtest, koordinieren wir die Übersetzung {crowdinLink}.",
+    "message": "The translation of this page may not be up to date, please refer to the {defaultLocaleLink} for the latest information. If you would like to contribute, you can do so {crowdinLink}, where we coordinate the translations.",
     "description": "The label used to tell the user that they're browsing translated docs that might be out of sync"
   },
   "customtheme.docs.lang.defaultLocaleLinkLabel": {

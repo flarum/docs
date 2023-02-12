@@ -1,6 +1,6 @@
 # Bundled Extensions Policy
 
-This document is to assist in deciding what extensions should be bundled or maintained by the Flarum project team.
+This document is to assist in deciding what core features should be bundled or maintained by the Flarum project team.
 
 Understand that Flarum aims to have a lean and efficient team. To guarantee a transparent workload, we intentionally have a "this could be an extension" mentality. The acronym D.O.R.C. spells out our decision-making process.
 
@@ -11,7 +11,7 @@ Understand that Flarum aims to have a lean and efficient team. To guarantee a tr
 
 ### Density
 
-To prevent the installation size of Flarum to continuously increasing we need to protect it from extensions that bloat it. We should ship extensions with Flarum that, for instance, have kilobytes in media files.
+To prevent the installation size of Flarum from continuously increasing we need to protect it from extensions that bloat it. We should ship extensions with Flarum that, for instance, have kilobytes in media files.
 
 ### Opinionatedness
 
@@ -22,3 +22,7 @@ Releasing Flarum with extensions that add functionality specific to cloud based 
 ### Responsibility
 
 Protecting the time of the project team is key. To do so we should empower the ecosystem in building extensions that it needs. Therefor we distance ourselves from the responsibility of building every and all extensions. The responsibility of extension development is held primarily by our community.
+
+### Complexity
+
+Complex extensions require a vast amount of time, not just for development, but also documentation and support. To protect the lean and efficient principles of the team, we will not take ownership of extensions that add this complexity.

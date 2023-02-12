@@ -1,27 +1,27 @@
-# Troubleshooting
+# Problembehandlung
 
 If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
 Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
 
-## Step 0: Turn on debug mode
+## Step 0: Activate debug mode
 
-:::danger Skip on Production
+:::danger Produktion überspringen
 
-These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+Diese Debugging-Tools sind sehr nützlich, können jedoch Informationen offenlegen, die nicht öffentlich sein sollten. Diese sind in Ordnung, wenn du dich in einer Staging- oder Entwicklungsumgebung befindest, doch wenn du nicht weißt, was du tust, überspringe diesen Schritt in einer Produktionsumgebung.
 
 :::
 
-Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
+Bevor du fortfährst, solltest du die Debugging-Tools von Flarum aktivieren. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
 
 If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
 
-## Step 1: Common Fixes
+## Schritt 1: Allgemeine Korrekturen
 
-A lot of issues can be fixed with the following:
+Viele Probleme können wie folgt behoben werden:
 
-* Clear your browser cache
-* Clear the backend cache with [`php flarum cache:clear`](console.md).
+* Lösche deinen Browser-Cache
+* Lösche den Backend-Cache mit [`php flarum cache:clear`](console.md).
 * Make sure your database is updated with [`php flarum migrate`](console.md).
 * Ensure that the [email configuration](mail.md) in your admin dashboard is correct: invalid email config will cause errors when registering, resetting a password, changing emails, and sending notifications.
 * Check that your `config.php` is correct. For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).

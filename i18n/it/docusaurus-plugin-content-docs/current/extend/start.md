@@ -37,7 +37,7 @@ Creare prima un'istanza dell'extender, quindi chiamare i metodi su di essa per u
 
 Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perch� sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromper� la tua estensione.
 
-Tutti gli estensori attualmente disponibili dal core di Flarum possono essere trovati sotto la voce [`Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(documentazione PHP API)](https://api.docs.flarum.org/php/master/flarum/extend). Ogni estensione potr� avere anche extender proprietari.
+All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/framework/blob/main/framework/core/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
 
 ## Ciao Mondo
 

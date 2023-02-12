@@ -4,7 +4,7 @@ Anche se abbiamo lavorato duramente per rendere Flarum il più bello possibile, 
 
 ## Pannello di amministrazione
 
-L'aspetto del [pannello di amministrazione](../admin.md) è un ottimo punto da cui iniziare a personalizzare il tuo forum. Da qui infatti si può:
+The [admin dashboard](admin.md)'s Appearance page is a great first place to start customizing your forum. Da qui infatti si può:
 
 - Scegliere i colori principali del forum
 - Attivare o meno la dark mode e scegliere il colore dell'header

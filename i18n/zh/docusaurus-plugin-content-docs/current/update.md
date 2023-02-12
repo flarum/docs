@@ -1,14 +1,14 @@
 # 更新
 
-To update Flarum, you'll need to use [Composer](https://getcomposer.org). If you're not familiar with it (although you should be, because you need it to install Flarum), read [our guide](composer.md) for information on what it is and how to set it up.
+您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
 
-If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
+如果跨主要版本进行更新(如 <=0.1.0 to 1.x.x, 1.x.x 到 2.x.x.x, ... )，请确保在运行一般升级步骤之前阅读相应的“主要版本更新指南”。
 
-## General Steps
+## 一般步骤
 
-**Step 1:** Make sure all your extensions have versions compatible with the Flarum version you're trying to install. This is only needed across major versions (e.g. you probably don't need to check this if upgrading from v1.0.0 to v1.1.0, assuming your extensions follow recommended versioning). You can check this by looking at the extension's [Discuss thread](https://discuss.flarum.org/t/extensions), searching for it on [Packagist](http://packagist.org/), or checking databases like [Extiverse](https://extiverse.com). You'll need to remove (not just disable) any incompatible extensions before updating. Please be patient with extension developers!
+**第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 在更新之前，您需要删除(不仅仅禁用) 任何不兼容的扩展。 请耐心等待扩展开发者更新！
 
-**Step 2:** Take a look at your `composer.json` file. Unless you have a reason to require specific versions of extensions or libraries, you should set the version string of everything except `flarum/core` to `*` (including `flarum/tags`, `flarum/mentions`, and other bundled extensions). Make sure `flarum/core` is NOT set to `*`. If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v0.1.0-beta.16`). If you just want the most recent version, use `"flarum/core": "^1.0"`.
+**第2步：** 查看您的 `composer.json` 文件。 Unless you have a reason to require specific versions of extensions or libraries, you should set the version string of everything except `flarum/core` to `*` (including `flarum/tags`, `flarum/mentions`, and other bundled extensions). Make sure `flarum/core` is NOT set to `*`. If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v0.1.0-beta.16`). If you just want the most recent version, use `"flarum/core": "^1.0"`.
 
 **Step 3:** If your local install uses [local extenders](extenders.md), make sure they are up to date with changes in Flarum.
 

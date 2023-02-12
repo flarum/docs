@@ -1,9 +1,11 @@
 # 控制台
 
-使用步骤：
+除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。
+
+Using the console:
 
 1. `ssh` 连接到安装 Flarum 的服务器
-2. `cd` 进入含有一个叫做 `flarum` 的文件的文件夹中
+2. `cd` to the folder that contains the file `flarum`
 3. 执行 `php flarum [命令名]`
 
 ## 注册控制台命令
@@ -28,7 +30,7 @@
 
 `php flarum info`
 
-统计 Flarum 核心及已安装插件的信息并输出。 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
+Get information about Flarum's core and installed extensions. 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
 
 ### cache:clear
 
@@ -42,7 +44,7 @@
 
 Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
 
-### migrate
+### 迁移
 
 `php flarum migrate`
 

@@ -1,38 +1,38 @@
-# Extensions
+# Erweiterungen
 
-Flarum is minimalistic, but it's also highly extensible. In fact, most of the features that ship with Flarum are actually extensions!
+Flarum ist minimalistisch, aber auch sehr erweiterbar. Tatsächlich sind die meisten Funktionen, die mit Flarum geliefert werden, tatsächlich Erweiterungen!
 
-This approach makes Flarum extremely customizable: You can disable any features you don't need, and install other extensions to make your forum perfect for your community.
+Dieser Ansatz macht Flarum extrem anpassbar: Du kannst alle Funktionen deaktivieren, die Du nicht benötigst, und andere Erweiterungen installieren, um dein Forum perfekt für deine Community zu machen.
 
-For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/README.md). This article will focus on managing extensions from a forum admin's perspective.
+Weitere Informationen zu Flarums Philosophie darüber, welche Funktionen wir im Kern enthalten, oder wenn Du deine eigene Erweiterung erstellen möchtest, findest Du in unserer [Erweiterungsdokumentation](extend/README.md). Dieser Artikel konzentriert sich auf die Verwaltung von Erweiterungen aus der Perspektive eines Forum-Administrators.
 
-## Finding Extensions
+## Erweiterungen finden
 
-Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
+Flarum verfügt über ein breites Ökosystem von Erweiterungen, von denen die meisten Open Source und kostenlos sind. Um neue und tolle Erweiterungen zu finden, besuche das [Extensions](https://discuss.flarum.org/t/extensions)-Tag in Flarums Community-Foren. Die inoffizielle [Extiverse Erweiterungsdatenbank](https://extiverse.com/) ist ebenfalls eine großartige Ressource.
 
-## Installing Extensions
+## Erweiterungen installieren
 
-Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
+Genau wie Flarum werden Erweiterungen über [Composer](https://getcomposer.org) mit SSH installiert. So installierst Du eine typische Erweiterung:
 
-1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME:*`. This should be provided by the extension's documentation.
+1. `cd` in dein Flarumverzeichnis. Dieses Verzeichnis sollte `composer.json`, `flarum`-Dateien und ein `storage`-Verzeichnis (unter anderem) enthalten. Du kannst Verzeichnisinhalte über `ls -la` überprüfen.
+2. Führe `composer require COMPOSER_PACKAGE_NAME:*` aus. Dies sollte durch die Dokumentation der Erweiterung bereitgestellt werden.
 
-## Updating Extensions
+## Aktualisieren von Erweiterungen
 
-Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+Anweisungen der Erweiterungsentwickler befolgen. Wenn Du `*` als Versionszeichenfolge für Erweiterungen verwendest ([wie empfohlen](composer.md)), sollten all deine Erweiterungen aktualisiert werden, indem Du die Befehle ausführst, die in der [Flarum-Upgrade-Anleitung](update.md) aufgeführt sind.
 
-## Uninstalling Extensions
+## Erweiterungen deinstallieren
 
-Similarly to installation, to remove an extension:
+Ähnlich wie bei der Installation, um eine Erweiterung zu entfernen:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
-1. `cd` to your Flarum directory.
-2. Run `composer remove COMPOSER_PACKAGE_NAME`. This should be provided by the extension's documentation.
+0. Wenn Du alle von der Erweiterung erstellten Datenbanktabellen entfernen möchtest, klicke im Admin-Dashboard auf die Schaltfläche „Löschen“. Weitere Informationen findest Du [unten](#managing-extensions).
+1. `cd` in dein Flarumverzeichnis.
+2. Führe `composer remove COMPOSER_PACKAGE_NAME` aus. Dies sollte durch die Dokumentation der Erweiterung bereitgestellt werden.
 
-## Managing Extensions
+## Verwalten von Erweiterungen
 
-The extensions page of the admin dashboard provides a convenient way to manage extensions when they are installed. You can:
+Die Erweiterungsseite des Admin-Dashboards bietet eine bequeme Möglichkeit, Erweiterungen zu verwalten, wenn sie installiert sind. Du kannst:
 
-- Enable or disable an extension
-- Access extension settings (although some extensions will use a tab in the main sidebar for settings)
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Uninstall button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
+- Eine Erweiterung aktivieren oder deaktivieren
+- Auf die Erweiterungseinstellungen zugreifen (obwohl einige Erweiterungen eine Registerkarte in der Hauptseitenleiste für Einstellungen verwenden)
+- Migrationen einer Erweiterung zurücksetzen, um alle vorgenommenen Datenbankänderungen zu entfernen (dies kann mit der Schaltfläche „Löschen“ erfolgen). Dadurch werden ALLE mit der Erweiterung verknüpften Daten entfernt und sind irreversibel. Dies sollte nur durchgeführt werden, wenn Du eine Erweiterung entfernst und nicht vorhast, sie erneut zu installieren. Es ist auch völlig optional.

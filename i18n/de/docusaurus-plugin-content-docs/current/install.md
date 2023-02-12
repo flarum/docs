@@ -1,21 +1,21 @@
 # Installation
 
-:::tip Quick test drive?
+:::tip Schneller Test?
 
-Feel free to give Flarum a spin on one of our [demonstration forums](https://discuss.flarum.org/d/21101). Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
+Fühle Dich frei, Flarum in einem unserer [Demonstrationsforen](https://discuss.flarum.org/d/21101) auszuprobieren. Or set up your own forum in seconds at [Free Flarum](https://www.freeflarum.com), a free community service not affiliated with the Flarum team.
 
 :::
 
-## Server Requirements
+## Server-Anforderungen
 
-Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
+Before you install Flarum, it's important to check that your server meets the requirements. Um Flarum ausführen zu können, brauchst du:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.3+** with the following extensions: curl, dom, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+/8.0.23+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run Composer
 
-:::tip Shared Hosting
+:::tip Geteiltes Hosting
 
 It's not possible to install Flarum by downloading a ZIP file and uploading the files to your web server. This is because Flarum uses a dependency-management system called [Composer](https://getcomposer.org) which needs to run on the command line.
 
@@ -23,7 +23,7 @@ This doesn't necessarily mean you need a VPS. Most decent hosts support SSH acce
 
 :::
 
-## Installing
+## Installieren
 
 Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Afterwards, run this command in an empty location that you want Flarum to be installed in:
 
@@ -67,7 +67,7 @@ Caddy requires a very simple configuration in order for Flarum to work properly.
 www.example.com {
     root * /var/www/flarum/public
     php_fastcgi unix//var/run/php/php7.4-fpm.sock
-    header /assets {
+    header /assets/* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"
         Pragma "public"
@@ -77,7 +77,7 @@ www.example.com {
 ```
 ## Folder Ownership
 
-During installation, Flarum may request that you make certain directories writable. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user FLarum is running as. The user that Flarum is running as MUST have read + write access to:
+During installation, Flarum may request that you make certain directories writable. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
 
 - The root install directory, so Flarum can edit `config.php`.
 - The `storage` subdirectory, so Flarum can edit logs and store cached data.
@@ -111,13 +111,13 @@ chcon -R -t httpd_sys_rw_content_t /path/to/directory
 
 To find out more about these commands as well as file permissions and ownership on Linux, read [this tutorial](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/). If you are setting up Flarum on Windows, you may find the answers to [this Super User question](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) useful.
 
-:::caution Environments may vary
+:::caution Umgebungen können variieren
 
 Your environment may vary from the documentation provided, please consult your web server configuration or web hosting provider for the proper user and group that PHP and the web server operate under.
 
 :::
 
-:::danger Never use permission 777
+:::danger Niemals die Berechtigung 777 verwenden
 
 You should never set any folder or file to permission level `777`, as this permission level allows anyone to access the content of the folder and file regardless of user or group.
 

@@ -1,18 +1,18 @@
-# Filesystem
+# Tập tin hệ thống
 
-Flarum core integrates with the filesystem to store and serve assets (like compiled JS/CSS or upload logos/favicons) and avatars.
+Lõi Flarum tích hợp với hệ thống tệp để lưu trữ và phân phát nội dung (như JS / CSS đã biên dịch hoặc tải lên logos/favicons) và avatars.
 
-Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/8.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
+Các tiện ích mở rộng có thể sử dụng các hữu ích được cung cấp của Flarum cho nhu cầu lưu trữ tệp và tương tác với hệ thống tệp của riêng chúng. Hệ thống này dựa trên [các công cụ hệ thống tệp của Laravel](https://laravel.com/docs/8.x/filesystem), lần lượt dựa trên [thư viện Flysystem](https://github.com/thephpleague/flysystem).
 
-## Disks
+## Ổ đĩa
 
-Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later. Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
+Hệ thống tập tin **ổ đĩa** đại diện cho các vị trí lưu trữ và được hỗ trợ bởi các trình điều khiển lưu trữ mà chúng ta sẽ đề cập sau. Flarum cốt lõi có 2 đĩa: `flarum-assets` và `flarum-avatars`.
 
-### Using existing disks
+### Sử dụng các ổ đĩa hiện có
 
-To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need.
+Để truy cập ổ đĩa, bạn cần truy xuất nó từ [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). Để làm như vậy, bạn nên đưa factory contract vào lớp của mình và truy cập vào các đĩa bạn cần.
 
-Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Api/Controller/DeleteLogoController.php#L19-L59) for an example:
+Hãy xem xét [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) của lõi để làm ví dụ:
 
 ```php
 <?php
@@ -104,7 +104,7 @@ The config array can contain other entries supported by [Laravel disk config arr
 
 Flarum selects the active driver for each disk by checking the `disk_driver.DISK_NAME` key in the [settings repository](settings.md) and [config.php file](../config.md). If no driver is configured, or the configured driver is unavailable, Flarum will default to the `local` driver.
 
-You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Filesystem/DriverInterface.php#L16-L16), and registering it via the `Filesystem` extender:
+You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/framework/blob/main/framework/core/src/Filesystem/DriverInterface.php#L16), and registering it via the `Filesystem` extender:
 
 ```php
 use Flarum\Extend;

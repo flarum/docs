@@ -1,28 +1,28 @@
-# Report dei Bugs
+# Reporting Bugs
 
-:::danger Vulnerabilità di sicurezza
+:::danger Security Vulnerabilities
 
-Se scopri una vulnerabilità di sicurezza all'interno di Flarum, invia un'e-mail a [security@flarum.org](mailto:security@flarum.org) così da ripararla subito.
+If you discover a security vulnerability within Flarum, please follow our [security policy](https://github.com/flarum/core/security/policy) so we can address it promptly.
 
 :::
 
-Grazie per averci aiutato a testare Flarum. Siamo felici di averti nella squadra! Abbiamo bisogno di persone che sappiano risolvere i problemi con pazienza e comunicarli chiaramente. Come probabilmente saprai, una buona segnalazione di bug richiede tempo e impegno. Se ti va bene, allora cominciamo!
+Thank you for helping us test Flarum. We're happy to have you on the team! We need people who can *troubleshoot issues patiently* and *communicate them clearly*. As you probably know, good bug reporting takes some time and effort. If you're fine with that, then let's get started!
 
-## Duplicati
+## Duplicates
 
-Hai già trovato un bug? Wonderful! Meraviglioso Ci piacerebbe saperlo, ma prima dovresti controllare per assicurarti di non sprecare il tuo tempo su un problema già noto:
+Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
 
-- Cerca sul [forum di supporto](https://discuss.flarum.org/t/support) per vedere se il bug è stato già segnalato.
-- Potremmo essere già al lavoro su una soluzione, quindi cerca anche sul nostro [sistema di gestione degli *issue*](https://github.com/flarum/core/issues).
+- Search our [Support forum](https://discuss.flarum.org/t/support) to see if it's already been reported.
+- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/core/issues) too.
 
-Se hai cercato a fondo e ne sei uscito a mani vuote, saremo lieti di ricevere il tuo rapporto. Se si tratta solo di un problema semplice (ad esempio una parola con errori di ortografia o un problema grafico), passa al paragrafo successivo. Ma se vedi errori o qualcosa è chiaramente un errore, avremo bisogno che tu raccolga prima alcune informazioni. Per favore leggi la guida alla [Risoluzione dei problemi](troubleshoot.md)  e seguine le istruzioni. Raccogli più informzioni possibili!
+If you've searched *thoroughly* and come up empty-handed, we'll welcome your report. If it's just a simple issue (a misspelled word or graphics glitch, for example) skip to the next paragraph. But if you're seeing errors, or something is clearly broken, we'll need you to gather some information first. Please head over to our [Troubleshooting](troubleshoot.md) guide and follow the instructions there. Collect as much info as you can!
 
-## Segnalare il problema
+## Reporting
 
-Monitoriamo i problemi su GitHub. Assicurati di aprire il problema nella [repository corretta](https://github.com/flarum),  e inserisci tutte le informazioni nel modello di segnalazione bug.
+We track issues on GitHub. Make sure you open your issue in the [correct repository](https://github.com/flarum), and fill out all of the information in the Bug Report template.
 
-Se puoi, controlla se il problema è riproducibile con l'ultima versione di Flarum. Se stai utilizzando una versione pre-rilascio o di sviluppo, indica la versione specifica che stai utilizzando.
+If you can, check if the issue is reproducible with the latest version of Flarum. If you are using a pre-release or development version, please indicate the specific version you are using.
 
-Ricorda: l'obiettivo di una segnalazione di bug è semplificare la replica del bug e risolverlo. Potresti voler leggere [questo articolo](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) per alcuni suggerimenti utili su come scrivere una segnalazione di bug efficace. E'richiesto che si descrivano chiaramente i passaggi necessari per riprodurre il problema che stai riscontrando. I problemi senza passaggi di riproduzione chiari non verranno valutati. Se un problema è etichettato come "needs verification" non riceve ulteriori input dall'autore del problema per più di 5 giorni, verrà chiuso.
+Remember: the goal of a bug report is to make it easy for us to replicate the bug and fix it. You might want to read [this article](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) for some useful tips on how to write an effective bug report. It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues with no clear reproduction steps will not be triaged. If an issue labeled "needs verification" receives no further input from the issue author for more than 5 days, it will be closed.
 
-Dopo aver pubblicato la segnalazione, ti chiediamo di seguire la discussione e di attendere pazientemente. Potremmo aver bisogno di chiedere ulteriori dettagli o chiarimenti; ma abbiamo sempre molto da fare e potrebbe volerci un po 'di tempo prima che possiamo dare alla tua relazione il tempo che merita.
+Once you've posted your report, we'd ask that you please *follow the discussion* and wait patiently. We may need to ask for further details or clarification; but we've always got plenty to do, and it could be a while before we can give your report the time it deserves.

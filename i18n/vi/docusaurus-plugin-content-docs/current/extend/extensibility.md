@@ -30,11 +30,11 @@ The implementation of extenders is actually quite simple. There are 3 main steps
 Accordingly, to create a custom extender, all you need to do is:
 
 0. Define a class that implements `Flarum\Extend\ExtenderInterface`.
-1. Accept arguments in the constructor, and various methods. Those methods should represent concrete "modifications".
+1. Accept arguments in the constructor, and various methods. Những phương pháp đó nên đại diện cho những "modifications" cụ thể.
 2. Implement an `extend` method that modifies your extension (or Flarum), typically via extending/modifying container bindings.
 3. Optionally, implement `Flarum\Extend\LifecycleInterface` if cleanup is needed on enable/disable.
 
-Before designing your own extenders, we HIGHLY recommend looking through the implementations of [core's extenders](https://github.com/flarum/core/tree/master/src/Extend).
+Before designing your own extenders, we HIGHLY recommend looking through the implementations of [core's extenders](https://github.com/flarum/framework/tree/main/framework/core/src/Extend).
 
 :::tip
 

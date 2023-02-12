@@ -4,7 +4,7 @@ Si Flarum no se instala o no funciona como se espera, lo primero que debes hacer
 
 A continuación, deberías tomarte unos minutos para buscar en el [foro de soporte](https://discuss.flarum.org/t/support) y en el [issue tracker](https://github.com/flarum/core/issues). Es posible que alguien ya haya informado del problema y que haya una solución disponible o en camino. Si has buscado a fondo y no puedes encontrar ninguna información sobre el problema, es hora de empezar a solucionar el problema.
 
-## Paso 0: Activar el modo de depuración
+## Step 0: Activate debug mode
 
 :::danger Skip on Production
 

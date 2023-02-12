@@ -25,7 +25,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Similarly to installation, to remove an extension:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
 2. 运行 `composer require COMPOSER_包名`。 具体安装命令一般可在扩展的文档中找到。
 
@@ -35,4 +35,4 @@ Similarly to installation, to remove an extension:
 
 - 启用或禁用一个扩展
 - 访问扩展设置（有些扩展会在主侧边栏添加标签页进行设置）。
-- 回滚一个扩展的迁移，以删除它所做的任何数据库修改（这可以通过卸载按钮来完成）。 这将删除与该扩展相关的所有数据，并且是不可逆的。 只有当你要删除一个扩展程序，并且不打算再次安装它时，才应该这样做。 当然这不是非要做的事情，选择权在您手中。
+- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). 这将删除与该扩展相关的所有数据，并且是不可逆的。 只有当你要删除一个扩展程序，并且不打算再次安装它时，才应该这样做。 当然这不是非要做的事情，选择权在您手中。

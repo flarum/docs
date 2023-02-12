@@ -16,7 +16,7 @@ Todos estamos aquí para hablar de Flarum, y para trabajar juntos para hacer una
 - Spam, suplantación de identidad y cualquier otra acción que pretenda desprestigiar este sitio
 - Discusión de la piratería de software y temas similares
 
-*Todo lo anterior es motivo de acción por parte de los moderadores.* Si tienes un problema con otro miembro, te pedimos que no te enfrentes a él. Si es en el foro, utiliza el comando *Informar* en el mensaje en cuestión, y luego deja que el personal se encargue de la situación. De lo contrario, informa de la infracción a [admin@flarum.org](mailto:admin@flarum.org).
+*Todo lo anterior es motivo de acción por parte de los moderadores.* Si tienes un problema con otro miembro, te pedimos que no te enfrentes a él. Si es en el foro, utiliza el comando *Informar* en el mensaje en cuestión, y luego deja que el personal se encargue de la situación. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Nuestros moderadores pueden editar o borrar cualquier contenido que sea ofensivo o que interrumpa el flujo de comunicación. Las infracciones graves o repetidas pueden llevar a la suspensión de la cuenta del usuario infractor. Así que, ya sabes, *sé guay*. 😎
 
@@ -29,7 +29,7 @@ Cuando estés seguro de que estás preparado para iniciar una discusión, ten en
 - ¡Dale un buen título! Obtendrás mejores resultados si tu título deja claro de qué quieres hablar.
 - Elige la(s) etiqueta(s) adecuada(s). Esto aumentará la probabilidad de que tu mensaje sea leído y respondido rápidamente.
 - *No* publiques repetidamente sobre el mismo tema, ya que esto tiende a tener el efecto contrario.
-- Si no utilizas una etiqueta reservada para uso multilingüe, *publica sólo en inglés.* ¡No podemos ayudarte si no podemos leerte!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Recuerda que no es necesario que firmes tus mensajes. Tenemos tu perfil para saber quién eres.
 
 Por favor, haz el esfuerzo de ayudarnos a mantener las cosas organizadas. El tiempo que pasamos ordenando es tiempo que no podemos dedicar a conocerte, a discutir tus asuntos y a hablar de Flarum. Y eso, al fin y al cabo, es lo que hemos venido a hacer.

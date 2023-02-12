@@ -1,18 +1,18 @@
 # Khắc phục sự cố
 
-If Flarum isn't installing or working as expected, the first thing you should do is *check again* whether your environment meets the [system requirements](install.md#server-requirements). If you're missing something that Flarum needs to run, you'll need to remedy that first.
+Nếu Flarum không cài đặt hoặc hoạt động như mong đợi, điều đầu tiên bạn nên làm là *kiểm tra lại* xem môi trường của bạn có đáp ứng [yêu cầu hệ thống](install.md#server-requirements). Nếu bạn đang thiếu thứ gì đó mà Flarum cần để chạy, trước tiên bạn cần phải khắc phục điều đó.
 
-Next, you should take a few minutes to search the [Support forum](https://discuss.flarum.org/t/support) and the [issue tracker](https://github.com/flarum/core/issues). It's possible that someone has already reported the problem, and a fix is either available or on the way. If you've searched thoroughly and can't find any information about the problem, it's time to start troubleshooting.
+Tiếp theo, bạn nên dành vài phút để tìm kiếm trong [Diễn đàn hỗ trợ](https://discuss.flarum.org/t/support) và [trình theo dõi vấn đề](https://github.com/flarum/core/issues). Có thể ai đó đã báo cáo sự cố và bản sửa lỗi đã có sẵn hoặc đang được xử lý. Nếu bạn đã tìm kiếm kỹ lưỡng và không thể tìm thấy bất kỳ thông tin nào về vấn đề, đã đến lúc bắt đầu khắc phục sự cố.
 
-## Bước 0: Bật chế độ gỡ lỗi
+## Step 0: Activate debug mode
 
 :::danger Bỏ qua phần Sản xuất
 
-These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+Các công cụ gỡ lỗi này rất hữu ích, nhưng có thể tiết lộ thông tin không nên công khai. Đây là những bước tốt nếu bạn đang sử dụng môi trường dàn dựng hoặc phát triển, nhưng nếu bạn không biết mình đang làm gì, hãy bỏ qua bước này khi ở trong môi trường sản xuất.
 
 :::
 
-Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
+Trước khi tiếp tục, bạn nên kích hoạt các công cụ gỡ lỗi của Flarum. Chỉ cần mở **config.php** bằng trình soạn thảo văn bản, thay đổi giá trị `debug` thành `true =` và lưu tệp. Điều này sẽ khiến Flarum hiển thị các thông báo lỗi chi tiết, giúp bạn có cái nhìn sâu sắc về những gì đang xảy ra.
 
 Nếu bạn thấy các trang trống và thay đổi ở trên không hữu ích, hãy thử đặt `display_errors` thành `On` trong tệp cấu hình **php.ini** của bạn.
 
@@ -24,22 +24,22 @@ Rất nhiều vấn đề có thể được khắc phục bằng cách sau:
 * Xóa bộ đệm backend bằng [`php flarum cache:clear`](console.md).
 * Đảm bảo rằng cơ sở dữ liệu của bạn được cập nhật với [`php flarum migrate`](console.md).
 * Đảm bảo rằng [cấu hình email](mail.md) trong bảng điều khiển quản trị của bạn là đúng: cấu hình email không hợp lệ sẽ gây ra lỗi khi đăng ký, đặt lại mật khẩu, thay đổi email và gửi thông báo.
-* Check that your `config.php` is correct. For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).
-* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
+* Kiểm tra xem `config.php` của bạn có đúng không. Ví dụ: đảm bảo rằng `url` đang được sử dụng (`https` so với `http` và vấn đề phân biệt chữ hoa chữ thường ở đây!).
+* Một thủ phạm tiềm năng có thể là đầu trang tùy chỉnh, chân trang tùy chỉnh hoặc LESS tùy chỉnh. Nếu sự cố của bạn nằm ở giao diện người dùng, hãy thử tạm thời xóa chúng qua trang Giao diện của trang tổng quan quản trị.
 
 Bạn cũng sẽ muốn xem kết quả đầu ra của [`php flarum info`](console.md) để đảm bảo rằng không có điều gì chính xảy ra.
 
 ## Bước 2: Tạo lại vấn đề
 
-Try to make the problem happen again. Pay careful attention to what you're doing when it occurs. Does it happen every time, or only now and then? Try changing a setting that you think might affect the problem, or the order in which you're doing things. Does it happen under some conditions, but not others?
+Cố gắng làm cho vấn đề xảy ra một lần nữa. Hãy chú ý cẩn thận đến những gì bạn đang làm khi nó xảy ra. Nó xảy ra mọi lúc, hay chỉ thỉnh thoảng? Hãy thử thay đổi một cài đặt mà bạn cho rằng có thể ảnh hưởng đến sự cố hoặc thứ tự mà bạn đang thực hiện. Nó có xảy ra trong một số điều kiện, nhưng không phải những điều kiện khác?
 
-If you've recently added or updated an extension, you should disable it temporarily to see if that makes the problem go away. Make sure all of your extensions were meant to be used with the version of Flarum you're running. Outdated extensions can cause a variety of issues.
+Nếu gần đây bạn đã thêm hoặc cập nhật tiện ích mở rộng, bạn nên tạm thời vô hiệu hóa tiện ích đó để xem liệu điều đó có làm cho sự cố biến mất hay không. Đảm bảo rằng tất cả các tiện ích mở rộng của bạn đều được sử dụng với phiên bản Flarum bạn đang chạy. Các tiện ích mở rộng lỗi thời có thể gây ra nhiều vấn đề.
 
-Somewhere along the way you may get an idea about what's causing your issue, and figure out a way to fix it. But even if that doesn't happen, you will probably run across a few valuable clues that will help us figure out what's going on, once you've filed your bug report.
+Ở một nơi nào đó trong quá trình thực hiện, bạn có thể nhận ra ý tưởng về nguyên nhân gây ra sự cố của mình và tìm ra cách khắc phục nó. Nhưng ngay cả khi điều đó không xảy ra, bạn có thể sẽ tìm thấy một vài manh mối có giá trị giúp chúng tôi tìm ra điều gì đang xảy ra sau khi bạn đã gửi báo cáo lỗi của mình.
 
 ## Bước 3: Thu thập thông tin
 
-If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. Look for error messages or other information about the problem in the following places:
+Nếu có vẻ như bạn đang cần trợ giúp để giải quyết vấn đề, thì đã đến lúc nghiêm túc với việc thu thập dữ liệu. Tìm thông báo lỗi hoặc thông tin khác về sự cố ở những nơi sau:
 
 * Hiển thị trên trang thực tế
 * Được hiển thị trong console của trình duyệt (Chrome: More tools -> Developer Tools -> Console)
@@ -47,10 +47,10 @@ If it looks like you're going to need help solving the problem, it's time to get
 * Được ghi lại trong nhật ký lỗi của PHP-FPM (ví dụ: `/var/log/php7.x-fpm.log`)
 * Được ghi lại bởi Flarum (`storage/logs`)
 
-Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
+Sao chép bất kỳ tin nhắn nào vào tệp văn bản và ghi lại một vài ghi chú về *khi* xảy ra lỗi, bạn *bị gì* đang làm vào thời điểm đó. Đảm bảo bao gồm bất kỳ thông tin chi tiết nào bạn có thể thu thập được về các điều kiện mà sự cố xảy ra và không xảy ra. Thêm càng nhiều thông tin càng tốt về môi trường máy chủ của bạn: phiên bản hệ điều hành, phiên bản máy chủ web, phiên bản PHP và trình xử lý.
 
 ## Bước 4: Chuẩn bị một báo cáo
 
-Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](bugs.md).
+Khi bạn đã thu thập tất cả thông tin có thể về sự cố, bạn đã sẵn sàng để gửi báo cáo lỗi. Vui lòng làm theo hướng dẫn về [Báo cáo lỗi](bugs.md).
 
-If you discover something new about the issue after filing your report, please add that information at the bottom of your original post. It's a good idea to file a report even if you have solved the problem on your own, since other users may also benefit from your solution. If you've found a temporary workaround for the problem, be sure to mention that as well.
+Nếu bạn phát hiện ra điều gì đó mới về vấn đề này sau khi gửi báo cáo, vui lòng thêm thông tin đó vào cuối bài đăng ban đầu của bạn. Bạn nên gửi báo cáo ngay cả khi bạn đã tự mình giải quyết vấn đề, vì những người dùng khác cũng có thể được hưởng lợi từ giải pháp của bạn. Nếu bạn đã tìm thấy giải pháp tạm thời cho vấn đề, hãy nhớ đề cập đến vấn đề đó.

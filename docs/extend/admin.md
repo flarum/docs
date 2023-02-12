@@ -115,9 +115,9 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-In Flarum, permissions are found in 2 places: globally (on the Permissions page), and on each extension's page.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`. 
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`. 
 
 Arguments: 
  * Permission object
@@ -133,14 +133,13 @@ app.initializers.add('interstellar', function(app) {
     .for('acme-interstellar')
     .registerPermission(
       {
-        icon: 'fas fa-rocket', // Any FontAwesome 5 icon class
+        icon: 'fas fa-rocket', // Font-Awesome Icon
         label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Permission Label
         permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
         tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-        allowGuest: false, // Whether this permission can be granted to guests
       }, 
       'start', // Category permission will be added to on the grid
-      95 // Priority (optional)
+      95 // Optional: Priority
     );
 });
 ```

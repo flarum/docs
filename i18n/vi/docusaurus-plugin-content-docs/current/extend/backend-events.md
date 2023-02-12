@@ -130,7 +130,7 @@ class SomeClass
 
 ## Custom Events
 
-As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
+As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Các sự kiện nói chung là các thể hiện của các lớp đơn giản (không cần mở rộng bất cứ điều gì). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
 
 ```php
 <?php

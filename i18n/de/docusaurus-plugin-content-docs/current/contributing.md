@@ -1,4 +1,4 @@
-# Help Build Flarum
+# Hilf Flarum aufzubauen
 
 Interested in contributing to Flarum development? That's great! From [opening a bug report](bugs.md) to creating a pull request: every single one is appreciated and welcome. Flarum wouldn't be possible without our community contributions.
 
@@ -28,39 +28,48 @@ Since Flarum is so extension-driven, we highly recommend [our extension docs](ex
 
 ### Setting Up a Local Codebase
 
-[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download [flarum/core](https://github.com/flarum/core) and a [bunch of extensions](https://github.com/flarum). In order to work on these, we recommend forking and cloning them into a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions. Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Set up a Composer path repository for Flarum packages
-composer config repositories.0 path "packages/*"
-git clone https://github.com/<username>/core.git packages/core
-git clone https://github.com/<username>/tags.git packages/tags # etc
+# Or, when you want to clone directly into the current directory
+git clone https://github.com/flarum/flarum.git .
+# Note, the directory must be empty
+
+# Set up a Composer path repository for Flarum monorepo packages
+composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
+git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
 
 Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 Finally, run `composer install` to complete the installation from the path repositories.
 
-After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's javascript or CSS.
+After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
 
-Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `master` branch.
+Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+
+To contribute to the frontend, first install the JavaScript dependencies. The monorepo uses [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/) to easily install JS dependencies across all packages within.
 
 ```bash
-cd packages/core/js
-npm install
-npm run dev
+cd packages/framework
+yarn install
+```
+
+Then you can watch JavaScript files for changes during development:
+
+```bash
+cd framework/core/js
+yarn dev
 ```
 
 The process is the same for extensions.
 
 ```bash
-cd packages/tags/js
-npm install
-npm link ../../core/js
-npm run dev
+cd extensions/tags/js
+yarn dev
 ```
 
 ### Development Tools
@@ -82,7 +91,7 @@ A typical contribution workflow looks like this:
 1. 🌳 **Branch** off the appropriate branch into a new feature branch.
     * *Bug fixes* should be sent to the latest stable branch.
     * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
-    * *Major* features should always be sent to the `master` branch, which contains the upcoming Flarum release.
+    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * Internally we use the naming scheme `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
 
 2. 🔨 **Write** some code.
@@ -117,7 +126,7 @@ Don't worry if your code styling isn't perfect! StyleCI and Prettier will automa
 
 ### PHP
 
-Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/core/blob/master/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
 * Interfaces should be suffixed with `Interface` (eg. `MailableInterface`)
@@ -146,7 +155,7 @@ Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/a
 
 Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
 
-### Translations
+### Übersetzungen
 
 We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 

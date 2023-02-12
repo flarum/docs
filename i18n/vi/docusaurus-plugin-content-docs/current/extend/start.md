@@ -37,7 +37,7 @@ You first create an instance of the extender, and then call methods on it for fu
 
 To keep things consistent, we use this concept of extenders in both the backend (in PHP land) and the frontend (in JavaScript land). _Everything_ you do in your extension should be done via extenders, because they are a **guarantee** we are giving to you that a future minor release of Flarum won't break your extension.
 
-Tất cả các bộ mở rộng hiện có sẵn cho bạn từ lõi của Flarum có thể được tìm thấy trong [namespace `Extend`](https://github.com/flarum/core/blob/master/src/Extend) [(tài liệu PHP API)](https://api.docs.flarum.org/php/master/flarum/extend) Các tiện ích mở rộng cũng có thể cung cấp các [bộ mở rộng của riêng](extensibility.md#custom-extenders) chúng.
+All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/framework/blob/main/framework/core/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
 
 ## Hello World
 

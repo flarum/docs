@@ -1,8 +1,8 @@
-# Themes
+# Chủ đề
 
-Flarum "themes" are just extensions. Typically, you'll want to use the `Frontend` extender to register custom [Less](https://lesscss.org/#overview) and JS. Of course, you can use other extenders too: for example, you might want to support settings to allow configuring your theme.
+Flarum "themes" chỉ là phần mở rộng. Thông thường, bạn sẽ muốn sử dụng bộ mở rộng `Frontend` để đăng ký [Less](https://lesscss.org/#overview) và JS tùy chỉnh. Tất nhiên, bạn cũng có thể sử dụng các bộ mở rộng khác: ví dụ: bạn có thể muốn hỗ trợ cài đặt để cho phép định cấu hình chủ đề của mình.
 
-You can indicate that your extension is a theme by setting the "extra.flarum-extension.category" key to "theme". For example:
+Bạn có thể chỉ ra rằng tiện ích của bạn là một chủ đề bằng cách đặt khóa "extra.flarum-extension.category" thành "theme". For example:
 
 ```json
 {
@@ -16,12 +16,12 @@ You can indicate that your extension is a theme by setting the "extra.flarum-ext
 }
 ```
 
-All this will do is show your extension in the "theme" section in the admin dashboard extension list.
+Tất cả điều này sẽ làm là hiển thị tiện ích mở rộng của bạn trong phần "theme" trong danh sách tiện ích mở rộng bảng điều khiển dành cho quản trị viên.
 
-## Less Variable Customization
+## Tùy biến giá trị Less
 
-You can define new Less variables in your extension's Less files. There currently isn't an extender to modify Less variable values in the PHP layer, but this is planned for future releases.
+Bạn có thể xác định các biến Less mới trong các tệp Less của tiện ích mở rộng của mình. Hiện tại không có bộ mở rộng để sửa đổi các giá trị Ít biến hơn trong lớp PHP, nhưng điều này được lên kế hoạch cho các bản phát hành trong tương lai.
 
-## Switching Between Themes
+## Chuyển đổi giữa các chủ đề
 
-Flarum doesn't currently have a comprehensive system that would support switching between themes. This is planned for future releases.
+Flarum hiện không có một hệ thống toàn diện hỗ trợ chuyển đổi giữa các chủ đề. Điều này được lên kế hoạch cho các bản phát hành trong tương lai.

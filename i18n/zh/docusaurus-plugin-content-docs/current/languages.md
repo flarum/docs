@@ -26,4 +26,4 @@
 
 虽然从 Flarum 社区中下载的语言包通常是包含所有 Flarum 原生捆绑扩展的翻译的，但是 _并没有规定说_ 语言包必须翻译了所有您安装的社区扩展。 是否提供、更新维护这些扩展的翻译取决于开发者的个人意愿。
 
-因此，在您安装一个社区扩展前，请检查您使用的语言包是否包含了该扩展的翻译，如果您发现语言包没有翻译该扩展，请直接联系语言包的开发者，让他/她添加翻译。 If you find that an extension doesn’t support a language you need, please contact the developer directly and arrange to have the necessary translations added.
+因此，在您安装一个社区扩展前，请检查您使用的语言包是否包含了该扩展的翻译。 如果您发现了一个不支持您所需要语言的社区扩展，请直接联系开发者，让他/她添加翻译。

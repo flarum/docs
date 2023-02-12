@@ -110,9 +110,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 Puoi iniettare [Visualizza](https://laravel.com/docs/6.x/views) di Laravel nel tuo controller. Ciò ti consentirà di eseguire il rendering di [Blade template](https://laravel.com/docs/6.x/blade) nella risposta del controller.
 
-First, you'll need to register the view. See [the relevant article](views.md) for more information on this.
-
-Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlResponse`:
+Innanzitutto, dovrai indicare al frontend dove può trovare i file di visualizzazione della tua estensione aggiungendo l'estender `View` a `extend.php`:
 
 ```php
 use Flarum\Extend;
@@ -122,6 +120,27 @@ return [
     (new Extend\View)
         ->namespace('acme.hello-world', __DIR__.'/views');
 ];
+```
+
+Quindi, inserisci la Factory nel tuo controller e rendenderizza tramite `HtmlResponse`:
+
+```php
+class HelloWorldController implements RequestHandlerInterface
+{
+    protected $view;
+
+    public function __construct(Factory $view)
+    {
+        $this->view = $view;
+    }
+
+    public function handle(Request $request): Response
+    {
+        $view = $this->view->make('acme.hello-world::greeting');
+
+        return new HtmlResponse($view->render());
+    }
+}
 ```
 
 ### Controller API
@@ -170,7 +189,7 @@ app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
   new Extend.Routes()
     .add('/user/:id', 'acme.user', <UsersPage />)
 ``` -->
-I parametri del percorso verranno passati in `attrs` del componente. I parametri del percorso verranno passati in `attrs` del componente.
+I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
 ### Generare URL
 Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
 

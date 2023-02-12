@@ -16,7 +16,7 @@ Hepimiz Flarum hakkında konuşmak ve onu daha iyi bir uygulama haline getirmek 
 - Spam, kimlik avı gönderileri ve bu siteyi tahrif etmeye yönelik her türlü eylem
 - Yazılım korsanlığı ve benzeri konuların tartışılması
 
-*Yukarıdakilerin tümü moderatör eylemi gerekçesidir.* Başka bir üyeyle bir sorununuz varsa, lütfen onlarla kendi başınıza yüzleşmemenizi rica ederiz. Forumdaysa, lütfen söz konusu gönderide *Report* komutunu kullanın, ardından durumla ilgilenmesi için bunu yetkiliye bırakın. Aksi takdirde, ihlali [admin@flarum.org](mailto:admin@flarum.org) adresine bildirin.
+*Yukarıdakilerin tümü moderatör eylemi gerekçesidir.* Başka bir üyeyle bir sorununuz varsa, lütfen onlarla kendi başınıza yüzleşmemenizi rica ederiz. Forumdaysa, lütfen söz konusu gönderide *Report* komutunu kullanın, ardından durumla ilgilenmesi için bunu yetkiliye bırakın. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
 Moderatörlerimiz, saldırgan veya iletişim akışını aksatan herhangi bir içeriği düzenleyebilir veya silebilir. Ciddi veya tekrarlanan suçlar, ihlalde bulunan kullanıcının hesabının askıya alınmasına neden olabilir. Yani, bilirsin, *sakin ol*. 😎
 
@@ -29,7 +29,7 @@ Bir tartışma başlatmaya hazır olduğunuzdan emin olduğunuzda lütfen aşağ
 - Ona iyi bir başlık ver! Başlığınız ne hakkında konuşmak istediğinizi netleştirirse en iyi sonuçları alırsınız.
 - Doğru etiketleri seçin. Bu, gönderinizin hemen okunma ve yanıtlanma olasılığını artıracaktır.
 - Aynı tartışma ilgili tekrar tekrar *yayınlamayın*, çünkü bunu yapmak ters etki yaratır.
-- Çok dilli kullanım için ayrılmış bir etiket kullanmıyorsanız, *yalnızca İngilizce yayınlayın.* Sizi okuyamazsak yardımcı olamayız!
+- If not using a tag set aside for multilingual use, *post in English only.* We can't help you if we don't understand your posts.
 - Unutmayın, yazılarınızı imzalamanıza gerek yok. Kim olduğunuzu bize bildirmek için profilinize bakıyoruz.
 
 Lütfen işleri organize etmemize yardımcı olmak için çaba gösterin. Toparlanmak için harcanan zaman, sizi tanımak, sorunlarınızı tartışmak ve Flarum hakkında konuşmak için harcayamayacağımız zamandır. Ve sonuçta, hepimiz yapmak için buradayız!

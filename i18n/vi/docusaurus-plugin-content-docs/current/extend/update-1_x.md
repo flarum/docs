@@ -2,19 +2,38 @@
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+Nếu bạn cần sự trợ giúp về những thay đổi mới này, vui lòng tạo cuộc thảo luận trên [cộng đồng Flarum](https://discuss.flarum.org/t/extensibility) hoặc [Discord](https://flarum.org/discord/).
 
 :::
 
-## Các thay đổi 1.2
+## 1.3 Changes
 
-Flarum v1.2 bao gồm một số bản sửa lỗi, tái cấu trúc nội bộ và các tính năng mới. Sau đây tóm tắt những thay đổi quan trọng nhất đối với các nhà phát triển tiện ích mở rộng:
+Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers:
 
-### Giao diện người dùng
+### Frontend
 
-- Bây giờ lõi Flarum vượt qua kiểm tra kiểu TypeScript (trên phần được viết bằng TypeScript). Ngoài ra, các phần chính của giao diện người dùng (model, phiên bản ứng dụng và các phần khác) hiện được viết bằng TypeScript. Những thay đổi này sẽ làm cho việc viết các phần mở rộng trong TypeScript trở nên dễ dàng và hiệu quả hơn nhiều.
-- Thay vì sử dụng trực tiếp biến Less trong mã CSS, giờ đây lõi sử dụng các biến CSS. Đối với hầu hết các phần, chúng tôi vừa tạo các biến CSS và đặt giá trị của chúng thành các biến Less. Điều này sẽ làm cho chúng và tùy chỉnh CSS dễ dàng hơn rất nhiều. https://github.com/flarum/core/pull/3146.
-- Danh sách thả xuống hiện có thể được vẽ lười biếng để cải thiện hiệu suất. Bạn có thể thực hiện việc này bằng cách đặt lazy draw thành "true". https://github.com/flarum/core/pull/2925.
+- More portions of the frontend are now written in TypeScript, providing a better extension development experience.
+- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
+- The markdown toolbar can now be used on the admin side.
+
+### Backend
+
+- Calculation of the `number` attribute on `posts` has changed and no longer relies on the discussion model's `post_number_index` attribute which is now deprecated and will be removed in 2.0
+- Extension event listeners are now added after core even listeners, this should generally cause no changes in behavior.
+
+### Tooling
+
+- The backend tests workflow now automatically fails tests if there are any PHP warnings and notices.
+
+## 1.2 Changes
+
+Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers:
+
+### Frontend
+
+- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
+- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
+- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
 - You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements.
 - A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
@@ -62,20 +81,20 @@ Flarum v1.2 bao gồm một số bản sửa lỗi, tái cấu trúc nội bộ 
 - All `flarum-cli` commands can now be run with a `--no-interaction` flag to prevent prompts. Defaults will be used when possible, and errors will be thrown if a prompt is needed and there is no default.
 - Frontend GH actions now support type-checking, as well as type coverage reports.
 
-## Những thay đổi
+## 1.1 Changes
 
-Flarum phiên bản 1.1 chủ yếu tập trung vào các bản sửa lỗi và cải tiến chất lượng sau bản phát hành ổn định của chúng tôi vào đầu năm nay. Đây chủ yếu là những thay đổi về cơ sở hạ tầng nội bộ và hướng tới người dùng, vì vậy các tiện ích mở rộng không bị ảnh hưởng đáng kể.
+Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements following our stable release earlier this year. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected.
 
 ### Frontend
 
-- Flarum hiện có gói cấu hình đẹp hơn cho toàn tổ chức trong [`@flarum/prettier-config`](https://github.com/flarum/prettier-config).
-- Hầu hết màu tùy chỉnh (cài đặt hoặc dựa trên dữ liệu) trong lõi hiện được thực hiện thông qua [tuỳ chỉnh thuộc tính CSS](https://github.com/flarum/core/pull/3001).
-- Nhập chữ cho toàn cục của Flarum hiện được [hỗ trợ trong các tiện ích mở rộng](https://github.com/flarum/core/pull/2992).
-- Giờ đây, bạn có thể truyền các attrs bổ sung vào component `Select` và chúng sẽ được [chuyển tới DOM](https://github.com/flarum/core/pull/2959).
-- Component `DiscussionPage` đã được tổ chức dưới dạng [danh sách item](https://github.com/flarum/core/pull/3004) vì vậy, các tiện ích mở rộng sẽ dễ dàng thay đổi nội dung của nó hơn.
-- Các tiện ích mở rộng [bây giờ có thể chỉnh sửa](https://github.com/flarum/core/pull/2935) tham số `page` của `PaginatedListState`.
+- Flarum now has an organization-wide prettier config package under [`@flarum/prettier-config`](https://github.com/flarum/prettier-config).
+- Most custom (setting or data based) coloring in core is now done via [CSS custom properties](https://github.com/flarum/core/pull/3001).
+- Typehinting for Flarum's globals are now [supported in extensions](https://github.com/flarum/core/pull/2992).
+- You can now pass extra attrs to the `Select` component, and they will be [passed through to the DOM](https://github.com/flarum/core/pull/2959).
+- The `DiscussionPage` component is now organized [as an item list](https://github.com/flarum/core/pull/3004), so it's easier for extensions to change its content.
+- Extensions [can now edit](https://github.com/flarum/core/pull/2935) the `page` parameter of `PaginatedListState`.
 
 ### Backend
 
-- Flarum hiện đi kèm với [Bộ mở rộng tải trước](https://github.com/flarum/core/pull/3057) để tải trước bất kỳ nội dung giao diện người dùng tùy chỉnh nào.
-- Bộ mở rộng [Chủ đề](https://github.com/flarum/core/pull/3008) mới hiện cho phép ghi đè lên các tệp Less và chèn nội bộ. Điều này cho phép các chủ đề dễ dàng thay thế hoàn toàn các mô-đun Less một cách dễ dàng hơn.
+- Flarum now comes with a [Preload extender](https://github.com/flarum/core/pull/3057) for preloading any custom frontend assets.
+- A new [Theme](https://github.com/flarum/core/pull/3008) extender now allows overriding Less files and internal imports. This allows themes to more easily completely replace Less modules.

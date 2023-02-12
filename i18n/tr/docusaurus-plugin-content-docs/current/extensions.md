@@ -25,7 +25,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Similarly to installation, to remove an extension:
 
-0. If you want to remove all database tables created by the extension, click the "Uninstall" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
 2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının belgesi tarafından sağlanmalıdır.
 
@@ -35,4 +35,4 @@ Yönetici panosunun uzantılar sayfası, yüklendiklerinde uzantıları yönetme
 
 - Bir uzantıyı etkinleştirin veya devre dışı bırakın
 - Uzantı ayarlarına erişin (ancak bazı uzantılar ayarlar için ana kenar çubuğunda bir sekme kullanacak olsa da)
-- Bir uzantının, yaptığı tüm veritabanı değişikliklerini kaldırmak için geçişlerini geri alın (bu, Kaldır düğmesiyle yapılabilir). Bu, uzantı ile ilişkili TÜM verileri kaldırır ve geri alınamaz. Yalnızca bir uzantıyı kaldırırken yapılmalıdır ve tekrar yüklemeyi planlamayın. Aynı zamanda tamamen isteğe bağlıdır.
+- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). Bu, uzantı ile ilişkili TÜM verileri kaldırır ve geri alınamaz. Yalnızca bir uzantıyı kaldırırken yapılmalıdır ve tekrar yüklemeyi planlamayın. Aynı zamanda tamamen isteğe bağlıdır.

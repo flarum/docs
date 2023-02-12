@@ -10,20 +10,20 @@ Khi bạn đã thêm gói ngôn ngữ, bạn có thể [ đặt nó làm ngôn n
 
 Gói ngôn ngữ được cài đặt giống như [ phần mở rộng ](extensions.md). Ngôn ngữ sẽ xuất hiện trong trang ** Tiện ích mở rộng ** của giao diện quản trị và bạn có thể bật ngôn ngữ đó ở đó.
 
-That’s all there is to it! Giờ đây, bạn có thể sử dụng công cụ chọn ngôn ngữ trong tiêu đề trang web của mình để chuyển hiển thị của diễn đàn sang ngôn ngữ mới.
+Đó là tất cả để có nó! Giờ đây, bạn có thể sử dụng công cụ chọn ngôn ngữ trong tiêu đề trang web của mình để chuyển hiển thị của diễn đàn sang ngôn ngữ mới.
 
 ## Thiết lập ngôn ngữ mặc định
 
-Once you have installed a language pack and made sure it’s working, you may want to set it as the default language for new users and guests. You can do that on the **Basics** page of the admin interface.
+Sau khi bạn đã cài đặt gói ngôn ngữ và đảm bảo rằng nó đang hoạt động, bạn có thể muốn đặt gói này làm ngôn ngữ mặc định cho người dùng và khách mới. Bạn có thể làm điều đó trên trang **Cơ bản** của giao diện quản trị viên.
 
 ## Vô hiệu hoá Gói ngôn ngữ
 
-If you decide you don’t need to support a certain language, after all, you can turn it off. Simply locate the language pack in the **Extensions** page of the admin interface and disable it.
+Nếu bạn quyết định rằng bạn không cần phải hỗ trợ một ngôn ngữ nhất định, thì bạn có thể tắt nó đi. Chỉ cần tìm gói ngôn ngữ trong trang **Tiện ích mở rộng** của giao diện quản trị viên và tắt nó.
 
-Disabling a language can be useful if you’re running a monolingual site and don’t want the language selector to appear in the site header. The language selector is hidden when only one language is enabled.
+Việc tắt một ngôn ngữ có thể hữu ích nếu bạn đang chạy một trang web đơn ngữ và không muốn bộ chọn ngôn ngữ xuất hiện trong tiêu đề trang web. Bộ chọn ngôn ngữ bị ẩn khi chỉ một ngôn ngữ được bật.
 
 ## Cộng đồng Tiện ích mở rộng
 
-While language packs downloaded from the Flarum Community site will generally include translations for all the extensions that come bundled with Flarum, they _will not_ as a rule cover any community extensions you may have installed. It is up to developers to provide and maintain translations for their extensions.
+Mặc dù các gói ngôn ngữ được tải xuống từ trang web Cộng đồng Flarum nói chung sẽ bao gồm bản dịch cho tất cả các tiện ích mở rộng đi kèm với Flarum, chúng _sẽ không_ như một quy tắc bao gồm bất kỳ tiện ích mở rộng cộng đồng nào mà bạn có thể có Cài đặt. Việc cung cấp và duy trì bản dịch cho các tiện ích mở rộng của họ là tùy thuộc vào các nhà phát triển.
 
-So before you install a community extension, you should check to make sure it includes translations for each language pack you have installed. If you find that an extension doesn’t support a language you need, please contact the developer directly and arrange to have the necessary translations added.
+Vì vậy, trước khi cài đặt tiện ích mở rộng cộng đồng, bạn nên kiểm tra để đảm bảo rằng nó bao gồm các bản dịch cho từng gói ngôn ngữ mà bạn đã cài đặt. Nếu bạn nhận thấy rằng tiện ích mở rộng không hỗ trợ ngôn ngữ bạn cần, vui lòng liên hệ trực tiếp với nhà phát triển và sắp xếp để được bổ sung các bản dịch cần thiết.

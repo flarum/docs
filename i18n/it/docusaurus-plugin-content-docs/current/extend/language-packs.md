@@ -10,7 +10,7 @@ Questa documentazione riguarda la struttura tecnica dei pacchetti di traduzione 
 
 I Language Pack dovrebbero essere estensioni, senza nessun altro codice/logica inclusa.
 
-L'extender [`LanguagePack`](https://github.com/flarum/core/blob/master/src/Extend/LanguagePack.php) ti permette di definire che la tua estensione è un language pack.
+The [`LanguagePack` extender](https://github.com/flarum/framework/blob/main/framework/core/src/Extend/LanguagePack.php) allows you to define that your extension is a language pack.
 
 Questo extender non ha impostazioni. Tutto quello che devi fare è istanziarlo, e assicurarti che il tuo language pack sia nella cartella `locale`, e sei a posto!
 

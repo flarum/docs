@@ -10,14 +10,8 @@
 
 ```php
 <?php return array (
-  'debug' => false, // enables or disables debug mode, used to troubleshoot issues
-  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
-  'database' =>
-  array (
-    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB...
-    <?php return array (
   'debug' => false, // 启用或禁用调试模式，用于排查问题
-  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
+  'offline' => false, // 启用或禁用网站维护模式。这使得所有用户(包括管理员)无法访问您的网站。
   'database' =>
   array (
     'driver' => 'mysql', // 数据库驱动，例如 MySQL, MariaDB ……

@@ -76,7 +76,7 @@ $ flarum-cli make frontend modal
 
 Como Flarum es un foro, necesitamos herramientas para que los usuarios puedan crear y editar mensajes y discusiones. Flarum logra esto a través del componente compositor flotante.
 
-El compositor es gestionado por una instancia global de [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), que es accesible a través de `app.composer` en el frontend de `forum`. Sus métodos públicos más importantes son:
+El compositor es gestionado por una instancia global de [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), que es accesible a través de `app.composer` en el frontend de `forum`. Sus métodos públicos más importantes son:
 
 - `app.composer.load(componentClass, attrs)` cargará un nuevo tipo de compositor. Si un compositor ya está activo, será reemplazado.
 - `app.composer.show()` mostrará el compositor si está actualmente oculto.
@@ -90,4 +90,4 @@ Debido a que el compositor puede ser utilizado para varias acciones diferentes (
 
 ### Editor del Composer
 
-El editor actual es otro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/core/blob/master/js/src/common/utils/EditorDriverInterface.ts). Está disponible globalmente para el compositor actual a través de `app.composer.editor`. Tiene una variedad de [métodos públicos](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) que permiten a las extensiones insertar y modificar mediante programación el contenido actual, las selecciones y la posición del cursor del editor de texto del compositor activo.
+El editor actual es otro componente, [`flarum/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/forum/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts). Está disponible globalmente para el compositor actual a través de `app.composer.editor`. Tiene una variedad de [métodos públicos](https://api.docs.flarum.org/js/master/class/src/common/utils/supertextarea.js~supertextarea) que permiten a las extensiones insertar y modificar mediante programación el contenido actual, las selecciones y la posición del cursor del editor de texto del compositor activo.

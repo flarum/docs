@@ -1,28 +1,28 @@
 # Báo cáo lỗi
 
-:::danger Security Vulnerabilities
+:::danger Lỗ hổng bảo mật
 
-If you discover a security vulnerability within Flarum, please follow our [security policy](https://github.com/flarum/core/security/policy) so we can address it promptly.
+Nếu bạn phát hiện ra lỗ hổng bảo mật trong Flarum, vui lòng tuân theo[chính sách bảo mật](https://github.com/flarum/core/security/policy) của chúng tôi để chúng tôi có thể giải quyết kịp thời.
 
 :::
 
-Thank you for helping us test Flarum. We're happy to have you on the team! We need people who can *troubleshoot issues patiently* and *communicate them clearly*. As you probably know, good bug reporting takes some time and effort. If you're fine with that, then let's get started!
+Cảm ơn bạn đã giúp chúng tôi kiểm tra Flarum. Chúng tôi rất vui khi có bạn trong nhóm! Chúng tôi cần những người có thể *kiên nhẫn khắc phục sự cố* và *thông báo rõ ràng*. Như bạn có thể biết, báo cáo lỗi tốt cần một chút thời gian và nỗ lực. Nếu bạn ổn với điều đó, thì hãy bắt đầu!
 
 ## Trùng lặp
 
-Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
+Đã tìm thấy một lỗi? Tuyệt vời! Chúng tôi rất muốn nghe về nó &mdash; nhưng trước tiên, bạn nên kiểm tra xung quanh để đảm bảo rằng bạn không lãng phí thời gian vào một vấn đề đã biết:
 
-- Search our [Support forum](https://discuss.flarum.org/t/support) to see if it's already been reported.
-- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/core/issues) too.
+- Tìm kiếm trong [Diễn đàn hỗ trợ](https://discuss.flarum.org/t/support) của chúng tôi để xem liệu nó đã được báo cáo chưa.
+- Chúng tôi có thể đang tìm cách khắc phục, vì vậy hãy tìm kiếm trong [trình theo dõi sự cố](https://github.com/flarum/core/issues) của chúng tôi.
 
-If you've searched *thoroughly* and come up empty-handed, we'll welcome your report. If it's just a simple issue (a misspelled word or graphics glitch, for example) skip to the next paragraph. But if you're seeing errors, or something is clearly broken, we'll need you to gather some information first. Please head over to our [Troubleshooting](troubleshoot.md) guide and follow the instructions there. Collect as much info as you can!
+Nếu bạn đã tìm kiếm *ỹ lưỡng* và ra về tay không, chúng tôi sẽ hoan nghênh báo cáo của bạn. Nếu đó chỉ là một vấn đề đơn giản (ví dụ: một từ sai chính tả hoặc trục trặc đồ họa), hãy chuyển sang đoạn tiếp theo. Nhưng nếu bạn thấy lỗi hoặc một cái gì đó rõ ràng bị hỏng, chúng tôi sẽ cần bạn thu thập một số thông tin trước. Vui lòng xem hướng dẫn [Gỡ rối](troubleshoot.md) của chúng tôi và làm theo hướng dẫn tại đó. Thu thập càng nhiều thông tin càng tốt!
 
 ## Báo cáo
 
-We track issues on GitHub. Make sure you open your issue in the [correct repository](https://github.com/flarum), and fill out all of the information in the Bug Report template.
+Chúng tôi theo dõi các vấn đề trên GitHub. Đảm bảo rằng bạn mở sự cố của mình trong [kho lưu trữ chính xác](https://github.com/flarum) và điền vào tất cả thông tin trong mẫu Báo cáo lỗi.
 
-If you can, check if the issue is reproducible with the latest version of Flarum. If you are using a pre-release or development version, please indicate the specific version you are using.
+Nếu bạn có thể, hãy kiểm tra xem sự cố có thể tái tạo được bằng phiên bản Flarum mới nhất hay không. Nếu bạn đang sử dụng phiên bản phát hành trước hoặc phiên bản phát triển, vui lòng cho biết phiên bản cụ thể mà bạn đang sử dụng.
 
-Remember: the goal of a bug report is to make it easy for us to replicate the bug and fix it. You might want to read [this article](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) for some useful tips on how to write an effective bug report. It is **required** that you clearly describe the steps necessary to reproduce the issue you are running into. Issues with no clear reproduction steps will not be triaged. If an issue labeled "needs verification" receives no further input from the issue author for more than 5 days, it will be closed.
+Hãy nhớ rằng: mục tiêu của báo cáo lỗi là giúp chúng tôi dễ dàng sao chép lỗi và sửa chữa nó. Bạn có thể muốn đọc [bài viết này](https://www.chiark.greenend.org.uk/~sgtatham/bugs.html) để biết một số mẹo hữu ích về cách viết báo cáo lỗi hiệu quả. Nó **bắt buộc** bạn phải mô tả rõ ràng các bước cần thiết để tái tạo sự cố mà bạn đang gặp phải. Các vấn đề không có bước tái tạo rõ ràng sẽ không được xử lý. Nếu một vấn đề có nhãn "cần xác minh" không nhận được thêm thông tin nào từ tác giả của vấn đề trong hơn 5 ngày, nó sẽ bị đóng.
 
-Once you've posted your report, we'd ask that you please *follow the discussion* and wait patiently. We may need to ask for further details or clarification; but we've always got plenty to do, and it could be a while before we can give your report the time it deserves.
+Khi bạn đã đăng báo cáo của mình, chúng tôi đề nghị bạn *theo dõi cuộc thảo luận* và kiên nhẫn chờ đợi. Chúng tôi có thể cần hỏi thêm chi tiết hoặc làm rõ; nhưng chúng tôi luôn có nhiều việc phải làm và có thể mất một thời gian trước khi chúng tôi có thể cung cấp cho báo cáo của bạn thời gian xứng đáng.

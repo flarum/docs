@@ -1,10 +1,10 @@
 # Bộ mở rộng cục bộ
 
-If there are customizations you want to make to your site without distributing an entire extension, you can do so by using **local extenders**. Each Flarum installation comes with an `extend.php` file where you can add extender instances, just like in a full extension.
+Nếu có các tùy chỉnh bạn muốn thực hiện cho trang web của mình mà không phân phối toàn bộ tiện ích mở rộng, bạn có thể làm như vậy bằng cách sử dụng **bộ mở rộng cục bộ**. Mỗi bản cài đặt Flarum đều đi kèm với một tệp `extend.php` nơi bạn có thể thêm các đối tượng bộ mở rộng, giống như trong một phần mở rộng đầy đủ.
 
 Xem [tài liệu mở rộng của chúng tôi](extend/start.md) để biết thêm thông tin về bộ mở rộng (và cả [ví dụ về bộ mở rộng cục bộ](extend/start.md#hello-world)).
 
-If you need to create new files (when adding a custom class to be imported for extenders), you'll need to adjust your composer.json a bit. Add the following:
+Nếu bạn cần tạo tệp mới (khi thêm class tùy chỉnh được nhập cho bộ mở rộng), bạn sẽ cần điều chỉnh composer.json của mình một chút. Thêm những dòng sau:
 
 ```json
 "autoload": {

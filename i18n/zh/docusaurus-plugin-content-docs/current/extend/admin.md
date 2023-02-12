@@ -1,16 +1,16 @@
-# 管理面板
+# 后台管理面板
 
 Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比以往任何时候都更容易为您的扩展添加设置或权限。
 
-在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 Now, every extension has a page containing info, settings, and the extension's own permissions.
+在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
-## Extension Data API
+## 扩展数据API
 
-This new API allows you to add settings to your extension with very few lines of code.
+这个新的 API 允许您用极少的代码添加设置到扩展中。
 
-### Telling the API about your extension
+### 告诉API您扩展的信息
 
 Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
 
@@ -117,7 +117,7 @@ app.initializers.add('interstellar', function(app) {
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
-In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, by calling `registerPermission`.
+In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
  * Permission object
@@ -140,13 +140,6 @@ app.initializers.add('interstellar', function(app) {
       }, 
       'start', // Category permission will be added to on the grid
       95 // Optional: Priority
-    );
-});
-        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
-        allowGuest: false, // Whether this permission can be granted to guests
-      }, 
-      'start', // Category permission will be added to on the grid
-      95 // Priority (optional)
     );
 });
 ```

@@ -1,6 +1,6 @@
----
+- - -
 slug: /
----
+- - -
 
 # Über Flarum
 
@@ -38,7 +38,7 @@ Flarum ist eine [kostenlose, quelloffene](https://github.com/flarum/core) Softwa
 
 🧑🤝🧑 Tritt [unserer Community](https://discuss.flarum.org) bei, um über die Entwicklung von Flarum zu sprechen, Hilfe für deine Instanz zu bekommen oder einfach coole Leute zu treffen! Wenn du Erfahrung mit Flarum hast, kannst du auch gerne Anfängern helfen!
 
-🐛 Wenn es einen Fehler gibt, der dich stört, oder eine Idee für eine neue Funktion, die dir durch den Kopf geht, können wir es nicht wissen, wenn du es uns nicht sagst! Wir verfolgen Bugs, Vorschläge und zukünftige Entwicklungspläne [über GitHub](https://github.com/flarum/core/issues). Wenn es bereits ein offenes Problem gibt, können Likes und (konstruktive) Zusatzinformationen sehr hilfreich sein!
+🐛 Wenn ein Fehler existiert, der dich stört, oder eine Idee für eine neue Funktion, die dir durch den Kopf geht, können wir es nicht wissen, wenn du es uns nicht sagst! Wir verfolgen Bugs, Vorschläge und zukünftige Entwicklungspläne [über GitHub](https://github.com/flarum/core/issues). Wenn bereits ein offenes Problem existiert, können Likes und (konstruktive) Zusatzinformationen sehr hilfreich sein!
 
 📣 Und wenn dir Flarum gefällt, dann erwäge doch darüber zu bloggen/twittern/reden! Mehr Aufmerksamkeit für Flarum führt zu mehr Nutzern, die sich mit Flarum beschäftigen, und damit zu mehr Aktivität, besseren Erweiterungen und einer schnelleren Entwicklung.
 

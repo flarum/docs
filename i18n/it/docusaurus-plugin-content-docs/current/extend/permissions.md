@@ -58,7 +58,7 @@ Il prefisso del modello è utile nel caso in cui tu abbia diversi modelli ma per
 
 Potresti aver visto alcune call a `$actor->can` che non usano il nome completo di un'autorizzazione; ad esempio, `$actor->can('reply', $discussion)`, dove il permesso è effettivamente chiamato `discussion.reply`.
 
-Questo viene fatto nel core per rendere le call di autorizzazione più brevi e più semplici. In sostanza, se il secondo argomento è una discussione, la [DiscussionPolicy](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Discussion/Access/DiscussionPolicy.php#L39-L44) del core controllerà automaticamente l'autorizzazione `discussione.PROVIDED_ABILITY`.
+Questo viene fatto nel core per rendere le call di autorizzazione più brevi e più semplici. Essentially, if the second argument is a discussion, Core's [DiscussionPolicy](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Discussion/Access/DiscussionPolicy.php#L39-L44) will check the `discussion.PROVIDED_ABILITY` permission automatically.
 
 Può essere usato per le estensioni quando il namespace di un modello non è presente: per esempio, `$actor->can('someAbility, $discussion)` controllerà il permesso di `discussion.someAbility` se l'argomento `$discussion` è un'istanza del modello `Discussion`. Tuttavia, questo significa che non è possibile prefissare i permessi con i namespace delle estensioni (o è necessario mettere il namespace delle estensioni alla fine).
 

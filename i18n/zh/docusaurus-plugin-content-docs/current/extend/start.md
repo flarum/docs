@@ -14,7 +14,7 @@ Flarum 的构成有三层：
 
 * 第二层，后端开放的一个 **公共 API**，允许前端客户端与论坛数据进行交互。 该接口根据 [JSON:API 规范](https://jsonapi.org/) 构建。
 
-* 第三层，默认的 Web 界面，俗称 **前端**。 这是一个使用 API 的 [单页应用](https://en.wikipedia.org/wiki/Single-page_application)，由一个简单的类 React 框架 [Mithril.js](https://mithril.js.org/) 构建。 It's built with a simple React-like framework called [Mithril.js](https://mithril.js.org).
+* 第三层，默认的 Web 界面，俗称 **前端**。 这是一个使用 API 的 [单页应用](https://en.wikipedia.org/wiki/Single-page_application)， 由一个简单的类 React 框架 [Mithril.js](https://mithril.js.org/) 构建。
 
 扩展程序通常需要与这三层都进行交互才能有所为。 例如，如果您想创建一个可以在用户资料中添加新属性的扩展，则需要在 **后端** 中添加相应的数据库结构，通过 **公共 API** 调用该数据，然后在 **前端** 显示这个数据并允许用户修改它。
 
@@ -24,7 +24,7 @@ Flarum 的构成有三层：
 
 为了扩展 Flarum，我们需要用到 **扩展器**，让我们先了解一下它的概念。 扩展器其实就是 *声明性* 对象，您可以通过简单的方式描述想要实现的内容（比如向论坛添加新的路由，或者在创建新主题帖时执行某些代码）。
 
-每个扩展器都是不同的，但是大体上长这样： However, they will always look somewhat similar to this:
+每个扩展器都是不同的， 但是大体上长这样：
 
 ```php
 // 注册要交付给前端的 JavaScript 和 CSS 文件
@@ -37,11 +37,11 @@ Flarum 的构成有三层：
 
 为了保持一致，我们在后端（PHP）和前端（JavaScript）都使用了扩展器的概念。 您在扩展中做的 _每一件事_ 都应当通过扩展器来完成，因为扩展器是我们给予您的 **保证** —— 保证 Flarum 小版本更新绝对不破坏您的扩展。
 
-所有 Flarum 核心提供的可用扩展器都可以在 [`Extend` 命名空间](https://github.com/flarum/core/blob/master/src/Extend)[（PHP API 文档）](https://api.docs.flarum.org/php/master/flarum/extend)找到。
+所有 Flarum 核心提供的可用扩展器都可以在 [`Extend` 命名空间](https://github.com/flarum/framework/blob/main/framework/core/src/Extend)[(PHP API 文档)](https://api.docs.flarum.org/php/master/flarum/extend)中找到。扩展程序亦有可能提供他们[自有的扩展器](extensibility.md#custom-extenders)。
 
-## Hello World
+## 世界你好
 
-想亲眼看看一个扩展器的执行？ Flarum 安装根目录中的 `extend.php` 是为您的站点注册扩展器的最简单的途径，它应该会返回一个扩展器对象的数组。 It should return an array of extender objects. 打开该文件并添加以下内容：
+想亲眼看看一个扩展器的执行？ Flarum 安装根目录中的 `extend.php` 是为您的站点注册扩展器的最简单的途径，它应该会返回一个扩展器对象的数组。 它应该会返回一个扩展器对象的数组。 打开该文件并添加以下内容：
 
 ```php
 <?php
@@ -59,7 +59,7 @@ return [
 
 现在，访问您的论坛，接受真挚的问候（尽管很突兀）。 👋
 
-对于简单的网站定制，比如添加一些自定义的 CSS 或 JavaScript，或者整合您网站的认证系统，论坛根目录下的 `extend.php` 文件是非常好用的。 但是在某些时候，您的自定义可能会超出它的限制范围。 或者您想建立一个扩展程序，并分享到社区，那么是时候建立一个扩展程序了！ Time to build an extension!
+对于简单的网站定制，比如添加一些自定义的 CSS 或 JavaScript，或者整合您网站的认证系统，论坛根目录下的 `extend.php` 文件是非常好用的。 但是在某些时候，您的自定义可能会超出它的限制范围。 或者您想建立一个扩展程序，并分享到社区。 那么是时候建立一个扩展程序了！
 
 ## 打包扩展程序
 
@@ -77,7 +77,7 @@ composer config repositories.0 path "packages/*"
 
 ### extend.php
 
-扩展程序的 `extend.php` 跟您站点根目录下的那个是一模一样的，它会返回一个扩展器对象数组，并告诉 Flarum 您想要做什么。 It will return an array of extender objects that tell Flarum what you want to do. 现在，将前面我们操作的 `Frontend` 扩展器移动到这里。
+扩展程序的 `extend.php` 跟您站点根目录下的那个是一模一样的。 它会返回一个扩展器对象数组，并告诉 Flarum 您想要做什么。 现在，将前面我们操作的 `Frontend` 扩展器移动到这里。
 
 ### composer.json
 
@@ -146,7 +146,7 @@ composer require acme/flarum-hello-world *@dev
 
 执行完成后，前往您论坛后台管理面板启用插件，最后回到您的论坛。
 
-*whizzing, whirring, metal clunking*
+*啾，咻，铮铛*
 
 哇！ 你好，扩展！
 

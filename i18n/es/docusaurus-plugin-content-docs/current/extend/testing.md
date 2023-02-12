@@ -127,7 +127,7 @@ La información de la base de datos de pruebas se configura a través del `DB_HO
 
 Ahora que hemos proporcionado la información necesaria, todo lo que tenemos que hacer es ejecutar `composer test:setup` en el directorio raíz de nuestra extensión, ¡y ya tenemos nuestro entorno de pruebas listo para funcionar!
 
-Dado que [(casi)](https://github.com/flarum/core/blob/master/tests/integration/api/discussions/ListTestWithFulltextSearch.php#L29-L43) todas las operaciones de la base de datos en las pruebas de integración se ejecutan en transacciones, los desarrolladores que trabajan en múltiples extensiones generalmente encontrarán más conveniente usar una base de datos compartida y un directorio tmp para probar todas sus extensiones. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
+Since [(almost)](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. Para hacer esto, establece la configuración de la base de datos y las variables de entorno `FLARUM_TEST_TMP_DIR` en tu `.bashrc` o `.bash_profile` a la ruta que deseas utilizar, y ejecuta el script de configuración para cualquier extensión (todavía querrás incluir el archivo de configuración en cada repo para las pruebas de CI a través de Github Actions). Entonces deberías estar listo para cualquier extensión de Flarum (o núcleo).
 
 ### Uso de las pruebas de integración
 
@@ -305,7 +305,7 @@ Si quieres enviar parámetros de consulta en una petición GET, no puedes inclui
 
 :::caution
 
-Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. Vea [el enfoque del núcleo](https://github.com/flarum/core/blob/master/tests/integration/extenders/SimpleFlarumSearchTest.php) para un ejemplo de una solución.
+Este es un caso extremo, pero tenga en cuenta que MySQL no actualiza el índice de texto completo en las transacciones, por lo que el enfoque estándar no funcionará si está tratando de probar una consulta de texto completo modificada. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
 
 :::
 
@@ -385,8 +385,8 @@ NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that f
 
 ## Frontend Tests
 
-¡Muy pronto!
+Coming Soon!
 
 ## E2E Tests
 
-¡Muy pronto!
+Coming Soon!

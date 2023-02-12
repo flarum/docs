@@ -12,7 +12,7 @@ I dischi **del filesystem** rappresentano le posizioni di archiviazione e sono s
 
 Per accedere a un disco, è necessario recuperarlo dalla [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). Per farlo, dovresti iniettare il factory contract nella tua classe e accedere ai dischi di cui hai bisogno.
 
-Diamo un'occhiata al [`DeleteLogoController`](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Api/Controller/DeleteLogoController.php#L19-L59) del core per un esempio:
+Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
 
 ```php
 <?php
@@ -104,7 +104,7 @@ L'array di configurazione può contenere altre voci supportate da [Array di conf
 
 Flarum seleziona il driver attivo per ogni disco controllando il `disk_driver.DISK_NAME` in [settings repository](settings.md) e [config.php](../config.md). Se nessun driver è configurato, o il driver configurato non è disponibile, Flarum utilizzerà il driver `local`.
 
-È possibile definire nuovi driver di archiviazione implementando l'interfaccia [`Flarum\Filesystem\DriverInterface`](https://github.com/flarum/core/blob/bba6485effc088e38e9ae0bc8f25528ecbee3a7b/src/Filesystem/DriverInterface.php#L16-L16)e registrarla tramite l'extender `Filesystem`:
+You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/framework/blob/main/framework/core/src/Filesystem/DriverInterface.php#L16), and registering it via the `Filesystem` extender:
 
 ```php
 use Flarum\Extend;
@@ -116,7 +116,7 @@ return [
 
 I driver di archiviazione del filesystem sono uno strumento molto potente che consente di personalizzare completamente le posizioni di archiviazione dei file, allegare CDN arbitrari, ed estendere il filesystem/cloud storage.
 
-:::danger
+:::Attenzione
 
 Alcuni driver potrebbero provare a indicizzare il loro filesystem ogni volta che il driver viene istanziato, anche se è necessario solo il metodo `url`. Ciò può avere gravi ripercussioni sulle prestazioni. Nella maggior parte dei casi, dovrai assicurarti che il metodo `url` del tuo driver non esegua il filesystem remoto. Allo stesso modo, il filesystem remoto di solito non dovrebbe essere accessibile fino a quando le operazioni non vengono effettivamente eseguite.
 

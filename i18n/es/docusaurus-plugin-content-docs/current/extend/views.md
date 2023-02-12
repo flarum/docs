@@ -46,7 +46,7 @@ Note that all Blade templates rendered this way automatically have access to the
 - `$settings`: a [SettingsInterface](settings) instance.
 - `$slugManager`: a [SlugManager](slugging) instance.
 
-Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/core/tree/master/src/Api/Serializer/ForumSerializer.php#L19-L19).
+Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Serializer/ForumSerializer.php#L19).
 
 ## Overriding Views
 

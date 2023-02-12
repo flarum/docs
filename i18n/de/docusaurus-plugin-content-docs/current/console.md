@@ -1,77 +1,77 @@
-# Console
+# Konsole
 
-In addition to the admin dashboard, Flarum provides several console commands to help manage your forum over the terminal.
+Zusätzlich zum Admin-Dashboard bietet Flarum mehrere Konsolenbefehle, mit denen du dein Forum über das Terminal verwalten kannst.
 
-To use the console:
+Using the console:
 
-1. `ssh` into the server where your flarum installation is hosted
-2. `cd` to the folder that contains a file called `flarum`
-3. Run the command via `php flarum [command]`
+1. `ssh` in den Server, auf dem deine Flarum-Installation gehostet wird
+2. `cd` to the folder that contains the file `flarum`
+3. Befehl über `php flarum [command]` ausführen
 
-## Default Commands
+## Standardbefehle
 
 ### list
 
-Lists all available management commands, as well as instructions for using management commands
+Listet alle verfügbaren Verwaltungsbefehle sowie Anweisungen zur Verwendung von Verwaltungsbefehlen auf
 
 ### help
 
 `php flarum help [command_name]`
 
-Displays help output for a given command.
+Zeigt die Hilfeausgabe für einen bestimmten Befehl an.
 
-You can also output the help in other formats by using the --format option:
+Du kannst die Hilfe auch in anderen Formaten ausgeben, indem du die Option --format verwendest:
 
 `php flarum help --format=xml list`
 
-To display the list of available commands, please use the list command.
+Um die Liste der verfügbaren Befehle anzuzeigen, verwende bitte den list-Befehl.
 
 ### info
 
 `php flarum info`
 
-Gather information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
+Get information about Flarum's core and installed extensions. Dies ist sehr nützlich zum Debuggen von Problemen und sollte bei Supportanfragen mitgeteilt werden.
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
+Löscht den Flarum-Cache des Backends, einschließlich generierter js/css, Textformatierer-Cache und zwischengespeicherter Übersetzungen. Dies sollte nach dem Installieren oder Entfernen von Erweiterungen ausgeführt werden, und das Ausführen sollte der erste Schritt sein, wenn Probleme auftreten.
 
 ### assets:publish
 
 `php flarum assets:publish`
 
-Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
+Assets aus Kern und Erweiterungen veröffentlichen (z. B. kompiliertes JS/CSS, Bootstrap-Symbole, Logos usw.). Dies ist nützlich, wenn deine Assets beschädigt wurden oder wenn du [filesystem drivers](extend/filesystem.md) für die `flarum-assets`-Festplatte ausgetauscht hast.
 
 ### migrate
 
 `php flarum migrate`
 
-Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
+Führt alle ausstehenden Migrationen aus. Dies sollte verwendet werden, wenn eine Erweiterung hinzugefügt oder aktualisiert wird, die die Datenbank ändert.
 
 ### migrate:reset
 
 `php flarum migrate:reset --extension [extension_id]`
 
-Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
+Alle Migrationen für eine Erweiterung zurücksetzen. Dies wird hauptsächlich von Erweiterungsentwicklern verwendet, doch gelegentlich musst du dies möglicherweise ausführen, wenn du eine Erweiterung entfernst und alle deine Daten aus der Datenbank löschen möchtest. Bitte beachte, dass die betreffende Erweiterung derzeit installiert (jedoch nicht unbedingt aktiviert) sein muss, damit dies funktioniert.
 
 ### schedule:run
 
 `php flarum schedule:run`
 
-Many extensions use scheduled jobs to run tasks on a regular interval. This could include database cleanups, posting scheduled drafts, generating sitemaps, etc. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
+Viele Erweiterungen verwenden geplante Jobs, um Aufgaben in regelmäßigen Abständen auszuführen. Dies kann Datenbankbereinigungen, das Posten geplanter Entwürfe, das Erstellen von Sitemaps usw. umfassen. Wenn eine deiner Erweiterungen geplante Jobs verwendet, solltest du einen [Cron-Job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) hinzufügen, um diesen Befehl in regelmäßigen Abständen auszuführen:
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
 ```
 
-This command should generally not be run manually.
+Dieser Befehl sollte im Allgemeinen nicht manuell ausgeführt werden.
 
-Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
+Beachte, dass einige Hosts es dir nicht erlauben, die Cron-Konfiguration direkt zu bearbeiten. In diesem Fall solltest du dich an deinen Host wenden, um weitere Informationen zum Planen von Cron-Jobs zu erhalten.
 
 ### schedule:list
 
 `php flarum schedule:list`
 
-This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
+Dieser Befehl gibt eine Liste geplanter Befehle zurück (weitere Informationen findest du unter `schedule:run`). Dies ist nützlich, um zu bestätigen, dass die von deinen Erweiterungen bereitgestellten Befehle ordnungsgemäß registriert sind. Dies **kann nicht** überprüfen, ob Cron-Jobs erfolgreich geplant wurden oder ausgeführt werden.

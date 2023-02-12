@@ -2,9 +2,9 @@
 
 Mặc dù chúng tôi đã làm việc chăm chỉ để làm cho Flarum đẹp nhất có thể, nhưng mỗi cộng đồng có thể sẽ muốn thực hiện một số chỉnh sửa/sửa đổi để phù hợp với phong cách mong muốn của họ.
 
-## Trang quản trị
+## Bảng điều khiển Quản trị
 
-The [admin dashboard](./admin.md)'s Appearance page is a great first place to start customizing your forum. Here, you can:
+The [admin dashboard](admin.md)'s Appearance page is a great first place to start customizing your forum. Tại đây, bạn có thể:
 
 - Chọn màu chủ đề
 - Chuyển đổi chế độ tối và màu đầu trang
@@ -14,7 +14,7 @@ The [admin dashboard](./admin.md)'s Appearance page is a great first place to st
 
 ## Chủ đề CSS
 
-CSS is a style sheet language that tells browsers how to display elements of a webpage. It allows us to modify everything from colors to fonts to element size and positioning to animations. Adding custom CSS can be a great way to modify your Flarum installation to match a theme.
+CSS là một ngôn ngữ biểu định kiểu cho các trình duyệt biết cách hiển thị các phần tử của một trang web. Nó cho phép chúng tôi sửa đổi mọi thứ từ màu sắc, phông chữ đến kích thước phần tử và vị trí cho đến hình ảnh động. Thêm CSS tùy chỉnh có thể là một cách tuyệt vời để sửa đổi cài đặt Flarum của bạn cho phù hợp với chủ đề.
 
 Hướng dẫn CSS nằm ngoài phạm vi của tài liệu này, nhưng có rất nhiều tài nguyên trực tuyến tuyệt vời để tìm hiểu kiến ​​thức cơ bản về CSS.
 
@@ -26,4 +26,4 @@ Flarum thực sự sử dụng LESS, giúp viết CSS dễ dàng hơn bằng cá
 
 ## Tiện ích mở rộng
 
-Flarum's flexible [extension system](extensions.md) allows you to add, remove, or modify practically any part of Flarum. If you want to make substantial theming modifications beyond changing colors/sizes/styles, a custom extension is definitely the way to go. To learn how to make an extension, check out our [extension documentation](extend/README.md)!
+[Hệ thống tiện ích mở rộng](extensions.md) linh hoạt của Flarum cho phép bạn thêm, xóa hoặc sửa đổi trên thực tế bất kỳ phần nào của Flarum. Nếu bạn muốn thực hiện các sửa đổi đáng kể về chủ đề ngoài việc thay đổi màu sắc/kích thước/kiểu dáng, thì một tiện ích mở rộng tùy chỉnh chắc chắn là cách tốt nhất. Để tìm hiểu cách tạo tiện ích mở rộng, hãy xem [tài liệu về tiện ích mở rộng](extend/README.md) của chúng tôi!
