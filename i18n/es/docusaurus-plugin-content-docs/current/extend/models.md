@@ -137,21 +137,20 @@ With all your snazzy new database tables and columns, you're going to want a way
 
 If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions. See the Eloquent docs linked above for examples of what your model class should look like.
 
-
-<!--
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+
+<!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
 ```php
 use Flarum\Extend;
 use Flarum\User\User;
 
 return [
-    new Extend\Model(User::class)
-        ->defaultValue('is_alive', true)
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
         ->accessor('first_name', function ($value) {
             return ucfirst($value)
         })
@@ -164,7 +163,21 @@ return [
 ```
 -->
 
-### Relaciones
+If you need to define any attribute [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+
+```php
+use Flarum\Extend;
+use Flarum\User\User;
+
+return [
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
+        ->cast('suspended_until', 'datetime')
+        ->cast('is_admin', 'boolean')
+];
+```
+
+### Relationships
 
 You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
@@ -195,7 +208,7 @@ Flarum provides a simple toolset for working with data in the frontend in the fo
 - Model instances are objects that represent a record from the database. You can use their methods to get attributes and relationships of that record, save changes to the record, or delete the record.
 - The Store is a util class that caches all the models we've fetched from the API, links related models together, and provides methods for getting model instances from both the API and the local cache.
 
-### Obtención de datos
+### Fetching Data
 
 Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
 
@@ -253,7 +266,7 @@ export const extend = [
   new Extend.Model('tags', Tag)
 ];
 ``` -->
-### Extender los modelos
+### Extending Models
 To add attributes and relationships to existing models, modify the model class prototype:
 
 ```js
@@ -271,7 +284,7 @@ Discussion.prototype.slug = Model.attribute('slug');
     .hasOne('user')
     .hasMany('posts')
 ``` -->
-### Ahorro de recursos
+### Saving Resources
 To send data back through the API, call the `save` method on a model instance. This method returns a Promise which resolves with the same model instance:
 
 ```js
@@ -291,7 +304,7 @@ user.save({
 })
 ```
 
-### Creación de nuevos recursos
+### Creating New Resources
 
 To create a new resource, create a new model instance for the resource type using the store's `createRecord` method, then `save` it:
 
@@ -301,7 +314,7 @@ const discussion = app.store.createRecord('discussions');
 discussion.save({ title: 'Hello, world!' }).then(console.log);
 ```
 
-### Borrar recursos
+### Deleting Resources
 
 To delete a resource, call the `delete` method on a model instance. This method returns a Promise:
 
