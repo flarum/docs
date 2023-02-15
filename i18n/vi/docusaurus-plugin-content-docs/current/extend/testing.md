@@ -8,9 +8,21 @@ The `flarum/testing` library is used by core and some bundled extensions for aut
 
 ### Setup
 
+:::tip [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically add and update backend testing infrastructure to your code:
+
+```bash
+$ flarum-cli infra backendTesting
+```
+
+:::
+
 Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
 
-`composer require --dev flarum/testing:^1.0`
+```bash
+composer require --dev flarum/testing:^1.0
+```
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
 
@@ -117,7 +129,7 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
 
 #### Github Testing Workflow
 
-In public repos, GitHub Actions allow you to run all your tests on every commit and pull request for free. You can copy [Flarum core's GitHub Actions](https://github.com/flarum/core/blob/master/.github/workflows/test.yml) testing workflow into your extension's `.github/workflows` folder to enable this.
+To run tests on every commit and pull request, check out the [GitHub Actions](github-actions.md) page.
 
 ---
 
