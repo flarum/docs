@@ -137,21 +137,20 @@ Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo pe
 
 Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per quest'ultima. Piuttosto che estendere la classe `Model` direttamente, dovrai estendere `Flarum\Database\AbstractModel` che fornisce un po 'di funzionalità extra per consentire ai tuoi modelli di essere estesi da altre estensioni. Vedere i documenti Eloquent linkati qui sopra per esempi su come dovrebbe apparire la classe del modello.
 
-
-<!--
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+
+<!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
 ```php
 use Flarum\Extend;
 use Flarum\User\User;
 
 return [
-    new Extend\Model(User::class)
-        ->defaultValue('is_alive', true)
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
         ->accessor('first_name', function ($value) {
             return ucfirst($value)
         })
@@ -164,9 +163,23 @@ return [
 ```
 -->
 
-### Relazioni
+If you need to define any attribute [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
 
-Puoi aggiungere anche [relazioni](https://laravel.com/docs/8.x/eloquent-relationships) a modelli esistenti utilizzando i metodi `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany` e `relationship` sull'extender `Model`. Il primo argomento è il nome della relazione; il resto degli argomenti viene passato al metodo equivalente sul modello, quindi è possibile specificare il nome del modello correlato e, facoltativamente, sostituire i nomi di tabella e chiave:
+```php
+use Flarum\Extend;
+use Flarum\User\User;
+
+return [
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
+        ->cast('suspended_until', 'datetime')
+        ->cast('is_admin', 'boolean')
+];
+```
+
+### Relationships
+
+You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
@@ -176,12 +189,12 @@ Puoi aggiungere anche [relazioni](https://laravel.com/docs/8.x/eloquent-relation
         ->belongsToMany('role', 'App\Role', 'role_user', 'user_id', 'role_id')
 ```
 
-Questi 4 dovrebbero coprire la maggior parte delle relazioni, ma a volte è necessaria una personalizzazione più precisa (es. `morphMany`, `morphToMany`, e `morphedByMany`). QUALSIASI relazione Eloquent valida è supportata dal metodo `relationship`:
+Those 4 should cover the majority of relations, but sometimes, finer-grained customization is needed (e.g. `morphMany`, `morphToMany`, and `morphedByMany`). ANY valid Eloquent relationship is supported by the `relationship` method:
 
 ```php
     new Extend\Model(User::class)
         ->relationship('mobile', 'App\Phone', function ($user) {
-            // Restituisce qui qualsiasi relazione Eloquent.
+            // Return any Eloquent relationship here.
             return $user->belongsToMany(Discussion::class, 'recipients')
                 ->withTimestamps()
                 ->wherePivot('removed_at', null);
@@ -190,14 +203,14 @@ Questi 4 dovrebbero coprire la maggior parte delle relazioni, ma a volte è nece
 
 ## Modelli frontend
 
-Flarum fornisce un semplice set di strumenti per lavorare con i dati nel frontend sotto forma di modelli frontend. Ci sono 2 concetti principali su cui porre attenzione:
+Flarum provides a simple toolset for working with data in the frontend in the form of frontend models. There's 2 main concepts to be aware of:
 
 - Le istanze del modello sono oggetti che rappresentano un record dal database. È possibile utilizzare i loro metodi per ottenere gli attributi e le relazioni di quel record, salvare le modifiche al record o eliminare il record.
 - Lo Store è una classe util che memorizza in cache tutti i modelli che abbiamo recuperato dall'API, collega i modelli correlati insieme, e fornisce metodi per ottenere le istanze del modello sia dall'API che dalla cache locale.
 
-### Recupero dati
+### Fetching Data
 
-Il frontend di Flarum contiene dati locali in `store` che fornisce un'interfaccia per interagire con JSON:API. Puoi recuperare le risorse dall'API utilizzando il metodo `find`, che restituisce sempre:
+Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
 
 ```js
 // GET /api/discussions?sort=createdAt
@@ -207,14 +220,14 @@ app.store.find('discussions', {sort: 'createdAt'}).then(console.log);
 app.store.find('discussions', 123).then(console.log);
 ```
 
-Una volta che le risorse sono state caricate, verranno memorizzate nella cache in modo da poterle accedere nuovamente senza reiterare l'API utilizzando i metodi `all` e `getById`:
+Once resources have been loaded, they will be cached in the store so you can access them again without hitting the API using the `all` and `getById` methods:
 
 ```js
 const discussions = app.store.all('discussions');
 const discussion = app.store.getById('discussions', 123);
 ```
 
-Store racchiude i dati delle risorse API non elaborate in oggetti che ne semplificano la maniera in cui lavorarci. È possibile accedere ad attributi e relazioni tramite metodi di istanza predefiniti:
+The store wraps the raw API resource data in model objects which make it a bit easier to work with. Attributes and relationships can be accessed via pre-defined instance methods:
 
 ```js
 const id = discussion.id();
@@ -222,11 +235,11 @@ const title = discussion.title();
 const posts = discussion.posts(); // array of Post models
 ```
 
-Puoi saperne di più su "store" nella nostra [Documentazione API](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
+You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
 
 ### Aggiunta di nuovi modelli
 
-Se hai aggiunto un nuovo tipo di risorsa, dovrai definire anche un nuovo modello. I modelli devono estendere la classe `Model` e ridefinire gli attributi e le relazioni delle risorse:
+If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
 
 ```js
 import Model from 'flarum/common/Model';
@@ -239,7 +252,7 @@ export default class Tag extends Model {
 }
 ```
 
-È quindi necessario registrare il nuovo modello:
+You must then register your new model with the store:
 
 ```js
 app.store.models.tags = Tag;
@@ -253,8 +266,8 @@ export const extend = [
   new Extend.Model('tags', Tag)
 ];
 ``` -->
-### Modelli estensibili
-Per aggiungere attributi e relazioni a modelli esistenti, modificare la "model class prototype":
+### Extending Models
+To add attributes and relationships to existing models, modify the model class prototype:
 
 ```js
 Discussion.prototype.user = Model.hasOne('user');
@@ -271,14 +284,14 @@ Discussion.prototype.slug = Model.attribute('slug');
     .hasOne('user')
     .hasMany('posts')
 ``` -->
-### Risparmio di risorse
-Per inviare di nuovo i dati tramite l'API, chiama il metodo `save` su un'istanza del modello. Questo metodo restituisce un valore che si risolve con la stessa istanza del modello:
+### Saving Resources
+To send data back through the API, call the `save` method on a model instance. This method returns a Promise which resolves with the same model instance:
 
 ```js
 discussion.save({ title: 'Hello, world!' }).then(console.log);
 ```
 
-Puoi anche salvare le relazioni passandole in `relationships`. Per le relazioni singole, passare una singola istanza del modello. Per le relazioni multiple, passare un array di istanze del modello.
+You can also save relationships by passing them in a `relationships` key. For has-one relationships, pass a single model instance. For has-many relationships, pass an array of model instances.
 
 ```js
 user.save({
@@ -291,9 +304,9 @@ user.save({
 })
 ```
 
-### Creazione di nuove risorse
+### Creating New Resources
 
-Per creare una nuova risorsa, crea una nuova istanza del modello per il tipo di risorsa utilizzando `createRecord`, quindi `save`:
+To create a new resource, create a new model instance for the resource type using the store's `createRecord` method, then `save` it:
 
 ```js
 const discussion = app.store.createRecord('discussions');
@@ -301,9 +314,9 @@ const discussion = app.store.createRecord('discussions');
 discussion.save({ title: 'Hello, world!' }).then(console.log);
 ```
 
-### Eliminazione di risorse
+### Deleting Resources
 
-Per eliminare una risorsa, usa `delete` su un'istanza del modello. Questo metodo restituisce:
+To delete a resource, call the `delete` method on a model instance. This method returns a Promise:
 
 ```js
 discussion.delete().then(done);
@@ -311,10 +324,10 @@ discussion.delete().then(done);
 
 ## Modelli di backend vs modelli Frontend
 
-Spesso, backend e modelli frontend avranno attributi e relazioni simili. Questo è un buon modello da seguire, mache può non essere sempre valido.
+Often, backend and frontend models will have similar attributes and relationships. This is a good pattern to follow, but isn't always true.
 
-Gli attributi e le relazioni dei modelli di backend sono basati sul **database **. Ogni colonna nella tabella verrà mappata su un attributo del backend.
+The attributes and relationships of backend models are based on the **database**. Each column in the model's table will map to an attribute on the backend model.
 
-Gli attributi e le relazioni dei modelli di frontend sono basati sull'output di [API Serializers](api.md). Parleremo in modo più approfondito di questo nel prossimo articolo, ma è scontato che un serializzatore può emettere tutti, qualsiasi, o nessuno degli attributi nel modello del backend, e i nomi con i quali si accede potrebbero essere diversi nel backend e nel frontend.
+The attributes and relationships of frontend models are based on the output of [API Serializers](api.md). These will be covered more in depth in the next article, but it's worth that a serializer could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
-Inoltre, quando si salva un modello di backend, questi dati vengono scritti direttamente nel database. Ma quando si salva un modello frontend, non si fa altro che innescare una richiesta alla API. Nel [prossimo articolo](api.md)impareremo come gestire queste richieste nel backend, in modo che le modifiche richieste siano effettivamente riflesse nel database.
+Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.
