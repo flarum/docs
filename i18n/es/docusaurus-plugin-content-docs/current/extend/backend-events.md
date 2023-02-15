@@ -179,10 +179,10 @@ Como desarrollador de extensiones puedes definir tus propios eventos para permit
 <?php
 
 /*
- * Este archivo forma parte de Flarum.
+ * This file is part of Flarum.
  *
- * Para obtener información detallada sobre los derechos de autor y la licencia, consulte el
- * archivo LICENSE que se distribuyó con este código fuente.
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
 
 namespace Flarum\Post\Event;
