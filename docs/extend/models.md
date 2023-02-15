@@ -137,20 +137,19 @@ With all your snazzy new database tables and columns, you're going to want a way
 
 If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions. See the Eloquent docs linked above for examples of what your model class should look like.
 
-<!--
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
-If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+<!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
 ```php
 use Flarum\Extend;
 use Flarum\User\User;
 
 return [
-    new Extend\Model(User::class)
-        ->defaultValue('is_alive', true)
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
         ->accessor('first_name', function ($value) {
             return ucfirst($value)
         })
@@ -162,6 +161,20 @@ return [
 ];
 ```
 -->
+
+If you need to define any attribute [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+
+```php
+use Flarum\Extend;
+use Flarum\User\User;
+
+return [
+    (new Extend\Model(User::class))
+        ->default('is_alive', true)
+        ->cast('suspended_until', 'datetime')
+        ->cast('is_admin', 'boolean')
+];
+```
 
 ### Relationships
 
