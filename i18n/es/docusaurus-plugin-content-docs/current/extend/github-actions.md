@@ -4,8 +4,6 @@ In public repos, [GitHub Actions](https://github.com/features/actions) allow you
 
 In this guide, you will learn how to add pre-defined workflows to your extension.
 
-## Configuración
-
 :::tip [Flarum CLI](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update workflows to your code:
@@ -14,6 +12,9 @@ $ flarum-cli infra githubActions
 ```
 
 :::
+
+## Backend
+
 
 All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
 
@@ -34,9 +35,7 @@ jobs:
       backend_directory: .
 ```
 
-## Backend
-
-Flarum provides a pre-defined workflow for running certain jobs for the backend of your extension. These are the currently available jobs:
+These are the currently available jobs:
 
 | Name                                            | Key                      | Descripción                            |
 | ----------------------------------------------- | ------------------------ | -------------------------------------- |
@@ -69,4 +68,52 @@ For more details on parameters, [checkout the full predefined reusable workflow 
 
 ## Frontend
 
-Soon..
+All you need to do is create a `.github/workflows/frontend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml). You need to specify the configuration as follows:
+
+```yaml
+name: Frontend
+
+on: [workflow_dispatch, push, pull_request]
+
+jobs:
+  run:
+    uses: flarum/framework/.github/workflows/REUSABLE_frontend.yml@main
+    with:
+      enable_bundlewatch: false
+      enable_prettier: true
+      enable_typescript: false
+
+      frontend_directory: ./js
+      backend_directory: .
+      js_package_manager: yarn
+      main_git_branch: main
+
+    secrets:
+      bundlewatch_github_token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+```
+
+Unlike the backend workflow, the frontend workflow runs everything in a single job. Here are the available parameters:
+
+| Name                  | Key                     | Descripción                                                                                                                                              | Format |
+| --------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| Build Script          | `build_script`          | Script to run for production build. Empty value to disable.                                                                                              | string |
+| Build Typings Script  | `build_typings_script`  | Script to run for typings build. Empty value to disable.                                                                                                 | string |
+| Format Script         | `format_script`         | Script to run for code formatting. Empty value to disable.                                                                                               | string |
+| Check Typings Script  | `check_typings_script`  | Script to run for tyiping check. Empty value to disable.                                                                                                 | string |
+| Type Coverage Script  | `type_coverage_script`  | Script to run for type coverage. Empty value to disable.                                                                                                 | string |
+| Test Script           | `test_script`           | Script to run for tests. Empty value to disable.                                                                                                         | string |
+| Enable Bundlewatch    | `enable_bundlewatch`    | Enable Bundlewatch?                                                                                                                                      | string |
+| Enable Prettier       | `enable_prettier`       | Enable Prettier?                                                                                                                                         | string |
+| Enable Typescript     | `enable_typescript`     | Enable TypeScript?                                                                                                                                       | string |
+| Enable Tests          | `enable_tests`          | Enable Tests?                                                                                                                                            | string |
+| Backend Directory     | `backend_directory`     | The directory of the project where backend code is located. This should contain a `composer.json` file, and is generally the root directory of the repo. | string |
+| Frontend Directory    | `frontend_directory`    | The directory of the project where frontend code is located. This should contain a `package.json` file.                                                  | string |
+| Main Git Branch       | `main_git_branch`       | The main git branch to use for the workflow.                                                                                                             | string |
+| Node Version          | `node_version`          | The node version to use for the workflow.                                                                                                                | string |
+| JS Package Manager    | `js_package_manager`    | The package manager to use (ex. yarn)                                                                                                                    | string |
+| Cache Dependency Path | `cache_dependency_path` | The path to the cache dependency file.                                                                                                                   | string |
+ :::tip
+
+For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml).
+
+:::
