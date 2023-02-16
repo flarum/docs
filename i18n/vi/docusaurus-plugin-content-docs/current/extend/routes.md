@@ -160,42 +160,66 @@ On the backend, instead of adding your frontend route via the `Routes` extender,
 
 Now when `yourforum.com/users` is visited, the forum frontend will be displayed. However, since the frontend doesn't yet know about the `users` route, the discussion list will still be rendered.
 
-Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#routing), adding route names and an abstract class for pages (`common/components/Page`). To register a new route, add an object for it to `app.routes`:
+Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#routing), adding route names and an abstract class for pages (`common/components/Page`).
+
+To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
+
+```jsx
+import Extend from 'flarum/common/extenders';
+
+export default [
+  new Extend.Routes()
+    .add('acme.users', '/users', <UsersPage />),
+];
+```
+
+:::info
+
+Remember to export the `extend` module from your entry `index.js` file:
 
 ```js
-app.routes['acme.users'] = { path: '/users', component: UsersPage };
+export { default as extend } from './extend';
 ```
 
+:::
 
-<!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
-
-```jsx
-export const extend = [
-  new Extend.Routes()
-    .add('/users', 'acme.users', <UsersPage />)
-];
-``` -->
 Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area. For more information on frontend pages, please see [that documentation section](frontend-pages.md).
+
 Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
+
 ### Các tham số Route
-Frontend routes also allow you to capture segments of the URI, but the [Mithril route syntax](https://mithril.js.org/route.html) is slightly different:
+
+Frontend routes also allow you to capture segments of the URI:
 
 ```jsx
-app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
+  new Extend.Routes()
+    .add('acme.user', '/user/:id', <UsersPage />)
 ```
 
-
-<!-- ```jsx
-  new Extend.Routes()
-    .add('/user/:id', 'acme.user', <UsersPage />)
-``` -->
 Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+
 ### Tạo URLs
+
 To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. Parameters will fill in matching URI segments, otherwise they will be appended as query params.
 
 ```js
 const url = app.route('acme.user', { id: 123, foo: 'bar' });
 // http://yourforum.com/users/123?foo=bar
+```
+
+The extender also allows you to define a route helper method:
+
+```js
+  new Extend.Routes()
+   .add('acme.user', '/user/:id', <UsersPage />)
+   .helper('acmeUser', (user) => app.route('acme.user', { id: user.id() }))
+```
+
+This allows you to generate URLs to the route using the `acmeUser` helper method:
+
+```js
+const url = app.route.acmeUser(user);
+// http://yourforum.com/users/123
 ```
 
 ### Liên kết đến trang khác
