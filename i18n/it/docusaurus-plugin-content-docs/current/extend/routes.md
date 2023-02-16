@@ -160,41 +160,76 @@ Sul backend, invece di aggiungere il tuo percorso frontend tramite `Routes`, pot
 
 Ora quando `tuoforum.com/utente` viene visitato, verrà visualizzato il frontend del forum. Tuttavia, poiché il frontend non conosce ancora la rotta `users`, verrà visualizzato l'elenco di discussioni.
 
-Flarum si basa sul [sistema di instradamento di Mithril](https://mithril.js.org/index.html#routing), che aggiunge nomi di percorsi e una classe astratta per le pagine (`common/components/Page`). Per registrare un nuovo percorso, aggiungi un oggetto `app.routes`:
+Flarum builds on [Mithril's routing system](https://mithril.js.org/index.html#routing), adding route names and an abstract class for pages (`common/components/Page`).
 
-```js
-app.routes['acme.users'] = { path: '/users', component: UsersPage };
-```
-
-
-<!-- To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
+To register the route on the frontend, there is a `Routes` extender which works much like the backend one. Instead of a controller, however, you pass a component instance as the third argument:
 
 ```jsx
-export const extend = [
+import Extend from 'flarum/common/extenders';
+
+export default [
   new Extend.Routes()
-    .add('/users', 'acme.users', <UsersPage />)
+    .add('acme.users', '/users', <UsersPage />),
 ];
-``` -->
-Ora quanto `tuoforum.com/utente`  verrà caricato il frontend del forum ed anche il componente `UsersPage` verrà renderizzato. Per ulteriori informazioni sulle pagine di frontend, vedere [questa sezione della documentazione](frontend-pages.md).
-I casi di utilizzo avanzato potrebbero anche essere interessati a guardare i [risolutori di percorsi](frontend-pages.md#route-resolvers-advanced).
-### Parametri percorsi
-I percorsi delfrontend consentono anche di acquisire segmenti dell'URI, ma la [sintassi di Mithril](https://mithril.js.org/route.html) è leggermente diversa:
-
-```jsx
-app.routes['acme.user'] = { path: '/user/:id', component: UserPage };
 ```
 
+:::info
 
-<!-- ```jsx
-  new Extend.Routes()
-    .add('/user/:id', 'acme.user', <UsersPage />)
-``` -->
-I parametri del percorso verranno passati in `attrs` del componente. Saranno disponibili anche tramite [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
-### Generare URL
-Per generare un URL ad un percorso sul frontend, utilizzare il metodo `app.route`. Accetta due argomenti: il nome della rotta e un hash di parametri. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
+Remember to export the `extend` module from your entry `index.js` file:
 
 ```js
-import Link from 'flarum/components/Link';
+export { default as extend } from './extend';
+```
+
+:::
+
+Now when `yourforum.com/users` is visited, the forum frontend will be loaded and the `UsersPage` component will be rendered in the content area. For more information on frontend pages, please see [that documentation section](frontend-pages.md).
+
+Advanced use cases might also be interested in using [route resolvers](frontend-pages.md#route-resolvers-advanced).
+
+### Parametri percorsi
+
+Frontend routes also allow you to capture segments of the URI:
+
+```jsx
+  new Extend.Routes()
+    .add('acme.user', '/user/:id', <UsersPage />)
+```
+
+Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+
+### Generare URL
+
+To generate a URL to a route on the frontend, use the `app.route` method. This accepts two arguments: the route name, and a hash of parameters. I parametri riempiranno i segmenti URI corrispondenti, altrimenti verranno aggiunti come parametri della query.
+
+```js
+const url = app.route('acme.user', { id: 123, foo: 'bar' });
+// http://yourforum.com/users/123?foo=bar
+```
+
+The extender also allows you to define a route helper method:
+
+```js
+  new Extend.Routes()
+   .add('acme.user', '/user/:id', <UsersPage />)
+   .helper('acmeUser', (user) => app.route('acme.user', { id: user.id() }))
+```
+
+This allows you to generate URLs to the route using the `acmeUser` helper method:
+
+```js
+const url = app.route.acmeUser(user);
+// http://yourforum.com/users/123
+```
+
+### Collegamenti ad altre pagine
+
+A forum wouldn't be very useful if it only had one page. While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+
+Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
+
+```jsx
+import Link from 'flarum/common/components/Link';
 
 // Link can be used just like any other component:
 <Link href="/route/known/to/mithril">Hello World!</Link>
@@ -211,40 +246,16 @@ import Link from 'flarum/components/Link';
 // that are conditionally internal or external.
 ```
 
-### Collegamenti ad altre pagine
-
-Un forum non sarebbe molto utile se avesse solo una pagina. Sebbene tu possa, ovviamente, implementare link ad altre parti del tuo forum con tag di ancoraggio HTML e link , questi possono essere difficile da mantenere e vanificano lo scopo di Flarum di essere una [Applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application).
-
-Flarum utilizza l'API di routing di Mithril per fornire un componente `Link` che racchiude in modo ordinato i collegamenti ad altre pagine interne. Il suo utilizzo è abbastanza semplice:
-
-```jsx
-import Link from 'flarum/common/components/Link';
-
-// Link può essere usato come qualsiasi altro componente:
-<Link href="/route/known/to/mithril">Ciao Mondo!</Link>
-
-// Utilizzerai frequentemente Link con itinerari generati:
-<Link href={app.route('settings')}>Ciao Mondo!</Link>
-
-// Il link può anche generare collegamenti esterni con attributi esterni:
-<Link external={true} href="https://google.com">Ciao Mondo!</Link>
-
-// L'esempio precedente con esterno = true equivale a:
-<a href="https://google.com">Ciao Mondo!</a>
-// ma è previsto per flessibilità: a volte si possono avere link
-// che sono condizionalmente interni o esterni.
-```
-
 ## Contenuto
 
-Ogni volta che visiti percorso sul frontend, il backend costruisce un documento HTML con lo "scheletro" necessario per avviare l'applicazione JavaScript frontend. Puoi facilmente modificare questo documento per eseguire attività come:
+Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
 
 * Modificare il `<title>` della pagina
 * Aggiunta di risorse JavaScript e CSS esterne
 * Aggiunta di contenuti SEO e tag `<meta>`
 * Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
-Puoi apportare modifiche generali al frontend utilizzando l'extender `Frontend` e metodo `content`. Accetta una chiusura che riceve due parametri: un oggetto `Flarum\Frontend\Document` che rappresenta il documento HTML che verrà visualizzato e un oggetto `Request`.
+You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 
 ```php
 use Flarum\Frontend\Document;
@@ -258,7 +269,7 @@ return [
 ];
 ```
 
-Puoi anche aggiungere contenuti tuo frontend:
+You can also add content onto your frontend route registrations:
 
 ```php
 return [
