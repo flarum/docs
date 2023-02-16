@@ -18,8 +18,6 @@ $ flarum-cli infra backendTesting
 
 :::
 
-Firstly, you will need to require the `flarum/testing` composer package as a dev dependency for your extension:
-
 ```bash
 composer require --dev flarum/testing:^1.0
 ```
@@ -400,7 +398,167 @@ NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that f
 
 ## Frontend Tests
 
-Coming Soon!
+### Setup
+
+:::tip [Flarum CLI](https://github.com/flarum/cli)
+
+You can use the CLI to automatically add and update frontend testing infrastructure to your code:
+
+```bash
+$ flarum-cli infra frontendTesting
+```
+
+:::
+
+First, you need to install the Jest config dev dependency:
+
+```bash
+$ yarn add --dev @flarum/jest-config
+```
+
+Then, add the following to your `package.json`:
+
+```json
+{
+  "type": "module",
+  "scripts": {
+    ...,
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
+  }
+}
+```
+
+Rename `webpack.config.js` to `webpack.config.cjs`. This is necessary because Jest doesn't support ESM yet.
+
+Create a `jest.config.cjs` file in the root of your extension:
+
+```js
+module.exports = require('@flarum/jest-config')();
+```
+
+If you are using TypeScript, create tsconfig.test.json with the following content:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "include": ["tests/**/*"],
+  "files": ["../../../node_modules/@flarum/jest-config/shims.d.ts"]
+}
+```
+
+Then, you will need to set up a file structure for tests:
+
+```
+js
+├── dist
+├── src
+├── tests
+│   ├── unit
+│   │   └── functionTest.test.js
+│   ├── integration
+│   │   └── componentTest.test.js
+├── package.json
+├── tsconfig.json
+├── tsconfig.test.json
+├── jest.config.cjs
+└── webpack.config.cjs
+```
+
+#### GitHub Testing Workflow
+
+To run tests on every commit and pull request, check out the [GitHub Actions](github-actions.md) page.
+
+### Using Unit Tests
+
+Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
+
+Here's a simple example of a unit test fo core's `abbreviateNumber` function:
+
+```ts
+import abbreviateNumber from '../../../../src/common/utils/abbreviateNumber';
+
+test('does not change small numbers', () => {
+  expect(abbreviateNumber(1)).toBe('1');
+});
+
+test('abbreviates large numbers', () => {
+  expect(abbreviateNumber(1000000)).toBe('1M');
+  expect(abbreviateNumber(100500)).toBe('100.5K');
+});
+
+test('abbreviates large numbers with decimal places', () => {
+  expect(abbreviateNumber(100500)).toBe('100.5K');
+  expect(abbreviateNumber(13234)).toBe('13.2K');
+});
+```
+
+### Using Integration Tests
+
+Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters.
+
+Here's a simple example of an integration test for core's `Alert` component:
+
+```ts
+import Alert from '../../../../src/common/components/Alert';
+import m from 'mithril';
+import mq from 'mithril-query';
+import { jest } from '@jest/globals';
+
+describe('Alert displays as expected', () => {
+  it('should display alert messages with an icon', () => {
+    const alert = mq(m(Alert, { type: 'error' }, 'Shoot!'));
+    expect(alert).toContainRaw('Shoot!');
+    expect(alert).toHaveElement('i.icon');
+  });
+
+  it('should display alert messages with a custom icon when using a title', () => {
+    const alert = mq(Alert, { type: 'error', icon: 'fas fa-users', title: 'Woops..' });
+    expect(alert).toContainRaw('Woops..');
+    expect(alert).toHaveElement('i.fas.fa-users');
+  });
+
+  it('should display alert messages with a title', () => {
+    const alert = mq(m(Alert, { type: 'error', title: 'Error Title' }, 'Shoot!'));
+    expect(alert).toContainRaw('Shoot!');
+    expect(alert).toContainRaw('Error Title');
+    expect(alert).toHaveElement('.Alert-title');
+  });
+
+  it('should display alert messages with custom controls', () => {
+    const alert = mq(Alert, { type: 'error', controls: [m('button', { className: 'Button--test' }, 'Click me!')] });
+    expect(alert).toHaveElement('button.Button--test');
+  });
+});
+
+describe('Alert is dismissible', () => {
+  it('should show dismiss button', function () {
+    const alert = mq(m(Alert, { dismissible: true }, 'Shoot!'));
+    expect(alert).toHaveElement('button.Alert-dismiss');
+  });
+
+  it('should call ondismiss when dismiss button is clicked', function () {
+    const ondismiss = jest.fn();
+    const alert = mq(Alert, { dismissible: true, ondismiss });
+    alert.click('.Alert-dismiss');
+    expect(ondismiss).toHaveBeenCalled();
+  });
+
+  it('should not be dismissible if not chosen', function () {
+    const alert = mq(Alert, { type: 'error', dismissible: false });
+    expect(alert).not.toHaveElement('button.Alert-dismiss');
+  });
+});
+```
+
+#### Methods
+
+These are the custom methods that are available for mithril component tests:
+* **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
+* **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
+
+To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
+
+
 
 ## E2E Tests
 

@@ -331,7 +331,7 @@ return [
     (new Extend\ApiSerializer(UserSerializer::class))
         // One attribute at a time
         ->attribute('firstName', function ($serializer, $user, $attributes) {
-                return $user->first_name
+            return $user->first_name
         })
         // Multiple modifications at once, more complex logic
         ->mutate(function($serializer, $user, $attributes) {
