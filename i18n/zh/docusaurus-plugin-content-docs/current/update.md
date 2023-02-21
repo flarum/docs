@@ -8,7 +8,7 @@
 
 **第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 在更新之前，您需要删除(不仅仅禁用) 任何不兼容的扩展。 请耐心等待扩展开发者更新！
 
-**第2步：** 查看您的 `composer.json` 文件。 Unless you have a reason to require specific versions of extensions or libraries, you should set the version string of everything except `flarum/core` to `*` (including `flarum/tags`, `flarum/mentions`, and other bundled extensions). Make sure `flarum/core` is NOT set to `*`. If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v0.1.0-beta.16`). If you just want the most recent version, use `"flarum/core": "^1.0"`.
+**第2步：** 查看您的 `composer.json` 文件。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
 
 **Step 3:** If your local install uses [local extenders](extenders.md), make sure they are up to date with changes in Flarum.
 
@@ -36,17 +36,17 @@ php flarum cache:clear
 4. Remove the `"minimum-stability": "beta",` line from your `composer.json`
 5. Do steps 6 and 7 above.
 
-## Troubleshooting Issues
+## 故障排除
 
 Flarum 正处于测试阶段，有关如何更新的说明将在每次 [版本发布公告](https://discuss.flarum.org/t/blog?sort=newest)中公示。
 
-### Errors While Updating
+### 更新时出错
 
-Here we'll go through several common types of issues while trying to update Flarum.
+这里我们将会处理尝试更新 Flarum 时出现的几种常见问题。
 
 ---
 
-If the output is short and contains:
+如果输出较短且包含：
 
 ```
 Nothing to modify in lock file
@@ -61,7 +61,7 @@ Or does not list `flarum/core` as an updated package, and you are not on the lat
 
 For other errors, try running `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`
 
-If the output looks something like this:
+如果输出看起来像这样：
 
 ```
 flarum/flarum                     -               requires          flarum/core (v0.1.0-beta.15)
@@ -97,4 +97,4 @@ If none of this fixes your issue, feel free to reach out on our [Support forum](
 
 ### Errors After Updating
 
-If you are unable to access your forum after updating, follow our [troubleshooting instructions](troubleshoot.md).
+如果您在更新后无法访问您的论坛，请遵循我们的 [故障排除说明](troubleshoot.md)。

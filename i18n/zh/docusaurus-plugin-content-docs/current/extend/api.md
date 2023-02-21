@@ -8,7 +8,7 @@ To use the built-in REST API as part of an integration, see [Consuming the REST 
 
 :::
 
-## API Request Lifecycle
+## API请求生命周期
 
 Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
 

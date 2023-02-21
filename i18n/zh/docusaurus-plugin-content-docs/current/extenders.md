@@ -1,6 +1,6 @@
-# Local Extenders
+# 本地扩展
 
-If there are customizations you want to make to your site without distributing an entire extension, you can do so by using **local extenders**. Each Flarum installation comes with an `extend.php` file where you can add extender instances, just like in a full extension.
+如果您想要在没有分发整个扩展的情况下自定义您的站点， 您可以通过使用 **本地扩展** 来做到这一点。 Each Flarum installation comes with an `extend.php` file where you can add extender instances, just like in a full extension.
 
 See our [extension documentation](extend/start.md) for more information about extenders (and even an [example of a local extender](extend/start.md#hello-world)).
 
