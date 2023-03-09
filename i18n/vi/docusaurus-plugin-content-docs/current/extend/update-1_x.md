@@ -6,6 +6,45 @@ Nếu bạn cần sự trợ giúp về những thay đổi mới này, vui lòn
 
 :::
 
+## 1.7
+
+### Frontend
+
+- Frontend extenders similar to the backend have been added, we highly recommend using them instead of the old method (https://docs.flarum.org/extend/models#adding-new-models-1), (https://docs.flarum.org/extend/routes#frontend-routes).
+- There is a new tag selection component (https://github.com/flarum/framework/blob/360a2ba1d886df3fc6d326be932c5431ee9df8cf/extensions/tags/js/src/common/components/TagSelectionModal.tsx).
+
+### Backend
+
+- Support for php 8.2, deprecations are still thrown by some packages, the testing workflow has been updated to ignore deprecations on 8.2
+- The `/api` endpoint now contains the actor as an included relationship.
+- The `Model::dateAttribute($attribute)` extender is deprecated, use `Model::cast($attribute, 'datetime')` instead.
+
+### Tooling
+
+- New `phpstan` package to run static code analysis on your extensions for code safety (https://docs.flarum.org/extend/static-code-analysis).
+- New `jest-config` package to run frontend unit and component tests (https://docs.flarum.org/extend/testing).
+
+## 1.6 Changes
+
+### Backend
+
+- Added customizable session drivers through the `Session` extender.
+
+## 1.5 Changes
+
+### Frontend
+
+- More portions of the frontend are now written in TypeScript, providing a better extension development experience.
+- Modals can be used in stacks, allowing for multiple modals to be open at once. This is useful for modals that open other modals: `app.modal.show(ModalComponent, { attrs }, true)`.
+
+### Backend
+
+- There is a new `createTableIfNotExists` migration helper, which can be used to create tables only if they don't already exist.
+
+## 1.4 Changes
+
+No developer-facing changes were made in Flarum v1.4.
+
 ## 1.3 Changes
 
 Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers:
