@@ -38,7 +38,7 @@ class CustomServiceProvider extends AbstractServiceProvider
         // custom logic here, for example:
         $this->container->resolving(SomeClass::class, function ($container) {
             return new SomeClass($container->make('some.binding'));
-        })
+        });
     }
 
     public function boot(Container $container)
