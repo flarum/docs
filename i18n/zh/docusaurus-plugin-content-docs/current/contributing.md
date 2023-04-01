@@ -18,23 +18,23 @@
 
 ## 开发设置
 
-请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。 您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。 有任何您不确定的问题，不要犹豫，直接提问！ All of us were just starting out once.
+请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。 您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。 有任何您不确定的问题，不要犹豫，直接提问！ 我们曾经都是新手。
 
 如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们， 以免做无用功。
 
-Since Flarum is so extension-driven, we highly recommend [our extension docs](extend/README.md) as a reference when working on core, as well as for bundled extensions. You should start with [the introduction](extend/README.md) for a better understanding of our extension philosophy.
+由于 Flarum 是如此依赖扩展，因此在处理核心问题以及捆绑扩展时，我们强烈推荐使用[我们的扩展文档](extend/README.md)作为参考。 你应该从[介绍](extend/README.md)开始，以更好地了解我们扩展中的学问。
 
 ## 开发流程
 
 ### 建立本地代码库
 
-[flarum/flarum 是一个「骨架」应用程序，它使用 Composer 下载核心包 和 一堆扩展程序](https://github.com/flarum/flarum)。 Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
+[flarum/flarum 是一个「骨架」应用程序，它使用 Composer 下载核心包 和 一堆扩展程序](https://github.com/flarum/flarum)。 Flarum 核心、扩展和前述使用的所有包的源代码都位于 Flarum Monorepo [flarum/framework ](https://github.com/flarum/framework)中。 若要对其进行贡献，你需要在本地 fork 和 clone Monorepo 代码库，然后将其作为 [Composer 路径库](https://getcomposer.org/doc/05-repositories.md#path)添加到开发环境中：
 
 ```bash
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
-# Or, when you want to clone directly into the current directory
+# 或者，如果你想要直接克隆到当前目录：
 git clone https://github.com/flarum/flarum.git .
 # Note, the directory must be empty
 
@@ -47,7 +47,7 @@ git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 
 最后，运行 `composer install` 从本地路径存储库完成插件安装。
 
-准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
+准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 调试模式还会在每个请求时强制重新编译Flarum的文件，省去了在每次更改扩展的JavaScript或CSS后调用`php flarum cache:clear`的需要。
 
 Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
 
