@@ -49,9 +49,9 @@ git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 
 准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 调试模式还会在每个请求时强制重新编译Flarum的文件，省去了在每次更改扩展的JavaScript或CSS后调用`php flarum cache:clear`的需要。
 
-Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
+Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 在开发过程中，你需要使用 [Node.js ](https://nodejs.org/)和 [`yarn`](https://yarnpkg.com/) 重新编译 JavaScript。 **请不要在发送 PR 时提交生成的 `dist `文件**；这会在更改合并到`主分支`时自动处理。
 
-To contribute to the frontend, first install the JavaScript dependencies. The monorepo uses [yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/) to easily install JS dependencies across all packages within.
+要为前端做出贡献，你需要先安装 JavaScript 依赖项。 Monorepo 使用[ yarn 工作区](https://classic.yarnpkg.com/lang/en/docs/workspaces/)来轻松地在所有包之间安装 JS 依赖项。
 
 ```bash
 cd packages/framework
@@ -65,20 +65,20 @@ cd framework/core/js
 yarn dev
 ```
 
-The process is the same for extensions.
+对于扩展程序，过程是一样的。
 
 ```bash
 cd extensions/tags/js
 yarn dev
 ```
 
-### Development Tools
+### 开发工具
 
-After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
+在 fork 和 clone 要工作的代码库之后，你需要设置本地主机来测试你的更改。 Flarum 目前没有开发服务器，所以你需要设置 Apache/NGINX/Caddy 等来提供本地 Flarum 安装的服务。
 
-Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
+或者，你可以使用以下工具：[ Laravel Valet](https://laravel.com/docs/master/valet)（Mac）、[XAMPP](https://www.apachefriends.org/index.html)（Windows）或 [Docker-Flarum](https://github.com/mondediefr/docker-flarum)（Linux）来提供本地论坛服务。
 
-Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
+大多数 Flarum 贡献者使用 [PHPStorm](https://www.jetbrains.com/phpstorm/download/) 或 [Visual Studio Code](https://code.visualstudio.com/) 进行开发。
 
 ## 编码风格
 
@@ -91,7 +91,7 @@ Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpst
 1. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
     * 请参见这里的 [编码风格](#编码风格)。
     * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
-    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
+    * *重要的*功能应该总是被提交到`主分支`，该分支包含即将发布的 Flarum 版本。
     * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🔨 **编写代码**，编写一些代码。
@@ -105,7 +105,7 @@ Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpst
 4. 💾 **提交代码**，并附上一条描述性信息。
     * 如果您的修改解决了一个现有的 Issue（通常情况下应该是这样），请在新行加上「Fixes #123」，其中 123 是 Issue 的编号。
     * 请务必按照 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 规范提交。
-    * *Fix* commits should describe the issue fixed, not how it was fixed.
+    * *修复*提交应该描述被修复的问题，而不是如何修复该问题。
 
 5. 🎁 **提交 PR**，在 GitHub 上提交一个 Pull Request。
     * 填写 Pull Request 模板。
