@@ -351,7 +351,7 @@ Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://g
 * I dati non vengono visualizzati nel database solo magicamente *
 * `$users`: Questo accetta un array di `user` che dovrebbe ricevere la notifica
 
-*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.
+*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.</p>
 
 Diamo un'occhiata al nostro ** ultimo ** esempio di oggi:
 
