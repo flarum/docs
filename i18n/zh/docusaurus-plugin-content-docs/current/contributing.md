@@ -10,11 +10,11 @@
 
 ⚡ **作出实际影响。** 成千上万的Flarum实例，和数百万的累积最终用户， 都会因为你的贡献而受益。
 
-🔮 **Shape the Future of Flarum.** We have a long backlog, and limited time. If you're willing to champion a feature or change, it's much more likely to happen, and you'll be able to enact your vision for it. Plus, our roadmap and milestones are set by our [core development team](https://flarum.org/team), and all of us started as contributors. The best road to influence is contributing.
+🔮 **塑造Flarum的未来。** 我们有很长的待办事项列表，但时间有限。 如果你愿意成为一个特性或更新的代言人，它将更有可能发生，并且你将能够实现你的愿景。 此外，我们的路线图和里程碑是由我们 [的核心开发团队](https://flarum.org/team)设定的，我们所有人都是贡献者。 影响的最佳途径是贡献。
 
-🧑‍💻 **Become a Better Engineer.** Our codebase is modern, and we heavily value good engineering and clean code. There's also a lot of interesting, challenging problems to solve regarding design, infrastructure, performance, and extensibility. Especially if you're a student or early in your career, working on Flarum is a great opportunity to build development skills.
+🧑‍💻 **成为更好的工程师。** 我们的代码库是现代化的，我们非常重视良好的工程和清晰的代码。 在设计、基础设施、性能和可扩展性方面，也有很多有趣、具有挑战性的问题需要解决。 特别的，如果你是一名学生或处于职业生涯的初期，参与 Flarum 的开发是一个培养开发技能的绝佳机会。
 
-🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
+🎠 **很有趣！** 我们非常喜欢在 Flarum 上工作：有很多有趣的挑战和有趣的特性可以构建。 我们在[论坛](https://discuss.flarum.org)和 [Discord 服务器](https://flarum.org/chat)上也有一个活跃的社区。
 
 ## 开发设置
 
