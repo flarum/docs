@@ -114,7 +114,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                 label: 'Community'
               },
               {
-                href: 'https://github.com/flarum/core/',
+                href: 'https://github.com/flarum/framework',
                 label: 'GitHub'
               },
             ]
