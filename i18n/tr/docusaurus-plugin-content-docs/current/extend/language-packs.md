@@ -1,6 +1,6 @@
 # Flarum Çeviri
 
-:::info
+:::bilgi
 
 This documentation covers the technical structure of language packs. Read [this article](../contributing-docs-translations.md) for information on how to start / contribute to a Flarum language pack.
 
