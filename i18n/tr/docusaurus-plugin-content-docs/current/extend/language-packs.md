@@ -31,7 +31,7 @@ The `composer.json` will also need some special values. It now needs a `flarum-l
 }
 ```
 
-And that's it! It should work out of the box.
+Ve bu kadar! It should work out of the box.
 
 ## Translation Files
 
