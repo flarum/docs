@@ -15,11 +15,10 @@ Some of the most popular examples are the following:
 - [FoF Sitemap](https://github.com/FriendsOfFlarum/sitemap)
 - [FoF Open Collective](https://github.com/FriendsOfFlarum/open-collective)
 - [FoF Github Sponsors](https://github.com/FriendsOfFlarum/github-sponsors)
-- [V17 Development Support](https://extiverse.com/extension/v17development/flarum-support)
 
 ## Ok, let's get this setup!
 
-Easy! Most (if not all) Linux distros either come with, or can have cron installed. For example, on Debian and Ubuntu based systems, install cron like this:
+Most (if not all) Linux distros either come with, or can have, cron installed. For example, on Debian and Ubuntu based systems, you can install `cron` like this:
 
 ```
 sudo apt-get update
@@ -39,18 +38,18 @@ Once you have cron installed, let's create the one and only entry you need for F
 crontab -e
 ```
 
-This will open the cron editor. You may or may not have other entries there. Add this line, and remember to leave an empty line at the bottom!
+This will open the cron editor. You may or may not have other entries there. Add this line, and remember to leave an empty line at the bottom.
 
 ```
 * * * * * cd /path-to-your-project && php flarum schedule:run >> /dev/null 2>&1
 ```
 
-In this case `* * * * *` tells cron to run your command every minute. You may need to experiment with the path to php, etc.
+`* * * * *` tells cron to run your command every minute.
 
 In case you want to use a different value and don't know exactly how cron expressions work, you can use a [cron expression generator](https://crontab.guru) to easily get the desired string.
 
-On the other hand `cd /path-to-your-project && php flarum schedule:run` simply says `php flarum ......` you've likely seen this many times before!
+`cd /path-to-your-project && php flarum schedule:run` executes Flarum's scheduler to trigger any tasks currently waiting to be run. If PHP isn't in your system's path, you may need to experiment with setting the full path to PHP.
 
-Lastly `>> /dev/null 2>&1` simply suppresses any output from the command (you won't need this anyway)
+Lastly `>> /dev/null 2>&1` suppresses any output from the command.
 
 Voila! Now any extension that registers a task to run, anything from every minute to daily, monthly, yearly - whatever - will now run on your server.
