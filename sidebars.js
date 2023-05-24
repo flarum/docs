@@ -48,6 +48,7 @@ module.exports = {
         'languages',
         'themes',
         'mail',
+        'scheduler',
         'console'
       ]
     },
