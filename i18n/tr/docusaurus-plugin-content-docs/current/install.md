@@ -1,6 +1,6 @@
 # Kurulum Belgeleri
 
-:::danger Uyarı
+:::ipucu Hızlı test sürüşü mü?
 
 Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birinde denemekten çekinmeyin. Veya Flarum ekibine bağlı olmayan ücretsiz bir topluluk hizmeti olan [Free Flarum](https://www.freeflarum.com)'da kendi forumunuzu birkaç saniye içinde kurun.
 
