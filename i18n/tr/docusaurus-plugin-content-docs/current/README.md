@@ -26,7 +26,7 @@ You can read more about our [philosophy and values for Flarum here](https://disc
 
 Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
 
-🧑‍💻 If you're a developer, consider [contributing to Flarum's core or bundled extensions](contributing.md). This is **the** most efficient way to help Flarum, and your work can have a lot of impact: there are thousands of Flarum sites out there, with millions of total end users.
+🧑‍💻 Eğer bir geliştiriciyseniz, Flarum'un temeline veya paketlenmiş uzantılarına katkıda bulunmayı düşünebilirsiniz. Bu, Flarum'a yardımcı olmanın en etkili yolu ve çalışmalarınızın büyük bir etkisi olabilir: milyonlarca son kullanıcıya sahip binlerce Flarum sitesi mevcuttur.
 
 🧩 If there's a feature you're missing, or a theme idea you have, [writing a custom extension](extend/README.md) will make Flarum that much better for you and others.
 
