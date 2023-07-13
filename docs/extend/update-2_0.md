@@ -83,7 +83,7 @@ Flarum 2.0 upgrades Flysystem to version 3. Most extensions will not need to mak
   new FilesystemAdapter(new Filesystem(new LocalAdapter($path)));
   
   // After
-  $adapter = new LocalAdapter($path);
+  $adapter = new LocalFilesystemAdapter($path);
   new FilesystemAdapter(new Filesystem($adapter), $adapter);
   ```
 
