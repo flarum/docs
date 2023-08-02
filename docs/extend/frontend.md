@@ -165,10 +165,13 @@ You should familiarize yourself with proper syntax for [importing js modules](ht
 Pretty much every Flarum extension will need to import *something* from Flarum Core.
 Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
-In some cases, an extension may want to extend code from another flarum extension. This is only possible for extensions which explicitly export their contents.
+In some cases, an extension may want to extend code from another flarum extension. You can use the same [import format](./extending-extensions#importing-from-extensions) valid for any third-party extension.
 
-* `flarum/tags` and `flarum/flags` are currently the only bundled extensions that allow extending their JS. You can import their contents from `flarum/{EXT_NAME}/PATH` (e.g. `flarum/tags/components/TagHero`).
-* The process for extending each community extension is different; you should consult documentation for each individual extension.
+For example, to import from tags extension:
+
+```js
+import TagsPage from 'ext:flarum/tags/components/TagsPage';
+```
 
 ### Transpilation
 
@@ -429,3 +432,23 @@ Flarum defines (and provides) quite a few util and helper functions, which you m
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
 And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
+
+## Changing the UI Part 3
+
+Flarum lazy loads a number of components and utils, which means that you can't always import them directly to extend or override them. However, the `extend` and `override` utils can apply your changes right after the component or util is loaded. For that, you just need to provide the import format of the component or util as first argument instead.
+
+```jsx 
+import { extend, override } from 'flarum/common/extend';
+
+extend('flarum/forum/components/LogInModal', 'oninit', function() {
+  console.log('LogInModal is loaded');
+});
+```
+
+The message will be logged to the console as soon as the LogInModal component is loaded.
+
+:::tip
+
+Find out more about using code splitting to lazy load modules in the [Code Splitting](./code-splitting) section.
+
+:::

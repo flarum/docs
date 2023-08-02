@@ -37,6 +37,7 @@ If you need help applying these changes or using new features, please start a di
   ```
 * `🔴 Breaking Change`: Importing from `@flarum/core` no longer works. It was previously only allowed for the compat API.
 * `🔴 Breaking Change`: The `useExtensions` webpack option has been removed, use the import format explained above to import using the export registry instead.
+* `🔴 Breaking Change`: Some flarum modules are now lazy loaded, such as `LogInModal`. You have to make sure they have been loaded before using them, or you can trigger the loading yourself. See the [Code Splitting](/extend/frontend/code-splitting) documentation for more information.
 
 :::info
 
