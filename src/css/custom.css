@@ -6,13 +6,22 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #c84a27;
+  --ifm-color-primary: #e7672e;
   --ifm-color-primary-dark: #b44323;
   --ifm-color-primary-darker: #aa3f21;
   --ifm-color-primary-darkest: #8c341b;
   --ifm-color-primary-light: #d75430;
   --ifm-color-primary-lighter: #d95d3a;
   --ifm-color-primary-lightest: #de7558;
+  --ifm-color-control: #667d99;
+  --ifm-color-secondary: #e7edf3;
+
+  --ifm-toc-link-color: var(--ifm-color-control);
+  --ifm-menu-color: var(--ifm-toc-link-color);
+  --ifm-menu-color-background-hover: transparent;
+
+  --ifm-navbar-shadow: none;
+
   --ifm-code-font-size: 95%;
 
   --ifm-h1-font-size: 2.2rem;
@@ -31,17 +40,18 @@ html[data-theme='dark'] {
   --ifm-font-color-base: #ddd;
 }
 
-/* Nice styes from VuePress we should keep */
-
 .navbar {
   font-size: .9rem;
+  border-bottom: 1px solid var(--ifm-color-secondary);
+}
+
+.navbar__inner {
+  max-width: 1700px;
+  margin: 0 auto;
 }
 
 .body {
-  font-family: 'Mukta',
-    'Noto Sans SC',
-    sans-serif,
-    "微软雅黑";
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Ubuntu,Cantarell,Oxygen,Roboto,Helvetica,Arial,sans-serif;
 }
 
 .markdown h1:first-child {
@@ -78,7 +88,10 @@ blockquote {
 
 .DocSearch.DocSearch-Button {
   border: 2px solid transparent;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-family: inherit;
+  background-color: var(--ifm-color-secondary);
+  color: var(--ifm-menu-color);
 }
 
 .DocSearch.DocSearch-Button input:focus {
@@ -92,6 +105,24 @@ blockquote {
 .DocSearch-Button-Placeholder {
   text-align: start;
   width: 130px;
+  font-size: 0.9rem !important;
+}
+
+.DocSearch-Search-Icon {
+  width: 16px;
+  height: 16px;
+  color: var(--ifm-menu-color) !important;
+}
+
+.DocSearch-Button-Container {
+  gap: 4px;
+}
+
+.DocSearch-Button:active, .DocSearch-Button:focus, .DocSearch-Button:hover {
+  background: var(--ifm-color-secondary) !important;
+  box-shadow: none !important;
+  color: var(--ifm-menu-color) !important;
+  cursor: text;
 }
 
 /* Other Docusaurus conf */
@@ -105,4 +136,30 @@ blockquote {
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.theme-doc-sidebar-item-category:not(:first-child) {
+  margin-top: 1.5rem;
+}
+
+.menu__list-item-collapsible .menu__link:not(.menu__link--active) {
+  color: var(--ifm-color-black);
+}
+
+.theme-doc-sidebar-item-link .menu__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+.docPage__5DB {
+  max-width: 1700px;
+  margin: 0 auto;
+}
+
+.theme-doc-sidebar-container {
+  font-size: 0.95rem;
+}
+
+li > .menu__list {
+  border-left: 1px solid var(--ifm-color-secondary);
+  margin-left: var(--ifm-menu-link-padding-horizontal);
 }
