@@ -122,6 +122,7 @@ module.exports = {
         'extend/search',
         'extend/service-provider',
         'extend/registry',
+        'extend/code-splitting',
       ]
     },
     {
