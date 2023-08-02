@@ -120,7 +120,8 @@ module.exports = {
         'extend/notifications',
         'extend/post-types',
         'extend/search',
-        'extend/service-provider'
+        'extend/service-provider',
+        'extend/registry',
       ]
     },
     {
@@ -128,6 +129,7 @@ module.exports = {
       label: 'Update Guides',
       collapsible: false,
       items: [
+        'extend/update-2_0',
         'extend/update-1_x',
         'extend/update-1_0',
         'extend/update-b16',
