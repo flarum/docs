@@ -44,6 +44,16 @@ Read more about the export registry and how to use it in the [Export Registry](/
 
 :::
 
+### Miscellaneous Changes
+
+There have been many changes to the core frontend codebase, including renamed or moved methods, new methods, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
+
+* `🔴 Breaking Change`: `IndexPage.prototype.sidebar` has been removed, use the `IndexSidebar` component instead.
+* `🔴 Breaking Change`: `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
+* `🔴 Breaking Change`: `IndexPage.prototype.sidebarItems` has been moved to `IndexSidebar.prototype.items`.
+* `🔴 Breaking Change`: `IndexPage.prototype.currentTag` has been moved to `app.currentTag`.
+* `🟡 Notable Change`: All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
+
 ## Backend
 
 ### PHP 8.1
