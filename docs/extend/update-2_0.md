@@ -46,13 +46,21 @@ Read more about the export registry and how to use it in the [Export Registry](/
 
 ### Miscellaneous Changes
 
-There have been many changes to the core frontend codebase, including renamed or moved methods, new methods, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
+There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
 
 * `🔴 Breaking Change`: `IndexPage.prototype.sidebar` has been removed, use the `IndexSidebar` component instead.
 * `🔴 Breaking Change`: `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
 * `🔴 Breaking Change`: `IndexPage.prototype.sidebarItems` has been moved to `IndexSidebar.prototype.items`.
 * `🔴 Breaking Change`: `IndexPage.prototype.currentTag` has been moved to `app.currentTag`.
 * `🟡 Notable Change`: All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
+* `🟡 Notable Change`: A `HeaderDropdown` component has been added which is used for the `NotificationsDropdown` and `FlagsDropdown` your component should extend that instead of the `NotificationsDropdown`. Along with it has been also added the following components: `HeaderList` and `HeaderListItem`.
+* `🟡 Notable Change`: A `DetailedDropdownItem` has been added. Checkout the [`SubsriptionsDropdown`](https://github.com/flarum/framework/blob/dev-theming-improvements/extensions/subscriptions/js/src/forum/components/SubscriptionMenu.tsx#L83-L87) component to see how it is used.
+* `🟡 Notable Change`: A `Notices` component has been added that allows you to easily add global alerts above the hero.
+* `🟡 Notable Change`: A `Footer` component has been added that allows you to easily add content to the footer.
+* `🟡 Notable Change`: A `Form` component has been added to ensure consistent styling across forms. You should use this component in your extension if you are creating a form.
+* `🔴 Breaking Change`: The `UploadImageButton` component has been refactored to allow using it in different contexts. An [admin setting definition](./admin.md#available-setting-types) has also been added to allow you to use an upload setting directly.*
+* `🔴 Breaking Change`: The `FieldSet` component has been refactored.
+* `🔴 Breaking Change`: The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
 
 ## Backend
 
