@@ -14,25 +14,25 @@ Flarum 有一个广泛的扩展生态系统，其中大部分是开源和免费�
 
 与 Flarum 一样，扩展是使用 SSH 通过 [Composer](https://getcomposer.org) 安装的。 要安装一个典型的扩展：
 
-1. `cd` to your Flarum directory. `cd` 到 `composer.json` 所在文件夹。 You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME:*`. 具体安装命令一般可在扩展的文档中找到。
+1. `cd` to your Flarum directory. `cd` 到 `composer.json` 所在文件夹。 您可以通过 `ls -la` 查看目录下的文件。
+2. 运行 `composer require COMPOSER_PACKAGE_NAME:*`. 具体安装命令一般可在扩展的文档中找到。
 
 ## 管理扩展
 
-Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+按照扩展开发者提供的说明操作。 如果你使用 `*` 作为扩展的版本字符串（[如推荐所示](composer.md)），运行[Flarum升级指南](update.md)中列出的命令应该会更新你的所有扩展。
 
-## Uninstalling Extensions
+## 卸载扩展
 
-Similarly to installation, to remove an extension:
+类似安装的步骤，若要移除扩展：
 
-0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. 如果你想移除由扩展创建的所有数据库表，请在管理员仪表板中点击"重置"按钮。 更多信息[见下](#managing-extensions)。
 1. `cd` to your Flarum directory.
 2. 运行 `composer require COMPOSER_包名`。 具体安装命令一般可在扩展的文档中找到。
 
-## Managing Extensions
+## 管理扩展
 
 后台管理面板的「扩展」页面提供了一种在安装后便捷管理扩展程序的途径。 您可以：
 
 - 启用或禁用一个扩展
 - 访问扩展设置（有些扩展会在主侧边栏添加标签页进行设置）。
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). 这将删除与该扩展相关的所有数据，并且是不可逆的。 只有当你要删除一个扩展程序，并且不打算再次安装它时，才应该这样做。 当然这不是非要做的事情，选择权在您手中。
+- 回滚一个扩展的迁移，以删除它所做的任何数据库修改（这可以通过重置按钮来完成）。 这将删除与该扩展相关的所有数据，并且是不可逆的。 只有当你要删除一个扩展程序，并且不打算再次安装它时，才应该这样做。 当然这不是非要做的事情，选择权在您手中。
