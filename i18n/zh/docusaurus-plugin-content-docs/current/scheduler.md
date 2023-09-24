@@ -1,6 +1,6 @@
-# Scheduler
+# 调度器
 
-The Flarum scheduler allows extensions to automate certain tasks effortlessly. In this guide we will see how to set it up. We won't go into the details of cron itself, but if you want to read more about it, I suggest you take a look at [this Wikipedia article](https://en.wikipedia.org/wiki/Cron) on cron.
+Flarum的调度器允许扩展程序轻松地自动化某些任务。 在本指南中，我们将介绍如何设置它。 我们不会深入讨论cron本身的细节，但如果你想进一步了解它，我建议你查看[Wikipedia上关于cron的文章](https://en.wikipedia.org/wiki/Cron)。
 
 ## Why should I care?
 
