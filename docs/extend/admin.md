@@ -113,6 +113,55 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
+### Available Setting Types
+
+This is a list of setting types available by default:
+
+**Toggle:** `bool` or `checkbox` or `switch` or `boolean`
+
+**Textarea:** `textarea`
+
+**Color Picker:** `color-preview`
+
+**Text Input**: `text` or any HTML input types such as `tel` or `number`
+
+```ts
+app.extensionData.registerSetting({
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key'),
+  type: 'bool' // Any of the mentioned values above
+})
+```
+
+**Selection:** `select` or `dropdown` or `selectdropdown`
+
+```ts
+app.extensionData.registerSetting({
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key'),
+  type: 'select', // Any of the mentioned values above
+  options: {
+    'option_key': 'Option Label',
+    'option_key_2': 'Option Label 2',
+    'option_key_3': 'Option Label 3',
+  },
+  default: 'option_key'
+})
+```
+
+**Image Upload Button:** `image-upload`
+
+```ts
+app.extensionData.registerSetting({
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key'),
+  type: 'image-upload',
+  name: 'my_image_name', // The name of the image, this will be used for the request to the backend.
+  routePath: '/upload-my-image', // The route to upload the image to.
+  url: () => app.forum.attribute('myImageUrl'), // The URL of the image, this will be used to preview the image.
+});
+```
+
 ### Registering Permissions
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
