@@ -14,12 +14,12 @@
   --ifm-color-primary-lighter: #d95d3a;
   --ifm-color-primary-lightest: #de7558;
   --ifm-color-control: #667d99;
-  --ifm-color-secondary: #e7edf3;
 
   --ifm-toc-link-color: var(--ifm-color-control);
   --ifm-menu-color: var(--ifm-toc-link-color);
   --ifm-menu-color-background-hover: transparent;
 
+  --ifm-navbar-background-color: var(--ifm-background-color);
   --ifm-navbar-shadow: none;
 
   --ifm-code-font-size: 95%;
@@ -36,10 +36,17 @@
 
 html[data-theme='light'] {
   --ifm-font-color-base: #222;
+  --ifm-color-secondary: #e7edf3;
+  --ifm-color-black: #222;
+  --ifm-background-color: #fff;
 }
 
 html[data-theme='dark'] {
-  --ifm-font-color-base: #ddd;
+  --ifm-font-color-base: #9ba2ab;
+  --ifm-heading-color: #fff;
+  --ifm-color-secondary: #1b2028;
+  --ifm-color-black: #ddd;
+  --ifm-background-color: #14191f;
 }
 
 .navbar {
@@ -70,7 +77,7 @@ html[data-theme='dark'] {
 
 h2 {
   padding-bottom: .3rem;
-  border-bottom: 1px solid #eaecef;
+  border-bottom: 1px solid var(--ifm-color-secondary);
 }
 
 blockquote {
@@ -170,4 +177,36 @@ li > .menu__list {
   font-weight: 800;
   text-transform: uppercase;
   font-size: 13px;
+}
+
+.docPage_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-styles-module {
+  display: flex;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.docPage_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-styles-module::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: calc(var(--doc-sidebar-width) + (100vw - 1800px)/2 - 8px);
+  background: var(--ifm-color-secondary);
+}
+
+.footer {
+  z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+}
+
+h1 > .hash-link, h2 > .hash-link, h3 > .hash-link, h4 > .hash-link, h5 > .hash-link, h6 > .hash-link {
+  position: absolute;
+  border-radius: 100%;
+  left: -38px;
+  opacity: 1;
 }
