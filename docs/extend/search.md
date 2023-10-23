@@ -336,6 +336,67 @@ This means that your custom gambits can NOT use spaces as part of their pattern.
 
 :::
 
+## Indexing
+
+Flarum simplifies the process of indexing models by taking care of listening to the events and running your indexer logic in an async job. All you need to do is implement the `Flarum\Search\IndexerInterface` interface and register it via the `SearchIndex` extender.
+
+Indexers are not tied to any specific search drivers. You can add indexers for existing or new models. But the logic of your indexer will be specific to the desired driver.
+
+```php
+namespace YourPackage\Search;
+
+use Flarum\Search\IndexerInterface;
+
+class AcmeIndexer implements IndexerInterface
+{
+    public static function index(): string
+    {
+        return 'acmes';
+    }
+
+    public function save(array $models): void
+    {
+        // Save the models to the index.
+    }
+
+    public function delete(array $models): void
+    {
+        // Delete the models from the index.
+    }
+
+    public function build(): void
+    {
+        // Build the index.
+    }
+
+    public function flush(): void
+    {
+        // Flush the index.
+    }
+}
+```
+
+```php
+use Flarum\Extend;
+
+return [
+    
+    // Other extenders..
+    
+    (new Extend\SearchIndex())
+        ->indexer(Acme::class, AcmeIndexer::class),
+    
+    // Other extenders..
+    
+];
+```
+
+:::info
+
+Checkout this [proof of concept elastic search driver](https://github.com/SychO9/flarum-ext-search) for more examples.
+
+:::
+
 ## Configuring the driver for a model
 
 You can select which driver a search model can use from the advanced admin page. This page needs to be toggled from the button on the dashboard page tools dropdown:
