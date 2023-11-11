@@ -116,6 +116,17 @@ For more details, read the [Flysystem 1.x to V2 & V3 upgrade guide](https://flys
 
 Checkout the [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html) for more details.
 
+### Search/Filter system
+
+The search system has been refactored to allow for more flexibility and extensibility, and to further simplify things, the separate concept of filtering has been removed. 
+
+* `🔴 Breaking Change`: The old system decided between using the model filterer and the model searcher based on whether a search query `filter[q]` was provided. The new system does not hae filterers anymore, but the distinction is still present, the only difference is that the default database search is always used when no search query is provided.
+* `🔴 Breaking Change`: Gambits have been removed from the backend. There are only filters now per model searcher. The concept of gambits has been moved to the frontend. See the [search documentation](/extend/search) for more details.
+* `🔴 Breaking Change`: Some namespaces have been changed or removed. The classes within `Flarum\Query` have been moved to `Flarum\Search`. The classes within `Flarum\Filter` have been moved to `Flarum\Search\Filter`. The `FilterState` class has been removed, you should use the `SearchState` class instead.
+* `🔴 Breaking Change`: A new search driver API has been introduced. Checkout the [search documentation](/extend/search) for more details on how to use it.
+* `🟡 Notable Change`: You can now get the total search result count from `SearchResults`.
+* `🟡 Notable Change`: You can now replace an existing filter implementation.
+
 ## Infrastructure
 
 ### Reusable GitHub Workflows
