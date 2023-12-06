@@ -75,8 +75,8 @@ There have been many changes to the core frontend codebase, including renamed or
 * The entire codebase has been updated to use PHP 8.1 features, including more strict types. This requires you to update your extension's code accordingly. This generally can be done using hints from your IDE.
 
 ##### <span class="notable">Notable</span>
-* `🟡 Notable Change`: Flarum 2.0 requires a minimum of **PHP 8.1**, this is not a breaking change for most extensions.
-* `🟡 Notable Change`: A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
+* Flarum 2.0 requires a minimum of **PHP 8.1**, this is not a breaking change for most extensions.
+* A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
 
 ### Dependencies
 
@@ -143,4 +143,5 @@ The search system has been refactored to allow for more flexibility and extensib
 
 ### Reusable GitHub Workflows
 
-* `🔴 Breaking Change`: The reusable GitHub workflows must be updated to use target the ones from the **2.x** branch. For example, you must change `flarum/framework/.github/workflows/REUSABLE_backend.yml@main` to `flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x`.
+##### <span class="breaking">Breaking</span>
+* The reusable GitHub workflows must be updated to use target the ones from the **2.x** branch. For example, you must change `flarum/framework/.github/workflows/REUSABLE_backend.yml@main` to `flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x`.
