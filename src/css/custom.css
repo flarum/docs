@@ -210,3 +210,36 @@ h1 > .hash-link, h2 > .hash-link, h3 > .hash-link, h4 > .hash-link, h5 > .hash-l
   left: -38px;
   opacity: 1;
 }
+
+.breaking {
+  color: #230000;
+  --bg: #d83e3e;
+}
+
+.notable {
+  color: #3e3400;
+  --bg: #fff2ae;
+}
+
+.breaking, .notable {
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 1px 4px;
+  background-color: var(--bg);
+}
+
+.breaking + .hash-link, .notable + .hash-link {
+  display: none;
+}
+
+.breaking::after, .notable::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 350px;
+  display: block;
+  background: linear-gradient(45deg, var(--bg), transparent);
+  top: 50%;
+  z-index: -1;
+}
