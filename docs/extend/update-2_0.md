@@ -62,6 +62,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * `🔴 Breaking Change`: The `UploadImageButton` component has been refactored to allow using it in different contexts. An [admin setting definition](./admin.md#available-setting-types) has also been added to allow you to use an upload setting directly.*
 * `🔴 Breaking Change`: The `FieldSet` component has been refactored.
 * `🔴 Breaking Change`: The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
+* `🟡 Notable Change`: An API for frontend gambits has been introduced, [checkout the full documentation](/extend/search#gambits).
 
 ## Backend
 
