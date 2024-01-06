@@ -13,6 +13,14 @@ Flarum has a wide ecosystem of extensions, most of which are open source and fre
 
 ## Installing Extensions
 
+### Through the interface
+
+Using the package manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the package manager's installation input.
+
+![Installing an extension](/en/img/install-extension.png)
+
+### Through the command line
+
 Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. To install a typical extension:
 
 1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
@@ -20,9 +28,25 @@ Just like Flarum, extensions are installed through [Composer](https://getcompose
 
 ## Updating Extensions
 
+### Through the interface
+
+Using the package manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the package manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
+
+![Updating an extension](/en/img/update-extension.png)
+
+### Through the command line
+
 Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
 
 ## Uninstalling Extensions
+
+### Through the interface
+
+Using the package manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
+
+![Uninstalling an extension](/en/img/uninstall-extension.png)
+
+### Through the command line
 
 Similarly to installation, to remove an extension:
 
@@ -32,8 +56,11 @@ Similarly to installation, to remove an extension:
 
 ## Managing Extensions
 
-The extensions page of the admin dashboard provides a convenient way to manage extensions when they are installed. You can:
+Each individual extension page of the admin dashboard provides a convenient way to manage the extension. You can:
 
-- Enable or disable an extension
-- Access extension settings (although some extensions will use a tab in the main sidebar for settings)
+- Enable or disable the extension.
+- See the settings provided by the extension, and change them.
 - Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
+- See the extension's README, if it has one.
+- See the extension's version.
+- Uninstall the extension if the package manager is installed.

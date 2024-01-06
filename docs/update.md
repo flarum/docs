@@ -1,5 +1,15 @@
 # Updating
 
+## From the Admin Dashboard
+
+:::info
+
+If you have the package manager extension installed you can simply run the update from its interface and skip this page entirely.
+
+:::
+
+---
+
 To update Flarum, you'll need to use [Composer](https://getcomposer.org). If you're not familiar with it (although you should be, because you need it to install Flarum), read [our guide](composer.md) for information on what it is and how to set it up.
 
 If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
