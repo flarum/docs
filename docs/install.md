@@ -13,7 +13,7 @@ Before you install Flarum, it's important to check that your server meets the re
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
 * **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **MySQL 5.6+/8.0.23+** or **MariaDB 10.0.5+**
-* **SSH (command-line) access** to run Composer if you intend on using the command-line to install and manage Flarum.
+* **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
 ## Installing
 
