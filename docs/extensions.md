@@ -64,3 +64,37 @@ Each individual extension page of the admin dashboard provides a convenient way 
 - See the extension's README, if it has one.
 - See the extension's version.
 - Uninstall the extension if the package manager is installed.
+
+## Configuring additional extension repository sources
+
+The package manager uses `composer` under the hood, and as such, it looks for extension packages in the same places as `composer`. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the package manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist.
+
+In the admin page of the package manager, clicking the **Add Repository** button will open a modal where you can enter the name and URL of the repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add.
+
+### Adding a repository from a VCS
+
+If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc), the URL should be the URL of the repository's VCS. For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL into the URL field. If it is a private source, you will need to enter an authentication method through the **New authentication method** button. The token can be generated from your VCS provider's website, and the host should be the domain of the VCS provider (e.g. `github.com`).
+
+### Adding a composer repository
+
+Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://extiverse.com/composer/` and the name as `extiverse`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Extiverse account's subscriptions page.
+
+* Type: `HTTP Bearer`
+* Host: `extiverse.com`
+
+![Configure repositories](/en/img/config-repositories.png)
+
+:::info
+
+The configured repositories and auth methods will be active for both the command line and the admin dashboard. If yu configure them from the command line however, you must not include the flag `--global`.
+
+:::
+
+## Installing Non-stable extensions
+
+If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
+
+* If you set it to Alpha, you will be able to install alpha, beta, RC and stable versions.
+* If you set it to Beta, you will be able to install beta, RC and stable versions.
+* If you set it to RC, you will be able to install RC and stable versions.
+* If you set it to Stable, you will only be able to install stable versions.
