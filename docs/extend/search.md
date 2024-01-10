@@ -263,79 +263,6 @@ You can check the [default database search driver implementation](https://github
 
 :::
 
-## Gambits
-
-Gambits are a way of adding filters through the search input of the frontend. The concept of gambits is only relevant to the frontend as they are used to translate string queries into filters and filters back into their string format. For example, the `is:unread` gambit translates to a `filter[unread]=true` filter, and vice versa.
-
-Gambits are applied any time you call `app.store.find()` and provide a `q` filter. For example:
-
-```ts
-app.store.find('discussions', { q: 'is:unread' });
-```
-
-To add a new gambit, you'll need to create a new class that implements `flarum/common/query/IGambit`. For example:
-
-```ts
-import IGambit from 'flarum/common/query/IGambit';
-
-export default class UnreadGambit implements IGambit {
-  pattern(): string {
-    return 'is:unread';
-  }
-
-  toFilter(_matches: string[], negate: boolean): Record<string, any> {
-    const key = (negate ? '-' : '') + 'unread';
-
-    return {
-      [key]: true,
-    };
-  }
-
-  filterKey(): string {
-    return 'unread';
-  }
-
-  fromFilter(value: string, negate: boolean): string {
-    return `${negate ? '-' : ''}is:unread`;
-  }
-}
-```
-
-Here's another example using the `country` column example we used earlier:
-
-```ts
-import IGambit from 'flarum/common/query/IGambit';
-
-export default class EmailGambit implements IGambit {
-  pattern(): string {
-    return 'country:(.+)';
-  }
-
-  toFilter(matches: string[], negate: boolean): Record<string, any> {
-    const key = (negate ? '-' : '') + 'country';
-
-    return {
-      [key]: matches[1],
-    };
-  }
-
-  filterKey(): string {
-    return 'country';
-  }
-
-  fromFilter(value: string, negate: boolean): string {
-    return `${negate ? '-' : ''}country:${value}`;
-  }
-}
-```
-
-:::warning No Spaces in Gambit Patterns!
-
-Flarum splits the `filter[q]` string into tokens by splitting it at spaces.
-This means that your custom gambits can NOT use spaces as part of their pattern.
-
-:::
-
 ## Indexing
 
 Flarum simplifies the process of indexing models by taking care of listening to the events and running your indexer logic in an async job. All you need to do is implement the `Flarum\Search\IndexerInterface` interface and register it via the `SearchIndex` extender.
@@ -404,3 +331,149 @@ You can select which driver a search model can use from the advanced admin page.
 ![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
 
 ![Advanced page](https://user-images.githubusercontent.com/20267363/277113315-9d75b9a3-f225-4a2b-9f42-8e5b9d13d5e8.png)
+
+
+## Gambits
+
+Gambits are a way of adding filters through the search input of the frontend. The concept of gambits is only relevant to the frontend as they are used to translate string queries into filters and filters back into their string format. For example, the `is:unread` gambit translates to a `filter[unread]` filter, and vice versa.
+
+Gambits are applied any time you call `app.store.find()` and provide a `q` filter. For example:
+
+```ts
+app.store.find('discussions', { q: 'is:unread' });
+```
+
+Gambits are automatically shown in the autocomplete options of the global search:
+
+![Global search modal](/en/img/global_search_modal.png)
+
+### Basic gambits
+
+To create a new gambit, determine if it is a `key:value` type of gambit, or a boolean `is:` type of gambit. If it is the former, you may create a class that extends `KeyValueGambit`. For example, the `country` column example we used earlier is a `key:value` gambit:
+
+```ts
+import app from 'flarum/common/app';
+import { KeyValueGambit } from 'flarum/common/query/IGambit';
+
+export default class CountryGambit extends KeyValueGambit {
+  key(): string {
+    return app.translator.trans('acme.lib.gambits.users.country.key', {}, true);
+  }
+
+  hint(): string {
+    return app.translator.trans('acme.lib.gambits.users.country.hint', {}, true);
+  }
+
+  filterKey(): string {
+    return 'country';
+  }
+}
+```
+
+The `key` is the localized gambit key, `country` would be the english word used, and other languages can appropriately translate. The key must have no spaces. The `hint` is used for the autocomplete in the global search modal. The implementation will produce a `filter[country]=value` filter. The filter key must not be localized.
+
+If the gambit you are creating is a boolean `is:` type of gambit, you can extend the `BooleanGambit` class. Here is an example from a built-in gambit (The filter key must not be localized.):
+
+```ts
+import app from 'flarum/common/app';
+import { BooleanGambit } from 'flarum/common/query/IGambit';
+
+export default class UnreadGambit extends BooleanGambit {
+  key(): string {
+    return app.translator.trans('core.lib.gambits.discussions.unread.key', {}, true);
+  }
+
+  filterKey(): string {
+    return 'unread';
+  }
+}
+```
+
+:::info No Spaces in Gambit Patterns!
+
+Flarum splits the `filter[q]` string into tokens by splitting it at spaces.
+This means that your custom gambits can NOT use spaces as part of their pattern.
+
+:::
+
+:::info Use the common frontend
+
+Gambits may be used from both the forum and admin frontends.
+So you want to make sure your gambit is added within the common frontend.
+
+:::
+
+### Advanced gambits
+
+If neither of the above gambit classes are suitable for your needs, you may directly implement the `IGambit` interface. Your class must implement the following:
+
+###### `type`
+The type of gambit. It can be `key:value` or `grouped`. The `key:value` gambit is a single key with a single value. The `grouped` gambit is a key with multiple values. For example, boolean gambits are grouped, because they are all prefixed with `is:`.
+###### `pattern`
+The regular expression pattern that will be used to match the gambit. The pattern language can be localized. For example, the pattern for the author gambit is `author:(.+)` in English, but `auteur:(.+)` in French.
+###### `toFilter`
+The method to transform a gambit into a filter format. The returned POJO will be combined into the filter POJO. For example, the author gambit will return `{ author: 'username' }`.
+###### `filterKey`
+The server standardised filter key for this gambit. The filter key must not be localized.
+###### `fromFilter`
+The method to transform a filter into a gambit format. The gambit format can be localized.
+###### `suggestion`
+Returns information about how the gambit is structured for the UI. Use localized values. For example, the author gambit will return `{ key: 'author', hint: 'the username of the author' }`.
+###### `predicates`
+Whether this gambit can use logical operators. For example, the tag gambit can be used as such: `tag:foo,bar tag:baz` which translates to `(foo OR bar) AND baz`. The info allows generation of the correct filtering format, which would be:
+```json
+{
+  "tag": [
+    "foo,bar", // OR because of the comma.
+    "baz" // AND because it's a separate item.
+  ]
+}
+```
+The backend filter must be able to handle this format. Checkout the `TagGambit` and `TagFilter` classes for an example.
+###### `enabled`
+Whether this gambit can be used by the actor. Some filters are protected and can only be used by certain actors. For example, the `is:suspended` gambit can only be used by actors with permission to suspend users.
+
+```ts
+enabled(): bool {
+  return !!app.session.user && app.forum.attribute('canSuspendUsers');
+}
+```
+
+### Registering gambits
+
+Once you have created your gambit, you will need to register it. You can do so using the `Search` frontend extender:
+
+```ts
+import Extend from 'flarum/common/extenders';
+import CountryGambit from './query/users/CountryGambit';
+
+// prettier-ignore
+export default [
+  new Extend.Search()
+    .gambit('users', CountryGambit),
+];
+```
+
+### Autocomplete for custom inputs
+
+If you have a custom input for which you want to provide gambit autocompletion, you may use the `GambitAutocompleteDropdown` wrapper component. The built-in user list admin page uses this component. Here is an example:
+
+```tsx
+import GambitsAutocompleteDropdown from 'flarum/common/components/GambitsAutocompleteDropdown';
+import Input from 'flarum/common/components/Input';
+
+<GambitsAutocompleteDropdown resource="users" query={this.query} onchange={onchange}>
+  <Input
+    type="search"
+    placeholder={app.translator.trans('core.admin.users.search_placeholder')}
+    clearable={true}
+    loading={this.isLoadingPage}
+    value={this.query}
+    onchange={onchange}
+  />
+</GambitsAutocompleteDropdown>
+```
+
+This will automatically produce an autocomplete dropdown with the appropriate gambits for the `users` resource. The `query` prop is the current search query, and the `onchange` prop is a callback that will be called when the query changes.
+
+![Gambit autocomplete dropdown component](/en/img/gambit_autocomplete_dropdown.png)
