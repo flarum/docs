@@ -1,6 +1,8 @@
 # Extension Manager
 This contains an explanation of how the extension manager works and what it has to offer.
 
+slightly outdated: see [the extensions guide for more](/extensions.md).
+
 ## Contents
 * Installing, Updating, and Removing Extensions.
 * [Checking for Updates](#checking-for-updates).
@@ -83,8 +85,4 @@ It is common for shared hosts to have a low php version used in SSH, users must 
 
 ## TODO
 - Try on shared hosting.
-- Composer command job must not overlap.
-- Code TODOs.
 - Better explanation on the UI about background tasks.
-- Take into consideration a scenario where we're updating an extension that isn't a root required dependency, like bundles.
-- Run one background task at a time, prevent user from triggering multiple tasks.
