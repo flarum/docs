@@ -11,8 +11,8 @@ This guide is provided as a brief explanation of Composer. We highly recommend c
 
 :::tip Shared Hosting
 
-On shared hosting it is recommended to use the Package Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access.
-You can directly install Flarum using an archive file, without the need for Composer. With the package manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
+On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access.
+You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
 
 :::
 

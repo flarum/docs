@@ -15,7 +15,7 @@ Flarum has a wide ecosystem of extensions, most of which are open source and fre
 
 ### Through the interface
 
-Using the package manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the package manager's installation input.
+Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
 
 ![Installing an extension](/en/img/install-extension.png)
 
@@ -30,7 +30,7 @@ Just like Flarum, extensions are installed through [Composer](https://getcompose
 
 ### Through the interface
 
-Using the package manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the package manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
+Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
 
 ![Updating an extension](/en/img/update-extension.png)
 
@@ -42,7 +42,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 ### Through the interface
 
-Using the package manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
+Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
 
 ![Uninstalling an extension](/en/img/uninstall-extension.png)
 
@@ -63,13 +63,13 @@ Each individual extension page of the admin dashboard provides a convenient way 
 - Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). This will remove ALL data associated with the extension, and is irreversible. It should only be done when you're removing an extension, and don't plan to install it again. It is also entirely optional.
 - See the extension's README, if it has one.
 - See the extension's version.
-- Uninstall the extension if the package manager is installed.
+- Uninstall the extension if the extension manager is installed.
 
 ## Configuring additional extension repository sources
 
-The package manager uses `composer` under the hood, and as such, it looks for extension packages in the same places as `composer`. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the package manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist.
+The extension manager uses `composer` under the hood, and as such, it looks for extension packages in the same places as `composer`. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the extension manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist.
 
-In the admin page of the package manager, clicking the **Add Repository** button will open a modal where you can enter the name and URL of the repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add.
+In the admin page of the extension manager, clicking the **Add Repository** button will open a modal where you can enter the name and URL of the repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add.
 
 ### Adding a repository from a VCS
 
