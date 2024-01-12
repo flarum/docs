@@ -7,6 +7,25 @@ This approach makes Flarum extremely customizable: You can disable any features 
 For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/README.md).
 This article will focus on managing extensions from a forum admin's perspective.
 
+## Extension Manager
+
+The extension manager is an extension that comes bundled with Flarum when installed via an archive. It provides a graphical interface for installing and updating both extensions and Flarum itself.
+
+If you do not have the extension manager installed and you wish to install it, you can do so by running the following command in your Flarum directory:
+
+```bash
+composer require flarum/extension-manager:*
+```
+
+:::warning
+
+The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions.
+
+:::
+
+![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+
+
 ## Finding Extensions
 
 Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.

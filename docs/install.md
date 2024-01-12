@@ -60,6 +60,18 @@ While this command is running, you can configure your web server. You will need 
 
 When everything is ready, navigate to your forum in a web browser and follow the instructions to complete the installation.
 
+If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
+
+```bash
+composer require flarum/extension-manager:*
+```
+
+:::warning
+
+The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions.
+
+:::
+
 ## URL Rewriting
 
 ### Apache
