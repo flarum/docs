@@ -3,14 +3,14 @@
 
 Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其依赖包和扩展程序。 你需要 Composer 以实现:
 
-- 安装或更新 Flarum
-- 安装，更新或删除 Flarum 扩展
+- Install or update Flarum through the command line
+- Install, update, or remove Flarum extensions  through the command line
 
 本指南会简单阐述 Composer 的使用。 我们强烈建议查阅 [官方文件](https://getcomposer.org/doc/00-intro.md) 以获取更多信息。
 
-:::tip Composer v2
+:::tip 即刻测试 Flarum？
 
-Composer 曾经由于巨大的内存占用，其在共享主机上引起过问题。 在 2020 年，[Composer v2 发布了](https://blog.packagist.com/composer-2-0-is-now-available/)。其大大改善了性能和内存占用并且解决了上述问题。 所以确保您的服务器正在使用Composer v2！
+On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access. You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
 
 :::
 
@@ -150,13 +150,3 @@ Composer 解决了所有这些，乃至更多的问题!
 在大多数命令后，你可以运行 `composer dump-autoload -a`。 基本上，这会缓存 PHP 文件使他们运行得更快。
 
 :::
-
-## 我没有 SSH 权限
-
-大多数像样的主机提供商都应当为共享主机提供 SSH 权限。 如果你的主机商不提供（而且你无法选择一个好的提供它的主机商），还有希望。 你有几个选择：
-
-- 使用如 [Pockethold](https://github.com/UvUno/pockethold) 等的备选方案来安装 Flarum。 注意你依旧需要 composer（和 SSH）来安装扩展。
-- 在你的电脑上安装 composer，本地运行 `install` 指令。 然后使用 FTP 把文件上传到你的主机。 要做修改的话（升级 Flarum、安装/升级/移除扩展），下载当前版本的文件，本地运行你需要的 composer 指令，然后替换 `composer.json` 和 `composer.lock` 文件，以及你本地副本安装的 `vendor` 目录。 请在进行这些操作之前备份！
-- 一些网络主机商可能会提供一个管理 composer 的 GUI。 命令行版本通常比较可取，但如果 GUI 是唯一选择，参阅你主机商的文档以了解如何使用它。
-
-请注意这些操作是不被官方支持的！ 官方唯一支持的安装和管理 Flarum 的方法是通过 Composer。
