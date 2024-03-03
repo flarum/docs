@@ -10,4 +10,4 @@ Flarum 管理面板是一个友好的论坛管理界面。 且只对「管理组
 - **Appearance** - Allows you to customize the forum's colors, branding and add additional CSS for customization.
 - **Users** - Provides you with a paginated list of all the users in the forum, and grants you the ability to edit the user or take administrative actions.
 
-Apart from the above mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
+除了以上提到的这些部分，主管理面板还通过_扩展_部分来允许你管理安装的扩展，这也包括 Flarum 的核心扩展，例如 Tags。 Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
