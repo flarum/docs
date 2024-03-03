@@ -1,5 +1,15 @@
 # 更新
 
+## From the Admin Dashboard
+
+:::info
+
+If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+
+:::
+
+---
+
 您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
 
 如果跨主要版本进行更新(如 <=0.1.0 to 1.x.x, 1.x.x 到 2.x.x.x, ... )，请确保在运行一般升级步骤之前阅读相应的“主要版本更新指南”。
@@ -10,13 +20,13 @@
 
 **第2步：** 查看您的 `composer.json` 文件。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
 
-**Step 3:** If your local install uses [local extenders](extenders.md), make sure they are up to date with changes in Flarum.
+**第 3步：** 如果您使用 [本地扩展](extenders.md)，请确保它们更新到最新的 Flarum 中的变更。
 
-**Step 4:** We recommend disabling third-party extensions in the admin dashboard before updating. This isn't strictly required, but will make debugging easier if you run into issues.
+**第 4 步：** 我们建议在更新之前在管理面板禁用第三方扩展。 这不是严格需要的，但如果您遇到问题，将更容易调试问题。
 
-**Step 5:** Make sure your PHP version is supported by the version of Flarum you are trying to upgrade to, and that you are using Composer 2 (`composer --version)`.
+**第 5步：** 请确保您的 PHP 版本被您正在尝试升级到 Flarum 的版本所支持。 并且你正在使用Composer 2(`composer --version)`
 
-**Step 6:** Finally, to update, run:
+**步骤6：** 最后更新，运行：
 
 ```
 composer update --prefer-dist --no-plugins --no-dev -a --with-all-dependencies
@@ -24,13 +34,13 @@ php flarum migrate
 php flarum cache:clear
 ```
 
-**Step 7:** If applicable, restart your PHP process and opcache.
+**步骤7：** 如果可以，请重启您的 PHP 进程和opcache。
 
-## Major Version Update Guides
+## 主要版本更新指南
 
-### Updating from Beta (<=0.1.0) to Stable v1 (^1.0.0)
+### 从 Beta (<= 0.1.0) 更新到 Stable v1 (^1.0.0)
 
-1. Do steps 1-5 above.
+1. 执行上文步骤1-5。
 2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^0.1.0` to `*`.
 3. Change `flarum/core`'s version string in `composer.json` from `^0.1.0` to `^1.0`.
 4. Remove the `"minimum-stability": "beta",` line from your `composer.json`

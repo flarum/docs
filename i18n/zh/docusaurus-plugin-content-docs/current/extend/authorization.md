@@ -1,11 +1,11 @@
-# Authorization
+# 身份认证
 
-As with any framework, Flarum allows certain actions and content to be restricted to certain users. There are 2 parallel systems for this:
+与其他框架类似，Flarum 可以将指定的操作和内容访问权限授权给特定的用户。 这方面有两套平行的系统：
 
-- The authorization process dictates whether a user can take a certain action.
-- Visibility scoping can be applied to a database query to efficiently restrict the records that users can access. This is documented in our [model visibility](model-visibility.md) article.
+- 授权程序决定用户是否可以采取某些操作。
+- 可见性作用域可以应用于数据库查询，有效地限制用户能够访问的记录。 这记录在我们的 [模型可见性](model-visibility.md) 文档中。
 
-## Authorization Process
+## 认证流程
 
 The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they:
 

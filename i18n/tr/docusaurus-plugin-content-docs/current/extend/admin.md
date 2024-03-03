@@ -6,7 +6,7 @@ Before beta 15, extension settings were either added in a `SettingsModal` or the
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
-## Extension Data API
+## Uzantı Veri API'si
 
 This new API allows you to add settings to your extension with very few lines of code.
 

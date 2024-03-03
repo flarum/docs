@@ -1,6 +1,6 @@
 # 反馈 Bug
 
-:::安全漏洞
+:::danger 安全漏洞
 
 如果您发现 Flarum 存在安全漏洞，请遵循我们的[安全政策](https://github.com/flarum/core/security/policy)，我们会及时处理
 

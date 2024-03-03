@@ -2,10 +2,10 @@
 
 除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。
 
-Using the console:
+使用控制台：
 
 1. `ssh` 连接到安装 Flarum 的服务器
-2. `cd` to the folder that contains the file `flarum`
+2. `cd` 进入含有一个叫做 `flarum` 的文件的文件夹中
 3. 执行 `php flarum [命令名]`
 
 ## 注册控制台命令
@@ -30,7 +30,7 @@ Using the console:
 
 `php flarum info`
 
-Get information about Flarum's core and installed extensions. 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
+获取 Flarum 核心及已安装插件的信息。 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
 
 ### cache:clear
 
@@ -52,7 +52,7 @@ Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, 
 
 ### migrate:reset
 
-`php flarum migrate:reset --extension [extension_id]`
+`php flarum migrate:reset --extension [插件ID]`
 
 重置指定插件的所有迁移。 这个命令大多被插件开发人员使用，如果您要卸载插件，并且想要从数据库中清除该插件的所有数据，也会需要用它。 请注意，该命令的被执行插件必须处于已安装状态（插件启用不启用都行）。
 
@@ -66,7 +66,7 @@ Many extensions use scheduled jobs to run tasks on a regular interval. This coul
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
 ```
 
-This command should generally not be run manually.
+这个命令一般不应被手动执行。
 
 Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
 

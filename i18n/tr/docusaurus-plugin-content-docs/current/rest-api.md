@@ -4,7 +4,7 @@ Flarum exposes a REST API which is used by the single page application but also 
 
 The API follows the best practices defined by the [JSON:API](https://jsonapi.org/) specification.
 
-:::info
+:::bilgi
 
 To extend the REST API with new endpoints, see [API and Data Flow](extend/api.md) in the developer documentation.
 
