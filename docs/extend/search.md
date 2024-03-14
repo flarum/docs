@@ -133,44 +133,6 @@ class AcmeFulltextFilter extends AbstractFulltextFilter
 }
 ```
 
-Then, you'll need to use the `SearchManager` on your `List` controller.
-
-```php
-class ListAcmesController extends AbstractListController
-{
-    public function __construct(
-        protected SearchManager $search,
-        protected UrlGenerator $url
-    ) {
-    }
-
-    protected function data(ServerRequestInterface $request, Document $document): array
-    {
-        $actor = $request->getAttribute('actor');
-        $filters = $this->extractFilter($request);
-        $sort = $this->extractSort($request);
-        $limit = $this->extractLimit($request);
-        $offset = $this->extractOffset($request);
-        $sortIsDefault = $this->sortIsDefault($request);
-
-        $results = $this->search->query(
-            Acme::class,
-            new SearchCriteria($actor, $filters, $limit, $offset, $sort, $sortIsDefault)
-        );
-
-        $document->addPaginationLinks(
-            $this->url->to('api')->route('acmes.index'),
-            $request->getQueryParams(),
-            $offset,
-            $limit,
-            $results->areMoreResults() ? null : 0
-        );
-
-        return $results->getResults();
-    }
-}
-```
-
 Then, you'll need to register this searcher via the search driver extender:
 
 ```php
