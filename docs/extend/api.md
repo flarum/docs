@@ -16,9 +16,9 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. Each API Resource is distinguished by a unique type and has a set of endpoints. You can read more about them in the below sections.
-3. Any modifications done by extensions to the API Resource endpoints via the [`ApiResource` extender](#extending-api-resources) are applied. This could entail changing sort, adding includes, eager loading relations, or executing some logic before and/or after.
+3. Any modifications done by extensions to the API Resource endpoints via the [`ApiResource` extender](#extending-api-resources) are applied. This could entail changing sort, adding includes, eager loading relations, or executing some logic before and/or after the default implementation runs.
 4. The action of the endpoint is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the API resource can process it. There are built-in reusable endpoint for CRUD operations, but custom endpoints can be implemented as well.
-5. Any modifications made through the [`ApiResource` extender](#extending-api-resources) to the API resource fields will be applied. Like adding new attributes or relationships to serialize, removing existing ones, or modifying their behavior.
+5. Any modifications made through the [`ApiResource` extender](#extending-api-resources) to the API resource's fields will be applied. These can include adding new attributes or relationships to serialize, removing existing ones, or changing how the field value is computed.
 6. The fields (attributes and relationships) are serialized, converting the data from the backend database-friendly format to the JSON:API format expected by the frontend.
 7. The serialized data is returned as a JSON response to the frontend.
 8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](#frontend-models) in the frontend store.
@@ -26,11 +26,11 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 ## API Resources
 
 We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend.
-We do this by writing an API Resource for the model, which defines the fields (attributes and relationships) of the model, the endpoints of the resource API, and optionally some extra logic, such as visibility scoping, sort columns ..etc, we will learn about this in the next sections.
+We do this by writing an API Resource for the model, which defines the fields (attributes and relationships) of the model, the endpoints of the resource API, and optionally some extra logic, such as visibility scoping, sorting options, etc. We will learn about this in the next few sections.
 
-CRUD endpoints are built-in and their logic does not need implementing, you can simply add them to your API resource's `endpoints()` method. They are:
+CRUD endpoints are provided by Flarum, so you can simply add them to your API resource's `endpoints()` method. They are:
 
-- `Index`: Listing instances of a model (possibly including searching/filtering)
+- `Index`: Listing many instances of a model (possibly including searching/filtering)
 - `Show`: Getting a single model instance
 - `Create`: Creating a model instance
 - `Update`: Updating a model instance
@@ -149,7 +149,7 @@ class LabelResource extends AbstractDatabaseResource
 
 ### Resource Definition
 
-The API resource class must extend the `Flarum\Api\Resource\AbstractDatabaseResource` class when interacting with Eloquent models, and `Flarum\Api\Resource\AbstractResource` when not. The `type` method should return a unique string that identifies the resource type. In the case of a database resource, a model method must return the class name of the model.
+The API resource class must extend the `Flarum\Api\Resource\AbstractDatabaseResource` class when interacting with Eloquent models, and `Flarum\Api\Resource\AbstractResource` when not. The `type` method should return a unique string that identifies the resource type. In the case of a database resource, the `model` method must return the class name of the model (`::class` property).
 
 ```php
 use Flarum\Api\Resource\AbstractDatabaseResource;
@@ -212,14 +212,14 @@ public function endpoints(): array
 {
     return [
         Endpoint\Index::make()
-            ->paginate(20, 50), // these are the default values, so you may omit them.
+            ->paginate(20, 50), // these are the default values, so you may omit these arguments.
     ];
 }
 ```
 
 #### Sorting
 
-You can specify sort columns through the `sorts` method. For example the following will permit two sorting options: `createdAt` and `-createdAt`:
+You can specify sort columns through the `sorts` method. For example the following will permit two sorting options: `createdAt` (in ascending order) and `-createdAt` (in descending order):
 
 ```php
 use Flarum\Api\Sort\SortColumn;
@@ -558,7 +558,7 @@ public function fields(): array
 
 ### Visibility
 
-You can use the `visible` method to determine whether an attribute should be visible in the API response.
+You can use the `visible` method to conditionally include an attribute in the API response.
 
 ```php
 use Flarum\Api\Context;
@@ -638,7 +638,7 @@ public function fields(): array
 
 ### Validation
 
-You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/10.x/validation#available-validation-rules) to an attribute. Each type of attribute will have some custom validation rules available as methods.
+You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/10.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
 
 ```php
 use Flarum\Api\Schema;
