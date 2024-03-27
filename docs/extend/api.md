@@ -98,6 +98,10 @@ class LabelResource extends AbstractDatabaseResource
         ];
     }
 
+    /*
+     * This is only for endpoint processing and serialization.
+     * You still have to create a database migration to add the table/columns.
+     */
     public function fields(): array
     {
         return [
@@ -168,9 +172,31 @@ class LabelResource extends AbstractDatabaseResource
 }
 ```
 
+```php
+use Flarum\Api\Resource\AbstractResource;
+
+class CustomResource extends AbstractResource
+{
+    public function type(): string
+    {
+        return 'custom';
+    }
+    
+    public function getId(object $model, Context $context): string
+    {
+        return // return the model ID.
+    }
+
+    public function find(string $id, Context $context): ?object
+    {
+        // return the model instance.
+    }
+}
+```
+
 ### Scoping Database Resources
 
-The `scope` method is used to apply a query scope to the model. This is useful for applying visibility scoping and ensures no data is returned that the actor should not have access to, including when the resource is a serialized relationship of another resource.
+The `scope` method is used to apply a query scope to the model. This is useful for applying [visibility scoping](model-visibility.md) and ensures no data is returned that the actor should not have access to, including when the resource is a serialized relationship of another resource.
 
 ```php
 use Tobyz\JsonApiServer\Context;
@@ -417,7 +443,7 @@ public function endpoints(): array
 
 ### Lifecycle Hooks
 
-Some methods on the endpoint allow you to hook certain logic into the lifecycle of the endpoint. These are `before`, `after`, and `beforeSerialization` which is often not very different from `after` but is called before it when available on the endpoint.
+Some methods on the endpoint allow you to hook certain logic into the lifecycle of the endpoint. These are `before`, `after`, and `beforeSerialization` which is often not very different from `after` but is called before it when available on the endpoint. For example, you can use these hooks to log additional information (such as marking notifications as read when said endpoint is accessed), or you may need to modify the resulting data before it is serialized.
 
 ```php
 use Flarum\Api\Endpoint;
@@ -441,7 +467,7 @@ public function endpoints(): array
 
 ### Eager Loading
 
-By default, relationships that are included in the API response are automatically eager loaded. However a lot of times you will want to specify some relations to be eager loaded regardless of their inclusion in the API response. For example, if you need to access `$label->parent` to check that a field should be visible in the response, then you will need to eager load the parent relation to prevent N+1 queries.
+By default, relationships that are included in the API response are automatically eager loaded. However, a lot of times you will want to specify some relations to be eager loaded regardless of their inclusion in the API response. For example, if you need to access `$label->parent` to check that a field should be visible in the response, then you will need to eager load the parent relation to prevent N+1 queries.
 
 You can do this through the `eagerLoad`, `eagerLoadWhenIncluded` and `eagerLoadWhere` methods on the endpoint.
 
@@ -534,6 +560,8 @@ $url->to('api')->route('labels.activate', ['id' => $label->id]);
 
 The `fields` method on the API resource is used to define the fields (attributes and relationships) of the model. You can use the `Schema` namespace to define the various field types.
 
+The code examples below are methods within an API resource class.
+
 ### Attributes
 
 Before you define an attribute, decide which type of attribute it is. The `Schema` namespace provides a range of attribute types, such as `Str`, `Integer`, `Boolean`, `DateTime` and `Arr` for arrays.
@@ -618,7 +646,7 @@ public function fields(): array
 
 ### Getter & Setter
 
-You can use the `get` and `set` methods to define a getter and setter for an attribute.
+By default, the value will be written directly to the model attribute, and read directly from the model attribute. You can use the `get` and `set` methods to customize how the value is read and written.
 
 ```php
 use Flarum\Api\Context;
@@ -704,20 +732,25 @@ The `Number` & `Integer` attributes are able to get efficiently get relationship
 use Flarum\Api\Schema\Number;
 use Flarum\Api\Schema\Integer;
 
-Integer::make('commentCount')
-    ->countRelation('comments'),
-
-Number::make('avgRevenue')
-    ->avgReation('reports', 'revenue'),
-
-Number::make('revenueSum')
-    ->sumRelation('reports', 'revenue'),
-
-Number::make('minNumber')
-    ->minRelation('posts', 'number'),
-
-Number::make('maxNumber')
-    ->maxRelation('posts', 'number'),
+public function fields(): array
+{
+    return [
+        Integer::make('commentCount')
+            ->countRelation('comments'),
+        
+        Number::make('avgRevenue')
+            ->avgReation('reports', 'revenue'),
+        
+        Number::make('revenueSum')
+            ->sumRelation('reports', 'revenue'),
+        
+        Number::make('minNumber')
+            ->minRelation('posts', 'number'),
+        
+        Number::make('maxNumber')
+            ->maxRelation('posts', 'number'),
+    ];
+}
 ```
 
 ## Relationships
@@ -764,9 +797,31 @@ public function fields(): array
 }
 ```
 
+:::tip
+
+Relationship linkage is the ID of the related model(s) in the API response. For example, linkage of a `ToOne` relationship would look like this:
+
+```json
+{
+    "attributes": {
+        "name": "John Doe"
+    },
+    "relationships": {
+        "user": {
+            "data": {
+                "type": "users",
+                "id": "1"
+            }
+        }
+    }
+}
+```
+
+:::
+
 ### Polymorphic Relationships
 
-You use the `collection` method to define the resource types that a polymorphic relationship can point to.
+You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/10.x/eloquent-relationships#polymorphic-relationships) can point to.
 
 ```php
 use Flarum\Api\Schema;
