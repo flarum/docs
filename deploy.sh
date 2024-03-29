@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source ~/.bashrc
+
 git pull
 
 npm i
