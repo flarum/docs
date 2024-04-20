@@ -57,6 +57,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * The `UploadImageButton` component has been refactored to allow using it in different contexts. An [admin setting definition](./admin.md#available-setting-types) has also been added to allow you to use an upload setting directly.*
 * The `FieldSet` component has been refactored.
 * The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
+* The `Modal` component has been split into `Modal` and `FormModal`. The `Modal` component is now a simple modal that can be used for any content, while the `FormModal` component is a modal that is specifically designed for forms.
 
 ##### <span class="notable">Notable</span>
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
