@@ -328,6 +328,6 @@ Often, backend and frontend models will have similar attributes and relationship
 
 The attributes and relationships of backend models are based on the **database**. Each column in the model's table will map to an attribute on the backend model.
 
-The attributes and relationships of frontend models are based on the output of [API Serializers](api.md). These will be covered more in depth in the next article, but it's worth that a serializer could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
+The attributes and relationships of frontend models are based on the fields of [API Resource](api.md). These will be covered more in depth in the next article, but it's worth that a resource could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
 Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.

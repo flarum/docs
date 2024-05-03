@@ -37,7 +37,7 @@ If you need help applying these changes or using new features, please start a di
   ```
 * Importing from `@flarum/core` no longer works. It was previously only allowed for the compat API.
 * The `useExtensions` webpack option has been removed, use the import format explained above to import using the export registry instead.
-* Some flarum modules are now lazy loaded, such as `LogInModal`. You have to make sure they have been loaded before using them, or you can trigger the loading yourself. See the [Code Splitting](/extend/frontend/code-splitting) documentation for more information.
+* Some flarum modules are now lazy loaded, such as `LogInModal`. You have to make sure they have been loaded before using them, or you can trigger the loading yourself. See the [Code Splitting](/extend/code-splitting) documentation for more information.
 
 :::info
 
@@ -45,7 +45,7 @@ Read more about the export registry and how to use it in the [Export Registry](/
 
 :::
 
-### Miscellaneous Changes
+### Miscellaneous
 
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
 
@@ -126,6 +126,32 @@ For more details, read the [Flysystem 1.x to V2 & V3 upgrade guide](https://flys
 
 Checkout the [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html) for more details.
 
+### JSON:API
+
+Flarum 2.0 completely refactors the JSON:API implementation. The way resource CRUD operations, serialization and extending other resources is done has completely changed.
+
+##### <span class="breaking">Breaking</span>
+* The `AbstractSerializeController`, `AbstractShowController`, `AbstractCreateController`, `AbstractUpdateController`, and `AbstractDeleteController` have been removed.
+* The `AbstractSerializer` has been removed.
+* The `ApiController` and `ApiSerializer` extenders have been removed.
+* The `Saving` are dispatched after the validation process instead of before.
+* The various validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, `GroupValidator`, `UserValidator`.
+* Many command handlers have been removed. Use the `JsonApi` class if you wish to execute logic from an existing endpoint internally instead.
+* The `flarum.forum.discussions.sortmap` singleton has been removed. Instead, you can define an `ascendingAlias` and `descendingAlias` [on your added `SortColumn` sorts](/extend/api#adding-sort-columns).
+
+Replacing the deleted classes is the new `AbstractResource` and `AbstractDatabaseResource` classes. We recommend looking at a comparison between the bundled extensions (like tags) from 1.x to 2.x to have a better understanding of the changes:
+* Tags 1.x: https://github.com/flarum/framework/blob/1.x/extensions/tags
+* Tags 2.x: https://github.com/flarum/framework/blob/2.x/extensions/tags 
+
+:::caution Refer to the documentation
+
+Read about the full extent of the new introduced implementation and its usage in the [JSON:API](/extend/api) section.
+
+:::
+
+##### <span class="notable">Notable</span>
+* We now do not recommend adding default includes to endpoints. Instead it is preferable to add what relations you need included in the payloads of individual requests. This improves the performance of the forum.
+
 ### Search/Filter system
 
 The search system has been refactored to allow for more flexibility and extensibility, and to further simplify things, the separate concept of filtering has been removed. 
@@ -139,6 +165,11 @@ The search system has been refactored to allow for more flexibility and extensib
 * A new search driver API has been introduced. Checkout the [search documentation](/extend/search) for more details on how to use it.
 * You can now get the total search result count from `SearchResults`.
 * You can now replace an existing filter implementation.
+
+### Miscellaneous
+
+##### <span class="breaking">Breaking</span>
+* The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
 
 ## Infrastructure
 
