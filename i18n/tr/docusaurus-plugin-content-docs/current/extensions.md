@@ -6,11 +6,11 @@ Bu yaklaşım Flarum'u son derece özelleştirilebilir kılar: İhtiyaç duymad�
 
 Flarum'un temelde hangi özellikleri dahil ettiğimiz konusundaki felsefesi hakkında daha fazla bilgi için veya kendi uzantınızı oluşturmak istiyorsanız, lütfen [uzantı belgelerimize](extend/README.md) bakın. Bu makale, bir forum yöneticisinin bakış açısından uzantıları yönetmeye odaklanacaktır.
 
-## Extension Manager
+## Uzantı Yöneticisi
 
-The extension manager is an extension that comes bundled with Flarum when installed via an archive. It provides a graphical interface for installing and updating both extensions and Flarum itself.
+Uzantı yöneticisi, bir arşiv aracılığıyla yüklendiğinde Flarum ile birlikte gelen bir uzantıdır. Hem uzantıları hem de Flarum'u yüklemek ve güncellemek için grafiksel bir arayüz sağlar.
 
-If you do not have the extension manager installed and you wish to install it, you can do so by running the following command in your Flarum directory:
+Eğer eklenti yöneticiniz kurulu değilse ve onu kurmak istiyorsanız Flarum dizininizde aşağıdaki komutu çalıştırarak bunu yapabilirsiniz:
 
 ```bash
 composer require flarum/extension-manager:*
@@ -18,11 +18,11 @@ composer require flarum/extension-manager:*
 
 :::warning
 
-The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions.
+Uzantı yöneticisi, yönetici kullanıcının herhangi bir besteci paketini yüklemesine olanak tanır. Uzantı yöneticisini yalnızca bu tür izinlere sahip tüm forum yöneticilerinize güveniyorsanız yükleyin.
 
 :::
 
-![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+![uzantı yöneticisi yönetici sayfası](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
 
 
 ## Uzantıları Bulmak
@@ -31,57 +31,57 @@ Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemin
 
 ## Uzantıları Yükleme
 
-### Through the interface
+### Arayüz aracılığıyla
 
-Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
+Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Yukarıdaki bağlantılardan mevcut uzantıların listesine göz attığınızda ve yüklemek istediğiniz uzantıyı bulduğunuzda, uzantı yöneticisinin kurulum girişine uzantının besteci paketi adını girerek yükleyebilirsiniz.
 
 ![Installing an extension](/en/img/install-extension.png)
 
-### Through the command line
+### Komut satırı aracılığıyla
 
 Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org) aracılığıyla yüklenir. Tipik bir uzantı yüklemek için:
 
-1. `cd` to your Flarum directory. `composer.json` dosyasını içeren klasöre `cd` komutuyla gidin. You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Bu, uzantının belgesi tarafından sağlanmalıdır.
+1. `cd` to your Flarum directory. Bu dizin `composer.json`, `flarum` dosyalarını ve bir `storage` dizini (diğerlerinin yanı sıra) içermelidir. Dizin içeriğini `ls -la` aracılığıyla kontrol edebilirsiniz.
+2. Çalıştırın `composer require COMPOSER_UZANTI_ADI:*`. Bu, uzantının belgelerinde sağlanmalıdır.
 
 ## Uzantıları Yönetme
 
-### Through the interface
+### Arayüz aracılığıyla
 
-Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
+Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden güncelleyebilirsiniz. Uzantı yöneticisindeki "Güncellemeleri kontrol et" düğmesini tıklayarak güncellemeleri kontrol edebilirsiniz. Güncellemeler mevcutsa, "Global güncelleme" butonuna tıklayarak tüm uzantıları güncelleyebilirsiniz. Veya güncellemek istediğiniz uzantının yanındaki "Güncelle" butonuna tıklayarak uzantıları tek tek güncelleyebilirsiniz.
 
 ![Updating an extension](/en/img/update-extension.png)
 
-### Through the command line
+### Komut satırı aracılığıyla
 
-Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
+Uzantı geliştiricileri tarafından sağlanan talimatları izleyin. Uzantılar için sürüm dizesi olarak `*` kullanıyorsanız ([önerildiği gibi](composer.md)), [Flarum yükseltme kılavuzunda](update.md) listelenen komutları çalıştırmak güncellenecektir tüm uzantılarınız.
 
-## Uninstalling Extensions
+## Uzantıları Kaldırma
 
-### Through the interface
+### Arayüz aracılığıyla
 
-Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
+Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Uzantının sayfasında, kaldırmak istediğiniz uzantının yanındaki "Kaldır" düğmesini tıklayarak bir uzantıyı kaldırabilirsiniz.
 
 ![Uninstalling an extension](/en/img/uninstall-extension.png)
 
-### Through the command line
+### Komut satırı aracılığıyla
 
-Similarly to installation, to remove an extension:
+Kuruluma benzer şekilde bir uzantıyı kaldırmak için:
 
-0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
+0. Uzantı tarafından oluşturulan tüm veritabanı tablolarını kaldırmak istiyorsanız yönetici kontrol panelindeki "Temizle" düğmesini tıklayın. Daha fazla bilgi için [aşağıya](#managing-extensions) bakın.
 1. `cd` to your Flarum directory.
-2. Besteciyi çalıştırmak için `composer require COMPOSER_PACKAGE_NAME` gereklidir. Bu, uzantının belgesi tarafından sağlanmalıdır.
+2. Çalıştırın `composer require COMPOSER_UZANTI_ADI:*`. Bu, uzantının belgelerinde sağlanmalıdır.
 
-## Managing Extensions
+## Uzantıları Yönetme
 
-Each individual extension page of the admin dashboard provides a convenient way to manage the extension. Yapabilecekleriniz:
+Yönetici kontrol panelindeki her bir uzantı sayfası, uzantıyı yönetmek için kullanışlı bir yol sağla. Yapabilecekleriniz:
 
-- Enable or disable the extension.
-- See the settings provided by the extension, and change them.
-- Revert an extension's migrations to remove any database modifications it made (this can be done with the Purge button). Bu, uzantı ile ilişkili TÜM verileri kaldırır ve geri alınamaz. Yalnızca bir uzantıyı kaldırırken yapılmalıdır ve tekrar yüklemeyi planlamayın. Aynı zamanda tamamen isteğe bağlıdır.
-- See the extension's README, if it has one.
-- See the extension's version.
-- Uninstall the extension if the extension manager is installed.
+- Uzantıyı etkinleştirin veya devre dışı bırakın.
+- Uzantının sağladığı ayarlara bakın ve bunları değiştirin.
+- Bir uzantının yaptığı tüm veritabanı değişikliklerini kaldırmak için, uzantının geçişlerini geri alın (bu, Temizle düğmesiyle yapılabilir). Bu, uzantı ile ilişkili TÜM verileri kaldırır ve geri alınamaz. Bu yalnızca bir uzantıyı kaldırırken yapılmalıdır ve tekrar yüklemeyi planlamayın. Aynı zamanda tamamen isteğe bağlıdır.
+- Varsa, uzantının README dosyasına bakın.
+- Uzantının sürümüne bakın.
+- Uzantı yöneticisi yüklüyse uzantıyı kaldırın.
 
 ## Configuring additional extension repository sources
 
