@@ -1,8 +1,8 @@
 # Yönetici Gösterge Tablosu
 
-Beta 15 introduced a completely redesigned admin panel and frontend API. It is now easier than ever to add settings or permissions to your extension.
+Beta 15, tamamen yeniden tasarlanmış bir yönetici paneli ve frontend API'sini tanıttı. Uzantınıza ayar veya izin eklemek artık her zamankinden daha kolay.
 
-Before beta 15, extension settings were either added in a `SettingsModal` or they added a new page for more complex settings. Now, every extension has a page containing info, settings, and the extension's own permissions.
+Beta 15'ten önce, uzantı ayarları ya bir `SettingsModal`'a ekleniyordu ya da daha karmaşık ayarlar için yeni bir sayfa ekleniyordu. Now, every extension has a page containing info, settings, and the extension's own permissions.
 
 You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
 
