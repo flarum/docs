@@ -1,4 +1,4 @@
-# Extension Manager
+# Uzantı Yöneticisi
 This contains an explanation of how the extension manager works and what it has to offer.
 
 slightly outdated: see [the extensions guide for more](/extensions.md).
