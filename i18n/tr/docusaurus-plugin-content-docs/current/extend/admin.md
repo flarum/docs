@@ -2,13 +2,13 @@
 
 Beta 15, tamamen yeniden tasarlanmış bir yönetici paneli ve frontend API'sini tanıttı. Uzantınıza ayar veya izin eklemek artık her zamankinden daha kolay.
 
-Beta 15'ten önce, uzantı ayarları ya bir `SettingsModal`'a ekleniyordu ya da daha karmaşık ayarlar için yeni bir sayfa ekleniyordu. Now, every extension has a page containing info, settings, and the extension's own permissions.
+Beta 15'ten önce, uzantı ayarları ya bir `SettingsModal`'a ekleniyordu ya da daha karmaşık ayarlar için yeni bir sayfa ekleniyordu. Artık her uzantının bilgileri, ayarları ve uzantının kendi izinlerini içeren bir sayfası var.
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+Ayarları kolayca kaydedebilir, temel [`Uzantı Sayfası`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) genişletebilir veya kendi tamamen özel sayfanızı sağlayabilirsiniz.
 
 ## Uzantı Veri API'si
 
-This new API allows you to add settings to your extension with very few lines of code.
+Bu yeni API, çok az kod satırıyla uzantınıza ayarlar eklemenizi sağlar.
 
 ### Telling the API about your extension
 
