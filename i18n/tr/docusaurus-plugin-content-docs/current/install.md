@@ -1,4 +1,4 @@
-# Kurulum Belgeleri
+# Kurulum
 
 :::ipucu Hızlı test sürüşü mü?
 
@@ -68,7 +68,7 @@ composer require flarum/extension-manager:*
 
 :::warning
 
-The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions.
+Uzantı yöneticisi, yönetici kullanıcının herhangi bir besteci paketini yüklemesine olanak tanır. Uzantı yöneticisini yalnızca bu tür izinlere sahip tüm forum yöneticilerinize güveniyorsanız yükleyin.
 
 :::
 
