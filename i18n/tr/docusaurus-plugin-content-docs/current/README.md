@@ -4,9 +4,9 @@ slug: /
 
 # Flarum Hakkında
 
-Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarılı bir topluluk yürütmek için ihtiyacınız olan tüm özelliklerle birlikte kullanımı hızlı ve kolaydır. It's also extremely extensible, allowing for ultimate customizability.
+Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarılı bir topluluk yürütmek için ihtiyacınız olan tüm özelliklerle birlikte kullanımı hızlı ve kolaydır. Aynı zamanda son derece genişletilebilir olup, en üst düzeyde özelleştirilebilirliğe olanak tanır.
 
-![Flarum Home Screenshot](/en/img/home_screenshot.png)
+![Flarum Ana Sayfa Ekran Görüntüsü](/en/img/home_screenshot.png)
 
 ## Hedefler
 
@@ -20,26 +20,26 @@ Flarum, [esoTalk](https://github.com/esotalk/esoTalk) ve [FluxBB](https://fluxbb
 
 * **Ücretsiz ve açıktır.** Flarum, [MIT lisansı](https://github.com/flarum/flarum/blob/master/LICENSE) altında yayınlanmıştır.
 
-You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
+[Flarum'a yönelik felsefemiz ve değerlerimiz](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values) hakkında daha fazla bilgi edinebilirsiniz.
 
 ## Flarum Projesine Yardım Edin
 
-Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
+Flarum, gönüllüler tarafından bakımı yapılan ve yönetilen [ücretsiz, açık kaynaklı](https://github.com/flarum/core) bir yazılımdır. Flarum'u geliştirmemize ve genişletmemize yardımcı olması için topluluk katkılarına güveniyoruz.
 
 🧑‍💻 Eğer bir geliştiriciyseniz, Flarum'un temeline veya paketlenmiş uzantılarına katkıda bulunmayı düşünebilirsiniz. Bu, Flarum'a yardımcı olmanın en etkili yolu ve çalışmalarınızın büyük bir etkisi olabilir: milyonlarca son kullanıcıya sahip binlerce Flarum sitesi mevcuttur.
 
-🧩 If there's a feature you're missing, or a theme idea you have, [writing a custom extension](extend/README.md) will make Flarum that much better for you and others.
+🧩Eksik olduğunu düşündüğünüz bir özellik veya aklınıza gelen bir tema fikri varsa, [özel bir uzantı yazmak](extend/README.md) Flarum'u siz ve diğerleri için çok daha iyi hale getirecektir.
 
-✒️ If you're experienced in technical writing, your contributions to [our documentation](https://github.com/flarum/docs/issues) could help future users, admins, and developers make the most of Flarum.
+✒️ Teknik yazım konusunda deneyiminiz varsa, [belgelerimize](https://github.com/flarum/docs/issues) yapacağınız katkılar gelecekteki kullanıcıların, yöneticilerin ve geliştiricilerin Flarum'dan en iyi şekilde yararlanmasına yardımcı olabilir.
 
-🌐 If you speak multiple languages, you could [contribute translations](extend/language-packs.md) to could help make Flarum accessible to countless users around the world.
+🌐 Birden fazla dil konuşuyorsanız Flarum'un dünya çapındaki sayısız kullanıcı tarafından erişilebilir olmasına yardımcı olmak için [çevirilere katkıda bulunabilirsiniz](extend/language-packs.md).
 
-💸 The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This wouldn't be possible without your financial support.
+💸 Flarum Vakfı, Flarum'dan para kazanmıyor ancak ödenmesi gereken faturaları var. [GitHub Sponsorları](https://github.com/sponsors/flarum) veya [OpenCollective](https://opencollective.com/flarum) aracılığıyla yapılan bağışlar her zaman minnetle alınır. Geçmişte, bazı temel geliştiricilerimizi finansal olarak da destekleyebildik, böylece onların Flarum'da yarı zamanlı çalışabilmesini sağladık. Maddi desteğiniz olmadan bu mümkün olmazdı.
 
-🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners!
+🧑‍🤝‍🧑 Flarum geliştirme hakkında konuşmak, örneğinizle ilgili yardım almak veya sadece harika insanlarla tanışmak için [topluluğumuza](https://discuss.flarum.org) katılın! Flarum konusunda deneyiminiz varsa yeni başlayanlara da yardımcı olabilirsiniz!
 
-🐛 If there's a bug that's bothering you, or a feature idea on your mind, we can't know about it unless you tell us! We track bugs, suggestions, and future development plans [via GitHub issues](https://github.com/flarum/core/issues). If there's already an issue open, adding likes and (constructive) additional information can be very helpful!
+🐛 Canınızı sıkan bir hata ya da aklınızda bir özellik fikri varsa siz bize söylemediğiniz sürece bunu bilemeyiz! Hataları, önerileri ve gelecekteki geliştirme planlarını [GitHub sorunları](https://github.com/flarum/core/issues) aracılığıyla takip ediyoruz. Zaten açık bir sorun varsa, beğeniler ve (yapıcı) ek bilgiler eklemek çok yararlı olabilir!
 
-📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
+📣 Ve eğer Flarum'u seviyorsanız, lütfen bunun hakkında blog yazmayı/tweetlemeyi/konuşmayı düşünün! Flarum'dan haberdar olan daha fazla insan, daha fazla insanın Flarum'la etkileşime geçmesine ve dolayısıyla daha fazla aktiviteye, daha iyi uzantılara ve daha hızlı gelişime yol açar.
 
-Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-docs-translations.md) docs for more information.
+Olağanüstü topluluğumuz olmadan Flarum mümkün olmazdı. Katkıda bulunmak istiyorsanız daha fazla bilgi için [geliştirici katkısı](contributing.md) ve [diğer katkı](contributing-docs-translations.md) belgelerimize bakın.
