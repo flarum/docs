@@ -218,7 +218,15 @@ h1 > .hash-link, h2 > .hash-link, h3 > .hash-link, h4 > .hash-link, h5 > .hash-l
 
 .notable {
   color: #3e3400;
-  --bg: #fff2ae;
+  --bg: #ebd022;
+}
+
+[data-theme=light] .breaking {
+  color: #ffefef;
+}
+
+[data-theme=light] .notable {
+  --bg: #ebd022;
 }
 
 .breaking, .notable {
