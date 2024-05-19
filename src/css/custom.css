@@ -192,7 +192,7 @@ li > .menu__list {
   left: 0;
   top: 0;
   height: 100%;
-  width: calc(var(--doc-sidebar-width) + (100vw - 1800px)/2 - 8px);
+  width: max(var(--doc-sidebar-width), calc(var(--doc-sidebar-width) + (100vw - 1800px)/2 - 8px));
   background: var(--ifm-color-secondary);
 }
 
