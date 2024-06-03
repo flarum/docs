@@ -13,7 +13,7 @@ Uzantı yöneticisi, bir arşiv aracılığıyla yüklendiğinde Flarum ile birl
 Eğer eklenti yöneticiniz kurulu değilse ve onu kurmak istiyorsanız Flarum dizininizde aşağıdaki komutu çalıştırarak bunu yapabilirsiniz:
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
@@ -95,16 +95,16 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 ### Adding a composer repository
 
-Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://extiverse.com/composer/` and the name as `extiverse`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Extiverse account's subscriptions page.
+Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
 * Type: `HTTP Bearer`
-* Host: `extiverse.com`
+* Host: `flarum.org`
 
 ![Configure repositories](/en/img/config-repositories.png)
 
 :::bilgi
 
-The configured repositories and auth methods will be active for both the command line and the admin dashboard. If yu configure them from the command line however, you must not include the flag `--global`.
+The configured repositories and auth methods will be active for both the command line and the admin dashboard. If you configure them from the command line however, you must not include the flag `--global`.
 
 :::
 
