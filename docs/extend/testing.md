@@ -378,25 +378,25 @@ When writing unit tests in Flarum, here are some helpful tips.
 Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.  
 
 ```php
-    public function setUp(): void
-    {
-        parent::setUp();
-        // example - if our setting needs settings, we can mock the settings repository
-        $settingsRepo = m::mock(SettingsRepositoryInterface::class);
-        // and then control specific return values for each setting key
-        $settingsRepo->shouldReceive('get')->with('some-plugin-key')->andReturn('some-value-useful-for-testing');
-        // construct your class under test, passing mocked services as needed
-        $this->serializer = new YourClassUnderTest($settingsRepo);
-    }
+public function setUp(): void
+{
+    parent::setUp();
+    // example - if our setting needs settings, we can mock the settings repository
+    $settingsRepo = m::mock(SettingsRepositoryInterface::class);
+    // and then control specific return values for each setting key
+    $settingsRepo->shouldReceive('get')->with('some-plugin-key')->andReturn('some-value-useful-for-testing');
+    // construct your class under test, passing mocked services as needed
+    $this->serializer = new YourClassUnderTest($settingsRepo);
+}
 ```
 
 Some aspects require more mocks. If you're validating authorization interactions for instance you might need to mock your users `User::class` and the request's method that provides them as well!
 
-```
-    $this->actor = m::mock(User::class);
-    $request = m::mock(Request::class)->makePartial();
-    $request->shouldReceive('getAttribute->getActor')->andReturn($this->actor);
-    $this->actor->shouldReceive('SOME PERMISSION')->andReturn(true/false);
+```php
+$this->actor = m::mock(User::class);
+$request = m::mock(Request::class)->makePartial();
+$request->shouldReceive('getAttribute->getActor')->andReturn($this->actor);
+$this->actor->shouldReceive('SOME PERMISSION')->andReturn(true/false);
 ```
 
 NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that feel unrelated, it might be an opportunity to simplify your code, perhaps moving key logic into their own smaller functions (that dont require mocks).  
@@ -504,10 +504,13 @@ Integration tests are used to test the components of your frontend code and the 
 Here's a simple example of an integration test for core's `Alert` component:
 
 ```ts
+import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
 import Alert from '../../../../src/common/components/Alert';
 import m from 'mithril';
 import mq from 'mithril-query';
 import { jest } from '@jest/globals';
+
+beforeAll(() => bootstrapForum());
 
 describe('Alert displays as expected', () => {
   it('should display alert messages with an icon', () => {
@@ -555,15 +558,60 @@ describe('Alert is dismissible', () => {
 });
 ```
 
-#### Methods
+#### Custom Matchers
 
-These are the custom methods that are available for mithril component tests:
+Apart from the [available Jest matchers](https://jestjs.io/docs/expect), these are the custom methods that are available for mithril component tests:
+
 * **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
+* **`toHaveElementAttr(selector, attribute, value)`** - Checks if the component has an element that matches the given selector with the given attribute and value.
 * **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
 
-To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
+To negate any of these methods, simply prefix them with `not.`. For example: 
 
+```ts
+expect(alert).not.toHaveElement('button.Alert-dismiss');
+```
 
+For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
+
+### Bootstrapping the flarum app
+
+Depending on the test you are writing, you may need to bootstrap the Flarum app. This is done by calling either `bootstrapForum()` or `bootstrapAdmin()` from `@flarum/jest-config/src/bootstrap`. This will initialize the global Flarum app object for you to use in your tests.
+
+You cannot bootstrap both the forum and admin app in the same test file. If you need to test both, you will need to split your tests into separate files.
+
+###### Examples
+
+```ts
+import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
+
+describe('Forum tests', () => {
+  beforeAll(() => bootstrapForum());
+
+  it('should do something', () => {
+    // your test code here
+  });
+});
+```
+
+```ts
+import bootstrapAdmin from '@flarum/jest-config/src/boostrap/admin';
+
+describe('Admin tests', () => {
+  beforeAll(() => bootstrapAdmin());
+
+  it('should do something', () => {
+    // your test code here
+  });
+});
+```
+
+:::tip
+
+Checkout the Flarum core tests for more examples on how to write tests for your extension:
+https://github.com/flarum/framework/tree/2.x/framework/core/js/tests
+
+:::
 
 ## E2E Tests
 
