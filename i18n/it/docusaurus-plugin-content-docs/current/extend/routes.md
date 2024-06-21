@@ -145,7 +145,7 @@ class HelloWorldController implements RequestHandlerInterface
 
 ### Controller API
 
-`Flarum\Api\Controller` contiene una serie di classi controller astratte che puoi estendere per implementare facilmente nuove risorse JSON-API. Vedere [Utilizzo dei dati](api.md) per info più dettagliate.
+`Flarum\Api\Controller` contiene una serie di classi controller astratte che puoi estendere per implementare facilmente nuove risorse JSON-API. Vedere [Utilizzo dei dati](/extend/data.md) per info più dettagliate.
 
 ## Percorsi Frontend
 

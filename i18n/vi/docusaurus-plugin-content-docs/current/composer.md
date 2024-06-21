@@ -3,14 +3,14 @@
 
 Flarum sử dụng một chương trình có tên là [Composer](https://getcomposer.org) để quản lý các phần phụ thuộc và tiện ích mở rộng của nó. Bạn sẽ cần sử dụng trình soạn nhạc nếu bạn muốn:
 
-- Cài đặt hoặc cập nhật Flarum
-- Cài đặt, cập nhật hoặc gỡ bỏ các tiện ích mở rộng Flarum
+- Install or update Flarum through the command line
+- Install, update, or remove Flarum extensions  through the command line
 
 Hướng dẫn này được cung cấp dưới dạng giải thích ngắn gọn về Composer. Chúng tôi thực sự khuyên bạn nên tham khảo [tài liệu chính thức](https://getcomposer.org/doc/00-intro.md) để biết thêm thông tin.
 
-:::tip Composer v2
+:::tip Shared Hosting
 
-Về mặt lịch sử, Composer đã gây ra các vấn đề về lưu trữ chia sẻ do sử dụng bộ nhớ lớn. Vào năm 2020, [Composer v2 đã được phát hành](https://blog.packagist.com/composer-2-0-is-now-available/) với những cải tiến về hiệu suất và mức sử dụng bộ nhớ lớn giúp loại bỏ những các vấn đề. Đảm bảo máy chủ của bạn đang sử dụng Composer v2!
+On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access. You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
 
 :::
 
@@ -150,13 +150,3 @@ Sau khi bạn đã cài đặt Composer, bạn sẽ có thể chạy các lệnh
 Sau hầu hết các lệnh, bạn sẽ muốn chạy `composer dump-autoload -a`. Về cơ bản, điều này lưu trữ các tệp PHP để chúng chạy nhanh hơn.
 
 :::
-
-## Tôi không thể truy cập SSH
-
-Hầu hết các máy chủ để cung cấp truy cập SSH dành cho shared hosting. Nếu host của bạn không có (hoặc bạn không đủ tiền để chuyển sang host tốt hơn). Bạn có một số tùy chọn:
-
-- Sử dụng lựa chọn thay thế như [ Pockethold](https://github.com/UvUno/pockethold) để cài đặt Flarum. Lưu ý rằng bạn vẫn sẽ cần composer (hoặc SSH) để cài đặt tiện ích mở rộng.
-- Cài đặt composer trên máy tính và chạy lệnh `install`. Sau đó tải các tệp lên host bằng FTP. Để thực hiện sửa đổi (cập nhật Flarum, cài đặt/cập nhật/xóa tiện ích mở rộng), hãy tải xuống phiên bản hiện tại của tệp, chạy bất kỳ lệnh trình soạn nhạc nào bạn cần cục bộ, sau đó thay thế `composer.json`, `composer.lock` và thư mục `vendor` trong bản cài đặt của bạn bằng bản sao cục bộ của bạn. Đảm bảo rằng bạn đã sao lưu trước khi thực hiện điều này!
-- Vài web host có thể cung cấp GUI để quản lý composer. Phiên bản dòng lệnh nói chung là tốt nhất, nhưng nếu GUI là khả năng duy nhất, hãy tham khảo tài liệu của máy chủ của bạn để biết thông tin về cách sử dụng nó.
-
-Lưu ý rằng những cách giải quyết này không được hỗ trợ chính thức! Cách duy nhất được hỗ trợ chính thức để cài đặt và quản lý Flarum là thông qua Composer.

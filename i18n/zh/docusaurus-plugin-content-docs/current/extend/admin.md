@@ -12,11 +12,11 @@ You can simply register settings, extend the base [`ExtensionPage`](https://api.
 
 ### 告诉API您扩展的信息
 
-Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
+在注册任何内容之前，您需要告诉`ExtensionData`它将为哪个扩展获取数据。
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+只需在`app.extensionData`上运行`for`函数，并传入扩展的id。 要找到您的扩展id，取编写器名称并用破折号替换任何斜杠(例如:'fof/merge-discussion '变成'fof-merge-discussion ')。  带有`flarum-`和`flarum-ext-`的扩展将从名称中省略这些内容(例如:'webbinaro/flarum-calendar'变成'webbinaro-calendar')。
 
-For the following example, we will use the fictitious extension 'acme/interstellar':
+对于下面的例子，我们将使用虚构的扩展名'acme/interstellar':
 
 ```js
 
@@ -27,19 +27,19 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Once that is done, you can begin adding settings and permissions.
+完成后，您可以开始添加设置和权限。
 
-:::tip Note
+:::注意
 
-All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+`ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行。
 
 :::
 
-### Registering Settings
+### 注册设置
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
 
 Here's an example with a switch (boolean) item:
 

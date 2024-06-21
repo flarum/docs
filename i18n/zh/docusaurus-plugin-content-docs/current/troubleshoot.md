@@ -2,13 +2,13 @@
 
 如果 Flarum 没有按照预期那样安装或工作，您 *首先应该检查* 服务器环境是否符合 [系统要求](install.md#环境要求)。 如果您缺少一些 Flarum 运行所需的东西，请先补全内容。
 
-然后，请花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)，有可能该问题已被报告，并且有了解决办法。 It's possible that someone has already reported the problem, and a fix is either available or on the way. 如果您彻底搜索后，仍然没有找到任何有用的信息，那么就可以开始排查故障了。
+然后，请花几分钟时间搜索 [支持论坛](https://discuss.flarum.org/t/support)和 [问题跟踪器](https://github.com/flarum/core/issues)，有可能该问题已被报告，并且有了解决办法。 有可能已经有人报告了该问题，而且修复方案已经可用或正在开发中。 如果您彻底搜索后，仍然没有找到任何有用的信息，那么就可以开始排查故障了。
 
-## Step 0: Activate debug mode
+## 步骤 0：开启调试模式
 
-:::danger Skip on Production
+:::danger 在生产环境下跳过
 
-These debugging tools are very useful, but can expose information that shouldn't be public. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+这些调试工具非常有用，但可能会暴露不应公开的信息。 如果你在暂存或开发环境中，这些是可以的。但是如果你不知道你在做什么，那么请在生产环境中跳过这个步骤。
 
 :::
 
@@ -18,14 +18,14 @@ These debugging tools are very useful, but can expose information that shouldn't
 
 ## 步骤 1：常见问题修复
 
-A lot of issues can be fixed with the following:
+很多问题都可通过以下解决：
 
 * 清除浏览器缓存。
 * 使用 [`php flarum cache:clear`](console.md) 清除后端缓存。
 * 确保以使用 [`php flarum migrate`](console.md) 更新数据库。
 * 确保 [邮箱配置](mail.md) 可用：无效的邮箱配置将导致注册、重置密码、更换用户绑定邮箱以及发送通知时产生错误。
-* 检查 `config.php` 配置是否正确，请确保您使用了正确的 `url`。 For instance, make sure that the right `url` is being used (`https` vs `http` and case sensitivity matter here!).
-* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
+* 检查 `config.php` 配置是否正确，请确保您使用了正确的 `url`。 例如，请确保正在使用正确的 `URL`（`https` 与 `http` 或大小写敏感之类的，这很重要！）
+* 罪魁祸首还可能是自定义页眉、自定义页脚或自定义 LESS。 如果你的问题在前端，请尝试通过删除管理员仪表板中外观页面的设置。
 
 您也得看看 [`php flarum info`](console.md) 的输出，以确保没有什么大的问题。
 
@@ -39,7 +39,7 @@ A lot of issues can be fixed with the following:
 
 ## 步骤 3：收集信息
 
-If it looks like you're going to need help solving the problem, it's time to get serious about collecting data. 如果您无法解决问题，需要他人的帮助，请从这些地方搜集相关报错内容或其他与问题有关的信息：
+如果您无法解决问题，需要他人的帮助，那么就是时候认真收集数据了。 请从这些地方搜集相关报错内容或其他与问题有关的信息：
 
 * 论坛页面上显示的报错
 * 浏览器控制台中显示的报错（Chrome：更多工具 -> 开发者工具 -> Console)
@@ -47,7 +47,7 @@ If it looks like you're going to need help solving the problem, it's time to get
 * PHP-FPM 错误日志中记录的内容（例如：`/var/log/php7.x-fpm.log`）
 * Flarum 日志记录的报错（`storage/logs/flarum.log`）
 
-将收集到的所有信息复制到记事本中，整理好并做一些注解，比如错误是 *何时* 发生的、当错误发生时您在 *做什么*、您探索出来的问题发生和不发生的条件。 Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. 请尽可能详尽地提供服务器环境信息，如操作系统版本、Web 服务器版本、PHP 版本和处理程序等。
+将收集到的所有信息复制到记事本中，整理好并做一些注解，比如错误是 *何时* 发生的、当错误发生时您在 *做什么*、您探索出来的问题发生和不发生的条件。 请务必附加上你已经知道的关于问题复现条件的信息。 请尽可能详尽地提供服务器环境信息，如操作系统版本、Web 服务器版本、PHP 版本和处理程序等。
 
 ## 步骤 4：准备报告
 

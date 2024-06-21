@@ -42,7 +42,7 @@ These are the currently available jobs:
 | [Tests (PHPUnit)](testing.md)                   | `enable_backend_testing` | Enables backend unit/integration tests |
 | [Static Code Analysis](static-code-analysis.md) | `enable_phpstan`         | Enables static code analysis           |
 
-:::info
+:::bilgi
 
 These jobs run on every commit pushed to the main branch or pull request created.
 
