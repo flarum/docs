@@ -22,7 +22,7 @@ If you need help applying these changes or using new features, please start a di
 #### Compat API
 
 ##### <span class="breaking">Breaking</span>
-* The compat API has been removed, for most extensions this should not be a problem. If you are using the compat API to allow other extensions to extend your modules, you can drop it and instead just make sure all your modules are imported to be automatically registered.
+* The compat API has been removed, for most extensions this should not be a problem. If you are using the compat API to allow other extensions to extend your modules, you can drop it and instead just make sure all your modules are imported to be automatically registered. For example, [tags in 1.x used the compat API to expose its modules](https://github.com/flarum/framework/blob/1.x/extensions/tags/js/src/forum/compat.js). In 2.0 [insuring the modules are imported is enough](https://github.com/flarum/framework/blob/2.x/extensions/tags/js/src/forum/forum.ts).
 
 #### Importing Modules
 
@@ -45,6 +45,12 @@ Read more about the export registry and how to use it in the [Export Registry](/
 
 :::
 
+:::tip
+
+Familiarize yourself with the new [Code Splitting](/extend/code-splitting) feature to lazy load modules and improve overall performance.
+
+:::
+
 ### Miscellaneous
 
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
@@ -54,7 +60,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
 * `IndexPage.prototype.sidebarItems` has been moved to `IndexSidebar.prototype.items`.
 * `IndexPage.prototype.currentTag` has been moved to `app.currentTag`.
-* The `UploadImageButton` component has been refactored to allow using it in different contexts. An [admin setting definition](./admin.md#available-setting-types) has also been added to allow you to use an upload setting directly.*
+* The `UploadImageButton` component has been refactored to allow using it in different contexts. An [admin setting definition](./admin.md#available-setting-types) has also been added to allow you to use an upload setting directly. Additionally, the component has been moved to the `common` namespace.
 * The `FieldSet` component has been refactored.
 * The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
 * The `Modal` component has been split into `Modal` and `FormModal`. The `Modal` component is now a simple modal that can be used for any content, while the `FormModal` component is a modal that is specifically designed for forms.
@@ -62,21 +68,21 @@ There have been many changes to the core frontend codebase, including renamed or
 ##### <span class="notable">Notable</span>
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
 * A `HeaderDropdown` component has been added which is used for the `NotificationsDropdown` and `FlagsDropdown` your component should extend that instead of the `NotificationsDropdown`. Along with it has been also added the following components: `HeaderList` and `HeaderListItem`.
-* A `DetailedDropdownItem` has been added. Checkout the [`SubsriptionsDropdown`](https://github.com/flarum/framework/blob/dev-theming-improvements/extensions/subscriptions/js/src/forum/components/SubscriptionMenu.tsx#L83-L87) component to see how it is used.
+* A `DetailedDropdownItem` has been added. Checkout the [`SubsriptionsDropdown`](https://github.com/flarum/framework/blob/2.x/extensions/subscriptions/js/src/forum/components/SubscriptionMenu.tsx#L83-L87) component to see how it is used.
 * A `Notices` component has been added that allows you to easily add global alerts above the hero.
 * A `Footer` component has been added that allows you to easily add content to the footer.
 * A `Form` component has been added to ensure consistent styling across forms. You should use this component in your extension if you are creating a form.
 * An API for frontend gambits has been introduced, [checkout the full documentation](/extend/search#gambits).
+* A `FormGroup` component has been added that allows you to add any supported type of input similar to the admin panel's settings registration. [checkout the documentation for more details](/extend/forms).
 
 ## Backend
 
 ### PHP 8.1
 
 ##### <span class="breaking">Breaking</span>
-* The entire codebase has been updated to use PHP 8.1 features, including more strict types. This requires you to update your extension's code accordingly. This generally can be done using hints from your IDE.
+* The entire codebase has been updated to use/require PHP 8.1 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
 
 ##### <span class="notable">Notable</span>
-* Flarum 2.0 requires a minimum of **PHP 8.1**, this is not a breaking change for most extensions.
 * A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
 
 ### Dependencies
@@ -157,10 +163,11 @@ Read about the full extent of the new introduced implementation and its usage in
 The search system has been refactored to allow for more flexibility and extensibility, and to further simplify things, the separate concept of filtering has been removed. 
 
 ##### <span class="breaking">Breaking</span>
-* The old system decided between using the model filterer and the model searcher based on whether a search query `filter[q]` was provided. The new system does not hae filterers anymore, but the distinction is still present, the only difference is that the default database search is always used when no search query is provided.
-* Gambits have been removed from the backend. There are only filters now per model searcher. The concept of gambits has been moved to the frontend. See the [search documentation](/extend/search) for more details.
+* The old system decided between using the model filterer and the model searcher based on whether a search query `filter[q]` was provided. The new system does not have *filterers* anymore, but the distinction is still present, the only difference is that the default database search driver is always used when no search query is provided.
+* If you have a class extending `AbstractFilterer` (a filterer) you should now extend `AbstractSearcher` instead (a searcher). If you already have a searcher for the same model, you can remove the filterer. Filters can be assigned to the searcher class.
+* Gambits have been removed from the backend. There are only filters now per model searcher. The concept of gambits has been moved to the frontend instead. See the [search documentation gambits section](/extend/search#gambits) for more details.
 * Some namespaces have been changed or removed. The classes within `Flarum\Query` have been moved to `Flarum\Search`. The classes within `Flarum\Filter` have been moved to `Flarum\Search\Filter`. The `FilterState` class has been removed, you should use the `SearchState` class instead.
-* 
+
 ##### <span class="notable">Notable</span>
 * A new search driver API has been introduced. Checkout the [search documentation](/extend/search) for more details on how to use it.
 * You can now get the total search result count from `SearchResults`.
