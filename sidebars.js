@@ -109,6 +109,7 @@ module.exports = {
         'extend/api-throttling',
         'extend/assets',
         'extend/console',
+        'extend/database',
         'extend/extending-extensions',
         'extend/extensibility',
         'extend/filesystem',

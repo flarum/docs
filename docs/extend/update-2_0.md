@@ -167,11 +167,25 @@ The search system has been refactored to allow for more flexibility and extensib
 * If you have a class extending `AbstractFilterer` (a filterer) you should now extend `AbstractSearcher` instead (a searcher). If you already have a searcher for the same model, you can remove the filterer. Filters can be assigned to the searcher class.
 * Gambits have been removed from the backend. There are only filters now per model searcher. The concept of gambits has been moved to the frontend instead. See the [search documentation gambits section](/extend/search#gambits) for more details.
 * Some namespaces have been changed or removed. The classes within `Flarum\Query` have been moved to `Flarum\Search`. The classes within `Flarum\Filter` have been moved to `Flarum\Search\Filter`. The `FilterState` class has been removed, you should use the `SearchState` class instead.
+* The database search state now returns an Eloquent query builder instead of a database query builder. 
 
 ##### <span class="notable">Notable</span>
 * A new search driver API has been introduced. Checkout the [search documentation](/extend/search) for more details on how to use it.
 * You can now get the total search result count from `SearchResults`.
 * You can now replace an existing filter implementation.
+
+### SQLite/PostgreSQL
+
+##### <span class="notable">Notable</span>
+* Flarum 2.0 introduces support for SQLite and PostgreSQL databases. If your extension uses any database-specific queries, you should ensure they are compatible with these databases.
+* You can use the new `whenMysql`, `whenSqlite`, and `whenPgsql` methods on the query builder to run database-specific queries. For example:
+* You should ensure your extension is explicit about whether it supports SQLite and PostgreSQL. You can use the `database-support` key in your `composer.json` to specify this.
+
+:::tip
+
+Checkout the [database documentation](/extend/database) for more details.
+
+:::
 
 ### Miscellaneous
 
