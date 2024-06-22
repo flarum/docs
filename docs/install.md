@@ -11,15 +11,19 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 7.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
-* **MySQL 5.6+/8.0.23+** or **MariaDB 10.0.5+**
+* **PHP 8.1+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **One of the following databases**:
+  * MySQL 5.7+ / 8.0.30+
+  * MariaDB 10.3+
+  * SQLite 3.35.0+
+  * PostgreSQL 10.0+
 * **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
 ## Installing
 
 ### Installing by unpacking an archive
 
-If you don't have SSH access to your server or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
+If you don't have SSH access to your server, or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
 
 | Flarum Version | PHP Version       | Public Path | Type   | Archive                                                                                                                                                   |
 |----------------|-------------------|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
