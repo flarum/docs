@@ -1,5 +1,7 @@
-# Package Manager
-This contains an explanation of how the package manager works and what it has to offer.
+# Extension Manager
+This contains an explanation of how the extension manager works and what it has to offer.
+
+slightly outdated: see [the extensions guide for more](/extensions.md).
 
 ## Contents
 * Installing, Updating, and Removing Extensions.
@@ -19,9 +21,9 @@ The relevant machine web user needs to have permissions to read and write to: `v
 ![flarum lan_admin (3)](https://user-images.githubusercontent.com/20267363/135268536-f79d42ab-6e05-4e41-b2ab-d95ec7a8b021.png)
 
 ### Path Repository
-In development environments (and production in rare scenarios) there should a path repository to a directory containing (mostly dev) packages, the path to this directory must be changed to an absolute path otherwise composer will have trouble running any command. Additionally the path repository by default has higher priority, so requiring an extension that exists in that repository will probably fail, unless a `*@dev` constraint is specified, in which case the package manager should not be used for dev purposes anyway.
+In development environments (and production in rare scenarios) there should a path repository to a directory containing (mostly dev) packages, the path to this directory must be changed to an absolute path otherwise composer will have trouble running any command. Additionally the path repository by default has higher priority, so requiring an extension that exists in that repository will probably fail, unless a `*@dev` constraint is specified, in which case the extension manager should not be used for dev purposes anyway.
 
-There is currently now hint of any of this in the package manager UI.
+There is currently now hint of any of this in the extension manager UI.
 
 ## Common Actions
 Each one of the features listed above is basically a composer command or two, and there are common actions/common behaviour between them all.
@@ -79,12 +81,8 @@ It is common for shared hosts to have a low php version used in SSH, users must 
 
 :::
 
-![Package Manager Queue Table Preview](/en/img/package-manager-queue.png)
+![Extension Manager Queue Table Preview](/en/img/extension-manager-queue.png)
 
 ## TODO
 - Try on shared hosting.
-- Composer command job must not overlap.
-- Code TODOs.
 - Better explanation on the UI about background tasks.
-- Take into consideration a scenario where we're updating an extension that isn't a root required dependency, like bundles.
-- Run one background task at a time, prevent user from triggering multiple tasks.

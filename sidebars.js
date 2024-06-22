@@ -153,7 +153,7 @@ module.exports = {
         'internal/README',
         'internal/merging-policy',
         'internal/bundled-extensions-policy',
-        'internal/package-manager',
+        'internal/extension-manager',
       ]
     },
   ]
