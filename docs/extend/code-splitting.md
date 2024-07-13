@@ -74,6 +74,14 @@ export default [
 ];
 ```
 
+### Async Composers
+
+If you are using a custom composer like the `DiscussionComposer`, you can pass a callback that returns a promise to the `composer` method.
+
+```js
+app.composer.load(() => import('flarum/forum/components/DiscussionComposer'), { user: app.session.user }).then(() => app.composer.show());
+```
+
 ### Flarum Lazy Loaded Modules
 
 You can see a list of all the modules that are lazy loaded by Flarum in the [GitHub repository](https://github.com/flarum/framework/tree/2.x/framework/core/js/dist).

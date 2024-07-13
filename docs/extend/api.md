@@ -300,7 +300,7 @@ public function endpoints(): array
 If your resource class extends the `AbstractResource` class, you must implement the appropriate interfaces.
 
 ```php
-use Tobyz\JsonApiServer\Resource\{
+use Flarum\Api\Resource\Contracts\{
     Countable,
     Creatable,
     Deletable,

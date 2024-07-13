@@ -56,6 +56,7 @@ Familiarize yourself with the new [Code Splitting](/extend/code-splitting) featu
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
 
 ##### <span class="breaking">Breaking</span>
+* Some extension initializers [have been renamed to be more uniform](https://github.com/flarum/framework/pull/4003/files), if you are checking for initializer existence with `app.initializers.has('...')` you should update the name accordingly.
 * `IndexPage.prototype.sidebar` has been removed, use the `IndexSidebar` component instead.
 * `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
 * `IndexPage.prototype.sidebarItems` has been moved to `IndexSidebar.prototype.items`.
@@ -112,6 +113,7 @@ Flarum 2.0 upgrades Flysystem to version 3. Most extensions will not need to mak
 
 ##### <span class="breaking">Breaking</span>
 * The `NullAdapter` has been removed. You may instead use the `InMemoryFilesystemAdapter`.
+* The `Local` adapter has been removed. You should use the `LocalFilesystemAdapter` instead.
 * The `FilesystemAdapter` constructor now takes as a second argument the adapter instance, if you are using the Flarum filesystem driver interface you don't need to make any changes. If you are using Flysystem directly, you will need to pass the adapter instance as a second argument.
   ```php
   // Before
@@ -178,7 +180,7 @@ The search system has been refactored to allow for more flexibility and extensib
 
 ##### <span class="notable">Notable</span>
 * Flarum 2.0 introduces support for SQLite and PostgreSQL databases. If your extension uses any database-specific queries, you should ensure they are compatible with these databases.
-* You can use the new `whenMysql`, `whenSqlite`, and `whenPgsql` methods on the query builder to run database-specific queries. For example:
+* You can use the new `whenMysql`, `whenSqlite`, and `whenPgsql` methods on the query builder to run database-specific queries.
 * You should ensure your extension is explicit about whether it supports SQLite and PostgreSQL. You can use the `database-support` key in your `composer.json` to specify this.
 
 :::tip
@@ -187,10 +189,36 @@ Checkout the [database documentation](/extend/database) for more details.
 
 :::
 
+### LESS Preprocessing
+
+##### <span class="breaking">Breaking</span>
+* The LESS code has been refactored to use more vanilla CSS instead of LESS conditionals and variables.
+  * The dark mode switch has been refactored to a color scheme setting that takes effect purely through CSS variables.  You should away from using LESS variables as much as possible and instead use the equivalent CSS variables. To add more color schemes.
+  * The `@config-dark-mode` and `@config-colored-header` variables have been removed. Instead, you can use the `[data-theme^=dark]` and `[data-colored-header=true]` CSS selectors respectively.
+    ```less
+    // before
+    & when (@config-dark-mode) {
+      background: black;
+    }
+    
+    // after
+    [data-theme^=dark] & {
+      background: black;
+    }
+    ```
+    
+##### <span class="notable">Notable</span>
+* New high contrast color schemes have been added.
+* You can register more color schemes through the new frontend `Theme` extender and equivalent CSS code `[data-theme=your-scheme]`.
+
 ### Miscellaneous
 
 ##### <span class="breaking">Breaking</span>
 * The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
+
+#### <span class="notable">Notable</span>
+* The `Frontend` extender now allows passing extra attributes and classes that will be added to the root `html` tag, through the `extraDocumentAttributes` and `extraDocumentClasses` methods.
+* When preparing data in tests, you should use the model class name instead of the table name, this will ensure the factory of the model is used and basic data is autofilled for you.
 
 ## Infrastructure
 
