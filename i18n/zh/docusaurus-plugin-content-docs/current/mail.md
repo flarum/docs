@@ -1,10 +1,10 @@
 # 电子邮件配置
 
-Any community needs to send emails to allow for email verification, password resets, notifications, and other communication to users. 作为论坛管理员，您首先要做的几件事之一就是配置好论坛的邮件服务！ 配置错误的话，用户在注册时会收到报错。
+社区需要发送邮箱验证、密码重置、消息，以及其他与用户交流的邮件。 作为论坛管理员，您首先要做的几件事之一就是配置好论坛的邮件服务！ 配置错误的话，用户在注册时会收到报错。
 
 ## 支持的邮件驱动
 
-Flarum provides several drivers by default, they are listed and explained below. Flarum 默认提供以下所列驱动，若有需要，开发者可自行开发插件添加 [自定义邮件驱动](extend/mail.md)。
+Flarum 默认提供以下所列驱动。 若有需要，开发者可自行开发插件添加 [自定义邮件驱动](extend/mail.md)。
 
 ### SMTP
 
@@ -18,11 +18,11 @@ Flarum provides several drivers by default, they are listed and explained below.
 
 通过您的 [Mailgun](https://www.mailgun.com/) 来发送邮件。 您需要填写 secret key，以及您在 Mailgun 配置的域名、区域。
 
-To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
+要使用 Mailgun 驱动，您需要安装 Guzzle composer 包 (一个 PHP HTTP 客户端)。 在您的 Flarum 根目录下运行 `composer require guzzlehttp/guzzle:^6.0|^7.0` 。
 
 ### Log
 
-The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
+邮件驱动 log 不会发送邮件，主要由开发者使用。 它会在在`FLARUM_ROOT_DIRECTORY/storage/logs`中的日志文件写入所有邮件的内容。
 
 ## 测试邮件
 
