@@ -3,14 +3,14 @@
 
 Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其依赖包和扩展程序。 你需要 Composer 以实现:
 
-- Install or update Flarum through the command line
-- Install, update, or remove Flarum extensions  through the command line
+- 通过命令行安装或更新 Flarum
+- 通过命令行安装、更新或删除 Flarum 扩展
 
-本指南会简单阐述 Composer 的使用。 我们强烈建议查阅 [官方文件](https://getcomposer.org/doc/00-intro.md) 以获取更多信息。
+本指南会简单阐述 Composer 的使用。 我们强烈建议查阅 [官方文档](https://getcomposer.org/doc/00-intro.md) 以获取更多信息。
 
 :::tip 即刻测试 Flarum？
 
-On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access. You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
+在共享主机上，建议使用扩展管理器扩展而不是 Composer。 这是一个 Composer 的图形界面，允许您安装、更新和删除扩展，而无需使用 SSH。 您可以直接用一个归档安装 Flarum，而不需要 Composer。 在扩展管理器预装后，请检查[安装指南](install.md#installing-by-unpacking-an-archive)获取更多信息。
 
 :::
 
@@ -139,7 +139,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
 :::
 
-## 如何使用Composer
+## 如何使用 Composer
 
 你需要在命令行界面（CLI）上运行 Composer。 请确保你可以通过 SSH 访问你的服务器。
 
