@@ -13,7 +13,7 @@
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
 * **PHP 7.3+** 以及以下扩展：curl、dom、fileinfo、gd、json、mbstring、openssl、pdo_mysql、tokenizer、zip
 * **MySQL 5.6+** 或 **MariaDB 10.0.5+**
-* **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
+* **SSH (命令行) 访问权限**来运行潜在必要的软件维护命令和 Composer (如果您打算使用命令行来安装和管理 Flarum 扩展)
 
 ## 开始安装
 
@@ -21,34 +21,34 @@
 
 如果您没有服务器的 SSH 访问权限，或您不想使用命令行，您可以通过解压缩来安装 Flarum。 下面是可用的归档列表，请确保与您的 PHP 版本以及 public 路径偏好 (即是否有 public 路径) 相符。
 
-| Flarum 版本 | PHP 版本            | Public 路径 | Type   | Archive                                                                                                                                                   |
-| --------- | ----------------- | --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1.x       | 8.3 (recommended) | No        | ZIP    | [flarum-v1.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.3.zip)       |
-| 1.x       | 8.3 (recommended) | Yes       | TAR.GZ | [flarum-v1.x-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.3.tar.gz)                             |
-| 1.x       | 8.3 (recommended) | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.3.tar.gz) |
-| 1.x       | 8.3 (recommended) | Yes       | ZIP    | [flarum-v1.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.3.zip)                                   |
-| 1.x       | 8.2 (recommended) | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.2.tar.gz) |
-| 1.x       | 8.2 (recommended) | Yes       | TAR.GZ | [flarum-v1.x-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.2.tar.gz)                             |
-| 1.x       | 8.2 (recommended) | No        | ZIP    | [flarum-v1.x-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.2.zip)       |
-| 1.x       | 8.2 (recommended) | Yes       | ZIP    | [flarum-v1.x-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.2.zip)                                   |
-| 1.x       | 8.1               | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.1.tar.gz) |
-| 1.x       | 8.1               | Yes       | TAR.GZ | [flarum-v1.x-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.1.tar.gz)                             |
-| 1.x       | 8.1               | No        | ZIP    | [flarum-v1.x-no-public-dir-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.1.zip)       |
-| 1.x       | 8.1               | Yes       | ZIP    | [flarum-v1.x-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.1.zip)                                   |
-| 1.x       | 8.0 (end of life) | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php8.0.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.0.tar.gz) |
-| 1.x       | 8.0 (end of life) | Yes       | TAR.GZ | [flarum-v1.x-php8.0.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.0.tar.gz)                             |
-| 1.x       | 8.0 (end of life) | No        | ZIP    | [flarum-v1.x-no-public-dir-php8.0.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.0.zip)       |
-| 1.x       | 8.0 (end of life) | Yes       | ZIP    | [flarum-v1.x-php8.0.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.0.zip)                                   |
-| 1.x       | 7.4 (end of life) | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php7.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.4.tar.gz) |
-| 1.x       | 7.4 (end of life) | Yes       | TAR.GZ | [flarum-v1.x-php7.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.4.tar.gz)                             |
-| 1.x       | 7.4 (end of life) | No        | ZIP    | [flarum-v1.x-no-public-dir-php7.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.4.zip)       |
-| 1.x       | 7.4 (end of life) | Yes       | ZIP    | [flarum-v1.x-php7.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.4.zip)                                   |
-| 1.x       | 7.3 (end of life) | No        | TAR.GZ | [flarum-v1.x-no-public-dir-php7.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.3.tar.gz) |
-| 1.x       | 7.3 (end of life) | Yes       | TAR.GZ | [flarum-v1.x-php7.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.3.tar.gz)                             |
-| 1.x       | 7.3 (end of life) | No        | ZIP    | [flarum-v1.x-no-public-dir-php7.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.3.zip)       |
-| 1.x       | 7.3 (end of life) | Yes       | ZIP    | [flarum-v1.x-php7.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.3.zip)                                   |
+| Flarum 版本 | PHP 版本     | Public 路径 | 格式     | 归档                                                                                                                                                        |
+| --------- | ---------- | --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.x       | 8.3 (推荐)   | 无         | ZIP    | [flarum-v1.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.3.zip)       |
+| 1.x       | 8.3 (推荐)   | 有         | TAR.GZ | [flarum-v1.x-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.3.tar.gz)                             |
+| 1.x       | 8.3 (推荐)   | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.3.tar.gz) |
+| 1.x       | 8.3 (推荐)   | 有         | ZIP    | [flarum-v1.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.3.zip)                                   |
+| 1.x       | 8.2 (推荐)   | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.2.tar.gz) |
+| 1.x       | 8.2 (推荐)   | 有         | TAR.GZ | [flarum-v1.x-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.2.tar.gz)                             |
+| 1.x       | 8.2 (推荐)   | 无         | ZIP    | [flarum-v1.x-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.2.zip)       |
+| 1.x       | 8.2 (推荐)   | 有         | ZIP    | [flarum-v1.x-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.2.zip)                                   |
+| 1.x       | 8.1        | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.1.tar.gz) |
+| 1.x       | 8.1        | 有         | TAR.GZ | [flarum-v1.x-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.1.tar.gz)                             |
+| 1.x       | 8.1        | 无         | ZIP    | [flarum-v1.x-no-public-dir-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.1.zip)       |
+| 1.x       | 8.1        | 有         | ZIP    | [flarum-v1.x-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.1.zip)                                   |
+| 1.x       | 8.0 (结束支持) | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php8.0.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.0.tar.gz) |
+| 1.x       | 8.0 (结束支持) | 有         | TAR.GZ | [flarum-v1.x-php8.0.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.0.tar.gz)                             |
+| 1.x       | 8.0 (结束支持) | 无         | ZIP    | [flarum-v1.x-no-public-dir-php8.0.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.0.zip)       |
+| 1.x       | 8.0 (结束支持) | 有         | ZIP    | [flarum-v1.x-php8.0.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php8.0.zip)                                   |
+| 1.x       | 7.4 (结束支持) | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php7.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.4.tar.gz) |
+| 1.x       | 7.4 (结束支持) | 有         | TAR.GZ | [flarum-v1.x-php7.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.4.tar.gz)                             |
+| 1.x       | 7.4 (结束支持) | 无         | ZIP    | [flarum-v1.x-no-public-dir-php7.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.4.zip)       |
+| 1.x       | 7.4 (结束支持) | 有         | ZIP    | [flarum-v1.x-php7.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.4.zip)                                   |
+| 1.x       | 7.3 (结束支持) | 无         | TAR.GZ | [flarum-v1.x-no-public-dir-php7.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.3.tar.gz) |
+| 1.x       | 7.3 (结束支持) | 有         | TAR.GZ | [flarum-v1.x-php7.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.3.tar.gz)                             |
+| 1.x       | 7.3 (结束支持) | 无         | ZIP    | [flarum-v1.x-no-public-dir-php7.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php7.3.zip)       |
+| 1.x       | 7.3 (结束支持) | 有         | ZIP    | [flarum-v1.x-php7.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-php7.3.zip)                                   |
 
-### Installing using the Command Line Interface
+### 使用命令行安装
 
 Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 在安装 Flarum 之前，您需要先在机器上 [安装 Composer](https://getcomposer.org)。 然后，在要安装 Flarum 的空白目录下执行此命令：
 
@@ -60,7 +60,7 @@ composer create-project flarum/flarum .
 
 当一切就绪后，在浏览器中访问您的论坛网址，根据安装向导完成安装。
 
-If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
+如果您还想从管理面板安装和升级扩展程序，您还需要安装[扩展程序管理器](extensions.md)扩展。
 
 ```bash
 composer require flarum/extension-manager:*
@@ -166,7 +166,7 @@ chcon -R -t httpd_sys_rw_content_t /path/to/directory
 
 但是，如果您希望在子目录中托管 Flarum（例如 `yoursite.com/forum`），或者如果您的主机没有让您控制 Web 根目录（只能使用 `public_html` 或 `htdocs` 之类的目录），您可以在没有 `public` 目录的情况下设置 Flarum。
 
-If you intend to install Flarum using one of the archives, you can simply use the `no-public-dir` (Public Path = No) [archives](#installing-by-unpacking-an-archive) and skip the rest of this section. If you're installing via Composer, you'll need to follow the instructions below.
+如果您打算使用其中一个档案安装 Flarum, 您可以使用 `no-public-dir` (Public 路径=无) [归档](#installing-by-unpacking-an-archive)并跳过本节其余部分。 如果您正在通过 Composer 安装，您需要遵循下面的说明。
 
 这种情况下，您需要将 `public` 目录中的所有文件（包括 `.htaccess`）全部移动到要安装 Flarum 的目录中。 然后编辑 `.htaccess` 并取消注释用来保护敏感文件的第 9-15 行代码。 如果是 Nginx，则取消注释 `.nginx.conf` 文件的第 8-11 行。
 
