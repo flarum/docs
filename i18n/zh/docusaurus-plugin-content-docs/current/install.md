@@ -148,13 +148,13 @@ chcon -R -t httpd_sys_rw_content_t /path/to/directory
 
 要了解有关这些命令以及 Linux 上的文件权限和所有权的更多信息，请阅读 [本教程](https://www.thegeekdiary.com/understanding-basic-file-permissions-and-ownership-in-linux/)。 如果您在 Windows 上设置 Flarum，您可能会发现 [此Super User中的问题](https://superuser.com/questions/106181/equivalent-of-chmod-to-change-file-permissions-in-windows) 的答案有用。
 
-:::注意：环境可能不同
+:::caution 环境可能不同
 
 您的环境可能与提供的文档不同，因此请咨询您的 Web 服务器配置或 Web 托管提供商，了解 PHP 和 Web 服务器运行所需的适当用户和组。
 
 :::
 
-:::危险：永远不要使用 777 权限！
+:::danger 永远不要使用 777 权限！
 
 您永远不应将任何文件夹或文件设置为 `777` 权限，因为此权限级别允许任何人访问文件夹和文件的内容，而无论是哪个用户或组。
 
