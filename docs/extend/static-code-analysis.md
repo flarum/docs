@@ -78,7 +78,7 @@ You can also run the analysis using GitHub Actions. Checkout the page on [GitHub
 
 PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the `Extend\Model(...)->cast(...)` method.
 
-For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
+For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
 
 ```php
 (new Extend\Model(User::class))
