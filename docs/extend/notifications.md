@@ -96,7 +96,7 @@ In addition to registering our notification to send by email, if we actually wan
 To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
 This comes with 2 additional methods:
 
-- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/8.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/11.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
 
 Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)

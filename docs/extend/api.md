@@ -666,7 +666,7 @@ public function fields(): array
 
 ### Validation
 
-You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/10.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
+You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/11.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
 
 ```php
 use Flarum\Api\Schema;
@@ -821,7 +821,7 @@ Relationship linkage is the ID of the related model(s) in the API response. For 
 
 ### Polymorphic Relationships
 
-You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/10.x/eloquent-relationships#polymorphic-relationships) can point to.
+You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/11.x/eloquent-relationships#polymorphic-relationships) can point to.
 
 ```php
 use Flarum\Api\Schema;

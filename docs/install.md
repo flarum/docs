@@ -11,7 +11,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 8.1+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
 * **One of the following databases**:
   * MySQL 5.7+ / 8.0.30+
   * MariaDB 10.3+

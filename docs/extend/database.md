@@ -1,6 +1,6 @@
 # Database
 
-Flarum supports a variety of database systems, including MySQL, PostgreSQL, and SQLite. Most extensions will not have to worry about the specifics of the database system, as [Laravel's query builder](https://laravel.com/docs/10.x/queries) handles the differences between them. However, you can still run into instances where you need to write certain database operations differently depending on the database system. This section aims to document some of the common pitfalls and solutions.
+Flarum supports a variety of database systems, including MySQL, PostgreSQL, and SQLite. Most extensions will not have to worry about the specifics of the database system, as [Laravel's query builder](https://laravel.com/docs/11.x/queries) handles the differences between them. However, you can still run into instances where you need to write certain database operations differently depending on the database system. This section aims to document some of the common pitfalls and solutions.
 
 :::warning
 

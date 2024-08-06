@@ -8,6 +8,16 @@ If you need help applying these changes or using new features, please start a di
 
 :::
 
+:::info
+
+You can use the [Flarum CLI](cli.md) to automate as much of the upgrade steps as possible:
+
+```bash
+flarum-cli upgrade 2.0
+```
+
+:::
+
 ## Frontend
 
 ### Mithril 2.2
@@ -78,24 +88,31 @@ There have been many changes to the core frontend codebase, including renamed or
 
 ## Backend
 
-### PHP 8.1
+### PHP 8.2
 
 ##### <span class="breaking">Breaking</span>
-* The entire codebase has been updated to use/require PHP 8.1 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
+* The entire codebase has been updated to use/require PHP 8.2 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
 
 ##### <span class="notable">Notable</span>
 * A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
 
 ### Dependencies
 
-#### Symfony (updated from 5.x to 6.x)
+#### Carbon 3
+
+##### <span class="breaking">Breaking</span>
+* Flarum 2.0 upgrades Carbon to version 3. `diffIn` methods now return floats instead of integers and can return negative values to indicate time direction. This is the most significant breaking change in Carbon 3. If you are using any of these methods, you should update your code to handle floats and negative values.
+
+Other changes can be found in the [Carbon 3 change log](https://github.com/briannesbitt/Carbon/releases/tag/3.0.0).
+
+#### Symfony (updated from 5.x to 7.x)
 
 ##### <span class="notable">Notable</span>
 * Flarum 2.0 upgrades Symfony components to version 6. Most extensions will not need to make any changes.
 
-#### Laravel (updated from 8.x to 10.x)
+#### Laravel (updated from 8.x to 11.x)
 
-Flarum 2.0 uses Laravel 10 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
+Flarum 2.0 uses Laravel 11 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
 
 ##### <span class="breaking">Breaking</span>
 * The `$dates` property on models has been removed. You should now use the `$casts` property instead as such:
@@ -104,8 +121,9 @@ Flarum 2.0 uses Laravel 10 components, depending on your extension you may need 
       'example_at' => 'datetime',
   ];
   ```
+* When changing columns in migrations, you must always include the entirety of the column definition. For example, if you are changing a nullable column from `string` to `text`, you must include the `->nullable()` method in the new column definition. You will have to update your migrations accordingly. (https://laravel.com/docs/11.x/upgrade#modifying-columns)
 
-For more details, see both the [Laravel 9](https://laravel.com/docs/9.x/upgrade) and [Laravel 10](https://laravel.com/docs/10.x/upgrade) upgrade guides.
+For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade) and [Laravel 11](https://laravel.com/docs/11.x/upgrade) upgrade guides.
 
 #### Flysystem (updated from 1.x to 3.x)
 
@@ -215,6 +233,7 @@ Checkout the [database documentation](/extend/database) for more details.
 
 ##### <span class="breaking">Breaking</span>
 * The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
+* The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now. 
 
 #### <span class="notable">Notable</span>
 * The `Frontend` extender now allows passing extra attributes and classes that will be added to the root `html` tag, through the `extraDocumentAttributes` and `extraDocumentClasses` methods.
