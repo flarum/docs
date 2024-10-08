@@ -13,9 +13,9 @@ Condividono lo stesso codice di base, quindi una volta che sai come estenderne u
 
 :::tip Typings!
 
-Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel README del pacchetto
+Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel </a>README del pacchetto
 
- per configurare il supporto ai typings.
+ per configurare il supporto ai typings.</p> 
 
 :::
 
@@ -165,7 +165,7 @@ src/forum/
 ```
 
 
-`components`, `models`, e `utils` sono directory che contengono file in cui � possibile definire [componenti personalizzati](#components), [modelli](models.md#frontend-models), e funzioni utili riutilizzabili. Tieni presente che questo � semplicemente un consiglio: non c'� nulla che ti costringa a utilizzare questa particolare struttura di file (o qualsiasi altra struttura di file).
+`components`, `models`, e `utils` sono directory che contengono file in cui � possibile definire [componenti personalizzati](#components), [modelli](data.md#frontend-models), e funzioni utili riutilizzabili. Tieni presente che questo � semplicemente un consiglio: non c'� nulla che ti costringa a utilizzare questa particolare struttura di file (o qualsiasi altra struttura di file).
 
 Il file pi� importante qui � `index.js`: tutto il resto � solo l'estrazione di classi e funzioni nei propri file. Esaminiamo un tipico `index.js`:
 

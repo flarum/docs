@@ -2,7 +2,7 @@
 slug: /extend
 - - -
 
-# Extending Flarum
+# Flarum'u Genişletmek
 
 Flarum minimalisttir, ancak aynı zamanda oldukça genişletilebilir. Aslında, Flarum ile birlikte gelen özelliklerin çoğu aslında uzantılardır!
 
@@ -10,7 +10,7 @@ This approach makes Flarum extremely customizable. A user can disable any featur
 
 In order to achieve this extensibility, Flarum has been built with rich APIs and extension points. With some programming knowledge, you can leverage these APIs to add just about any feature you want. This section of the documentation aims to teach you how Flarum works, and how to use the APIs so that you can build your own extensions.
 
-## Core vs. Extensions
+## Çekirdek ve Uzantılar
 
 Where do we draw the line between Flarum's core and its extensions? Why are some features included in the core, and others aren't? It is important to understand this distinction so that we can maintain consistency and quality within Flarum's ecosystem.
 
@@ -22,16 +22,16 @@ Where do we draw the line between Flarum's core and its extensions? Why are some
 
 If you are aiming to address a bug or shortcoming of the core, or of an existing bundled extension, it may be appropriate to *contribute to the respective project* rather than disperse effort on a new third-party extension. It is a good idea to start a discussion on the [Flarum Community](https://discuss.flarum.org/) to get the perspective of the Flarum developers.
 
-## Useful Resources
+## Yararlı Kaynaklar
 
-- [This Documentation](start.md)
+- [Bu Belge](start.md)
 - [Tips for Beginning Developers](https://discuss.flarum.org/d/5512-extension-development-tips)
 - [Flarum CLI](https://github.com/flarum/cli)
 - [Developers explaining their workflow for extension development](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Extension namespace tips](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Mithril js documentation](https://mithril.js.org/)
-- [Laravel API Docs](https://laravel.com/api/8.x/)
-- [Flarum API Docs](https://api.flarum.org)
+- [Laravel API Dokümanları](https://laravel.com/api/8.x/)
+- [Flarum API Dokümanları](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 
 ### Flarum Genişletme
