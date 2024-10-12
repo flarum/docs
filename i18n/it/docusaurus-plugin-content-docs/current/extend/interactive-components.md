@@ -2,7 +2,7 @@
 
 Spesso, hai necessità di attivare componenti interattivi oltre a qualsiasi contenuto/animazione che hai su una determinata pagina. A seconda della natura della tua estensione, potresti voler definire elementi interattivi personalizzati o riutilizzare o estendere quelli esistenti.
 
-Ricorda che tutti i [componenti](frontend.md#components) utilizzati in Flarum core vengono esportati e resi disponibili per il riutilizzo delle estensioni. Un elenco completo è disponibile nella nostra [documentazione API](https://api.docs.flarum.org/js/master/identifiers.html).
+All [components](frontend.md#components) and [utilities](frontend.md#flarum-utils) from Flarum core and bundled extensions are exported, making them available for reuse in other extensions. Un elenco completo è disponibile nella nostra [documentazione API](https://api.docs.flarum.org/js/master/identifiers.html).
 
 ## Avvisi
 

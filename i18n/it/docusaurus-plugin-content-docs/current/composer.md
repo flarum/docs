@@ -3,14 +3,14 @@
 
 Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Dovrai usare composer per:
 
-- Installare o aggiornare Flarum
-- Installare, aggiornare o rimuovere le estensioni di Flarum
+- Install or update Flarum through the command line
+- Install, update, or remove Flarum extensions  through the command line
 
 Questa guida è una piccola base per l'utilizzo di Composer. Raccomandiamo vivamente di consultare la  [documentazione ufficiale](https://getcomposer.org/doc/00-intro.md) per maggiori informazioni.
 
-:::tip Composer v2
+:::info Hosting condiviso
 
-Storicamente, Composer ha causato problemi sull'hosting condiviso a causa di un uso enorme della memoria. Nel 2020, [Composer v2 è stato rilasciato](https://blog.packagist.com/composer-2-0-is-now-available/) con enormi miglioramenti di utilizzo delle prestazioni e della memoria che eliminano questi problemi. Assicurati che il tuo server stia usando Composer v2!
+On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access. You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
 
 :::
 
@@ -150,13 +150,3 @@ Once you have Composer installed, you should be able to run Composer commands in
 After most commands, you'll want to run `composer dump-autoload -a`. Essentially, this caches PHP files so they run faster.
 
 :::
-
-## I don't have SSH access
-
-Most decent hosts should provide SSH access for shared hosting. If your host doesn't (and you can't switch to a good host that does offer it), hope might not yet be lost. You have several options:
-
-- Use alternatives like [Pockethold](https://github.com/UvUno/pockethold) to install Flarum. Note that you'll still need composer (and SSH) to install extensions.
-- Install composer on your computer, and run the `install` command locally. Then upload the files via FTP to your host. To make modifications (updating Flarum, installing/updating/removing extensions), download the current versions of the files, run whatever composer commands you need locally, and then replace the `composer.json` and `composer.lock` files, and the `vendor` directory of your install with your local copy. Make sure to create backups before doing this!
-- Some web hosts might provide a GUI for managing composer. The command line version is generally preferably, but if a GUI is the only possibility, consult your host's documentation for information on how to use it.
-
-Note that these workarounds are not officially supported! The only officially supported way to install and manage Flarum is through Composer.
