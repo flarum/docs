@@ -61,6 +61,15 @@ Familiarize yourself with the new [Code Splitting](/extend/code-splitting) featu
 
 :::
 
+### Admin Search
+
+##### <span class="breaking">Breaking</span>
+* `app.extensionData` has been renamed to `app.registry`, but you should now use the [`Admin` extender](/extend/admin.md) instead.
+
+##### <span class="notable">Notable</span>
+* The admin dashboard now has a search feature, as long as you register your settings/permissions using the `Admin` extender, then they will be automatically picked up.
+* If your settings/permissions are too custom to be added through the `Admin.setting` and `Admin.permission` extenders, then you can use `Admin.generalIndexItems` to add custom search index entries.
+
 ### Miscellaneous
 
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
@@ -75,6 +84,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * The `FieldSet` component has been refactored.
 * The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
 * The `Modal` component has been split into `Modal` and `FormModal`. The `Modal` component is now a simple modal that can be used for any content, while the `FormModal` component is a modal that is specifically designed for forms.
+* `app.extensionData` has been removed. You must now use the `Admin` extender to register settings, permissions and custom extension pages.
 
 ##### <span class="notable">Notable</span>
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
@@ -164,6 +174,7 @@ Flarum 2.0 completely refactors the JSON:API implementation. The way resource CR
 * The various validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, `GroupValidator`, `UserValidator`.
 * Many command handlers have been removed. Use the `JsonApi` class if you wish to execute logic from an existing endpoint internally instead.
 * The `flarum.forum.discussions.sortmap` singleton has been removed. Instead, you can define an `ascendingAlias` and `descendingAlias` [on your added `SortColumn` sorts](/extend/api#adding-sort-columns).
+* The `show` discussion endpoint no longer includes the `posts` relationship, so any `posts.*` relation includes or eager loads added to that endpoint must be removed.
 
 Replacing the deleted classes is the new `AbstractResource` and `AbstractDatabaseResource` classes. We recommend looking at a comparison between the bundled extensions (like tags) from 1.x to 2.x to have a better understanding of the changes:
 * Tags 1.x: https://github.com/flarum/framework/blob/1.x/extensions/tags
@@ -233,6 +244,7 @@ Checkout the [database documentation](/extend/database) for more details.
 
 ##### <span class="breaking">Breaking</span>
 * The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
+* Notification Blueprints must now implement the `Flarum\Notification\AlertableInterface` interface in order them to be sent as alerts. This allows for email-only notifications for example.
 * The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now. 
 
 #### <span class="notable">Notable</span>
