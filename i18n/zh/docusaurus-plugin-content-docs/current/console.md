@@ -36,13 +36,13 @@
 
 `php flarum cache:clear`
 
-清楚后端 Flarum 缓存，包括已生成的 js/css，文本格式器缓存、翻译缓存。 This should be run after installing or removing extensions, and running this should be the first step when issues occur.
+清楚后端 Flarum 缓存，包括已生成的 js/css，文本格式器缓存、翻译缓存。 这应当在每次安装或移除扩展后运行，在出现问题时这应该是第一步。
 
 ### assets:publish
 
 `php flarum migrate:reset --extension [插件ID]`
 
-Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
+发布核心和扩展插件中的资源文件(例如编译的 JS/CSS、bootstrap 图标、logos 等)。 这在您的资源文件发生损坏，或者您切换了 [文件系统驱动程序](extend/filesystem.md) 的 `flarum-assets` 存储磁盘时可以帮助您。
 
 ### 迁移
 
@@ -60,7 +60,7 @@ Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, 
 
 `php flarum schedule:run`
 
-Many extensions use scheduled jobs to run tasks on a regular interval. This could include database cleanups, posting scheduled drafts, generating sitemaps, etc. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
+许多扩展使用预定作业定期执行任务。 包括清理数据库缓存，定时发布草稿，生成站点地图等。 If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
