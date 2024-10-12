@@ -6,7 +6,7 @@ Flarum includes a powerful notification system to alert users to new activity.
 
 ### Defining a Notification Type
 
-To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface`. This class will define your notification's content and behaviour through the following methods:
+To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface` and `Flarum\Notification\AlertableInterface`. This class will define your notification's content and behaviour through the following methods:
 
 * `getFromUser()` The `User` model for the user that triggered the notification.
 * `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
@@ -21,11 +21,12 @@ Lets take a look at an example from [Flarum Likes](https://github.com/flarum/lik
 
 namespace Flarum\Likes\Notification;
 
+use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Post\Post;
 use Flarum\User\User;
 
-class PostLikedBlueprint implements BlueprintInterface
+class PostLikedBlueprint implements BlueprintInterface, AlertableInterface
 {
     public $post;
 
@@ -106,12 +107,13 @@ Let's take a look at an example from [Flarum Mentions](https://github.com/flarum
 
 namespace Flarum\Mentions\Notification;
 
+use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Notification\MailableInterface;
 use Flarum\Post\Post;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
+class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, MailableInterface
 {
     /**
      * @var Post
@@ -193,6 +195,12 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
     }
 }
 ```
+
+:::tip
+
+If you need your notification to be sent by email **only**, you can remove the `AlertableInterface` implementation, which will skip sending an alert for that notification.
+
+:::
 
 ### Notification Drivers
 
