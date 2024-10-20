@@ -31,7 +31,7 @@ app.initializers.add('interstellar', function(app) {
 
 :::注意
 
-`ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行。
+`ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行`for` 。
 
 :::
 
@@ -39,19 +39,19 @@ app.initializers.add('interstellar', function(app) {
 
 对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
 
 Here's an example with a switch (boolean) item:
 
 ```js
 
-app.initializers.add('interstellar', function(app) {
+app.initializers.add('interstellar', function(app){
 
   app.extensionData
     .for('acme-interstellar')
-    .registerSetting(
-      {
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
+    registerSetting(
+     {
+       setting: 'acme-interstellar.coordinates', //这是数据库设置表中保存设置的键值。
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
         help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
         type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
