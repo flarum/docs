@@ -1,4 +1,4 @@
-# API Throttling
+# API 调节器
 
 Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests.
 
