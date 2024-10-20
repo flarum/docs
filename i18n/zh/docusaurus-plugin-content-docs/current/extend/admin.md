@@ -4,7 +4,7 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+您可以简单地注册设置，扩展页面 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage)，或完全自定义页面。
 
 ## 扩展数据API
 
@@ -54,14 +54,14 @@ app.initializers.add('interstellar', function(app){
        setting: 'acme-interstellar.coordinates', //这是数据库设置表中保存设置的键值。
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
         help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
-        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+        type: 'boolean', // 这是什么类型的设置，有效选项包括：布尔、文本(或任何其他" <input>" 标记类型)和选择。 
       },
-      30 // Optional: Priority
+      30 // 选择: 优先
     )
 });
 ```
 
-If you use `type: 'select'` the setting object looks a little bit different:
+如果您使用 `type: 'select'` 设置对象看起来有一点不同：
 
 ```js
 {
@@ -69,7 +69,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
   label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
   type: 'select',
   options: {
-    'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+    'LOH': 'Liquid Fuel', // 该对象中的键作为设置项,存储在数据库中，值是管理员将看到的标签(如果翻译在上下文中有意义，请记住使用翻译)。
     'RDX': 'Solid Fuel',
   },
   default: 'LOH',
@@ -196,7 +196,7 @@ app.initializers.add('interstellar', function(app) {
 
 This page will be shown instead of the default.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+您可以扩展 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) 或扩展基本 `Page` 并设计自己的页面！
 
 ## Composer.json Metadata
 
@@ -204,7 +204,7 @@ In beta 15, extension pages make room for extra info which is pulled from extens
 
 For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Description                        | Where in composer.json                                       |
+| Description                        | 在composer.json 中的位置                                          |
 | ---------------------------------- | ------------------------------------------------------------ |
 | discuss.flarum.org discussion link | "forum" key inside "support"                                 |
 | Documentation                      | "docs" key inside "support"                                  |
