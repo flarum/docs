@@ -58,27 +58,27 @@ cd packages/framework
 yarn install
 ```
 
-Then you can watch JavaScript files for changes during development:
+Daha sonra geliştirme sırasındaki değişiklikler için JavaScript dosyalarını izleyebilirsiniz:
 
 ```bash
 cd framework/core/js
 yarn dev
 ```
 
-The process is the same for extensions.
+Uzantılar için de süreç aynıdır.
 
 ```bash
 cd extensions/tags/js
-yarn dev
+yarn de
 ```
 
-### Development Tools
+### Geliştirme araçları
 
-After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
+Üzerinde çalışacağınız depoları çatallayıp klonladıktan sonra, değişikliklerinizi test edebilmeniz için yerel barındırma kurmanız gerekecektir. Flarum şu anda bir geliştirme sunucusuyla birlikte gelmiyor, dolayısıyla bu yerel Flarum kurulumuna hizmet etmek için Apache/NGINX/Caddy/etc'yi kurmanız gerekecek.
 
-Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
+Alternatif olarak, bir hizmet sunmak için [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows) veya [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) gibi araçları kullanabilirsiniz. yerel forum.
 
-Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
+Flarum'a katkıda bulunanların çoğu [PHPStorm](https://www.jetbrains.com/phpstorm/download/) veya [Visual Studio Code](https://code.visualstudio.com/) ile geliştirir.
 
 ## Kodlama Stili
 
@@ -104,7 +104,7 @@ A typical contribution workflow looks like this:
 
 4. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
     * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+    * [Geleneksel Taahhütler](https://www.conventionalcommits.org/en/v1.0.0/#summary) spesifikasyonunu izleyin.
     * *Fix* commits should describe the issue fixed, not how it was fixed.
 
 5. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
@@ -155,7 +155,7 @@ Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/a
 
 Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
 
-### Translations
+### Çeviriler
 
 We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 

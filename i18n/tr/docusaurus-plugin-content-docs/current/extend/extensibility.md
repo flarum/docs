@@ -7,11 +7,11 @@ In some cases, you might want other extensions to [extend your extension](extend
 Extensions extend Flarum Core's backend via two mechanisms:
 
 - [The extender API](start.md#extenders)
-- [Listening to Events](backend-events.md)
+- [Etkinliği Dinlemek](backend-events.md)
 
 Unsurprisingly, you can make your extension extensible via the same mechanisms.
 
-### Custom Events
+### Özel Etkinlikler
 
 To learn about dispatching events and defining new ones, see the [relevant documentation](backend-events.md).
 

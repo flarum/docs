@@ -2,7 +2,7 @@
 
 In addition to labeling roles, Flarum's group system is a way for permissions to be applied to segments of users.
 
-## Groups
+## Gruplar
 
 Flarum has several "reserved groups":
 
@@ -16,7 +16,7 @@ On install, Flarum will also create a moderator group with ID `4`, but this is j
 
 Admins can also create new groups through the admin dashboard. Users can be added or removed from groups from their user page.
 
-## Permissions
+## İzinler
 
 Flarum "permissions" are implemented as simple strings, and associated with groups in a pseudo-junction table (it's not a real ManyToMany relationship, but the concept is the same). That's actually all that the permissions grid in the admin dashboard is doing: you're adding and removing these permission strings from groups.
 
@@ -68,6 +68,6 @@ If you want to use authorization checks with an ability name that differs from t
 
 See our [authorization documentation](authorization.md) for more information on the `can` method, policies, and how authorization checks are processed.
 
-## Adding Custom Permissions
+## Özel İzin Ekleme
 
 To learn more about adding permissions through the admin dashboard, see the [relevant documentation](admin.md).

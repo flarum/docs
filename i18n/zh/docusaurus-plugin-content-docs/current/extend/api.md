@@ -1,6 +1,6 @@
 # 接口与数据流
 
-在[上一篇文章中](models.md), 我们学习了Flarum是如何通过模型与数据交互的。 Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
+在[上一篇文章中](models.md), 我们学习了Flarum是如何通过模型与数据交互的。 在这里，我们将学习如何将数据从数据库到 JSON-API 再到前端，然后再返回。
 
 :::info
 
@@ -17,11 +17,11 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
 3. Any modifications done by extensions to the controller via the [`ApiController` extender](#extending-api-controllers) are applied. This could entail changing sort, adding includes, changing the serializer, etc.
-4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the controller's serializer can process it. Each controller is responsible for implementing its own `data` method. Note that for `PATCH`, `POST`, and `DELETE` requests, `data` will perform the operation in question, and return the modified model instance.
+4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. 也就是说，只要控制器的序列化器可以处理，数据可以是任何东西。 Each controller is responsible for implementing its own `data` method. 请注意，对于 `PATCH`、`POST` 和 `DELETE` 请求，`data` 将执行相关操作，并返回修改后的模型实例。
 5. That data is run through any pre-serialization callbacks that extensions register via the [`ApiController` extender](#extending-api-controllers).
-6. The data is passed through a [serializer](#serializers), which converts it from the backend, database-friendly format to the JSON:API format expected by the frontend. It also attaches any related objects, which are run through their own serializers. As we'll explain below, extensions can [add / override relationships and attributes](#attributes-and-relationships) at the serialization level.
+6. The data is passed through a [serializer](#serializers), which converts it from the backend, database-friendly format to the JSON:API format expected by the frontend. 它还会附加任何相关对象，这些对象会通过各自的序列化器运行。 As we'll explain below, extensions can [add / override relationships and attributes](#attributes-and-relationships) at the serialization level.
 7. The serialized data is returned as a JSON response to the frontend.
-8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](#frontend-models) in the frontend store.
+8. 如果请求是通过 Flarum 前端的 `Store`发出的，返回的数据 (包括任何相关对象) 将作为 [frontend models](#frontend-models)存储在前端存储中。
 
 ## API Endpoints
 
@@ -50,7 +50,7 @@ We'll go over each type of controller shortly, but once they're written, you can
 
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 
-- The path should either be `/prefix/{id}` for get/update/delete, or `/prefix` for list/create.
+- 对于获取/更新/删除，路径应为 `/prefix/{id}`；对于列表/创建，路径应为 `/prefix`。
 - the prefix (`tags` in the example above) must correspond to the JSON:API model type. You'll also use this model type in your serializer's `$type` attribute, and when registering the frontend model (`app.store.models.TYPE = MODEL_CLASS`).
 - The methods must match the example above.
 

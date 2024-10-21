@@ -4,7 +4,7 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+您可以简单地注册设置，扩展页面 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage)，或完全自定义页面。
 
 ## 扩展数据API
 
@@ -12,11 +12,11 @@ You can simply register settings, extend the base [`ExtensionPage`](https://api.
 
 ### 告诉API您扩展的信息
 
-Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
+在注册任何内容之前，您需要告诉`ExtensionData`它将为哪个扩展获取数据。
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+只需在`app.extensionData`上运行`for`函数，并传入扩展的id。 要找到您的扩展id，取编写器名称并用破折号替换任何斜杠(例如:'fof/merge-discussion '变成'fof-merge-discussion ')。  带有`flarum-`和`flarum-ext-`的扩展将从名称中省略这些内容(例如:'webbinaro/flarum-calendar'变成'webbinaro-calendar')。
 
-For the following example, we will use the fictitious extension 'acme/interstellar':
+对于下面的例子，我们将使用虚构的扩展名'acme/interstellar':
 
 ```js
 
@@ -27,41 +27,41 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Once that is done, you can begin adding settings and permissions.
+完成后，您可以开始添加设置和权限。
 
-:::tip Note
+:::注意
 
-All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
+`ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行`for` 。
 
 :::
 
-### Registering Settings
+### 注册设置
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
+要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
 
 Here's an example with a switch (boolean) item:
 
 ```js
 
-app.initializers.add('interstellar', function(app) {
+app.initializers.add('interstellar', function(app){
 
   app.extensionData
     .for('acme-interstellar')
-    .registerSetting(
-      {
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
+    registerSetting(
+     {
+       setting: 'acme-interstellar.coordinates', //这是数据库设置表中保存设置的键值。
         label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // The label to be shown letting the admin know what the setting does.
         help: app.translator.trans('acme-interstellar.admin.coordinates_help'), // Optional help text where a longer explanation of the setting can go.
-        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+        type: 'boolean', // 这是什么类型的设置，有效选项包括：布尔、文本(或任何其他" <input>" 标记类型)和选择。 
       },
-      30 // Optional: Priority
+      30 // 选择: 优先
     )
 });
 ```
 
-If you use `type: 'select'` the setting object looks a little bit different:
+如果您使用 `type: 'select'` 设置对象看起来有一点不同：
 
 ```js
 {
@@ -69,7 +69,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
   label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
   type: 'select',
   options: {
-    'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+    'LOH': 'Liquid Fuel', // 该对象中的键作为设置项,存储在数据库中，值是管理员将看到的标签(如果翻译在上下文中有意义，请记住使用翻译)。
     'RDX': 'Solid Fuel',
   },
   default: 'LOH',
@@ -196,7 +196,7 @@ app.initializers.add('interstellar', function(app) {
 
 This page will be shown instead of the default.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+您可以扩展 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) 或扩展基本 `Page` 并设计自己的页面！
 
 ## Composer.json Metadata
 
@@ -204,7 +204,7 @@ In beta 15, extension pages make room for extra info which is pulled from extens
 
 For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Description                        | Where in composer.json                                       |
+| Description                        | 在composer.json 中的位置                                          |
 | ---------------------------------- | ------------------------------------------------------------ |
 | discuss.flarum.org discussion link | "forum" key inside "support"                                 |
 | Documentation                      | "docs" key inside "support"                                  |

@@ -2,10 +2,10 @@
 
 除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。
 
-Using the console:
+使用控制台：
 
 1. `ssh` 连接到安装 Flarum 的服务器
-2. `cd` to the folder that contains the file `flarum`
+2. `cd` 进入含有一个叫做 `flarum` 的文件的文件夹中
 3. 执行 `php flarum [命令名]`
 
 ## 注册控制台命令
@@ -30,19 +30,19 @@ Using the console:
 
 `php flarum info`
 
-Get information about Flarum's core and installed extensions. 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
+获取 Flarum 核心及已安装插件的信息。 调试问题时这个命令会很有用，在您提交的问题报告中也应当附上该输出内容。
 
 ### cache:clear
 
 `php flarum cache:clear`
 
-清楚后端 Flarum 缓存，包括已生成的 js/css，文本格式器缓存、翻译缓存。 This should be run after installing or removing extensions, and running this should be the first step when issues occur.
+清楚后端 Flarum 缓存，包括已生成的 js/css，文本格式器缓存、翻译缓存。 这应当在每次安装或移除扩展后运行，在出现问题时这应该是第一步。
 
 ### assets:publish
 
 `php flarum migrate:reset --extension [插件ID]`
 
-Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
+发布核心和扩展插件中的资源文件(例如编译的 JS/CSS、bootstrap 图标、logos 等)。 这在您的资源文件发生损坏，或者您切换了 [文件系统驱动程序](extend/filesystem.md) 的 `flarum-assets` 存储磁盘时可以帮助您。
 
 ### 迁移
 
@@ -52,7 +52,7 @@ Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, 
 
 ### migrate:reset
 
-`php flarum migrate:reset --extension [extension_id]`
+`php flarum migrate:reset --extension [插件ID]`
 
 重置指定插件的所有迁移。 这个命令大多被插件开发人员使用，如果您要卸载插件，并且想要从数据库中清除该插件的所有数据，也会需要用它。 请注意，该命令的被执行插件必须处于已安装状态（插件启用不启用都行）。
 
@@ -60,13 +60,13 @@ Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, 
 
 `php flarum schedule:run`
 
-Many extensions use scheduled jobs to run tasks on a regular interval. This could include database cleanups, posting scheduled drafts, generating sitemaps, etc. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
+许多扩展使用预定作业定期执行任务。 包括清理数据库缓存，定时发布草稿，生成站点地图等。 If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
 ```
 
-This command should generally not be run manually.
+这个命令一般不应被手动执行。
 
 Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
 
@@ -74,4 +74,4 @@ Note that some hosts do not allow you to edit cron configuration directly. In th
 
 `php flarum schedule:list`
 
-This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
+此命令将返回已计划命令的列表(更多信息请参阅 `schedule:run`)。 这有助于确认扩展程序提供的命令已正确注册。 This **can not** check that cron jobs have been scheduled successfully, or are being run.

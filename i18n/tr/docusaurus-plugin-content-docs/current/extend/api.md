@@ -2,7 +2,7 @@
 
 In the [previous article](models.md), we learned how Flarum uses models to interact with data. Here, we'll learn how to get that data from the database to the JSON-API to the frontend, and all the way back again.
 
-:::info
+:::bilgi
 
 To use the built-in REST API as part of an integration, see [Consuming the REST API](../rest-api.md).
 
