@@ -74,4 +74,4 @@ Note that some hosts do not allow you to edit cron configuration directly. In th
 
 `php flarum schedule:list`
 
-This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
+此命令将返回已计划命令的列表(更多信息请参阅 `schedule:run`)。 这有助于确认扩展程序提供的命令已正确注册。 This **can not** check that cron jobs have been scheduled successfully, or are being run.
