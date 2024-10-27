@@ -70,6 +70,28 @@ Familiarize yourself with the new [Code Splitting](/extend/code-splitting) featu
 * The admin dashboard now has a search feature, as long as you register your settings/permissions using the `Admin` extender, then they will be automatically picked up.
 * If your settings/permissions are too custom to be added through the `Admin.setting` and `Admin.permission` extenders, then you can use `Admin.generalIndexItems` to add custom search index entries.
 
+### Locale
+
+##### <span class="breaking">Breaking</span>
+* HTML tags used within translations must be simple tags, without attributes. For example, if you have a locale with the value:
+  
+  ```yml
+  my_locale_key: "You can read about a <a href='{basic_impl_link}'>basic queue</a> implementation or a <a href='{adv_impl_link}'>more advanced</a> one."
+  ```
+  You must change this to:
+  ```yml
+  my_locale_key: "You can read about a <basic_impl_link>basic queue</basic_impl_link> implementation or a <adv_impl_link>more advanced</adv_impl_link> one."
+  ```
+  With the following code in your JavaScript:
+  ```js
+  app.translator.trans('acme.my_locale_key', {
+    basic_impl_link: <a href="https://discuss.flarum.org/d/28151-database-queue-the-simplest-queue-even-for-shared-hosting" />,
+    adv_impl_link: <a href="https://discuss.flarum.org/d/21873-redis-sessions-cache-queues" />,
+  })
+  ```
+  
+* Tags used within translations such as `<strong>` were previously auto provided as parameters
+
 ### Miscellaneous
 
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
