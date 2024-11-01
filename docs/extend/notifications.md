@@ -97,7 +97,7 @@ In addition to registering our notification to send by email, if we actually wan
 To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
 This comes with 2 additional methods:
 
-- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/11.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/11.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
 
 Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
@@ -115,62 +115,36 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, MailableInterface
 {
-    /**
-     * @var Post
-     */
-    public $post;
-
-    /**
-     * @var Post
-     */
-    public $reply;
-
-    /**
-     * @param Post $post
-     * @param Post $reply
-     */
-    public function __construct(Post $post, Post $reply)
-    {
-        $this->post = $post;
-        $this->reply = $reply;
+    public function __construct(
+      public Post $post, 
+      public Post $reply
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubject()
+    public function getSubject(): ?AbstractModel
     {
         return $this->post;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFromUser()
+    public function getFromUser(): ?User
     {
         return $this->reply->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getData()
+    public function getData(): mixed
     {
         return ['replyNumber' => (int) $this->reply->number];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailView()
+    public function getEmailViews(): array
     {
-        return ['text' => 'flarum-mentions::emails.postMentioned'];
+        return [
+          'text' => 'flarum-mentions::emails.plain.postMentioned',
+          'html' => 'flarum-mentions::emails.html.postMentioned',
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailSubject(TranslatorInterface $translator)
+    public function getEmailSubject(TranslatorInterface $translator): string
     {
         return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
             '{replier_display_name}' => $this->post->user->display_name,
@@ -178,18 +152,12 @@ class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, 
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getType()
+    public static function getType(): string
     {
         return 'postMentioned';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubjectModel()
+    public static function getSubjectModel(): string
     {
         return Post::class;
     }
@@ -201,6 +169,16 @@ class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, 
 If you need your notification to be sent by email **only**, you can remove the `AlertableInterface` implementation, which will skip sending an alert for that notification.
 
 :::
+
+#### Mail Templates
+
+Now that we have our email views registered, we need to create the actual email templates. These are Blade views, and should be placed in the `views/emails` directory of your extension (unless you registered a different path). The filenames should match the names you returned in `getEmailViews`.
+
+You can use the following blade components:
+* `mail::html.notification`: The HTML template for notification emails. Use this when your notification is a type that can be disabled by the user, as it includes an unsubscribe link.
+* `mail::plain.notification`: The plain text template for notification emails. Use this when your notification is a type that can be disabled by the user, as it includes an unsubscribe link.
+* `mail::html.information`: The HTML template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
+* `mail::plain.information`: The plain text template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 
 ### Notification Drivers
 
