@@ -13,9 +13,9 @@ Condividono lo stesso codice di base, quindi una volta che sai come estenderne u
 
 :::tip Typings!
 
-Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel </a>README del pacchetto
+Insieme al nuovo supporto TypeScript, abbiamo un pacchetto [`tsconfig`](https://www.npmjs.com/package/flarum-tsconfig) disponibile, che si dovrebbe installare come dipendenza per ottenere accesso ai nostri typings durante lo sviluppo. Assicurati di seguire le istruzioni contenute nel README del pacchetto
 
- per configurare il supporto ai typings.</p> 
+ per configurare il supporto ai typings. 
 
 :::
 
