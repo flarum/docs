@@ -104,7 +104,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Flarum',
             position: 'right',
             items: [
-
               {
                 href: 'https://flarum.org/',
                 label: 'Home'
@@ -118,7 +117,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                 label: 'GitHub'
               },
             ]
-          },{
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownItemsAfter: [],
+            dropdownActiveClassDisabled: true,
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
