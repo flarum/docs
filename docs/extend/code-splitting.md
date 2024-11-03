@@ -45,9 +45,9 @@ import('ext:flarum/tags/common/components/TagSelectionModal').then(({ default: T
 });
 ```
 
-## Extending split modules
+## Extending/Overriding/Adding split modules methods
 
-If you wish to extend a split module, rather than passing the prototype to `extend` or `override`, you can pass the import path as a first argument. The callback will be executed when the module is loaded. Checkout [Changing The UI Part 3](./frontend#changing-the-ui-part-3) for more details.
+If you wish to extend, override or add a method to a split module, rather than directly accessing the module prototype `Component.prototype` or passing the prototype to `extend` or `override`, you have to pass the import path as a first argument to either `extend` or `override` utilities. The callback will be executed when the module is loaded. Checkout [Changing The UI Part 3](./frontend#changing-the-ui-part-3) for more details.
 
 ## Code APIs that support lazy loading
 
@@ -85,3 +85,39 @@ app.composer.load(() => import('flarum/forum/components/DiscussionComposer'), { 
 ### Flarum Lazy Loaded Modules
 
 You can see a list of all the modules that are lazy loaded by Flarum in the [GitHub repository](https://github.com/flarum/framework/tree/2.x/framework/core/js/dist).
+
+
+## Extending a split component class
+
+Often, you may want to create a component that extends a split component class. Here is a common example, the `fof/byobu` extension has a `PrivateDiscussionComposer` component which extends `flarum/forum/components/DiscussionComposer`.
+
+The `DiscussionComposer` along with other modules related to the composer, are lazy loaded. So this line of code will not work:
+
+```ts
+import PrivateDiscussionComposer from './discussions/PrivateDiscussionComposer';
+
+app.composer.load(PrivateDiscussionComposer, {
+  user: app.session.user,
+  recipients: recipients,
+  recipientUsers: recipients,
+});
+
+app.composer.show();
+```
+
+Because `flarum/forum/components/DiscussionComposer` is not loaded yet, the frontend will throw an error, complaining of not being able to find that module.
+
+What we need to do in this case, is to first ensure that `flarum/forum/components/DiscussionComposer` has been loaded, then we can load the custom component, that means we *have* to lazy load the custom component:
+
+```ts
+const PrivateDiscussionComposer = await app.composer  
+  .load(() => import('flarum/forum/components/DiscussionComposer').then(async () => {  
+      return await import('./discussions/PrivateDiscussionComposer');  
+  }), {  
+    user: app.session.user,  
+    recipients: recipients,  
+    recipientUsers: recipients,  
+  });
+  
+app.composer.show();
+```

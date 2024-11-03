@@ -262,6 +262,21 @@ Checkout the [database documentation](/extend/database) for more details.
 * New high contrast color schemes have been added.
 * You can register more color schemes through the new frontend `Theme` extender and equivalent CSS code `[data-theme=your-scheme]`.
 
+### Email Notifications
+
+##### <span class="breaking">Breaking</span>
+* The `getEmailView` method of the `Flarum\Notification\MailableInterface` interface has been renamed to `getEmailViews`
+* `getEmailViews` now requires you to return both `text` and `html` views for your email notification.
+
+:::tip
+
+Checkout this example from the mentions extension:
+* Blueprint class: https://github.com/flarum/framework/blob/2.x/extensions/mentions/src/Notification/PostMentionedBlueprint.php#L43-L49
+* HTML view: https://github.com/flarum/framework/blob/2.x/extensions/mentions/views/emails/html/postMentioned.blade.php
+* Text view: https://github.com/flarum/framework/blob/2.x/extensions/mentions/views/emails/plain/postMentioned.blade.php
+
+:::
+
 ### Miscellaneous
 
 ##### <span class="breaking">Breaking</span>
