@@ -1,26 +1,26 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "Sonraki",
     "description": "The label for version current"
   },
   "sidebar.guideSidebar.category.Introduction": {
-    "message": "Introduction",
+    "message": "Giriş",
     "description": "The label for category Introduction in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Setting Up": {
-    "message": "Setting Up",
+    "message": "Kurulum",
     "description": "The label for category Setting Up in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Management": {
-    "message": "Management",
+    "message": "Yönetim",
     "description": "The label for category Management in sidebar guideSidebar"
   },
   "sidebar.guideSidebar.category.Advanced": {
-    "message": "Advanced",
+    "message": "Gelişmiş",
     "description": "The label for category Advanced in sidebar guideSidebar"
   },
   "sidebar.extendSidebar.category.Main Concepts": {
-    "message": "Main Concepts",
+    "message": "Ana konseptler",
     "description": "The label for category Main Concepts in sidebar extendSidebar"
   },
   "sidebar.extendSidebar.category.Reference Guides": {

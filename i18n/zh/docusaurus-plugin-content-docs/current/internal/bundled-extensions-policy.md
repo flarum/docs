@@ -1,8 +1,8 @@
-# Bundled Extensions Policy
+# 捆绑扩展策略
 
-This document is to assist in deciding what core features should be bundled or maintained by the Flarum project team.
+本文件旨在协助确定“Flarum”项目小组应将哪些核心特征捆绑起来或加以维护。
 
-Understand that Flarum aims to have a lean and efficient team. To guarantee a transparent workload, we intentionally have a "this could be an extension" mentality. The acronym D.O.R.C. spells out our decision-making process.
+认识到Flarum的目的是要有一个精干和高效的团队。 To guarantee a transparent workload, we intentionally have a "this could be an extension" mentality. The acronym D.O.R.C. spells out our decision-making process.
 
 - **Density**: prevent bloating Flarum so that it becomes a burden to install on shared hosting plans with limited space.
 - **Opinionatedness**: no extensions should be bundled that is only useful by only a limited amount of communities or on specific hosting environments.

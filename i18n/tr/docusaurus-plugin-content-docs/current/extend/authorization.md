@@ -1,11 +1,11 @@
-# Yetki
+# Yetkilendirme
 
 As with any framework, Flarum allows certain actions and content to be restricted to certain users. There are 2 parallel systems for this:
 
 - The authorization process dictates whether a user can take a certain action.
 - Visibility scoping can be applied to a database query to efficiently restrict the records that users can access. This is documented in our [model visibility](model-visibility.md) article.
 
-## Authorization Process
+## Yetkilendirme Süreci
 
 The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they:
 
@@ -16,7 +16,7 @@ The authorization process is used to check whether a person is allowed to perfor
 
 Each of these is determined by unique criteria: in some cases a flag is sufficient; otherwise, we might need custom logic.
 
-## How It Works
+## Nasıl Çalışır
 
 Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
@@ -39,7 +39,7 @@ Then, if the user is in the admin group, we will authorize the action.
 
 Finally, as we have exhausted all checks, we will assume that the user is unauthorized and deny the request.
 
-## How To Use Authorization
+## Yetkilendirme Nasıl Kullanılır
 
 Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
 
@@ -70,7 +70,7 @@ $actor->assertAdmin();
 $actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
-## Custom Policies
+## Özel Politikalar
 
 Policies allow us to use custom logic beyond simple groups and permissions when evaluating authorization for an ability with a subject. For instance:
 
@@ -96,7 +96,7 @@ $ flarum-cli make backend policy
 
 :::
 
-### Example Policies
+### Örnek Politikalar
 
 Let's take a look at an example policy from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):
 
@@ -179,7 +179,7 @@ class GlobalPolicy extends AbstractPolicy
 }
 ```
 
-### Registering Policies
+### Kayıt Politikaları
 
 Both model-based and global policies can be registered with the `Policy` extender in your `extend.php` file:
 
@@ -197,7 +197,7 @@ return [
 ];
 ```
 
-## Frontend Authorization
+## Ön Uç Yetkilendirmesi
 
 Commonly, you'll want to use authorization results in frontend logic. For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint. And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
 

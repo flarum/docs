@@ -11,7 +11,7 @@ Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritaban
 ```php
 <?php return array (
   'debug' => false, // sorunları gidermek için kullanılan hata ayıklama modunu etkinleştirir veya devre dışı bırakır
-  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
+  'offline' => false, // site bakım modunu etkinleştirir veya devre dışı bırakır. Bu, sitenizi tüm kullanıcılar (yöneticiler dahil) için erişilemez hale getirir.
   'database' =>
   array (
     'driver' => 'mysql', // veritabanı sürücüsü, yani MySQL, MariaDB...
@@ -21,7 +21,7 @@ Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritaban
     'password' => '', // veritabanı şifresi
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '', // veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
+    'prefix' => '', / veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
     'port' => '3306', // veritabanı bağlantısının portu, MySQL ile varsayılan olarak 3306'dır
     'strict' => false,
   ),
