@@ -1,6 +1,6 @@
 # Flarum Çeviri
 
-:::info
+:::bilgi
 
 This documentation covers the technical structure of language packs. Read [this article](../contributing-docs-translations.md) for information on how to start / contribute to a Flarum language pack.
 
@@ -31,7 +31,7 @@ The `composer.json` will also need some special values. It now needs a `flarum-l
 }
 ```
 
-And that's it! It should work out of the box.
+Ve bu kadar! It should work out of the box.
 
 ## Translation Files
 

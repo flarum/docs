@@ -263,7 +263,7 @@ export default [
 ];
 ```
 
-:::info
+:::bilgi
 
 Remember to export the `extend` module from your entry `index.js` file:
 

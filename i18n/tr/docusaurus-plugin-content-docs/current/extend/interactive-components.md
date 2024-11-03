@@ -2,7 +2,7 @@
 
 Often, you'll want to trigger interactive components in addition to whatever content/animations you have on a given page. Depending on the nature of your extension, you may want to define custom interactive elements or reuse or extend existing ones.
 
-Remember that all [components](frontend.md#components) used in Flarum core are exported and made available for extensions to reuse. A full list is available in our [API documentation](https://api.docs.flarum.org/js/master/identifiers.html).
+All [components](frontend.md#components) and [utilities](frontend.md#flarum-utils) from Flarum core and bundled extensions are exported, making them available for reuse in other extensions. A full list is available in our [API documentation](https://api.docs.flarum.org/js/master/identifiers.html).
 
 ## Alerts
 

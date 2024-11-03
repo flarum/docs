@@ -14,7 +14,7 @@ $ flarum-cli make backend event-listener
 
 :::
 
-## Listening to Events
+## Etkinliği Dinlemek
 
 You can attach a listener to an event using the [`Event`](https://api.docs.flarum.org/php/master/flarum/extend/event) [extender](start.md#extenders):
 
@@ -128,7 +128,7 @@ class SomeClass
 }
 ```
 
-## Custom Events
+## Özel Etkinlikler
 
 As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
 

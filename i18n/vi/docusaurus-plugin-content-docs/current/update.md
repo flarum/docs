@@ -1,5 +1,15 @@
 # Cập nhật
 
+## From the Admin Dashboard
+
+:::info
+
+If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+
+:::
+
+---
+
 Để cập nhật Flarum, bạn cần sử dụng [Composer](https://getcomposer.org). Nếu bạn không biết gì về nó, bạn cần phải biết 1 ít về Composer để cài đặt Flarum, đọc [hướng dẫn](composer.md) để biết cách cài đặt và sử dụng như thế nào.
 
 Nếu cập nhật trên các phiên bản chính (ví dụ: <= 0.1.0 đến 1.x.x, 1.x.x thành 2.x.x, ...), hãy nhớ đọc "hướng dẫn cập nhật phiên bản chính" thích hợp trước khi chạy các bước nâng cấp chung.

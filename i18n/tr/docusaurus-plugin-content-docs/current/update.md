@@ -1,5 +1,15 @@
 # Güncelleme
 
+## From the Admin Dashboard
+
+:::bilgi
+
+If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+
+:::
+
+---
+
 Flarum'u güncellemek için [Composer](https://getcomposer.org) kullanmanız gerekir. Eğer aşina değilseniz (Flarum'u kurmak için buna ihtiyacınız vardır), ne olduğu ve nasıl kurulacağı hakkında bilgi için [kılavuzumuzu](composer.md) okuyun.
 
 Ana sürümler arasında güncelleme yapıyorsanız (ör. <=0.1.0 - 1.x.x, 1.x.x - 2.x.x, ...), genel yükseltme adımlarını çalıştırmadan önce uygun "ana sürüm güncelleme kılavuzunu" okuduğunuzdan emin olun.

@@ -26,15 +26,19 @@ Un provider di servizi personalizzato dovrebbe estendersi in `Flarum\Foundation\
 <?php
 
 use Flarum\Foundation\AbstractServiceProvider;
+use Illuminate\Contracts\Container\Container;
 
 class CustomServiceProvider extends AbstractServiceProvider
 {
     public function register()
     {
-        // custom logic here
+        // custom logic here, for example:
+        $this->container->resolving(SomeClass::class, function ($container) {
+            return new SomeClass($container->make('some.binding'));
+        });
     }
 
-    public function boot()
+    public function boot(Container $container)
     {
         // custom logic here
     }
