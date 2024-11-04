@@ -305,7 +305,7 @@ export default class NewPostNotification extends Notification {
 }
 ```
 
-Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica del frontend che abbiamo appena creato.
+Nell'esempio, l'icona è una stella, il link andrà al nuovo post e il contenuto dirà che "{user} ha pubblicato".
 
 Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica frontend che abbiamo appena creato.
 
@@ -338,7 +338,7 @@ app.initializers.add('flarum-likes', () => {
   });
 });
 ```
-Ora che hai configurato tutte le notifiche, è il momento di inviare effettivamente la notifica all'utente!
+Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che desideri mostrare e una descrizione della notifica e il gioco è fatto!
 
 ## Inviare Notifiche
 
