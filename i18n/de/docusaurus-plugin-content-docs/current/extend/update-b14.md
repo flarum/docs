@@ -519,7 +519,7 @@ class CustomComponent extends Component {
   view(vnode) {
     return <div>
       <button onclick={() => this.showContent = !this.showContent}>Toggle Extra Content</button>
-      <p>Hello World!{this.showContent ? ' Extra Content!' : ''}</p>
+      <p>Hello World!{this.showContent ? ' Extra Content!' ' Extra Content!' : ''}</p>
     </div>;
   }
 }
