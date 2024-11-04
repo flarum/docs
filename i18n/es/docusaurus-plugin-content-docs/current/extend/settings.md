@@ -4,7 +4,7 @@ En algún momento mientras haces una extensión, puede que quieras leer algunas 
 
 ## El repositorio de ajustes
 
-La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`. En su lugar, puedes confiar en el contenedor para instanciar tu clase e inyectar las dependencias correctas. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
+La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
 
 ```php
 <?php
