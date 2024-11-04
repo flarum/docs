@@ -48,12 +48,18 @@ In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'vi
 
 ```php
 // Check whether a user can perform an action.
+// WARNING: this should be used with caution, as it doesn't actually
+// run through the authorization process, so it doesn't account for policies.
 $canDoSomething = $actor->can('viewForum');
 
 // Check whether a user can perform an action on a subject.
+// It is, however, useful in implementing custom policies.
 $canDoSomething = $actor->can('reply', $discussion);
 
 // Raise a PermissionDeniedException if a user cannot perform an action.
+$actor->assertAdmin();
+
+// Check whether one of the user's groups have a permission.
 $actor->assertCan('viewForum');
 $actor->assertCan('reply', $discussion);
 
@@ -61,12 +67,6 @@ $actor->assertCan('reply', $discussion);
 $actor->assertRegistered();
 
 // Raise a PermissionDeniedException if the user is not an admin.
-$actor->assertAdmin();
-
-// Check whether one of the user's groups have a permission.
-// WARNING: this should be used with caution, as it doesn't actually
-// run through the authorization process, so it doesn't account for policies.
-// It is, however, useful in implementing custom policies.
 $actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
@@ -123,7 +123,6 @@ class TagPolicy extends AbstractPolicy
     }
 
     /**
-     * @param User $actor
      * @param Tag $tag
      * @return bool|null
      */
