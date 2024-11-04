@@ -16,9 +16,9 @@ If you have the extension manager extension installed you can simply run the upd
 
 ## 一般步骤
 
-**第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 在更新之前，您需要删除(不仅仅禁用) 任何不兼容的扩展。 请耐心等待扩展开发者更新！
+**第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 请耐心等待扩展开发者更新！ 请耐心等待扩展开发者更新！
 
-**第2步：** 查看您的 `composer.json` 文件。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
+**第2步：** 查看您的 `composer.json` 文件。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
 
 **第 3步：** 如果您使用 [本地扩展](extenders.md)，请确保它们更新到最新的 Flarum 中的变更。
 
@@ -65,7 +65,7 @@ Nothing to modify in lock file
 Or does not list `flarum/core` as an updated package, and you are not on the latest flarum version:
 
 - Revisit step 2 above, make sure that all third party extensions have an asterisk for their version string.
-- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above.
+- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above. If you're trying to update across major versions of Flarum, follow the related major version update guide above.
 
 ---
 
@@ -100,10 +100,10 @@ flarum/flarum                     -               does not require  illuminate/e
 
 It is very likely that some of your extensions have not yet been updated.
 
-- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't.
+- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. Remove any that don't.
 - Make sure you're running `composer update` with all the flags specified in the update step.
 
-If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
+If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
 
 ### Errors After Updating
 
