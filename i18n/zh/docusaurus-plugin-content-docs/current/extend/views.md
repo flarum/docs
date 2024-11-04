@@ -1,8 +1,8 @@
 # Views and Blade
 
-Although the Flarum UI you know and love is powered by our [Mithril frontend](frontend), server-side generated templates are still used throughout Flarum. Most notably, the HTML skeleton of the forum, which includes various SEO meta tags, as well as the no-js view of the forum, is implemented through the Views and Blade systems.
+Although the Flarum UI you know and love is powered by our [Mithril frontend](frontend), server-side generated templates are still used throughout Flarum. Most notably, the HTML skeleton of the forum, which includes various SEO meta tags, as well as the no-js view of the forum, is implemented through the Views and Blade systems. Most notably, the HTML skeleton of the forum, which includes various SEO meta tags, as well as the no-js view of the forum, is implemented through the Views and Blade systems.
 
-[Blade](https://laravel.com/docs/8.x/blade) is Laravel's templating engine, which allows you to conveniently generate HTML (or other static content) from PHP. It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/). [Views](https://laravel.com/docs/8.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables.
+[Blade](https://laravel.com/docs/8.x/blade) is Laravel's templating engine, which allows you to conveniently generate HTML (or other static content) from PHP. It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/). [Views](https://laravel.com/docs/8.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables. It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/). [Views](https://laravel.com/docs/8.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables.
 
 For our purposes, views are directories containing `.blade.php` template files (possibly contained in subdirectories).
 
@@ -37,7 +37,7 @@ $renderedString = $view->make('acme.hello-world::greeting', ['varName' => true])
 
 You can obtain the view factory instance through dependency injection.
 
-The format is `"VIEW_NAMESPACE::VIEW_NAME"`. If the view folder is organized as subdirectories, replace `/` with `.` in the pack. So if you have a file at `"forum/error.blade.php"` in a namespace called `"custom-views"`, you would use `"custom-views::forum.error"`.
+The format is `"VIEW_NAMESPACE::VIEW_NAME"`. If the view folder is organized as subdirectories, replace `/` with `.` in the pack. The format is `"VIEW_NAMESPACE::VIEW_NAME"`. If the view folder is organized as subdirectories, replace `/` with `.` in the pack. So if you have a file at `"forum/error.blade.php"` in a namespace called `"custom-views"`, you would use `"custom-views::forum.error"`.
 
 Note that all Blade templates rendered this way automatically have access to the following variables:
 
@@ -50,7 +50,7 @@ Additionally, templates used by [content logic](routes#content) have access to `
 
 ## Overriding Views
 
-If you want to override templates added by core or extensions, set up a view folder structure matching the one you are trying to override, containing just the files you are trying to override. Then use the `View` extender's `extendNamespace` method:
+If you want to override templates added by core or extensions, set up a view folder structure matching the one you are trying to override, containing just the files you are trying to override. Then use the `View` extender's `extendNamespace` method: Then use the `View` extender's `extendNamespace` method:
 
 ```php
 use Flarum\Extend;
