@@ -23,11 +23,14 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 ```json
 {
   // ...
+  {
+  // ...
   "require": {
     "flarum/core": "^0.1.0-beta.15",  // Since all extensions need to require core.
     "flarum/tags": "^0.1.0-beta.15"  // This tells Flarum to treat tags as a dependency of your extension.
   },
   // ...
+}
 }
 ```
 
@@ -72,6 +75,8 @@ For instance:
 ```json
 {
   // ...
+  {
+  // ...
   "extra": {
     "flarum-extension": {
       "optional-dependencies": [
@@ -80,6 +85,7 @@ For instance:
     }
   },
   // ...
+}
 }
 ```
 
