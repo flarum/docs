@@ -42,7 +42,7 @@ Using the extension manager extension, you can install extensions directly from 
 Al igual que Flarum, las extensiones se instalan a través de [Composer](https://getcomposer.org), usando SSH. Para instalar una extensión típica:
 
 1. `cd` to your Flarum directory. `cd` a la carpeta que contiene el archivo `composer.json`. You can check directory contents via `ls -la`.
-2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Esto debería ser proporcionado por la documentación de la extensión.
+2. Ejecute `composer require COMPOSER_PACKAGE_NAME`. Esto debería ser proporcionado por la documentación de la extensión.
 
 ## Gestión de Extensiones
 
@@ -70,7 +70,7 @@ Similarly to installation, to remove an extension:
 
 0. If you want to remove all database tables created by the extension, click the "Purge" button in the admin dashboard. See [below](#managing-extensions) for more information.
 1. `cd` to your Flarum directory.
-2. Ejecute `composer require COMPOSER_PACKAGE_NAME`. Esto debería ser proporcionado por la documentación de la extensión.
+2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Esto debería ser proporcionado por la documentación de la extensión.
 
 ## Managing Extensions
 
@@ -95,7 +95,7 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 ### Adding a composer repository
 
-Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
+Extiverse provides access to premium extensions. It is a good example of a composer repository. You would also need to enter an authentication method through the **New authentication method** button. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
