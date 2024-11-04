@@ -1,10 +1,10 @@
 # API 调节器
 
-Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests.
+Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests. This runs on every API route, and extensions can add their own custom logic to throttle requests.
 
 :::caution Forum Routes
 
-Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future.
+Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future.
 
 :::
 
@@ -14,12 +14,16 @@ The format for a custom throttler is extremely simple: all you need is a closure
 
 - `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
 - `true`: This marks the request as to be throttled.
-- `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
+- `null`: This means that this throttler doesn't apply. `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
 
-Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler:
+Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler: For example, consider Flarum's post throttler:
 
 ```php
 use DateTime;
+use Flarum\Post\Post;
+
+function ($request) {
+    if (! use DateTime;
 use Flarum\Post\Post;
 
 function ($request) {
@@ -39,7 +43,7 @@ function ($request) {
 };
 ```
 
-Throttlers can be added or removed via the `ThrottleApi` middleware in `extend.php`. For example:
+Throttlers can be added or removed via the `ThrottleApi` middleware in `extend.php`. For example: For example:
 
 ```php
 <?php
