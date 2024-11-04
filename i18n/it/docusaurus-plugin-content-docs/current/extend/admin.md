@@ -8,15 +8,15 @@ Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage
 
 ## API Dati Estensione
 
-:::caution SettingsModal
+Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
 ### Raccontare all'API la tua estensione
 
-Le impostazioni aggiunte tramite `SettingsModal` continueranno a funzionare nella beta 15, ma questo metodo **è ormai obsoleto** e verrà rimosso nelle future release.
+Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati.
 
 Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Le estensioni che contengono nel nome `flarum-` e/o `flarum-ext-` verranno troncate (esempio: 'webbinaro/flarum-calendar' diventa 'webbinaro-calendar').
 
-Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
+Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
 ```js
 
@@ -104,13 +104,7 @@ app.initializers.add('interstellar', function(app) {
             <h1> {app. ranslator.trans('acme-interstellar. dmin.you_are_rocket_man_label')} </h1>
             <label className="checkbox">
               <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
-                {app. ranslator.trans('acme-interstellar. dmin.rocket_man_setting_label')}
-            </label>
-          </div>
-        );
-      }
-    })
-});
+                {app. ranslator.trans('acme-interstellar.
 ```
 
 ### Registrazione delle autorizzazioni
