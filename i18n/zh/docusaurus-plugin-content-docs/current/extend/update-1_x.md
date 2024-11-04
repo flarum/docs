@@ -35,7 +35,7 @@ If you need help applying these changes or using new features, please start a di
 ### Frontend
 
 - More portions of the frontend are now written in TypeScript, providing a better extension development experience.
-- Modals can be used in stacks, allowing for multiple modals to be open at once. This is useful for modals that open other modals: `app.modal.show(ModalComponent, { attrs }, true)`.
+- Modals can be used in stacks, allowing for multiple modals to be open at once. Modals can be used in stacks, allowing for multiple modals to be open at once. This is useful for modals that open other modals: `app.modal.show(ModalComponent, { attrs }, true)`.
 
 ### Backend
 
@@ -47,12 +47,12 @@ No developer-facing changes were made in Flarum v1.4.
 
 ## 1.3 Changes
 
-Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers:
+Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers: Below are listed note worthy changes for extension developers:
 
 ### Frontend
 
 - More portions of the frontend are now written in TypeScript, providing a better extension development experience.
-- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
+- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
 - The markdown toolbar can now be used on the admin side.
 
 ### Backend
@@ -66,16 +66,16 @@ Flarum v1.3 included mostly QoL improvements. Below are listed note worthy chang
 
 ## 1.2 Changes
 
-Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers:
+Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers: The following recaps the most important changes for extension developers:
 
 ### Frontend
 
-- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
-- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
-- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
+- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript. Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
+- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
+- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
-- You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements.
-- A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
+- You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements. This will offer minor bundle size improvements.
+- A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`. It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
 - Extensions can now [modify the minimum search length](https://github.com/flarum/core/pull/3130) of the `Search` component.
 - The following components are now extensible:
   - The "colors" part of the Appearance page in the admin dashboard: https://github.com/flarum/core/pull/3186
@@ -86,7 +86,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 
 ### Backend
 
-- An [extender for settings defaults](https://github.com/flarum/core/pull/3127) has been added. This should be used instead of the `addSettings` migration helper, which has been deprecated.
+- An [extender for settings defaults](https://github.com/flarum/core/pull/3127) has been added. This should be used instead of the `addSettings` migration helper, which has been deprecated. This should be used instead of the `addSettings` migration helper, which has been deprecated.
 - You can now [generate Less variables from setting values](https://github.com/flarum/core/pull/3011) via the `Settings` extender.
 - Extensions can now [override/supplement blade template namespaces](https://github.com/flarum/core/pull/3167) through the `View` extender, meaning custom blade templates can be used instead of the default ones added by core or extensions.
 - You can now define [custom Less functions through PHP](https://github.com/flarum/core/pull/3190), allowing you to use some backend logic in your Less theming.
@@ -100,7 +100,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 
 ### Misc
 
-- Translations now support the `zero`, `one`, `two`, `few`, and `many` localized plural rules for `plural` ICU MessageFormat translations. This was done through the [`Intl.PluralRules` helper](https://github.com/flarum/core/issues/3072).
+- Translations now support the `zero`, `one`, `two`, `few`, and `many` localized plural rules for `plural` ICU MessageFormat translations. This was done through the [`Intl.PluralRules` helper](https://github.com/flarum/core/issues/3072). This was done through the [`Intl.PluralRules` helper](https://github.com/flarum/core/issues/3072).
 - Translations are now used for page titles, so that the format can be customized via language packs or [Linguist](https://discuss.flarum.org/d/7026-linguist-customize-translations-with-ease): https://github.com/flarum/core/pull/3077, https://github.com/flarum/core/pull/3228
 - API endpoints for retrieving single groups, as well as support for filtering groups on the plural get endpoint, [have been added](https://github.com/flarum/core/pull/3084).
 
@@ -108,21 +108,21 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 ### Tooling
 
 
-- The `flarum-cli infra` command can now be used to update or enable various infrastructure features. You can now add the following to your extension in just one command:
+- The `flarum-cli infra` command can now be used to update or enable various infrastructure features. You can now add the following to your extension in just one command: You can now add the following to your extension in just one command:
   - TypeScript
   - Prettier for JS/TS formatting
   - Backend testing with PHPUnit
   - Code formatting with StyleCI
   - EditorConfig support
   - GitHub actions for automating testing, linting, type checking, and building.
-- You can also exclude any files from these updates by adding their relative path to the "extra.flarum-cli" key's array in your extension's `composer.json` file. For example, if you wanted to exclude your tsconfig file from any updates by the infra system, the "extra.flarum-cli" key's value should be `["js/tsconfig.json"]`.
-- The `flarum-cli audit infra` can be used to check that all infra modules your extension uses are up to date. The `--fix` flag can be used to automatically fix any issues, which has essentially the same effect as running `flarum-cli infra` for each outdated module.
-- All `flarum-cli` commands can now be run with a `--no-interaction` flag to prevent prompts. Defaults will be used when possible, and errors will be thrown if a prompt is needed and there is no default.
+- You can also exclude any files from these updates by adding their relative path to the "extra.flarum-cli" key's array in your extension's `composer.json` file. For example, if you wanted to exclude your tsconfig file from any updates by the infra system, the "extra.flarum-cli" key's value should be `["js/tsconfig.json"]`. For example, if you wanted to exclude your tsconfig file from any updates by the infra system, the "extra.flarum-cli" key's value should be `["js/tsconfig.json"]`.
+- The `flarum-cli audit infra` can be used to check that all infra modules your extension uses are up to date. The `flarum-cli audit infra` can be used to check that all infra modules your extension uses are up to date. The `--fix` flag can be used to automatically fix any issues, which has essentially the same effect as running `flarum-cli infra` for each outdated module.
+- All `flarum-cli` commands can now be run with a `--no-interaction` flag to prevent prompts. Defaults will be used when possible, and errors will be thrown if a prompt is needed and there is no default. Defaults will be used when possible, and errors will be thrown if a prompt is needed and there is no default.
 - Frontend GH actions now support type-checking, as well as type coverage reports.
 
 ## 1.1 Changes
 
-Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements following our stable release earlier this year. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected.
+Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements following our stable release earlier this year. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected.
 
 ### Frontend
 
@@ -136,4 +136,4 @@ Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements f
 ### Backend
 
 - Flarum now comes with a [Preload extender](https://github.com/flarum/core/pull/3057) for preloading any custom frontend assets.
-- A new [Theme](https://github.com/flarum/core/pull/3008) extender now allows overriding Less files and internal imports. This allows themes to more easily completely replace Less modules.
+- A new [Theme](https://github.com/flarum/core/pull/3008) extender now allows overriding Less files and internal imports. This allows themes to more easily completely replace Less modules. This allows themes to more easily completely replace Less modules.
