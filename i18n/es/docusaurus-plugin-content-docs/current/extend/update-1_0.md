@@ -120,6 +120,8 @@ The `flarum/common/components/Tooltip` component has been introduced as a simple
     Click for free money!
   </button>
 </Tooltip>
+  </button>
+</Tooltip>
 ```
 
 See [the source code](https://github.com/flarum/core/blob/master/js/src/common/components/Tooltip.tsx) for more examples and instructions.
@@ -128,7 +130,7 @@ See [the PR](https://github.com/flarum/core/pull/2843/files) for examples of how
 
 ### PaginatedListState
 
-The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON:API resources (usually models). In future releases, we will also provide an `PaginatedList` (or `InfiniteScroll`) component that can be used as a base class for these paginated lists.
+The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON: API resources (usually models). In future releases, we will also provide an `PaginatedList` (or `InfiniteScroll`) component that can be used as a base class for these paginated lists.
 
 Please see [the source code](https://github.com/flarum/core/blob/master/js/src/common/states/PaginatedListState.ts) for a list of methods.
 
@@ -142,7 +144,7 @@ See [this discussion](https://discuss.flarum.org/d/26994-beta16-using-the-new-lo
 
 ### classList util
 
-Ever wrote messy code trying to put together a list of classes for some component? Well, no longer! The [clsx library](https://www.npmjs.com/package/clsx) is now available as the `flarum/common/utils/classList` util.
+Ever wrote messy code trying to put together a list of classes for some component? Well, no longer! Well, no longer! The [clsx library](https://www.npmjs.com/package/clsx) is now available as the `flarum/common/utils/classList` util.
 
 ### User List
 
