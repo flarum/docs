@@ -8,19 +8,19 @@
 
 ## 为什么要为Flarum做贡献？
 
-⚡ **作出实际影响。** 成千上万的Flarum实例，和数百万的累积最终用户， 都会因为你的贡献而受益。
+⚡ **作出实际影响。 ** 成千上万的Flarum实例，和数百万的累积最终用户， 都会因为你的贡献而受益。 都会因为你的贡献而受益。
 
-🔮 **塑造Flarum的未来。** 我们有很长的待办事项列表，但时间有限。 如果你愿意成为一个特性或更新的代言人，它将更有可能发生，并且你将能够实现你的愿景。 此外，我们的路线图和里程碑是由我们 [的核心开发团队](https://flarum.org/team)设定的，我们所有人都是贡献者。 影响的最佳途径是贡献。
+🔮 **塑造Flarum的未来。 ** 我们有很长的待办事项列表，但时间有限。 如果你愿意成为一个特性或更新的代言人，它将更有可能发生，并且你将能够实现你的愿景。 此外，我们的路线图和里程碑是由我们 [的核心开发团队](https://flarum.org/team)设定的，我们所有人都是贡献者。 影响的最佳途径是贡献。
 
-🧑‍💻 **成为更好的工程师。** 我们的代码库是现代化的，我们非常重视良好的工程和清晰的代码。 在设计、基础设施、性能和可扩展性方面，也有很多有趣、具有挑战性的问题需要解决。 特别的，如果你是一名学生或处于职业生涯的初期，参与 Flarum 的开发是一个培养开发技能的绝佳机会。
+🧑‍💻 **成为更好的工程师。 ** 我们的代码库是现代化的，我们非常重视良好的工程和清晰的代码。 在设计、基础设施、性能和可扩展性方面，也有很多有趣、具有挑战性的问题需要解决。 特别的，如果你是一名学生或处于职业生涯的初期，参与 Flarum 的开发是一个培养开发技能的绝佳机会。
 
-🎠 **很有趣！** 我们非常喜欢在 Flarum 上工作：有很多有趣的挑战和有趣的特性可以构建。 我们在[论坛](https://discuss.flarum.org)和 [Discord 服务器](https://flarum.org/chat)上也有一个活跃的社区。
+🎠 **很有趣！ ** 我们非常喜欢在 Flarum 上工作：有很多有趣的挑战和有趣的特性可以构建。 我们在[论坛](https://discuss.flarum.org)和 [Discord 服务器](https://flarum.org/chat)上也有一个活跃的社区。
 
 ## 开发设置
 
 请查看我们的规划 [里程碑](https://github.com/flarum/core/milestones)，了解一下需要做的事情。 您可以查看[「Good first issue」](https://github.com/flarum/core/labels/Good%20first%20issue)标签中的 Issue，这些 Issue 都比较容易上手。 有任何您不确定的问题，不要犹豫，直接提问！ 我们曾经都是新手。
 
-如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们， 以免做无用功。
+如果您打算揽下某项工作，请先在相关 Issue 上发表评论或创建一个新的 Issue 告知我们， 以免做无用功。 以免做无用功。
 
 由于 Flarum 是如此依赖扩展，因此在处理核心问题以及捆绑扩展时，我们强烈推荐使用[我们的扩展文档](extend/README.md)作为参考。 你应该从[介绍](extend/README.md)开始，以更好地了解我们扩展中的学问。
 
@@ -31,6 +31,11 @@
 [flarum/flarum 是一个「骨架」应用程序，它使用 Composer 下载核心包 和 一堆扩展程序](https://github.com/flarum/flarum)。 Flarum 核心、扩展和前述使用的所有包的源代码都位于 Flarum Monorepo [flarum/framework ](https://github.com/flarum/framework)中。 若要对其进行贡献，你需要在本地 fork 和 clone Monorepo 代码库，然后将其作为 [Composer 路径库](https://getcomposer.org/doc/05-repositories.md#path)添加到开发环境中：
 
 ```bash
+git clone https://github.com/flarum/flarum.git
+cd flarum
+
+# 或者，如果你想要直接克隆到当前目录：
+git clone https://github.com/flarum/flarum.git .
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
@@ -49,7 +54,7 @@ git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 
 准备好以上本地环境后，请务必打开 **config.php** 中的 `debug` 调试模式，并在 PHP 配置中将 `display_errors` 设置为 `On`。 这样您就能同时看到 Flarum 和 PHP 的详细报错内容。 调试模式还会在每个请求时强制重新编译Flarum的文件，省去了在每次更改扩展的JavaScript或CSS后调用`php flarum cache:clear`的需要。
 
-Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 在开发过程中，你需要使用 [Node.js ](https://nodejs.org/)和 [`yarn`](https://yarnpkg.com/) 重新编译 JavaScript。 **请不要在发送 PR 时提交生成的 `dist `文件**；这会在更改合并到`主分支`时自动处理。
+Flarum 的前端代码是用 ES6 编写的，并已编译为 JavaScript。 在开发过程中，你需要使用 [Node.js ](https://nodejs.org/)和 [`yarn`](https://yarnpkg.com/) 重新编译 JavaScript。 **请不要在发送 PR 时提交生成的 `dist`文件**；这会在更改合并到`主分支`时自动处理。
 
 要为前端做出贡献，你需要先安装 JavaScript 依赖项。 Monorepo 使用[ yarn 工作区](https://classic.yarnpkg.com/lang/en/docs/workspaces/)来轻松地在所有包之间安装 JS 依赖项。
 
@@ -89,13 +94,13 @@ yarn dev
     * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
 
 1. 🌳 **建立分支**，从合适的分支建立一个新功能分支。
-    * 请参见这里的 [编码风格](#编码风格)。
-    * *主要* 功能应当始终提交合并到 `master` 分支，该分支包含即将推出的 Flarum 版本。
+    * *Bug 修复* 应当提交合并到最新的稳定分支。
+    * 与当前 Flarum 版本完全向后兼容的 *次要* 功能可以提交合并到最新的稳定分支。
     * *重要的*功能应该总是被提交到`主分支`，该分支包含即将发布的 Flarum 版本。
     * 在内部，我们使用 `<姓名首字母缩写>/<简短描述>` 的分支命名方案（例如：`tz/refactor-frontend`）。
 
 2. 🔨 **编写代码**，编写一些代码。
-    * 修复错误或添加功能时，请根据需要添加单元测试。
+    * 请参见这里的 [编码风格](#编码风格)。
 
 3. 🚦 **测试代码**，测试您的代码。
     * 修复错误或添加功能时，请根据需要添加单元测试。
@@ -118,15 +123,15 @@ yarn dev
 
 7. 🕺 **恭喜**，您刚刚向 Flarum 做了贡献。
 
-## 开发工具
+## 编码风格
 
-In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code. When in doubt, read the source code.
 
-Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
+Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style. StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
 
 ### PHP
 
-Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
 * 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
 * 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
@@ -135,7 +140,7 @@ Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/
 
 ### JavaScript
 
-Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation. We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
 
 ### 翻译
 
@@ -161,10 +166,10 @@ We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) t
 
 ## 贡献者许可协议
 
-By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
 
-You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
+You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
 
 The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
