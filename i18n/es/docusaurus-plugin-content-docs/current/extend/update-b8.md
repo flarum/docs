@@ -16,7 +16,7 @@ Beta 8 comes with large changes to the overall structure of the PHP backend. You
 
 ## Database Naming
 
-Many database columns and JSON:API attributes have been renamed to conform to a [convention](/contributing.md#database). You will need to update any instances where your extension interacts with core data. You can see the changes in [#1344](https://github.com/flarum/core/pull/1344/files).
+Many database columns and JSON: API attributes have been renamed to conform to a [convention](/contributing.md#database). You will need to update any instances where your extension interacts with core data. You can see the changes in [#1344](https://github.com/flarum/core/pull/1344/files).
 
 ## Extensores
 
