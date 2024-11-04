@@ -26,7 +26,7 @@ I seguenti attributi sono utili da tenere a mente:
 
 ## Modali
 
-Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
+Composer è gestito da un'istanza globale di [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` nel frontend di `forum`. I suoi metodi pubblici più importanti sono:
 
 - `app.modal.show(componentClass, attrs)` mostrerà un modale utilizzando la classe componente e attributi dati. Se chiamato mentre un modale è già aperto, sostituirà il modale attualmente aperto.
 - `app.modal.close()` chiuderà il modale se uno è attualmente attivo.
@@ -76,7 +76,7 @@ $ flarum-cli make frontend modal
 
 Poiché Flarum è un forum, abbiamo bisogno di strumenti per consentire agli utenti di creare e modificare post e discussioni. Flarum realizza questo attraverso il componente composer.
 
-Composer è gestito da un'istanza globale di [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` nel frontend di `forum`. I suoi metodi pubblici più importanti sono:
+Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
 
 - `app.composer.load(componentClass, attrs)` caricherà un nuovo tipo di compositore. Se un compositore è già attivo, verrà sostituito.
 - `app.composer.show()` mostrerà il compositore se è attualmente nascosto.
