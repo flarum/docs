@@ -1,18 +1,18 @@
 # Distribution
 
-You've written a great extension — and now you want the whole world to be able to use it. This document will take you through the process of distribution, from setting up a Git repository for your extension, to publishing it on Packagist.
+You've written a great extension — and now you want the whole world to be able to use it. You've written a great extension — and now you want the whole world to be able to use it. This document will take you through the process of distribution, from setting up a Git repository for your extension, to publishing it on Packagist.
 
 ## Setting Up Git
 
-The first thing you'll need to do is set up a version control system (VCS). The most popular VCS is [Git](https://git-scm.com/). In this guide we'll be using Git, so make sure you have it [installed](https://git-scm.com/downloads) before continuing. If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/).
+The first thing you'll need to do is set up a version control system (VCS). The most popular VCS is [Git](https://git-scm.com/). The first thing you'll need to do is set up a version control system (VCS). The most popular VCS is [Git](https://git-scm.com/). In this guide we'll be using Git, so make sure you have it [installed](https://git-scm.com/downloads) before continuing. If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/). If you don't have much Git knowledge, you may want to check out [these learning resources](https://try.github.io/).
 
-After you have installed Git, you'll need to initialize your repository. You can use `git init` on the command line if you're comfortable, or use a GUI tool like [SourceTree](https://www.sourcetreeapp.com/) or [GitKraken](https://www.gitkraken.com/).
+After you have installed Git, you'll need to initialize your repository. After you have installed Git, you'll need to initialize your repository. You can use `git init` on the command line if you're comfortable, or use a GUI tool like [SourceTree](https://www.sourcetreeapp.com/) or [GitKraken](https://www.gitkraken.com/).
 
-Then, you'll need an account in a Git hosting server, the most popular being [GitHub](https://github.com) and [GitLab](https://gitlab.com). These will instruct you on how to hook up your local repository with the online "remote" repository.
+Then, you'll need an account in a Git hosting server, the most popular being [GitHub](https://github.com) and [GitLab](https://gitlab.com). These will instruct you on how to hook up your local repository with the online "remote" repository. These will instruct you on how to hook up your local repository with the online "remote" repository.
 
 ## Tagging a Release
 
-As you are going to be publishing this extension, you'll want to make sure that the information is up to date. Take a minute to revisit `composer.json` and make sure package name, description, and Flarum extension information are all correct. It is recommended to have a `README.md` file in your repository to explain what the extension is, so create one if you haven't already.
+As you are going to be publishing this extension, you'll want to make sure that the information is up to date. As you are going to be publishing this extension, you'll want to make sure that the information is up to date. Take a minute to revisit `composer.json` and make sure package name, description, and Flarum extension information are all correct. It is recommended to have a `README.md` file in your repository to explain what the extension is, so create one if you haven't already. It is recommended to have a `README.md` file in your repository to explain what the extension is, so create one if you haven't already.
 
 When you're ready to release, commit your extension's files to the repo and tag your first version:
 
@@ -23,17 +23,17 @@ git push && git push --tags
 
 ## Publishing on Packagist
 
-Composer packages are published to a Composer repository, usually [Packagist](https://packagist.org/). You will need an account to proceed.
+Composer packages are published to a Composer repository, usually [Packagist](https://packagist.org/). You will need an account to proceed. You will need an account to proceed.
 
-If this is the first release you are publishing of your extension, you will need to [submit your package](https://packagist.org/packages/submit) using its public repository URL. If your extension is located on GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`.
+If this is the first release you are publishing of your extension, you will need to [submit your package](https://packagist.org/packages/submit) using its public repository URL. If your extension is located on GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`. If your extension is located on GitHub, this URL will look something like `https://github.com/AUTHOR/NAME.git`.
 
 ### Future Releases
 
-You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages). Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
+You can set up Packagist to [auto-update packages](https://packagist.org/about#how-to-update-packages). Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server. Then for future releases, all you will need to do with Git is commit, tag, and push it to the remote server.
 
 ## Promoting Your Extension
 
-You will most likely want to create a discussion on the Flarum Community in the [Extensions tag](https://discuss.flarum.org/t/extensions). Other people can install your extension using the following command:
+You will most likely want to create a discussion on the Flarum Community in the [Extensions tag](https://discuss.flarum.org/t/extensions). Other people can install your extension using the following command: Other people can install your extension using the following command:
 
 ```bash
 composer require vendor/package
