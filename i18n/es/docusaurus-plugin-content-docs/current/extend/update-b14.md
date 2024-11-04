@@ -196,6 +196,15 @@ Remember that Mithril automatically triggers a redraw after DOM event handlers. 
 }}>
   Click Me!
 </button>
+</button>
+
+// Mithril 2
+<button onclick={e => {
+  console.log("Hello world");
+  e.redraw = false;
+}}>
+  Click Me!
+</button>
 ```
 
 #### AJAX
@@ -522,6 +531,9 @@ class CustomComponent extends Component {
       <p>Hello World!{this.showContent ? ' Extra Content!' : ''}</p>
     </div>;
   }
+} ' Extra Content!' : ''}</p>
+    </div>;
+  }
 }
 ```
 
@@ -672,7 +684,7 @@ For the following changes, we currently provide a backwards-compatibility layer.
 
 Some extensions are based on, or add features to, other extensions. Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them. Now, you cannot enable an extension unless all of its dependencies are enabled, and you cannot disable an extension if there are other enabled extensions depending on it.
 
-So, how do we specify dependencies for an extension? Well, all you need to do is add them as composer dependencies to your extension's `composer.json`! For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this:
+So, how do we specify dependencies for an extension? Well, all you need to do is add them as composer dependencies to your extension's `composer.json`! For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this: For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this:
 
 ```json
 {
