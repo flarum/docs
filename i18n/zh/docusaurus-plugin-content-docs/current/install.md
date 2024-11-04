@@ -68,7 +68,7 @@ composer require flarum/extension-manager:*
 
 :::warning
 
-The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions.
+The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions. Only install the extension manager if you trust all of your forum admins with such permissions.
 
 :::
 
