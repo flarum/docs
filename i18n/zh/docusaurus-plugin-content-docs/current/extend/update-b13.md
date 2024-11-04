@@ -1,6 +1,6 @@
 # Updating For Beta 13
 
-Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
+Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
 :::tip
 
@@ -11,11 +11,11 @@ If you need help applying these changes or using new features, please start a di
 ## Breaking Changes
 
 - Dropped support for PHP 7.1.
-- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963).
-- The `Flarum\Util\Str::slug()` method has been removed including the class. Use `Illuminate\Support\Str::slug()` instead.
-- The `Flarum\Event\ConfigureMiddleware` has been removed. Use the [proper replacement](middleware.md).
+- Classes from the `Zend` namespace are now removed. Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963). Use the `Laminas` namespace instead. See [PR #1963](https://github.com/flarum/core/pull/1963).
+- The `Flarum\Util\Str::slug()` method has been removed including the class. Use `Illuminate\Support\Str::slug()` instead. Use `Illuminate\Support\Str::slug()` instead.
+- The `Flarum\Event\ConfigureMiddleware` has been removed. Use the [proper replacement](middleware.md). Use the [proper replacement](middleware.md).
 - Several events used in Event Listeners have been removed, use their [replacement extender](start.md#extenders) instead.
-- The LanguagePack extender only loads keys from extensions that are enabled. The translations loaded are based on the yaml files matching the [i18n namespace](i18n.md#appendix-a-standard-key-format).
+- The LanguagePack extender only loads keys from extensions that are enabled. The LanguagePack extender only loads keys from extensions that are enabled. The translations loaded are based on the yaml files matching the [i18n namespace](i18n.md#appendix-a-standard-key-format).
 - All notifications are now sent through the queue; without a queue driver they will run as usual.
 - The implementation of avatar upload changed, we're [no longer storing files temporarily on disk](https://github.com/flarum/core/pull/2117).
 - The SES mail driver [has been removed](https://github.com/flarum/core/pull/2011).
@@ -23,7 +23,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## Recommendations
 
-- Beta 14 will ship with a rewrite in the frontend (javascript). If you're building for that release, make sure to follow our [progress](https://github.com/flarum/core/pull/2126).
+- Beta 14 will ship with a rewrite in the frontend (javascript). If you're building for that release, make sure to follow our [progress](https://github.com/flarum/core/pull/2126). If you're building for that release, make sure to follow our [progress](https://github.com/flarum/core/pull/2126).
 
 ## New Features
 
