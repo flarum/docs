@@ -87,6 +87,23 @@ export default class CustomPageLoadsData extends Page {
     // ...
   }
 }
+  }
+}
+
+export default class CustomPageLoadsData extends Page {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    app.store.find("users", 1).then(user => {
+      app.setTitle(user.displayName());
+      app.setTitleCount(0);
+    })
+  }
+
+  view() {
+    // ...
+  }
+}
 ```
 
 Please note that if your page is [set as the homepage](#setting-page-as-homepage), `app.setTitle()` will clear the title for simplicity. It should still be called though, to prevent titles from previous pages from carrying over.
