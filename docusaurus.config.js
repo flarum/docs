@@ -52,6 +52,18 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: false,
           editUrl: 'https://github.com/flarum/docs/tree/master',
+          lastVersion: '1.x',
+          versions: {
+            current: {
+              label: '2.x',
+              path: '2.x',
+            },
+            '1.x': {
+              label: '1.x',
+              path: '/', // backwards compatibility, only needed for 1.x
+              // banner: 'unmaintained',
+            },
+          },
         },
         blog: false,
         theme: {
