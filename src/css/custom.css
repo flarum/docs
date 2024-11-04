@@ -193,7 +193,7 @@ li > .menu__list {
   top: 0;
   height: 100%;
   width: max(var(--doc-sidebar-width), calc(var(--doc-sidebar-width) + (100vw - 1800px)/2 - 8px));
-  background: var(--ifm-color-secondary);
+  /*background: var(--ifm-color-secondary);*/
 }
 
 .footer {
@@ -250,4 +250,10 @@ h1 > .hash-link, h2 > .hash-link, h3 > .hash-link, h4 > .hash-link, h5 > .hash-l
   background: linear-gradient(45deg, var(--bg), transparent);
   top: 50%;
   z-index: -1;
+}
+
+[data-theme=dark] .badge--secondary {
+  --ifm-badge-background-color: var(--ifm-color-black);
+  --ifm-badge-border-color: var(--ifm-color-black);
+  color: var(--ifm-color-secondary);
 }

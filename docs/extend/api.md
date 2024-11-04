@@ -12,7 +12,7 @@ To use the built-in REST API as part of an integration, see [Consuming the REST 
 
 Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
 
-![Flarum API Flowchart](/en/img/api_flowchart.svg)
+![Flarum API Flowchart](../assets/api_flowchart.svg)
 
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. Each API Resource is distinguished by a unique type and has a set of endpoints. You can read more about them in the below sections.
