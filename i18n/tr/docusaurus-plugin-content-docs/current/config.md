@@ -22,6 +22,7 @@ Dosya varsa, Flarum'a zaten kurulu olduğunu söyler. Ayrıca Flarum'a veritaban
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'prefix' => '', / veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
+    'port' => '3306', // veritabanındaki tablolar için önek, aynı veritabanını başka bir hizmetle paylaşıyorsanız kullanışlıdır
     'port' => '3306', // veritabanı bağlantısının portu, MySQL ile varsayılan olarak 3306'dır
     'strict' => false,
   ),
