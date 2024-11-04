@@ -191,7 +191,7 @@ To support searching for a model, you'll need to create a subclass of `Flarum/Se
 
 Then, you'll need to use that searcher in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Controller/ListUsersController.php#L93-L98).
 
-Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error. See core's [FulltextGambit for users](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/Gambit/FulltextGambit.php) for an example. You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method.
+Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error. You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method. See core's [FulltextGambit for users](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/Gambit/FulltextGambit.php) for an example.
 
 ### Search Drivers
 
