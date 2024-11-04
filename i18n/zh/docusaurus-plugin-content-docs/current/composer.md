@@ -18,7 +18,7 @@ Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其
 
 > Composer 是一个 PHP 依赖管理工具。 它允许您声明项目所依赖的库，并管理 (安装/更新) 这些库 。 — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。
+每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。 他们都有自己的自己的依赖和发布包。
 
 在过去，论坛框架会通过让用户上传带有拓展代码的压缩文件来管理拓展。 这看上去很简单，但问题会很快显现出来：
 
@@ -78,6 +78,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
     // 下面是我们最关心的部分
     // 这是我们想要的包清单和每个包的版本。
+    // 这是我们想要的包清单和每个包的版本。
     // 我们会简单略过他们
     "require": {
         "flarum/core": "^1.0",
@@ -131,7 +132,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
 ### 共享服务器
 
-如果Composer没有预先安装（你可以通过执行`composer --version`命令来判断），你可以查阅[手动安装手册](https://getcomposer.org/composer-stable.phar) 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行
+如果Composer没有预先安装（你可以通过执行`composer --version`命令来判断），你可以查阅[手动安装手册](https://getcomposer.org/composer-stable.phar) 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行
 
 :::danger
 
