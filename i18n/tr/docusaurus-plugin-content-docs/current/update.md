@@ -18,7 +18,7 @@ Ana sürümler arasında güncelleme yapıyorsanız (ör. <=0.1.0 - 1.x.x, 1.x.x
 
 **1. Adım:** Tüm uzantılarınızın, yüklemeye çalıştığınız Flarum sürümüyle uyumlu sürümleri olduğundan emin olun. Bu yalnızca ana sürümler için gereklidir (örneğin, uzantılarınızın önerilen sürümü izlediğini varsayarsak, v1.0.0'dan v1.1.0'a yükseltme yapıyorsanız muhtemelen bunu kontrol etmeniz gerekmez). Bunu, uzantının [Tartışma konusuna](https://discuss.flarum.org/t/extensions) bakarak, [Packagist](http://packagist.org/)'te arayarak veya [Extiverse](https://extiverse.com) gibi veritabanlarını kontrol ederek bilgi alabilirsiniz. Güncellemeden önce uyumsuz uzantıları kaldırmanız (yalnızca devre dışı bırakmanız değil) gerekir. Lütfen uzantı geliştiricilerine karşı sabırlı olun!
 
-**2. Adım:** `composer.json` dosyanıza bir göz atın. Uzantıların veya kitaplıkların belirli sürümlerini gerektirecek bir nedeniniz yoksa, `flarum/core` dışındaki her şeyin sürüm dizesini `*` olarak ayarlamalısınız ((`flarum/tags dahil) `, `flarum/bahsetmeler` ve diğer paket uzantılar.) `flarum/core` öğesinin `*` olarak AYARLANMADIĞINDAN emin olun. Belirli bir Flarum sürümünü hedefliyorsanız, `flarum/core` öğesini buna ayarlayın (ör. `"flarum/core": "v0.1.0-beta.16`). Yalnızca en son sürümü istiyorsanız, `"flarum/core": "^1.0"` kullanın.
+**2. Adım:** `composer.json` dosyanıza bir göz atın. Uzantıların veya kitaplıkların belirli sürümlerini gerektirecek bir nedeniniz yoksa, `flarum/core` dışındaki her şeyin sürüm dizesini `*` olarak ayarlamalısınız ((`flarum/tags dahil)`, `flarum/bahsetmeler` ve diğer paket uzantılar.) `flarum/core` öğesinin `*` olarak AYARLANMADIĞINDAN emin olun. Belirli bir Flarum sürümünü hedefliyorsanız, `flarum/core` öğesini buna ayarlayın (ör. `"flarum/core": "v0.1.0-beta.16`). Yalnızca en son sürümü istiyorsanız, `"flarum/core": "^1.0"` kullanın.
 
 **3. Adım:** Yerel kurulumunuz [yerel genişleticiler](extenders.md) kullanıyorsa, bunların Flarum'daki değişikliklerle güncel olduğundan emin olun.
 
@@ -41,7 +41,7 @@ php flarum cache:clear
 ### Beta'dan (<=0.1.0) Kararlı v1'e (^1.0.0) güncelleme
 
 1. Yukarıdaki 1-5 adımlarını uygulayın.
-2. `Composer.json`'da tüm paketlenmiş uzantıların (`flarum/tags`, `flarum/bahsetme`, `flarum/likes` vb.) sürüm dizelerini değiştirin. `^0.1.0` ile `*` arasında değişti.
+2. `Composer.json`'da tüm paketlenmiş uzantıların (`flarum/tags`, `flarum/bahsetme`, `flarum/likes` vb.) sürüm dizelerini değiştirin.
 3. `composer.json` içindeki `flarum/core` sürüm dizesini `^0.1.0`'den `^1.0`'e değiştirin.
 4. `composer.json` dosyanızdan `"minimum-stability": "beta",` satırını kaldırın
 5. Yukarıdaki 6. ve 7. adımları uygulayın.
@@ -95,7 +95,7 @@ flarum/core                       v0.1.0-beta.16  requires          illuminate/d
 flarum/flarum                     -               does not require  illuminate/database (but v6.20.19 is installed)
 flarum/core                       v0.1.0-beta.16  requires          illuminate/events (^8.0)
 flarum/flarum                     -               does not require  illuminate/events (but v6.20.19 is installed)
-... (this'll go on for a bit)
+...
 ```
 
 It is very likely that some of your extensions have not yet been updated.
