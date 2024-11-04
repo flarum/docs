@@ -4,14 +4,14 @@ In this article, we'll go over some frontend tools that are available to us for 
 
 ## Form Components
 
-As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
+As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
 
 - The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
 - The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
+- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator. Their `loading` attr can be set to `true` to show a loading indicator.
 - The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
 
-You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
+You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example: For example:
 
 ```jsx
 import Component from 'flarum/common/Component';
@@ -51,7 +51,7 @@ Don't forget to use [translations](i18n.md)!
 
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is: This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
 
 ```js
 import Stream from 'flarum/common/utils/Stream';
@@ -77,7 +77,7 @@ const value = Stream();
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+You can also use the `flarum/common/utils/withAttr` util for simplified form processing. You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
 
 ```jsx
 import Stream from 'flarum/common/utils/Stream';
@@ -103,6 +103,6 @@ Flarum's request system is available globally via `app.request(options)`, and ha
 - It will automatically attach `X-CSRF-Token` headers.
 - It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
 - If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
+- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done. However, this should almost never be done.
 
 Otherwise, the API for using `app.request` is the same as that for `m.request`.
