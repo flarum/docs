@@ -16,7 +16,7 @@ Bu belge, Flarum'a kod katkısında bulunmak isteyen geliştiriciler için bir k
 
 🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
 
-## Geliştirme Kurulumu
+## Ne Üzerinde Çalışmalı
 
 Nelerin yapılması gerektiğine dair genel bir bakış için [Milestones](https://github.com/flarum/core/milestones) dönüm noktalarına göz atın. Başlaması nispeten kolay olması gereken sorunların bir listesi için [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) etiketine bakın. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
 
@@ -89,13 +89,13 @@ A typical contribution workflow looks like this:
     * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
 
 1. 🔨 Bir **kod** yazın.
-    * [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
-    * *Ana* özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
+    * *Hata düzeltmeleri* en son kararlı dala gönderilmelidir.
+    * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
     * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
 
 2. 🚦 **Kodunuzu** test edin.
-    * Hataları giderirken veya özellikler eklerken gerektiği gibi birim testleri ekleyin.
+    * [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
 
 3. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
     * Add unit tests as necessary when fixing bugs or adding features.
@@ -118,7 +118,7 @@ A typical contribution workflow looks like this:
 
 7. 🕺 **Dance** like you just contributed to Flarum.
 
-## Geliştirme araçları
+## Kodlama Stili
 
 In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
