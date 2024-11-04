@@ -2,7 +2,7 @@
 
 Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/8.x/events).
 
-For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
+For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`. Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
@@ -49,9 +49,9 @@ class PostDeletedListener
 }
 ```
 
-As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/8.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
+As shown above, a listener class can be used instead of a callback. As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/8.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need. In this example we resolve a translator instance, but we can inject anything we want/need.
 
-You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
+You can also listen to multiple events at once via an event subscriber. You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
 
 ```php
 use Flarum\Extend;
@@ -95,7 +95,7 @@ class PostEventSubscriber
 
 ## Dispatching Events
 
-Dispatching events is very simple. All you need to do is inject `Illuminate\Contracts\Events\Dispatcher` into your class, and then call its `dispatch` method. For instance:
+Dispatching events is very simple. Dispatching events is very simple. All you need to do is inject `Illuminate\Contracts\Events\Dispatcher` into your class, and then call its `dispatch` method. For instance: For instance:
 
 ```php
 use Flarum\Post\Event\Deleted;
@@ -130,10 +130,17 @@ class SomeClass
 
 ## Custom Events
 
-As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
+As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data: Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
 
 ```php
 <?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ <?php
 
 /*
  * This file is part of Flarum.
