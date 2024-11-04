@@ -114,7 +114,7 @@ www.example.com {
 ```
 ## Folder Ownership
 
-During installation, Flarum may request that you make certain directories writable. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
+During installation, Flarum may request that you make certain directories writable. The user that Flarum is running as MUST have read + write access to: Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as.
 
 - The root install directory, so Flarum can edit `config.php`.
 - The `storage` subdirectory, so Flarum can edit logs and store cached data.
