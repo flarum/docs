@@ -1,10 +1,10 @@
 # 测试
 
-Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing. Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
+Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing. Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing. Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
 
 ## Backend Tests
 
-The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests. It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
+The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests. It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit. It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
 
 ### Setup
 
@@ -62,7 +62,7 @@ This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/
 
 #### phpunit.unit.xml
 
-This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for unit tests. You can tweak this as needed.
+This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for unit tests. You can tweak this as needed. You can tweak this as needed.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -105,7 +105,7 @@ $setup->run();
 
 #### composer.json Modifications
 
-We will also want to add scripts to our `composer.json`, so that we can run our test suite via `composer test`. Add some variant of the following to your `composer.json`:
+We will also want to add scripts to our `composer.json`, so that we can run our test suite via `composer test`. Add some variant of the following to your `composer.json`: Add some variant of the following to your `composer.json`:
 
 ```json
 "scripts": {
@@ -122,6 +122,7 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
     "test:unit": "Runs all unit tests.",
     "test:integration": "Runs all integration tests.",
     "test:setup": "Sets up a database for use with integration tests. Execute this only once."
+} Execute this only once."
 }
 ```
 
@@ -131,17 +132,17 @@ To run tests on every commit and pull request, check out the [GitHub Actions](gi
 
 ---
 
-Now that we have everything in place, we need to set up our testing site for integration tests. For this, we will need a MySQL or MariaDb instance, and a place to store testing files.
+Now that we have everything in place, we need to set up our testing site for integration tests. Now that we have everything in place, we need to set up our testing site for integration tests. For this, we will need a MySQL or MariaDb instance, and a place to store testing files.
 
-Testing database information is configured via the `DB_HOST` (defaults to `localhost`), `DB_PORT` (defaults to `3306`), `DB_DATABASE` (defaults to `flarum_test`), `DB_USERNAME` (defaults to `root`), `DB_PASSWORD` (defaults to `root`), and `DB_PREFIX` (defaults to `''`) environmental variables. The testing tmp directory path is configured via the `FLARUM_TEST_TMP_DIR_LOCAL` or `FLARUM_TEST_TMP_DIR` environmental variables, with the former taking precedence over the latter. If neither are provided, a `tmp` directory will be created in the `vendor` folder of your extension's local install.
+Testing database information is configured via the `DB_HOST` (defaults to `localhost`), `DB_PORT` (defaults to `3306`), `DB_DATABASE` (defaults to `flarum_test`), `DB_USERNAME` (defaults to `root`), `DB_PASSWORD` (defaults to `root`), and `DB_PREFIX` (defaults to `''`) environmental variables. The testing tmp directory path is configured via the `FLARUM_TEST_TMP_DIR_LOCAL` or `FLARUM_TEST_TMP_DIR` environmental variables, with the former taking precedence over the latter. If neither are provided, a `tmp` directory will be created in the `vendor` folder of your extension's local install. The testing tmp directory path is configured via the `FLARUM_TEST_TMP_DIR_LOCAL` or `FLARUM_TEST_TMP_DIR` environmental variables, with the former taking precedence over the latter. If neither are provided, a `tmp` directory will be created in the `vendor` folder of your extension's local install.
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). You should then be good to go for any Flarum extension (or core). To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). You should then be good to go for any Flarum extension (or core).
 
 ### Using Integration Tests
 
-Flarum's integration test utils are contained in the `Flarum\Testing\integration\TestCase` class. It:
+Flarum's integration test utils are contained in the `Flarum\Testing\integration\TestCase` class. It: It:
 
 - Boots (and makes available) an instance of the Flarum application.
 - Allows pre-populating the database, enabling extensions, and adding extenders.
@@ -154,17 +155,17 @@ Your testcase classes should extend this class.
 
 There are several important utilities available for your test cases:
 
-- The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
-- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
-- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
+- The `setting($key, $value)` method allows you to override settings before the app has booted. The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
+- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array. You can use dot-delimited keys to set deep-nested values in the config array.
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
 - The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
-- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
+- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
 :::warning
 
-The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
+The `TestCase` class will boot a Flarum instance the first time its `app()` method is called. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method. Any uses of `prepareDatabase`, `extend`, or `extension` after this happens will have no effect. Make sure you have done all the setup you need in your test case before calling `app()`, or `database()`, `server()`, or `send()`, which call `app()` implicitly. If you need to make database modifications after the app has booted, you can use the regular Eloquent save method, or the `Illuminate\Database\ConnectionInterface` instance obtained via calling the `database()` method.
 
 :::
 
@@ -174,6 +175,13 @@ For example:
 
 ```php
 <?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ <?php
 
 /*
  * This file is part of Flarum.
@@ -230,11 +238,43 @@ class SomeTest extends TestCase
 
     // ...
 }
+        // Note that tags will need to be in your extension's composer.json's `require-dev`.
+        // Also, make sure you include the ID of the extension currently being tested, unless you're
+        // testing the baseline without your extension.
+        $this->extension('flarum-tags', 'my-cool-extension');
+
+        // Note that this input isn't validated: make sure you're populating with valid, representative data.
+        $this->prepareDatabase([
+            'users' => [
+                $this->normalUser() // Available for convenience.
+            ],
+            'discussions' => [
+                ['id' => 1, 'title' => 'some title', 'created_at' => Carbon::now(), 'last_posted_at' => Carbon::now(), 'user_id' => 1, 'first_post_id' => 1, 'comment_count' => 1]
+            ],
+            'posts' => [
+                ['id' => 1, 'number' => 1, 'discussion_id' => 1, 'created_at' => Carbon::now(), 'user_id' => 1, 'type' => 'comment', 'content' => '<t><p>something</p></t>']
+            ]
+        ]);
+
+        // Most test cases won't need to test extenders, but if you want to, you can.
+        $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
+    }
+
+    /**
+     * @test
+     */
+    public function some_phpunit_test_case()
+    {
+        // ...
+    }
+
+    // ...
+}
 ```
 
 #### Sending Requests
 
-A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that:
+A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that: You can use this to ensure that:
 
 - Users can't access content they're not supported to access.
 - Permission-based create/edit/delete operations perform as expected.
@@ -244,13 +284,20 @@ A common application of automated testing is pinging various HTTP endpoints with
 
 `TestCase` provides several utilities:
 
-- The `request()` method constructs a `Psr\Http\Message\ServerRequestInterface` implementing object from a path, a method, and some options, which can be used for authentication, attaching cookies, or configuring the JSON request body. See the [method docblock](https://github.com/flarum/testing/blob/main/src/integration/TestCase.php) for more information on available options.
+- The `request()` method constructs a `Psr\Http\Message\ServerRequestInterface` implementing object from a path, a method, and some options, which can be used for authentication, attaching cookies, or configuring the JSON request body. See the [method docblock](https://github.com/flarum/testing/blob/main/src/integration/TestCase.php) for more information on available options. See the [method docblock](https://github.com/flarum/testing/blob/main/src/integration/TestCase.php) for more information on available options.
 - Once you've created a request instance, you can send it (and get a response object back) via the `send()` method.
 
 For example:
 
 ```php
 <?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ <?php
 
 /*
  * This file is part of Flarum.
@@ -307,6 +354,7 @@ class SomeTest extends TestCase
 
     // ...
 }
+}
 ```
 
 :::caution
@@ -317,21 +365,28 @@ If you want to send query parameters in a GET request, you can't include them in
 
 :::caution
 
-This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
+This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
 
 :::
 
 #### Console Tests
 
-If you want to test custom console commands, you can extend `Flarum\Testing\integration\ConsoleTestCase` (which itself extends the regular `Flarum\Testing\integration\TestCase`). It provides 2 useful methods:
+If you want to test custom console commands, you can extend `Flarum\Testing\integration\ConsoleTestCase` (which itself extends the regular `Flarum\Testing\integration\TestCase`). It provides 2 useful methods: It provides 2 useful methods:
 
 - `$this->console()` returns an instance of `Symfony\Component\Console\Application`
-- `$this->runCommand()` takes an array that will be wrapped in `Symfony\Component\Console\Input\ArrayInput`, and run. See the [Symfony code docblock](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22) for more information.
+- `$this->runCommand()` takes an array that will be wrapped in `Symfony\Component\Console\Input\ArrayInput`, and run. See the [Symfony code docblock](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22) for more information. See the [Symfony code docblock](https://github.com/symfony/console/blob/5.x/Input/ArrayInput.php#L22) for more information.
 
 For example:
 
 ```php
 <?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ <?php
 
 /*
  * This file is part of Flarum.
@@ -364,13 +419,13 @@ class ConsoleTest extends ConsoleTestCase
 
 ### Using Unit Tests
 
-Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit-9.html) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
+Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit-9.html) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
 
 When writing unit tests in Flarum, here are some helpful tips.
 
 #### Mocking Flarum Services
 
-Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.
+Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.
 
 ```php
     public function setUp(): void
@@ -385,7 +440,7 @@ Unlike the running app, or even integration tests, there is no app/container/etc
     }
 ```
 
-Some aspects require more mocks. If you're validating authorization interactions for instance you might need to mock your users `User::class` and the request's method that provides them as well!
+Some aspects require more mocks. Some aspects require more mocks. If you're validating authorization interactions for instance you might need to mock your users `User::class` and the request's method that provides them as well!
 
 ```
     $this->actor = m::mock(User::class);
@@ -428,7 +483,7 @@ Then, add the following to your `package.json`:
 }
 ```
 
-Rename `webpack.config.js` to `webpack.config.cjs`. This is necessary because Jest doesn't support ESM yet.
+Rename `webpack.config.js` to `webpack.config.cjs`. This is necessary because Jest doesn't support ESM yet. This is necessary because Jest doesn't support ESM yet.
 
 Create a `jest.config.cjs` file in the root of your extension:
 
@@ -470,7 +525,7 @@ To run tests on every commit and pull request, check out the [GitHub Actions](gi
 
 ### Using Unit Tests
 
-Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
+Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
 
 Here's a simple example of a unit test fo core's `abbreviateNumber` function:
 
@@ -494,7 +549,7 @@ test('abbreviates large numbers with decimal places', () => {
 
 ### Using Integration Tests
 
-Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters.
+Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters. For example, you might test that a page component renders the correct content based on certain parameters.
 
 Here's a simple example of an integration test for core's `Alert` component:
 
@@ -513,6 +568,41 @@ describe('Alert displays as expected', () => {
 
   it('should display alert messages with a custom icon when using a title', () => {
     const alert = mq(Alert, { type: 'error', icon: 'fas fa-users', title: 'Woops..' });
+    expect(alert).toContainRaw('Woops..');
+    expect(alert).toHaveElement('i.fas.fa-users');
+  });
+
+  it('should display alert messages with a title', () => {
+    const alert = mq(m(Alert, { type: 'error', title: 'Error Title' }, 'Shoot!'));
+    expect(alert).toContainRaw('Shoot!');
+    expect(alert).toContainRaw('Error Title');
+    expect(alert).toHaveElement('.Alert-title');
+  });
+
+  it('should display alert messages with custom controls', () => {
+    const alert = mq(Alert, { type: 'error', controls: [m('button', { className: 'Button--test' }, 'Click me!')] });
+    expect(alert).toHaveElement('button.Button--test');
+  });
+});
+
+describe('Alert is dismissible', () => {
+  it('should show dismiss button', function () {
+    const alert = mq(m(Alert, { dismissible: true }, 'Shoot!'));
+    expect(alert).toHaveElement('button.Alert-dismiss');
+  });
+
+  it('should call ondismiss when dismiss button is clicked', function () {
+    const ondismiss = jest.fn();
+    const alert = mq(Alert, { dismissible: true, ondismiss });
+    alert.click('.Alert-dismiss');
+    expect(ondismiss).toHaveBeenCalled();
+  });
+
+  it('should not be dismissible if not chosen', function () {
+    const alert = mq(Alert, { type: 'error', dismissible: false });
+    expect(alert).not.toHaveElement('button.Alert-dismiss');
+  });
+}); });
     expect(alert).toContainRaw('Woops..');
     expect(alert).toHaveElement('i.fas.fa-users');
   });
