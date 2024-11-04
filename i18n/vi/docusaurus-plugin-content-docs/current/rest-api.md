@@ -81,7 +81,7 @@ Hiện tại, 3 loại mã thông báo tồn tại, mặc dù chỉ có 2 loại
 
 #### Sử dụng
 
-Đính kèm giá trị `token` được trả về vào mỗi yêu cầu API bằng cách sử dụng header ` Authorization`:
+Đính kèm giá trị `token` được trả về vào mỗi yêu cầu API bằng cách sử dụng header `Authorization`:
 
     Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
 
