@@ -24,6 +24,8 @@ class YourCommand implements AbstractCommand {
 }
   }
 }
+  }
+}
 ```
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
