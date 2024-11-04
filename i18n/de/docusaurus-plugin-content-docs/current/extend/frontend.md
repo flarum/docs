@@ -322,7 +322,7 @@ Now that we have a better understanding of the component system, let's go a bit 
 
 ### ItemList
 
-As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 if not provided), then by key alphabetically where priorities are equal.
+As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 if not provided), then by key alphabetically where priorities are equal.
 
 ### `extend` and `override`
 
