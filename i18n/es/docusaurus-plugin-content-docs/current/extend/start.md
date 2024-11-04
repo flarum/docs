@@ -1,6 +1,6 @@
 # Cómo empezar
 
-¿Quieres construir una extensión de Flarum? You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
+¿Quieres construir una extensión de Flarum? You've come to the right place! You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
 
 ## Arquitectura
 
@@ -148,6 +148,6 @@ Una vez hecho esto, sigue adelante y activa la extension en la página de admini
 
 *whizzing, whirring, metal clunking*
 
-Woop! Hello to you too, extension!
+Woop! Woop! Hello to you too, extension!
 
 Estamos haciendo buenos progresos. Hemos aprendido a configurar nuestra extensión y a utilizar los extensores, lo que nos abre muchas puertas. Sigue leyendo para aprender a extender el frontend de Flarum.
