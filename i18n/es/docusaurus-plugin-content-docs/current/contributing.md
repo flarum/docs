@@ -16,7 +16,7 @@ Este documento es una guía para los desarrolladores que quieren contribuir con 
 
 🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
 
-## Configuración de desarrollo
+## En qué trabajar
 
 Consulta nuestros próximos [Hitos](https://github.com/flarum/core/milestones) para tener una visión general de lo que hay que hacer. Consulta la etiqueta [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) para ver una lista de temas que deberían ser relativamente fáciles de empezar. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
 
@@ -89,21 +89,21 @@ A typical contribution workflow looks like this:
     * Características *menores* que son totalmente compatibles con la versión actual de Flarum pueden ser enviadas al ultimo branch estable.
 
 1. 🔨 **Escribe** algo de código.
-    * Ver abajo sobre el [Estilo de codificación](#coding-style).
-    * Características *mayores* deben enviarse siempre al branch `master`, que contiene la próxima versión de Flarum.
+    * *Correcciones de Bugs* debe enviarse al ultimo branch estable.
+    * Características *menores* que son totalmente compatibles con la versión actual de Flarum pueden ser enviadas al ultimo branch estable.
     * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * Internamente utilizamos el scheme de nomenclatura  `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
 
 2. 🚦 **Prueba** el código.
-    * Añade pruebas unitarias según sea necesario cuando arregles errores o añadas características.
+    * Ver abajo sobre el [Estilo de codificación](#coding-style).
 
 3. 💾 Haz el **commit** de su código con un mensaje descriptivo.
-    * Si su cambio resuelve un problema existente (por lo general, debería) incluir "Fixes #123" en una nueva línea, donde 123 es el número del issue.
+    * Añade pruebas unitarias según sea necesario cuando arregles errores o añadas características.
     * Escriba un [buen mensaje en el commit](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
     * See [here](extend/testing.md) for more information about testing in Flarum.
 
 4. 🎁 **Envia** un Pull Request en GitHub.
-    * Rellene la plantilla del pull request.
+    * Si su cambio resuelve un problema existente (por lo general, debería) incluir "Fixes #123" en una nueva línea, donde 123 es el número del issue.
     * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
     * *Fix* commits should describe the issue fixed, not how it was fixed.
 
@@ -118,11 +118,11 @@ A typical contribution workflow looks like this:
 
 7. **Columnas** deben nombrarse según su tipo de datos:
 
-## Herramientas de Desarrollo
+## Estilo de Codificación
 
 In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
-Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
+Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
 
 ### PHP
 
