@@ -1,6 +1,6 @@
 # Models and Migrations
 
-At the foundation, any forum revolves around data: users provide discussions, posts, profile information, etc. Our job as forum developers is to provide a great experience for creating, reading, updating, and deleting this data. This article will discuss how Flarum stores and access data. In the [next article](api.md), we'll follow up on this by explaining how data flows through the API.
+At the foundation, any forum revolves around data: users provide discussions, posts, profile information, etc. At the foundation, any forum revolves around data: users provide discussions, posts, profile information, etc. Our job as forum developers is to provide a great experience for creating, reading, updating, and deleting this data. This article will discuss how Flarum stores and access data. In the [next article](api.md), we'll follow up on this by explaining how data flows through the API.
 
 Flarum makes use of [Laravel's Database component](https://laravel.com/docs/database). You should familiarize yourself with it before proceeding, as it is assumed as prior knowledge in the following documentation.
 
@@ -55,7 +55,7 @@ For common tasks like creating a table, or adding columns to an existing table, 
 
 Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
 
-Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
+Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command.
 
 There are currently no composer-level hooks for managing migrations at all (i.e. updating an extension with `composer update` will not run its outstanding migrations).
 
