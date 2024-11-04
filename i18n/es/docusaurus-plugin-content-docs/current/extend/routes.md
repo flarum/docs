@@ -168,7 +168,7 @@ To register the route on the frontend, there is a `Routes` extender which works 
 import Extend from 'flarum/common/extenders';
 
 export default [
-  new Extend.Routes()
+  new Extend. Routes()
     .add('acme.users', '/users', <UsersPage />),
 ];
 ```
@@ -192,7 +192,7 @@ Advanced use cases might also be interested in using [route resolvers](frontend-
 Frontend routes also allow you to capture segments of the URI:
 
 ```jsx
-  new Extend.Routes()
+  new Extend. Routes()
     .add('acme.user', '/user/:id', <UsersPage />)
 ```
 
@@ -210,7 +210,7 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 The extender also allows you to define a route helper method:
 
 ```js
-  new Extend.Routes()
+  new Extend. Routes()
    .add('acme.user', '/user/:id', <UsersPage />)
    .helper('acmeUser', (user) => app.route('acme.user', { id: user.id() }))
 ```
