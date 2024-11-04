@@ -26,7 +26,7 @@ Back in the day, forum frameworks would manage extensions by having users upload
 - Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
 - Zip files can cause a lot of headache if trying to automate deployments, run automated tests, or scale to multiple server nodes.
 - There is no good way to ensure conflicting extension versions can't be installed, or that system PHP version and extension requirements are met.
-- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
+- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
 
 Composer takes care of all these issues, and more!
 
@@ -79,7 +79,8 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     // This next section is the one we care about the most.
     // It's a list of packages we want, and the versions for each.
     // We'll discuss this shortly.
-    "require": {
+    "prefer-stable": true
+} "require": {
         "flarum/core": "^1.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
@@ -99,18 +100,17 @@ As mentioned above, the entire composer configuration for your Flarum site is co
         "flarum/tags": "*"
     },
 
-    // Various composer config. The ones here are sensible defaults.
-    // See https://getcomposer.org/doc/06-config.md for a list of options.
-    "config": {
+    // Various composer config.
+    The ones here are sensible defaults.
+    // See https://getcomposer.org/doc/06-config.md for a list of options. "config": {
         "preferred-install": "dist",
         "sort-packages": true
     },
 
     // If composer can find a stable (not dev, alpha, or beta) version
-    // of a package, it should use that. Generally speaking, production
+    // of a package, it should use that.
+    Generally speaking, production
     // sites shouldn't run beta software unless you know what you're doing.
-    "prefer-stable": true
-}
 ```
 
 Let's focus on that `require` section. Each entry is the name of a composer package, and a version string. To read more about version strings, see the relevant [composer documentation](https://semver.org/).
@@ -135,7 +135,7 @@ If Composer is not preinstalled (you can check this by running `composer --versi
 
 :::danger
 
-Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
+Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
 
 :::
 
