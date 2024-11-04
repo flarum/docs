@@ -52,6 +52,18 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: false,
           editUrl: 'https://github.com/flarum/docs/tree/master',
+          lastVersion: '1.x',
+          versions: {
+            current: {
+              label: '2.x',
+              path: '2.x',
+            },
+            '1.x': {
+              label: '1.x',
+              path: '/', // backwards compatibility, only needed for 1.x
+              // banner: 'unmaintained',
+            },
+          },
         },
         blog: false,
         theme: {
@@ -75,7 +87,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             position: 'right',
           },
           {
-            to: '/',
+            type: 'doc',
+            docId: 'README',
             label: 'Guide',
             position: 'right',
             // Anything that isn't `extend`, `'internal`, or contain a slash.
@@ -83,13 +96,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend\/?|internal\/?|)$).*',
           },
           {
-            to: 'extend',
+            type: 'doc',
+            docId: 'extend/README',
             label: 'Extend',
             position: 'right',
             activeBasePath: `extend`,
           },
           {
-            to: 'internal',
+            type: 'doc',
+            docId: 'internal/README',
             label: 'Internal',
             position: 'right',
             activeBasePath: `internal`,
@@ -104,7 +119,6 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             label: 'Flarum',
             position: 'right',
             items: [
-
               {
                 href: 'https://flarum.org/',
                 label: 'Home'
@@ -118,7 +132,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
                 label: 'GitHub'
               },
             ]
-          },{
+          },
+          {
+            type: 'docsVersionDropdown',
+            position: 'right',
+            dropdownItemsAfter: [],
+            dropdownActiveClassDisabled: true,
+          },
+          {
             type: 'localeDropdown',
             position: 'right',
           },
