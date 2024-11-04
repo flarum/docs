@@ -156,9 +156,9 @@ There are several important utilities available for your test cases:
 
 - The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
 - Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
-- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. Note that you must list them in a valid order. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`.
 - The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
-- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
+- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
@@ -177,8 +177,7 @@ For example:
 
 /*
  * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
+ * * For detailed copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
 
@@ -230,6 +229,10 @@ class SomeTest extends TestCase
 
     // ...
 }
+    }
+
+    // ...
+}
 ```
 
 #### Sending Requests
@@ -254,8 +257,7 @@ For example:
 
 /*
  * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
+ * * For detailed copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
 
@@ -307,6 +309,7 @@ class SomeTest extends TestCase
 
     // ...
 }
+}
 ```
 
 :::caution
@@ -335,8 +338,7 @@ For example:
 
 /*
  * This file is part of Flarum.
- *
- * For detailed copyright and license information, please view the
+ * * For detailed copyright and license information, please view the
  * LICENSE file that was distributed with this source code.
  */
 
@@ -370,7 +372,7 @@ When writing unit tests in Flarum, here are some helpful tips.
 
 #### Mocking Flarum Services
 
-Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.
+Unlike the running app, or even integration tests, there is no app/container/etc to inject service instances into our classes.  Now all the  useful settings, or helpers your extension use require a _mock_ . Now all the  useful settings, or helpers your extension use require a _mock_ . We want to limit mocking to just the key services, supporting only the minimum interactions needed to test the contract of our individual functions.
 
 ```php
     public function setUp(): void
@@ -526,6 +528,28 @@ describe('Alert displays as expected', () => {
 
   it('should display alert messages with custom controls', () => {
     const alert = mq(Alert, { type: 'error', controls: [m('button', { className: 'Button--test' }, 'Click me!')] });
+    expect(alert).toHaveElement('button.Button--test');
+  });
+});
+
+describe('Alert is dismissible', () => {
+  it('should show dismiss button', function () {
+    const alert = mq(m(Alert, { dismissible: true }, 'Shoot!'));
+    expect(alert).toHaveElement('button.Alert-dismiss');
+  });
+
+  it('should call ondismiss when dismiss button is clicked', function () {
+    const ondismiss = jest.fn();
+    const alert = mq(Alert, { dismissible: true, ondismiss });
+    alert.click('.Alert-dismiss');
+    expect(ondismiss).toHaveBeenCalled();
+  });
+
+  it('should not be dismissible if not chosen', function () {
+    const alert = mq(Alert, { type: 'error', dismissible: false });
+    expect(alert).not.toHaveElement('button.Alert-dismiss');
+  });
+}); });
     expect(alert).toHaveElement('button.Button--test');
   });
 });
