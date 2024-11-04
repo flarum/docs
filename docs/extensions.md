@@ -23,12 +23,12 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
-![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+![extension manager admin page](./assets/extension-manager-page.png)
 
 
 ## Finding Extensions
 
-Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
+Flarum has a wide ecosystem of extensions, most of which are open source and free. The extension manager provides a discovery feature allowing you to search through the available extensions. The extension manager connects to [flarum.org/extensions](https://flarum.org/extensions). Alternatively, you can visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums.
 
 ## Installing Extensions
 
