@@ -27,6 +27,10 @@ function ($request) {
 use Flarum\Post\Post;
 
 function ($request) {
+    if (! use DateTime;
+use Flarum\Post\Post;
+
+function ($request) {
     if (! in_array($request->getAttribute('routeName'), ['discussions.create', 'posts.create'])) {
         return;
     }
