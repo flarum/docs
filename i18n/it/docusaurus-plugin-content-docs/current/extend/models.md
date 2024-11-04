@@ -1,6 +1,6 @@
 # Modelli e migrazioni
 
-Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
+Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
 
 Flarum fa uso di [componenti Database Laravel](https://laravel.com/docs/database). È necessario familiarizzare con questi componenti prima di procedere, poiché si presume che la conoscenza di questi sia assodata.
 
@@ -55,7 +55,7 @@ Per attività comuni come la creazione di una tabella o l'aggiunta di colonne a 
 
 Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite.
 
-Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate.
+Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command.
 
 Al momento non sono presenti hook a livello del composer per la gestione delle migrazioni (es. aggiornare un estensione con `composer update` non eseguirà le sue migrazioni in sospeso).
 
