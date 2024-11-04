@@ -159,6 +159,9 @@ app.extensionData
     .registerSetting(...)
     .registerPermission(...)
     .registerPermission(...);
+    .registerSetting(...)
+    .registerPermission(...)
+    .registerPermission(...);
 ```
 
 ### Extending/Overriding the Default Page
