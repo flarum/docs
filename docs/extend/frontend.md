@@ -52,16 +52,26 @@ js
   "private": true,
   "name": "@acme/flarum-hello-world",
   "dependencies": {
-    "flarum-webpack-config": "^1.0.0",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^4.0.0"
-  },
-  "devDependencies": {
-    "flarum-tsconfig": "^1.0.0"
+    "@flarum/prettier-config": "^1.0.0",
+    "flarum-tsconfig": "^2.0.0",
+    "flarum-webpack-config": "^3.0.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4",
+    "typescript-coverage-report": "^0.6.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "analyze": "cross-env ANALYZER=true <%= params.jsPackageManager %> run build",
+    "format": "prettier --write src",
+    "format-check": "prettier --check src",
+    "clean-typings": "npx rimraf dist-typings && mkdir dist-typings",
+    "build-typings": "<%= params.jsPackageManager %> run clean-typings && ([ -e src/@types ] && cp -r src/@types dist-typings/@types || true) && tsc && <%= params.jsPackageManager %> run post-build-typings",
+    "post-build-typings": "find dist-typings -type f -name '*.d.ts' -print0 | xargs -0 sed -i 's,../src/@types,@types,g'",
+    "check-typings": "tsc --noEmit --emitDeclarationOnly false",
+    "check-typings-coverage": "typescript-coverage-report",
   }
 }
 ```
@@ -90,16 +100,21 @@ To work properly, our extensions should use the [official flarum webpack config]
   // This will match all .ts, .tsx, .d.ts, .js, .jsx files in your `src` folder
   // and also tells your Typescript server to read core's global typings for
   // access to `dayjs` and `$` in the global namespace.
-  "include": ["src/**/*", "../vendor/flarum/core/js/dist-typings/@types/**/*"],
+  "include": [
+    "src/**/*",
+    "../vendor/*/*/js/dist-typings/@types/**/*",
+    "@types/**/*"
+  ],
   "compilerOptions": {
     // This will output typings to `dist-typings`
     "declarationDir": "./dist-typings",
     "baseUrl": ".",
     "paths": {
-      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"],
     }
   }
 }
+
 ```
 
 This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
