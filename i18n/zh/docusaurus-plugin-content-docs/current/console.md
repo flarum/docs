@@ -68,7 +68,7 @@
 
 这个命令一般不应被手动执行。
 
-Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
+Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs. In this case, you should consult your host for more information on how to schedule cron jobs.
 
 ### schedule:list
 
