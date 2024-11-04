@@ -2,20 +2,27 @@
 
 Flarum core integrates with the filesystem to store and serve assets (like compiled JS/CSS or upload logos/favicons) and avatars.
 
-Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/8.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
+Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/8.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Disks
 
-Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later. Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
+Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later. Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`. Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
 
 ### Using existing disks
 
-To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need.
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need. To do so, you should inject the factory contract in your class, and access the disks you need.
 
 Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
 
 ```php
 <?php
+
+/*
+ * This file is part of Flarum.
+ *
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ <?php
 
 /*
  * This file is part of Flarum.
@@ -98,11 +105,11 @@ return [
 
 Since all disks use the local filesystem by default, you'll need to provide a base path and base URL for the local filesystem.
 
-The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/8.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
+The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/8.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored. The `driver` key should not be provided, and will be ignored.
 
 ## Storage drivers
 
-Flarum selects the active driver for each disk by checking the `disk_driver.DISK_NAME` key in the [settings repository](settings.md) and [config.php file](../config.md). If no driver is configured, or the configured driver is unavailable, Flarum will default to the `local` driver.
+Flarum selects the active driver for each disk by checking the `disk_driver.DISK_NAME` key in the [settings repository](settings.md) and [config.php file](../config.md). If no driver is configured, or the configured driver is unavailable, Flarum will default to the `local` driver. If no driver is configured, or the configured driver is unavailable, Flarum will default to the `local` driver.
 
 You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/framework/blob/main/framework/core/src/Filesystem/DriverInterface.php#L16), and registering it via the `Filesystem` extender:
 
@@ -118,12 +125,12 @@ Filesystem storage drivers are a very powerful tool that allows you to completel
 
 :::danger
 
-Some drivers might try to index their filesystem every time the driver is instantiated, even if only the `url` method is needed. This can have serious performance implications. In most cases, you'll want to ensure that your driver's `url` method does not ping the remote filesystem. Similarly, the remote filesystem should usually not be accessed until operations are actually executed.
+Some drivers might try to index their filesystem every time the driver is instantiated, even if only the `url` method is needed. This can have serious performance implications. In most cases, you'll want to ensure that your driver's `url` method does not ping the remote filesystem. Similarly, the remote filesystem should usually not be accessed until operations are actually executed. This can have serious performance implications. In most cases, you'll want to ensure that your driver's `url` method does not ping the remote filesystem. Similarly, the remote filesystem should usually not be accessed until operations are actually executed.
 
 :::
 
 ## GUI and Admin Configuration
 
-Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future. For now, extensions are responsible for providing a GUI for their disks and drivers.
+Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future. For now, extensions are responsible for providing a GUI for their disks and drivers. This might be added in the future. For now, extensions are responsible for providing a GUI for their disks and drivers.
 
 As noted [above](#storage-drivers), if your extension provides a GUI for selecting drivers for a disk, it should modify the `disk_driver.DISK_NAME` key in settings.
