@@ -2,7 +2,7 @@
 
 ### ¿Cuándo será estable Flarum?
 
-Yes! After 6 years of development, Flarum 1.0.0 is finally here.
+Yes! Yes! After 6 years of development, Flarum 1.0.0 is finally here.
 
 ### ¿Podré pasar de la versión beta a las siguientes?
 
@@ -14,11 +14,11 @@ Todas las donaciones son bienvenidas. Puedes donar en [Github Sponsors](https://
 
 Sin embargo, las donaciones no tendrán un impacto directo en la velocidad de desarrollo de Flarum. También animamos a los usuarios a contribuir de otras maneras, como [contribuyendo con código](contributing.md), [construyendo extensiones](/extend/), escribiendo documentación, traduciendo Flarum a otros idiomas, proporcionando ayuda y soporte en los [foros de la comunidad](https://discuss.flarum.org/)...
 
-### ¿Tendrá Flarum [insertar característica aquí]? When? ¿Cuándo? ¿Por qué no?
+### ¿Tendrá Flarum [insertar característica aquí]? When? ¿Cuándo? ¿Por qué no? ¿Cuándo? ¿Por qué no?
 
 Nos encantaría construir innumerables características y extensiones para Flarum, pero lo primero es lo primero: Nos centramos en lo esencial y en la estabilidad.
 
-### ¿Puedo integrar Flarum con WordPress/Laravel/etc.?
+### ¿Por qué todavía no han arreglado [inserte el problema aquí]?
 
 También en este caso, la respuesta es "lo primero es lo primero". Si aún no hemos solucionado un problema (o no le hemos asignado un hito), es porque estamos trabajando en otra cosa igual de importante. Por favor, tened paciencia; intentaremos que esté listo antes del lanzamiento. O si tienes prisa, no dudes en arreglarlo tú mismo y [contribuir al proyecto](contributing.md).
 
