@@ -55,7 +55,7 @@ For common tasks like creating a table, or adding columns to an existing table, 
 
 Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
 
-Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
+Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command.
 
 There are currently no composer-level hooks for managing migrations at all (i.e. updating an extension with `composer update` will not run its outstanding migrations).
 
@@ -119,7 +119,7 @@ and
 use Flarum\Group\Group;
 
 return Migration::addPermissions([
-    'some.permission' => Group::MODERATOR_ID
+    'some.permission' => Group:: MODERATOR_ID
 ]);
 ```
 
@@ -210,7 +210,7 @@ Flarum provides a simple toolset for working with data in the frontend in the fo
 
 ### Fetching Data
 
-Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON:API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
+Flarum's frontend contains a local data `store` which provides an interface to interact with the JSON: API. You can retrieve resource(s) from the API using the `find` method, which always returns a promise:
 
 ```js
 // GET /api/discussions?sort=createdAt
@@ -258,7 +258,7 @@ You must then register your new model with the store using the frontend `Store` 
 import Extend from 'flarum/common/extenders';
 
 export default [
-  new Extend.Store()
+  new Extend. Store()
     .add('tags', Tag),
 ];
 ```
@@ -278,7 +278,7 @@ export { default as extend } from './extend';
 To add attributes and relationships to existing models, use the `Model` extender:
 
 ```ts
-  new Extend.Model(Discussion)
+  new Extend. Model(Discussion)
     .attribute<string>('slug')
     .hasOne<User>('user')
     .hasMany<Post>('posts')
