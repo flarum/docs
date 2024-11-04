@@ -87,7 +87,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             position: 'right',
           },
           {
-            to: '/',
+            type: 'doc',
+            docId: 'README',
             label: 'Guide',
             position: 'right',
             // Anything that isn't `extend`, `'internal`, or contain a slash.
@@ -95,13 +96,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
             activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend\/?|internal\/?|)$).*',
           },
           {
-            to: 'extend',
+            type: 'doc',
+            docId: 'extend/README',
             label: 'Extend',
             position: 'right',
             activeBasePath: `extend`,
           },
           {
-            to: 'internal',
+            type: 'doc',
+            docId: 'internal/README',
             label: 'Internal',
             position: 'right',
             activeBasePath: `internal`,
