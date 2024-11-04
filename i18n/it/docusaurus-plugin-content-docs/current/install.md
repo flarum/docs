@@ -114,7 +114,7 @@ www.example.com {
 ```
 ## Proprietà della cartella
 
-Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune directory. Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as. The user that Flarum is running as MUST have read + write access to:
+Durante l'installazione, Flarum potrebbe richiedere di rendere scrivibili alcune directory. The user that Flarum is running as MUST have read + write access to: Modern operating systems are generally multi-user, meaning that the user you log in as is not the same as the user Flarum is running as.
 
 - The root install directory, so Flarum can edit `config.php`.
 - The `storage` subdirectory, so Flarum can edit logs and store cached data.
