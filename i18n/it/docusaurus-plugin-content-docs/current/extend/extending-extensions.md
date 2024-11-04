@@ -72,13 +72,7 @@ Per esempio:
 ```json
 {
   // ...
-  "extra": {
-    "flarum-extension": {
-      "optional-dependencies": [
-        "flarum/tags"
-      ]
-    }
-  },
+  {
   // ...
 }
 ```
