@@ -107,25 +107,14 @@ Ad esempio, ecco come la Pagina di Discussione rende [`PostStreamState`](https:/
 Puoi anche controllare il tipo e i dati di una pagina usando `PostStreamState` ed il metodo `matches`. Ad esempio, se vogliamo sapere se siamo attualmente su una pagina di discussione:
 
 ```jsx
-// Vedi sopra per un esempio di pagina personalizzata
-import CustomPage from './components/CustomPage';
-// Vedi sotto per un esempio di resolver personalizzato
-import CustomPageResolver from './resolvers/CustomPageResolver';
+import IndexPage from 'flarum/components/DiscussionPage';
+import DiscussionPage from 'flarum/components/DiscussionPage';
 
-// Utilizza un'istanza del resolver di percorsi
-app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
-  onmatch: function(args) {
-    if (!app.session.user) return m.route.SKIP;
+// To just check page type
+app.current.matches(DiscussionPage);
 
-    return CustomPage;
-  }
-}};
-
-// Usa una classe di resolver di percorsi personalizzata
-app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
-
-// Usa la classe di default (`flarum/resolvers/DefaultResolver`)
-app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+// To check page type and some data
+app.current.matches(IndexPage, {routeName: 'following'});
 ```
 
 ## Route resolver (avanzato)
