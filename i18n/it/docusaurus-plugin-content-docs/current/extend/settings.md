@@ -4,7 +4,7 @@ Ad un certo punto durante la creazione di un'estensione, potresti voler leggere 
 
 ## La repository Impostazioni
 
-La lettura o la modifica delle impostazioni può essere eseguita utilizzando un'implementazione di `SettingsRepositoryInterface`. Invece, puoi fare affidamento sul contenitore per istanziare la tua classe e inserire le dipendenze corrette. Poichè Flarum utilizza [il contenitore di servizi di Laravel](https://laravel.com/docs/6.x/container) (o IoC container)per l'inserimento di dipendenze, non è necessario preoccuparsi di dove ottenere tale repository o di come istanziarne una.
+La lettura o la modifica delle impostazioni può essere eseguita utilizzando un'implementazione di `SettingsRepositoryInterface`. Poichè Flarum utilizza [il contenitore di servizi di Laravel](https://laravel.com/docs/6.x/container) (o IoC container)per l'inserimento di dipendenze, non è necessario preoccuparsi di dove ottenere tale repository o di come istanziarne una. Poichè Flarum utilizza [il contenitore di servizi di Laravel](https://laravel.com/docs/6.x/container) (o IoC container)per l'inserimento di dipendenze, non è necessario preoccuparsi di dove ottenere tale repository o di come istanziarne una.
 
 ```php
 <?php
