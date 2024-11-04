@@ -16,7 +16,7 @@ Il processo di autorizzazione viene utilizzato per verificare se una persona è 
 
 Ciascuno di questi è determinato da criteri univoci: in alcuni casi è sufficiente un flag; altrimenti, potremmo aver bisogno di una logica personalizzata.
 
-## Visibility Scoping
+## Come funziona
 
 Le richieste di autorizzazione vengono effettuate con 3 parametri, con logica contenuta in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
 
@@ -39,7 +39,7 @@ Quindi, se l'utente è nel gruppo admin, autorizzeremo l'azione.
 
 Infine, poiché abbiamo esaurito tutti i controlli, daremo per scontato che l'utente non sia autorizzato e negheremo la richiesta.
 
-## Autorizzazioni del frontend
+## Come utilizzare le autorizzazioni
 
 Il sistema di autorizzazione di Flarum è accessibile attraverso metodi pubblici delle classi `Flarum\User\User`. I più importanti sono elencati di seguito; altri sono documentati nelle [documentazioni PHP API](https://api.docs.flarum.org/php/master/flarum/user/user).
 
@@ -48,25 +48,25 @@ In questo esempio, useremo `$actor` come istanza di `Flarum\User\User`, `'viewFo
 
 ```php
 // Verifica se un utente può eseguire un'azione.
-// ATTENZIONE: questo dovrebbe essere usato con cautela, poiché in realtà
-// non viene eseguito attraverso il processo di autorizzazione, quindi non tiene conto delle policy.
-$canDoSomething = $actor->can('viewForum');
-
-// Verifica se un utente può eseguire un'azione su un argomento.
-// Tuttavia, è utile nell'implementazione di criteri personalizzati.
-$canDoSomething = $actor->can('reply', $discussion);
-
-// Genera un'eccezione PermissionDeniedException se un utente non può eseguire un'azione.
-$actpr->assertAdmin();
-
-// Controlla se uno dei gruppi dell'utente dispone di un'autorizzazione.
 $actor->assertCan('viewForum');
 $actor->assertCan('reply', $discussion);
 
 // Genera un'eccezione NotAuthenticatedException se l'utente non ha efettuato il login.
+// ATTENZIONE: questo dovrebbe essere usato con cautela, poiché in realtà
+// non viene eseguito attraverso il processo di autorizzazione, quindi non tiene conto delle policy.
 $actor->assertRegistered();
 
 // Genera un'eccezione PermissionDeniedException se l'utente non è un amministratore.
+$canDoSomething = $actor->can('viewForum');
+
+// Verifica se un utente può eseguire un'azione su un argomento.
+$actpr->assertAdmin();
+
+// Controlla se uno dei gruppi dell'utente dispone di un'autorizzazione.
+// Tuttavia, è utile nell'implementazione di criteri personalizzati.
+$canDoSomething = $actor->can('reply', $discussion);
+
+// Genera un'eccezione PermissionDeniedException se un utente non può eseguire un'azione.
 $actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
