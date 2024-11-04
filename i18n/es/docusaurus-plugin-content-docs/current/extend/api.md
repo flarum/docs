@@ -27,7 +27,7 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 
 We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend. We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
 
-As per the JSON:API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
+As per the JSON: API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
 
 - Listing instances of a model (possibly including searching/filtering)
 - Getting a single model instance
@@ -51,7 +51,7 @@ We'll go over each type of controller shortly, but once they're written, you can
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 
 - The path should either be `/prefix/{id}` for get/update/delete, or `/prefix` for list/create.
-- the prefix (`tags` in the example above) must correspond to the JSON:API model type. You'll also use this model type in your serializer's `$type` attribute, and when registering the frontend model (`app.store.models.TYPE = MODEL_CLASS`).
+- the prefix (`tags` in the example above) must correspond to the JSON: API model type. You'll also use this model type in your serializer's `$type` attribute, and when registering the frontend model (`app.store.models.TYPE = MODEL_CLASS`).
 - The methods must match the example above.
 
 Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
@@ -110,7 +110,7 @@ $offset = $this->extractOffset($request);
 return Tag::skip($offset)->take($limit);
 ```
 
-To add pagination links to the JSON:API document, use the `Document::addPaginationLinks` method.
+To add pagination links to the JSON: API document, use the `Document::addPaginationLinks` method.
 
 #### Clasificación
 
@@ -170,7 +170,7 @@ class ShowTagController extends AbstractShowController
 
 ### Creación de un recurso
 
-For the controller that creates a resource, extend the `Flarum\Api\Controller\AbstractCreateController` class. This is the same as the show controller, except the response status code will automatically be set to `201 Created`. You can access the incoming JSON:API document body via `$request->getParsedBody()`:
+For the controller that updates a resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the create controller, you can access the incoming JSON: API document body via `$request->getParsedBody()`.
 
 ```php
 use Flarum\Api\Controller\AbstractCreateController;
@@ -195,7 +195,7 @@ class CreateTagController extends AbstractCreateController
 
 ### Actualización de un recurso
 
-For the controller that updates a resource, extend the `Flarum\Api\Controller\AbstractShowController` class. Like for the create controller, you can access the incoming JSON:API document body via `$request->getParsedBody()`.
+For the controller that creates a resource, extend the `Flarum\Api\Controller\AbstractCreateController` class. You can access the incoming JSON: API document body via `$request->getParsedBody()`:
 
 ### Borrar un recurso
 
@@ -279,9 +279,9 @@ return [
 
 ## Serializadores
 
-Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
+Before we can send our data to the frontend, we need to convert it to JSON: API format so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON: API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
 
-A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API. Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
+A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON: API. Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
 
 ```php
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -350,4 +350,4 @@ return [
 
 ### Non-Model Serializers and `ForumSerializer`
 
-Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything. For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
+Serializers don't have to correspond to Eloquent models: you can define JSON: API resources for anything. For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
