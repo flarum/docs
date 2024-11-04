@@ -124,7 +124,7 @@ Volvemos a nuestra extensión favorita del rocket:
  * Qué tipo de permiso - ver las funciones de [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) para los tipos (eliminar elementos del nombre)
  * Prioridad de `ItemList`
 
-Recuerda que todas estas funciones se pueden encadenar como:
+Volvemos a nuestra extensión favorita del rocket:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -150,12 +150,15 @@ Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
 
 ### Recordatorio de Encadenamiento
 
-Entonces, simplemente ejecute `registerPage`:
+Recuerda que todas estas funciones se pueden encadenar como:
 
 ```js
 app.extensionData
     .for('acme-interstellar')
     .registerSetting(...)
+    .registerSetting(...)
+    .registerPermission(...)
+    .registerPermission(...);
     .registerSetting(...)
     .registerPermission(...)
     .registerPermission(...);
@@ -168,7 +171,7 @@ app.extensionData
 
 A veces tienes configuraciones más complicadas que se mezclan con las relaciones, o simplemente quieres que la página se vea completamente diferente. En este caso, necesitarás decirle a `ExtensionData` que quieres proporcionar tu propia página. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
-¡Puedes extender la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o extender la `Page` base y diseñar la tuya propia!
+Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
 
 ```js
 import ExtensionPage from 'flarum/components/ExtensionPage';
@@ -183,7 +186,7 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
+Entonces, simplemente ejecute `registerPage`:
 
 ```js
 
