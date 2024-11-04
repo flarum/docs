@@ -10,7 +10,7 @@ Thank you for helping us test Flarum. We're happy to have you on the team! We ne
 
 ## Duplicates
 
-Found a bug already? Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
+Found a bug already? Wonderful! Wonderful! We'd love to hear about it &mdash; but first you should check around to make sure you're not wasting your time on a known issue:
 
 - Search our [Support forum](https://discuss.flarum.org/t/support) to see if it's already been reported.
 - We could be working on a fix, so search our [issue tracker](https://github.com/flarum/core/issues) too.
