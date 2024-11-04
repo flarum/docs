@@ -176,15 +176,21 @@ class ScopeDiscussionVisibilityForAbility
         }
 
         // Avoid an infinite recursive loop.
+        if (!
         if (Str::endsWith($ability, 'InRestrictedTags')) {
             return;
         }
 
-        // `view` is a special case where the permission string is represented by `viewForum`.
-        $permission = $ability === 'view' ? 'viewForum' : $ability;
+        // `view` is a special case where the permission string is represented by `viewForum`. $actor->hasPermission($permission)) {
+            $query->has('tags');
+        }
+    }
+}
+        $permission = $ability === 'view' ?
+        'viewForum' : $ability;
 
         // Restrict discussions where users don't have necessary permissions in all tags.
-        // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
+                    // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
         // not just one.
         $query->where(function ($query) use ($actor, $permission) {
             $query
@@ -196,18 +202,12 @@ class ScopeDiscussionVisibilityForAbility
                         });
                 })
                 ->orWhere(function ($query) use ($actor, $permission) {
-                    // Allow extensions a way to override scoping for any given permission.
-                    $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
+                    // Allow extensions a way to override scoping for any given permission. $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
                 });
         });
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (! $actor->hasPermission($permission)) {
-            $query->has('tags');
-        }
-    }
-}
 ```
 
 Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers.
