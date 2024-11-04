@@ -1,10 +1,10 @@
 # Settings
 
-At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy.
+At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy. Thankfully, Flarum makes this very easy.
 
 ## The Settings Repository
 
-Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`. Because Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one. Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
+Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`. Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`. Because Flarum uses [Laravel's service container](https://laravel.com/docs/8.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one. Instead, you can rely on the container to instantiate your class and inject the correct dependencies. Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
 
 ```php
 <?php
@@ -27,7 +27,7 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` to our class.
+Great! Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` to our class.
 
 ### Reading Settings
 
@@ -38,7 +38,7 @@ To read settings, all we have to do is use the repository's `get()` function:
 The `get()` function accepts two arguments:
 
 1. The name of the setting you are trying to read.
-2. (Optional) A default value if no value has been stored for such a setting. By default, this will be `null`.
+2. (Optional) A default value if no value has been stored for such a setting. By default, this will be `null`. By default, this will be `null`.
 
 ### Storing Settings
 
@@ -64,11 +64,11 @@ The `delete($name)` function lets you remove a named setting.
 To learn more about adding settings through the admin dashboard, see the [relevant documentation](admin.md).
 ### Accessing Settings
 
-All settings are available in the `admin` frontend via the `app.data.settings` global. However, this is not done in the `forum` frontend, as anyone can access it, and you wouldn't want to leak all your settings! (Seriously, that could be a very problematic data breach).
+All settings are available in the `admin` frontend via the `app.data.settings` global. However, this is not done in the `forum` frontend, as anyone can access it, and you wouldn't want to leak all your settings! (Seriously, that could be a very problematic data breach). However, this is not done in the `forum` frontend, as anyone can access it, and you wouldn't want to leak all your settings! (Seriously, that could be a very problematic data breach).
 
 Instead, if we want to use settings in the `forum` frontend, we'll need to serialize them and send them alongside the initial forum data payload.
 
-This can be done via the `Settings` extender. For example:
+This can be done via the `Settings` extender. For example: For example:
 
 **extend.php**
 
@@ -80,6 +80,11 @@ return [
       ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
       ->serializeToForum('myCoolSettingModified', 'my.cool.setting.key', function ($retrievedValue) {
         // This third argument is optional, and allows us to pass the retrieved setting through some custom logic.
+        // In this example, we'll append a string to it.
+
+        return "My Cool Setting: $retrievedValue";
+      }, "default value!"),
+]
         // In this example, we'll append a string to it.
 
         return "My Cool Setting: $retrievedValue";
