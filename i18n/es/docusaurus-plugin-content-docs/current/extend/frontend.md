@@ -2,7 +2,7 @@
 
 Esta página describe cómo realizar cambios en la interfaz de usuario de Flarum. Cómo añadir botones, marquesinas y texto parpadeante. 🤩
 
-[Recuerda](/extend/start.md#architecture), el frontend de Flarum es una **aplicación JavaScript de una sola página**. No hay Twig, Blade, o cualquier otro tipo de plantilla PHP para hablar. Las pocas plantillas que están presentes en el backend sólo se utilizan para renderizar el contenido optimizado para el motor de búsqueda. Todos los cambios en la interfaz de usuario deben hacerse a través de JavaScript.
+[Remember](./start.md#architecture), Flarum's frontend is a **single-page JavaScript application**. No hay Twig, Blade, o cualquier otro tipo de plantilla PHP para hablar. Las pocas plantillas que están presentes en el backend sólo se utilizan para renderizar el contenido optimizado para el motor de búsqueda. Todos los cambios en la interfaz de usuario deben hacerse a través de JavaScript.
 
 Flarum tiene dos aplicaciones frontales separadas:
 
@@ -216,7 +216,7 @@ Flarum hará que cualquier cosa que haga `export` desde `forum.js` esté disponi
 
 :::tip External Libraries
 
-Sólo se permite un archivo JavaScript principal por extensión. Si necesitas incluir alguna librería JavaScript externa, instálala con NPM e `import` para que se compile en tu archivo JavaScript, o consulta [Rutas y Contenido](/extend/routes.md) para saber cómo añadir etiquetas `<script>` adicionales al documento del frontend.
+Sólo se permite un archivo JavaScript principal por extensión. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](./routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
 :::
 
