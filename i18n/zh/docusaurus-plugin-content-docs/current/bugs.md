@@ -13,7 +13,7 @@
 已经发现了 Bug？ 太棒了！ 我们很乐意听到关于它的消息&mdash; 但首先您应该检查一下相关情况，以确保您不会在一个已知问题上浪费时间：
 
 - 搜索我们的 [支持论坛](https://discuss.flarum.org/t/support) 来查看它是否已经报告。
-- 我们也可能正在进行修复，所以也请搜索我们的 [问题跟踪器](https://github.com/flarum/core/issues)。
+- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/framework/issues) too.
 
 在 *彻底地*搜索一番后，如果无人报告该问题，欢迎您提交报告。 如果只是一个简单的小问题（例如单词拼写问题或图像问题），请直接跳到下一节。 但如果您看到错误，或者它已经明显损坏，我们需要您先收集一些信息。 请跳转到我们的 [故障排除](troubleshoot.md) 指南并遵循那里的指引。 请收集尽可能多的信息！
 
