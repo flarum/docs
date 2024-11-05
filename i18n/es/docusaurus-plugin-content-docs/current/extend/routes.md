@@ -68,7 +68,7 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
+Controllers are resolved from the [container](https://laravel.com/docs/11.x/container) so you can inject dependencies into their constructors.
 
 :::tip ¿Qué son los controladores?
 
@@ -108,7 +108,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Vistas
 
-Puedes inyectar la fábrica [View](https://laravel.com/docs/6.x/views) de Laravel en tu controlador. Esto te permitirá renderizar una [plantilla Blade](https://laravel.com/docs/6.x/blade) en la respuesta de tu controlador.
+You can inject Laravel's [View](https://laravel.com/docs/11.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/11.x/blade) into your controller's response.
 
 First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
@@ -168,7 +168,7 @@ To register the route on the frontend, there is a `Routes` extender which works 
 import Extend from 'flarum/common/extenders';
 
 export default [
-  new Extend.Routes()
+  new Extend. Routes()
     .add('acme.users', '/users', <UsersPage />),
 ];
 ```
@@ -192,7 +192,7 @@ Advanced use cases might also be interested in using [route resolvers](frontend-
 Frontend routes also allow you to capture segments of the URI:
 
 ```jsx
-  new Extend.Routes()
+  new Extend. Routes()
     .add('acme.user', '/user/:id', <UsersPage />)
 ```
 
@@ -210,7 +210,7 @@ const url = app.route('acme.user', { id: 123, foo: 'bar' });
 The extender also allows you to define a route helper method:
 
 ```js
-  new Extend.Routes()
+  new Extend. Routes()
    .add('acme.user', '/user/:id', <UsersPage />)
    .helper('acmeUser', (user) => app.route('acme.user', { id: user.id() }))
 ```
