@@ -80,7 +80,7 @@ Es ist üblich, dass gemeinsam genutzte Hosts eine niedrige PHP-Version in SSH v
 
 :::
 
-![Extension Manager Queue Table Preview](/en/img/extension-manager-queue.png)
+![Extension Manager Queue Table Preview](../assets/extension-manager-queue.png)
 
 ## ZUTUN
 - Mit Shared Hosting versuchen.
