@@ -79,7 +79,8 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     // This next section is the one we care about the most.
     // It's a list of packages we want, and the versions for each.
     // We'll discuss this shortly.
-    "require": {
+    "prefer-stable": true
+} "require": {
         "flarum/core": "^1.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
@@ -99,18 +100,17 @@ As mentioned above, the entire composer configuration for your Flarum site is co
         "flarum/tags": "*"
     },
 
-    // Various composer config. The ones here are sensible defaults.
-    // See https://getcomposer.org/doc/06-config.md for a list of options.
-    "config": {
+    // Various composer config.
+    The ones here are sensible defaults.
+    // See https://getcomposer.org/doc/06-config.md for a list of options. "config": {
         "preferred-install": "dist",
         "sort-packages": true
     },
 
     // If composer can find a stable (not dev, alpha, or beta) version
-    // of a package, it should use that. Generally speaking, production
+    // of a package, it should use that.
+    Generally speaking, production
     // sites shouldn't run beta software unless you know what you're doing.
-    "prefer-stable": true
-}
 ```
 
 Let's focus on that `require` section. Each entry is the name of a composer package, and a version string. To read more about version strings, see the relevant [composer documentation](https://semver.org/).
