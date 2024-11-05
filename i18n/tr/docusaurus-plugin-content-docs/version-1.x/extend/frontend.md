@@ -6,8 +6,8 @@ This page describes how to make changes to Flarum's user interface. How to add b
 
 Flarum has two separate frontend applications:
 
-* `forum`, the public side of your forum where users create discussions and posts.
-* `admin`, the private side of your forum where, as an administrator of your forum, you configure your Flarum installation.
+- `forum`, the public side of your forum where users create discussions and posts.
+- `admin`, the private side of your forum where, as an administrator of your forum, you configure your Flarum installation.
 
 They share the same foundational code, so once you know how to extend one, you know how to extend both.
 
@@ -25,12 +25,12 @@ Before we can write any JavaScript, we need to set up a **transpiler**. This all
 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
-* Node.js and npm ([Download](https://nodejs.org/en/download/))
-* Webpack (`npm install -g webpack`)
+- Node.js and npm ([Download](https://nodejs.org/en/download/))
+- Webpack (`npm install -g webpack`)
 
 This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](https://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](https://discuss.flarum.org) or on the [Discord chat](https://flarum.org/discord/).
 
-It's time to set up our little JavaScript transpilation project. Create a new folder in your extension called `js`, then pop in a couple of new files. A typical extension will have the following frontend structure:
+It's time to set up our little JavaScript transpilation project. It's time to set up our little JavaScript transpilation project. A typical extension will have the following frontend structure:
 
 ```
 js
@@ -78,7 +78,8 @@ const config = require('flarum-webpack-config');
 module.exports = config();
 ```
 
-[Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension. To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
+[Webpack](https://webpack.js.org/concepts/) is the system that actually compiles and bundles all the javascript (and its dependencies) for our extension.
+To work properly, our extensions should use the [official flarum webpack config](https://github.com/flarum/flarum-webpack-config) (shown in the above example).
 
 ### tsconfig.json
 
@@ -125,7 +126,8 @@ export * from './src/forum';
 
 ### src
 
-If following the recommendations for `admin.js` and `forum.js`, we'll want to have 2 subfolders here: one for `admin` frontend code, and one for `forum` frontend code. If you have components, models, utils, or other code that is shared across both frontends, you may want to create a `common` subfolder and place it there.
+If following the recommendations for `admin.js` and `forum.js`, we'll want to have 2 subfolders here: one for `admin` frontend code, and one for `forum` frontend code.
+If you have components, models, utils, or other code that is shared across both frontends, you may want to create a `common` subfolder and place it there.
 
 Structure for `admin` and `forum` is identical, so we'll just show it for `forum` here:
 
@@ -137,7 +139,8 @@ src/forum/
 └── index.js
 ```
 
-`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions. Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
+`components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions.
+Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
 
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
@@ -158,12 +161,13 @@ We'll go over tools available for extensions below.
 
 You should familiarize yourself with proper syntax for [importing js modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), as most extensions larger than a few lines will split their js into multiple files.
 
-Pretty much every Flarum extension will need to import *something* from Flarum Core. Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
+Pretty much every Flarum extension will need to import _something_ from Flarum Core.
+Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
 In some cases, an extension may want to extend code from another flarum extension. This is only possible for extensions which explicitly export their contents.
 
-* `flarum/tags` and `flarum/flags` are currently the only bundled extensions that allow extending their JS. You can import their contents from `flarum/{EXT_NAME}/PATH` (e.g. `flarum/tags/components/TagHero`).
-* The process for extending each community extension is different; you should consult documentation for each individual extension.
+- `flarum/tags` and `flarum/flags` are currently the only bundled extensions that allow extending their JS. You can import their contents from `flarum/{EXT_NAME}/PATH` (e.g. `flarum/tags/components/TagHero`).
+- The process for extending each community extension is different; you should consult documentation for each individual extension.
 
 ### Transpilation
 
@@ -227,11 +231,11 @@ The crux of it is that Flarum generates virtual DOM elements which are a JavaScr
 
 Because the interface is built with JavaScript, it's really easy to hook in and make changes. All you need to do is find the right extender for the part of the interface you want to change, and then add your own virtual DOM into the mix.
 
-Most mutable parts of the interface are really just *lists of items*. For example:
+Most mutable parts of the interface are really just _lists of items_. For example:
 
-* The controls that appear on each post (Reply, Like, Edit, Delete)
-* The index sidebar navigation items (All Discussions, Following, Tags)
-* The items in the header (Search, Notifications, User menu)
+- The controls that appear on each post (Reply, Like, Edit, Delete)
+- The index sidebar navigation items (All Discussions, Following, Tags)
+- The items in the header (Search, Notifications, User menu)
 
 Each item in these lists is given a **name** so you can easily add, remove, and rearrange the items. Simply find the appropriate component for the part of the interface you want to change, and monkey-patch its methods to modify the item list contents. For example, to add a link to Google in the header:
 
@@ -267,19 +271,20 @@ DiscussionPage
 
 You should familiarize yourself with [Mithril's component API](https://mithril.js.org/components.html) and [redraw system](https://mithril.js.org/autoredraw.html). Flarum wraps components in the `flarum/common/Component` class, which extends Mithril's [class components](https://mithril.js.org/components.html#classes). It provides the following benefits:
 
-* Attributes passed to components are available throughout the class via `this.attrs`.
-* The static `initAttrs` method mutates `this.attrs` before setting them, and allows you to set defaults or otherwise modify them before using them in your class. Please note that this doesn't affect the initial `vnode.attrs`.
-* The `$` method returns a jQuery object for the component's root DOM element. You can optionally pass a selector to get DOM children.
-* the `component` static method can be used as an alternative to JSX and the `m` hyperscript. The following are equivalent:
-  * `m(CustomComponentClass, attrs, children)`
-  * `CustomComponentClass.component(attrs, children)`
-  * `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
+- Attributes passed to components are available throughout the class via `this.attrs`.
+- The static `initAttrs` method mutates `this.attrs` before setting them, and allows you to set defaults or otherwise modify them before using them in your class. Please note that this doesn't affect the initial `vnode.attrs`.
+- The `$` method returns a jQuery object for the component's root DOM element. You can optionally pass a selector to get DOM children.
+- the `component` static method can be used as an alternative to JSX and the `m` hyperscript. The following are equivalent:
+  - `m(CustomComponentClass, attrs, children)`
+  - `CustomComponentClass.component(attrs, children)`
+  - `<CustomComponentClass {...attrs}>{children}</CustomComponentClass>`
 
 However, component classes extending `Component` must call `super` when using the lifecycle methods (`oninit`, `oncreate`, `onbeforeupdate`, `onupdate`, `onbeforeremove`, and `onremove`).
 
 To use Flarum components, simply extend `flarum/common/Component` in your custom component class.
 
-All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved. With this in mind, a custom component class might look like this:
+All other properties of Mithril components, including [lifecycle methods](https://mithril.js.org/lifecycle-methods.html) (which you should familiarize yourself with), are preserved.
+With this in mind, a custom component class might look like this:
 
 ```jsx
 import Component from 'flarum/common/Component';
@@ -360,7 +365,9 @@ extend(IndexPage.prototype, ['oncreate', 'onupdate'], () => { /* your logic */ }
 
 :::
 
-Please note that if you are trying to change the output of a method with `override`, you must return the new output. If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument). Keep in mind that `extend` can only mutate output if the output is mutable (e.g. an object or array, and not a number/string).
+Please note that if you are trying to change the output of a method with `override`, you must return the new output.
+If you are changing output with `extend`, you should simply modify the original output (which is received as the first argument).
+Keep in mind that `extend` can only mutate output if the output is mutable (e.g. an object or array, and not a number/string).
 
 Let's now revisit the original "adding a link to Google to the header" example to demonstrate.
 
@@ -401,10 +408,11 @@ override(HeaderPrimary.prototype, 'items', function(original) {
 });
 ```
 
-Since all Flarum components and utils are represented by classes, `extend`, `override`, and regular old JS mean that we can hook into, or replace, ANY method in any part of Flarum. Some potential "advanced" uses include:
+Since all Flarum components and utils are represented by classes, `extend`, `override`, and regular old JS mean that we can hook into, or replace, ANY method in any part of Flarum.
+Some potential "advanced" uses include:
 
-* Extending or overriding `view` to change (or completely redefine) the html structure of Flarum components. This opens Flarum up to unlimited theming
-* Hooking into Mithril component methods to add JS event listeners, or otherwise redefine business logic.
+- Extending or overriding `view` to change (or completely redefine) the html structure of Flarum components. This opens Flarum up to unlimited theming
+- Hooking into Mithril component methods to add JS event listeners, or otherwise redefine business logic.
 
 ### Flarum Utils
 
