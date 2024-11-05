@@ -6,7 +6,7 @@ slug: /
 
 Flarum ist eine herrlich einfache Diskussionsplattform für deine Website. Es ist schnell, kostenlos und benutzerfreundlich und bietet alle Funktionen, die du für den Betrieb einer erfolgreichen Community benötigst. Zudem ist Flarum äußerst erweiterbar und lässt sich optimal anpassen.
 
-![Flarum Startseite Screenshot](/en/img/home_screenshot.png)
+![Flarum Startseite Screenshot](./assets/home_screenshot.png)
 
 ## Ziele
 
