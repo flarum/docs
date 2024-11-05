@@ -2,7 +2,7 @@
 
 Questa pagina descrive come apportare modifiche all'interfaccia utente di Flarum. Come aggiungere pulsanti, cornici e testo lampeggiante. 🤩
 
-[Ricorda](/extend/start.md#architecture), Il frontend di Flarum � un ** applicazione JavaScript a pagina singola **. Non ci sono Twig, Blade o qualsiasi altro tipo di modelli PHP di cui parlare. I pochi modelli presenti nel back-end vengono utilizzati solo per il rendering di contenuto ottimizzato per i motori di ricerca. Tutte le modifiche all'interfaccia utente devono essere apportate tramite JavaScript.
+[Remember](./start.md#architecture), Flarum's frontend is a **single-page JavaScript application**. Non ci sono Twig, Blade o qualsiasi altro tipo di modelli PHP di cui parlare. I pochi modelli presenti nel back-end vengono utilizzati solo per il rendering di contenuto ottimizzato per i motori di ricerca. Tutte le modifiche all'interfaccia utente devono essere apportate tramite JavaScript.
 
 Flarum ha due applicazioni frontend separate:
 
@@ -216,7 +216,7 @@ Flarum renderà tutto ciò che esporti con `export` da `forum.js` disponibile ne
 
 :::tip Librerie Esterne
 
-È consentito solo un file JavaScript principale per estensione. Se è necessario includere una libreria JavaScript esterna, è possibile sia installarla con NPM e `import` in modo che siano compilati nel tuo file JavaScript, o vedi [Percorsi e Contenuti](/extend/routes.md) per imparare ad aggiungere tag aggiuntivi `<script>` al frontend.
+È consentito solo un file JavaScript principale per estensione. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](./routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
 :::
 
