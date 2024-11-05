@@ -4,7 +4,7 @@ Bạn quan tâm đến việc đóng góp vào sự phát triển của Flarum? 
 
 Trước khi đóng góp, vui lòng đọc [quy tắc ứng xử](code-of-conduct.md).
 
-Tài liệu này là hướng dẫn cho các nhà phát triển muốn đóng góp mã cho Flarum. Nếu bạn mới bắt đầu, chúng tôi khuyên bạn nên đọc tài liệu [Bắt đầu](/extend/start.md) trong tài liệu Tiện ích mở rộng để hiểu thêm một chút về cách hoạt động của Flarum.
+Tài liệu này là hướng dẫn cho các nhà phát triển muốn đóng góp mã cho Flarum. If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## Tại sao lại đóng góp Flarum?
 
@@ -157,7 +157,7 @@ Các lớp CSS của Flarum gần như tuân theo [THÍCH hợp quy ước đặ
 
 ### Bản dịch
 
-Chúng tôi sử dụng [định dạng khóa chuẩn](/extend/i18n.md#append-a-standard-key-format) để đặt tên các khóa dịch một cách mô tả và nhất quán.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Thỏa thuận cấp phép cộng tác viên
 
