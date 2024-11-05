@@ -2,7 +2,7 @@
 
 Flarum core integrates with the filesystem to store and serve assets (like compiled JS/CSS or upload logos/favicons) and avatars.
 
-Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/8.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
+Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/11.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Disks
 
@@ -10,7 +10,7 @@ Filesystem **disks** represent storage locations, and are backed by storage driv
 
 ### Using existing disks
 
-To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need.
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need.
 
 Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
 
@@ -75,7 +75,7 @@ class DeleteLogoController extends AbstractDeleteController
 }
 ```
 
-The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
+The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
 
 ### Declaring new disks
 
@@ -98,7 +98,7 @@ return [
 
 Since all disks use the local filesystem by default, you'll need to provide a base path and base URL for the local filesystem.
 
-The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/8.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
+The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/11.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
 
 ## Storage drivers
 
