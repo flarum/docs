@@ -13,7 +13,7 @@ Vielen Dank, dass Du uns beim Testen von Flarum geholfen hast. Wir freuen uns, d
 Schon einen Fehler gefunden? Wundervoll! Wir würden gerne davon hören &mdash; doch zuerst solltest Du dich umsehen, um sicherzustellen, dass Du deine Zeit nicht mit einem bekannten Problem verschwendest:
 
 - Durchsuche unser [Support-Forum](https://discuss.flarum.org/t/support), um zu sehen, ob es bereits gemeldet wurde.
-- Wir könnten an einer Lösung arbeiten, also durchsuche auch unseren [Probleme-Tracker](https://github.com/flarum/core/issues).
+- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/framework/issues) too.
 
 Wenn Du *gründlich* gesucht hast und leer ausgegangen bist, freuen wir uns über deinen Bericht. Wenn es sich nur um ein einfaches Problem handelt (z. B. ein falsch geschriebenes Wort oder ein Grafikfehler), fahre mit dem nächsten Absatz fort. Wenn Du jedoch Fehler siehst oder etwas eindeutig defekt ist, musst Du zuerst einige Informationen sammeln. Bitte gehe zu unserem Leitfaden [Fehlerbehebung](troubleshoot.md) und befolge die dortigen Anweisungen. Sammel so viele Informationen wie möglich!
 
