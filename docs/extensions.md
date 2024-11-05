@@ -23,12 +23,12 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
-![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+![extension manager admin page](./assets/extension-manager-page.png)
 
 
 ## Finding Extensions
 
-Flarum has a wide ecosystem of extensions, most of which are open source and free. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
+Flarum has a wide ecosystem of extensions, most of which are open source and free. The extension manager provides a discovery feature allowing you to search through the available extensions. The extension manager connects to [flarum.org/extensions](https://flarum.org/extensions). Alternatively, you can visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums.
 
 ## Installing Extensions
 
@@ -36,7 +36,7 @@ Flarum has a wide ecosystem of extensions, most of which are open source and fre
 
 Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
 
-![Installing an extension](/en/img/install-extension.png)
+![Installing an extension](./assets/install-extension.png)
 
 ### Through the command line
 
@@ -51,7 +51,7 @@ Just like Flarum, extensions are installed through [Composer](https://getcompose
 
 Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
 
-![Updating an extension](/en/img/update-extension.png)
+![Updating an extension](./assets/update-extension.png)
 
 ### Through the command line
 
@@ -63,7 +63,7 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
 
-![Uninstalling an extension](/en/img/uninstall-extension.png)
+![Uninstalling an extension](./assets/uninstall-extension.png)
 
 ### Through the command line
 
@@ -101,7 +101,7 @@ Extiverse provides access to premium extensions. It is a good example of a compo
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
 
-![Configure repositories](/en/img/config-repositories.png)
+![Configure repositories](./assets/config-repositories.png)
 
 :::info
 
