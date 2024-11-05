@@ -17,12 +17,12 @@ Per conoscere gli eventi di dispatching e definirne di nuovi, consultare la [doc
 
 ### Extenders Personalizzati
 
-Diciamo che hai sviluppato un'estensione che aggiunge un driver di ricerca alternativo a Flarum, ma vuoi consentire ad altre estensioni di aggiungere il supporto per filtri personalizzati/ordinamento. Un estensore personalizzato potrebbe essere un la via giusta da seguire.
+Let's say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts. Un estensore personalizzato potrebbe essere un la via giusta da seguire.
 
 L'implementazione degli extender è in realtà abbastanza semplice. Queste sono le 3 fasi principali:
 
 1. Vari metodi (e il costruttore) consentono al codice client di specificare le opzioni. Per esempio:
-  - Quale modello/controller API/validatore dovrebbe essere esteso?
+  - Which model / controller / service should be extended?
   - Quali modifiche si dovrebbero apportare?
 2. Un metodo `extend` prende l'input dal passaggio 1, e lo applica modificando varie [container bindings](service-provider.md) e variabili statiche globali per ottenere l'effetto desiderato. Questa è la "implementazione" del composer. I metodi `extend` per tutte le estensioni abilitate vengono eseguiti come parte del processo di avvio di Flarum.
 3. Facoltativamente, gli extender che implementano `Flarum\Extend\LifecycleInterface` possono avere i metodi `onEnable` e `onDisable`, che vengono eseguiti quando le estensioni che usano l'extender sono abilitate/disabilitate, e sono utili per attività come la cancellazione di varie cache.
