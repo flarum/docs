@@ -2,7 +2,7 @@
 
 This page describes how to make changes to Flarum's user interface. How to add buttons, marquees, and blinking text. 🤩
 
-[Remember](/extend/start.md#architecture), Flarum's frontend is a **single-page JavaScript application**. There's no Twig, Blade, or any other kind of PHP template to speak of. The few templates that are present in the backend are only used to render search-engine-optimized content. All changes to the UI need to be made via JavaScript.
+[Remember](./start.md#architecture), Flarum's frontend is a **single-page JavaScript application**. There's no Twig, Blade, or any other kind of PHP template to speak of. The few templates that are present in the backend are only used to render search-engine-optimized content. All changes to the UI need to be made via JavaScript.
 
 Flarum has two separate frontend applications:
 
@@ -222,7 +222,7 @@ Flarum will make anything you `export` from `forum.js` available in the global `
 
 :::tip External Libraries
 
-Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
+Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](./routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
 :::
 
