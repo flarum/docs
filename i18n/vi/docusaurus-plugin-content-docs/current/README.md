@@ -16,7 +16,7 @@ Flarum là sự kế thừa kết hợp của [esoTalk](https://github.com/esota
 
 * **Đẹp và nhanh nhạy.** Đây là phần mềm diễn đàn dành cho con người. Flarum được thiết kế cẩn thận để nhất quán và trực quan trên các nền tảng, ngay từ đầu.
 
-* **Mạnh mẽ và có thể mở rộng.** Tùy chỉnh, mở rộng và tích hợp Flarum cho phù hợp với cộng đồng của bạn. Kiến trúc của Flarum rất linh hoạt, với [API tiện ích mở rộng mạnh mẽ](/extend/README.md).
+* **Mạnh mẽ và có thể mở rộng.** Tùy chỉnh, mở rộng và tích hợp Flarum cho phù hợp với cộng đồng của bạn. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](./extend/README.md).
 
 * **Miễn phí và mở.** Flarum được phát hành theo [giấy phép MIT](https://github.com/flarum/flarum/blob/master/LICENSE).
 
