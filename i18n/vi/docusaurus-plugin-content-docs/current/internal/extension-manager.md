@@ -80,7 +80,7 @@ Các máy chủ chia sẻ thường có phiên bản php thấp được sử d�
 
 :::
 
-![Extension Manager Queue Table Preview](/en/img/extension-manager-queue.png)
+![Extension Manager Queue Table Preview](../assets/extension-manager-queue.png)
 
 ## TODO
 - Hãy thử trên dịch vụ lưu trữ được chia sẻ.
