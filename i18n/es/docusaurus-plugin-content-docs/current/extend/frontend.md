@@ -51,13 +51,26 @@ js
   "private": true,
   "name": "@acme/flarum-hello-world",
   "dependencies": {
-    "flarum-webpack-config": "0.1.0-beta.10",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^3.0.7"
+    "@flarum/prettier-config": "^1.0.0",
+    "flarum-tsconfig": "^2.0.0",
+    "flarum-webpack-config": "^3.0.0",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.4",
+    "typescript-coverage-report": "^0.6.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "analyze": "cross-env ANALYZER=true <%= params.jsPackageManager %> run build",
+    "format": "prettier --write src",
+    "format-check": "prettier --check src",
+    "clean-typings": "npx rimraf dist-typings && mkdir dist-typings",
+    "build-typings": "<%= params.jsPackageManager %> run clean-typings && ([ -e src/@types ] && cp -r src/@types dist-typings/@types || true) && tsc && <%= params.jsPackageManager %> run post-build-typings",
+    "post-build-typings": "find dist-typings -type f -name '*.d.ts' -print0 | xargs -0 sed -i 's,../src/@types,@types,g'",
+    "check-typings": "tsc --noEmit --emitDeclarationOnly false",
+    "check-typings-coverage": "typescript-coverage-report",
   }
 }
 ```
@@ -85,16 +98,21 @@ module.exports = config();
   // This will match all .ts, .tsx, .d.ts, .js, .jsx files in your `src` folder
   // and also tells your Typescript server to read core's global typings for
   // access to `dayjs` and `$` in the global namespace.
-  "include": ["src/**/*", "../vendor/flarum/core/js/dist-typings/@types/**/*"],
+  "include": [
+    "src/**/*",
+    "../vendor/*/*/js/dist-typings/@types/**/*",
+    "@types/**/*"
+  ],
   "compilerOptions": {
     // This will output typings to `dist-typings`
     "declarationDir": "./dist-typings",
     "baseUrl": ".",
     "paths": {
-      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"]
+      "flarum/*": ["../vendor/flarum/core/js/dist-typings/*"],
     }
   }
 }
+
 ```
 
 This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
@@ -156,10 +174,13 @@ We'll go over tools available for extensions below.
 
 Casi todas las extensiones de Flarum necesitarán importar *algo* de Flarum Core. Como la mayoría de las extensiones, el código fuente JS del núcleo está dividido en las carpetas `admin`, `common` y `forum`. Sin embargo, todo se exporta bajo `flarum`. Para elaborar:
 
-En algunos casos, una extensión puede querer extender el código de otra extensión de flarum. Esto sólo es posible para las extensiones que exportan explícitamente su contenido.
+En algunos casos, una extensión puede querer extender el código de otra extensión de flarum. You can use the same [import format](./extending-extensions#importing-from-extensions) valid for any third-party extension.
 
-* `flarum/tags` y `flarum/flags` son actualmente las únicas extensiones empaquetadas que permiten extender su JS. Puedes importar sus contenidos desde `flarum/{EXT_NAME}/PATH` (por ejemplo, `flarum/tags/components/TagHero`).
-* The process for extending each community extension is different; you should consult documentation for each individual extension.
+For example, to import from tags extension:
+
+```js
+import TagsPage from 'ext:flarum/tags/components/TagsPage';
+```
 
 ### Transpilation
 
@@ -416,3 +437,23 @@ Flarum define (y proporciona) bastantes funciones de ayuda y utilidades, que pue
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
 And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).
+
+## Changing the UI Part 3
+
+Flarum lazy loads a number of components and utils, which means that you can't always import them directly to extend or override them. However, the `extend` and `override` utils can apply your changes right after the component or util is loaded. For that, you just need to provide the import format of the component or util as first argument instead.
+
+```jsx 
+import { extend, override } from 'flarum/common/extend';
+
+extend('flarum/forum/components/LogInModal', 'oninit', function() {
+  console.log('LogInModal is loaded');
+});
+```
+
+The message will be logged to the console as soon as the LogInModal component is loaded.
+
+:::tip
+
+Find out more about using code splitting to lazy load modules in the [Code Splitting](./code-splitting) section.
+
+:::
