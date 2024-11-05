@@ -4,7 +4,7 @@ Flarum gelişimine katkıda bulunmak ister misiniz? Bu harika! [Bir hata raporu 
 
 Katkıda bulunmadan önce lütfen [davranış kurallarını](code-of-conduct.md) okuyun.
 
-Bu belge, Flarum'a kod katkısında bulunmak isteyen geliştiriciler için bir kılavuzdur. Yeni başlıyorsanız, Flarum'un nasıl çalıştığı hakkında biraz daha fazla bilgi edinmek için Uzantı belgelerindeki [Başlarken](/extend/start.md) belgelerini okumanızı öneririz.
+Bu belge, Flarum'a kod katkısında bulunmak isteyen geliştiriciler için bir kılavuzdur. If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## Ne Üzerinde Çalışmalı
 
@@ -157,7 +157,7 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 
 ### Çeviriler
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Katılımcı Lisans Sözleşmesi
 
