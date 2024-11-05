@@ -1,8 +1,8 @@
 # Static Code Analysis
 
-Static code analysis is the process of analyzing the source code against a set of rules to find bugs, code smells, and security vulnerabilities. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments.
+Static code analysis is the process of analyzing the source code against a set of rules to find bugs, code smells, and security vulnerabilities. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments.
 
-Flarum provides a static code analysis package based on [PHPStan](https://phpstan.org/) that can be added to your extension. In this guide, we will show you how to add the package to your extension and how to run the analysis.
+Flarum provides a static code analysis package based on [PHPStan](https://phpstan.org/) that can be added to your extension. In this guide, we will show you how to add the package to your extension and how to run the analysis. In this guide, we will show you how to add the package to your extension and how to run the analysis.
 
 ## Setup
 
@@ -16,13 +16,13 @@ $ flarum-cli infra phpstan
 
 :::
 
-First you need to require the `flarum/phpstan` package in your extension. You can do this by running the following command in the root of our extension:
+First you need to require the `flarum/phpstan` package in your extension. You can do this by running the following command in the root of our extension: You can do this by running the following command in the root of our extension:
 
 ```bash
 composer require --dev flarum/phpstan:^1.0
 ```
 
-Next, you need to create a `phpstan.neon` file in the root of your extension. This file contains [the configuration for PHPStan](https://phpstan.org/config-reference). You can copy the following configuration into the file:
+Next, you need to create a `phpstan.neon` file in the root of your extension. This file contains [the configuration for PHPStan](https://phpstan.org/config-reference). You can copy the following configuration into the file: This file contains [the configuration for PHPStan](https://phpstan.org/config-reference). You can copy the following configuration into the file:
 
 ```neon
 includes:
@@ -70,15 +70,15 @@ composer clear-cache:phpstan && composer analyse:phpstan
 
 ## GitHub Actions
 
-You can also run the analysis using GitHub Actions. Checkout the page on [GitHub Actions](github-actions.md) for more information.
+You can also run the analysis using GitHub Actions. You can also run the analysis using GitHub Actions. Checkout the page on [GitHub Actions](github-actions.md) for more information.
 
 ## Tips
 
 ### Extended model attribute types
 
-PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the `Extend\Model(...)->cast(...)` method.
+PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the `Extend\Model(...)->cast(...)` method. To do this you can use the `Extend\Model(...)->cast(...)` method.
 
-For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
+For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
 
 ```php
 (new Extend\Model(User::class))
