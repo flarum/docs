@@ -9,5 +9,6 @@ Das Admin-Dashboard hat die folgenden Abschnitte:
 - **Berechtigungen** - Zeigt die Berechtigungen für jede Benutzergruppe an und ermöglicht dir, globale und spezifische Bereiche zu konfigurieren.
 - **Erscheinungsbild** - Ermöglicht es, die Farben und das Branding des Forums anzupassen und zusätzliches CSS zur Anpassung hinzuzufügen.
 - **Benutzer** – Stellt dir eine paginierte Liste aller Benutzer im Forum zur Verfügung und gibt die Möglichkeit, den Benutzer zu bearbeiten oder administrative Aktionen durchzuführen.
+- **Advanced** - Allows you to configure advanced settings such as Maintenance Mode, Search drivers, and more.
 
-Abgesehen von den oben genannten Abschnitten ermöglicht das Admin-Dashboard auch die Verwaltung deiner Erweiterungen (einschließlich der Flarum-Core-Erweiterungen wie Tags) im Abschnitt _Features_. Erweiterungen, die das Forum-Thema ändern oder Ihnen erlauben, mehrere Sprachen zu verwenden, werden unter den Abschnitten _Themes_ bzw. _Sprachen_ kategorisiert.
+Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Erweiterungen, die das Forum-Thema ändern oder Ihnen erlauben, mehrere Sprachen zu verwenden, werden unter den Abschnitten _Themes_ bzw. _Sprachen_ kategorisiert.
