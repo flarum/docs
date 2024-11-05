@@ -6,7 +6,7 @@ Flarum includes a powerful notification system to alert users to new activity.
 
 ### Defining a Notification Type
 
-To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface`. This class will define your notification's content and behaviour through the following methods:
+To define a notification type, you will need to create a new class which implements `Flarum\Notification\Blueprint\BlueprintInterface` and `Flarum\Notification\AlertableInterface`. This class will define your notification's content and behaviour through the following methods:
 
 * `getFromUser()` The `User` model for the user that triggered the notification.
 * `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
@@ -21,11 +21,12 @@ Lets take a look at an example from [Flarum Likes](https://github.com/flarum/lik
 
 namespace Flarum\Likes\Notification;
 
+use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Post\Post;
 use Flarum\User\User;
 
-class PostLikedBlueprint implements BlueprintInterface
+class PostLikedBlueprint implements BlueprintInterface, AlertableInterface
 {
     public $post;
 
@@ -70,22 +71,19 @@ Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framewor
 Next, let's register your notification so Flarum knows about it. This will allow users to be able to change how they want to be notified of your notification. We can do this with the `type` method of the `Notification` extender
 
 * `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
-* `$serializer`: The serializer of your subject model (example: `PostSerializer::class`)
 * `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
 
 Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/extend.php):
 
 ```php
 <?php
-
-use Flarum\Api\Serializer\BasicDiscussionSerializer;
 use Flarum\Extend
 use Flarum\Subscriptions\Notification\NewPostBlueprint;
 
 return [
     // Other extenders
     (new Extend\Notification())
-        ->type(NewPostBlueprint::class, BasicDiscussionSerializer::class, ['alert', 'email']),
+        ->type(NewPostBlueprint::class, ['alert', 'email']),
     // Other extenders
 ];
 ```
@@ -96,7 +94,7 @@ Your notification is coming together nicely! Just a few things left to do!
 
 In addition to registering our notification to send by email, if we actually want it to send, we need to provide a bit more information: namely, code for generating the email subject and body. To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface). This comes with 2 additional methods:
 
-- `getEmailView()` should return an array of email type to [Blade View](https://laravel.com/docs/8.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/11.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
 
 Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
@@ -106,69 +104,44 @@ Let's take a look at an example from [Flarum Mentions](https://github.com/flarum
 
 namespace Flarum\Mentions\Notification;
 
+use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Notification\MailableInterface;
 use Flarum\Post\Post;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
+class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, MailableInterface
 {
-    /**
-     * @var Post
-     */
-    public $post;
-
-    /**
-     * @var Post
-     */
-    public $reply;
-
-    /**
-     * @param Post $post
-     * @param Post $reply
-     */
-    public function __construct(Post $post, Post $reply)
-    {
-        $this->post = $post;
-        $this->reply = $reply;
+    public function __construct(
+      public Post $post, 
+      public Post $reply
+    ) {
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubject()
+    public function getSubject(): ?AbstractModel
     {
         return $this->post;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFromUser()
+    public function getFromUser(): ?User
     {
         return $this->reply->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getData()
+    public function getData(): mixed
     {
         return ['replyNumber' => (int) $this->reply->number];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailView()
+    public function getEmailViews(): array
     {
-        return ['text' => 'flarum-mentions::emails.postMentioned'];
+        return [
+          'text' => 'flarum-mentions::emails.plain.postMentioned',
+          'html' => 'flarum-mentions::emails.html.postMentioned',
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailSubject(TranslatorInterface $translator)
+    public function getEmailSubject(TranslatorInterface $translator): string
     {
         return $translator->trans('flarum-mentions.email.post_mentioned.subject', [
             '{replier_display_name}' => $this->post->user->display_name,
@@ -176,23 +149,33 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getType()
+    public static function getType(): string
     {
         return 'postMentioned';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubjectModel()
+    public static function getSubjectModel(): string
     {
         return Post::class;
     }
 }
 ```
+
+:::tip
+
+If you need your notification to be sent by email **only**, you can remove the `AlertableInterface` implementation, which will skip sending an alert for that notification.
+
+:::
+
+#### Mail Templates
+
+Now that we have our email views registered, we need to create the actual email templates. These are Blade views, and should be placed in the `views/emails` directory of your extension (unless you registered a different path). The filenames should match the names you returned in `getEmailViews`.
+
+You can use the following blade components:
+* `mail::html.notification`: The HTML template for notification emails. Use this when your notification is a type that can be disabled by the user, as it includes an unsubscribe link.
+* `mail::plain.notification`: The plain text template for notification emails. Use this when your notification is a type that can be disabled by the user, as it includes an unsubscribe link.
+* `mail::html.information`: The HTML template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
+* `mail::plain.information`: The plain text template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 
 ### Notification Drivers
 
@@ -246,7 +229,7 @@ class PusherNotificationDriver implements NotificationDriverInterface
 Notification drivers are also registered via the `Notification` extender, using the `driver` method. The following arguments are provided
 
 * `$driverName`: A unique, human readable name for the driver
-* `$driverClass`: The class static of the driver (example: `PostSerializer::class`)
+* `$driverClass`: The class static of the driver (example: `Driver::class`)
 * `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
 
 Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
