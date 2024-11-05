@@ -2,7 +2,7 @@
 
 Questo articolo riguarda l'autorizzazione, e utilizza alcuni concetti del sistema [authorization](authorization.md). Dovresti familiarizzare con questo concetto.
 
-Quando un utente visita la pagina **Tutte le Discussioni**, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente stesso ha accesso. Lo facciamo tramite il metodo `whereVisibleTo`, definito in `Flarum\Database\ScopeVisibilityTrait`, e disponibile su [Modelli e query Eloquent](https://laravel.com/docs/8.x/queries) tramite [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Per esempio:
+Quando un utente visita la pagina **Tutte le Discussioni**, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente stesso ha accesso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/11.x/queries) through [Eloquent scoping](https://laravel.com/docs/11.x/eloquent#local-scopes). Per esempio:
 
 ```php
 usa Flarum\Group\Group;
@@ -38,7 +38,7 @@ Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`? Questa 
 
 La query verrà eseguita attraverso tutti gli scoper applicabili registrati per il modello della query. Notare che gli scopers di visibilità registrati per una classe genitore (tipo `Flarum\Post\Post`) verranno applicate sulle classi secondarie (come `Flarum\Post\CommentPost`).
 
-Tieni presente che gli scoper non devono restituire nulla, ma piuttosto dovrebbero eseguire mutazioni nei file [Eloquent query object](https://laravel.com/docs/8.x/queries).
+Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/11.x/queries).
 
 ## Scopers Personalizzati
 
