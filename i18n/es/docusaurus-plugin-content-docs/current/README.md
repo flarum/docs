@@ -16,7 +16,7 @@ Flarum es el sucesor combinado de [esoTalk](https://github.com/esotalk/esoTalk) 
 
 * **Bonito y responsivo.** Este es el software de foros hecho para personas. Flarum está cuidadosamente diseñado para ser consistente e intuitivo en todas las plataformas, desde el principio.
 
-* **Potente y extensible.** Personalice, extienda e integre Flarum para adaptarlo a su comunidad. La arquitectura de Flarum es increíblemente flexible, con una [potente API de extensión](/extend/).
+* **Potente y extensible.** Personalice, extienda e integre Flarum para adaptarlo a su comunidad. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](./extend/README.md).
 
 * **Gratis y libre.** Flarum está liberado bajo la [licencia MIT](https://github.com/flarum/flarum/blob/master/LICENSE).
 
