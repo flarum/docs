@@ -1,6 +1,6 @@
 # Cómo empezar
 
-¿Quieres construir una extensión de Flarum? You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
+¿Quieres construir una extensión de Flarum? You've come to the right place! You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
 
 ## Arquitectura
 
@@ -10,7 +10,7 @@ Ten en cuenta que Flarum utiliza algunos lenguajes y herramientas _modernas_. Si
 
 Flarum se compone de tres capas:
 
-* En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). También querrás familiarizarte con el concepto de [Dependency Injection](https://laravel.com/docs/6.x/container), que se utiliza en todo nuestro backend.
+* En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/11.x/container), which is used throughout our backend.
 
 * En segundo lugar, el backend expone una **API pública** que permite a los clientes del frontend interactuar con los datos de tu foro. Está construida de acuerdo con la especificación [JSON:API](https://jsonapi.org/).
 
@@ -148,6 +148,6 @@ Una vez hecho esto, sigue adelante y activa la extension en la página de admini
 
 *whizzing, whirring, metal clunking*
 
-Woop! Hello to you too, extension!
+Woop! Woop! Hello to you too, extension!
 
 Estamos haciendo buenos progresos. Hemos aprendido a configurar nuestra extensión y a utilizar los extensores, lo que nos abre muchas puertas. Sigue leyendo para aprender a extender el frontend de Flarum.
