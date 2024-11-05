@@ -54,6 +54,32 @@ export default class CustomModal extends Modal {
     // Content to show in the modal's body
     return <p>Hello World!</p>;
   }
+}
+```
+
+Modals with forms inherit `flarum/common/components/FormModal`. This class provides a `onsubmit` method which is called when the submit button is clicked:
+
+```jsx
+import FormModal from 'flarum/common/components/FormModal';
+
+export default class CustomFormModal extends FormModal {
+  // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
+  static isDismissible = true;
+
+  className() {
+    // Custom CSS classes to apply to the modal
+    return 'custom-modal-class';
+  }
+
+  title() {
+    // Content to show in the modal's title bar
+    return <p>Custom Modal</p>;
+  }
+
+  content() {
+    // Content to show in the modal's body
+    return <p>Hello World!</p>;
+  }
 
   onsubmit() {
     // If your modal contains a form, you can add form processing logic here.
@@ -90,4 +116,4 @@ Because the composer can be used for various different actions (starting a discu
 
 ### Composer Editor
 
-The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts). This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.
+The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor). This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor. Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts).
