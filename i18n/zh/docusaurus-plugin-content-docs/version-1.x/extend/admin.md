@@ -2,7 +2,7 @@
 
 Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比以往任何时候都更容易为您的扩展添加设置或权限。
 
-在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
+在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
 您可以简单地注册设置，扩展页面 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage)，或完全自定义页面。
 
@@ -14,7 +14,7 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 在注册任何内容之前，您需要告诉`ExtensionData`它将为哪个扩展获取数据。
 
-只需在`app.extensionData`上运行`for`函数，并传入扩展的id。 要找到您的扩展id，取编写器名称并用破折号替换任何斜杠(例如:'fof/merge-discussion '变成'fof-merge-discussion ')。  带有`flarum-`和`flarum-ext-`的扩展将从名称中省略这些内容(例如:'webbinaro/flarum-calendar'变成'webbinaro-calendar')。
+Simply run the `for` function on `app.extensionData` passing in the id of your extension. 要找到您的扩展id，取编写器名称并用破折号替换任何斜杠(例如:'fof/merge-discussion '变成'fof-merge-discussion ')。  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
 
 对于下面的例子，我们将使用虚构的扩展名'acme/interstellar':
 
@@ -29,7 +29,7 @@ app.initializers.add('interstellar', function(app) {
 
 完成后，您可以开始添加设置和权限。
 
-:::注意
+:::tip Note
 
 `ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行`for` 。
 
@@ -39,7 +39,7 @@ app.initializers.add('interstellar', function(app) {
 
 对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
+To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. 要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
 
 Here's an example with a switch (boolean) item:
 
@@ -76,7 +76,7 @@ app.initializers.add('interstellar', function(app){
 }
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc: This can be used for placeholders, min/max restrictions, etc:
 
 ```js
 {
@@ -115,14 +115,15 @@ app.initializers.add('interstellar', function(app) {
 
 ### Registering Permissions
 
-New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
 In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+
+- Permission object
+- What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
+- `ItemList` priority
 
 Back to our favorite rocket extension:
 
@@ -204,11 +205,11 @@ In beta 15, extension pages make room for extra info which is pulled from extens
 
 For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Description                        | 在composer.json 中的位置                                          |
-| ---------------------------------- | ------------------------------------------------------------ |
-| discuss.flarum.org discussion link | "forum" key inside "support"                                 |
-| Documentation                      | "docs" key inside "support"                                  |
-| Support (email)                    | "email" key inside "support"                                 |
-| Website                            | "homepage" key                                               |
-| Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| Description                                                        | 在composer.json 中的位置                                                             |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| discuss.flarum.org discussion link | "forum" key inside "support"                                                                    |
+| Documentation                                                      | "docs" key inside "support"                                                                     |
+| Support (email)                                 | "email" key inside "support"                                                                    |
+| Website                                                            | "homepage" key                                                                                  |
+| Donate                                                             | "funding" key block (Note: Only the first link will be used) |
+| Source                                                             | "source" key inside "support"                                                                   |
