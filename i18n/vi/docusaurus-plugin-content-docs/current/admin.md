@@ -9,5 +9,6 @@ Bảng điều khiển dành cho quản trị viên gồm các phần sau:
 - **Quyền** - Hiển thị các quyền cho từng nhóm người dùng và cho phép bạn định cấu hình phạm vi toàn cầu và phạm vi cụ thể.
 - **Giao diện** - Cho phép bạn tùy chỉnh màu sắc, thương hiệu của diễn đàn và thêm CSS bổ sung để tùy chỉnh.
 - **Người dùng** - Cung cấp cho bạn danh sách được phân trang gồm tất cả người dùng trong diễn đàn và cấp cho bạn khả năng chỉnh sửa người dùng hoặc thực hiện các hành động quản trị.
+- **Advanced** - Allows you to configure advanced settings such as Maintenance Mode, Search drivers, and more.
 
-Ngoài các phần được đề cập ở trên, Trang tổng quan quản trị cũng cho phép bạn quản lý các Tiện ích mở rộng của mình (bao gồm các tiện ích mở rộng cốt lõi như Thẻ) trong phần _Tính năng_. Các tiện ích mở rộng sửa đổi chủ đề diễn đàn hoặc cho phép bạn sử dụng nhiều ngôn ngữ được phân loại trong phần _Chủ đề_ và _Ngôn ngữ_ tương ứng.
+Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Các tiện ích mở rộng sửa đổi chủ đề diễn đàn hoặc cho phép bạn sử dụng nhiều ngôn ngữ được phân loại trong phần _Chủ đề_ và _Ngôn ngữ_ tương ứng.
