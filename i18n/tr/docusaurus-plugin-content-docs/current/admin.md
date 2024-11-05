@@ -9,5 +9,6 @@ Yönetici Kontrol Panelinde aşağıdaki bölümler bulunur:
 - **İzinler** - Her kullanıcı grubunun izinlerini gösterir ve genel ve belirli kapsamları yapılandırmanıza olanak tanır.
 - **Görünüm** - Forumun renklerini, markasını özelleştirmenize ve özelleştirme için ek CSS eklemenize olanak tanır.
 - **Kullanıcılar** - Forumdaki tüm kullanıcıların sayfalandırılmış bir listesini sağlar ve size kullanıcıyı düzenleme veya idari işlemler gerçekleştirme olanağı verir.
+- **Advanced** - Allows you to configure advanced settings such as Maintenance Mode, Search drivers, and more.
 
-Yönetici Kontrol Paneli, yukarıda bahsedilen bölümlerin dışında, _Özellikler_ bölümü altında Uzantılarınızı (Etiketler gibi flarum çekirdek uzantıları dahil) yönetmenize de olanak tanır. Forum temasını değiştiren veya birden fazla dil kullanmanıza olanak tanıyan uzantılar, sırasıyla _Temalar_ ve _Diller_ bölümünde kategorize edilmiştir.
+Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Forum temasını değiştiren veya birden fazla dil kullanmanıza olanak tanıyan uzantılar, sırasıyla _Temalar_ ve _Diller_ bölümünde kategorize edilmiştir.
