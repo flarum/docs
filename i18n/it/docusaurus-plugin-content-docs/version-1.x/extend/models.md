@@ -1,6 +1,6 @@
 # Modelli e migrazioni
 
-Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
+Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
 
 Flarum fa uso di [componenti Database Laravel](https://laravel.com/docs/database). È necessario familiarizzare con questi componenti prima di procedere, poiché si presume che la conoscenza di questi sia assodata.
 
@@ -10,11 +10,12 @@ Prima di approfondire i dettagli dell'implementazione, definiamo alcuni concetti
 
 Le **Migrazioni** consentono di modificare il database. Se stai aggiungendo una nuova tabella, definendo una nuova relazione, aggiungendo una nuova colonna a una tabella, o facendo qualche altro cambiamento strutturale al DB, dovrai usare una migrazione.
 
-I **Modelli** forniscono una comoda API basata su codice per la creazione, la lettura, l'aggiornamento e l'eliminazione dei dati. Nel backend, sono rappresentati da classi PHP e sono utilizzati per interagire con il database MySQL. Nel frontend, sono rappresentati da classi JS, e sono utilizzati per interagire con il [JSON:API](api.md), di cui discuteremo nel prossimo articolo.
+I **Modelli** forniscono una comoda API basata su codice per la creazione, la lettura, l'aggiornamento e l'eliminazione dei dati. Nel backend, sono rappresentati da classi PHP e sono utilizzati per interagire con il database MySQL. Nel backend, sono rappresentati da classi PHP e sono utilizzati per interagire con il database MySQL.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 È possibile utilizzare la CLI per creare automaticamente il tuo modello:
+
 ```bash
 $ flarum-cli make backend model
 $ flarum-cli make frontend model
@@ -135,12 +136,11 @@ Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo pe
 
 ### Aggiunta di nuovi modelli
 
-Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per quest'ultima. Piuttosto che estendere la classe `Model` direttamente, dovrai estendere `Flarum\Database\AbstractModel` che fornisce un po 'di funzionalità extra per consentire ai tuoi modelli di essere estesi da altre estensioni. Vedere i documenti Eloquent linkati qui sopra per esempi su come dovrebbe apparire la classe del modello.
+Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per quest'ultima. Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per quest'ultima. Vedere i documenti Eloquent linkati qui sopra per esempi su come dovrebbe apparire la classe del modello.
 
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
-
 
 <!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
@@ -239,7 +239,7 @@ You can learn more about the store in our [API documentation](https://api.docs.f
 
 ### Aggiunta di nuovi modelli
 
-If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
+If you have added a new resource type, you will need to define a new model for it. If you have added a new resource type, you will need to define a new model for it.
 
 ```js
 import Model from 'flarum/common/Model';
