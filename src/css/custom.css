@@ -257,3 +257,10 @@ h1 > .hash-link, h2 > .hash-link, h3 > .hash-link, h4 > .hash-link, h5 > .hash-l
   --ifm-badge-border-color: var(--ifm-color-black);
   color: var(--ifm-color-secondary);
 }
+
+img[alt="Flarum Home Screenshot"] {
+  border-radius: 10px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
+  position: relative;
+  border: 1px solid #eee;
+}
