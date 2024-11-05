@@ -11,10 +11,10 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
 ```php
 <?php return array (
   'debug' => false, // activa o desactiva el modo de depuración, utilizado para solucionar problemas
-  'offline' => false, // enables or disables site maintenance mode. This makes your site inaccessible to all users (including admins).
+  'offline' => false, // none, high, low or safe.
   'database' =>
   array (
-    'driver' => 'mysql', // el controlador de la base de datos, es decir, MySQL, MariaDB...
+    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB, PostgreSQL, SQLite
     'host' => 'localhost', // el host de la conexión, localhost en la mayoría de los casos, a menos que se utilice un servicio externo
     'database' => 'flarum', // el nombre de la base de datos en la instancia
     'username' => 'root', // nombre de usuario de la base de datos
@@ -33,3 +33,15 @@ Aquí hay un rápido resumen de lo que significa todo con un archivo de ejemplo:
   ),
 );
 ```
+
+### Maintenance modes
+
+Flarum has a maintenance mode that can be enabled by setting the `offline` key in the `config.php` file to one of the following values:
+* `none` - No maintenance mode.
+* `high` - No one can access the forum, not even admins.
+* `low` - Only admins can access the forum.
+* `safe` - Only admins can access the forum, and no extensions are booted.
+
+This can also be configured from the admin panel's advanced settings page:
+
+![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
