@@ -48,12 +48,18 @@ In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'vi
 
 ```php
 // Check whether a user can perform an action.
+// WARNING: this should be used with caution, as it doesn't actually
+// run through the authorization process, so it doesn't account for policies.
 $canDoSomething = $actor->can('viewForum');
 
 // Check whether a user can perform an action on a subject.
+// It is, however, useful in implementing custom policies.
 $canDoSomething = $actor->can('reply', $discussion);
 
 // Raise a PermissionDeniedException if a user cannot perform an action.
+$actor->assertAdmin();
+
+// Check whether one of the user's groups have a permission.
 $actor->assertCan('viewForum');
 $actor->assertCan('reply', $discussion);
 
@@ -61,12 +67,6 @@ $actor->assertCan('reply', $discussion);
 $actor->assertRegistered();
 
 // Raise a PermissionDeniedException if the user is not an admin.
-$actor->assertAdmin();
-
-// Check whether one of the user's groups have a permission.
-// WARNING: this should be used with caution, as it doesn't actually
-// run through the authorization process, so it doesn't account for policies.
-// It is, however, useful in implementing custom policies.
 $actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
@@ -201,6 +201,6 @@ return [
 
 Commonly, you'll want to use authorization results in frontend logic. For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint. And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
 
-Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending. Global permissions (`viewForum`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object. For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model. It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
+Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending. Global permissions (`viewForum`, `viewUserList`) can be included on the `ForumResource`, but for object-specific authorization, we may want to include those with the subject object. For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model. It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
 
-For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).
+For an example of how to attach data to an API resource, see a [similar case for transmitting settings](settings.md#accessing-settings).
