@@ -12,7 +12,7 @@ Chúng tôi vẫn đang làm việc trên một lộ trình chính thức. Chún
 
 Mọi đóng góp đều được nhận với lòng biết ơn. Bạn có thể đóng góp trên [Nhà tài trợ GitHub](https://github.com/sponsors/flarum) hoặc [OpenCollective](https://opencollective.com/flarum).
 
-Tuy nhiên, các khoản đóng góp sẽ không tác động trực tiếp đến tốc độ phát triển của Flarum. Chúng tôi cũng khuyến khích người dùng đóng góp theo những cách khác, chẳng hạn như [đóng góp mã](contributing.md), [tiện ích mở rộng xây dựng](/extend/README.md), viết tài liệu, dịch Flarum sang các ngôn ngữ khác, cung cấp trợ giúp và hỗ trợ trên [cộng đồng diễn đàn](https://discuss.flarum.org/)... và chỉ là một nguồn năng lượng tích cực chung cho cộng đồng!
+Tuy nhiên, các khoản đóng góp sẽ không tác động trực tiếp đến tốc độ phát triển của Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Liệu Flarum có [chèn tính năng vào đây] không? Khi nào? Tại sao không?
 
