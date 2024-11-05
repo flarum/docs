@@ -6,7 +6,7 @@ slug: /
 
 Flarum là một nền tảng thảo luận đơn giản thú vị cho trang web của bạn. Nó nhanh chóng, miễn phí và dễ sử dụng, với tất cả các tính năng bạn cần để điều hành một cộng đồng thành công. Nó cũng cực kỳ có thể mở rộng, cho phép khả năng tùy chỉnh cao nhất.
 
-![Ảnh chụp màn hình Trang chủ Flarum](/en/img/home_screenshot.png)
+![Ảnh chụp màn hình Trang chủ Flarum](./assets/home_screenshot.png)
 
 ## Mục tiêu
 
