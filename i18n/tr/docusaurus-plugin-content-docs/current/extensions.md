@@ -22,12 +22,12 @@ Uzantı yöneticisi, yönetici kullanıcının herhangi bir besteci paketini yü
 
 :::
 
-![uzantı yöneticisi yönetici sayfası](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+![uzantı yöneticisi yönetici sayfası](./assets/extension-manager-page.png)
 
 
 ## Uzantıları Bulmak
 
-Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemine sahiptir. Yeni ve harika uzantılar bulmak için, Flarum'un topluluk forumundaki [Extensions](https://discuss.flarum.org/t/extensions) etiketini ziyaret edin. Resmi olmayan [Extiverse](https://extiverse.com/) de harika bir kaynaktır.
+Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemine sahiptir. The extension manager provides a discovery feature allowing you to search through the available extensions. The extension manager connects to [flarum.org/extensions](https://flarum.org/extensions). Alternatively, you can visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums.
 
 ## Uzantıları Yükleme
 
@@ -35,7 +35,7 @@ Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemin
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Yukarıdaki bağlantılardan mevcut uzantıların listesine göz attığınızda ve yüklemek istediğiniz uzantıyı bulduğunuzda, uzantı yöneticisinin kurulum girişine uzantının besteci paketi adını girerek yükleyebilirsiniz.
 
-![Installing an extension](/en/img/install-extension.png)
+![Installing an extension](./assets/install-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -50,7 +50,7 @@ Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org)
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden güncelleyebilirsiniz. Uzantı yöneticisindeki "Güncellemeleri kontrol et" düğmesini tıklayarak güncellemeleri kontrol edebilirsiniz. Güncellemeler mevcutsa, "Global güncelleme" butonuna tıklayarak tüm uzantıları güncelleyebilirsiniz. Veya güncellemek istediğiniz uzantının yanındaki "Güncelle" butonuna tıklayarak uzantıları tek tek güncelleyebilirsiniz.
 
-![Updating an extension](/en/img/update-extension.png)
+![Updating an extension](./assets/update-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -62,7 +62,7 @@ Uzantı geliştiricileri tarafından sağlanan talimatları izleyin. Uzantılar 
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Uzantının sayfasında, kaldırmak istediğiniz uzantının yanındaki "Kaldır" düğmesini tıklayarak bir uzantıyı kaldırabilirsiniz.
 
-![Uninstalling an extension](/en/img/uninstall-extension.png)
+![Uninstalling an extension](./assets/uninstall-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -95,12 +95,12 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 ### Adding a composer repository
 
-Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
+Extiverse provides access to premium extensions. It is a good example of a composer repository. You would also need to enter an authentication method through the **New authentication method** button. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
 
-![Configure repositories](/en/img/config-repositories.png)
+![Configure repositories](./assets/config-repositories.png)
 
 :::bilgi
 
