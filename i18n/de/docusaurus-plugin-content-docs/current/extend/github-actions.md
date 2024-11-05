@@ -1,6 +1,6 @@
 # GitHub Actions (Workflows)
 
-In public repos, [GitHub Actions](https://github.com/features/actions) allow you to run jobs on every commit and pull request for free. These processes can be automated tests, builds, code inspections ..etc. You can find more information about GitHub Actions [here](https://docs.github.com/en/actions).
+In public repos, [GitHub Actions](https://github.com/features/actions) allow you to run jobs on every commit and pull request for free. These processes can be automated tests, builds, code inspections ..etc. These processes can be automated tests, builds, code inspections ..etc. You can find more information about GitHub Actions [here](https://docs.github.com/en/actions).
 
 In this guide, you will learn how to add pre-defined workflows to your extension.
 
@@ -85,6 +85,11 @@ jobs:
 
       frontend_directory: ./js
       backend_directory: .
+      js_package_manager: yarn
+      main_git_branch: main
+
+    secrets:
+      bundlewatch_github_token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
       js_package_manager: yarn
       main_git_branch: main
 
