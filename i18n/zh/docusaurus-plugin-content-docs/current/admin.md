@@ -9,5 +9,6 @@ Flarum 管理面板是一个友好的论坛管理界面。 且只对「管理组
 - **权限** - 显示每个用户组的权限，并允许您配置全站和特定范围。
 - **外观** - 允许您自定义论坛的颜色、图标和添加额外的 CSS 以自定义论坛样式。
 - **用户** - 为您提供论坛中所有用户的分页列表，可以在此编辑或管理用户。
+- **Advanced** - Allows you to configure advanced settings such as Maintenance Mode, Search drivers, and more.
 
-除了以上提到的这些部分，主管理面板还通过_扩展_部分来允许你管理安装的扩展，这也包括 Flarum 的核心扩展，例如 Tags。 在 _主题 _ 和 _语言_ 模块下，您可以修改论坛主题或使用扩展以适应多语言。
+Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. 在 _主题 _ 和 _语言_ 模块下，您可以修改论坛主题或使用扩展以适应多语言。
