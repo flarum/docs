@@ -72,13 +72,7 @@ For instance:
 ```json
 {
   // ...
-  "extra": {
-    "flarum-extension": {
-      "optional-dependencies": [
-        "flarum/tags"
-      ]
-    }
-  },
+  {
   // ...
 }
 ```
@@ -103,20 +97,8 @@ class SomeClass
 
 Note that if you're importing from an optional dependency which might not be installed, you'll need to check that the class in question exists via the `class_exists` function.
 
-In the frontend, you can only import things that have been explicitly exported. However, first you'll need to configure your extension's webpack to allow these imports:
+In the frontend, you can import any modules exported by other extensions via the `ext:vendor/extension/.../module` syntax. For instance:
 
-#### webpack.config.js
-
-```js
-module.exports = require('flarum-webpack-config')({
-    // Provide the extension IDs of all extensions from which your extension will be importing.
-    // Do this for both full and optional dependencies.
-    useExtensions: ['flarum-tags']
-});
-```
-
-Once this is done, you can import with:
-
-```js
-const allThingsExportedBySomeExtension = require('@flarum-tags');
+```ts
+import Tag from 'ext:flarum/tags/common/models/Tag';
 ```
