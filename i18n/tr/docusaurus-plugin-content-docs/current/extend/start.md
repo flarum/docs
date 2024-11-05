@@ -10,7 +10,7 @@ Flarum'un _ modern _ programlama dillerini ve araçlarını kullandığını bil
 
 Flarum is made up of three layers:
 
-* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/8.x/container), which is used throughout our backend.
+* First, there is the **backend**. This is written in [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), and makes use of a wide array of [Laravel](https://laravel.com/) components and other packages via [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/11.x/container), which is used throughout our backend.
 
 * Second, the backend exposes a **public API** which allows frontend clients to interface with your forum's data. This is built according to the [JSON:API specification](https://jsonapi.org/).
 
