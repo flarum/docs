@@ -68,7 +68,7 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
+Controllers are resolved from the [container](https://laravel.com/docs/11.x/container) so you can inject dependencies into their constructors.
 
 :::tip Cosa sono i controller?
 
@@ -108,7 +108,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Visualizzazioni
 
-Puoi iniettare [Visualizza](https://laravel.com/docs/6.x/views) di Laravel nel tuo controller. Ciò ti consentirà di eseguire il rendering di [Blade template](https://laravel.com/docs/6.x/blade) nella risposta del controller.
+You can inject Laravel's [View](https://laravel.com/docs/11.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/11.x/blade) into your controller's response.
 
 Innanzitutto, dovrai indicare al frontend dove può trovare i file di visualizzazione della tua estensione aggiungendo l'estender `View` a `extend.php`:
 
