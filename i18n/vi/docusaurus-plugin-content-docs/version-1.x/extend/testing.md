@@ -1,10 +1,12 @@
 # Testing
 
-Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing. Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
+Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing.
+Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
 
 ## Backend Tests
 
-The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests. It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
+The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests.
+It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
 
 ### Setup
 
@@ -234,7 +236,8 @@ class SomeTest extends TestCase
 
 #### Sending Requests
 
-A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that:
+A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users.
+You can use this to ensure that:
 
 - Users can't access content they're not supported to access.
 - Permission-based create/edit/delete operations perform as expected.
@@ -553,12 +556,11 @@ describe('Alert is dismissible', () => {
 #### Methods
 
 These are the custom methods that are available for mithril component tests:
-* **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
-* **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
+
+- **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
+- **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
 
 To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
-
-
 
 ## E2E Tests
 
