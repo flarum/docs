@@ -89,7 +89,7 @@ jobs:
       main_git_branch: main
 
     secrets:
-      bundlewatch_github_token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+      bundlewatch_github_token: ${{ secrets. BUNDLEWATCH_GITHUB_TOKEN }}
 ```
 
 Unlike the backend workflow, the frontend workflow runs everything in a single job. Here are the available parameters:
