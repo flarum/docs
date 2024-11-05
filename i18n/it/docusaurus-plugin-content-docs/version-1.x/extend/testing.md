@@ -1,14 +1,16 @@
 # Test
 
-Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing. Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
+Automated testing ensures that your extension performs as you expect it to, helps avoid introducing new bugs or regressions, and saves time on manual testing.
+Flarum currently provides tooling for automated backend unit and integration tests, and we plan to release support for frontend unit testing and E2E testing in the future.
 
 ## Backend Tests
 
-The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests. It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
+The `flarum/testing` library is used by core and some bundled extensions for automated unit and integration tests.
+It is essentially a collection of utils that allow testing Flarum core and extensions with PHPUnit.
 
 ### Setup
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update backend testing infrastructure to your code:
 
@@ -156,7 +158,7 @@ There are several important utilities available for your test cases:
 
 - The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
 - Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
-- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json <code>require</code> field (or <code>require-dev</code> for <a href="extending-extensions.md">optional dependencies</a>), and also list their composer package names when calling <code>extension()</code>.
 - The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
 - The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
@@ -234,7 +236,8 @@ class SomeTest extends TestCase
 
 #### Sending Requests
 
-A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that:
+A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users.
+You can use this to ensure that:
 
 - Users can't access content they're not supported to access.
 - Permission-based create/edit/delete operations perform as expected.
@@ -309,13 +312,13 @@ class SomeTest extends TestCase
 }
 ```
 
-:::cautela
+:::caution
 
 If you want to send query parameters in a GET request, you can't include them in the path; you'll need to add them afterwards with the `withQueryParams` method.
 
 :::
 
-:::cautela
+:::caution
 
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
 
@@ -400,7 +403,7 @@ NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that f
 
 ### Setup
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update frontend testing infrastructure to your code:
 
@@ -470,7 +473,7 @@ To run tests on every commit and pull request, check out the [GitHub Actions](gi
 
 ### Using Unit Tests
 
-Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
+Like any other JS project, you can use Jest to write unit tests for your frontend code. Like any other JS project, you can use Jest to write unit tests for your frontend code.
 
 Here's a simple example of a unit test fo core's `abbreviateNumber` function:
 
@@ -553,12 +556,11 @@ describe('Alert is dismissible', () => {
 #### Methods
 
 These are the custom methods that are available for mithril component tests:
-* **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
-* **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
+
+- **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
+- **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
 
 To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
-
-
 
 ## E2E Tests
 
