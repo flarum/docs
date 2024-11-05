@@ -6,7 +6,7 @@ slug: /
 
 Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarılı bir topluluk yürütmek için ihtiyacınız olan tüm özelliklerle birlikte kullanımı hızlı ve kolaydır. Aynı zamanda son derece genişletilebilir olup, en üst düzeyde özelleştirilebilirliğe olanak tanır.
 
-![Flarum Ana Sayfa Ekran Görüntüsü](/en/img/home_screenshot.png)
+![Flarum Ana Sayfa Ekran Görüntüsü](./assets/home_screenshot.png)
 
 ## Hedefler
 
