@@ -14,7 +14,7 @@ This new API allows you to add settings to your extension with very few lines of
 
 Before you can register anything, you need to tell `ExtensionData` what extension it is about to get data for.
 
-Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  To find you extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').
 
 For the following example, we will use the fictitious extension 'acme/interstellar':
 
@@ -120,9 +120,10 @@ New in beta 15, permissions can now be found in 2 places. Now, you can view each
 In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
 Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+
+- Permission object
+- What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
+- `ItemList` priority
 
 Back to our favorite rocket extension:
 
@@ -204,11 +205,11 @@ In beta 15, extension pages make room for extra info which is pulled from extens
 
 For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Description                        | Where in composer.json                                       |
-| ---------------------------------- | ------------------------------------------------------------ |
-| discuss.flarum.org discussion link | "forum" key inside "support"                                 |
-| Documentation                      | "docs" key inside "support"                                  |
-| Support (email)                    | "email" key inside "support"                                 |
-| Website                            | "homepage" key                                               |
-| Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| Description                                                        | Where in composer.json                                                          |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| discuss.flarum.org discussion link | "forum" key inside "support"                                                                    |
+| Documentation                                                      | "docs" key inside "support"                                                                     |
+| Support (email)                                 | "email" key inside "support"                                                                    |
+| Website                                                            | "homepage" key                                                                                  |
+| Donate                                                             | "funding" key block (Note: Only the first link will be used) |
+| Source                                                             | "source" key inside "support"                                                                   |
