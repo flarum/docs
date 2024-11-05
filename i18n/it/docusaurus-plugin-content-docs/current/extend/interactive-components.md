@@ -26,7 +26,7 @@ I seguenti attributi sono utili da tenere a mente:
 
 ## Modali
 
-Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
+Composer è gestito da un'istanza globale di [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` nel frontend di `forum`. I suoi metodi pubblici più importanti sono:
 
 - `app.modal.show(componentClass, attrs)` mostrerà un modale utilizzando la classe componente e attributi dati. Se chiamato mentre un modale è già aperto, sostituirà il modale attualmente aperto.
 - `app.modal.close()` chiuderà il modale se uno è attualmente attivo.
@@ -38,6 +38,32 @@ import Modal from 'flarum/components/Modal';
 
 export default class CustomModal extends Modal {
   // Vero per impostazione predefinita, determina se il modale può essere ignorato facendo clic sullo sfondo o nell'angolo in alto a destra.
+  static isDismissible = true;
+
+  className() {
+    // Custom CSS classes to apply to the modal
+    return 'custom-modal-class';
+  }
+
+  title() {
+    // Content to show in the modal's title bar
+    return <p>Custom Modal</p>;
+  }
+
+  content() {
+    // Content to show in the modal's body
+    return <p>Hello World!</p>;
+  }
+}
+```
+
+Modals with forms inherit `flarum/common/components/FormModal`. This class provides a `onsubmit` method which is called when the submit button is clicked:
+
+```jsx
+import FormModal from 'flarum/common/components/FormModal';
+
+export default class CustomFormModal extends FormModal {
+  // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
   static isDismissible = true;
 
   className() {
@@ -76,7 +102,7 @@ $ flarum-cli make frontend modal
 
 Poiché Flarum è un forum, abbiamo bisogno di strumenti per consentire agli utenti di creare e modificare post e discussioni. Flarum realizza questo attraverso il componente composer.
 
-Composer è gestito da un'istanza globale di [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` nel frontend di `forum`. I suoi metodi pubblici più importanti sono:
+Composer è gestito da un'istanza globale di [`ComposerState`]([https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), accessibile tramite `app.composer` sul frontend di `forum`. I suoi metodi pubblici più importanti sono:
 
 - `app.composer.load(componentClass, attrs)` caricherà un nuovo tipo di compositore. Se un compositore è già attivo, verrà sostituito.
 - `app.composer.show()` mostrerà il compositore se è attualmente nascosto.
