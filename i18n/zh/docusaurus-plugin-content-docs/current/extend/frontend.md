@@ -2,7 +2,7 @@
 
 这个页面描述如何改变Flarum的用户界面—— 添加按钮、文字滚动、和闪耀的文本 🤩 添加按钮、文字滚动、和闪耀的文本 🤩
 
-[记住](/extend/start.md#architecture), Flarum 的前端是**单页 JavaScript 应用**。 我们不会用到Twig、Blade或任何其他的PHP模板。 后端中存在的少数模板仅用于渲染针对搜索引擎优化的内容。 所有对UI的改动都需要通过JavaScript实现。
+[Remember](./start.md#architecture), Flarum's frontend is a **single-page JavaScript application**. 我们不会用到Twig、Blade或任何其他的PHP模板。 后端中存在的少数模板仅用于渲染针对搜索引擎优化的内容。 所有对UI的改动都需要通过JavaScript实现。
 
 Flarum有两个分开的前端应用：
 
@@ -231,7 +231,7 @@ Flarum will make anything you `export` from `forum.js` available in the global `
 
 :::tip External Libraries
 
-Only one main JavaScript file per extension is permitted. Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
+Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](./routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
 :::
 
