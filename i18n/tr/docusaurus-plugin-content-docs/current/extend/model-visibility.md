@@ -2,7 +2,7 @@
 
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
-When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). For example:
+When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/11.x/queries) through [Eloquent scoping](https://laravel.com/docs/11.x/eloquent#local-scopes). For example:
 
 ```php
 use Flarum\Group\Group;
@@ -38,7 +38,7 @@ So, what actually happens when we call `whereVisibleTo`? This call is handled by
 
 The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
 
-Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
+Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/11.x/queries).
 
 ## Custom Scopers
 
@@ -176,15 +176,21 @@ class ScopeDiscussionVisibilityForAbility
         }
 
         // Avoid an infinite recursive loop.
+        if (!
         if (Str::endsWith($ability, 'InRestrictedTags')) {
             return;
         }
 
-        // `view` is a special case where the permission string is represented by `viewForum`.
-        $permission = $ability === 'view' ? 'viewForum' : $ability;
+        // `view` is a special case where the permission string is represented by `viewForum`. $actor->hasPermission($permission)) {
+            $query->has('tags');
+        }
+    }
+}
+        $permission = $ability === 'view' ?
+        'viewForum' : $ability;
 
         // Restrict discussions where users don't have necessary permissions in all tags.
-        // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
+                    // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
         // not just one.
         $query->where(function ($query) use ($actor, $permission) {
             $query
@@ -196,18 +202,12 @@ class ScopeDiscussionVisibilityForAbility
                         });
                 })
                 ->orWhere(function ($query) use ($actor, $permission) {
-                    // Allow extensions a way to override scoping for any given permission.
-                    $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
+                    // Allow extensions a way to override scoping for any given permission. $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
                 });
         });
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (! $actor->hasPermission($permission)) {
-            $query->has('tags');
-        }
-    }
-}
 ```
 
 Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers.
