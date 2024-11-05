@@ -10,11 +10,12 @@ Before we delve into implementation details, let's define some key concepts.
 
 **Migrations** allow you to modify the database. If you're adding a new table, defining a new relationship, adding a new column to a table, or making some other DB structural change, you'll need to use a migration.
 
-**Models** provide a convenient, code-based API for creating, reading, updating, and deleting data. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database. On the frontend, they are represented by JS classes, and are used to interact with the [JSON:API](api.md), which we'll discuss in the next article.
+**Models** provide a convenient, code-based API for creating, reading, updating, and deleting data. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [开发者讲解：扩展开发的工作流程](https://github.com/flarum/cli)
 
 You can use the CLI to automatically create your model:
+
 ```bash
 $ flarum-cli make backend model
 $ flarum-cli make frontend model
@@ -24,7 +25,7 @@ $ flarum-cli make frontend model
 
 ## Migrations
 
-If we want to use a custom model, or add attributes to an existing one, we will need to modify the database to add tables / columns. We do this via migrations.
+If we want to use a custom model, or add attributes to an existing one, we will need to modify the database to add tables / columns. We do this via migrations. We do this via migrations.
 
 Migrations are like version control for your database, allowing you to easily modify Flarum's database schema in a safe way. Flarum's migrations are very similar to [Laravel's](https://laravel.com/docs/migrations), although there are some differences.
 
@@ -53,7 +54,7 @@ For common tasks like creating a table, or adding columns to an existing table, 
 
 ### Migration Lifecycle
 
-Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
+Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. Migrations are applied when the extension is enabled for the first time or when it's enabled and there are some outstanding migrations. The executed migrations are logged in the database, and when some are found in the migrations folder of an extension that aren't logged as completed yet, they will be executed.
 
 Migrations can also be manually applied with `php flarum migrate` which is also needed to update the migrations of an already enabled extension. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Nothing can break by running `php flarum migrate` again if you've already migrated - executed migrations will not run again.
 
@@ -84,7 +85,7 @@ return Migration::renameTable($from, $to);
 
 ### Creating/Dropping Columns
 
-To add columns to an existing table, use the `Migration::addColumns` helper. The `addColumns` helper accepts two arguments. The first is the name of the table. The second is an array of column definitions, with the key being the column name. The value of each item is an array with the column definitions, as understood by Laravel's `Illuminate\Database\Schema\Blueprint::addColumn()` method. The first value is the column type, and any other keyed values are passed through to `addColumn`.
+To add columns to an existing table, use the `Migration::addColumns` helper. The `addColumns` helper accepts two arguments. The first is the name of the table. The second is an array of column definitions, with the key being the column name. The first is the name of the table. The second is an array of column definitions, with the key being the column name.
 
 ```php
 return Migration::addColumns('users', [
@@ -135,12 +136,11 @@ With all your snazzy new database tables and columns, you're going to want a way
 
 ### Adding New Models
 
-If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions. See the Eloquent docs linked above for examples of what your model class should look like.
+If you've added a new table, you'll need to set up a new model for it. If you've added a new table, you'll need to set up a new model for it. See the Eloquent docs linked above for examples of what your model class should look like.
 
 ### Extending Models
 
-If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
-
+If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the <code>users</code> table via the <code>Flarum\User\User</code> model. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
 <!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
@@ -203,9 +203,9 @@ Those 4 should cover the majority of relations, but sometimes, finer-grained cus
 
 ## Frontend Models
 
-Flarum provides a simple toolset for working with data in the frontend in the form of frontend models. There's 2 main concepts to be aware of:
+Flarum provides a simple toolset for working with data in the frontend in the form of frontend models. There's 2 main concepts to be aware of: There's 2 main concepts to be aware of:
 
-- Model instances are objects that represent a record from the database. You can use their methods to get attributes and relationships of that record, save changes to the record, or delete the record.
+- Model instances are objects that represent a record from the database. Model instances are objects that represent a record from the database. You can use their methods to get attributes and relationships of that record, save changes to the record, or delete the record.
 - The Store is a util class that caches all the models we've fetched from the API, links related models together, and provides methods for getting model instances from both the API and the local cache.
 
 ### Fetching Data
@@ -227,7 +227,7 @@ const discussions = app.store.all('discussions');
 const discussion = app.store.getById('discussions', 123);
 ```
 
-The store wraps the raw API resource data in model objects which make it a bit easier to work with. Attributes and relationships can be accessed via pre-defined instance methods:
+The store wraps the raw API resource data in model objects which make it a bit easier to work with. Attributes and relationships can be accessed via pre-defined instance methods: Attributes and relationships can be accessed via pre-defined instance methods:
 
 ```js
 const id = discussion.id();
@@ -239,7 +239,7 @@ You can learn more about the store in our [API documentation](https://api.docs.f
 
 ### Adding New Models
 
-If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
+If you have added a new resource type, you will need to define a new model for it. If you have added a new resource type, you will need to define a new model for it.
 
 ```js
 import Model from 'flarum/common/Model';
@@ -325,10 +325,10 @@ discussion.delete().then(done);
 
 ## Backend Models vs Frontend Models
 
-Often, backend and frontend models will have similar attributes and relationships. This is a good pattern to follow, but isn't always true.
+Often, backend and frontend models will have similar attributes and relationships. This is a good pattern to follow, but isn't always true. This is a good pattern to follow, but isn't always true.
 
 The attributes and relationships of backend models are based on the **database**. Each column in the model's table will map to an attribute on the backend model.
 
 The attributes and relationships of frontend models are based on the output of [API Serializers](api.md). These will be covered more in depth in the next article, but it's worth that a serializer could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
-Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.
+Furthermore, when you save a backend model, that data is being written directly to the database. Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the <a href="api.md">next article</a>, we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.
