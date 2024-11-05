@@ -15,6 +15,7 @@ Before we delve into implementation details, let's define some key concepts.
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
 You can use the CLI to automatically create your model:
+
 ```bash
 $ flarum-cli make backend model
 $ flarum-cli make frontend model
@@ -140,7 +141,6 @@ If you've added a new table, you'll need to set up a new model for it. Rather th
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
-
 
 <!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
