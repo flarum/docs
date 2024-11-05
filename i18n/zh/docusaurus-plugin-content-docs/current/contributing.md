@@ -4,7 +4,7 @@
 
 在贡献之前，请仔细阅读 [行为准则](code-of-conduct.md)。
 
-本文档是想要为 Flarum 贡献代码的开发者的指南。 如果您只是入门，建议您阅读进阶文档中的 [Getting Started](https://flarum.org/extend/start.md) 文档了解 Flarum 的工作原理。
+本文档是想要为 Flarum 贡献代码的开发者的指南。 If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## 为什么要为Flarum做贡献？
 
@@ -162,7 +162,7 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 
 ### Translations
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## 贡献者许可协议
 
