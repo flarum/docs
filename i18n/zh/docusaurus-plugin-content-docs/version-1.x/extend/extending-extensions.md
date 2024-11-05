@@ -33,9 +33,10 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 
 ## Optional Dependencies
 
+Sometimes, extension A might want to extend extension B only if extension B is enabled.
 Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
 
-The first step here is detecting whether extension B is enabled. In the frontend, this is easy: if extension B does anything in the frontend, its extension ID will appear as a key in the `flarum.extensions` global object. For instance:
+The first step here is detecting whether extension B is enabled. The first step here is detecting whether extension B is enabled. For instance:
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
@@ -65,7 +66,8 @@ class SomeClass {
 }
 ```
 
-Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies. You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
+Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies.
+You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
 
 For instance:
 
@@ -103,7 +105,7 @@ class SomeClass
 
 Note that if you're importing from an optional dependency which might not be installed, you'll need to check that the class in question exists via the `class_exists` function.
 
-In the frontend, you can only import things that have been explicitly exported. However, first you'll need to configure your extension's webpack to allow these imports:
+In the frontend, you can only import things that have been explicitly exported. In the frontend, you can only import things that have been explicitly exported. However, first you'll need to configure your extension's webpack to allow these imports:
 
 #### webpack.config.js
 
