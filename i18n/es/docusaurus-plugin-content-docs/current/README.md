@@ -6,7 +6,7 @@ slug: /
 
 Flarum es una plataforma de discusión increíblemente sencilla para su sitio web. Es rápido y fácil de usar, con todas las características que necesitas para dirigir una comunidad exitosa. It's also extremely extensible, allowing for ultimate customizability.
 
-![Flarum Home Screenshot](/en/img/home_screenshot.png)
+![Flarum Home Screenshot](./assets/home_screenshot.png)
 
 ## Objetivos
 
@@ -36,7 +36,7 @@ Esta guía de usuario te ayudará a crear tu propio foro usando Flarum y te ense
 
 💸 The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This wouldn't be possible without your financial support.
 
-🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners!
+🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners! If you're experienced with Flarum, you can also help out beginners!
 
 🐛 If there's a bug that's bothering you, or a feature idea on your mind, we can't know about it unless you tell us! We track bugs, suggestions, and future development plans [via GitHub issues](https://github.com/flarum/core/issues). If there's already an issue open, adding likes and (constructive) additional information can be very helpful!
 
