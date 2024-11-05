@@ -146,7 +146,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         copyright: `Copyright © ${new Date().getFullYear()} Flarum. Built with Docusaurus.`,
       },
       prism: {
