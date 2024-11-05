@@ -4,7 +4,7 @@ Interessato a contribuire allo sviluppo di Flarum? È fantastico! Dalla [segnala
 
 Prima di contribuire, leggi il [codice di condotta](code-of-conduct.md).
 
-Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Per iniziare](/extend/start.md)  (per ora in inglese) sul funzionamento di Flarum.
+Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## Contribuire a Flarum
 
@@ -157,7 +157,7 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 
 ### Traduzioni
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Contratto di licenza del collaboratore
 
