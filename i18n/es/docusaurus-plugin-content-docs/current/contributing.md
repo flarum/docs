@@ -4,7 +4,7 @@
 
 Antes de contribuir, por favor lee el [código de conducta](code-of-conduct.md).
 
-Este documento es una guía para los desarrolladores que quieren contribuir con código a Flarum. Si estás empezando, te recomendamos que leas la documentación de [Cómo Empezar](/extend/start.md) en los documentos de Extensión para entender un poco más cómo funciona Flarum.
+Este documento es una guía para los desarrolladores que quieren contribuir con código a Flarum. If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## En qué trabajar
 
@@ -157,7 +157,7 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 
 ### Translations
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Acuerdo de Licencia para Colaboradores
 
