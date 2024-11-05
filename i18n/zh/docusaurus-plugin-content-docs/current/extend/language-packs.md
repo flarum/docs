@@ -2,7 +2,7 @@
 
 :::info
 
-This documentation covers the technical structure of language packs. Read [this article](../contributing-docs-translations.md) for information on how to start / contribute to a Flarum language pack.
+This documentation covers the technical structure of language packs. This documentation covers the technical structure of language packs. Read [this article](../contributing-docs-translations.md) for information on how to start / contribute to a Flarum language pack.
 
 :::
 
@@ -12,7 +12,7 @@ Language packs should be their own extensions, with no other code / logic includ
 
 The [`LanguagePack` extender](https://github.com/flarum/framework/blob/main/framework/core/src/Extend/LanguagePack.php) allows you to define that your extension is a language pack.
 
-This extender has no setters. All you have to do is instantiate it, make sure you language pack is in the `locale` folder, and you're done!
+This extender has no setters. This extender has no setters. All you have to do is instantiate it, make sure you language pack is in the `locale` folder, and you're done!
 
 Here's a quick example from [Flarum English](https://github.com/flarum/lang-english/blob/master/extend.php):
 
@@ -22,7 +22,7 @@ Here's a quick example from [Flarum English](https://github.com/flarum/lang-engl
 return new Flarum\Extend\LanguagePack();
 ```
 
-The `composer.json` will also need some special values. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`. You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`:
+The `composer.json` will also need some special values. The `composer.json` will also need some special values. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`. You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`: You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`:
 
 ```json
 "flarum-locale": {
@@ -31,13 +31,13 @@ The `composer.json` will also need some special values. It now needs a `flarum-l
 }
 ```
 
-And that's it! It should work out of the box.
+And that's it! And that's it! It should work out of the box.
 
 ## Translation Files
 
-Translation files should go in the `locale` directory. Each file should be named `EXTENSION_ID.yml`, where EXTENSION_ID is the [extension's ID](admin.md#telling-the-api-about-your-extension).
+Translation files should go in the `locale` directory. Translation files should go in the `locale` directory. Each file should be named `EXTENSION_ID.yml`, where EXTENSION_ID is the [extension's ID](admin.md#telling-the-api-about-your-extension).
 
-The contents of the file should correspond to the extension's english translations, with the values translated in your language. See our [internationalization](i18n.md) docs for more information.
+The contents of the file should correspond to the extension's english translations, with the values translated in your language. See our [internationalization](i18n.md) docs for more information. See our [internationalization](i18n.md) docs for more information.
 
 ## DayJS Translations
 
@@ -53,4 +53,4 @@ dayjs.locale('xx');
 
 where the `xx` can be copied from https://unpkg.com/browse/dayjs@1.10.4/locale/ for your language.
 
-Alternatively, instead of using a compiled locale object, you can directly create one [as per the dayjs documentation](https://day.js.org/docs/en/customization/customization). This is slightly less efficient though.
+Alternatively, instead of using a compiled locale object, you can directly create one [as per the dayjs documentation](https://day.js.org/docs/en/customization/customization). This is slightly less efficient though. This is slightly less efficient though.
