@@ -12,7 +12,7 @@ Stiamo ancora lavorando ad una roadmap formale. Abbiamo molti piani e idee e non
 
 Tutte le donazioni sono ben accette. Puoi effettuarle tramite [Github Sponsors](https://github.com/sponsors/flarum) o [OpenCollective](https://opencollective.com/flarum).
 
-Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. Incoraggiamo inoltre gli utenti a contribuire in altri modi, ad esempio [contribuire al codice](contributing.md), [creare estensioni](/extend/), scrivere documentazione, tradurre Flarum in altre lingue, fornire aiuto e supporto sul [forum](https://discuss.flarum.org/)...
+Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Flarum avrà [nome feauture]? Quando? Perchè no?
 
@@ -22,7 +22,7 @@ Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste
 
 Anche in questo caso, la risposta è "prima le prime cose". Se non abbiamo ancora risolto un problema (o gli abbiamo assegnato un traguardo), è perché stiamo lavorando a qualcos'altro che è altrettanto importante. Per favore sii paziente; proveremo a farlo prima del rilascio. Oppure, se hai fretta, sentiti libero di aggiustarlo da solo e [contribuire al progetto](contributing.md)!
 
-### Perchè non è stato risolto ancora il [nome problema]?
+### Potrò migrare il mio forum su Flarum?
 
 Attualmente non forniamo software di migrazione ufficiali, ma ci sono molte soluzioni della comunità già pronte all'uso. Una volta che siamo sicuri che Flarum è pronto per essere utilizzato in produzione, inizieremo a creare strumenti per importare dati da altri software per forum come esoTalk, FluxBB, phpBB, Discourse e altri.
 
