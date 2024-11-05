@@ -6,7 +6,7 @@ Prima di contribuire, leggi il [codice di condotta](code-of-conduct.md).
 
 Questo documento è una guida per gli sviluppatori che vogliono contribuire con codice a Flarum. Se hai appena iniziato, ti consigliamo di leggere la documentazione [Per iniziare](/extend/start.md)  (per ora in inglese) sul funzionamento di Flarum.
 
-## Su cosa lavorare
+## Contribuire a Flarum
 
 ⚡ **Have Real Impact.** There are thousands of Flarum instances, with millions of aggregate end users. By contributing to Flarum, your code will have a positive impact on all of them.
 
@@ -16,7 +16,7 @@ Questo documento è una guida per gli sviluppatori che vogliono contribuire con 
 
 🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
 
-## Setup area di sviluppo
+## Su cosa lavorare
 
 Dai un occhiata ai nostri prossimi [Traduardi (in inglese)](https://github.com/flarum/core/milestones) per una panoramica di ciò che deve essere fatto. Consulta le [Primi problemi](https://github.com/flarum/core/labels/Good%20first%20issue) per un elenco di problemi con cui dovrebbe essere relativamente facile iniziare. Se c'è qualcosa di cui non sei sicuro, non esitare a chiedere! Abbiamo tutti cominciato dal principio.
 
@@ -24,7 +24,7 @@ Se hai intenzione di andare avanti e lavorare su qualcosa, commenta il problema 
 
 Dal momento che Flarum è così estendibile, consigliamo vivamente [i nostri documenti per le estensioni](extend/README.md) come riferimento quando si lavora sul core, così come per le estensioni in bundle. Si dovrebbe iniziare con [l'introduzione](extend/README.md) per una migliore comprensione della nostra filosofia di estensibilità.
 
-## Flusso di lavoro nello sviluppo
+## Setup area di sviluppo
 
 ### Impostare un codice locale
 
@@ -80,7 +80,7 @@ Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/
 
 Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpstorm/download/) or [Visual Studio Code](https://code.visualstudio.com/).
 
-## Stile del codice
+## Flusso di lavoro nello sviluppo
 
 A typical contribution workflow looks like this:
 
@@ -89,21 +89,21 @@ A typical contribution workflow looks like this:
     * *Funzionalità minori* che sono completamente retrocompatibili con l'attuale versione di Flarum possono essere inviate all'ultimo branch stabile.
 
 1. 🔨 **Scrivi** un po' di codice.
-    * Vedi sotto per lo [stile del codice](#stile-del-codice).
+    * * Le correzioni di bug* dovrebbero essere inviate all'ultimo branch stabile.
     * *Funzionalità minori* che sono completamente retrocompatibili con l'attuale versione di Flarum possono essere inviate all'ultimo branch stabile.
     * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
     * Internamente usiamo lo schema di denominazione `<iniziali>/<breve-descrizione>` (es. `tz/refactor-frontend`).
 
 2. 🚦 **Testa** il tuo codice.
-    * Aggiungi unit test in base alle esigenze durante la correzione di bug o l'aggiunta di funzionalità.
+    * Vedi sotto per lo [stile del codice](#stile-del-codice).
 
 3. 💾 **Crea dei commit** per il tuo codice con un messaggio descrittivo.
-    * Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
+    * Aggiungi unit test in base alle esigenze durante la correzione di bug o l'aggiunta di funzionalità.
     * Scrivi un [buon messaggio accompagnatorio](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
     * Vedi [qui](extend/testing.md) per maggiori informazioni sui test in Flarum.
 
 4. 🎁 **Invia** una Pull Request su GitHub.
-    * Riempi i campi della richiesta.
+    * Se la modifica risolve un problema esistente (di solito, dovrebbe) includere "Fixes #123" in una nuova riga, dove 123 è il numero dell'issue GitHub.
     * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
     * *Fix* commits should describe the issue fixed, not how it was fixed.
 
@@ -118,7 +118,7 @@ A typical contribution workflow looks like this:
 
 7. 🕺 **Festeggia** per aver contribuito a Flarum.
 
-## Strumenti di sviluppo
+## Stile del codice
 
 In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
