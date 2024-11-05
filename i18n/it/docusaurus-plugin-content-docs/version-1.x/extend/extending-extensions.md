@@ -33,9 +33,10 @@ Ad esempio, se stai sviluppando un nuovo tema per l'estensione Tag Flarum, il tu
 
 ## Dipendenze opzionali
 
-A volte, l'estensione A potrebbe voler estendere l'estensione B solo se l'estensione B è abilitata. In questo caso, chiamiamo B una "Dipendenza opzionale" di A. Per esempio, l'estensione "Drafts" potrebbe voler aggiungere il supporto per salvare bozze di discussione private, ma solo se l'estensione di discussione privata è abilitata.
+A volte, l'estensione A potrebbe voler estendere l'estensione B solo se l'estensione B è abilitata.
+In questo caso, chiamiamo B una "Dipendenza opzionale" di A. Per esempio, l'estensione "Drafts" potrebbe voler aggiungere il supporto per salvare bozze di discussione private, ma solo se l'estensione di discussione privata è abilitata.
 
-Il primo passo quindi è quello di rilevare se l'estensione B è abilitata. Nel frontend,  è facile: se l'estensione B fa qualcosa nel frontend, il suo ID di estensione apparirà come chiave nell'oggetto globale `flarum.extensions` . Per esempio:
+Il primo passo quindi è quello di rilevare se l'estensione B è abilitata. Il primo passo quindi è quello di rilevare se l'estensione B è abilitata. Per esempio:
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
@@ -65,7 +66,8 @@ class SomeClass {
 }
 ```
 
-Generalmente, se la tua estensione ha dipendenze opzionali, vorrai che venga avviata dopo queste dipendenze opzionali. Tutto ciò è possibile farlo anche specificando i nomi dei pacchetti composer (NON ID dell' estensione flarum) in un array `extra.flarum-extension.optional-dependencies` del tuo file composer.json.
+Generalmente, se la tua estensione ha dipendenze opzionali, vorrai che venga avviata dopo queste dipendenze opzionali.
+Tutto ciò è possibile farlo anche specificando i nomi dei pacchetti composer (NON ID dell' estensione flarum) in un array `extra.flarum-extension.optional-dependencies` del tuo file composer.json.
 
 Per esempio:
 
