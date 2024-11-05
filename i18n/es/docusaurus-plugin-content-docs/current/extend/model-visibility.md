@@ -2,7 +2,7 @@
 
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
-Cuando un usuario visita la página **Discusiones**, queremos mostrarle rápidamente los debates recientes a los que tiene acceso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Por ejemplo:
+Cuando un usuario visita la página **Discusiones**, queremos mostrarle rápidamente los debates recientes a los que tiene acceso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/11.x/queries) through [Eloquent scoping](https://laravel.com/docs/11.x/eloquent#local-scopes). Por ejemplo:
 
 ```php
 use Flarum\Group\Group;
@@ -34,11 +34,11 @@ Tenga en cuenta que el alcance de la visibilidad sólo se puede utilizar en los 
 
 ## Cómo se procesa
 
-So, what actually happens when we call `whereVisibleTo`? ¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
+So, what actually happens when we call `whereVisibleTo`? ¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers". ¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
 
 La consulta se ejecutará a través de todos los visores aplicables registrados para el modelo de la consulta. Tenga en cuenta que los scopers de visibilidad registrados para una clase padre (como `Flarum\Post\Post`) también se aplicarán a cualquier clase hija (como `Flarum\Post\CommentPost`).
 
-Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/8.x/queries).
+Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/11.x/queries).
 
 ## Custom Scopers
 
@@ -180,7 +180,7 @@ class ScopeDiscussionVisibilityForAbility
         }
 
         // `view` is a special case where the permission string is represented by `viewForum`.
-        $permission = $ability === 'view' ? 'viewForum' : $ability;
+        $permission = $ability === 'view' ? $permission = $ability === 'view' ? 'viewForum' : $ability;
 
         // Restrict discussions where users don't have necessary permissions in all tags.
         // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
@@ -202,7 +202,7 @@ class ScopeDiscussionVisibilityForAbility
 
         // Hide discussions with no tags if the user doesn't have that global
         // permission.
-        if (! $actor->hasPermission($permission)) {
+        if (! if (! $actor->hasPermission($permission)) {
             $query->has('tags');
         }
     }
