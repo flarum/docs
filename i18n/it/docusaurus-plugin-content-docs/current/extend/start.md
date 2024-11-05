@@ -10,7 +10,7 @@ Tieni presente che Flarum utilizza alcuni linguaggi e strumenti _moderni_. Se ha
 
 Flarum � composto da tre strati:
 
-* Primo, c'� il ** backend **. Questo � scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
+* Primo, c'� il ** backend **. Questo � scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). You'll also want to familiarize yourself with the concept of [Dependency Injection](https://laravel.com/docs/11.x/container), which is used throughout our backend.
 
 * Secondo, il backend espone una ** API pubblica ** che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo � costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
 
