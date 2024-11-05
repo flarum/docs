@@ -13,7 +13,7 @@ Cảm ơn bạn đã giúp chúng tôi kiểm tra Flarum. Chúng tôi rất vui 
 Đã tìm thấy một lỗi? Tuyệt vời! Chúng tôi rất muốn nghe về nó &mdash; nhưng trước tiên, bạn nên kiểm tra xung quanh để đảm bảo rằng bạn không lãng phí thời gian vào một vấn đề đã biết:
 
 - Tìm kiếm trong [Diễn đàn hỗ trợ](https://discuss.flarum.org/t/support) của chúng tôi để xem liệu nó đã được báo cáo chưa.
-- Chúng tôi có thể đang tìm cách khắc phục, vì vậy hãy tìm kiếm trong [trình theo dõi sự cố](https://github.com/flarum/core/issues) của chúng tôi.
+- We could be working on a fix, so search our [issue tracker](https://github.com/flarum/framework/issues) too.
 
 Nếu bạn đã tìm kiếm *ỹ lưỡng* và ra về tay không, chúng tôi sẽ hoan nghênh báo cáo của bạn. Nếu đó chỉ là một vấn đề đơn giản (ví dụ: một từ sai chính tả hoặc trục trặc đồ họa), hãy chuyển sang đoạn tiếp theo. Nhưng nếu bạn thấy lỗi hoặc một cái gì đó rõ ràng bị hỏng, chúng tôi sẽ cần bạn thu thập một số thông tin trước. Vui lòng xem hướng dẫn [Gỡ rối](troubleshoot.md) của chúng tôi và làm theo hướng dẫn tại đó. Thu thập càng nhiều thông tin càng tốt!
 
