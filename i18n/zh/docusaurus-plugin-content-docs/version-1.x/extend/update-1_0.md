@@ -1,6 +1,6 @@
 # Updating For 1.0
 
-Flarum version 1.0 is the long-awaited stable release! This release brings a number of refactors, cleanup, and small improvements that should make your Flarum experience just a bit better!
+Flarum version 1.0 is the long-awaited stable release! This release brings a number of refactors, cleanup, and small improvements that should make your Flarum experience just a bit better! This release brings a number of refactors, cleanup, and small improvements that should make your Flarum experience just a bit better!
 
 :::tip
 
@@ -14,14 +14,14 @@ If you need help applying these changes or using new features, please start a di
 
 #### Background
 
-Historically, Flarum has used Symfony for backend translations, and a port for frontend translations to keep format consistent. There are a few limitations to this approach though:
+Historically, Flarum has used Symfony for backend translations, and a port for frontend translations to keep format consistent. There are a few limitations to this approach though: There are a few limitations to this approach though:
 
 - Developers need to decide between using `trans` or `transChoice` for pluralization
 - The pluralization format is proprietary to Symfony
 - We have to maintain the JS port ourselves
 - Keys for values provided to backend translations need to be wrapped in curly braces. (e.g. `$this->translator->trans('some.translation', ['{username}' => 'Some Username!'])`).
 - There's no support for complex applications (nested pluralization, non-number-based selection)
-- As a result of the previous point, genderization is impossible. And that's kinda important for a lot of languages.
+- As a result of the previous point, genderization is impossible. And that's kinda important for a lot of languages. And that's kinda important for a lot of languages.
 
 ### New System
 
@@ -38,13 +38,15 @@ No change to translation file naming is necessary (Symfony docs say that an `+in
 
 In the future, this will serve as a basis for additional features:
 
-- Translator preprocessors will allow extensions to modify arguments passed to translations. This will enable genderization (extensions could automatically extract a gender field from any objects of type "user" passed in).
+- Translator preprocessors will allow extensions to modify arguments passed to translations. Translator preprocessors will allow extensions to modify arguments passed to translations. This will enable genderization (extensions could automatically extract a gender field from any objects of type "user" passed in).
 - We could support internationalized "magic variables" for numbers: currently, `one` is supported, but others (`few`, `many`, etc) currently aren't.
 - We could support ordinal formatting in additional to just plural formatting.
 
 #### Changes Needed in Extensions
 
-The `transChoice` methods in the frontend and backend have been removed. The `trans` method should always be used for translating, regardless of pluralization. If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
+The `transChoice` methods in the frontend and backend have been removed.
+The `trans` method should always be used for translating, regardless of pluralization.
+If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
 
 In the frontend, code that looked like this:
 
@@ -72,6 +74,7 @@ $translator->trans('some-translation', ['host' => $hostName, 'guestCount' => $gu
 ```
 
 Note that in the backend, translation keys were previously wrapped in curly braces. This is no longer needed.
+This is no longer needed.
 
 #### Changes Needed in Translations
 
@@ -85,7 +88,7 @@ to
 
 `{count, plural, one {For # minute} other {For # minutes}}`
 
-Note that in this example, `count` is the variable that controls pluralization. If a different variable were used (such as guestCount in the example above), this would look like:
+Note that in this example, `count` is the variable that controls pluralization. Note that in this example, <code>count</code> is the variable that controls pluralization. If a different variable were used (such as guestCount in the example above), this would look like:
 
 `{guestCount, plural, one {For # minute} other {For # minutes}}`
 
@@ -98,9 +101,10 @@ For a long time, the `viewDiscussions` and `viewUserList` permissions have been 
 - `viewDiscussions` controls viewing both discussions and users.
 - `viewUserList` controls searching users, not viewing user profiles.
 
-To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively. A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
+To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively.
+A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
 
-We have also slightly improved tag scoping for permissions. Currently, permissions can be applied to tags if:
+We have also slightly improved tag scoping for permissions. Currently, permissions can be applied to tags if: Currently, permissions can be applied to tags if:
 
 - The permission is `viewForum`
 - The permission is `startDiscussion`
@@ -128,7 +132,7 @@ See [the PR](https://github.com/flarum/core/pull/2843/files) for examples of how
 
 ### PaginatedListState
 
-The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON:API resources (usually models). In future releases, we will also provide an `PaginatedList` (or `InfiniteScroll`) component that can be used as a base class for these paginated lists.
+The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON:API resources (usually models). It provides support for loading and displaying paginated lists of JSON:API resources (usually models).
 
 Please see [the source code](https://github.com/flarum/core/blob/master/js/src/common/states/PaginatedListState.ts) for a list of methods.
 
@@ -146,7 +150,7 @@ Ever wrote messy code trying to put together a list of classes for some componen
 
 ### User List
 
-An extensible user list has been added to the admin dashboard. In future releases, we hope to extract a generic model table component that can be used to list any model in the admin dashboard.
+An extensible user list has been added to the admin dashboard. An extensible user list has been added to the admin dashboard. In future releases, we hope to extract a generic model table component that can be used to list any model in the admin dashboard.
 
 See [the source code](https://github.com/flarum/core/blob/master/js/src/admin/components/UserListPage.tsx#L41) for a list of methods to extend, and examples of how columns should look like (can be added by extending the `columns` method and adding items to the [ItemList](frontend.md)).
 
@@ -180,7 +184,7 @@ return [
 ];
 ```
 
-This approach was difficult to maintain and provide a well-tested public API for, frequently resolved classes early (breaking all sorts of things), and was not very descriptive. With the extender API completed in beta 16, this approach is no longer necessary. Support for these closures has been removed in this stable version.
+This approach was difficult to maintain and provide a well-tested public API for, frequently resolved classes early (breaking all sorts of things), and was not very descriptive. With the extender API completed in beta 16, this approach is no longer necessary. Support for these closures has been removed in this stable version. With the extender API completed in beta 16, this approach is no longer necessary. Support for these closures has been removed in this stable version.
 
 One type of functionality for which the extender replacement isn't obvious is container bindings ([e.g. flarum/pusher](https://github.com/flarum/pusher/blob/v0.1.0-beta.14/extend.php#L33-L49)). This can be done with via the service provider extender (e.g. [a newer version of flarum/pusher](https://github.com/flarum/pusher/blob/master/extend.php#L40-L41)).
 
@@ -194,7 +198,7 @@ The [fof/console](https://github.com/FriendsOfFlarum/console) library has been a
 
 As part of solving [N+1 Query issues](https://secure.phabricator.com/book/phabcontrib/article/n_plus_one/) in some [Flarum API endpoints](https://github.com/flarum/core/issues/2637), we have introduced a `load` method on the `ApiController` extender that allows you to indicate relations that should be eager loaded.
 
-This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. For example, we will always need the tags of a discussion to check what permissions a user has on that discussion, so we should eager load the discussion's `tags` relationship. For example:
+This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. For example:
 
 ```php
 return [
@@ -212,7 +216,7 @@ The `Flarum\Http\RequestUtil`'s `getActor` and `withActor` should be used for ge
 ### Miscellaneous
 
 - The `Formatter` extender now has an `unparse` method that allows modifying XML before unparsing content.
-- All route names must now be unique. In beta 16, uniqueness was enforced per-method; now, it is mandatory for all routes.
+- All route names must now be unique. All route names must now be unique. In beta 16, uniqueness was enforced per-method; now, it is mandatory for all routes.
 - API requests sent through `Flarum\Api\Client` now run through middleware, including `ThrottleApi`. This means that it is now possible to throttle login/registration calls.
 - In beta 16, registering custom [searchers](search.md) was broken. It has been fixed in stable.
 - The `post_likes` table in the [flarum/likes](https://github.com/flarum/likes) extension now logs the timestamp when likes were created. This isn't used in the extension, but could be used in other extensions for analytics.
@@ -248,7 +252,7 @@ These methods have been replaced with a `whereHasPermission` [Eloquent dynamic s
 
 That query can then be used in other DB queries, or further constricted to retrieve individual tags.
 
-Secondly, we no longer load in all tags as part of the initial payload. The initial payload contains all top-level primary tags, and the top 3 secondary tags. Other tags are loaded in as needed. Future releases will paginate secondary tags. This should enable forums to have thousands of secondary tags without significant performance impacts. These changes mean that extensions should not assume that all tags are available in the model store.
+Secondly, we no longer load in all tags as part of the initial payload. The initial payload contains all top-level primary tags, and the top 3 secondary tags. Other tags are loaded in as needed. Future releases will paginate secondary tags. This should enable forums to have thousands of secondary tags without significant performance impacts. These changes mean that extensions should not assume that all tags are available in the model store. The initial payload contains all top-level primary tags, and the top 3 secondary tags. Other tags are loaded in as needed. Future releases will paginate secondary tags. This should enable forums to have thousands of secondary tags without significant performance impacts. These changes mean that extensions should not assume that all tags are available in the model store.
 
 ## Testing Library Changes
 
