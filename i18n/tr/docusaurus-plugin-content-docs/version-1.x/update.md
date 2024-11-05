@@ -2,7 +2,7 @@
 
 ## From the Admin Dashboard
 
-:::bilgi
+:::info
 
 If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
 
