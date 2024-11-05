@@ -16,7 +16,7 @@ Flarum, [esoTalk](https://github.com/esotalk/esoTalk) ve [FluxBB](https://fluxbb
 
 * **Güzel ve duyarlı.** Bu, insanlar için forum yazılımıdır. Flarum, kutudan çıkar çıkmaz tüm platformlarda tutarlı ve sezgisel olacak şekilde dikkatle tasarlanmıştır.
 
-* **Güçlü ve genişletilebilir.** Flarum'u topluluğunuza uyacak şekilde özelleştirin, genişletin ve entegre edin. Flarum’un mimarisi, [Güçlü Uzantı API'si](/extend/) ile inanılmaz derecede esnektir.
+* **Güçlü ve genişletilebilir.** Flarum'u topluluğunuza uyacak şekilde özelleştirin, genişletin ve entegre edin. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](./extend/README.md).
 
 * **Ücretsiz ve açıktır.** Flarum, [MIT lisansı](https://github.com/flarum/flarum/blob/master/LICENSE) altında yayınlanmıştır.
 
