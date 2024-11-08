@@ -61,10 +61,16 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 
 :::
 
-### Admin Search
+### Forum Search
 
 ##### <span class="breaking">Breaking</span>
-* `app.extensionData` has been renamed to `app.registry`, but you should now use the [`Admin` extender](./admin.md) instead.
+* The forum search UI has been refactored to use a new `SearchModal` component.
+* The `flarum/forum/components/Search` component is no longer the global search component, it can still be used for custom search purposes.
+* Custom global search sources should be registered in `flarum/forum/components/GlobalSearch` `sourceItems` method.
+* Custom global search sources should now implement the `GlobalSearchSource` interface instead of `SearchSource`, see https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/components/AbstractSearch.tsx#L26-L69.
+* The `flarum/forum/states/SearchState` class has been moved to `flarum/common/states/SearchState`.
+
+### Admin Search
 
 ##### <span class="notable">Notable</span>
 * The admin dashboard now has a search feature, as long as you register your settings/permissions using the `Admin` extender, then they will be automatically picked up.
@@ -97,6 +103,7 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 There have been many changes to the core frontend codebase, including renamed or moved methods/components, new methods/components, and more. It might help to look directly at the [JavaScript diffs](https://github.com/flarum/framework/issues?q=is%3Amerged+label%3Ajavascript+milestone%3A2.0+) to see what has changed. But here are some notable changes.
 
 ##### <span class="breaking">Breaking</span>
+* `app.extensionData` has been renamed to `app.registry`, but you should now use the [`Admin` extender](./admin.md) instead.
 * Some extension initializers [have been renamed to be more uniform](https://github.com/flarum/framework/pull/4003/files), if you are checking for initializer existence with `app.initializers.has('...')` you should update the name accordingly.
 * `IndexPage.prototype.sidebar` has been removed, use the `IndexSidebar` component instead.
 * `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
