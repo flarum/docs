@@ -44,7 +44,7 @@ Nếu có vẻ như bạn đang cần trợ giúp để giải quyết vấn đ�
 * Hiển thị trên trang thực tế
 * Được hiển thị trong console của trình duyệt (Chrome: More tools -> Developer Tools -> Console)
 * Được ghi lại trong nhật ký lỗi của máy chủ (ví dụ: `/var/log/nginx/error.log`)
-* Được ghi lại trong nhật ký lỗi của PHP-FPM (ví dụ: `/var/log/php7.x-fpm.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php8.x-fpm.log`)
 * Được ghi lại bởi Flarum (`storage/logs`)
 
 Sao chép bất kỳ tin nhắn nào vào tệp văn bản và ghi lại một vài ghi chú về *khi* xảy ra lỗi, bạn *bị gì* đang làm vào thời điểm đó. Đảm bảo bao gồm bất kỳ thông tin chi tiết nào bạn có thể thu thập được về các điều kiện mà sự cố xảy ra và không xảy ra. Thêm càng nhiều thông tin càng tốt về môi trường máy chủ của bạn: phiên bản hệ điều hành, phiên bản máy chủ web, phiên bản PHP và trình xử lý.
