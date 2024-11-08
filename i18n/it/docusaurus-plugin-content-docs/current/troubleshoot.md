@@ -44,7 +44,7 @@ Se sembra che avrai bisogno di aiuto per risolvere il problema, è ora di fare s
 * Visualizzato nella pagina attuale
 * Visualizzato nella console del browser (Chrome: More tools -> Developer Tools -> Console)
 * Registrato nel registro degli errori del server (es. `/var/log/nginx/error.log`)
-* Registrato nel log PHP-FPM's (es. `/var/log/php7.x-fpm.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php8.x-fpm.log`)
 * Registrato da Flarum (`storage/logs/flarum.log`)
 
 Copia i messaggi in un file di testo e prendi nota di quando si è verificato l'errore, cosa stavi facendo in quel momento e così via. Assicurati di includere tutti gli approfondimenti che potresti aver raccolto sulle condizioni in cui il problema si verifica e non si verifica. Aggiungi quante più informazioni possibili sul tuo ambiente server: versione del sistema operativo, versione del server web, versione e gestore di PHP, ecc.
