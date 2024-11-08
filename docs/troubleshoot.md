@@ -45,7 +45,7 @@ If it looks like you're going to need help solving the problem, it's time to get
 * Displayed on the actual page
 * Displayed in the browser console (Chrome: More tools -> Developer Tools -> Console)
 * Recorded in the server's error log (e.g. `/var/log/nginx/error.log`)
-* Recorded in PHP-FPM's error log (e.g. `/var/log/php7.x-fpm.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php8.x-fpm.log`)
 * Recorded by Flarum (`storage/logs`)
 
 Copy any messages to a text file and jot down a few notes about *when* the error occurred, *what* you were doing at the time, and so on. Be sure to include any insights you may have gleaned about the conditions under which the issue does and doesn't occur. Add as much information as possible about your server environment: OS version, web server version, PHP version and handler, et cetera.
