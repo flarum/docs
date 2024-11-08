@@ -44,7 +44,7 @@ Sorunu çözmek için yardıma ihtiyacınız olacak gibi görünüyorsa, veri to
 * Asıl sayfada görüntülenir
 * Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
 * `/var/log/nginx/error.log`)
-* PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
+* Recorded in PHP-FPM's error log (e.g. `/var/log/php8.x-fpm.log`)
 * Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
 
 Herhangi bir mesajı bir metin dosyasına kopyalayın ve hatanın *ne zaman* oluştuğu, o sırada *ne yaptığınız* vb. Hakkında birkaç not alın. Sorunun meydana geldiği ve oluşmadığı koşullar hakkında derlemiş olabileceğiniz tüm bilgileri eklediğinizden emin olun. Sunucu ortamınız hakkında olabildiğince fazla bilgi ekleyin: İşletim sistemi sürümü, web sunucusu sürümü, PHP sürümü ve işleyici, vb.
