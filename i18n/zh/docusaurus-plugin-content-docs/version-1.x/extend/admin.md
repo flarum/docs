@@ -41,7 +41,7 @@ app.initializers.add('interstellar', function(app) {
 
 To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. 要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
 
-Here's an example with a switch (boolean) item:
+下面是一个带有开关(布尔) 项的示例：
 
 ```js
 
