@@ -60,7 +60,7 @@
 
 `php flarum schedule:run`
 
-许多扩展使用预定作业定期执行任务。 包括清理数据库缓存，定时发布草稿，生成站点地图等。 If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
+许多扩展使用预定作业定期执行任务。 包括清理数据库缓存，定时发布草稿，生成站点地图等。 如果您的扩展使用预定的作业，您应该添加一个 [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) 以便在正常间隔内运行此命令：
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
@@ -68,10 +68,10 @@
 
 这个命令一般不应被手动执行。
 
-Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
+Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs. 在这种情况下，您应该咨询您的主机以了解更多关于如何安排定时任务的信息。
 
 ### schedule:list
 
 `php flarum schedule:list`
 
-此命令将返回已计划命令的列表(更多信息请参阅 `schedule:run`)。 这有助于确认扩展程序提供的命令已正确注册。 This **can not** check that cron jobs have been scheduled successfully, or are being run.
+此命令将返回已计划命令的列表(更多信息请参阅 `schedule:run`)。 这有助于确认扩展程序提供的命令已正确注册。 这**不能**检查 cron job 是否已成功计划或正在运行。
