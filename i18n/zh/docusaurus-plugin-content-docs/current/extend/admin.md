@@ -1,14 +1,14 @@
 # 后台管理面板
 
-Every extension has a unique page containing information, settings, and the extension's own permissions.
+每个扩展都有一个独特的页面，其中包含信息、设置和扩展自身的权限。
 
-You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) component.
+您可以注册设置、权限，或者使用基于 [`扩展页面`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) 组件的完全自定义页面。
 
-## Admin Extender
+## 管理扩展器
 
-The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
+管理员前端允许您使用 `Admin` 前端扩展器，以极少的代码行数为扩展添加设置和权限。
 
-To get started, make sure you have an `admin/extend.js` file:
+若要开始，请确保您有一个 `admin/extend.js` 文件：
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -21,7 +21,7 @@ export default [
 
 :::info
 
-Remember to export the `extend` module from your entry `admin/index.js` file:
+记住要从您的条目 `admin/index.js` 导出 `扩展` 模块：
 
 ```js
 export { default as extend } from './extend';
@@ -33,9 +33,9 @@ export { default as extend } from './extend';
 
 对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page.
+要添加字段，请调用 `Admin` 扩展程序的 `setting` 方法，并将返回 “设置对象 ”的回调作为第一个参数传递。 在幕后，应用程序会将您的设置转化为 [`项目列表`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)，您可以将优先级数字作为第二个参数传递，这将决定页面上设置的顺序。
 
-Here's an example with a switch (boolean) item:
+下面是一个带有开关(布尔) 项的示例：
 
 ```js
 import Extend from 'flarum/common/extenders';
