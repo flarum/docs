@@ -4,7 +4,7 @@
 
 在贡献之前，请仔细阅读 [行为准则](code-of-conduct.md)。
 
-本文档是想要为 Flarum 贡献代码的开发者的指南。 If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
+本文档是想要为 Flarum 贡献代码的开发者的指南。 如果您刚刚开始， 我们建议您阅读扩展文档中的 [Getting Started](./extend/start.md) 文档，以了解更多关于Flarum 如何工作的信息。
 
 ## 为什么要为Flarum做贡献？
 
@@ -63,7 +63,7 @@ cd packages/framework
 yarn install
 ```
 
-Then you can watch JavaScript files for changes during development:
+然后，您就可以在开发过程中观察 JavaScript 文件的变化：
 
 ```bash
 cd framework/core/js
@@ -125,13 +125,13 @@ yarn dev
 
 ## 编码风格
 
-In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code. When in doubt, read the source code.
+In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code. 当有疑问时，请阅读源代码。
 
-Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style. StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style.
+Don't worry if your code styling isn't perfect! StyleCI and Prettier will automatically check formatting for every pull request. This allows us to focus on the content of the contribution, not the code style. StyleCI 和 Prettier 将自动检查每个拉取请求的格式。 这使得我们可以专注在贡献的内容本身，而非代码风格上。
 
 ### PHP
 
-Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
+Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions. 除此之外，我们还遵守了一些 [其他样式规则](https://github.com/flarum/framework/blob/main/.styleci.yml)。 我们尽可能地使用 PHP 7 类型提示和返回类型声明，我们也使用 [PHPDoc](https://docs.phpdoc.org/) 提供内联文档。 在你的贡献中尽量模仿代码库其他部分所使用的风格。
 
 * 命名空间应当是单数（例如：`Flarum\Discussion`，而非 `Flarum\Discussions`）
 * 接口命名应当以 `Interface` 结尾（例如：`MailableInterface`）
@@ -140,36 +140,36 @@ Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/
 
 ### JavaScript
 
-Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation. We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation.
+Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/airbnb/javascript). We use [ESDoc](https://esdoc.org/manual/tags.html) to provide inline documentation. 我们使用 [ESDoc](https://esdoc.org/manual/tags.html) 提供内联文档。
 
 ### 翻译
 
-**Columns** should be named according to their data type:
+**Columns** 应该按照他们的数据类型命名：
 * DATETIME 或 TIMESTAMP：`{动词}_at`（例如：created_at，read_at）或 `{动词}_until`（例如：suspended_until）
 * INT 用于计数：`{名词}_count`（例如：comment_count，word_count）
 * 外键：`{动词}_{实体对象}_id`（例如：hidden_user_id）
     * 动词可以使用具有相同意义的主键等替代（例如：帖子作者可以是 `user_id`)
 * 布尔值：`is_{形容词}`（例如：is_locked）
 
-**Tables** should be named as follows:
+**Tables** 应该命名如下：
 * 使用复数形式（`discussions`）
 * 多个单词之间用下划线分隔（`access_tokens`）
 * 对于关系表，请将两个表名用单数的形式连接起来，并按字母顺序排列。 （例如：`discussion_user`）
 
 ### CSS
 
-Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md) using the format `.ComponentName-descendentName--modifierName`.
+Flarum 的 CSS 类大致遵循 [SUIT CSS 命名规则](https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md)，格式为 `.ComponentName-descendentName-modifierName`。
 
-### Translations
+### 翻译
 
-We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+我们使用 [standard key format](./extend/i18n.md#appendix-a-standard-key-format) 来确保翻译键以一致的方式被准确命名。
 
 ## 贡献者许可协议
 
-By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution.
+By contributing your code to Flarum you grant the Flarum Foundation (Stichting Flarum) a non-exclusive, irrevocable, worldwide, royalty-free, sublicensable, transferable license under all of Your relevant intellectual property rights (including copyright, patent, and any other rights), to use, copy, prepare derivative works of, distribute and publicly perform and display the Contributions on any licensing terms, including without limitation: (a) open source licenses like the MIT license; and (b) binary, proprietary, or commercial licenses. Except for the licenses granted herein, You reserve all right, title, and interest in and to the Contribution. 除本协议授权的许可外，您保留与此等贡献有关的所有权利、所有权和利益。
 
-You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
+你代表你具有授予上述许可证的合法权利。 You confirm that you are able to grant us these rights. You represent that You are legally entitled to grant the above license. If Your employer has rights to intellectual property that You create, You represent that You have received permission to make the Contributions on behalf of that employer, or that Your employer has waived such rights for the Contributions.
 
-You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license.
+You represent that the Contributions are Your original works of authorship, and to Your knowledge, no other person claims, or has the right to claim, any right in any invention or patent related to the Contributions. You also represent that You are not legally obligated, whether by entering into an agreement or otherwise, in any way that conflicts with the terms of this license. 您还声明，无论是通过签订协议还是其他方式，您都没有任何与本许可条款相冲突的法律义务。
 
-The Flarum Foundation acknowledges that, except as explicitly described in this Agreement, any Contribution which you provide is on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
+Flarum 基金会确认，除非本协议中有明确的描述，您提供的任何贡献都是以「现状」为基础的，不附带任何形式的无论明示或暗示的保证或条件，包括但不限于任何关于所有权、非侵权、适销性或特定用途的适用性的保证或条件。
