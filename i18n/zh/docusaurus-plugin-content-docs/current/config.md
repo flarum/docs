@@ -11,10 +11,10 @@
 ```php
 <?php return array (
   'debug' => false, // 启用或禁用调试模式，用于排查问题
-  'offline' => false, // none, high, low or safe.
+  'offline' => false, // 无、高、 低或安全。
   'database' =>
   array (
-    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB, PostgreSQL, SQLite
+    'driver' => 'mysql', // 数据库驱动程序，如 MySQL、MariaDB、PostgreSQL、SQLite
     'host' => 'localhost', // 连接的主机，除非使用外部服务，否则多数情况下是 localhost
     'database' => 'flarum', // 数据库实例名
     'username' => 'root', // 数据库用户名
