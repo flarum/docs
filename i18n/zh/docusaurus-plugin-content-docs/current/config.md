@@ -34,14 +34,14 @@
 );
 ```
 
-### Maintenance modes
+### 维护模式
 
-Flarum has a maintenance mode that can be enabled by setting the `offline` key in the `config.php` file to one of the following values:
-* `none` - No maintenance mode.
-* `high` - No one can access the forum, not even admins.
-* `low` - Only admins can access the forum.
-* `safe` - Only admins can access the forum, and no extensions are booted.
+Flarum 具有维护模式，可以通过将 `config.php` 文件中的 `offline` 键设置为以下值之一来启用：
+* `none` - 无维护模式。
+* `high` - 任何人都无法访问论坛，甚至管理员也不行。
+* `low` - 只有管理员才能访问论坛。
+* `safe` - 只有管理员可以访问论坛，并且不会启动任何扩展。
 
-This can also be configured from the admin panel's advanced settings page:
+这也可以通过管理面板的高级设置页面进行配置：
 
-![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
+![切换高级页面](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
