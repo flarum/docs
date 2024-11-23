@@ -4,17 +4,36 @@ Flarum 2.0 is a major release that includes a number of breaking changes and new
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility).
 
 :::
 
-:::info
+## Upgrade Automation
 
 You can use the [Flarum CLI](cli.md) to automate as much of the upgrade steps as possible:
+
+Keep in mind the following information about the upgrade command:
+* The process goes through multiple steps, each step points to the right documentation if any, and provides any helpful tips.
+* After each step, the changes **are committed to Git** so that you can always review the changes commit by commit.
+* Mistakes can and will be made, after every step is finished you can view the changes made and make any necessary adjustments.
+* Most of the steps should require little to no manual adjustments, except for the following:
+  * Adapt to accessing/extending lazy loaded Flarum modules. _(Can require some amount of manual changes)_
+  * Prepare for JSON:API changes. _(100% manual changes requires)_
+  * Search & Filter API changes. _(Can require some amount of manual changes)_
+
+### Installation & Usage
+
+The upgrader is just another command of the `@flarum/cli` npm package. However, the CLI can only support either Flarum 1.x or 2.x at a time, so if you upgrade the package, you will no longer be able to use it for Flarum 1.x extensions.
+
+Now to use, simply run the following command:
 
 ```bash
 flarum-cli upgrade 2.0
 ```
+
+:::caution
+
+**Before you use the automated upgrade command, make sure to read the entire upgrade guide at least once to understand the changes.**
 
 :::
 
@@ -191,6 +210,13 @@ For more details, read the [Flysystem 1.x to V2 & V3 upgrade guide](https://flys
 
 Checkout the [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html) for more details.
 
+#### Intervention Image v3
+
+##### <span class="breaking">Breaking</span>
+The Intervention Image library (`intervention/image`) has been updated to version 3. If your extension makes any image manipulations, you should check the [Intervention Image v3 upgrade guide](https://image.intervention.io/v3/introduction/upgrade) for the breaking changes and adjust your code accordingly.
+
+You may also check out the core pull request that updated the library [here](https://github.com/flarum/framework/pull/3947/files).
+
 ### JSON:API
 
 Flarum 2.0 completely refactors the JSON:API implementation. The way resource CRUD operations, serialization and extending other resources is done has completely changed.
@@ -203,15 +229,21 @@ Flarum 2.0 completely refactors the JSON:API implementation. The way resource CR
 * The various validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, `GroupValidator`, `UserValidator`.
 * Many command handlers have been removed. Use the `JsonApi` class if you wish to execute logic from an existing endpoint internally instead.
 * The `flarum.forum.discussions.sortmap` singleton has been removed. Instead, you can define an `ascendingAlias` and `descendingAlias` [on your added `SortColumn` sorts](./api#adding-sort-columns).
-* The `show` discussion endpoint no longer includes the `posts` relationship, so any `posts.*` relation includes or eager loads added to that endpoint must be removed.
+* The `show` discussion endpoint no longer includes the `posts` relationship, so any `posts.*` relation includes or eager loads added to that endpoint must be removed. You can move those to the `list` posts endpoint if you are not already doing the same on that endpoint.
 
 Replacing the deleted classes is the new `AbstractResource` and `AbstractDatabaseResource` classes. We recommend looking at a comparison between the bundled extensions (like tags) from 1.x to 2.x to have a better understanding of the changes:
 * Tags 1.x: https://github.com/flarum/framework/blob/1.x/extensions/tags
 * Tags 2.x: https://github.com/flarum/framework/blob/2.x/extensions/tags 
 
-:::caution Refer to the documentation
+:::info Refer to the documentation
 
 Read about the full extent of the new introduced implementation and its usage in the [JSON:API](./api) section.
+
+:::
+
+:::tip
+
+Checkout our [guide to upgrading the JSON:API layer from 1.x to 2.x](./update-2_0-api), which provides concrete examples for different scenarios.
 
 :::
 

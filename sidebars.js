@@ -81,6 +81,16 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Update Guides',
+      collapsible: false,
+      items: [
+        // 'extend/update-2_x',
+        'extend/update-2_0',
+        'extend/update-2_0-api',
+      ]
+    },
+    {
+      type: 'category',
       label: 'Reference Guides',
       collapsible: false,
       items: [
@@ -124,23 +134,6 @@ module.exports = {
         'extend/service-provider',
         'extend/registry',
         'extend/code-splitting',
-      ]
-    },
-    {
-      type: 'category',
-      label: 'Update Guides',
-      collapsible: false,
-      items: [
-        'extend/update-2_0',
-        'extend/update-1_x',
-        'extend/update-1_0',
-        'extend/update-b16',
-        'extend/update-b15',
-        'extend/update-b14',
-        'extend/update-b13',
-        'extend/update-b12',
-        'extend/update-b10',
-        'extend/update-b8',
       ]
     },
   ],
