@@ -414,12 +414,12 @@ public function endpoints(): array
     return [
         Endpoint\Show::make()
             ->authenticated()
-            ->can('view'), // equivalent to $actor->can('view', $label)
+            ->can('view'), // equivalent to $actor->assertCan('view', $label)
         Endpoint\Create::make()
             ->authenticated()
-            ->can('createLabel'), // equivalent to $actor->can('createLabel'),
+            ->can('createLabel'), // equivalent to $actor->assertCan('createLabel'),
         Endpoint\Update::make()
-            ->admin(), // equivalent to $actor->isAdmin()
+            ->admin(), // equivalent to $actor->assertAdmin()
     ];
 }
 ```
@@ -873,6 +873,12 @@ return [
             Schema\Str::make('customField'),
             Schema\Relationship\ToOne::make('customRelation')
                 ->type('customRelationType'),
+        ])
+        ->fieldsBefore('email', fn () => [
+            Schema\Str::make('customFieldBeforeEmail'),
+        ])
+        ->fieldsAfter('email', fn () => [
+            Schema\Str::make('customFieldAfterEmail'),
         ]),
 ]
 ```
@@ -913,6 +919,7 @@ return [
 You can add endpoints to an existing resource through the `endpoints` method.
 
 ```php
+use Flarum\Api\Context;
 use Flarum\Api\Resource;
 use Flarum\Api\Endpoint;
 use Flarum\Extend;
@@ -920,11 +927,35 @@ use Flarum\Extend;
 return [
     (new Extend\ApiResource(Resource\UserResource::class))
         ->endpoints(fn () => [
-            Endpoint\Show::make(),
             Endpoint\Endpoint::make('custom')
-                ->route('GET', '/custom')
-                ->action(fn (Context $context) => 'custom'),
-        ]),
+                ->route('GET', '/{id}/custom')
+                ->action(function (Context $context) {
+                    $user = $context->model;
+
+                    // logic...
+                }),
+        ])
+        ->endpointsBefore('show', fn () => [
+            Endpoint\Endpoint::make('customBeforeShow')
+                ->route('GET', '/customBeforeShow')
+                ->action(function (Context $context) {
+                    // logic ...
+                }),
+        ])
+        ->endpointsAfter('show', fn () => [
+            Endpoint\Endpoint::make('customAfterShow')
+                ->route('GET', '/customAfterShow')
+                ->action(function (Context $context) {
+                    // logic ...
+                }),
+        ])
+        ->endpointsBeforeAll(fn () => [
+            Endpoint\Endpoint::make('customBeforeAll')
+                ->route('GET', '/customBeforeAll')
+                ->action(function (Context $context) {
+                    // logic ...
+                }),
+        ])
 ];
 ```
 
@@ -1029,3 +1060,62 @@ return [
 ## Non-Model API Resources
 
 API Resources don't have to correspond to Eloquent models: you can define JSON:API resources for anything. You need to extend the [`Flarum\Api\Rsource\AbstractResource`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/AbstractResource.php) class instead. For instance, Flarum core uses the [`Flarum\Api\Resource\ForumResource`](hhttps://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the fields of `ForumResource`.
+
+## Programmatically calling an API endpoint
+
+You can internally execute an endpoint's logic through the `Flarum\Api\JsonApi` object. For example, this is what Flarum does to immediately create the first post of a discussion:
+
+```php
+/** @var JsonApi $api */
+$api = $context->api;
+
+/** @var Post $post */
+$post = $api->forResource(PostResource::class)
+    ->forEndpoint('create')
+    ->withRequest($context->request)
+    ->process([
+        'data' => [
+            'attributes' => [
+                'content' => Arr::get($context->body(), 'data.attributes.content'),
+            ],
+            'relationships' => [
+                'discussion' => [
+                    'data' => [
+                        'type' => 'discussions',
+                        'id' => (string) $model->id,
+                    ],
+                ],
+            ],
+        ],
+    ], ['isFirstPost' => true]);
+```
+
+If you do not have access to the `Flarum\Api\Context $context` object, then you can directly inject the api object:
+
+```php
+use Flarum\Api\JsonApi;
+
+public function __construct(
+    protected JsonApi $api 
+) {
+}
+
+public function handle(): void
+{
+    $group = $api->forResource(GroupResource::class)
+        ->forEndpoint('create')
+        ->process(
+            body: [
+                'data' => [
+                    'attributes' => [
+                        'nameSingular' => 'test group',
+                        'namePlural' => 'test groups',
+                        'color' => '#000000',
+                        'icon' => 'fas fa-crown',
+                    ]
+                ],
+            ],
+            options: ['actor' => User::find(1)]
+        )
+}
+```
