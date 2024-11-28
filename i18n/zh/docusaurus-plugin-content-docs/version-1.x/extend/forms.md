@@ -5,6 +5,8 @@ In this article, we'll go over some frontend tools that are available to us for 
 ## Form Components
 
 As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
+Flarum provides some components to make building (and styling!) these forms easier.
+Please see the linked API documentation for each of these to learn more about its accepted attrs.
 
 - The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
 - The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
@@ -48,10 +50,11 @@ class FormComponent extends Component {
 
 Don't forget to use [translations](i18n.md)!
 
-
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`.
+This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data.
+Its basic usage is:
 
 ```js
 import Stream from 'flarum/common/utils/Stream';
@@ -63,7 +66,9 @@ value("world!");
 value() === "world!"; // true
 ```
 
-In Flarum forms, streams are frequently used together with the bidi attr. Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs. This abstracts away input processing in Mithril. For instance:
+In Flarum forms, streams are frequently used together with the bidi attr.
+Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. In Flarum forms, streams are frequently used together with the bidi attr.
+This abstracts away input processing in Mithril. For instance:
 
 ```jsx
 import Stream from 'flarum/common/utils/Stream';
