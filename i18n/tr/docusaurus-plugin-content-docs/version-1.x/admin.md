@@ -1,8 +1,11 @@
 # Yönetici Gösterge Tablosu
 
-Flarum Yönetici Panosu, forumunuzu yönetmek için kullanıcı dostu bir arayüzdür. Yalnızca "Yönetici" grubundaki kullanıcılar tarafından kullanılabilir. Yönetici panosuna erişmek için ekranın sağ üst köşesindeki **Adınıza** tıklayın ve **Yönetim**'i seçin.
+Flarum Yönetici Panosu, forumunuzu yönetmek için kullanıcı dostu bir arayüzdür.
+Yalnızca "Yönetici" grubundaki kullanıcılar tarafından kullanılabilir.
+Yönetici panosuna erişmek için ekranın sağ üst köşesindeki **Adınıza** tıklayın ve **Yönetim**'i seçin.
 
 Yönetici Kontrol Panelinde aşağıdaki bölümler bulunur:
+
 - **Kontrol Paneli** - İstatistikleri ve diğer ilgili bilgileri içeren ana Yönetici Kontrol Panelini gösterir.
 - **Temel Bilgiler** - Ad, Açıklama ve Hoş Geldiniz Banner'ı gibi temel forum ayrıntılarını ayarlama seçeneklerini gösterir.
 - **E-posta** - E-Posta ayarlarınızı yapılandırmanıza olanak tanır. Daha fazla bilgi için [buraya](https://docs.flarum.org/mail) bakın.
