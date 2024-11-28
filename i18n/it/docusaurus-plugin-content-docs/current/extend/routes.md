@@ -143,10 +143,6 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-### Controller API
-
-`Flarum\Api\Controller` contiene una serie di classi controller astratte che puoi estendere per implementare facilmente nuove risorse JSON-API. Vedere [Utilizzo dei dati](/extend/data.md) per info più dettagliate.
-
 ## Percorsi Frontend
 
 L'aggiunta di percorsi al frontend richiede in realtà di registrarl sia su frontend che backend. Questo perché quando il tuo percorso viene visitato, il backend deve avere informazioni per servire il frontend e il frontend analogamente deve sapere cosa visualizzare sulla pagina.
