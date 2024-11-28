@@ -143,10 +143,6 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-### Controladores API
-
-El espacio de nombres `Flarum\Api\Controller` contiene una serie de clases abstractas de controladores que puedes extender para implementar fácilmente nuevos recursos JSON-API. Consulte [Working with Data](/extend/data.md) para obtener más información.
-
 ## Rutas en el frontend
 
 Para añadir rutas al frontend es necesario registrarlas _tanto_ en el frontend como en el backend. Esto se debe a que cuando tu ruta es visitada, el backend necesita saber que debe servir el frontend, y el frontend necesita saber qué mostrar en la página.
