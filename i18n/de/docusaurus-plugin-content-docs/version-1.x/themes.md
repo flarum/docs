@@ -14,7 +14,9 @@ The [admin dashboard](admin.md)'s Appearance page is a great first place to star
 
 ## CSS-Design
 
-CSS ist eine Stylesheet-Sprache, die Browsern mitteilt, wie Elemente einer Webseite angezeigt werden sollen. Es ermöglicht uns, alles von Farben über Schriftarten bis hin zu Elementgröße und Positionierung bis hin zu Animationen zu ändern. Das Hinzufügen von benutzerdefiniertem CSS kann eine großartige Möglichkeit sein, deine Flarum-Installation an ein Thema anzupassen.
+CSS ist eine Stylesheet-Sprache, die Browsern mitteilt, wie Elemente einer Webseite angezeigt werden sollen.
+Es ermöglicht uns, alles von Farben über Schriftarten bis hin zu Elementgröße und Positionierung bis hin zu Animationen zu ändern.
+Das Hinzufügen von benutzerdefiniertem CSS kann eine großartige Möglichkeit sein, deine Flarum-Installation an ein Thema anzupassen.
 
 Ein CSS-Tutorial würde den Rahmen dieser Dokumentation sprengen, aber es existieren viele großartige Online-Ressourcen, um die Grundlagen von CSS zu erlernen.
 
@@ -26,4 +28,6 @@ Flarum verwendet tatsächlich LESS, was das Schreiben von CSS erleichtert, indem
 
 ## Erweiterungen
 
-Das flexible [Erweiterungssystem](extensions.md) von Flarum ermöglicht es dir, praktisch jeden Teil von Flarum hinzuzufügen, zu entfernen oder zu modifizieren. Wenn Du über das Ändern von Farben/Größen/Stilen hinaus erhebliche thematische Änderungen vornehmen möchtest, ist eine benutzerdefinierte Erweiterung definitiv der richtige Weg. Um zu erfahren, wie man eine Erweiterung erstellt, lese unsere [Extension-Dokumentation](extend/README.md)!
+Das flexible [Erweiterungssystem](extensions.md) von Flarum ermöglicht es dir, praktisch jeden Teil von Flarum hinzuzufügen, zu entfernen oder zu modifizieren.
+Wenn Du über das Ändern von Farben/Größen/Stilen hinaus erhebliche thematische Änderungen vornehmen möchtest, ist eine benutzerdefinierte Erweiterung definitiv der richtige Weg.
+Um zu erfahren, wie man eine Erweiterung erstellt, lese unsere [Extension-Dokumentation](extend/README.md)!
