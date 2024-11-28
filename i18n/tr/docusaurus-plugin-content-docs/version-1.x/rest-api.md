@@ -4,7 +4,7 @@ Flarum exposes a REST API which is used by the single page application but also 
 
 The API follows the best practices defined by the [JSON:API](https://jsonapi.org/) specification.
 
-:::bilgi
+:::info
 
 To extend the REST API with new endpoints, see [API and Data Flow](extend/api.md) in the developer documentation.
 
@@ -12,9 +12,12 @@ To extend the REST API with new endpoints, see [API and Data Flow](extend/api.md
 
 ## Authentication
 
-The single page app uses session cookies to authenticate against the API. External scripts can use stateless authentication using [API Keys](#api-keys) or [Access Tokens](#access-tokens).
+The single page app uses session cookies to authenticate against the API.
+External scripts can use stateless authentication using [API Keys](#api-keys) or [Access Tokens](#access-tokens).
 
-`GET` endpoints can be used without authentication. Only content visible to guests will be returned. Other endpoints generally cannot be used without authentication because of the [CSRF protection](#csrf-protection).
+`GET` endpoints can be used without authentication.
+Only content visible to guests will be returned.
+Other endpoints generally cannot be used without authentication because of the [CSRF protection](#csrf-protection).
 
 ### API keys
 
@@ -39,21 +42,28 @@ The remaining attributes are either automatically filled or currently not used:
 
 #### Usage
 
-Attach your key value to each API request using the `Authorization` header. Then provide the user ID you want to interact as at the end of the header:
+Attach your key value to each API request using the `Authorization` header.
+Then provide the user ID you want to interact as at the end of the header:
 
-    Authorization: Token YOUR_API_KEY_VALUE; userId=1
+```
+Authorization: Token YOUR_API_KEY_VALUE; userId=1
+```
 
-If a `user_id` value has been set for the key in the database, `userId=` will be ignored. Otherwise, it can be set to any valid user ID that exists in the database.
+If a `user_id` value has been set for the key in the database, `userId=` will be ignored.
+Otherwise, it can be set to any valid user ID that exists in the database.
 
 ### Access Tokens
 
 Access Tokens are short-lived tokens that belong to a specific user.
 
-Those tokens are used behind the scenes for cookie sessions. Their use in stateless API requests has the same effect as a regular session. The user last activity will be updated each time the token is used.
+Those tokens are used behind the scenes for cookie sessions.
+Their use in stateless API requests has the same effect as a regular session.
+The user last activity will be updated each time the token is used.
 
 #### Creation
 
-All users are allowed to create access tokens. To create a token, use the `/api/token` endpoint with the credentials of your user:
+All users are allowed to create access tokens.
+To create a token, use the `/api/token` endpoint with the credentials of your user:
 
 ```
 POST /api/token HTTP/1.1
@@ -83,25 +93,33 @@ At the moment, 3 token types exist, although only 2 types can be created via the
 
 Attach the returned `token` value to each API request using the `Authorization` header:
 
-    Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
+Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
 
 ### CSRF Protection
 
-Most of the `POST`/`PUT`/`DELETE` API endpoints are protected against [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery). This means stateless requests are not possible without authentication.
+Most of the `POST`/`PUT`/`DELETE` API endpoints are protected against [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery).
+This means stateless requests are not possible without authentication.
 
 When using an API Key or Access Token, CSRF protection is bypassed.
 
 ## Endpoints
 
-This part of the documentation is still in progress. We are researching options to provide an automated documentation of the endpoints.
+This part of the documentation is still in progress.
+We are researching options to provide an automated documentation of the endpoints.
 
-Every extension adds new endpoints and attributes so it's difficult to provide a complete documentation of all endpoints. A good way to discover endpoints is to use the browser development tools to inspect requests made by the single page application.
+Every extension adds new endpoints and attributes so it's difficult to provide a complete documentation of all endpoints.
+A good way to discover endpoints is to use the browser development tools to inspect requests made by the single page application.
 
-Below are a few examples of commonly used endpoints. JSON has been truncated to make reading easier.
+Below are a few examples of commonly used endpoints.
+JSON has been truncated to make reading easier.
 
 ### List discussions
 
-    GET /api/discussions
+```
+GET /api/discussions
+```
 
 ```json
 {
@@ -239,7 +257,9 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
 
 ### Create discussion
 
-    POST /api/discussions
+```
+POST /api/discussions
+```
 
 ```json
 {
@@ -312,7 +332,9 @@ The response includes the ID of the new discussion:
 
 ### Create user
 
-    POST /api/users
+```
+POST /api/users
+```
 
 ```json
 {
@@ -349,7 +371,9 @@ If you receive a 400 HTTP error with `csrf_token_mismatch` message, it means the
 
 ### Validation errors
 
-Validation errors are returned with 422 HTTP status code. The name of the invalid field is returned as the `pointer` value. There can be multiple errors for a single field at the same time.
+Validation errors are returned with 422 HTTP status code.
+The name of the invalid field is returned as the `pointer` value.
+There can be multiple errors for a single field at the same time.
 
 ```json
 {
