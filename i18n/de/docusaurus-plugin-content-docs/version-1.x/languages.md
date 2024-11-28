@@ -2,7 +2,8 @@
 
 Es ist ganz einfach, deiner Flarum-Basisinstallation eine neue Sprache hinzuzufügen. Befolgen einfach die nachstehenden Anweisungen, um das Sprachpaket deiner Wahl herunterzuladen und zu installieren.
 
-Nachdem du ein Sprachpaket hinzugefügt hast, kannst du es als [Standardsprache](#setting-the-default-language) für dein Forum festlegen. Und wenn du jemals feststellst, dass du eines deiner installierten Sprachpakete nicht benötigst, kannst du es jederzeit [deaktivieren](#disabling-a-language-pack). Wenn du Erweiterungen von Drittanbietern verwendest, stelle sicher, dass du [dies liest](#third-party-extensions), bevor du beginnst.
+Nachdem du ein Sprachpaket hinzugefügt hast, kannst du es als [Standardsprache](#setting-the-default-language) für dein Forum festlegen. Und wenn du jemals feststellst, dass du eines deiner installierten Sprachpakete nicht benötigst, kannst du es jederzeit [deaktivieren](#disabling-a-language-pack).
+Wenn du Erweiterungen von Drittanbietern verwendest, stelle sicher, dass du [dies liest](#third-party-extensions), bevor du beginnst.
 
 ## Installation des Sprachpakets
 
@@ -18,7 +19,7 @@ Nachdem du ein Sprachpaket installiert und sichergestellt hast, dass es funktion
 
 ## Deaktivieren eines Sprachpakets
 
-Wenn du entscheidest, dass du eine bestimmte Sprache nicht unterstützen musst, kannst du sie schließlich deaktivieren. Suche einfach das Sprachpaket auf der Seite **Erweiterungen** der Admin-Oberfläche und deaktiviere es.
+Wenn du entscheidest, dass du eine bestimmte Sprache nicht unterstützen musst, kannst du sie schließlich deaktivieren. Das Deaktivieren einer Sprache kann nützlich sein, wenn du eine einsprachige Website betreiben und nicht möchtest, dass die Sprachauswahl im Website-Header angezeigt wird.
 
 Das Deaktivieren einer Sprache kann nützlich sein, wenn du eine einsprachige Website betreiben und nicht möchtest, dass die Sprachauswahl im Website-Header angezeigt wird. Die Sprachauswahl ist ausgeblendet, wenn nur eine Sprache aktiviert ist.
 
