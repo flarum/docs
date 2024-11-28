@@ -1,12 +1,12 @@
 # Static Code Analysis
 
-Static code analysis is the process of analyzing the source code against a set of rules to find bugs, code smells, and security vulnerabilities. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments.
+Static code analysis is the process of analyzing the source code against a set of rules to find bugs, code smells, and security vulnerabilities. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments. This is a great way to improve the quality of your code and to find potential issues before they are deployed to production. An example is validating the typings of a function to ensure that the function is called with the correct arguments.
 
 Flarum provides a static code analysis package based on [PHPStan](https://phpstan.org/) that can be added to your extension. In this guide, we will show you how to add the package to your extension and how to run the analysis.
 
 ## Setup
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [开发者讲解：扩展开发的工作流程](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update the infrastructure for phpstan to your code:
 
@@ -76,7 +76,7 @@ You can also run the analysis using GitHub Actions. Checkout the page on [GitHub
 
 ### Extended model attribute types
 
-PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the `Extend\Model(...)->cast(...)` method.
+PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the <code>Extend\Model(...)-&gt;cast(...)</code> method. To do this you can use the `Extend\Model(...)->cast(...)` method.
 
 For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
 
