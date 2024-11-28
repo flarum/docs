@@ -20,19 +20,18 @@
 
 ## 合并时间！
 
-如果符合所有模板中的检查，**任何**核心开发者都可以合并这个 PR。 如果此 PR 由一名核心开发者编写，他们可能是合并它的人。
+If all the checks in the template are met, **any** core developer may merge this PR. 如果此 PR 由一名核心开发者编写，他们可能是合并它的人。
 
 - 合并：
   - GitHub 提供了合并 PR 的几种方式。 在以下策略中选择：
-    - 当 PR 分支由单个的描述细致的提交组成，并且适合出现在版本列表中，选择 **Merge**。
-    - 当积攒了大量提交时，**Squash** 是个好选择。 请务必按照 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) 规范来 squash 提交。 我们通常会在这些预制的提交信息中发现一些来自StyleCI等机器人的提交，他们的提交信息应该被删除。
+    - **Merge** when the PR branch consists of atomic, well-described commits that are nice to have in the version history.
+    - **Squash** when lots of cleanup commits have accumulated. Please make sure to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) spec for the squash commit. 我们通常会在这些预制的提交信息中发现一些来自StyleCI等机器人的提交，他们的提交信息应该被删除。
 
 - 在合并之后：
   - 将相关的 issue（如果没有，则是 pull request 本身，但绝不是两者同时）分配给适当的里程碑。
-  - 关闭所有相关 issue（它们*是否*被全部关闭）。
+  - 关闭所有相关 issue（它们_是否_被全部关闭）。
   - 回归应按此标明，并在合并后从项目板和里程碑中删除。
   - 检查后续任务：
     - 合并相关的 PR（语言文件、扩展、文档）。
     - 更新文档。
   - 如有必要，为进一步的后续任务创建一个 issue。
-
