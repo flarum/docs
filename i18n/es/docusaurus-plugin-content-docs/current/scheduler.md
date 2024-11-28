@@ -52,4 +52,4 @@ In case you want to use a different value and don't know exactly how cron expres
 
 Lastly `>> /dev/null 2>&1` suppresses any output from the command.
 
-Voila! Now any extension that registers a task to run, anything from every minute to daily, monthly, yearly - whatever - will now run on your server.
+Voila! Voila! Now any extension that registers a task to run, anything from every minute to daily, monthly, yearly - whatever - will now run on your server.
