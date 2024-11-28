@@ -1030,10 +1030,6 @@ class DraftResource extends Resource\AbstractDatabaseResource
 }
 ```
 
-## API Layer From 1.x to 2.x (fof/gamification)
-
-
-
 ## Extending an existing API Layer
 
 If you are using the `ApiController` or `ApiSerializer` extenders from 1.x, you can migrate the logic to using the `ApiResource` extender from 2.x, which uses the same field and endpoint definitions as shown before. For example, we have the following 1.x extenders:
