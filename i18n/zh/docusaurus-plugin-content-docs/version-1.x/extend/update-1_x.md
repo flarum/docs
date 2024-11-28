@@ -47,12 +47,12 @@ No developer-facing changes were made in Flarum v1.4.
 
 ## 1.3 Changes
 
-Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers:
+Flarum v1.3 included mostly QoL improvements. Below are listed note worthy changes for extension developers: Below are listed note worthy changes for extension developers:
 
 ### Frontend
 
 - More portions of the frontend are now written in TypeScript, providing a better extension development experience.
-- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
+- Frontend errors will no longer cause the forum to crash into a NoJs page. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes. The extension will fail to execute its frontend code (initializer) and display an error to the admin through an alert, and to all users through the console. The frontend will continue to execute without the extension's frontend changes.
 - The markdown toolbar can now be used on the admin side.
 
 ### Backend
@@ -66,15 +66,15 @@ Flarum v1.3 included mostly QoL improvements. Below are listed note worthy chang
 
 ## 1.2 Changes
 
-Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers:
+Flarum v1.2 included quite a few bugfixes, internal refactors, and new features. The following recaps the most important changes for extension developers: The following recaps the most important changes for extension developers:
 
 ### Frontend
 
-- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
-- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
-- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
+- Flarum core now passes TypeScript type checking (on the portion written in TypeScript). Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript. Additionally, major portions of the frontend (models, the application instance, and others) are now written in TypeScript. These changes should make it much easier and more fruitful to write extensions in TypeScript.
+- Instead of directly using Less variables in CSS code, core now uses CSS variables. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146. For the most part, we've just created CSS variables and set their values to the Less variables. This should make theming and customizing CSS a lot easier. https://github.com/flarum/core/pull/3146.
+- Dropdowns can now be lazy-drawn to improve performance. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925. You can do this by setting the lazy draw attr to "true". https://github.com/flarum/core/pull/2925.
 - [Textarea-type settings](https://github.com/flarum/core/pull/3141) are now supported through the `app.extensionData.registerSetting` util.
-- You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements.
+- You can now use Webpack 5 to bundle your extension's code. This will offer minor bundle size improvements. This will offer minor bundle size improvements.
 - A new `flarum/common/components/ColorPreviewInput` component [has been added](https://github.com/flarum/core/pull/3140). It can be used directly, or through the `color-preview` type when registered via `app.extensionData.registerSetting`.
 - Extensions can now [modify the minimum search length](https://github.com/flarum/core/pull/3130) of the `Search` component.
 - The following components are now extensible:
@@ -104,9 +104,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 - Translations are now used for page titles, so that the format can be customized via language packs or [Linguist](https://discuss.flarum.org/d/7026-linguist-customize-translations-with-ease): https://github.com/flarum/core/pull/3077, https://github.com/flarum/core/pull/3228
 - API endpoints for retrieving single groups, as well as support for filtering groups on the plural get endpoint, [have been added](https://github.com/flarum/core/pull/3084).
 
-
 ### Tooling
-
 
 - The `flarum-cli infra` command can now be used to update or enable various infrastructure features. You can now add the following to your extension in just one command:
   - TypeScript
@@ -122,7 +120,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 
 ## 1.1 Changes
 
-Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements following our stable release earlier this year. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected.
+Flarum version 1.1 mostly focuses on bugfixes and quality-of-life improvements following our stable release earlier this year. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected. These are mainly user-facing and internal infrastructure changes, so extensions are not significantly affected.
 
 ### Frontend
 
