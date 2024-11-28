@@ -1,6 +1,7 @@
 # Interactive Components
 
 Often, you'll want to trigger interactive components in addition to whatever content/animations you have on a given page. Depending on the nature of your extension, you may want to define custom interactive elements or reuse or extend existing ones.
+Depending on the nature of your extension, you may want to define custom interactive elements or reuse or extend existing ones.
 
 All [components](frontend.md#components) and [utilities](frontend.md#flarum-utils) from Flarum core and bundled extensions are exported, making them available for reuse in other extensions. A full list is available in our [API documentation](https://api.docs.flarum.org/js/master/identifiers.html).
 
@@ -15,7 +16,7 @@ Alerts are managed by a global instance of [`AlertManagerState`](https://api.doc
 - `app.alerts.dismiss(key)` will dismiss an active alert with the given key, if one exists.
 - `app.alerts.clear()` will dismiss all alerts.
 
-Typically, you won't need a custom component for alerts; however, if you could like, you can provide one. You'll probably want it to inherit `flarum/common/components/Alert`.
+Typically, you won't need a custom component for alerts; however, if you could like, you can provide one. You'll probably want it to inherit <code>flarum/common/components/Alert</code>. Typically, you won't need a custom component for alerts; however, if you could like, you can provide one.
 
 The following attrs are useful to keep in mind:
 
@@ -63,9 +64,10 @@ export default class CustomModal extends Modal {
 
 More information about methods available to override is available in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/components/modal.js~modal).
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [开发者讲解：扩展开发的工作流程](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate a modal:
+
 ```bash
 $ flarum-cli make frontend modal
 ```
@@ -74,7 +76,7 @@ $ flarum-cli make frontend modal
 
 ## Composer
 
-Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component.
+Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component. Flarum accomplishes this through the floating composer component.
 
 The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
 
@@ -86,8 +88,11 @@ The composer is managed by a global instance of [`ComposerState`](https://api.do
 
 The full list of public methods is documented in the API docs linked above.
 
-Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage. This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
+Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage. This is done by splitting code for each usage into a subclass of <code>flarum/forum/components/ComposerBody</code>. This component class must be provided when loading a composer.
+This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
 
 ### Composer Editor
 
-The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor). Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts). This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.
+The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor).
+Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts).
+This is globally available for the current composer via `app.composer.editor`, and allows extensions to programatically read, insert, and modify the current contents, selections, and cursor position of the active composer's text editor.
