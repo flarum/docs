@@ -150,9 +150,27 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         copyright: `Copyright © ${new Date().getFullYear()} Flarum. Built with Docusaurus.`,
       },
       prism: {
-        additionalLanguages: ['php'],
+        additionalLanguages: ['php','bash'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        magicComments: [
+          // Remember to extend the default highlight class name as well!
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: {start: 'highlight-start', end: 'highlight-end'},
+          },
+          {
+            className: 'code-block-remove-line',
+            line: 'remove-next-line',
+            block: {start: 'remove-start', end: 'remove-end'},
+          },
+          {
+            className: 'code-block-insert-line',
+            line: 'insert-next-line',
+            block: {start: 'insert-start', end: 'insert-end'},
+          },
+        ],
       },
       algolia: {
         appId: 'QHP1YG60G0',

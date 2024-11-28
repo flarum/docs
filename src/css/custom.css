@@ -32,6 +32,8 @@
   --ifm-container-width-xl: 1125px;
 
   --ifm-menu-link-padding-horizontal: 6px;
+
+  --docusaurus-highlighted-code-line-bg: rgba(72, 77, 91, 0.35);
 }
 
 html[data-theme='light'] {
@@ -263,4 +265,18 @@ img[alt="Flarum Home Screenshot"] {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 10px 10px -5px rgba(0, 0, 0, .04);
   position: relative;
   border: 1px solid #eee;
+}
+
+.code-block-remove-line {
+  background-color: #ff000020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.code-block-insert-line {
+  background-color: rgba(0, 255, 0, 0.05);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
 }
