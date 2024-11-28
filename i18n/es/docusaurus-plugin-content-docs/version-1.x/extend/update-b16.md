@@ -32,7 +32,8 @@ If you need help applying these changes or using new features, please start a di
 
 ### Laravel y Symfony
 
-La Beta 16 actualiza de la v6.x a la v8.x de los componentes de Laravel y de la v4 a la v5 de los componentes de Symfony. Por favor, consulta las respectivas guías de actualización de cada una de ellas para conocer los cambios que puedes necesitar en tus extensiones. El cambio más aplicable es la desaparición de `Symfony\Component\Translation\TranslatorInterface` en favor de `Symfony\Contracts\Translation\TranslatorInterface`. El primero se eliminará en la beta 17.
+La Beta 16 actualiza de la v6.x a la v8.x de los componentes de Laravel y de la v4 a la v5 de los componentes de Symfony. Por favor, consulta las respectivas guías de actualización de cada una de ellas para conocer los cambios que puedes necesitar en tus extensiones.
+El cambio más aplicable es la desaparición de `Symfony\Component\Translation\TranslatorInterface` en favor de `Symfony\Contracts\Translation\TranslatorInterface`. El primero se eliminará en la beta 17.
 
 ### Funciones de Ayuda
 
@@ -42,7 +43,9 @@ Dado que algunas extensiones de Flarum utilizan bibliotecas de Laravel que asume
 
 ### Cambios en la búsqueda
 
-Como parte de nuestros esfuerzos para hacer el sistema de búsqueda de Flarum más flexible, hemos hecho varias refacciones en la beta 16. En particular, el filtrado y la búsqueda se tratan ahora como mecanismos diferentes, y tienen conductos y extensores separados. Esencialmente, si una consulta tiene un parámetro de consulta `filter[q]`, será tratada como una búsqueda, y todos los demás parámetros de filtro serán ignorados. En caso contrario, será tratada por el sistema de filtrado. Esto permitirá eventualmente que las búsquedas sean manejadas por controladores alternativos (provistos por extensiones), como ElasticSearch, sin afectar el filtrado (por ejemplo, cargar discusiones recientes). Las clases comunes a ambos sistemas se han trasladado a un espacio de nombres `Query`.
+Como parte de nuestros esfuerzos para hacer el sistema de búsqueda de Flarum más flexible, hemos hecho varias refacciones en la beta 16.
+En particular, el filtrado y la búsqueda se tratan ahora como mecanismos diferentes, y tienen conductos y extensores separados.
+Esencialmente, si una consulta tiene un parámetro de consulta `filter[q]`, será tratada como una búsqueda, y todos los demás parámetros de filtro serán ignorados. En caso contrario, será tratada por el sistema de filtrado. Esto permitirá eventualmente que las búsquedas sean manejadas por controladores alternativos (provistos por extensiones), como ElasticSearch, sin afectar el filtrado (por ejemplo, cargar discusiones recientes). Las clases comunes a ambos sistemas se han trasladado a un espacio de nombres `Query`.
 
 Las implementaciones de filtrado y de búsqueda por defecto de Core (denominadas SimpleFlarumSearch) son bastante similares, ya que ambas se alimentan de la base de datos. Los controladores de la API `List` llaman a los métodos `search` / `filter` en una subclase específica de recursos de `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Los argumentos son una instancia de `Flarum\Query\QueryCriteria`, así como información de ordenación, desplazamiento y límite. Ambos sistemas devuelven una instancia de `Flarum\Query\QueryResults`, que es efectivamente una envoltura alrededor de una colección de modelos Eloquent.
 
@@ -60,7 +63,7 @@ Con respecto a la actualización, tenga en cuenta lo siguiente:
 
 El paquete `flarum/testing` proporciona utilidades para las pruebas automatizadas de backend impulsadas por PHPUnit. Vea la [documentación de pruebas](testing.md) para más información.
 
-### Dependencias Opcionales
+### Optional Dependencies
 
 La beta 15 introdujo las "dependencias de la extensión", que requieren que cualquier extensión listada en la sección `composer.json` de tu extensión esté habilitada antes de que tu extensión pueda ser activada.
 
@@ -76,7 +79,7 @@ La firma de varios métodos relacionados con la autenticación se han cambiado p
 - Para crear tokens de acceso recordables se debe utilizar `Flarum\Http\RememberAccessToken::generate($userId)`.
 - `Flarum\Http\DeveloperAccessToken::generate($userId)` debe usarse para crear tokens de acceso para desarrolladores (no caducan).
 - `Flarum\Http\SessionAccessToken::generate()` puede ser usado como un alias de `FlarumHttpAccessToken::generate()`. Es posible que en el futuro desaparezca `AccessToken::generate()`.
-- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: pasar un `AccessToken` ha quedado obsoleto. Pasa una instancia de `RememberAccessToken` en su lugar. Como capa de compatibilidad temporal, pasar cualquier otro tipo de token lo convertirá en un remember token. En la beta 17 la firma del método cambiará para aceptar sólo `RememberAccessToken`.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: pasar un `AccessToken` ha quedado obsoleto. Pasa una instancia de `RememberAccessToken` en su lugar. Como capa de compatibilidad temporal, pasar cualquier otro tipo de token lo convertirá en un remember token. Como capa de compatibilidad temporal, pasar cualquier otro tipo de token lo convertirá en un remember token.
 - El método `Flarum\Http\Rememberer::rememberUser()` ha quedado obsoleto. En su lugar debe crear/recuperar un token manualmente con `RememberAccessToken::generate()` y pasarlo a `Rememberer::remember()`.
 - El segundo parámetro de `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` ha quedado obsoleto y se sustituye por `$token`. Se mantiene la compatibilidad con versiones anteriores. En la beta 17, la firma del método del segundo parámetro cambiará a `AccessToken $token`.
 - Ahora `AccessToken::generate()` guarda el modelo en la base de datos antes de devolverlo.
