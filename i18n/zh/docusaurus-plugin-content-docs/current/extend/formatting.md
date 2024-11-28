@@ -1,8 +1,8 @@
 # Formatting
 
-Flarum uses the powerful [s9e TextFormatter](https://github.com/s9e/TextFormatter) library to format posts from plain markup into HTML. You should become familiar with [how TextFormatter works](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) before you attempt to extend it.
+Flarum uses the powerful [s9e TextFormatter](https://github.com/s9e/TextFormatter) library to format posts from plain markup into HTML. You should become familiar with [how TextFormatter works](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) before you attempt to extend it. You should become familiar with [how TextFormatter works](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) before you attempt to extend it.
 
-In Flarum, post content is formatted with a minimal TextFormatter configuration by default. The bundled **Markdown** and **BBCode** extensions simply enable the respective plugins on this TextFormatter configuration.
+In Flarum, post content is formatted with a minimal TextFormatter configuration by default. In Flarum, post content is formatted with a minimal TextFormatter configuration by default. The bundled **Markdown** and **BBCode** extensions simply enable the respective plugins on this TextFormatter configuration.
 
 ## Configuration
 
@@ -22,6 +22,21 @@ return [
             $config->BBCodes->addFromRepository('B');
         })
         // Modify raw text before it is parsed.
+        // This callback should return the modified text.
+        ->parse(function (Parser $parser, $context, $text) {
+            // custom logic here
+            return $newText;
+        })
+        // Modify the XML to be rendered before rendering.
+        // This callback should return the new XML.
+        // For example, in the mentions extension, this is used to
+        // provide the username and display name of the user being mentioned.
+        // Make sure that the last $request argument is nullable (or omitted entirely).
+        ->render(function (Renderer $renderer, $context, $xml, Request $request = null) {
+            // custom logic here
+            return $newXml;
+        })
+];
         // This callback should return the modified text.
         ->parse(function (Parser $parser, $context, $text) {
             // custom logic here
