@@ -32,7 +32,8 @@ If you need help applying these changes or using new features, please start a di
 
 ### Laravel and Symfony
 
-Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions. The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
+Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions. The most applicable change is the deprecation of <code>Symfony\Component\Translation\TranslatorInterface</code> in favor of <code>Symfony\Contracts\Translation\TranslatorInterface</code>. The former will be removed in beta 17. Please see the respective upgrade guides of each for changes you might need to make to your extensions.
+The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
 
 ### Helper Functions
 
@@ -42,9 +43,11 @@ Since some Flarum extensions use Laravel libraries that assume some global helpe
 
 ### Search Changes
 
-As part of our ongoing efforts to make Flarum's search system more flexible, we've made several refactors in beta 16. Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders. Essentially, if a query has a `filter[q]` query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a `Query` namespace.
+As part of our ongoing efforts to make Flarum's search system more flexible, we've made several refactors in beta 16. Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders. Essentially, if a query has a <code>filter[q]</code> query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a <code>Query</code> namespace.
+Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders.
+Essentially, if a query has a `filter[q]` query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a `Query` namespace.
 
-Core's filtering and default search (named SimpleFlarumSearch) implementations are quite similar, as both are powered by the database. `List` API controllers call the `search` / `filter` methods on a resource-specific subclass of `Flarum\Search\AbstractSearcher` or `Flarum\Filter\AbstractFilterer`. Arguments are an instance of `Flarum\Query\QueryCriteria`, as well as sort, offset, and limit information. Both systems return an instance of `Flarum\Query\QueryResults`, which is effectively a wrapper around a collection of Eloquent models.
+Core's filtering and default search (named SimpleFlarumSearch) implementations are quite similar, as both are powered by the database. <code>List</code> API controllers call the <code>search</code> / <code>filter</code> methods on a resource-specific subclass of <code>Flarum\Search\AbstractSearcher</code> or <code>Flarum\Filter\AbstractFilterer</code>. Arguments are an instance of <code>Flarum\Query\QueryCriteria</code>, as well as sort, offset, and limit information. Both systems return an instance of <code>Flarum\Query\QueryResults</code>, which is effectively a wrapper around a collection of Eloquent models. `List` API controllers call the `search` / `filter` methods on a resource-specific subclass of `Flarum\Search\AbstractSearcher` or `Flarum\Filter\AbstractFilterer`. Arguments are an instance of `Flarum\Query\QueryCriteria`, as well as sort, offset, and limit information. Both systems return an instance of `Flarum\Query\QueryResults`, which is effectively a wrapper around a collection of Eloquent models.
 
 The default systems are also somewhat similar in their implementation. `Filterer`s apply Filters (implementing `Flarum\Filter\FilterInterface`) based on query params in the form `filter[FILTER_KEY] = FILTER_VALUE` (or `filter[-FILTER_KEY] = FILTER_VALUE` for negated filters). SimpleFlarumSearch's `Searcher`s split the `filter[q]` param by spaces into "terms", apply Gambits (implementing `Flarum\Search\GambitInterface`) that match the terms, and then apply a "Fulltext Gambit" to search based on any "terms" that don't match an auxiliary gambit. Both systems then apply sorting, an offset, and a result count limit, and allow extensions to modify the query result via `searchMutators` or `filterMutators`.
 
@@ -76,7 +79,7 @@ The signature to various method related to authentication have been changed to t
 - `Flarum\Http\RememberAccessToken::generate($userId)` should be used to create remember access tokens.
 - `Flarum\Http\DeveloperAccessToken::generate($userId)` should be used to create developer access tokens (don't expire).
 - `Flarum\Http\SessionAccessToken::generate()` can be used as an alias to `Flarum\Http\AccessToken::generate()`. We might deprecate `AccessToken::generate()` in the future.
-- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. In beta 17 the method signature will change to accept only `RememberAccessToken`.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. As a temporary compatibility layer, passing any other type of token will convert it into a remember token.
 - `Flarum\Http\Rememberer::rememberUser()` has been deprecated. Instead you should create/retrieve a token manually with `RememberAccessToken::generate()` and pass it to `Rememberer::remember()`
 - `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` second parameter has been deprecated and is replaced with `$token`. Backward compatibility is kept. In beta 17, the second parameter method signature will change to `AccessToken $token`.
 - `AccessToken::generate()` now saves the model to the database before returning it.
@@ -93,7 +96,7 @@ To retrieve the current user from inside a Flarum extension, the ideal solution 
 
 To retrieve the token instance from Flarum, you can use `Flarum\Http\AccessToken::findValid($tokenString)`
 
-To retrieve the user data from a non-Flarum application, you'll need to make an additional database request to retrieve the token. The user ID is present as `user_id` on the `access_tokens` table.
+To retrieve the user data from a non-Flarum application, you'll need to make an additional database request to retrieve the token. The user ID is present as <code>user_id</code> on the <code>access_tokens</code> table. The user ID is present as `user_id` on the `access_tokens` table.
 
 #### Token creation changes
 
@@ -111,7 +114,7 @@ If you manually created tokens in the database from outside Flarum, the `type` c
 
 A [security issue in Flarum](https://github.com/flarum/core/issues/2075) previously caused all tokens to never expire. This had limited security impact due to tokens being long unique characters. However custom integrations that saved a token in an external database for later use might find the tokens no longer working if they were not used recently.
 
-If you use short-lived access tokens for any purpose, take note of the expiration time of 1h. The expiration is based on the time of last usage, so it will remain valid as long as it continues to be used.
+If you use short-lived access tokens for any purpose, take note of the expiration time of 1h. The expiration is based on the time of last usage, so it will remain valid as long as it continues to be used. The expiration is based on the time of last usage, so it will remain valid as long as it continues to be used.
 
 Due to the large amount of expired tokens accumulated in the database and the fact most tokens weren't ever used more than once during the login process, we have made the choice to delete all access tokens a lifetime of 3600 seconds as part of the migration, All remaining tokens have been converted to `session_remember` tokens.
 
@@ -125,9 +128,9 @@ Now only access tokens created with `remember` option can be used as remember co
 
 In previous versions of Flarum, a session could be kept alive forever until the Symfony session files were deleted from disk.
 
-Now sessions are linked to access tokens. A token being deleted or expiring will automatically end the linked web session.
+Now sessions are linked to access tokens. Now sessions are linked to access tokens. A token being deleted or expiring will automatically end the linked web session.
 
-A token linked to a web session will now be automatically deleted from the database when the user clicks logout. This prevents any stolen token from being re-used, but it could break custom integration that previously used a single access token in both a web session and something else.
+A token linked to a web session will now be automatically deleted from the database when the user clicks logout. This prevents any stolen token from being re-used, but it could break custom integration that previously used a single access token in both a web session and something else. This prevents any stolen token from being re-used, but it could break custom integration that previously used a single access token in both a web session and something else.
 
 ### Miscellaneous
 
