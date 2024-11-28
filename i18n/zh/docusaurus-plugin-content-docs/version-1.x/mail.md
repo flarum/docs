@@ -4,25 +4,25 @@
 
 ## 支持的邮件驱动
 
-Flarum 默认提供以下所列驱动。 若有需要，开发者可自行开发插件添加 [自定义邮件驱动](extend/mail.md)。
+Flarum 默认提供以下所列驱动。 Developers can also add [custom mail drivers through extensions](extend/mail.md).
 
 ### SMTP
 
-这是最常用的邮件驱动，需要您配置主机地址、端口、加密方式、用户名和密码，以使用外部 SMTP 服务。 请注意，加密方式必须为小写的 `ssl` 或 `tls`。
+这是最常用的邮件驱动，需要您配置主机地址、端口、加密方式、用户名和密码，以使用外部 SMTP 服务。 Please note that the encryption field expects either `ssl` or `tls`.
 
 ### Mail
 
-`mail` 会用到许多托管服务器上都有的 sendmail / postfix 邮件系统。 您必须在服务器上正确安装并配置好 sendmail 才能正常工作。
+The `mail` driver will try to use the sendmail / postfix email system included in many hosting servers. 您必须在服务器上正确安装并配置好 sendmail 才能正常工作。
 
 ### Mailgun
 
-通过您的 [Mailgun](https://www.mailgun.com/) 来发送邮件。 您需要填写 secret key，以及您在 Mailgun 配置的域名、区域。
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. 您需要填写 secret key，以及您在 Mailgun 配置的域名、区域。
 
-要使用 Mailgun 驱动，您需要安装 Guzzle composer 包 (一个 PHP HTTP 客户端)。 在您的 Flarum 根目录下运行 `composer require guzzlehttp/guzzle:^6.0|^7.0` 。
+要使用 Mailgun 驱动，您需要安装 Guzzle composer 包 (一个 PHP HTTP 客户端)。 You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
 ### Log
 
-邮件驱动 log 不会发送邮件，主要由开发者使用。 它会在在`FLARUM_ROOT_DIRECTORY/storage/logs`中的日志文件写入所有邮件的内容。
+邮件驱动 log 不会发送邮件，主要由开发者使用。 It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
 ## 测试邮件
 
