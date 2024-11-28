@@ -39,3 +39,35 @@ fl1 flarum info
 fl2 flarum info
 ```
 
+##### Switching Between Versions
+
+If you have any of the latest v2 or v3 versions of the CLI, you can also use the following command to install the counterpart version:
+
+```bash
+fl flarum change
+```
+
+This will install the latest counterpart version of the CLI, allowing you to switch between them as needed. It will also set the default `fl` bin to the version you have just changed to.
+
+```shell
+$ fl flarum info
+Flarum version: 2.x
+CLI version: 3.0.1
+$ fl flarum change
+Currently using CLI 3.x compatible with Flarum 2.x
+
+✔ Switch to CLI 2.x compatible with Flarum 1.x? … yes
+$ fl flarum info
+Flarum version: 1.x
+CLI version: 2.0.2
+```
+
+You will still be able to use the individual version specific bins:
+```bash
+$ fl1 flarum info
+Flarum version: 1.x
+CLI version: 2.0.2
+$ fl2 flarum info
+Flarum version: 2.x
+CLI version: 3.0.1
+```

@@ -150,7 +150,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
         copyright: `Copyright © ${new Date().getFullYear()} Flarum. Built with Docusaurus.`,
       },
       prism: {
-        additionalLanguages: ['php'],
+        additionalLanguages: ['php','bash'],
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
         magicComments: [
