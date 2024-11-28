@@ -2,7 +2,12 @@
 
 除了 Flarum 核心提供的 [默认命令](../console.md)，我们还允许扩展程序的开发者添加自定义控制台命令。
 
-所有控制台命令开发都是在后端使用 PHP 完成的。 要创建自定义控制台命令，您需要创建一个类实现 `\Flarum\Console\AbstractCommand`。
+所有控制台命令开发都是在后端使用 PHP 完成的。 use Flarum\Extend;
+use YourNamespace\Console\CustomCommand;return [
+// 其他扩展器
+(new Extend\Console())->command(CustomCommand::class)
+// 其他扩展器
+];
 
 ```php
 use Flarum\Console\AbstractCommand;
@@ -24,16 +29,17 @@ class YourCommand implements AbstractCommand {
 }
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [开发者讲解：扩展开发的工作流程](https://github.com/flarum/cli)
 
 :::tip 定时命令
+
 ```bash
 use Flarum\Extend;
 use YourNamespace\Console\CustomCommand;
 
 return [
   // 其他扩展器
-  (new Extend\Console())->command(CustomCommand::class)
+  (new Extend\Console())-&gt;command(CustomCommand::class)
   // 其他扩展器
 ];
 ```
@@ -58,7 +64,6 @@ return [
 ## Scheduled Commands
 
 The `Flarum\Extend\Console`'s `schedule` method allows extension developers to create scheduled commands that run on an interval:
-
 
 ```php
 use Flarum\Extend;
