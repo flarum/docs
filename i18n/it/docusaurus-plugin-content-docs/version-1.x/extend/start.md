@@ -10,19 +10,19 @@ Tieni presente che Flarum utilizza alcuni linguaggi e strumenti _moderni_. Se ha
 
 Flarum � composto da tre strati:
 
-* Primo, c'� il ** backend **. Questo � scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
+- Primo, c'� il \*\* backend \*\*. Questo � scritto in formato [object-oriented PHP](https://laracasts.com/series/object-oriented-bootcamp-in-php), e fa uso di un'ampia gamma di array e componenti [Laravel](https://laravel.com/) e pacchetti tramite [Composer](https://getcomposer.org/). Ti consigliamo anche di familiarizzare con il concetto di [iniezione dipendenze](https://laravel.com/docs/6.x/container), che viene utilizzato in tutto il nostro backend.
 
-* Secondo, il backend espone una ** API pubblica ** che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo � costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
+- Secondo, il backend espone una \*\* API pubblica \*\* che consente ai client frontend di interfacciarsi con i dati del tuo forum. Questo � costruito secondo il [specifiche JSON:API](https://jsonapi.org/).
 
-* Ed ultimo, c'� l'interfaccia web predefinita che chiamiamo ** frontend **. Questa � una [applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application) che utilizza le API. � costruito con un semplice framework simile a React chiamato [Mithril.js](https://mithril.js.org).
+- Ed ultimo, c'� l'interfaccia web predefinita che chiamiamo \*\* frontend \*\*. Questa � una [applicazione a pagina singola](https://en.wikipedia.org/wiki/Single-page_application) che utilizza le API. � costruito con un semplice framework simile a React chiamato [Mithril.js](https://mithril.js.org).
 
-Le estensioni dovranno spesso interagire con tutti e tre questi livelli per far accadere le cose. Ad esempio, se si desidera creare un'estensione che aggiunga campi personalizzati ai profili utente, � necessario aggiungere le strutture di database appropriate nel ** backend **, esporre tali dati nell '** API pubblica ** e quindi visualizzare e consentire agli utenti di modificarlo sul ** frontend **.
+Le estensioni dovranno spesso interagire con tutti e tre questi livelli per far accadere le cose. Ad esempio, se si desidera creare un'estensione che aggiunga campi personalizzati ai profili utente, � necessario aggiungere le strutture di database appropriate nel \*\* backend **, esporre tali dati nell '** API pubblica \*\* e quindi visualizzare e consentire agli utenti di modificarlo sul \*\* frontend \*\*.
 
 Allora ... come estendiamo questi livelli?
 
 ## Extender
 
-Per estendere Flarum, useremo un concetto chiamato ** extender **. Gli extender sono oggetti * dichiarativi * che descrivono in termini semplici gli obiettivi che stai cercando di raggiungere (come aggiungere un nuovo percorso al tuo forum o eseguire del codice quando � stata creata una nuova discussione).
+Per estendere Flarum, useremo un concetto chiamato \*\* extender \*\*. Gli extender sono oggetti \* dichiarativi \* che descrivono in termini semplici gli obiettivi che stai cercando di raggiungere (come aggiungere un nuovo percorso al tuo forum o eseguire del codice quando � stata creata una nuova discussione).
 
 Ogni extender � diverso. Tuttavia, saranno sempre in qualche modo simili a questo:
 
@@ -35,7 +35,7 @@ Ogni extender � diverso. Tuttavia, saranno sempre in qualche modo simili a que
 
 Creare prima un'istanza dell'extender, quindi chiamare i metodi su di essa per un'ulteriore configurazione. Tutti questi metodi restituiscono l'extender stesso, in modo da poter ottenere l'intera configurazione semplicemente concatenando le chiamate ai metodi.
 
-Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perch� sono una ** garanzia ** che ti stiamo dando che una futura versione minore di Flarum non interromper� la tua estensione.
+Per mantenere le cose coerenti, usiamo questo concetto di estensori sia nel backend (nel mondo PHP) che nel frontend (mondo JavaScript). _Tutto_ quello che fai nella tua estensione dovrebbe essere fatto tramite extender, perch� sono una \*\* garanzia \*\* che ti stiamo dando che una futura versione minore di Flarum non interromper� la tua estensione.
 
 All of the extenders currently available to you from Flarum's core can be found in the [`Extend` namespace](https://github.com/flarum/framework/blob/main/framework/core/src/Extend) [(PHP API documentation)](https://api.docs.flarum.org/php/master/flarum/extend) Extensions may also offer their [own extenders](extensibility.md#custom-extenders).
 
@@ -89,7 +89,7 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+        "flarum/core": "&gt;=0.1.0-beta.15 &lt;0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -107,29 +107,30 @@ Dobbiamo parlare un po' a Composer del nostro pacchetto, e possiamo farlo creand
 }
 ```
 
-* ** nome ** � il nome del pacchetto Composer nel formato `creatore/pacchetto`.
-  * Dovresti scegliere un nome fornitore che sia univoco, ad esempio il tuo nome utente GitHub. Ai fini di questo tutorial, supporremo che tu stia utilizzando `acme`come nome creatore.
-  * Dovresti aggiungere il prefisso `package` con `flarum-` per indicare che si tratta di un pacchetto specificamente destinato all'uso con Flarum.
+- \*\* nome \*\* � il nome del pacchetto Composer nel formato `creatore/pacchetto`.
+  - Dovresti scegliere un nome fornitore che sia univoco, ad esempio il tuo nome utente GitHub. Ai fini di questo tutorial, supporremo che tu stia utilizzando `acme`come nome creatore.
+  - Dovresti aggiungere il prefisso `package` con `flarum-` per indicare che si tratta di un pacchetto specificamente destinato all'uso con Flarum.
 
-* **description ** � una breve descrizione composta da una frase che spiega ci� che fa l'estensione.
+- \*\*description \*\* � una breve descrizione composta da una frase che spiega ci� che fa l'estensione.
 
-* **type** DEVE essere impostato su `flarum-extension`. Ci� garantisce che quando qualcuno "richiede" la tua estensione, verr� identificato come tale.
+- **type** DEVE essere impostato su `flarum-extension`. Ci� garantisce che quando qualcuno "richiede" la tua estensione, verr� identificato come tale.
 
-* **require** contiene un elenco delle dipendenze della tua estensione.
-  * Dovrai specificare la versione di Flarum con cui la tua estensione � compatibile qui.
-  * Questo � anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
+- **require** contiene un elenco delle dipendenze della tua estensione.
+  - Dovrai specificare la versione di Flarum con cui la tua estensione � compatibile qui.
+  - Questo � anche il posto dove elencare altre librerie Composer di cui il tuo codice ha bisogno per funzionare.
 
-* **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
+- **autoload** dice a Composer dove trovare le classi della tua estensione. Il nome qui dovrebbe riflettere il fornitore delle estensioni e il nome del pacchetto in CamelCase.
 
-* **extra.flarum-extension** contiene alcune informazioni specifiche di Flarum, come il nome visualizzato dell'estensione e come dovrebbe apparire la sua icona.
-  * **title** � il nome visualizzato della tua estensione.
-  * **icon** � un oggetto che definisce l'icona della tua estensione. La propriet� ** name ** � un icona [Font Awesome](https://fontawesome.com/icons). Tutte le altre propriet� vengono utilizzate dall'attributo `style` per l'icona della tua estensione.
+- **extra.flarum-extension** contiene alcune informazioni specifiche di Flarum, come il nome visualizzato dell'estensione e come dovrebbe apparire la sua icona.
+  - **title** � il nome visualizzato della tua estensione.
+  - **icon** � un oggetto che definisce l'icona della tua estensione. La propriet� \*\* name \*\* � un icona [Font Awesome](https://fontawesome.com/icons). Tutte le altre propriet� vengono utilizzate dall'attributo `style` per l'icona della tua estensione.
 
 Guarda la documentazione [schema di composer.json](https://getcomposer.org/doc/04-schema.md) documentation per informazioni su altre propriet� da aggiungere a `composer.json`.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
-Usa [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) per creare automaticamente lo scheletro della tua estensione
+Usa <a href="https://github.com/FriendsOfFlarum/extension-generator">FoF extension generator</a> per creare automaticamente lo scheletro della tua estensione
+
 ```bash
 $ flarum-cli init
 ```
@@ -146,7 +147,7 @@ composer require acme/flarum-hello-world *@dev
 
 Una volta fatto, vai avanti e avvia la pagina di amministrazione del tuo forum.
 
-*crank, ching, crunk*
+_whizzing, whirring, metal clunking_
 
 Oopl�! Ciao a te estensione Hello World!
 
