@@ -13,7 +13,7 @@ If you need help applying these changes or using new features, please start a di
 You can use the [Flarum CLI](cli.md) to automate as much of the upgrade steps as possible:
 
 Keep in mind the following information about the upgrade command:
-* The process goes through multiple steps, each step points to the right documentation if any, and provides any helpful tips.
+* The process goes through multiple steps, each step points to the related documentation, and provides helpful tips.
 * After each step, the changes **are committed to Git** so that you can always review the changes commit by commit.
 * Mistakes can and will be made, after every step is finished you can view the changes made and make any necessary adjustments.
 * Most of the steps should require little to no manual adjustments, except for the following:
@@ -21,14 +21,22 @@ Keep in mind the following information about the upgrade command:
   * Prepare for JSON:API changes. _(100% manual changes requires)_
   * Search & Filter API changes. _(Can require some amount of manual changes)_
 
-### Installation & Usage
+### Installation
 
-The upgrader is just another command of the `@flarum/cli` npm package. However, the CLI can only support either Flarum 1.x or 2.x at a time, so if you upgrade the package, you will no longer be able to use it for Flarum 1.x extensions.
+The upgrader is just another command of the `@flarum/cli` npm package.
+
+```bash
+npm install -g @flarum/cli@3
+```
+
+v3 of the CLI is only compatible with v2.x of Flarum, if you wish to continue using the CLI for both v1.x and v2.x of Flarum, you can install them together. Read more about it [here](cli.md#installation).
+
+### Usage
 
 Now to use, simply run the following command:
 
 ```bash
-flarum-cli upgrade 2.0
+fl upgrade 2.0
 ```
 
 :::caution
@@ -294,6 +302,18 @@ Checkout the [database documentation](./database) for more details.
     // after
     [data-theme^=dark] & {
       background: black;
+    }
+    ```
+  * The `@config-colored-header` variable has been removed. Instead, you can use the `[data-colored-header=true]` CSS selector.
+    ```less
+    // before
+    & when (@config-colored-header = true) {
+      background: @primary-color;
+    }
+    
+    // after
+    [data-colored-header=true] & {
+      background: var(--primary-color);
     }
     ```
     
