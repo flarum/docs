@@ -2,7 +2,7 @@
 
 :::tip
 
-Nếu bạn cần sự trợ giúp về những thay đổi mới này, vui lòng tạo cuộc thảo luận trên [cộng đồng Flarum](https://discuss.flarum.org/t/extensibility) hoặc [Discord](https://flarum.org/discord/).
+If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
 
 :::
 
@@ -104,9 +104,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 - Translations are now used for page titles, so that the format can be customized via language packs or [Linguist](https://discuss.flarum.org/d/7026-linguist-customize-translations-with-ease): https://github.com/flarum/core/pull/3077, https://github.com/flarum/core/pull/3228
 - API endpoints for retrieving single groups, as well as support for filtering groups on the plural get endpoint, [have been added](https://github.com/flarum/core/pull/3084).
 
-
 ### Tooling
-
 
 - The `flarum-cli infra` command can now be used to update or enable various infrastructure features. You can now add the following to your extension in just one command:
   - TypeScript
