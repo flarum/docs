@@ -23,7 +23,7 @@ Keep in mind the following information about the upgrade command:
 
 ### Installation
 
-The upgrader is just another command of the `@flarum/cli` npm package.
+The upgrader is just another command of the [`@flarum/cli` npm package](https://github.com/flarum/cli#readme).
 
 ```bash
 npm install -g @flarum/cli@3
