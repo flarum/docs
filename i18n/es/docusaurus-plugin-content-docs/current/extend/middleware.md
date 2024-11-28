@@ -52,7 +52,7 @@ return [
 ];
 ```
 
-Tada! Listo, Middleware registrado. Recuerda que el orden es importante.
+Tada! Tada! Listo, Middleware registrado. Recuerda que el orden es importante.
 
 Ahora que ya tenemos lo básico, vamos a repasar algunas cosas más:
 
@@ -77,12 +77,9 @@ Si su middleware se ejecuta después de `Flarum\Http\Middleware\ResolveRoute` (l
 ```php
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 {
-    if ($request->getAttribute('routeName') === 'register') {
-        // ¡Su lógica aquí!
-    }
+    $response = $handler->handle($request);
 
-    return $handler->handle($request);
-}
+    // Your logic...
     $response = $response->withHeader('Content-Type', 'application/json');
 
     return $response;
@@ -130,10 +127,20 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
     }
 
     return $handler->handle($request);
+} Your email can\'t be used.',
+            ],
+        ]);
+        $document = new Document();
+        $document->setErrors($error->getErrors());
+
+        return new JsonApiResponse($document, $error->getStatus());
+    }
+
+    return $handler->handle($request);
 }
 ```
 
-Phew! ¡Uf! Crisis evitada.
+Phew! Phew! ¡Uf! Crisis evitada.
 
 Para saber más sobre los objetos de solicitud y respuesta, consulte la documentación [PSR HTTP message interfaces](https://www.php-fig.org/psr/psr-7/#1-specification).
 
@@ -147,6 +154,14 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
     $response = $handler->handle($request);
 
     // Your logic...
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+{
+    if ($request->getAttribute('routeName') === 'register') {
+        // ¡Su lógica aquí!
+    }
+
+    return $handler->handle($request);
+}
     $response = $response->withHeader('Content-Type', 'application/json');
 
     return $response;
@@ -163,4 +178,4 @@ Una vez que todo está dicho y hecho y no estás devolviendo una respuesta por t
 return $handler->handle($request);
 ```
 
-Great! We're all done here. ¡Ahora puedes hacer el middleware de tus sueños!
+Great! Great! We're all done here. ¡Ahora puedes hacer el middleware de tus sueños!
