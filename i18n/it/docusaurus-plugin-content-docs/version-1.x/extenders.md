@@ -4,7 +4,8 @@ If there are customizations you want to make to your site without distributing a
 
 See our [extension documentation](extend/start.md) for more information about extenders (and even an [example of a local extender](extend/start.md#hello-world)).
 
-If you need to create new files (when adding a custom class to be imported for extenders), you'll need to adjust your composer.json a bit. Add the following:
+If you need to create new files (when adding a custom class to be imported for extenders), you'll need to adjust your composer.json a bit.
+Add the following:
 
 ```json
 "autoload": {
