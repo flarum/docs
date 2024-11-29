@@ -89,7 +89,7 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+        "flarum/core": "^2.0.0"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
