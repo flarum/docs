@@ -2,7 +2,7 @@
 
 ### Is Flarum Stable?
 
-Yes! After 6 years of development, Flarum 1.0.0 is finally here.
+Yes! After 6 years of development, Flarum **1.0.0** was released, and we are now spear-heading the development of Flarum **2.0**.
 
 ### What's next after stable?
 
