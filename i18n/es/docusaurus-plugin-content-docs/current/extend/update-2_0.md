@@ -48,6 +48,15 @@ fl upgrade 2.0
 
 ## Frontend
 
+### Dependencies
+
+##### <span class="breaking">Breaking</span>
+
+In `package.json`:
+
+- Set `flarum-webpack-config` to `^3.0.0`.
+- Set `flarum-tsconfig` to `^2.0.0`.
+
 ### Mithril 2.2
 
 ##### <span class="breaking">Breaking</span>
@@ -178,6 +187,16 @@ There have been many changes to the core frontend codebase, including renamed or
 - A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
 
 ### Dependencies
+
+#### Main packages
+
+##### <span class="breaking">Breaking</span>
+
+In `composer.json`:
+
+- Set any `flarum/` package requirement to `^2.0.0`.
+- If you have a `php` requirement, make sure it is not below `^8.2`.
+- If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "^2.0.0"`.
 
 #### Carbon 3
 
