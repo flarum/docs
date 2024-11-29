@@ -89,7 +89,7 @@ Chúng tôi cần cho Composer biết một chút về gói của chúng tôi v�
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": "^1.0.0"
+        "flarum/core": "^2.0.0"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
