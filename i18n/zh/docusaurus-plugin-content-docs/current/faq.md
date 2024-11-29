@@ -2,7 +2,7 @@
 
 ### Flarum 现在是正式版吗？
 
-是的！ 经过 6 年的开发之后，Flarum 1.0.0 最终来了。
+是的！ After 6 years of development, Flarum **1.0.0** was released, and we are now spear-heading the development of Flarum **2.0**.
 
 ### 展望未来，下一阶段 Flarum 会做些什么？
 
