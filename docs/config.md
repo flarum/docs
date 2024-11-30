@@ -25,6 +25,7 @@ Here's a quick overview of what everything means with an example file:
     'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
     'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
+    'unix_socket' => '', // the unix socket of the connection, useful if you are using a local database (example: '/run/mysqld/mysqld.sock')
   ),
   'url' => 'https://flarum.localhost', // the URL installation, you will want to change this if you change domains
   'paths' =>
