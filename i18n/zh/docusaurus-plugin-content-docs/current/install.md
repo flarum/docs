@@ -51,7 +51,7 @@ composer create-project flarum/flarum .
 如果您还想从管理面板安装和升级扩展程序，您还需要安装[扩展程序管理器](extensions.md)扩展。
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
