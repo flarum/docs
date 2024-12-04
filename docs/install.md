@@ -51,7 +51,7 @@ When everything is ready, navigate to your forum in a web browser and follow the
 If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
