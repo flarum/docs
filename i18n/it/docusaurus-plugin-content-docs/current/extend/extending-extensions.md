@@ -24,8 +24,8 @@ Ad esempio, se stai sviluppando un nuovo tema per l'estensione Tag Flarum, il tu
 {
   // ...
   "require": {
-    "flarum/core": "^1.0.0",  // Perchè tutte le estensioni necessitano del Core di Flarum.
-    "flarum/tags": "^1.1.0"  //  Questo dice a Flarum di trattare i tag come dipendenza della tua estensione.
+    "flarum/core": "^2.0",  // Since all extensions need to require core.
+    "flarum/tags": "*"  // This tells Flarum to treat tags as a dependency of your extension.
   },
   // ...
 }
