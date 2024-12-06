@@ -6,6 +6,12 @@ Vui lòng tham gia Flarum trên một trong những [diễn đàn demo](https://
 
 :::
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use.
+
+:::
+
 ## Yêu cầu máy chủ
 
 Trước khi bạn cài đặt Flarum, điều quan trọng là phải kiểm tra xem máy chủ của bạn có đáp ứng các yêu cầu hay không. Để chạy Flarum, bạn sẽ cần:
@@ -41,7 +47,7 @@ If you don't have SSH access to your server, or you prefer not to use the comman
 Flarum sử dụng [Composer](https://getcomposer.org) để quản lý các phần phụ thuộc và tiện ích mở rộng của nó. Nếu bạn không quen thuộc với nó, hãy đọc [hướng dẫn của chúng tôi](composer.md) để biết thông tin về nó là gì và cách thiết lập nó. Sau đó, chạy lệnh này ở một vị trí trống mà bạn muốn cài đặt Flarum:
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum --stability=beta .
 ```
 
 Trong khi lệnh này đang chạy, bạn có thể định cấu hình máy chủ web của mình. Bạn sẽ cần đảm bảo rằng webroot của mình được đặt thành `/path/to/your/forum/public` và thiết lập [Rewriting URL](#url-rewriting) như theo hướng dẫn bên dưới.
