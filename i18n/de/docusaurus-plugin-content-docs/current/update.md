@@ -1,10 +1,16 @@
 # Updating
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+
+:::
+
 ## From the Admin Dashboard
 
 :::info
 
-If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+If you have the [extension manager](./extensions#extension-manager) extension installed you can simply run the update from its interface and skip the general steps. You should still read the ["Major Version Update Guide"](#major-version-update-guides) if you are updating from v1 to v2.
 
 :::
 
@@ -12,7 +18,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 To update Flarum, you'll need to use [Composer](https://getcomposer.org). If you're not familiar with it (although you should be, because you need it to install Flarum), read [our guide](composer.md) for information on what it is and how to set it up.
 
-If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
+If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate ["Major Version Update Guide"](#major-version-update-guides) before running the general upgrade steps.
 
 ## General Steps
 
@@ -40,11 +46,25 @@ php flarum cache:clear
 
 ### Updating from v1 (^1.0.0) to v2 (^2.0.0)
 
-1. Do steps 1-5 above.
-2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
-3. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
-4. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
-5. Do steps 6 and 7 above.
+1. If you are using a MariaDB database, you should change the driver in `config.php` from `mysql` to `mariadb`:
+   ```php
+    <?php return array (
+      'debug' => true,
+      'offline' => false,
+      'database' =>
+      array (
+        // remove-next-line
+        'driver' => 'mysql',
+        // insert-next-line
+        'driver' => 'mariadb',
+        'host' => 'localhost',
+        'port' => 3306,
+   ```
+2. Do steps 1-5 above.
+3. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
+4. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
+5. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
+6. Do steps 6 and 7 above.
 
 ## Troubleshooting Issues
 
