@@ -82,7 +82,7 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     // It's a list of packages we want, and the versions for each.
     // We'll discuss this shortly.
     "require": {
-        "flarum/core": "^1.0",
+        "flarum/core": "^2.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
         "flarum/emoji": "*",
@@ -120,7 +120,7 @@ To read more about version strings, see the relevant [composer documentation](ht
 
 For Flarum projects, there's several types of entries you'll see in the `require` section of your root install's `flarum/core`:
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0`.
+- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 2.x versions, this would be `^2.0`.
 - You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
