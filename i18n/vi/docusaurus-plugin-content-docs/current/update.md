@@ -1,10 +1,16 @@
 # Cập nhật
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+
+:::
+
 ## From the Admin Dashboard
 
 :::info
 
-If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+If you have the [extension manager](./extensions#extension-manager) extension installed you can simply run the update from its interface and skip the general steps. You should still read the ["Major Version Update Guide"](#major-version-update-guides) if you are updating from v1 to v2.
 
 :::
 
@@ -12,7 +18,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 Để cập nhật Flarum, bạn cần sử dụng [Composer](https://getcomposer.org). Nếu bạn không biết gì về nó, bạn cần phải biết 1 ít về Composer để cài đặt Flarum, đọc [hướng dẫn](composer.md) để biết cách cài đặt và sử dụng như thế nào.
 
-Nếu cập nhật trên các phiên bản chính (ví dụ: <= 0.1.0 đến 1.x.x, 1.x.x thành 2.x.x, ...), hãy nhớ đọc "hướng dẫn cập nhật phiên bản chính" thích hợp trước khi chạy các bước nâng cấp chung.
+If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate ["Major Version Update Guide"](#major-version-update-guides) before running the general upgrade steps.
 
 ## Các bước chung
 
@@ -40,11 +46,25 @@ php flarum cache:clear
 
 ### Updating from v1 (^1.0.0) to v2 (^2.0.0)
 
-1. Thực hiện các bước 1-5 ở trên.
-2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
-3. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
-4. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
-5. Thực hiện bước 6 và 7 ở trên.
+1. If you are using a MariaDB database, you should change the driver in `config.php` from `mysql` to `mariadb`:
+   ```php
+    <?php return array (
+      'debug' => true,
+      'offline' => false,
+      'database' =>
+      array (
+        // remove-next-line
+        'driver' => 'mysql',
+        // insert-next-line
+        'driver' => 'mariadb',
+        'host' => 'localhost',
+        'port' => 3306,
+   ```
+2. Thực hiện các bước 1-5 ở trên.
+3. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
+4. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
+5. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
+6. Thực hiện bước 6 và 7 ở trên.
 
 ## Các vấn đề gặp phải
 
