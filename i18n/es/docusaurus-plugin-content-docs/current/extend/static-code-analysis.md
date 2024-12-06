@@ -19,7 +19,7 @@ $ flarum-cli infra phpstan
 First you need to require the `flarum/phpstan` package in your extension. You can do this by running the following command in the root of our extension:
 
 ```bash
-composer require --dev flarum/phpstan:^1.0
+composer require --dev flarum/phpstan:^2.0
 ```
 
 Next, you need to create a `phpstan.neon` file in the root of your extension. This file contains [the configuration for PHPStan](https://phpstan.org/config-reference). You can copy the following configuration into the file:
