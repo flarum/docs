@@ -6,6 +6,12 @@ Fühle Dich frei, Flarum in einem unserer [Demonstrationsforen](https://discuss.
 
 :::
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use.
+
+:::
+
 ## Server-Anforderungen
 
 Before you install Flarum, it's important to check that your server meets the requirements. Um Flarum ausführen zu können, brauchst du:
@@ -41,7 +47,7 @@ If you don't have SSH access to your server, or you prefer not to use the comman
 Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Afterwards, run this command in an empty location that you want Flarum to be installed in:
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum --stability=beta .
 ```
 
 While this command is running, you can configure your web server. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
