@@ -1,10 +1,16 @@
 # Güncelleme
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+
+:::
+
 ## From the Admin Dashboard
 
 :::bilgi
 
-If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+If you have the [extension manager](./extensions#extension-manager) extension installed you can simply run the update from its interface and skip the general steps. You should still read the ["Major Version Update Guide"](#major-version-update-guides) if you are updating from v1 to v2.
 
 :::
 
@@ -12,7 +18,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 Flarum'u güncellemek için [Composer](https://getcomposer.org) kullanmanız gerekir. Eğer aşina değilseniz (Flarum'u kurmak için buna ihtiyacınız vardır), ne olduğu ve nasıl kurulacağı hakkında bilgi için [kılavuzumuzu](composer.md) okuyun.
 
-Ana sürümler arasında güncelleme yapıyorsanız (ör. <=0.1.0 - 1.x.x, 1.x.x - 2.x.x, ...), genel yükseltme adımlarını çalıştırmadan önce uygun "ana sürüm güncelleme kılavuzunu" okuduğunuzdan emin olun.
+If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate ["Major Version Update Guide"](#major-version-update-guides) before running the general upgrade steps.
 
 ## Genel Adımlar
 
@@ -40,11 +46,25 @@ php flarum cache:clear
 
 ### Updating from v1 (^1.0.0) to v2 (^2.0.0)
 
-1. Yukarıdaki 1-5 adımlarını uygulayın.
-2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
-3. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
-4. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
-5. Yukarıdaki 6. ve 7. adımları uygulayın.
+1. If you are using a MariaDB database, you should change the driver in `config.php` from `mysql` to `mariadb`:
+   ```php
+    <?php return array (
+      'debug' => true,
+      'offline' => false,
+      'database' =>
+      array (
+        // remove-next-line
+        'driver' => 'mysql',
+        // insert-next-line
+        'driver' => 'mariadb',
+        'host' => 'localhost',
+        'port' => 3306,
+   ```
+2. Yukarıdaki 1-5 adımlarını uygulayın.
+3. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
+4. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
+5. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
+6. Yukarıdaki 6. ve 7. adımları uygulayın.
 
 ## Sorun Giderme
 
