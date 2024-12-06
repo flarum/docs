@@ -175,9 +175,10 @@ There have been many changes to the core frontend codebase, including renamed or
 
 ##### <span class="breaking">Breaking</span>
 In `composer.json`:
-* Set any `flarum/` package requirement to `^2.0.0`.
+* Set `flarum/core` package requirement to `^2.0.0-beta`.
+* Set other `flarum/*` packages to `*`.
 * If you have a `php` requirement, make sure it is not below `^8.2`.
-* If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "^2.0.0"`.
+* If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "*"`.
 
 #### Carbon 3
 
