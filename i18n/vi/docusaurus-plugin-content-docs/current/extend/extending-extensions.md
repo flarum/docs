@@ -24,8 +24,8 @@ Ví dụ: nếu bạn đang tạo chủ đề mới cho tiện ích mở rộng 
 {
   // ...
   "require": {
-    "flarum/core": "^0.1.0-beta.15",  // Since all extensions need to require core.
-    "flarum/tags": "^0.1.0-beta.15"  // This tells Flarum to treat tags as a dependency of your extension.
+    "flarum/core": "^2.0",  // Since all extensions need to require core.
+    "flarum/tags": "*"  // This tells Flarum to treat tags as a dependency of your extension.
   },
   // ...
 }
