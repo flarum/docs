@@ -2,7 +2,7 @@
 
 ### ¿Cuándo será estable Flarum?
 
-Yes! After 6 years of development, Flarum **1.0.0** was released, and we are now spear-heading the development of Flarum **2.0**.
+Yes! After 6 years of development, Flarum **1.0.0** was released, and we are now spearheading the development of Flarum **2.0**.
 
 ### ¿Podré pasar de la versión beta a las siguientes?
 
