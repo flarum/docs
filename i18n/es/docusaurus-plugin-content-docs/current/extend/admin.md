@@ -1,37 +1,31 @@
 # Panel de Administración
 
-La Beta 15 ha introducido un panel de administración y una API frontend completamente rediseñada. Ahora es más fácil que nunca añadir ajustes o permisos a tu extensión.
+Every extension has a unique page containing information, settings, and the extension's own permissions.
 
-Antes de la Beta 15, los ajustes de las extensiones se añadían en un `SettingsModal` o se añadía una nueva página para ajustes más complejos. Ahora, cada extensión tiene una página que contiene información, ajustes y los propios permisos de la extensión.
+You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) component.
 
-Puedes simplemente registrar los ajustes, extender la base [`ExtensionPage`] (https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), o proporcionar tu propia página completamente personalizada.
+## Admin Extender
 
-## API de datos de la extensión
+The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
 
-Esta nueva API le permite añadir ajustes a su extensión con muy pocas líneas de código.
-
-### Cómo informar a la API sobre su extensión
-
-Antes de que puedas registrar nada, tienes que decirle a `ExtensionData` de qué extensión va a obtener datos.
-
-Simplemente ejecute la función `for` en `app.extensionData` pasando el id de su extensión. Para encontrar el id de tu extensión, toma el nombre del compositor y sustituye las barras por guiones (ejemplo: 'fof/merge-discussions' se convierte en 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
-
-Para el siguiente ejemplo, utilizaremos la extensión ficticia 'acme/interstellar':
+To get started, make sure you have an `admin/extend.js` file:
 
 ```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
 
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-});
+export default [
+  //
+]
 ```
 
-Una vez hecho esto, puedes empezar a añadir configuraciones y permisos.
+:::info
 
-:::info Note
+Remember to export the `extend` module from your entry `admin/index.js` file:
 
-Todas las funciones de registro en `ExtensionData` son encadenables, lo que significa que puedes llamarlas una tras otra sin tener que volver a ejecutar `for`.
+```js
+export { default as extend } from './extend';
+```
 
 :::
 
@@ -39,109 +33,177 @@ Todas las funciones de registro en `ExtensionData` son encadenables, lo que sign
 
 Se recomienda añadir campos de configuración para los elementos simples. Como regla general, si sólo necesitas almacenar cosas en la tabla de ajustes, esto debería ser suficiente para ti.
 
-Para añadir un campo, llama a la función `registerSetting` después de `for` en `app.extensionData` y pasa un 'setting object' como primer argumento. Detrás de las escenas `ExtensionData` en realidad convierte su configuración en un [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), puede pasar un número de prioridad como el segundo argumento.
+To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page.
 
 Aquí hay un ejemplo con un elemento switch (booleano):
 
 ```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
 
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerSetting(
-      {
-        setting: 'acme-interstellar.coordinates', // Esta es la clave con la que se guardarán los ajustes en la tabla de ajustes de la base de datos.
-        label: app.translator.trans('acme-interstellar.admin.coordinates_label'), // La etiqueta que se mostrará para que el administrador sepa lo que hace el ajuste.
-        type: 'boolean', // Qué tipo de ajuste es, las opciones válidas son: booleano, texto (o cualquier otro tipo de etiqueta <input>), y seleccionar.
+return [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
+        label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true), // The label to be shown letting the admin know what the setting does.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help', {}, true), // Optional help text where a longer explanation of the setting can go.
         },
       30 // Opcional: 
-      Prioridad
+      }),
+      30 // Optional: Priority
     )
-});
+];
 ```
 
 Si se utiliza `type: 'select'` el objeto de ajuste tiene un aspecto un poco diferente:
 
 ```js
-{
-  setting: 'acme-interstellar.fuel_type',
-  label: app.translator.trans('acme-interstellar.admin.fuel_type_label'),
-  type: 'select',
-  options: {
-    'LOH': 'Liquid Fuel', // La clave en este objeto es lo que la configuración almacenará en la base de datos, el valor es la etiqueta que el administrador verá (recuerde usar traducciones si tienen sentido en su contexto).
-    'RDX': 'Solid Fuel',
-  },
-  default: 'LOH',
-}
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+return [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.fuel_type',
+        label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
+        type: 'select',
+        options: {
+          'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+          'RDX': 'Solid Fuel',
+        },
+        default: 'LOH',
+      }),
+    )
+];
 ```
 
 Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
 
 ```js
-{
-  setting: 'acme-interstellar.crew_count',
-  label: app.translator.trans('acme-interstellar.admin.crew_count_label'),
-  type: 'number',
-  min: 1,
-  max: 10
-}
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+return [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.crew_count',
+        label: app.translator.trans('acme-interstellar.admin.crew_count_label', {}, true),
+        type: 'number',
+        min: 1,
+        max: 10
+      }),
+    )
+];
 ```
 
 Si quieres añadir algo a los ajustes como algún texto extra o una entrada más complicada, también puedes pasar una devolución de llamada como primer argumento que devuelva JSX. Este callback se ejecutará en el contexto de [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) y los valores de configuración no se serializarán automáticamente.
 
 ```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
 
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerSetting(function () {
-      if (app.session.user.username() === 'RocketMan') {
-
-        return (
-          <div className="Form-group">
-            <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
-            <label className="checkbox">
-              <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
+return [
+  new Extend.Admin()
+    .setting(
+      () => function () {
+        if (app.session.user.username() === 'RocketMan') {
+          return (
+            <div className="Form-group">
+              <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
+              <label className="checkbox">
+                <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
                 {app.translator.trans('acme-interstellar.admin.rocket_man_setting_label')}
-            </label>
-          </div>
-        );
-      }
-    })
-});
+              </label>
+            </div>
+          );
+        }
+      },
+    )
+];
+```
+
+### Available Setting Types
+
+This is a list of setting types available by default:
+
+**Toggle:** `bool` or `checkbox` or `switch` or `boolean`
+
+**Textarea:** `textarea`
+
+**Color Picker:** `color-preview`
+
+**Text Input**: `text` or any HTML input types such as `tel` or `number`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'bool' // Any of the mentioned values above
+}
+```
+
+**Selection:** `select` or `dropdown` or `selectdropdown`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'select', // Any of the mentioned values above
+  options: {
+    'option_key': 'Option Label',
+    'option_key_2': 'Option Label 2',
+    'option_key_3': 'Option Label 3',
+  },
+  default: 'option_key'
+}
+```
+
+**Image Upload Button:** `image-upload`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'image-upload',
+  name: 'my_image_name', // The name of the image, this will be used for the request to the backend.
+  routePath: '/upload-my-image', // The route to upload the image to.
+  url: () => app.forum.attribute('myImageUrl'), // The URL of the image, this will be used to preview the image.
+}
 ```
 
 ### Registro de Permisos
 
-Como novedad en la beta 15, los permisos pueden encontrarse ahora en dos lugares. Ahora, puedes ver los permisos individuales de cada extensión en su página. Todos los permisos se pueden seguir encontrando en la página de permisos.
+Permissions can be found in 2 places. You can view each extension's individual permissions on their dedicated page, or you can view all permissions in the main permissions page.
 
-Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Esto se hace de forma similar a la configuración, llamando a `registerPermission`.
+In order for that to happen, permissions must be registered using the `permission` method of the `Admin` extender, similar to how settings are registered.
 
 Volvemos a nuestra extensión favorita del rocket:
  * Objeto de permiso
  * Qué tipo de permiso - ver las funciones de [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) para los tipos (eliminar elementos del nombre)
  * Prioridad de `ItemList`
 
-Recuerda que todas estas funciones se pueden encadenar como:
+Volvemos a nuestra extensión favorita del rocket:
 
 ```js
-app.initializers.add('interstellar', function(app) {
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
 
-  app.extensionData
-    .for('acme-interstellar')
-    .registerPermission(
-      {
-        icon: 'fas fa-rocket', // Icono Font-Awesome
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label'), // Etiqueta de permiso
-        permission: 'discussion.rocket_fly', // Nombre real del permiso almacenado en la base de datos (y utilizado al comprobar el permiso).
+return [
+  new Extend.Admin()
+    .permission(
+      () => ({
+        icon: 'fas fa-rocket', // Font-Awesome Icon
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label', {}, true), // Permission Label
+        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
         tagScoped: true, // Si es posible aplicar este permiso en las etiquetas, no sólo globalmente. Se explica en el siguiente párrafo.
-      }, 
-      'start', // El permiso de la categoría se añadirá a la cuadrícula (grid)
-      95 // Opcional: Prioridad
-    );
-});
+      }),
+      'start', // Category permission will be added to on the grid
+      95 // Optional: Priority
+    )
+];
 ```
 
 If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
@@ -150,25 +212,28 @@ Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
 
 ### Recordatorio de Encadenamiento
 
-Entonces, simplemente ejecute `registerPage`:
+Recuerda que todas estas funciones se pueden encadenar como:
 
 ```js
-app.extensionData
-    .for('acme-interstellar')
-    .registerSetting(...)
-    .registerSetting(...)
-    .registerPermission(...)
-    .registerPermission(...);
-    .registerSetting(...)
-    .registerPermission(...)
-    .registerPermission(...);
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+return [
+  new Extend.Admin()
+    .setting(...)
+    .permission(...)
+    .permission(...)
+    .permission(...)
+    .setting(...)
+    .setting(...)
+];
 ```
 
 ### Extending/Overriding de la Página por Defecto
 
-A veces tienes configuraciones más complicadas que se mezclan con las relaciones, o simplemente quieres que la página se vea completamente diferente. En este caso, necesitarás decirle a `ExtensionData` que quieres proporcionar tu propia página. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
+Sometimes you may have more complicated settings, or just want the page to look completely different. In this case, you will need to tell the `Admin` extender that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
-¡Puedes extender la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o extender la `Page` base y diseñar la tuya propia!
+Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
 
 ```js
 import ExtensionPage from 'flarum/components/ExtensionPage';
@@ -183,27 +248,81 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
+Then, simply use the `page` method of the extender:
 
 ```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
 
 import StarPage from './components/StarPage';
 
-app.initializers.add('interstellar', function(app) {
-
-  app.extensionData
-    .for('acme-interstellar')
-    .registerPage(StarPage);
-});
+return [
+  new Extend.Admin()
+    .page(StarPage)
+];
 ```
 
 Para más información, consulte el esquema [composer.json](https://getcomposer.org/doc/04-schema.md).
 
 You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
 
+### Admin Search
+
+The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.settings` and `Admin.permissions` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
+
+To do this, you can use the `Admin.generalIndexItems` extender method. This method takes a callback that returns an array of index items. Each index item is an object with the following properties:
+
+```ts
+export type GeneralIndexItem = {
+  /**
+   * The unique identifier for this index item.
+   */
+  id: string;
+  /**
+   * Optional: The tree path to this item, used for grouping in the search results.
+   */
+  tree?: string[];
+  /**
+   * The label to display in the search results.
+   */
+  label: string;
+  /**
+   * Optional: The description to display in the search results.
+   */
+  help?: string;
+  /**
+   * Optional: The URL to navigate to when this item is selected.
+   * The default is to navigate to the extension page.
+   */
+  link?: string;
+  /**
+   * Optional: A callback that returns a boolean indicating whether this item should be visible in the search results.
+   */
+  visible?: () => boolean;
+};
+```
+
+Here is an example of how to add an index item:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+return [
+  new Extend.Admin()
+    .generalIndexItems(() => [
+      {
+        id: 'acme-interstellar',
+        label: app.translator.trans('acme-interstellar.admin.acme_interstellar_label', {}, true),
+        help: app.translator.trans('acme-interstellar.admin.acme_interstellar_help', {}, true),
+      },
+    ])
+];
+```
+
 ## Metadatos del Composer.json
 
-En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
+Extension pages make room for extra info which is pulled from extensions' composer.json.
 
 Para más información, consulte el esquema (schema) [composer.json](https://getcomposer.org/doc/04-schema.md).
 

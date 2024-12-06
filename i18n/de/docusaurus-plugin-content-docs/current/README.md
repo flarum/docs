@@ -6,7 +6,7 @@ slug: /
 
 Flarum ist eine herrlich einfache Diskussionsplattform für deine Website. Es ist schnell, kostenlos und benutzerfreundlich und bietet alle Funktionen, die du für den Betrieb einer erfolgreichen Community benötigst. Zudem ist Flarum äußerst erweiterbar und lässt sich optimal anpassen.
 
-![Flarum Startseite Screenshot](/en/img/home_screenshot.png)
+![Flarum Startseite Screenshot](./assets/home_screenshot.png)
 
 ## Ziele
 
@@ -16,7 +16,7 @@ Flarum ist der kombinierte Nachfolger von [esoTalk](https://github.com/esotalk/e
 
 * **Schön und responsiv.** Dies ist eine Forensoftware für Menschen. Flarum wurde sorgfältig entwickelt, um plattformübergreifend konsistent und intuitiv zu sein, und zwar sofort nach der Installation.
 
-* **Leistungsstark und erweiterbar.** Passe Flarum an, erweitere es und integriere es in deine Community. Die Architektur von Flarum ist erstaunlich flexibel, mit einer [leistungsfähigen Erweiterungs-API](/extend/README.md).
+* **Leistungsstark und erweiterbar.** Passe Flarum an, erweitere es und integriere es in deine Community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](./extend/README.md).
 
 * **Kostenlos und Open Source.** Flarum wird unter der [MIT-Lizenz](https://github.com/flarum/flarum/blob/master/LICENSE) veröffentlicht.
 

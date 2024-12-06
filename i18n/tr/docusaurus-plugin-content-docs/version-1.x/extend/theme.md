@@ -1,6 +1,7 @@
 # Hızlı Başlangıç
 
-Flarum "themes" are just extensions. Typically, you'll want to use the `Frontend` extender to register custom [Less](https://lesscss.org/#overview) and JS. Of course, you can use other extenders too: for example, you might want to support settings to allow configuring your theme.
+Flarum "themes" are just extensions. Typically, you'll want to use the `Frontend` extender to register custom [Less](https://lesscss.org/#overview) and JS.
+Of course, you can use other extenders too: for example, you might want to support settings to allow configuring your theme.
 
 You can indicate that your extension is a theme by setting the "extra.flarum-extension.category" key to "theme". For example:
 

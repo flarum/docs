@@ -22,12 +22,12 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
-![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
+![extension manager admin page](./assets/extension-manager-page.png)
 
 
 ## Erweiterungen finden
 
-Flarum verfügt über ein breites Ökosystem von Erweiterungen, von denen die meisten Open Source und kostenlos sind. Um neue und tolle Erweiterungen zu finden, besuche das [Extensions](https://discuss.flarum.org/t/extensions)-Tag in Flarums Community-Foren. Die inoffizielle [Extiverse Erweiterungsdatenbank](https://extiverse.com/) ist ebenfalls eine großartige Ressource.
+Flarum verfügt über ein breites Ökosystem von Erweiterungen, von denen die meisten Open Source und kostenlos sind. The extension manager provides a discovery feature allowing you to search through the available extensions. The extension manager connects to [flarum.org/extensions](https://flarum.org/extensions). Alternatively, you can visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums.
 
 ## Erweiterungen installieren
 
@@ -35,7 +35,7 @@ Flarum verfügt über ein breites Ökosystem von Erweiterungen, von denen die me
 
 Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
 
-![Installing an extension](/en/img/install-extension.png)
+![Installing an extension](./assets/install-extension.png)
 
 ### Through the command line
 
@@ -50,7 +50,7 @@ Genau wie Flarum werden Erweiterungen über [Composer](https://getcomposer.org) 
 
 Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
 
-![Updating an extension](/en/img/update-extension.png)
+![Updating an extension](./assets/update-extension.png)
 
 ### Through the command line
 
@@ -62,7 +62,7 @@ Anweisungen der Erweiterungsentwickler befolgen. Wenn Du `*` als Versionszeichen
 
 Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
 
-![Uninstalling an extension](/en/img/uninstall-extension.png)
+![Uninstalling an extension](./assets/uninstall-extension.png)
 
 ### Through the command line
 
@@ -95,12 +95,12 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 ### Adding a composer repository
 
-Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
+Extiverse provides access to premium extensions. It is a good example of a composer repository. You would also need to enter an authentication method through the **New authentication method** button. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
 
-![Configure repositories](/en/img/config-repositories.png)
+![Configure repositories](./assets/config-repositories.png)
 
 :::info
 

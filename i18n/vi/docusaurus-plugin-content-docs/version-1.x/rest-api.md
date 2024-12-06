@@ -12,9 +12,12 @@ API tuân theo các phương pháp hay nhất được xác định bởi đặc
 
 ## Xác thực
 
-Ứng dụng trang đơn sử dụng cookie phiên để xác thực dựa trên API. Các tập lệnh bên ngoài có thể sử dụng xác thực không trạng thái bằng [Khóa API](#api-keys) hoặc [Mã token truy cập](#access-tokens).
+Ứng dụng trang đơn sử dụng cookie phiên để xác thực dựa trên API.
+External scripts can use stateless authentication using [API Keys](#api-keys) or [Access Tokens](#access-tokens).
 
-Điểm cuối `GET` có thể được sử dụng mà không cần xác thực. Chỉ nội dung hiển thị cho khách sẽ được trả lại. Các điểm cuối khác thường không thể được sử dụng mà không có xác thực vì [bảo vệ CSRF](#csrf-protection).
+`GET` endpoints can be used without authentication.
+Chỉ nội dung hiển thị cho khách sẽ được trả lại.
+Other endpoints generally cannot be used without authentication because of the [CSRF protection](#csrf-protection).
 
 ### Khoá API
 
@@ -27,7 +30,7 @@ Hiện không có giao diện người dùng nào để quản lý Khóa API, nh
 Các thuộc tính sau có thể được điền:
 
 - `key`: Tạo một mã token dài duy nhất (khuyến nghị: chữ-số, 40 ký tự) và đặt nó ở đây, đây sẽ là mã thông báo được sử dụng trong header `Authorization`.
-- `user_id`: Tùy chọn. Nếu được đặt, khóa chỉ có thể được sử dụng để hoạt động như một người dùng nhất định.
+- `user_id`: Optional. Nếu được đặt, khóa chỉ có thể được sử dụng để hoạt động như một người dùng nhất định.
 
 Các thuộc tính còn lại hoặc được điền tự động hoặc hiện không được sử dụng:
 
@@ -39,21 +42,28 @@ Các thuộc tính còn lại hoặc được điền tự động hoặc hiện
 
 #### Sử dụng
 
-Đính kèm giá trị khóa của bạn vào mỗi yêu cầu API bằng header `Authorization`. Sau đó, cung cấp ID người dùng bạn muốn tương tác ở cuối header:
+Attach your key value to each API request using the `Authorization` header.
+Sau đó, cung cấp ID người dùng bạn muốn tương tác ở cuối header:
 
-    Authorization: Token YOUR_API_KEY_VALUE; userId=1
+```
+Authorization: Token YOUR_API_KEY_VALUE; userId=1
+```
 
-Nếu giá trị `user_id` đã được đặt cho khóa trong cơ sở dữ liệu, thì `userId=` sẽ bị bỏ qua. Nếu không, nó có thể được đặt thành bất kỳ ID người dùng hợp lệ nào tồn tại trong cơ sở dữ liệu.
+If a `user_id` value has been set for the key in the database, `userId=` will be ignored.
+Nếu không, nó có thể được đặt thành bất kỳ ID người dùng hợp lệ nào tồn tại trong cơ sở dữ liệu.
 
 ### Mã token truy cập
 
 Mã token truy cập là mã token tồn tại trong thời gian ngắn thuộc về một người dùng cụ thể.
 
-Những mã token đó được sử dụng trong hậu trường cho các phiên cookie. Việc sử dụng chúng trong các yêu cầu API không trạng thái có tác dụng giống như một phiên thông thường. Hoạt động gần đây nhất của người dùng sẽ được cập nhật mỗi khi mã thông báo được sử dụng.
+Những mã token đó được sử dụng trong hậu trường cho các phiên cookie.
+Việc sử dụng chúng trong các yêu cầu API không trạng thái có tác dụng giống như một phiên thông thường.
+Hoạt động gần đây nhất của người dùng sẽ được cập nhật mỗi khi mã thông báo được sử dụng.
 
 #### Tạo
 
-Tất cả người dùng được phép tạo mã token truy cập. Để tạo mã token, hãy sử dụng điểm cuối `/api/token` với thông tin đăng nhập của người dùng của bạn:
+Tất cả người dùng được phép tạo mã token truy cập.
+To create a token, use the `/api/token` endpoint with the credentials of your user:
 
 ```
 POST /api/token HTTP/1.1
@@ -73,9 +83,9 @@ HTTP/1.1 200 OK
 
 Hiện tại, 3 loại mã thông báo tồn tại, mặc dù chỉ có 2 loại có thể được tạo thông qua REST API.
 
-- Các mã token `session` hết hạn sau 1 giờ không hoạt động. Đây là loại mã token mặc định.
-- Các mã token `session_remember` sẽ hết hạn sau 5 năm không hoạt động. Nó có thể được lấy bằng cách chỉ định `remember=1` trong các thuộc tính yêu cầu.
-- Mã token `developer` không bao giờ hết hạn. Chúng chỉ có thể được tạo thủ công trong cơ sở dữ liệu vào lúc này.
+- `session` tokens expire after 1h of inactivity. Đây là loại mã token mặc định.
+- `session_remember` tokens expire after 5 years of inactivity. They can be obtained by specifying `remember=1` in the request attributes.
+- `developer` tokens never expire. Chúng chỉ có thể được tạo thủ công trong cơ sở dữ liệu vào lúc này.
 
 **Tất cả các mã token truy cập sẽ bị xóa khi người dùng đăng xuất** (điều này bao gồm các mã token của `developer`, mặc dù người ta đã lên kế hoạch thay đổi nó).
 
@@ -83,25 +93,33 @@ Hiện tại, 3 loại mã thông báo tồn tại, mặc dù chỉ có 2 loại
 
 Đính kèm giá trị `token` được trả về vào mỗi yêu cầu API bằng cách sử dụng header ` Authorization`:
 
-    Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
+Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
 
 ### Bảo vệ CSRF
 
-Hầu hết các điểm cuối API `POST`/`PUT`/`DELETE` được bảo vệ chống lại [Giả mạo yêu cầu Cross-site](https://en.wikipedia.org/wiki/Cross-site_request_forgery). Điều này có nghĩa là không thể thực hiện các yêu cầu không trạng thái nếu không có xác thực.
+Most of the `POST`/`PUT`/`DELETE` API endpoints are protected against [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery).
+Điều này có nghĩa là không thể thực hiện các yêu cầu không trạng thái nếu không có xác thực.
 
 Khi sử dụng Khóa API hoặc Mã Token, bảo vệ CSRF bị bỏ qua.
 
 ## Điểm cuối
 
-Phần tài liệu này vẫn đang được hoàn thiện. Chúng tôi đang nghiên cứu các tùy chọn để cung cấp tài liệu tự động về các điểm cuối.
+Phần tài liệu này vẫn đang được hoàn thiện.
+Chúng tôi đang nghiên cứu các tùy chọn để cung cấp tài liệu tự động về các điểm cuối.
 
-Mọi tiện ích mở rộng đều thêm các điểm cuối và thuộc tính mới, vì vậy rất khó để cung cấp tài liệu đầy đủ về tất cả các điểm cuối. Một cách tốt để phát hiện ra các điểm cuối là sử dụng các công cụ phát triển trình duyệt để kiểm tra các yêu cầu do ứng dụng một trang đưa ra.
+Mọi tiện ích mở rộng đều thêm các điểm cuối và thuộc tính mới, vì vậy rất khó để cung cấp tài liệu đầy đủ về tất cả các điểm cuối.
+Một cách tốt để phát hiện ra các điểm cuối là sử dụng các công cụ phát triển trình duyệt để kiểm tra các yêu cầu do ứng dụng một trang đưa ra.
 
-Dưới đây là một vài ví dụ về các điểm cuối thường được sử dụng. JSON đã được cắt bớt để giúp việc đọc dễ dàng hơn.
+Dưới đây là một vài ví dụ về các điểm cuối thường được sử dụng.
+JSON đã được cắt bớt để giúp việc đọc dễ dàng hơn.
 
 ### Danh sách cuộc thảo luận
 
-    GET /api/discussions
+```
+GET /api/discussions
+```
 
 ```json
 {
@@ -239,7 +257,9 @@ Dưới đây là một vài ví dụ về các điểm cuối thường đượ
 
 ### Tạo cuộc thảo luận
 
-    POST /api/discussions
+```
+POST /api/discussions
+```
 
 ```json
 {
@@ -312,7 +332,9 @@ Phản hồi trả về bao gồm ID của cuộc thảo luận mới:
 
 ### Tạo người dùng
 
-    POST /api/users
+```
+POST /api/users
+```
 
 ```json
 {
@@ -349,7 +371,9 @@ Nếu bạn nhận được lỗi HTTP 400 với thông báo `csrf_token_mismatc
 
 ### Lỗi xác thực
 
-Lỗi xác thực được trả về với mã trạng thái 422 HTTP. Tên của trường không hợp lệ được trả về dưới dạng giá trị `pointer`. Có thể có nhiều lỗi cho một trường cùng một lúc.
+Lỗi xác thực được trả về với mã trạng thái 422 HTTP.
+The name of the invalid field is returned as the `pointer` value.
+Có thể có nhiều lỗi cho một trường cùng một lúc.
 
 ```json
 {

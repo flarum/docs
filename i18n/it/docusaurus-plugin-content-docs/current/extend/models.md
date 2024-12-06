@@ -1,6 +1,6 @@
 # Modelli e migrazioni
 
-Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
+Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Nelle fondamenta, qualsiasi forum ruota intorno ai dati: gli utenti forniscono discussioni, post, informazioni sul profilo, ecc. Il nostro lavoro come sviluppatori di forum è quello di fornire una grande esperienza per la creazione, la lettura, l'aggiornamento e l'eliminazione di questi dati. Questo articolo vi parlerà di come Flarum salvi e dia accesso a tali dati. Nel [prossimo articolo](api.md) spiegheremo come i dati fluiscono attraverso le API.
 
 Flarum fa uso di [componenti Database Laravel](https://laravel.com/docs/database). È necessario familiarizzare con questi componenti prima di procedere, poiché si presume che la conoscenza di questi sia assodata.
 
@@ -32,7 +32,7 @@ Le migrazioni risiedono all'interno di una cartella opportunamente denominata `m
 
 ### Struttura della migrazioni
 
-In Flarum, i file di migrazione dovrebbero **restituire un array** con due funzioni: `up` e `down`. La funzione `up` viene utilizzata per aggiungere nuove tabelle, colonne o indici al database, mentre la funziona `down` si occupa di fare l'opposto. Queste funzioni ricevono un'istanza di [Laravel schema builder](https://laravel.com/docs/8.x/migrations#creating-tables) che puoi usare per modificare lo schema del database:
+In Flarum, i file di migrazione dovrebbero **restituire un array** con due funzioni: `up` e `down`. La funzione `up` viene utilizzata per aggiungere nuove tabelle, colonne o indici al database, mentre la funziona `down` si occupa di fare l'opposto. These functions receive an instance of the [Laravel schema builder](https://laravel.com/docs/11.x/migrations#creating-tables) which you can use to alter the database schema:
 
 ```php
 <?php
@@ -55,7 +55,7 @@ Per attività comuni come la creazione di una tabella o l'aggiunta di colonne a 
 
 Le migrazioni vengono applicate quando l'estensione viene abilitata per la prima volta o quando è abilitata e ci sono alcune migrazioni in sospeso. Le migrazioni eseguite vengono registrate nel database, e se ne vengono trovate alcune nella cartella migrazioni di un estensione, non ancora espletate, vengono eseguite.
 
-Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate.
+Le migrazioni possono anche essere applicate manualmente con il comando `php flarum migrate` necessario anche per aggiornare le migrazioni di un'estensione già abilitata. Non può rompersi nulla eseguento il comando `php flarum migrate` anche se è stato appena eseguito - le migrazioni infatti non verranno reiterate. To undo the changes applied by migrations, you need to click "Purge" next to an extension in the Admin UI, or you need to use the `php flarum migrate:reset` command.
 
 Al momento non sono presenti hook a livello del composer per la gestione delle migrazioni (es. aggiornare un estensione con `composer update` non eseguirà le sue migrazioni in sospeso).
 
@@ -72,7 +72,7 @@ return Migration::createTable('users', function (Blueprint $table) {
 });
 ```
 
-Quando si crea la tabella, è possibile utilizzare uno qualsiasi dei generatori di schemi [column methods](https://laravel.com/docs/8.x/migrations#creating-columns) per definire le colonne della tabella.
+When creating the table, you may use any of the schema builder's [column methods](https://laravel.com/docs/11.x/migrations#creating-columns) to define the table's columns.
 
 ### Rinominare tabelle
 
@@ -127,11 +127,11 @@ Notare che dovrebbe essere utilizzato solo aggiungendo **nuovi** permessi o impo
 
 ### Migrazioni dei dati (avanzatato)
 
-Una migrazione non deve modificare la struttura del database: è possibile utilizzare una migrazione per inserire, aggiornare o eliminare righe in una tabella. Gli helper di migrazione che aggiungono [valori predefiniti per impostazioni/permessi](#default-settings-and-permissions) sono solo un possibile caso. Per esempio, è possibile utilizzare le migrazioni per creare le istanze predefinite di un nuovo modello aggiunto dalla tua estensione. Dato che hai accesso a [Eloquent Schema Builder](https://laravel.com/docs/8.x/migrations#creating-tables), tutto è possibile (anche se, ovviamente, dovresti essere estremamente cauto e testare ampiamente la tua estensione).
+Una migrazione non deve modificare la struttura del database: è possibile utilizzare una migrazione per inserire, aggiornare o eliminare righe in una tabella. Gli helper di migrazione che aggiungono [valori predefiniti per impostazioni/permessi](#default-settings-and-permissions) sono solo un possibile caso. Per esempio, è possibile utilizzare le migrazioni per creare le istanze predefinite di un nuovo modello aggiunto dalla tua estensione. Since you have access to the [Eloquent Schema Builder](https://laravel.com/docs/11.x/migrations#creating-tables), anything is possible (although of course, you should be extremely cautious and test your extension extensively).
 
 ## Modelli di backend
 
-Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo per accedere ai dati sia nel backend che nel frontend. Sul back-end è piuttosto semplice: devi solo avere familiarità con [Eloquent](https://laravel.com/docs/8.x/eloquent).
+Con tutte le tue nuove eleganti tabelle e colonne di database, vorrai un modo per accedere ai dati sia nel backend che nel frontend. On the backend it's pretty straightforward – you just need to be familiar with [Eloquent](https://laravel.com/docs/11.x/eloquent).
 
 ### Aggiunta di nuovi modelli
 
@@ -142,7 +142,7 @@ Se hai aggiunto una nuova tabella, dovrai impostare un nuovo modello per quest'u
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
 
 
-<!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
+<!-- If you need to define any attribute [accessors](https://laravel.com/docs/11.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/11.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/11.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/11.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
 ```php
 use Flarum\Extend;
@@ -163,7 +163,7 @@ return [
 ```
 -->
 
-If you need to define any attribute [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
+If you need to define any attribute [casts](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/11.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender:
 
 ```php
 use Flarum\Extend;
@@ -179,7 +179,7 @@ return [
 
 ### Relationships
 
-You can also add [relationships](https://laravel.com/docs/8.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
+You can also add [relationships](https://laravel.com/docs/11.x/eloquent-relationships) to existing models using the `hasOne`, `belongsTo`, `hasMany`,  `belongsToMany`and `relationship` methods on the `Model` extender. The first argument is the relationship name; the rest of the arguments are passed into the equivalent method on the model, so you can specify the related model name and optionally override table and key names:
 
 ```php
     new Extend\Model(User::class)
@@ -329,6 +329,6 @@ Often, backend and frontend models will have similar attributes and relationship
 
 The attributes and relationships of backend models are based on the **database**. Each column in the model's table will map to an attribute on the backend model.
 
-The attributes and relationships of frontend models are based on the output of [API Serializers](api.md). These will be covered more in depth in the next article, but it's worth that a serializer could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
+The attributes and relationships of frontend models are based on the fields of [API Resource](api.md). These will be covered more in depth in the next article, but it's worth that a resource could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
 Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.

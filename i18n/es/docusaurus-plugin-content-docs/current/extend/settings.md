@@ -4,7 +4,7 @@ En algún momento mientras haces una extensión, puede que quieras leer algunas 
 
 ## El repositorio de ajustes
 
-La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`. En su lugar, puedes confiar en el contenedor para instanciar tu clase e inyectar las dependencias correctas. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
+La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`. Because Flarum uses [Laravel's service container](https://laravel.com/docs/11.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
 
 ```php
 <?php
@@ -62,6 +62,9 @@ La función `delete($name)` permite eliminar una configuración con nombre.
 ### Edición de Ajustes
 
 Para obtener más información sobre la gestión de la configuración a través del panel de administración, consulte la [documentación pertinente](admin.md).
+
+## Extending Settings
+
 ### Acceso a la Configuración
 
 Todos los ajustes están disponibles en el frontend `admin` a través del global `app.data.settings`. Sin embargo, esto no se hace en el frontend `forum`, ya que cualquiera puede acceder a él, ¡y no querrías filtrar todas tus configuraciones! (En serio, eso podría ser una violación de datos muy problemática). (Seriously, that could be a very problematic data breach).
@@ -88,3 +91,26 @@ return [
 ```
 
 Ahora, el ajuste `my.cool.setting.key` será accesible en el frontend como `app.forum.attribute("myCoolSetting")`, y nuestro valor modificado será accesible a través de `app.forum.attribute("myCoolSettingModified")`.
+
+### Default Settings
+
+If you want to set a default value for a setting, you can do so using the `Extender\Settings::default` method:
+
+```php
+(new Extend\Settings)
+    ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
+    ->default('my.cool.setting.key', 'default value!')
+```
+
+### Reset Settings
+
+Sometimes you might want a setting's value to be reset to its default value based on some condition. You can do this using the `Extender\Settings::resetWhen` method:
+
+```php
+(new Extend\Settings)
+    ->serializeToForum('myCoolSetting', 'my.cool.setting.key')
+    ->default('my.cool.setting.key', 'default value!')
+    ->resetWhen('my.cool.setting.key', function ($value) {
+        return $value === '';
+    })
+```

@@ -1,14 +1,16 @@
 # Testing
 
-Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales. Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
+Las pruebas automatizadas garantizan que tu extensión funcione como esperas, ayudan a evitar la introducción de nuevos errores o regresiones, y ahorran tiempo en las pruebas manuales.
+Actualmente, Flarum proporciona herramientas para las pruebas unitarias y de integración automatizadas del backend, y planeamos lanzar soporte para las pruebas unitarias del frontend y las pruebas E2E en el futuro.
 
 ## Backend Tests
 
-La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas. Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
+La librería `flarum/testing` es utilizada por el núcleo y algunas extensiones para realizar pruebas unitarias y de integración automatizadas.
+Es esencialmente una colección de utilidades que permiten probar el núcleo y las extensiones de Flarum con PHPUnit.
 
 ### Configuración
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update backend testing infrastructure to your code:
 
@@ -156,7 +158,7 @@ There are several important utilities available for your test cases:
 
 - The `setting($key, $value)` method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
 - Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
-- El método `extension()` tomará los IDs de Flarum de las extensiones a habilitar como argumentos. Su extensión siempre debe llamar a esto con el ID de su extensión al comienzo de los casos de prueba, a menos que el objetivo del caso de prueba en cuestión sea confirmar algún comportamiento presente sin su extensión, y compararlo con el comportamiento cuando su extensión está habilitada. Si su extensión depende de otras extensiones, asegúrese de que están incluidas en el campo `require` de composer.json (o `require-dev` para [dependencias opcionales](dependencies.md)), y también liste los nombres de sus paquetes en composer cuando llame a `extension()`. Ten en cuenta que debes listarlos en un orden válido.
+- El método `extension()` tomará los IDs de Flarum de las extensiones a habilitar como argumentos. Su extensión siempre debe llamar a esto con el ID de su extensión al comienzo de los casos de prueba, a menos que el objetivo del caso de prueba en cuestión sea confirmar algún comportamiento presente sin su extensión, y compararlo con el comportamiento cuando su extensión está habilitada. Su extensión siempre debe llamar a esto con el ID de su extensión al comienzo de los casos de prueba, a menos que el objetivo del caso de prueba en cuestión sea confirmar algún comportamiento presente sin su extensión, y compararlo con el comportamiento cuando su extensión está habilitada. Ten en cuenta que debes listarlos en un orden válido.
 - El método `extend()` toma instancias de extensores como argumentos, y es útil para probar extensores introducidos por su extensión para que otras extensiones los usen.
 - El método `prepareDatabase()` le permite pre-poblar su base de datos. Esto podría incluir la adición de usuarios, discusiones, mensajes, configuración de permisos, etc. Su argumento es un array asociativo que mapea los nombres de las tablas a arrays de [arrays de registros](https://laravel.com/docs/8.x/queries#insert-statements).
 
@@ -234,7 +236,8 @@ class SomeTest extends TestCase
 
 #### Envío de solicitudes
 
-A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users. You can use this to ensure that:
+A common application of automated testing is pinging various HTTP endpoints with various data, authenticated as different users.
+You can use this to ensure that:
 
 - Los usuarios no pueden acceder a contenidos a los que no están autorizados a acceder.
 - Las operaciones de creación/edición/borrado basadas en permisos funcionan como se espera.
@@ -400,7 +403,7 @@ NOTE: If you find your extension needs _lots and lots_ of mocks, or mocks that f
 
 ### Configuración
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update frontend testing infrastructure to your code:
 
@@ -470,7 +473,7 @@ To run tests on every commit and pull request, check out the [GitHub Actions](gi
 
 ### Using Unit Tests
 
-Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
+Like any other JS project, you can use Jest to write unit tests for your frontend code. Like any other JS project, you can use Jest to write unit tests for your frontend code.
 
 Here's a simple example of a unit test fo core's `abbreviateNumber` function:
 
@@ -553,12 +556,11 @@ describe('Alert is dismissible', () => {
 #### Methods
 
 These are the custom methods that are available for mithril component tests:
-* **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
-* **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
+
+- **`toHaveElement(selector)`** - Checks if the component has an element that matches the given selector.
+- **`toContainRaw(content)`** - Checks if the component HTML contains the given content.
 
 To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
-
-
 
 ## E2E Tests
 

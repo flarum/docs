@@ -1,6 +1,6 @@
-- - -
-slug: /extend
-- - -
+---
+slug: "slug: /extend"
+---
 
 # Estensioni di Flarum
 
@@ -14,13 +14,13 @@ Per ottenere questa estensibilità, Flarum è stato costruito con ricche API e p
 
 Dove tracciamo il confine tra il nucleo di Flarum e le sue estensioni? Perché alcune funzionalità sono incluse nel core e altre no? È importante comprendere questa distinzione in modo da poter mantenere la coerenza e la qualità all'interno dell'ecosistema di Flarum.
 
-** Il nucleo di Flarum ** non è pensato per essere pieno di funzionalità. Piuttosto, è una base, o un framework, che fornisce un appoggio affidabile su cui costruire le estensioni. Contiene solo funzionalità di base non avanzate che sono essenziali per un forum: discussioni, post, utenti, gruppi e notifiche.
+\*\* Il nucleo di Flarum \*\* non è pensato per essere pieno di funzionalità. Piuttosto, è una base, o un framework, che fornisce un appoggio affidabile su cui costruire le estensioni. Contiene solo funzionalità di base non avanzate che sono essenziali per un forum: discussioni, post, utenti, gruppi e notifiche.
 
-Le ** estensioni in bundle ** sono funzionalità incluse in Flarum e abilitate per impostazione predefinita. Sono estensioni come le altre e possono essere disabilitate e disinstallate. Sebbene il loro ambito non sia inteso ad affrontare tutti i casi d'uso, l'idea è di renderli abbastanza generici e configurabili da poter soddisfare la maggioranza degli utenti finali.
+Le \*\* estensioni in bundle \*\* sono funzionalità incluse in Flarum e abilitate per impostazione predefinita. Sono estensioni come le altre e possono essere disabilitate e disinstallate. Sebbene il loro ambito non sia inteso ad affrontare tutti i casi d'uso, l'idea è di renderli abbastanza generici e configurabili da poter soddisfare la maggioranza degli utenti finali.
 
-** Le estensioni di terze parti ** sono funzionalità create da altri e non sono ufficialmente supportate dal team di Flarum. Possono essere costruite e utilizzate per affrontare casi d'uso più specifici.
+\*\* Le estensioni di terze parti \*\* sono funzionalità create da altri e non sono ufficialmente supportate dal team di Flarum. Possono essere costruite e utilizzate per affrontare casi d'uso più specifici.
 
-Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione in bundle esistente, potrebbe essere appropriato * contribuire al rispettivo progetto * piuttosto che disperdere gli sforzi su una nuova estensione di terze parti. È una buona idea iniziare una discussione sulla [Community di Flarum](https://discuss.flarum.org/) per avere opinioni anche dagli sviluppatori di Flarum.
+Se stai cercando di risolvere un bug o un difetto del core, o di un'estensione in bundle esistente, potrebbe essere appropriato \* contribuire al rispettivo progetto \* piuttosto che disperdere gli sforzi su una nuova estensione di terze parti. È una buona idea iniziare una discussione sulla [Community di Flarum](https://discuss.flarum.org/) per avere opinioni anche dagli sviluppatori di Flarum.
 
 ## Risorse utili
 

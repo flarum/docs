@@ -12,9 +12,12 @@ Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可�
 
 ## 身份验证
 
-我们的单页应用使用会话 Cookies 进行 API 的身份验证。 外部程序可使用 [API 密钥](#api-keys) 或 [访问令牌](#access-tokens) 的无状态身份验证。
+我们的单页应用使用会话 Cookies 进行 API 的身份验证。
+External scripts can use stateless authentication using [API Keys](#api-keys) or [Access Tokens](#access-tokens).
 
-`GET` 端点无需身份验证即可使用， 但此时只会返回游客可见的内容。 为防止 [CSRF 攻击](#csrf-protection)，其他端点均需身份验证方可使用。
+`GET` endpoints can be used without authentication.
+但此时只会返回游客可见的内容。
+Other endpoints generally cannot be used without authentication because of the [CSRF protection](#csrf-protection).
 
 ### API 密钥
 
@@ -27,32 +30,39 @@ Flarum 提供了 REST API，它不仅被我们的单页应用使用着，也可�
 以下参数可在创建时提供：
 
 - `key`：秘钥。您需要自行生成一个独一无二的长字符串（推荐长度 40 的字母数字组合），秘钥将作为 `Authorization` 请求头的值。
-- `user_id`：用户 ID，可选项。 如果设置了此值，秘钥会被充当为指定的用户。
+- `user_id`: Optional. 如果设置了此值，秘钥会被充当为指定的用户。
 
 以下属性会被自动填充，部分作为保留字段尚未使用：
 
 - `id`：主键。由 MySQL 自动递增填写。
-- `allowed_ips`：IP 白名单。保留字段，尚未使用。
-- `scopes`：范围。保留字段，尚未使用。
+- `allowed_ips`: Not implemented.
+- `scopes`: Not implemented.
 - `created_at`：创建时间。虽然可设置任意日期值，但理应表示秘钥的创建日期。
 - `last_activity_at`：上次使用时间。秘钥被使用时自动更新。
 
 #### 使用
 
-发起 API 请求时，将秘钥添加到 `Authorization` 请求头即可。 如需指定扮演用户角色，可在请求头末尾添加。
+Attach your key value to each API request using the `Authorization` header.
+如需指定扮演用户角色，可在请求头末尾添加。
 
-    Authorization: Token 你的_API_秘钥_值; userId=1
+```
+Authorization: Token 你的_API_秘钥_值; userId=1
+```
 
 如果在数据库中为密钥设置了 `user_id` 值，请求头中的 `userId=` 将被忽略。 否则，任何有效的用户 ID 都可起作用。
+否则，任何有效的用户 ID 都可起作用。
 
 ### 访问令牌
 
 访问令牌（Access Tokens）是基于用户的短效令牌。
 
-这些令牌用于 Cookie 会话， 使用他们与常规会话别无二致。 用户的上次在线时间会随访问令牌的使用而更新。
+这些令牌用于 Cookie 会话，
+使用他们与常规会话别无二致。
+用户的上次在线时间会随访问令牌的使用而更新。
 
 #### 创建
 
+所有用户均可创建访问令牌。
 所有用户均可创建访问令牌。 要创建令牌，请使用 `/api/token` 端点并提供用户凭证：
 
 ```
@@ -73,9 +83,9 @@ HTTP/1.1 200 OK
 
 我们目前存在 3 种令牌类型，其中 2 种可以通过 REST API 创建。
 
-- `session` 令牌在 1 小时没有活动后即会过期。 这是默认的令牌类型。
-- `session_remember` 令牌在 5 年没有活动后即会过期。 在请求体中添加 `remember=1` 属性即可获取这种令牌。
-- `developer` 令牌永不过期。 目前只可通过数据库手动创建这种令牌。
+- `session` tokens expire after 1h of inactivity. 这是默认的令牌类型。
+- `session_remember` tokens expire after 5 years of inactivity. They can be obtained by specifying `remember=1` in the request attributes.
+- `developer` tokens never expire. 目前只可通过数据库手动创建这种令牌。
 
 **所有令牌将在用户注销时一并失效**（包括 `developer` 令牌，不过我们计划改变这种状况）。
 
@@ -83,25 +93,33 @@ HTTP/1.1 200 OK
 
 发起 API 请求时，将上一步取得的 `token` 添加到 `Authorization` 请求头即可：
 
-    Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
+Authorization: Token YACub2KLfe8mfmHPcUKtt6t2SMJOGPXnZbqhc3nX
+```
 
 ### CSRF 保护
 
 多数 `POST`/`PUT`/`DELETE` API 端点都有 [跨站请求伪造](https://en.wikipedia.org/wiki/Cross-site_request_forgery)（Cross-site request forgery，缩写 CSRF）保护功能。 因此，要发出无状态请求，必须进行身份验证。
+因此，要发出无状态请求，必须进行身份验证。
 
 使用 API 密钥或访问令牌时，可跳过 CSRF 保护。
 
 ## 端点
 
-这部分文档仍在编写中。 我们正在研究如何为端点实现自动化文档。
+这部分文档仍在编写中。
+我们正在研究如何为端点实现自动化文档。
 
-每个扩展程序都可自行添加新的端点和属性，因此提供涵盖所有端点的文档。 若要查看端点，您可以使用浏览器的开发者工具检查单页应用发起的请求。
+每个扩展程序都可自行添加新的端点和属性，因此提供涵盖所有端点的文档。
+若要查看端点，您可以使用浏览器的开发者工具检查单页应用发起的请求。
 
-下面是一些常用接口的示例。 为方便阅读，部分 JSON 字段已略去。
+下面是一些常用接口的示例。
+为方便阅读，部分 JSON 字段已略去。
 
 ### 列出全部主题帖
 
-    GET /api/discussions
+```
+GET /api/discussions
+```
 
 ```json
 {
@@ -239,7 +257,9 @@ HTTP/1.1 200 OK
 
 ### 发布主题
 
-    POST /api/discussions
+```
+POST /api/discussions
+```
 
 ```json
 {
@@ -312,7 +332,9 @@ HTTP/1.1 200 OK
 
 ### 注册用户
 
-    POST /api/users
+```
+POST /api/users
+```
 
 ```json
 {
@@ -349,7 +371,9 @@ Flarum 使用不同的 HTTP 状态码进行错误应答，所有错误表述均�
 
 ### 验证错误
 
-验证错误会返回一个 HTTP 状态码 422 的响应。 无效字段的名称会以 `pointer` 值返回。 在同一时间，单个字段可能出现多个错误。
+验证错误会返回一个 HTTP 状态码 422 的响应。
+The name of the invalid field is returned as the `pointer` value.
+在同一时间，单个字段可能出现多个错误。
 
 ```json
 {

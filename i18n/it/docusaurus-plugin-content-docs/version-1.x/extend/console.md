@@ -24,9 +24,10 @@ class YourCommand implements AbstractCommand {
 }
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 :::tip Comandi pianificati
+
 ```bash
 $ flarum-cli make backend command
 ```
@@ -51,7 +52,6 @@ return [
 ## Scheduled Commands
 
 La [fof/console library](https://github.com/FriendsOfFlarum/console) consente di programmare l'esecuzione dei comandi a intervalli regolari!
-
 
 ```php
 use Flarum\Extend;

@@ -1,22 +1,23 @@
-
 # Composer
 
-Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Dovrai usare composer per:
+Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni.
+Dovrai usare composer per:
 
 - Install or update Flarum through the command line
 - Install, update, or remove Flarum extensions  through the command line
 
 Questa guida è una piccola base per l'utilizzo di Composer. Raccomandiamo vivamente di consultare la  [documentazione ufficiale](https://getcomposer.org/doc/00-intro.md) per maggiori informazioni.
 
-:::info Hosting condiviso
+:::tip Hosting condiviso
 
-On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access. You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
+On shared hosting it is recommended to use the Extension Manager extension instead of Composer. It is a graphical interface for Composer that allows you to install, update and remove extensions without the need for SSH access.
+You can directly install Flarum using an archive file, without the need for Composer. With the extension manager pre-installed, check the [installation guide](install.md#installing-by-unpacking-an-archive) for more information.
 
 :::
 
 ## Che cos’è Composer?
 
-> Il compositore è uno strumento per la gestione delle dipendenze in PHP. Ti permette di dichiarare le librerie su cui dipende il tuo progetto e le gestirà (installazione/aggiornamento) per te. — [Introduzione a Composer](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
+> Il compositore è uno strumento per la gestione delle dipendenze in PHP. Ti permette di dichiarare le librerie su cui dipende il tuo progetto e le gestirà (installazione/aggiornamento) per te. — [Introduzione a Composer](https://getcomposer.org/doc/00-intro.md]\(https://getcomposer.org/doc/00-intro.md\))
 
 Ogni installazione di Flarum consiste principalmente nell'installazione di Flarum core e una serie di [estensioni](extensions.md). Ognuna di queste ha le sue dipendenze.
 
@@ -113,12 +114,13 @@ As mentioned above, the entire composer configuration for your Flarum site is co
 }
 ```
 
-Let's focus on that `require` section. Each entry is the name of a composer package, and a version string. To read more about version strings, see the relevant [composer documentation](https://semver.org/).
+Let's focus on that `require` section. Each entry is the name of a composer package, and a version string.
+To read more about version strings, see the relevant [composer documentation](https://semver.org/).
 
 For Flarum projects, there's several types of entries you'll see in the `require` section of your root install's `flarum/core`:
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0`.
-- You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
+- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. This should have an explicit version string corresponding to the major release you want to install.
+- You should have an entry for each extension you've installed. You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
 ## How to install Composer?

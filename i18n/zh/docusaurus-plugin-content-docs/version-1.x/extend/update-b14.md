@@ -1,8 +1,13 @@
 # Updating For Beta 14
 
+This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release.
 This release brings a large chunk of breaking changes - hopefully the last chunk of this size before our stable release. In order to prepare the codebase for the upcoming stable release, we decided it was time to modernize / upgrade / exchange some of the underlying JavaScript libraries that are used in the frontend. Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
+Due to the nature and size of these upgrades, we have to pass on some of the breaking changes to you, our extension developers.
 
-On the bright side, this overdue upgrade brings us closer to the conventions of best practices of [Mithril.js](https://mithril.js.org/), the mini-framework used for Flarum's UI. Mithril's 2.0 release sports a more consistent component interface, which should be a solid foundation for years to come. Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition. Quite a few breaking changes remain, though - read more below.
+On the bright side, this overdue upgrade brings us closer to the conventions of best practices of [Mithril.js](https://mithril.js.org/), the mini-framework used for Flarum's UI.
+Mithril's 2.0 release sports a more consistent component interface, which should be a solid foundation for years to come.
+Where possible, we replicated old APIs, to ease the upgrade and give you time to do the full transition.
+Quite a few breaking changes remain, though - read more below.
 
 :::tip
 
@@ -10,7 +15,8 @@ If you need help with the upgrade, our friendly community will gladly help you o
 
 :::
 
-To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below. If your extension does not change the UI, consider yourself lucky. :-)
+To ease the process, we've clearly separated the changes to the [frontend (JS)](#frontend-javascript) from those in the [backend (PHP)](#backend-php) below.
+If your extension does not change the UI, consider yourself lucky. :-)
 
 A [summary of the frontend changes](#required-frontend-changes-recap) is available towards the end of this guide.
 
@@ -18,7 +24,8 @@ A [summary of the frontend changes](#required-frontend-changes-recap) is availab
 
 ### Mithril 2.0: Concepts
 
-Most breaking changes required by beta 14 are prompted by changes in Mithril 2. [Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
+Most breaking changes required by beta 14 are prompted by changes in Mithril 2. <a href="https://mithril.js.org/migration-v02x.html">Mithril's upgrade guide</a> is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
+[Mithril's upgrade guide](https://mithril.js.org/migration-v02x.html) is an extremely useful resource, and should be consulted for more detailed information. A few key changes are explained below:
 
 #### props -> attrs; initProps -> initAttrs
 
@@ -41,7 +48,6 @@ In mithril 0.2, we had 2 "lifecycle hooks":
 `init`, an unofficial hook which ran when the component instance was initialized.
 
 `config`, which ran when components were created, and on every redraw.
-
 
 Mithril 2 has the following hooks; each of which take `vnode` as an argument:
 
@@ -139,7 +145,7 @@ Please see [the mithril documentation](https://mithril.js.org/vnodes.html#struct
 
 #### Routing API
 
-Mithril 2 introduces a few changes in the routing API. Most of these are quite simple:
+Mithril 2 introduces a few changes in the routing API. Most of these are quite simple: Most of these are quite simple:
 
 - `m.route()` to get the current route has been replaced by `m.route.get()`
 - `m.route(NEW_ROUTE)` to set a new route has been replaced by `m.route.set(NEW_ROUTE)`
@@ -155,7 +161,7 @@ app.routes.new_page = { path: '/new', component: NewPage.component() }
 app.routes.new_page = { path: '/new', component: NewPage }
 ```
 
-Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed. The `Link` component should be used instead.
+Additionally, the preferred way of defining an internal (doesn't refresh the page when clicked) link has been changed. The <code>Link</code> component should be used instead. The `Link` component should be used instead.
 
 ```js
 // Mithril 0.2
@@ -173,12 +179,12 @@ For a full list of routing-related changes, please see [the mithril documentatio
 
 #### Redraw API
 
-Mithril 2 introduces a few changes in the redraw API. Most of these are quite simple:
+Mithril 2 introduces a few changes in the redraw API. Most of these are quite simple: Most of these are quite simple:
 
 - Instead of `m.redraw(true)` for synchronous redraws, use `m.redraw.sync()`
 - Instead of `m.lazyRedraw()`, use `m.redraw()`
 
-Remember that Mithril automatically triggers a redraw after DOM event handlers. The API for preventing a redraw has also changed:
+Remember that Mithril automatically triggers a redraw after DOM event handlers. The API for preventing a redraw has also changed: The API for preventing a redraw has also changed:
 
 ```js
 // Mithril 0.2
@@ -254,9 +260,9 @@ class ParentComponent extends Component {
 }
 ```
 
-That will no longer work. In fact; the Component class no longer has a render method.
+That will no longer work. That will no longer work. In fact; the Component class no longer has a render method.
 
-Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance:
+Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance: For instance:
 
 ```js
 class ChildComponent extends Component {
@@ -282,7 +288,8 @@ class ParentComponent extends Component {
 }
 ```
 
-For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance:
+For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components.
+In this case, it might be preferable to create a POJO "state instance' for this data. For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance: For instance:
 
 ```js
 class Counter {
@@ -318,7 +325,7 @@ extend(HeaderPrimary.prototype, 'items', function(items) {
 })
 ```
 
-This "state pattern" can be found throughout core. Some non-trivial examples are:
+This "state pattern" can be found throughout core. Some non-trivial examples are: Some non-trivial examples are:
 
 - PageState
 - SearchState and GlobalSearchState
@@ -341,7 +348,8 @@ Since we don't store component instances anymore, we pass in the component class
 app.modal.show(LoginModal, {identification: 'prefilledUsername'});
 ```
 
-The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component. Any modifications by extensions should accordingly be done to `ModalManagerState`.
+The `show` and `close` methods are still available through `app.modal`, but `app.modal` now points to an instance of `ModalManagerState`, not of the `ModalManager` component.
+Any modifications by extensions should accordingly be done to `ModalManagerState`.
 
 #### Alerts
 
@@ -351,7 +359,7 @@ Previously, alerts could be opened by providing an `Alert` component instance:
 app.alerts.show(new Alert(type: 'success', children: 'Hello, this is a success alert!'));
 ```
 
-Since we don't store component instances anymore, we pass in a component class, attrs, children separately. The `show` method has 3 overloads:
+Since we don't store component instances anymore, we pass in a component class, attrs, children separately. The <code>show</code> method has 3 overloads: The `show` method has 3 overloads:
 
 ```js
 app.alerts.show('Hello, this is a success alert!');
@@ -359,9 +367,11 @@ app.alerts.show({type: 'success'}, 'Hello, this is a success alert!');
 app.alerts.show(Alert, {type: 'success'}, 'Hello, this is a success alert!');
 ```
 
-Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert. This replaces the old method of passing the alert instance itself to `dismiss`.
+Additionally, the `show` method now returns a unique key, which can then be passed into the `dismiss` method to dismiss that particular alert.
+This replaces the old method of passing the alert instance itself to `dismiss`.
 
-The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component. Any modifications by extensions should accordingly be done to `AlertManagerState`.
+The `show`, `dismiss`, and `clear` methods are still available through `app.alerts`, but `app.alerts` now points to an instance of `AlertManagerState`, not of the `AlertManager` component.
+Any modifications by extensions should accordingly be done to `AlertManagerState`.
 
 #### Composer
 
@@ -492,7 +502,8 @@ The `moment` library has been removed, and replaced by the `dayjs` library. The 
 
 #### Subtree Retainer
 
-`SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data. When called, it checks if any of the data has changed; if not, it indicates that a redraw is not necessary.
+`SubtreeRetainer` is a util class that makes it easier to avoid unnecessary redraws by keeping track of some pieces of data.
+When called, it checks if any of the data has changed; if not, it indicates that a redraw is not necessary.
 
 In mithril 0.2, its `retain` method returned a [subtree retain directive](https://mithril.js.org/archive/v0.1.25/mithril.render.html#subtree-directives) if no redraw was necessary.
 
@@ -617,7 +628,7 @@ class NewWay extends Component {
 
 **Warning: For Advanced Use Only**
 
-In some rare cases, we want to have extremely fine grained control over the rendering and display of some significant chunks of the DOM. These are attached with `m.render`, and do not experience automated redraws. Current use cases in core and bundled extensions are:
+In some rare cases, we want to have extremely fine grained control over the rendering and display of some significant chunks of the DOM. These are attached with <code>m.render</code>, and do not experience automated redraws. Current use cases in core and bundled extensions are: These are attached with `m.render`, and do not experience automated redraws. Current use cases in core and bundled extensions are:
 
 - The "Reply" button that shows up when selecting text in a post
 - The mentions autocomplete menu that shows up when typing
@@ -625,7 +636,7 @@ In some rare cases, we want to have extremely fine grained control over the rend
 
 For this purpose, we provide a helper class (`common/Fragment`), of which you can create an instance, call methods, and render via `m.render(DOM_ROOT, fragmentInstance.render())`. The main benefit of using the helper class is that it allows you to use lifecycle methods, and to access the underlying DOM via `this.$()`, like you would be able to do with a component.
 
-This should only be used when absolutely necessary. If you are unsure, you probably don't need it. If the goal is to not store component instances, the "state pattern" as described above is preferable.
+This should only be used when absolutely necessary. If you are unsure, you probably don't need it. This should only be used when absolutely necessary. If you are unsure, you probably don't need it. If the goal is to not store component instances, the "state pattern" as described above is preferable.
 
 ### Required Frontend Changes Recap
 
@@ -656,7 +667,12 @@ Each of these changes has been explained above, this is just a recap of major ch
 
 #### Deprecated changes
 
+For the following changes, we currently provide a backwards-compatibility layer.
+This will be removed in time for the stable release.
 For the following changes, we currently provide a backwards-compatibility layer. This will be removed in time for the stable release. The idea is to let you release a new version that's compatible with Beta 14 to your users as quickly as possible. When you have taken care of the changes above, you should be good to go. For the following changes, we have bought you time until the stable release. Considering you have to make changes anyway, why not do them now?
+When you have taken care of the changes above, you should be good to go.
+For the following changes, we have bought you time until the stable release.
+Considering you have to make changes anyway, why not do them now?
 
 - `this.props` -> `this.attrs`
 - static `initProps()` -> static `initAttrs()`
@@ -670,6 +686,8 @@ For the following changes, we currently provide a backwards-compatibility layer.
 
 #### Extension Dependencies
 
+Some extensions are based on, or add features to, other extensions.
+Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them.
 Some extensions are based on, or add features to, other extensions. Prior to this release, there was no way to ensure that those dependencies were enabled before the extension that builds on them. Now, you cannot enable an extension unless all of its dependencies are enabled, and you cannot disable an extension if there are other enabled extensions depending on it.
 
 So, how do we specify dependencies for an extension? Well, all you need to do is add them as composer dependencies to your extension's `composer.json`! For instance, if we have an extension that depends on Tags and Mentions, our `composer.json` will look like this:
@@ -704,7 +722,7 @@ return [
 ]
 ```
 
-This should NOT be used, as it will break views for all extensions that boot after yours. Instead, the `View` extender should be used:
+This should NOT be used, as it will break views for all extensions that boot after yours. Instead, the <code>View</code> extender should be used: Instead, the `View` extender should be used:
 
 ```php
 // extend.php
@@ -717,7 +735,7 @@ return [
 
 #### Application and Container
 
-Although Flarum uses multiple components of the Laravel framework, it is not a pure Laravel system. In beta 14, the `Flarum\Foundation\Application` class no longer implements `Illuminate\Contracts\Foundation\Application`, and no longer inherits `Illuminate\Container\Container`. Several things to note:
+Although Flarum uses multiple components of the Laravel framework, it is not a pure Laravel system. In beta 14, the <code>Flarum\Foundation\Application</code> class no longer implements <code>Illuminate\Contracts\Foundation\Application</code>, and no longer inherits <code>Illuminate\Container\Container</code>. Several things to note: In beta 14, the `Flarum\Foundation\Application` class no longer implements `Illuminate\Contracts\Foundation\Application`, and no longer inherits `Illuminate\Container\Container`. Several things to note:
 
 - The `app` helper now points to an instance of `Illuminate\Container\Container`, not `Flarum\Foundation\Application`. You might need to resolve things through the container before using them: for instance, `app()->url()` will no longer work; you'll need to resolve or inject an instance of `Flarum\Foundation\Config` and use that.
 - Injected or resolved instances of `Flarum\Foundation\Application` can no longer resolve things through container methods. `Illuminate\Container\Container` should be used instead.
@@ -725,8 +743,8 @@ Although Flarum uses multiple components of the Laravel framework, it is not a p
 
 #### Other Changes
 
-- We are now using Laravel 6. Please see [Laravel's upgrade guide](https://laravel.com/docs/6.x/upgrade) for more information. Please note that we do not use all of Laravel.
-- Optional params in url generator now work. For instance, the url generator can now properly generate links to posts in discussions.
+- We are now using Laravel 6. We are now using Laravel 6. Please note that we do not use all of Laravel.
+- Optional params in url generator now work. Optional params in url generator now work. For instance, the url generator can now properly generate links to posts in discussions.
 - A User Extender has been added, which replaces the deprecated `PrepareUserGroups` and `GetDisplayName` events.
 - Error handler middleware can now be manipulated by the middleware extender through the `add`, `remove`, `replace`, etc methods, just like any other middleware.
 - `Flarum/Foundation/Config` and `Flarum/Foundation/Paths` can now be injected where needed; previously their data was accessible through `Flarum/Foundation/Application`.
@@ -740,7 +758,7 @@ Although Flarum uses multiple components of the Laravel framework, it is not a p
 
 ### Removals
 
-- Do NOT use the old closure notation for configuring view namespaces. This will break all extensions that boot after your extension. The `View` extender MUST be used instead.
+- Do NOT use the old closure notation for configuring view namespaces. This will break all extensions that boot after your extension. The <code>View</code> extender MUST be used instead. This will break all extensions that boot after your extension. The `View` extender MUST be used instead.
 - app()->url() will no longer work: [`Flarum\Http\UrlGenerator`](routes.md) should be injected and used instead. An instance of `Flarum\Http\UrlGenerator` is available in `blade.php` templates via `$url`.
 - As a part of the Laravel 6 upgrade, the [`array_` and `str_` helpers](https://laravel.com/docs/6.x/upgrade#helpers) have been removed.
 - The Laravel translator interface has been removed; the Symfony translator interface should be used instead: `Symfony\Component\Translation\TranslatorInterface`

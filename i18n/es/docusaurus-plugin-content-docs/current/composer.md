@@ -26,7 +26,7 @@ Back in the day, forum frameworks would manage extensions by having users upload
 - Let's say Extension A requires v4 of some library, and Extension B requires v5 of that same library. With a zip-based solution, either one of the two dependencies could override the other, causing all sorts of inconsistent problems. Or both would attempt to run at once, which would cause PHP to crash (you can't declare the same class twice).
 - Zip files can cause a lot of headache if trying to automate deployments, run automated tests, or scale to multiple server nodes.
 - There is no good way to ensure conflicting extension versions can't be installed, or that system PHP version and extension requirements are met.
-- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
+- Sure, we can upgrade extensions by replacing the zip file. But what about upgrading Flarum core? But what about upgrading Flarum core? And how can we ensure that extensions can declare which versions of core they're compatible with?
 
 Composer takes care of all these issues, and more!
 
@@ -80,6 +80,26 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     // It's a list of packages we want, and the versions for each.
     // We'll discuss this shortly.
     "require": {
+        "flarum/core": "^2.0",
+        "flarum/approval": "*",
+        "flarum/bbcode": "*",
+        "flarum/emoji": "*",
+        "flarum/lang-english": "*",
+        "flarum/flags": "*",
+        "flarum/likes": "*",
+        "flarum/lock": "*",
+        "flarum/markdown": "*",
+        "flarum/mentions": "*",
+        "flarum/nicknames": "*",
+        "flarum/pusher": "*",
+        "flarum/statistics": "*",
+        "flarum/sticky": "*",
+        "flarum/subscriptions": "*",
+        "flarum/suspend": "*",
+        "flarum/tags": "*"
+    },
+
+    // Various composer config. "require": {
         "flarum/core": "^1.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
@@ -99,25 +119,24 @@ As mentioned above, the entire composer configuration for your Flarum site is co
         "flarum/tags": "*"
     },
 
-    // Various composer config. The ones here are sensible defaults.
-    // See https://getcomposer.org/doc/06-config.md for a list of options.
-    "config": {
+    // Various composer config.
+    The ones here are sensible defaults.
+    // See https://getcomposer.org/doc/06-config.md for a list of options. "config": {
         "preferred-install": "dist",
         "sort-packages": true
     },
 
     // If composer can find a stable (not dev, alpha, or beta) version
-    // of a package, it should use that. Generally speaking, production
+    // of a package, it should use that.
+    Generally speaking, production
     // sites shouldn't run beta software unless you know what you're doing.
-    "prefer-stable": true
-}
 ```
 
 Let's focus on that `require` section. Each entry is the name of a composer package, and a version string. To read more about version strings, see the relevant [composer documentation](https://semver.org/).
 
 For Flarum projects, there's several types of entries you'll see in the `require` section of your root install's `flarum/core`:
 
-- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 1.x versions, this would be `^1.0`.
+- You MUST have a `flarum/core` entry. This should have an explicit version string corresponding to the major release you want to install. For Flarum 2.x versions, this would be `^2.0`.
 - You should have an entry for each extension you've installed. Some bundled extensions are included by default (e.g. `flarum/tags`, `flarum/suspend`, etc), [others you'll add via composer commands](extensions.md). Unless you have a reason to do otherwise (e.g. you're testing a beta version of a package), we recommend using an asterisk as the version string for extensions (`*`). This means "install the latest version compatible with my flarum/core".
 - Some extensions / features might require PHP packages that aren't Flarum extensions. For example, you need the guzzle library to use the [Mailgun mail driver](mail.md). In these cases, the instructions for the extension/feature in question should explain which version string to use.
 
@@ -135,7 +154,7 @@ If Composer is not preinstalled (you can check this by running `composer --versi
 
 :::danger
 
-Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
+Some articles on the internet will mention that you can use tools like a PHP shell. If you are not sure what you are doing or what they are talking about - be careful! If you are not sure what you are doing or what they are talking about - be careful! An unprotected web shell is **extremely** dangerous.
 
 :::
 

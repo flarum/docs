@@ -11,10 +11,10 @@
 ```php
 <?php return array (
   'debug' => false, // 启用或禁用调试模式，用于排查问题
-  'offline' => false, // 启用或禁用网站维护模式。这使得所有用户(包括管理员)无法访问您的网站。
+  'offline' => false, // 无、高、 低或安全。
   'database' =>
   array (
-    'driver' => 'mysql', // 数据库驱动，例如 MySQL, MariaDB ……
+    'driver' => 'mysql', // 数据库驱动程序，如 MySQL、MariaDB、PostgreSQL、SQLite
     'host' => 'localhost', // 连接的主机，除非使用外部服务，否则多数情况下是 localhost
     'database' => 'flarum', // 数据库实例名
     'username' => 'root', // 数据库用户名
@@ -33,3 +33,15 @@
   ),
 );
 ```
+
+### 维护模式
+
+Flarum 具有维护模式，可以通过将 `config.php` 文件中的 `offline` 键设置为以下值之一来启用：
+* `none` - 无维护模式。
+* `high` - 任何人都无法访问论坛，甚至管理员也不行。
+* `low` - 只有管理员才能访问论坛。
+* `safe` - 只有管理员可以访问论坛，并且不会启动任何扩展。
+
+这也可以通过管理面板的高级设置页面进行配置：
+
+![切换高级页面](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)

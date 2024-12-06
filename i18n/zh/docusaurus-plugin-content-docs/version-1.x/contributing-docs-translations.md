@@ -21,6 +21,6 @@ Flarum Core的翻译、捆绑扩展和社区扩展是通过 [Weblate](https://we
 
 此文档的翻译通过 [Crowdin](https://crowdin.com/project/flarum-docs) 管理。
 
-Flarum基金会设立了“flarum-lang”组织，以支助笔译员以确保各种语言包的可用性。 您可以通过 [访问 GitHub 仓库](https://github.com/flarum-lang/about) 了解更多信息。
+Flarum基金会设立了“flarum-lang”组织，以支助笔译员以确保各种语言包的可用性。 You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about).
 
 如果你想要支持现有的语言包，开始一项新的翻译，或者在使用weblate或crowdin时出现问题，您 [最好与 `flarum-lang` 团队](https://discuss.flarum.org/d/27519-the-flarum-language-project) 取得联系。

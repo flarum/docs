@@ -4,21 +4,21 @@ In this article, we'll go over some frontend tools that are available to us for 
 
 ## Form Components
 
-As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
+As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
 
 - The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
 - The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
+- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator. Their `loading` attr can be set to `true` to show a loading indicator.
 - The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
 
-You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
+You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example: For example:
 
 ```jsx
 import Component from 'flarum/common/Component';
+import Form from 'flarum/common/Form';
 import FieldSet from 'flarum/common/components/FieldSet';
 import Button from 'flarum/common/components/Button';
 import Switch from 'flarum/common/components/Switch';
-
 
 class FormComponent extends Component {
   oninit(vnode) {
@@ -29,13 +29,15 @@ class FormComponent extends Component {
   view() {
     return (
       <form onsubmit={this.onsubmit.bind(this)}>
-        <FieldSet label={app.translator.trans('fake-extension.form.fieldset_label')}>
-          <input className="FormControl" value={this.textInput} oninput={e => this.textInput = e.target.value}>
-          </input>
-          <Switch state={this.booleanInput} onchange={val => this.booleanInput = val}>
-          </Switch>
-        </FieldSet>
-        <Button type="submit">{app.translator.trans('core.admin.basics.submit_button')}</Button>
+        <Form>
+          <FieldSet label={app.translator.trans('fake-extension.form.fieldset_label')}>
+            <input className="FormControl" value={this.textInput} oninput={e => this.textInput = e.target.value}>
+            </input>
+            <Switch state={this.booleanInput} onchange={val => this.booleanInput = val}>
+            </Switch>
+          </FieldSet>
+          <Button type="submit">{app.translator.trans('core.admin.basics.submit_button')}</Button>
+        </Form>
       </form>
     )
   }
@@ -51,7 +53,7 @@ Don't forget to use [translations](i18n.md)!
 
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is: This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
 
 ```js
 import Stream from 'flarum/common/utils/Stream';
@@ -77,7 +79,7 @@ const value = Stream();
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+You can also use the `flarum/common/utils/withAttr` util for simplified form processing. You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
 
 ```jsx
 import Stream from 'flarum/common/utils/Stream';
@@ -94,6 +96,37 @@ const value = Stream();
 })}></input>
 ```
 
+## `FormGroup` component
+
+The `FormGroup` component provides the same flexibility you get when [registering admin settings](http://localhost:3000/extend/admin#registering-settings). It allows you to pass an input type, with other information such as the label and help text, then uses the appropriate component to render the input.
+
+```jsx
+import Component from 'flarum/common/Component';
+import FormGroup from 'flarum/common/components/FormGroup';
+import Stream from 'flarum/common/utils/Stream';
+
+export default class MyComponent extends Component {
+  oninit(vnode) {
+    this.value = Stream(false);
+  }
+
+  view() {
+    return (
+      <div>
+        <FormGroup
+          key="acme.checkbox"
+          stream={this.value}
+          label={app.translator.trans('acme.forum.my_component.my_value')}
+          type="bool"
+          help={app.translator.trans('acme.forum.my_component.my_value')}
+          className="Setting-item"
+        />
+      </div>
+    );
+  }
+}
+```
+
 ## Making Requests
 
 In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
@@ -103,6 +136,6 @@ Flarum's request system is available globally via `app.request(options)`, and ha
 - It will automatically attach `X-CSRF-Token` headers.
 - It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
 - If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done.
+- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done. However, this should almost never be done.
 
 Otherwise, the API for using `app.request` is the same as that for `m.request`.

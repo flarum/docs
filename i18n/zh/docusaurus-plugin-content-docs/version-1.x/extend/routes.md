@@ -8,11 +8,11 @@ Routing happens on both the PHP backend and the JavaScript frontend.
 
 On the backend, Flarum has three collections of routes:
 
-* `forum` These routes are accessible under `yourforum.com/`. They include routes that show pages in the frontend (like `yourforum.com/d/123-title`) and other utility routes (like the reset password route).
+- `forum` These routes are accessible under `yourforum.com/`. They include routes that show pages in the frontend (like `yourforum.com/d/123-title`) and other utility routes (like the reset password route).
 
-* `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
+- `admin` These routes are accessible under `yourforum.com/admin/`. By default, there is only one `admin` route on the backend; the rest of the admin routing happens on the frontend.
 
-* `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
+- `api` These routes are accessible under `yourforum.com/api/` and make up Flarum's JSON:API.
 
 ### Defining Routes
 
@@ -20,9 +20,9 @@ You can add routes to any of these collections using the `Routes` extender. Pass
 
 There are methods to register routes for any HTTP request method: `get`, `post`, `put`, `patch`, and `delete`. All of these methods accept three arguments:
 
-* `$path` The route path using [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax.
-* `$name` A unique name for the route, used for generating URLs. To avoid conflicts with other extensions, you should use your vendor name as a namespace.
-* `$handler` The name of the controller class that will handle the request. This will be resolved through the container.
+- `$path` The route path using [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax.
+- `$name` A unique name for the route, used for generating URLs. <code>$name</code> A unique name for the route, used for generating URLs. To avoid conflicts with other extensions, you should use your vendor name as a namespace.
+- `$handler` The name of the controller class that will handle the request. This will be resolved through the container.
 
 ```php
 <?php
@@ -36,9 +36,10 @@ return [
 ];
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [开发者讲解：扩展开发的工作流程](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate your routes:
+
 ```bash
 $ flarum-cli make backend route
 ```
@@ -75,8 +76,8 @@ Controllers are resolved from the [container](https://laravel.com/docs/8.x/conta
 The `handle` method of a Controller is the code that runs when someone visits your route (or sends data to it via a form submission). Generally speaking, Controller implementations follow the pattern:
 
 1. Retrieve information (GET params, POST data, the current user, etc) from the Request object.
-2. Do something with that information. For instance, if our controller handles a route for creating posts, we'll want to save a new post object to the database.
-3. Return a response. Most routes will return an HTML webpage, or a JSON api response.
+2. Do something with that information. Do something with that information. For instance, if our controller handles a route for creating posts, we'll want to save a new post object to the database.
+3. Return a response. Return a response. Most routes will return an HTML webpage, or a JSON api response.
 
 :::
 
@@ -224,7 +225,8 @@ const url = app.route.acmeUser(user);
 
 ### Linking to Other Pages
 
-A forum wouldn't be very useful if it only had one page. While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+A forum wouldn't be very useful if it only had one page.
+While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
 
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
@@ -248,12 +250,12 @@ import Link from 'flarum/common/components/Link';
 
 ## Content
 
-Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
+Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like: You can easily modify this document to perform tasks like:
 
-* Changing the `<title>` of the page
-* Adding external JavaScript and CSS resources
-* Adding SEO content and `<meta>` tags
-* Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
+- Changing the `<title>` of the page
+- Adding external JavaScript and CSS resources
+- Adding SEO content and `<meta>` tags
+- Adding data to the JavaScript payload (eg. to preload resources which are going to be rendered on the page immediately, thereby preventing an unnecessary request to the API)
 
 You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 

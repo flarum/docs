@@ -6,7 +6,6 @@ Flarum mantiene una "pipe" middleware attraverso la quale passano tutte le richi
 
 Una richiesta passa attraverso i livelli middleware in ordine. Quando la richiesta viene gestita (un middleware restituisce qualcosa invece di passare la richiesta al livello successivo o lancia un'eccezione), la risposta risalirà ai livelli del middleware in ordine inverso, prima di essere infine restituita all'utente. Tutto, dal gestore degli errori di Flarum alla sua logica di autenticazione, viene implementato come middleware e quindi può essere integrato, sostituito, riordinato o rimosso dalle estensioni.
 
-
 ```php
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -76,7 +75,7 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
 }
 ```
 
-Se il tuo middleware viene eseguito dopo `Flarum\Http\Middleware\ResolveRoute` (consigliato se dipende dal percorso), è possibile accedere al nome del percorso tramite `$request->getAttribute('routeName')`. Per esempioe:
+Se il tuo middleware viene eseguito dopo `Flarum\Http\Middleware\ResolveRoute` (consigliato se dipende dal percorso), è possibile accedere al nome del percorso tramite `$request->getAttribute('routeName')`. Per esempio:
 
 ```php
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

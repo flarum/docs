@@ -80,7 +80,7 @@ Như đã đề cập ở trên, toàn bộ cấu hình trình soạn nhạc cho
     // Đó là danh sách các gói chúng tôi muốn và các phiên bản cho mỗi gói.
     // Chúng ta sẽ thảo luận về vấn đề này ngay sau đây.
     "require": {
-        "flarum/core": "^1.0",
+        "flarum/core": "^2.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
         "flarum/emoji": "*",
@@ -99,7 +99,7 @@ Như đã đề cập ở trên, toàn bộ cấu hình trình soạn nhạc cho
         "flarum/tags": "*"
     },
 
-    // Nhiều cấu hình composer khác nhau. Những cái ở đây là mặc định hợp lý.
+    // Various composer config. Những cái ở đây là mặc định hợp lý.
     // Xem https://getcomposer.org/doc/06-config.md để biết danh sách các tùy chọn.
     "config": {
         "preferred-install": "dist",
@@ -117,7 +117,7 @@ Hãy tập trung vào phần `request` đó. Mỗi mục nhập là tên của m
 
 Đối với các dự án Flarum, có một số loại mục nhập bạn sẽ thấy trong phần `require` của `flarum /core` cài đặt gốc của bạn:
 
-- Bạn PHẢI có mục nhập `flarum/core`. Điều này phải có một chuỗi phiên bản rõ ràng tương ứng với bản phát hành chính mà bạn muốn cài đặt. Đối với các phiên bản Flarum 1.x, đây sẽ là `^1.0`.
+- Bạn PHẢI có mục nhập `flarum/core`. Điều này phải có một chuỗi phiên bản rõ ràng tương ứng với bản phát hành chính mà bạn muốn cài đặt. For Flarum 2.x versions, this would be `^2.0`.
 - Bạn sẽ có một mục nhập cho mỗi tiện ích mở rộng mà bạn đã cài đặt. Một số tiện ích mở rộng đi kèm được bao gồm theo mặc định (ví dụ: `flarum/tags`, `flarum/pause`, v.v.), [những tiện ích khác mà bạn sẽ thêm qua lệnh của composer](extensions.md). Trừ khi bạn có lý do để làm khác (ví dụ: bạn đang thử nghiệm phiên bản beta của một gói), chúng tôi khuyên bạn nên sử dụng dấu hoa thị làm chuỗi phiên bản cho các tiện ích mở rộng (`*`). Điều này có nghĩa là "cài đặt phiên bản mới nhất tương thích với flarum/core của tôi".
 - Một số tiện ích mở rộng / tính năng có thể yêu cầu các gói PHP không phải là tiện ích mở rộng Flarum. Ví dụ: bạn cần thư viện guzzle để sử dụng [trình điều khiển thư Mailgun](mail.md). Trong những trường hợp này, hướng dẫn cho tiện ích mở rộng/tính năng được đề cập phải giải thích chuỗi phiên bản nào được sử dụng.
 

@@ -2,7 +2,7 @@
 
 ### Ist Flarum stabil?
 
-Ja! Nach 6 Jahren Entwicklung ist Flarum 1.0.0 endlich da.
+Ja! After 6 years of development, Flarum **1.0.0** was released, and we are now spearheading the development of Flarum **2.0**.
 
 ### Was kommt als nächstes nach Stable?
 
@@ -12,7 +12,7 @@ Wir arbeiten noch an einer formalen Roadmap. Wir haben viele Pläne und Ideen un
 
 Alle Spenden werden dankbar angenommen. Du kannst auf [GitHub Sponsors](https://github.com/sponsors/flarum) oder [OpenCollective](https://opencollective.com/flarum) spenden.
 
-Spenden wirken sich jedoch nicht direkt auf die Entwicklungsgeschwindigkeit von Flarum aus. Wir ermutigen Benutzer auch, auf andere Weise beizutragen, z. B. [Code beisteuern](contributing.md), [Erweiterungen erstellen](/extend/README.md), Dokumentation schreiben, Flarum in andere Sprachen übersetzen, Hilfe und Unterstützung in den [Community-Foren leisten](https://discuss.flarum.org/)... Und einfach eine allgemeine positive Energie in der Community sein!
+Spenden wirken sich jedoch nicht direkt auf die Entwicklungsgeschwindigkeit von Flarum aus. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Wird Flarum [Feature hier einfügen] haben? Wann? Warum nicht?
 

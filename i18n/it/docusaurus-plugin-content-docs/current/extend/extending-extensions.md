@@ -24,8 +24,8 @@ Ad esempio, se stai sviluppando un nuovo tema per l'estensione Tag Flarum, il tu
 {
   // ...
   "require": {
-    "flarum/core": "^1.0.0",  // Perchè tutte le estensioni necessitano del Core di Flarum.
-    "flarum/tags": "^1.1.0"  //  Questo dice a Flarum di trattare i tag come dipendenza della tua estensione.
+    "flarum/core": "^2.0",  // Since all extensions need to require core.
+    "flarum/tags": "*"  // This tells Flarum to treat tags as a dependency of your extension.
   },
   // ...
 }
@@ -72,13 +72,7 @@ Per esempio:
 ```json
 {
   // ...
-  "extra": {
-    "flarum-extension": {
-      "optional-dependencies": [
-        "flarum/tags"
-      ]
-    }
-  },
+  {
   // ...
 }
 ```
@@ -103,20 +97,8 @@ class SomeClass
 
 Nota che se stai importando da una dipendenza opzionale che potrebbe non essere installata, dovrai controllare che la classe in questione esista tramite la funzione `class_exists`.
 
-Nel frontend, è possibile importare solo cose che sono state esplicitamente esportate. Tuttavia, per prima cosa dovrai configurare il webpack della tua estensione per consentire queste importazioni:
+In the frontend, you can import any modules exported by other extensions via the `ext:vendor/extension/.../module` syntax. Per esempio:
 
-#### webpack.config.js
-
-```js
-module.exports = require('flarum-webpack-config')({
-    // Fornire gli ID di estensione di tutte le estensioni da cui la tua estensione verrà importata.
-    // Fai questo sia per le dipendenze complete che opzionali.
-    useExtensions: ['flarum-tags']
-});
-```
-
-Una volta fatto questo, è possibile importare con:
-
-```js
-const tutteLeCoseEsportateDaQualcheEstensione = require('@flarum-tags');
+```ts
+import Tag from 'ext:flarum/tags/common/models/Tag';
 ```

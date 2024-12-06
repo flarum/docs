@@ -1,4 +1,4 @@
-# Tema
+# Uzantılar
 
 Flarum'u olabildiğince güzel hale getirmek için çok çalışmış olsak da, her topluluk muhtemelen arzu ettikleri stile uyacak bazı ince ayarlar/değişiklikler yapmak isteyecektir.
 

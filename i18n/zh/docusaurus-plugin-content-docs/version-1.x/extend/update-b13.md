@@ -1,6 +1,6 @@
 # Updating For Beta 13
 
-Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
+Beta 13 ships with several new extenders to simplify building and maintaining extensions. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available. We do our best to create backward compatibility changes. We recommend changing to new Extenders as soon as they are available.
 
 :::tip
 
@@ -23,7 +23,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## Recommendations
 
-- Beta 14 will ship with a rewrite in the frontend (javascript). If you're building for that release, make sure to follow our [progress](https://github.com/flarum/core/pull/2126).
+- Beta 14 will ship with a rewrite in the frontend (javascript). If you're building for that release, make sure to follow our <a href="https://github.com/flarum/core/pull/2126">progress</a>. If you're building for that release, make sure to follow our [progress](https://github.com/flarum/core/pull/2126).
 
 ## New Features
 

@@ -2,7 +2,7 @@
 
 Although the Flarum UI you know and love is powered by our [Mithril frontend](frontend), server-side generated templates are still used throughout Flarum. Most notably, the HTML skeleton of the forum, which includes various SEO meta tags, as well as the no-js view of the forum, is implemented through the Views and Blade systems.
 
-[Blade](https://laravel.com/docs/8.x/blade) is Laravel's templating engine, which allows you to conveniently generate HTML (or other static content) from PHP. It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/). [Views](https://laravel.com/docs/8.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables.
+[Blade](https://laravel.com/docs/11.x/blade) is Laravel's templating engine, which allows you to conveniently generate HTML (or other static content) from PHP. It's the same idea as [Jinja](https://jinja.palletsprojects.com/en/3.0.x/) or [EJS](https://ejs.co/). [Views](https://laravel.com/docs/11.x/views) are Laravel's system for organizing/registering Blade templates, and also includes utilities for rendering them and providing them with variables.
 
 For our purposes, views are directories containing `.blade.php` template files (possibly contained in subdirectories).
 
@@ -23,7 +23,7 @@ return [
 
 ## Blade Templates
 
-To learn about the syntax for Blade templates, read [Laravel's documentation](https://laravel.com/docs/8.x/blade).
+To learn about the syntax for Blade templates, read [Laravel's documentation](https://laravel.com/docs/11.x/blade).
 
 Once you've set up your views, you can render them to strings:
 
@@ -46,7 +46,7 @@ Note that all Blade templates rendered this way automatically have access to the
 - `$settings`: a [SettingsInterface](settings) instance.
 - `$slugManager`: a [SlugManager](slugging) instance.
 
-Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Serializer/ForumSerializer.php#L19).
+Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php).
 
 ## Overriding Views
 

@@ -4,10 +4,10 @@ A menudo, una extensión querrá reaccionar a algunos eventos que ocurren en otr
 
 Para obtener una lista completa de los eventos del backend, consulte nuestra [documentación de la API](https://api.docs.flarum.org/php/master/search.html?search=Event). Las clases de eventos del dominio están organizadas por espacio de nombres, normalmente `Flarum\TYPE\Event`.
 
-
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate event listeners:
+
 ```bash
 use Flarum\Extend;
 use Flarum\Post\Event\Deleted;
@@ -16,10 +16,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 return [
     (new Extend\Event)
-        ->listen(Deleted::class, function($event) {
+        -&gt;listen(Deleted::class, function($event) {
           // haz algo aquí
         })
-        ->listen(Deleted::class, PostDeletedListener::class)
+        -&gt;listen(Deleted::class, PostDeletedListener::class)
 ];
 
 
@@ -29,7 +29,7 @@ class PostDeletedListener
 
   public function __construct(TranslatorInterface $translator)
   {
-      $this->translator = $translator;
+      $this-&gt;translator = $translator;
   }
 
   public function handle(Deleted $event)
@@ -75,6 +75,7 @@ class SomeClass
     }
 }
 ```
+
 ```php
 class PostDeletedListener
 {
@@ -92,7 +93,7 @@ class PostDeletedListener
 }
 ```
 
-Como se muestra arriba, se puede utilizar una clase listener en lugar de un callback. Esto le permite [inyectar dependencias](https://laravel.com/docs/6.x/container) en su clase listener a través de los parámetros del constructor. En este ejemplo resolvemos una instancia de traductor, pero podemos inyectar cualquier cosa que queramos/necesitemos.
+Como se muestra arriba, se puede utilizar una clase listener en lugar de un callback. Como se muestra arriba, se puede utilizar una clase listener en lugar de un callback. En este ejemplo resolvemos una instancia de traductor, pero podemos inyectar cualquier cosa que queramos/necesitemos.
 
 You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
 
@@ -108,6 +109,7 @@ return [
         ->subscribe(PostEventSubscriber::class),
 ];
 ```
+
 ```php
 class PostEventSubscriber
 {
@@ -138,7 +140,7 @@ class PostEventSubscriber
 
 ## Dispatching de eventos
 
-Despachar eventos es muy sencillo. Todo lo que necesitas hacer es inyectar `Illuminate\Contracts\Events\Dispatcher` en tu clase, y luego llamar a su método `dispatch`. Por ejemplo:
+Despachar eventos es muy sencillo. Despachar eventos es muy sencillo. Por ejemplo:
 
 ```php
 use Flarum\Post\Event\Deleted;
@@ -173,7 +175,9 @@ class SomeClass
 
 ## Eventos personalizados
 
-Como desarrollador de extensiones puedes definir tus propios eventos para permitirte a ti mismo (o a otras extensiones) reaccionar a eventos en tu extensión. Los eventos son generalmente instancias de clases simples (no es necesario extender nada). Cuando definas un nuevo evento, normalmente querrás usar propiedades públicas, y quizás algunos métodos para la comodidad de los usuarios. Por ejemplo, si echamos un vistazo a `Flarum\Post\Event\Deleted`, es sólo una envoltura de algunos datos:
+Como desarrollador de extensiones puedes definir tus propios eventos para permitirte a ti mismo (o a otras extensiones) reaccionar a eventos en tu extensión.
+Los eventos son generalmente instancias de clases simples (no es necesario extender nada). Cuando definas un nuevo evento, normalmente querrás usar propiedades públicas, y quizás algunos métodos para la comodidad de los usuarios.
+Por ejemplo, si echamos un vistazo a `Flarum\Post\Event\Deleted`, es sólo una envoltura de algunos datos:
 
 ```php
 <?php

@@ -67,4 +67,4 @@ return [
 ];
 ```
 
-Nella callback fornita come secondo argomento, puoi chiamare metodi sull'oggetto [$event](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) per pianificare operazioni ricorrenti (o applicare altre opzioni). Vedi la documentazione [Laravel](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) per maggiori informazioni.
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/11.x/scheduling#scheduling-artisan-commands) for more information.

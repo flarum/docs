@@ -15,10 +15,10 @@ You'll typically want to assign logic for reacting to input changes via Mithril'
 
 ```jsx
 import Component from 'flarum/common/Component';
+import Form from 'flarum/common/Form';
 import FieldSet from 'flarum/common/components/FieldSet';
 import Button from 'flarum/common/components/Button';
 import Switch from 'flarum/common/components/Switch';
-
 
 class FormComponent extends Component {
   oninit(vnode) {
@@ -29,13 +29,15 @@ class FormComponent extends Component {
   view() {
     return (
       <form onsubmit={this.onsubmit.bind(this)}>
-        <FieldSet label={app.translator.trans('fake-extension.form.fieldset_label')}>
-          <input className="FormControl" value={this.textInput} oninput={e => this.textInput = e.target.value}>
-          </input>
-          <Switch state={this.booleanInput} onchange={val => this.booleanInput = val}>
-          </Switch>
-        </FieldSet>
-        <Button type="submit">{app.translator.trans('core.admin.basics.submit_button')}</Button>
+        <Form>
+          <FieldSet label={app.translator.trans('fake-extension.form.fieldset_label')}>
+            <input className="FormControl" value={this.textInput} oninput={e => this.textInput = e.target.value}>
+            </input>
+            <Switch state={this.booleanInput} onchange={val => this.booleanInput = val}>
+            </Switch>
+          </FieldSet>
+          <Button type="submit">{app.translator.trans('core.admin.basics.submit_button')}</Button>
+        </Form>
       </form>
     )
   }
@@ -92,6 +94,37 @@ const value = Stream();
 <input type="text" value={value()} oninput={withAttr('value', (currValue) => {
   // Some custom logic here
 })}></input>
+```
+
+## `FormGroup` component
+
+The `FormGroup` component provides the same flexibility you get when [registering admin settings](http://localhost:3000/extend/admin#registering-settings). It allows you to pass an input type, with other information such as the label and help text, then uses the appropriate component to render the input.
+
+```jsx
+import Component from 'flarum/common/Component';
+import FormGroup from 'flarum/common/components/FormGroup';
+import Stream from 'flarum/common/utils/Stream';
+
+export default class MyComponent extends Component {
+  oninit(vnode) {
+    this.value = Stream(false);
+  }
+
+  view() {
+    return (
+      <div>
+        <FormGroup
+          key="acme.checkbox"
+          stream={this.value}
+          label={app.translator.trans('acme.forum.my_component.my_value')}
+          type="bool"
+          help={app.translator.trans('acme.forum.my_component.my_value')}
+          className="Setting-item"
+        />
+      </div>
+    );
+  }
+}
 ```
 
 ## Making Requests

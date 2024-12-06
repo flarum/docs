@@ -68,7 +68,7 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/8.x/container) so you can inject dependencies into their constructors.
+Controllers are resolved from the [container](https://laravel.com/docs/11.x/container) so you can inject dependencies into their constructors.
 
 :::tip Was sind Controller?
 
@@ -108,7 +108,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Views
 
-You can inject Laravel's [View](https://laravel.com/docs/8.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/8.x/blade) into your controller's response.
+You can inject Laravel's [View](https://laravel.com/docs/11.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/11.x/blade) into your controller's response.
 
 First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
@@ -142,10 +142,6 @@ class HelloWorldController implements RequestHandlerInterface
     }
 }
 ```
-
-### API Controllers
-
-The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement new JSON-API resources. See [Working with Data](api.md) for more information.
 
 ## Frontend Routes
 

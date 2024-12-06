@@ -16,7 +16,7 @@ Bu belge, Flarum'a kod katkısında bulunmak isteyen geliştiriciler için bir k
 
 🎠 **It's Fun!** We really enjoy working on Flarum: there's a lot of interesting challenges and fun features to build. We also have an active community on [our forums](https://discuss.flarum.org) and [Discord server](https://flarum.org/chat).
 
-## Geliştirme Kurulumu
+## Ne Üzerinde Çalışmalı
 
 Nelerin yapılması gerektiğine dair genel bir bakış için [Milestones](https://github.com/flarum/core/milestones) dönüm noktalarına göz atın. Başlaması nispeten kolay olması gereken sorunların bir listesi için [Good first issue](https://github.com/flarum/core/labels/Good%20first%20issue) etiketine bakın. If there's anything you're unsure of, don't hesitate to ask! All of us were just starting out once.
 
@@ -43,11 +43,11 @@ composer config repositories.0 path "PATH_TO_MONOREPO/*/*"
 git clone https://github.com/<username>/framework.git PATH_TO_MONOREPO
 ```
 
-Tipik bir katkı iş akışı şuna benzer:
+Next, ensure that Composer accepts unstable releases from your local copies by setting the `minimum-stability` key to `dev` in `composer.json`.
 
 Son olarak, kurulumu dizin havuzlarından tamamlamak için `composer install` çalıştırın.
 
-Yerel kurulumunuz kurulduktan sonra, **config.php** içinde `debug` modunu etkinleştirdiğinizden ve php yapılandırmanızda `display_errors` u `On` olarak ayarladığınızdan emin olun. Bu, hem Flarum hem de PHP için hata ayrıntılarını görmenize olanak sağlar. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
+Yerel kurulumunuz kurulduktan sonra, **config.php** içinde `debug` modunu etkinleştirdiğinizden ve php yapılandırmanızda `display_errors` u `On` olarak ayarladığınızdan emin olun. Bu, hem Flarum hem de PHP için hata ayrıntılarını görmenize olanak sağlar. Bu, hem Flarum hem de PHP için hata ayrıntılarını görmenize olanak sağlar.
 
 Flarum'un ön uç kodu ES6'da yazılır ve JavaScript'e aktarılır. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
 
@@ -74,7 +74,8 @@ yarn de
 
 ### Geliştirme araçları
 
-Üzerinde çalışacağınız depoları çatallayıp klonladıktan sonra, değişikliklerinizi test edebilmeniz için yerel barındırma kurmanız gerekecektir. Flarum şu anda bir geliştirme sunucusuyla birlikte gelmiyor, dolayısıyla bu yerel Flarum kurulumuna hizmet etmek için Apache/NGINX/Caddy/etc'yi kurmanız gerekecek.
+Üzerinde çalışacağınız depoları çatallayıp klonladıktan sonra, değişikliklerinizi test edebilmeniz için yerel barındırma kurmanız gerekecektir.
+Flarum şu anda bir geliştirme sunucusuyla birlikte gelmiyor, dolayısıyla bu yerel Flarum kurulumuna hizmet etmek için Apache/NGINX/Caddy/etc'yi kurmanız gerekecek.
 
 Alternatif olarak, bir hizmet sunmak için [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows) veya [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) gibi araçları kullanabilirsiniz. yerel forum.
 
@@ -84,41 +85,41 @@ Flarum'a katkıda bulunanların çoğu [PHPStorm](https://www.jetbrains.com/phps
 
 A typical contribution workflow looks like this:
 
-0. 🌳 Uygun **dalı** yeni bir özellik dalına ayırın.
-    * *Hata düzeltmeleri* en son kararlı dala gönderilmelidir.
-    * Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan *Küçük* özellikler, en son kararlı dala gönderilebilir.
+0. 🧭 **Plan** out your contribution
+   - Figure out [which issue you want to tackle](#what-to-work-on)
+   - Set up a [development environment](#setting-up-a-local-codebase)
 
-1. 🔨 Bir **kod** yazın.
-    * [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
-    * *Ana* özellikler her zaman gelecek Flarum sürümünü içeren "ana" şubeye gönderilmelidir.
-    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
-    * Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
+1. 🌳 Uygun **dalı** yeni bir özellik dalına ayırın.
+   - _Hata düzeltmeleri_ en son kararlı dala gönderilmelidir.
+   - Mevcut Flarum sürümüyle geriye dönük olarak tamamen uyumlu olan _Küçük_ özellikler, en son kararlı dala gönderilebilir.
+   - _Major_ features should always be sent to the `main` branch, which contains the upcoming Flarum release.
+   - Dahili olarak `<initials>/<short-description>` (eg. `tz/refactor-frontend`) adlandırma şemasını kullanıyoruz.
 
-2. 🚦 **Kodunuzu** test edin.
-    * Hataları giderirken veya özellikler eklerken gerektiği gibi birim testleri ekleyin.
+2. 🔨 Bir **kod** yazın.
+   - [Kodlama Stili](#Kodlama-Stili) hakkında aşağıya bakın.
 
-3. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
-    * Add unit tests as necessary when fixing bugs or adding features.
-    * Test paketini ilgili paket klasöründeki `vendor/bin/phpunit` ile çalıştırın.
-    * See [here](extend/testing.md) for more information about testing in Flarum.
+3. 🚦 **Kodunuzu** test edin.
+   - Add unit tests as necessary when fixing bugs or adding features.
+   - Test paketini ilgili paket klasöründeki `vendor/bin/phpunit` ile çalıştırın.
+   - See [here](extend/testing.md) for more information about testing in Flarum.
 
-4. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
-    * Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
-    * [Geleneksel Taahhütler](https://www.conventionalcommits.org/en/v1.0.0/#summary) spesifikasyonunu izleyin.
-    * *Fix* commits should describe the issue fixed, not how it was fixed.
+4. 💾 Kodunuzu açıklayıcı bir mesajla **işleyin**.
+   - Değişikliğiniz mevcut bir sorunu çözüyorsa (genellikle bu, 123 numaralı sorun numarası olmak üzere yeni satırda "123 numaralı düzeltmeleri" içermelidir).
+   - [Geleneksel Taahhütler](https://www.conventionalcommits.org/en/v1.0.0/#summary) spesifikasyonunu izleyin.
+   - _Fix_ commits should describe the issue fixed, not how it was fixed.
 
-5. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
-    * Çekme talebi şablonunu doldurun.
-    * Değişikliğiniz görselse, değişikliği gösteren bir ekran görüntüsü veya GIF ekleyin.
-    * JavaScript `dist` dosyalarını DERLEMEYİN. Bunlar birleştirme sırasında otomatik olarak derlenecektir.
+5. 🎁 GitHub'da bir Çekme İsteği (PR) **gönderin**.
+   - Çekme talebi şablonunu doldurun.
+   - Değişikliğiniz görselse, değişikliği gösteren bir ekran görüntüsü veya GIF ekleyin.
+   - JavaScript `dist` dosyalarını DERLEMEYİN. Bunlar birleştirme sırasında otomatik olarak derlenecektir.
 
-6. 🕺 **Dans et** tıpkı Flarum'a katkıda bulunduğun gibi.
-    * Ekip üyeleri kodunuzu inceleyecek. Bazı değişiklikler veya iyileştirmeler veya alternatifler önerebiliriz, ancak küçük değişiklikler için çekme talebinizin hızla kabul edilmesi gerekir.
-    * Geri bildirimi ele alırken, üzerine yazmak veya ezmek yerine ek taahhütleri itin (birleştireceğiz).
+6. 🤝 Onay için Flarum ekibiyle **iletişim kurun**.
+   - Ekip üyeleri kodunuzu inceleyecek. Bazı değişiklikler veya iyileştirmeler veya alternatifler önerebiliriz, ancak küçük değişiklikler için çekme talebinizin hızla kabul edilmesi gerekir.
+   - Geri bildirimi ele alırken, üzerine yazmak veya ezmek yerine ek taahhütleri itin (birleştireceğiz).
 
 7. 🕺 **Dance** like you just contributed to Flarum.
 
-## Geliştirme araçları
+## Kodlama Stili
 
 In order to keep the Flarum codebase clean and consistent, we have a number of coding style guidelines that we follow. When in doubt, read the source code.
 
@@ -128,10 +129,10 @@ Don't worry if your code styling isn't perfect! StyleCI and Prettier will automa
 
 Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
-* `Flarum\Discussion`, not `Flarum\Discussions`)
-* Arayüzlerin sonuna `Interface` eklenmelidir (ör. `MailableInterface`)
-* Abstract sınıflarının önüne `Abstract` yazılmalıdır (ör `AbstractModel`)
-* Özelliklerin sonuna `Trait` eklenmelidir (ör. `ScopeVisibilityTrait`)
+- Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
+- Arayüzlerin sonuna `Interface` eklenmelidir (ör. `MailableInterface`)
+- Abstract sınıflarının önüne `Abstract` yazılmalıdır (ör `AbstractModel`)
+- Özelliklerin sonuna `Trait` eklenmelidir (ör. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
@@ -140,16 +141,18 @@ Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/a
 ### Çeviriler
 
 **Columns** should be named according to their data type:
-* DATETIME veya TIMESTAMP: `{verbed}_at` (ör. created_at, read_at) veya `{verbed}_until` (ör. suspended_until)
-* INT bu bir sayıdır: `{noun}_count` (ör. comment_count, word_count)
-* Yabancı anahtar: `{verbed}_{entity}_id` (ör. hidden_user_id)
-    * Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
-* BOOL: `is_{adjective}` (ör. is_locked)
+
+- DATETIME veya TIMESTAMP: `{verbed}_at` (ör. created_at, read_at) veya `{verbed}_until` (ör. suspended_until)
+- INT bu bir sayıdır: `{noun}_count` (ör. comment_count, word_count)
+- Yabancı anahtar: `{verbed}_{entity}_id` (ör. hidden_user_id)
+  - Fiil birincil ilişki için ihmal edilebilir (ör. Yazının yazarı sadece `user_id`)
+- BOOL: `is_{adjective}` (ör. is_locked)
 
 **Tables** should be named as follows:
-* Çoğul biçim kullanın (`discussions`)
-* Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
-* İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
+
+- Çoğul biçim kullanın (`discussions`)
+- Birden çok kelimeyi alt çizgilerle ayırın (`access_tokens`)
+- İlişki tabloları için, iki tablo adını alfabetik sırayla bir alt çizgi ile tekil biçimde birleştirin (ör. `discussion_user`)
 
 ### CSS
 

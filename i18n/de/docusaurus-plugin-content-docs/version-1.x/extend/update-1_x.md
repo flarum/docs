@@ -104,9 +104,7 @@ Flarum v1.2 included quite a few bugfixes, internal refactors, and new features.
 - Translations are now used for page titles, so that the format can be customized via language packs or [Linguist](https://discuss.flarum.org/d/7026-linguist-customize-translations-with-ease): https://github.com/flarum/core/pull/3077, https://github.com/flarum/core/pull/3228
 - API endpoints for retrieving single groups, as well as support for filtering groups on the plural get endpoint, [have been added](https://github.com/flarum/core/pull/3084).
 
-
 ### Tooling
-
 
 - The `flarum-cli infra` command can now be used to update or enable various infrastructure features. You can now add the following to your extension in just one command:
   - TypeScript

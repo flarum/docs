@@ -1,6 +1,6 @@
 # Eventos del Backend
 
-A menudo, una extensión querrá reaccionar a algunos eventos que ocurren en otra parte de Flarum. Por ejemplo, podríamos querer incrementar un contador cuando se publica una nueva discusión, enviar un email de bienvenida cuando un usuario se conecta por primera vez, o añadir etiquetas a una discusión antes de guardarla en la base de datos. Estos eventos se conocen como **eventos de dominio**, y se transmiten a todo el framework a través del [sistema de eventos de Laravel](https://laravel.com/docs/6.x/events).
+A menudo, una extensión querrá reaccionar a algunos eventos que ocurren en otra parte de Flarum. Por ejemplo, podríamos querer incrementar un contador cuando se publica una nueva discusión, enviar un email de bienvenida cuando un usuario se conecta por primera vez, o añadir etiquetas a una discusión antes de guardarla en la base de datos. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/11.x/events).
 
 Para obtener una lista completa de los eventos del backend, consulte nuestra [documentación de la API](https://api.docs.flarum.org/php/master/search.html?search=Event). Las clases de eventos del dominio están organizadas por espacio de nombres, normalmente `Flarum\TYPE\Event`.
 
@@ -92,7 +92,7 @@ class PostDeletedListener
 }
 ```
 
-Como se muestra arriba, se puede utilizar una clase listener en lugar de un callback. Esto le permite [inyectar dependencias](https://laravel.com/docs/6.x/container) en su clase listener a través de los parámetros del constructor. En este ejemplo resolvemos una instancia de traductor, pero podemos inyectar cualquier cosa que queramos/necesitemos.
+Como se muestra arriba, se puede utilizar una clase listener en lugar de un callback. This allows you to [inject dependencies](https://laravel.com/docs/11.x/container) into your listener class via constructor parameters. En este ejemplo resolvemos una instancia de traductor, pero podemos inyectar cualquier cosa que queramos/necesitemos.
 
 You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
 

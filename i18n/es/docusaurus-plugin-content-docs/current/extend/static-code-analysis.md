@@ -19,7 +19,7 @@ $ flarum-cli infra phpstan
 First you need to require the `flarum/phpstan` package in your extension. You can do this by running the following command in the root of our extension:
 
 ```bash
-composer require --dev flarum/phpstan:^1.0
+composer require --dev flarum/phpstan:^2.0
 ```
 
 Next, you need to create a `phpstan.neon` file in the root of your extension. This file contains [the configuration for PHPStan](https://phpstan.org/config-reference). You can copy the following configuration into the file:
@@ -78,7 +78,7 @@ You can also run the analysis using GitHub Actions. Checkout the page on [GitHub
 
 PHPStan needs to be able to determine the type of an attribute added to an existing model. To do this you can use the `Extend\Model(...)->cast(...)` method.
 
-For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
+For example, if your extension were to add a `is_cool` attribute to the `User` model, you can use [attribute casting](https://laravel.com/docs/11.x/eloquent-mutators#attribute-casting) to explicitly define the attribute as boolean. The `flarum/phpstan` package will automatically detect this and communicate it to PHPStan.
 
 ```php
 (new Extend\Model(User::class))

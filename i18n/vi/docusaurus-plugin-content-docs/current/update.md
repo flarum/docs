@@ -1,10 +1,16 @@
 # Cập nhật
 
+:::warning
+
+Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+
+:::
+
 ## From the Admin Dashboard
 
 :::info
 
-If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+If you have the [extension manager](./extensions#extension-manager) extension installed you can simply run the update from its interface and skip the general steps. You should still read the ["Major Version Update Guide"](#major-version-update-guides) if you are updating from v1 to v2.
 
 :::
 
@@ -12,13 +18,13 @@ If you have the extension manager extension installed you can simply run the upd
 
 Để cập nhật Flarum, bạn cần sử dụng [Composer](https://getcomposer.org). Nếu bạn không biết gì về nó, bạn cần phải biết 1 ít về Composer để cài đặt Flarum, đọc [hướng dẫn](composer.md) để biết cách cài đặt và sử dụng như thế nào.
 
-Nếu cập nhật trên các phiên bản chính (ví dụ: <= 0.1.0 đến 1.x.x, 1.x.x thành 2.x.x, ...), hãy nhớ đọc "hướng dẫn cập nhật phiên bản chính" thích hợp trước khi chạy các bước nâng cấp chung.
+If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate ["Major Version Update Guide"](#major-version-update-guides) before running the general upgrade steps.
 
 ## Các bước chung
 
-**Bước 1:** Đảm bảo các tiện ích mở rộng của bạn có phiên bản tương thích với phiên bản Flarum bạn đang cài đặt. Điều này chỉ cần thiết trên các phiên bản chính (ví dụ: bạn có thể không cần kiểm tra điều này nếu nâng cấp từ v1.0.0 lên v1.1.0, giả sử các tiện ích mở rộng của bạn tuân theo cách lập phiên bản được đề xuất). Bạn có thể kiểm tra điều này bằng cách xem [Cuộc thảo luận](https://discuss.flarum.org/t/extensions) của tiện ích mở rộng, tìm kiếm nó trên [Packagist](http://packagist.org/) hoặc kiểm tra cơ sở dữ liệu như [Extiverse](https://extiverse.com). Bạn sẽ cần phải xóa (không chỉ tắt) bất kỳ tiện ích mở rộng nào không tương thích trước khi cập nhật. Hãy kiên nhẫn với các nhà phát triển tiện ích mở rộng!
+**Bước 1:** Đảm bảo các tiện ích mở rộng của bạn có phiên bản tương thích với phiên bản Flarum bạn đang cài đặt. This is only needed across major versions (e.g. you probably don't need to check this if upgrading from v2.0.0 to v1.1.0, assuming your extensions follow recommended versioning). Bạn có thể kiểm tra điều này bằng cách xem [Cuộc thảo luận](https://discuss.flarum.org/t/extensions) của tiện ích mở rộng, tìm kiếm nó trên [Packagist](http://packagist.org/) hoặc kiểm tra cơ sở dữ liệu như [Extiverse](https://extiverse.com). Bạn sẽ cần phải xóa (không chỉ tắt) bất kỳ tiện ích mở rộng nào không tương thích trước khi cập nhật. Hãy kiên nhẫn với các nhà phát triển tiện ích mở rộng!
 
-**Bước 2:** Hãy xem tệp `composer.json` của bạn. Trừ khi bạn có lý do để yêu cầu các phiên bản tiện ích mở rộng hoặc thư viện cụ thể, bạn nên đặt chuỗi phiên bản của mọi thứ ngoại trừ `flarum/core ` thành `*` (bao gồm cả `flarum/tags`, `flarum/mentions` và các tiện ích mở rộng đi kèm khác). Đảm bảo rằng `flarum/core` KHÔNG được đặt thành `*`. Nếu bạn đang muốn cài phiên bản cụ thể của Flarum, hãy đặt `flarum/core` thành phiên bản đó (ví dụ: `"flarum/core":"v0.1.0-beta.16"`). Nếu bạn muốn phiên bản mới nhất, hãy sử dụng `"flarum/core":"^1.0"`.
+**Bước 2:** Hãy xem tệp `composer.json` của bạn. Trừ khi bạn có lý do để yêu cầu các phiên bản tiện ích mở rộng hoặc thư viện cụ thể, bạn nên đặt chuỗi phiên bản của mọi thứ ngoại trừ `flarum/core ` thành `*` (bao gồm cả `flarum/tags`, `flarum/mentions` và các tiện ích mở rộng đi kèm khác). Đảm bảo rằng `flarum/core` KHÔNG được đặt thành `*`. If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v1.8`). Nếu bạn muốn phiên bản mới nhất, hãy sử dụng `"flarum/core":"^1.0"`.
 
 **Bước 3:** Nếu cài đặt cục bộ của bạn sử dụng [bộ mở rộng cục bộ](extenders.md), đảm bảo rằng chúng được cập nhật với những thay đổi trong Flarum.
 
@@ -38,13 +44,27 @@ php flarum cache:clear
 
 ## Hướng dẫn cập nhật phiên bản chính
 
-### Cập nhật từ Beta (<=0.1.0) lên Ổn định v1 (^1.0.0)
+### Updating from v1 (^1.0.0) to v2 (^2.0.0)
 
-1. Thực hiện các bước 1-5 ở trên.
-2. Thay đổi chuỗi phiên bản của tất cả các tiện ích mở rộng đi kèm (`flarum/tags`, `flarum/mentions`, `flarum/likes`, vv) trong `composer.json` từ `^0.1.0` thành `*`.
-3. Đổi phiên bản của `flarum/core` trong `composer.json` từ `^0.1.0` thành `^1.0`.
-4. Xoá dòng `"minimum-stability": "beta",` từ tệp `composer.json`
-5. Thực hiện bước 6 và 7 ở trên.
+1. If you are using a MariaDB database, you should change the driver in `config.php` from `mysql` to `mariadb`:
+   ```php
+    <?php return array (
+      'debug' => true,
+      'offline' => false,
+      'database' =>
+      array (
+        // remove-next-line
+        'driver' => 'mysql',
+        // insert-next-line
+        'driver' => 'mariadb',
+        'host' => 'localhost',
+        'port' => 3306,
+   ```
+2. Thực hiện các bước 1-5 ở trên.
+3. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
+4. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
+5. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
+6. Thực hiện bước 6 và 7 ở trên.
 
 ## Các vấn đề gặp phải
 
@@ -65,7 +85,7 @@ Nothing to modify in lock file
 Hoặc không liệt kê `flarum/core` như một gói cập nhật và bạn không sử dụng phiên bản flarum mới nhất:
 
 - Xem lại bước 2 ở trên, đảm bảo rằng tất cả các tiện ích mở rộng của bên thứ ba đều có dấu hoa thị cho chuỗi phiên bản của chúng.
-- Đảm bảo yêu cầu phiên bản `flarum/core` của bạn không bị khóa đối với một phiên bản nhỏ cụ thể (ví dụ: `v0.1.0-beta.16` bị khóa, `^1.0.0` không). Nếu bạn đang cố gắng cập nhật các phiên bản chính của Flarum, hãy làm theo hướng dẫn cập nhật phiên bản chính có liên quan ở trên.
+- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v1.8` is locked, `^2.0.0` isn't). Nếu bạn đang cố gắng cập nhật các phiên bản chính của Flarum, hãy làm theo hướng dẫn cập nhật phiên bản chính có liên quan ở trên.
 
 ---
 

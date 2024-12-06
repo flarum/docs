@@ -25,7 +25,8 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 
 ## API Endpoints
 
-We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend. We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
+We learned how to use models to interact with data, but we still need to get that data from the backend to the frontend.
+We do this by writing API Controller [routes](routes.md), which implement logic for API endpoints.
 
 As per the JSON:API convention, we'll want to add separate endpoints for each operation we support. Common operations are:
 
@@ -46,7 +47,7 @@ We'll go over each type of controller shortly, but once they're written, you can
         ->delete('/tags/{id}', 'tags.delete', DeleteTagController::class)
 ```
 
-:::cautela
+:::caution
 
 Paths to API endpoints are not arbitrary! To support interactions with frontend models:
 
@@ -60,9 +61,10 @@ Also, remember that route names (`tags.index`, `tags.show`, etc) must be unique!
 
 The `Flarum\Api\Controller` namespace contains a number of abstract controller classes that you can extend to easily implement your JSON-API resources.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 You can use the CLI to automatically create your endpoint controllers:
+
 ```bash
 $ flarum-cli make backend api-controller
 ```
@@ -141,7 +143,7 @@ foreach ($sort as $field => $order) {
 return $query->get();
 ```
 
-#### Cercare e Filtrare
+#### Cerca
 
 Read our [searching and filtering](search.md) guide for more information!
 
@@ -279,9 +281,13 @@ return [
 
 ## Serializers
 
-Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend. You should become familiar with the [JSON:API specification](https://jsonapi.org/format/). Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
+Before we can send our data to the frontend, we need to convert it to JSON:API format so that it can be consumed by the frontend.
+You should become familiar with the [JSON:API specification](https://jsonapi.org/format/).
+Flarum's JSON:API layer is powered by the [tobscure/json-api](https://github.com/tobscure/json-api) library.
 
-A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API. Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information. To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
+A serializer is just a class that converts some data (usually [Eloquent models](models.md#backend-models)) into JSON:API.
+Serializers serve as intermediaries between backend and frontend models: see the [model documentation](models.md) for more information.
+To define a new resource type, create a new serializer class extending `Flarum\Api\Serializer\AbstractSerializer`. You must specify a resource `$type` and implement the `getDefaultAttributes` method which accepts the model instance as its only argument:
 
 ```php
 use Flarum\Api\Serializer\AbstractSerializer;
@@ -300,9 +306,10 @@ class DiscussionSerializer extends AbstractSerializer
 }
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 You can use the CLI to automatically create your serializer:
+
 ```bash
 $ flarum-cli make backend api-serializer
 ```
@@ -350,4 +357,5 @@ return [
 
 ### Serializzatori Non-Model e `ForumSerializer`
 
-Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything. For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.
+Serializers don't have to correspond to Eloquent models: you can define JSON:API resources for anything.
+For instance, Flarum core uses the [`Flarum\Api\Serializer\ForumSerializer`](https://api.docs.flarum.org/php/master/flarum/api/serializer/forumserializer) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the attributes of `ForumSerializer`.

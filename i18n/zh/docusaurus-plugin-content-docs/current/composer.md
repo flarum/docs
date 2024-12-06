@@ -18,7 +18,7 @@ Flarum 使用一个叫 [Composer](https://getcomposer.org) 的程序来管理其
 
 > Composer 是一个 PHP 依赖管理工具。 它允许您声明项目所依赖的库，并管理 (安装/更新) 这些库 。 — [Composer Introduction](https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md))
 
-每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。
+每次安装 Flarum 都包含了 Flarum 的核心和一系列的 [扩展](extensions.md) 他们都有自己的自己的依赖和发布包。 他们都有自己的自己的依赖和发布包。
 
 在过去，论坛框架会通过让用户上传带有拓展代码的压缩文件来管理拓展。 这看上去很简单，但问题会很快显现出来：
 
@@ -78,9 +78,10 @@ Composer 解决了所有这些，乃至更多的问题!
 
     // 下面是我们最关心的部分
     // 这是我们想要的包清单和每个包的版本。
+    // 这是我们想要的包清单和每个包的版本。
     // 我们会简单略过他们
     "require": {
-        "flarum/core": "^1.0",
+        "flarum/core": "^2.0",
         "flarum/approval": "*",
         "flarum/bbcode": "*",
         "flarum/emoji": "*",
@@ -99,7 +100,7 @@ Composer 解决了所有这些，乃至更多的问题!
         "flarum/tags": "*"
     },
 
-    // Composer 的配置多种多样。 这是合理的默认值。
+    // Various composer config. 这是合理的默认值。
     // 您可在 https://getcomposer.org/doc/06-config.md 找到选项列表。
     "config": {
         "preferred-install": "dist",
@@ -117,7 +118,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
 对于 Flarum 项目来说，在安装 `flarum/core` 的 `require` 字段中，你会看到有几种类型的条目：
 
-- 你必须有一个 `flarum/core` 节点。 这应该包含一个与您想要安装的版本相对应的明确的版本字段。 对于 1.x 版本的 Flarum，这应是 `^1.0`。
+- 你必须有一个 `flarum/core` 节点。 这应该包含一个与您想要安装的版本相对应的明确的版本字段。 For Flarum 2.x versions, this would be `^2.0`.
 - 你应该为你安装的每个扩展配备一个节点。 一些内置扩展（比如 `flarum/tags` 和 `flarum/suspend` 等）已被默认包含，[其他的由您通过 composer 指令添加](extensions.md)。 除非你有其它原因（比如正在测试一个包的测试版本），我们建议使用星号作为扩展的版本字段（`*`）。 它的意思是“安装与我的 flarum/core 相适配的最新版本”。
 - 某些扩展/功能可能需要 PHP 包，而不是 Flarum 扩展。 比如，你需要 guzzle 库来使用 [Mailgun 邮件驱动器](mail.md)。 在这种情况下，该扩展/功能的说明应该解释使用哪个版本字段。
 
@@ -131,7 +132,7 @@ Composer 解决了所有这些，乃至更多的问题!
 
 ### 共享服务器
 
-如果Composer没有预先安装（你可以通过执行`composer --version`命令来判断），你可以查阅[手动安装手册](https://getcomposer.org/composer-stable.phar) 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行
+如果Composer没有预先安装（你可以通过执行`composer --version`命令来判断），你可以查阅[手动安装手册](https://getcomposer.org/composer-stable.phar) 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行 只需要上传 composer.phar 到你的文件夹中，并执行`/path/to/your/php7 composer.phar COMMAND` 对于所有的命令应该以`composer COMMAND`执行
 
 :::danger
 

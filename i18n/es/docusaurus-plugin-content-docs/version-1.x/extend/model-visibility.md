@@ -2,7 +2,9 @@
 
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
-Cuando un usuario visita la página **Discusiones**, queremos mostrarle rápidamente los debates recientes a los que tiene acceso. We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Por ejemplo:
+Cuando un usuario visita la página **Discusiones**, queremos mostrarle rápidamente los debates recientes a los que tiene acceso.
+We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/8.x/queries) through [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes).
+Por ejemplo:
 
 ```php
 use Flarum\Group\Group;
@@ -34,7 +36,9 @@ Tenga en cuenta que el alcance de la visibilidad sólo se puede utilizar en los 
 
 ## Cómo se procesa
 
-So, what actually happens when we call `whereVisibleTo`? ¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
+So, what actually happens when we call `whereVisibleTo`?
+¿Qué ocurre cuando llamamos a <code>whereVisibleTo</code>?
+Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
 
 La consulta se ejecutará a través de todos los visores aplicables registrados para el modelo de la consulta. Tenga en cuenta que los scopers de visibilidad registrados para una clase padre (como `Flarum\Post\Post`) también se aplicarán a cualquier clase hija (como `Flarum\Post\CommentPost`).
 
@@ -47,7 +51,8 @@ Hay dos tipos de scopers:
 - Los scopers basados en la capacidad se aplicarán a todas las consultas del modelo de consulta que se ejecute con una capacidad determinada (que por defecto es `"view"`). Please note this is not related to ability strings from the [policy system](authorization.md#how-it-works)
 - Los scopers "globales" se aplicarán a todas las consultas del modelo de la consulta. Tenga en cuenta que los ámbitos globales se ejecutarán en TODAS las consultas para su modelo, incluyendo `view`, lo que podría crear bucles infinitos o errores. Generalmente, sólo querrá ejecutarlos para las capacidades que no empiecen por `view`. Lo verás en el [ejemplo de abajo](#custom-visibility-scoper-examples)
 
-Un caso de uso común para esto es permitir la extensibilidad dentro del alcance de la visibilidad. Echemos un vistazo a una pieza simple y anotada de `Flarum\Post\PostPolicy` como ejemplo:
+Un caso de uso común para esto es permitir la extensibilidad dentro del alcance de la visibilidad.
+Echemos un vistazo a una pieza simple y anotada de `Flarum\Post\PostPolicy` como ejemplo:
 
 ```php
 // Aquí queremos asegurarnos de que las publicaciones privadas no sean visibles para los usuarios por defecto.
@@ -241,7 +246,6 @@ class ScopeDiscussionVisibility
 Note that in contrast to the other 2 examples, we're using `orWhere` to wrap our logic. This is explained [above](#where-vs-orwhere)
 
 ### Registering Custom Scopers
-
 
 ```php
 use Flarum\Extend;

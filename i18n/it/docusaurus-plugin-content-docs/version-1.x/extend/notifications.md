@@ -8,11 +8,11 @@ Flarum include un potente sistema di notifica per avvisare gli utenti di nuove a
 
 Per definire un tipo di notifica, sarà necessario creare una nuova classe che implementa `Flarum\Notification\Blueprint\BlueprintInterface`. Questa classe definirà il contenuto e il comportamento della notifica tramite i seguenti metodi:
 
-* `getSubject()` Il modello su cui si riferisce la notifica (ad es. Il `Post` che è stato apprezzato).
-* `getSender()` Il modello `User` per l'utente che ha attivato la notifica.
-* `getData()` Qualsiasi altro dato che potresti voler includere per l'accesso sul frontend (es. Il vecchio titolo della discussione quando rinominato).
-* `getType()` Qui è dove assegni il nome alla notifica, questo sarà importante per i passaggi successivi.
-* `getSubjectModal()`: Specificare il tipo di modello del soggetto (da `getSubject`).
+- `getSubject()` Il modello su cui si riferisce la notifica (ad es.
+- `getSender()` Il modello `User` per l'utente che ha attivato la notifica.
+- `getData()` Qualsiasi altro dato che potresti voler includere per l'accesso sul frontend (es. Il vecchio titolo della discussione quando rinominato).
+- `getType()` Qui è dove assegni il nome alla notifica, questo sarà importante per i passaggi successivi.
+- `getSubjectModal()`: Specificare il tipo di modello del soggetto (da `getSubject`).
 
 Diamo un'occhiata a un esempio tratto da [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Notification/PostLikedBlueprint.php):
 
@@ -67,11 +67,12 @@ Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framewor
 
 ### Registrazione di un tipo di notifica
 
-Quindi, registriamo la tua notifica in modo che Flarum lo sappia. Ciò consentirà agli utenti di modificare il modo in cui desiderano ricevere l'avviso della notifica. Possiamo farlo con il metodo `type` dell'extender `Notification`
+Quindi, registriamo la tua notifica in modo che Flarum lo sappia. Ciò consentirà agli utenti di modificare il modo in cui desiderano ricevere l'avviso della notifica.
+Possiamo farlo con il metodo `type` dell'extender `Notification`
 
-* `$blueprint`: La tua classe statica (esempio: `PostLikedBlueprint::class`)
-* `$serializer`: Il serializzatore del modello del soggetto (esempio: `PostSerializer::class`)
-* `$enabledByDefault`: Qui è dove imposti i metodi di notifica che saranno abilitati per impostazione predefinita. Accetta una serie di stringhe, include "alert" per avere notifiche del forum (l'icona della campana), include "email" per le notifiche email. Puoi usarne uno entrambi o nessuno! (esempio: `['alert']` imposterebbe solo le notifiche nel forum per impostazione predefinita)
+- `$blueprint`: La tua classe statica (esempio: `PostLikedBlueprint::class`)
+- `$serializer`: Il serializzatore del modello del soggetto (esempio: `PostSerializer::class`)
+- `$enabledByDefault`: Qui è dove imposti i metodi di notifica che saranno abilitati per impostazione predefinita. Accetta una serie di stringhe, include "alert" per avere notifiche del forum (l'icona della campana), include "email" per le notifiche email. Puoi usarne uno entrambi o nessuno! (esempio: `['alert']` imposterebbe solo le notifiche nel forum per impostazione predefinita)
 
 Vediamo un esempio da [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/extend.php):
 
@@ -94,7 +95,9 @@ La tua notifica sta venendo davvero bene! Rimangono solo poche cose da fare!
 
 ### Notifiche spedibili
 
-Oltre a registrare la nostra notifica da inviare via e-mail, se vogliamo effettivamente inviarla, dobbiamo fornire un po 'più di informazioni: vale a dire, il codice per generare l'oggetto e il corpo dell'e-mail. A tale scopo, è necessario implementare [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in aggiunta a [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface). Questo viene fornito con 2 metodi aggiuntivi:
+Oltre a registrare la nostra notifica da inviare via e-mail, se vogliamo effettivamente inviarla, dobbiamo fornire un po 'più di informazioni: vale a dire, il codice per generare l'oggetto e il corpo dell'e-mail.
+A tale scopo, è necessario implementare [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in aggiunta a [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface). Questo viene fornito con 2 metodi aggiuntivi:
+Questo viene fornito con 2 metodi aggiuntivi:
 
 - `getEmailView()` dovrebbe restituire un array del tipo di email a [Blade View](https://laravel.com/docs/6.x/blade). I namespace per queste devono [prima essere registrati](routes.md#views). Questi poi verranno utilizzati per generare il corpo dell'email.
 - `getEmailSubject(TranslatorInterface $translator)` dovrebbe restituire una stringa per l'oggetto dell'email. Viene passata un'istanza del traduttore per abilitare le e-mail di notifica tradotte.
@@ -196,7 +199,8 @@ class PostMentionedBlueprint implements BlueprintInterface, MailableInterface
 
 ### Driver di notifica
 
-Oltre a registrare i tipi di notifica, possiamo anche aggiungere nuovi driver accanto a quelli predefiniti `alert` e `email`. Il driver dovrebbe implementare `Flarum\Notification\Driver\NotificationDriverInterface`. Diamo un'occhiata a un esempio annotato dall'[estensione Pusher](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
+Oltre a registrare i tipi di notifica, possiamo anche aggiungere nuovi driver accanto a quelli predefiniti `alert` e `email`.
+Il driver dovrebbe implementare `Flarum\Notification\Driver\NotificationDriverInterface`. Diamo un'occhiata a un esempio annotato dall'[estensione Pusher](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
 
 ```php
 <?php
@@ -245,9 +249,9 @@ class PusherNotificationDriver implements NotificationDriverInterface
 
 Anche i driver di notifica vengono registrati tramite l'extender `Notification`, usando il metodo `driver`. Vengono forniti i seguenti argomenti
 
-* `$driverName`: Un nome unico e leggibile per il driver
-* `$driverClass`: La classe statica del driver (esempio: `PostSerializer::class`)
-* `$typesEnabledByDefault`: Un array di tipi per i quali questo driver dovrebbe essere abilitato per impostazione predefinita. Questo verrà utilizzato nel calcolo `$driversEnabledByDefault`, che viene fornito dal metodo `registerType` del driver.
+- `$driverName`: Un nome unico e leggibile per il driver
+- `$driverClass`: La classe statica del driver (esempio: `PostSerializer::class`)
+- `$typesEnabledByDefault`: Un array di tipi per i quali questo driver dovrebbe essere abilitato per impostazione predefinita. Questo verrà utilizzato nel calcolo `$driversEnabledByDefault`, che viene fornito dal metodo `registerType` del driver.
 
 Un altro esempio da [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
 
@@ -273,14 +277,14 @@ Come per i progetti di notifica, dobbiamo dire a Flarum come vogliamo che venga 
 
 Innanzitutto, crea una classe che estenda il componente di notifica. Quindi, ci sono 4 funzioni da aggiungere:
 
-* `icon()`: Le icone [Font Awesome](https://fontawesome.com/) che appariranno accanto al testo della notifica (esempio: `fas fa-code-branch`).
-* `href()`: Il collegamento che dovrebbe essere aperto quando si fa clic sulla notifica (esempio: `app.route.post(this.attrs.notification.subject())`).
-* `content()`: Cosa dovrebbe mostrare la notifica stessa. Dovrebbe dire il nome utente e quindi l'azione. Sarà seguito da quando è stata inviata la notifica (assicurati di utilizzare le traduzioni).
-* `exerpt()`: (opzionale) Un piccolo estratto che viene mostrato sotto la notifica (comunemente un estratto di un post).
+- `icon()`: Le icone [Font Awesome](https://fontawesome.com/) che appariranno accanto al testo della notifica (esempio: `fas fa-code-branch`).
+- `href()`: Il collegamento che dovrebbe essere aperto quando si fa clic sulla notifica (esempio: `app.route.post(this.attrs.notification.subject())`).
+- `content()`: Cosa dovrebbe mostrare la notifica stessa. Dovrebbe dire il nome utente e quindi l'azione. Sarà seguito da quando è stata inviata la notifica (assicurati di utilizzare le traduzioni).
+- `exerpt()`: (opzionale) Un piccolo estratto che viene mostrato sotto la notifica (comunemente un estratto di un post).
 
-*Diamo un'occhiata al nostro esempio, vero?*
+_Diamo un'occhiata al nostro esempio, vero?_
 
-Nell'esempio, l'icona è una stella, il link andrà al nuovo post e il contenuto dirà che "{user} ha pubblicato".
+From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
 ```jsx harmony
 import Notification from 'flarum/components/Notification';
@@ -305,7 +309,7 @@ export default class NewPostNotification extends Notification {
 }
 ```
 
-Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica del frontend che abbiamo appena creato.
+Nell'esempio, l'icona è una stella, il link andrà al nuovo post e il contenuto dirà che "{user} ha pubblicato".
 
 Successivamente, dobbiamo dire a Flarum che la notifica che invii nel backend corrisponde alla notifica frontend che abbiamo appena creato.
 
@@ -317,7 +321,7 @@ Assicurati di sostituire `{nameOfNotification}`con il nome della notifica nel tu
 
 Diamo agli utenti un'opzione per modificare le loro impostazioni per la tua notifica. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
-Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che desideri mostrare e una descrizione della notifica e il gioco è fatto!
+From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
 
 ```js
 import { extend } from 'flarum/extend';
@@ -338,22 +342,23 @@ app.initializers.add('flarum-likes', () => {
   });
 });
 ```
-Ora che hai configurato tutte le notifiche, è il momento di inviare effettivamente la notifica all'utente!
+
+Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che desideri mostrare e una descrizione della notifica e il gioco è fatto!
 
 ## Inviare Notifiche
 
-*I dati non appaiono solo magicamente nel database*
+_I dati non appaiono solo magicamente nel database_
 
 Ora che hai configurato la tua notifica, è il momento di inviarla all'utente!
 
 Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. Accetta due argomenti:
 
-* I dati non vengono visualizzati nel database solo magicamente *
-* `$users`: Questo accetta un array di `user` che dovrebbe ricevere la notifica
+- `BlueprintInterface`: This is the blueprint to be instantiated we made in the first step, you must include all variables that are used on the blueprint (example: if a user likes a post you must include the `user` model that liked the post).
+- `$users`: Questo accetta un array di `user` che dovrebbe ricevere la notifica
 
-*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? * Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.
+\*Che cos'è? Vuoi essere in grado di eliminare anche le notifiche? \* Il modo più semplice per rimuovere una notifica è passare esattamente gli stessi dati dell'invio di una notifica, tranne che con un array vuoto di destinatari.
 
-Diamo un'occhiata al nostro ** ultimo ** esempio di oggi:
+Diamo un'occhiata al nostro \*\* ultimo \*\* esempio di oggi:
 
 Da [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php):
 
@@ -410,4 +415,4 @@ class SendNotificationWhenPostIsLiked
 
 **Fantastico!** Ora puoi spammare gli utenti con aggiornamenti sugli eventi del forum!
 
-*Provato tutto?* Beh, se hai provato tutto allora indovino... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.
+_Provato tutto?_ Beh, se hai provato tutto allora indovino... Scherzo. Sentiti libero di postare nella [Community di Flarum](https://discuss.flarum.org/t/extensibility) o su [Discord](https://flarum.org/discord/) e qualcuno ti darà una mano.

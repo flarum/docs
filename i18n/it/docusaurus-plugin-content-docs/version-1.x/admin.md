@@ -1,8 +1,11 @@
 # Pannello di amministrazione
 
-Il pannello di amministrazione di Flarum un'interfaccia user-friendly per la gestione del tuo forum. Per accedere al pannello di amministrazione, clicca sul tuo **Nome** nell'angolo in alto a destra dello schermo, e scegli **Amministrazione**. È disponibile solo per gli utenti nel gruppo [gruppo](permissions.md) "Admin".
+Il pannello di amministrazione di Flarum un'interfaccia user-friendly per la gestione del tuo forum.
+È disponibile solo per gli utenti nel gruppo <a href="permissions.md">gruppo</a> "Admin".
+Per accedere al pannello di amministrazione, clicca sul tuo **Nome** nell'angolo in alto a destra dello schermo, e scegli **Amministrazione**.
 
 The Admin Dashboard has the following sections, being:
+
 - **Dashboard** - Shows the main Admin Dashboard, containing statistics and other relevant information.
 - **Basics** - Shows the options to set basic forum details such as Name, Description, and Welcome Banner.
 - **Email** - Allows you to configure your E-Mail settings. Refer [here](https://docs.flarum.org/mail) for more information.

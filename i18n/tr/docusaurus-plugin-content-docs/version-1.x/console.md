@@ -20,11 +20,11 @@ Mevcut tüm yönetim komutlarını ve ayrıca yönetim komutlarını kullanma ta
 
 Belirli bir komut için yardım çıktısını görüntüler.
 
-`--format` seçeneğini kullanarak yardımın çıktısını başka formatlarda da yapabilirsiniz:
+<code>--format</code> seçeneğini kullanarak yardımın çıktısını başka formatlarda da yapabilirsiniz:
 
 `php flarum help --format=xml list`
 
-Mevcut komutların listesini görüntülemek için lütfen `list` komutunu kullanın.
+Mevcut komutların listesini görüntülemek için lütfen <code>list</code> komutunu kullanın.
 
 ### info
 

@@ -17,12 +17,12 @@ To learn about dispatching events and defining new ones, see the [relevant docum
 
 ### Custom Extenders
 
-Lets say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts. A custom extender could be a good way to accomplish this.
+Let's say you've developed an extension that adds an alternative search driver to Flarum, but you want to allow other extensions to add support for custom filters / sorts. A custom extender could be a good way to accomplish this.
 
 The implementation of extenders is actually quite simple. There are 3 main steps:
 
 1. Various methods (and the constructor) allow client code to specify options. Por ejemplo:
-  - Which model / API controller / validator should be extended?
+  - Which model / controller / service should be extended?
   - What modifications should be made?
 2. An `extend` method takes the input from step 1, and applies it by modifying various [container bindings](service-provider.md) and global static variables to achieve the desired effect. This is the "implementation" of the composer. The `extend` methods for all enabled extensions are run as part of Flarum's boot process.
 3. Optionally, extenders implementing `Flarum\Extend\LifecycleInterface` can have `onEnable` and `onDisable` methods, which are run when extensions that use the extender are enabled/disabled, and are useful for tasks like clearing various caches.

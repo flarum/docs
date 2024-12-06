@@ -235,6 +235,69 @@ Below are a few examples of commonly used endpoints. JSON has been truncated to 
     // [...] more includes for the other discussions
   ]
 }
+      },
+      "relationships": {
+        // [...]
+      }
+    },
+    // [...] more discussions
+  ],
+  "included": [
+    {
+      "type": "users",
+      "id": "1",
+      "attributes": {
+        "username": "Admin",
+        "displayName": "Admin",
+        "avatarUrl": null,
+        "slug": "1"
+      }
+    },
+    {
+      "type": "users",
+      "id": "64",
+      "attributes": {
+        "username": "Flarum",
+        "displayName": "Flarum",
+        "avatarUrl": "https://flarum.tld/assets/avatars/Z4hEncw0ndVqZ8be.png",
+        "slug": "64"
+      }
+    },
+    {
+      "type": "tags",
+      "id": "3",
+      "attributes": {
+        "name": "Welcome",
+        "description": "Post interesting things here",
+        "slug": "welcome",
+        "color": "#888",
+        "backgroundUrl": null,
+        "backgroundMode": null,
+        "icon": "fas fa-bullhorn",
+        "discussionCount": 30,
+        "position": 1,
+        "defaultSort": null,
+        "isChild": false,
+        "isHidden": false,
+        "lastPostedAt": "2022-01-05T10:20:30+00:00",
+        "canStartDiscussion": true,
+        "canAddToDiscussion": true,
+        "isRestricted": false
+      }
+    },
+    {
+      "type": "posts",
+      "id": "668",
+      "attributes": {
+        "number": 1,
+        "createdAt": "2022-01-01T10:20:30+00:00",
+        "contentType": "comment",
+        "contentHtml": "<p>Hello World</p>"
+      }
+    },
+    // [...] more includes for the other discussions
+  ]
+}
 ```
 
 ### Create discussion

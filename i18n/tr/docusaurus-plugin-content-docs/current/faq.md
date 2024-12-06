@@ -2,7 +2,7 @@
 
 ### Flarum ne zaman kararlı olacak?
 
-Yes! After 6 years of development, Flarum 1.0.0 is finally here.
+Yes! After 6 years of development, Flarum **1.0.0** was released, and we are now spearheading the development of Flarum **2.0**.
 
 ### Beta'dan sonraki sürümlere geçiş yapabilecek miyim?
 
@@ -12,7 +12,7 @@ We're still working on a formal roadmap. We have a lot of plans and ideas, and l
 
 Tüm bağışlar minnetle alındı. [Github Sponsors](https://github.com/sponsors/flarum) veya [OpenCollective](https://opencollective.com/flarum) üzerinden verebilirsiniz.
 
-Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. Ayrıca, kullanıcıları [katkıda bulunan kod](contributing.md), [uzantıları oluşturma](/extend/), belge yazma, Flarum'u diğer dillere çevirme, [topluluk forumlarında](https://discuss.flarum.org/) yardım ve destek sağlama gibi başka şekillerde katkıda bulunmaya teşvik ediyoruz. ...ve sadece topluluk etrafında genel bir pozitif enerji olmak!
+Ancak bağışlar, Flarum'daki geliştirme hızını doğrudan etkilemeyecek. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Flarum'da [özelliği buraya ekleyin] olacak mı? Ne zaman? Neden olmasın?
 

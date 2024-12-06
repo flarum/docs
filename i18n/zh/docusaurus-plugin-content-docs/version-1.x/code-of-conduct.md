@@ -2,7 +2,7 @@
 
 ### _欢迎光临 Flarum 社区！_
 
-... 感谢您的加入! 我们对 Flarum 充满信心与激情，也很高兴认识同样的人。 我们希望 *每个人* 都能从 Flarum 及其社区中得到最大的帮助，因此请阅读并遵守下列准则。 我们希望每位用户都能充分利用 Flarum 和 Flarum 社区，因此，请您阅读并遵守以下准则。 无论您是使用我们的论坛，还是在 Discord、GitHub 上交流，亦或是在其他平台进行任何形式的交流，这些准则均适用。
+... 感谢您的加入! ... 感谢您的加入! 我们对 Flarum 充满信心与激情，也很高兴认识同样的人。 We want _everyone_ to get the most out of Flarum and the Flarum community, so we ask that you please read and follow these guidelines. 我们希望每位用户都能充分利用 Flarum 和 Flarum 社区，因此，请您阅读并遵守以下准则。 无论您是使用我们的论坛，还是在 Discord、GitHub 上交流，亦或是在其他平台进行任何形式的交流，这些准则均适用。
 
 ### 重中之重，为人友善！
 
@@ -16,20 +16,20 @@
 - 发表垃圾信息、钓鱼贴，以及任何旨在破坏本网站的行为；
 - 讨论盗版软件或类似事情。
 
-*上述条例将作为版主采取行动的依据。 * 如果您对其他成员有意见，请不要相互对峙。 如果违规行为发生于论坛，请 *举报* 相关帖字，然后等待工作人员处理。 否则，请通过我们的 [联系页面](https://flarum.org/foundation/contact) 报告不合法的违规行为。
+_All the above are grounds for moderator action._ If you have an issue with another member, we ask that you please don't confront them yourself. If it's on the forum, please use the _Report_ command on the post in question, then leave it up to the staff to deal with the situation. Otherwise, report the violation using our [contact page](https://flarum.org/foundation/contact), option Legal.
 
-我们的管理员和版主可以编辑或删除任何具有冒犯性或破坏性的内容。 严重或屡次违规的用户，可能会被封禁账户。 所以，你懂的，*待人友善一些*。 😎
+我们的管理员和版主可以编辑或删除任何具有冒犯性或破坏性的内容。 严重或屡次违规的用户，可能会被封禁账户。 So, you know, _be cool_. 😎
 
 ### 提高自己的曝光度
 
-想发起一个新讨论？ 请务必先阅读我们的 [常见问题](faq.md)，通过其中的相关链接充分了解这个项目。 然后花一些时间浏览论坛，熟悉一下 [标签系统](https://discuss.flarum.org/tags)，并搜索一些关键词，*可能您想讨论的早已被大家讨论过。
+想发起一个新讨论？ First, be sure to read [our FAQ](faq.md) and follow the links to make sure you're fully informed about the project. Then spend some time browsing the forum, familiarize yourself with [the tag system](https://discuss.flarum.org/tags), and do a few searches for keywords related to your topic: _it could be someone has already started a discussion about it!_
 
 当您确定要发起一个讨论时，请牢记：
 
 - 起个好标题！ 如果您的标题能简洁明了地阐明您要讨论的内容，您会得到更加理想的结果。
 - 标签要选对！ 这将增加帖子被及时阅读、回复的可能性。
-- *不要*翻来覆去的发布相同主题的帖子。这样通常会适得其反。
-- 如果不使用标签组标记为多语言，则请*务必使用英语来发表帖子*。如果我们无法理解你发的帖子想表达什么，我们就无从帮助你。
+- _不要_翻来覆去的发布相同主题的帖子。这样通常会适得其反。
+- 如果不使用标签组标记为多语言，则请_务必使用英语来发表帖子_。如果我们无法理解你发的帖子想表达什么，我们就无从帮助你。
 - 不要在帖子中签名或者添加小尾巴！ 个人资料的辨识度足够了。
 
 帮我们一起把事务整理的有条不紊吧。 可别让我们把用来了解您、帮助您解决问题、谈论 Flarum 的大好时光浪费在杂七杂八的琐碎事儿上，您说对吗？ 毕竟，那才是我们应该在这里做的事情。
@@ -38,7 +38,7 @@
 
 大家参与讨论，都是希望自己的观点或建议能被他人采纳、为他人提供帮助。 既然如此，为什么不从一开始就让您的回帖值得一读呢？
 
-- 不要回复标题。 花点时间 *看一下* 看看一楼在说什么，至少先 *速览一下* 后面的对话。
+- 不要回复标题。 不要回复标题。 花点时间 _看一下_ 看看一楼在说什么，至少先 _速览一下_ 后面的对话。
 - 问问自己，您的回复是否对讨论有帮助。 如果没有，请斟酌斟酌。
 - 避免仅仅为了同意某人就去顶帖，您可以使用「喜欢」按钮表达您的态度。
 - 不要刷帖。 这里是论坛，不是聊天室。

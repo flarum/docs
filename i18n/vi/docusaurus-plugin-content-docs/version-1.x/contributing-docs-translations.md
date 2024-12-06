@@ -21,6 +21,6 @@ Bản dịch cho cốt lõi Flarum, tiện ích mở rộng đi kèm và tiện 
 
 Các bản dịch cho tài liệu này được quản lý thông qua [Crowdin](https://crowdin.com/project/flarum-docs).
 
-Flarum Foundation đã thành lập tổ chức "flarum-lang" để hỗ trợ các biên dịch viên và đảm bảo tính khả dụng liên tục của các gói ngôn ngữ. Bạn có thể tìm hiểu thêm về điều này bằng cách [truy cập kho lưu trữ GitHub](https://github.com/flarum-lang/about).
+Flarum Foundation đã thành lập tổ chức "flarum-lang" để hỗ trợ các biên dịch viên và đảm bảo tính khả dụng liên tục của các gói ngôn ngữ. You can learn more about this by [visiting the GitHub repository](https://github.com/flarum-lang/about).
 
 Nếu bạn muốn hỗ trợ gói ngôn ngữ hiện có, bắt đầu bản dịch mới hoặc bạn gặp sự cố khi sử dụng weblate hoặc crowdin, tốt nhất hãy [liên hệ với nhóm flarum-lang](https://discuss.flarum.org/d/27519-the-flarum-language-project).

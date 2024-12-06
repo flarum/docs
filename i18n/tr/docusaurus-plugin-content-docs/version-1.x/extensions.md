@@ -4,7 +4,8 @@ Flarum minimalisttir, ancak aynı zamanda oldukça genişletilebilir. Aslında, 
 
 Bu yaklaşım Flarum'u son derece özelleştirilebilir kılar: İhtiyaç duymadığınız tüm özellikleri devre dışı bırakabilir ve forumunuzu topluluğunuz için mükemmel hale getirmek için diğer uzantıları yükleyebilirsiniz.
 
-Flarum'un temelde hangi özellikleri dahil ettiğimiz konusundaki felsefesi hakkında daha fazla bilgi için veya kendi uzantınızı oluşturmak istiyorsanız, lütfen [uzantı belgelerimize](extend/README.md) bakın. Bu makale, bir forum yöneticisinin bakış açısından uzantıları yönetmeye odaklanacaktır.
+Flarum'un temelde hangi özellikleri dahil ettiğimiz konusundaki felsefesi hakkında daha fazla bilgi için veya kendi uzantınızı oluşturmak istiyorsanız, lütfen [uzantı belgelerimize](extend/README.md) bakın.
+Bu makale, bir forum yöneticisinin bakış açısından uzantıları yönetmeye odaklanacaktır.
 
 ## Uzantı Yöneticisi
 
@@ -23,7 +24,6 @@ Uzantı yöneticisi, yönetici kullanıcının herhangi bir besteci paketini yü
 :::
 
 ![uzantı yöneticisi yönetici sayfası](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
-
 
 ## Uzantıları Bulmak
 
@@ -97,12 +97,12 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
-* Type: `HTTP Bearer`
-* Host: `flarum.org`
+- Type: `HTTP Bearer`
+- Host: `flarum.org`
 
 ![Configure repositories](/en/img/config-repositories.png)
 
-:::bilgi
+:::info
 
 The configured repositories and auth methods will be active for both the command line and the admin dashboard. If you configure them from the command line however, you must not include the flag `--global`.
 
@@ -112,7 +112,7 @@ The configured repositories and auth methods will be active for both the command
 
 If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
 
-* If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
-* If you set it to Beta, you will be able to install beta, RC and stable versions.
-* If you set it to RC, you will be able to install RC and stable versions.
-* If you set it to Stable, you will only be able to install stable versions.
+- If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
+- If you set it to Beta, you will be able to install beta, RC and stable versions.
+- If you set it to RC, you will be able to install RC and stable versions.
+- If you set it to Stable, you will only be able to install stable versions.

@@ -26,6 +26,37 @@ export default class CustomPage extends Page {
 }
 ```
 
+### Forum Page Structure
+
+Flarum's forum frontend uses a generic page structure, which is defined in `flarum/common/components/PageStructure`. This structure is used by all forum pages, and is recommended for use in extensions as well. You will have noticed that each forum page has a hero, sidebar, and content area among other things. These are all defined in `PageStructure` and can be used in your extension as well.
+
+For example, a custom page component can use the `PageStructure` component as follows:
+
+```tsx
+import PageStructure from 'flarum/forum/components/PageStructure';
+
+export default class AcmePage extends Page {
+  view() {
+    return (
+      <PageStructure
+        className="AcmePage" // Optional but recommended.
+        hero={() => <CustomHero />} // Optional. Extends `flarum/forum/components/Hero`
+        sidebar={() => <div>Custom Sidebar</div>} // Optional.
+        loading={this.loading} // Optional.
+      >
+        <div>Custom Content</div>
+      </PageStructure>
+    );
+  }
+}
+```
+
+:::info Why use `PageStructure`?
+
+Using `PageStructure` is not required, but it is recommended. It provides a consistent structure for all pages, and allows other extensions such as themes to extend and customize pages more easily.
+
+:::
+
 ### Usare i Route Resolvers
 
 Flarum utilizza un'impostazione per determinare quale pagina dovrebbe essere la homepage: questo dà flessibilità agli amministratori per personalizzare le loro community. Per aggiungere una pagina personalizzata alla homepage in Admin, è necessario estendere il metodo `BasicsPage.homePageItems` con il percorso della tua nuova pagina.
@@ -107,25 +138,14 @@ Ad esempio, ecco come la Pagina di Discussione rende [`PostStreamState`](https:/
 Puoi anche controllare il tipo e i dati di una pagina usando `PostStreamState` ed il metodo `matches`. Ad esempio, se vogliamo sapere se siamo attualmente su una pagina di discussione:
 
 ```jsx
-// Vedi sopra per un esempio di pagina personalizzata
-import CustomPage from './components/CustomPage';
-// Vedi sotto per un esempio di resolver personalizzato
-import CustomPageResolver from './resolvers/CustomPageResolver';
+import IndexPage from 'flarum/components/DiscussionPage';
+import DiscussionPage from 'flarum/components/DiscussionPage';
 
-// Utilizza un'istanza del resolver di percorsi
-app.routes['resolverInstance'] = {path: '/custom/path/1', resolver: {
-  onmatch: function(args) {
-    if (!app.session.user) return m.route.SKIP;
+// To just check page type
+app.current.matches(DiscussionPage);
 
-    return CustomPage;
-  }
-}};
-
-// Usa una classe di resolver di percorsi personalizzata
-app.routes['resolverClass'] = {path: '/custom/path/2', resolverClass: CustomPageResolver, component: CustomPage};
-
-// Usa la classe di default (`flarum/resolvers/DefaultResolver`)
-app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
+// To check page type and some data
+app.current.matches(IndexPage, {routeName: 'following'});
 ```
 
 ## Route resolver (avanzato)

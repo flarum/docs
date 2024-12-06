@@ -24,6 +24,8 @@ class YourCommand implements AbstractCommand {
 }
   }
 }
+  }
+}
 ```
 
 :::info [Flarum CLI](https://github.com/flarum/cli)
@@ -76,4 +78,4 @@ return [
 ];
 ```
 
-In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/8.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/8.x/scheduling#scheduling-artisan-commands) for more information.
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/11.x/scheduling#scheduling-artisan-commands) for more information.

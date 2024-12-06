@@ -16,7 +16,7 @@ Il processo di autorizzazione viene utilizzato per verificare se una persona è 
 
 Ciascuno di questi è determinato da criteri univoci: in alcuni casi è sufficiente un flag; altrimenti, potremmo aver bisogno di una logica personalizzata.
 
-## Visibility Scoping
+## Come funziona
 
 Le richieste di autorizzazione vengono effettuate con 3 parametri, con logica contenuta in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
 
@@ -33,16 +33,16 @@ Per prima cosa, eseguiamo l'intera richiesta (tutti e tre i parametri) attravers
 
 I risultati delle policy sono considerati prioritari `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. Ad esempio, se viene restituita una singola policy `FORCE_DENY`, tutte le altre policy verranno ignorate. Se una policy restituisce `DENY` e altre 10 restituiscono `ALLOW`, la richiesta verrà rifiutata. Ciò consente di prendere decisioni indipendentemente dall'ordine in cui le estensioni vengono avviate. Le policy sono estremamente potenti: se l'accesso viene negato in fase di policy, questo sovrascriverà i permessi dei gruppi e i privilegi di amministratore.
 
-In secondo luogo, se tutte le policy restituiscono null (o non restituiscono nulla), controlliamo se l'utente è in un gruppo che ha un permesso che consenta l'azione (nota che sia i permessi che le azioni sono rappresentati sotto forma di stringhe). In tal caso, autorizziamo l'azione. Guarda la [Documentazione su gruppi e permessi](permissions.md) per maggiori informazioni.
+In secondo luogo, se tutte le policy restituiscono null (o non restituiscono nulla), controlliamo se l'utente è in un gruppo che ha un permesso che consenta l'azione (nota che sia i permessi che le azioni sono rappresentati sotto forma di stringhe). In tal caso, autorizziamo l'azione.
+Guarda la [Documentazione su gruppi e permessi](permissions.md) per maggiori informazioni.
 
 Quindi, se l'utente è nel gruppo admin, autorizzeremo l'azione.
 
 Infine, poiché abbiamo esaurito tutti i controlli, daremo per scontato che l'utente non sia autorizzato e negheremo la richiesta.
 
-## Autorizzazioni del frontend
+## Come utilizzare le autorizzazioni
 
 Il sistema di autorizzazione di Flarum è accessibile attraverso metodi pubblici delle classi `Flarum\User\User`. I più importanti sono elencati di seguito; altri sono documentati nelle [documentazioni PHP API](https://api.docs.flarum.org/php/master/flarum/user/user).
-
 
 In questo esempio, useremo `$actor` come istanza di `Flarum\User\User`, `'viewForum'` e `'reply'` come esempi di abilità, e `$discussion` (istanza di `Flarum\Discussion\Discussion`) come esempio di argomento.
 
@@ -77,19 +77,23 @@ I criteri ci consentono di utilizzare una logica personalizzata oltre a semplici
 - Vogliamo consentire agli utenti di modificare i post anche se non sono moderatori, ma solo i propri post.
 - A seconda delle impostazioni, potremmo consentire agli utenti di rinominare le proprie discussioni a tempo indeterminato, per un breve periodo di tempo dopo la pubblicazione o per niente.
 
-Come descritto [qui](#how-it-works), ad ogni controllo di autorizzazione, interroghiamo tutte le politiche registrate per il modello del target o qualsiasi classe genitore del modello del target. Se non viene fornito alcun target, verranno applicati i criteri egistrati come "global".
+Come descritto [qui](#how-it-works), ad ogni controllo di autorizzazione, interroghiamo tutte le politiche registrate per il modello del target o qualsiasi classe genitore del modello del target.
+Se non viene fornito alcun target, verranno applicati i criteri egistrati come "global".
 
 Quindi, come viene "verificato" un criterio?
 
-Innanzitutto, controlliamo se la classe del criterio ha un metodo con lo stesso nome dell'abilità che viene valutata. In tal caso, lo eseguiamo con l'attore e il soggetto come parametri. Se quel metodo restituisce un valore non nullo, restituiamo quel risultato. In caso contrario, si passa alla fase successiva (non necessariamente al criterio successivo).
+Innanzitutto, controlliamo se la classe del criterio ha un metodo con lo stesso nome dell'abilità che viene valutata.
+In tal caso, lo eseguiamo con l'attore e il soggetto come parametri.
+Se quel metodo restituisce un valore non nullo, restituiamo quel risultato. In caso contrario, si passa alla fase successiva (non necessariamente al criterio successivo).
 
 Quindi, controlliamo se la classe policy ha un metodo chiamato `can`. In tal caso, lo eseguiamo con l'attore, l'abilità e il soggetto e restituiamo il risultato.
 
 Se "can" non esiste o restituisce null, abbiamo finito con questo criterio e procediamo a quello successivo.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
 È possibile utilizzare la CLI per generare automaticamente i criteri:
+
 ```bash
 $ flarum-cli make backend policy
 ```
@@ -181,7 +185,7 @@ class GlobalPolicy extends AbstractPolicy
 
 ### Come utilizzare le autorizzazioni
 
-ed uno globale per il modelle `Discussion`:
+Both model-based and global policies can be registered with the `Policy` extender in your `extend.php` file:
 
 ```php
 use Flarum\Extend;
@@ -199,8 +203,13 @@ return [
 
 ## Autorizzazioni del frontend
 
-Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend. Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint. E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
+Di solito, vorrai utilizzare i risultati dell'autorizzazione nella logica del frontend.
+Ad esempio, se un utente non dispone dell'autorizzazione per visualizzare gli utenti di ricerca, non dovremmo inviare richieste a quell'endpoint.
+E se un utente non ha il permesso di modificare gli utenti, non dovremmo mostrare le voci di menu che consentono di effettuare tali modifiche.
 
-Poiché non possiamo eseguire controlli di autorizzazione nel frontend, dobbiamo eseguirli nel backend e allegarli alla serializzazione dei dati che stiamo inviando. Permessi globali come (`viewForum`, `viewUserList`) possono essere inclusi in `ForumSerializer`, ma per l'autorizzazione specifica dell'oggetto, potremmo voler includere quelli con altri parametri. Ad esempio, quando restituiamo l'elenco delle discussioni, controlliamo se l'utente può rispondere, rinominare, modificare ed eliminarle oggetti, e memorizzare quei dati nel modello di discussione frontend. È quindi accessibile tramite `discussion.canReply()` o `discussion.canEdit()`, ma non c'è niente di magico qui: è solo un altro attributo inviato dal serializzatore.
+Poiché non possiamo eseguire controlli di autorizzazione nel frontend, dobbiamo eseguirli nel backend e allegarli alla serializzazione dei dati che stiamo inviando.
+Permessi globali come (`viewForum`, `viewUserList`) possono essere inclusi in `ForumSerializer`, ma per l'autorizzazione specifica dell'oggetto, potremmo voler includere quelli con altri parametri.
+Ad esempio, quando restituiamo l'elenco delle discussioni, controlliamo se l'utente può rispondere, rinominare, modificare ed eliminarle oggetti, e memorizzare quei dati nel modello di discussione frontend.
+È quindi accessibile tramite `discussion.canReply()` o `discussion.canEdit()`, ma non c'è niente di magico qui: è solo un altro attributo inviato dal serializzatore.
 
-Esistono in realtà due tipi di scoper:
+For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).

@@ -2,7 +2,7 @@
 
 Lõi Flarum tích hợp với hệ thống tệp để lưu trữ và phân phát nội dung (như JS / CSS đã biên dịch hoặc tải lên logos/favicons) và avatars.
 
-Các tiện ích mở rộng có thể sử dụng các hữu ích được cung cấp của Flarum cho nhu cầu lưu trữ tệp và tương tác với hệ thống tệp của riêng chúng. Hệ thống này dựa trên [các công cụ hệ thống tệp của Laravel](https://laravel.com/docs/8.x/filesystem), lần lượt dựa trên [thư viện Flysystem](https://github.com/thephpleague/flysystem).
+Các tiện ích mở rộng có thể sử dụng các hữu ích được cung cấp của Flarum cho nhu cầu lưu trữ tệp và tương tác với hệ thống tệp của riêng chúng. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/11.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Ổ đĩa
 
@@ -10,7 +10,7 @@ Hệ thống tập tin **ổ đĩa** đại diện cho các vị trí lưu trữ
 
 ### Sử dụng các ổ đĩa hiện có
 
-Để truy cập ổ đĩa, bạn cần truy xuất nó từ [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). Để làm như vậy, bạn nên đưa factory contract vào lớp của mình và truy cập vào các đĩa bạn cần.
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Factory.html). Để làm như vậy, bạn nên đưa factory contract vào lớp của mình và truy cập vào các đĩa bạn cần.
 
 Hãy xem xét [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) của lõi để làm ví dụ:
 
@@ -75,7 +75,7 @@ class DeleteLogoController extends AbstractDeleteController
 }
 ```
 
-The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
+The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
 
 ### Declaring new disks
 
@@ -98,7 +98,7 @@ return [
 
 Since all disks use the local filesystem by default, you'll need to provide a base path and base URL for the local filesystem.
 
-The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/8.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
+The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/11.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
 
 ## Storage drivers
 

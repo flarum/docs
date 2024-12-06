@@ -1,4 +1,4 @@
-# Pannello amministrazione
+# Pannello di amministrazione
 
 La Beta 15 ha introdotto un pannello di amministrazione e un frontend per le API completamente riprogettati. Ora è più facile che mai aggiungere impostazioni o autorizzazioni alla tua estensione.
 
@@ -8,15 +8,15 @@ Puoi semplicemente registrare le impostazioni, estendere la base [`ExtensionPage
 
 ## API Dati Estensione
 
-:::caution SettingsModal
+Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
 
 ### Raccontare all'API la tua estensione
 
-Le impostazioni aggiunte tramite `SettingsModal` continueranno a funzionare nella beta 15, ma questo metodo **è ormai obsoleto** e verrà rimosso nelle future release.
+Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati.
 
-Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Le estensioni che contengono nel nome `flarum-` e/o `flarum-ext-` verranno troncate (esempio: 'webbinaro/flarum-calendar' diventa 'webbinaro-calendar').
+Semplicemente lancia la funzione `for` su `app.extensionData` passando l'ID della tua estensione. Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').  Per trovare l'ID estensione, prendi il nome del composer e sostituisci eventuali barre con trattini (esempio: 'fof/merge-discussions' diventa 'fof-merge-discussions').
 
-Questa nuova API ti consente di aggiungere impostazioni alla tua estensione con pochissime righe di codice.
+Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
 
 ```js
 
@@ -27,11 +27,11 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Prima di poter registrare qualsiasi cosa, è necessario dire a `ExtensionData` per quale estensione si vogliono ottenere i dati.
+Prima di poter registrare qualsiasi cosa, è necessario dire a <code>ExtensionData</code> per quale estensione si vogliono ottenere i dati.
 
-:::info Note
+:::tip :::info Note
 
-Per il seguente esempio, useremo l'estensione fittizia 'acme/interstellar':
+All registration functions on `ExtensionData` are chainable, meaning you can call them one after another without running `for` again.
 
 :::
 
@@ -120,9 +120,10 @@ Novità nella beta 15, le autorizzazioni ora possono essere trovate in 2 posizio
 Affinché ciò avvenga, i permessi devono essere registrati con `ExtensionData`. Questo viene fatto in modo simile alle impostazioni, richiama `registerPermission`.
 
 Argomenti:
- * Permessi Oggetto
- * Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
- * Priorità di `ItemList`
+
+- Permessi Oggetto
+- Che tipo di autorizzazione - vedere le funzioni di [`PermissionGrid`] (https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) per i tipi (rimuovi elementi dal nome)
+- Priorità di `ItemList`
 
 Tornando alla nostra estensione "rocket" preferita:
 
@@ -146,7 +147,7 @@ app.initializers.add('interstellar', function(app) {
 
 Se la tua estensione interagisce con l'estensione [tag](https://github.com/flarum/tags) (che è abbastanza comune), si potrebbe desiderare un permesso per essere "tag scopable" (... applicato a livello del tag, non solo globalmente). Puoi farlo includendo un attributo `tagScoped`, come abbiamo visto sopra. Permessi che iniziano con la discussione `.` saranno automaticamente "tag scoped" a meno che `tagScoped: false` non sia indicato.
 
-Torniamo alla nostra estensione missilistica preferita:
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Promemoria concatenamento
 
@@ -204,11 +205,11 @@ Nella beta 15, le pagine di estensione lasciano spazio a informazioni aggiuntive
 
 Per maggiori informationi, guarda [composer.json schema](https://getcomposer.org/doc/04-schema.md).
 
-| Descrizione                              | dovein composer.json                                                 |
-| ---------------------------------------- | -------------------------------------------------------------------- |
-| discuss.flarum.org link alla discussione | "forum" all'interno del tag "support"                                |
-| Documentazione                           | "docs" all'interno del tag "support"                                 |
-| Supporto (email)                         | "email" all'interno del tag "support"                                |
-| Sito Web                                 | "homepage" chiave                                                    |
-| Donazioni                                | chiave "funding" (Nota: verrà utilizzato solo il primo collegamento) |
-| Sorgente                                 | "source" all'interno del tag "support"                               |
+| Descrizione                                                              | dovein composer.json                                                                    |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| discuss.flarum.org link alla discussione | "forum" all'interno del tag "support"                                                                   |
+| Documentazione                                                           | "docs" all'interno del tag "support"                                                                    |
+| Supporto (email)                                      | "email" all'interno del tag "support"                                                                   |
+| Sito Web                                                                 | "homepage" chiave                                                                                       |
+| Donazioni                                                                | chiave "funding" (Nota: verrà utilizzato solo il primo collegamento) |
+| Sorgente                                                                 | "source" all'interno del tag "support"                                                                  |

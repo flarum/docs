@@ -30,7 +30,7 @@ Nếu bạn đang muốn giải quyết một lỗi hoặc thiếu sót của l�
 - [Các lập trình viên giải thích về quá trình phát triển tiện ích mở rộng](https://discuss.flarum.org/d/6320-extension-developers-show-us-your-workflow)
 - [Mẹo namespace tiện ích mở rộng](https://discuss.flarum.org/d/9625-flarum-extension-namespacing-tips)
 - [Tài liệu Mithril js](https://mithril.js.org/)
-- [Tài liệu API Laravel](https://laravel.com/api/8.x/)
+- [Tài liệu API Laravel](https://laravel.com/api/11.x/)
 - [Tài liệu API Flarum](https://api.flarum.org)
 - [ES6 cheatsheet](https://github.com/DrkSephy/es6-cheatsheet)
 

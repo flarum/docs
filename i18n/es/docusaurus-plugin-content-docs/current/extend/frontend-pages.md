@@ -26,6 +26,37 @@ export default class CustomPage extends Page {
 }
 ```
 
+### Forum Page Structure
+
+Flarum's forum frontend uses a generic page structure, which is defined in `flarum/common/components/PageStructure`. This structure is used by all forum pages, and is recommended for use in extensions as well. You will have noticed that each forum page has a hero, sidebar, and content area among other things. These are all defined in `PageStructure` and can be used in your extension as well.
+
+For example, a custom page component can use the `PageStructure` component as follows:
+
+```tsx
+import PageStructure from 'flarum/forum/components/PageStructure';
+
+export default class AcmePage extends Page {
+  view() {
+    return (
+      <PageStructure
+        className="AcmePage" // Optional but recommended.
+        hero={() => <CustomHero />} // Optional. Extends `flarum/forum/components/Hero`
+        sidebar={() => <div>Custom Sidebar</div>} // Optional.
+        loading={this.loading} // Optional.
+      >
+        <div>Custom Content</div>
+      </PageStructure>
+    );
+  }
+}
+```
+
+:::info Why use `PageStructure`?
+
+Using `PageStructure` is not required, but it is recommended. It provides a consistent structure for all pages, and allows other extensions such as themes to extend and customize pages more easily.
+
+:::
+
 ### Uso de Resolvers de Rutas
 
 Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities. To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.

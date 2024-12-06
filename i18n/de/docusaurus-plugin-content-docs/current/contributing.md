@@ -4,7 +4,7 @@ Interested in contributing to Flarum development? That's great! From [opening a 
 
 Before contributing, please read the [code of conduct](code-of-conduct.md).
 
-This document is a guide for developers who want to contribute code to Flarum. If you're just getting started, we recommend that you read the [Getting Started](/extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
+This document is a guide for developers who want to contribute code to Flarum. If you're just getting started, we recommend that you read the [Getting Started](./extend/start.md) documentation in the Extension docs to understand a bit more about how Flarum works.
 
 ## Why Contribute to Flarum?
 
@@ -31,6 +31,11 @@ Since Flarum is so extension-driven, we highly recommend [our extension docs](ex
 [flarum/flarum](https://github.com/flarum/flarum) is a "skeleton" application which uses Composer to download the core package and a bunch of extensions. Source code for Flarum core, extensions, and all packages used by the aforementioned is located in the Flarum monorepo [flarum/framework](https://github.com/flarum/framework). In order to contribute to these, you'll need to fork and clone the monorepo repository locally, and then add it to your dev environment as a [Composer path repository](https://getcomposer.org/doc/05-repositories.md#path):
 
 ```bash
+git clone https://github.com/flarum/flarum.git
+cd flarum
+
+# Or, when you want to clone directly into the current directory
+git clone https://github.com/flarum/flarum.git .
 git clone https://github.com/flarum/flarum.git
 cd flarum
 
@@ -157,7 +162,7 @@ Flarum's CSS classes roughly follow the [SUIT CSS naming conventions](https://gi
 
 ### Übersetzungen
 
-We use a [standard key format](/extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
+We use a [standard key format](./extend/i18n.md#appendix-a-standard-key-format) to name translation keys descriptively and consistently.
 
 ## Contributor License Agreement
 
