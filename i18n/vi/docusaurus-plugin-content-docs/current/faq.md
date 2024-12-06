@@ -2,7 +2,7 @@
 
 ### Flarum có ổn định không?
 
-Có! After 6 years of development, Flarum **1.0.0** was released, and we are now spear-heading the development of Flarum **2.0**.
+Có! After 6 years of development, Flarum **1.0.0** was released, and we are now spearheading the development of Flarum **2.0**.
 
 ### Điều gì tiếp theo sau phiên bản ổn định?
 
