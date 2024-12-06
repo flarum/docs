@@ -49,7 +49,8 @@ module.exports = {
         'themes',
         'mail',
         'scheduler',
-        'console'
+        'console',
+        'queue'
       ]
     },
     {
