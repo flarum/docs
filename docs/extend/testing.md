@@ -21,7 +21,7 @@ $ flarum-cli infra backendTesting
 :::
 
 ```bash
-composer require --dev flarum/testing:^1.0
+composer require --dev flarum/testing:^2.0
 ```
 
 Then, you will need to set up a file structure for tests, and add PHPUnit configuration:
