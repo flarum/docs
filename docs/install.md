@@ -47,7 +47,7 @@ If you don't have SSH access to your server, or you prefer not to use the comman
 Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Afterwards, run this command in an empty location that you want Flarum to be installed in:
 
 ```bash
-composer create-project flarum/flarum:^2.0.0-beta .
+composer create-project flarum/flarum --stability=beta .
 ```
 
 While this command is running, you can configure your web server. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
