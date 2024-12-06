@@ -3,6 +3,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Introduction',
+      className: 'menu__intro-category',
       collapsible: false,
       items: [
         'README',
@@ -15,6 +16,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Contribute',
+      className: 'menu__contribute-category',
       collapsible: false,
       items: [
         'contributing',
@@ -29,6 +31,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Setting Up',
+      className: 'menu__install-category',
       collapsible: false,
       items: [
         'composer',
@@ -40,6 +43,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Management',
+      className: 'menu__manage-category',
       collapsible: false,
       items: [
         'admin',
@@ -56,6 +60,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Advanced',
+      className: 'menu__advanced-category',
       collapsible: false,
       items: [
         'rest-api',
@@ -69,6 +74,7 @@ module.exports = {
       type: 'category',
       label: 'Main Concepts',
       collapsible: false,
+      className: 'menu__intro-category',
       items: [
         'extend/README',
         'extend/start',
@@ -84,6 +90,7 @@ module.exports = {
       type: 'category',
       label: 'Update Guides',
       collapsible: false,
+      className: 'menu__update-category',
       items: [
         // 'extend/update-2_x',
         'extend/update-2_0',
@@ -94,6 +101,7 @@ module.exports = {
       type: 'category',
       label: 'Reference Guides',
       collapsible: false,
+      className: 'menu__refs-category',
       items: [
         'extend/admin',
         'extend/backend-events',
@@ -116,6 +124,7 @@ module.exports = {
       type: 'category',
       label: 'Advanced Guides',
       collapsible: false,
+      className: 'menu__advanced-category',
       items: [
         'extend/api-throttling',
         'extend/assets',

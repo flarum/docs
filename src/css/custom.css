@@ -153,7 +153,7 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   margin-top: 1.5rem;
 }
 
-.menu__list-item-collapsible .menu__link:not(.menu__link--active) {
+.menu__list-item-collapsible .menu__link {
   color: var(--ifm-color-black);
 }
 
@@ -279,4 +279,36 @@ img[alt="Flarum Home Screenshot"] {
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link::before {
+  --size: 16px;
+  width: var(--size);
+  height: var(--size);
+  margin-right: calc(var(--size) / 2);
+  margin-left: calc(0px - var(--size) / 2);
+  filter: invert(1);
+  display: inline-block;
+}
+
+.menu__intro-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/book-open.svg");
+}
+.menu__contribute-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/lifebuoy.svg");
+}
+.menu__install-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/arrow-down-tray.svg");
+}
+.menu__manage-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/adjustments-vertical.svg");
+}
+.menu__advanced-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/light-bulb.svg");
+}
+.menu__update-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/document-arrow-up.svg");
+}
+.menu__refs-category > .menu__list-item-collapsible > .menu__link::before {
+  content: url("../assets/cube.svg");
 }

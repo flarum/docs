@@ -4,6 +4,7 @@
       "type": "category",
       "label": "Introduction",
       "collapsible": false,
+      "className": "menu__intro-category",
       "items": [
         "README",
         "code-of-conduct",
@@ -16,6 +17,7 @@
       "type": "category",
       "label": "Contribute",
       "collapsible": false,
+      "className": "menu__contribute-category",
       "items": [
         "contributing",
         "contributing-docs-translations",
@@ -30,6 +32,7 @@
       "type": "category",
       "label": "Setting Up",
       "collapsible": false,
+      "className": "menu__install-category",
       "items": [
         "composer",
         "install",
@@ -41,6 +44,7 @@
       "type": "category",
       "label": "Management",
       "collapsible": false,
+      "className": "menu__manage-category",
       "items": [
         "admin",
         "config",
@@ -56,6 +60,7 @@
       "type": "category",
       "label": "Advanced",
       "collapsible": false,
+      "className": "menu__advanced-category",
       "items": [
         "rest-api",
         "extenders"
@@ -67,6 +72,7 @@
       "type": "category",
       "label": "Main Concepts",
       "collapsible": false,
+      "className": "menu__intro-category",
       "items": [
         "extend/README",
         "extend/start",
@@ -82,6 +88,7 @@
       "type": "category",
       "label": "Reference Guides",
       "collapsible": false,
+      "className": "menu__update-category",
       "items": [
         "extend/admin",
         "extend/backend-events",
@@ -104,6 +111,7 @@
       "type": "category",
       "label": "Advanced Guides",
       "collapsible": false,
+      "className": "menu__refs-category",
       "items": [
         "extend/api-throttling",
         "extend/assets",
@@ -126,6 +134,7 @@
       "type": "category",
       "label": "Update Guides",
       "collapsible": false,
+      "className": "menu__advanced-category",
       "items": [
         "extend/update-1_x",
         "extend/update-1_0",
