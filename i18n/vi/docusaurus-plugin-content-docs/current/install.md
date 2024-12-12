@@ -47,7 +47,7 @@ If you don't have SSH access to your server, or you prefer not to use the comman
 Flarum sử dụng [Composer](https://getcomposer.org) để quản lý các phần phụ thuộc và tiện ích mở rộng của nó. Nếu bạn không quen thuộc với nó, hãy đọc [hướng dẫn của chúng tôi](composer.md) để biết thông tin về nó là gì và cách thiết lập nó. Sau đó, chạy lệnh này ở một vị trí trống mà bạn muốn cài đặt Flarum:
 
 ```bash
-composer create-project flarum/flarum --stability=beta .
+composer create-project flarum/flarum:^2.0.0 --stability=beta .
 ```
 
 Trong khi lệnh này đang chạy, bạn có thể định cấu hình máy chủ web của mình. Bạn sẽ cần đảm bảo rằng webroot của mình được đặt thành `/path/to/your/forum/public` và thiết lập [Rewriting URL](#url-rewriting) như theo hướng dẫn bên dưới.
