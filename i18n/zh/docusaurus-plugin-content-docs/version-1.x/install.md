@@ -53,7 +53,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 在安装 Flarum 之前，您需要先在机器上 [安装 Composer](https://getcomposer.org)。 然后，在要安装 Flarum 的空白目录下执行此命令： If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. 然后，在要安装 Flarum 的空白目录下执行此命令：
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum:^1.8.0 .
 ```
 
 您可以在命令执行期间配置您的 Web 服务器。 您可以在命令执行期间配置您的 Web 服务器。 请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-rewriting)。
@@ -63,7 +63,7 @@ composer create-project flarum/flarum .
 如果您还想从管理面板安装和升级扩展程序，您还需要安装[扩展程序管理器](extensions.md)扩展。
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
