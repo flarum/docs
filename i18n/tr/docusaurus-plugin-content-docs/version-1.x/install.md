@@ -53,7 +53,7 @@ If you don't have SSH access to your server or you prefer not to use the command
 Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum:^1.8.0 .
 ```
 
 Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre \[URL Yeniden Yazma\] (# url-yeniden yazma) ayarlamanız gerekir.
@@ -63,7 +63,7 @@ Her şey hazır olduğunda, bir web tarayıcısında forumunuza gidin ve kurulum
 If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
