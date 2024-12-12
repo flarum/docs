@@ -53,7 +53,7 @@ If you don't have SSH access to your server or you prefer not to use the command
 Flarum utiliza [Composer](https://getcomposer.org) para gestionar sus dependencias y extensiones. Antes de instalar Flarum, necesitarás [instalar Composer](https://getcomposer.org) en tu máquina. Después, ejecuta este comando en una ubicación vacía en la que quieras que se instale Flarum:
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum:^1.8.0 .
 ```
 
 Mientras se ejecuta este comando, puede configurar su servidor web. Tendrás que asegurarte de que tu webroot está configurado en `/ruta/para/su/foro/public`, y configurar el [URL Rewriting](#url-rewriting) según las instrucciones siguientes.
@@ -63,7 +63,7 @@ Cuando todo esté listo, navega a tu foro en un navegador web y sigue las instru
 If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
