@@ -53,7 +53,7 @@ If you don't have SSH access to your server or you prefer not to use the command
 Flarum uses [Composer](https://getcomposer.org) to manage its dependencies and extensions. If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. Sau đó, chạy lệnh này ở một vị trí trống mà bạn muốn cài đặt Flarum:
 
 ```bash
-composer create-project flarum/flarum .
+composer create-project flarum/flarum:^1.8.0 .
 ```
 
 Trong khi lệnh này đang chạy, bạn có thể định cấu hình máy chủ web của mình. You will need to make sure your webroot is set to `/path/to/your/forum/public`, and set up [URL Rewriting](#url-rewriting) as per the instructions below.
@@ -63,7 +63,7 @@ Khi mọi thứ đã sẵn sàng, hãy điều hướng đến diễn đàn củ
 If you wish to install and update extensions from the admin dashboard, you need to also install the [Extension Manager](extensions.md) extension.
 
 ```bash
-composer require flarum/extension-manager:*
+composer require flarum/extension-manager:"*"
 ```
 
 :::warning
