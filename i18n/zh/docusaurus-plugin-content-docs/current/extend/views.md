@@ -58,6 +58,6 @@ use Illuminate\Contracts\View\Factory;
 
 return [
     (new Extend\View)
-        ->extendNamespace('acme.hello-world', __DIR__.'/override_views');
+        ->extendNamespace('acme.hello-world', __DIR__.'/override_views'),
 ];
 ```
