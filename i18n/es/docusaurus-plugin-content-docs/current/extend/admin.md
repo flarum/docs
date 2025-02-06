@@ -33,7 +33,7 @@ export { default as extend } from './extend';
 
 Se recomienda añadir campos de configuración para los elementos simples. Como regla general, si sólo necesitas almacenar cosas en la tabla de ajustes, esto debería ser suficiente para ti.
 
-To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page.
+. Detrás de escena, la aplicación convierte tus configuraciones en un [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist). Puedes pasar un número de prioridad como el segundo argumento, el cual determinará el orden de las configuraciones en la página.
 
 Aquí hay un ejemplo con un elemento switch (booleano):
 
@@ -45,7 +45,7 @@ return [
   new Extend.Admin()
     .setting(
       () => ({
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
+        setting: 'acme-interstellar.coordinates', //Esta es la clave bajo la cual se guardarán las configuraciones en la tabla de configuraciones en la base de datos.
         label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true), // The label to be shown letting the admin know what the setting does.
         help: app.translator.trans('acme-interstellar.admin.coordinates_help', {}, true), // Optional help text where a longer explanation of the setting can go.
         },
