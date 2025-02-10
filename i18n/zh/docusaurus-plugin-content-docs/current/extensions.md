@@ -80,22 +80,22 @@ Each individual extension page of the admin dashboard provides a convenient way 
 - 查看扩展提供的设置并更改它们.
 - 回滚一个扩展的迁移，以删除它所做的任何数据库修改（这可以通过重置按钮来完成）。 这将删除与该扩展相关的所有数据，并且是不可逆的。 只有当你要删除一个扩展程序，并且不打算再次安装它时，才应该这样做。 当然这不是非要做的事情，选择权在您手中。
 - 如果有的话，请查看扩展的README。
-- See the extension's version.
-- Uninstall the extension if the extension manager is installed.
+- 查看扩展的版本。
+- 如果已安装扩展管理器，请卸载该扩展。
 
-## Configuring additional extension repository sources
+## 配置其他扩展存储库源
 
-The extension manager uses `composer` under the hood, and as such, it looks for extension packages in the same places as `composer`. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the extension manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the extension manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist.
+The extension manager uses `composer` under the hood, and as such, it looks for extension packages in the same places as `composer`. By default, this is [Packagist](https://packagist.org/). However, you can configure additional sources for the extension manager to look for extensions in. This is useful if you want to install an extension that is not available on Packagist. 默认情况下，这是 [封装](https://packagist.org/)。 然而，您可以配置扩展管理器的额外源来查找扩展。 如果您想要安装一个在 Packagist 上不可用的扩展，这是有用的。
 
-In the admin page of the extension manager, clicking the **Add Repository** button will open a modal where you can enter the name and URL of the repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add.
+In the admin page of the extension manager, clicking the **Add Repository** button will open a modal where you can enter the name and URL of the repository you want to add. The name is just a label for the repository, and can be anything you want. The URL should be the URL of the repository which depends on the type of repository you want to add. 名称只是仓库的标签，可以是你想要的东西。 URL应该是仓库的 URL，取决于你想要添加的仓库类型。
 
-### Adding a repository from a VCS
+### 从 VCS 添加仓库
 
-If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc), the URL should be the URL of the repository's VCS. For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL into the URL field. If it is a private source, you will need to enter an authentication method through the **New authentication method** button. The token can be generated from your VCS provider's website, and the host should be the domain of the VCS provider (e.g. `github.com`). For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL into the URL field. If it is a private source, you will need to enter an authentication method through the **New authentication method** button. The token can be generated from your VCS provider's website, and the host should be the domain of the VCS provider (e.g. `github.com`).
+If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc), the URL should be the URL of the repository's VCS. For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL into the URL field. If it is a private source, you will need to enter an authentication method through the **New authentication method** button. The token can be generated from your VCS provider's website, and the host should be the domain of the VCS provider (e.g. `github.com`). 例如，如果您在https://github.com/acme/flarum-extension，您可以在 URL 字段中输入该 URL。 如果是私有源，则需要通过“新建身份验证方法”按钮 令牌可以从您的 VCS 提供商的网站生成，并且主机应该是 VCS 提供商的域（例如github.com)。
 
-### Adding a composer repository
+### 添加 composer 存储库
 
-Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
+Extiverse 提供对高级扩展的访问。 这是 composer 存储库的一个很好的示例。 您将指定网址为 `https://flarum.org/composer/` 名称为 `premium`。 You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
