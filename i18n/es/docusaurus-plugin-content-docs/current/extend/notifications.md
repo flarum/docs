@@ -298,6 +298,12 @@ Abre tu index.js (el del foro) y empieza importando tu plantilla de notificació
 
 Asegúrate de sustituir `{nameOfNotification}` por el nombre de la notificación en tu plano PHP (`getType()`) y sustituye `{NotificationTemplate}` por el nombre de la plantilla de notificación JS que acabamos de crear. (¡Asegúrate de que se importa!)
 
+:::tip
+
+If the subject of your notification is a new model, make sure you have a frontend represantation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
+
+:::
+
 Vamos a dar a los usuarios una opción para cambiar la configuración de su notificación. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
 De [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
