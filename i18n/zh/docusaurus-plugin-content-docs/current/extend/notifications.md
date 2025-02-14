@@ -314,6 +314,12 @@ Open up your index.js (the forum one) and start off by importing your newly crea
 
 Make sure to replace `{nameOfNotification}` with the name of the notification in your PHP blueprint (`getType()`) and replace `{NotificationTemplate}` with the name of the JS notification template we just made! (Make sure it's imported!) (Make sure it's imported!)
 
+:::tip
+
+If the subject of your notification is a new model, make sure you have a frontend represantation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
+
+:::
+
 Let's give users an option to change their settings for your notification. Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
 From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
