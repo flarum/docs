@@ -298,6 +298,12 @@ Apri il tuo index.js (quello del forum) e inizia importando il modello di notifi
 
 Assicurati di sostituire `{nameOfNotification}`con il nome della notifica nel tuo progetto PHP (`getType()`) e sostituisci `{NotificationTemplate}` con il nome del modello di notifica JS che abbiamo appena creato! (Assicurati che sia importato!)
 
+:::tip
+
+If the subject of your notification is a new model, make sure you have a frontend represantation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
+
+:::
+
 Diamo agli utenti un'opzione per modificare le loro impostazioni per la tua notifica. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
 Aggiungi semplicemente il nome della tua notifica (dal progetto), un'icona che desideri mostrare e una descrizione della notifica e il gioco è fatto!
