@@ -97,20 +97,20 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 Extiverse 提供对高级扩展的访问。 这是 composer 存储库的一个很好的示例。 您将指定网址为 `https://flarum.org/composer/` 名称为 `premium`。 您还需要通过**“新建认证方法”**按钮输入一个认证方法。 令牌可以从您的 Flarum 账户的[“订阅”](https://flarum.org/dashboard/subscriptions)页面通过“说明”按钮生成。
 
-* Type: `HTTP Bearer`
-* Host: `flarum.org`
+* 类型: `HTTP Bearer`
+* 域名： `flarum.org`
 
-![Configure repositories](./assets/config-repositories.png)
+![配置仓库](./assets/config-repositories.png)
 
 :::info
 
-The configured repositories and auth methods will be active for both the command line and the admin dashboard. If you configure them from the command line however, you must not include the flag `--global`. If you configure them from the command line however, you must not include the flag `--global`.
+The configured repositories and auth methods will be active for both the command line and the admin dashboard. If you configure them from the command line however, you must not include the flag `--global`. 但是，如果你从命令行配置了它们，你不能包含标志 `--global`。
 
 :::
 
-## Installing Non-stable extensions
+## 正在安装不稳定扩展
 
-If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
+如果基于任何原因您想安装一个不稳定的扩展(例如： a beta, alpha 或 RC 版本)，您必须首先更新 **最小稳定性** 设置到想要的稳定性上。
 
 * If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
 * If you set it to Beta, you will be able to install beta, RC and stable versions.
