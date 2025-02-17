@@ -44,7 +44,7 @@
 * 论坛页面上显示的报错
 * 浏览器控制台中显示的报错（Chrome：更多工具 -> 开发者工具 -> Console)
 * 服务器错误日志中记录的内容（例如：`/var/log/nginx/error.log`）
-* Recorded in PHP-FPM's error log (e.g. `/var/log/php8.x-fpm.log`)
+* 记录在 PHP-FPM 的错误日志中（例如 `/var/log/php8.x-fpm.log`）
 * Flarum 日志记录的报错（`storage/logs/flarum.log`）
 
 将收集到的所有信息复制到记事本中，整理好并做一些注解，比如错误是 *何时* 发生的、当错误发生时您在 *做什么*、您探索出来的问题发生和不发生的条件。 请务必附加上你已经知道的关于问题复现条件的信息。 请尽可能详尽地提供服务器环境信息，如操作系统版本、Web 服务器版本、PHP 版本和处理程序等。
