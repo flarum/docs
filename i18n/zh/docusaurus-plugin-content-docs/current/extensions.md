@@ -95,7 +95,7 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 ### 添加 composer 存储库
 
-Extiverse 提供对高级扩展的访问。 这是 composer 存储库的一个很好的示例。 您将指定网址为 `https://flarum.org/composer/` 名称为 `premium`。 You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
+Extiverse 提供对高级扩展的访问。 这是 composer 存储库的一个很好的示例。 您将指定网址为 `https://flarum.org/composer/` 名称为 `premium`。 您还需要通过**“新建认证方法”**按钮输入一个认证方法。 令牌可以从您的 Flarum 账户的[“订阅”](https://flarum.org/dashboard/subscriptions)页面通过“说明”按钮生成。
 
 * Type: `HTTP Bearer`
 * Host: `flarum.org`
