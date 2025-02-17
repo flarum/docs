@@ -108,7 +108,7 @@ The configured repositories and auth methods will be active for both the command
 
 :::
 
-## Installing Non-stable extensions
+## 正在安装不稳定扩展
 
 If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
 
