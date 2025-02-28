@@ -24,7 +24,7 @@ Anche in questo caso, la risposta è "prima le prime cose". Se non abbiamo ancor
 
 ### Potrò migrare il mio forum su Flarum?
 
-Attualmente non forniamo software di migrazione ufficiali, ma ci sono molte soluzioni della comunità già pronte all'uso. Una volta che siamo sicuri che Flarum è pronto per essere utilizzato in produzione, inizieremo a creare strumenti per importare dati da altri software per forum come esoTalk, FluxBB, phpBB, Discourse e altri.
+We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
 
 ### Potrò migrare il mio forum su Flarum?
 
