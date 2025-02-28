@@ -24,7 +24,7 @@ Burada yine cevap “ilk önce şeyler”dir. Henüz bir sorunu çözmediysek (v
 
 ### Forumumu Flarum'a taşıyabilecek miyim?
 
-We don't currently provide official migrators, but there are many community solutions out there. Flarum'un üretimde kullanılmaya hazır olduğundan emin olduktan sonra, esoTalk, FluxBB, phpBB, Discourse ve diğerleri gibi diğer forum yazılımlarından verileri içeri aktarmak için araçlar oluşturmaya başlayacağız.
+We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
 
 ### Neden henüz [sorunu buraya ekleyin] sorunu çözmediniz?
 
