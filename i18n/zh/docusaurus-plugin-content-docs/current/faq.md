@@ -24,7 +24,7 @@
 
 ### 我可以将我的论坛迁移到 Flarum 上吗？
 
-我们目前没有提供官方的迁移工具，但是现在已有很多由社区提供的解决办法。 一旦我们有信心 Flarum 可以用于生产环境，我们将打造从其他论坛软件（例如 esoTalk、FluxBB、phpBB、Discourse等）导入数据的工具。
+We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
 
 ### 我如何加入 Flarum 团队？
 
