@@ -24,7 +24,7 @@ Chúng tôi muốn xây dựng vô số tính năng và tiện ích mở rộng 
 
 ### Có thể di chuyển diễn đàn của tôi qua Flarum được không?
 
-Chúng tôi hiện không cung cấp người di cư chính thức, nhưng có rất nhiều giải pháp cộng đồng hiện có. Tương đối sớm, chúng tôi sẽ bắt đầu xây dựng các công cụ để nhập dữ liệu từ các phần mềm diễn đàn khác như esoTalk, FluxBB, phpBB, Discourse và các phần mềm khác.
+We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
 
 ### Làm thế nào để gia nhập đội ngũ Flarum?
 
