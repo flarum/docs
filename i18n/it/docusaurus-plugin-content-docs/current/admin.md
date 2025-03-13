@@ -2,10 +2,10 @@
 
 Il pannello di amministrazione di Flarum un'interfaccia user-friendly per la gestione del tuo forum. È disponibile solo per gli utenti nel gruppo [gruppo](permissions.md) "Admin". È disponibile solo per gli utenti nel gruppo [gruppo](permissions.md) "Admin".
 
-The Admin Dashboard has the following sections, being:
-- **Dashboard** - Shows the main Admin Dashboard, containing statistics and other relevant information.
-- **Basics** - Shows the options to set basic forum details such as Name, Description, and Welcome Banner.
-- **Email** - Allows you to configure your E-Mail settings. Refer [here](https://docs.flarum.org/mail) for more information.
+Il cruscotto di amministrazione ha le seguenti sezioni:
+- **Cruscotto** - Mostra il cruscotto principale dell'amministratore, contenente statistiche e altre informazioni rilevanti.
+- **Base** - Mostra le opzioni per impostare i dettagli di base del forum come Nome, Descrizione e Banner di Benvenuto.
+- **Email** - Consente di configurare le impostazioni di E-Mail. Refer [here](https://docs.flarum.org/mail) for more information.
 - **Permissions** - Shows the permissions for each user group, and allows you to configure global and specific scopes.
 - **Appearance** - Allows you to customize the forum's colors, branding and add additional CSS for customization.
 - **Users** - Provides you with a paginated list of all the users in the forum, and grants you the ability to edit the user or take administrative actions.
