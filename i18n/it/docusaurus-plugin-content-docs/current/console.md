@@ -28,7 +28,7 @@ Per visualizzare l'elenco dei comandi disponibili, utilizzare il comando list
 
 ### info
 
-`php flarum info`
+`info php flarum`
 
 Get information about Flarum's core and installed extensions. Questo è molto utile per il debug dei problemi e dovrebbe essere condiviso quando si richiede supporto.
 
@@ -44,7 +44,7 @@ Cancella la cache del backend di Flarum, inclusi js / css generati, cache del fo
 
 Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, logos, etc). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
 
-### migrate
+### migra
 
 `php flarum migrate`
 
