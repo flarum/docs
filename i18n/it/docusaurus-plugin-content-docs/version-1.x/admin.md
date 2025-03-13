@@ -4,7 +4,7 @@ Il pannello di amministrazione di Flarum un'interfaccia user-friendly per la ges
 È disponibile solo per gli utenti nel gruppo <a href="permissions.md">gruppo</a> "Admin".
 Per accedere al pannello di amministrazione, clicca sul tuo **Nome** nell'angolo in alto a destra dello schermo, e scegli **Amministrazione**.
 
-The Admin Dashboard has the following sections, being:
+Il cruscotto di amministrazione ha le seguenti sezioni:
 
 - **Dashboard** - Shows the main Admin Dashboard, containing statistics and other relevant information.
 - **Basics** - Shows the options to set basic forum details such as Name, Description, and Welcome Banner.
