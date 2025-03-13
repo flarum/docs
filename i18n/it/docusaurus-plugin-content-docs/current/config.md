@@ -14,7 +14,7 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
   'offline' => false, // nessuna, alta, bassa o sicura.
   'database' =>
   array (
-    'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB, PostgreSQL, SQLite
+    'driver' => 'mysql', // il driver del database, ovvero MySQL, MariaDB, PostgreSQL, SQLite
     'host' => 'localhost', // l'host della connessione, localhost nella maggior parte dei casi a meno di non utilizzare un servizio esterno
     'database' => 'flarum', // il nome del database nell'istanza
     'username' => 'root', // nome utente del database
@@ -37,11 +37,11 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
 ### Modalità di manutenzione
 
 Flarum ha una modalità di manutenzione che può essere abilitata impostando la chiave `offline` nel file `config.php` su uno dei seguenti valori:
-* `none` - No maintenance mode.
-* `high` - No one can access the forum, not even admins.
-* `low` - Only admins can access the forum.
-* `safe` - Only admins can access the forum, and no extensions are booted.
+* `none` - Nessuna modalità di manutenzione.
+* `alta` - Nessuno può accedere al forum, nemmeno gli amministratori.
+* `bassa` - Solo gli amministratori possono accedere al forum.
+* `sicura` - Solo gli amministratori possono accedere al forum, e nessuna estensione è avviata.
 
-This can also be configured from the admin panel's advanced settings page:
+Questo può anche essere configurato dalla pagina delle impostazioni avanzate del pannello di amministrazione:
 
-![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
+![Attiva/Disattiva pagina avanzata](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
