@@ -2,7 +2,7 @@
 
 Oltre al pannello di amministrazione, Flarum fornisce diversi comandi eseguibili della console per aiutarti a gestire il tuo forum tramite il terminale.
 
-Using the console:
+Uso della console:
 
 1. `Collegarsi in ssh` nel server in cui è ospitata la tua installazione di flarum
 2. `cd` to the folder that contains the file `flarum`
