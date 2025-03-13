@@ -11,7 +11,7 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
 ```php
 <?php return array (
   'debug' => false, // abilita o disabilita il debug mode, utilizzato per la risoluzione dei problemi
-  'offline' => false, // none, high, low or safe.
+  'offline' => false, // nessuna, alta, bassa o sicura.
   'database' =>
   array (
     'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB, PostgreSQL, SQLite
@@ -34,9 +34,9 @@ Ecco una rapida panoramica di cosa significa con un file di esempio:
 );
 ```
 
-### Maintenance modes
+### Modalità di manutenzione
 
-Flarum has a maintenance mode that can be enabled by setting the `offline` key in the `config.php` file to one of the following values:
+Flarum ha una modalità di manutenzione che può essere abilitata impostando la chiave `offline` nel file `config.php` su uno dei seguenti valori:
 * `none` - No maintenance mode.
 * `high` - No one can access the forum, not even admins.
 * `low` - Only admins can access the forum.
