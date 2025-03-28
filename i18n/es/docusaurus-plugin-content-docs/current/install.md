@@ -17,7 +17,7 @@ Flarum 2.0 is currently in beta. It is not ready for production use.
 Antes de instalar Flarum, es importante comprobar que tu servidor cumple los requisitos. Para ejecutar Flarum, necesitarás:
 
 * **Apache** (con mod\_rewrite activado) o **Nginx**.
-* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
 * **One of the following databases**:
   * MySQL 5.7+ / 8.0.30+
   * MariaDB 10.3+
