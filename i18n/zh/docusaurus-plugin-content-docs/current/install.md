@@ -17,7 +17,7 @@ Flarum 2.0 is currently in beta. It is not ready for production use.
 在您安装 Flarum 之前，请确保您的服务器满足以下要求， 以便顺利的安装和运行 Flarum：
 
 * **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip
+* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
 * **One of the following databases**:
   * MySQL 5.7+ / 8.0.30+
   * MariaDB 10.3+
