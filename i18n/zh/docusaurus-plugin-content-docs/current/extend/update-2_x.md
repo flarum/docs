@@ -1,4 +1,4 @@
-# Updating For 2.x
+# 升级到 2.x
 
 :::tip
 
@@ -6,4 +6,5 @@ If you need help applying these changes or using new features, please start a di
 
 :::
 
-## 2.1 Changes
+## 2.1 的变更
+
