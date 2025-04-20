@@ -6,7 +6,7 @@ slug: /
 
 Flarum 是一款非常简洁的开源论坛软件。 它响应快速、简便易用，拥有打造一片成功的社区所需的所有功能。 它也极其可扩展，允许达到终极的可定制性。
 
-![Flarum Home Screenshot](./assets/home_screenshot.png)
+![Flarum 首页截图](./assets/home_screenshot.png)
 
 ## 目标
 
