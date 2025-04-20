@@ -12,7 +12,7 @@
 
 衷心感谢所有的捐款。 您可以在 [Github Sponsors](https://github.com/sponsors/flarum) 或 [OpenCollective](https://opencollective.com/flarum) 上捐款。
 
-但是，捐款并不会直接影响 Flarum 的开发速度。 We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
+但是，捐款并不会直接影响 Flarum 的开发速度。 我们还鼓励用户以其他方式做出贡献，如 [贡献代码](contributing.md)、 [构建扩展](./extend/README.md), 撰写文档，将Flarum翻译成其他语言，为 [社区论坛](https://discuss.flarum.org/)提供帮助和支持。 。并且只是整个社区的一种普遍积极的能量！
 
 ### Flarum 会有****的功能吗？ 什么时候有？ 为什么还没做呢？
 
@@ -24,7 +24,7 @@
 
 ### 我可以将我的论坛迁移到 Flarum 上吗？
 
-We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
+我们目前没有提供官方的迁移工具。 但我们确实推荐并支持 [Nitro Porter](https://discuss.flarum.org/d/31776) 作为社区软件之间的通用进出口工具。 目前它支持Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal 和 IPBoard。
 
 ### 我如何加入 Flarum 团队？
 
