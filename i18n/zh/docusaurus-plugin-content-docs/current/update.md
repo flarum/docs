@@ -2,7 +2,7 @@
 
 :::warning
 
-Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。 Please wait for the stable release before updating your forum.
 
 :::
 
