@@ -112,7 +112,7 @@ The configured repositories and auth methods will be active for both the command
 
 If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
 
-- If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
-- If you set it to Beta, you will be able to install beta, RC and stable versions.
-- If you set it to RC, you will be able to install RC and stable versions.
-- If you set it to Stable, you will only be able to install stable versions.
+- 如果您将其设置为 Alpha, 您将能够安装 alpha, beta, RC (Release Candidate) 和稳定版本。
+- 如果您将其设置为 Beta，您将能够安装测试、RC 和稳定版本。
+- 如果您将其设置为 RC，您将能够安装 RC 和稳定版本。
+- 如果您将其设置为稳定版本，您将只能安装稳定版本。
