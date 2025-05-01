@@ -28,7 +28,7 @@ Para hacer esta transpilación, tienes que trabajar en un entorno capaz. No, no 
 * Node.js y npm ([Descarga](https://nodejs.org/en/download/))
 * Webpack (`npm install -g webpack`)
 
-Esto puede ser complicado porque cada sistema es diferente. Desde el sistema operativo que usas, hasta las versiones de los programas que tienes instalados, pasando por los permisos de acceso de los usuarios... ¡me dan escalofríos sólo de pensarlo! Si tienes problemas, ~~dale recuerdos~~ utiliza [Google](https://google.com) para ver si alguien se ha encontrado con el mismo error que tú y ha encontrado una solución. Si no, pide ayuda en la [Comunidad Flarum](https://discuss.flarum.org) o en el [chat de Discord](https://flarum.org/discord/).
+Esto puede ser complicado porque cada sistema es diferente. Desde el sistema operativo que usas, hasta las versiones de los programas que tienes instalados, pasando por los permisos de acceso de los usuarios... ¡me dan escalofríos sólo de pensarlo! Si tienes problemas, ~~dale recuerdos~~ utiliza [Google](https://google.com) para ver si alguien se ha encontrado con el mismo error que tú y ha encontrado una solución. If not, ask for help from the [Flarum Community](https://discuss.flarum.org).
 
 Es hora de configurar nuestro pequeño proyecto de transpilación de JavaScript. Crea una nueva carpeta en tu extensión llamada `js`, y luego introduce un par de archivos nuevos. Una extensión típica tendrá la siguiente estructura de frontend:
 
