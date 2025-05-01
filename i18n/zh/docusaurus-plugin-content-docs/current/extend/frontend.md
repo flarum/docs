@@ -28,7 +28,7 @@ Flarum有两个分开的前端应用：
 * Node.js和npm ([下载](https://nodejs.org/en/download/))
 * Webpack (`npm install -g webpack`)
 
-这可能比较麻烦，因为每个人的系统都不一样。 从您正在使用的操作系统，到您已安装的程序版本，到用户访问权限——想想就令人胆寒。 如果你遇上了困难，~~帮我向他问好~~ 上[谷歌](https://google.com)查查是否有人遇到了同样的问题并找到解决方案。 如果找不到，可以去[Flarum社区](https://discuss.flarum.org)或者[Discord群聊](https://flarum.org/discord/)寻求帮助。
+这可能比较麻烦，因为每个人的系统都不一样。 从您正在使用的操作系统，到您已安装的程序版本，到用户访问权限——想想就令人胆寒。 如果你遇上了困难，~~帮我向他问好~~ 上[谷歌](https://google.com)查查是否有人遇到了同样的问题并找到解决方案。 If not, ask for help from the [Flarum Community](https://discuss.flarum.org).
 
 是时候设置我们的小 JavaScript 转译项目了。 在你的扩展中创建一个新文件夹，名为 `js`，然后再丢进去几个新文件。 一个典型拓展的前端结构是这样的：
 
