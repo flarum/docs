@@ -28,7 +28,7 @@ Per fare ci�, devi lavorare in un ambiente adatto. No, non il tipo di ambiente
 * Node.js e npm ([Download](https://nodejs.org/en/download/))
 * Webpack (`npm install -g webpack`)
 
-Questo pu� essere complicato perch� il sistema di ognuno � diverso. Dal sistema operativo che stai utilizzando, alle versioni del programma che hai installato, alle autorizzazioni di accesso dell'utente – Ci vengono i brividi solo a pensarci! Se incappi nei guai, ~~ti salutiamo~~ usa [Google](https://google.com) per vedere se qualcuno ha riscontrato il tuo stesso errore e ha trovato una soluzione. In caso contrario, chiedi aiuto nel [Forum di Flarum](https://flarumit.it) o su [Discord chat](https://flarum.org/discord/).
+Questo pu� essere complicato perch� il sistema di ognuno � diverso. Dal sistema operativo che stai utilizzando, alle versioni del programma che hai installato, alle autorizzazioni di accesso dell'utente – Ci vengono i brividi solo a pensarci! Se incappi nei guai, ~~ti salutiamo~~ usa [Google](https://google.com) per vedere se qualcuno ha riscontrato il tuo stesso errore e ha trovato una soluzione. If not, ask for help from the [Flarum Community](https://discuss.flarum.org).
 
 � ora di impostare il nostro piccolo progetto di traspilazione JavaScript. Crea una nuova cartella nella tua estensione chiamata `js`, quindi inserisci un paio di nuovi file. Una tipica estensione avr� la seguente struttura di frontend:
 
