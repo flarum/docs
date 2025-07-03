@@ -29,7 +29,7 @@ Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。
 
 ### 通过解压缩归档进行安装
 
-If you don't have SSH access to your server, or you prefer not to use the command line, you can install Flarum by unpacking an archive. 下面是可用的归档列表，请确保与您的 PHP 版本以及 public 路径偏好 (即是否有 public 路径) 相符。
+如果您没有服务器的 SSH 访问权限，或您不想使用命令行，您可以通过解压缩来安装 Flarum。 下面是可用的归档列表，请确保与您的 PHP 版本以及 public 路径偏好 (即是否有 public 路径) 相符。
 
 | Flarum 版本 | PHP 版本   | Public 路径 | 格式     | 归档                                                                                                                                                        |
 | --------- | -------- | --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ If you don't have SSH access to your server, or you prefer not to use the comman
 | 2.x       | 8.3 (推荐) | 有         | ZIP    | [flarum-v2.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.zip)                                   |
 | 2.x       | 8.2 (推荐) | 无         | TAR.GZ | [flarum-v2.x-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.2.tar.gz) |
 | 2.x       | 8.2 (推荐) | 有         | TAR.GZ | [flarum-v2.x-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.2.tar.gz)                             |
-| 2.x       | 8.2 (推荐) | 无         | ZIP    | [flarum-v2.x-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.2.zip)       |
+| 2.x       | 8.2 (推荐) | 无         | ZIP    | [flarum-v2.x-no-public dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.2.zip)       |
 | 2.x       | 8.2 (推荐) | 有         | ZIP    | [flarum-v2.x-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.2.zip)                                   |
 
 ### 使用命令行安装
