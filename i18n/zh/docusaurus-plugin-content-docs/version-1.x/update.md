@@ -1,6 +1,6 @@
 # 更新
 
-## From the Admin Dashboard
+## 从管理员控制面板
 
 :::info
 
