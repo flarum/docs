@@ -2,15 +2,15 @@
 
 :::warning
 
-Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。 Please wait for the stable release before updating your forum.
+Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。 请等待稳定的发布，然后更新您的论坛。
 
 :::
 
-## From the Admin Dashboard
+## 从管理员控制面板
 
 :::info
 
-If you have the [extension manager](./extensions#extension-manager) extension installed you can simply run the update from its interface and skip the general steps. You should still read the ["Major Version Update Guide"](#major-version-update-guides) if you are updating from v1 to v2.
+如果您安装了 [扩展管理器](./extensions#extension-manager) 扩展，您可以简单地从其接口运行更新并跳过一般步骤。 如果您正在从 v1 到 v2 更新，您仍然应该阅读 ["主要版本更新指南"](#major-version-update-guides)。
 
 :::
 
@@ -18,7 +18,7 @@ If you have the [extension manager](./extensions#extension-manager) extension in
 
 您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
 
-If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate ["Major Version Update Guide"](#major-version-update-guides) before running the general upgrade steps.
+如果在主要版本中更新(例如 <=0.1.0 to 1.x.x, 1.x.x 到 2.x.x, ... , 请确保在运行一般升级步骤之前阅读相应的 ["主要版本更新指南"](#major-version-update-guides)
 
 ## 一般步骤
 
