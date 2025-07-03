@@ -1,15 +1,15 @@
-# Queue
+# 队列
 
-If you're just starting out, you won't need a queue. But once you reach a certain scale, you cannot go without one.
+如果你刚刚开始，你将不需要队列。 但一旦你达到一定的比额，你就不能没有一个比额表。
 
 ## 为什么我要关心？
 
-A Flarum installation that has no queue configured, will process a wide variety of tasks during the request of a user. The best example of such a task are email notifications. Flarum Subscriptions, Friends of Flarum Follow Tags and IanM Follow Users are just a few extensions that trigger email notifications for new activity. It is probably not a mystery that having a community of ten users will not be much of an issue in this regard. However once you have thousands it is far more likely that these notifications will take a long time, and affect the interaction of users on your community.
+未配置队列的 Flarum 安装将在用户请求时处理各种任务。 这种任务的最好例子是电子邮件通知。 Flarum 订阅，Flarum 跟随标签的朋友和IanM 跟随用户只是触发新活动电子邮件通知的少数扩展。 在这方面，由10个用户组成的社区可能并不是一个神秘的问题。 然而，一旦您拥有数千个通知，这些通知很可能需要很长时间。 并影响您所在社区的用户之间的互动。
 
-To resolve this increasing burden, you can run a Queue. A queue runs on your server, it does not interact with the user and their requests. A user request, however, can dispatch tasks to the queue.
+要解决这个日益增加的负担，你可以运行一个队列。 一个队列运行在您的服务器上，它不会与用户及其请求交互。 然而，用户请求可以发送任务到队列。
 
-## What extensions offer Queue functionality?
+## 什么扩展提供队列功能？
 
-The best way currently to identify what extensions add a queue is by looking at the [Extensions directory at Flarum.org](https://flarum.org/extensions?tableSearch=queue). The simplest implementation currently is the [Database Queue](https://flarum.org/extension/blomstra/database-queue) which re-uses the [scheduler](scheduler.md).
+目前最好的方法是通过查看[Flarum.org上的扩展目录](https://flarum.org/extensions?tableSearch=queue)。 目前最简单的实现是 [数据库队列](https://flarum.org/extension/blomstra/database-queue)，它重复使用 [调度器](scheduler.md)。
 
-Understand that each extension requires some form of configuration before it can work, make sure to read the instructions.
+了解每个扩展需要某种形式的配置才能工作，请务必阅读说明。
