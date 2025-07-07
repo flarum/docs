@@ -1,9 +1,10 @@
 name: Deploy to production
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -12,11 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: executing remote upgrade
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm ci
+      - run: npm run build --if-present
+
+      - name: copy compiled assets to remote
+        uses: appleboy/scp-action@v4
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          script: cd /var/www/docs.flarum.org && ./deploy.sh
+          source: build
+          target: public_html/docs.flarum.org
