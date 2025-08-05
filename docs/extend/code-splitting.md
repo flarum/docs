@@ -47,7 +47,7 @@ import('ext:flarum/tags/common/components/TagSelectionModal').then(({ default: T
 
 ## Extending/Overriding/Adding split modules methods
 
-If you wish to extend, override or add a method to a split module, rather than directly accessing the module prototype `Component.prototype` or passing the prototype to `extend` or `override`, you have to pass the import path as a first argument to either `extend` or `override` utilities. The callback will be executed when the module is loaded. Checkout [Changing The UI Part 3](./frontend#changing-the-ui-part-3) for more details.
+If you wish to extend, override or add a method to a split module, rather than directly accessing the module prototype `Component.prototype` or passing the prototype to `extend` or `override`, you have to pass the import path as a first argument to either `extend` or `override` utilities. The callback will be executed when the module is loaded. Checkout [Changing The UI Part 3](frontend.md#changing-the-ui-part-3) for more details.
 
 ## Code APIs that support lazy loading
 
