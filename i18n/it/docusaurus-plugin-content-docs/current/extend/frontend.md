@@ -70,7 +70,7 @@ js
     "build-typings": "<%= params.jsPackageManager %> run clean-typings && ([ -e src/@types ] && cp -r src/@types dist-typings/@types || true) && tsc && <%= params.jsPackageManager %> run post-build-typings",
     "post-build-typings": "find dist-typings -type f -name '*.d.ts' -print0 | xargs -0 sed -i 's,../src/@types,@types,g'",
     "check-typings": "tsc --noEmit --emitDeclarationOnly false",
-    "check-typings-coverage": "typescript-coverage-report",
+    "check-typings-coverage": "typescript-coverage-report"
   }
 }
 ```
