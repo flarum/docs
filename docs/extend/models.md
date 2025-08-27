@@ -103,6 +103,56 @@ To rename columns, use the `Migration::renameColumns` helper. The `renameColumns
 return Migration::renameColumns('users', ['from' => 'to']);
 ```
 
+### Conditional Migrations
+
+When integrating with other extensions, either through [optional dependencies](extending-extensions.md#optional-dependencies) or dealing with multiple supported versions at the same time, you might find a need to only modify a table or create a constraint if another table or column exists. Conditional migrations allow you to re-attempt a migration until a given condition is met, so that they can run at the correct time when the dependency is eventually enabled or updated.
+
+To create a conditional migration, simply add a `when` callback to your migration array. Returning a truthy value will continue to the `up` method and the migration won't run again. Returning a falsy value will skip the `up` method and the migration will be attempted again next time your extension is disabled and re-enabled or `php flarum migrate` is executed.
+
+The `down` method of the migration will always run if the `up` method was successfully executed at some point.
+If `up` never ran, `down` will never be called either.
+
+When using conditional migrations, make sure to require Flarum version `^1.7` in your `composer.json` and when possible add the extended extension to `extra.flarum-extension.optional-dependencies` to ensure proper loading order.
+
+:::caution
+
+There is currently no mechanism to reset a conditonal migration if the extension you depend on has been purged / rolled back.
+Make sure your code can handle the `down` migration gracefully if the migration changes have been cancelled as a result of another extension rolling back.
+
+Migrations from other extensions currently don't run during another extension activation.
+Users of your extension must run `php flarum migrate` after the condition is met for the conditional migration to apply.
+Alternatively, they can disable and re-enable your extension.
+
+:::
+
+```php
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
+
+return [
+    'when' => function (Builder $schema) {
+        return $schema->hasTable('tags');
+    },
+    'up' => function (Builder $schema) {
+        $schema->table('tags', function (Blueprint $table) {
+            $table->string('my_attribute');
+        });
+    },
+    'down' => function (Builder $schema) {
+        // It's safer to check that the column still exists before deleting, in case the tags extension was purged and re-installed in the meantime
+        if (!$schema->hasColumn('tags', 'my_attribute')) {
+            return;
+        }
+
+        $schema->table('tags', function (Blueprint $table) {
+            $table->dropColumn('my_attribute');
+        });
+    },
+];
+```
+
 ### Default Settings and Permissions
 
 Data migrations are the recommended way to specify default settings and permissions:
