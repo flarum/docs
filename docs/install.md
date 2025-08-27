@@ -162,25 +162,111 @@ By default Flarum's directory structure includes a `public` directory which cont
 
 However, if you wish to host Flarum in a subdirectory (like `yoursite.com/forum`), or if your host doesn't give you control over your webroot (you're stuck with something like `public_html` or `htdocs`), you can set up Flarum without the `public` directory.
 
-If you intend to install Flarum using one of the archives, you can simply use the `no-public-dir` (Public Path = No) [archives](#installing-by-unpacking-an-archive) and skip the rest of this section. If you're installing via Composer, you'll need to follow the instructions below.
+Flarum relations between engine and public are defined in the following files:
 
-Simply move all the files inside the `public` directory (including `.htaccess`) into the directory you want to serve Flarum from. Then edit `.htaccess` and uncomment lines 9-15 in order to protect sensitive resources. For Nginx, uncomment lines 8-11 of `.nginx.conf`.
-
-You will also need to edit the `index.php` file and change the following line:
+**site.php**
 
 ```php
-$site = require './site.php';
+return Flarum\Foundation\Site::fromPaths([
+    'base' => __DIR__,               // Here is the engine
+    'public' => __DIR__.'/public',   // Public path
+    'storage' => __DIR__.'/storage', // Folder for temporary data like different kind of caches
+]);
 ```
 
- Edit the `site.php` and update the paths in the following lines to reflect your new directory structure:
+**public/index.php**
 
 ```php
-'base' => __DIR__,
-'public' => __DIR__,
-'storage' => __DIR__.'/storage',
+// Path to main engine file
+$site = require '../flarum/site.php';
 ```
 
-Finally, check `config.php` and make sure the `url` value is correct.
+Here are common cases of putting engine and public folders in different locations:
+
+### Engine files with `public` folder inside — this folder is your **document root**.
+
+If you intend to install Flarum using one of the archives, use one of the (Public Path = Yes) [archives](#installing-by-unpacking-an-archive).
+
+### Both engine and `public` folder are in the **document root**.
+
+For installing from an archive, you can download the same archive as above. Then put "engine" into folder with a name of yor choice — like `flarum`, `flarum_engine`, etc. Move the files of `public` folder right into **document root**. Then deny access to the engine in Apache or Nginx config.
+
+**Apache .htaccess**
+
+```
+RewriteRule /\.git          / [F,L]
+RewriteRule /flarum_engine/ / [F,L]
+```
+
+**Nginx conf**
+
+```
+location ~* ^/(\.git|/flarum_engine/) {
+    deny all;
+    return 404;
+}
+
+```
+
+Then edit flarum configuration files:
+
+**site.php**
+
+```php
+return Flarum\Foundation\Site::fromPaths([
+    'base' => __DIR__,
+    'public' => __DIR__.'/..',
+    'storage' => __DIR__.'/storage',
+]);
+```
+
+**public/index.php**
+
+```php
+$site = require '/flarum_engine/site.php';
+```
+
+### Serving from a subfolder
+
+Also you may want Flarum to be accessible from a subfolder — if your site besides Flarum has other functionality, like CMS, blog, etc. The subfolder can be named "flarum", and the site visitors access Flarum at https://yourdomain.com/flarum/
+
+In this case install Flarum via either archive or Composer. Don't move `public` anywhere, we will use the power of symlinks!
+
+Put Flarum in a location of your choice. For an example we can use the following structure:
+
+```
+flarum_engine/
+    public/
+doc_root/
+    flarum/
+```
+
+Here are according `bash` commands:
+
+```sh
+cd flarum_engine
+ln -sr public ../doc_root/flarum
+```
+
+`-s` flag stands for "make a symbolic link, not a hard link". `-r` is for "make a link with relative path, not an absolute one" — it is important if you plan to deploy your site on different machines, like prod, dev, test, stage, etc.
+
+For configuration:
+
+```php
+return Flarum\Foundation\Site::fromPaths([
+    'base' => __DIR__,
+    'public' => __DIR__.'/../doc_root/flarum',
+    'storage' => __DIR__.'/storage',
+]);
+```
+
+**public/index.php**
+
+```php
+$site = require '/../flarum_engine/site.php';
+```
+
+Benefit of this method is that you can store both engine and public files in `git`.
 
 ## Importing Data
 
