@@ -1,6 +1,6 @@
 # 后台管理面板
 
-每个扩展都有一个独特的页面，其中包含信息、设置和扩展自身的权限。
+现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
 您可以注册设置、权限，或者使用基于 [`扩展页面`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) 组件的完全自定义页面。
 
