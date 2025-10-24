@@ -1,14 +1,14 @@
 # Yönetici Gösterge Tablosu
 
-Every extension has a unique page containing information, settings, and the extension's own permissions.
+Her uzantının bilgi, ayarlar ve uzantının kendi izinlerini içeren benzersiz bir sayfası vardır.
 
-You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) component.
+Ayarları veya izinleri kaydedebilir ya da tamamen özel bir sayfayı [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) bileşenine dayalı olarak kullanabilirsiniz.
 
-## Admin Extender
+## Yönetici Genişletici
 
-The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
+Yönetici ön yüzü, `Admin` ön yüz genişleticisini kullanarak eklentinize çok az kod ile ayarlar ve izinler eklemenizi sağlar.
 
-To get started, make sure you have an `admin/extend.js` file:
+Başlamak için, bir `admin/extend.js` dosyanızın olduğundan emin olun:
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -21,7 +21,7 @@ export default [
 
 :::bilgi
 
-Remember to export the `extend` module from your entry `admin/index.js` file:
+Giriş dosyanız olan `admin/index.js` dosyasından `extend` modülünü dışa aktardığınızdan emin olun:
 
 ```js
 export { default as extend } from './extend';
@@ -29,33 +29,13 @@ export { default as extend } from './extend';
 
 :::
 
-### Registering Settings
+### Ayarları Kaydetme
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+Bu şekilde ayar alanları eklemek, basit öğeler için önerilir. Genel bir kural olarak, sadece ayarlar tablosunda veri saklamanız gerekiyorsa, bu sizin için yeterli olacaktır.
 
-To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page.
+Bir alan eklemek için, `Admin` genişleticisinin `setting` yöntemini çağırın ve ilk argüman olarak bir 'ayar nesnesi' döndüren bir callback (geri çağırma) fonksiyonu iletin. Arka planda, uygulama ayarlarınızı bir [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist) haline getirir; ikinci argüman olarak bir öncelik numarası geçebilirsiniz, bu numara sayfadaki ayarların sırasını belirler.
 
-Here's an example with a switch (boolean) item:
-
-```js
-import Extend from 'flarum/common/extenders';
-import app from 'flarum/admin/app';
-
-return [
-  new Extend.Admin()
-    .setting(
-      () => ({
-        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
-        label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true), // The label to be shown letting the admin know what the setting does.
-        help: app.translator.trans('acme-interstellar.admin.coordinates_help', {}, true), // Optional help text where a longer explanation of the setting can go.
-        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
-      }),
-      30 // Optional: Priority
-    )
-];
-```
-
-If you use `type: 'select'` the setting object looks a little bit different:
+İşte bir anahtar (boolean) öğesi ile örnek:
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -65,20 +45,40 @@ return [
   new Extend.Admin()
     .setting(
       () => ({
-        setting: 'acme-interstellar.fuel_type',
-        label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
-        type: 'select',
-        options: {
-          'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
-          'RDX': 'Solid Fuel',
-        },
-        default: 'LOH',
+        setting: 'acme-interstellar.coordinates', // Bu, ayarların veritabanındaki ayarlar tablosunda kaydedileceği anahtardır.
+        label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true), // Yöneticiye ayarın ne işe yaradığını göstermek için görüntülenecek etiket.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help', {}, true), // Ayarın daha ayrıntılı açıklamasının verilebileceği isteğe bağlı yardım metni.
+        type: 'boolean', // Bu ayarın türü, geçerli seçenekler: boolean, text (veya başka herhangi bir <input>tag türü) ve select. 
       }),
-    )
+30 // İsteğe bağlı: Öncelik Sıralaması
+)
 ];
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+Eğer ``type: 'select'`\` kullanırsanız, ayar nesnesi biraz farklı görünür:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+return [
+new Extend.Admin()
+.setting(
+() => ({
+setting: 'acme-interstellar.fuel_type',
+label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
+type: 'select',
+options: {
+'LOH': 'Sıvı Yakıt', // Bu nesnedeki anahtar, ayarın veritabanında nasıl saklanacağını gösterir; değer ise yöneticinin göreceği etikettir (bağlamınıza uygunsa çevirileri kullanmayı unutmayın).
+          'RDX': 'Katı Yakıt',
+},
+default: 'LOH',
+}),
+)
+];
+```
+
+Ayrıca, ayar nesnesine eklenen diğer öğelerin bileşen özellikleri (component attrs) olarak kullanılacağını unutmayın. Bu, yer tutucular, minimum/maksimum sınırlamalar vb. için kullanılabilir:
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -98,7 +98,7 @@ return [
 ];
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+Ayarlar bölümüne ekstra metin veya daha karmaşık bir girdi eklemek isterseniz, ilk argüman olarak JSX döndüren bir geri çağırma (callback) fonksiyonu da geçebilirsiniz. Bu geri çağırma (callback), [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) bağlamında çalıştırılacaktır ve ayar değerleri otomatik olarak serileştirilmeyecektir.
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -124,67 +124,67 @@ return [
 ];
 ```
 
-### Available Setting Types
+### Mevcut Ayar Türleri
 
-This is a list of setting types available by default:
+Varsayılan olarak kullanılabilen ayar türlerinin listesi şunlardır:
 
-**Toggle:** `bool` or `checkbox` or `switch` or `boolean`
+**Açma/Kapama:** `bool` veya `checkbox` veya `switch` veya `boolean`
 
-**Textarea:** `textarea`
+**Metin Alanı:** `textarea`
 
-**Color Picker:** `color-preview`
+**Renk Seçici:** `color-preview`
 
-**Text Input**: `text` or any HTML input types such as `tel` or `number`
+**Metin Girdisi:** `text` veya `tel` ya da `number` gibi herhangi bir HTML input türü
 
 ```ts
 {
   setting: 'setting_unique_key',
   label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
-  type: 'bool' // Any of the mentioned values above
+  type: 'bool' // Yukarıda bahsedilen değerlerden herhangi biri
 }
 ```
 
-**Selection:** `select` or `dropdown` or `selectdropdown`
+**Seçim:** `select` veya `dropdown` veya `selectdropdown`
 
 ```ts
 {
   setting: 'setting_unique_key',
   label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
-  type: 'select', // Any of the mentioned values above
+  type: 'select', // Yukarıda bahsedilen değerlerden herhangi biri
   options: {
-    'option_key': 'Option Label',
-    'option_key_2': 'Option Label 2',
-    'option_key_3': 'Option Label 3',
+    'option_key': 'Seçenek Etiketi',
+    'option_key_2': 'Seçenek Etiketi 2',
+    'option_key_3': 'Seçenek Etiketi 3',
   },
   default: 'option_key'
 }
 ```
 
-**Image Upload Button:** `image-upload`
+**Görsel Yükleme Butonu:** `image-upload`
 
 ```ts
 {
   setting: 'setting_unique_key',
   label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
   type: 'image-upload',
-  name: 'my_image_name', // The name of the image, this will be used for the request to the backend.
-  routePath: '/upload-my-image', // The route to upload the image to.
-  url: () => app.forum.attribute('myImageUrl'), // The URL of the image, this will be used to preview the image.
+  name: 'my_image_name', // Görselin adı; bu, backend'e yapılan istek için kullanılacaktır.
+  routePath: '/upload-my-image', // Görselin yükleneceği rota.
+  url: () => app.forum.attribute('myImageUrl'), // Görselin bağlantısı; bu, görseli önizlemek için kullanılacaktır.
 }
 ```
 
-### Registering Permissions
+### İzinleri Kaydetme
 
-Permissions can be found in 2 places. You can view each extension's individual permissions on their dedicated page, or you can view all permissions in the main permissions page.
+İzinler 2 yerde bulunabilir. Her uzantının kendi sayfasında bireysel izinlerini görüntüleyebilir veya tüm izinleri ana izinler sayfasında görebilirsiniz.
 
-In order for that to happen, permissions must be registered using the `permission` method of the `Admin` extender, similar to how settings are registered.
+Bunun gerçekleşmesi için, izinler ayarların kaydedildiği yöntemle benzer şekilde, `Admin` genişleticisinin `permission` yöntemi kullanılarak kaydedilmelidir.
 
-Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+Argümanlar:
+ * İzin nesnesi
+ * İzin türü – türleri görmek için [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) fonksiyonlarına bakabilirsiniz (isimdeki öğeleri kaldırın)
+ * `ItemList` önceliği
 
-Back to our favorite rocket extension:
+Favori roket eklentimize geri dönelim:
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -194,9 +194,9 @@ return [
   new Extend.Admin()
     .permission(
       () => ({
-        icon: 'fas fa-rocket', // Font-Awesome Icon
-        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label', {}, true), // Permission Label
-        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        icon: 'fas fa-rocket', // Font-Awesome simgesi
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label', {}, true), // İzin etiketi
+        permission: 'discussion.rocket_fly', // Veritabanında saklanan gerçek izin adı (izin kontrolü yapılırken kullanılır).
         tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
       }),
       'start', // Category permission will be added to on the grid
