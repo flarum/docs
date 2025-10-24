@@ -35,13 +35,13 @@ All registration functions on `ExtensionData` are chainable, meaning you can cal
 
 :::
 
-### Registering Settings
+### Ayarları Kaydetme
 
-Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
+Bu şekilde ayar alanları eklemek, basit öğeler için önerilir. Genel bir kural olarak, sadece ayarlar tablosunda veri saklamanız gerekiyorsa, bu sizin için yeterli olacaktır.
 
 To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument.
 
-Here's an example with a switch (boolean) item:
+İşte bir anahtar (boolean) öğesi ile örnek:
 
 ```js
 
@@ -76,7 +76,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
 }
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+Ayrıca, ayar nesnesine eklenen diğer öğelerin bileşen özellikleri (component attrs) olarak kullanılacağını unutmayın. Bu, yer tutucular, minimum/maksimum sınırlamalar vb. için kullanılabilir:
 
 ```js
 {
@@ -88,7 +88,7 @@ Also, note that additional items in the setting object will be used as component
 }
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+Ayarlar bölümüne ekstra metin veya daha karmaşık bir girdi eklemek isterseniz, ilk argüman olarak JSX döndüren bir geri çağırma (callback) fonksiyonu da geçebilirsiniz. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -113,19 +113,19 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-### Registering Permissions
+### İzinleri Kaydetme
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
 In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
-Arguments:
+Argümanlar:
 
-- Permission object
+- İzin nesnesi
 - What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
 - `ItemList` priority
 
-Back to our favorite rocket extension:
+Favori roket eklentimize geri dönelim:
 
 ```js
 app.initializers.add('interstellar', function(app) {
