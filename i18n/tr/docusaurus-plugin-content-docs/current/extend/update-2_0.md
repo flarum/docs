@@ -1,18 +1,18 @@
-# Updating For 2.0
+# 2.0 Sürümüne Güncelleme
 
-Flarum 2.0 is a major release that includes a number of breaking changes and new features. This guide will help you update your extension to be compatible with Flarum 2.0 and take advantage of the new additions.
+Flarum 2.0, birçok uyumsuz değişiklik ve yeni özellik içeren büyük bir sürümdür. Bu kılavuz, uzantınızı Flarum 2.0 ile uyumlu hale getirmenize ve yeni eklemelerden yararlanmanıza yardımcı olacaktır.
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility).
+Bu değişiklikleri uygulama veya yeni özellikleri kullanma konusunda yardıma ihtiyacınız olursa, lütfen [topluluk forumunda](https://discuss.flarum.org/t/extensibility) bir tartışma başlatın.
 
 :::
 
-## Upgrade Automation
+## Yükseltme Otomasyonu
 
-You can use the [Flarum CLI](cli.md) to automate as much of the upgrade steps as possible:
+Yükseltme adımlarının olabildiğince çoğunu otomatikleştirmek için [Flarum CLI](cli.md) aracını kullanabilirsiniz:
 
-Keep in mind the following information about the upgrade command:
+Yükseltme komutuyla ilgili aşağıdaki bilgileri aklınızda bulundurun:
 
 - The process goes through multiple steps, each step points to the related documentation, and provides helpful tips.
 - After each step, the changes **are committed to Git** so that you can always review the changes commit by commit.
