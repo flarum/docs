@@ -2,11 +2,11 @@
 
 Flarum eklentisi mi yazmak istiyorsunuz? Doğru yere geldiniz! Bu dökümantasyon sizi bazı temel kavramlara götürecek ve ardından ilk Flarum uzantınızı sıfırdan oluşturacaksınız.
 
-## Architecture
+## Mimari
 
 Flarum'un nasıl büyüteceğimizi anlamak için, önce Flarum'un nasıl inşa edildiğini biraz anlamamız gerekiyor.
 
-Flarum'un _ modern _ programlama dillerini ve araçlarını kullandığını bilin. Daha önce sadece WordPress eklentileri oluşturduysanız, kendinizi biraz yetersiz hissedebilirsiniz! Sorun Değil - yeni şeyler öğrenmek ve becerilerinizi geliştirmek için harika bir zaman. However, we would advise that you become somewhat familiar with the technologies described below before proceeding.
+Flarum'un _ modern _ programlama dillerini ve araçlarını kullandığını bilin. Daha önce sadece WordPress eklentileri oluşturduysanız, kendinizi biraz yetersiz hissedebilirsiniz! Sorun Değil - yeni şeyler öğrenmek ve becerilerinizi geliştirmek için harika bir zaman. Ancak, devam etmeden önce aşağıda açıklanan teknolojilerle biraz da olsa aşina olmanızı tavsiye ederiz.
 
 Flarum is made up of three layers:
 
