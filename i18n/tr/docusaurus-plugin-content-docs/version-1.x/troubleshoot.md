@@ -1,12 +1,12 @@
 # Sorun Giderme
 
-Flarum beklendiği gibi yüklenmiyorsa veya çalışmıyorsa, yapmanız gereken ilk şey ortamınızın [sistem gereksinimlerini](install.md#sunucu-gereksinimleri) karşılayıp karşılamadığını _tekrar kontrol etmektir._ Flarum'un çalıştırması gereken bir şeyi kaçırıyorsanız, onu düzeltmeniz gerekir. If you're missing something that Flarum needs to run, you'll need to remedy that first.
+Flarum yüklenmiyor veya beklenildiği gibi çalışmıyorsa, yapmanız gereken ilk şey, ortamınızın [sistem gereksinimlerini](install.md#server-requirements) karşılayıp karşılamadığını _yeniden kontrol etmektir._ If you're missing something that Flarum needs to run, you'll need to remedy that first.
 
 Ayrıca, [Destek forumunu](https://discuss.flarum.org/t/support) ve [sorun izleyiciyi](https://github.com/flarum/core/issues) aramak için birkaç dakikanızı ayırmalısınız. Birisi sorunu zaten bildirmiş olabilir ve bir düzeltme mevcut veya yolda. İyice araştırdıysanız ve sorunla ilgili herhangi bir bilgi bulamıyorsanız, sorun gidermeye başlamanın zamanı geldi.
 
 ## Step 0: Activate debug mode
 
-:::danger Skip on Production
+:::danger Canlı Ortamda Atla
 
 These debugging tools are very useful, but can expose information that shouldn't be public.
 These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
@@ -15,7 +15,7 @@ These are fine if you're on a staging or development environment, but if you don
 
 Devam etmeden önce, Flarum'un hata ayıklama araçlarını etkinleştirmelisiniz. Basitçe bir metin düzenleyiciyle **config.php** açın, `debug` değerini `true` olarak değiştirin ve dosyayı kaydedin. Bu, Flarum'un ayrıntılı hata mesajları göstermesine neden olarak size neyin yanlış gittiğine dair bir fikir verecektir.
 
-Boş sayfalar görüyorsanız ve yukarıdaki değişiklik yardımcı olmuyorsa, **php.ini** yapılandırma dosyanızda `display_errors` ı `On` olarak ayarlamayı deneyin.
+Boş sayfalar görüyorsanız ve yukarıdaki değişiklik işe yaramadıysa, **php.ini** yapılandırma dosyanızda `display_errors` ayarını `On` olarak değiştirmeyi deneyin.
 
 ## 1. Adım: Yaygın düzeltmeler
 
@@ -44,9 +44,9 @@ Sorunu çözmek için yardıma ihtiyacınız olacak gibi görünüyorsa, veri to
 
 - Asıl sayfada görüntülenir
 - Tarayıcı konsolunda görüntülenir (Chrome: Diğer araçlar -> Geliştirici Araçları -> Konsol)
-- `/var/log/nginx/error.log`)
+- Sunucunun hata günlüğüne kaydedilir (örneğin `/var/log/nginx/error.log`)
 - PHP-FPM'nin hata günlüğüne kaydedilir (ör. `/var/log/php7.x-fpm.log`)
-- Flarum tarafından kaydedildi (`storage/logs/flarum.log`)
+- Flarum tarafından kaydedildi (`storage/logs`)
 
 Herhangi bir mesajı bir metin dosyasına kopyalayın ve hatanın _ne zaman_ oluştuğu, o sırada _ne yaptığınız_ vb. Hakkında birkaç not alın. Sorunun meydana geldiği ve oluşmadığı koşullar hakkında derlemiş olabileceğiniz tüm bilgileri eklediğinizden emin olun. Sunucu ortamınız hakkında olabildiğince fazla bilgi ekleyin: İşletim sistemi sürümü, web sunucusu sürümü, PHP sürümü ve işleyici, vb.
 
