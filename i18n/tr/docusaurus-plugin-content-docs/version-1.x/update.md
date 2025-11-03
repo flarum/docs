@@ -18,7 +18,7 @@ Ana sürümler arasında güncelleme yapıyorsanız (ör. <=0.1.0 - 1.x.x, 1.x.x
 
 **1. Adım:** Tüm uzantılarınızın, yüklemeye çalıştığınız Flarum sürümüyle uyumlu sürümleri olduğundan emin olun. Bu yalnızca ana sürümler için gereklidir (örneğin, uzantılarınızın önerilen sürümü izlediğini varsayarsak, v1.0.0'dan v1.1.0'a yükseltme yapıyorsanız muhtemelen bunu kontrol etmeniz gerekmez). Bunu, uzantının [Tartışma konusuna](https://discuss.flarum.org/t/extensions) bakarak, [Packagist](http://packagist.org/)'te arayarak veya [Extiverse](https://extiverse.com) gibi veritabanlarını kontrol ederek bilgi alabilirsiniz. Güncellemeden önce uyumsuz uzantıları kaldırmanız (yalnızca devre dışı bırakmanız değil) gerekir. Lütfen uzantı geliştiricilerine karşı sabırlı olun!
 
-**2. Adım:** `composer.json` dosyanıza bir göz atın. Uzantıların veya kitaplıkların belirli sürümlerini gerektirecek bir nedeniniz yoksa, `flarum/core` dışındaki her şeyin sürüm dizesini `*` olarak ayarlamalısınız ((`flarum/tags dahil) `, `flarum/bahsetmeler` ve diğer paket uzantılar.) `flarum/core` öğesinin `*` olarak AYARLANMADIĞINDAN emin olun. Belirli bir Flarum sürümünü hedefliyorsanız, `flarum/core` öğesini buna ayarlayın (ör. `"flarum/core": "v0.1.0-beta.16`). Yalnızca en son sürümü istiyorsanız, `"flarum/core": "^1.0"` kullanın.
+**2. Adım:** `composer.json` dosyanıza bir göz atın. Uzantıların veya kitaplıkların belirli sürümlerini gerektirecek bir nedeniniz yoksa, `flarum/core` dışındaki her şeyin sürüm dizesini `*` olarak ayarlamalısınız ((`flarum/tags dahil) `, `flarum/bahsetmeler` ve diğer paket uzantılar). `flarum/core` öğesinin `*` olarak AYARLANMADIĞINDAN emin olun. Belirli bir Flarum sürümünü hedefliyorsanız, `flarum/core` öğesini buna ayarlayın (ör. `"flarum/core": "v0.1.0-beta.16`). Yalnızca en son sürümü istiyorsanız, `"flarum/core": "^1.0"` kullanın.
 
 **3. Adım:** Yerel kurulumunuz [yerel genişleticiler](extenders.md) kullanıyorsa, bunların Flarum'daki değişikliklerle güncel olduğundan emin olun.
 
@@ -103,8 +103,8 @@ It is very likely that some of your extensions have not yet been updated.
 - Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't.
 - Güncelleme adımında belirtilen tüm bayraklarla birlikte `composer update` komutunu çalıştırdığınızdan emin olun.
 
-If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
+Bunların hiçbiri sorununuzu çözmezse, [Destek forumumuzdan](https://discuss.flarum.org/t/support) bizimle iletişime geçmekten çekinmeyin. `php flarum info` ve `composer why-not flarum/core YÜKSELTMEK_İSTEDİĞİN_VERSİYON` komutlarının çıktısını eklemeyi unutmayın.
 
 ### Errors After Updating
 
-If you are unable to access your forum after updating, follow our [troubleshooting instructions](troubleshoot.md).
+Güncellemeden sonra forumunuza erişemiyorsanız, [sorun giderme talimatlarımızı](troubleshoot.md) izleyin.
