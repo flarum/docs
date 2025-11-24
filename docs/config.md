@@ -41,7 +41,7 @@ Here's a quick overview of what everything means with an example file:
 
 ### Queues
 
-Flarum ships with support for two queue types - `sync` and `database`. Many tasks, or 'jobs' can be offloaded to a seperate process in order to improve responce times and provide a better user experience.
+Flarum ships with support for two queue types - `sync` and `database`. Many tasks, or 'jobs' can be offloaded to a seperate process in order to improve response times and provide a better user experience.
 * `sync` - default behaviour
 * `database` - stores jobs in a dedicated database table, which are then processed via the [scheduler](/2.x/scheduler) in a seperate process. It is strongly advised that the scheduler is configured to run _every minute_
 
