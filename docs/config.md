@@ -35,6 +35,10 @@ Here's a quick overview of what everything means with an example file:
   'queue' =>
   array (
     'driver' => 'sync', // Use the standard sync queue. Omitting this will entirely will have the same effect
+  ),
+  'fontawesome' =>
+  array (
+    'source' => 'local', // Use the bundled FontAwesome Free v6 icons. See below for other config options
   )
 );
 ```
@@ -77,3 +81,33 @@ Flarum has a maintenance mode that can be enabled by setting the `offline` key i
 This can also be configured from the admin panel's advanced settings page:
 
 ![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
+
+### FontAwesome
+
+By default Flarum uses the bundled FontAwesome 'Free' v6 icons. These can be switched out to use either a CDN hosted icon bundle, or a custom kit.
+
+```php
+<?php
+
+return [
+    'url' => 'https://example.com',
+    // ... other config
+    
+    // FontAwesome Kit (Pro features + custom icons)
+    'fontawesome' => [
+        'source' => 'kit',
+        'kit_url' => 'https://kit.fontawesome.com/YOUR_KIT_CODE.js',
+    ],
+    
+    // OR use a CDN
+    // 'fontawesome' => [
+    //     'source' => 'cdn',
+    //     'cdn_url' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+    // ],
+    
+    // OR keep local (default, no config needed)
+    // 'fontawesome' => [
+    //     'source' => 'local',
+    // ],
+];
+```
