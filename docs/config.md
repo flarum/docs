@@ -45,6 +45,10 @@ Flarum ships with support for two queue types - `sync` and `database`. Many task
 * `sync` - default behaviour
 * `database` - stores jobs in a dedicated database table, which are then processed via the [scheduler](/2.x/scheduler) in a seperate process. It is strongly advised that the scheduler is configured to run _every minute_
 
+When the `database` queue is active, additional configuration options are available under `advanced settings`.
+
+![Database Queue Settings](https://private-user-images.githubusercontent.com/16573496/511708325-c4e8c663-b98e-45a9-a32f-d3be9a8f1aa6.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjM5NzA5NTMsIm5iZiI6MTc2Mzk3MDY1MywicGF0aCI6Ii8xNjU3MzQ5Ni81MTE3MDgzMjUtYzRlOGM2NjMtYjk4ZS00NWE5LWEzMmYtZDNiZTlhOGYxYWE2LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTExMjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMTI0VDA3NTA1M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTRhNDM0ZTNlMDc4NjU5ZjBkYzVlZGZjNTNmYzExMTU4ZmVhMDhkOTA5OGM2NTRjYTYxZjNlYWI0NWNkNWI5ZGYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.Q8_b4O04wzKtqkaVyjukeucaR05r9oRPdNNvjODd2ME)
+
 ##### Other queue processors
 
 At this point in time, use of other schedulers is supported, but configuration via `config.php` is not required. Example [FoF Horizon](https://FriendsOfFlarum/horizon) or [Redis Queues](https://FriendsOfFlarum/redis).
