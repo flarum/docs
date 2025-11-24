@@ -39,6 +39,19 @@ Here's a quick overview of what everything means with an example file:
 );
 ```
 
+### Configuration via environment variables
+
+Whilst the file based method described here is suitable for most Flarum installations, scaled Flarum instances or those deployed via CI/CD will probably benefit from being configured via the environment. Here's an example of how to do this:
+
+```php
+<?php return array (
+  'debug' => env('DEBUG')
+  ...
+);
+```
+
+This provides Flarum with the static configuration file it expects, but pulls variables from the environment at runtime.
+
 ### Queues
 
 Flarum ships with support for two queue types - `sync` and `database`. Many tasks, or 'jobs' can be offloaded to a seperate process in order to improve response times and provide a better user experience.
