@@ -32,8 +32,22 @@ Here's a quick overview of what everything means with an example file:
     'api' => 'api', // /api goes to the API
     'admin' => 'admin', // /admin goes to the admin
   ),
+  'queue' =>
+  array (
+    'driver' => 'sync', // Use the standard sync queue. Omitting this will entirely will have the same effect
+  )
 );
 ```
+
+### Queues
+
+Flarum ships with support for two queue types - `sync` and `database`. Many tasks, or 'jobs' can be offloaded to a seperate process in order to improve responce times and provide a better user experience.
+* `sync` - default behaviour
+* `database` - stores jobs in a dedicated database table, which are then processed via the [scheduler](/2.x/scheduler) in a seperate process. It is strongly advised that the scheduler is configured to run _every minute_
+
+##### Other queue processors
+
+At this point in time, use of other schedulers is supported, but configuration via `config.php` is not required. Example [FoF Horizon](https://FriendsOfFlarum/horizon) or [Redis Queues](https://FriendsOfFlarum/redis).
 
 ### Maintenance modes
 
