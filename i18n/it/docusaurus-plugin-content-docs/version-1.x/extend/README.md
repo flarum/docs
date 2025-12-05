@@ -1,5 +1,5 @@
 ---
-slug: "slug: /extend"
+slug: 'slug: /extend'
 ---
 
 # Estensioni di Flarum
