@@ -1,5 +1,5 @@
 ---
-slug: /internal
+slug: '/internal'
 ---
 
 # 团队内部文档
