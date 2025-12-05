@@ -22,7 +22,7 @@ Có một số trở ngại cần được lưu ý trước khi sử dụng.
 
 The relevant machine web user needs to have permissions to read and write to: `vendor`, `composer.json`, `composer.lock` and `storage`. Ngay bây giờ, một cảnh báo sẽ hiển thị khi trường hợp này không xảy ra, điều này tốt nhất nên được thay đổi để chỉ đề cập đến các tệp/thư mục thiếu quyền thay vì tất cả.
 
-![flarum lan\_admin (3)](https://user-images.githubusercontent.com/20267363/135268536-f79d42ab-6e05-4e41-b2ab-d95ec7a8b021.png)
+![flarum lan_admin (3)](https://user-images.githubusercontent.com/20267363/135268536-f79d42ab-6e05-4e41-b2ab-d95ec7a8b021.png)
 
 ### Đường dẫn kho lưu trữ
 
@@ -60,7 +60,7 @@ This executes the command `composer outdated -D --format json` which checks for 
 
 Thông tin về lần kiểm tra cập nhật cuối cùng được lưu vào cài đặt JSON.
 
-![flarum lan\_admin (4)](https://user-images.githubusercontent.com/20267363/135272032-9de37599-b364-4e42-b234-1113135eaa83.png)
+![flarum lan_admin (4)](https://user-images.githubusercontent.com/20267363/135272032-9de37599-b364-4e42-b234-1113135eaa83.png)
 
 ## Cập nhật toàn bộ Flarum
 
@@ -70,7 +70,7 @@ Chỉ cần chạy lệnh `command update --prefer-dist --no-dev -a --with-all-d
 
 Điều này thay đổi trực tiếp các phiên bản gói được yêu cầu thành `*` và sau đó thực thi lệnh `command update --prefer-dist --no-dev -a --with-all-dependencies`.
 
-![flarum lan\_admin (5)](https://user-images.githubusercontent.com/20267363/135276114-ae438c2f-4122-45bd-b32f-690de3b56e25.png)
+![flarum lan_admin (5)](https://user-images.githubusercontent.com/20267363/135276114-ae438c2f-4122-45bd-b32f-690de3b56e25.png)
 
 ## Cập nhật Flarum chính
 
