@@ -1,5 +1,5 @@
 ---
-slug: /extend
+slug: '/extend'
 ---
 
 # Mở rộng Flarum
