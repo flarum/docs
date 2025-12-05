@@ -66,32 +66,7 @@ $query
 
 ### Seeding record with their IDs
 
-In PostgreSQL, when inserting data with the Auto increment column value specified, the database will not increase the sequence value. So you have to do it manually. Here is an example of Flarum core inserting the default member groups:
+In PostgreSQL, when inserting data with the Auto increment column value specified, the database will not increase the sequence value. So you have to do it manually. 下面是 Flarum 核心插入默认成员组的示例：
 
 ```php
-    'up' => function (Builder $schema) {
-        $db = $schema->getConnection();
-
-        $groups = [
-            [Group::ADMINISTRATOR_ID, 'Admin', 'Admins', '#B72A2A', 'fas fa-wrench'],
-            [Group::GUEST_ID, 'Guest', 'Guests', null, null],
-            [Group::MEMBER_ID, 'Member', 'Members', null, null],
-            [Group::MODERATOR_ID, 'Mod', 'Mods', '#80349E', 'fas fa-bolt']
-        ];
-
-        foreach ($groups as $group) {
-            if ($db->table('groups')->where('id', $group[0])->exists()) {
-                continue;
-            }
-
-            $db->table('groups')->insert(array_combine(['id', 'name_singular', 'name_plural', 'color', 'icon'], $group));
-        }
-
-        // PgSQL doesn't auto-increment the sequence when inserting the IDs manually.
-        if ($db->getDriverName() === 'pgsql') {
-            $table = $db->getSchemaGrammar()->wrapTable('groups');
-            $seq = $db->getSchemaGrammar()->wrapTable('groups_id_seq');
-            $db->statement("SELECT setval('$seq', (SELECT MAX(id) FROM $table))");
-        }
-    },
 ```
