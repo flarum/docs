@@ -22,7 +22,7 @@ There are some obstacles that need to be taken care of before this can be used.
 
 The relevant machine web user needs to have permissions to read and write to: `vendor`, `composer.json`, `composer.lock` and `storage`. Right now a warning shows up when this is not the case, this should preferably be changed to mention only the files/dirs where permissions are lacking instead of all of them.
 
-![flarum lan\_admin (3)](https://user-images.githubusercontent.com/20267363/135268536-f79d42ab-6e05-4e41-b2ab-d95ec7a8b021.png)
+![flarum lan_admin (3)](https://user-images.githubusercontent.com/20267363/135268536-f79d42ab-6e05-4e41-b2ab-d95ec7a8b021.png)
 
 ### Path Repository
 
@@ -60,7 +60,7 @@ This executes the command `composer outdated -D --format json` which checks for 
 
 The information about the last update check is saved into a JSON setting.
 
-![flarum lan\_admin (4)](https://user-images.githubusercontent.com/20267363/135272032-9de37599-b364-4e42-b234-1113135eaa83.png)
+![flarum lan_admin (4)](https://user-images.githubusercontent.com/20267363/135272032-9de37599-b364-4e42-b234-1113135eaa83.png)
 
 ## Global Flarum Updates
 
@@ -70,7 +70,7 @@ Simply runs the command `command update --prefer-dist --no-dev -a --with-all-dep
 
 This changes directly required package versions to `*` and then executes the command `command update --prefer-dist --no-dev -a --with-all-dependencies`.
 
-![flarum lan\_admin (5)](https://user-images.githubusercontent.com/20267363/135276114-ae438c2f-4122-45bd-b32f-690de3b56e25.png)
+![flarum lan_admin (5)](https://user-images.githubusercontent.com/20267363/135276114-ae438c2f-4122-45bd-b32f-690de3b56e25.png)
 
 ## Major Flarum Updates
 
