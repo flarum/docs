@@ -1,5 +1,5 @@
 ---
-slug: /internal
+slug: '/internal'
 ---
 
 # Tài liệu nhóm nội bộ
