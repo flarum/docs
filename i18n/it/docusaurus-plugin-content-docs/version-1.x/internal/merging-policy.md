@@ -35,3 +35,4 @@ If all the checks in the template are met, **any** core developer may merge this
     - Merge related PRs (language files, extensions, documentations).
     - Documentation updates.
   - Create issues for further follow-up tasks, if necessary.
+
