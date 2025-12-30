@@ -70,5 +70,3 @@ Once registered, avatar drivers will automatically appear in the admin dashboard
 Flarum automatically adds your driver to the admin settings page when you register it. No additional frontend code is required.
 
 The selected driver identifier is stored in the `avatar_driver` setting. If the setting is empty or refers to an unregistered driver, Flarum will use the Default driver as a fallback.
-
-For a real-world example, see Flarum's built-in [Gravatar driver](https://github.com/flarum/framework/blob/main/framework/core/src/User/Avatar/GravatarDriver.php).
