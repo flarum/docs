@@ -32,7 +32,7 @@ class DiscordAvatarDriver implements DriverInterface
         $discordId = $user->discord_id;
         $avatarHash = $user->discord_avatar_hash;
 
-        if (!$discordId || !$avatarHash) {
+        if (! $discordId || ! $avatarHash) {
             return null;
         }
 
