@@ -128,6 +128,7 @@ module.exports = {
       items: [
         'extend/api-throttling',
         'extend/assets',
+        'extend/avatars',
         'extend/console',
         'extend/database',
         'extend/extending-extensions',
