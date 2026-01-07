@@ -41,7 +41,7 @@ Here's an example with a switch (boolean) item:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
