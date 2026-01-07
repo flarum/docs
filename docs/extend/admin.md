@@ -61,7 +61,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
@@ -84,7 +84,7 @@ Also, note that additional items in the setting object will be used as component
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
@@ -104,7 +104,7 @@ If you want to add something to the settings like some extra text or a more comp
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => function () {
@@ -190,7 +190,7 @@ Back to our favorite rocket extension:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .permission(
       () => ({
@@ -217,7 +217,7 @@ Remember these functions can all be chained like:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(...)
     .permission(...)
@@ -255,7 +255,7 @@ import app from 'flarum/admin/app';
 
 import StarPage from './components/StarPage';
 
-return [
+export default [
   new Extend.Admin()
     .page(StarPage)
 ];
@@ -307,7 +307,7 @@ Here is an example of how to add an index item:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .generalIndexItems(() => [
       {
