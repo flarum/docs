@@ -102,19 +102,19 @@ To work properly, our extensions should use the [official flarum webpack config]
 }
 ```
 
-This is a standard configuration file to enable support for Typescript with the options that Flarum needs.
+这是一个标准的配置文件，以启用 Flarum 需要的选项支持Typescript。
 
-Always ensure you're using the latest version of this file: https://github.com/flarum/flarum-tsconfig#readme.
+始终确保您使用此文件的最新版本：https://github.com/flarum/flarum-tsconfig#readme。
 
 Even if you choose not to use TypeScript in your extension, which is supported natively by our Webpack config, it's still recommended to install the `flarum-tsconfig` package and to include this configuration file so that your IDE can infer types for our core JS.
 
-To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. Remember not to commit this folder if you're using a version control system such as Git.
+To get the typings working, you'll need to run `composer update` in your extension's folder to download the latest copy of Flarum's core into a new `vendor` folder. 如果您正在使用版本控制系统，请记住不要提交此文件夹。
 
-You may also need to restart your IDE's TypeScript server. You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete. This might take a minute to complete.
+您可能还需要重启 IDE 的 TypeScript 服务器。 You may also need to restart your IDE's TypeScript server. In Visual Studio Code, you can press F1, then type "Restart TypeScript Server" and hit ENTER. This might take a minute to complete. 完成可能需要一分钟。
 
-### admin.js and forum.js
+### admin.js 和 forum.js
 
-These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in <code>src</code>, and having these files just export the contents of <code>src</code>. For instance: You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in `src`, and having these files just export the contents of `src`. For instance:
+These files contain the root of our actual frontend JS. You could put your entire extension here, but that would not be well organized. For this reason, we recommend putting the actual source code in <code>src</code>, and having these files just export the contents of <code>src</code>. For instance: 你可以把你的整个扩展放在这里，但这不是很好的组织方式。 For this reason, we recommend putting the actual source code in `src`, and having these files just export the contents of `src`. 就像这样：
 
 ```js
 // admin.js
@@ -140,7 +140,7 @@ src/forum/
 ```
 
 `components`, `models`, and `utils` are directories that contain files where you can define custom [components](#components), [models](models.md#frontend-models), and reusable util helper functions.
-Please note that this is all simply a recommendation: there's nothing forcing you to use this particular file structure (or any other file structure).
+请注意，这只是一个建议：没有任何东西强迫您使用这个特定的文件结构(或任何其他文件结构)。
 
 The most important file here is `index.js`: everything else is just extracting classes and functions into their own files. Let's go over a typical `index.js` file structure:
 
@@ -155,7 +155,7 @@ app.initializers.add('acme-flarum-hello-world', function(app) {
 });
 ```
 
-We'll go over tools available for extensions below.
+我们将转到下面可供扩展使用的工具。
 
 ### 导入
 
@@ -171,7 +171,7 @@ In some cases, an extension may want to extend code from another flarum extensio
 
 ### 转译
 
-OK, time to fire up the transpiler. Run the following commands in the `js` directory:
+好，现在启动转译器。 Run the following commands in the `js` directory:
 
 ```bash
 npm install
@@ -182,7 +182,7 @@ This will compile your browser-ready JavaScript code into the `js/dist/forum.js`
 
 When you've finished developing your extension (or before a new release), you'll want to run `npm run build` instead of `npm run dev`: this builds the extension in production mode, which makes the source code smaller and faster.
 
-## Asset Registration
+## 资产注册
 
 ### JavaScript
 
@@ -199,11 +199,11 @@ return [
 ];
 ```
 
-Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. Thus, you may choose to expose your own public API for other extensions to interact with.
+Flarum will make anything you `export` from `forum.js` available in the global `flarum.extensions['acme-hello-world']` object. 因此，您可以选择公开您自己的公共API以便与其他扩展进行交互。
 
 :::tip External Libraries
 
-Only one main JavaScript file per extension is permitted. If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
+每个扩展只允许一个主JavaScript文件。 If you need to include any external JavaScript libraries, either install them with NPM and `import` them so they are compiled into your JavaScript file, or see [Routes and Content](/extend/routes.md) to learn how to add extra `<script>` tags to the frontend document.
 
 :::
 
@@ -227,17 +227,17 @@ You should develop extensions with debug mode turned **on** in `config.php`. You
 
 Flarum的界面是使用一个名为[Mithril.js](https://mithril.js.org/)的JavaScript框架编写的。 如果你熟悉[React](https://reactjs.org)，那么你很容易就能掌握它。 但如果你不熟悉任何JavaScript框架，我们建议你在继续之前浏览这个[教程](https://mithril.js.org/simple-application.html)以了解一些基础知识。 If you are familiar with [React](https://reactjs.org), then you'll catch on in no time. But if you are not familiar with any JavaScript frameworks, we suggest you go through a [tutorial](https://mithril.js.org/simple-application.html) to understand the fundamentals before proceeding.
 
-The crux of it is that Flarum generates virtual DOM elements which are a JavaScript representation of HTML. Mithril takes these virtual DOM elements and turns them into real HTML in the most efficient way possible. (That's why Flarum is so speedy!) Mithril takes these virtual DOM elements and turns them into real HTML in the most efficient way possible. (That's why Flarum is so speedy!)
+The crux of it is that Flarum generates virtual DOM elements which are a JavaScript representation of HTML. Mithril takes these virtual DOM elements and turns them into real HTML in the most efficient way possible. (That's why Flarum is so speedy!) Mithril以最有效的方式将这些虚拟的DOM元素变成真正的HTML。 (正因为如此，Flarum 如此快！)
 
-Because the interface is built with JavaScript, it's really easy to hook in and make changes. Because the interface is built with JavaScript, it's really easy to hook in and make changes. All you need to do is find the right extender for the part of the interface you want to change, and then add your own virtual DOM into the mix.
+因为接口是用 JavaScript 构建的，因此很容易绑定并做出更改。 Because the interface is built with JavaScript, it's really easy to hook in and make changes. All you need to do is find the right extender for the part of the interface you want to change, and then add your own virtual DOM into the mix.
 
 Most mutable parts of the interface are really just _lists of items_. For example:
 
-- The controls that appear on each post (Reply, Like, Edit, Delete)
-- The index sidebar navigation items (All Discussions, Following, Tags)
-- The items in the header (Search, Notifications, User menu)
+- 显示在每个帖子上的控件 (回复、 点赞 、 编辑、 删除)
+- 索引侧边栏导航项 (所有讨论，跟进，标签)
+- 标题中的项目 (搜索、通知、用户菜单)
 
-Each item in these lists is given a **name** so you can easily add, remove, and rearrange the items. Simply find the appropriate component for the part of the interface you want to change, and monkey-patch its methods to modify the item list contents. For example, to add a link to Google in the header:
+Each item in these lists is given a **name** so you can easily add, remove, and rearrange the items. 只需找到您想要更改的接口部分的适当组件，并且只需修补其修改项目列表内容的方法。 For example, to add a link to Google in the header:
 
 ```jsx
 import { extend } from 'flarum/common/extend';
@@ -331,7 +331,7 @@ m.mount(document.body, <MyComponent buttonLabel="Increment" />);
 
 ### `extend`和`override`
 
-Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. For instance:
+Pretty much all frontend extensions use [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) to add, modify, or remove behavior. 就像这样：
 
 ```jsx
 // This adds an attribute to the `app` global.
