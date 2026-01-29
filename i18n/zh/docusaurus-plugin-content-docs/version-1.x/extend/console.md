@@ -61,7 +61,7 @@ return [
 ];
 ```
 
-## Scheduled Commands
+## 计划任务命令
 
 The `Flarum\Extend\Console`'s `schedule` method allows extension developers to create scheduled commands that run on an interval:
 
