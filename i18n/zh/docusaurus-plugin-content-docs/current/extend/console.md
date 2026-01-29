@@ -42,7 +42,7 @@ return [
 
 ## 注册控制台命令
 
-To register console commands, use the `Flarum\Extend\Console` extender in your extension's `extend.php` file:
+要注册控制台命令，请在扩展名的 `extend.php` 文件中使用 `Flarum\Extend\Contene` 扩展程序：
 
 ```php
 use Flarum\Extend;
@@ -55,9 +55,9 @@ return [
 ];
 ```
 
-## Scheduled Commands
+## 计划任务命令
 
-The `Flarum\Extend\Console`'s `schedule` method allows extension developers to create scheduled commands that run on an interval:
+`Flarum\Extend\Console`的 `schedule` 方法允许扩展开发者创建按间隔运行的预定命令：
 
 
 ```php
@@ -74,4 +74,4 @@ return [
 ];
 ```
 
-In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/11.x/scheduling#scheduling-artisan-commands) for more information.
+在作为第二个参数传入的回调函数中，您可调用 [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) 的方法，以多种频率设置调度任务（或配置其他选项，例如仅在单台服务器上运行）。 更多信息请访问 [Laravel 文档](https://laravel.com/docs/11.x/scheduling#scheduling-artisan-commands)。
