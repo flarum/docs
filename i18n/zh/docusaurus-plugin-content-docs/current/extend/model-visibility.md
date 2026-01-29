@@ -32,7 +32,7 @@ $query
   ->whereVisibleTo($actor, 'someAbility')
 ```
 
-This is necessary because users shouldn't see all discussions. For instance: For instance:
+This is necessary because users shouldn't see all discussions. For instance: 就像这样：
 
 - Users shouldn't see discussions in tags they don't have permission to see.
 - Users shouldn't see posts in discussions they don't have permission to see.
