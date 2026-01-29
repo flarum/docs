@@ -242,13 +242,13 @@ class PusherNotificationDriver implements NotificationDriverInterface
 }
 ```
 
-Notification drivers are also registered via the `Notification` extender, using the `driver` method. The following arguments are provided The following arguments are provided
+Notification drivers are also registered via the `Notification` extender, using the `driver` method. The following arguments are provided 提供了以下参数
 
-* `$driverName`: A unique, human readable name for the driver
-* `$driverClass`: The class static of the driver (example: `Driver::class`)
-* `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
+* `$driverName`: 唯一的，人类可读的驱动名称
+* `$driverClass`: 静态驱动类 (例如：`Driver::class`)
+* `$typesEnabledByDefault`：一个数组，存储了该驱动默认应启用的所有类型。 `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
 
-Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
+[Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php) 的另一个示例：
 
 ```php
 <?php
@@ -264,22 +264,22 @@ return [
 ];
 ```
 
-## Rendering Notifications
+## 渲染通知
 
-As with everything in Flarum, what we register in the backend, must be registered in the frontend as well.
+如同在Flarum的一切一样，我们在后端注册的东西也必须在前端登记。
 
-Similar to the notification blueprint, we need tell Flarum how we want our notification displayed.
+类似于通知蓝图，我们需要告诉Flarum 我们希望如何显示我们的通知。
 
-First, create a class that extends the notification component. Then, there are 4 functions to add: Then, there are 4 functions to add:
+First, create a class that extends the notification component. Then, there are 4 functions to add: 然后，有4个函数可以添加：
 
-* `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
-* `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
-* `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations). It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
-* `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
+* `icon()`: [Font Awesome](https://fontawesome.com/) 图标将出现在通知文本旁边(例如： `fas fa-code-brant`)。
+* `href()`: 点击通知时应该打开的链接 (例如： `app.route.post(this.trans.notification.subject())`).
+* `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations). 它应该说出用户名，然后是动作。 随后发出通知（确保使用翻译）。
+* `exprespt()`: (可选) 下面显示的一点节录(通常是一个帖子的节录)。
 
-*Let take a look at our example shall we?*
+*咱们来看下这个示例，如何？*
 
-From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
+从 [Flarum 订阅](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js)，当一个新帖子被发布到关注的讨论中：
 
 ```jsx harmony
 import Notification from 'flarum/forum/components/Notification';
@@ -304,25 +304,25 @@ export default class NewPostNotification extends Notification {
 }
 ```
 
-In the example, the icon is a star, the link will go to the new post, and the content will say that "{user} posted".
+在这个示例中，图标是星星，链接是跳转到新帖子，内容是"{user} 已发帖"。
 
-Next, we need to tell Flarum that the notification you send in the backend corresponds to the frontend notification we just created.
+接下来，我们需要告诉Flarum, 你在后端发送的通知对应于我们刚刚创建的前端通知。
 
-Open up your index.js (the forum one) and start off by importing your newly created notification template. Then add the following line: Then add the following line:
+Open up your index.js (the forum one) and start off by importing your newly created notification template. Then add the following line: 然后添加以下行：
 
 `app.notificationComponents.{nameOfNotification} = {NotificationTemplate};`
 
-Make sure to replace `{nameOfNotification}` with the name of the notification in your PHP blueprint (`getType()`) and replace `{NotificationTemplate}` with the name of the JS notification template we just made! (Make sure it's imported!) (Make sure it's imported!)
+Make sure to replace `{nameOfNotification}` with the name of the notification in your PHP blueprint (`getType()`) and replace `{NotificationTemplate}` with the name of the JS notification template we just made! (Make sure it's imported!) (请确保它已导入!)
 
 :::tip
 
-If the subject of your notification is a new model, make sure you have a frontend represantation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
+若你的通知主题关联的是一个新模型，务必确保该模型的前端表现形式已在前端存储中完成注册。 [在此阅读更多关于它的信息。](./models.md#adding-new-models-1)
 
 :::
 
-Let's give users an option to change their settings for your notification. Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
+让我们给用户一个选项来更改您的通知设置。 Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
-From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
+从 [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js)：
 
 ```js
 import { extend } from 'flarum/common/extend';
@@ -343,24 +343,24 @@ app.initializers.add('flarum-likes', () => {
   });
 });
 ```
-Simply add the name of your notification (from the blueprint), an icon you want to show, and a description of the notification and you are all set!
+只需从蓝图中添加您的通知名称， 您想要显示的图标以及通知的描述和您都已设置！
 
-## Sending Notifications
+## 发送通知
 
-*Data doesn't just appear in the database magically*
+*数据可不是平白无故就出现在数据库里的*
 
-Now that you have your notification all setup, it's time to actually send the notification to the user!
+现在您已经有了您的所有设置，现在是向用户发送通知的时候了！
 
-Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. It accepts 2 arguments: It accepts 2 arguments:
+Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. It accepts 2 arguments: 它接受了2个参数：
 
-* `BlueprintInterface`: This is the blueprint to be instantiated we made in the first step, you must include all variables that are used on the blueprint (example: if a user likes a post you must include the `user` model that liked the post).
-* `$users`: This accepts an array of `user` modals that should receive the notification
+* `BlueprintInterface`：这是我们在第一步中创建的、待实例化的蓝图接口。你必须包含该蓝图中所使用的所有变量（示例：如果用户点赞了某篇帖子，你就必须包含完成该点赞操作的 `user` 模型）。
+* `$users`: 接受一个`用户`模型数组，用来接受通知
 
-*Whats that? *Whats that? You want to be able to delete notifications too?* The easiest way to remove a notification is to pass the exact same data as sending a notification, except with an empty array of recipients.</p>
+*你说什么？ *Whats that? You want to be able to delete notifications too?* The easiest way to remove a notification is to pass the exact same data as sending a notification, except with an empty array of recipients.</p>
 
-Lets take a look at our **final** example for today:
+我们来看看今天 **最后的** 例子：
 
-From [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php):
+来自 [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php)：
 
 ```php
 <?php
@@ -413,6 +413,6 @@ class SendNotificationWhenPostIsLiked
 }
 ```
 
-**Awesome!** Now you can spam users with updates on happenings around the forum!
+** 太棒了！** 现在你就能给用户推送论坛内的各类动态更新啦！
 
-*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand! Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!
+*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand! Kidding。 尽管在 [Flarum Community](https://discuss.flarum.org/t/extensibility) 论坛或 [Discord](https://flarum.org/discord/) 社群里发帖提问就好，总会有社区成员前来伸出援手的！
