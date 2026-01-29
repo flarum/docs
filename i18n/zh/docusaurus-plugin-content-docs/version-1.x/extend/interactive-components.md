@@ -80,18 +80,18 @@ Since Flarum is a forum, we need tools for users to be able to create and edit p
 
 The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/master/class/src/common/states/modalmanagerstate.js~modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. Its most important public methods are:
 
-- `app.composer.load(componentClass, attrs)` will load in a new composer type. If a composer is already active, it will be replaced.
+- `app.composer.load(componentClass, attrs)` will load in a new composer type. 如果 composer 已经激活，它将被替换。
 - `app.composer.show()` will show the composer if it is currently hidden.
 - `app.composer.close()` will close and reset the composer after confirming with the user.
 - `app.composer.hide()` will close and reset the composer without confirming with the user.
 - `app.composer.bodyMatches(componentClass, attrs)` will check if the currently active composer is of a certain type, and whether its atts match optionally provided attrs.
 
-The full list of public methods is documented in the API docs linked above.
+公共方法的完整清单在上面链接的 API 文档中作了记录。
 
 Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage. This is done by splitting code for each usage into a subclass of <code>flarum/forum/components/ComposerBody</code>. This component class must be provided when loading a composer.
-This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
+This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. 此组件类必须在加载 composer 时提供。
 
-### Composer Editor
+### Composer 编辑器
 
 The actual editor is yet another component, [`flarum/common/components/TextEditor`](https://api.docs.flarum.org/js/master/class/src/common/components/texteditor.js~texteditor).
 Its state can be programatically accessed via an "editor driver", which implements [`EditorDriverInterface`](https://github.com/flarum/framework/blob/main/framework/core/js/src/common/utils/EditorDriverInterface.ts).
