@@ -91,7 +91,7 @@ This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/
 
 #### setup.php
 
-This script will be run to set up a testing database / file structure.
+此脚本将运行以设置测试数据库/文件结构。
 
 ```php
 <?php
@@ -105,7 +105,7 @@ $setup = new SetupScript();
 $setup->run();
 ```
 
-#### composer.json Modifications
+#### composer.json 修改
 
 We will also want to add scripts to our `composer.json`, so that we can run our test suite via `composer test`. Add some variant of the following to your `composer.json`:
 
@@ -127,40 +127,40 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
 }
 ```
 
-#### GitHub Testing Workflow
+#### GitHub 测试工作流
 
 To run tests on every commit and pull request, check out the [GitHub Actions](github-actions.md) page.
 
 ---
 
-Now that we have everything in place, we need to set up our testing site for integration tests. Now that we have everything in place, we need to set up our testing site for integration tests. For this, we will need a MySQL or MariaDb instance, and a place to store testing files.
+既然我们已经做了一切，我们就需要建立我们的集成测试。 Now that we have everything in place, we need to set up our testing site for integration tests. For this, we will need a MySQL or MariaDb instance, and a place to store testing files.
 
 Testing database information is configured via the `DB_HOST` (defaults to `localhost`), `DB_PORT` (defaults to `3306`), `DB_DATABASE` (defaults to `flarum_test`), `DB_USERNAME` (defaults to `root`), `DB_PASSWORD` (defaults to `root`), and `DB_PREFIX` (defaults to `''`) environmental variables. The testing tmp directory path is configured via the `FLARUM_TEST_TMP_DIR_LOCAL` or `FLARUM_TEST_TMP_DIR` environmental variables, with the former taking precedence over the latter. If neither are provided, a `tmp` directory will be created in the `vendor` folder of your extension's local install.
 
 Now that we've provided the needed information, all we need to do is run `composer test:setup` in our extension's root directory, and we have our testing environment ready to go!
 
-Since [(almost)](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). You should then be good to go for any Flarum extension (or core).
+Since [(almost)](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/tests/integration/api/discussions/ListWithFulltextSearchTest.php#L29-L45) all database operations in integration tests are run in transactions, developers working on multiple extensions will generally find it more convenient to use one shared database and tmp directory for testing all their extensions. To do this, set the database config and `FLARUM_TEST_TMP_DIR` environmental variables in your `.bashrc` or `.bash_profile` to the path you want to use, and run the setup script for any one extension (you'll still want to include the setup file in every repo for CI testing via GitHub Actions). 然后，你应该很好地去做任何Flarum扩展(或核心)。
 
-### Using Integration Tests
+### 使用集成测试
 
 Flarum's integration test utils are contained in the `Flarum\Testing\integration\TestCase` class. It:
 
-- Boots (and makes available) an instance of the Flarum application.
-- Allows pre-populating the database, enabling extensions, and adding extenders.
-- Runs all database changes in transactions, so your test database retains the default post-installation state.
-- Allows sending requests through the middleware stack to test HTTP endpoints.
+- Boots（并提供）是Flarum应用程序的一个实例。
+- 允许预填充数据库、启用扩展和添加扩展。
+- 在事务中运行所有数据库更改，所以您的测试数据库保留默认的安装后状态。
+- 允许通过中间件堆栈发送请求以测试 HTTP 端点。
 
-Your testcase classes should extend this class.
+您的测试箱类应该扩展这个类。
 
-#### Test Case Setup
+#### 测试大小写设置
 
-There are several important utilities available for your test cases:
+您的测试案例有几个重要的实用工具：
 
 - The `setting($key, $value)` method allows you to override settings before the app has booted. The <code>setting($key, $value)</code> method allows you to override settings before the app has booted. This is useful if your boot process has logic depending on settings (e.g. which driver to use for some system).
-- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
-- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. Note that you must list them in a valid order.
+- Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. 您可以在配置数组中设置深嵌套值。
+- The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. 您的扩展应该总是在测试案例开始时用扩展的 ID 来调用这个扩展。 除非所涉测试案例的目标是确认某些存在的行为，而不需要您的扩展， 并比较您的扩展启用时的行为。 Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. 请注意，您必须以合法的顺序列出它们。
 - The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
-- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
+- The `prepareDatabase()` method allow you to pre-populate your database. 这可以包括添加用户、讨论、帖子、配置权限等。 Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/8.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
@@ -467,7 +467,7 @@ js
 └── webpack.config.cjs
 ```
 
-#### GitHub Testing Workflow
+#### GitHub 测试工作流
 
 To run tests on every commit and pull request, check out the [GitHub Actions](github-actions.md) page.
 
@@ -495,9 +495,9 @@ test('abbreviates large numbers with decimal places', () => {
 });
 ```
 
-### Using Integration Tests
+### 使用集成测试
 
-Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters. For example, you might test that a page component renders the correct content based on certain parameters.
+Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters. 例如，您可以测试一个页面组件根据某些参数渲染正确的内容。
 
 Here's a simple example of an integration test for core's `Alert` component:
 
@@ -562,6 +562,6 @@ These are the custom methods that are available for mithril component tests:
 
 To negate any of these methods, simply prefix them with `not.`. For example, `expect(alert).not.toHaveElement('button.Alert-dismiss');`. For more information, check out the [Jest docs](https://jestjs.io/docs/using-matchers). For example you may need to check how to [mock functions](https://jestjs.io/docs/mock-functions), or how to use `beforeEach` and `afterEach` to set up and tear down tests.
 
-## E2E Tests
+## E2E测试
 
-Coming Soon!
+敬请期待！
