@@ -1,19 +1,19 @@
-# Frontend Pages and Resolvers
+# 前端页面和解析器
 
 As explained in the [Routes and Content](routes.md#frontend-routes) documentation, we can use Mithril's routing system to show different [components](frontend.md#components) for different routes. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component.
 
-## The Page Component
+## 页面组件
 
-We provide `flarum/common/components/Page` as a base class for pages in both the `admin` and `forum` frontends. It has a few benefits:
+We provide `flarum/common/components/Page` as a base class for pages in both the `admin` and `forum` frontends. 它有几个好处：
 
 - Automatically updates [`app.current` and `app.previous` PageState](#pagestate) when switching from one route to another.
-- Automatically closes the modal and drawer when switching from one route to another.
+- 切换路由时自动关闭模态框和抽屉。
 - Applies `this.bodyClass` (if defined) to the '#app' HTML element when the page renders.
-- It's also good for consistency's sake to use a common base class for all pages.
+- 在所有页面上使用一个共同的基础类也是很好的。
 - If the page's `scrollTopOnCreate` attribute is set to `false` in `oninit`, the page won't be scrolled to the top when changed.
 - If the page's `useBrowserScrollRestoration` is set to `false` in `oninit`, the browser's automatic scroll restoration won't be used on that page.
 
-Page components work just like any other inherited component. For a (very simple) example: For a (very simple) example:
+Page components work just like any other inherited component. For a (very simple) example: 一个(非常简单的)示例：
 
 ```js
 import Page from 'flarum/common/components/Page';
