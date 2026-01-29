@@ -1,6 +1,6 @@
-# Extending Extensions
+# 扩展其他扩展
 
-Flarum extensions aren't just for adding features to core: extensions can extend other extensions!
+Flarum 扩展不仅仅是为核心添加功能：扩展可以扩展其他扩展！
 
 :::tip
 
@@ -8,13 +8,13 @@ To learn how to make your extension extensible, see the [relevant documentation]
 
 :::
 
-## Dependencies
+## 依赖
 
-If your extension relies on another extension, you'll want to ensure that:
+如果你的扩展依赖于另一个扩展，你将会确保：
 
-- The other extension is installed and enabled before yours can be.
-- The other extension can't be disabled while yours is enabled.
-- The other extension is booted before your extension.
+- 在您开始之前安装并启用了其他扩展。
+- 在您的扩展启用时不能禁用其他扩展。
+- 另一个扩展在您的扩展之前启动。
 
 Flarum makes this very easy: just add the other extension to your extension's `composer.json`'s `require` section.
 
@@ -31,12 +31,12 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 }
 ```
 
-## Optional Dependencies
+## 可选依赖
 
-Sometimes, extension A might want to extend extension B only if extension B is enabled.
+有时候，扩展A可能只在启用扩展B时才想扩展扩展B。
 Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
 
-The first step here is detecting whether extension B is enabled. The first step here is detecting whether extension B is enabled. For instance:
+这里的第一步是检测扩展B是否启用。 The first step here is detecting whether extension B is enabled. 就像这样：
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
@@ -44,7 +44,7 @@ if ('some-extension-id' in flarum.extensions) {
 }
 ```
 
-In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. For instance:
+In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. 就像这样：
 
 ```php
 <?php
@@ -69,7 +69,7 @@ class SomeClass {
 Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies.
 You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
 
-For instance:
+就像这样：
 
 ```json
 {
