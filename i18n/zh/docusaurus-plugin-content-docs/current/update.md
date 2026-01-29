@@ -24,7 +24,7 @@ Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。 �
 
 **第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只是需要跨主要版本的 （例如，如果从 v2.0.0 升级，您可能不需要检查）。 v1.1.0，假定您的扩展遵循推荐的版本)。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 请耐心等待扩展开发者更新！ 请耐心等待扩展开发者更新！
 
-**第2步：** 查看您的 `composer.json` 文件。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 If you're targeting a specific version of Flarum, set `flarum/core` to that (e.g. `"flarum/core": "v1.8`). 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
+**第2步：** 查看您的 `composer.json` 文件。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.8-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
 
 **第 3步：** 如果您使用 [本地扩展](extenders.md)，请确保它们更新到最新的 Flarum 中的变更。
 
@@ -44,9 +44,9 @@ php flarum cache:clear
 
 ## 主要版本更新指南
 
-### Updating from v1 (^1.0.0) to v2 (^2.0.0)
+### 从 v1 (^1.0.0) 升级到 v2 (^2.0.0)
 
-1. If you are using a MariaDB database, you should change the driver in `config.php` from `mysql` to `mariadb`:
+1. 如果您正在使用MariaDB数据库，您应该将 `config.php` 的驱动程序从 `mysql` 更改为 `mariadb`：
    ```php
     <?php return array (
       'debug' => true,
@@ -61,10 +61,10 @@ php flarum cache:clear
         'port' => 3306,
    ```
 2. 执行上文步骤1-5。
-3. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `*`.
-4. Change `flarum/core`'s version string in `composer.json` from `^1.0` (or `^1.8`, ...etc) to `^2.0`.
-5. Preferably set the `"minimum-stability": "beta",` line in your `composer.json` to `stable` unless you are still using a beta third party extension.
-6. Do steps 6 and 7 above.
+3. 在`composer.json`中，把所有捆绑扩展的版本 (例如：`flarum/tags`, `flarum/mentions`, `flarum/likes`等) 从 `^1.0` (or `^1.8`, ...etc) 改成 `*`。
+4. 在 `composer.json` 中，把 `flarum/core` 的版本从`^1.0` (或 `^1.8`, ...等等) 改成 `^2.0`。
+5. 除非您仍在使用测试版本的第三方扩展，否则，最好在您的 `composer.json` 中，把 `"minimum-stability": "beta",` 这行改成 `stable`。
+6. 执行上文步骤6-7。
 
 ## 故障排除
 
@@ -79,17 +79,17 @@ Flarum 正处于测试阶段，有关如何更新的说明将在每次 [版本�
 如果输出较短且包含：
 
 ```
-Nothing to modify in lock file
+在锁定文件中没有可以修改的
 ```
 
-Or does not list `flarum/core` as an updated package, and you are not on the latest flarum version:
+或者不将 `flarum/core` 列为更新的包，并且您不在最新的 flarum 版本上：
 
-- Revisit step 2 above, make sure that all third party extensions have an asterisk for their version string.
-- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v1.8` is locked, `^2.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above.
+- 请重新访问上面步骤2，确保所有第三方扩展都有一个星号的版本字符串。
+- 请确保您的 `flarum/core` 版本要求没有锁定到特定的次要版本(例如， `v1.8` 已锁定。 `^2.0.0` 不是)。 如果您试图在Flarum的主要版本中更新，请参阅上面相关的主要版本更新指南。
 
 ---
 
-For other errors, try running `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`
+对于其他错误, 请尝试 `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`
 
 如果输出看起来像这样：
 
@@ -118,13 +118,13 @@ flarum/flarum                     -               does not require  illuminate/e
 ... (this'll go on for a bit)
 ```
 
-It is very likely that some of your extensions have not yet been updated.
+很可能您的一些扩展尚未更新。
 
-- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. Remove any that don't.
-- Make sure you're running `composer update` with all the flags specified in the update step.
+- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. 删除任何不存在的内容。
+- 请确保您正在使用更新步骤中指定的所有标志来运行 `composer update`。
 
-If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
+如果这没有解决你的问题，请随时联系我们的 [支持论坛](https://discuss.flarum.org/t/support)。 If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
 
-### Errors After Updating
+### 更新时出错
 
 如果您在更新后无法访问您的论坛，请遵循我们的 [故障排除说明](troubleshoot.md)。
