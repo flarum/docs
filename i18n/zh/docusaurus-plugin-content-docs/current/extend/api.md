@@ -4,20 +4,20 @@
 
 :::info
 
-To use the built-in REST API as part of an integration, see [Consuming the REST API](../rest-api.md).
+若要在集成项目中使用内置的 REST API，可参考[Consuming the REST API](../rest-api.md)这份文档 / 章节。
 
 :::
 
 ## API请求生命周期
 
-Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
+在我们详细了解如何扩展Flarum的数据 API 之前，值得考虑一个典型的 API 请求的生命周期：
 
-![Flarum API Flowchart](../assets/api_flowchart.svg)
+![Flarum API 流程图](../assets/api_flowchart.svg)
 
-1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
-2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. Each API Resource is distinguished by a unique type and has a set of endpoints. You can read more about them in the below sections.
-3. Any modifications done by extensions to the API Resource endpoints via the [`ApiResource` extender](#extending-api-resources) are applied. This could entail changing sort, adding includes, eager loading relations, or executing some logic before and/or after the default implementation runs.
-4. The action of the endpoint is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. That being said, the data could be anything as long as the API resource can process it. There are built-in reusable endpoint for CRUD operations, but custom endpoints can be implemented as well.
+1. HTTP请求已发送到Flarum的 API。 通常情况下，这将来自Flarum前端，但外部程序也可以与 API 互动。 An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
+2. 请求运行到 [middleware](middleware.md)并路由到适当的 API 资源端点。 每个API资源都有一个唯一的类型，并且有一组端点。 你可以在以下章节中阅读更多关于这些问题的内容。
+3. 扩展通过 [`ApiResource` 扩展器](#extending-api-resources) 对 API 资源端点所做的所有修改，都会被自动应用生效。 这可能需要更改排序，添加包括加载关系，或在默认实现运行之前或之后执行一些逻辑。
+4. 端点的动作被调用，产生了一些原始数据，返回给客户端。 通常，这些数据将采取Laravel Espoent模型收集或实例的形式，已从数据库中检索。 That being said, the data could be anything as long as the API resource can process it. There are built-in reusable endpoint for CRUD operations, but custom endpoints can be implemented as well.
 5. Any modifications made through the [`ApiResource` extender](#extending-api-resources) to the API resource's fields will be applied. These can include adding new attributes or relationships to serialize, removing existing ones, or changing how the field value is computed.
 6. The fields (attributes and relationships) are serialized, converting the data from the backend database-friendly format to the JSON:API format expected by the frontend.
 7. The serialized data is returned as a JSON response to the frontend.
@@ -274,13 +274,13 @@ public function endpoints(): array
 
 #### 搜索
 
-Read our [searching and filtering](search.md) guide for more information!
+阅读我们的 [搜索和过滤](search.md) 指南以获取更多信息！
 
-### Showing, Creating, Updating, and Deleting Resources
+### 展示、创建、更新和删除资源
 
-The `Show`, `Create`, `Update`, and `Delete` endpoints are used to get, create, update, and delete a single model instance, respectively.
+`Show`, `Create`, `Update`, 和 `Delete` 端点分别用于获取、创建、更新和删除单个模型实例。
 
-If your resource class extends the `AbstractDatabaseResource` class, you can directly use the endpoints.
+如果你的资源类扩展了 `AbstractDatabaseResource` 类，你可以直接使用端点。
 
 ```php
 use Flarum\Api\Endpoint;
@@ -296,7 +296,7 @@ public function endpoints(): array
 }
 ```
 
-If your resource class extends the `AbstractResource` class, you must implement the appropriate interfaces.
+如果您的资源类扩展了 `AbstractResource` 类，您必须实现相应的接口。
 
 ```php
 use Flarum\Api\Resource\Contracts\{
@@ -324,7 +324,7 @@ class CustomResource extends AbstractResource implements
 
 :::info
 
-Find out more about these endpoint in the underlying package's documentation:
+了解更多关于这些端点的基本包文档：
 * https://tobyzerner.github.io/json-api-server/show.html
 * https://tobyzerner.github.io/json-api-server/create.html
 * https://tobyzerner.github.io/json-api-server/update.html
@@ -332,9 +332,9 @@ Find out more about these endpoint in the underlying package's documentation:
 
 :::
 
-### Database resource hooks
+### 数据库资源钩子
 
-API database resources have additional hooks that can be used to run custom logic:
+API 数据库资源有额外的钩子，可用来运行自定义逻辑：
 
 ```php
 public function creating(object $model, Context $context): ?object
@@ -385,11 +385,11 @@ public function mutateDataBeforeValidation(Context $context, array $data): array
 
 ## 端点
 
-There is a range of methods you can use to customize the behavior of your API endpoints. We will try to go through them in this section.
+您可以使用一系列方法来自定义您的 API 端点的行为。 我们将在本节中试图谈论这些问题。
 
 ### 身份认证
 
-You can use a callback to determine whether an actor can access an endpoint. This is done through the `visible` method on the endpoint:
+您可以使用回调来确定操作者是否可以访问端点。 这是通过端点上的 `visible` 方法完成的：
 
 ```php
 use Flarum\Api\Context;
@@ -404,7 +404,7 @@ public function endpoints(): array
 }
 ```
 
-Flarum adds a couple of useful methods. The `can`, `authenticated` & `admin` methods. `can` is just the equivalent of the above example. `authenticated` checks that the actor is logged in (not a guest). `admin` checks that the actor is an admin.
+Flarum增加了几种有用的方法。 `can`, `authenticated` & `admin` 方法。 `can` 方法其实就与上述示例的实现逻辑完全等效。 `authenticated` 检查操作者是否已登录(不是访客)。 `admin` 检查操作者是管理员。
 
 ```php
 use Flarum\Api\Endpoint;
@@ -424,9 +424,9 @@ public function endpoints(): array
 }
 ```
 
-### Including relationship by default
+### 默认包含关联关系
 
-We do not recommend including relationships by default. If possible, it is better to extend the specific request payloads to be made on the frontend side and add the includes there as that keeps the API responses optimized. However, if you *really* need to include a relationship by default, you can do so through the `defaultInclude` method:
+我们不推荐默认包含关联关系。 如有可能： 最好是扩展在前端的特定请求有效载荷，并添加包含在前端，因为这将使API响应保持最佳化。 不过，如果你*确实* 有必要默认包含某一关联关系数据，可通过`defaultInclude`方法来实现这一需求：
 
 ```php
 use Flarum\Api\Endpoint;
@@ -442,7 +442,7 @@ public function endpoints(): array
 
 ### Lifecycle Hooks
 
-Some methods on the endpoint allow you to hook certain logic into the lifecycle of the endpoint. These are `before`, `after`, and `beforeSerialization` which is often not very different from `after` but is called before it when available on the endpoint. For example, you can use these hooks to log additional information (such as marking notifications as read when said endpoint is accessed), or you may need to modify the resulting data before it is serialized.
+端点上的一些方法允许您将某些逻辑绑定到端点的生命周期。 这三个钩子分别是 `before`、`after` 以及 `beforeSerialization`—— 其中 beforeSerialization 的功能通常与 `after` 相差不大，但在端点支持该钩子的情况下，它的调用时机要早于 after。 例如，您可以使用这些钩子来记录额外的信息(例如在访问该端点时标记通知为已读), 或者您可能需要修改生成的数据，然后才能序列化。
 
 ```php
 use Flarum\Api\Endpoint;
@@ -464,11 +464,11 @@ public function endpoints(): array
 }
 ```
 
-### Eager Loading
+### 预加载
 
-By default, relationships that are included in the API response are automatically eager loaded. However, a lot of times you will want to specify some relations to be eager loaded regardless of their inclusion in the API response. For example, if you need to access `$label->parent` to check that a field should be visible in the response, then you will need to eager load the parent relation to prevent N+1 queries.
+默认情况下，包含在 API 响应中的关系会自动加载。 然而，你想要很多时候指定一些关系，不管它们是否包含在API响应中。 例如，如果你需要访问 `$label->parent` 来判断某个字段是否应该在响应中显示，那么你就需要预加载 parent 这个关联关系，以此避免出现 N+1 查询问题。
 
-You can do this through the `eagerLoad`, `eagerLoadWhenIncluded` and `eagerLoadWhere` methods on the endpoint.
+你可以通过端点上的 `eagerLoad`、`eagerLoadWhenIncluded` 以及 `eagerLoadWhere` 这三个方法来完成关联数据的预加载配置。
 
 ```php
 use Flarum\Api\Endpoint;
@@ -492,11 +492,11 @@ public function endpoints(): array
 
 :::tip
 
-Use the [Clockwork](https://github.com/FriendsOfFlarum/clockwork) extension to profile your API requests and see if you are making N+1 queries. These can be very costly the larger the community is.
+你可以使用 [Clockwork](https://github.com/FriendsOfFlarum/clockwork) 这个扩展来剖析性能分析你的 API 请求，进而查看是否存在 N+1 查询问题。 这可能会使社区付出巨大代价。
 
 :::
 
-### Custom Endpoints
+### 自定义端点
 
 Aside from the built-in CRUD endpoints, you can also define custom endpoints. This is done through the `Endpoint\Endpoint` class. You can define the logic of the endpoint through the `action` method. Unlike the built-in CRUD endpoints, you must specify the name of the endpoint, the HTTP method, and path.
 
@@ -707,7 +707,7 @@ public function fields(): array
 }
 ```
 
-### Property
+### 属性
 
 By default you should use camelCase for your attribute names and they will be automatically mapped to their snake_case equivalent when interacting with the model. But if you need to specify which property on the model the attribute should map to, you can use the `property` method.
 
