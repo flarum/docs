@@ -1,20 +1,20 @@
 # API 调节器
 
-Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests. This runs on every API route, and extensions can add their own custom logic to throttle requests.
+Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API. This runs on every API route, and extensions can add their own custom logic to throttle requests. 这将运行在每一个 API 路由上，扩展可以将自己的自定义逻辑添加到节流请求中。
 
 :::caution Forum Routes
 
-Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future.
+Some forum routes (login, register, forgot password, etc) work by calling an API route under the surface. The `ThrottleApi` middleware does not currently run for these requests, but that is planned for the future. `ThrottleApi` 中间件目前没有为这些请求运行，但是计划将来使用。
 
 :::
 
-## Custom Throttlers
+## 自定义限流处理器
 
-The format for a custom throttler is extremely simple: all you need is a closure or invokable class that takes the current request as an argument, and returns one of:
+自定义限流处理器格式非常简单：您需要的只是一个关闭或可调用的类，将当前请求作为一个参数， 并返回一个：
 
-- `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
-- `true`: This marks the request as to be throttled.
-- `null`: This means that this throttler doesn't apply. `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
+- `false`: 此操作会显式绕过该请求的限流机制，覆盖所有其他限流处理器
+- `true`: 这个标记的请求将被限流。
+- `null`: 这意味着该限流处理器不生效。 `null`: This means that this throttler doesn't apply. Any other outputs will be ignored, with the same effect as `null`.
 
 Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler: For example, consider Flarum's post throttler:
 
