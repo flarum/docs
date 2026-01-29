@@ -48,7 +48,7 @@ fl upgrade 2.0
 
 ## Frontend
 
-### Dependencies
+### 依赖
 
 ##### <span class="breaking">Breaking</span>
 
@@ -186,7 +186,7 @@ There have been many changes to the core frontend codebase, including renamed or
 
 - A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
 
-### Dependencies
+### 依赖
 
 #### Main packages
 
