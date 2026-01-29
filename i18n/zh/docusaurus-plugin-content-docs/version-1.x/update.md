@@ -44,7 +44,7 @@ php flarum cache:clear
 2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^0.1.0` to `*`.
 3. Change `flarum/core`'s version string in `composer.json` from `^0.1.0` to `^1.0`.
 4. Remove the `"minimum-stability": "beta",` line from your `composer.json`
-5. Do steps 6 and 7 above.
+5. 执行上文步骤6-7。
 
 ## 故障排除
 
@@ -59,13 +59,13 @@ Flarum 正处于测试阶段，有关如何更新的说明将在每次 <a href="
 如果输出较短且包含：
 
 ```
-Nothing to modify in lock file
+在锁定文件中没有可以修改的
 ```
 
 Or does not list `flarum/core` as an updated package, and you are not on the latest flarum version:
 
-- Revisit step 2 above, make sure that all third party extensions have an asterisk for their version string.
-- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above.
+- 请重新访问上面步骤2，确保所有第三方扩展都有一个星号的版本字符串。
+- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). 如果您试图在Flarum的主要版本中更新，请参阅上面相关的主要版本更新指南。
 
 ---
 
@@ -98,13 +98,13 @@ flarum/flarum                     -               does not require  illuminate/e
 ... (this'll go on for a bit)
 ```
 
-It is very likely that some of your extensions have not yet been updated.
+很可能您的一些扩展尚未更新。
 
-- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. Remove any that don't.
+- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. 删除任何不存在的内容。
 - Make sure you're running `composer update` with all the flags specified in the update step.
 
 If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
 
-### Errors After Updating
+### 更新时出错
 
 如果您在更新后无法访问您的论坛，请遵循我们的 [故障排除说明](troubleshoot.md)。
