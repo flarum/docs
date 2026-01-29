@@ -63,7 +63,7 @@ With regards to upgrading, please note the following:
 
 The `flarum/testing` package provides utils for PHPUnit-powered automated backend tests. See the [testing documentation](testing.md) for more info.
 
-### Optional Dependencies
+### 可选依赖
 
 Beta 15 introduced "extension dependencies", which require any extensions listed in your extension's `composer.json`'s `require` section to be enabled before your extension can be enabled.
 
