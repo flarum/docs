@@ -110,7 +110,7 @@ class AcmeSearcher extends AbstractSearcher
 }
 ```
 
-You can optionally create a fulltext filter implementation for actual searching. This is a special filter that is always applied when a search query is provided. For instance, if you want to search Acme models by their `name` column:
+您可以为实际搜索创建一个全文过滤器实现。 这是一个在提供搜索查询时始终应用的特殊过滤器。 比如，如果你想通过`name`字段来搜索 Acme 模型的数据：
 
 ```php
 namespace YourPackage\Search;
@@ -132,7 +132,7 @@ class AcmeFulltextFilter extends AbstractFulltextFilter
 }
 ```
 
-Then, you'll need to register this searcher via the search driver extender:
+然后，您需要通过搜索驱动扩展来注册此搜索器：
 
 ```php
 use Flarum\Extend;
@@ -149,15 +149,15 @@ return [
 ];
 ```
 
-## Creating a new search driver
+## 创建一个新的搜索驱动
 
-If you want to create a new search driver, you'll need to:
+如果您想要创建一个新的搜索驱动器，您需要：
 
-1. First create a driver class that extends `Flarum\Search\AbstractDriver`.
-2. Then for each model that your driver implements searching for, you'll need to create a model searcher class that implements `Flarum\Search\SearcherInterface`.
-3. (*Optionally*) you can create a custom search state class that extends `Flarum\Search\SearchState` to store any additional state you need for your driver.
-4. Refer to the section above for registering a filter and/or a fulltext filter for your model searcher.
-5. Finally, you'll need to register your driver via the `SearchDriver` extender.
+1. 首先创建扩展的 `Flarum\Search\AbstractDriver` 的驱动类。
+2. 然后，对于您的驱动程序实现搜索的每个模型，您需要创建一个实现 `Flarum\Search\SearcherInterface` 的模型搜索类。
+3. (*可选*) 您可以创建一个自定义搜索状态类，扩展 `Flarum\Search\SearchState` 以存储您需要的任何额外状态的驱动程序。
+4. 请参阅上面的部分，以便为您的模型搜索者注册一个过滤器和/或一个完整的文本过滤器。
+5. 最后，您需要通过 `SearchDriver` 注册您的驱动。
 
 ```php
 namespace YourPackage\Search;
@@ -192,7 +192,7 @@ return [
 ];
 ```
 
-Your model searcher and fulltext filter implementations is where the specific logic for your search driver goes. You will want to create an abstract searcher class to reuse the logic for all your model searchers.
+您的模型搜索器和全文过滤器实现是您搜索驱动程序的特定逻辑运行的地方。 您将想要创建一个抽象的搜索器类来重新使用您所有模型搜索者的逻辑。
 
 ```php
 namespace YourPackage\Search;
@@ -220,15 +220,15 @@ abstract class AbstractAcmeSearcher implements SearcherInterface
 
 :::info
 
-You can check the [default database search driver implementation](https://github.com/flarum/framework/blob/2.x/framework/core/src/Search/Database) for an example of how to implement the searcher.
+您可以检查 [默认数据库搜索驱动器实现](https://github.com/flarum/framework/blob/2.x/framework/core/src/Search/Database) 的示例如何实现搜索程序。
 
 :::
 
-## Indexing
+## 索引
 
-Flarum simplifies the process of indexing models by taking care of listening to the events and running your indexer logic in an async job. All you need to do is implement the `Flarum\Search\IndexerInterface` interface and register it via the `SearchIndex` extender.
+Flarum通过注意监听事件和在异步作业中运行你的索引器逻辑来简化索引模型的过程。 您需要做的只是实现 `Flarum\Search\IndexerInterface` 接口，并通过 `SearchIndex` 扩展程序注册它。
 
-Indexers are not tied to any specific search drivers. You can add indexers for existing or new models. But the logic of your indexer will be specific to the desired driver.
+索引器不绑定到任何特定的搜索驱动器。 您可以为现有或新模型添加索引器。 但你的索引器的逻辑将针对指定的驱动程序。
 
 ```php
 namespace YourPackage\Search;
@@ -281,36 +281,36 @@ return [
 
 :::info
 
-Checkout this [proof of concept elastic search driver](https://github.com/SychO9/flarum-ext-search) for more examples.
+查看更多示例的 [概念弹性搜索驱动程序](https://github.com/SychO9/flarum-ext-search)。
 
 :::
 
-## Configuring the driver for a model
+## 配置模型驱动程序
 
-You can select which driver a search model can use from the advanced admin page. This page needs to be toggled from the button on the dashboard page tools dropdown:
+您可以从高级管理页面选择搜索模型可以使用的驱动程序。 此页面需要从控制面板工具下拉的按钮切换：
 
 ![切换高级页面](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
 
-![Advanced page](https://user-images.githubusercontent.com/20267363/277113315-9d75b9a3-f225-4a2b-9f42-8e5b9d13d5e8.png)
+![高级页面](https://user-images.githubusercontent.com/20267363/277113315-9d75b9a3-f225-4a2b-9f42-8e5b9d13d5e8.png)
 
 
 ## Gambits
 
-Gambits are a way of adding filters through the search input of the frontend. The concept of gambits is only relevant to the frontend as they are used to translate string queries into filters and filters back into their string format. For example, the `is:unread` gambit translates to a `filter[unread]` filter, and vice versa.
+Gambits 是通过搜索前台添加过滤器的一种方式。 Gambit的概念仅与前端有关，因为它们被用来将字符串查询转换成过滤器和过滤器返回其字符串格式。 例如，`is:unread` 筛选语法会对应转换为 `filter[unread]` 筛选器，反之亦然。
 
-Gambits are applied any time you call `app.store.find()` and provide a `q` filter. For example:
+任何时候你调用 `app.store.find()` 并提供一个 `q` 过滤器都会应用 Gambits 。 For example:
 
 ```ts
 app.store.find('discussions', { q: 'is:unread' });
 ```
 
-Gambits are automatically shown in the autocomplete options of the global search:
+在全局搜索的自动完成选项中，Gambits 会自动显示：
 
-![Global search modal](../assets/global_search_modal.png)
+![全局搜索模式](../assets/global_search_modal.png)
 
-### Basic gambits
+### 基本 gambits
 
-To create a new gambit, determine if it is a `key:value` type of gambit, or a boolean `is:` type of gambit. If it is the former, you may create a class that extends `KeyValueGambit`. For example, the `country` column example we used earlier is a `key:value` gambit:
+要创建一个新的 gambit，请确定它是一个 `key:value` 类型的 gambit，还是布尔值为 `is:` 类型的 gambit。 如果它是前者，你可以创建一个扩展 `KeyValueGambit` 的类。 For example, the `country` column example we used earlier is a `key:value` gambit:
 
 ```ts
 import app from 'flarum/common/app';
@@ -389,8 +389,8 @@ Whether this gambit can use logical operators. For example, the tag gambit can b
 }
 ```
 The backend filter must be able to handle this format. Checkout the `TagGambit` and `TagFilter` classes for an example.
-###### `enabled`
-Whether this gambit can be used by the actor. Some filters are protected and can only be used by certain actors. For example, the `is:suspended` gambit can only be used by actors with permission to suspend users.
+###### `已启用`
+这个gambit是否可以被操作者使用。 某些过滤规则是受保护的，只能被某些行为者使用。 例如，`is:suspended` 这一筛选语法，仅允许拥有封禁用户权限的操作主体使用。
 
 ```ts
 enabled(): bool {
@@ -398,9 +398,9 @@ enabled(): bool {
 }
 ```
 
-### Registering gambits
+### 注册 gambit
 
-Once you have created your gambit, you will need to register it. You can do so using the `Search` frontend extender:
+一旦您创建了您的 gambit，您将需要注册它。 您可以使用 `Search` 前端扩展：
 
 ```ts
 import Extend from 'flarum/common/extenders';
@@ -413,9 +413,9 @@ export default [
 ];
 ```
 
-### Autocomplete for custom inputs
+### 自动完成自定义输入
 
-If you have a custom input for which you want to provide gambit autocompletion, you may use the `GambitAutocompleteDropdown` wrapper component. The built-in user list admin page uses this component. Here is an example:
+如果你有一个自定义输入框，且希望为它提供筛选语法gambit自动补全功能，那么可以使用 `GambitAutocompleteDropdown` 这个包装组件。 内置用户列表管理页面使用此组件。 下面是一个示例：
 
 ```tsx
 import GambitsAutocompleteDropdown from 'flarum/common/components/GambitsAutocompleteDropdown';
@@ -433,6 +433,6 @@ import Input from 'flarum/common/components/Input';
 </GambitsAutocompleteDropdown>
 ```
 
-This will automatically produce an autocomplete dropdown with the appropriate gambits for the `users` resource. The `query` prop is the current search query, and the `onchange` prop is a callback that will be called when the query changes.
+这将自动生成一个自动完成的下拉列表，并且为 `users` 资源。 `query` 验证是当前的搜索查询， 和 `onchange` prop 是一个在查询发生变化时调用的回调。
 
-![Gambit autocomplete dropdown component](../assets/gambit_autocomplete_dropdown.png)
+![Gambit 自动完成下拉组件](../assets/gambit_autocomplete_dropdown.png)
