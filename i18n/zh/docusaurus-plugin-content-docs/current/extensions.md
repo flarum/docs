@@ -16,7 +16,7 @@ The extension manager is an extension that comes bundled with Flarum when instal
 composer require flarum/extension-manager:"*"
 ```
 
-:::warning
+:::警告
 
 The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions. 只有在您信任所有论坛管理员拥有此权限的情况下才安装扩展管理器
 
