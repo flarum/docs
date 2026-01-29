@@ -76,7 +76,7 @@ app.initializers.add('interstellar', function(app){
 }
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc: This can be used for placeholders, min/max restrictions, etc:
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc: 这可以用于占位符、最小/最大限制等：
 
 ```js
 {
@@ -88,7 +88,7 @@ Also, note that additional items in the setting object will be used as component
 }
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+如果您想要在设置中添加一些内容，比如额外的文本或更复杂的输入， 您也可以传递回调作为返回JSX的第一个参数。 This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -113,19 +113,19 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-### Registering Permissions
+### 注册权限
 
 New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
 In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
-Arguments:
+参数：
 
-- Permission object
+- 权限对象
 - What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
 - `ItemList` priority
 
-Back to our favorite rocket extension:
+回到我们最喜欢的 rocket 扩展：
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -212,4 +212,4 @@ For more information, see the [composer.json schema](https://getcomposer.org/doc
 | Support (email)                                 | "email" key inside "support"                                                                    |
 | Website                                                            | "homepage" key                                                                                  |
 | Donate                                                             | "funding" key block (Note: Only the first link will be used) |
-| Source                                                             | "source" key inside "support"                                                                   |
+| 来源                                                                 | “support” 内的 “source” 键                                                                         |
