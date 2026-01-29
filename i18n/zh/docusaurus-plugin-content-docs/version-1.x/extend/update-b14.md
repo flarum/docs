@@ -212,7 +212,7 @@ For examples and other AJAX changes, see [the mithril documentation](https://mit
 
 #### Promises
 
-`m.deferred` has been removed, native promises should be used instead. For instance:
+`m.deferred` has been removed, native promises should be used instead. 就像这样：
 
 ```js
 // Mithril 0.2
@@ -262,7 +262,7 @@ class ParentComponent extends Component {
 
 That will no longer work. That will no longer work. In fact; the Component class no longer has a render method.
 
-Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance: For instance:
+Instead, any data needed by a child component that is modified by a parent component should be passed in as an attr. For instance: 就像这样：
 
 ```js
 class ChildComponent extends Component {
@@ -289,7 +289,7 @@ class ParentComponent extends Component {
 ```
 
 For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components.
-In this case, it might be preferable to create a POJO "state instance' for this data. For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance: For instance:
+In this case, it might be preferable to create a POJO "state instance' for this data. For more complex components, this might require some reorganization of code. For instance, let's say you have data that can be modified by several unrelated components. In this case, it might be preferable to create a POJO "state instance' for this data. These states are similar to "service" singletons used in Angular and Ember. For instance: 就像这样：
 
 ```js
 class Counter {
@@ -423,7 +423,7 @@ Loading state in the `common/components/Checkbox` component is no longer managed
 
 #### Preference Saver
 
-The `preferenceSaver` method of `forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. For instance:
+The `preferenceSaver` method of `forum/components/SettingsPage` has been removed without replacement. This is done to avoid saving component instances. Instead, preferences should be directly saved. 就像这样：
 
 ```js
 // Old way
@@ -507,7 +507,7 @@ When called, it checks if any of the data has changed; if not, it indicates that
 
 In mithril 0.2, its `retain` method returned a [subtree retain directive](https://mithril.js.org/archive/v0.1.25/mithril.render.html#subtree-directives) if no redraw was necessary.
 
-In mithril 2, we use its `needsRebuild` method in combination with `onbeforeupdate`. For instance:
+In mithril 2, we use its `needsRebuild` method in combination with `onbeforeupdate`. 就像这样：
 
 ```js
 class CustomComponent extends Component {
