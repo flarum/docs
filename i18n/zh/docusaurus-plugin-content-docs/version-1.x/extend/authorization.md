@@ -7,40 +7,40 @@
 
 ## 认证流程
 
-The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they: For instance, we want to check if a user is authorized before they:
+The authorization process is used to check whether a person is allowed to perform certain actions. For instance, we want to check if a user is authorized before they: 例如，我们想要检查用户是否在他们之前被授权：
 
-- Access the admin dashboard
-- Start a discussion
-- Edit a post
-- Update another user's profile
+- 访问管理员控制面板
+- 开始讨论
+- 编辑一篇文章
+- 更新其他用户的个人资料
 
-Each of these is determined by unique criteria: in some cases a flag is sufficient; otherwise, we might need custom logic.
+每一项都是由独特的标准决定的：在某些情况下，标志已经足够；否则，我们可能需要自定义逻辑。
 
-## How It Works
+## 工作原理
 
 Authorization queries are made with 3 parameters, with logic contained in [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/access/gate):
 
-1. The actor: the user attempting to perform the action
-2. The ability: a string representing the action the actor is attempting
-3. The arguments: usually an instance of a database model which is the subject of the attempted ability, but could be anything.
+1. 操作者：试图执行该动作的用户
+2. 能力：一个表示操作者试图动作的字符串
+3. 参数：通常是一个数据库模型的实例，它是尝试能力的主体，但可以是任何东西。
 
-First, we run the entire request (all three parameters) through all [policies](#policies) registered by extensions and core. Policies are blocks of logic provided by core and extensions that determine whether the actor can perform the ability on the arguments. Policies can return one of the following:
+First, we run the entire request (all three parameters) through all [policies](#policies) registered by extensions and core. 策略是决定操作者是否能够在参数上行使能力的核心和扩展所提供的逻辑块。 策略可以以下一种返回：
 
 - `Flarum\User\Access\AbstractPolicy::ALLOW` (via `$this->allow()`)
 - `Flarum\User\Access\AbstractPolicy::DENY` (via `$this->deny()`)
 - `Flarum\User\Access\AbstractPolicy::FORCE_ALLOW` (via `$this->forceAllow()`)
 - `Flarum\User\Access\AbstractPolicy::FORCE_DENY` (via `$this->forceDeny()`)
 
-Policy results are considered in the priority `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. For example, if a single policy returns `FORCE_DENY`, all other policies will be ignored. If one policy returns `DENY` and 10 policies return `ALLOW`, the request will be denied. This allows decisions to be made regardless of the order in which extensions are booted. Note that policies are extremely powerful: if access is denied at the policy stage, that will override group permissions and even admin privileges.
+Policy results are considered in the priority `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. For example, if a single policy returns `FORCE_DENY`, all other policies will be ignored. If one policy returns `DENY` and 10 policies return `ALLOW`, the request will be denied. 这允许做出决定，而不考虑启动延期的顺序。 请注意策略的影响极大：如果在策略阶段拒绝访问，那将会覆盖组权限，甚至管理员权限。
 
-Secondly, if all policies return null (or don't return anything), we check if the user is in a group that has a permission equal to the ability (note that both permissions and abilities are represented as strings). If so, we authorize the action. See our <a href="permissions.md">Groups and Permissions documentation</a> for more information on permissions. If so, we authorize the action.
+Secondly, if all policies return null (or don't return anything), we check if the user is in a group that has a permission equal to the ability (note that both permissions and abilities are represented as strings). If so, we authorize the action. See our <a href="permissions.md">Groups and Permissions documentation</a> for more information on permissions. 如果是，我们授权采取行动。
 See our [Groups and Permissions documentation](permissions.md) for more information on permissions.
 
-Then, if the user is in the admin group, we will authorize the action.
+然后，如果用户在管理组中，我们将授权该行动。
 
-Finally, as we have exhausted all checks, we will assume that the user is unauthorized and deny the request.
+最后，由于我们已经完成了所有检查，我们将假定用户未经授权并拒绝请求。
 
-## How To Use Authorization
+## 如何使用授权
 
 Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
 
@@ -70,9 +70,9 @@ $actor->assertAdmin();
 $actorHasPermission = $actor->hasPermission(`viewForum`);
 ```
 
-## Custom Policies
+## 自定义策略
 
-Policies allow us to use custom logic beyond simple groups and permissions when evaluating authorization for an ability with a subject. For instance: For instance:
+Policies allow us to use custom logic beyond simple groups and permissions when evaluating authorization for an ability with a subject. For instance: 就像这样：
 
 - We want to allow users to edit posts even if they aren't moderators, but only their own posts.
 - Depending on settings, we might allow users to rename their own discussions indefinitely, for a short period of time after posting, or not at all.
