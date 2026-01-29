@@ -1,7 +1,7 @@
 # API 调节器
 
 Flarum comes with a builtin `Flarum\Api\Middleware\ThrottleApi` [middleware](middleware.md) for throttling requests to the API.
-This runs on every API route, and extensions can add their own custom logic to throttle requests.
+这将运行在每一个 API 路由上，扩展可以将自己的自定义逻辑添加到节流请求中。
 
 :::caution Forum Routes
 
@@ -10,9 +10,9 @@ The `ThrottleApi` middleware does not currently run for these requests, but that
 
 :::
 
-## Custom Throttlers
+## 自定义限流处理器
 
-The format for a custom throttler is extremely simple: all you need is a closure or invokable class that takes the current request as an argument, and returns one of:
+自定义限流处理器格式非常简单：您需要的只是一个关闭或可调用的类，将当前请求作为一个参数， 并返回一个：
 
 - `false`: This explicitly bypasses throttling for this request, overriding all other throttlers
 - `true`: This marks the request as to be throttled.
