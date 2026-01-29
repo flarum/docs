@@ -6,7 +6,7 @@
 
 :::
 
-:::warning
+:::警告
 
 Flarum 2.0 目前处于测试阶段。 它尚未准备好用于生产环境。
 
@@ -60,7 +60,7 @@ composer create-project flarum/flarum:^2.0.0 --stability=beta .
 composer require flarum/extension-manager:"*"
 ```
 
-:::warning
+:::警告
 
 The extension manager allows an admin user to install any composer package. Only install the extension manager if you trust all of your forum admins with such permissions. 只有在您信任所有论坛管理员拥有此权限的情况下才安装扩展管理器
 
