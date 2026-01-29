@@ -95,7 +95,7 @@ class PostEventSubscriber
 
 ## Dispatching Events
 
-Dispatching events is very simple. Dispatching events is very simple. All you need to do is inject `Illuminate\Contracts\Events\Dispatcher` into your class, and then call its `dispatch` method. For instance: For instance:
+Dispatching events is very simple. Dispatching events is very simple. All you need to do is inject `Illuminate\Contracts\Events\Dispatcher` into your class, and then call its `dispatch` method. For instance: 就像这样：
 
 ```php
 use Flarum\Post\Event\Deleted;
@@ -130,7 +130,7 @@ class SomeClass
 
 ## Custom Events
 
-As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data: Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data:
+As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension. Events are generally instances of simple classes (no need to extend anything). When defining a new event, you'll typically want to use public properties, and maybe some methods for convenience of users. For example, if we take a look at `Flarum\Post\Event\Deleted`, it's just a wrapping around some data: Events are generally instances of simple classes (no need to extend anything). 当定义一个新事件时，您通常想要使用公共属性，也许是一些方便用户的方法。 例如，如果我们看一下 `Flarum\Post\Event\Deleted`, 它只是一个围绕某些数据的包装：
 
 ```php
 <?php
