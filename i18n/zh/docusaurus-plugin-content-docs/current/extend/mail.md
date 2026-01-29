@@ -1,6 +1,6 @@
 # 邮件发送方式
 
-In addition to the [default drivers in core](../mail.md), Flarum allows new mail drivers to be added through extenders. To create your own mail driver, you'll need to create a class implementing `\Flarum\Mail\DriverInterface`. Flarum actually takes care of the frontend for providing email settings: just declare which settings you need, and any default values, in `availableSettings`. To create your own mail driver, you'll need to create a class implementing `\Flarum\Mail\DriverInterface`. Flarum actually takes care of the frontend for providing email settings: just declare which settings you need, and any default values, in `availableSettings`.
+In addition to the [default drivers in core](../mail.md), Flarum allows new mail drivers to be added through extenders. To create your own mail driver, you'll need to create a class implementing `\Flarum\Mail\DriverInterface`. Flarum actually takes care of the frontend for providing email settings: just declare which settings you need, and any default values, in `availableSettings`. 要创建您自己的邮件驱动程序，您需要创建一个实现 `\Flarum\Mail\DriverInterface` 的类。 Flarum 实际上负责提供电子邮件设置的前端：只需要在 `availableSettings` 中声明您需要哪些设置和任何默认值。
 
 For example:
 
@@ -45,7 +45,7 @@ class MailgunDriver implements DriverInterface
 }
 ```
 
-To register mail drivers, use the `Flarum\Extend\Mail` extender in your extension's `extend.php` file:
+要注册邮件驱动程序，请在扩展名的 `extend.php` 文件中使用 `Flarum\Extend\Mail` 扩展程序：
 
 ```php
 use Flarum\Extend;
