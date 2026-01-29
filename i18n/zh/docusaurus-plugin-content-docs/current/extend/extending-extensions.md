@@ -1,24 +1,24 @@
-# Extending Extensions
+# 扩展其他扩展
 
-Flarum extensions aren't just for adding features to core: extensions can extend other extensions!
+Flarum 扩展不仅仅是为核心添加功能：扩展可以扩展其他扩展！
 
 :::tip
 
-To learn how to make your extension extensible, see the [relevant documentation](extensibility.md)
+如需了解如何将你的扩展插件设计为可扩展架构，可参阅 [ 相关文档 ](extensibility.md)。
 
 :::
 
-## Dependencies
+## 依赖
 
-If your extension relies on another extension, you'll want to ensure that:
+如果你的扩展依赖于另一个扩展，你将会确保：
 
-- The other extension is installed and enabled before yours can be.
-- The other extension can't be disabled while yours is enabled.
-- The other extension is booted before your extension.
+- 在您开始之前安装并启用了其他扩展。
+- 在您的扩展启用时不能禁用其他扩展。
+- 另一个扩展在您的扩展之前启动。
 
-Flarum makes this very easy: just add the other extension to your extension's `composer.json`'s `require` section.
+Flarum 让这个非常容易：只需将其它扩展添加到扩展名的 `composer.json`'s `需要` 部分。
 
-For example, if you were building a new theme for the Flarum Tags extension, your `composer.json` would look like this:
+例如，如果你正在为 Flarum Tags 扩展构建一个新主题，你的 `composer.json` 看起来就像这样：
 
 ```json
 {
@@ -31,11 +31,11 @@ For example, if you were building a new theme for the Flarum Tags extension, you
 }
 ```
 
-## Optional Dependencies
+## 可选依赖
 
-Sometimes, extension A might want to extend extension B only if extension B is enabled. Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
+有时候，扩展A可能只在启用扩展B时才想扩展扩展B。 Sometimes, extension A might want to extend extension B only if extension B is enabled. In this case, we call B an "Optional Dependency" of A. For instance, a drafts extension might want to add support for saving private discussion drafts, but only if the private discussion extension is enabled.
 
-The first step here is detecting whether extension B is enabled. The first step here is detecting whether extension B is enabled. In the frontend, this is easy: if extension B does anything in the frontend, its extension ID will appear as a key in the `flarum.extensions` global object. For instance: For instance:
+这里的第一步是检测扩展B是否启用。 The first step here is detecting whether extension B is enabled. In the frontend, this is easy: if extension B does anything in the frontend, its extension ID will appear as a key in the `flarum.extensions` global object. For instance: 就像这样：
 
 ```js
 if ('some-extension-id' in flarum.extensions) {
@@ -43,7 +43,7 @@ if ('some-extension-id' in flarum.extensions) {
 }
 ```
 
-In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. For instance: For instance:
+In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. For instance: 就像这样：
 
 ```php
 <?php
@@ -70,7 +70,7 @@ class SomeClass {
 
 Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies. Generally, if your extension has optional dependencies, you'll want it to be booted after said optional dependencies. You can also do this by specifying composer package names (NOT flarum extension IDs) in an array for the `extra.flarum-extension.optional-dependencies` key of your composer.json.
 
-For instance:
+就像这样：
 
 ```json
 {
@@ -111,7 +111,7 @@ class SomeClass
 
 Note that if you're importing from an optional dependency which might not be installed, you'll need to check that the class in question exists via the `class_exists` function.
 
-In the frontend, you can import any modules exported by other extensions via the `ext:vendor/extension/.../module` syntax. For instance:
+In the frontend, you can import any modules exported by other extensions via the `ext:vendor/extension/.../module` syntax. 就像这样：
 
 ```ts
 import Tag from 'ext:flarum/tags/common/models/Tag';
