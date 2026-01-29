@@ -190,7 +190,7 @@ One type of functionality for which the extender replacement isn't obvious is co
 
 If you are unsure about which extenders should be used to replace your use of callbacks in `extend.php`, or are not sure that such an extender exists, please comment so below or reach out! We're in the final stages of finishing up the extender API, so now is the time to comment.
 
-### Scheduled Commands
+### 计划任务命令
 
 The [fof/console](https://github.com/FriendsOfFlarum/console) library has been a popular way to schedule commands (e.g. for publishing scheduled posts, running DB-heavy operations, etc) for several release. In Flarum 1.0, this functionality has been brought into core's `Console` extender. See our [console extension documentation](console.md) for more information on how to create schedule commands, and our [console user documentation](../console.md) for more information on how to run scheduled commands.
 
