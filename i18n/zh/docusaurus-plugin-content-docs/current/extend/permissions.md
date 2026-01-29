@@ -1,10 +1,10 @@
-# Groups and Permissions
+# 群组和权限
 
-In addition to labeling roles, Flarum's group system is a way for permissions to be applied to segments of users.
+除了标记角色外，Flarum的群组系统是一种将权限应用于用户部分的方法。
 
-## Groups
+## 组
 
-Flarum has several "reserved groups":
+Flarum 有几个“保留组”：
 
 - The administrator group has ID `1`. Users in this group have all permissions. Users in this group have all permissions.
 - All users (regardless of authentication status) are automatically placed in the Guest group (ID `2`)
