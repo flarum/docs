@@ -19,7 +19,7 @@ The `ThrottleApi` middleware does not currently run for these requests, but that
 - `null`: This means that this throttler doesn't apply.
   Any other outputs will be ignored, with the same effect as `null`.
 
-Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler: For example, consider Flarum's post throttler:
+Throttlers will be run on EVERY request, and are responsible for figuring out whether or not they apply. For example, consider Flarum's post throttler: 例如, 请查看 Flarum 的 post 限流器：
 
 ```php
 use DateTime;
