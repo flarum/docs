@@ -10,14 +10,14 @@ To use the built-in REST API as part of an integration, see [Consuming the REST 
 
 ## API请求生命周期
 
-Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
+在我们详细了解如何扩展Flarum的数据 API 之前，值得考虑一个典型的 API 请求的生命周期：
 
 ![Flarum API Flowchart](/en/img/api_flowchart.png)
 
-1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
+1. HTTP请求已发送到Flarum的 API。 通常情况下，这将来自Flarum前端，但外部程序也可以与 API 互动。 Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper controller. You can learn more about controllers as a whole on our [routes and content documentation](routes.md). Assuming the request is to the API (which is the case for this section), the controller that handles the request will be a subclass of `Flarum\Api\AbstractSerializeController`.
 3. Any modifications done by extensions to the controller via the [`ApiController` extender](#extending-api-controllers) are applied. This could entail changing sort, adding includes, changing the serializer, etc.
-4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. Typically, this data will take the form of a Laravel Eloquent model collection or instance, which has been retrieved from the database. 也就是说，只要控制器的序列化器可以处理，数据可以是任何东西。 也就是说，只要控制器的序列化器可以处理，数据可以是任何东西。 Each controller is responsible for implementing its own `data` method. 请注意，对于 `PATCH`、`POST` 和 `DELETE` 请求，`data` 将执行相关操作，并返回修改后的模型实例。
+4. The `$this->data()` method of the controller is called, yielding some raw data that should be returned to the client. 通常，这些数据将采取Laravel Espoent模型收集或实例的形式，已从数据库中检索。 也就是说，只要控制器的序列化器可以处理，数据可以是任何东西。 也就是说，只要控制器的序列化器可以处理，数据可以是任何东西。 Each controller is responsible for implementing its own `data` method. 请注意，对于 `PATCH`、`POST` 和 `DELETE` 请求，`data` 将执行相关操作，并返回修改后的模型实例。
 5. That data is run through any pre-serialization callbacks that extensions register via the [`ApiController` extender](#extending-api-controllers).
 6. The data is passed through a [serializer](#serializers), which converts it from the backend, database-friendly format to the JSON:API format expected by the frontend. 它还会附加任何相关对象，这些对象会通过各自的序列化器运行。 它还会附加任何相关对象，这些对象会通过各自的序列化器运行。 As we'll explain below, extensions can [add / override relationships and attributes](#attributes-and-relationships) at the serialization level.
 7. The serialized data is returned as a JSON response to the frontend.
