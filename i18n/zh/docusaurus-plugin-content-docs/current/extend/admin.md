@@ -69,7 +69,7 @@ return [
         label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
         type: 'select',
         options: {
-          'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+          'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context)。
           'RDX': 'Solid Fuel',
         },
         default: 'LOH',
@@ -78,7 +78,7 @@ return [
 ];
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc: This can be used for placeholders, min/max restrictions, etc:
+Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc: 这可以用于占位符、最小/最大限制等：
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -98,7 +98,7 @@ return [
 ];
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+如果您想要在设置中添加一些内容，比如额外的文本或更复杂的输入， 您也可以传递回调作为返回JSX的第一个参数。 If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -124,17 +124,17 @@ return [
 ];
 ```
 
-### Available Setting Types
+### 可用的设置类型
 
-This is a list of setting types available by default:
+这是默认可用的设置类型列表：
 
-**Toggle:** `bool` or `checkbox` or `switch` or `boolean`
+**切换:** `bool` 或 `checkbox` 或 `switch` 或 `boolean`
 
-**Textarea:** `textarea`
+**长文本:** `textarea`
 
-**Color Picker:** `color-preview`
+**颜色拾取器:** `color-preview`
 
-**Text Input**: `text` or any HTML input types such as `tel` or `number`
+**文本输入**: `text` 或任何HTML输入类型，如 `tel` 或 `number`
 
 ```ts
 {
@@ -144,7 +144,7 @@ This is a list of setting types available by default:
 }
 ```
 
-**Selection:** `select` or `dropdown` or `selectdropdown`
+**下拉选择:** `select` 或 `dropdown` 或 `selectdropdown`
 
 ```ts
 {
@@ -160,7 +160,7 @@ This is a list of setting types available by default:
 }
 ```
 
-**Image Upload Button:** `image-upload`
+**图片上传按钮:** `image-upload`
 
 ```ts
 {
@@ -173,18 +173,18 @@ This is a list of setting types available by default:
 }
 ```
 
-### Registering Permissions
+### 注册权限
 
-Permissions can be found in 2 places. You can view each extension's individual permissions on their dedicated page, or you can view all permissions in the main permissions page.
+权限可以在 2 个地方找到。 您可以在其专用页面查看每个扩展的个别权限，或者您可以在主权限页面查看所有权限。
 
-In order for that to happen, permissions must be registered using the `permission` method of the `Admin` extender, similar to how settings are registered.
+要实现此功能，需通过 `permission` 方法在 `Admin` 扩展器中注册权限，其方式与注册设置项的方式类似。
 
-Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+参数：
+ * 权限对象
+ * 权限的哪种类型-请参阅 [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)中的类型函数(从名称中删除项目)
+ * `ItemList` 优先级
 
-Back to our favorite rocket extension:
+回到我们最喜欢的 rocket 扩展：
 
 ```js
 import Extend from 'flarum/common/extenders';
@@ -332,4 +332,4 @@ For more information, see the [composer.json schema](https://getcomposer.org/doc
 | Support (email)                    | "email" key inside "support"                                 |
 | Website                            | "homepage" key                                               |
 | Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| 来源                                 | “support” 内的 “source” 键                                      |
