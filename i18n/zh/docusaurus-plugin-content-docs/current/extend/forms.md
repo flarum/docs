@@ -1,15 +1,15 @@
 # Forms and Requests
 
-In this article, we'll go over some frontend tools that are available to us for building and managing forms, as well how to send HTTP requests via Flarum.
+在这篇文章中，我们将会转过我们可以用于建立和管理表格的一些前端工具。 如何通过 Flarum 发送 HTTP 请求。
 
-## Form Components
+## 表单组件
 
-As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs.
+As with any interactive site, you will likely want to include forms in some pages and modals. Flarum provides some components to make building (and styling!) these forms easier. Please see the linked API documentation for each of these to learn more about its accepted attrs. Flarum 提供了一些组件使构建(和写样式!)更加容易。 请查看链接的 API 文档，了解更多关于其可接受属性的信息。
 
-- The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
-- The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator. Their `loading` attr can be set to `true` to show a loading indicator.
-- The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
+- [`flarum/common/components/FieldSet` 组件 ](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) 会将其子元素包裹在带图例的 HTML fieldset 标签中。
+- [`flarum/common/components/Sselect` 组件](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) 是一个样式化的选择输入。
+- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator. 其 `loading` 属性可设置为 `true`，以显示加载指示器。
+- [`flarum/common/components/Button` 组件 ](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) 为样式化按钮组件，在 Flarum 中被广泛使用。
 
 You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example: For example:
 
@@ -48,12 +48,12 @@ class FormComponent extends Component {
 }
 ```
 
-Don't forget to use [translations](i18n.md)!
+别忘了使用 [翻译](i18n.md)！
 
 
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is: This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`. This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data. Its basic usage is: 这是一种非常强大的响应式数据结构，但最常用于Flarum作为表格数据的包装器。 其基本用法是：
 
 ```js
 import Stream from 'flarum/common/utils/Stream';
@@ -65,7 +65,7 @@ value("world!");
 value() === "world!"; // true
 ```
 
-In Flarum forms, streams are frequently used together with the bidi attr. Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs. This abstracts away input processing in Mithril. For instance:
+在 Flarum 表单中，streams 经常与 bidi attr 一起使用。 Bidi代表双向绑定，是前端框架的常见模式。 Flarum 通过 [`m.attrs.bidi` 库](https://github.com/tobyzerner/m.attrs) 为 Mithril 打补丁。 这对Mithril中的输入处理进行了抽象封装。 就像这样：
 
 ```jsx
 import Stream from 'flarum/common/utils/Stream';
@@ -79,7 +79,7 @@ const value = Stream();
 <input type="text" bidi={value}></input>
 ```
 
-You can also use the `flarum/common/utils/withAttr` util for simplified form processing. You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
+您也可以使用 `flarum/common/utils/withAttr` 工具简化表单处理。 You can also use the `flarum/common/utils/withAttr` util for simplified form processing. `withAttr` calls a callable, providing as an argument some attr of the DOM element tied to the component in question:
 
 ```jsx
 import Stream from 'flarum/common/utils/Stream';
@@ -96,9 +96,9 @@ const value = Stream();
 })}></input>
 ```
 
-## `FormGroup` component
+## `FormGroup` 组件
 
-The `FormGroup` component provides the same flexibility you get when [registering admin settings](http://localhost:3000/extend/admin#registering-settings). It allows you to pass an input type, with other information such as the label and help text, then uses the appropriate component to render the input.
+`FormGroup` 组件提供了和[注册管理员设置](http://localhost:3000/extend/admin#registering-settings) 时同样的灵活性。 它允许您传递输入类型，以及其他信息，如标签和帮助文本， 然后使用适当的组件渲染输入。
 
 ```jsx
 import Component from 'flarum/common/Component';
@@ -127,15 +127,15 @@ export default class MyComponent extends Component {
 }
 ```
 
-## Making Requests
+## 发起请求
 
-In our [models](models.md) documentation, you learned how to work with models, and save model creation, changes, and deletion to the database via the Store util, which is just a wrapper around Flarum's request system, which itself is just a wrapper around [Mithril's request system](https://mithril.js.org/request.html).
+在我们的 [模型](models.md) 文档中，你学会了如何使用模型。 并通过存储设备保存模型的创建、更改和删除数据库， 它只是围绕着Flarum的请求系统的一个包装器，这本身只是围绕着 [Miintil的请求系统](https://mithril.js.org/request.html) 的包装器。
 
-Flarum's request system is available globally via `app.request(options)`, and has the following differences from Mithril's `m.request(options)`:
+Flarum 的请求系统可通过 `app.request(选项)`全局使用，它与Miintil的 `m.request(选项)` 有以下差异：
 
-- It will automatically attach `X-CSRF-Token` headers.
-- It will convert `PATCH` and `DELETE` requests into `POST` requests, and attach a `X-HTTP-Method-Override` header.
-- If the request errors, it will show an alert which, if in debug mode, can be clicked to show a full error modal.
-- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done. However, this should almost never be done.
+- 它将自动附加 `X-CSRF-Token` 头。
+- 它会将 `PATCH` 和 `DELETE` 请求转换为 `POST` 请求，并附加 `X-HTTP-Method-Override` 请求头。
+- 如果请求错误，它将显示一个提醒，如果在调试模式下，可以单击显示完整的错误模式。
+- You can supply a `background: false` option, which will run the request synchronously. However, this should almost never be done. 然而，几乎永远不应该这样做。
 
-Otherwise, the API for using `app.request` is the same as that for `m.request`.
+其他情况下，使用 `app.request` 的API与 `m.request` 的API相同。
