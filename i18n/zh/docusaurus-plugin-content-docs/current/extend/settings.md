@@ -1,10 +1,10 @@
-# Settings
+# 设置
 
-At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy. Thankfully, Flarum makes this very easy.
+At some point while making an extension, you might want to read some of the forum's settings or store certain settings specific to your extension. Thankfully, Flarum makes this very easy. 幸运的是，Flarum 使这种情况非常容易。
 
-## The Settings Repository
+## 设置存储库
 
-Reading or changing settings can be done using an implementation of the `SettingsRepositoryInterface`. Because Flarum uses [Laravel's service container](https://laravel.com/docs/11.x/container) (or IoC container) for dependency injection, you don't need to worry about where to obtain such a repository, or how to instantiate one. Instead, you can rely on the container to instantiate your class and inject the correct dependencies.
+可以使用 `SettingsRepositoryInterface` 来读取或更改设置。 因为Flarum使用 [Laravel的服务容器](https://laravel.com/docs/11.x/container) (或IoC 容器) 作为依赖注入， 你不需要担心从哪里获取这个仓库，或者如何实例化一个仓库。 相反，您可以依靠容器实例化您的类并注入正确的依赖项。
 
 ```php
 <?php
@@ -27,11 +27,11 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Great! Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` to our class.
+太好了！ Great! Now the `SettingsRepositoryInterface` is available through `$this->settings` to our class.
 
-### Reading Settings
+### 读取设置
 
-To read settings, all we have to do is use the repository's `get()` function:
+要读取设置，我们必须使用资源库的 `get()` 函数：
 
 `$this->settings->get('forum_title')`
 
