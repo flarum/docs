@@ -1,19 +1,19 @@
-# Frontend Pages and Resolvers
+# 前端页面和解析器
 
-As explained in the [Routes and Content](routes.md#frontend-routes) documentation, we can use Mithril's routing system to show different [components](frontend.md#components) for different routes. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component.
+As explained in the [Routes and Content](routes.md#frontend-routes) documentation, we can use Mithril's routing system to show different [components](frontend.md#components) for different routes. Mithril allows you to use any component you like, even a Modal or Alert, but we recommend sticking to component classes that inherit the `Page` component. Mithil允许您使用您喜欢的任何组件，即使是模态框或提醒， 但我们建议按住继承 `页面` 组件的组件类。
 
-## The Page Component
+## 页面组件
 
-We provide `flarum/common/components/Page` as a base class for pages in both the `admin` and `forum` frontends. It has a few benefits: It has a few benefits:
+We provide `flarum/common/components/Page` as a base class for pages in both the `admin` and `forum` frontends. It has a few benefits: 它有几个好处：
 
-- Automatically updates [`app.current` and `app.previous` PageState](#pagestate) when switching from one route to another.
-- Automatically closes the modal and drawer when switching from one route to another.
-- Applies `this.bodyClass` (if defined) to the '#app' HTML element when the page renders.
-- It's also good for consistency's sake to use a common base class for all pages.
-- If the page's `scrollTopOnCreate` attribute is set to `false` in `oninit`, the page won't be scrolled to the top when changed.
-- If the page's `useBrowserScrollRestoration` is set to `false` in `oninit`, the browser's automatic scroll restoration won't be used on that page.
+- 自动更新 [`app.current` 和 `app.previous` 页面状态](#pagestate) 当从一个路径切换到另一个路径的时候。
+- 切换路由时自动关闭模态框和抽屉。
+- 在页面渲染时应用 `this bodyClass` (如果定义的话) 到 '#app' HTML 元素。
+- 在所有页面上使用一个共同的基础类也是很好的。
+- 若在 `oninit` 中将页面的 `scrollTopOnCreate` 属性设置为 `false`，则页面切换时不会滚动至顶部。
+- 若在 `oninit` 中将页面的 `useBrowserScrollRestoration` 设为 `false`，则该页面将不会启用浏览器的自动滚动恢复功能。
 
-Page components work just like any other inherited component. For a (very simple) example: For a (very simple) example:
+Page components work just like any other inherited component. For a (very simple) example: 一个(非常简单的)示例：
 
 ```js
 import Page from 'flarum/common/components/Page';
@@ -26,9 +26,9 @@ export default class CustomPage extends Page {
 }
 ```
 
-### Forum Page Structure
+### 论坛页面结构
 
-Flarum's forum frontend uses a generic page structure, which is defined in `flarum/common/components/PageStructure`. This structure is used by all forum pages, and is recommended for use in extensions as well. You will have noticed that each forum page has a hero, sidebar, and content area among other things. These are all defined in `PageStructure` and can be used in your extension as well.
+Flarum 的论坛前端使用一个通用的页面结构，定义为 `flarum/common/components/PageStructure`。 所有论坛页面都使用这个结构，并建议在扩展中使用。 您会注意到，论坛的每个页面都配有标题区、侧边栏和内容区等板块。 这些都在 `页面结构` 中定义，并且也可以用于扩展。
 
 For example, a custom page component can use the `PageStructure` component as follows:
 
