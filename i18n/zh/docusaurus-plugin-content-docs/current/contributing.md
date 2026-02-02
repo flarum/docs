@@ -1,12 +1,12 @@
 # 贡献代码
 
-有兴趣为 Flarum 的发展做贡献吗？ 那太好了！ 竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！ 没有我们社区的贡献，Flarum就不会有今天。
+有兴趣为 Flarum 的发展做贡献吗？ 那太好了！ 竭诚欢迎，[报告错误](bugs.md) 或是 Pull Request 都没问题！ 没有我们社区的贡献，Flarum 就不会有今天。
 
 在贡献之前，请仔细阅读 [行为准则](code-of-conduct.md)。
 
 本文档是想要为 Flarum 贡献代码的开发者的指南。 如果您刚刚开始， 我们建议您阅读扩展文档中的 [Getting Started](./extend/start.md) 文档，以了解更多关于Flarum 如何工作的信息。
 
-## 为什么要为Flarum做贡献？
+## 为什么要为 Flarum 做贡献？
 
 ⚡ **作出实际影响。 ** 成千上万的Flarum实例，和数百万的累积最终用户， 都会因为你的贡献而受益。 都会因为你的贡献而受益。
 
