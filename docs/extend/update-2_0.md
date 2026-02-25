@@ -180,6 +180,10 @@ In `composer.json`:
 * If you have a `php` requirement, make sure it is not below `^8.2`.
 * If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "*"`.
 
+#### wikimedia/less.php (updated from 4.x to 5.x)
+
+Flarum 2.0 upgrades the LESS compiler to less.php 5.x. Most extensions will not need to make any changes to their PHP code, as the breaking changes were handled internally by Flarum core. However, there is one LESS language behaviour change that may affect your stylesheets — see [LESS Preprocessing](#less-preprocessing) below.
+
 #### Carbon 3
 
 ##### <span class="breaking">Breaking</span>
@@ -339,6 +343,21 @@ Checkout the [database documentation](./database) for more details.
     }
     ```
     
+* Math expressions inside CSS custom properties are no longer evaluated by the LESS compiler (this aligns with Less.js 3.5+ behaviour). If your extension performs arithmetic inside a custom property declaration, it will now be output as a literal string instead of a computed value:
+  ```less
+  // before: outputs --spacing: 32px
+  @base: 16px;
+  --spacing: @base * 2;
+
+  // after: use a regular LESS variable for the calculation, then assign
+  @base: 16px;
+  @spacing: @base * 2;
+  --spacing: @spacing;
+
+  // or use calc() if the calculation must remain in CSS
+  --spacing: calc(@base * 2);
+  ```
+
 ##### <span class="notable">Notable</span>
 * New high contrast color schemes have been added.
 * You can register more color schemes through the new frontend `Theme` extender and equivalent CSS code `[data-theme=your-scheme]`.
