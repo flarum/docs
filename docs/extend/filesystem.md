@@ -2,7 +2,7 @@
 
 Flarum core integrates with the filesystem to store and serve assets (like compiled JS/CSS or upload logos/favicons) and avatars.
 
-Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/11.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
+Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/12.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Disks
 
@@ -100,7 +100,7 @@ return [
 
 Since all disks use the local filesystem by default, you'll need to provide a base path and base URL for the local filesystem.
 
-The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/11.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
+The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/12.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
 
 ## Storage drivers
 
