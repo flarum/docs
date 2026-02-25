@@ -117,3 +117,71 @@ Sometimes you might want a setting's value to be reset to its default value base
         return $value === '';
     })
 ```
+
+## Conditional Extenders
+
+The `Conditional` extender allows you to apply other extenders only when a certain condition is met. This is useful for optional integrations — for example, adding extra API fields only when a companion extension is enabled, or changing behaviour based on a settings value.
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\Conditional())
+        ->whenExtensionEnabled('some-extension-id', fn () => [
+            // extenders to apply when the extension is enabled
+            (new Extend\ApiResource(SomeResource::class))
+                ->fields(fn () => [ /* ... */ ]),
+        ])
+        ->whenExtensionDisabled('some-extension-id', fn () => [
+            // extenders to apply when the extension is disabled
+        ]),
+];
+```
+
+The extenders argument can also be an invokable class string, which will be resolved from the container:
+
+```php
+(new Extend\Conditional())
+    ->whenExtensionEnabled('some-extension-id', MyConditionalExtenders::class)
+```
+
+### Available conditions
+
+#### `whenExtensionEnabled(string $extensionId, ...)`
+
+Applies extenders only if the given extension is currently enabled.
+
+#### `whenExtensionDisabled(string $extensionId, ...)`
+
+Applies extenders only if the given extension is currently disabled.
+
+#### `whenSetting(string $key, mixed $expected, ..., strict: false)`
+
+Applies extenders only if a settings value matches an expected value. Uses loose comparison (`==`) by default, so a stored string `'1'` will match a boolean `true`. Pass `strict: true` to use strict comparison (`===`):
+
+```php
+// Loose comparison (default) - stored '1' matches true
+(new Extend\Conditional())
+    ->whenSetting('my_extension.feature_enabled', true, fn () => [
+        // ...
+    ])
+
+// Strict comparison - stored '1' does NOT match integer 1
+(new Extend\Conditional())
+    ->whenSetting('my_extension.mode', 'advanced', fn () => [
+        // ...
+    ], strict: true)
+```
+
+#### `when(bool|callable $condition, ...)`
+
+The general-purpose method that all the above convenience methods are built on. Accepts a boolean or a callable. If a callable is given, it is resolved through the container so you can typehint any service:
+
+```php
+(new Extend\Conditional())
+    ->when(function (\Flarum\Settings\SettingsRepositoryInterface $settings) {
+        return $settings->get('my_extension.driver') === 'custom';
+    }, fn () => [
+        // ...
+    ])
+```

@@ -128,6 +128,34 @@ class SomeClass
 }
 ```
 
+## Notable Core Events
+
+Most of Flarum's domain events are listed in the [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). A few lifecycle events are worth calling out specifically.
+
+### `Flarum\Foundation\Event\ApplicationBooted`
+
+Fired after the application has finished booting — all service providers have registered and booted, and all extension extenders have been applied — but before any HTTP request is handled. This is the earliest reliable point at which all bindings, extensions, and settings are fully available.
+
+This is useful for one-time setup that must happen after the entire extension system is ready but before any request is processed:
+
+```php
+use Flarum\Extend;
+use Flarum\Foundation\Event\ApplicationBooted;
+
+return [
+    (new Extend\Event())
+        ->listen(ApplicationBooted::class, function () {
+            // Everything is booted. Safe to resolve any binding or read any setting.
+        }),
+];
+```
+
+:::tip
+
+This event fires on every request. If you are doing work that should only happen once (e.g. warming a cache), make sure to guard against repeated execution yourself.
+
+:::
+
 ## Custom Events
 
 As an extension developer you can define your own events to allow yourself (or other extensions) to react to events in your extension.
