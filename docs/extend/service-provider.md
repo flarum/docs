@@ -20,10 +20,13 @@ To understand service providers, you must first understand the order in which Fl
 3. The `extend` methods of all extenders used by all enabled extensions are run.
 4. The `extend` methods of all extenders used in the Flarum site's local `extend.php` are run.
 5. The `boot` methods of all core service providers are run.
+6. The `Flarum\Foundation\Event\ApplicationBooted` event is fired. See [backend events](backend-events.md#applicationbooted) for details.
 
 ## Custom Service Providers
 
-A custom service provider should extend `Flarum\Foundation\AbstractServiceProvider`, and can have a `boot` and a `register` method. For example:
+A custom service provider should extend `Flarum\Foundation\AbstractServiceProvider`, and can have a `boot` and a `register` method. Third-party Laravel packages that ship their own service providers (extending `Illuminate\Support\ServiceProvider`) can also be registered directly — see [below](#registering-a-service-provider).
+
+For example:
 
 ```php
 <?php
@@ -52,7 +55,9 @@ The `register` method will run during step (3) above, and the `boot` method will
 
 Flarum does not currently support Laravel Octane, but some [best practices](https://laravel.com/docs/12.x/octane#dependency-injection-and-octane), like using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used. See the [Octane documentation](https://laravel.com/docs/12.x/octane#dependency-injection-and-octane) for more information.
 
-To actually register your custom service provider, you can use the `ServiceProvider` extender in `extend.php`:
+## Registering a Service Provider
+
+To register a service provider, use the `ServiceProvider` extender in `extend.php`:
 
 ```php
 <?php
@@ -64,5 +69,17 @@ return [
     (new Extend\ServiceProvider())
         ->register(CustomServiceProvider::class),
     // Other extenders
+];
+```
+
+The `register` method accepts any class that extends either `Flarum\Foundation\AbstractServiceProvider` or `Illuminate\Support\ServiceProvider`. This means you can directly register service providers shipped by third-party Laravel packages without wrapping them:
+
+```php
+use Flarum\Extend;
+use SomePackage\SomePackageServiceProvider;
+
+return [
+    (new Extend\ServiceProvider())
+        ->register(SomePackageServiceProvider::class),
 ];
 ```
