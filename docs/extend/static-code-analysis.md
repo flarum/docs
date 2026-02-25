@@ -29,14 +29,12 @@ includes:
   - vendor/flarum/phpstan/extension.neon
 
 parameters:
-  # The level will be increased in Flarum 2.0
-  level: 5
+  level: 6
   paths:
     - src
     - extend.php
   excludePaths:
     - *.blade.php
-  checkMissingIterableValueType: false
   databaseMigrationsPath: ['migrations']
 ```
 

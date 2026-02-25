@@ -371,6 +371,65 @@ Checkout this example from the mentions extension:
 
 ## Infrastructure
 
+### PHPStan (updated from ^1.10 to ^2.1) and Larastan (updated from 2.9 to ^3.8)
+
+Flarum 2.0 upgrades its static analysis tooling to PHPStan 2.x and Larastan 3.x. Extensions using `flarum/phpstan` will need to update their configuration and may need to fix newly reported errors.
+
+#### flarum/phpstan dependency
+
+Update your `composer.json` to require the latest `flarum/phpstan`:
+
+```bash
+composer require --dev flarum/phpstan:^2.0
+```
+
+#### Recommended level increase
+
+Flarum core now runs PHPStan at **level 6**. We recommend all extensions do the same. Update your `phpstan.neon`:
+
+```neon
+parameters:
+  level: 6
+```
+
+Level 6 checks for missing return types on all methods and properties. You may encounter new errors on your first run after increasing the level — work through them incrementally.
+
+#### Removed config parameters
+
+PHPStan 2.x removed several parameters that were commonly used in Flarum extension configs. Remove these from your `phpstan.neon` if present — they will cause an error if left in:
+
+* `checkMissingIterableValueType` — replaced by the `missingType.iterableValue` error identifier. If you need to suppress these errors, use `ignoreErrors` with the identifier instead.
+* `checkGenericClassInNonGenericObjectType` — replaced by `missingType.generics`.
+* `checkAlwaysTrueCheckTypeFunctionCall`, `checkAlwaysTrueInstanceof`, `checkAlwaysTrueStrictComparison`, `checkAlwaysTrueLooseComparison` — these checks are now always enabled and can no longer be disabled.
+
+#### Larastan 3.x: explicit relation return types required
+
+Larastan 3.x no longer infers generic types for Eloquent relation methods by parsing the method body. You must now annotate return types explicitly:
+
+```php
+// Before (Larastan 2.x would infer the generic type automatically)
+public function posts(): HasMany
+{
+    return $this->hasMany(Post::class);
+}
+
+// After (explicit generic annotation required)
+/** @return HasMany<Post, $this> */
+public function posts(): HasMany
+{
+    return $this->hasMany(Post::class);
+}
+```
+
+A [Rector rule](https://github.com/larastan/larastan/blob/3.x/UPGRADE.md) is available to automate this migration.
+
+#### Larastan 3.x: template annotation renames
+
+If your extension uses Larastan's template type annotations, two names have changed:
+
+* `TModelClass` → `TModel`
+* `TChildModel` → `TDeclaringModel`
+
 ### Reusable GitHub Workflows
 
 ##### <span class="breaking">Breaking</span>
