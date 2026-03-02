@@ -319,6 +319,130 @@ export default [
 ];
 ```
 
+## Extension Categories
+
+The admin sidebar groups extensions into collapsible categories. Each category has an icon, a count badge, and can be expanded or collapsed independently. When searching, categories with matching results expand automatically.
+
+### Declaring a Category
+
+Declare your extension's category in `composer.json` under `extra.flarum-extension.category`:
+
+```json
+{
+  "extra": {
+    "flarum-extension": {
+      "title": "My Extension",
+      "category": "moderation",
+      "icon": {
+        "name": "fas fa-shield-alt",
+        "backgroundColor": "#dc3626",
+        "color": "#fff"
+      }
+    }
+  }
+}
+```
+
+If no category is declared, or the declared category is not recognised, the extension is placed in the **feature** category.
+
+Language packs (extensions with an `extra.flarum-locale` key) are always placed in the **language** category regardless of any declared category.
+
+### Available Categories
+
+| Key              | Label          | Icon                    |
+|------------------|----------------|-------------------------|
+| `feature`        | Features       | `fas fa-star`           |
+| `moderation`     | Moderation     | `fas fa-shield-alt`     |
+| `discussion`     | Discussion     | `fas fa-comments`       |
+| `authentication` | Authentication | `fas fa-lock`           |
+| `formatting`     | Formatting     | `fas fa-paragraph`      |
+| `infrastructure` | Infrastructure | `fas fa-server`         |
+| `analytics`      | Analytics      | `fas fa-chart-bar`      |
+| `other`          | Other          | `fas fa-cube`           |
+| `theme`          | Themes         | `fas fa-paint-brush`    |
+| `language`       | Languages      | `fas fa-language`       |
+
+### Registering a Custom Category
+
+Third-party extensions can register additional categories by extending `app.extensionCategories` in an admin initializer. The value is the sort priority — higher numbers appear first in the sidebar:
+
+```js
+import app from 'flarum/admin/app';
+
+app.initializers.add('acme-interstellar', () => {
+  app.extensionCategories['space'] = 45;
+});
+```
+
+Then declare `"category": "space"` in your `composer.json`, and add a translation key `core.admin.nav.categories.space` (or provide your own translation via your extension's locale files — the sidebar will fall back to the raw key if no translation exists).
+
+## Extension Health Widget
+
+The admin dashboard includes an **Extension Health Widget** that gives forum administrators an at-a-glance view of the health of their installed extensions. It replaces the old categorised extension grid that duplicated the sidebar.
+
+The widget has three sections:
+
+### Abandoned Extensions
+
+Extensions whose Composer package has been marked as abandoned on Packagist will appear here. Flarum reads the `abandoned` field from the extension's payload and surfaces it prominently so administrators know to take action.
+
+- If the package specifies a **replacement** (e.g. `"abandoned": "vendor/new-package"`), the item is shown in **red** with an exclamation circle and the replacement package name.
+- If there is **no replacement** (e.g. `"abandoned": true`), the item is shown in **orange** with a warning triangle.
+
+The same warning badge is duplicated on the extension's entry in the admin sidebar so it is visible even when the dashboard widget is not in view.
+
+#### Marking your package as abandoned
+
+This is a Packagist/Composer concept, not a Flarum-specific one. If your extension has been superseded by another package, update your `composer.json`:
+
+```json
+{
+  "abandoned": "vendor/replacement-package"
+}
+```
+
+Or if there is no replacement:
+
+```json
+{
+  "abandoned": true
+}
+```
+
+Packagist will then mark the package abandoned, and Flarum will surface the warning to administrators.
+
+:::info Abandoned status is determined at install time
+
+Flarum reads the `abandoned` field from `vendor/composer/installed.json`, which is populated by Composer when packages are installed or updated. This means:
+
+- The status reflects what was current when `composer install` or `composer update` was last run.
+- If a package is marked abandoned after that point, the warning will not appear until Composer is run again.
+- **Private Packagist, Satis, Toran Proxy, and other custom Composer repositories are fully supported** — Composer writes the `abandoned` field from whatever repository served the package, so the data is repository-agnostic.
+
+Automatic periodic checking via a scheduled task is planned for a future version of Flarum 2.x. Because installations may use private or custom repositories rather than Packagist, the scheduled checker will need to be repository-aware. In preparation for this, Flarum already supports a `flarum.abandoned_overrides` settings key that a future task can write to after querying the appropriate repository API. Its value is a JSON object mapping extension IDs to their abandoned status (`false`, `true`, or a replacement package name string). This decouples the checking logic from core's install-time parsing, and means the override mechanism will work regardless of which Composer repository a package came from.
+
+:::
+
+### Suggested Extensions
+
+If your extension has optional integrations with other packages, you can advertise them via the standard Composer `suggest` field in `composer.json`:
+
+```json
+{
+  "suggest": {
+    "vendor/package-name": "Adds support for XYZ feature"
+  }
+}
+```
+
+Flarum reads the `suggest` map from every **enabled** extension and surfaces any `vendor/package` entries that are not already installed. The widget links directly to the package on Packagist. PHP extension requirements (e.g. `ext-gd`) are ignored.
+
+Only suggestions from **enabled** extensions are shown, so administrators are not overwhelmed by suggestions from extensions they haven't activated.
+
+### Disabled Extensions
+
+All installed-but-disabled extensions are shown as a compact icon grid so administrators can quickly spot extensions they may have forgotten about. Each icon links to the extension's settings page.
+
 ## Composer.json Metadata
 
 Extension pages make room for extra info which is pulled from extensions' composer.json.

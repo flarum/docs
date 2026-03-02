@@ -110,6 +110,19 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 * The admin dashboard now has a search feature, as long as you register your settings/permissions using the `Admin` extender, then they will be automatically picked up.
 * If your settings/permissions are too custom to be added through the `Admin.setting` and `Admin.permission` extenders, then you can use `Admin.generalIndexItems` to add custom search index entries.
 
+### Admin Dashboard
+
+##### <span class="breaking">Breaking</span>
+* The old extension grid widget on the admin dashboard, which displayed all installed extensions grouped by category, has been removed. It duplicated the information already available in the sidebar and provided no additional value.
+
+##### <span class="notable">Notable</span>
+* A new **Extension Health Widget** has been added to the admin dashboard. It surfaces actionable information about installed extensions:
+  * **Abandoned** — extensions whose Composer package is marked abandoned on Packagist, with or without a suggested replacement.
+  * **Suggested** — packages listed in the `suggest` field of any enabled extension's `composer.json` that are not yet installed.
+  * **Disabled** — a compact icon grid of all installed-but-disabled extensions.
+  * Abandoned extensions also display a warning badge on their entry in the admin sidebar.
+  * See the [Extension Health Widget](./admin.md#extension-health-widget) docs for how to use the `abandoned` and `suggest` fields in your own extension's `composer.json`.
+
 ### Locale
 
 ##### <span class="breaking">Breaking</span>
@@ -150,6 +163,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * `app.extensionData` has been removed. You must now use the `Admin` extender to register settings, permissions and custom extension pages.
 
 ##### <span class="notable">Notable</span>
+* The admin sidebar navigation has been overhauled. Extension categories are now collapsible groups with count badges and category icons. Categories start collapsed by default, and searching auto-expands categories with matching results. The active extension's category is pre-expanded on page load. Extensions should declare their category in `composer.json` under `extra.flarum-extension.category`. See the [Extension Categories](./admin.md#extension-categories) section in the admin docs for the full list of available categories and how to register custom ones.
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
 * A `HeaderDropdown` component has been added which is used for the `NotificationsDropdown` and `FlagsDropdown` your component should extend that instead of the `NotificationsDropdown`. Along with it has been also added the following components: `HeaderList` and `HeaderListItem`.
 * A `DetailedDropdownItem` has been added. Checkout the [`SubsriptionsDropdown`](https://github.com/flarum/framework/blob/2.x/extensions/subscriptions/js/src/forum/components/SubscriptionMenu.tsx#L83-L87) component to see how it is used.
