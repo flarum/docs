@@ -14,7 +14,9 @@ The [admin dashboard](admin.md)'s Appearance page is a great first place to star
 
 ## FontAwesome
 
-Flarum allows customization out-of-the-box to the FontAwesome icon sets used. By default we use FontAwesome 6 free icons, but this can be easily modified to use the `Pro` or even full Kits via the [advanced settings](admin.md) for configuration via the UI, or via [config.php](config.md) for code-based setups.
+Flarum uses FontAwesome 7 for icons throughout the interface. By default the Free icon set is bundled and served locally, but this can be switched to a CDN or a FontAwesome Kit (which unlocks Pro icons and custom icons) via the [advanced settings](admin.md) in the admin dashboard, or directly in [config.php](config.md).
+
+See the [FontAwesome](fontawesome.md) page for full details on configuration options and available icon styles.
 
 ## CSS Theming
 

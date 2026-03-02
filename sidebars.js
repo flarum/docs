@@ -51,6 +51,7 @@ module.exports = {
         'extensions',
         'languages',
         'themes',
+        'fontawesome',
         'mail',
         'scheduler',
         'console',

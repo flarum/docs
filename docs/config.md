@@ -38,7 +38,7 @@ Here's a quick overview of what everything means with an example file:
   ),
   'fontawesome' =>
   array (
-    'source' => 'local', // Use the bundled FontAwesome Free v6 icons. See below for other config options
+    'source' => 'local', // Use the bundled FontAwesome Free v7 icons. See below for other config options
   )
 );
 ```
@@ -85,7 +85,7 @@ This can also be configured from the admin panel's advanced settings page:
 
 ### FontAwesome
 
-By default Flarum uses the bundled FontAwesome 'Free' v6 icons. These can be switched out to use either a CDN hosted icon bundle, or a custom kit.
+By default Flarum uses the bundled FontAwesome Free v7 icons. These can be switched out to use either a CDN hosted icon bundle, or a custom kit. See the [FontAwesome](fontawesome.md) page for full details on each source.
 
 ```php
 <?php
@@ -93,19 +93,19 @@ By default Flarum uses the bundled FontAwesome 'Free' v6 icons. These can be swi
 return [
     'url' => 'https://example.com',
     // ... other config
-    
+
     // FontAwesome Kit (Pro features + custom icons)
     'fontawesome' => [
         'source' => 'kit',
         'kit_url' => 'https://kit.fontawesome.com/YOUR_KIT_CODE.js',
     ],
-    
+
     // OR use a CDN
     // 'fontawesome' => [
     //     'source' => 'cdn',
-    //     'cdn_url' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+    //     'cdn_url' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css',
     // ],
-    
+
     // OR keep local (default, no config needed)
     // 'fontawesome' => [
     //     'source' => 'local',

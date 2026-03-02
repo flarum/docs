@@ -265,6 +265,27 @@ The Intervention Image library (`intervention/image`) has been updated to versio
 
 You may also check out the core pull request that updated the library [here](https://github.com/flarum/framework/pull/3947/files).
 
+#### FontAwesome (updated from 5.x to 7.x)
+
+Flarum 2.0 upgrades the bundled icon library from **FontAwesome Free 5** (Flarum 1.x) to **FontAwesome Free 7**. For most extensions and themes this requires **no changes**, but there are a few things to be aware of.
+
+##### <span class="notable">Notable</span>
+* The legacy shorthand class names (`fas`, `far`, `fab`) remain fully supported in FA7 — existing icon strings like `"fas fa-house"` or `"far fa-envelope"` continue to work without modification.
+* Only `.woff2` webfonts are shipped. FA5 bundled several font formats; FA7 ships only `.woff2`. All modern browsers support WOFF2.
+* The underlying Composer package changed from `components/font-awesome` (a third-party mirror) to `fortawesome/font-awesome` (the official package). If your extension references the vendor path directly — e.g. for custom asset publishing — update the path from `vendor/components/font-awesome` to `vendor/fortawesome/font-awesome`.
+* FA7 introduces `fa-solid`, `fa-regular`, and `fa-brands` as the preferred canonical class names alongside the legacy aliases. You may start using these in new code, but the old names remain valid.
+
+:::tip Upgrading existing installs
+
+After upgrading Flarum, old font files in `public/assets/fonts/` are not automatically removed. Clear the directory and re-publish assets:
+
+```bash
+rm -rf public/assets/fonts
+php flarum assets:publish
+```
+
+:::
+
 ### JSON:API
 
 Flarum 2.0 completely refactors the JSON:API implementation. The way resource CRUD operations, serialization and extending other resources is done has completely changed.
