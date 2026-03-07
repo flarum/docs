@@ -172,6 +172,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * A `Form` component has been added to ensure consistent styling across forms. You should use this component in your extension if you are creating a form.
 * An API for frontend gambits has been introduced, [checkout the full documentation](./search#gambits).
 * A `FormGroup` component has been added that allows you to add any supported type of input similar to the admin panel's settings registration. [checkout the documentation for more details](./forms).
+* `WelcomeHero.prototype.viewItems` has been moved to `WelcomeHero.prototype.bodyItems`.
 
 ## Backend
 
