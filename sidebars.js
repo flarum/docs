@@ -109,6 +109,7 @@ module.exports = {
         'extend/authorization',
         'extend/frontend-pages',
         'extend/interactive-components',
+        'extend/haptic-feedback',
         'extend/i18n',
         'extend/language-packs',
         'extend/forms',
