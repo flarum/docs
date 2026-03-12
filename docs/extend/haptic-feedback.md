@@ -64,7 +64,7 @@ haptic([100, 50, 100]); // vibrate 100ms, pause 50ms, vibrate 100ms
 
 :::info
 
-Custom patterns use the Web Vibration API directly and will only work on Android. They are a no-op on iOS, which only supports the named presets via the Taptic Engine.
+Custom patterns work on both platforms. On Android they use the Web Vibration API directly. On iOS, `web-haptics` simulates the pattern by clicking the hidden checkbox repeatedly via `requestAnimationFrame`, producing distinct Taptic Engine taps at the correct intervals. Intensity values are ignored on iOS.
 
 :::
 
@@ -253,20 +253,18 @@ function maybeHaptic(preset = 'light') {
 
 ## TypeScript
 
-Full TypeScript types are exported from `flarum/common/utils/haptic`:
+The `HapticInput` type is re-exported from `flarum/common/utils/haptic` (sourced from `web-haptics`):
 
 ```ts
 import haptic, { isHapticSupported } from 'flarum/common/utils/haptic';
-import type { HapticPreset, HapticPattern } from 'flarum/common/utils/haptic';
+import type { HapticInput } from 'flarum/common/utils/haptic';
 
-// HapticPreset — named preset string union
-const preset: HapticPreset = 'success';
+// HapticInput accepts a preset name, a duration in ms, or a vibrate/pause array
+const preset: HapticInput = 'success';
+const duration: HapticInput = 50;
+const pattern: HapticInput = [100, 50, 100];
 
-// HapticPattern — raw duration or vibrate/pause sequence
-const pattern: HapticPattern = [100, 50, 100];
-
-// The function signature
-// haptic(pattern?: HapticPreset | HapticPattern): void
+// haptic(pattern?: HapticInput): void
 haptic(preset);
 haptic(pattern);
 haptic(); // defaults to 'light'
@@ -276,7 +274,6 @@ haptic(); // defaults to 'light'
 
 | Export | Type | Description |
 |---|---|---|
-| `haptic` (default) | `(pattern?: HapticPreset \| HapticPattern) => void` | Trigger haptic feedback |
+| `haptic` (default) | `(pattern?: HapticInput) => void` | Trigger haptic feedback |
 | `isHapticSupported` | `boolean` | Whether the device supports haptics |
-| `HapticPreset` | type | Named preset string union |
-| `HapticPattern` | type | `number \| number[]` raw pattern |
+| `HapticInput` | type | Re-exported from `web-haptics` — preset name, ms duration, or pattern array |
