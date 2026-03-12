@@ -423,6 +423,7 @@ Checkout this example from the mentions extension:
 #### <span class="notable">Notable</span>
 * The `Frontend` extender now allows passing extra attributes and classes that will be added to the root `html` tag, through the `extraDocumentAttributes` and `extraDocumentClasses` methods.
 * When preparing data in tests, you should use the model class name instead of the table name, this will ensure the factory of the model is used and basic data is autofilled for you.
+* Avatar upload processing has been improved: static images (JPEG, PNG, BMP, WebP) are now converted to **WebP** (previously PNG), and animated GIFs are now preserved as `.gif` rather than being flattened. Extensions that read `avatar_url` and assume a `.png` extension should be updated to handle `.webp` as well. A new CLI command `php flarum avatars:convert-to-webp` is available to batch-convert any existing avatars. WebP is also now accepted as a valid upload format.
 
 ## Infrastructure
 
