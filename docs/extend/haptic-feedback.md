@@ -70,17 +70,23 @@ Custom patterns work on both platforms. On Android they use the Web Vibration AP
 
 ## Detecting Support
 
-Use `isHapticSupported` to conditionally show haptic-related UI (e.g. a settings toggle):
+Use `isHapticSupported` to conditionally show haptic-related UI in your extension:
 
 ```js
 import { isHapticSupported } from 'flarum/common/utils/haptic';
 
 if (isHapticSupported) {
-  // Show haptic preference toggle
+  // e.g. show a mobile-only tip or UI affordance
 }
 ```
 
 `isHapticSupported` is a boolean evaluated once at page load. It is `true` on Android (Web Vibration API) and iOS (Taptic Engine via checkbox trick), and `false` on desktop browsers.
+
+## User preference
+
+Flarum core includes a built-in haptic feedback toggle in the user's **Settings → Device** panel. Logged-in users can disable haptics at any time; guests always receive haptic feedback.
+
+`haptic()` checks this preference automatically — extensions can call it unconditionally without any extra gating.
 
 ## Where Core Uses Haptics
 
@@ -201,53 +207,6 @@ function onReactionSelected(reactionType, post) {
   haptic(preset);
 
   post.save({ reaction: reactionType });
-}
-```
-
-### Settings toggle (with `isHapticSupported`)
-
-If your extension adds a user preference to enable/disable haptics, conditionally render the setting using `isHapticSupported`:
-
-```js
-import { extend } from 'flarum/common/extend';
-import haptic, { isHapticSupported } from 'flarum/common/utils/haptic';
-import SettingsPage from 'flarum/forum/components/SettingsPage';
-import Switch from 'flarum/common/components/Switch';
-
-app.initializers.add('my-extension', () => {
-  extend(SettingsPage.prototype, 'settingsItems', function (items) {
-    // Only show the toggle on devices that support haptics
-    if (!isHapticSupported) return;
-
-    items.add(
-      'hapticFeedback',
-      <Switch
-        state={!!this.attrs.user.preferences()?.myExtensionHaptics}
-        onchange={(value) => {
-          haptic('light'); // demonstrate the effect as they toggle
-          this.attrs.user.savePreferences({ myExtensionHaptics: value });
-        }}
-      >
-        {app.translator.trans('my-extension.forum.settings.haptic_feedback_label')}
-      </Switch>
-    );
-  });
-});
-```
-
-### Respecting user preferences
-
-If your extension exposes a haptic preference, gate calls behind it:
-
-```js
-import haptic, { isHapticSupported } from 'flarum/common/utils/haptic';
-
-function maybeHaptic(preset = 'light') {
-  const enabled = app.session.user?.preferences()?.myExtensionHaptics ?? true;
-
-  if (isHapticSupported && enabled) {
-    haptic(preset);
-  }
 }
 ```
 
