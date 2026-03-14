@@ -418,7 +418,8 @@ Checkout this example from the mentions extension:
 ##### <span class="breaking">Breaking</span>
 * The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
 * Notification Blueprints must now implement the `Flarum\Notification\AlertableInterface` interface in order them to be sent as alerts. This allows for email-only notifications for example.
-* The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now. 
+* The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now.
+* The `/logout` route has changed from `GET` to `POST`. The named route `logout` now refers to the `POST` action endpoint. A new `GET /logout` route named `logoutPage` shows a no-JS confirmation page. If your extension generates a logout URL using `$url->to('forum')->route('logout')`, update it to `route('logoutPage')` for the confirmation page, or submit a `POST` to `route('logout')` with a `csrfToken` body field for a direct logout. Extensions calling `app.session.logout()` on the frontend require no changes.
 
 #### <span class="notable">Notable</span>
 * The `Frontend` extender now allows passing extra attributes and classes that will be added to the root `html` tag, through the `extraDocumentAttributes` and `extraDocumentClasses` methods.
