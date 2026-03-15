@@ -413,6 +413,74 @@ Checkout this example from the mentions extension:
 
 :::
 
+### OAuth / Forum Auth
+
+##### <span class="breaking">Breaking</span>
+
+**`ResponseFactory::make()` — new `$returnTo` argument and return type change**
+
+`Flarum\Forum\Auth\ResponseFactory::make()` now requires a fourth argument `string $returnTo = '/'` and always returns a `RedirectResponse` instead of an `HtmlResponse`. The old popup-based HTML response has been removed entirely.
+
+```php
+// Before
+$this->response->make($provider, $identifier, $configureRegistration);
+
+// After — pass a validated same-origin returnTo URL
+$this->response->make($provider, $identifier, $configureRegistration, $returnTo);
+```
+
+The `$returnTo` value must be a validated same-origin relative path (starting with `/`). Passing an absolute URL is a security risk — validate it before passing it in.
+
+**`ForumApplication::authenticationComplete()` removed**
+
+`authenticationComplete()` existed solely to close the old popup window. It has been removed. Extensions that called it can drop the call entirely — the new redirect flow handles everything server-side.
+
+**`makeLoggedInResponse()` and `makeRegistrationResponse()` are now `protected`**
+
+Both helper methods on `ResponseFactory` are now `protected`, making them official extension points. Subclass `ResponseFactory` and override either method to customise login redirect behaviour or the registration handoff mechanism.
+
+```php
+class MyResponseFactory extends ResponseFactory
+{
+    protected function makeLoggedInResponse(User $user, string $returnTo): ResponseInterface
+    {
+        // Custom behaviour — e.g. append your own query params
+        return parent::makeLoggedInResponse($user, $returnTo);
+    }
+}
+```
+
+Bind your subclass in a service provider:
+
+```php
+$this->container->extend(ResponseFactory::class, fn () => new MyResponseFactory(...));
+```
+
+**New `POST /api/registration-token` endpoint**
+
+A new unauthenticated endpoint accepts a short-lived registration token in the POST body and returns only `username`, `email`, and `provided[]`. Sensitive fields (provider name, identifier, payload internals) are never exposed. The token is submitted in the body — not the URL — so it never appears in server access logs, browser history, or Referer headers.
+
+This endpoint is CSRF-exempt (token possession is the credential) and is primarily used by the frontend to pre-populate the sign-up modal after an OAuth redirect.
+
+**`_flarum_auth` and `_flarum_linked` query parameters**
+
+The new redirect flow uses two query parameters appended to the `returnTo` URL:
+
+* `_flarum_auth=<token>` — set when a new user arrives via OAuth and must complete registration. The frontend detects this on boot, strips it, fetches `username`/`email`/`provided` from `POST /api/registration-token`, and opens the `SignUpModal` pre-populated.
+* `_flarum_linked=<provider>` — set when an existing user's account is linked to an OAuth provider for the first time (either via email-match during login, or a manual link from the security page). The frontend detects this on boot and shows a confirmation modal.
+
+Both parameters are stripped from the URL immediately on the client without a page reload.
+
+:::warning fof/oauth also updated
+
+If your extension extends or depends on **FriendsOfFlarum/oauth**, that package has been significantly updated alongside these core changes. The popup flow has been removed, `AbstractOAuthController` has moved from `fof/extend` into `fof/oauth` itself, and several other breaking changes apply. See the fof/oauth upgrade notes for the full migration guide.
+
+:::
+
+#### <span class="notable">Notable</span>
+
+* `SignUpModal` fields (Username, Email, Password) now render a visible `<label>` element above each input. If your extension renders additional fields in `SignUpModal`, consider adding a label for consistency.
+
 ### Miscellaneous
 
 ##### <span class="breaking">Breaking</span>
