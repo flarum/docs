@@ -176,10 +176,10 @@ There have been many changes to the core frontend codebase, including renamed or
 
 ## Backend
 
-### PHP 8.2
+### PHP 8.3
 
 ##### <span class="breaking">Breaking</span>
-* The entire codebase has been updated to use/require PHP 8.2 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
+* The entire codebase has been updated to use/require PHP 8.3 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
 
 ##### <span class="notable">Notable</span>
 * A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
@@ -192,7 +192,7 @@ There have been many changes to the core frontend codebase, including renamed or
 In `composer.json`:
 * Set `flarum/core` package requirement to `^2.0.0-beta`.
 * Set other `flarum/*` packages to `*`.
-* If you have a `php` requirement, make sure it is not below `^8.2`.
+* If you have a `php` requirement, make sure it is not below `^8.3`.
 * If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "*"`.
 
 #### wikimedia/less.php (updated from 4.x to 5.x)
@@ -211,9 +211,9 @@ Other changes can be found in the [Carbon 3 change log](https://github.com/brian
 ##### <span class="notable">Notable</span>
 * Flarum 2.0 upgrades Symfony components to version 6. Most extensions will not need to make any changes.
 
-#### Laravel (updated from 8.x to 12.x)
+#### Laravel (updated from 8.x to 13.x)
 
-Flarum 2.0 uses Laravel 12 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
+Flarum 2.0 uses Laravel 13 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
 
 ##### <span class="breaking">Breaking</span>
 * The `$dates` property on models has been removed. You should now use the `$casts` property instead as such:
@@ -222,7 +222,7 @@ Flarum 2.0 uses Laravel 12 components, depending on your extension you may need 
       'example_at' => 'datetime',
   ];
   ```
-* When changing columns in migrations, you must always include the entirety of the column definition. For example, if you are changing a nullable column from `string` to `text`, you must include the `->nullable()` method in the new column definition. You will have to update your migrations accordingly. (https://laravel.com/docs/12.x/upgrade#modifying-columns)
+* When changing columns in migrations, you must always include the entirety of the column definition. For example, if you are changing a nullable column from `string` to `text`, you must include the `->nullable()` method in the new column definition. You will have to update your migrations accordingly. (https://laravel.com/docs/13.x/upgrade#modifying-columns)
 * The `HasUuids` trait now generates UUIDv7 (ordered) instead of UUIDv4. If your extension uses this trait and relies on UUIDv4, use `HasVersion4Uuids` instead:
   ```php
   use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids;
@@ -230,7 +230,7 @@ Flarum 2.0 uses Laravel 12 components, depending on your extension you may need 
 * `Schema::getTables()`, `Schema::getViews()`, and `Schema::getTypes()` now return results across all schemas by default. Pass the `schema` parameter to limit results to a specific schema.
 * The `image` validation rule no longer allows SVGs by default. To allow SVGs, use `'image:allow_svg'`.
 
-For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade), [Laravel 11](https://laravel.com/docs/11.x/upgrade) and [Laravel 12](https://laravel.com/docs/12.x/upgrade) upgrade guides.
+For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade), [Laravel 11](https://laravel.com/docs/11.x/upgrade), [Laravel 12](https://laravel.com/docs/12.x/upgrade) and [Laravel 13](https://laravel.com/docs/13.x/upgrade) upgrade guides.
 
 #### Flysystem (updated from 1.x to 3.x)
 
