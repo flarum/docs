@@ -208,6 +208,7 @@ export default [
   new Extend.Routes()
     .add('user.foobar', '/u/:username/foobar', FoobarUserPage, UserPageResolver),
 ];
+
 ```
 Custom route resolvers let you control how Mithril identifies and keys route instances — for example, treating `/d/5-wrong-slug` and `/d/5-correct-slug` as the same page to prevent unnecessary remounts — and hook into the render lifecycle to perform side effects like auto-correcting URLs or triggering scroll-to-post behavior.
 
