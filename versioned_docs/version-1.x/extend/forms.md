@@ -8,10 +8,10 @@ As with any interactive site, you will likely want to include forms in some page
 Flarum provides some components to make building (and styling!) these forms easier.
 Please see the linked API documentation for each of these to learn more about its accepted attrs.
 
-- The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) wraps its children in a HTML fieldset tag, with a legend.
-- The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) is a stylized select input.
-- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/master/class/src/common/components/switch.js~switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/master/class/src/common/components/checkbox.js~checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
-- The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/master/class/src/common/components/button.js~button) is a stylized button, and is used frequently throughout Flarum.
+- The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/1.x/classes/flarum.common_components_fieldset.fieldset) wraps its children in a HTML fieldset tag, with a legend.
+- The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/1.x/classes/flarum.common_components_select.select) is a stylized select input.
+- The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/1.x/classes/flarum.common_components_switch.switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/1.x/classes/flarum.common_components_checkbox.checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
+- The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/1.x/classes/flarum.common_components_button.button) is a stylized button, and is used frequently throughout Flarum.
 
 You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
 

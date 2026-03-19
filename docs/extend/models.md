@@ -234,7 +234,7 @@ const title = discussion.title();
 const posts = discussion.posts(); // array of Post models
 ```
 
-You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/master/class/src/common/store.js~store).
+You can learn more about the store in our [API documentation](https://api.docs.flarum.org/js/2.x/classes/flarum.common_store.store).
 
 ### Adding New Models
 
