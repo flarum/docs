@@ -173,6 +173,8 @@ There have been many changes to the core frontend codebase, including renamed or
 * An API for frontend gambits has been introduced, [checkout the full documentation](./search#gambits).
 * A `FormGroup` component has been added that allows you to add any supported type of input similar to the admin panel's settings registration. [checkout the documentation for more details](./forms).
 * `WelcomeHero.prototype.viewItems` has been moved to `WelcomeHero.prototype.bodyItems`.
+* The frontend `Routes` extender has been modified to allow passing a custom route resolver class as the fourth argument when [adding routes](./routes#frontend-routes).
+* A `UserPageResolver` has been introduced to allow canonicalizing user slugs if the current URL slug doesn't match. Extensions that add user profile routes should use this resolver to ensure consistent slug canonicalization across the multiple profile routes.
 
 ## Backend
 
