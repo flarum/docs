@@ -71,6 +71,18 @@ When the `database` driver is active, additional tuning options (retries, memory
 
 Extensions such as [FoF Redis](https://github.com/FriendsOfFlarum/redis) provide additional queue drivers. These do not require any `queue` entry in `config.php` — they are configured through their own extension settings.
 
+### Announcements widget
+
+Flarum displays an announcements widget on the admin dashboard, showing the latest news from the official [Flarum community](https://discuss.flarum.org). This is enabled by default and refreshes weekly in the background.
+
+To disable it, add the following to your `config.php`:
+
+```php
+'flarum_announcements.disabled' => true,
+```
+
+When disabled, the widget is hidden from the dashboard, no outbound requests are made to discuss.flarum.org, and the scheduled refresh task is not registered.
+
 ### Maintenance modes
 
 Flarum has a maintenance mode that can be enabled by setting the `offline` key in the `config.php` file to one of the following values:
