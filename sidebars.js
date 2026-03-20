@@ -142,6 +142,7 @@ module.exports = {
         'extend/model-visibility',
         'extend/slugging',
         'extend/notifications',
+        'extend/realtime',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
