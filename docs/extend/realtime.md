@@ -66,6 +66,8 @@ Use `broadcastModelEvent` to push a JSON:API payload of a model whenever certain
 
 **What gets pushed:** Realtime calls the internal API as each recipient (`GET /api/posts/{id}` in this example) and pushes the resulting JSON:API document. For `Post` models, the owning discussion is used as the primary resource with the post in `included`.
 
+**Choosing which model to return:** The `getModel` callback should return a model that already has a JSON:API endpoint — one that renders *everything the frontend needs to see the change*. For events that mutate a post (likes, reactions, votes), return `$event->post` rather than the pivot/reaction model itself. The post's endpoint already serialises its aggregated state (like counts, reaction counts etc.) and the frontend can refresh its display from that. Only return a custom model class if you have a dedicated API endpoint for it and the frontend needs to render new data from that resource directly.
+
 **Custom model types:** If you are broadcasting a model that isn't a core `Discussion`, `Post`, `User`, or `Notification`, register its API endpoint:
 
 ```php
@@ -125,35 +127,38 @@ Realtime will call `GET /api/my-models/{id}` (as the recipient user) to generate
 
 ### The JS `Realtime` extender
 
-Import and use the `Realtime` extender from `flarum/realtime/forum`. Guard it with an extension check so your extension still loads when Realtime is absent:
+Import the extender using the `ext:` prefix, which resolves cross-extension modules at runtime. Guard the whole block with an extension check so your extension still loads when Realtime is absent.
+
+The recommended pattern is to move the integration into a separate `extendRealtime.ts` file and call it conditionally from your `index.ts`:
 
 ```ts
+// forum/extendRealtime.ts
 import app from 'flarum/forum/app';
+import RealtimeExtend from 'ext:flarum/realtime/forum/extenders/Realtime';
 
-export default [
-  ...('flarum-realtime' in flarum.extensions
-    ? [
-        new (require('flarum/realtime/forum').RealtimeExtend)()
-          .onDiscussionStreamEvent('likesMutation'),
-      ]
-    : []),
-];
+export default function extendRealtime() {
+  new RealtimeExtend()
+    .onDiscussionStreamEvent('likesMutation')
+    .extend(app, { name: 'my-extension', exports: {} });
+}
 ```
 
-Or using dynamic `import()` (preferred in larger extensions):
-
 ```ts
-// In your forum index.ts
-app.initializers.add('my-extension', async () => {
+// forum/index.ts
+app.initializers.add('my-extension', () => {
   if ('flarum-realtime' in flarum.extensions) {
-    const { RealtimeExtend } = await import('flarum/realtime/forum');
-
-    new RealtimeExtend()
-      .onDiscussionStreamEvent('likesMutation')
-      .extend(app, { name: 'my-extension', exports: {} });
+    extendRealtime();
   }
 });
 ```
+
+:::info ext: imports
+
+The `ext:flarum/realtime/...` import prefix tells the Flarum module loader to resolve the module from the `flarum-realtime` extension's registered exports. This is the correct way to import from another extension — it avoids bundling the other extension's code into yours and ensures the module isn't loaded at all when Realtime is not installed.
+
+See the [extending extensions](extending-extensions.md) guide for details.
+
+:::
 
 ### Triggering a discussion stream reload
 
@@ -221,7 +226,7 @@ The `data` argument your callback receives is a JSON:API document (the same stru
 If you need fine-grained control beyond the extender API, you can bind to channels directly after they are ready. Use `RealtimeState` for this:
 
 ```ts
-import RealtimeState from 'flarum/realtime/forum/RealtimeState';
+import RealtimeState from 'ext:flarum/realtime/forum/RealtimeState';
 
 RealtimeState.onUserChannelReady((channel) => {
   channel.bind('my-event', (data: unknown) => {
@@ -266,14 +271,13 @@ return [
 ];
 ```
 
-**TypeScript (`extendRealtime.ts`):**
+**TypeScript (`forum/extendRealtime.ts`):**
 
 ```ts
 import app from 'flarum/forum/app';
+import RealtimeExtend from 'ext:flarum/realtime/forum/extenders/Realtime';
 
 export default function extendRealtime() {
-  const { RealtimeExtend } = require('flarum/realtime/forum');
-
   new RealtimeExtend()
     .onDiscussionStreamEvent('likesMutation')
     .extend(app, { name: 'flarum-likes', exports: {} });
