@@ -48,20 +48,18 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 "flarum/mentions": "*",
 ```
 
-**5. Set `minimum-stability` to `stable`.**
-In your `composer.json`, change:
+**5. Set `minimum-stability` to `beta`.**
+While Flarum 2.0 is in beta, your `composer.json` must have:
 
 ```json
 "minimum-stability": "beta"
 ```
 
-to:
+:::info
 
-```json
-"minimum-stability": "stable"
-```
+Once Flarum 2.0 stable is released, you should change this to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
 
-Only leave this as `beta` if you are intentionally using a third-party extension that has not yet released a stable v2 version. Leaving it as `beta` can cause Composer to pull in unstable versions of other packages unexpectedly.
+:::
 
 **6. Update your `config.php` if using MariaDB.**
 Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
