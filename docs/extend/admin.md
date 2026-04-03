@@ -265,6 +265,45 @@ This page will be shown instead of the default.
 
 You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
 
+### Reset Settings Button
+
+`AdminPage` provides a `resetButton()` method that renders a **Reset Settings** button. When clicked, it opens a confirmation modal listing the setting keys that will be deleted from the database, reverting them to their PHP-side defaults (as registered via `Extend\Settings()->default(...)`).
+
+On default extension pages (those that use `Admin.setting()`), the reset button is rendered automatically alongside the save button. On custom pages, you must call `resetButton()` yourself.
+
+The simplest approach is to pass a label as the third argument to `this.setting()` when reading each setting. The reset button will then pick up those labels automatically when called with no arguments:
+
+```js
+content() {
+  const myValue = this.setting('acme.my_key', '', app.translator.trans('acme.admin.my_key_label'));
+
+  return (
+    <Form>
+      {/* ... your form fields ... */}
+      <div className="Form-group Form-controls">
+        {this.submitButton()}
+        {this.resetButton()}
+      </div>
+    </Form>
+  );
+}
+```
+
+If you need more control, you can pass the settings list explicitly:
+
+```js
+this.resetButton(
+  [
+    { key: 'acme.setting_one', label: app.translator.trans('acme.admin.setting_one_label') },
+    { key: 'acme.setting_two', label: app.translator.trans('acme.admin.setting_two_label') },
+  ],
+  app.translator.trans('acme.admin.reset_title', {}, true), // optional modal title
+  'acme-extension' // optional extension ID, included in the Reset event payload
+)
+```
+
+When a reset is confirmed, a `Flarum\Settings\Event\Reset` event is dispatched on the backend with the `$actor`, `$extensionId`, and `$keys` that were deleted. Extensions can listen to this event to perform any necessary cleanup.
+
 ### Admin Search
 
 The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.settings` and `Admin.permissions` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
