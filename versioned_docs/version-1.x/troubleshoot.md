@@ -14,6 +14,7 @@ These are fine if you're on a staging or development environment, but if you don
 :::
 
 Before you proceed, you should enable Flarum's debugging tools. Simply open up **config.php** with a text editor, change the `debug` value to `true`, and save the file. This will cause Flarum to display detailed error messages, giving you an insight into what's going wrong.
+To disable debug you can change the `debug` value back to `false`, and save the file.
 
 If you've been seeing blank pages and the above change doesn't help, try setting `display_errors` to `On` in your **php.ini** configuration file.
 
