@@ -163,6 +163,25 @@ There have been many changes to the core frontend codebase, including renamed or
 * `app.extensionData` has been removed. You must now use the `Admin` extender to register settings, permissions and custom extension pages.
 
 ##### <span class="notable">Notable</span>
+* A **Reset Settings** button is now available on extension admin pages. For extensions using the standard `Admin.setting()` extender, the button appears automatically alongside the save button. **If your extension has a custom settings page, you should add the reset button yourself** by calling `this.resetButton()` in your `content()` method. Pass a label as the third argument to `this.setting()` so the modal can display human-readable names for each key:
+
+  ```js
+  content() {
+    const myValue = this.setting('acme.my_key', '', app.translator.trans('acme.admin.my_key_label'));
+
+    return (
+      <Form>
+        {/* ... your form fields ... */}
+        <div className="Form-group Form-controls">
+          {this.submitButton()}
+          {this.resetButton()}
+        </div>
+      </Form>
+    );
+  }
+  ```
+
+  Confirming the reset deletes the listed setting rows from the database and reloads the page, reverting them to their PHP-side defaults. A `Flarum\Settings\Event\Reset` event is dispatched on the backend with the `$actor`, `$extensionId`, and `$keys` involved. See the [Reset Settings Button](./admin.md#reset-settings-button) documentation for full details.
 * The admin sidebar navigation has been overhauled. Extension categories are now collapsible groups with count badges and category icons. Categories start collapsed by default, and searching auto-expands categories with matching results. The active extension's category is pre-expanded on page load. Extensions should declare their category in `composer.json` under `extra.flarum-extension.category`. See the [Extension Categories](./admin.md#extension-categories) section in the admin docs for the full list of available categories and how to register custom ones.
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
 * A `HeaderDropdown` component has been added which is used for the `NotificationsDropdown` and `FlagsDropdown` your component should extend that instead of the `NotificationsDropdown`. Along with it has been also added the following components: `HeaderList` and `HeaderListItem`.
