@@ -17,7 +17,14 @@ Your driver is only called when the user has no uploaded avatar or custom URL. T
 
 ## Creating a Driver
 
-The `DriverInterface` has a single method which receives a `User` model and returns either a URL string or null:
+`DriverInterface` has two methods, both receiving a `User` model:
+
+| Method | Returns | Purpose |
+|--------|---------|---------|
+| `avatarUrl(User $user): ?string` | A URL string, or `null` | The 1× avatar URL shown to all devices |
+| `avatarSrcset(User $user): ?string` | A `srcset` string, or `null` | HiDPI variants for retina displays |
+
+Return `null` from either method to let Flarum fall back to its defaults.
 
 ```php
 namespace Acme\Avatars\Driver;
@@ -36,14 +43,56 @@ class DiscordAvatarDriver implements DriverInterface
             return null;
         }
 
-        return "https://cdn.discordapp.com/avatars/{$discordId}/{$avatarHash}.png?size=200";
+        // 1× base image (100 px)
+        return "https://cdn.discordapp.com/avatars/{$discordId}/{$avatarHash}.png?size=100";
+    }
+
+    public function avatarSrcset(User $user): ?string
+    {
+        $discordId = $user->discord_id;
+        $avatarHash = $user->discord_avatar_hash;
+
+        if (! $discordId || ! $avatarHash) {
+            return null;
+        }
+
+        $base = "https://cdn.discordapp.com/avatars/{$discordId}/{$avatarHash}.png";
+
+        return "{$base}?size=100 1x, {$base}?size=200 2x, {$base}?size=300 3x";
     }
 }
 ```
 
-The `avatarUrl()` method receives the full User model, so you can access any user properties including custom attributes you have added via [migrations](database.md).
+Both methods receive the full User model, so you can access any user properties including custom attributes added via [migrations](database.md).
 
-Drivers should return `null` when they cannot provide an avatar URL. This allows Flarum to fall back to the default avatar display.
+If your provider does not support HiDPI images, implement `avatarSrcset()` returning `null` and Flarum will serve only the base URL.
+
+## HiDPI Variants for Uploaded Avatars
+
+When a user uploads an avatar, Flarum automatically generates up to three size variants:
+
+| Suffix | Size | Descriptor |
+|--------|------|------------|
+| _(none)_ | 100 × 100 px | `1x` |
+| `@2x` | 200 × 200 px | `2x` |
+| `@3x` | 300 × 300 px | `3x` |
+
+Upscaling is never performed — if the source image is smaller than a variant's target size, that variant is skipped. A 150 px source produces only the `1x` file; a 200 px source produces `1x` and `2x`; a 300 px (or larger) source produces all three.
+
+The `Avatar` component automatically includes the `srcset` attribute on the `<img>` element when HiDPI variants exist, so browsers on retina displays receive the appropriately sized image without any extra work in your extension.
+
+## Providing HiDPI Avatars via OAuth Registration
+
+OAuth drivers that call `provideAvatar()` can also supply pre-sized HiDPI URLs via `provideAvatar2x()` and `provideAvatar3x()` on the `Registration` object. Flarum will fetch and store these URLs directly rather than upscaling the base image:
+
+```php
+$registration
+    ->provideAvatar('https://example.com/avatar.png?size=100')
+    ->provideAvatar2x('https://example.com/avatar.png?size=200')
+    ->provideAvatar3x('https://example.com/avatar.png?size=300');
+```
+
+All three methods are optional and chainable. If only `provideAvatar()` is called, Flarum generates HiDPI variants from that image using the normal upload pipeline (subject to the upscaling rule above).
 
 ## Registering a Driver
 
