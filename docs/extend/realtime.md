@@ -301,6 +301,125 @@ When a post is liked, Realtime:
 
 ---
 
+## Presence channels
+
+The `presence-online` channel tracks which logged-in users are currently connected. You can subscribe to it directly via `app.websocket` to build features like an online users list.
+
+### How presence channels work
+
+- When a user subscribes, they receive `pusher:subscription_succeeded` with the current member list (IDs and info for everyone already subscribed).
+- When any member joins, all subscribers receive `pusher:member_added`.
+- When a member's last socket disconnects, all subscribers receive `pusher:member_removed`.
+- The server only broadcasts `member_added`/`member_removed` when the user's connection count crosses zero — multiple tabs don't produce duplicate events.
+
+Note that presence tracks **who is subscribed to the channel**, not who has been recently active. This is more accurate than polling `last_seen_at` but only reflects users who are actively connected via WebSocket.
+
+### Subscribing from an extension
+
+Use `RealtimeState.onUserChannelReady` (for logged-in users) and `RealtimeState.onPublicChannelReady` (for guests) to defer subscription until Pusher is connected and `app.forum` is available. Register both so your code works regardless of whether the visitor is logged in:
+
+```ts
+// forum/extendRealtime.ts
+import app from 'flarum/forum/app';
+import type { Channel } from 'pusher-js';
+import RealtimeState from 'ext:flarum/realtime/forum/RealtimeState';
+
+interface PresenceMembers {
+  each(callback: (member: { id: string; info: Record<string, unknown> }) => void): void;
+}
+
+function subscribeToPresence(): void {
+  // Presence channels require authentication — guests cannot join.
+  if (!app.session.user) return;
+
+  const channel: Channel = app.websocket.subscribe('presence-online');
+
+  channel.bind('pusher:subscription_succeeded', (members: PresenceMembers) => {
+    members.each((member) => {
+      console.log('online:', member.id, member.info);
+    });
+  });
+
+  channel.bind('pusher:member_added', (member: { id: string }) => {
+    console.log('came online:', member.id);
+  });
+
+  channel.bind('pusher:member_removed', (member: { id: string }) => {
+    console.log('went offline:', member.id);
+  });
+}
+
+export default function extendRealtime(): void {
+  // Logged-in users get a private user channel; guests get the public channel.
+  // Register on both so the subscription fires regardless of auth state.
+  RealtimeState.onUserChannelReady(subscribeToPresence);
+  RealtimeState.onPublicChannelReady(subscribeToPresence);
+}
+```
+
+```ts
+// forum/index.ts
+app.initializers.add('my-extension', () => {
+  if ('flarum-realtime' in flarum.extensions) {
+    extendRealtime();
+  }
+});
+```
+
+### Loading user models from the store
+
+Presence member data only includes the user ID and the info hash set at auth time (by default just `displayName`). To render avatars or other model attributes, you need the full `User` model from the store.
+
+Use `app.store.getById` to check the store first, and only call `app.store.find` (which makes an API request) if the model is absent. Do this before adding the user to any state that triggers a re-render — otherwise a concurrent redraw may run before the model is available:
+
+```ts
+async function ensureUserLoaded(id: string): Promise<void> {
+  if (!app.store.getById('users', id)) {
+    await app.store.find<any>('users', id);
+  }
+}
+
+// In member_added: fetch first, then update state and redraw.
+channel.bind('pusher:member_added', async (member: { id: string }) => {
+  await ensureUserLoaded(member.id);
+  myState.userIds.add(member.id);
+  m.redraw();
+});
+```
+
+For the initial member list on `subscription_succeeded`, fetch all unknown users in parallel before rendering:
+
+```ts
+channel.bind('pusher:subscription_succeeded', async (members: PresenceMembers) => {
+  const loads: Promise<void>[] = [];
+  members.each((member) => loads.push(ensureUserLoaded(member.id)));
+  await Promise.all(loads);
+
+  // Safe to render now — all models are in the store.
+  m.redraw();
+});
+```
+
+### Presence and permissions
+
+The `presence-online` channel admits all logged-in users by default. This means **anyone connected appears as a member**, regardless of what permissions your extension uses to control visibility of the data.
+
+If your feature has a "who can see" permission but no "who can appear" concept, this is the right model: all users join the channel, and you gate rendering on the client side by checking the relevant permission attribute before activating your UI.
+
+If you need to restrict who can *join* the channel (e.g. a staff-only presence channel), use `authorizePresenceChannel` in the `Realtime` PHP extender:
+
+```php
+(new Extend\Conditional())
+    ->whenExtensionEnabled('flarum-realtime', fn () => [
+        (new \Flarum\Realtime\Extend\Realtime())
+            ->authorizePresenceChannel('online', fn (User $actor, string $channel) => $actor->isAdmin()),
+    ]),
+```
+
+The callback receives the authenticated `User` and the channel subject name (e.g. `'online'`), and must return `false` to deny — any other return value (including `null`) is treated as a pass. All registered callbacks for a channel must pass before the auth response is issued. Guests are always rejected before callbacks are invoked.
+
+---
+
 ## Security
 
 Realtime enforces permissions at two layers:
