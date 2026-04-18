@@ -577,6 +577,80 @@ If your extension uses Larastan's template type annotations, two names have chan
 * `TModelClass` → `TModel`
 * `TChildModel` → `TDeclaringModel`
 
+### PHPUnit (updated from ^9.5 to ^12.5)
+
+Flarum 2.0 upgrades `flarum/testing` to PHPUnit 12. PHPUnit 12 requires PHP 8.3+ (already the 2.x floor) and removes docblock annotation support, so extension test suites need to migrate to PHP 8 attributes.
+
+#### Annotations replaced by attributes
+
+##### <span class="breaking">Breaking</span>
+
+Docblock annotations like `@test`, `@dataProvider`, `@depends`, `@before`, `@after`, `@group`, `@covers`, and `@runInSeparateProcess` are no longer recognised. Tests that relied on `@test` to mark methods without a `test` prefix will **silently stop being discovered** — PHPUnit will not warn you.
+
+Replace them with their PHP 8 attribute equivalents:
+
+```php
+// Before
+use PHPUnit\Framework\TestCase;
+
+class MyTest extends TestCase
+{
+    /**
+     * @test
+     * @dataProvider provideFoo
+     */
+    public function it_works(int $input): void
+    {
+        // ...
+    }
+
+    public static function provideFoo(): array
+    {
+        return [[1], [2]];
+    }
+}
+
+// After
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
+
+class MyTest extends TestCase
+{
+    #[Test]
+    #[DataProvider('provideFoo')]
+    public function it_works(int $input): void
+    {
+        // ...
+    }
+
+    public static function provideFoo(): array
+    {
+        return [[1], [2]];
+    }
+}
+```
+
+See the [PHPUnit annotations guide](https://docs.phpunit.de/en/12.5/annotations.html) for the full mapping. [Rector](https://github.com/rectorphp/rector) ships a ruleset (`PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES`) that automates the conversion.
+
+#### phpunit.xml schema changes
+
+##### <span class="breaking">Breaking</span>
+
+Several attributes were removed from the PHPUnit config schema between 9.x and 12.x. If your `phpunit.unit.xml` / `phpunit.integration.xml` contains any of these, PHPUnit 12 will fail to load the config:
+
+* `convertErrorsToExceptions`, `convertNoticesToExceptions`, `convertWarningsToExceptions` — removed in PHPUnit 10. Errors, notices, and warnings are always converted to exceptions now.
+* `backupStaticAttributes` — renamed to `backupStaticProperties` in PHPUnit 10.
+* `<listeners>` element — removed in PHPUnit 10. The Mockery `TestListener` is no longer needed; Mockery integrates automatically via PHPUnit's extension mechanism when `mockery/mockery` is installed.
+
+See the updated example configs in the [testing guide](testing.md#phpunitintegrationxml).
+
+#### Mockery expectations
+
+##### <span class="notable">Notable</span>
+
+PHPUnit 12 emits a notice for every mock that is created without any expectations configured (`No expectations were configured for the mock object ...`). These are advisory and do not fail the suite, but they indicate tests that would be clearer using a stub instead of a mock. To silence the notice for a specific test class or method without changing the mock, add the `#[AllowMockObjectsWithoutExpectations]` attribute.
+
 ### Reusable GitHub Workflows
 
 ##### <span class="breaking">Breaking</span>

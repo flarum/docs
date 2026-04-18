@@ -40,19 +40,19 @@ tests
 
 #### phpunit.integration.xml
 
-This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for integration tests. You can tweak this as needed, but keep `backupGlobals`, `backupStaticAttributes`, and `processIsolation` unchanged.
+This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/configuration.html) for integration tests. You can tweak this as needed, but keep `backupGlobals`, `backupStaticProperties`, and `processIsolation` unchanged.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="true"
-         stopOnFailure="false">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
+    backupGlobals="false"
+    backupStaticProperties="false"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    processIsolation="true"
+    stopOnFailure="false">
 
     <testsuites>
         <testsuite name="Flarum Integration Tests">
@@ -64,30 +64,33 @@ This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/
 
 #### phpunit.unit.xml
 
-This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for unit tests. You can tweak this as needed.
+This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/configuration.html) for unit tests. You can tweak this as needed.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
+    backupGlobals="false"
+    backupStaticProperties="false"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    processIsolation="false"
+    stopOnFailure="false">
 
     <testsuites>
         <testsuite name="Flarum Unit Tests">
             <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
-    <listeners>
-        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
-    </listeners>
 </phpunit>
 ```
+
+:::note
+
+As of Flarum 2.x, `flarum/testing` requires PHPUnit 12. Example configs above reflect PHPUnit 12's schema — the legacy `convertErrorsToExceptions`, `convertNoticesToExceptions`, `convertWarningsToExceptions`, and `backupStaticAttributes` attributes were removed in PHPUnit 10, and the `<listeners>` element was removed in PHPUnit 10. If you're migrating an extension from Flarum 1.x, replace any `@test` / `@dataProvider` docblock annotations with the PHP 8 attribute equivalents (`#[Test]`, `#[DataProvider]`) — docblock annotations no longer register tests. See the [PHPUnit annotations guide](https://docs.phpunit.de/en/12.5/annotations.html) for the full list.
+
+:::
 
 #### setup.php
 
@@ -188,6 +191,7 @@ namespace CoolExtension\Tests\integration;
 
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
@@ -222,9 +226,7 @@ class SomeTest extends TestCase
         $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function some_phpunit_test_case()
     {
         // ...
@@ -283,13 +285,13 @@ namespace CoolExtension\Tests\integration;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
     use RetrievesAuthorizedUsers;
-    /**
-     * @test
-     */
+
+    #[Test]
     public function some_phpunit_test_case()
     {
         $this->app();
@@ -363,12 +365,11 @@ For example:
 namespace CoolExtension\Tests\integration;
 
 use Flarum\Testing\integration\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function can_search_users()
     {
         $response = $this->send(
@@ -379,9 +380,7 @@ class SomeTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function can_create_user()
     {
         $response = $this->send(
@@ -444,12 +443,11 @@ For example:
 namespace CoolExtension\Tests\integration;
 
 use Flarum\Tests\integration\ConsoleTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ConsoleTest extends ConsoleTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function command_works()
     {
         $input = [
@@ -465,7 +463,7 @@ class ConsoleTest extends ConsoleTestCase
 
 ### Using Unit Tests
 
-Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit-9.html) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
+Unit testing in Flarum uses [PHPUnit](https://phpunit.de/) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
 
 When writing unit tests in Flarum, here are some helpful tips.
 
