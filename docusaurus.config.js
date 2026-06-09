@@ -1,18 +1,45 @@
-const lightCodeTheme = require('prism-react-renderer/themes/dracula');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const { themes: prismThemes } = require('prism-react-renderer');
+const lightCodeTheme = prismThemes.dracula;
+const darkCodeTheme = prismThemes.dracula;
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
   title: 'Flarum Documentation',
   tagline: 'Forums made simple.',
-  url: 'https://flarum.org',
+  url: 'https://docs.flarum.org',
   baseUrl: '/',
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   organizationName: 'flarum',
   projectName: 'flarum',
+  headTags: [
+    // Site-level JSON-LD structured data (WebSite + Organization). Docusaurus
+    // does not emit structured data for doc pages by default, so we provide it
+    // here at the site level for richer search-engine understanding.
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Flarum Documentation',
+        url: 'https://docs.flarum.org',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Flarum',
+          url: 'https://flarum.org',
+          logo: 'https://docs.flarum.org/img/flarum-banner.png',
+        },
+      }),
+    },
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -41,6 +68,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
       }
     }
   },
+
+  plugins: [
+    // Injects per-page TechArticle + BreadcrumbList JSON-LD for rich search results.
+    require.resolve('./plugins/structured-data'),
+  ],
 
   presets: [
     [
@@ -76,6 +108,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Default social-card image used for og:image / twitter:image on pages
+      // that don't define their own. Path is relative to the static/ directory.
+      image: 'img/flarum-banner.png',
       navbar: {
         logo: {
           alt: 'Flarum Docs Logo',
