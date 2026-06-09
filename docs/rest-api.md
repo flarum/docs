@@ -85,7 +85,7 @@ At the moment, 3 token types exist, although only 2 types can be created via the
 - `session_remember` tokens expire after 5 years of inactivity. They can be obtained by specifying `remember=1` in the request attributes.
 - `developer` tokens never expire. They can only be created manually in the database at the moment.
 
-**All access tokens are deleted when the user logs out** (this includes `developer` tokens, although it is planned to change it).
+**Logging out deletes only the access token used by that session.** A global logout (`POST /logout` with `?global=1`), and changing the user's password, delete *all* of the user's access tokens — including `developer` tokens.
 
 #### Usage
 

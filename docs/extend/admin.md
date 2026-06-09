@@ -8,26 +8,63 @@ You can register settings, permissions, or use an entirely custom page based off
 
 The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
 
-To get started, make sure you have an `admin/extend.js` file:
+Register your settings, permissions, and admin page in a declarative `admin/extend.ts` file rather than imperatively inside the `admin/index.ts` initializer. The extender approach is the recommended pattern: it's less code, and — importantly — it lets Flarum automatically index your settings and permissions for the [admin search](#admin-search). Reserve the `index.ts` initializer for logic that genuinely has to run imperatively (e.g. extending core components).
 
-```js
+To get started, create an `admin/extend.ts` file:
+
+```ts
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
 export default [
   //
-]
+];
 ```
 
-:::info
+:::warning Don't forget the import
 
-Remember to export the `extend` module from your entry `admin/index.js` file:
+For your extenders to take effect, your entry `admin/index.ts` file **must** re-export the `extend` module:
 
-```js
+```ts
+// admin/index.ts
 export { default as extend } from './extend';
+
+app.initializers.add('acme-interstellar', () => {
+  // Imperative-only logic goes here. Keep your settings, permissions,
+  // and page registration in extend.ts.
+});
 ```
+
+Without this `export` line, none of your extenders run.
 
 :::
+
+A complete `extend.ts` registering a custom admin page alongside settings and a permission looks like this:
+
+```ts
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+import SettingsPage from './components/SettingsPage';
+
+export default [
+  new Extend.Admin()
+    .page(SettingsPage)
+    .setting(() => ({
+      setting: 'acme-interstellar.coordinates',
+      label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true),
+      type: 'boolean',
+    }))
+    .permission(
+      () => ({
+        icon: 'fas fa-rocket',
+        label: app.translator.trans('acme-interstellar.admin.permissions.launch_label'),
+        permission: 'acme-interstellar.launch',
+      }),
+      'moderate',
+      90
+    ),
+];
+```
 
 ### Registering Settings
 
@@ -306,9 +343,9 @@ When a reset is confirmed, a `Flarum\Settings\Event\Reset` event is dispatched o
 
 ### Admin Search
 
-The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.settings` and `Admin.permissions` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
+The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.setting` and `Admin.permission` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
 
-To do this, you can use the `Admin.generalIndexItems` extender method. This method takes a callback that returns an array of index items. Each index item is an object with the following properties:
+To do this, you can use the `Admin.generalIndexItems` extender method. This method takes an index type (`'settings'` or `'permissions'`) and a callback that returns an array of index items. Each index item is an object with the following properties:
 
 ```ts
 export type GeneralIndexItem = {
@@ -348,7 +385,7 @@ import app from 'flarum/admin/app';
 
 export default [
   new Extend.Admin()
-    .generalIndexItems(() => [
+    .generalIndexItems('settings', () => [
       {
         id: 'acme-interstellar',
         label: app.translator.trans('acme-interstellar.admin.acme_interstellar_label', {}, true),
@@ -388,18 +425,14 @@ Language packs (extensions with an `extra.flarum-locale` key) are always placed 
 
 ### Available Categories
 
-| Key              | Label          | Icon                    |
-|------------------|----------------|-------------------------|
-| `feature`        | Features       | `fas fa-star`           |
-| `moderation`     | Moderation     | `fas fa-shield-alt`     |
-| `discussion`     | Discussion     | `fas fa-comments`       |
-| `authentication` | Authentication | `fas fa-lock`           |
-| `formatting`     | Formatting     | `fas fa-paragraph`      |
-| `infrastructure` | Infrastructure | `fas fa-server`         |
-| `analytics`      | Analytics      | `fas fa-chart-bar`      |
-| `other`          | Other          | `fas fa-cube`           |
-| `theme`          | Themes         | `fas fa-paint-brush`    |
-| `language`       | Languages      | `fas fa-language`       |
+| Key             | Label         |
+|-----------------|---------------|
+| `feature`       | Features      |
+| `theme`         | Themes        |
+| `forum-widget`  | Forum Widgets |
+| `language`      | Languages     |
+
+Any other declared category that is not registered falls back to the **feature** category. You can register additional categories yourself — see [Registering a Custom Category](#registering-a-custom-category) below.
 
 ### Registering a Custom Category
 
@@ -458,7 +491,11 @@ Flarum reads the `abandoned` field from `vendor/composer/installed.json`, which 
 - If a package is marked abandoned after that point, the warning will not appear until Composer is run again.
 - **Private Packagist, Satis, Toran Proxy, and other custom Composer repositories are fully supported** — Composer writes the `abandoned` field from whatever repository served the package, so the data is repository-agnostic.
 
-Automatic periodic checking via a scheduled task is planned for a future version of Flarum 2.x. Because installations may use private or custom repositories rather than Packagist, the scheduled checker will need to be repository-aware. In preparation for this, Flarum already supports a `flarum.abandoned_overrides` settings key that a future task can write to after querying the appropriate repository API. Its value is a JSON object mapping extension IDs to their abandoned status (`false`, `true`, or a replacement package name string). This decouples the checking logic from core's install-time parsing, and means the override mechanism will work regardless of which Composer repository a package came from.
+Flarum also refreshes abandoned-extension data periodically via a scheduled task. The `extensions:sync-abandoned` console command — registered in `flarum.console.scheduled` with a weekly schedule — fetches the [community-maintained abandoned-extensions list](https://raw.githubusercontent.com/flarum/abandoned-extensions/main/abandoned.json), filters it to your installed packages, and stores the result in the `flarum-core.abandoned_extensions_map` setting. When the `flarum-core.notify_admins_on_abandoned` setting is enabled, scheduled runs email admins about newly flagged extensions. You can also trigger it manually:
+
+```bash
+php flarum extensions:sync-abandoned
+```
 
 :::
 

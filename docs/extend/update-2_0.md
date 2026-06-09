@@ -101,7 +101,7 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 * The forum search UI has been refactored to use a new `SearchModal` component.
 * The `flarum/forum/components/Search` component is no longer the global search component, it can still be used for custom search purposes.
 * Custom global search sources should be registered in `flarum/forum/components/GlobalSearch` `sourceItems` method.
-* Custom global search sources should now implement the `GlobalSearchSource` interface instead of `SearchSource`, see https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/components/AbstractSearch.tsx#L26-L69.
+* Custom global search sources should now implement the `GlobalSearchSource` interface instead of `SearchSource`, see https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/components/AbstractGlobalSearch.tsx#L26-L69.
 * The `flarum/forum/states/SearchState` class has been moved to `flarum/common/states/SearchState`.
 
 ### Admin Search
@@ -317,7 +317,7 @@ Flarum 2.0 completely refactors the JSON:API implementation. The way resource CR
 * The `AbstractSerializer` has been removed.
 * The `ApiController` and `ApiSerializer` extenders have been removed.
 * The `Saving` are dispatched after the validation process instead of before.
-* The various validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, `GroupValidator`, `UserValidator`.
+* Several validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, and `GroupValidator`. (`UserValidator` is still present.)
 * Many command handlers have been removed. Use the `JsonApi` class if you wish to execute logic from an existing endpoint internally instead.
 * The `flarum.forum.discussions.sortmap` singleton has been removed. Instead, you can define an `ascendingAlias` and `descendingAlias` [on your added `SortColumn` sorts](./api#adding-sort-columns).
 * The `show` discussion endpoint no longer includes the `posts` relationship, so any `posts.*` relation includes or eager loads added to that endpoint must be removed. You can move those to the `list` posts endpoint if you are not already doing the same on that endpoint.

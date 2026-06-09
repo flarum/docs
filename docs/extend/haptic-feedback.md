@@ -180,7 +180,7 @@ import CommentPost from 'flarum/forum/components/CommentPost';
 
 app.initializers.add('my-extension', () => {
   // Example: haptic when user expands a collapsed post
-  extend(CommentPost.prototype, 'toggleCollapse', function () {
+  extend(CommentPost.prototype, 'toggleContent', function () {
     haptic('light');
   });
 });

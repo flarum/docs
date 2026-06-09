@@ -442,7 +442,7 @@ For example:
 
 namespace CoolExtension\Tests\integration;
 
-use Flarum\Tests\integration\ConsoleTestCase;
+use Flarum\Testing\integration\ConsoleTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 class ConsoleTest extends ConsoleTestCase
@@ -598,7 +598,7 @@ Integration tests are used to test the components of your frontend code and the 
 Here's a simple example of an integration test for core's `Alert` component:
 
 ```ts
-import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
+import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
 import Alert from '../../../../src/common/components/Alert';
 import m from 'mithril';
 import mq from 'mithril-query';
@@ -677,7 +677,7 @@ You cannot bootstrap both the forum and admin app in the same test file. If you 
 ###### Examples
 
 ```ts
-import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
+import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
 
 describe('Forum tests', () => {
   beforeAll(() => bootstrapForum());
@@ -689,7 +689,7 @@ describe('Forum tests', () => {
 ```
 
 ```ts
-import bootstrapAdmin from '@flarum/jest-config/src/boostrap/admin';
+import bootstrapAdmin from '@flarum/jest-config/src/bootstrap/admin';
 
 describe('Admin tests', () => {
   beforeAll(() => bootstrapAdmin());

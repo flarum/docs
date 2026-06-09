@@ -38,8 +38,10 @@ As opposed to alerts, most modals will use a custom class, inheriting `flarum/co
 import Modal from 'flarum/common/components/Modal';
 
 export default class CustomModal extends Modal {
-  // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
-  static isDismissible = true;
+  // All true by default. These control whether the modal can be dismissed via the close button, the Esc key, and clicking the backdrop, respectively.
+  static isDismissibleViaCloseButton = true;
+  static isDismissibleViaEscKey = true;
+  static isDismissibleViaBackdropClick = true;
 
   className() {
     // Custom CSS classes to apply to the modal
@@ -64,8 +66,10 @@ Modals with forms inherit `flarum/common/components/FormModal`. This class provi
 import FormModal from 'flarum/common/components/FormModal';
 
 export default class CustomFormModal extends FormModal {
-  // True by default, dictates whether the modal can be dismissed by clicking on the background or in the top right corner.
-  static isDismissible = true;
+  // All true by default. These control whether the modal can be dismissed via the close button, the Esc key, and clicking the backdrop, respectively.
+  static isDismissibleViaCloseButton = true;
+  static isDismissibleViaEscKey = true;
+  static isDismissibleViaBackdropClick = true;
 
   className() {
     // Custom CSS classes to apply to the modal

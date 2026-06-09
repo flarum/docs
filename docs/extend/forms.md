@@ -17,7 +17,7 @@ You'll typically want to assign logic for reacting to input changes via Mithril'
 
 ```jsx
 import Component from 'flarum/common/Component';
-import Form from 'flarum/common/Form';
+import Form from 'flarum/common/components/Form';
 import FieldSet from 'flarum/common/components/FieldSet';
 import Button from 'flarum/common/components/Button';
 import Switch from 'flarum/common/components/Switch';
@@ -55,7 +55,7 @@ Don't forget to use [translations](i18n.md)!
 
 ## Streams, bidi, and withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/util/Stream`.
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/common/utils/Stream`.
 This is a very powerful reactive data structure, but is most commonly used in Flarum as a wrapper for form data.
 Its basic usage is:
 
