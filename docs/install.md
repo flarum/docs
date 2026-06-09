@@ -8,7 +8,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 
 :::warning
 
-Flarum 2.0 is currently in beta. It is not ready for production use.
+Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production — but it isn't the final stable release yet, so back up your data and test before relying on it.
 
 :::
 
