@@ -2,7 +2,7 @@
 
 :::warning
 
-Flarum 2.0 is currently in beta. It is not ready for production use. Please wait for the stable release before updating your forum.
+Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production. It isn't the final stable release yet, so back up your database and test on a staging copy before upgrading a live forum.
 
 :::
 
@@ -49,7 +49,7 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 ```
 
 **5. Set `minimum-stability` to `beta`.**
-While Flarum 2.0 is in beta, your `composer.json` must have:
+Until Flarum 2.0 reaches its final stable release, your `composer.json` must allow pre-stable versions:
 
 ```json
 "minimum-stability": "beta"
@@ -57,7 +57,7 @@ While Flarum 2.0 is in beta, your `composer.json` must have:
 
 :::info
 
-Once Flarum 2.0 stable is released, you should change this to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
+Once Flarum 2.0 stable is released, you should change this back to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
 
 :::
 
