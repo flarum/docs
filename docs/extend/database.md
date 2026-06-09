@@ -30,18 +30,15 @@ You may choose to not support all database systems, but you should specify which
 
 Flarum adds the following query builder methods to simplify writing queries specific to a database system:
 
+Each method takes two closures: the first runs when the connection matches that driver, the second (`$else`) runs otherwise. Both arguments are required.
+
 ```php
 // this is just an example, otherwise you would just use eloquent's whereYear method.
 $query
-  ->whenMySql(function ($query) {
-      $query->whereRaw('YEAR(created_at) = 2022');
-  })
-  ->whenPgSql(function ($query) {
-      $query->whereRaw('strftime("%Y", created_at) = 2022');
-  })
-  ->whenSqlite(function ($query) {
-      $query->whereRaw('EXTRACT(YEAR FROM created_at) = 2022');
-  });
+  ->whenMySql(
+      fn ($query) => $query->whereRaw('YEAR(created_at) = 2022'),
+      fn ($query) => $query->whereRaw('EXTRACT(YEAR FROM created_at) = 2022'),
+  );
 ```
 
 ## Common pitfalls

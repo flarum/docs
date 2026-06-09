@@ -25,6 +25,18 @@ Before you install Flarum, it's important to check that your server meets the re
   * PostgreSQL 10.0+
 * **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
+:::tip Recommended database versions
+
+The versions above are the minimums Flarum supports, but older releases such as **MySQL 5.7** and **MariaDB 10.x** are approaching (or past) their upstream end-of-life and are **not recommended** for new installs. For the best performance and longest support window, we recommend running a current LTS-grade release:
+
+* **MySQL 8.4 LTS**
+* **MariaDB 11.8 LTS**
+* **PostgreSQL 15, 16, or 17**
+
+These are the versions Flarum is actively developed and tested against. Note that Flarum treats **MySQL and MariaDB as distinct database drivers** — make sure your `config.php` `driver` matches the server you're actually connecting to.
+
+:::
+
 ## Installing
 
 ### Installing by unpacking an archive

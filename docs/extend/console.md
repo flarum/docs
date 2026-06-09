@@ -6,9 +6,6 @@ All console command development is done in the backend using PHP. To create a cu
 
 ```php
 use Flarum\Console\AbstractCommand;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 class YourCommand extends AbstractCommand {
   protected function configure()
@@ -17,9 +14,11 @@ class YourCommand extends AbstractCommand {
           ->setName('YOUR COMMAND NAME')
           ->setDescription('YOUR COMMAND DESCRIPTION');
   }
-  protected function fire()
+  protected function fire(): int
   {
     // Your logic here!
+
+    return 0;
   }
 }
 ```

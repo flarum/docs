@@ -13,7 +13,7 @@ When Flarum needs to display a user's avatar, it resolves the avatar URL through
 3. **Configured avatar driver** - Call the active driver's `avatarUrl()` method
 4. **Null** - Falls back to default UI avatar (initials)
 
-Your driver is only called when the user has no uploaded avatar or custom URL. This means users can always override your driver by uploading their own avatar. The `$user->avatar_url` accessor handles this resolution automatically. You can check if a user has a custom avatar using `$user->original_avatar_url`.
+Your driver is only called when the user has no uploaded avatar or custom URL. This means users can always override your driver by uploading their own avatar. The `$user->avatar_url` accessor handles this resolution automatically. You can check if a user has uploaded a custom avatar using `$user->has_uploaded_avatar`.
 
 ## Creating a Driver
 

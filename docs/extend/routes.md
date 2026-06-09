@@ -166,7 +166,7 @@ import FoobarPage from './components/FoobarPage';
 
 export default [
   new Extend.Routes()
-    .add('acme.foobar', '/foobar', <FoobarPage />),
+    .add('acme.foobar', '/foobar', FoobarPage),
 ];
 ```
 
@@ -190,7 +190,7 @@ Frontend routes also allow you to capture segments of the URI:
 
 ```jsx
   new Extend.Routes()
-    .add('acme.user', '/user/:id', <UsersPage />)
+    .add('acme.user', '/user/:id', UsersPage)
 ```
 
 Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)

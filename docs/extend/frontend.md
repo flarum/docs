@@ -178,7 +178,7 @@ We'll go over tools available for extensions below.
 You should familiarize yourself with proper syntax for [importing js modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import), as most extensions larger than a few lines will split their js into multiple files.
 
 Pretty much every Flarum extension will need to import *something* from Flarum Core.
-Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/AdminLinkButton` is available as `flarum/admin/components/AdminLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
+Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/ExtensionLinkButton` is available as `flarum/admin/components/ExtensionLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
 In some cases, an extension may want to extend code from another flarum extension. You can use the same [import format](./extending-extensions#importing-from-extensions) valid for any third-party extension.
 
@@ -346,7 +346,7 @@ Now that we have a better understanding of the component system, let's go a bit 
 
 ### ItemList
 
-As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist). When the `toArray` method of ItemList is called, items are returned in ascending order of priority (0 if not provided), then by key alphabetically where priorities are equal.
+As noted above, most easily extensible parts of the UI allow you to extend methods called `items` or something similar (e.g. `controlItems`, `accountItems`, `toolbarItems`, etc. Exact names depend on the component you are extending) to add, remove, or replace elements. Under the surface, these methods return a `utils/ItemList` instance, which is essentially an ordered object. Detailed documentation of its methods is available in [our API documentation](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist). When the `toArray` method of ItemList is called, items are returned in descending order of priority (0 if not provided) — higher-priority items come first — then by key alphabetically where priorities are equal.
 
 ### `extend` and `override`
 
@@ -441,9 +441,9 @@ Flarum defines (and provides) quite a few util and helper functions, which you m
 - `flarum/common/utils/classList` provides the [clsx library](https://www.npmjs.com/package/clsx), which is great for dynamically assembling a list of CSS classes for your components
 - `flarum/common/utils/extractText` extracts text as a string from Mithril component vnode instances (or translation vnodes).
 - `flarum/common/utils/throttleDebounce` provides the [throttle-debounce](https://www.npmjs.com/package/throttle-debounce) library
-- `flarum/common/helpers/avatar` displays a user's avatar
+- `flarum/common/components/Avatar` displays a user's avatar
 - `flarum/common/helpers/highlight` highlights text in strings: great for search results!
-- `flarum/common/helpers/icon` displays an icon, usually used for FontAwesome.
+- `flarum/common/components/Icon` displays an icon, usually used for FontAwesome.
 - `flarum/common/helpers/username` shows a user's display name, or "deleted" text if the user has been deleted.
 
 And there's a bunch more! Some are covered elsewhere in the docs, but the best way to learn about them is through [the source code](https://github.com/flarum/framework/tree/main/framework/core/js) or [our javascript API documentation](https://api.docs.flarum.org/js/).

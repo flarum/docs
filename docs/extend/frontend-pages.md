@@ -28,7 +28,7 @@ export default class CustomPage extends Page {
 
 ### Forum Page Structure
 
-Flarum's forum frontend uses a generic page structure, which is defined in `flarum/common/components/PageStructure`. This structure is used by all forum pages, and is recommended for use in extensions as well. You will have noticed that each forum page has a hero, sidebar, and content area among other things. These are all defined in `PageStructure` and can be used in your extension as well.
+Flarum's forum frontend uses a generic page structure, which is defined in `flarum/forum/components/PageStructure`. This structure is used by all forum pages, and is recommended for use in extensions as well. You will have noticed that each forum page has a hero, sidebar, and content area among other things. These are all defined in `PageStructure` and can be used in your extension as well.
 
 For example, a custom page component can use the `PageStructure` component as follows:
 
@@ -66,10 +66,10 @@ An example from the [Tags extension](https://github.com/flarum/tags/blob/master/
 
 ```js
 import { extend } from 'flarum/common/extend';
-import BasicsPage from 'flarum/common/components/BasicsPage';
+import BasicsPage from 'flarum/admin/components/BasicsPage';
 
 export default function() {
-  extend(BasicsPage.prototype, 'homePageItems', items => {
+  extend(BasicsPage, 'homePageItems', items => {
     items.add('tags', {
       path: '/tags',
       label: app.translator.trans('flarum-tags.admin.basics.tags_label')
@@ -143,10 +143,10 @@ app.current.get(KEY);
 
 For example, this is how the Discussion Page makes its [`PostStreamState`](https://api.docs.flarum.org/js/2.x/classes/flarum.forum_states_poststreamstate.poststreamstate) instance globally available.
 
-You can also check the type and data of a page using `PostStreamState`'s `matches` method. For instance, if we want to know if we are currently on a discussion page:
+You can also check the type and data of a page using `PageState`'s `matches` method. For instance, if we want to know if we are currently on a discussion page:
 
 ```jsx
-import IndexPage from 'flarum/forum/components/DiscussionPage';
+import IndexPage from 'flarum/forum/components/IndexPage';
 import DiscussionPage from 'flarum/forum/components/DiscussionPage';
 
 // To just check page type

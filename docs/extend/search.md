@@ -63,7 +63,7 @@ We can use a *search mutator* for this:
 namespace YourPackage\Filter;
 
 use Flarum\Search\Database\DatabaseSearchState;
-use Flarum\Seach\SeachCriteria;
+use Flarum\Search\SearchCriteria;
 
 class OnlySameCountrySearchMutator
 {
@@ -144,7 +144,7 @@ return [
   
     (new Extend\SearchDriver(DatabaseSearchDriver::class))
         ->addSearcher(Acme::class, AcmeSearcher::class)
-        ->setFullText(AcmeSearcher::class, AcmeFulltextFilter::class),
+        ->setFulltext(AcmeSearcher::class, AcmeFulltextFilter::class),
     
   // Other extenders..
 ];
@@ -184,7 +184,7 @@ return [
     (new Extend\SearchDriver(AcmeSearchDriver::class))
         ->addSearcher(Acme::class, AcmeSearcher::class)
         // Optionally, you can set a fulltext filter for your searcher, a filter and/or a mutator.
-        ->setFullText(AcmeSearcher::class, AcmeFulltextFilter::class)
+        ->setFulltext(AcmeSearcher::class, AcmeFulltextFilter::class)
         ->addFilter(AcmeSearcher::class, AcmeFilter::class)
         ->addMutator(AcmeSearcher::class, AcmeMutator::class),
     

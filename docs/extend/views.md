@@ -47,7 +47,7 @@ Note that all Blade templates rendered this way automatically have access to the
 
 - `$url`: a [URL generator](routes#generating-urls) instance.
 - `$translator`: a [Translator](i18n#server-side-translation) instance.
-- `$settings`: a [SettingsInterface](settings) instance.
+- `$settings`: a [SettingsRepositoryInterface](settings) instance.
 - `$slugManager`: a [SlugManager](slugging) instance.
 
 Additionally, templates used by [content logic](routes#content) have access to `$forum`, which represents the [Forum API Document's attributes](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php).

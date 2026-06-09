@@ -32,6 +32,12 @@ Flarum 2.0 requires **PHP 8.3 or higher**. Check your current version with `php 
 
 Also confirm you're on Composer 2: `composer --version`.
 
+:::tip Check your database version too
+
+Flarum 2.0 still supports older databases, but releases such as **MySQL 5.7** and **MariaDB 10.x** are at or near upstream end-of-life and are **not recommended**. If you're planning maintenance anyway, this is a good moment to move to a current LTS-grade release: **MySQL 8.4 LTS**, **MariaDB 11.8 LTS**, or **PostgreSQL 15/16/17** — the versions Flarum is actively tested against.
+
+:::
+
 **3. Check for incompatible or superseded extensions.**
 Some extensions are no longer compatible with v2, and some have been superseded:
 
