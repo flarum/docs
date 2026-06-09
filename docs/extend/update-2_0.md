@@ -101,7 +101,7 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 * The forum search UI has been refactored to use a new `SearchModal` component.
 * The `flarum/forum/components/Search` component is no longer the global search component, it can still be used for custom search purposes.
 * Custom global search sources should be registered in `flarum/forum/components/GlobalSearch` `sourceItems` method.
-* Custom global search sources should now implement the `GlobalSearchSource` interface instead of `SearchSource`, see https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/components/AbstractSearch.tsx#L26-L69.
+* Custom global search sources should now implement the `GlobalSearchSource` interface instead of `SearchSource`, see https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/components/AbstractGlobalSearch.tsx#L26-L69.
 * The `flarum/forum/states/SearchState` class has been moved to `flarum/common/states/SearchState`.
 
 ### Admin Search
@@ -109,6 +109,19 @@ Familiarize yourself with the new [Code Splitting](./code-splitting) feature to 
 ##### <span class="notable">Notable</span>
 * The admin dashboard now has a search feature, as long as you register your settings/permissions using the `Admin` extender, then they will be automatically picked up.
 * If your settings/permissions are too custom to be added through the `Admin.setting` and `Admin.permission` extenders, then you can use `Admin.generalIndexItems` to add custom search index entries.
+
+### Admin Dashboard
+
+##### <span class="breaking">Breaking</span>
+* The old extension grid widget on the admin dashboard, which displayed all installed extensions grouped by category, has been removed. It duplicated the information already available in the sidebar and provided no additional value.
+
+##### <span class="notable">Notable</span>
+* A new **Extension Health Widget** has been added to the admin dashboard. It surfaces actionable information about installed extensions:
+  * **Abandoned** — extensions whose Composer package is marked abandoned on Packagist, with or without a suggested replacement.
+  * **Suggested** — packages listed in the `suggest` field of any enabled extension's `composer.json` that are not yet installed.
+  * **Disabled** — a compact icon grid of all installed-but-disabled extensions.
+  * Abandoned extensions also display a warning badge on their entry in the admin sidebar.
+  * See the [Extension Health Widget](./admin.md#extension-health-widget) docs for how to use the `abandoned` and `suggest` fields in your own extension's `composer.json`.
 
 ### Locale
 
@@ -150,6 +163,26 @@ There have been many changes to the core frontend codebase, including renamed or
 * `app.extensionData` has been removed. You must now use the `Admin` extender to register settings, permissions and custom extension pages.
 
 ##### <span class="notable">Notable</span>
+* A **Reset Settings** button is now available on extension admin pages. For extensions using the standard `Admin.setting()` extender, the button appears automatically alongside the save button. **If your extension has a custom settings page, you should add the reset button yourself** by calling `this.resetButton()` in your `content()` method. Pass a label as the third argument to `this.setting()` so the modal can display human-readable names for each key:
+
+  ```js
+  content() {
+    const myValue = this.setting('acme.my_key', '', app.translator.trans('acme.admin.my_key_label'));
+
+    return (
+      <Form>
+        {/* ... your form fields ... */}
+        <div className="Form-group Form-controls">
+          {this.submitButton()}
+          {this.resetButton()}
+        </div>
+      </Form>
+    );
+  }
+  ```
+
+  Confirming the reset deletes the listed setting rows from the database and reloads the page, reverting them to their PHP-side defaults. A `Flarum\Settings\Event\Reset` event is dispatched on the backend with the `$actor`, `$extensionId`, and `$keys` involved. See the [Reset Settings Button](./admin.md#reset-settings-button) documentation for full details.
+* The admin sidebar navigation has been overhauled. Extension categories are now collapsible groups with count badges and category icons. Categories start collapsed by default, and searching auto-expands categories with matching results. The active extension's category is pre-expanded on page load. Extensions should declare their category in `composer.json` under `extra.flarum-extension.category`. See the [Extension Categories](./admin.md#extension-categories) section in the admin docs for the full list of available categories and how to register custom ones.
 * All forum pages now use the same page structure through the new `PageStructure` component. You should use this component in your extension if you are creating a new forum page.
 * A `HeaderDropdown` component has been added which is used for the `NotificationsDropdown` and `FlagsDropdown` your component should extend that instead of the `NotificationsDropdown`. Along with it has been also added the following components: `HeaderList` and `HeaderListItem`.
 * A `DetailedDropdownItem` has been added. Checkout the [`SubsriptionsDropdown`](https://github.com/flarum/framework/blob/2.x/extensions/subscriptions/js/src/forum/components/SubscriptionMenu.tsx#L83-L87) component to see how it is used.
@@ -158,13 +191,16 @@ There have been many changes to the core frontend codebase, including renamed or
 * A `Form` component has been added to ensure consistent styling across forms. You should use this component in your extension if you are creating a form.
 * An API for frontend gambits has been introduced, [checkout the full documentation](./search#gambits).
 * A `FormGroup` component has been added that allows you to add any supported type of input similar to the admin panel's settings registration. [checkout the documentation for more details](./forms).
+* `WelcomeHero.prototype.viewItems` has been moved to `WelcomeHero.prototype.bodyItems`.
+* The frontend `Routes` extender has been modified to allow passing a custom route resolver class as the fourth argument when [adding routes](./routes#frontend-routes).
+* A `UserPageResolver` has been introduced to allow canonicalizing user slugs if the current URL slug doesn't match. Extensions that add user profile routes should use this resolver to ensure consistent slug canonicalization across the multiple profile routes.
 
 ## Backend
 
-### PHP 8.2
+### PHP 8.3
 
 ##### <span class="breaking">Breaking</span>
-* The entire codebase has been updated to use/require PHP 8.2 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
+* The entire codebase has been updated to use/require PHP 8.3 as a minimum, and with it come more strict types. This is not a breaking change for most extensions. But you should still update your extension's code accordingly and check for any potential issues or deprecated code.
 
 ##### <span class="notable">Notable</span>
 * A new `Flarum\Locale\TranslatorInterface` has been introduced, it is recommended to use instead of either `Illuminate\Contracts\Translation\Translator` or `Symfony\Contracts\Translation\TranslatorInterface`.
@@ -177,8 +213,12 @@ There have been many changes to the core frontend codebase, including renamed or
 In `composer.json`:
 * Set `flarum/core` package requirement to `^2.0.0-beta`.
 * Set other `flarum/*` packages to `*`.
-* If you have a `php` requirement, make sure it is not below `^8.2`.
+* If you have a `php` requirement, make sure it is not below `^8.3`.
 * If you have `blomstra/gdpr` as a requirement, change it to `"flarum/gdpr": "*"`.
+
+#### wikimedia/less.php (updated from 4.x to 5.x)
+
+Flarum 2.0 upgrades the LESS compiler to less.php 5.x. Most extensions will not need to make any changes to their PHP code, as the breaking changes were handled internally by Flarum core. However, there is one LESS language behaviour change that may affect your stylesheets — see [LESS Preprocessing](#less-preprocessing) below.
 
 #### Carbon 3
 
@@ -192,9 +232,9 @@ Other changes can be found in the [Carbon 3 change log](https://github.com/brian
 ##### <span class="notable">Notable</span>
 * Flarum 2.0 upgrades Symfony components to version 6. Most extensions will not need to make any changes.
 
-#### Laravel (updated from 8.x to 11.x)
+#### Laravel (updated from 8.x to 13.x)
 
-Flarum 2.0 uses Laravel 11 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
+Flarum 2.0 uses Laravel 13 components, depending on your extension you may need to adapt your code. Here are some notable highlights.
 
 ##### <span class="breaking">Breaking</span>
 * The `$dates` property on models has been removed. You should now use the `$casts` property instead as such:
@@ -203,9 +243,15 @@ Flarum 2.0 uses Laravel 11 components, depending on your extension you may need 
       'example_at' => 'datetime',
   ];
   ```
-* When changing columns in migrations, you must always include the entirety of the column definition. For example, if you are changing a nullable column from `string` to `text`, you must include the `->nullable()` method in the new column definition. You will have to update your migrations accordingly. (https://laravel.com/docs/11.x/upgrade#modifying-columns)
+* When changing columns in migrations, you must always include the entirety of the column definition. For example, if you are changing a nullable column from `string` to `text`, you must include the `->nullable()` method in the new column definition. You will have to update your migrations accordingly. (https://laravel.com/docs/13.x/upgrade#modifying-columns)
+* The `HasUuids` trait now generates UUIDv7 (ordered) instead of UUIDv4. If your extension uses this trait and relies on UUIDv4, use `HasVersion4Uuids` instead:
+  ```php
+  use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids;
+  ```
+* `Schema::getTables()`, `Schema::getViews()`, and `Schema::getTypes()` now return results across all schemas by default. Pass the `schema` parameter to limit results to a specific schema.
+* The `image` validation rule no longer allows SVGs by default. To allow SVGs, use `'image:allow_svg'`.
 
-For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade) and [Laravel 11](https://laravel.com/docs/11.x/upgrade) upgrade guides.
+For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade), [Laravel 11](https://laravel.com/docs/11.x/upgrade), [Laravel 12](https://laravel.com/docs/12.x/upgrade) and [Laravel 13](https://laravel.com/docs/13.x/upgrade) upgrade guides.
 
 #### Flysystem (updated from 1.x to 3.x)
 
@@ -241,6 +287,27 @@ The Intervention Image library (`intervention/image`) has been updated to versio
 
 You may also check out the core pull request that updated the library [here](https://github.com/flarum/framework/pull/3947/files).
 
+#### FontAwesome (updated from 5.x to 7.x)
+
+Flarum 2.0 upgrades the bundled icon library from **FontAwesome Free 5** (Flarum 1.x) to **FontAwesome Free 7**. For most extensions and themes this requires **no changes**, but there are a few things to be aware of.
+
+##### <span class="notable">Notable</span>
+* The legacy shorthand class names (`fas`, `far`, `fab`) remain fully supported in FA7 — existing icon strings like `"fas fa-house"` or `"far fa-envelope"` continue to work without modification.
+* Only `.woff2` webfonts are shipped. FA5 bundled several font formats; FA7 ships only `.woff2`. All modern browsers support WOFF2.
+* The underlying Composer package changed from `components/font-awesome` (a third-party mirror) to `fortawesome/font-awesome` (the official package). If your extension references the vendor path directly — e.g. for custom asset publishing — update the path from `vendor/components/font-awesome` to `vendor/fortawesome/font-awesome`.
+* FA7 introduces `fa-solid`, `fa-regular`, and `fa-brands` as the preferred canonical class names alongside the legacy aliases. You may start using these in new code, but the old names remain valid.
+
+:::tip Upgrading existing installs
+
+After upgrading Flarum, old font files in `public/assets/fonts/` are not automatically removed. Clear the directory and re-publish assets:
+
+```bash
+rm -rf public/assets/fonts
+php flarum assets:publish
+```
+
+:::
+
 ### JSON:API
 
 Flarum 2.0 completely refactors the JSON:API implementation. The way resource CRUD operations, serialization and extending other resources is done has completely changed.
@@ -250,7 +317,7 @@ Flarum 2.0 completely refactors the JSON:API implementation. The way resource CR
 * The `AbstractSerializer` has been removed.
 * The `ApiController` and `ApiSerializer` extenders have been removed.
 * The `Saving` are dispatched after the validation process instead of before.
-* The various validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, `GroupValidator`, `UserValidator`.
+* Several validators have been removed. This includes the `DiscussionValidator`, `PostValidator`, `TagValidator`, `SuspendValidator`, and `GroupValidator`. (`UserValidator` is still present.)
 * Many command handlers have been removed. Use the `JsonApi` class if you wish to execute logic from an existing endpoint internally instead.
 * The `flarum.forum.discussions.sortmap` singleton has been removed. Instead, you can define an `ascendingAlias` and `descendingAlias` [on your added `SortColumn` sorts](./api#adding-sort-columns).
 * The `show` discussion endpoint no longer includes the `posts` relationship, so any `posts.*` relation includes or eager loads added to that endpoint must be removed. You can move those to the `list` posts endpoint if you are not already doing the same on that endpoint.
@@ -333,6 +400,21 @@ Checkout the [database documentation](./database) for more details.
     }
     ```
     
+* Math expressions inside CSS custom properties are no longer evaluated by the LESS compiler (this aligns with Less.js 3.5+ behaviour). If your extension performs arithmetic inside a custom property declaration, it will now be output as a literal string instead of a computed value:
+  ```less
+  // before: outputs --spacing: 32px
+  @base: 16px;
+  --spacing: @base * 2;
+
+  // after: use a regular LESS variable for the calculation, then assign
+  @base: 16px;
+  @spacing: @base * 2;
+  --spacing: @spacing;
+
+  // or use calc() if the calculation must remain in CSS
+  --spacing: calc(@base * 2);
+  ```
+
 ##### <span class="notable">Notable</span>
 * New high contrast color schemes have been added.
 * You can register more color schemes through the new frontend `Theme` extender and equivalent CSS code `[data-theme=your-scheme]`.
@@ -352,18 +434,222 @@ Checkout this example from the mentions extension:
 
 :::
 
+### OAuth / Forum Auth
+
+##### <span class="breaking">Breaking</span>
+
+**`ResponseFactory::make()` — new `$returnTo` argument and return type change**
+
+`Flarum\Forum\Auth\ResponseFactory::make()` now requires a fourth argument `string $returnTo = '/'` and always returns a `RedirectResponse` instead of an `HtmlResponse`. The old popup-based HTML response has been removed entirely.
+
+```php
+// Before
+$this->response->make($provider, $identifier, $configureRegistration);
+
+// After — pass a validated same-origin returnTo URL
+$this->response->make($provider, $identifier, $configureRegistration, $returnTo);
+```
+
+The `$returnTo` value must be a validated same-origin relative path (starting with `/`). Passing an absolute URL is a security risk — validate it before passing it in.
+
+**`ForumApplication::authenticationComplete()` removed**
+
+`authenticationComplete()` existed solely to close the old popup window. It has been removed. Extensions that called it can drop the call entirely — the new redirect flow handles everything server-side.
+
+**`makeLoggedInResponse()` and `makeRegistrationResponse()` are now `protected`**
+
+Both helper methods on `ResponseFactory` are now `protected`, making them official extension points. Subclass `ResponseFactory` and override either method to customise login redirect behaviour or the registration handoff mechanism.
+
+```php
+class MyResponseFactory extends ResponseFactory
+{
+    protected function makeLoggedInResponse(User $user, string $returnTo): ResponseInterface
+    {
+        // Custom behaviour — e.g. append your own query params
+        return parent::makeLoggedInResponse($user, $returnTo);
+    }
+}
+```
+
+Bind your subclass in a service provider:
+
+```php
+$this->container->extend(ResponseFactory::class, fn () => new MyResponseFactory(...));
+```
+
+**New `POST /api/registration-token` endpoint**
+
+A new unauthenticated endpoint accepts a short-lived registration token in the POST body and returns only `username`, `email`, and `provided[]`. Sensitive fields (provider name, identifier, payload internals) are never exposed. The token is submitted in the body — not the URL — so it never appears in server access logs, browser history, or Referer headers.
+
+This endpoint is CSRF-exempt (token possession is the credential) and is primarily used by the frontend to pre-populate the sign-up modal after an OAuth redirect.
+
+**`_flarum_auth` and `_flarum_linked` query parameters**
+
+The new redirect flow uses two query parameters appended to the `returnTo` URL:
+
+* `_flarum_auth=<token>` — set when a new user arrives via OAuth and must complete registration. The frontend detects this on boot, strips it, fetches `username`/`email`/`provided` from `POST /api/registration-token`, and opens the `SignUpModal` pre-populated.
+* `_flarum_linked=<provider>` — set when an existing user's account is linked to an OAuth provider for the first time (either via email-match during login, or a manual link from the security page). The frontend detects this on boot and shows a confirmation modal.
+
+Both parameters are stripped from the URL immediately on the client without a page reload.
+
+:::warning fof/oauth also updated
+
+If your extension extends or depends on **FriendsOfFlarum/oauth**, that package has been significantly updated alongside these core changes. The popup flow has been removed, `AbstractOAuthController` has moved from `fof/extend` into `fof/oauth` itself, and several other breaking changes apply. See the fof/oauth upgrade notes for the full migration guide.
+
+:::
+
+#### <span class="notable">Notable</span>
+
+* `SignUpModal` fields (Username, Email, Password) now render a visible `<label>` element above each input. If your extension renders additional fields in `SignUpModal`, consider adding a label for consistency.
+
 ### Miscellaneous
 
 ##### <span class="breaking">Breaking</span>
 * The `(Extend\Notification)->type()` extender no longer accepts a serializer as second argument.
 * Notification Blueprints must now implement the `Flarum\Notification\AlertableInterface` interface in order them to be sent as alerts. This allows for email-only notifications for example.
-* The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now. 
+* The [`staudenmeir/eloquent-eager-limit`](https://github.com/staudenmeir/eloquent-eager-limit) package has been removed. If you are using the `Staudenmeir\EloquentEagerLimit\HasEagerLimit` trait in any of your models, you can simply remove it as it is native to Laravel now.
+* The `/logout` route has changed from `GET` to `POST`. The named route `logout` now refers to the `POST` action endpoint. A new `GET /logout` route named `logoutPage` shows a no-JS confirmation page. If your extension generates a logout URL using `$url->to('forum')->route('logout')`, update it to `route('logoutPage')` for the confirmation page, or submit a `POST` to `route('logout')` with a `csrfToken` body field for a direct logout. Extensions calling `app.session.logout()` on the frontend require no changes.
 
 #### <span class="notable">Notable</span>
 * The `Frontend` extender now allows passing extra attributes and classes that will be added to the root `html` tag, through the `extraDocumentAttributes` and `extraDocumentClasses` methods.
 * When preparing data in tests, you should use the model class name instead of the table name, this will ensure the factory of the model is used and basic data is autofilled for you.
+* Avatar upload processing has been improved: static images (JPEG, PNG, BMP, WebP) are now converted to **WebP** (previously PNG), and animated GIFs are now preserved as `.gif` rather than being flattened. Extensions that read `avatar_url` and assume a `.png` extension should be updated to handle `.webp` as well. A new CLI command `php flarum avatars:convert-to-webp` is available to batch-convert any existing avatars. WebP is also now accepted as a valid upload format.
+* **HiDPI avatar variants** are now generated automatically at upload time. When the source image is large enough, Flarum stores `@2x` (200 px) and `@3x` (300 px) variants alongside the base 1× (100 px) file and serves them via the HTML `srcset` attribute. The User API resource exposes a new `avatarSrcset` field. Custom avatar drivers should now implement `avatarSrcset(User $user): ?string` (added to `DriverInterface`) to optionally supply a srcset string for their provider's images. OAuth drivers can provide pre-sized HiDPI URLs via `$registration->provideAvatar2x()` and `->provideAvatar3x()`. See the [Avatar Drivers](avatars.md) documentation for details.
 
 ## Infrastructure
+
+### PHPStan (updated from ^1.10 to ^2.1) and Larastan (updated from 2.9 to ^3.8)
+
+Flarum 2.0 upgrades its static analysis tooling to PHPStan 2.x and Larastan 3.x. Extensions using `flarum/phpstan` will need to update their configuration and may need to fix newly reported errors.
+
+#### flarum/phpstan dependency
+
+Update your `composer.json` to require the latest `flarum/phpstan`:
+
+```bash
+composer require --dev flarum/phpstan:^2.0
+```
+
+#### Recommended level increase
+
+Flarum core now runs PHPStan at **level 6**. We recommend all extensions do the same. Update your `phpstan.neon`:
+
+```neon
+parameters:
+  level: 6
+```
+
+Level 6 checks for missing return types on all methods and properties. You may encounter new errors on your first run after increasing the level — work through them incrementally.
+
+#### Removed config parameters
+
+PHPStan 2.x removed several parameters that were commonly used in Flarum extension configs. Remove these from your `phpstan.neon` if present — they will cause an error if left in:
+
+* `checkMissingIterableValueType` — replaced by the `missingType.iterableValue` error identifier. If you need to suppress these errors, use `ignoreErrors` with the identifier instead.
+* `checkGenericClassInNonGenericObjectType` — replaced by `missingType.generics`.
+* `checkAlwaysTrueCheckTypeFunctionCall`, `checkAlwaysTrueInstanceof`, `checkAlwaysTrueStrictComparison`, `checkAlwaysTrueLooseComparison` — these checks are now always enabled and can no longer be disabled.
+
+#### Larastan 3.x: explicit relation return types required
+
+Larastan 3.x no longer infers generic types for Eloquent relation methods by parsing the method body. You must now annotate return types explicitly:
+
+```php
+// Before (Larastan 2.x would infer the generic type automatically)
+public function posts(): HasMany
+{
+    return $this->hasMany(Post::class);
+}
+
+// After (explicit generic annotation required)
+/** @return HasMany<Post, $this> */
+public function posts(): HasMany
+{
+    return $this->hasMany(Post::class);
+}
+```
+
+A [Rector rule](https://github.com/larastan/larastan/blob/3.x/UPGRADE.md) is available to automate this migration.
+
+#### Larastan 3.x: template annotation renames
+
+If your extension uses Larastan's template type annotations, two names have changed:
+
+* `TModelClass` → `TModel`
+* `TChildModel` → `TDeclaringModel`
+
+### PHPUnit (updated from ^9.5 to ^12.5)
+
+Flarum 2.0 upgrades `flarum/testing` to PHPUnit 12. PHPUnit 12 requires PHP 8.3+ (already the 2.x floor) and removes docblock annotation support, so extension test suites need to migrate to PHP 8 attributes.
+
+#### Annotations replaced by attributes
+
+##### <span class="breaking">Breaking</span>
+
+Docblock annotations like `@test`, `@dataProvider`, `@depends`, `@before`, `@after`, `@group`, `@covers`, and `@runInSeparateProcess` are no longer recognised. Tests that relied on `@test` to mark methods without a `test` prefix will **silently stop being discovered** — PHPUnit will not warn you.
+
+Replace them with their PHP 8 attribute equivalents:
+
+```php
+// Before
+use PHPUnit\Framework\TestCase;
+
+class MyTest extends TestCase
+{
+    /**
+     * @test
+     * @dataProvider provideFoo
+     */
+    public function it_works(int $input): void
+    {
+        // ...
+    }
+
+    public static function provideFoo(): array
+    {
+        return [[1], [2]];
+    }
+}
+
+// After
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
+
+class MyTest extends TestCase
+{
+    #[Test]
+    #[DataProvider('provideFoo')]
+    public function it_works(int $input): void
+    {
+        // ...
+    }
+
+    public static function provideFoo(): array
+    {
+        return [[1], [2]];
+    }
+}
+```
+
+See the [PHPUnit annotations guide](https://docs.phpunit.de/en/12.5/annotations.html) for the full mapping. [Rector](https://github.com/rectorphp/rector) ships a ruleset (`PHPUnitSetList::ANNOTATIONS_TO_ATTRIBUTES`) that automates the conversion.
+
+#### phpunit.xml schema changes
+
+##### <span class="breaking">Breaking</span>
+
+Several attributes were removed from the PHPUnit config schema between 9.x and 12.x. If your `phpunit.unit.xml` / `phpunit.integration.xml` contains any of these, PHPUnit 12 will fail to load the config:
+
+* `convertErrorsToExceptions`, `convertNoticesToExceptions`, `convertWarningsToExceptions` — removed in PHPUnit 10. Errors, notices, and warnings are always converted to exceptions now.
+* `backupStaticAttributes` — renamed to `backupStaticProperties` in PHPUnit 10.
+* `<listeners>` element — removed in PHPUnit 10. The Mockery `TestListener` is no longer needed; Mockery integrates automatically via PHPUnit's extension mechanism when `mockery/mockery` is installed.
+
+See the updated example configs in the [testing guide](testing.md#phpunitintegrationxml).
+
+#### Mockery expectations
+
+##### <span class="notable">Notable</span>
+
+PHPUnit 12 emits a notice for every mock that is created without any expectations configured (`No expectations were configured for the mock object ...`). These are advisory and do not fail the suite, but they indicate tests that would be clearer using a stub instead of a mock. To silence the notice for a specific test class or method without changing the mock, add the `#[AllowMockObjectsWithoutExpectations]` attribute.
 
 ### Reusable GitHub Workflows
 

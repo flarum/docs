@@ -267,7 +267,7 @@ public function endpoints(): array
 {
     return [
         Endpoint\Index::make()
-            ->defaultSort('-createdAt'),
+            ->defaultSort('-createdAt')
             ->paginate(),
     ];
 }
@@ -666,7 +666,7 @@ public function fields(): array
 
 ### Validation
 
-You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/11.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
+You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/12.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
 
 ```php
 use Flarum\Api\Schema;
@@ -739,7 +739,7 @@ public function fields(): array
             ->countRelation('comments'),
         
         Number::make('avgRevenue')
-            ->avgReation('reports', 'revenue'),
+            ->avgRelation('reports', 'revenue'),
         
         Number::make('revenueSum')
             ->sumRelation('reports', 'revenue'),
@@ -821,7 +821,7 @@ Relationship linkage is the ID of the related model(s) in the API response. For 
 
 ### Polymorphic Relationships
 
-You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/11.x/eloquent-relationships#polymorphic-relationships) can point to.
+You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/12.x/eloquent-relationships#polymorphic-relationships) can point to.
 
 ```php
 use Flarum\Api\Schema;
@@ -911,7 +911,7 @@ use Flarum\Extend;
 
 return [
     (new Extend\ApiResource(Resource\UserResource::class))
-        ->removeField('email'),
+        ->removeFields(['email']),
 ];
 ```
 
@@ -993,7 +993,7 @@ use Flarum\Extend;
 
 return [
     (new Extend\ApiResource(Resource\UserResource::class))
-        ->removeEndpoint('delete'),
+        ->removeEndpoints(['delete']),
 ];
 ```
 
@@ -1041,7 +1041,7 @@ use Flarum\Extend;
 
 return [
     (new Extend\ApiResource(Resource\UserResource::class))
-        ->removeSort('createdAt'),
+        ->removeSorts(['createdAt']),
 ];
 ```
 
@@ -1060,7 +1060,7 @@ return [
 
 ## Non-Model API Resources
 
-API Resources don't have to correspond to Eloquent models: you can define JSON:API resources for anything. You need to extend the [`Flarum\Api\Rsource\AbstractResource`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/AbstractResource.php) class instead.
+API Resources don't have to correspond to Eloquent models: you can define JSON:API resources for anything. You need to extend the [`Flarum\Api\Resource\AbstractResource`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/AbstractResource.php) class instead.
 For instance, Flarum core uses the [`Flarum\Api\Resource\ForumResource`](hhttps://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the fields of `ForumResource`.
 
 ## Programmatically calling an API endpoint

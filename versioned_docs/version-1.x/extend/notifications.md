@@ -309,7 +309,7 @@ export default class NewPostNotification extends Notification {
 }
 ```
 
-In the example, the icon is a star, the link will go to the new post, and the content will say that "{user} posted".
+In the example, the icon is a star, the link will go to the new post, and the content will say that "`{user}` posted".
 
 Next, we need to tell Flarum that the notification you send in the backend corresponds to the frontend notification we just created.
 

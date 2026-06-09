@@ -23,6 +23,7 @@ Throttlers will be run on EVERY request, and are responsible for figuring out wh
 
 ```php
 use DateTime;
+use Flarum\Http\RequestUtil;
 use Flarum\Post\Post;
 
 function ($request) {
@@ -30,7 +31,7 @@ function ($request) {
         return;
     }
 
-    $actor = $request->getAttribute('actor');
+    $actor = RequestUtil::getActor($request);
 
     if ($actor->can('postWithoutThrottle')) {
         return false;

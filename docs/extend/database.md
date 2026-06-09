@@ -1,6 +1,6 @@
 # Database
 
-Flarum supports a variety of database systems, including MySQL, MariaDB, PostgreSQL, and SQLite. Most extensions will not have to worry about the specifics of the database system, as [Laravel's query builder](https://laravel.com/docs/11.x/queries) handles the differences between them. However, you can still run into instances where you need to write certain database operations differently depending on the database system. This section aims to document some of the common pitfalls and solutions.
+Flarum supports a variety of database systems, including MySQL, MariaDB, PostgreSQL, and SQLite. Most extensions will not have to worry about the specifics of the database system, as [Laravel's query builder](https://laravel.com/docs/12.x/queries) handles the differences between them. However, you can still run into instances where you need to write certain database operations differently depending on the database system. This section aims to document some of the common pitfalls and solutions.
 
 :::warning
 
@@ -30,18 +30,15 @@ You may choose to not support all database systems, but you should specify which
 
 Flarum adds the following query builder methods to simplify writing queries specific to a database system:
 
+Each method takes two closures: the first runs when the connection matches that driver, the second (`$else`) runs otherwise. Both arguments are required.
+
 ```php
 // this is just an example, otherwise you would just use eloquent's whereYear method.
 $query
-  ->whenMySql(function ($query) {
-      $query->whereRaw('YEAR(created_at) = 2022');
-  })
-  ->whenPgSql(function ($query) {
-      $query->whereRaw('strftime("%Y", created_at) = 2022');
-  })
-  ->whenSqlite(function ($query) {
-      $query->whereRaw('EXTRACT(YEAR FROM created_at) = 2022');
-  });
+  ->whenMySql(
+      fn ($query) => $query->whereRaw('YEAR(created_at) = 2022'),
+      fn ($query) => $query->whereRaw('EXTRACT(YEAR FROM created_at) = 2022'),
+  );
 ```
 
 ## Common pitfalls

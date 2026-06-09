@@ -12,6 +12,12 @@ The [admin dashboard](admin.md)'s Appearance page is a great first place to star
 - Add HTML for custom headers and footers
 - Add [custom LESS/CSS](#css-theming) to change how elements are displayed
 
+## FontAwesome
+
+Flarum uses FontAwesome 7 for icons throughout the interface. By default the Free icon set is bundled and served locally, but this can be switched to a CDN or a FontAwesome Kit (which unlocks Pro icons and custom icons) via the [advanced settings](admin.md) in the admin dashboard, or directly in [config.php](config.md).
+
+See the [FontAwesome](fontawesome.md) page for full details on configuration options and available icon styles.
+
 ## CSS Theming
 
 CSS is a style sheet language that tells browsers how to display elements of a webpage.

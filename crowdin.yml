@@ -1,7 +1,11 @@
 files:
   - source: /i18n/en/**/*
     translation: /i18n/%two_letters_code%/**/%original_file_name%
-  - source: /docs/**/*
-    translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
+  # 2.x (current) translations are intentionally not synced. They were frozen at
+  # a Dec-2024 snapshot, fell ~18 months behind, and translated since-corrected
+  # content (e.g. the pre-Symfony mail driver API). They were removed ahead of the
+  # 2.0 release. Re-enable this mapping to resume 2.x translation from current English.
+  # - source: /docs/**/*
+  #   translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
   - source: /versioned_docs/version-1.x/**/*
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/version-1.x/**/%original_file_name%

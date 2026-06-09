@@ -2,38 +2,75 @@
 
 Every extension has a unique page containing information, settings, and the extension's own permissions.
 
-You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) component.
+You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) component.
 
 ## Admin Extender
 
 The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
 
-To get started, make sure you have an `admin/extend.js` file:
+Register your settings, permissions, and admin page in a declarative `admin/extend.ts` file rather than imperatively inside the `admin/index.ts` initializer. The extender approach is the recommended pattern: it's less code, and — importantly — it lets Flarum automatically index your settings and permissions for the [admin search](#admin-search). Reserve the `index.ts` initializer for logic that genuinely has to run imperatively (e.g. extending core components).
 
-```js
+To get started, create an `admin/extend.ts` file:
+
+```ts
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
 export default [
   //
-]
+];
 ```
 
-:::info
+:::warning Don't forget the import
 
-Remember to export the `extend` module from your entry `admin/index.js` file:
+For your extenders to take effect, your entry `admin/index.ts` file **must** re-export the `extend` module:
 
-```js
+```ts
+// admin/index.ts
 export { default as extend } from './extend';
+
+app.initializers.add('acme-interstellar', () => {
+  // Imperative-only logic goes here. Keep your settings, permissions,
+  // and page registration in extend.ts.
+});
 ```
+
+Without this `export` line, none of your extenders run.
 
 :::
+
+A complete `extend.ts` registering a custom admin page alongside settings and a permission looks like this:
+
+```ts
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+import SettingsPage from './components/SettingsPage';
+
+export default [
+  new Extend.Admin()
+    .page(SettingsPage)
+    .setting(() => ({
+      setting: 'acme-interstellar.coordinates',
+      label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true),
+      type: 'boolean',
+    }))
+    .permission(
+      () => ({
+        icon: 'fas fa-rocket',
+        label: app.translator.trans('acme-interstellar.admin.permissions.launch_label'),
+        permission: 'acme-interstellar.launch',
+      }),
+      'moderate',
+      90
+    ),
+];
+```
 
 ### Registering Settings
 
 Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
 
-To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page. 
+To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page. 
 
 Here's an example with a switch (boolean) item:
 
@@ -41,7 +78,7 @@ Here's an example with a switch (boolean) item:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
@@ -61,7 +98,7 @@ If you use `type: 'select'` the setting object looks a little bit different:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
@@ -84,7 +121,7 @@ Also, note that additional items in the setting object will be used as component
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => ({
@@ -98,13 +135,13 @@ return [
 ];
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) and setting values will not be automatically serialized.
 
 ```js
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(
       () => function () {
@@ -181,7 +218,7 @@ In order for that to happen, permissions must be registered using the `permissio
 
 Arguments: 
  * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
+ * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_permissiongrid.permissiongrid)'s functions for types (remove items from the name)
  * `ItemList` priority
  
 Back to our favorite rocket extension:
@@ -190,7 +227,7 @@ Back to our favorite rocket extension:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .permission(
       () => ({
@@ -217,7 +254,7 @@ Remember these functions can all be chained like:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
     .setting(...)
     .permission(...)
@@ -255,7 +292,7 @@ import app from 'flarum/admin/app';
 
 import StarPage from './components/StarPage';
 
-return [
+export default [
   new Extend.Admin()
     .page(StarPage)
 ];
@@ -263,13 +300,52 @@ return [
 
 This page will be shown instead of the default.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
+
+### Reset Settings Button
+
+`AdminPage` provides a `resetButton()` method that renders a **Reset Settings** button. When clicked, it opens a confirmation modal listing the setting keys that will be deleted from the database, reverting them to their PHP-side defaults (as registered via `Extend\Settings()->default(...)`).
+
+On default extension pages (those that use `Admin.setting()`), the reset button is rendered automatically alongside the save button. On custom pages, you must call `resetButton()` yourself.
+
+The simplest approach is to pass a label as the third argument to `this.setting()` when reading each setting. The reset button will then pick up those labels automatically when called with no arguments:
+
+```js
+content() {
+  const myValue = this.setting('acme.my_key', '', app.translator.trans('acme.admin.my_key_label'));
+
+  return (
+    <Form>
+      {/* ... your form fields ... */}
+      <div className="Form-group Form-controls">
+        {this.submitButton()}
+        {this.resetButton()}
+      </div>
+    </Form>
+  );
+}
+```
+
+If you need more control, you can pass the settings list explicitly:
+
+```js
+this.resetButton(
+  [
+    { key: 'acme.setting_one', label: app.translator.trans('acme.admin.setting_one_label') },
+    { key: 'acme.setting_two', label: app.translator.trans('acme.admin.setting_two_label') },
+  ],
+  app.translator.trans('acme.admin.reset_title', {}, true), // optional modal title
+  'acme-extension' // optional extension ID, included in the Reset event payload
+)
+```
+
+When a reset is confirmed, a `Flarum\Settings\Event\Reset` event is dispatched on the backend with the `$actor`, `$extensionId`, and `$keys` that were deleted. Extensions can listen to this event to perform any necessary cleanup.
 
 ### Admin Search
 
-The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.settings` and `Admin.permissions` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
+The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.setting` and `Admin.permission` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
 
-To do this, you can use the `Admin.generalIndexItems` extender method. This method takes a callback that returns an array of index items. Each index item is an object with the following properties:
+To do this, you can use the `Admin.generalIndexItems` extender method. This method takes an index type (`'settings'` or `'permissions'`) and a callback that returns an array of index items. Each index item is an object with the following properties:
 
 ```ts
 export type GeneralIndexItem = {
@@ -307,9 +383,9 @@ Here is an example of how to add an index item:
 import Extend from 'flarum/common/extenders';
 import app from 'flarum/admin/app';
 
-return [
+export default [
   new Extend.Admin()
-    .generalIndexItems(() => [
+    .generalIndexItems('settings', () => [
       {
         id: 'acme-interstellar',
         label: app.translator.trans('acme-interstellar.admin.acme_interstellar_label', {}, true),
@@ -318,6 +394,130 @@ return [
     ])
 ];
 ```
+
+## Extension Categories
+
+The admin sidebar groups extensions into collapsible categories. Each category has an icon, a count badge, and can be expanded or collapsed independently. When searching, categories with matching results expand automatically.
+
+### Declaring a Category
+
+Declare your extension's category in `composer.json` under `extra.flarum-extension.category`:
+
+```json
+{
+  "extra": {
+    "flarum-extension": {
+      "title": "My Extension",
+      "category": "moderation",
+      "icon": {
+        "name": "fas fa-shield-alt",
+        "backgroundColor": "#dc3626",
+        "color": "#fff"
+      }
+    }
+  }
+}
+```
+
+If no category is declared, or the declared category is not recognised, the extension is placed in the **feature** category.
+
+Language packs (extensions with an `extra.flarum-locale` key) are always placed in the **language** category regardless of any declared category.
+
+### Available Categories
+
+| Key             | Label         |
+|-----------------|---------------|
+| `feature`       | Features      |
+| `theme`         | Themes        |
+| `forum-widget`  | Forum Widgets |
+| `language`      | Languages     |
+
+Any other declared category that is not registered falls back to the **feature** category. You can register additional categories yourself — see [Registering a Custom Category](#registering-a-custom-category) below.
+
+### Registering a Custom Category
+
+Third-party extensions can register additional categories by extending `app.extensionCategories` in an admin initializer. The value is the sort priority — higher numbers appear first in the sidebar:
+
+```js
+import app from 'flarum/admin/app';
+
+app.initializers.add('acme-interstellar', () => {
+  app.extensionCategories['space'] = 45;
+});
+```
+
+Then declare `"category": "space"` in your `composer.json`, and add a translation key `core.admin.nav.categories.space` (or provide your own translation via your extension's locale files — the sidebar will fall back to the raw key if no translation exists).
+
+## Extension Health Widget
+
+The admin dashboard includes an **Extension Health Widget** that gives forum administrators an at-a-glance view of the health of their installed extensions. It replaces the old categorised extension grid that duplicated the sidebar.
+
+The widget has three sections:
+
+### Abandoned Extensions
+
+Extensions whose Composer package has been marked as abandoned on Packagist will appear here. Flarum reads the `abandoned` field from the extension's payload and surfaces it prominently so administrators know to take action.
+
+- If the package specifies a **replacement** (e.g. `"abandoned": "vendor/new-package"`), the item is shown in **red** with an exclamation circle and the replacement package name.
+- If there is **no replacement** (e.g. `"abandoned": true`), the item is shown in **orange** with a warning triangle.
+
+The same warning badge is duplicated on the extension's entry in the admin sidebar so it is visible even when the dashboard widget is not in view.
+
+#### Marking your package as abandoned
+
+This is a Packagist/Composer concept, not a Flarum-specific one. If your extension has been superseded by another package, update your `composer.json`:
+
+```json
+{
+  "abandoned": "vendor/replacement-package"
+}
+```
+
+Or if there is no replacement:
+
+```json
+{
+  "abandoned": true
+}
+```
+
+Packagist will then mark the package abandoned, and Flarum will surface the warning to administrators.
+
+:::info Abandoned status is determined at install time
+
+Flarum reads the `abandoned` field from `vendor/composer/installed.json`, which is populated by Composer when packages are installed or updated. This means:
+
+- The status reflects what was current when `composer install` or `composer update` was last run.
+- If a package is marked abandoned after that point, the warning will not appear until Composer is run again.
+- **Private Packagist, Satis, Toran Proxy, and other custom Composer repositories are fully supported** — Composer writes the `abandoned` field from whatever repository served the package, so the data is repository-agnostic.
+
+Flarum also refreshes abandoned-extension data periodically via a scheduled task. The `extensions:sync-abandoned` console command — registered in `flarum.console.scheduled` with a weekly schedule — fetches the [community-maintained abandoned-extensions list](https://raw.githubusercontent.com/flarum/abandoned-extensions/main/abandoned.json), filters it to your installed packages, and stores the result in the `flarum-core.abandoned_extensions_map` setting. When the `flarum-core.notify_admins_on_abandoned` setting is enabled, scheduled runs email admins about newly flagged extensions. You can also trigger it manually:
+
+```bash
+php flarum extensions:sync-abandoned
+```
+
+:::
+
+### Suggested Extensions
+
+If your extension has optional integrations with other packages, you can advertise them via the standard Composer `suggest` field in `composer.json`:
+
+```json
+{
+  "suggest": {
+    "vendor/package-name": "Adds support for XYZ feature"
+  }
+}
+```
+
+Flarum reads the `suggest` map from every **enabled** extension and surfaces any `vendor/package` entries that are not already installed. The widget links directly to the package on Packagist. PHP extension requirements (e.g. `ext-gd`) are ignored.
+
+Only suggestions from **enabled** extensions are shown, so administrators are not overwhelmed by suggestions from extensions they haven't activated.
+
+### Disabled Extensions
+
+All installed-but-disabled extensions are shown as a compact icon grid so administrators can quickly spot extensions they may have forgotten about. Each icon links to the extension's settings page.
 
 ## Composer.json Metadata
 

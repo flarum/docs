@@ -1,22 +1,32 @@
 name: Deploy to production
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
 
-      - name: executing remote upgrade
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+      - name: copy compiled assets to remote
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          script: cd /var/www/docs.flarum.org && ./deploy.sh
+          source: build
+          target: public_html/docs.flarum.org

@@ -68,7 +68,7 @@ class HelloWorldController implements RequestHandlerInterface
 }
 ```
 
-Controllers are resolved from the [container](https://laravel.com/docs/11.x/container) so you can inject dependencies into their constructors.
+Controllers are resolved from the [container](https://laravel.com/docs/12.x/container) so you can inject dependencies into their constructors.
 
 :::tip What are Controllers?
 
@@ -108,7 +108,7 @@ $url = $this->url->to('forum')->route('acme.user', ['id' => 123, 'foo' => 'bar']
 
 ### Views
 
-You can inject Laravel's [View](https://laravel.com/docs/11.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/11.x/blade) into your controller's response.
+You can inject Laravel's [View](https://laravel.com/docs/12.x/views) factory into your controller. This will allow you to render a [Blade template](https://laravel.com/docs/12.x/blade) into your controller's response.
 
 First, you will need to tell the view factory where it can find your extension's view files by adding a `View` extender to `extend.php`:
 
@@ -162,10 +162,11 @@ To register the route on the frontend, there is a `Routes` extender which works 
 
 ```jsx
 import Extend from 'flarum/common/extenders';
+import FoobarPage from './components/FoobarPage';
 
 export default [
   new Extend.Routes()
-    .add('acme.users', '/users', <UsersPage />),
+    .add('acme.foobar', '/foobar', FoobarPage),
 ];
 ```
 
@@ -189,10 +190,29 @@ Frontend routes also allow you to capture segments of the URI:
 
 ```jsx
   new Extend.Routes()
-    .add('acme.user', '/user/:id', <UsersPage />)
+    .add('acme.user', '/user/:id', UsersPage)
 ```
 
 Route parameters will be passed into the `attrs` of the route's component. They will also be available through [`m.route.param`](https://mithril.js.org/route.html#mrouteparam)
+
+### Route Resolvers
+
+Optionally, the `Routes` extender also allows passing a custom resolver class as the fourth argument when adding routes.
+
+```jsx
+import Extend from 'flarum/common/extenders';
+import FoobarUserPage from './components/FoobarUserPage';
+import UserPageResolver from 'flarum/forum/resolvers/UserPageResolver';
+
+export default [
+  new Extend.Routes()
+    .add('user.foobar', '/u/:username/foobar', FoobarUserPage, UserPageResolver),
+];
+
+```
+Custom route resolvers let you control how Mithril identifies and keys route instances — for example, treating `/d/5-wrong-slug` and `/d/5-correct-slug` as the same page to prevent unnecessary remounts — and hook into the render lifecycle to perform side effects like auto-correcting URLs or triggering scroll-to-post behavior.
+
+Extensions that add user profile routes should use the `UserPageResolver` to ensure consistent slug canonicalization across the multiple profile routes.
 
 ### Generating URLs
 

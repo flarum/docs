@@ -280,7 +280,7 @@ Innanzitutto, crea una classe che estenda il componente di notifica. Quindi, ci 
 
 *Diamo un'occhiata al nostro esempio, vero?*
 
-Nell'esempio, l'icona è una stella, il link andrà al nuovo post e il contenuto dirà che "{user} ha pubblicato".
+Nell'esempio, l'icona è una stella, il link andrà al nuovo post e il contenuto dirà che "`{user}` ha pubblicato".
 
 ```jsx harmony
 import Notification from 'flarum/components/Notification';

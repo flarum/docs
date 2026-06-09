@@ -97,7 +97,7 @@ It should still be called though, to prevent titles from previous pages from car
 ## PageState
 
 Sometimes, we want to get information about the page we're currently on, or the page we've just come from.
-To allow this, Flarum creates (and stores) instances of [`PageState`](https://api.docs.flarum.org/js/master/class/src/common/states/pagestate.js~pagestate) as `app.current` and `app.previous`.
+To allow this, Flarum creates (and stores) instances of [`PageState`](https://api.docs.flarum.org/js/1.x/classes/flarum.common_states_pagestate.pagestate) as `app.current` and `app.previous`.
 These store:
 
 - The component class being used for the page
@@ -110,7 +110,7 @@ app.current.set(KEY, DATA);
 app.current.get(KEY);
 ```
 
-For example, this is how the Discussion Page makes its [`PostStreamState`](https://api.docs.flarum.org/js/master/class/src/forum/states/poststreamstate.js~poststreamstate) instance globally available.
+For example, this is how the Discussion Page makes its [`PostStreamState`](https://api.docs.flarum.org/js/1.x/classes/flarum.forum_states_poststreamstate.poststreamstate) instance globally available.
 
 You can also check the type and data of a page using `PostStreamState`'s `matches` method. For instance, if we want to know if we are currently on a discussion page:
 

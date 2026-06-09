@@ -32,8 +32,56 @@ Here's a quick overview of what everything means with an example file:
     'api' => 'api', // /api goes to the API
     'admin' => 'admin', // /admin goes to the admin
   ),
+  'queue' =>
+  array (
+    'driver' => 'sync', // Use the standard sync queue. Omitting this will entirely will have the same effect
+  ),
+  'fontawesome' =>
+  array (
+    'source' => 'local', // Use the bundled FontAwesome Free v7 icons. See below for other config options
+  )
 );
 ```
+
+### Configuration via environment variables
+
+Whilst the file based method described here is suitable for most Flarum installations, scaled Flarum instances or those deployed via CI/CD will probably benefit from being configured via the environment. Here's an example of how to do this:
+
+```php
+<?php return array (
+  'debug' => env('DEBUG')
+  ...
+);
+```
+
+This provides Flarum with the static configuration file it expects, but pulls variables from the environment at runtime.
+
+### Queues
+
+Flarum ships with support for two queue drivers - `sync` and `database`. Many tasks, or 'jobs' can be offloaded to a separate process in order to improve response times and provide a better user experience.
+
+The only configuration key read from `config.php` is `driver`. Omitting the `queue` block entirely is equivalent to setting `driver` to `sync`.
+
+* `sync` - default behaviour; jobs run immediately inline during the request
+* `database` - stores jobs in a dedicated `queue_jobs` database table, which are then processed via the [scheduler](/2.x/scheduler) in a separate process. It is strongly advised that the scheduler is configured to run _every minute_
+
+When the `database` driver is active, additional tuning options (retries, memory limit, timeout, etc.) become available in the admin panel under **Admin > Advanced Settings**.
+
+##### Other queue drivers
+
+Extensions such as [FoF Redis](https://github.com/FriendsOfFlarum/redis) provide additional queue drivers. These do not require any `queue` entry in `config.php` — they are configured through their own extension settings.
+
+### Announcements widget
+
+Flarum displays an announcements widget on the admin dashboard, showing the latest news from the official [Flarum community](https://discuss.flarum.org). This is enabled by default and refreshes weekly in the background.
+
+To disable it, add the following to your `config.php`:
+
+```php
+'flarum_announcements.disabled' => true,
+```
+
+When disabled, the widget is hidden from the dashboard, no outbound requests are made to discuss.flarum.org, and the scheduled refresh task is not registered.
 
 ### Maintenance modes
 
@@ -46,3 +94,33 @@ Flarum has a maintenance mode that can be enabled by setting the `offline` key i
 This can also be configured from the admin panel's advanced settings page:
 
 ![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
+
+### FontAwesome
+
+By default Flarum uses the bundled FontAwesome Free v7 icons. These can be switched out to use either a CDN hosted icon bundle, or a custom kit. See the [FontAwesome](fontawesome.md) page for full details on each source.
+
+```php
+<?php
+
+return [
+    'url' => 'https://example.com',
+    // ... other config
+
+    // FontAwesome Kit (Pro features + custom icons)
+    'fontawesome' => [
+        'source' => 'kit',
+        'kit_url' => 'https://kit.fontawesome.com/YOUR_KIT_CODE.js',
+    ],
+
+    // OR use a CDN
+    // 'fontawesome' => [
+    //     'source' => 'cdn',
+    //     'cdn_url' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css',
+    // ],
+
+    // OR keep local (default, no config needed)
+    // 'fontawesome' => [
+    //     'source' => 'local',
+    // ],
+];
+```

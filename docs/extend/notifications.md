@@ -12,7 +12,7 @@ To define a notification type, you will need to create a new class which impleme
 * `getSubject()` The model that the notification is about (eg. the `Post` that was liked).
 * `getData()` Any other data you might wish to include for access on the frontend (eg. the old discussion title when renamed).
 * `getType()` This is where you name your notification, this will be important for later steps.
-* `getSubjectModal()`: Specify the type of model the subject is (from `getSubject`).
+* `getSubjectModel()`: Specify the type of model the subject is (from `getSubject`).
 
 Lets take a look at an example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Notification/PostLikedBlueprint.php):
 
@@ -97,7 +97,7 @@ In addition to registering our notification to send by email, if we actually wan
 To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
 This comes with 2 additional methods:
 
-- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/11.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/12.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
 
 Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
@@ -107,10 +107,12 @@ Let's take a look at an example from [Flarum Mentions](https://github.com/flarum
 
 namespace Flarum\Mentions\Notification;
 
+use Flarum\Database\AbstractModel;
 use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Notification\MailableInterface;
 use Flarum\Post\Post;
+use Flarum\User\User;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostMentionedBlueprint implements BlueprintInterface, AlertableInterface, MailableInterface
@@ -263,7 +265,7 @@ First, create a class that extends the notification component. Then, there are 4
 * `icon()`: The [Font Awesome](https://fontawesome.com/) icon that will appear next to the notification text (example: `fas fa-code-branch`).
 * `href()`: The link that should be opened when the notification is clicked (example: `app.route.post(this.attrs.notification.subject())`).
 * `content()`: What the notification itself should show. It should say the username and then the action. It will be followed by when the notification was sent (make sure to use translations).
-* `exerpt()`: (optional) A little excerpt that is shown below the notification (commonly an excerpt of a post).
+* `excerpt()`: A little excerpt that is shown below the notification (commonly an excerpt of a post).
 
 *Let take a look at our example shall we?*
 
@@ -292,7 +294,7 @@ export default class NewPostNotification extends Notification {
 }
 ```
 
-In the example, the icon is a star, the link will go to the new post, and the content will say that "{user} posted".
+In the example, the icon is a star, the link will go to the new post, and the content will say that "`{user}` posted".
 
 Next, we need to tell Flarum that the notification you send in the backend corresponds to the frontend notification we just created.
 
@@ -355,7 +357,6 @@ From [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/Sen
 
 namespace Flarum\Likes\Listener;
 
-use Flarum\Event\ConfigureNotificationTypes;
 use Flarum\Likes\Event\PostWasLiked;
 use Flarum\Likes\Event\PostWasUnliked;
 use Flarum\Likes\Notification\PostLikedBlueprint;

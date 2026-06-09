@@ -1,6 +1,6 @@
 # Backend Events
 
-Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/11.x/events).
+Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/12.x/events).
 
 For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
@@ -49,7 +49,7 @@ class PostDeletedListener
 }
 ```
 
-As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/11.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
+As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/12.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
 
 You can also listen to multiple events at once via an event subscriber. This is useful for grouping common functionality; for instance, if you want to update some metadata on changes to posts:
 
@@ -127,6 +127,34 @@ class SomeClass
     }
 }
 ```
+
+## Notable Core Events
+
+Most of Flarum's domain events are listed in the [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). A few lifecycle events are worth calling out specifically.
+
+### `Flarum\Foundation\Event\ApplicationBooted`
+
+Fired after the application has finished booting — all service providers have registered and booted, and all extension extenders have been applied — but before any HTTP request is handled. This is the earliest reliable point at which all bindings, extensions, and settings are fully available.
+
+This is useful for one-time setup that must happen after the entire extension system is ready but before any request is processed:
+
+```php
+use Flarum\Extend;
+use Flarum\Foundation\Event\ApplicationBooted;
+
+return [
+    (new Extend\Event())
+        ->listen(ApplicationBooted::class, function () {
+            // Everything is booted. Safe to resolve any binding or read any setting.
+        }),
+];
+```
+
+:::tip
+
+This event fires on every request. If you are doing work that should only happen once (e.g. warming a cache), make sure to guard against repeated execution yourself.
+
+:::
 
 ## Custom Events
 

@@ -40,19 +40,19 @@ tests
 
 #### phpunit.integration.xml
 
-This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for integration tests. You can tweak this as needed, but keep `backupGlobals`, `backupStaticAttributes`, and `processIsolation` unchanged.
+This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/configuration.html) for integration tests. You can tweak this as needed, but keep `backupGlobals`, `backupStaticProperties`, and `processIsolation` unchanged.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="true"
-         stopOnFailure="false">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
+    backupGlobals="false"
+    backupStaticProperties="false"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    processIsolation="true"
+    stopOnFailure="false">
 
     <testsuites>
         <testsuite name="Flarum Integration Tests">
@@ -64,30 +64,33 @@ This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/
 
 #### phpunit.unit.xml
 
-This is just an example [phpunit config file](https://phpunit.readthedocs.io/en/9.3/configuration.html) for unit tests. You can tweak this as needed.
+This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/configuration.html) for unit tests. You can tweak this as needed.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit backupGlobals="false"
-         backupStaticAttributes="false"
-         colors="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         processIsolation="false"
-         stopOnFailure="false">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
+    backupGlobals="false"
+    backupStaticProperties="false"
+    cacheDirectory=".phpunit.cache"
+    colors="true"
+    processIsolation="false"
+    stopOnFailure="false">
 
     <testsuites>
         <testsuite name="Flarum Unit Tests">
             <directory suffix="Test.php">./unit</directory>
         </testsuite>
     </testsuites>
-    <listeners>
-        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
-    </listeners>
 </phpunit>
 ```
+
+:::note
+
+As of Flarum 2.x, `flarum/testing` requires PHPUnit 12. Example configs above reflect PHPUnit 12's schema — the legacy `convertErrorsToExceptions`, `convertNoticesToExceptions`, `convertWarningsToExceptions`, and `backupStaticAttributes` attributes were removed in PHPUnit 10, and the `<listeners>` element was removed in PHPUnit 10. If you're migrating an extension from Flarum 1.x, replace any `@test` / `@dataProvider` docblock annotations with the PHP 8 attribute equivalents (`#[Test]`, `#[DataProvider]`) — docblock annotations no longer register tests. See the [PHPUnit annotations guide](https://docs.phpunit.de/en/12.5/annotations.html) for the full list.
+
+:::
 
 #### setup.php
 
@@ -160,7 +163,7 @@ There are several important utilities available for your test cases:
 - Similarly, the `config($key, $value)` method allows you to override config.php values before the app has booted. You can use dot-delimited keys to set deep-nested values in the config array.
 - The `extension($extensionId)` method will take Flarum IDs of extensions to enable as arguments. Your extension should always call this with your extension's ID at the start of test cases, unless the goal of the test case in question is to confirm some behavior present without your extension, and compare that to behavior when your extension is enabled. If your extension is dependent on other extensions, make sure they are included in the composer.json `require` field (or `require-dev` for [optional dependencies](extending-extensions.md)), and also list their composer package names when calling `extension()`. Note that you must list them in a valid order.
 - The `extend($extender)` method takes instances of extenders as arguments, and is useful for testing extenders introduced by your extension for other extensions to use.
-- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/11.x/queries#insert-statements).
+- The `prepareDatabase()` method allow you to pre-populate your database. This could include adding users, discussions, posts, configuring permissions, etc. Its argument is an associative array that maps table names to arrays of [record arrays](https://laravel.com/docs/12.x/queries#insert-statements).
 
 If your test case needs users beyond the default admin user, you can use the `$this->normalUser()` method of the `Flarum\Testing\integration\RetrievesAuthorizedUsers` trait.
 
@@ -188,6 +191,7 @@ namespace CoolExtension\Tests\integration;
 
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
@@ -222,9 +226,7 @@ class SomeTest extends TestCase
         $this->extend((new CoolExtensionExtender)->doSomething('hello world'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function some_phpunit_test_case()
     {
         // ...
@@ -236,7 +238,7 @@ class SomeTest extends TestCase
 
 #### Model Factories
 
-When preparing database data for tests, you can also use the [model factories to fill default data](https://laravel.com/docs/11.x/database-testing#model-factories). By using the model class as table key instead of the table name. When doing so, other model values will be generated by the factory of the model.
+When preparing database data for tests, you can also use the [model factories to fill default data](https://laravel.com/docs/12.x/database-testing#model-factories). By using the model class as table key instead of the table name. When doing so, other model values will be generated by the factory of the model.
 
 ```php
 <?php
@@ -283,13 +285,13 @@ namespace CoolExtension\Tests\integration;
 use Flarum\Testing\integration\RetrievesAuthorizedUsers;
 use Flarum\Testing\integration\TestCase;
 use Flarum\User\User;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
     use RetrievesAuthorizedUsers;
-    /**
-     * @test
-     */
+
+    #[Test]
     public function some_phpunit_test_case()
     {
         $this->app();
@@ -363,12 +365,11 @@ For example:
 namespace CoolExtension\Tests\integration;
 
 use Flarum\Testing\integration\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SomeTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function can_search_users()
     {
         $response = $this->send(
@@ -379,9 +380,7 @@ class SomeTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function can_create_user()
     {
         $response = $this->send(
@@ -443,13 +442,12 @@ For example:
 
 namespace CoolExtension\Tests\integration;
 
-use Flarum\Tests\integration\ConsoleTestCase;
+use Flarum\Testing\integration\ConsoleTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ConsoleTest extends ConsoleTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function command_works()
     {
         $input = [
@@ -465,7 +463,7 @@ class ConsoleTest extends ConsoleTestCase
 
 ### Using Unit Tests
 
-Unit testing in Flarum uses [PHPUnit](https://phpunit.de/getting-started/phpunit-9.html) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
+Unit testing in Flarum uses [PHPUnit](https://phpunit.de/) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.
 
 When writing unit tests in Flarum, here are some helpful tips.
 
@@ -600,7 +598,7 @@ Integration tests are used to test the components of your frontend code and the 
 Here's a simple example of an integration test for core's `Alert` component:
 
 ```ts
-import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
+import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
 import Alert from '../../../../src/common/components/Alert';
 import m from 'mithril';
 import mq from 'mithril-query';
@@ -679,7 +677,7 @@ You cannot bootstrap both the forum and admin app in the same test file. If you 
 ###### Examples
 
 ```ts
-import bootstrapForum from '@flarum/jest-config/src/boostrap/forum';
+import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
 
 describe('Forum tests', () => {
   beforeAll(() => bootstrapForum());
@@ -691,7 +689,7 @@ describe('Forum tests', () => {
 ```
 
 ```ts
-import bootstrapAdmin from '@flarum/jest-config/src/boostrap/admin';
+import bootstrapAdmin from '@flarum/jest-config/src/bootstrap/admin';
 
 describe('Admin tests', () => {
   beforeAll(() => bootstrapAdmin());

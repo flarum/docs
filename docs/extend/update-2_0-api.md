@@ -279,7 +279,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
     } 
 
     // insert-start
-    public function creating(object $model, OriginalContext $context): ?object
+    public function creating(object $model, Context $context): ?object
     {
         $model->user_id = $context->getActor()->id;
         $model->ip_address = $context->request->getAttribute('ipAddress');
@@ -458,7 +458,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         ];  
     } 
 
-    public function creating(object $model, OriginalContext $context): ?object
+    public function creating(object $model, Context $context): ?object
     {
         $model->user_id = $context->getActor()->id;
         $model->ip_address = $context->request->getAttribute('ipAddress');
@@ -468,7 +468,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
     }
 
     // insert-start
-    public function updating(object $model, OriginalContext $context): ?object
+    public function updating(object $model, Context $context): ?object
     {
         $model->ip_address = $context->request->getAttribute('ipAddress');
         $model->updated_at = Carbon::now();
@@ -595,7 +595,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         ];  
     } 
 
-    public function creating(object $model, OriginalContext $context): ?object
+    public function creating(object $model, Context $context): ?object
     {
         $model->user_id = $context->getActor()->id;
         $model->ip_address = $context->request->getAttribute('ipAddress');
@@ -604,7 +604,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         return $model;
     }
 
-    public function updating(object $model, OriginalContext $context): ?object
+    public function updating(object $model, Context $context): ?object
     {
         $model->ip_address = $context->request->getAttribute('ipAddress');
         $model->updated_at = Carbon::now();
@@ -665,7 +665,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
     }
 
     // insert-start
-    public function scope(Builder $query, OriginalContext $context): void
+    public function scope(Builder $query, Context $context): void
     {
         $query->where('user_id', $context->getActor()->id);
     }
@@ -728,7 +728,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         ];  
     } 
 
-    public function creating(object $model, OriginalContext $context): ?object
+    public function creating(object $model, Context $context): ?object
     {
         $model->user_id = $context->getActor()->id;
         $model->ip_address = $context->request->getAttribute('ipAddress');
@@ -737,7 +737,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         return $model;
     }
 
-    public function updating(object $model, OriginalContext $context): ?object
+    public function updating(object $model, Context $context): ?object
     {
         $model->ip_address = $context->request->getAttribute('ipAddress');
         $model->updated_at = Carbon::now();
@@ -808,7 +808,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         return Draft::class;  
     }
 
-    public function scope(Builder $query, OriginalContext $context): void
+    public function scope(Builder $query, Context $context): void
     {
         $query->where('user_id', $context->getActor()->id);
     }
@@ -877,7 +877,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         ];  
     } 
 
-    public function creating(object $model, OriginalContext $context): ?object
+    public function creating(object $model, Context $context): ?object
     {
         $model->user_id = $context->getActor()->id;
         $model->ip_address = $context->request->getAttribute('ipAddress');
@@ -886,7 +886,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
         return $model;
     }
 
-    public function updating(object $model, OriginalContext $context): ?object
+    public function updating(object $model, Context $context): ?object
     {
         $model->ip_address = $context->request->getAttribute('ipAddress');
         $model->updated_at = Carbon::now();
@@ -917,7 +917,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
 {
     ...
 
-    public function scope(Builder $query, OriginalContext $context): void
+    public function scope(Builder $query, Context $context): void
     {
         $query->whereVisibleTo($context->getActor());
     }
@@ -1658,7 +1658,7 @@ class FlagResource extends AbstractDatabaseResource
     ...
 
     // insert-start
-    public function scope(Builder $query, OriginalContext $context): void
+    public function scope(Builder $query, Context $context): void
     {
         $query->whereVisibleTo($actor);
         

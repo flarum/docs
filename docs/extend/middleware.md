@@ -40,7 +40,7 @@ return [
     // API frontend
     (new Extend\Middleware('api'))->add(YourMiddleware::class),
 
-    (new Extend\Middleware('frontend'))
+    (new Extend\Middleware('forum'))
         // remove a middleware (e.g. remove CSRF token check 😱)
         ->remove(CheckCsrfToken::class)
         // insert before another middleware (e.g. before a CSRF token check)
@@ -53,6 +53,12 @@ return [
 ```
 
 Tada! Middleware registered. Remember that order matters.
+
+:::info Available stacks
+
+The `Middleware` extender accepts one of three stacks: `'forum'`, `'admin'`, or `'api'`. There is no single combined `'frontend'` stack — if you need your middleware on both the forum and admin frontends, register it against each.
+
+:::
 
 Now that we've got the basics down, let's run through a few more things:
 
@@ -93,34 +99,47 @@ Of course, you can use any condition, not just the current route. Simple, right?
 
 ## Returning Your Own Response
 
-Let's refer back to the example and say you're checking a user against an external database during registration. One user registers and they are found in this database. Uh-oh! Let's keep them from registering:
+Let's refer back to the example and say you're checking a user against an external database during registration. One user registers and they are found in this database. Uh-oh! Let's keep them from registering.
+
+The simplest way to reject input with a field-scoped error is to throw a `Flarum\Foundation\ValidationException`. Flarum's error handler turns it into a properly-formatted JSON:API `422` error response for you:
 
 ```php
-use Flarum\Api\JsonApiResponse;
-use Tobscure\JsonApi\Document;
-use Tobscure\JsonApi\Exception\Handler\ResponseBag;
+use Flarum\Foundation\ValidationException;
 
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 {
     if ($userFoundInDatabase) {
-        $error = new ResponseBag('422', [
-            [
-                'status' => '422',
-                'code' => 'validation_error',
-                'source' => [
-                    'pointer' => '/data/attributes/email',
-                ],
-                'detail' => 'Yikes! Your email can\'t be used.',
-            ],
+        // Keys are attribute names; values are the error messages.
+        throw new ValidationException([
+            'email' => 'Yikes! Your email can\'t be used.',
         ]);
-        $document = new Document();
-        $document->setErrors($error->getErrors());
-      
-        return new JsonApiResponse($document, $error->getStatus());
     }
 
     return $handler->handle($request);
 }
+```
+
+:::info JSON:API in 2.0
+
+Flarum 2.0 replaced the Tobscure JSON:API library with [`flarum/json-api-server`](https://github.com/flarum/json-api-server). The old `Tobscure\JsonApi\Document` / `ResponseBag` classes no longer exist. Throwing an exception (as above) is the recommended way to return errors from middleware.
+
+:::
+
+If you need full control over the body, `Flarum\Api\JsonApiResponse` now accepts a plain document array (rather than a Tobscure `Document`) and sets the `application/vnd.api+json` content type for you:
+
+```php
+use Flarum\Api\JsonApiResponse;
+
+return new JsonApiResponse([
+    'errors' => [
+        [
+            'status' => '422',
+            'code' => 'validation_error',
+            'source' => ['pointer' => '/data/attributes/email'],
+            'detail' => 'Yikes! Your email can\'t be used.',
+        ],
+    ],
+], 422);
 ```
 
 Phew! Crisis avoided.

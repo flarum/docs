@@ -4,7 +4,7 @@ Beta 15 introduced a completely redesigned admin panel and frontend API. It is n
 
 Before beta 15, extension settings were either added in a `SettingsModal` or they added a new page for more complex settings. Now, every extension has a page containing info, settings, and the extension's own permissions.
 
-You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage), or provide your own completely custom page.
+You can simply register settings, extend the base [`ExtensionPage`](https://api.docs.flarum.org/js/1.x/classes/flarum.admin_components_extensionpage.extensionpage), or provide your own completely custom page.
 
 ## Extension Data API
 
@@ -39,7 +39,7 @@ All registration functions on `ExtensionData` are chainable, meaning you can cal
 
 Adding settings fields in this way is recommended for simple items. As a rule of thumb, if you only need to store things in the settings table, this should be enough for you.
 
-To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist), you can pass a priority number as the second argument. 
+To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. Behind the scenes `ExtensionData` actually turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist), you can pass a priority number as the second argument. 
 
 Here's an example with a switch (boolean) item:
 
@@ -88,7 +88,7 @@ Also, note that additional items in the setting object will be used as component
 }
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -121,7 +121,7 @@ In order for that to happen, permissions must be registered with `ExtensionData`
 
 Arguments: 
  * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
+ * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_permissiongrid.permissiongrid)'s functions for types (remove items from the name)
  * `ItemList` priority
  
 Back to our favorite rocket extension:
@@ -196,7 +196,7 @@ app.initializers.add('interstellar', function(app) {
 
 This page will be shown instead of the default.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
 
 ## Composer.json Metadata
 

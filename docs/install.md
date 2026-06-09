@@ -8,7 +8,7 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 
 :::warning
 
-Flarum 2.0 is currently in beta. It is not ready for production use.
+Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production — but it isn't the final stable release yet, so back up your data and test before relying on it.
 
 :::
 
@@ -17,7 +17,7 @@ Flarum 2.0 is currently in beta. It is not ready for production use.
 Before you install Flarum, it's important to check that your server meets the requirements. To run Flarum, you will need:
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
-* **PHP 8.2+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
+* **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
 * **One of the following databases**:
   * MySQL 5.7+ / 8.0.30+
   * MariaDB 10.3+
@@ -25,22 +25,30 @@ Before you install Flarum, it's important to check that your server meets the re
   * PostgreSQL 10.0+
 * **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
+:::tip Recommended database versions
+
+The versions above are the minimums Flarum supports, but older releases such as **MySQL 5.7** and **MariaDB 10.x** are approaching (or past) their upstream end-of-life and are **not recommended** for new installs. For the best performance and longest support window, we recommend running a current LTS-grade release:
+
+* **MySQL 8.4 LTS**
+* **MariaDB 11.8 LTS**
+* **PostgreSQL 15, 16, or 17**
+
+These are the versions Flarum is actively developed and tested against. Note that Flarum treats **MySQL and MariaDB as distinct database drivers** — make sure your `config.php` `driver` matches the server you're actually connecting to.
+
+:::
+
 ## Installing
 
 ### Installing by unpacking an archive
 
 If you don't have SSH access to your server, or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
 
-| Flarum Version | PHP Version       | Public Path | Type   | Archive                                                                                                                                                   |
-|----------------|-------------------|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2.x            | 8.3 (recommended) | No          | ZIP    | [flarum-v2.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.zip)       |
-| 2.x            | 8.3 (recommended) | Yes         | TAR.GZ | [flarum-v2.x-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.tar.gz)                             |
-| 2.x            | 8.3 (recommended) | No          | TAR.GZ | [flarum-v2.x-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.tar.gz) |
-| 2.x            | 8.3 (recommended) | Yes         | ZIP    | [flarum-v2.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.zip)                                   |
-| 2.x            | 8.2 (recommended) | No          | TAR.GZ | [flarum-v2.x-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.2.tar.gz) |
-| 2.x            | 8.2 (recommended) | Yes         | TAR.GZ | [flarum-v2.x-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.2.tar.gz)                             |
-| 2.x            | 8.2 (recommended) | No          | ZIP    | [flarum-v2.x-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.2.zip)       |
-| 2.x            | 8.2 (recommended) | Yes         | ZIP    | [flarum-v2.x-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.2.zip)                                   |
+| Flarum Version | PHP Version | Public Path | Type   | Archive                                                                                                                                                   |
+|----------------|-------------|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2.x            | 8.3         | No          | ZIP    | [flarum-v2.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.zip)       |
+| 2.x            | 8.3         | Yes         | TAR.GZ | [flarum-v2.x-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.tar.gz)                             |
+| 2.x            | 8.3         | No          | TAR.GZ | [flarum-v2.x-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.tar.gz) |
+| 2.x            | 8.3         | Yes         | ZIP    | [flarum-v2.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.zip)                                   |
 
 ### Installing using the Command Line Interface
 

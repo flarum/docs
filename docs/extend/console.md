@@ -6,9 +6,6 @@ All console command development is done in the backend using PHP. To create a cu
 
 ```php
 use Flarum\Console\AbstractCommand;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 class YourCommand extends AbstractCommand {
   protected function configure()
@@ -17,9 +14,11 @@ class YourCommand extends AbstractCommand {
           ->setName('YOUR COMMAND NAME')
           ->setDescription('YOUR COMMAND DESCRIPTION');
   }
-  protected function fire()
+  protected function fire(): int
   {
     // Your logic here!
+
+    return 0;
   }
 }
 ```
@@ -67,4 +66,4 @@ return [
 ];
 ```
 
-In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/11.x/scheduling#scheduling-artisan-commands) for more information.
+In the callback provided as the second argument, you can call methods on the [$event object](https://laravel.com/api/11.x/Illuminate/Console/Scheduling/Event.html) to schedule on a variety of frequencies (or apply other options, such as only running on one server). See the [Laravel documentation](https://laravel.com/docs/12.x/scheduling#scheduling-artisan-commands) for more information.
