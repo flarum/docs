@@ -101,7 +101,7 @@ In generale, vorremo essere coerenti con i tipi di query che utilizziamo. Mescol
 
 Per le altro che non inizia con `view`, andrebbe visto caso per caso. Di norma:
 
-- Se `whereVisibleTo($actor, 'someAbilityName')` è chiamato da codice normale (es. <`Discussion::query()->whereVisibleTo($actor, 'someAbilityName')`), gli scopers per `someAbilityName` dovrebbero avvolgere la loro logica in un `where`.
+- Se `whereVisibleTo($actor, 'someAbilityName')` è chiamato da codice normale (es. `Discussion::query()->whereVisibleTo($actor, 'someAbilityName')`), gli scopers per `someAbilityName` dovrebbero avvolgere la loro logica in un `where`.
 - Se `whereVisibleTo($actor, 'someAbilityName')` è chiamato da un'altro visibility scoper , gli scopers per `someAbilityName` dovrebbero avvolgere la loro logica in un `orWhere`.
 
 Questo perché la logica dello scoper di alto livello dovrebbe vincolare la query più in basso, ma ognuno di questi vincoli potrebbe avere delle eccezioni, per le quali vorremmo aggiungere delle istanze. Ad esempio, gli utenti dovrebbero vedere le discussioni se:

@@ -12,7 +12,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 To update Flarum, you'll need to use [Composer](https://getcomposer.org). If you're not familiar with it (although you should be, because you need it to install Flarum), read [our guide](composer.md) for information on what it is and how to set it up.
 
-If updating across major versions (e.g. <=0.1.0 to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
+If updating across major versions (e.g. `<=0.1.0` to 1.x.x, 1.x.x to 2.x.x, ...), make sure to read the appropriate "major version update guide" before running the general upgrade steps.
 
 ## General Steps
 
@@ -38,7 +38,7 @@ php flarum cache:clear
 
 ## Major Version Update Guides
 
-### Updating from Beta (<=0.1.0) to Stable v1 (^1.0.0)
+### Updating from Beta (`<=0.1.0`) to Stable v1 (^1.0.0)
 
 1. Do steps 1-5 above.
 2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^0.1.0` to `*`.

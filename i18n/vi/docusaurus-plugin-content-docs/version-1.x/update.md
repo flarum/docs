@@ -12,7 +12,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 Để cập nhật Flarum, bạn cần sử dụng [Composer](https://getcomposer.org). Nếu bạn không biết gì về nó, bạn cần phải biết 1 ít về Composer để cài đặt Flarum, đọc [hướng dẫn](composer.md) để biết cách cài đặt và sử dụng như thế nào.
 
-Nếu cập nhật trên các phiên bản chính (ví dụ: <= 0.1.0 đến 1.x.x, 1.x.x thành 2.x.x, ...), hãy nhớ đọc "hướng dẫn cập nhật phiên bản chính" thích hợp trước khi chạy các bước nâng cấp chung.
+Nếu cập nhật trên các phiên bản chính (ví dụ: `<= 0.1.0` đến 1.x.x, 1.x.x thành 2.x.x, ...), hãy nhớ đọc "hướng dẫn cập nhật phiên bản chính" thích hợp trước khi chạy các bước nâng cấp chung.
 
 ## Các bước chung
 
@@ -38,7 +38,7 @@ php flarum cache:clear
 
 ## Hướng dẫn cập nhật phiên bản chính
 
-### Cập nhật từ Beta (<=0.1.0) lên Ổn định v1 (^1.0.0)
+### Cập nhật từ Beta (`<=0.1.0`) lên Ổn định v1 (^1.0.0)
 
 1. Thực hiện các bước 1-5 ở trên.
 2. Thay đổi chuỗi phiên bản của tất cả các tiện ích mở rộng đi kèm (`flarum/tags`, `flarum/mentions`, `flarum/likes`, vv) trong `composer.json` từ `^0.1.0` thành `*`.

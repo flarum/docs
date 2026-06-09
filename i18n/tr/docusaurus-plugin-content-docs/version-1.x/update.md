@@ -12,7 +12,7 @@ If you have the extension manager extension installed you can simply run the upd
 
 Flarum'u güncellemek için [Composer](https://getcomposer.org) kullanmanız gerekir. Eğer aşina değilseniz (Flarum'u kurmak için buna ihtiyacınız vardır), ne olduğu ve nasıl kurulacağı hakkında bilgi için [kılavuzumuzu](composer.md) okuyun.
 
-Ana sürümler arasında güncelleme yapıyorsanız (ör. <=0.1.0 - 1.x.x, 1.x.x - 2.x.x, ...), genel yükseltme adımlarını çalıştırmadan önce uygun "ana sürüm güncelleme kılavuzunu" okuduğunuzdan emin olun.
+Ana sürümler arasında güncelleme yapıyorsanız (ör. `<=0.1.0` - 1.x.x, 1.x.x - 2.x.x, ...), genel yükseltme adımlarını çalıştırmadan önce uygun "ana sürüm güncelleme kılavuzunu" okuduğunuzdan emin olun.
 
 ## Genel Adımlar
 
@@ -38,7 +38,7 @@ php flarum cache:clear
 
 ## Ana Sürüm Güncelleme Kılavuzları
 
-### Beta'dan (<=0.1.0) Kararlı v1'e (^1.0.0) güncelleme
+### Beta'dan (`<=0.1.0`) Kararlı v1'e (^1.0.0) güncelleme
 
 1. Yukarıdaki 1-5 adımlarını uygulayın.
 2. `Composer.json`'da tüm paketlenmiş uzantıların (`flarum/tags`, `flarum/bahsetme`, `flarum/likes` vb.) sürüm dizelerini değiştirin. `^0.1.0` ile `*` arasında değişti.

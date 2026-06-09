@@ -1,1 +1,0 @@
-# Kiểu Post
