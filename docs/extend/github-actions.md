@@ -7,6 +7,7 @@ In this guide, you will learn how to add pre-defined workflows to your extension
 :::tip [Flarum CLI](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update workflows to your code:
+
 ```bash
 $ flarum-cli infra githubActions
 ```
@@ -15,54 +16,62 @@ $ flarum-cli infra githubActions
 
 ## Backend
 
-
-All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
+Create `.github/workflows/backend.yml` in your extension. It reuses a [predefined workflow](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml) that runs PHPUnit across a matrix of PHP versions, databases, and table prefixes — and optionally PHPStan static analysis.
 
 ```yaml
-name: Backend
+name: ACME Foobar PHP
 
 on: [workflow_dispatch, push, pull_request]
 
 jobs:
   run:
-    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@main
+    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x
     with:
-      # Different types of jobs
       enable_backend_testing: true
-      enable_phpstan: false
-
-      # Additional parameters
-      backend_directory: .
+      enable_phpstan: true
 ```
-
-These are the currently available jobs:
-
-| Name                                            | Key                      | Description                            |
-|-------------------------------------------------|--------------------------|----------------------------------------|
-| [Tests (PHPUnit)](testing.md)                   | `enable_backend_testing` | Enables backend unit/integration tests |
-| [Static Code Analysis](static-code-analysis.md) | `enable_phpstan`         | Enables static code analysis           |                                                                              
 
 :::info
 
-These jobs run on every commit pushed to the main branch or pull request created.
+Runs on every push and on pull requests from forks. Internal pull requests are skipped to avoid duplicate runs triggered by the push event.
 
 :::
 
-### Additional Parameters
+### Inputs
 
-In addition, the following parameters can be provided:
+**Job controls**
 
-| Name           | Key                 | Description                                             | Format            |
-|----------------|---------------------|---------------------------------------------------------|-------------------|
-| Directory      | `backend_directory` | Backend code location. Contains a `composer.json` file. | string            |
-| PHP Versions   | `php_versions`      | The PHP versions to run jobs on                         | String JSON Array |
-| PHP Extensions | `php_extensions`    | The PHP extensions to install                           | Comma seperated   |
-| Databases      | `db_versions`       | The databases to run jobs on                            | String JSON Array |
-| PHP ini values | `php_ini_values`    | The PHP ini values to use                               | Comma seperated   |
+| Input                    | Description                                                                                     | Default |
+| ------------------------ | ----------------------------------------------------------------------------------------------- | ------- |
+| `enable_backend_testing` | Run [PHPUnit integration tests](testing.md)                                                     | `true`  |
+| `enable_phpstan`         | Run [PHPStan static analysis](static-code-analysis.md) — disabled by default, opt in explicitly | `false` |
+
+**Configuration**
+
+These inputs have sensible defaults, which are updated over time as new PHP and database versions are released. The most common reason to override them is to narrow the matrix to your extension's supported PHP or database versions.
+
+| Input               | Description                                                                                                                                    | Default                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `php_versions`      | PHP versions to test (JSON array). Should match your extension's declared PHP support range.                                                   | `'["8.3", "8.4", "8.5"]'`                                                        |
+| `db_versions`       | Database images to test (JSON array). Supports `mysql`, `mariadb`, `postgres`, and `sqlite`.                                                   | `'["mysql:9.7", "mariadb:12.3", "postgres:18", "sqlite:3"]'`                     |
+| `db_prefixes`       | Table prefixes to test (JSON array). Prefix testing catches hardcoded table names — keep enabled. Pass `'[""]'` to test without a prefix only. | `'["", "flarum_"]'`                                                              |
+| `backend_directory` | Directory containing `composer.json`                                                                                                           | `"."`                                                                            |
+| `runner_type`       | GitHub Actions runner type                                                                                                                     | `"ubuntu-latest"`                                                                |
+| `php_extensions`    | PHP extensions to install (comma-separated)                                                                                                    | `"curl, dom, gd, json, mbstring, openssl, pdo_mysql, pdo_pgsql, tokenizer, zip"` |
+| `php_ini_values`    | PHP ini values (comma-separated)                                                                                                               | `"error_reporting=E_ALL"`                                                        |
+| `fail_fast`         | Cancel remaining matrix jobs if any job fails                                                                                                  | `true`                                                                           |
+
+### Secrets
+
+All secrets are optional.
+
+| Secret          | Description                               |
+| --------------- | ----------------------------------------- |
+| `composer_auth` | Composer auth token for private packages |
 
 :::tip
 
-For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml).
+For more details, see the [full reusable workflow file](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml).
 
 :::
 
@@ -95,7 +104,7 @@ jobs:
 Unlike the backend workflow, the frontend workflow runs everything in a single job. Here are the available parameters:
 
 | Name                  | Key                     | Description                                                                                                                                              | Format |
-|-----------------------|-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| --------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | Build Script          | `build_script`          | Script to run for production build. Empty value to disable.                                                                                              | string |
 | Build Typings Script  | `build_typings_script`  | Script to run for typings build. Empty value to disable.                                                                                                 | string |
 | Format Script         | `format_script`         | Script to run for code formatting. Empty value to disable.                                                                                               | string |
@@ -112,6 +121,7 @@ Unlike the backend workflow, the frontend workflow runs everything in a single j
 | Node Version          | `node_version`          | The node version to use for the workflow.                                                                                                                | string |
 | JS Package Manager    | `js_package_manager`    | The package manager to use (ex. yarn)                                                                                                                    | string |
 | Cache Dependency Path | `cache_dependency_path` | The path to the cache dependency file.                                                                                                                   | string |
+
 :::tip
 
 For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml).
