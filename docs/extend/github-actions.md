@@ -16,7 +16,7 @@ $ flarum-cli infra githubActions
 
 ## Backend
 
-Create `.github/workflows/backend.yml` in your extension. It reuses a [predefined workflow](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml) that runs PHPUnit across a matrix of PHP versions, databases, and table prefixes — and optionally PHPStan static analysis.
+Create `.github/workflows/backend.yml` in your extension. It uses a [reusable workflow](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml) that runs PHPUnit across a matrix of PHP versions, databases, and table prefixes — and optionally PHPStan static analysis.
 
 ```yaml
 name: ACME Foobar PHP
@@ -65,8 +65,8 @@ These inputs have sensible defaults, which are updated over time as new PHP and 
 
 All secrets are optional.
 
-| Secret          | Description                               |
-| --------------- | ----------------------------------------- |
+| Secret          | Description                              |
+| --------------- | ---------------------------------------- |
 | `composer_auth` | Composer auth token for private packages |
 
 :::tip
