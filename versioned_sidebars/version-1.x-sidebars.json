@@ -49,6 +49,7 @@
         "admin",
         "config",
         "extensions",
+        "extensions/audit",
         "languages",
         "themes",
         "mail",
