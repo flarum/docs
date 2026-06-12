@@ -243,6 +243,63 @@ RealtimeState.onPublicChannelReady((channel) => {
 
 This is useful when you are wiring things up inside a component `oncreate` / `onremove` lifecycle (remember to `unbind` in `onremove` to avoid duplicate handlers).
 
+### Moving the typing indicator
+
+By default the "X is typing…" indicator is added to the end of the post stream. It is rendered through the `PostStream` `endItems` [item list](frontend.md#itemlist) under the name `typingIndicator`, and is also exported as a standalone component, so themes and extensions can move it, remove it, or render it in more than one place.
+
+The data it displays lives in a `TypingState`, stored on the discussion model as `discussion.typingState` while its `PostStream` is mounted. Read that state and pass it to the `TypingIndicator` component — you never need a reference to the `PostStream` itself.
+
+#### Removing it from the default position
+
+Remove the `typingIndicator` item from `PostStream.endItems`:
+
+```ts
+import { extend } from 'flarum/common/extend';
+
+extend('flarum/forum/components/PostStream', 'endItems', function (items) {
+  if (items.has('typingIndicator')) {
+    items.remove('typingIndicator');
+  }
+});
+```
+
+#### Rendering it somewhere else
+
+Import the component and render a fresh `<TypingIndicator>` wherever you have a discussion in scope, reading the state from `discussion.typingState`. Here it is added to the discussion page sidebar:
+
+```tsx
+import { extend } from 'flarum/common/extend';
+import TypingIndicator from 'ext:flarum/realtime/forum/components/TypingIndicator';
+
+extend('flarum/forum/components/DiscussionPage', 'sidebarItems', function (items) {
+  const state = this.discussion?.typingState;
+
+  // typingState is only present while the discussion's PostStream is mounted,
+  // so guard against it being absent.
+  if (state) {
+    items.add('typingIndicator', <TypingIndicator state={state} />);
+  }
+});
+```
+
+If you are somewhere without a discussion in local scope, the current one is reachable globally:
+
+```ts
+const state = app.current.get('discussion')?.typingState;
+```
+
+:::tip Render it in as many places as you like
+
+Because the component only reads from the shared `TypingState`, you can render multiple `<TypingIndicator state={discussion.typingState} />` on the same page — they all stay in sync.
+
+:::
+
+:::warning Don't move the generated vnode
+
+Move the indicator by `remove`-ing the item and rendering a **fresh** `<TypingIndicator>` in your own location — don't grab the already-rendered vnode and re-insert it into a different array. Mithril requires every child of a fragment to either have a key or not, and relocating a keyed vnode into an unkeyed array (or vice versa) throws.
+
+:::
+
 ---
 
 ## Complete example: likes integration
