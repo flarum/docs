@@ -14,7 +14,7 @@ Any extension can record its own actions in the audit log via a public extender.
 
 ## Requirements
 
-- A `JSON` column type is used to store each entry's payload, which requires **MySQL 5.7.8+** or **MariaDB 10.2.7+**. The extension refuses to migrate on older versions with a clear error. This check can be bypassed by setting `flarum-audit.ignore-mysql-requirement` to `true` in `config.php`, but the `JSON` column will then fail to create on an unsupported server.
+Each entry's payload is stored in a native `JSON` column. This is supported on every database Flarum 2.0 runs on — MySQL, MariaDB, PostgreSQL and SQLite — at the versions Flarum already requires, so no extra database configuration is needed.
 
 ## Installation
 
@@ -108,7 +108,7 @@ Each log entry records:
 
 :::info
 
-When an action is processed by a queued job rather than the original web request (for example a password reset), the IP address and actor of the original request are not available to that job, and the entry is recorded with the `cli` client and no actor.
+When an action is processed by a queued job rather than the original web request (for example a password reset, or a GDPR erasure or export), the IP address and actor of the original request are not available to that job. Such an entry is recorded with the `cli` client and no IP. Where the responsible user still matters — for example the administrator who processed a GDPR erasure — the integration records it explicitly (see [GDPR](#flarum-gdpr) below); a system-driven action such as a scheduled erasure is recorded with no actor.
 
 :::
 
@@ -134,7 +134,9 @@ Deleting entries with `--before` is itself logged as `audit_log_cleared`. Add `-
 
 ## Logged actions
 
-Below is the full list of actions the extension records out of the box. Core actions are always recorded; each extension integration (both the bundled first-party ones and the [third-party ones](#third-party-extension-integrations)) is only active when the corresponding extension is enabled.
+Below is the full list of actions recorded out of the box. Core actions are always recorded. Actions contributed by another extension are only active when that extension is enabled.
+
+In Flarum 2.x, audit coverage for another extension lives **in that extension**, declared with the public `Flarum\Audit\Extend\Audit` extender (see [Integrating with Audit](../extend/audit.md)). Audit itself only records core actions; the per-extension actions documented below ship with the respective bundled extensions. The action names and payloads are the same regardless of where they are declared.
 
 Some actions are deliberately not logged to avoid duplicates:
 
@@ -155,9 +157,13 @@ Some actions are deliberately not logged to avoid duplicates:
 - `discussion.hidden` — a discussion was soft-deleted.
 - `discussion.renamed` — a discussion title changed (payload: old title, new title).
 - `discussion.restored` — a soft-deleted discussion was restored.
+- `developer_token_created` — a developer (long-lived) API access token was created (payload: owner user ID, title). The token value itself is never logged.
 - `extension.disabled` — an extension was disabled via the admin panel (payload: package name).
 - `extension.enabled` — an extension was enabled via the admin panel (payload: package name).
 - `extension.uninstalled` — an extension was rolled back via the admin panel (payload: package name).
+- `group.created` — a user group was created (payload: group ID, name).
+- `group.renamed` — a user group was renamed (payload: group ID, old name, new name).
+- `group.deleted` — a user group was deleted (payload: group ID, name).
 - `permission_changed` — a permission was edited (payload: old groups, new groups).
 - `post.created` — a reply was created (the first post of a discussion is excluded).
 - `post.deleted` — a post was permanently deleted.
@@ -165,6 +171,7 @@ Some actions are deliberately not logged to avoid duplicates:
 - `post.restored` — a soft-deleted post was restored.
 - `post.revised` — a post's content was edited.
 - `setting_changed` — a setting was edited (payload: key; old and new values are recorded only for a known list of non-sensitive settings).
+- `settings_reset` — one or more settings were reset to their defaults (payload: extension ID, reset keys).
 - `user.activated` — an account was activated manually by an administrator or extension.
 - `user.activated_with_email` — an account was activated via the confirmation email.
 - `user.avatar_changed` — a user avatar was replaced.
@@ -191,6 +198,14 @@ Some actions are deliberately not logged to avoid duplicates:
 
 - `post.flagged` — a post was flagged by a user (payload: reason). Approval/Akismet flags are not logged.
 - `post.dismissed_flags` — the flags on a post were dismissed.
+
+### Flarum GDPR
+
+These actions cover the privacy operations in `flarum/gdpr`. Because erasure and export run on a queued job, the responsible user is recorded explicitly rather than from request context.
+
+- `user.gdpr_deleted` — a user's data was erased by deletion (payload: user ID, processor). The entry is attributed to the administrator who processed the request; a scheduled (automatic) erasure has no actor.
+- `user.gdpr_anonymized` — a user's data was erased by anonymization (payload: user ID, processor), attributed as above.
+- `user.gdpr_exported` — a user's data export was requested (payload: user ID), attributed to the requesting actor.
 
 ### Flarum Lock
 
@@ -222,9 +237,9 @@ There is no entry when a suspension naturally expires.
 
 ## Third-party extension integrations
 
-The integrations below are for extensions outside the Flarum monorepo. They are currently bundled inside Audit so that coverage carried over from the original KILOWHAT extension is preserved, and each is only active when the corresponding extension is enabled.
+Audit also bundles integrations for a number of extensions outside the Flarum monorepo. This coverage carried over from the original KILOWHAT extension; each integration is only active when the corresponding extension is enabled.
 
-These integrations are intended to move out of Audit and into the respective extensions over time, declared with the public `Flarum\Audit\Extend\Audit` extender (gated behind `Extend\Conditional()->whenExtensionEnabled('flarum-audit', ...)`) — see [Integrating with Audit](../extend/audit.md). As an extension adopts the API, its block here will be removed in favour of the extension owning its own audit integration. The logged actions themselves will not change.
+These integrations are intended to move out of Audit and into the respective extensions over time, declared with the public `Flarum\Audit\Extend\Audit` extender exactly as the first-party extensions above already do. As an extension adopts the API, its block here is removed in favour of the extension owning its own audit integration — the logged actions and payloads do not change. If you maintain one of these extensions, you are encouraged to add the integration yourself — see [Integrating with Audit](../extend/audit.md) — which lets you drop the bundled copy from Audit.
 
 ### FriendsOfFlarum Ban IPs
 

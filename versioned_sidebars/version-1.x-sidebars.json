@@ -49,12 +49,20 @@
         "admin",
         "config",
         "extensions",
-        "extensions/audit",
         "languages",
         "themes",
         "mail",
         "scheduler",
         "console"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Bundled Extensions",
+      "collapsible": false,
+      "className": "menu__manage-category",
+      "items": [
+        "extensions/audit"
       ]
     },
     {
@@ -126,6 +134,7 @@
         "extend/model-visibility",
         "extend/slugging",
         "extend/notifications",
+        "extend/audit",
         "extend/post-types",
         "extend/search",
         "extend/service-provider"
