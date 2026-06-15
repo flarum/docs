@@ -1,10 +1,10 @@
 # Audit
 
-The Audit extension (`flarum/audit`) records moderation and administration actions to a tamper-resistant log, so you can see who did what, when, and from where.
+The Audit extension (`flarum/audit`) records moderation and administration actions to a tamper-resistant audit log, so you can see who did what, when, and from where.
 
-It is a [bundled extension](../extensions.md) maintained as part of Flarum, but it is disabled by default. Administrators browse the log from the admin panel, and — for users with the relevant permission — shortcuts are provided to view a specific discussion's or user's history directly from the forum.
+It is a [bundled extension](../extensions.md) maintained as part of Flarum, but it is disabled by default. Administrators browse the audit log from the admin panel, and — for users with the relevant permission — shortcuts are provided to view a specific discussion's or user's history directly from the forum.
 
-The logs are read-only through the interface and are intentionally preserved when the extension is disabled or its migrations are reset, to prevent tampering.
+The audit log is read-only through the interface and is intentionally preserved when the extension is disabled or its migrations are reset, to prevent tampering.
 
 :::tip For developers
 
@@ -39,6 +39,8 @@ The premium free/pro distinction no longer exists: all features described here a
 ## Permissions
 
 The extension adds two permissions on the **Permissions** page of the admin panel, both under the Moderation scope.
+
+The two levels exist so you can grant visibility into moderation activity without exposing personally identifiable information (PII) such as IP addresses or account edits to a wider moderation team. Reserve the full **View audit log** permission for a small, trusted group, and use **View limited audit log** to give the rest of your team the oversight they need while minimising PII exposure — helping you stay aligned with data-protection obligations such as the GDPR.
 
 ### View audit log
 
