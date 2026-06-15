@@ -58,6 +58,15 @@
     },
     {
       "type": "category",
+      "label": "Bundled Extensions",
+      "collapsible": false,
+      "className": "menu__manage-category",
+      "items": [
+        "extensions/audit"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Advanced",
       "collapsible": false,
       "className": "menu__advanced-category",
@@ -125,6 +134,7 @@
         "extend/model-visibility",
         "extend/slugging",
         "extend/notifications",
+        "extend/audit",
         "extend/post-types",
         "extend/search",
         "extend/service-provider"

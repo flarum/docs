@@ -60,6 +60,15 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Bundled Extensions',
+      className: 'menu__manage-category',
+      collapsible: false,
+      items: [
+        'extensions/audit'
+      ]
+    },
+    {
+      type: 'category',
       label: 'Advanced',
       className: 'menu__advanced-category',
       collapsible: false,
@@ -143,6 +152,7 @@ module.exports = {
         'extend/slugging',
         'extend/notifications',
         'extend/realtime',
+        'extend/audit',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
