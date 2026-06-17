@@ -194,7 +194,10 @@ Some actions are deliberately not logged to avoid duplicates:
 
 ### Flarum Approval
 
-- `post.approved` — a post was approved.
+- `post.approved` — a post was approved (payload: discussion ID, post ID).
+- `post.not_approved` — an approved post was un-approved by a moderator (payload: discussion ID, post ID).
+- `discussion.approved` — a discussion was approved (logged when its first post is approved; payload: discussion ID).
+- `discussion.not_approved` — a discussion was un-approved (logged when its first post is un-approved; payload: discussion ID).
 
 ### Flarum Flags
 
