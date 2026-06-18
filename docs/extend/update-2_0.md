@@ -655,3 +655,6 @@ PHPUnit 12 emits a notice for every mock that is created without any expectation
 
 ##### <span class="breaking">Breaking</span>
 * The reusable GitHub workflows must be updated to use target the ones from the **2.x** branch. For example, you must change `flarum/framework/.github/workflows/REUSABLE_backend.yml@main` to `flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x`.
+
+##### <span class="notable">Notable</span>
+* The default database versions tested by the [backend workflow](github-actions.md#backend) have been updated to `mysql:9.7`, `mariadb:12.3`, `postgres:18`, and `sqlite:3`. If your extension needs to test against a different set of versions, pass the `db_versions` input in the `with` section of your workflow file.
