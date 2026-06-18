@@ -39,6 +39,16 @@ Translation files should go in the `locale` directory. Each file should be named
 
 The contents of the file should correspond to the extension's english translations, with the values translated in your language. See our [internationalization](i18n.md) docs for more information. 
 
+## Gambit Keywords
+
+Some extensions expose gambit keywords — the search tokens users type into the search bar, such as `is:following`, `author:admin`, or `country:US` — as translatable strings. These are typically found in the extension's locale file under keys ending in `_key`.
+
+Translating a gambit keyword lets users search in their own language. For example, translating `country.key` from `country` to `pays` means French users can type `pays:france` into the search bar.
+
+The English keyword always works as a fallback — users can type either the translated keyword or the English original and get the same result. You do not need to document this for your users; it happens automatically.
+
+See [Localizing gambit keywords](./search#localizing-gambit-keywords) in the search documentation for the full technical details, including how to identify which translation keys control gambit keywords and what to do if the English fallback stops working.
+
 ## DayJS Translations
 
 Flarum use [the DayJS library](https://day.js.org/) to format and internationalize dates.
