@@ -43,12 +43,20 @@ These are the versions Flarum is actively developed and tested against. Note tha
 
 If you don't have SSH access to your server, or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
 
-| Flarum Version | PHP Version | Public Path | Type   | Archive                                                                                                                                                   |
-|----------------|-------------|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2.x            | 8.3         | No          | ZIP    | [flarum-v2.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.zip)       |
-| 2.x            | 8.3         | Yes         | TAR.GZ | [flarum-v2.x-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.tar.gz)                             |
-| 2.x            | 8.3         | No          | TAR.GZ | [flarum-v2.x-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-no-public-dir-php8.3.tar.gz) |
-| 2.x            | 8.3         | Yes         | ZIP    | [flarum-v2.x-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/flarum-v2.x-php8.3.zip)                                   |
+| Flarum Version | PHP Version | Public Path | Type   | Archive |
+|----------------|-------------|-------------|--------|---------|
+| 2.x | 8.3 | No | TAR.GZ | [flarum-v2.0.0-rc.5-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.3.tar.gz) |
+| 2.x | 8.3 | No | ZIP | [flarum-v2.0.0-rc.5-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.3.zip) |
+| 2.x | 8.4 | No | TAR.GZ | [flarum-v2.0.0-rc.5-no-public-dir-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.4.tar.gz) |
+| 2.x | 8.4 | No | ZIP | [flarum-v2.0.0-rc.5-no-public-dir-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.4.zip) |
+| 2.x | 8.5 | No | TAR.GZ | [flarum-v2.0.0-rc.5-no-public-dir-php8.5.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.5.tar.gz) |
+| 2.x | 8.5 | No | ZIP | [flarum-v2.0.0-rc.5-no-public-dir-php8.5.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-no-public-dir-php8.5.zip) |
+| 2.x | 8.3 | Yes | TAR.GZ | [flarum-v2.0.0-rc.5-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.3.tar.gz) |
+| 2.x | 8.3 | Yes | ZIP | [flarum-v2.0.0-rc.5-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.3.zip) |
+| 2.x | 8.4 | Yes | TAR.GZ | [flarum-v2.0.0-rc.5-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.4.tar.gz) |
+| 2.x | 8.4 | Yes | ZIP | [flarum-v2.0.0-rc.5-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.4.zip) |
+| 2.x | 8.5 | Yes | TAR.GZ | [flarum-v2.0.0-rc.5-php8.5.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.5.tar.gz) |
+| 2.x | 8.5 | Yes | ZIP | [flarum-v2.0.0-rc.5-php8.5.zip](https://github.com/flarum/installation-packages/raw/main/packages/v2.x/v2.0.0-rc.5/flarum-v2.0.0-rc.5-php8.5.zip) |
 
 ### Installing using the Command Line Interface
 
