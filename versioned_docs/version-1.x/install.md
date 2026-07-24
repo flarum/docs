@@ -21,6 +21,8 @@ Before you install Flarum, it's important to check that your server meets the re
 
 If you don't have SSH access to your server or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
 
+Only the latest Flarum 1.x version is detailed here, for previous versions [browse the archive](https://github.com/flarum/installation-packages/tree/main/packages/v1.x)
+
 | Flarum Version | PHP Version       | Public Path | Type   | Archive                                                                                                                                                   |
 |----------------|-------------------|-------------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1.x            | 8.3 (recommended) | No          | ZIP    | [flarum-v1.x-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/flarum-v1.x-no-public-dir-php8.3.zip)       |

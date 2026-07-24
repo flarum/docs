@@ -43,7 +43,7 @@ These are the versions Flarum is actively developed and tested against. Note tha
 
 If you don't have SSH access to your server, or you prefer not to use the command line, you can install Flarum by unpacking an archive. Below is a list of the available archives, make sure you choose the one that matches your PHP version and public path or lack thereof preference.
 
-Only the latest Flarum version is detailed here, for previous versions [browse](https://github.com/flarum/installation-packages/tree/main/packages/v2.x)
+Only the latest Flarum 2.x version is detailed here, for previous versions [browse the archive](https://github.com/flarum/installation-packages/tree/main/packages/v2.x)
 
 | Flarum Version | PHP Version | Public Path | Type   | Archive |
 |----------------|-------------|-------------|--------|---------|
