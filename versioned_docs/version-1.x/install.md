@@ -25,26 +25,26 @@ Only the latest Flarum 1.x version is detailed here, for previous versions [brow
 
 | Flarum Version | PHP Version | Public Path | Type   | Archive |
 |----------------|-------------|-------------|--------|---------|
-| 1.8.17 | 8.1 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.1.tar.gz) |
-| 1.8.17 | 8.1 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.1.zip) |
-| 1.8.17 | 8.2 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.2.tar.gz) |
-| 1.8.17 | 8.2 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.2.zip) |
-| 1.8.17 | 8.3 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.3.tar.gz) |
-| 1.8.17 | 8.3 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.3.zip) |
-| 1.8.17 | 8.4 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.4.tar.gz) |
-| 1.8.17 | 8.4 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.4.zip) |
 | 1.8.17 | 8.5 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.5.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.5.tar.gz) |
 | 1.8.17 | 8.5 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.5.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.5.zip) |
-| 1.8.17 | 8.1 | Yes | TAR.GZ | [flarum-v1.8.17-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.1.tar.gz) |
-| 1.8.17 | 8.1 | Yes | ZIP | [flarum-v1.8.17-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.1.zip) |
-| 1.8.17 | 8.2 | Yes | TAR.GZ | [flarum-v1.8.17-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.2.tar.gz) |
-| 1.8.17 | 8.2 | Yes | ZIP | [flarum-v1.8.17-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.2.zip) |
-| 1.8.17 | 8.3 | Yes | TAR.GZ | [flarum-v1.8.17-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.3.tar.gz) |
-| 1.8.17 | 8.3 | Yes | ZIP | [flarum-v1.8.17-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.3.zip) |
-| 1.8.17 | 8.4 | Yes | TAR.GZ | [flarum-v1.8.17-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.4.tar.gz) |
-| 1.8.17 | 8.4 | Yes | ZIP | [flarum-v1.8.17-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.4.zip) |
 | 1.8.17 | 8.5 | Yes | TAR.GZ | [flarum-v1.8.17-php8.5.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.5.tar.gz) |
 | 1.8.17 | 8.5 | Yes | ZIP | [flarum-v1.8.17-php8.5.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.5.zip) |
+| 1.8.17 | 8.4 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.4.tar.gz) |
+| 1.8.17 | 8.4 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.4.zip) |
+| 1.8.17 | 8.4 | Yes | TAR.GZ | [flarum-v1.8.17-php8.4.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.4.tar.gz) |
+| 1.8.17 | 8.4 | Yes | ZIP | [flarum-v1.8.17-php8.4.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.4.zip) |
+| 1.8.17 | 8.3 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.3.tar.gz) |
+| 1.8.17 | 8.3 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.3.zip) |
+| 1.8.17 | 8.3 | Yes | TAR.GZ | [flarum-v1.8.17-php8.3.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.3.tar.gz) |
+| 1.8.17 | 8.3 | Yes | ZIP | [flarum-v1.8.17-php8.3.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.3.zip) |
+| 1.8.17 | 8.2 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.2.tar.gz) |
+| 1.8.17 | 8.2 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.2.zip) |
+| 1.8.17 | 8.2 | Yes | TAR.GZ | [flarum-v1.8.17-php8.2.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.2.tar.gz) |
+| 1.8.17 | 8.2 | Yes | ZIP | [flarum-v1.8.17-php8.2.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.2.zip) |
+| 1.8.17 | 8.1 | No | TAR.GZ | [flarum-v1.8.17-no-public-dir-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.1.tar.gz) |
+| 1.8.17 | 8.1 | No | ZIP | [flarum-v1.8.17-no-public-dir-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-no-public-dir-php8.1.zip) |
+| 1.8.17 | 8.1 | Yes | TAR.GZ | [flarum-v1.8.17-php8.1.tar.gz](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.1.tar.gz) |
+| 1.8.17 | 8.1 | Yes | ZIP | [flarum-v1.8.17-php8.1.zip](https://github.com/flarum/installation-packages/raw/main/packages/v1.x/v1.8.17/flarum-v1.8.17-php8.1.zip) |
 
 ### Installing using the Command Line Interface
 
