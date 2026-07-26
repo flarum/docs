@@ -45,6 +45,12 @@ Permissions are just part of the puzzle: if you're enforcing whether a user can 
 
 :::
 
+### Permission Caching
+
+Since a user's permissions depend only on the set of groups they belong to, permission lookups are cached per group set for the lifetime of the app instance. Checking permissions for many users in the same groups (for example, while serializing a discussion list) therefore only queries the database once.
+
+The cache is invalidated automatically when permissions are changed through the `Flarum\Group\Permission` model (or the admin permissions grid), and when a group is deleted. If your extension modifies the `group_permission` table directly through the query builder, no model events fire, so you should resolve `Flarum\Group\PermissionCache` from the container and call `flush()` (or `forgetGroup($groupId)`) to make sure permission checks later in the same request see the change.
+
 ## Permission Naming Conventions
 
 Nothing is enforced, but we generally recommend the following convention for permission naming:
