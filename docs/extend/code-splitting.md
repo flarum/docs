@@ -87,6 +87,27 @@ app.composer.load(() => import('flarum/forum/components/DiscussionComposer'), { 
 You can see a list of all the modules that are lazy loaded by Flarum in the [GitHub repository](https://github.com/flarum/framework/tree/2.x/framework/core/js/dist).
 
 
+## Prefetching split chunks
+
+Code splitting keeps the initial bundle small, but it moves the cost of loading a chunk to the first time its route or feature is used — the browser must fetch the chunk over the network before the component can render. For a page the user is very likely to visit (for example, the post stream when they open a discussion), that first-visit request adds a noticeable delay.
+
+To avoid this, you can register a chunk to be *prefetched* in the background once the app has finished booting and the browser is idle. By the time the user navigates to it, the `import()` resolves from cache instead of blocking on a request.
+
+Register a loader with `app.prefetch`:
+
+```js
+app.prefetch.add('acme.customPage', () => import('./components/CustomPage'));
+```
+
+- The key (`'acme.customPage'`) is a unique name for your prefetch, following the usual [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist) conventions, so other extensions can reorder or remove it.
+- The value is the same kind of loader you would pass to a lazy route — a function returning a dynamic import.
+- An optional third argument sets the priority; higher priorities are prefetched first.
+
+Loaders run one at a time, each waiting for the next idle period, so prefetching never competes with rendering or user interaction. A failed prefetch is ignored silently — it is only an optimisation, and the real `import()` on navigation will surface any genuine load error.
+
+Only prefetch chunks the user is *likely* to need soon. Prefetching everything would defeat the point of code splitting by pulling the whole app over the network up front.
+
+
 ## Extending a split component class
 
 Often, you may want to create a component that extends a split component class. Here is a common example, the `fof/byobu` extension has a `PrivateDiscussionComposer` component which extends `flarum/forum/components/DiscussionComposer`.
