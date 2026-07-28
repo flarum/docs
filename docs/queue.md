@@ -22,7 +22,14 @@ Since Flarum 2.x, the `database` queue driver is built into Flarum core — no a
 
 The database queue re-uses the [scheduler](scheduler.md) to process jobs, so you must have the scheduler configured to run **every minute** for it to work. See the [scheduler guide](scheduler.md) for setup instructions.
 
-For more advanced queue solutions (e.g. Redis-backed queues), extensions such as [FoF Redis](https://github.com/FriendsOfFlarum/redis) are available.
+### Going further than the database driver
+
+For higher throughput than the database driver can sustain, two extensions build on top of Flarum's queue:
+
+- **[FoF Redis](https://github.com/FriendsOfFlarum/redis)** moves the queue (and, optionally, the cache, sessions and settings) onto a Redis-compatible server such as Redis or Valkey. Jobs are processed by the standard `php flarum queue:work` worker, but against Redis instead of the database — faster, and it keeps this load off your database. Failed jobs are kept in Redis too.
+- **[FoF Horizon](https://github.com/FriendsOfFlarum/horizon)** builds on FoF Redis (it requires it) and adds [Laravel Horizon](https://laravel.com/docs/horizon) on top: supervised, auto-balancing worker processes in place of a single `queue:work`, plus a full real-time dashboard showing throughput, wait times, job history, and per-queue metrics. It also enriches the admin queue widget with worker and status information. Choose Horizon when you're running at a scale where you want to tune worker pools per queue and watch the queue's health in detail.
+
+Both integrate with the monitoring, failed-job, pausing and named-queue features described below.
 
 ## Monitoring the queue
 
