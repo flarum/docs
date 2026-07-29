@@ -123,7 +123,16 @@ return [
 ];
 ```
 
-Every instance of that job class is then dispatched onto the `exports` queue, without changing the code that dispatches it. You can route as many job classes as you like — each keeps its own queue.
+Every instance of that job class is then dispatched onto the `exports` queue, without changing the code that dispatches it. You can route as many job classes as you like.
+
+Routing a base or abstract class covers all of its subclasses, so a family of related jobs can be sent to one queue by routing their shared parent:
+
+```php
+(new Extend\Queue())
+    ->route(\Your\Extension\Jobs\AbstractExportJob::class, 'exports'),
+```
+
+If a job matches more than one route through its class hierarchy, the most specific one wins — a route on the job's own class overrides one on a parent. An explicit queue passed when the job is dispatched always takes precedence over any route.
 
 You then run a worker across the queues you care about, in priority order — each queue is fully drained before the next:
 
