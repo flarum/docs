@@ -112,14 +112,27 @@ Pausing and resuming are recorded in the [audit log](extensions/audit.md) (as `q
 
 Jobs are not all equal — a time-sensitive notification should not sit behind a slow bulk export. Flarum (and the queue drivers) support **multiple named queues** so you can separate and prioritise work.
 
-A job declares its target queue with the core `AbstractJob::$onQueue` property:
+Route a job class onto a named queue with the `Queue` extender in your `extend.php`:
 
 ```php
-class SendExportJob extends \Flarum\Queue\AbstractJob
-{
-    public static ?string $onQueue = 'exports';
-}
+use Flarum\Extend;
+
+return [
+    (new Extend\Queue())
+        ->route(\Your\Extension\Jobs\SendExportJob::class, 'exports'),
+];
 ```
+
+Every instance of that job class is then dispatched onto the `exports` queue, without changing the code that dispatches it. You can route as many job classes as you like.
+
+Routing a base or abstract class covers all of its subclasses, so a family of related jobs can be sent to one queue by routing their shared parent:
+
+```php
+(new Extend\Queue())
+    ->route(\Your\Extension\Jobs\AbstractExportJob::class, 'exports'),
+```
+
+If a job matches more than one route through its class hierarchy, the most specific one wins — a route on the job's own class overrides one on a parent. An explicit queue passed when the job is dispatched always takes precedence over any route.
 
 You then run a worker across the queues you care about, in priority order — each queue is fully drained before the next:
 

@@ -434,6 +434,24 @@ Checkout this example from the mentions extension:
 
 :::
 
+### Queue
+
+In 1.x you routed a job onto a named queue by setting the `AbstractJob::$sendOnQueue` static property on the job class. That property has been removed; route jobs with the new `Queue` extender instead:
+
+```php
+use Flarum\Extend;
+
+return [
+    // 1.x: SendExportJob::$sendOnQueue = 'exports';
+    (new Extend\Queue())
+        ->route(\Your\Extension\Jobs\SendExportJob::class, 'exports'),
+];
+```
+
+Routing a base or abstract class covers all of its subclasses (the most specific route wins), so if you set `$sendOnQueue` on a shared base class, route that same base class. The queue is now applied when the job is pushed, so it works for `dispatch()`, the low-level `push($job)`, and jobs dispatched by other extensions alike. See the [queue documentation](../queue.md#named-queues) for details.
+
+> The static was briefly renamed `$onQueue` on early 2.x development builds; either way, replace it with `Extend\Queue->route()`.
+
 ### OAuth / Forum Auth
 
 ##### <span class="breaking">Breaking</span>
