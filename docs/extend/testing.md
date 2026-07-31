@@ -421,6 +421,53 @@ This is an extreme edge case, but note that MySQL does not update the fulltext i
 
 :::
 
+#### N+1 Query Detection
+
+Requests sent with `send()` are checked for N+1 query patterns, and **the test fails if one is found**. An N+1 is a single query shape executed once per record — a relationship loaded per model, a permission check per row, an API field that hits the database for each item. It looks harmless on a test fixture of three records and becomes hundreds of queries on a real forum.
+
+A failure looks like this:
+
+```
+GET /api/posts ran repeated queries — likely an N+1.
+
+  10x (10 distinct bindings): select * from `warnings` where `warnings`.`post_id` = ?
+```
+
+The two numbers say different things:
+
+- **Distinct bindings ≈ the repeat count** — one query per record. This is the N+1: load the data for the whole page instead, with [eager loading](api.md#eager-loading), a batched relationship, or one grouped query.
+- **One distinct binding, many repeats** — the same rows fetched over and over. Not an N+1, but usually worth memoising.
+
+If a repetition is genuinely necessary, exempt that one query shape rather than switching the check off, so the rest of the request stays covered:
+
+```php
+class MyTest extends TestCase
+{
+    protected function allowedRepeatedQueries(): array
+    {
+        return [
+            // The lifecycle test deliberately re-reads the token each request.
+            'from `access_tokens`',
+        ];
+    }
+}
+```
+
+Each entry is matched as a substring of the normalised SQL (literals and `IN` lists replaced), so `'from `access_tokens`'` covers every query against that table.
+
+Two blunter switches exist for when that isn't enough — a whole test case:
+
+```php
+protected function detectsRepeatedQueries(): bool
+{
+    return false;
+}
+```
+
+and a whole run, `FLARUM_DETECT_REPEATED_QUERIES=0 composer test:integration`, which is mostly useful when bisecting an unrelated failure. The repetition threshold can be raised with `FLARUM_REPEATED_QUERY_THRESHOLD` or by overriding `repeatedQueryThreshold()`.
+
+Batched queries never trigger the check: an `IN (…)` list is recognised as one shape regardless of how many ids it carries, which is exactly what eager loading produces.
+
 #### Console Tests
 
 If you want to test custom console commands, you can extend `Flarum\Testing\integration\ConsoleTestCase` (which itself extends the regular `Flarum\Testing\integration\TestCase`). It provides 2 useful methods:
