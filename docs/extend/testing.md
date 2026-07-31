@@ -50,6 +50,7 @@ This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/co
     backupGlobals="false"
     backupStaticProperties="false"
     cacheDirectory=".phpunit.cache"
+    displayDetailsOnTestsThatTriggerWarnings="true"
     colors="true"
     processIsolation="true"
     stopOnFailure="false">
@@ -444,6 +445,10 @@ POST /api/posts repeated queries for the same few values — consider memoising.
 ```
 
 Five executions but only two distinct users: wasteful, but bounded — it stays five queries whether the forum has two users or two million. Worth tidying when you're in the area; it won't fail your build.
+
+Warning details are printed when your `phpunit.integration.xml` sets `displayDetailsOnTestsThatTriggerWarnings="true"` (the example config above does). Without it PHPUnit still reports the count — `OK, but there were issues! … Warnings: 11` — but not what they were.
+
+In CI, findings also appear as annotations on the pull request and in a table in the run summary, so they don't have to be dug out of the log. Flarum's [reusable backend workflow](github-actions.md) does this by pointing `FLARUM_REPEATED_QUERY_LOG` at a file the job reads afterwards; set that variable yourself if you run tests through your own workflow.
 
 If a repetition is genuinely necessary, exempt that one query shape rather than switching the check off, so the rest of the request stays covered:
 
