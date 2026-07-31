@@ -423,20 +423,27 @@ This is an extreme edge case, but note that MySQL does not update the fulltext i
 
 #### N+1 Query Detection
 
-Requests sent with `send()` are checked for N+1 query patterns, and **the test fails if one is found**. An N+1 is a single query shape executed once per record — a relationship loaded per model, a permission check per row, an API field that hits the database for each item. It looks harmless on a test fixture of three records and becomes hundreds of queries on a real forum.
+Requests sent with `send()` are checked for repeated queries. An N+1 — a single query shape executed once per record — **fails the test**; a query that merely repeats itself for the same few values raises a warning instead.
 
 A failure looks like this:
 
 ```
-GET /api/posts ran repeated queries — likely an N+1.
+GET /api/posts ran one query per record — an N+1.
 
   10x (10 distinct bindings): select * from `warnings` where `warnings`.`post_id` = ?
 ```
 
-The two numbers say different things:
+Ten executions, ten different post ids: the work grows with the data. Twenty posts on the page would mean twenty queries, and a busy forum thousands. Load the data for the whole page instead — [eager loading](api.md#eager-loading), a batched relationship, or one grouped query.
 
-- **Distinct bindings ≈ the repeat count** — one query per record. This is the N+1: load the data for the whole page instead, with [eager loading](api.md#eager-loading), a batched relationship, or one grouped query.
-- **One distinct binding, many repeats** — the same rows fetched over and over. Not an N+1, but usually worth memoising.
+A warning looks like this:
+
+```
+POST /api/posts repeated queries for the same few values — consider memoising.
+
+  5x (2 distinct bindings): select * from `users` where `users`.`id` = ? limit 1
+```
+
+Five executions but only two distinct users: wasteful, but bounded — it stays five queries whether the forum has two users or two million. Worth tidying when you're in the area; it won't fail your build.
 
 If a repetition is genuinely necessary, exempt that one query shape rather than switching the check off, so the rest of the request stays covered:
 
