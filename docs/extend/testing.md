@@ -50,6 +50,7 @@ This is just an example [phpunit config file](https://docs.phpunit.de/en/12.5/co
     backupGlobals="false"
     backupStaticProperties="false"
     cacheDirectory=".phpunit.cache"
+    displayDetailsOnTestsThatTriggerWarnings="true"
     colors="true"
     processIsolation="true"
     stopOnFailure="false">
@@ -420,6 +421,64 @@ If you want to send query parameters in a GET request, you can't include them in
 This is an extreme edge case, but note that MySQL does not update the fulltext index in transactions, so the standard approach won't work if you're trying to test a modified fulltext query. See [core's approach](https://github.com/flarum/framework/blob/main/framework/core/tests/integration/extenders/SimpleFlarumSearchTest.php) for an example of a workaround.
 
 :::
+
+#### N+1 Query Detection
+
+Requests sent with `send()` are checked for repeated queries. An N+1 — a single query shape executed once per record — **fails the test**; a query that merely repeats itself for the same few values raises a warning instead.
+
+A failure looks like this:
+
+```
+GET /api/posts ran one query per record — an N+1.
+
+  10x (10 distinct bindings): select * from `warnings` where `warnings`.`post_id` = ?
+```
+
+Ten executions, ten different post ids: the work grows with the data. Twenty posts on the page would mean twenty queries, and a busy forum thousands. Load the data for the whole page instead — [eager loading](api.md#eager-loading), a batched relationship, or one grouped query.
+
+A warning looks like this:
+
+```
+POST /api/posts repeated queries for the same few values — consider memoising.
+
+  5x (2 distinct bindings): select * from `users` where `users`.`id` = ? limit 1
+```
+
+Five executions but only two distinct users: wasteful, but bounded — it stays five queries whether the forum has two users or two million. Worth tidying when you're in the area; it won't fail your build.
+
+Warning details are printed when your `phpunit.integration.xml` sets `displayDetailsOnTestsThatTriggerWarnings="true"` (the example config above does). Without it PHPUnit still reports the count — `OK, but there were issues! … Warnings: 11` — but not what they were.
+
+In CI, findings also appear as annotations on the pull request and in a table in the run summary, so they don't have to be dug out of the log. Flarum's [reusable backend workflow](github-actions.md) does this by pointing `FLARUM_REPEATED_QUERY_LOG` at a file the job reads afterwards; set that variable yourself if you run tests through your own workflow.
+
+If a repetition is genuinely necessary, exempt that one query shape rather than switching the check off, so the rest of the request stays covered:
+
+```php
+class MyTest extends TestCase
+{
+    protected function allowedRepeatedQueries(): array
+    {
+        return [
+            // The lifecycle test deliberately re-reads the token each request.
+            'from `access_tokens`',
+        ];
+    }
+}
+```
+
+Each entry is matched as a substring of the normalised SQL (literals and `IN` lists replaced), so `'from `access_tokens`'` covers every query against that table.
+
+Two blunter switches exist for when that isn't enough — a whole test case:
+
+```php
+protected function detectsRepeatedQueries(): bool
+{
+    return false;
+}
+```
+
+and a whole run, `FLARUM_DETECT_REPEATED_QUERIES=0 composer test:integration`, which is mostly useful when bisecting an unrelated failure. The repetition threshold can be raised with `FLARUM_REPEATED_QUERY_THRESHOLD` or by overriding `repeatedQueryThreshold()`.
+
+Batched queries never trigger the check: an `IN (…)` list is recognised as one shape regardless of how many ids it carries, which is exactly what eager loading produces.
 
 #### Console Tests
 
