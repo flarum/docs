@@ -163,6 +163,12 @@ Publish assets from core and extensions (e.g. compiled JS/CSS, bootstrap icons, 
 
 Runs all outstanding migrations. This should be used when an extension that modifies the database is added or updated.
 
+If you run Flarum on multiple servers or containers that share one database, several instances may try to run migrations at the same time during a deployment, causing all but one of them to fail. To prevent this, pass the `--isolated` option: the command will then only run if no other instance of it is currently running, and will exit successfully otherwise. This requires all instances to communicate with the same central cache server.
+
+```
+php flarum migrate --isolated
+```
+
 ### migrate:reset
 
 `php flarum migrate:reset --extension [extension_id]`
