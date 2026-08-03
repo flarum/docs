@@ -15,7 +15,7 @@ If you need help applying these changes or using new features, please start a di
 
 ### Backend
 
-- Support for php 8.2, deprecations are still thrown by some packages, the testing workflow has been updated to ignore deprecations on 8.2
+- Support for php 8.2 (later extended through 8.5); deprecations are still thrown by some packages, so the testing workflow ignores deprecations on these versions. See [PHP Configuration](../install.md#php-configuration) for the recommended `error_reporting` setting.
 - The `/api` endpoint now contains the actor as an included relationship.
 - The `Model::dateAttribute($attribute)` extender is deprecated, use `Model::cast($attribute, 'datetime')` instead.
 
