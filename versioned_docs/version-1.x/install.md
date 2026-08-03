@@ -15,6 +15,24 @@ Before you install Flarum, it's important to check that your server meets the re
 * **MySQL 5.6+/8.0.23+** or **MariaDB 10.0.5+**
 * **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
+## PHP Configuration
+
+Flarum 1.x runs on PHP up to and including 8.5, but it is built on an older framework stack. On modern PHP, some of its dependencies emit deprecation notices. This is expected and does not affect how Flarum works.
+
+Every PHP version that currently receives [official support](https://www.php.net/supported-versions.php) — 8.2, 8.3, 8.4 and 8.5 — is affected. In other words, if you are running Flarum 1.x on a PHP version that is still maintained (as you should be), you will encounter these notices, so the configuration below should be treated as a standard part of setting up Flarum 1.x.
+
+Configure PHP to exclude deprecation warnings so they don't fill your logs or leak into responses:
+
+```ini
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED
+```
+
+On a typical production server `display_errors` is already off, so the notices are not shown to visitors — but they can still be written to your error log on every request, which the setting above prevents.
+
+:::tip Want a deprecation-free stack?
+These notices come from the older framework that Flarum 1.x is built on. Flarum 2.x runs on a current framework version and does not produce them. If you are starting fresh or able to upgrade, consider [Flarum 2.x](https://docs.flarum.org/2.x).
+:::
+
 ## Installing
 
 ### Installing by unpacking an archive
