@@ -29,6 +29,8 @@ error_reporting = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED
 
 On a typical production server `display_errors` is already off, so the notices are not shown to visitors — but they can still be written to your error log on every request, which the setting above prevents.
 
+In practice we see the best results running Flarum 1.x on **PHP 8.3**, which at the time of writing still receives [security support](https://www.php.net/supported-versions.php). If you have the choice, it is a good balance of stability and remaining support life for a 1.x install.
+
 :::warning Consider upgrading to Flarum 2.x
 
 These notices come from the older framework that Flarum 1.x is built on. That framework has itself reached end of life, so keeping 1.x running cleanly and securely on modern PHP takes progressively more effort over time.
