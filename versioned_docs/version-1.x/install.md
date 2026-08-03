@@ -29,8 +29,14 @@ error_reporting = E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED
 
 On a typical production server `display_errors` is already off, so the notices are not shown to visitors — but they can still be written to your error log on every request, which the setting above prevents.
 
-:::tip Want a deprecation-free stack?
-These notices come from the older framework that Flarum 1.x is built on. Flarum 2.x runs on a current framework version and does not produce them. If you are starting fresh or able to upgrade, consider [Flarum 2.x](https://docs.flarum.org/2.x).
+:::warning Consider upgrading to Flarum 2.x
+
+These notices come from the older framework that Flarum 1.x is built on. That framework has itself reached end of life, so keeping 1.x running cleanly and securely on modern PHP takes progressively more effort over time.
+
+Flarum 1.x is officially on life support while we finalize the 2.0 release. Going forward, the 1.x line will receive critical and security fixes only — no new features — and that support will wind down over time. We encourage all Flarum 1.x installations to plan an upgrade to Flarum 2.x, which is built on a current, supported framework and does not produce these deprecations.
+
+Flarum 2.0 is in its release-candidate phase — the API is stable and many forums already run it in production — and a stable release is not far off. See the [Flarum 2.x documentation](https://docs.flarum.org/2.x) to get started.
+
 :::
 
 ## Installing
