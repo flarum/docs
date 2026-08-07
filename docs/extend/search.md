@@ -365,6 +365,140 @@ So you want to make sure your gambit is added within the common frontend.
 
 :::
 
+### Localizing gambit keywords
+
+Gambit keywords are fully localizable. English always works as a fallback, regardless of the active locale — so `is:hidden` or `author:behz` will always be accepted even when the site language is French, Chinese, or anything else.
+
+#### How keyword localization works
+
+The `key()` method drives the keyword that appears in the search bar and autocomplete. You should always return a translated string from `app.translator.trans()`:
+
+```ts
+key(): string {
+  return app.translator.trans('acme.lib.gambits.users.country.key', {}, true);
+}
+```
+
+When the locale is English, `key()` returns `'country'` — and everything works as before. When the locale is French and a language pack translates `country.key` to `'pays'`, the gambit responds to `pays:france` in the search bar.
+
+#### The English fallback — `canonicalKey()`
+
+`GambitManager` builds a second alias pattern from `canonicalKey()`. If the translated pattern doesn't match a token in the search query, the canonical English pattern is tried instead. This means `country:france` continues to work even when the locale is French.
+
+By default `canonicalKey()` returns the same value as `key()`. For untranslated gambits (where `key()` already returns English) no override is needed — the alias path simply never fires.
+
+**If your gambit's `key()` returns a translated string, you must override `canonicalKey()` to return the hardcoded English keyword.** This is the only change required for localization support:
+
+```ts
+import app from 'flarum/common/app';
+import { KeyValueGambit } from 'flarum/common/query/IGambit';
+
+export default class CountryGambit extends KeyValueGambit {
+  key(): string {
+    // Translated — e.g. 'pays' in French, 'country' in English
+    return app.translator.trans('acme.lib.gambits.users.country.key', {}, true);
+  }
+
+  // highlight-start
+  canonicalKey(): string {
+    // Hardcoded English — never translates, always accepted as an alias
+    return 'country';
+  }
+  // highlight-end
+
+  hint(): string {
+    return app.translator.trans('acme.lib.gambits.users.country.hint', {}, true);
+  }
+
+  filterKey(): string {
+    return 'country';
+  }
+}
+```
+
+For `BooleanGambit`, the pattern is identical. If `key()` can return an array (for gambits like `SubscriptionGambit` that match multiple keywords), `canonicalKey()` must return the same shape — an array of hardcoded English keywords:
+
+```ts
+import app from 'flarum/common/app';
+import { BooleanGambit } from 'flarum/common/query/IGambit';
+
+export default class SubscriptionGambit extends BooleanGambit {
+  key(): string[] {
+    return [
+      app.translator.trans('flarum-subscriptions.lib.gambits.discussions.subscription.following_key', {}, true),
+      app.translator.trans('flarum-subscriptions.lib.gambits.discussions.subscription.ignoring_key', {}, true),
+    ];
+  }
+
+  // highlight-start
+  canonicalKey(): string[] {
+    return ['following', 'ignoring'];
+  }
+  // highlight-end
+
+  filterKey(): string {
+    return 'subscription';
+  }
+}
+```
+
+#### `toFilter()` must always produce canonical filter values
+
+When a gambit matches via the canonical alias rather than the translated keyword, the `matches` array still contains what was typed in the search bar (e.g. `'following'`). Your `toFilter()` implementation should map matched keywords to a stable, locale-independent filter value — never pass the raw matched string directly to the API if it might vary by locale:
+
+```ts
+toFilter(matches: string[], negate: boolean): Record<string, any> {
+  const filterKey = (negate ? '-' : '') + this.filterKey();
+
+  // Map both translated and canonical English keywords to the stable DB value.
+  const allFollowKeywords = [
+    'following',
+    'followed',
+    app.translator.trans('flarum-subscriptions.lib.gambits.discussions.subscription.following_key', {}, true),
+  ];
+
+  const value = allFollowKeywords.includes(matches[1]) ? 'follow' : 'ignore';
+
+  return { [filterKey]: value };
+}
+```
+
+The backend filter (`SubscriptionFilter` in this case) should only expect the stable canonical values (`'follow'`, `'ignore'`), never locale-specific surface keywords.
+
+#### For language pack maintainers
+
+To translate gambit keywords, find the translation keys ending in `_key` in the extension's locale file. For example, a `locale/en.yml` may contain:
+
+```yaml
+acme:
+  lib:
+    gambits:
+      users:
+        country:
+          key: country
+          hint: "country code (e.g. US, FR)"
+```
+
+Translate the `key` value to your language. The hint is shown in the autocomplete dropdown and should also be translated:
+
+```yaml
+acme:
+  lib:
+    gambits:
+      users:
+        country:
+          key: pays
+          hint: "code pays (p. ex. US, FR)"
+```
+
+Once translated, users can search with `pays:france` in French. The English `country:france` will continue to work as a fallback for any user — translated and English keywords are always accepted simultaneously.
+
+:::info Extension authors must implement `canonicalKey()`
+
+The English fallback only works if the extension author has overridden `canonicalKey()`. If you translate a gambit keyword and the English form stops working, the extension has not yet been updated. File an issue with the extension to request `canonicalKey()` support.
+
+:::
+
 ### Advanced gambits
 
 If neither of the above gambit classes are suitable for your needs, you may directly implement the `IGambit` interface. Your class must implement the following:

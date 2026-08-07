@@ -190,6 +190,7 @@ There have been many changes to the core frontend codebase, including renamed or
 * A `Footer` component has been added that allows you to easily add content to the footer.
 * A `Form` component has been added to ensure consistent styling across forms. You should use this component in your extension if you are creating a form.
 * An API for frontend gambits has been introduced, [checkout the full documentation](./search#gambits).
+* Gambit keywords are now **fully localizable**. The English keyword always works as a fallback regardless of the active locale. If your extension registers a gambit whose `key()` returns a translated string, you must now also override `canonicalKey()` to return the hardcoded English keyword — `GambitManager` uses this to build an alias pattern so both the translated and English forms are accepted. See [Localizing gambit keywords](./search#localizing-gambit-keywords) for details and examples.
 * A `FormGroup` component has been added that allows you to add any supported type of input similar to the admin panel's settings registration. [checkout the documentation for more details](./forms).
 * `WelcomeHero.prototype.viewItems` has been moved to `WelcomeHero.prototype.bodyItems`.
 * The frontend `Routes` extender has been modified to allow passing a custom route resolver class as the fourth argument when [adding routes](./routes#frontend-routes).
