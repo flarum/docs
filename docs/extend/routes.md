@@ -252,7 +252,7 @@ import Link from 'flarum/common/components/Link';
 <Link href="/route/known/to/mithril">Hello World!</Link>
 
 // You'll frequently use Link with generated routes:
-<Link href={app.route('settings')}>Hello World!</Link>
+<Link href={app.route('index')}>Hello World!</Link>
 
 // Link can even generate external links with the external attr:
 <Link external={true} href="https://google.com">Hello World!</Link>
