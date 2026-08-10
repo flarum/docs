@@ -25,7 +25,8 @@ Before we can write any JavaScript, we need to set up a **transpiler**. This all
 
 In order to do this transpilation, you need to be working in a capable environment. No, not the home/office kind of environment – you can work in the bathroom for all I care! I'm talking about the tools that are installed on your system. You'll need:
 
-* Node.js and npm ([Download](https://nodejs.org/en/download/))
+* Node.js ([Download](https://nodejs.org/en/download/))
+* A JavaScript package manager: [npm](https://www.npmjs.com/) (bundled with Node.js), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/)
 * Webpack (`npm install -g webpack`)
 
 This can be tricky because everyone's system is different. From the OS you're using, to the program versions you have installed, to the user access permissions – I get chills just thinking about it! If you run into trouble, ~~tell him I said hi~~ use [Google](https://google.com) to see if someone has encountered the same error as you and found a solution. If not, ask for help from the [Flarum Community](https://discuss.flarum.org).
@@ -76,9 +77,23 @@ js
 }
 ```
 
-This is a standard JS [package-description file](https://docs.npmjs.com/files/package.json), used by npm and Yarn (Javascript package managers). You can use it to add commands, js dependencies, and package metadata. We're not actually publishing a npm package: this is simply used to collect dependencies.
+This is a standard JS [package-description file](https://docs.npmjs.com/files/package.json), used by JavaScript package managers such as npm, Yarn, and pnpm. You can use it to add commands, js dependencies, and package metadata. We're not actually publishing a npm package: this is simply used to collect dependencies.
 
 Please note that we do not need to include `flarum/core` or any flarum extensions as dependencies: they will be automatically packaged when Flarum compiles the frontends for all extensions.
+
+:::warning Using pnpm?
+
+If you use pnpm, you must also declare it in the [`packageManager` field](https://github.com/nodejs/corepack#readme) of your `package.json`:
+
+```json
+{
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
+}
+```
+
+The value consists of the pnpm version you use, followed by an integrity hash of that release. You don't need to write it by hand: running `corepack use pnpm@<version>` in the `js` directory sets the field for you, hash included. This field is read by [Corepack](https://nodejs.org/api/corepack.html) to determine which package manager (and version) the project expects. If it is missing, the [reusable frontend workflow](./github-actions.md#frontend) will fail.
+
+:::
 
 ### webpack.config.js
 
@@ -190,16 +205,25 @@ import TagsPage from 'ext:flarum/tags/components/TagsPage';
 
 ### Transpilation
 
-OK, time to fire up the transpiler. Run the following commands in the `js` directory:
+OK, time to fire up the transpiler. Run the following commands in the `js` directory, using your package manager of choice:
 
 ```bash
+# npm
 npm install
 npm run dev
+
+# yarn
+yarn install
+yarn dev
+
+# pnpm
+pnpm install
+pnpm dev
 ```
 
 This will compile your browser-ready JavaScript code into the `js/dist/forum.js` file, and keep watching for changes to the source files. Nifty!
 
-When you've finished developing your extension (or before a new release), you'll want to run `npm run build` instead of `npm run dev`: this builds the extension in production mode, which makes the source code smaller and faster.
+When you've finished developing your extension (or before a new release), you'll want to run the `build` script instead of the `dev` script (e.g. `npm run build`): this builds the extension in production mode, which makes the source code smaller and faster.
 
 ## Asset Registration
 
