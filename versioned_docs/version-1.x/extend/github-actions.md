@@ -85,12 +85,26 @@ jobs:
 
       frontend_directory: ./js
       backend_directory: .
-      js_package_manager: yarn
+      js_package_manager: yarn # npm, yarn or pnpm
       main_git_branch: main
 
     secrets:
       bundlewatch_github_token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
 ```
+
+:::warning Using pnpm?
+
+If you set `js_package_manager` to `pnpm`, you must declare the [`packageManager` field](https://github.com/nodejs/corepack#readme) in your extension's `js/package.json`, for example:
+
+```json
+{
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
+}
+```
+
+The workflow relies on [Corepack](https://nodejs.org/api/corepack.html) to provision pnpm, which reads this field to determine the expected package manager and version. Without it, the workflow will fail.
+
+:::
 
 Unlike the backend workflow, the frontend workflow runs everything in a single job. Here are the available parameters:
 
@@ -110,7 +124,7 @@ Unlike the backend workflow, the frontend workflow runs everything in a single j
 | Frontend Directory    | `frontend_directory`    | The directory of the project where frontend code is located. This should contain a `package.json` file.                                                  | string |
 | Main Git Branch       | `main_git_branch`       | The main git branch to use for the workflow.                                                                                                             | string |
 | Node Version          | `node_version`          | The node version to use for the workflow.                                                                                                                | string |
-| JS Package Manager    | `js_package_manager`    | The package manager to use (ex. yarn)                                                                                                                    | string |
+| JS Package Manager    | `js_package_manager`    | The package manager to use. One of `npm`, `yarn` or `pnpm`.                                                                                              | string |
 | Cache Dependency Path | `cache_dependency_path` | The path to the cache dependency file.                                                                                                                   | string |
 :::tip
 
