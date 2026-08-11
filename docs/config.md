@@ -7,12 +7,15 @@ This file, though small, contains details that are crucial for your Flarum insta
 If the file exists, it tells Flarum that it has already been installed.
 It also provides Flarum with database info and more.
 
-Here's a quick overview of what everything means with an example file:
+Only `database`, `url` and `paths` are written by the installer and required. Everything else is optional — leaving a block out gives you the default shown here.
+
+Here is every option core reads, with what each one does:
 
 ```php
 <?php return array (
   'debug' => false, // enables or disables debug mode, used to troubleshoot issues
-  'offline' => false, // none, high, low or safe.
+  'offline' => false, // none, high, low or safe. See "Maintenance modes" below
+  'safe_mode_extensions' => null, // extensions to keep enabled in safe mode, e.g. array('flarum-tags')
   'database' =>
   array (
     'driver' => 'mysql', // the database driver, i.e. MySQL, MariaDB, PostgreSQL, SQLite
@@ -23,6 +26,7 @@ Here's a quick overview of what everything means with an example file:
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
+    'prefix_indexes' => true, // whether the prefix above also applies to index names
     'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
@@ -34,14 +38,40 @@ Here's a quick overview of what everything means with an example file:
   ),
   'queue' =>
   array (
-    'driver' => 'sync', // Use the standard sync queue. Omitting this will entirely will have the same effect
+    'driver' => 'sync', // Use the standard sync queue. Omitting this entirely will have the same effect
+  ),
+  'session' =>
+  array (
+    'driver' => 'file', // where sessions are stored; extensions can add drivers
+    'lifetime' => 120, // how long a session may sit idle, in minutes
+    'cookie_expires_on_close' => false, // sign people out when they close their browser
+    'tokens' =>
+    array (
+      'session' => 3600, // how long a normal sign-in lasts, in seconds
+      'session_remember' => 157680000, // how long "remember me" lasts, in seconds
+    ),
+  ),
+  'cookie' =>
+  array (
+    'name' => 'flarum', // the prefix for cookie names
+    'path' => '/', // defaults to the path of your forum URL
+    'domain' => null, // set this to share cookies across subdomains
+    'secure' => true, // defaults to true when your forum URL is https
+    'samesite' => null, // lax, strict or none
   ),
   'fontawesome' =>
   array (
     'source' => 'local', // Use the bundled FontAwesome Free v7 icons. See below for other config options
-  )
+  ),
+  'flarum_announcements.disabled' => false, // hide the announcements widget on the admin dashboard
 );
 ```
+
+:::tip
+
+Extensions may read their own keys from this file. Those are documented by the extension rather than here.
+
+:::
 
 ### Configuration via environment variables
 
@@ -82,6 +112,49 @@ To disable it, add the following to your `config.php`:
 ```
 
 When disabled, the widget is hidden from the dashboard, no outbound requests are made to discuss.flarum.org, and the scheduled refresh task is not registered.
+
+### Sessions
+
+How long people stay signed in is configurable, either from the admin panel under **Admin > Advanced**, or in `config.php`.
+
+Everything here is optional. A forum that configures nothing keeps the lengths Flarum has always used.
+
+```php
+'session' => [
+    // How long a session may sit idle before it is discarded, in minutes.
+    'lifetime' => 120,
+
+    // Sign people out when they close their browser.
+    'cookie_expires_on_close' => false,
+
+    // How long each type of sign-in lasts, in seconds.
+    'tokens' => [
+        'session' => 3600,           // 1 hour
+        'session_remember' => 157680000, // 5 years
+    ],
+],
+```
+
+#### Token types
+
+| Type | Default | Applies to |
+| --- | --- | --- |
+| `session` | 1 hour | Signing in without choosing "remember me" |
+| `session_remember` | 5 years | Signing in with "remember me", **and all logins through another service** |
+
+Social logins are always remembered — there is no "remember me" checkbox on a *Sign in with…* button — so `session_remember` is what governs them. On a forum where most people sign in that way, it is the only value that matters.
+
+A lifetime of `0` means tokens of that type never expire.
+
+Extensions can add their own token types, which are configured the same way, keyed by the type they declare.
+
+#### Sessions and cookies are separate
+
+`lifetime` is how long the server keeps a session; `cookie_expires_on_close` is whether the browser keeps presenting it. Turning the latter on signs people out when they close the browser, which is useful on shared computers — the session itself is untouched.
+
+#### config.php takes precedence
+
+Anything set in `config.php` overrides the equivalent admin setting, and the admin panel shows those values read-only rather than letting them be changed. This is deliberate: it lets whoever runs the server pin session lengths where an administrator cannot loosen them.
 
 ### Maintenance modes
 
