@@ -7,4 +7,3 @@ If you need help applying these changes or using new features, please start a di
 :::
 
 ## 2.1 Changes
-
