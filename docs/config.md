@@ -79,12 +79,58 @@ Whilst the file based method described here is suitable for most Flarum installa
 
 ```php
 <?php return array (
-  'debug' => env('DEBUG')
-  ...
+  'debug' => env('DEBUG'),
+  'url' => env('FLARUM_URL', 'https://flarum.localhost'),
+  'database' =>
+  array (
+    'host' => env('DB_HOST', 'localhost'),
+    'database' => env('DB_NAME', 'flarum'),
+    'username' => env('DB_USER', 'root'),
+    'password' => env('DB_PASSWORD', ''),
+  ),
+  'session' =>
+  array (
+    'lifetime' => env('SESSION_LIFETIME', 120),
+  ),
 );
 ```
 
 This provides Flarum with the static configuration file it expects, but pulls variables from the environment at runtime.
+
+`config.php` is an ordinary PHP file, so **every** option on this page can be set this way — there is no separate list of environment variables, and nothing needs to support it specially. The second argument to `env()` is the value used when the variable is not set.
+
+#### Value types
+
+Environment variables are always strings. `env()` converts a few of them for you:
+
+| Variable value | PHP value |
+| --- | --- |
+| `true`, `(true)` | `true` |
+| `false`, `(false)` | `false` |
+| `null`, `(null)` | `null` |
+| `empty`, `(empty)` | `''` |
+| anything else | the string, unchanged |
+
+Numbers therefore arrive as strings — `SESSION_LIFETIME=120` gives you `'120'`, not `120`. Flarum handles that for its own options, but if you write your own logic in `config.php`, cast it yourself:
+
+```php
+'lifetime' => (int) env('SESSION_LIFETIME', 120),
+```
+
+For switches, prefer the literal words:
+
+```bash
+DEBUG=true    # becomes true
+DEBUG=1       # stays the string "1"
+```
+
+`1` works for Flarum's own options, which read any truthy value, but `true` is unambiguous and is what `env()` is designed for.
+
+Options that expect an array, such as `safe_mode_extensions`, need building from the string yourself:
+
+```php
+'safe_mode_extensions' => array_filter(explode(',', env('SAFE_MODE_EXTENSIONS', ''))),
+```
 
 ### Queues
 
