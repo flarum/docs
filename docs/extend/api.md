@@ -273,6 +273,33 @@ public function endpoints(): array
 }
 ```
 
+##### Sorting on text columns
+
+Ordering text is the database's decision rather than Flarum's, and the four supported backends do not all answer it the same way.
+
+MySQL, MariaDB and PostgreSQL fold case and accents through the column's collation, so `Apple`, `apple` and `Ápple` sort next to each other as a reader would expect. SQLite compares raw bytes: every capitalised value sorts ahead of every lowercase one, and accented characters land after `Z`. The same sort therefore produces a different — though still stable — order depending on where the forum is hosted:
+
+```
+MySQL, MariaDB, PostgreSQL      SQLite
+  Announcements                   Announcements
+  apple pie                       Bug report
+  banana bread                    Zebra crossing
+  Bug report                      apple pie
+  Zebra crossing                  banana bread
+```
+
+Where non-Latin text is concerned they diverge further still: CJK titles sort before Latin ones on MySQL, and after them on MariaDB, PostgreSQL and SQLite.
+
+There is no query-level fix that reconciles all four. `COLLATE` syntax differs per driver, SQLite's `NOCASE` only folds ASCII, and PostgreSQL's ordering depends on the locale the server was initialised with. Making them agree would mean sorting on a separate normalised column, which is rarely worth the write cost.
+
+If you add a text sort, be aware of this rather than surprised by it, and avoid writing tests that assert an order only one backend produces.
+
+##### Indexes
+
+A sort is only usable at scale if the column it names is indexed. Without one the database reads and sorts the whole table to return a single page, which stays unnoticeable on a small forum and is felt on every request on a large one.
+
+Note that a `FULLTEXT` index does not help here. It records which words appear in a value, not where the whole value falls in order, and MySQL will not consider it for `ORDER BY` at all. A column used for both search and sorting needs both kinds of index.
+
 #### Searching and Filtering
 
 Read our [searching and filtering](search.md) guide for more information!
