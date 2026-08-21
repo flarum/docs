@@ -2,16 +2,23 @@
 
 Flarum core provides a `haptic()` utility for triggering tactile feedback on supported mobile devices. When users perform significant actions — liking a post, submitting a reply, deleting a discussion — a brief vibration reinforces the interaction, making the app feel more responsive and native.
 
-Haptics are supported on:
+Haptics are delivered through the [Web Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API) (`navigator.vibrate`), which is implemented by Chromium. In practice that means haptics are available on Chromium-based Android browsers and nowhere else.
 
-- **Android** — via the [Web Vibration API](https://developer.mozilla.org/en-US/docs/Web/API/Vibration_API) (`navigator.vibrate`)
-- **iOS** — via a hidden `<input type="checkbox" switch>` element that triggers the Taptic Engine (powered by the [`web-haptics`](https://github.com/lochie/web-haptics) package)
-
-On desktop browsers and unsupported devices, `haptic()` is a silent no-op — it is always safe to call unconditionally.
+Everywhere the API is absent, `haptic()` is a silent no-op — it is always safe to call unconditionally.
 
 :::caution User gesture requirement
 
-Both Android and iOS require `haptic()` to be called within a synchronous user gesture context. Call it before any `await` or `.then()` — once execution goes async, the browser's gesture token expires and the haptic will be silently ignored on both platforms.
+`haptic()` must be called within a synchronous user gesture context. Call it before any `await` or `.then()` — once execution goes async, the browser's gesture token expires and the haptic is silently ignored.
+
+:::
+
+:::info iOS is not supported
+
+iOS Safari has no vibration API. Between iOS 17.4 and 26.4 it was possible to reach the Taptic Engine by clicking a hidden `<input type="checkbox" switch>`, and Flarum used that. WebKit closed it in iOS 26.5 by requiring a trusted event, so a click made from script no longer produces feedback.
+
+This is not expected to return. WebKit's [standards position](https://github.com/WebKit/standards-positions/issues/267) on the Vibration API is **oppose**, on the grounds that it cannot be mapped onto Apple's platforms — iOS exposes discrete feedback types rather than arbitrary-duration vibration. Firefox also removed `Navigator.vibrate` in Firefox 129, so the API is Chromium-only.
+
+The one technique that still works on iOS requires a real `<input type="checkbox" switch>` to be present in the page and tapped directly by the user, which cannot be driven from a function call. Do not gate features on haptics being available.
 
 :::
 
@@ -64,7 +71,7 @@ haptic([100, 50, 100]); // vibrate 100ms, pause 50ms, vibrate 100ms
 
 :::info
 
-Custom patterns work on both platforms. On Android they use the Web Vibration API directly. On iOS, `web-haptics` simulates the pattern by clicking the hidden checkbox repeatedly via `requestAnimationFrame`, producing distinct Taptic Engine taps at the correct intervals. Intensity values are ignored on iOS.
+Patterns are passed to the Web Vibration API directly. Since the API has no intensity parameter, the presets above approximate intensity by splitting each pulse into shorter on/off bursts.
 
 :::
 
@@ -80,11 +87,17 @@ if (isHapticSupported) {
 }
 ```
 
-`isHapticSupported` is a boolean evaluated once at page load. It is `true` on Android (Web Vibration API) and iOS (Taptic Engine via checkbox trick), and `false` on desktop browsers.
+`isHapticSupported` is a boolean evaluated once at page load, from the presence of `navigator.vibrate`. It is `true` on Chromium-based Android browsers and `false` everywhere else, including iOS and desktop.
+
+Because it is a capability check rather than a platform check, it needs no updating if browser support changes.
+
+You only need this for UI that would otherwise be misleading — a setting, or a tip that mentions haptics. Calls to `haptic()` do not need guarding.
 
 ## User preference
 
 Flarum core includes a built-in haptic feedback toggle in the user's **Settings → Device** panel. Logged-in users can disable haptics at any time; guests always receive haptic feedback.
+
+The toggle is only shown where haptics are supported, so users are not offered a setting that cannot do anything.
 
 `haptic()` checks this preference automatically — extensions can call it unconditionally without any extra gating.
 
@@ -129,7 +142,7 @@ import Button from 'flarum/common/components/Button';
 
 ### Before an API save
 
-For actions that involve a server round-trip, trigger the haptic **before** the async call, while still in the synchronous user gesture context. Calling it inside `.then()` will be silently ignored on both Android and iOS:
+For actions that involve a server round-trip, trigger the haptic **before** the async call, while still in the synchronous user gesture context. Calling it inside `.then()` is silently ignored:
 
 ```js
 import haptic from 'flarum/common/utils/haptic';
@@ -234,5 +247,5 @@ haptic(); // defaults to 'light'
 | Export | Type | Description |
 |---|---|---|
 | `haptic` (default) | `(pattern?: HapticInput) => void` | Trigger haptic feedback |
-| `isHapticSupported` | `boolean` | Whether the device supports haptics |
+| `isHapticSupported` | `boolean` | Whether the browser implements the Web Vibration API |
 | `HapticInput` | type | Re-exported from `web-haptics` — preset name, ms duration, or pattern array |
