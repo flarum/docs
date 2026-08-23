@@ -1,0 +1,46 @@
+# docs.flarum.org — server-side redirects
+#
+# Deployed verbatim from static/ into the site root by the build, so these
+# rules are version-controlled and redeploy with every push rather than
+# being hand-maintained on the server.
+#
+# Context: Flarum 2.x became the default docs version (served at the site
+# root) when 2.0.0 shipped. Previously the root served 1.x and 2.x lived
+# under /2.x. Both URL namespaces moved at once, so we issue permanent
+# redirects to preserve inbound links and consolidate SEO signals onto the
+# new canonical URLs.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# ---------------------------------------------------------------------------
+# 1. /2.x/* -> /*    (2.x is now the root version)
+# ---------------------------------------------------------------------------
+# Every page that lived under /2.x is now served at the root. Redirect the
+# whole namespace, preserving the remaining path and any locale prefix.
+RewriteRule ^2\.x/?$ /  [R=301,L]
+RewriteRule ^2\.x/(.*)$ /$1  [R=301,L]
+
+# Same for localized builds: /es/2.x/foo -> /es/foo
+RewriteRule ^([a-z]{2})/2\.x/?$ /$1/  [R=301,L]
+RewriteRule ^([a-z]{2})/2\.x/(.*)$ /$1/$2  [R=301,L]
+
+# ---------------------------------------------------------------------------
+# 2. Legacy 1.x-only pages at the root -> /1.x/*
+# ---------------------------------------------------------------------------
+# IMPORTANT: this is deliberately an explicit list, NOT a catch-all.
+# 65 of the 74 1.x routes also exist in 2.x, and those root URLs must now
+# serve the 2.x page. Only pages that exist *solely* in 1.x would otherwise
+# 404 at the root, so only those are redirected into /1.x.
+#
+# If a page is later removed from 2.x but kept in 1.x, add it here.
+RewriteRule ^extend/update-1_0/?$ /1.x/extend/update-1_0  [R=301,L]
+RewriteRule ^extend/update-1_x/?$ /1.x/extend/update-1_x  [R=301,L]
+RewriteRule ^extend/update-b8/?$  /1.x/extend/update-b8   [R=301,L]
+RewriteRule ^extend/update-b10/?$ /1.x/extend/update-b10  [R=301,L]
+RewriteRule ^extend/update-b12/?$ /1.x/extend/update-b12  [R=301,L]
+RewriteRule ^extend/update-b13/?$ /1.x/extend/update-b13  [R=301,L]
+RewriteRule ^extend/update-b14/?$ /1.x/extend/update-b14  [R=301,L]
+RewriteRule ^extend/update-b15/?$ /1.x/extend/update-b15  [R=301,L]
+RewriteRule ^extend/update-b16/?$ /1.x/extend/update-b16  [R=301,L]
+</IfModule>

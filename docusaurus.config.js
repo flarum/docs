@@ -83,17 +83,20 @@ const darkCodeTheme = prismThemes.dracula;
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: false,
-          editUrl: 'https://github.com/flarum/docs/tree/master',
-          lastVersion: '1.x',
+          editUrl: 'https://github.com/flarum/docs/tree/main',
+          // 'current' (the docs/ directory) is 2.x and is the default version
+          // served at the site root. 1.x is maintained for critical bug and
+          // security fixes only, and lives under /1.x.
+          lastVersion: 'current',
           versions: {
             current: {
               label: '2.x',
-              path: '2.x',
+              path: '/',
             },
             '1.x': {
               label: '1.x',
-              path: '/', // backwards compatibility, only needed for 1.x
-              // banner: 'unmaintained',
+              path: '1.x',
+              banner: 'unmaintained',
             },
           },
         },
@@ -126,9 +129,10 @@ const darkCodeTheme = prismThemes.dracula;
             docId: 'README',
             label: 'Guide',
             position: 'right',
-            // Anything that isn't `extend`, `'internal`, or contain a slash.
-            // Account for local 2-char code at the start.
-            activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend\/?|internal\/?|)$).*',
+            // Match any doc page that isn't `extend`, `internal`, or the version
+            // root itself. Accounts for an optional 2-char locale code and an
+            // optional version prefix (`1.x`), in either order.
+            activeBaseRegex: '^(\/[a-z][a-z])?(\/1\.x)?\/(?!(extend\/?|internal\/?|)$).*',
           },
           {
             type: 'doc',
