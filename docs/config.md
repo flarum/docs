@@ -63,7 +63,7 @@ Flarum ships with support for two queue drivers - `sync` and `database`. Many ta
 The only configuration key read from `config.php` is `driver`. Omitting the `queue` block entirely is equivalent to setting `driver` to `sync`.
 
 * `sync` - default behaviour; jobs run immediately inline during the request
-* `database` - stores jobs in a dedicated `queue_jobs` database table, which are then processed via the [scheduler](/2.x/scheduler) in a separate process. It is strongly advised that the scheduler is configured to run _every minute_
+* `database` - stores jobs in a dedicated `queue_jobs` database table, which are then processed via the [scheduler](scheduler.md) in a separate process. It is strongly advised that the scheduler is configured to run _every minute_
 
 When the `database` driver is active, additional tuning options (retries, memory limit, timeout, etc.) become available in the admin panel under **Admin > Advanced Settings**.
 
