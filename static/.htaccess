@@ -9,6 +9,16 @@
 # under /2.x. Both URL namespaces moved at once, so we issue permanent
 # redirects to preserve inbound links and consolidate SEO signals onto the
 # new canonical URLs.
+#
+# Targets are absolute https://docs.flarum.org URLs with a trailing slash,
+# deliberately, to keep every redirect a SINGLE hop:
+#   - The origin sits behind Cloudflare, which terminates TLS and forwards
+#     over plain HTTP. A root-relative target (/foo) makes Apache build the
+#     Location header from the origin's own scheme, emitting http:// and
+#     forcing an extra Cloudflare bounce back to https://.
+#   - Docusaurus serves directories, so /foo is itself redirected to /foo/
+#     by mod_dir. Pointing straight at /foo/ skips that hop as well.
+# Together these took the /2.x/* chain from 4 redirects down to 1.
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -18,12 +28,26 @@ RewriteEngine On
 # ---------------------------------------------------------------------------
 # Every page that lived under /2.x is now served at the root. Redirect the
 # whole namespace, preserving the remaining path and any locale prefix.
-RewriteRule ^2\.x/?$ /  [R=301,L]
-RewriteRule ^2\.x/(.*)$ /$1  [R=301,L]
+# Matched against %{REQUEST_URI} rather than the rule pattern: because a
+# localized build creates a real directory (build/es/), Apache treats these as
+# per-directory rules and strips the locale prefix before matching, so a
+# pattern like ^([a-z]{2})/2\.x/ can never fire. %{REQUEST_URI} always holds
+# the full original path, so we capture the locale from there instead.
 
-# Same for localized builds: /es/2.x/foo -> /es/foo
-RewriteRule ^([a-z]{2})/2\.x/?$ /$1/  [R=301,L]
-RewriteRule ^([a-z]{2})/2\.x/(.*)$ /$1/$2  [R=301,L]
+# Localized first, so /es/2.x/... keeps its locale (the generic rules below
+# would otherwise match the prefix-stripped URI and drop it).
+RewriteCond %{REQUEST_URI} ^/([a-z]{2})/2\.x/?$
+RewriteRule ^ https://docs.flarum.org/%1/ [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/([a-z]{2})/2\.x/(.+?)/?$
+RewriteRule ^ https://docs.flarum.org/%1/%2/ [R=301,L]
+
+# Unlocalized /2.x/...
+RewriteCond %{REQUEST_URI} ^/2\.x/?$
+RewriteRule ^ https://docs.flarum.org/ [R=301,L]
+
+RewriteCond %{REQUEST_URI} ^/2\.x/(.+?)/?$
+RewriteRule ^ https://docs.flarum.org/%1/ [R=301,L]
 
 # ---------------------------------------------------------------------------
 # 2. Legacy 1.x-only pages at the root -> /1.x/*
@@ -34,13 +58,13 @@ RewriteRule ^([a-z]{2})/2\.x/(.*)$ /$1/$2  [R=301,L]
 # 404 at the root, so only those are redirected into /1.x.
 #
 # If a page is later removed from 2.x but kept in 1.x, add it here.
-RewriteRule ^extend/update-1_0/?$ /1.x/extend/update-1_0  [R=301,L]
-RewriteRule ^extend/update-1_x/?$ /1.x/extend/update-1_x  [R=301,L]
-RewriteRule ^extend/update-b8/?$  /1.x/extend/update-b8   [R=301,L]
-RewriteRule ^extend/update-b10/?$ /1.x/extend/update-b10  [R=301,L]
-RewriteRule ^extend/update-b12/?$ /1.x/extend/update-b12  [R=301,L]
-RewriteRule ^extend/update-b13/?$ /1.x/extend/update-b13  [R=301,L]
-RewriteRule ^extend/update-b14/?$ /1.x/extend/update-b14  [R=301,L]
-RewriteRule ^extend/update-b15/?$ /1.x/extend/update-b15  [R=301,L]
-RewriteRule ^extend/update-b16/?$ /1.x/extend/update-b16  [R=301,L]
+RewriteRule ^extend/update-1_0/?$ https://docs.flarum.org/1.x/extend/update-1_0/ [R=301,L]
+RewriteRule ^extend/update-1_x/?$ https://docs.flarum.org/1.x/extend/update-1_x/ [R=301,L]
+RewriteRule ^extend/update-b8/?$  https://docs.flarum.org/1.x/extend/update-b8/  [R=301,L]
+RewriteRule ^extend/update-b10/?$ https://docs.flarum.org/1.x/extend/update-b10/ [R=301,L]
+RewriteRule ^extend/update-b12/?$ https://docs.flarum.org/1.x/extend/update-b12/ [R=301,L]
+RewriteRule ^extend/update-b13/?$ https://docs.flarum.org/1.x/extend/update-b13/ [R=301,L]
+RewriteRule ^extend/update-b14/?$ https://docs.flarum.org/1.x/extend/update-b14/ [R=301,L]
+RewriteRule ^extend/update-b15/?$ https://docs.flarum.org/1.x/extend/update-b15/ [R=301,L]
+RewriteRule ^extend/update-b16/?$ https://docs.flarum.org/1.x/extend/update-b16/ [R=301,L]
 </IfModule>

@@ -40,5 +40,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "//": "Security patches for transitive build-time deps that Docusaurus pins. NOT bumped: ajv 6.x (6.15.0 breaks ajv-keywords@3.5.2's _formatLimit, build fails) and image-size (no patched release exists).",
+    "serialize-javascript": "^6.0.2",
+    "ws": "^7.5.11",
+    "uuid": "^11.1.1",
+    "**/react-router/path-to-regexp": "^1.9.0",
+    "**/gray-matter/js-yaml": "^3.15.1",
+    "**/js-yaml": "^4.3.1"
   }
 }
