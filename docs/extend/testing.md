@@ -583,6 +583,27 @@ $ yarn add --dev @flarum/jest-config@^2.0.2
 
 `@flarum/jest-config` also carries the frontend dependencies core needs at test time (Mithril, dayjs, and so on), so this single install — run in your extension's `js` directory, as usual — provides everything. You do **not** need to install anything inside `vendor`.
 
+:::caution `@types/node` and older TypeScript
+
+The test toolchain pulls in `@types/node`. If your extension is on an older TypeScript (many extensions still ship TypeScript 4.x), the latest `@types/node` can use syntax your compiler doesn't understand, and `check-typings` will fail on files inside `node_modules/@types/node` — nothing to do with your own code.
+
+If you hit this, pin `@types/node` to a major your TypeScript supports. For TypeScript 4.x, version 22 works well:
+
+```json
+{
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  },
+  "resolutions": {
+    "@types/node": "^22.0.0"
+  }
+}
+```
+
+The `resolutions` entry (yarn) ensures the pin applies even when a dependency asks for a newer version. This isn't Flarum-specific — it's the usual way to keep `@types/node` in step with your TypeScript version.
+
+:::
+
 Then, add the following to your `package.json`:
 
 ```json
@@ -665,7 +686,9 @@ If the code under test reaches for the global `app` (for example, anything that 
 
 Integration tests are used to test the components of your frontend code and the interaction between different components. For example, you might test that a page component renders the correct content based on certain parameters.
 
-Here's a simple example of an integration test for core's `Alert` component:
+Component tests need the app bootstrapped first — see [Bootstrapping the flarum app](#bootstrapping-the-flarum-app), and note the `app.boot()` requirement if your component reads `app.forum`.
+
+Here's a simple example of an integration test for core's `Alert` component (`Alert` doesn't read `app.forum`, so `bootstrapForum()` alone is enough here):
 
 ```ts
 import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
@@ -748,9 +771,13 @@ You cannot bootstrap both the forum and admin app in the same test file. If you 
 
 ```ts
 import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
+import app from 'flarum/forum/app';
 
 describe('Forum tests', () => {
-  beforeAll(() => bootstrapForum());
+  beforeAll(() => {
+    bootstrapForum();
+    app.boot();
+  });
 
   it('should do something', () => {
     // your test code here
@@ -760,9 +787,13 @@ describe('Forum tests', () => {
 
 ```ts
 import bootstrapAdmin from '@flarum/jest-config/src/bootstrap/admin';
+import app from 'flarum/admin/app';
 
 describe('Admin tests', () => {
-  beforeAll(() => bootstrapAdmin());
+  beforeAll(() => {
+    bootstrapAdmin();
+    app.boot();
+  });
 
   it('should do something', () => {
     // your test code here
@@ -770,10 +801,36 @@ describe('Admin tests', () => {
 });
 ```
 
+:::warning `bootstrapForum()` on its own does not populate `app.forum`
+
+`bootstrapForum()` (or `bootstrapAdmin()`) initializes the global `app` object, but `app.forum` — and anything else set up during boot — is only populated once you also call `app.boot()`. If your code under test reads `app.forum`, follow the bootstrap call with `app.boot()`, as the examples above do. Without it, `app.forum` is `undefined` and your test fails in a way that has nothing to do with the code you're testing.
+
+The simpler `beforeAll(() => bootstrapForum())` form is fine only when nothing in the test touches `app.forum`.
+
+:::
+
+#### Setting forum data in a test
+
+Once the app is booted, you can push forum attributes your component depends on — the base URL, settings, permissions, and so on — with `pushAttributes`:
+
+```ts
+beforeAll(() => {
+  bootstrapForum();
+  app.boot();
+
+  app.forum.pushAttributes({ baseUrl: 'https://example.com' });
+});
+```
+
+This mirrors the data the backend would send in a real request, so the component sees the environment it expects.
+
 :::tip
 
-Checkout the Flarum core tests for more examples on how to write tests for your extension:
+For more examples, check out the Flarum core tests:
 https://github.com/flarum/framework/tree/2.x/framework/core/js/tests
+
+For a worked example in a real, standalone (Composer-installed) extension — including the `package.json`, `jest.config.cjs`, and CI wiring — see FriendsOfFlarum/links:
+https://github.com/FriendsOfFlarum/links/tree/2.x/js/tests
 
 :::
 

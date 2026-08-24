@@ -106,6 +106,12 @@ The workflow relies on [Corepack](https://nodejs.org/api/corepack.html) to provi
 
 :::
 
+:::info Running frontend tests
+
+The example above does not run [frontend tests](testing.md#frontend-tests). To run them on every push and pull request, add `enable_tests: true` to the `with:` block. The workflow runs `composer install` before the frontend job, so Flarum core is present at `vendor/flarum/core/js` for the tests to resolve against — no extra configuration is needed. By default it runs your `test` script; override that with `test_script` if you use a different script name.
+
+:::
+
 Unlike the backend workflow, the frontend workflow runs everything in a single job. Here are the available parameters:
 
 | Name                  | Key                     | Description                                                                                                                                              | Format |
