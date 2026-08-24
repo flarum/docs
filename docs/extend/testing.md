@@ -570,7 +570,7 @@ $ flarum-cli infra frontendTesting
 
 :::info Prerequisites
 
-- **`@flarum/jest-config` 2.0.1 or newer.** Standalone (Composer-installed) extensions need the core-resolution support added in 2.0.1; earlier versions only work inside the `flarum/framework` monorepo.
+- **`@flarum/jest-config` 2.0.2 or newer.** Standalone (Composer-installed) extensions need the core-resolution and alias support added in 2.0.2 — including the `flarum/...` import alias your own components use. Earlier versions only work inside the `flarum/framework` monorepo.
 - **Flarum core installed via Composer**, so that its frontend source is present at `vendor/flarum/core/js`. The Jest config resolves core from there (or from the monorepo, if you are developing inside `flarum/framework`). If you have run `composer install` for your extension, this is already the case.
 
 :::
@@ -578,7 +578,7 @@ $ flarum-cli infra frontendTesting
 First, you need to install the Jest config dev dependency:
 
 ```bash
-$ yarn add --dev @flarum/jest-config@^2.0.1
+$ yarn add --dev @flarum/jest-config@^2.0.2
 ```
 
 `@flarum/jest-config` also carries the frontend dependencies core needs at test time (Mithril, dayjs, and so on), so this single install — run in your extension's `js` directory, as usual — provides everything. You do **not** need to install anything inside `vendor`.
@@ -641,10 +641,10 @@ To run tests on every commit and pull request, check out the [GitHub Actions](gi
 
 Like any other JS project, you can use Jest to write unit tests for your frontend code. Checkout the [Jest docs](https://jestjs.io/docs/using-matchers) for more information on how to write tests.
 
-Import your extension's own code with a relative path, and anything from core with the `@flarum/core/...` prefix — the Jest config maps that to whichever copy of core is installed (vendored, or the monorepo). Unit tests suit pure functions that don't touch the running app; here's an example against core's `classList` helper:
+Import your extension's own code with a relative path, and anything from core with the `flarum/...` alias — the same alias you use in your extension's source. The Jest config maps it to whichever copy of core is installed (vendored, or the monorepo). Unit tests suit pure functions that don't touch the running app; here's an example against core's `classList` helper:
 
 ```ts
-import classList from '@flarum/core/src/common/utils/classList';
+import classList from 'flarum/common/utils/classList';
 
 test('joins truthy class names', () => {
   expect(classList('a', 'b')).toBe('a b');
@@ -669,7 +669,7 @@ Here's a simple example of an integration test for core's `Alert` component:
 
 ```ts
 import bootstrapForum from '@flarum/jest-config/src/bootstrap/forum';
-import Alert from '@flarum/core/src/common/components/Alert';
+import Alert from 'flarum/common/components/Alert';
 import m from 'mithril';
 import mq from 'mithril-query';
 import { jest } from '@jest/globals';
