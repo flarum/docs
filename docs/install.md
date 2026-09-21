@@ -84,6 +84,15 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
+## Docker
+
+These docs cover a manual composer/archive install. If you'd rather run Flarum in a container, [Easypanel](https://easypanel.io) is a self-hosted deployment platform with a one-click Flarum template:
+
+[![Deploy on Easypanel][easypanel-btn]][easypanel-deploy]
+
+[easypanel-btn]: https://easypanel.io/img/deploy-on-easypanel-40.svg
+[easypanel-deploy]: https://easypanel.io/templates/flarum
+
 ## URL Rewriting
 
 ### Apache
