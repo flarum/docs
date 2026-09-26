@@ -14,7 +14,7 @@ To define a notification type, you will need to create a new class which impleme
 * `getType()` This is where you name your notification, this will be important for later steps.
 * `getSubjectModel()`: Specify the type of model the subject is (from `getSubject`).
 
-Lets take a look at an example from [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Notification/PostLikedBlueprint.php):
+Lets take a look at an example from [Flarum Likes](https://github.com/flarum/likes/blob/2.x/src/Notification/PostLikedBlueprint.php):
 
 ```php
 <?php
@@ -64,7 +64,7 @@ class PostLikedBlueprint implements BlueprintInterface, AlertableInterface
 }
 ```
 
-Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
+Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
 ### Registering a Notification Type
 
@@ -74,7 +74,7 @@ We can do this with the `type` method of the `Notification` extender
 * `$blueprint`: Your class static (example: `PostLikedBlueprint::class`)
 * `$enabledByDefault`: This is where you set which notification methods will be enabled by default. It accepts an array of strings, include 'alert' to have forum notifications (the bell icon), include 'email' for email notifications. You can use, one both, or none! (example: `['alert']` would set only in-forum notifications on by default)
 
-Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/extend.php):
+Lets look at an example from [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/2.x/extend.php):
 
 ```php
 <?php
@@ -97,10 +97,10 @@ In addition to registering our notification to send by email, if we actually wan
 To do this, your notification blueprint should implement [`Flarum\Notification\MailableInterface`](https://api.docs.flarum.org/php/master/flarum/notification/mailableinterface) in addition to [`Flarum\Notification\Blueprint\BlueprintInterface`](https://api.docs.flarum.org/php/master/flarum/notification/blueprint/blueprintinterface).
 This comes with 2 additional methods:
 
-- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/12.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
+- `getEmailViews()` should return an array of email types (both `text` and `html`) to [Blade View](https://laravel.com/docs/13.x/blade) names. The namespaces for these views must [first be registered](routes.md#views). These will be used to generate the body of the email.
 - `getEmailSubject(TranslatorInterface $translator)` should return a string for the email subject. An instance of the translator is passed in to enable translated notification emails.
 
-Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/master/src/Notification/PostMentionedBlueprint.php)
+Let's take a look at an example from [Flarum Mentions](https://github.com/flarum/mentions/blob/2.x/src/Notification/PostMentionedBlueprint.php)
 
 ```php
 <?php
@@ -185,7 +185,7 @@ You can use the following blade components:
 ### Notification Drivers
 
 In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`.
-The driver should implement `Flarum\Notification\Driver\NotificationDriverInterface`. Let's look at an annotated example from the [Pusher extension](https://github.com/flarum/pusher/blob/master/src/PusherNotificationDriver.php):
+The driver should implement `Flarum\Notification\Driver\NotificationDriverInterface`. Let's look at an annotated example from the [Pusher extension](https://github.com/flarum/pusher/blob/2.x/src/PusherNotificationDriver.php):
 
 ```php
 <?php
@@ -238,7 +238,7 @@ Notification drivers are also registered via the `Notification` extender, using 
 * `$driverClass`: The class static of the driver (example: `Driver::class`)
 * `$typesEnabledByDefault`: An array of types for which this driver should be enabled by default. This will be used in calculating `$driversEnabledByDefault`, which is provided to the `registerType` method of the driver.
 
-Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/master/extend.php):
+Another example from [Flarum Pusher](https://github.com/flarum/pusher/blob/2.x/extend.php):
 
 ```php
 <?php
@@ -269,7 +269,7 @@ First, create a class that extends the notification component. Then, there are 4
 
 *Let take a look at our example shall we?*
 
-From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/master/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
+From [Flarum Subscriptions](https://github.com/flarum/subscriptions/blob/2.x/js/src/forum/components/NewPostNotification.js), when a new post is posted on a followed discussion:
 
 ```jsx harmony
 import Notification from 'flarum/forum/components/Notification';
@@ -306,13 +306,13 @@ Make sure to replace `{nameOfNotification}` with the name of the notification in
 
 :::tip
 
-If the subject of your notification is a new model, make sure you have a frontend represantation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
+If the subject of your notification is a new model, make sure you have a frontend representation of it registered in the frontend store. [Read more about it here](./models.md#adding-new-models-1)
 
 :::
 
-Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/main/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
+Let's give users an option to change their settings for your notification. All you have to do is extend the [`notificationGrid`](https://github.com/flarum/framework/blob/2.x/framework/core/js/src/forum/components/NotificationGrid.js)'s [`notificationTypes()`](https://github.com/flarum/framework/blob/2.x/framework/core/js/src/forum/components/NotificationGrid.js#L204) function
 
-From [Flarum-Likes](https://github.com/flarum/likes/blob/master/js/src/forum/index.js):
+From [Flarum-Likes](https://github.com/flarum/likes/blob/2.x/js/src/forum/index.ts):
 
 ```js
 import { extend } from 'flarum/common/extend';
@@ -341,7 +341,7 @@ Simply add the name of your notification (from the blueprint), an icon you want 
 
 Now that you have your notification all setup, it's time to actually send the notification to the user!
 
-Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/main/framework/core/src/Notification/NotificationSyncer.php)'s sync function. It accepts 2 arguments:
+Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Notification/NotificationSyncer.php)'s sync function. It accepts 2 arguments:
 
 * `BlueprintInterface`: This is the blueprint to be instantiated we made in the first step, you must include all variables that are used on the blueprint (example: if a user likes a post you must include the `user` model that liked the post).
 * `$users`: This accepts an array of `user` modals that should receive the notification
@@ -350,7 +350,7 @@ Thankfully, this is the easiest part, simply use[`NotificationSyncer`](https://g
 
 Lets take a look at our **final** example for today:
 
-From [Flarum Likes](https://github.com/flarum/likes/blob/master/src/Listener/SendNotificationWhenPostIsLiked.php):
+From [Flarum Likes](https://github.com/flarum/likes/blob/2.x/src/Listener/SendNotificationWhenPostIsLiked.php):
 
 ```php
 <?php
@@ -404,4 +404,4 @@ class SendNotificationWhenPostIsLiked
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 
-*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!
+*Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://discord.gg/flarum) and someone will be around to lend a hand!
