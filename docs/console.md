@@ -215,12 +215,6 @@ Bisecting toggles extensions repeatedly on the live site, so it puts the forum i
 
 :::
 
-### schema:dump {#schema-dump}
-
-`php flarum schema:dump`
-
-Dumps the current database schema. This is a tool for core and extension development rather than something you need to run on a live forum.
-
 ### queue:pause {#queue-pause}
 
 `php flarum queue:pause [queue]`
