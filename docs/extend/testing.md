@@ -834,6 +834,10 @@ https://github.com/FriendsOfFlarum/links/tree/2.x/js/tests
 
 :::
 
-## E2E Tests
+## End-to-End Tests
 
-Coming Soon!
+Flarum ships no end-to-end test harness, and core does not have one of its own. The two layers above are what core and the bundled extensions are actually tested with.
+
+That is less of a gap than it sounds, because [backend tests](#backend-tests) already cover much of what an end-to-end test would: an integration test boots a real application, sends a real request through the real middleware stack against a real database, and asserts on the real response. What it cannot see is the browser, so rendering, navigating between pages, and anything that only misbehaves once JavaScript is running are outside its reach, as they are for the [frontend tests](#frontend-tests), which mount components in isolation.
+
+If you need that browser layer, you are supplying your own tooling, such as Playwright or Cypress, and pointing it at a running Flarum install. There is nothing Flarum-specific to set up and no helper package to install, so treat it as testing any other web application. A throwaway install created the same way [the integration test suite creates one](#setup) is a reasonable target to point it at.
