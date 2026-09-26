@@ -40,3 +40,37 @@ return [
 ```
 
 With a good understanding of TextFormatter, this will allow you to achieve anything from simple BBCode tag additions to more complex formatting tasks like Flarum's **Mentions** extension.
+
+## Link Attributes
+
+Links in post content are rewritten at render time, so `rel` and `target` are not something you set when the post is written. The `Link` extender lets you decide both per link, which is how you would add `rel="nofollow"` to outbound links or open them in a new tab.
+
+Both callbacks receive the link's URI, your forum's own URL, and the attributes TextFormatter has collected so far. Return the value you want set, or nothing to leave the attribute alone:
+
+```php
+use Flarum\Extend;
+use Psr\Http\Message\UriInterface;
+
+return [
+    (new Extend\Link())
+        ->setRel(function (?UriInterface $uri, string $siteUrl, array $attributes) {
+            // Only mark links that point somewhere else.
+            if ($uri && $uri->getHost() && $uri->getHost() !== parse_url($siteUrl, PHP_URL_HOST)) {
+                return 'nofollow noopener';
+            }
+        })
+        ->setTarget(function (?UriInterface $uri, string $siteUrl, array $attributes) {
+            if ($uri && $uri->getHost() && $uri->getHost() !== parse_url($siteUrl, PHP_URL_HOST)) {
+                return '_blank';
+            }
+        }),
+];
+```
+
+The URI may be `null`, since not every link TextFormatter produces carries a parseable URL, so check it before calling anything on it.
+
+:::caution This runs on every link in every rendered post
+
+The callbacks are invoked while rendering, once per link, so keep them cheap. In particular do not query the database or call out over the network from inside one: a discussion page with a hundred links would make a hundred of those calls.
+
+:::

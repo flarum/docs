@@ -185,3 +185,21 @@ The general-purpose method that all the above convenience methods are built on. 
         // ...
     ])
 ```
+
+### Recompiling Assets When a Setting Changes
+
+Some settings end up baked into the compiled JavaScript rather than read at runtime. Changing one of those has no visible effect until the assets are rebuilt, which is a confusing thing for an admin to run into: they save the setting, nothing happens, and there is no error to explain why.
+
+Tell Flarum which of your settings that applies to, and saving one will flush the JavaScript cache:
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\Settings())
+        ->serializeToForum('acmeMode', 'acme.mode')
+        ->resetJsCacheFor('acme.mode'),
+];
+```
+
+Only add this for settings that genuinely are compiled in. Flushing on a setting that is read at runtime just makes saving it needlessly slow for the admin.

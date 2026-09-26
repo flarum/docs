@@ -173,3 +173,31 @@ return $handler->handle($request);
 ```
 
 Great! We're all done here. Now you can make the middleware of your dreams!
+
+## Exempting a Route from CSRF Checks
+
+Flarum protects state-changing requests with a CSRF token, enforced by middleware. A request without a valid token is rejected before it reaches your controller.
+
+That is the right default, but it is wrong for an endpoint whose caller cannot hold a token: an incoming webhook from a payment provider, or a callback from an external service. Exempt such a route by name with the `Csrf` extender:
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\Routes('api'))
+        ->post('/acme/webhook', 'acme.webhook', WebhookController::class),
+
+    (new Extend\Csrf())
+        ->exemptRoute('acme.webhook'),
+];
+```
+
+The argument is the route's **name**, the second argument you gave when [defining the route](routes.md#defining-routes), not its path.
+
+:::danger An exempt route is protecting itself
+
+CSRF is what stops another site making a request as one of your logged-in users. Removing it means any page anywhere can invoke that endpoint against your forum with the visitor's cookies attached, so the route has to establish its caller some other way: a shared secret in a header, a signature over the request body, or an [API key](../rest-api.md#api-keys).
+
+Exempt the single named route that needs it, never a route that acts on behalf of whoever happens to be signed in.
+
+:::
