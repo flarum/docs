@@ -196,9 +196,11 @@ php flarum realtime:halt
 
 ## Troubleshooting
 
-`php flarum realtime:info` prints the settings the daemon is actually using, which is the fastest way to find a host or port that does not match what browsers are being told.
+`php flarum realtime:info` is the first thing to reach for. It lists the channels currently open, counts how many signed-in members are connected, and then sends three test events: one directly, one asynchronously, and one through the queue.
 
-**Nothing updates, and no errors.** Check the daemon is running (`supervisorctl status` or `systemctl status flarum-realtime.service`) and that a queue worker is running too. Realtime hands its pushes to the queue, so with no worker consuming it, events simply pile up.
+Those three tell you different things. If the direct and async events succeed, your backend can reach the daemon, so the `php-client-*` settings and the daemon itself are fine. If those two work but the queued one never arrives, the problem is your queue worker rather than realtime. If none of them succeed, the daemon is not reachable from PHP at all.
+
+**Nothing updates, and no errors.** Check the daemon is running (`supervisorctl status` or `systemctl status flarum-realtime.service`) and that a queue worker is running too. Realtime hands its pushes to the queue, so with no worker consuming it, events simply pile up. `realtime:info` above distinguishes the two cases.
 
 **`SendTriggerJob` fails every time.** Raise the queue worker's timeout. The default is 60 seconds, which this job can exceed on a busy forum:
 
