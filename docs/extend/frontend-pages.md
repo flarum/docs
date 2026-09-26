@@ -62,7 +62,7 @@ Using `PageStructure` is not required, but it is recommended. It provides a cons
 Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities.
 To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.
 
-An example from the [Tags extension](https://github.com/flarum/tags/blob/master/js/src/admin/addTagsHomePageOption.js):
+An example from the [Tags extension](https://github.com/flarum/tags/blob/2.x/js/src/admin/addTagsHomePageOption.js):
 
 ```js
 import { extend } from 'flarum/common/extend';

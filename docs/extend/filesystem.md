@@ -2,7 +2,7 @@
 
 Flarum core integrates with the filesystem to store and serve assets (like compiled JS/CSS or upload logos/favicons) and avatars.
 
-Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/12.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
+Extensions can use Flarum's provided utils for their own filesystem interaction and file storage needs. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/13.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Disks
 
@@ -11,7 +11,7 @@ Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
 
 ### Using existing disks
 
-To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Factory.html).
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/13.x/Illuminate/Contracts/Filesystem/Factory.html).
 To do so, you should inject the factory contract in your class, and access the disks you need.
 
 Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
@@ -77,7 +77,7 @@ class DeleteLogoController extends AbstractDeleteController
 }
 ```
 
-The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/11.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
+The object returned by `$filesystemFactory->disk(DISK_NAME)` implements the [Illuminate\Contracts\Filesystem\Cloud](https://laravel.com/api/13.x/Illuminate/Contracts/Filesystem/Cloud.html) interface, and can be used to create/get/move/delete files, and to get the URL to a resource.
 
 ### Declaring new disks
 
@@ -100,13 +100,13 @@ return [
 
 Since all disks use the local filesystem by default, you'll need to provide a base path and base URL for the local filesystem.
 
-The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/12.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
+The config array can contain other entries supported by [Laravel disk config arrays](https://laravel.com/docs/13.x/filesystem#configuration). The `driver` key should not be provided, and will be ignored.
 
 ## Storage drivers
 
 Flarum selects the active driver for each disk by checking the `disk_driver.DISK_NAME` key in the [settings repository](settings.md) and [config.php file](../config.md). If no driver is configured, or the configured driver is unavailable, Flarum will default to the `local` driver.
 
-You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/framework/blob/main/framework/core/src/Filesystem/DriverInterface.php#L16), and registering it via the `Filesystem` extender:
+You can define new storage drivers by implementing the [`Flarum\Filesystem\DriverInterface` interface](https://github.com/flarum/framework/blob/2.x/framework/core/src/Filesystem/DriverInterface.php#L16), and registering it via the `Filesystem` extender:
 
 ```php
 use Flarum\Extend;

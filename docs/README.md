@@ -18,7 +18,7 @@ Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk
 
 * **Powerful and extensible.** Customize, extend, and integrate Flarum to suit your community. Flarum’s architecture is amazingly flexible, with a [powerful Extension API](./extend/README.md).
 
-* **Free and open.** Flarum is released under the [MIT license](https://github.com/flarum/flarum/blob/master/LICENSE).
+* **Free and open.** Flarum is released under the [MIT license](https://github.com/flarum/flarum/blob/2.x/LICENSE).
 
 You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
 
