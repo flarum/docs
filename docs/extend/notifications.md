@@ -21,6 +21,7 @@ Lets take a look at an example from [Flarum Likes](https://github.com/flarum/lik
 
 namespace Flarum\Likes\Notification;
 
+use Flarum\Database\AbstractModel;
 use Flarum\Notification\AlertableInterface;
 use Flarum\Notification\Blueprint\BlueprintInterface;
 use Flarum\Post\Post;
@@ -28,41 +29,51 @@ use Flarum\User\User;
 
 class PostLikedBlueprint implements BlueprintInterface, AlertableInterface
 {
-    public $post;
-
-    public $user;
-
-    public function __construct(Post $post, User $user)
-    {
-        $this->post = $post;
-        $this->user = $user;
+    public function __construct(
+        public Post $post,
+        public User $user
+    ) {
     }
 
-    public function getSubject()
+    public function getSubject(): ?AbstractModel
     {
         return $this->post;
     }
 
-    public function getFromUser()
+    public function getFromUser(): ?User
     {
         return $this->user;
     }
 
-    public function getData()
+    public function getData(): mixed
     {
+        return null;
     }
 
-    public static function getType()
+    public static function getType(): string
     {
         return 'postLiked';
     }
 
-    public static function getSubjectModel()
+    public static function getSubjectModel(): string
     {
         return Post::class;
     }
 }
 ```
+
+:::caution Declare the return types
+
+`BlueprintInterface` declares a return type on all five methods, so an implementation has to as well. PHP treats an omitted return type as wider than a declared one, and a return type may only be narrowed, so leaving them off is a fatal error rather than an untidiness:
+
+```
+Declaration of PostLikedBlueprint::getSubject() must be compatible with
+BlueprintInterface::getSubject(): ?AbstractModel
+```
+
+Note also that `getSubject()` is typed against `Flarum\Database\AbstractModel` rather than `Post`, since that is what the interface promises.
+
+:::
 
 Take a look at [`DiscussionRenamedBlueprint`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Notification/Blueprint/DiscussionRenamedBlueprint.php) if you want another example.
 
