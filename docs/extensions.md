@@ -9,7 +9,7 @@ This article will focus on managing extensions from a forum admin's perspective.
 
 ## Extension Manager
 
-The extension manager is an extension that comes bundled with Flarum when installed via an archive. It provides a graphical interface for installing and updating both extensions and Flarum itself.
+The extension manager is an extension that comes bundled with Flarum when installed via an archive. It provides a graphical interface for installing and updating both extensions and Flarum itself, within a major version. Upgrading across majors, such as 1.x to 2.0, has to be done with Composer on the command line: see [the upgrade guide](update.md).
 
 If you do not have the extension manager installed and you wish to install it, you can do so by running the following command in your Flarum directory:
 

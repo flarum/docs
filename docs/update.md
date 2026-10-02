@@ -8,9 +8,11 @@ Flarum 2.0 is in its release-candidate phase. The API is stable and many forums 
 
 This guide walks you through upgrading from Flarum v1 to v2. You'll need [Composer](https://getcomposer.org) — if you're not familiar with it, read [our guide](composer.md) first.
 
-:::info
+:::danger Run this upgrade with Composer, not the extension manager
 
-If you have the [extension manager](./extensions#extension-manager) extension installed, you can run the upgrade from its interface instead of the command line. You should still follow this guide for all the preparation steps.
+The [extension manager](./extensions#extension-manager) cannot move a forum from 1.x to 2.0. Its update check skips `flarum/core`, so it never sees that a new major version exists and refuses the upgrade; and the step meant to relax your extension version constraints beforehand does not relax them. Use the command line for this upgrade.
+
+The extension manager is still the right tool for routine updates once you are on 2.0, because those stay within a major version. It is only the jump across majors it cannot do.
 
 :::
 
@@ -103,6 +105,10 @@ php flarum cache:clear
 Then restart your PHP process and opcache if applicable.
 
 ## Troubleshooting
+
+### The extension manager reports that no new major version is available
+
+This is expected: the extension manager cannot perform the 1.x to 2.0 upgrade, for the reasons given at the top of this page. Run the upgrade with Composer as described above.
 
 ### The update command doesn't upgrade Flarum
 
