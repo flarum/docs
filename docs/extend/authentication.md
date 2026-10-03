@@ -58,28 +58,36 @@ A checker returning `true` grants access to that account, so a mistake here is a
 
 ## Session Drivers
 
-Sessions are stored using Laravel's session handlers, and by default Flarum uses the `file` driver, which writes to `storage/sessions`. A driver is chosen by setting `session.driver` in `config.php`:
+Sessions are stored using Laravel's session handlers, and by default Flarum uses the `file` driver, which writes to `storage/sessions`.
+
+:::tip Storing sessions in Redis
+
+Install [`fof/redis`](https://github.com/FriendsOfFlarum/redis) rather than setting a `redis` driver in `config.php` by hand. Laravel's built-in driver names, `redis` included, resolve in Flarum, but Flarum does not set up the cache stores they rely on. `fof/redis` replaces the session handler with one built to work with Flarum.
+
+:::
+
+An extension that keeps sessions somewhere else can register a driver with the `Session` extender. Admins then select it by setting `session.driver` in `config.php` to the name you register:
+
+```php
+use Acme\Session\AcmeSessionDriver;
+use Flarum\Extend;
+
+return [
+    (new Extend\Session())
+        ->driver('acme', AcmeSessionDriver::class),
+];
+```
 
 ```php
 return [
     // ..
     'session' => [
-        'driver' => 'redis',
+        'driver' => 'acme',
     ],
 ];
 ```
 
-Core registers no drivers of its own beyond Laravel's default, so anything other than `file` comes from an extension. Register one with the `Session` extender, giving it the name that `config.php` will refer to:
-
-```php
-use Acme\Session\RedisSessionDriver;
-use Flarum\Extend;
-
-return [
-    (new Extend\Session())
-        ->driver('redis', RedisSessionDriver::class),
-];
-```
+If the configured driver does not exist, Flarum falls back to `file` and logs a critical error, so a typo here shows up in the log rather than as a crash.
 
 A driver implements `Flarum\User\SessionDriverInterface`, whose single `build()` method returns a PHP `SessionHandlerInterface`. It receives the settings repository and the `config.php` wrapper, so a driver can take its connection details from either:
 
@@ -93,11 +101,11 @@ use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\SessionDriverInterface;
 use SessionHandlerInterface;
 
-class RedisSessionDriver implements SessionDriverInterface
+class AcmeSessionDriver implements SessionDriverInterface
 {
     public function build(SettingsRepositoryInterface $settings, Config $config): SessionHandlerInterface
     {
-        return new RedisSessionHandler(
+        return new AcmeSessionHandler(
             $config['session']['connection'] ?? 'default'
         );
     }

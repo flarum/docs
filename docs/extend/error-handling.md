@@ -108,11 +108,17 @@ use Flarum\Extend;
 
 return [
     (new Extend\ErrorHandling())
-        ->reporter(SentryReporter::class),
+        ->reporter(AcmeTrackerReporter::class),
 ];
 ```
 
-Registering a reporter adds to the list rather than replacing it, so core's log reporter keeps working alongside yours.
+Registering a reporter adds to the list rather than replacing it. Core's log reporter, and any reporter another extension has registered, keeps working alongside yours, and every one of them receives each error.
+
+:::tip Using Sentry?
+
+[`fof/sentry`](https://github.com/FriendsOfFlarum/sentry) already registers a reporter for Sentry. Install that rather than writing your own, or every error will be sent to Sentry twice.
+
+:::
 
 :::caution Reporters only see unhandled errors
 

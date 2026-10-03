@@ -43,7 +43,15 @@ With a good understanding of TextFormatter, this will allow you to achieve anyth
 
 ## Link Attributes
 
-Links in post content are rewritten at render time, so `rel` and `target` are not something you set when the post is written. The `Link` extender lets you decide both per link, which is how you would add `rel="nofollow"` to outbound links or open them in a new tab.
+Links in post content are rewritten at render time, so `rel` and `target` are not something you set when the post is written. The `Link` extender lets you decide both per link.
+
+:::tip Most forums want an extension, not code
+
+[`fof/seo`](https://github.com/FriendsOfFlarum/seo) already handles the common case: it adds `nofollow` to links pointing off the forum, except for domains an admin puts on its do-follow list, and opens those links in a new tab. Reach for the `Link` extender only when you need a rule it does not cover. If you run both, they set `rel` on the same links and whichever runs last wins.
+
+:::
+
+The example below adds `rel="nofollow noopener"` to links pointing off the forum and opens them in a new tab.
 
 Both callbacks receive the link's URI, your forum's own URL, and the attributes TextFormatter has collected so far. Return the value you want set, or nothing to leave the attribute alone:
 
@@ -67,7 +75,7 @@ return [
 ];
 ```
 
-The URI may be `null`, since not every link TextFormatter produces carries a parseable URL, so check it before calling anything on it.
+The URI is `null` when a link has no `url` attribute, so check it before calling anything on it.
 
 :::caution This runs on every link in every rendered post
 
