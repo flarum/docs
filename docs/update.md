@@ -2,7 +2,7 @@
 
 :::warning
 
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production. It isn't the final stable release yet, so back up your database and test on a staging copy before upgrading a live forum.
+Back up your database and files, and test the upgrade on a staging copy before upgrading a live forum.
 
 :::
 
@@ -56,20 +56,7 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 "flarum/mentions": "*",
 ```
 
-**5. Set `minimum-stability` to `beta`.**
-Until Flarum 2.0 reaches its final stable release, your `composer.json` must allow pre-stable versions:
-
-```json
-"minimum-stability": "beta"
-```
-
-:::info
-
-Once Flarum 2.0 stable is released, you should change this back to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
-
-:::
-
-**6. Update your `config.php` if using MariaDB.**
+**5. Update your `config.php` if using MariaDB.**
 Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
 
 ```php
@@ -86,10 +73,10 @@ Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, upd
     'port' => 3306,
 ```
 
-**7. Check any local extenders.**
+**6. Check any local extenders.**
 If your install uses [local extenders](extenders.md), review them for compatibility with Flarum 2.0's API changes before upgrading.
 
-**8. Disable third-party extensions.**
+**7. Disable third-party extensions.**
 We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong.
 
 ## Running the Upgrade
