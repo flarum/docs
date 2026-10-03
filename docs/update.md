@@ -94,7 +94,7 @@ Once Flarum 2.0 stable is released, you should change this back to `stable`. Lea
 :::
 
 **6. Update your `config.php` if using MariaDB.**
-Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
+Flarum 2.0 distinguishes between MySQL and MariaDB. If your forum runs on MariaDB, you must change the `driver` value in `config.php` to `mariadb`. Leaving it as `mysql` will cause compatibility errors once you are on 2.0.
 
 :::tip Not sure which one you have?
 
