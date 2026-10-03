@@ -96,6 +96,18 @@ Once Flarum 2.0 stable is released, you should change this back to `stable`. Lea
 **6. Update your `config.php` if using MariaDB.**
 Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
 
+:::tip Not sure which one you have?
+
+On Flarum 1.x, `php flarum info` labels the line `MySQL version` whichever server you run, so read the version string rather than the label:
+
+```
+MySQL version: 11.8.9-MariaDB-ubu2404
+```
+
+That forum is on MariaDB and does need this change, despite what the label says. After upgrading, 2.0 reports it as `MariaDB version` correctly.
+
+:::
+
 ```php
 <?php return array (
   'debug' => true,
