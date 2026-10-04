@@ -210,8 +210,11 @@ Some actions are deliberately not logged to avoid duplicates:
 
 ### Flarum GDPR
 
-These actions cover the privacy operations in `flarum/gdpr`. Because erasure and export run on a queued job, the responsible user is recorded explicitly rather than from request context.
+These actions cover the privacy operations in [`flarum/gdpr`](gdpr.md). Because erasure and export run on a queued job, the responsible user is recorded explicitly rather than from request context.
 
+- `user.gdpr_erasure_requested` — a user asked for their data to be erased (payload: user ID).
+- `user.gdpr_erasure_confirmed` — a user confirmed their erasure request via the emailed link (payload: user ID). Attributed to that user, even when the link was opened while logged out.
+- `user.gdpr_erasure_cancelled` — an erasure request was cancelled, by the user or a moderator (payload: user ID). Attributed to whoever cancelled it.
 - `user.gdpr_deleted` — a user's data was erased by deletion (payload: user ID, processor). The entry is attributed to the administrator who processed the request; a scheduled (automatic) erasure has no actor.
 - `user.gdpr_anonymized` — a user's data was erased by anonymization (payload: user ID, processor), attributed as above.
 - `user.gdpr_exported` — a user's data export was requested (payload: user ID), attributed to the requesting actor.
