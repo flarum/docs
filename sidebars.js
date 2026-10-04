@@ -64,7 +64,8 @@ module.exports = {
       className: 'menu__manage-category',
       collapsible: false,
       items: [
-        'extensions/audit'
+        'extensions/audit',
+        'extensions/realtime'
       ]
     },
     {
