@@ -67,6 +67,7 @@ module.exports = {
         'extensions/akismet',
         'extensions/audit',
         'extensions/gdpr',
+        'extensions/nicknames',
         'extensions/realtime'
       ]
     },
