@@ -64,6 +64,7 @@ module.exports = {
       className: 'menu__manage-category',
       collapsible: false,
       items: [
+        'extensions/akismet',
         'extensions/audit',
         'extensions/gdpr',
         'extensions/realtime'
