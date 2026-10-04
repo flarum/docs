@@ -24,12 +24,6 @@ Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk
 
 You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
 
-## What's New in Flarum 2.0
-
-Flarum 2.0 brings private messages, realtime updates, a rebuilt search and an audit log, runs on PostgreSQL and SQLite as well as MySQL and MariaDB, and moves the whole stack to modern PHP. If you are coming from 1.x, see [Updating to Flarum 2.0](update.md), or [Updating For 2.0](extend/update-2_0.md) for extension developers.
-
-![Everything new in Flarum 2.0: performance improvements, new features for communities, admins, hosts and developers, and every major dependency upgraded.](./assets/flarum-2.0-infographic.png)
-
 ## Help the Flarum Project
 
 Flarum is [free, open source](https://github.com/flarum/core) software, maintained and governed by volunteers. We rely on community contributions to help us improve and expand Flarum.
