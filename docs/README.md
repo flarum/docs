@@ -4,6 +4,8 @@ slug: /
 
 # About Flarum
 
+![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](./assets/flarum-2.0-hero.png)
+
 Flarum is a delightfully simple discussion platform for your website. It's fast, free, and easy to use, with all the features you need to run a successful community. It's also extremely extensible, allowing for ultimate customizability.
 
 ![Flarum Home Screenshot](./assets/home_screenshot.png)
@@ -21,6 +23,12 @@ Flarum is the combined successor of [esoTalk](https://github.com/esotalk/esoTalk
 * **Free and open.** Flarum is released under the [MIT license](https://github.com/flarum/flarum/blob/master/LICENSE).
 
 You can read more about our [philosophy and values for Flarum here](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
+
+## What's New in Flarum 2.0
+
+Flarum 2.0 brings private messages, realtime updates, a rebuilt search and an audit log, runs on PostgreSQL and SQLite as well as MySQL and MariaDB, and moves the whole stack to modern PHP. If you are coming from 1.x, see [Updating to Flarum 2.0](update.md), or [Updating For 2.0](extend/update-2_0.md) for extension developers.
+
+![Everything new in Flarum 2.0: performance improvements, new features for communities, admins, hosts and developers, and every major dependency upgraded.](./assets/flarum-2.0-infographic.png)
 
 ## Help the Flarum Project
 
