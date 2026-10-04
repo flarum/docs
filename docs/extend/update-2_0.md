@@ -1,5 +1,7 @@
 # Updating For 2.0
 
+![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](../assets/flarum-2.0-header.png)
+
 Flarum 2.0 is a major release that includes a number of breaking changes and new features. This guide will help you update your extension to be compatible with Flarum 2.0 and take advantage of the new additions.
 
 :::tip

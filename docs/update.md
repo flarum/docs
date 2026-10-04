@@ -1,5 +1,7 @@
 # Updating to Flarum 2.0
 
+![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](./assets/flarum-2.0-header.png)
+
 :::warning
 
 Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production. It isn't the final stable release yet, so back up your database and test on a staging copy before upgrading a live forum.
