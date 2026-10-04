@@ -65,6 +65,7 @@ module.exports = {
       collapsible: false,
       items: [
         'extensions/audit',
+        'extensions/gdpr',
         'extensions/realtime'
       ]
     },
@@ -154,6 +155,7 @@ module.exports = {
         'extend/notifications',
         'extend/realtime',
         'extend/audit',
+        'extend/gdpr',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
