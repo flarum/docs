@@ -1,4 +1,10 @@
+---
+image: img/extensions/audit-share.png
+---
+
 # Audit
+
+![Audit: keep a log of moderation and administration actions. Bundled with Flarum 2.0.](../assets/extensions/audit.png)
 
 The Audit extension (`flarum/audit`) records moderation and administration actions to a tamper-resistant audit log, so you can see who did what, when, and from where.
 
