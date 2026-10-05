@@ -4,25 +4,25 @@ Bất kỳ cộng đồng nào cũng cần gửi email để cho phép xác minh
 
 ## Trình điều khiển có sẵn
 
-Flarum cung cấp một số trình điều khiển theo mặc định, chúng được liệt kê và giải thích bên dưới. Các nhà phát triển cũng có thể thêm [trình điều khiển thư tùy chỉnh thông qua các tiện ích mở rộng](extend/mail.md).
+Flarum cung cấp một số trình điều khiển theo mặc định, chúng được liệt kê và giải thích bên dưới. Developers can also add [custom mail drivers through extensions](extend/mail.md).
 
 ### SMTP
 
-Đây có lẽ là trình điều khiển email được sử dụng phổ biến nhất, cho phép bạn định cấu hình máy chủ lưu trữ, cổng / mã hóa, tên người dùng và mật khẩu cho dịch vụ SMTP bên ngoài. Xin lưu ý rằng trường mã hóa yêu cầu `ssl` hoặc `tls`.
+Đây có lẽ là trình điều khiển email được sử dụng phổ biến nhất, cho phép bạn định cấu hình máy chủ lưu trữ, cổng / mã hóa, tên người dùng và mật khẩu cho dịch vụ SMTP bên ngoài. Please note that the encryption field expects either `ssl` or `tls`.
 
 ### Mail
 
-Trình điều khiển `mail` sẽ cố gắng sử dụng hệ thống email sendmail/postfix có trong nhiều máy chủ lưu trữ. Bạn phải cài đặt đúng cách và định cấu hình sendmail trên máy chủ của mình để nó hoạt động.
+The `mail` driver will try to use the sendmail / postfix email system included in many hosting servers. Bạn phải cài đặt đúng cách và định cấu hình sendmail trên máy chủ của mình để nó hoạt động.
 
 ### Mailgun
 
-Trình điều khiển này sử dụng tài khoản [Mailgun](https://www.mailgun.com/) của bạn để gửi email. Bạn sẽ cần một khóa bí mật, cũng như miền và khu vực từ cấu hình mailgun của bạn.
+This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails. Bạn sẽ cần một khóa bí mật, cũng như miền và khu vực từ cấu hình mailgun của bạn.
 
-Để sử dụng trình điều khiển mailgun, bạn sẽ cần cài đặt gói trình soạn nhạc Guzzle (một ứng dụng khách PHP HTTP). Bạn có thể thực hiện việc này bằng cách chạy `composer require guzzlehttp/guzzle:^6.0|^7.0` trong thư mục gốc của cài đặt Flarum của bạn.
+Để sử dụng trình điều khiển mailgun, bạn sẽ cần cài đặt gói trình soạn nhạc Guzzle (một ứng dụng khách PHP HTTP). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
 ### Nhật ký
 
-Trình điều khiển thư nhật ký KHÔNG GỬI MAIL, và chủ yếu được sử dụng bởi các nhà phát triển. Nó ghi nội dung của bất kỳ email nào vào tệp nhật ký trong `FLARUM_ROOT_DIRECTORY/storage/logs`.
+Trình điều khiển thư nhật ký KHÔNG GỬI MAIL, và chủ yếu được sử dụng bởi các nhà phát triển. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
 
 ## Thử nghiệm Email
 
