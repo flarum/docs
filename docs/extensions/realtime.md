@@ -144,6 +144,7 @@ return [
 | `php-client-secure` | whether your forum URL is `https` | Whether the backend talks TLS to the daemon. |
 | `php-client-timeout` | `3` | Seconds before the backend gives up sending an event. |
 | `max-connections` | `1000` | Maximum concurrent connections. Lower it if the daemon is straining the server. |
+| `max-channels-per-connection` | `100` | Most channels a single connection may subscribe to. A real client needs only a handful, so this is a safety limit against a misbehaving or malicious client; raise it only if a legitimate use pushes a connection past it. |
 | `app-key` | derived from your forum's host | Public key the browser and backend authenticate with. |
 | `app-secret` | derived from your database password | Secret used for private channels and for sending events. |
 
