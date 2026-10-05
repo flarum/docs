@@ -47,7 +47,7 @@ Next, ensure that Composer accepts unstable releases from your local copies by s
 
 Finally, run `composer install` to complete the installation from the path repositories.
 
-After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. Debug mode also forces a re-compilation of Flarum's asset files on each request, removing the need to call `php flarum cache:clear` after each change to the extension's JavaScript or CSS.
+After your local installation is set up, make sure you've enabled `debug` mode in **config.php**, and set `display_errors` to `On` in your php config. This will allow you to see error details for both Flarum and PHP. This will allow you to see error details for both Flarum and PHP.
 
 Flarum's front-end code is written in ES6 and transpiled into JavaScript. During development you will need to recompile the JavaScript using [Node.js](https://nodejs.org/) and [`yarn`](https://yarnpkg.com/). **Please do not commit the resulting `dist` files when sending PRs**; this is automatically taken care of when changes are merged into the `main` branch.
 
@@ -74,7 +74,8 @@ yarn dev
 
 ### Development Tools
 
-After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes. Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
+After you've forked and cloned the repositories you'll be working on, you'll need to set up local hosting so you can test out your changes.
+Flarum doesn't currently come with a development server, so you'll need to set up Apache/NGINX/Caddy/etc to serve this local Flarum installation.
 
 Alternatively, you can use tools like, [Laravel Valet](https://laravel.com/docs/master/valet) (Mac), [XAMPP](https://www.apachefriends.org/index.html) (Windows), or [Docker-Flarum](https://github.com/mondediefr/docker-flarum) (Linux) to serve a local forum.
 
@@ -85,36 +86,36 @@ Most Flarum contributors develop with [PHPStorm](https://www.jetbrains.com/phpst
 A typical contribution workflow looks like this:
 
 0. 🧭 **Plan** out your contribution
-    * Figure out [which issue you want to tackle](#what-to-work-on)
-    * Set up a [development environment](#setting-up-a-local-codebase)
+   - Figure out [which issue you want to tackle](#what-to-work-on)
+   - Set up a [development environment](#setting-up-a-local-codebase)
 
 1. 🌳 **Branch** off the appropriate branch into a new feature branch.
-    * *Bug fixes* should be sent to the latest stable branch.
-    * *Minor* features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
-    * *Major* features should always be sent to the `main` branch, which contains the upcoming Flarum release.
-    * Internally we use the naming scheme `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
+   - _Bug fixes_ should be sent to the latest stable branch.
+   - _Minor_ features that are fully backwards compatible with the current Flarum release may be sent to the latest stable branch.
+   - _Major_ features should always be sent to the `main` branch, which contains the upcoming Flarum release.
+   - Internally we use the naming scheme `<initials>/<short-description>` (eg. `tz/refactor-frontend`).
 
 2. 🔨 **Write** some code.
-    * See below about [Coding Style](#coding-style).
+   - See below about [Coding Style](#coding-style).
 
 3. 🚦 **Test** your code.
-    * Add unit tests as necessary when fixing bugs or adding features.
-    * Run the test suite with `vendor/bin/phpunit` in the relevant package folder.
-    * See [here](extend/testing.md) for more information about testing in Flarum.
+   - Add unit tests as necessary when fixing bugs or adding features.
+   - Run the test suite with `vendor/bin/phpunit` in the relevant package folder.
+   - See [here](extend/testing.md) for more information about testing in Flarum.
 
 4. 💾 **Commit** your code with a descriptive message.
-    * If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
-    * Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
-    * *Fix* commits should describe the issue fixed, not how it was fixed.
+   - If your change resolves an existing issue (usually, it should) include "Fixes #123" on a newline, where 123 is the issue number.
+   - Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) specification.
+   - _Fix_ commits should describe the issue fixed, not how it was fixed.
 
 5. 🎁 **Submit** a Pull Request on GitHub.
-    * Fill out the pull request template.
-    * If your change is visual, include a screenshot or GIF demonstrating the change.
-    * Do NOT check-in the JavaScript `dist` files. These will be compiled automatically on merge.
+   - Fill out the pull request template.
+   - If your change is visual, include a screenshot or GIF demonstrating the change.
+   - Do NOT check-in the JavaScript `dist` files. These will be compiled automatically on merge.
 
 6. 🤝 **Engage** with the Flarum team for approval.
-    * Team members will review your code. We may suggest some changes or improvements or alternatives, but for small changes your pull request should be accepted quickly.
-    * When addressing feedback, push additional commits instead of overwriting or squashing (we will squash on merge).
+   - Team members will review your code. We may suggest some changes or improvements or alternatives, but for small changes your pull request should be accepted quickly.
+   - When addressing feedback, push additional commits instead of overwriting or squashing (we will squash on merge).
 
 7. 🕺 **Dance** like you just contributed to Flarum.
 
@@ -128,10 +129,10 @@ Don't worry if your code styling isn't perfect! StyleCI and Prettier will automa
 
 Flarum follows the [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) coding standard and the [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) autoloading standard. On top of this, we conform to a number of [other style rules](https://github.com/flarum/framework/blob/main/.styleci.yml). We use PHP 7 type hinting and return type declarations where possible, and [PHPDoc](https://docs.phpdoc.org/) to provide inline documentation. Try and mimic the style used by the rest of the codebase in your contributions.
 
-* Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
-* Interfaces should be suffixed with `Interface` (eg. `MailableInterface`)
-* Abstract classes should be prefixed with `Abstract` (eg. `AbstractModel`)
-* Traits should be suffixed with `Trait` (eg. `ScopeVisibilityTrait`)
+- Namespaces should be singular (eg. `Flarum\Discussion`, not `Flarum\Discussions`)
+- Interfaces should be suffixed with `Interface` (eg. `MailableInterface`)
+- Abstract classes should be prefixed with `Abstract` (eg. `AbstractModel`)
+- Traits should be suffixed with `Trait` (eg. `ScopeVisibilityTrait`)
 
 ### JavaScript
 
@@ -140,16 +141,18 @@ Flarum's JavaScript mostly follows the [Airbnb Style Guide](https://github.com/a
 ### Database
 
 **Columns** should be named according to their data type:
-* DATETIME or TIMESTAMP: `{verbed}_at` (eg. created_at, read_at) or `{verbed}_until` (eg. suspended_until)
-* INT that is a count: `{noun}_count` (eg. comment_count, word_count)
-* Foreign key: `{verbed}_{entity}_id` (eg. hidden_user_id)
-    * Verb can be omitted for primary relationship (eg. post author is just `user_id`)
-* BOOL: `is_{adjective}` (eg. is_locked)
+
+- DATETIME or TIMESTAMP: `{verbed}_at` (eg. created_at, read_at) or `{verbed}_until` (eg. suspended_until)
+- INT that is a count: `{noun}_count` (eg. comment_count, word_count)
+- Foreign key: `{verbed}_{entity}_id` (eg. hidden_user_id)
+  - Verb can be omitted for primary relationship (eg. post author is just `user_id`)
+- BOOL: `is_{adjective}` (eg. is_locked)
 
 **Tables** should be named as follows:
-* Use plural form (`discussions`)
-* Separate multiple words with underscores (`access_tokens`)
-* For relationships tables, join the two table names in singular form with an underscore in alphabetical order (eg. `discussion_user`)
+
+- Use plural form (`discussions`)
+- Separate multiple words with underscores (`access_tokens`)
+- For relationships tables, join the two table names in singular form with an underscore in alphabetical order (eg. `discussion_user`)
 
 ### CSS
 
