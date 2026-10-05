@@ -2,6 +2,11 @@ name: Deploy to production
 
 on:
   workflow_dispatch:
+    inputs:
+      crowdin_pr:
+        description: Number of the Crowdin PR being deployed, to announce it in Discord (optional)
+        required: false
+        default: ''
   push:
     branches:
       - main
@@ -49,3 +54,36 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           source: build
           target: public_html/docs.flarum.org
+
+      - name: Announce Crowdin deploy in Discord
+        if: >-
+          inputs.crowdin_pr != '' ||
+          (github.event_name == 'pull_request_target' && github.event.pull_request.head.ref == 'l10n_main')
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PR_NUMBER: ${{ inputs.crowdin_pr || github.event.pull_request.number }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not set; skipping."
+            exit 0
+          fi
+
+          jq -n \
+            --arg number "$PR_NUMBER" \
+            --arg url "$REPO_URL/pull/$PR_NUMBER" \
+            '{
+              username: "GitHub",
+              allowed_mentions: { parse: [] },
+              embeds: [{
+                title: ("Crowdin updates deployed (#" + $number + ")"),
+                url: $url,
+                description: "The latest translations are live on docs.flarum.org.",
+                color: 5763719
+              }]
+            }' > payload.json
+
+          curl --fail-with-body --silent --show-error \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$DISCORD_WEBHOOK_URL"
