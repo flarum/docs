@@ -4,11 +4,11 @@ slug: /
 
 # Về Flarum
 
-![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](./assets/flarum-2.0-hero.png)
+![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](/img/docs/flarum-2.0-hero.png)
 
 Flarum là một nền tảng thảo luận đơn giản thú vị cho trang web của bạn. Nó nhanh chóng, miễn phí và dễ sử dụng, với tất cả các tính năng bạn cần để điều hành một cộng đồng thành công. Nó cũng cực kỳ có thể mở rộng, cho phép khả năng tùy chỉnh cao nhất.
 
-![Flarum Home Screenshot](./assets/home_screenshot.png)
+![Flarum Home Screenshot](/img/docs/home_screenshot.png)
 
 ## Mục tiêu
 

@@ -4,7 +4,7 @@ image: img/extensions/gdpr-share.png
 
 # GDPR
 
-![GDPR Data Management: members can export their data or ask for erasure. Admins choose deletion or anonymization. Bundled with Flarum 2.0.](../assets/extensions/gdpr.png)
+![GDPR Data Management: members can export their data or ask for erasure. Admins choose deletion or anonymization. Bundled with Flarum 2.0.](/img/docs/extensions/gdpr.png)
 
 The GDPR extension (`flarum/gdpr`) gives your members control over their personal data, and gives you the tools to handle their requests. It is a [bundled extension](../extensions.md), and it is disabled by default.
 

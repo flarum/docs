@@ -12,7 +12,7 @@ In the [previous article](models.md), we learned how Flarum uses models to inter
 
 Trước khi chúng ta đi vào chi tiết về cách mở rộng API dữ liệu của Flarum, chúng ta nên suy nghĩ về vòng đời của một yêu cầu API điển hình:
 
-![Flarum API Flowchart](../assets/api_flowchart.svg)
+![Flarum API Flowchart](/img/docs/api_flowchart.svg)
 
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. Each API Resource is distinguished by a unique type and has a set of endpoints. You can read more about them in the below sections.

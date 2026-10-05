@@ -2,11 +2,10 @@ files:
   - source: /i18n/en/**/*
     translation: /i18n/%two_letters_code%/**/%original_file_name%
   # 2.x (current). The old Dec-2024 translations were removed ahead of the 2.0
-  # release, so this restarts 2.x translation from current English. Images in
-  # docs/assets are not sent for translation.
+  # release, so this restarts 2.x translation from current English. Images live
+  # in static/img/docs and are referenced by absolute path, so every locale
+  # resolves them without needing its own copy.
   - source: /docs/**/*
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%
-    ignore:
-      - /docs/assets/**/*
   - source: /versioned_docs/version-1.x/**/*
     translation: /i18n/%two_letters_code%/docusaurus-plugin-content-docs/version-1.x/**/%original_file_name%

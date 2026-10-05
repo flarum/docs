@@ -94,7 +94,7 @@ Các máy chủ chia sẻ thường có phiên bản php thấp được sử d�
 
 :::
 
-![Extension Manager Queue Table Preview](../assets/extension-manager-queue.png)
+![Extension Manager Queue Table Preview](/img/docs/extension-manager-queue.png)
 
 ## TODO
 

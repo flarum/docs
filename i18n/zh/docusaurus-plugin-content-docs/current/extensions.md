@@ -22,7 +22,7 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
-![extension manager admin page](./assets/extension-manager-page.png)
+![extension manager admin page](/img/docs/extension-manager-page.png)
 
 ## 寻找扩展
 
@@ -34,7 +34,7 @@ Flarum 有一个广泛的扩展生态系统，其中大部分是开源和免费�
 
 使用扩展管理扩展，您可以直接从管理仪表盘安装扩展。 Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
 
-![Installing an extension](./assets/install-extension.png)
+![Installing an extension](/img/docs/install-extension.png)
 
 ### 通过命令行
 
@@ -49,7 +49,7 @@ Flarum 有一个广泛的扩展生态系统，其中大部分是开源和免费�
 
 使用扩展管理扩展，您可以直接从管理仪表板更新扩展。 Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update. 如果有可用的更新，您可以点击“全局更新”按钮来更新所有扩展。或者，您可以通过点击您想要更新的扩展旁边的“更新”按钮来更新单个扩展。
 
-![Updating an extension](./assets/update-extension.png)
+![Updating an extension](/img/docs/update-extension.png)
 
 ### 通过命令行
 
@@ -61,7 +61,7 @@ Flarum 有一个广泛的扩展生态系统，其中大部分是开源和免费�
 
 使用扩展管理扩展，您可以直接从管理员面板卸载扩展。 Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
 
-![Uninstalling an extension](./assets/uninstall-extension.png)
+![Uninstalling an extension](/img/docs/uninstall-extension.png)
 
 ### 通过命令行
 
@@ -99,7 +99,7 @@ Extiverse 提供对高级扩展的访问。这是 composer 存储库的一个很
 - Type: `HTTP Bearer`
 - Host: `flarum.org`
 
-![Configure repositories](./assets/config-repositories.png)
+![Configure repositories](/img/docs/config-repositories.png)
 
 :::info
 

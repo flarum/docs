@@ -4,11 +4,11 @@ slug: /
 
 # Flarum? Cos'è?
 
-![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](./assets/flarum-2.0-hero.png)
+![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](/img/docs/flarum-2.0-hero.png)
 
 Flarum è un potente software per creare forum di discussione nel tuo sito web. Velocissimo e facile da utilizzare con tutte le feauture necessarie per la creazione del tuo forum di successo. È anche estremamente estensibile, consentendo la massima personalizzabilità.
 
-![Flarum Home Screenshot](./assets/home_screenshot.png)
+![Flarum Home Screenshot](/img/docs/home_screenshot.png)
 
 ## Obiettivi
 

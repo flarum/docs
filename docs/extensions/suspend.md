@@ -4,7 +4,7 @@ image: img/extensions/suspend-share.png
 
 # Suspend
 
-![Suspend: suspend members so they can't post. Bundled with Flarum 2.0.](../assets/extensions/suspend.png)
+![Suspend: suspend members so they can't post. Bundled with Flarum 2.0.](/img/docs/extensions/suspend.png)
 
 The Suspend extension (`flarum/suspend`) lets moderators suspend members, for a number of days or indefinitely. It is a [bundled extension](../extensions.md), and it is enabled by default.
 

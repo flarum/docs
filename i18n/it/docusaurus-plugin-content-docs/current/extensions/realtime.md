@@ -4,7 +4,7 @@ image: img/extensions/realtime-share.png
 
 # Realtime
 
-![Realtime: new posts, notifications and typing indicators appear live. Now part of Flarum 2.0.](../assets/extensions/realtime.png)
+![Realtime: new posts, notifications and typing indicators appear live. Now part of Flarum 2.0.](/img/docs/extensions/realtime.png)
 
 The Realtime extension (`flarum/realtime`) pushes activity to the forum as it happens, over a websocket, so people do not have to reload to see it. It is a [bundled extension](../extensions.md), and it is disabled by default.
 

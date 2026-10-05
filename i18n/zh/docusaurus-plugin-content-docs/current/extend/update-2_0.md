@@ -1,6 +1,6 @@
 # 升级到 Flarum 2.0
 
-![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](../assets/flarum-2.0-header.png)
+![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](/img/docs/flarum-2.0-header.png)
 
 Flarum 2.0 是一个主版本，包括一些重大变化和新功能。本指南将帮助您更新扩展，使其与 Flarum 2.0 兼容，并利用新增的功能。
 
