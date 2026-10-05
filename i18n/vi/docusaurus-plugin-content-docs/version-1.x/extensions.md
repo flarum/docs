@@ -4,7 +4,8 @@ Flarum là tối giản, nhưng nó cũng có khả năng mở rộng cao. Trên
 
 Cách tiếp cận này làm cho Flarum cực kỳ tùy biến: Bạn có thể tắt bất kỳ tính năng nào bạn không cần và cài đặt các tiện ích mở rộng khác để làm cho diễn đàn của bạn trở nên hoàn hảo cho cộng đồng của bạn.
 
-Để biết thêm thông tin về triết lý của Flarum về những tính năng mà chúng tôi đưa vào cốt lõi hoặc nếu bạn đang muốn tạo tiện ích mở rộng của riêng mình, vui lòng xem [tài liệu về tiện ích mở rộng](extend/README.md) của chúng tôi. Bài viết này sẽ tập trung vào việc quản lý các tiện ích mở rộng từ góc độ của quản trị viên diễn đàn.
+For more information on Flarum's philosophy on what features we include in core, or if you're looking to make your own extension, please see our [extension documentation](extend/README.md).
+Bài viết này sẽ tập trung vào việc quản lý các tiện ích mở rộng từ góc độ của quản trị viên diễn đàn.
 
 ## Extension Manager
 
@@ -24,10 +25,9 @@ The extension manager allows an admin user to install any composer package. Only
 
 ![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
 
-
 ## Tìm Tiện ích mở rộng
 
-Flarum có một hệ sinh thái đa dạng các tiện ích mở rộng, hầu hết đều là mã nguồn mở và miễn phí. Để tìm các tiện ích mở rộng mới và tuyệt vời, hãy truy cập thẻ [Tiện ích mở rộng](https://discuss.flarum.org/t/extensions) trên các diễn đàn cộng đồng của Flarum. [Cơ sở dữ liệu mở rộng Extiverse](https://extiverse.com/) không chính thức cũng là một tài nguyên tuyệt vời.
+Flarum có một hệ sinh thái đa dạng các tiện ích mở rộng, hầu hết đều là mã nguồn mở và miễn phí. To find new and awesome extensions, visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums. The unofficial [Extiverse extension database](https://extiverse.com/) is also a great resource.
 
 ## Cài đặt Tiện ích mở rộng
 
@@ -39,10 +39,10 @@ Using the extension manager extension, you can install extensions directly from 
 
 ### Through the command line
 
-Cũng giống như Flarum, các tiện ích mở rộng được cài đặt thông qua [Composer](https://getcomposer.org), sử dụng SSH. Để cài đặt một tiện ích mở rộng điển hình:
+Just like Flarum, extensions are installed through [Composer](https://getcomposer.org), using SSH. Để cài đặt một tiện ích mở rộng điển hình:
 
-1. `cd` vào thư mục Flarum của bạn. Thư mục này phải chứa các tệp `composer.json`, `flarum` và thư mục ` storage ` (trong số các tệp khác). Bạn có thể kiểm tra nội dung thư mục qua `ls -la`.
-2. Chạy ` composer require TÊN_GÓI_COMPOSER:*`. Điều này sẽ được cung cấp bởi tài liệu của phần mở rộng.
+1. `cd` to your Flarum directory. This directory should contain `composer.json`, `flarum` files and a `storage` directory (among others). You can check directory contents via `ls -la`.
+2. Run `composer require COMPOSER_PACKAGE_NAME:*`. Điều này sẽ được cung cấp bởi tài liệu của phần mở rộng.
 
 ## Cập nhật Tiện ích mở rộng
 
@@ -54,7 +54,7 @@ Using the extension manager extension, you can update extensions directly from t
 
 ### Through the command line
 
-Thực hiện theo các hướng dẫn do nhà phát triển tiện ích mở rộng cung cấp. Nếu bạn đang sử dụng `*` làm chuỗi phiên bản cho các tiện ích mở rộng ([như được khuyến nghị](composer.md)), hãy chạy các lệnh được liệt kê trong [Hướng dẫn nâng cấp Flarum](update.md) sẽ cập nhật tất cả các tiện ích mở rộng của bạn.
+Thực hiện theo các hướng dẫn do nhà phát triển tiện ích mở rộng cung cấp. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
 
 ## Gỡ cài đặt Tiện ích mở rộng
 
@@ -68,9 +68,9 @@ Using the extension manager extension, you can uninstall extensions directly fro
 
 Tương tự như cài đặt, để xóa tiện ích mở rộng:
 
-0. Nếu bạn muốn xóa tất cả các bảng cơ sở dữ liệu được tạo bởi tiện ích mở rộng, hãy nhấp vào nút "Gỡ cài đặt" trong trang tổng quan quản trị. Xem [bên dưới](#managing-extensions) để biết thêm thông tin.
-1. `cd` vào thư mục Flarum của bạn.
-2. Chạy `composer remove TÊN_GÓI_COMPOSER`. Điều này sẽ được cung cấp bởi tài liệu của phần mở rộng.
+0. Nếu bạn muốn xóa tất cả các bảng cơ sở dữ liệu được tạo bởi tiện ích mở rộng, hãy nhấp vào nút "Gỡ cài đặt" trong trang tổng quan quản trị. See [below](#managing-extensions) for more information.
+1. `cd` to your Flarum directory.
+2. Run `composer remove COMPOSER_PACKAGE_NAME`. Điều này sẽ được cung cấp bởi tài liệu của phần mở rộng.
 
 ## Quản lý Tiện ích mở rộng
 
@@ -97,8 +97,8 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
-* Type: `HTTP Bearer`
-* Host: `flarum.org`
+- Type: `HTTP Bearer`
+- Host: `flarum.org`
 
 ![Configure repositories](/en/img/config-repositories.png)
 
@@ -112,7 +112,7 @@ The configured repositories and auth methods will be active for both the command
 
 If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
 
-* If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
-* If you set it to Beta, you will be able to install beta, RC and stable versions.
-* If you set it to RC, you will be able to install RC and stable versions.
-* If you set it to Stable, you will only be able to install stable versions.
+- If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
+- If you set it to Beta, you will be able to install beta, RC and stable versions.
+- If you set it to RC, you will be able to install RC and stable versions.
+- If you set it to Stable, you will only be able to install stable versions.
