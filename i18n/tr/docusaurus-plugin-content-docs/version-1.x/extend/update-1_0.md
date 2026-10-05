@@ -44,7 +44,9 @@ In the future, this will serve as a basis for additional features:
 
 #### Changes Needed in Extensions
 
-The `transChoice` methods in the frontend and backend have been removed. The `trans` method should always be used for translating, regardless of pluralization. If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
+The `transChoice` methods in the frontend and backend have been removed.
+The `trans` method should always be used for translating, regardless of pluralization.
+If a translation requires pluralization, make sure you pass in the controlling variable as one of the arguments.
 
 In the frontend, code that looked like this:
 
@@ -71,7 +73,8 @@ should be changed to:
 $translator->trans('some-translation', ['host' => $hostName, 'guestCount' => $guestCount]);
 ```
 
-Note that in the backend, translation keys were previously wrapped in curly braces. This is no longer needed.
+Note that in the backend, translation keys were previously wrapped in curly braces.
+This is no longer needed.
 
 #### Changes Needed in Translations
 
@@ -98,7 +101,8 @@ For a long time, the `viewDiscussions` and `viewUserList` permissions have been 
 - `viewDiscussions` controls viewing both discussions and users.
 - `viewUserList` controls searching users, not viewing user profiles.
 
-To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively. A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
+To clear this up, in v1.0, these permissions have been renamed to `viewForum` and `searchUsers` respectively.
+A migration in core will automatically adjust all permissions in the database to use the new naming. However, any extension code using the old name must switch to the new ones immediately to avoid security issues. To help the transfer, a warning will be thrown if the old permissions are referenced.
 
 We have also slightly improved tag scoping for permissions. Currently, permissions can be applied to tags if:
 
@@ -128,7 +132,7 @@ See [the PR](https://github.com/flarum/core/pull/2843/files) for examples of how
 
 ### PaginatedListState
 
-The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON:API resources (usually models). In future releases, we will also provide an `PaginatedList` (or `InfiniteScroll`) component that can be used as a base class for these paginated lists.
+The `flarum/common/states/PaginatedListState` state class has been introduced to abstract away most of the logic of `DiscussionListState` and `NotificationListState`. It provides support for loading and displaying paginated lists of JSON:API resources (usually models). It provides support for loading and displaying paginated lists of JSON:API resources (usually models).
 
 Please see [the source code](https://github.com/flarum/core/blob/master/js/src/common/states/PaginatedListState.ts) for a list of methods.
 
@@ -194,7 +198,7 @@ The [fof/console](https://github.com/FriendsOfFlarum/console) library has been a
 
 As part of solving [N+1 Query issues](https://secure.phabricator.com/book/phabcontrib/article/n_plus_one/) in some [Flarum API endpoints](https://github.com/flarum/core/issues/2637), we have introduced a `load` method on the `ApiController` extender that allows you to indicate relations that should be eager loaded.
 
-This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. For example, we will always need the tags of a discussion to check what permissions a user has on that discussion, so we should eager load the discussion's `tags` relationship. For example:
+This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. This should be done if you know a relation will always be included, or will always be referenced by controller / permission logic. For example:
 
 ```php
 return [
