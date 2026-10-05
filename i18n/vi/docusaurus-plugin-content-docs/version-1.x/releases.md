@@ -1,6 +1,5 @@
 # Ghi chú phát hành
 
-
 <!--
 https://github.com/flarum/docs/issues/22
 https://laravel.com/docs/5.7/releases
