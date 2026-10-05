@@ -2,15 +2,17 @@
 
 Lõi Flarum tích hợp với hệ thống tệp để lưu trữ và phân phát nội dung (như JS / CSS đã biên dịch hoặc tải lên logos/favicons) và avatars.
 
-Các tiện ích mở rộng có thể sử dụng các hữu ích được cung cấp của Flarum cho nhu cầu lưu trữ tệp và tương tác với hệ thống tệp của riêng chúng. Hệ thống này dựa trên [các công cụ hệ thống tệp của Laravel](https://laravel.com/docs/8.x/filesystem), lần lượt dựa trên [thư viện Flysystem](https://github.com/thephpleague/flysystem).
+Các tiện ích mở rộng có thể sử dụng các hữu ích được cung cấp của Flarum cho nhu cầu lưu trữ tệp và tương tác với hệ thống tệp của riêng chúng. This system is based around [Laravel's filesystem tools](https://laravel.com/docs/8.x/filesystem), which are in turn based on the [Flysystem library](https://github.com/thephpleague/flysystem).
 
 ## Ổ đĩa
 
-Hệ thống tập tin **ổ đĩa** đại diện cho các vị trí lưu trữ và được hỗ trợ bởi các trình điều khiển lưu trữ mà chúng ta sẽ đề cập sau. Flarum cốt lõi có 2 đĩa: `flarum-assets` và `flarum-avatars`.
+Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later.
+Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
 
 ### Sử dụng các ổ đĩa hiện có
 
-Để truy cập ổ đĩa, bạn cần truy xuất nó từ [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). Để làm như vậy, bạn nên đưa factory contract vào lớp của mình và truy cập vào các đĩa bạn cần.
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html).
+Để làm như vậy, bạn nên đưa factory contract vào lớp của mình và truy cập vào các đĩa bạn cần.
 
 Hãy xem xét [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) của lõi để làm ví dụ:
 
@@ -124,6 +126,7 @@ Some drivers might try to index their filesystem every time the driver is instan
 
 ## GUI and Admin Configuration
 
-Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future. For now, extensions are responsible for providing a GUI for their disks and drivers.
+Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future.
+For now, extensions are responsible for providing a GUI for their disks and drivers.
 
 As noted [above](#storage-drivers), if your extension provides a GUI for selecting drivers for a disk, it should modify the `disk_driver.DISK_NAME` key in settings.
