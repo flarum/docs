@@ -12,7 +12,7 @@ This guide walks you through upgrading from Flarum v1 to v2. You'll need [Compos
 
 :::danger Run this upgrade with Composer, not the extension manager
 
-The [extension manager](./extensions#extension-manager) cannot move a forum from 1.x to 2.0. Its update check skips `flarum/core`, so it never sees that a new major version exists and refuses the upgrade; and the step meant to relax your extension version constraints beforehand does not relax them. Use the command line for this upgrade.
+The [extension manager](./extensions.md#extension-manager) cannot move a forum from 1.x to 2.0. Its update check skips `flarum/core`, so it never sees that a new major version exists and refuses the upgrade; and the step meant to relax your extension version constraints beforehand does not relax them. Use the command line for this upgrade.
 
 The extension manager is still the right tool for routine updates once you are on 2.0, because those stay within a major version. It is only the jump across majors it cannot do.
 
