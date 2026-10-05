@@ -17,8 +17,8 @@ Flarum 2.0 is in its release-candidate phase. The API is stable and many forums 
 Before you install Flarum, it's important to check that your server meets the requirements. Um Flarum ausführen zu können, brauchst du:
 
 - **Apache** (with mod\_rewrite enabled) or **Nginx**
-- **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
-- **One of the following databases**:
+- **PHP 8.3+** mit den folgenden Erweiterungen: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
+- **Eine der folgenden Datenbanken**:
   - MySQL 5.7+ / 8.0.30+
   - MariaDB 10.3+
   - SQLite 3.35.0+
