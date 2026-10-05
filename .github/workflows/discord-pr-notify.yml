@@ -11,8 +11,11 @@ permissions: {}
 
 jobs:
   notify:
-    # Dependabot opens a PR for every dependency bump; leave those out of the channel.
-    if: github.event.pull_request.user.login != 'dependabot[bot]'
+    # Leave out Dependabot's dependency bumps, and Crowdin's PRs, which are
+    # merged automatically and announced when deployed (crowdin-automerge.yml).
+    if: >-
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.event.pull_request.head.ref != 'l10n_main'
     runs-on: ubuntu-latest
 
     steps:
