@@ -23,7 +23,7 @@ Uzantı yöneticisi, yönetici kullanıcının herhangi bir besteci paketini yü
 
 :::
 
-![extension manager admin page](./assets/extension-manager-page.png)
+![extension manager admin page](/img/docs/extension-manager-page.png)
 
 ## Uzantıları Bulmak
 
@@ -35,7 +35,7 @@ Flarum, çoğu açık kaynaklı ve ücretsiz olan geniş bir uzantı ekosistemin
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Yukarıdaki bağlantılardan mevcut uzantıların listesine göz attığınızda ve yüklemek istediğiniz uzantıyı bulduğunuzda, uzantı yöneticisinin kurulum girişine uzantının besteci paketi adını girerek yükleyebilirsiniz.
 
-![Installing an extension](./assets/install-extension.png)
+![Installing an extension](/img/docs/install-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -50,7 +50,7 @@ Flarum gibi, uzantılar da SSH kullanılarak [Composer](https://getcomposer.org)
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden güncelleyebilirsiniz. Uzantı yöneticisindeki "Güncellemeleri kontrol et" düğmesini tıklayarak güncellemeleri kontrol edebilirsiniz. Güncellemeler mevcutsa, "Global güncelleme" butonuna tıklayarak tüm uzantıları güncelleyebilirsiniz. Veya güncellemek istediğiniz uzantının yanındaki "Güncelle" butonuna tıklayarak uzantıları tek tek güncelleyebilirsiniz.
 
-![Updating an extension](./assets/update-extension.png)
+![Updating an extension](/img/docs/update-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -62,7 +62,7 @@ Uzantı geliştiricileri tarafından sağlanan talimatları izleyin. Uzantılar 
 
 Uzantı yöneticisi uzantısını kullanarak uzantıları doğrudan yönetici kontrol panelinden yükleyebilirsiniz. Uzantının sayfasında, kaldırmak istediğiniz uzantının yanındaki "Kaldır" düğmesini tıklayarak bir uzantıyı kaldırabilirsiniz.
 
-![Uninstalling an extension](./assets/uninstall-extension.png)
+![Uninstalling an extension](/img/docs/uninstall-extension.png)
 
 ### Komut satırı aracılığıyla
 
@@ -100,7 +100,7 @@ Extiverse provides access to premium extensions. It is a good example of a compo
 - Type: `HTTP Bearer`
 - Host: `flarum.org`
 
-![Configure repositories](./assets/config-repositories.png)
+![Configure repositories](/img/docs/config-repositories.png)
 
 :::info
 

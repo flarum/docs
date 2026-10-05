@@ -4,7 +4,7 @@ image: img/extensions/akismet-share.png
 
 # Akismet
 
-![Akismet: stop spam with the Akismet anti-spam service. Bundled with Flarum 2.0.](../assets/extensions/akismet.png)
+![Akismet: stop spam with the Akismet anti-spam service. Bundled with Flarum 2.0.](/img/docs/extensions/akismet.png)
 
 The Akismet extension (`flarum/akismet`) checks new posts against [Akismet](https://akismet.com), a third-party anti-spam service. Posts that Akismet thinks are spam are held for a moderator to review instead of being published. It is a [bundled extension](../extensions.md), and it is disabled by default.
 

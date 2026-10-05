@@ -4,11 +4,11 @@ slug: /
 
 # Flarum Hakkında
 
-![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](./assets/flarum-2.0-hero.png)
+![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](/img/docs/flarum-2.0-hero.png)
 
 Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarılı bir topluluk yürütmek için ihtiyacınız olan tüm özelliklerle birlikte kullanımı hızlı ve kolaydır. Aynı zamanda son derece genişletilebilir olup, en üst düzeyde özelleştirilebilirliğe olanak tanır.
 
-![Flarum Home Screenshot](./assets/home_screenshot.png)
+![Flarum Home Screenshot](/img/docs/home_screenshot.png)
 
 ## Hedefler
 

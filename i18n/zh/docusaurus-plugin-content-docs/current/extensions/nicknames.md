@@ -4,7 +4,7 @@ image: img/extensions/nicknames-share.png
 
 # Nicknames
 
-![Nicknames: let members set a nickname. Bundled with Flarum 2.0.](../assets/extensions/nicknames.png)
+![Nicknames: let members set a nickname. Bundled with Flarum 2.0.](/img/docs/extensions/nicknames.png)
 
 The Nicknames extension (`flarum/nicknames`) lets members choose a nickname that is shown across the forum in place of their username. The username stays the same, and is still what they log in with. It is a [bundled extension](../extensions.md), and it is disabled by default.
 

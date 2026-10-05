@@ -323,7 +323,7 @@ app.store.find('discussions', { q: 'is:unread' });
 
 Gambits are automatically shown in the autocomplete options of the global search:
 
-![Global search modal](../assets/global_search_modal.png)
+![Global search modal](/img/docs/global_search_modal.png)
 
 ### Basic gambits
 
@@ -454,4 +454,4 @@ import Input from 'flarum/common/components/Input';
 
 This will automatically produce an autocomplete dropdown with the appropriate gambits for the `users` resource. The `query` prop is the current search query, and the `onchange` prop is a callback that will be called when the query changes.
 
-![Gambit autocomplete dropdown component](../assets/gambit_autocomplete_dropdown.png)
+![Gambit autocomplete dropdown component](/img/docs/gambit_autocomplete_dropdown.png)

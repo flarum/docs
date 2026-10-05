@@ -23,7 +23,7 @@ The extension manager allows an admin user to install any composer package. Only
 
 :::
 
-![extension manager admin page](./assets/extension-manager-page.png)
+![extension manager admin page](/img/docs/extension-manager-page.png)
 
 ## Erweiterungen finden
 
@@ -35,7 +35,7 @@ Flarum verfügt über ein breites Ökosystem von Erweiterungen, von denen die me
 
 Using the extension manager extension, you can install extensions directly from the admin dashboard. Once you have browsed the list of available extensions from the links above, and found one you want to install, you can install it by entering the extension's composer package name into the extension manager's installation input.
 
-![Installing an extension](./assets/install-extension.png)
+![Installing an extension](/img/docs/install-extension.png)
 
 ### Through the command line
 
@@ -50,7 +50,7 @@ Genau wie Flarum werden Erweiterungen über [Composer](https://getcomposer.org) 
 
 Using the extension manager extension, you can update extensions directly from the admin dashboard. You can run a check for updates by clicking the "Check for updates" button in the extension manager. If there are updates available, you can update all extensions by clicking the "Global update" button. Or, you can update individual extensions by clicking the "Update" button next to the extension you want to update.
 
-![Updating an extension](./assets/update-extension.png)
+![Updating an extension](/img/docs/update-extension.png)
 
 ### Through the command line
 
@@ -62,7 +62,7 @@ Anweisungen der Erweiterungsentwickler befolgen. Wenn Du `*` als Versionszeichen
 
 Using the extension manager extension, you can uninstall extensions directly from the admin dashboard. You can uninstall an extension by clicking the "Uninstall" button next to the extension you want to uninstall inside the extension's page.
 
-![Uninstalling an extension](./assets/uninstall-extension.png)
+![Uninstalling an extension](/img/docs/uninstall-extension.png)
 
 ### Through the command line
 
@@ -100,7 +100,7 @@ Extiverse provides access to premium extensions. It is a good example of a compo
 - Type: `HTTP Bearer`
 - Host: `flarum.org`
 
-![Configure repositories](./assets/config-repositories.png)
+![Configure repositories](/img/docs/config-repositories.png)
 
 :::info
 

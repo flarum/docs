@@ -1,6 +1,6 @@
 # Updating to Flarum 2.0
 
-![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](./assets/flarum-2.0-header.png)
+![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](/img/docs/flarum-2.0-header.png)
 
 :::warning
 

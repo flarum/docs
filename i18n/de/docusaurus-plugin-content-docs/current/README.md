@@ -4,11 +4,11 @@ slug: /
 
 # Über Flarum
 
-![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](./assets/flarum-2.0-hero.png)
+![Flarum 2.0: rebuilt on a modern stack, tuned for speed.](/img/docs/flarum-2.0-hero.png)
 
 Flarum ist eine herrlich einfache Diskussionsplattform für deine Website. Es ist schnell, kostenlos und benutzerfreundlich und bietet alle Funktionen, die du für den Betrieb einer erfolgreichen Community benötigst. Zudem ist Flarum äußerst erweiterbar und lässt sich optimal anpassen.
 
-![Flarum Home Screenshot](./assets/home_screenshot.png)
+![Flarum Home Screenshot](/img/docs/home_screenshot.png)
 
 ## Ziele
 

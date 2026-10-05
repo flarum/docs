@@ -12,7 +12,7 @@ To use the built-in REST API as part of an integration, see [Consuming the REST 
 
 在我们详细了解如何扩展 Flarum 的数据 API 之前，值得考虑一个典型的 API 请求的生命周期：
 
-![Flarum API Flowchart](../assets/api_flowchart.svg)
+![Flarum API Flowchart](/img/docs/api_flowchart.svg)
 
 1. HTTP请求已发送到 Flarum 的 API。通常情况下，这将来自 Flarum 前端，但外部程序也可以与 API 互动。 Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. 每个 API 资源都有一个唯一的类型，并且有一组端点。你可以在以下章节中阅读更多关于这些问题的内容。
