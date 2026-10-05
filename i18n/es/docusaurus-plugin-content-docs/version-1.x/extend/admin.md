@@ -14,7 +14,7 @@ Esta nueva API le permite añadir ajustes a su extensión con muy pocas líneas 
 
 Antes de que puedas registrar nada, tienes que decirle a `ExtensionData` de qué extensión va a obtener datos.
 
-Simplemente ejecute la función `for` en `app.extensionData` pasando el id de su extensión. Para encontrar el id de tu extensión, toma el nombre del compositor y sustituye las barras por guiones (ejemplo: 'fof/merge-discussions' se convierte en 'fof-merge-discussions').  Extensions with the `flarum-` and `flarum-ext-` will omit those from the name (example: 'webbinaro/flarum-calendar' becomes 'webbinaro-calendar').
+Simplemente ejecute la función `for` en `app.extensionData` pasando el id de su extensión. Para encontrar el id de tu extensión, toma el nombre del compositor y sustituye las barras por guiones (ejemplo: 'fof/merge-discussions' se convierte en 'fof-merge-discussions').  Para encontrar el id de tu extensión, toma el nombre del compositor y sustituye las barras por guiones (ejemplo: 'fof/merge-discussions' se convierte en 'fof-merge-discussions').
 
 Para el siguiente ejemplo, utilizaremos la extensión ficticia 'acme/interstellar':
 
@@ -29,7 +29,7 @@ app.initializers.add('interstellar', function(app) {
 
 Una vez hecho esto, puedes empezar a añadir configuraciones y permisos.
 
-:::info Note
+:::tip Note
 
 Todas las funciones de registro en `ExtensionData` son encadenables, lo que significa que puedes llamarlas una tras otra sin tener que volver a ejecutar `for`.
 
@@ -88,7 +88,7 @@ Also, note that additional items in the setting object will be used as component
 }
 ```
 
-Si quieres añadir algo a los ajustes como algún texto extra o una entrada más complicada, también puedes pasar una devolución de llamada como primer argumento que devuelva JSX. Este callback se ejecutará en el contexto de [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) y los valores de configuración no se serializarán automáticamente.
+Si quieres añadir algo a los ajustes como algún texto extra o una entrada más complicada, también puedes pasar una devolución de llamada como primer argumento que devuelva JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -120,11 +120,12 @@ Como novedad en la beta 15, los permisos pueden encontrarse ahora en dos lugares
 Para que esto ocurra, los permisos deben estar registrados en `ExtensionData`. Esto se hace de forma similar a la configuración, llamando a `registerPermission`.
 
 Volvemos a nuestra extensión favorita del rocket:
- * Objeto de permiso
- * Qué tipo de permiso - ver las funciones de [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid) para los tipos (eliminar elementos del nombre)
- * Prioridad de `ItemList`
 
-Recuerda que todas estas funciones se pueden encadenar como:
+- Objeto de permiso
+- What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_permissiongrid.permissiongrid)'s functions for types (remove items from the name)
+- Prioridad de `ItemList`
+
+Volvemos a nuestra extensión favorita del rocket:
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -146,11 +147,11 @@ app.initializers.add('interstellar', function(app) {
 
 If your extension interacts with the [tags extension](https://github.com/flarum/tags) (which is fairly common), you might want a permission to be tag scopable (i.e. applied on the tag level, not just globally). You can do this by including a `tagScoped` attribute, as seen above. Permissions starting with `discussion.` will automatically be tag scoped unless `tagScoped: false` is indicated.
 
-Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
 ### Recordatorio de Encadenamiento
 
-Entonces, simplemente ejecute `registerPage`:
+Recuerda que todas estas funciones se pueden encadenar como:
 
 ```js
 app.extensionData
@@ -168,7 +169,7 @@ app.extensionData
 
 A veces tienes configuraciones más complicadas que se mezclan con las relaciones, o simplemente quieres que la página se vea completamente diferente. En este caso, necesitarás decirle a `ExtensionData` que quieres proporcionar tu propia página. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
-¡Puedes extender la [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) o extender la `Page` base y diseñar la tuya propia!
+Crea una nueva clase que extienda el componente `Page` o `ExtensionPage`:
 
 ```js
 import ExtensionPage from 'flarum/components/ExtensionPage';
@@ -183,7 +184,7 @@ export default class StarPage extends ExtensionPage {
 
 ```
 
-En la beta 15, las páginas de las extensiones tienen espacio para información extra que se extrae del composer.json de las extensiones.
+Entonces, simplemente ejecute `registerPage`:
 
 ```js
 
@@ -197,9 +198,9 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-Para más información, consulte el esquema [composer.json](https://getcomposer.org/doc/04-schema.md).
+Para más información, consulte el esquema <a href="https://getcomposer.org/doc/04-schema.md">composer.json</a>.
 
-You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) or extend the base `Page` and design your own!
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
 
 ## Metadatos del Composer.json
 
@@ -207,11 +208,11 @@ En la beta 15, las páginas de las extensiones tienen espacio para información 
 
 Para más información, consulte el esquema (schema) [composer.json](https://getcomposer.org/doc/04-schema.md).
 
-| Descripción                            | Dónde en composer.json                                                |
-| -------------------------------------- | --------------------------------------------------------------------- |
-| Enlace de discusión discuss.flarum.org | Clave "forum" dentro de "support"                                     |
-| Documentación                          | Clave "docs" dentro de "support"                                      |
-| Soporte (correo electrónico)           | Clave "email" dentro de "support"                                     |
-| Sitio web                              | Clave "homepage"                                                      |
-| Donación                               | Bloque de claves "funding" (Nota: Sólo se utilizará el primer enlace) |
-| Fuente                                 | Clave "source" dentro de "support"                                    |
+| Descripción                                                            | Dónde en composer.json                                                                   |
+| ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Enlace de discusión discuss.flarum.org | Clave "forum" dentro de "support"                                                                        |
+| Documentación                                                          | Clave "docs" dentro de "support"                                                                         |
+| Soporte (correo electrónico)                        | Clave "email" dentro de "support"                                                                        |
+| Sitio web                                                              | Clave "homepage"                                                                                         |
+| Donación                                                               | Bloque de claves "funding" (Nota: Sólo se utilizará el primer enlace) |
+| Fuente                                                                 | Clave "source" dentro de "support"                                                                       |
