@@ -1,8 +1,8 @@
 # 后台管理面板
 
-Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比以往任何时候都更容易为您的扩展添加设置或权限。
+Beta 15引入了一个完全重新设计的管理面板和前端API。现在比以往任何时候都更容易为您的扩展添加设置或权限。
 
-在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
+在测试版15之前，扩展设置要么在 `设置模式` 中添加，要么为更复杂的设置添加了一个新的页面。 现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。现在，每个扩展程序都有一个包含信息、设置和扩展程序自身权限的页面。
 
 您可以简单地注册设置，扩展页面 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage)，或完全自定义页面。
 
@@ -14,7 +14,7 @@ Beta 15引入了一个完全重新设计的管理面板和前端API。 现在比
 
 在注册任何内容之前，您需要告诉`ExtensionData`它将为哪个扩展获取数据。
 
-只需在`app.extensionData`上运行`for`函数，并传入扩展的id。 要找到您的扩展id，取编写器名称并用破折号替换任何斜杠(例如:'fof/merge-discussion '变成'fof-merge-discussion ')。  带有`flarum-`和`flarum-ext-`的扩展将从名称中省略这些内容(例如:'webbinaro/flarum-calendar'变成'webbinaro-calendar')。
+Simply run the `for` function on `app.extensionData` passing in the id of your extension. To find your extension id, take the composer name and replace any slashes with dashes (example: 'fof/merge-discussions' becomes 'fof-merge-discussions').  使用 `flarum-` 和 `flarum-ext-` 的扩展将从名称中省略(例如：'webbinaro/flarum-calendar' 变成'webbinaro-calendar)。
 
 对于下面的例子，我们将使用虚构的扩展名'acme/interstellar':
 
@@ -29,7 +29,7 @@ app.initializers.add('interstellar', function(app) {
 
 完成后，您可以开始添加设置和权限。
 
-:::注意
+:::tip Note
 
 `ExtensionData`上的所有注册函数都是可链接的，这意味着您可以一个接一个地调用它们而无需再次运行`for` 。
 
@@ -37,11 +37,11 @@ app.initializers.add('interstellar', function(app) {
 
 ### 注册设置
 
-对于简单的项目，建议使用这种方式添加设置字段。 一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
+对于简单的项目，建议使用这种方式添加设置字段。一般来说，如果您只需要在设置表中存储东西，这对您来说应该足够了。
 
-要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
+To add a field, call the `registerSetting` function after `for` on `app.extensionData` and pass a 'setting object' as the first argument. 要添加字段，请在`app.extensionData`的`for`之后调用`registerSetting`函数，并传递一个“设置对象”作为第一个参数。 在场景背后的 `ExtensionData` 实际上将您的设置变成了一个 [`ItemLis`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist)您可以传递优先级编号作为第二个参数。
 
-Here's an example with a switch (boolean) item:
+下面是一个带有开关（布尔）项的示例：
 
 ```js
 
@@ -76,7 +76,7 @@ app.initializers.add('interstellar', function(app){
 }
 ```
 
-Also, note that additional items in the setting object will be used as component attrs. This can be used for placeholders, min/max restrictions, etc:
+另外，请注意设置对象中的额外项将用作组件属性。这可以用于占位符、最小/最大限制等：
 
 ```js
 {
@@ -88,7 +88,7 @@ Also, note that additional items in the setting object will be used as component
 }
 ```
 
-If you want to add something to the settings like some extra text or a more complicated input, you can also pass a callback as the first argument that returns JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) and setting values will not be automatically serialized.
+如果您想要在设置中添加一些内容，比如额外的文本或更复杂的输入，您也可以传递回调作为返回 JSX 的第一个参数。 This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) and setting values will not be automatically serialized.
 
 ```js
 
@@ -113,18 +113,19 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-### Registering Permissions
+### 注册权限
 
-New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
+New in beta 15, permissions can now be found in 2 places. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page. Now, you can view each extension's individual permissions on their page. All permissions can still be found on the permissions page.
 
 In order for that to happen, permissions must be registered with `ExtensionData`. This is done in a similar way to settings, call `registerPermission`.
 
-Arguments:
- * Permission object
- * What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/master/class/src/admin/components/permissiongrid.js~permissiongrid)'s functions for types (remove items from the name)
- * `ItemList` priority
+参数：
 
-Back to our favorite rocket extension:
+- 权限对象
+- What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_permissiongrid.permissiongrid)'s functions for types (remove items from the name)
+- `ItemList` priority
+
+回到我们最喜欢的 rocket 扩展：
 
 ```js
 app.initializers.add('interstellar', function(app) {
@@ -148,9 +149,9 @@ If your extension interacts with the [tags extension](https://github.com/flarum/
 
 To learn more about Flarum permissions, see [the relevant docs](permissions.md).
 
-### Chaining Reminder
+### 链式调用提醒
 
-Remember these functions can all be chained like:
+请记住，这些函数都可以链式调用，如下所示：
 
 ```js
 app.extensionData
@@ -161,7 +162,7 @@ app.extensionData
     .registerPermission(...);
 ```
 
-### Extending/Overriding the Default Page
+### 扩展/覆盖默认页面
 
 Sometimes you have more complicated settings that mess with relationships, or just want the page to look completely different. In this case, you will need to tell `ExtensionData` that you want to provide your own page. Note that `buildSettingComponent`, the util used to register settings by providing a descriptive object, is available as a method on `ExtensionPage` (extending from `AdminPage`, which is a generic base for all admin pages with some util methods).
 
@@ -194,21 +195,21 @@ app.initializers.add('interstellar', function(app) {
 });
 ```
 
-This page will be shown instead of the default.
+将显示此页面而不是默认页面。
 
-您可以扩展 [`ExtensionPage`](https://api.docs.flarum.org/js/master/class/src/admin/components/extensionpage.js~extensionpage) 或扩展基本 `Page` 并设计自己的页面！
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
 
-## Composer.json Metadata
+## Composer.json 元数据
 
 In beta 15, extension pages make room for extra info which is pulled from extensions' composer.json.
 
-For more information, see the [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+欲了解更多信息，请参阅 [composer.json schema](https://getcomposer.org/doc/04-schema.md)。
 
-| Description                        | 在composer.json 中的位置                                          |
-| ---------------------------------- | ------------------------------------------------------------ |
-| discuss.flarum.org discussion link | "forum" key inside "support"                                 |
-| Documentation                      | "docs" key inside "support"                                  |
-| Support (email)                    | "email" key inside "support"                                 |
-| Website                            | "homepage" key                                               |
-| Donate                             | "funding" key block (Note: Only the first link will be used) |
-| Source                             | "source" key inside "support"                                |
+| 描述                                                      | 在 composer.json 中的位置 |
+| ------------------------------------------------------- | ------------------------------------ |
+| discuss.flarum.org 讨论链接 | "support" 下的 "forum" 键               |
+| 文档                                                      | "support" 下的 "docs" 键                |
+| 支持（邮箱）                                                  | "support" 下的 "email" 键               |
+| 网站                                                      | "homepage" 键                         |
+| 捐赠                                                      | "funding" 键块（注意：仅使用第一个链接）            |
+| 源码                                                      | "support" 下的 "source" 键              |
