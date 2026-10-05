@@ -14,7 +14,9 @@ The [admin dashboard](admin.md)'s Appearance page is a great first place to star
 
 ## Il CSS nei temi
 
-CSS è un linguaggio per fogli di stile che indica ai browser come visualizzare gli elementi di una pagina web. Ci consente di modificare qualsiasi cosa, dai colori ai caratteri, alla dimensione degli elementi e al posizionamento delle animazioni. L'aggiunta di CSS personalizzati può essere un ottimo modo per modificare l'aspetto di Flarum in modo che corrisponda al tema del tuo sito.
+CSS è un linguaggio per fogli di stile che indica ai browser come visualizzare gli elementi di una pagina web.
+Ci consente di modificare qualsiasi cosa, dai colori ai caratteri, alla dimensione degli elementi e al posizionamento delle animazioni.
+L'aggiunta di CSS personalizzati può essere un ottimo modo per modificare l'aspetto di Flarum in modo che corrisponda al tema del tuo sito.
 
 Un tutorial CSS va oltre lo scopo di questa documentazione, ma ci sono molte ottime risorse online per apprendere le basi dei fogli di stile.
 
@@ -26,4 +28,6 @@ Flarum utilizza LESS, il che rende più facile scrivere CSS consentendo variabil
 
 ## Estensioni
 
-La flessibilità di Flarum nel [sistema di estensioni](extensions.md) ti consente di aggiungere, rimuovere o modificare praticamente ogni parte di Flarum. Se si desidera apportare modifiche sostanziali ai temi oltre a cambiare colori / dimensioni / stili, un'estensione personalizzata è sicuramente la strada da percorrere. Per sapere come creare un'estensione, dai un'occhiata alla [documentazione sulle estensioni](extend/README.md)!
+La flessibilità di Flarum nel [sistema di estensioni](extensions.md) ti consente di aggiungere, rimuovere o modificare praticamente ogni parte di Flarum.
+Se si desidera apportare modifiche sostanziali ai temi oltre a cambiare colori / dimensioni / stili, un'estensione personalizzata è sicuramente la strada da percorrere.
+Per sapere come creare un'estensione, dai un'occhiata alla [documentazione sulle estensioni](extend/README.md)!
