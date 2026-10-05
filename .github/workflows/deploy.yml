@@ -5,13 +5,32 @@ on:
   push:
     branches:
       - main
+  # Crowdin puts "[ci skip]" in every commit message, and a squash merge copies
+  # them into the commit on main, so the push trigger above never fires for
+  # Crowdin PRs. The skip markers don't apply to pull_request_target, so deploy
+  # when a Crowdin PR is merged too. Only main is checked out, never PR code.
+  pull_request_target:
+    types: [closed]
+    branches:
+      - main
+
+# Queue deploys rather than letting two copy to the server at once.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
+    if: >-
+      github.event_name != 'pull_request_target' ||
+      (github.event.pull_request.merged && github.event.pull_request.head.ref == 'l10n_main')
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # For a merged Crowdin PR, deploy main; otherwise the default (the pushed commit).
+          ref: ${{ github.event_name == 'pull_request_target' && 'main' || '' }}
 
       - name: Use Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
