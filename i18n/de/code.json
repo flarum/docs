@@ -12,7 +12,7 @@
     "description": "The label used for Crowdin link label"
   },
   "theme.docs.versions.unmaintainedVersionLabel": {
-    "message": "This is documentation for Flarum {versionLabel}, which now only receives fixes for critical bugs and security issues.",
+    "message": "Dies ist die Dokumentation zu Flarum {versionLabel}, für das nun nur noch Fehlerbehebungen für kritische Fehler und Sicherheitsprobleme bereitgestellt werden.",
     "description": "The label used to tell the user that he's browsing an unmaintained doc version"
   }
 }
