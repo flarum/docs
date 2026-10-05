@@ -10,11 +10,12 @@ Before we delve into implementation details, let's define some key concepts.
 
 **Migrations** allow you to modify the database. If you're adding a new table, defining a new relationship, adding a new column to a table, or making some other DB structural change, you'll need to use a migration.
 
-**Models** provide a convenient, code-based API for creating, reading, updating, and deleting data. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database. On the frontend, they are represented by JS classes, and are used to interact with the [JSON:API](api.md), which we'll discuss in the next article.
+**Models** provide a convenient, code-based API for creating, reading, updating, and deleting data. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database. On the backend, they are represented by PHP classes, and are used to interact with the MySQL database.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically create your model:
+
 ```bash
 $ flarum-cli make backend model
 $ flarum-cli make frontend model
@@ -84,7 +85,7 @@ return Migration::renameTable($from, $to);
 
 ### Crear/eliminar columnas
 
-To add columns to an existing table, use the `Migration::addColumns` helper. The `addColumns` helper accepts two arguments. The first is the name of the table. The second is an array of column definitions, with the key being the column name. The value of each item is an array with the column definitions, as understood by Laravel's `Illuminate\Database\Schema\Blueprint::addColumn()` method. The first value is the column type, and any other keyed values are passed through to `addColumn`.
+To add columns to an existing table, use the `Migration::addColumns` helper. The `addColumns` helper accepts two arguments. The first is the name of the table. The second is an array of column definitions, with the key being the column name. The first is the name of the table. The second is an array of column definitions, with the key being the column name.
 
 ```php
 return Migration::addColumns('users', [
@@ -135,12 +136,11 @@ With all your snazzy new database tables and columns, you're going to want a way
 
 ### Añadir nuevos modelos
 
-If you've added a new table, you'll need to set up a new model for it. Rather than extending the Eloquent `Model` class directly, you should extend `Flarum\Database\AbstractModel` which provides a bit of extra functionality to allow your models to be extended by other extensions. See the Eloquent docs linked above for examples of what your model class should look like.
+If you've added a new table, you'll need to set up a new model for it. If you've added a new table, you'll need to set up a new model for it. See the Eloquent docs linked above for examples of what your model class should look like.
 
 ### Extending Models
 
 If you've added columns to existing tables, they will be accessible on existing models. For example, you can grab data from the `users` table via the `Flarum\User\User` model.
-
 
 <!-- If you need to define any attribute [accessors](https://laravel.com/docs/8.x/eloquent-mutators#defining-an-accessor), [mutators](https://laravel.com/docs/8.x/eloquent-mutators#defining-a-mutator), [dates](https://laravel.com/docs/8.x/eloquent-mutators#date-mutators), [casts](https://laravel.com/docs/8.x/eloquent-mutators#attribute-casting), or [default values](https://laravel.com/docs/8.x/eloquent#default-attribute-values) on an existing model, you can use the `Model` extender: 
 
@@ -239,7 +239,7 @@ You can learn more about the store in our [API documentation](https://api.docs.f
 
 ### Añadir nuevos modelos
 
-If you have added a new resource type, you will need to define a new model for it. Models must extend the `Model` class and re-define the resource attributes and relationships:
+If you have added a new resource type, you will need to define a new model for it. If you have added a new resource type, you will need to define a new model for it.
 
 ```js
 import Model from 'flarum/common/Model';
@@ -258,7 +258,7 @@ You must then register your new model with the store using the frontend `Store` 
 import Extend from 'flarum/common/extenders';
 
 export default [
-  new Extend.Store()
+  new Extend. Store()
     .add('tags', Tag),
 ];
 ```

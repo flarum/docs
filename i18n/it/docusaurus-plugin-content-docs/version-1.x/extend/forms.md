@@ -4,7 +4,9 @@ In questo articolo, esamineremo alcuni strumenti di frontend che sono a nostra d
 
 ## Componenti Form
 
-Come con qualsiasi sito interattivo, probabilmente vorrai includere moduli in alcune pagine. Flarum fornisce alcuni componenti per rendere più facile la costruzione (e lo styling!) di questi ultimi. Si prega di consultare la documentazione API collegata per per saperne di più sugli attributi accettati.
+Come con qualsiasi sito interattivo, probabilmente vorrai includere moduli in alcune pagine.
+Flarum fornisce alcuni componenti per rendere più facile la costruzione (e lo styling!) these forms easier.
+Si prega di consultare la documentazione API collegata per per saperne di più sugli attributi accettati.
 
 - Il [`flarum/components/FieldSet` componente](https://api.docs.flarum.org/js/master/class/src/common/components/fieldset.js~fieldset) racchiude i suoi "figli" in un tag fieldset HTML, con una legenda.
 - Il [`flarum/components/Select` componente](https://api.docs.flarum.org/js/master/class/src/common/components/select.js~select) è un input di selezione stilizzato.
@@ -48,10 +50,11 @@ class FormComponent extends Component {
 
 Don't forget to use [translations](translate.md)!
 
-
 ## Streams, bidi, e withAttr
 
-Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/util/Stream`. Questa è una struttura di dati molto potente, ma è più comunemente usata in Flarum come wrapper per i dati dei moduli form. Il suo utilizzo di base è:
+Flarum provides [Mithril's Stream](https://mithril.js.org/stream.html) as `flarum/util/Stream`.
+Questa è una struttura di dati molto potente, ma è più comunemente usata in Flarum come wrapper per i dati dei moduli form.
+Il suo utilizzo di base è:
 
 ```js
 import Stream from 'flarum/utils/Stream';
@@ -63,7 +66,9 @@ value("world!");
 value() === "world!"; // true
 ```
 
-Nei form di Flarum, i flussi sono spesso usati insieme all'attributo bidi. Bidi sta per associazione bidirezionale ed è un modello comune nei framework di frontend. Flarum applica al Mithril la [`m.attrs.bidi` libreria](https://github.com/tobyzerner/m.attrs. Questo astrae l'elaborazione degli input in Mithril. Per esempio:
+Nei form di Flarum, i flussi sono spesso usati insieme all'attributo bidi.
+Bidi sta per associazione bidirezionale ed è un modello comune nei framework di frontend. Nei form di Flarum, i flussi sono spesso usati insieme all'attributo bidi.
+Questo astrae l'elaborazione degli input in Mithril. Per esempio:
 
 ```jsx
 import Stream from 'flarum/utils/Stream';

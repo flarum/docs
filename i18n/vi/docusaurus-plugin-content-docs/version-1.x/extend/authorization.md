@@ -33,7 +33,8 @@ First, we run the entire request (all three parameters) through all [policies](#
 
 Policy results are considered in the priority `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. For example, if a single policy returns `FORCE_DENY`, all other policies will be ignored. If one policy returns `DENY` and 10 policies return `ALLOW`, the request will be denied. This allows decisions to be made regardless of the order in which extensions are booted. Note that policies are extremely powerful: if access is denied at the policy stage, that will override group permissions and even admin privileges.
 
-Secondly, if all policies return null (or don't return anything), we check if the user is in a group that has a permission equal to the ability (note that both permissions and abilities are represented as strings). If so, we authorize the action. See our [Groups and Permissions documentation](permissions.md) for more information on permissions.
+Secondly, if all policies return null (or don't return anything), we check if the user is in a group that has a permission equal to the ability (note that both permissions and abilities are represented as strings). If so, we authorize the action.
+See our [Groups and Permissions documentation](permissions.md) for more information on permissions.
 
 Then, if the user is in the admin group, we will authorize the action.
 
@@ -42,7 +43,6 @@ Finally, as we have exhausted all checks, we will assume that the user is unauth
 ## How To Use Authorization
 
 Flarum's authorization system is accessible through public methods of the `Flarum\User\User` class. The most important ones are listed below; others are documented in our [PHP API documentation](https://api.docs.flarum.org/php/master/flarum/user/user).
-
 
 In this example, we will use `$actor` as an instance of `Flarum\User\User`, `'viewForum'` and `'reply'` as examples of abilities, and `$discussion` (instance of `Flarum\Discussion\Discussion`) as an example argument.
 
@@ -77,11 +77,14 @@ Policies allow us to use custom logic beyond simple groups and permissions when 
 - We want to allow users to edit posts even if they aren't moderators, but only their own posts.
 - Depending on settings, we might allow users to rename their own discussions indefinitely, for a short period of time after posting, or not at all.
 
-As described [above](#how-it-works), on any authorization check, we query all policies registered for the target's model, or any parent classes of the target's model. If no target is provided, any policies registered as `global` will be applied.
+As described [above](#how-it-works), on any authorization check, we query all policies registered for the target's model, or any parent classes of the target's model.
+If no target is provided, any policies registered as `global` will be applied.
 
 So, how does a policy get "checked"?
 
-First, we check if the policy class has a method with the same name as the ability being evaluated. If so, we run it with the actor and subject as parameters. Nếu phương thức đó trả về giá trị khác rỗng, chúng tôi trả về kết quả đó. Otherwise, we continue to the next step (not necessarily the next policy).
+First, we check if the policy class has a method with the same name as the ability being evaluated.
+If so, we run it with the actor and subject as parameters.
+Nếu phương thức đó trả về giá trị khác rỗng, chúng tôi trả về kết quả đó. Otherwise, we continue to the next step (not necessarily the next policy).
 
 Then, we check if the policy class has a method called `can`. If so, we run it with the actor, ability, and subject, and return the result.
 
@@ -90,6 +93,7 @@ If `can` doesn't exist or returns null, we are done with this policy, and we pro
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate policies:
+
 ```bash
 $ flarum-cli make backend policy
 ```
@@ -199,8 +203,13 @@ return [
 
 ## Frontend Authorization
 
-Commonly, you'll want to use authorization results in frontend logic. For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint. And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
+Commonly, you'll want to use authorization results in frontend logic.
+For example, if a user doesn't have permission to see search users, we shouldn't send requests to that endpoint.
+And if a user doesn't have permission to edit users, we shouldn't show menu items for that.
 
-Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending. Global permissions (`viewForum`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object. For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model. It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
+Because we can't do authorization checks in the frontend, we have to perform them in the backend, and attach them to serialization of data we're sending.
+Global permissions (`viewForum`, `viewUserList`) can be included on the `ForumSerializer`, but for object-specific authorization, we may want to include those with the subject object.
+For instance, when we return lists of discussions, we check whether the user can reply, rename, edit, and delete them, and store that data on the frontend discussion model.
+It's then accessible via `discussion.canReply()` or `discussion.canEdit()`, but there's nothing magic there: it's just another attribute sent by the serializer.
 
 For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).

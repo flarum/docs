@@ -26,16 +26,17 @@ class YourCommand implements AbstractCommand {
 }
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 :::tip Comandos Programados
+
 ```bash
 use Flarum\Extend;
 use YourNamespace\Console\CustomCommand;
 
 return [
   // Otros extensores
-  (new Extend\Console())->command(CustomCommand::class)
+  (new Extend\Console())-&gt;command(CustomCommand::class)
   // Otros extensores
 ];
 ```
@@ -60,7 +61,6 @@ return [
 ## Scheduled Commands
 
 La [fof/console library](https://github.com/FriendsOfFlarum/console) le permite programar comandos para que se ejecuten en un intervalo regular.
-
 
 ```php
 use Flarum\Extend;

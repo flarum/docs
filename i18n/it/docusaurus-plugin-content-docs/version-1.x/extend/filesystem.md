@@ -6,11 +6,13 @@ Le estensioni possono utilizzare le utilità fornite da Flarum per le proprie in
 
 ## Dischi
 
-I dischi **del filesystem** rappresentano le posizioni di archiviazione e sono supportati da driver di archiviazione, che approfondiremo più tardi. Flarum core ha 2 dischi: `flarum-assets` e `flarum-avatars`.
+I dischi **del filesystem** rappresentano le posizioni di archiviazione e sono supportati da driver di archiviazione, che approfondiremo più tardi.
+Flarum core ha 2 dischi: `flarum-assets` e `flarum-avatars`.
 
 ### Utilizzo dei dischi esistenti
 
-Per accedere a un disco, è necessario recuperarlo dalla [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). Per farlo, dovresti iniettare il factory contract nella tua classe e accedere ai dischi di cui hai bisogno.
+Per accedere a un disco, è necessario recuperarlo dalla [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html).
+Per farlo, dovresti iniettare il factory contract nella tua classe e accedere ai dischi di cui hai bisogno.
 
 Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
 
@@ -116,7 +118,7 @@ return [
 
 I driver di archiviazione del filesystem sono uno strumento molto potente che consente di personalizzare completamente le posizioni di archiviazione dei file, allegare CDN arbitrari, ed estendere il filesystem/cloud storage.
 
-:::Attenzione
+:::danger
 
 Alcuni driver potrebbero provare a indicizzare il loro filesystem ogni volta che il driver viene istanziato, anche se è necessario solo il metodo `url`. Ciò può avere gravi ripercussioni sulle prestazioni. Nella maggior parte dei casi, dovrai assicurarti che il metodo `url` del tuo driver non esegua il filesystem remoto. Allo stesso modo, il filesystem remoto di solito non dovrebbe essere accessibile fino a quando le operazioni non vengono effettivamente eseguite.
 
@@ -124,6 +126,7 @@ Alcuni driver potrebbero provare a indicizzare il loro filesystem ogni volta che
 
 ## Configurazione interfaccia utente e amministratore
 
-Flarum al momento non fornisce una GUI per selezionare driver o per inserire impostazioni per i driver. Ma potrebbe essere aggiunta in futuro. Per ora, le estensioni sono responsabili di fornire una GUI per i loro dischi/driver.
+Flarum al momento non fornisce una GUI per selezionare driver o per inserire impostazioni per i driver. Ma potrebbe essere aggiunta in futuro.
+Per ora, le estensioni sono responsabili di fornire una GUI per i loro dischi/driver.
 
 Come notato [sopra](#storage-drivers), se la tua estensione fornisce una GUI per selezionare driver di un disco, dovrà modificare il `disk_driver.DISK_NAME` nelle impostazioni.
