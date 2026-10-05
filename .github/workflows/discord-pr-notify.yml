@@ -1,0 +1,71 @@
+name: Notify Discord of new pull requests
+
+on:
+  # pull_request_target runs in the context of this repository, so the webhook
+  # secret is available for PRs from forks too. It is safe here because the job
+  # never checks out or runs the PR's code.
+  pull_request_target:
+    types: [opened]
+
+permissions: {}
+
+jobs:
+  notify:
+    # Dependabot opens a PR for every dependency bump; leave those out of the channel.
+    if: github.event.pull_request.user.login != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Post to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          # Passed through env, never interpolated into the script, because the
+          # title and body are written by whoever opens the PR.
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_AUTHOR_URL: ${{ github.event.pull_request.user.html_url }}
+          PR_AUTHOR_AVATAR: ${{ github.event.pull_request.user.avatar_url }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_DRAFT: ${{ github.event.pull_request.draft }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not set; skipping."
+            exit 0
+          fi
+
+          if [ "$PR_DRAFT" = "true" ]; then
+            label="New draft pull request"
+          else
+            label="New pull request"
+          fi
+
+          jq -n \
+            --arg label "$label" \
+            --arg title "$PR_TITLE" \
+            --arg url "$PR_URL" \
+            --arg number "$PR_NUMBER" \
+            --arg author "$PR_AUTHOR" \
+            --arg author_url "$PR_AUTHOR_URL" \
+            --arg avatar "$PR_AUTHOR_AVATAR" \
+            --arg body "$PR_BODY" \
+            --arg repo "$REPO" \
+            '{
+              username: "GitHub",
+              allowed_mentions: { parse: [] },
+              embeds: [{
+                title: ("#" + $number + " " + $title | .[0:256]),
+                url: $url,
+                description: ($body | if length == 0 then null elif length > 300 then .[0:300] + "…" else . end),
+                color: 15234094,
+                author: { name: $author, url: $author_url, icon_url: $avatar },
+                footer: { text: ($label + " in " + $repo) }
+              }]
+            } | .embeds[0] |= with_entries(select(.value != null))' > payload.json
+
+          curl --fail-with-body --silent --show-error \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$DISCORD_WEBHOOK_URL"
