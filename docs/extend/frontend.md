@@ -195,7 +195,7 @@ You should familiarize yourself with proper syntax for [importing js modules](ht
 Pretty much every Flarum extension will need to import *something* from Flarum Core.
 Like most extensions, core's JS source code is split up into `admin`, `common`, and `forum` folders. You can import the file by prefixing its path in the Flarum core source code with `flarum`. So `admin/components/ExtensionLinkButton` is available as `flarum/admin/components/ExtensionLinkButton`, `common/Component` is available as `flarum/common/Component`, and `forum/states/PostStreamState` is available as `flarum/forum/states/PostStreamState`.
 
-In some cases, an extension may want to extend code from another flarum extension. You can use the same [import format](./extending-extensions#importing-from-extensions) valid for any third-party extension.
+In some cases, an extension may want to extend code from another flarum extension. You can use the same [import format](./extending-extensions.md#importing-from-extensions) valid for any third-party extension.
 
 For example, to import from tags extension:
 
@@ -488,6 +488,6 @@ The message will be logged to the console as soon as the LogInModal component is
 
 :::tip
 
-Find out more about using code splitting to lazy load modules in the [Code Splitting](./code-splitting) section.
+Find out more about using code splitting to lazy load modules in the [Code Splitting](./code-splitting.md) section.
 
 :::
