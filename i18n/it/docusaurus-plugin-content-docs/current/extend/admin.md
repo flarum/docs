@@ -1,0 +1,536 @@
+# Pannello di amministrazione
+
+Every extension has a unique page containing information, settings, and the extension's own permissions.
+
+You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) component.
+
+## Admin Extender
+
+The admin frontend allows you to add settings and permissions to your extension with very few lines of code, using the `Admin` frontend extender.
+
+Register your settings, permissions, and admin page in a declarative `admin/extend.ts` file rather than imperatively inside the `admin/index.ts` initializer. The extender approach is the recommended pattern: it's less code, and — importantly — it lets Flarum automatically index your settings and permissions for the [admin search](#admin-search). Reserve the `index.ts` initializer for logic that genuinely has to run imperatively (e.g. extending core components).
+
+To get started, create an `admin/extend.ts` file:
+
+```ts
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  //
+];
+```
+
+:::warning Don't forget the import
+
+For your extenders to take effect, your entry `admin/index.ts` file **must** re-export the `extend` module:
+
+```ts
+// admin/index.ts
+export { default as extend } from './extend';
+
+app.initializers.add('acme-interstellar', () => {
+  // Imperative-only logic goes here. Keep your settings, permissions,
+  // and page registration in extend.ts.
+});
+```
+
+Without this `export` line, none of your extenders run.
+
+:::
+
+A complete `extend.ts` registering a custom admin page alongside settings and a permission looks like this:
+
+```ts
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+import SettingsPage from './components/SettingsPage';
+
+export default [
+  new Extend.Admin()
+    .page(SettingsPage)
+    .setting(() => ({
+      setting: 'acme-interstellar.coordinates',
+      label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true),
+      type: 'boolean',
+    }))
+    .permission(
+      () => ({
+        icon: 'fas fa-rocket',
+        label: app.translator.trans('acme-interstellar.admin.permissions.launch_label'),
+        permission: 'acme-interstellar.launch',
+      }),
+      'moderate',
+      90
+    ),
+];
+```
+
+### Registrazione delle impostazioni
+
+L'aggiunta di campi delle impostazioni in questo modo è consigliata per elementi semplici. Come regola generale, se hai solo bisogno di memorizzare le cose nella tabella delle impostazioni, questi consigli ti saranno utili.
+
+To add a field, call the `setting` method of the `Admin` extender and pass a callback that returns a 'setting object' as the first argument. Behind the scenes, the app turns your settings into an [`ItemList`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist), you can pass a priority number as the second argument which will determine the order of the settings on the page.
+
+Ecco un esempio con un elemento switch (booleano):
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.coordinates', // This is the key the settings will be saved under in the settings table in the database.
+        label: app.translator.trans('acme-interstellar.admin.coordinates_label', {}, true), // The label to be shown letting the admin know what the setting does.
+        help: app.translator.trans('acme-interstellar.admin.coordinates_help', {}, true), // Optional help text where a longer explanation of the setting can go.
+        type: 'boolean', // What type of setting this is, valid options are: boolean, text (or any other <input> tag type), and select. 
+      }),
+      30 // Optional: Priority
+    )
+];
+```
+
+Se utilizzi `type: 'select'` l'oggetto ha un aspetto leggermente diverso:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.fuel_type',
+        label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
+        type: 'select',
+        options: {
+          'LOH': 'Liquid Fuel', // The key in this object is what the setting will be stored as in the database, the value is the label the admin will see (remember to use translations if they make sense in your context).
+          'RDX': 'Solid Fuel',
+        },
+        default: 'LOH',
+      }),
+    )
+];
+```
+
+Inoltre, notare che ulteriori elementi nelle impostazioni saranno utilizzati come attributi del componente. Questo può essere utilizzato come testo di esempio (placeholder), restrizioni min/max, ecc:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .setting(
+      () => ({
+        setting: 'acme-interstellar.crew_count',
+        label: app.translator.trans('acme-interstellar.admin.crew_count_label', {}, true),
+        type: 'number',
+        min: 1,
+        max: 10
+      }),
+    )
+];
+```
+
+Se vuoi aggiungere qualcosa alle impostazioni come del testo extra o un input più complicato, puoi anche passare un callback come primo argomento che restituisce JSX. This callback will be executed in the context of [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) and setting values will not be automatically serialized.
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .setting(
+      () => function () {
+        if (app.session.user.username() === 'RocketMan') {
+          return (
+            <div className="Form-group">
+              <h1> {app.translator.trans('acme-interstellar.admin.you_are_rocket_man_label')} </h1>
+              <label className="checkbox">
+                <input type="checkbox" bidi={this.setting('acme-interstellar.rocket_man_setting')}/>
+                {app.translator.trans('acme-interstellar.admin.rocket_man_setting_label')}
+              </label>
+            </div>
+          );
+        }
+      },
+    )
+];
+```
+
+### Available Setting Types
+
+This is a list of setting types available by default:
+
+**Toggle:** `bool` or `checkbox` or `switch` or `boolean`
+
+**Textarea:** `textarea`
+
+**Color Picker:** `color-preview`
+
+**Text Input**: `text` or any HTML input types such as `tel` or `number`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'bool' // Any of the mentioned values above
+}
+```
+
+**Selection:** `select` or `dropdown` or `selectdropdown`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'select', // Any of the mentioned values above
+  options: {
+    'option_key': 'Option Label',
+    'option_key_2': 'Option Label 2',
+    'option_key_3': 'Option Label 3',
+  },
+  default: 'option_key'
+}
+```
+
+**Image Upload Button:** `image-upload`
+
+```ts
+{
+  setting: 'setting_unique_key',
+  label: app.translator.trans('acme-interstellar.admin.settings.setting_unique_key', {}, true),
+  type: 'image-upload',
+  name: 'my_image_name', // The name of the image, this will be used for the request to the backend.
+  routePath: '/upload-my-image', // The route to upload the image to.
+  url: () => app.forum.attribute('myImageUrl'), // The URL of the image, this will be used to preview the image.
+}
+```
+
+### Registrazione delle autorizzazioni
+
+Permissions can be found in 2 places. You can view each extension's individual permissions on their dedicated page, or you can view all permissions in the main permissions page.
+
+In order for that to happen, permissions must be registered using the `permission` method of the `Admin` extender, similar to how settings are registered.
+
+Argomenti:
+
+- Permessi Oggetto
+- What type of permission - see [`PermissionGrid`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_permissiongrid.permissiongrid)'s functions for types (remove items from the name)
+- Priorità di `ItemList`
+
+Tornando alla nostra estensione "rocket" preferita:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .permission(
+      () => ({
+        icon: 'fas fa-rocket', // Font-Awesome Icon
+        label: app.translator.trans('acme-interstellar.admin.permissions.fly_rockets_label', {}, true), // Permission Label
+        permission: 'discussion.rocket_fly', // Actual permission name stored in database (and used when checking permission).
+        tagScoped: true, // Whether it be possible to apply this permission on tags, not just globally. Explained in the next paragraph.
+      }),
+      'start', // Category permission will be added to on the grid
+      95 // Optional: Priority
+    )
+];
+```
+
+Se la tua estensione interagisce con l'estensione [tag](https://github.com/flarum/tags) (che è abbastanza comune), si potrebbe desiderare un permesso per essere "tag scopable" (... applicato a livello del tag, non solo globalmente). Puoi farlo includendo un attributo `tagScoped`, come abbiamo visto sopra. Permessi che iniziano con la discussione `.` saranno automaticamente "tag scoped" a meno che `tagScoped: false` non sia indicato.
+
+To learn more about Flarum permissions, see [the relevant docs](permissions.md).
+
+### Promemoria concatenamento
+
+Ricorda che queste funzioni possono essere tutte concatenate come:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .setting(...)
+    .permission(...)
+    .permission(...)
+    .permission(...)
+    .setting(...)
+    .setting(...)
+];
+```
+
+### Estensione/sovrascrittura della pagina predefinita
+
+Sometimes you may have more complicated settings, or just want the page to look completely different. In this case, you will need to tell the `Admin` extender that you want to provide your own page. Nota che `buildSettingComponent`, l'util utilizzato per registrare le impostazioni fornendo un oggetto descrittivo, è disponibile come metodo su `ExtensionPage` (estensione da `AdminPage`, che è una base generica per tutte le pagine di amministrazione con alcuni metodi aggiuntivi).
+
+Crea una nuova classe che estenda il componente `Page` o`ExtensionPage`
+
+```js
+import ExtensionPage from 'flarum/components/ExtensionPage';
+
+export default class StarPage extends ExtensionPage {
+  content() {
+    return (
+      <h1>Ciao dalla sezione impostazioni!</h1>
+    )
+  }
+}
+
+```
+
+Then, simply use the `page` method of the extender:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+import StarPage from './components/StarPage';
+
+export default [
+  new Extend.Admin()
+    .page(StarPage)
+];
+```
+
+Questa pagina verrà visualizzata al posto di quella predefinita.
+
+You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
+
+### Reset Settings Button
+
+`AdminPage` provides a `resetButton()` method that renders a **Reset Settings** button. When clicked, it opens a confirmation modal listing the setting keys that will be deleted from the database, reverting them to their PHP-side defaults (as registered via `Extend\Settings()->default(...)`).
+
+On default extension pages (those that use `Admin.setting()`), the reset button is rendered automatically alongside the save button. On custom pages, you must call `resetButton()` yourself.
+
+The simplest approach is to pass a label as the third argument to `this.setting()` when reading each setting. The reset button will then pick up those labels automatically when called with no arguments:
+
+```js
+content() {
+  const myValue = this.setting('acme.my_key', '', app.translator.trans('acme.admin.my_key_label'));
+
+  return (
+    <Form>
+      {/* ... your form fields ... */}
+      <div className="Form-group Form-controls">
+        {this.submitButton()}
+        {this.resetButton()}
+      </div>
+    </Form>
+  );
+}
+```
+
+If you need more control, you can pass the settings list explicitly:
+
+```js
+this.resetButton(
+  [
+    { key: 'acme.setting_one', label: app.translator.trans('acme.admin.setting_one_label') },
+    { key: 'acme.setting_two', label: app.translator.trans('acme.admin.setting_two_label') },
+  ],
+  app.translator.trans('acme.admin.reset_title', {}, true), // optional modal title
+  'acme-extension' // optional extension ID, included in the Reset event payload
+)
+```
+
+When a reset is confirmed, a `Flarum\Settings\Event\Reset` event is dispatched on the backend with the `$actor`, `$extensionId`, and `$keys` that were deleted. Extensions can listen to this event to perform any necessary cleanup.
+
+### Admin Search
+
+The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.setting` and `Admin.permission` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
+
+To do this, you can use the `Admin.generalIndexItems` extender method. This method takes an index type (`'settings'` or `'permissions'`) and a callback that returns an array of index items. Each index item is an object with the following properties:
+
+```ts
+export type GeneralIndexItem = {
+  /**
+   * The unique identifier for this index item.
+   */
+  id: string;
+  /**
+   * Optional: The tree path to this item, used for grouping in the search results.
+   */
+  tree?: string[];
+  /**
+   * The label to display in the search results.
+   */
+  label: string;
+  /**
+   * Optional: The description to display in the search results.
+   */
+  help?: string;
+  /**
+   * Optional: The URL to navigate to when this item is selected.
+   * The default is to navigate to the extension page.
+   */
+  link?: string;
+  /**
+   * Optional: A callback that returns a boolean indicating whether this item should be visible in the search results.
+   */
+  visible?: () => boolean;
+};
+```
+
+Here is an example of how to add an index item:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .generalIndexItems('settings', () => [
+      {
+        id: 'acme-interstellar',
+        label: app.translator.trans('acme-interstellar.admin.acme_interstellar_label', {}, true),
+        help: app.translator.trans('acme-interstellar.admin.acme_interstellar_help', {}, true),
+      },
+    ])
+];
+```
+
+## Extension Categories
+
+The admin sidebar groups extensions into collapsible categories. Each category has an icon, a count badge, and can be expanded or collapsed independently. When searching, categories with matching results expand automatically.
+
+### Declaring a Category
+
+Declare your extension's category in `composer.json` under `extra.flarum-extension.category`:
+
+```json
+{
+  "extra": {
+    "flarum-extension": {
+      "title": "My Extension",
+      "category": "moderation",
+      "icon": {
+        "name": "fas fa-shield-alt",
+        "backgroundColor": "#dc3626",
+        "color": "#fff"
+      }
+    }
+  }
+}
+```
+
+If no category is declared, or the declared category is not recognised, the extension is placed in the **feature** category.
+
+Language packs (extensions with an `extra.flarum-locale` key) are always placed in the **language** category regardless of any declared category.
+
+### Available Categories
+
+| Key            | Label         |
+| -------------- | ------------- |
+| `feature`      | Features      |
+| `theme`        | Guida rapida  |
+| `forum-widget` | Forum Widgets |
+| `language`     | Lingue        |
+
+Any other declared category that is not registered falls back to the **feature** category. You can register additional categories yourself — see [Registering a Custom Category](#registering-a-custom-category) below.
+
+### Registering a Custom Category
+
+Third-party extensions can register additional categories by extending `app.extensionCategories` in an admin initializer. The value is the sort priority — higher numbers appear first in the sidebar:
+
+```js
+import app from 'flarum/admin/app';
+
+app.initializers.add('acme-interstellar', () => {
+  app.extensionCategories['space'] = 45;
+});
+```
+
+Then declare `"category": "space"` in your `composer.json`, and add a translation key `core.admin.nav.categories.space` (or provide your own translation via your extension's locale files — the sidebar will fall back to the raw key if no translation exists).
+
+## Extension Health Widget
+
+The admin dashboard includes an **Extension Health Widget** that gives forum administrators an at-a-glance view of the health of their installed extensions. It replaces the old categorised extension grid that duplicated the sidebar.
+
+The widget has three sections:
+
+### Abandoned Extensions
+
+Extensions whose Composer package has been marked as abandoned on Packagist will appear here. Flarum reads the `abandoned` field from the extension's payload and surfaces it prominently so administrators know to take action.
+
+- If the package specifies a **replacement** (e.g. `"abandoned": "vendor/new-package"`), the item is shown in **red** with an exclamation circle and the replacement package name.
+- If there is **no replacement** (e.g. `"abandoned": true`), the item is shown in **orange** with a warning triangle.
+
+The same warning badge is duplicated on the extension's entry in the admin sidebar so it is visible even when the dashboard widget is not in view.
+
+#### Marking your package as abandoned
+
+This is a Packagist/Composer concept, not a Flarum-specific one. If your extension has been superseded by another package, update your `composer.json`:
+
+```json
+{
+  "abandoned": "vendor/replacement-package"
+}
+```
+
+Or if there is no replacement:
+
+```json
+{
+  "abandoned": true
+}
+```
+
+Packagist will then mark the package abandoned, and Flarum will surface the warning to administrators.
+
+:::info Abandoned status is determined at install time
+
+Flarum reads the `abandoned` field from `vendor/composer/installed.json`, which is populated by Composer when packages are installed or updated. This means:
+
+- The status reflects what was current when `composer install` or `composer update` was last run.
+- If a package is marked abandoned after that point, the warning will not appear until Composer is run again.
+- **Private Packagist, Satis, Toran Proxy, and other custom Composer repositories are fully supported** — Composer writes the `abandoned` field from whatever repository served the package, so the data is repository-agnostic.
+
+Flarum also refreshes abandoned-extension data periodically via a scheduled task. The `extensions:sync-abandoned` console command — registered in `flarum.console.scheduled` with a weekly schedule — fetches the [community-maintained abandoned-extensions list](https://raw.githubusercontent.com/flarum/abandoned-extensions/main/abandoned.json), filters it to your installed packages, and stores the result in the `flarum-core.abandoned_extensions_map` setting. When the `flarum-core.notify_admins_on_abandoned` setting is enabled, scheduled runs email admins about newly flagged extensions. You can also trigger it manually:
+
+```bash
+php flarum extensions:sync-abandoned
+```
+
+:::
+
+### Suggested Extensions
+
+If your extension has optional integrations with other packages, you can advertise them via the standard Composer `suggest` field in `composer.json`:
+
+```json
+{
+  "suggest": {
+    "vendor/package-name": "Adds support for XYZ feature"
+  }
+}
+```
+
+Flarum reads the `suggest` map from every **enabled** extension and surfaces any `vendor/package` entries that are not already installed. The widget links directly to the package on Packagist. PHP extension requirements (e.g. `ext-gd`) are ignored.
+
+Only suggestions from **enabled** extensions are shown, so administrators are not overwhelmed by suggestions from extensions they haven't activated.
+
+### Disabled Extensions
+
+All installed-but-disabled extensions are shown as a compact icon grid so administrators can quickly spot extensions they may have forgotten about. Each icon links to the extension's settings page.
+
+## Metadati Composer.json
+
+Extension pages make room for extra info which is pulled from extensions' composer.json.
+
+Per maggiori informationi, guarda [composer.json schema](https://getcomposer.org/doc/04-schema.md).
+
+| Descrizione                                                              | dovein composer.json                                                                    |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
+| discuss.flarum.org link alla discussione | "forum" all'interno del tag "support"                                                                   |
+| Documentazione                                                           | "docs" all'interno del tag "support"                                                                    |
+| Supporto (email)                                      | "email" all'interno del tag "support"                                                                   |
+| Sito Web                                                                 | "homepage" chiave                                                                                       |
+| Donazioni                                                                | chiave "funding" (Nota: verrà utilizzato solo il primo collegamento) |
+| Sorgente                                                                 | "source" all'interno del tag "support"                                                                  |
