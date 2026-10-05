@@ -4,7 +4,8 @@ Wenn du Anpassungen an deiner Seite vornehmen möchtest, ohne eine ganze Erweite
 
 In unserer [Erweiterungsdokumentation](extend/start.md) findest du weitere Informationen über Extender (und auch ein [Beispiel für einen lokalen Extender](extend/start.md#hello-world)).
 
-Wenn du neue Dateien erstellen musst (wenn du eine benutzerdefinierte Klasse hinzufügst, die für Extender importiert werden soll), musst du deine composer.json ein wenig anpassen. Füge Folgendes hinzu:
+Wenn du neue Dateien erstellen musst (wenn du eine benutzerdefinierte Klasse hinzufügst, die für Extender importiert werden soll), musst du deine composer.json ein wenig anpassen.
+Füge Folgendes hinzu:
 
 ```json
 "autoload": {
@@ -18,6 +19,7 @@ Jetzt kannst du neue PHP-Dateien in einem `App`-Unterverzeichnis erstellen, inde
 
 :::tip Lokale Extender vs. Erweiterungen
 
-Lokale Extender können für kleine Anpassungen gut sein, aber wenn Sie umfangreiche Anpassungen benötigen, ist eine Erweiterung möglicherweise die bessere Wahl: Eine separate Codebasis, eine sauberere Handhabung vieler Dateien, Werkzeuge für Entwickler und die Möglichkeit, den Quellcode zu teilen, sind große Vorteile.
+Lokale Extender können für kleine Anpassungen gut sein, aber wenn Sie umfangreiche Anpassungen benötigen, ist eine Erweiterung möglicherweise die bessere Wahl:
+Eine separate Codebasis, eine sauberere Handhabung vieler Dateien, Werkzeuge für Entwickler und die Möglichkeit, den Quellcode zu teilen, sind große Vorteile.
 
 :::
