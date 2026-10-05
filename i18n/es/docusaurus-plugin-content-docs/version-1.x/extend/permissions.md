@@ -18,7 +18,8 @@ Los administradores también pueden crear nuevos grupos a través del panel de a
 
 ## Permisos
 
-Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo). En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
+Los "permisos" de Flarum se implementan como simples cadenas, y se asocian con los grupos en una tabla de pseudounión (no es una verdadera relación ManyToMany, pero el concepto es el mismo).
+En realidad, eso es todo lo que hace la cuadrícula de permisos en el panel de control del administrador: estás añadiendo y eliminando estas cadenas de permisos de los grupos.
 
 No hay una asociación directa entre los usuarios y los permisos: cuando comprobamos los permisos de un usuario, en realidad estamos enumerando los permisos de todos los grupos del usuario.
 
