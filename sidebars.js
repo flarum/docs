@@ -69,6 +69,7 @@ module.exports = {
         'extensions/gdpr',
         'extensions/nicknames',
         'extensions/realtime',
+        'extensions/statistics',
         'extensions/suspend'
       ]
     },
@@ -159,6 +160,7 @@ module.exports = {
         'extend/realtime',
         'extend/audit',
         'extend/gdpr',
+        'extend/statistics',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
