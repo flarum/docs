@@ -6,7 +6,7 @@ Um auf das Admin-Dashboard zuzugreifen, klicke oben rechts auf dem Bildschirm au
 
 Das Admin-Dashboard hat die folgenden Abschnitte:
 
-- **Dashboard** – Zeigt das Haupt-Admin-Dashboard an, das Statistiken und andere relevante Informationen enthält.
+- **Dashboard** - Shows the main Admin Dashboard, containing [statistics](extensions/statistics.md) and other relevant information.
 - **Basics** - Zeigt die Optionen zum Festlegen grundlegender Forumsdetails wie Name, Beschreibung und Willkommensbanner.
 - **E-Mail** - Ermöglicht die Konfiguration von E-Mail-Einstellungen. Siehe [hier](https://docs.flarum.org/mail) für weitere Informationen.
 - **Berechtigungen** - Zeigt die Berechtigungen für jede Benutzergruppe an und ermöglicht dir, globale und spezifische Bereiche zu konfigurieren.

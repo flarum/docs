@@ -6,7 +6,7 @@ To access the Admin dashboard, Click on your **Name** at the at the top right of
 
 Bảng điều khiển dành cho quản trị viên gồm các phần sau:
 
-- **Trang tổng quan** - Hiển thị Trang tổng quan quản trị chính, chứa số liệu thống kê và thông tin có liên quan khác.
+- **Dashboard** - Shows the main Admin Dashboard, containing [statistics](extensions/statistics.md) and other relevant information.
 - **Cơ bản** - Hiển thị các tùy chọn để đặt các chi tiết cơ bản của diễn đàn như Tên, Mô tả và Biểu ngữ chào mừng.
 - **Email** - Allows you to configure your E-Mail settings. Refer [here](https://docs.flarum.org/mail) for more information.
 - **Quyền** - Hiển thị các quyền cho từng nhóm người dùng và cho phép bạn định cấu hình phạm vi toàn cầu và phạm vi cụ thể.
