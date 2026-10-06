@@ -71,7 +71,7 @@ Days run from midnight to midnight UTC, whatever your forum's or your browser's 
 
 The statistics count what is in your forum's database, not what visitors can see, so hidden and private content is included. Content that has been deleted permanently is no longer counted, so totals and past counts can go down.
 
-Other extensions can add their own statistics, which appear after the built-in ones. For example, the Messages extension (`flarum/messages`) adds:
+Other extensions can add their own statistics, which appear after the built-in ones. For example, the [Messages](messages.md) extension (`flarum/messages`) adds:
 
 | Statistic | What it counts | Dated by |
 | --- | --- | --- |
