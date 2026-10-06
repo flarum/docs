@@ -4,7 +4,7 @@ Flarum 管理面板是一个友好的论坛管理界面。且只对「管理组�
 
 管理员控制面板有如下部分，具体是：
 
-- **仪表盘** - 显示主要的管理员控制面板，包含统计信息和其他相关信息。
+- **Dashboard** - Shows the main Admin Dashboard, containing [statistics](extensions/statistics.md) and other relevant information.
 - **Basics** - 显示设置基本论坛详情的选项，如名称、描述和欢迎横幅。
 - **电子邮件** - 允许您配置您的电子邮件设置。更多信息请参考[此处]（https://docs.flarum.org/mail）。
 - **权限** - 显示每个用户组的权限，并允许您配置全站和特定范围。
