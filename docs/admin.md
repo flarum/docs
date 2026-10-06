@@ -5,7 +5,7 @@ It is only available to users in the "Admin" group.
 To access the Admin dashboard, Click on your **Name** at the at the top right of the screen, and select **Administration**.
 
 The Admin Dashboard has the following sections, being:
-- **Dashboard** - Shows the main Admin Dashboard, containing statistics and other relevant information.
+- **Dashboard** - Shows the main Admin Dashboard, containing [statistics](extensions/statistics.md) and other relevant information.
 - **Basics** - Shows the options to set basic forum details such as Name, Description, and Welcome Banner.
 - **Email** - Allows you to configure your E-Mail settings. Refer [here](https://docs.flarum.org/mail) for more information.
 - **Permissions** - Shows the permissions for each user group, and allows you to configure global and specific scopes.
