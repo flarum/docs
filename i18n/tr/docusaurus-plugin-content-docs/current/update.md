@@ -31,6 +31,31 @@ php flarum migrate
 php flarum cache:clear
 ```
 
+:::warning Composer may refuse to run this
+
+Flarum 1.x requires `league/flysystem` 1.x, which has security advisories and no patched 1.x release, so current Composer versions block it and the update fails before it starts:
+
+```
+flarum/core[...] require league/flysystem ^1.0.11 -> found league/flysystem[1.0.11, ..., 1.1.10]
+but these were not loaded, because they are affected by security advisories
+```
+
+Ignoring that advisory is the recommended approach for Flarum 1.8. Add this to your `composer.json`, then run the command again:
+
+```json
+"config": {
+    "audit": {
+        "ignore": {
+            "GHSA-cxf4-7mrp-vvpr": "league/flysystem 1.x (required by flarum/core 1.x) has no patched release"
+        }
+    }
+}
+```
+
+This only affects the 1.x line. Flarum 2.0 uses Flysystem 3.x and needs no such entry, so you can drop it once you are upgraded.
+
+:::
+
 **2. Check your PHP version.**
 Flarum 2.0 requires **PHP 8.3 or higher**. Check your current version with `php --version`. If you're below 8.3, upgrade PHP before proceeding.
 
@@ -47,6 +72,7 @@ Some extensions are no longer compatible with v2, and some have been superseded:
 
 - **Remove** `blomstra/database-queue` and `blomstra/fontawesome` — this functionality is now built into `flarum/core`.
 - **Replace** `blomstra/flarum-redis` with `fof/redis`, and `blomstra/horizon` with `fof/horizon`.
+- **Replace** `flarum/package-manager` with `flarum/extension-manager`. The package was renamed for v2; the old name still resolves, but Composer will warn on every run that it is abandoned.
 - For all other extensions, check their [Discuss thread](https://discuss.flarum.org/t/extensions) or [Packagist](http://packagist.org/) page to confirm a v2-compatible release is available. You'll need to remove any that don't have one yet. Lütfen uzantı geliştiricilerine karşı sabırlı olun!
 
 **4. Update your `composer.json`.**
@@ -72,7 +98,19 @@ Once Flarum 2.0 stable is released, you should change this back to `stable`. Lea
 :::
 
 **6. Update your `config.php` if using MariaDB.**
-Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
+Flarum 2.0 distinguishes between MySQL and MariaDB. If your forum runs on MariaDB, you must change the `driver` value in `config.php` to `mariadb`. Leaving it as `mysql` will cause compatibility errors once you are on 2.0.
+
+:::tip Not sure which one you have?
+
+On Flarum 1.x, `php flarum info` labels the line `MySQL version` whichever server you run, so read the version string rather than the label:
+
+```
+MySQL version: 11.8.9-MariaDB-ubu2404
+```
+
+That forum is on MariaDB and does need this change, despite what the label says. After upgrading, 2.0 reports it as `MariaDB version` correctly.
+
+:::
 
 ```php
 <?php return array (
@@ -92,7 +130,7 @@ Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, upd
 If your install uses [local extenders](extenders.md), review them for compatibility with Flarum 2.0's API changes before upgrading.
 
 **8. Disable third-party extensions.**
-We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong.
+We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong. Re-enable them once the upgrade has finished and the forum loads.
 
 ## Running the Upgrade
 
