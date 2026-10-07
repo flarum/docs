@@ -28,9 +28,17 @@ A conversation is between two members. A member can start one with:
 
 Messaging someone you already have a conversation with continues that conversation rather than starting another.
 
-If the other member's groups don't have permission to send messages, the conversation shows **This user cannot reply**. You can still message them; they just can't answer.
-
 Only the two members of a conversation can see it. That includes admins and moderators: they can't read conversations they aren't part of.
+
+## Members who can't reply
+
+Members can only message someone who could reply: someone whose groups have **Send private messages**. A member who is [suspended](suspend.md), or who hasn't confirmed their email address, has only a guest's permissions, so they can't reply.
+
+When a member chooses who to message, anyone who can't reply is shown as **Can't reply to messages** and can't be chosen. On that person's profile, **Send a message** is unavailable and says **This user cannot reply**. In an existing conversation with them, the reply box is gone and the conversation shows **This user cannot reply**.
+
+Admins, and any group you grant **Message users without messaging permission**, can message them anyway. Once one of them has sent a message in a conversation, everyone in it can reply there, so a suspended member can answer a moderator. That member still can't start conversations of their own.
+
+When you update from an earlier release, conversations that an admin has already written in are opened to replies in the same way.
 
 ## The Messages page
 
@@ -85,6 +93,7 @@ Set these on the **Permissions** page of the admin panel:
 | Permission | Granted to by default | What it allows |
 | --- | --- | --- |
 | **Send private messages** | Members | Starting conversations and sending messages. |
+| **Message users without messaging permission** | Admins only | Messaging members who can't send messages themselves. They can then reply in that conversation. See [Members who can't reply](#members-who-cant-reply). |
 | **Delete own messages** | Nobody | Deleting messages the member sent, for the time you choose. See [Deleting messages](#deleting-messages). |
 | **Send messages without throttling** | Admins only | Sending messages without [flood control](#flood-control). |
 | **View IP addresses of messages** | Admins only | Seeing the IP address each message was sent from. Messages records it for every message. |
@@ -97,4 +106,4 @@ Set these on the **Permissions** page of the admin panel:
 | Mentions | Members can mention other members and posts in their messages. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
 | [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with who it was sent to. It never records what a message says. |
-| [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages. |
+| [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
