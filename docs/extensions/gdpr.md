@@ -142,7 +142,7 @@ The **GDPR Integrations** page, linked in the admin navigation and from the exte
 
 Check it before choosing your actions. Data stored by an extension is only covered if that extension registers it with GDPR; anything else stays where it is when an account is anonymized, and is not included in exports.
 
-The bundled [Messages](messages.md) extension registers private messages: a member's messages are included in their export, lose their IP addresses when the account is anonymized, and are deleted when it is deleted.
+The bundled [Messages](messages.md) extension registers private messages: a member's messages are included in their export, lose their IP addresses when the account is anonymized, and are deleted when it is deleted. Nobody can message an anonymized account.
 
 ## Scheduled tasks
 
