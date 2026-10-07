@@ -119,7 +119,7 @@ An anonymized account cannot be acted on afterwards: every permission check agai
 
 ### Deletion
 
-Deletion removes all the member's posts, their avatar and their tokens, then deletes the account itself. Data that other tables link to the account with a database cascade, such as private messages from the Messages extension, goes with it.
+Deletion removes all the member's posts, their avatar and their tokens, then deletes the account itself. Data that other tables link to the account with a database cascade goes with it.
 
 ### Erasing accounts as a moderator
 
@@ -141,6 +141,8 @@ With the default settings, erasing a spam account **anonymizes** it, so its post
 The **GDPR Integrations** page, linked in the admin navigation and from the extension's settings, lists every registered data type with what happens to it on export, anonymization and deletion, and which extension registered it. It also lists `users` table columns that are handled specially, and which fields are treated as personal data.
 
 Check it before choosing your actions. Data stored by an extension is only covered if that extension registers it with GDPR; anything else stays where it is when an account is anonymized, and is not included in exports.
+
+The bundled [Messages](messages.md) extension registers private messages: a member's messages are included in their export, lose their IP addresses when the account is anonymized, and are deleted when it is deleted.
 
 ## Scheduled tasks
 
@@ -177,7 +179,6 @@ When the [Audit](audit.md) extension is enabled, requests, confirmations, cancel
 
 ## Known limitations
 
-- Private messages from the bundled Messages extension are not included in exports, and are kept when an account is anonymized. They are removed when an account is deleted.
 - Posts and discussions marked as private by an extension are not included in exports unless that extension adds them.
 
 :::tip For developers
