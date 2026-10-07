@@ -14,6 +14,8 @@ While a member is suspended, they are treated as if they belong to the **Guest**
 
 In practice, this means they can still log in and read whatever guests can read, but they cannot start discussions, reply, like or do anything else that guests cannot. If you have given guests extra permissions, suspended members get those too.
 
+With [Messages](messages.md) enabled, they can't send private messages, and other members can't message them. Admins, and groups with [Message users without messaging permission](messages.md#members-who-cant-reply), still can, and the suspended member can reply in that conversation.
+
 Their groups are not removed, so everything comes back as it was when the suspension ends.
 
 ## Permisos
