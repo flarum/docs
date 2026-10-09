@@ -144,6 +144,18 @@ php flarum cache:clear
 
 Then restart your PHP process and opcache if applicable.
 
+## After the Upgrade
+
+Your forum is fully functional at this point. There is one optional piece of housekeeping worth knowing about.
+
+Flarum 2.0 saves newly uploaded avatars as WebP, where 1.x saved them as PNG. Avatars uploaded before the upgrade keep working exactly as they are, so nothing is broken by leaving them alone. If you would rather have the existing ones stored as WebP as well, run it once:
+
+```
+php flarum avatars:convert-to-webp
+```
+
+It only touches avatars stored on your own forum, and skips animated GIFs so they stay animated. See [the console documentation](console.md#avatars-convert-to-webp) for what it reports.
+
 ## Troubleshooting
 
 ### The extension manager reports that no new major version is available
