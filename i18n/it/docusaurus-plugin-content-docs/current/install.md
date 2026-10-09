@@ -6,12 +6,6 @@ Fatti un giro sul nostro [forum di dimostrazione](https://discuss.flarum.org/d/2
 
 :::
 
-:::warning
-
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production — but it isn't the final stable release yet, so back up your data and test before relying on it.
-
-:::
-
 ## Requisiti del server
 
 Prima di installare Flarum, è importante verificare che il tuo server soddisfi i requisiti. Per eseguire Flarum, avrai bisogno di:
@@ -65,7 +59,7 @@ Only the latest Flarum 2.x version is detailed here, for previous versions [brow
 Flarum usa [Composer](https://getcomposer.org) per gestire le sue dipendenze ed estensioni. Prima di installare Flarum, sar� necessario [installare Composer](https://getcomposer.org) sulla tua macchina. Successivamente, esegui questo comando in una cartella vuota in cui desideri installare Flarum:
 
 ```bash
-composer create-project flarum/flarum:^2.0.0 --stability=beta .
+composer create-project flarum/flarum:^2.0.0 .
 ```
 
 Mentre questo comando è in esecuzione, puoi configurare il tuo server web. Dovrai assicurarti che il tuo webroot sia impostato su `/percorso/del/tuo/forum/public`, e impostare [URL Rewriting](#url-rewriting) come descritto qui sotto.
