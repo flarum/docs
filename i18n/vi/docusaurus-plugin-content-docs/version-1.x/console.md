@@ -20,7 +20,7 @@ Liệt kê tất cả các lệnh quản lý có sẵn, cũng như hướng dẫ
 
 Hiển thị kết quả trợ giúp cho một lệnh nhất định.
 
-Bạn cũng có thể xuất ra trợ giúp ở các định dạng khác bằng cách sử dụng tùy chọn `--format`:
+Bạn cũng có thể xuất ra trợ giúp ở các định dạng khác bằng cách sử dụng tùy chọn <code>--format</code>:
 
 `php flarum help --format=xml list`
 
@@ -42,7 +42,7 @@ Xóa bộ đệm ẩn phụ trợ, bao gồm js/css đã tạo, bộ đệm đ�
 
 `php flarum assets:publish`
 
-Xuất bản nội dung từ lõi và tiện ích mở rộng (ví dụ: JS/CSS đã biên dịch, biểu tượng bootstrap, biểu trưng, ​​v.v.). Điều này hữu ích nếu nội dung của bạn bị hỏng hoặc nếu bạn đã chuyển đổi [trình điều khiển hệ thống tệp](extend/filesystem.md) cho đĩa `flarum-asset`.
+Xuất bản nội dung từ lõi và tiện ích mở rộng (ví dụ: JS/CSS đã biên dịch, biểu tượng bootstrap, biểu trưng, ​​v.v.). This is useful if your assets have become corrupted, or if you have switched [filesystem drivers](extend/filesystem.md) for the `flarum-assets` disk.
 
 ### migrate
 
@@ -60,7 +60,7 @@ Chạy tất cả các lần di chuyển chưa thực hiện. Điều này sẽ 
 
 `php flarum schedule:run`
 
-Nhiều tiện ích mở rộng sử dụng các công việc đã lên lịch để chạy các tác vụ theo chu kỳ. Điều này có thể bao gồm dọn dẹp cơ sở dữ liệu, đăng bản nháp đã lên lịch, tạo sơ đồ trang, v.v. Nếu bất kỳ tiện ích mở rộng nào của bạn sử dụng công việc đã lên lịch, bạn nên thêm một [công việc cron](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) để chạy lệnh này trên một khoảng thời gian đều đặn:
+Nhiều tiện ích mở rộng sử dụng các công việc đã lên lịch để chạy các tác vụ theo chu kỳ. Điều này có thể bao gồm dọn dẹp cơ sở dữ liệu, đăng bản nháp đã lên lịch, tạo sơ đồ trang, v.v. If any of your extensions use scheduled jobs, you should add a [cron job](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to run this command on a regular interval:
 
 ```
 * * * * * cd /path-to-your-flarum-install && php flarum schedule:run >> /dev/null 2>&1
@@ -74,4 +74,4 @@ Lưu ý rằng một số máy chủ không cho phép bạn chỉnh sửa cấu 
 
 `php flarum schedule:list`
 
-Lệnh này trả về danh sách các lệnh được lập lịch (xem `schedule:run` để biết thêm thông tin). Điều này hữu ích để xác nhận rằng các lệnh do tiện ích mở rộng của bạn cung cấp đã được đăng ký đúng cách. **Điều này không thể** kiểm tra xem các công việc cron đã được lên lịch thành công hay đang được chạy.
+This command returns a list of scheduled commands (see `schedule:run` for more information). Điều này hữu ích để xác nhận rằng các lệnh do tiện ích mở rộng của bạn cung cấp đã được đăng ký đúng cách. This **can not** check that cron jobs have been scheduled successfully, or are being run.

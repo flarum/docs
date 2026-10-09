@@ -45,9 +45,9 @@ class CountryFilter implements FilterInterface
         return 'country';
     }
 
-    public function filter(SearchState $state, string $filterValue, bool $negate)
+    public function filter(SearchState $state, string|array $value, bool $negate): void
     {
-        $country = trim($filterValue, '"');
+        $country = trim((string) (is_array($value) ? $value[0] : $value), '"');
 
         $state->getQuery()->where('users.country', $negate ? '!=' : '=', $country);
     }
@@ -55,6 +55,12 @@ class CountryFilter implements FilterInterface
 ```
 
 Note that `SearchState` is a wrapper around the Eloquent builder's underlying Query builder and the current user.
+
+:::caution Match the interface signature exactly
+
+`FilterInterface::filter()` declares `string|array $value` and a `void` return. PHP does not allow an implementation to narrow a parameter type, so declaring just `string` is a fatal error rather than a style choice, and the return type cannot be omitted either. The value arrives as an array when the same filter key is given more than once, which is why the example normalises it before use.
+
+:::
 
 Also, let's pretend that for some reason, we want to omit any users that have a different country from the current user on ANY filter.
 We can use a *search mutator* for this:
@@ -86,7 +92,7 @@ return [
   
     (new Extend\SearchDriver(DatabaseSearchDriver::class))
         ->addFilter(UserSearcher::class, CountryFilter::class)
-        ->addMutator(UserSearcher::class, OnlySameCountryFilterMutator::class),
+        ->addMutator(UserSearcher::class, OnlySameCountrySearchMutator::class),
     
   // Other extenders..
 ];
@@ -100,16 +106,22 @@ If you want to make a non-searchable model searchable *(for instance, your exten
 namespace YourPackage\Search;
 
 use Flarum\Search\Database\AbstractSearcher;
+use Flarum\User\User;
+use Illuminate\Database\Eloquent\Builder;
 use YourPackage\Model\Acme;
 
 class AcmeSearcher extends AbstractSearcher
 {
     public function getQuery(User $actor): Builder
     {
-        return Acme::query()->select('acmes.*'); // The selection is recommended to avoid conflicts with other extensions.
+        // Selecting explicitly avoids column conflicts with other extensions
+        // that join onto this query.
+        return Acme::whereVisibleTo($actor)->select('acmes.*');
     }
 }
 ```
+
+`whereVisibleTo()` comes from `Flarum\Database\ScopeVisibilityTrait`, so use it only if your model has that trait; see [Model Visibility](model-visibility.md). Scoping the searcher's base query is what stops search returning rows the actor is not allowed to see, so it is worth doing rather than filtering afterwards.
 
 You can optionally create a fulltext filter implementation for actual searching. This is a special filter that is always applied when a search query is provided. For instance, if you want to search Acme models by their `name` column:
 
@@ -198,7 +210,11 @@ Your model searcher and fulltext filter implementations is where the specific lo
 ```php
 namespace YourPackage\Search;
 
+use Flarum\Search\Filter\FilterManager;
+use Flarum\Search\SearchCriteria;
 use Flarum\Search\SearcherInterface;
+use Flarum\Search\SearchResults;
+use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 
 abstract class AbstractAcmeSearcher implements SearcherInterface
@@ -307,7 +323,7 @@ app.store.find('discussions', { q: 'is:unread' });
 
 Gambits are automatically shown in the autocomplete options of the global search:
 
-![Global search modal](../assets/global_search_modal.png)
+![Global search modal](/img/docs/global_search_modal.png)
 
 ### Basic gambits
 
@@ -438,4 +454,4 @@ import Input from 'flarum/common/components/Input';
 
 This will automatically produce an autocomplete dropdown with the appropriate gambits for the `users` resource. The `query` prop is the current search query, and the `onchange` prop is a callback that will be called when the query changes.
 
-![Gambit autocomplete dropdown component](../assets/gambit_autocomplete_dropdown.png)
+![Gambit autocomplete dropdown component](/img/docs/gambit_autocomplete_dropdown.png)

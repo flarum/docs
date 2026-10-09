@@ -4,7 +4,9 @@ En algún momento mientras haces una extensión, puede que quieras leer algunas 
 
 ## El repositorio de ajustes
 
-La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`. En su lugar, puedes confiar en el contenedor para instanciar tu clase e inyectar las dependencias correctas. Debido a que Flarum utiliza el [contenedor de servicios de Laravel](https://laravel.com/docs/6.x/container) (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
+La lectura o el cambio de configuraciones puede hacerse usando una implementación de la `SettingsRepositoryInterface`.
+En su lugar, puedes confiar en el contenedor para instanciar tu clase e inyectar las dependencias correctas.
+Debido a que Flarum utiliza el <a href="https://laravel.com/docs/6.x/container">contenedor de servicios de Laravel</a> (o contenedor IoC) para la inyección de dependencias, no necesitas preocuparte de dónde obtener tal repositorio, o cómo instanciar uno.
 
 ```php
 <?php
@@ -27,7 +29,7 @@ class ClassInterfacesWithSettings
 }
 ```
 
-Muy bien. Ahora la `SettingsRepositoryInterface` está disponible a través de `$this->settings` para nuestra clase.
+Great! Ahora la `SettingsRepositoryInterface` está disponible a través de `$this->settings` para nuestra clase.
 
 ### Lectura de la configuración
 
@@ -62,9 +64,11 @@ La función `delete($name)` permite eliminar una configuración con nombre.
 ### Edición de Ajustes
 
 Para obtener más información sobre la gestión de la configuración a través del panel de administración, consulte la [documentación pertinente](admin.md).
+
 ### Acceso a la Configuración
 
-Todos los ajustes están disponibles en el frontend `admin` a través del global `app.data.settings`. Sin embargo, esto no se hace en el frontend `forum`, ya que cualquiera puede acceder a él, ¡y no querrías filtrar todas tus configuraciones! (En serio, eso podría ser una violación de datos muy problemática). (Seriously, that could be a very problematic data breach).
+Todos los ajustes están disponibles en el frontend `admin` a través del global `app.data.settings`.
+Sin embargo, esto no se hace en el frontend `forum`, ya que cualquiera puede acceder a él, ¡y no querrías filtrar todas tus configuraciones! (Seriously, that could be a very problematic data breach).
 
 En su lugar, si queremos utilizar la configuración en el frontend de `forum`, tendremos que serializarla y enviarla junto con la carga de datos inicial del foro.
 

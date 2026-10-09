@@ -4,7 +4,7 @@ La Beta 16 finalizza l'API extender PHP, introduce una libreria di test e le tip
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+Se hai bisogno di aiuto per alcune modifiche o utilizzare le nuove funzionalità, si prega di avviare una discussione sul [forum della community](https://discuss.flarum.org/t/extensibility) o nella [chat Discord](https://flarum.org/discord/).
 
 :::
 
@@ -18,7 +18,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## Backend
 
-### Estensori
+### Extender
 
 - Tutti gli extender che supportano callback / chiusure ora supportano funzioni globali come `'boolval'` e funzioni array-type come `[ClassName::class, 'methodName']`.
 - L'estensore `Settings` e metodo `serializeToFrontend` ora supporta un valore predefinito come quarto argomento.
@@ -32,7 +32,8 @@ If you need help applying these changes or using new features, please start a di
 
 ### Laravel e Symfony
 
-Aggiornamenti beta 16 dalla v6.x alla v8.x dei componenti Laravel e dalla v4 alla v5 dei componenti Symfony. Consulta le rispettive guide all'upgrade di ciascuna per le modifiche che potresti dover apportare alle tue estensioni. La modifica più sostanziale è la deprecazione di `Symfony\Component\Translation\TranslatorInterface` in favore di `Symfony\Contracts\Translation\TranslatorInterface`. Il primo verrà rimosso nella beta 17.
+Aggiornamenti beta 16 dalla v6.x alla v8.x dei componenti Laravel e dalla v4 alla v5 dei componenti Symfony. Consulta le rispettive guide all'upgrade di ciascuna per le modifiche che potresti dover apportare alle tue estensioni.
+La modifica più sostanziale è la deprecazione di `Symfony\Component\Translation\TranslatorInterface` in favore di `Symfony\Contracts\Translation\TranslatorInterface`. Il primo verrà rimosso nella beta 17.
 
 ### Funzioni Helper
 
@@ -42,7 +43,9 @@ Poiché alcune estensioni Flarum utilizzano librerie Laravel che presumono l'esi
 
 ### Cambiamenti alla Ricerca
 
-Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flarum più flessibile, abbiamo rifattorizzato parecchio codice nella beta 16. In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati. In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
+Come parte dei nostri continui sforzi per rendere il sistema di ricerca di Flarum più flessibile, abbiamo rifattorizzato parecchio codice nella beta 16.
+In particolare, il filtraggio e la ricerca sono ora trattati come meccanismi diversi e hanno condutture ed estensori separati.
+In sostanza, se una query ha `filter[q]` come parametro, verrà considerato come una ricerca e tutti gli altri parametri del filtro verranno ignorati. In caso contrario, verrà gestito dal sistema di filtraggio. Ciò consentirà alla fine di gestire le ricerche da driver alternativi (forniti dalle estensioni), come ElasticSearch, senza impattare i filtri (es. caricamento discussioni recenti). Le classi comuni a entrambi i sistemi sono state spostate sotto il namespace `Query`.
 
 Le implementazioni di filtro e ricerca predefinita di Core (denominate SimpleFlarumSearch) sono abbastanza simili, poiché entrambe sono alimentate dal database. L'API controller `List` richiama i metodi `search` / `filter` in una sottoclasse specifica delle risorse di `Flarum\Search\AbstractSearcher` o `Flarum\Filter\AbstractFilterer`. Gli argomenti sono un'istanza di `Flarum\Query\QueryCriteria`, oltre a informazioni su ordinamento, offset e limite. Entrambi i sistemi restituiscono un'istanza di `Flarum\Query\QueryResults`, che è effettivamente un involucro attorno a una collezione di modelli Eloquent.
 
@@ -76,7 +79,7 @@ La firma per vari metodi relativi all'autenticazione è stata modificata in `$to
 - `Flarum\Http\RememberAccessToken::generate($userId)` dovrebbe essere usato per creare token di accesso da ricordare.
 - `Flarum\Http\DeveloperAccessToken::generate($userId)` dovrebbe essere utilizzato per creare token di accesso sviluppatore (non scadono).
 - `Flarum\Http\SessionAccessToken::generate()` può essere utilizzato come alias per `Flarum\Http\AccessToken::generate()`. Verrà deprecato `AccessToken::generate()` in futuro.
-- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passare `AccessToken` è stato deprecato. Passa un'istanza di `RememberAccessToken` al suo posto. Come livello di compatibilità temporaneo, il passaggio di qualsiasi altro tipo di token lo convertirà in un token di ricordo. Nella beta 17 la firma del metodo cambierà per accettare solo `RememberAccessToken`.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passare `AccessToken` è stato deprecato. Passa un'istanza di `RememberAccessToken` al suo posto. Come livello di compatibilità temporaneo, il passaggio di qualsiasi altro tipo di token lo convertirà in un token di ricordo. Come livello di compatibilità temporaneo, il passaggio di qualsiasi altro tipo di token lo convertirà in un token di ricordo.
 - `Flarum\Http\Rememberer::rememberUser()` è deprecata. Invece dovresti creare / recuperare un token manualmente con `RememberAccessToken::generate()` e passarlo a `Rememberer::remember()`
 - `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` come secondo parametro è stato deprecato ed è stato sostituito con `$token`. Viene mantenuta la compatibilità con le versioni precedenti. Nella beta 17, la firma del secondo metodo del parametro cambierà in `AccessToken $token`.
 - `AccessToken::generate()` ora salva il modello nel database prima di restituirlo.
@@ -93,7 +96,7 @@ Per recuperare l'utente corrente dall'interno di un'estensione Flarum, la soluzi
 
 Per recuperare l'istanza del token da Flarum, puoi usare `Flarum\Http\AccessToken::findValid($tokenString)`
 
-Per recuperare i dati utente da un'applicazione non Flarum, dovrai effettuare una richiesta di database aggiuntiva per recuperare il token. L' user ID è presente come `user_id` nella tabella `access_tokens.
+Per recuperare i dati utente da un'applicazione non Flarum, dovrai effettuare una richiesta di database aggiuntiva per recuperare il token. L' user ID è presente come `user_id` nella tabella \`access_tokens.
 
 #### Cambiamenti creazione Token
 

@@ -31,4 +31,4 @@ If you need help applying these changes or using new features, please start a di
 ## Other changes / Recommendations
 
 - The `TextFormatter` library has been updated to (at least) version 2.3.6. If you are using it (likely through our own `Flarum\Formatter\Formatter` class), we recommend scanning [the library's changelog](https://github.com/s9e/TextFormatter/blob/2.3.6/CHANGELOG.md).
-- The JS `slug()` helper from the `flarum/utils/string` module should only be used to *suggest* slugs to users, not enforce them. It does not employ any sophisticated transliteration logic like its PHP counterpart.
+- The JS `slug()` helper from the `flarum/utils/string` module should only be used to _suggest_ slugs to users, not enforce them. It does not employ any sophisticated transliteration logic like its PHP counterpart.

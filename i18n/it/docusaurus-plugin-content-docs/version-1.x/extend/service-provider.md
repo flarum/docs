@@ -1,6 +1,9 @@
 # Provider di servizi
 
-Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze. [I provider di servizi](https://laravel.com/docs/6.x/providers) consentono la configurazione e la modifica del backend Flarum a basso livello. Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore. Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
+Come notato in questa documentazione, Flarum utilizza [il contenitore dei servizi Laravel](https://laravel.com/docs/6.x/container) (o IoC container) per l'iniezione di dipendenze.
+[I provider di servizi](https://laravel.com/docs/6.x/providers) consentono la configurazione e la modifica del backend Flarum a basso livello.
+Il caso d'uso più comune per i provider di servizi è creare, modificare o sostituire i binding del contenitore.
+Detto questo, i provider di servizi consentono l'accesso completo per eseguire qualsiasi logica necessaria durante l'avvio dell'applicazione con accesso al contenitore.
 
 :::caution Solo per utenti avanzati!!!
 

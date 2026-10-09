@@ -9,6 +9,11 @@ const darkCodeTheme = prismThemes.dracula;
   tagline: 'Forums made simple.',
   url: 'https://docs.flarum.org',
   baseUrl: '/',
+  // Every page is a directory on the Apache origin, so a URL without the
+  // trailing slash gets a mod_dir redirect, which goes to http:// behind
+  // Cloudflare. Emitting the slash everywhere (links, sitemap, canonical)
+  // avoids that hop, and lets the Algolia crawler index the sitemap URLs.
+  trailingSlash: true,
   onBrokenLinks: 'warn',
   onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',

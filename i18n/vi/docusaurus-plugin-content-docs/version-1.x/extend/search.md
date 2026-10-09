@@ -5,7 +5,7 @@ Flarum treats searching and filtering as parallel but distinct processes. Which 
 - Filtering is applied when the `filter[q]` query param is omitted. Filters represent **structured** queries: for instance, you might want to only retrieve discussions in a certain category, or users who registered before a certain date. Filtering computes results based entirely on `filter[KEY] = VALUE` query parameters.
 - Searching is applied when the `filter[q]` query param is included. Searches represent **unstructured** queries: the user submits an arbitrary string, and data records that "match" it are returned. For instance, you might want to search discussions based on the content of their posts, or users based on their username. Searching computes results based solely on parsing the `filter[q]` query param: all other `filter[KEY] = VALUE` params are ignored when searching. It's important to note that searches aren't entirely unstructured: the dataset being searched can be constrained by gambits (which are very similar to filters, and will be explained later).
 
-This distinction is important because searches and filters have very different use cases: filters represent *browsing*: that is, the user is passively looking through some category of content. In contrast, searches represent, well, *searching*: the user is actively looking for content based on some criteria.
+This distinction is important because searches and filters have very different use cases: filters represent _browsing_: that is, the user is passively looking through some category of content. In contrast, searches represent, well, _searching_: the user is actively looking for content based on some criteria.
 
 Flarum implements searching and filtering via per-model `Searcher` and `Filterer` classes (discussed in more detail below). Both classes accept a [`Flarum\Query\QueryCriteria`](https://api.docs.flarum.org/php/master/flarum/query/querycriteria) instance (a wrapper around the user and query params), and return a [`Flarum\Query\QueryResults`](https://api.docs.flarum.org/php/master/flarum/query/queryresults) instance (a wrapper around an Eloquent model collection). This common interface means that adding search/filter support to models is quite easy.
 
@@ -15,7 +15,8 @@ Remember that the [JSON:API schema](https://jsonapi.org/format) is used for all 
 
 :::tip Reuse Code
 
-Often, you might want to use the same class as both a `Filter` and a `Gambit` (both explained below). Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/framework/blob/main/framework/core/src/Discussion/Query/UnreadFilterGambit.php) for an example.
+Often, you might want to use the same class as both a `Filter` and a `Gambit` (both explained below).
+Your classes can implement both interface; see Flarum core's [`UnreadFilterGambit`](https://github.com/flarum/framework/blob/main/framework/core/src/Discussion/Query/UnreadFilterGambit.php) for an example.
 
 :::
 
@@ -67,7 +68,8 @@ class CountryFilter implements FilterInterface
 
 Note that `FilterState` is a wrapper around the Eloquent builder's underlying Query builder and the current user.
 
-Also, let's pretend that for some reason, we want to omit any users that have a different country from the current user on ANY filter. We can use a "filter mutator" for this:
+Also, let's pretend that for some reason, we want to omit any users that have a different country from the current user on ANY filter.
+We can use a "filter mutator" for this:
 
 ```php
 <?php
@@ -98,13 +100,15 @@ Now, all we need to do is register these via the Filter extender:
 
 ### Add Filtering to a New Model
 
-To filter a model that doesn't support filtering, you'll need to create a subclass of `Flarum/Filter/AbstractFilterer` for that model. For an example, see core's [UserFilterer](https://github.com/flarum/framework/blob/main/framework/core/src/User/Filter/UserFilterer.php).
+To filter a model that doesn't support filtering, you'll need to create a subclass of `Flarum/Filter/AbstractFilterer` for that model.
+For an example, see core's [UserFilterer](https://github.com/flarum/framework/blob/main/framework/core/src/User/Filter/UserFilterer.php).
 
 Then, you'll need to use that filterer in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Controller/ListUsersController.php#L93-L98).
 
 ## Searching
 
-Searching constrains queries by applying `Gambit`s, which are classes that implement `Flarum\Search\GambitInterface`, based on the `filter[q]` query param. After searching is complete, a set of callbacks called "search mutators" run for every search request.
+Searching constrains queries by applying `Gambit`s, which are classes that implement `Flarum\Search\GambitInterface`, based on the `filter[q]` query param.
+After searching is complete, a set of callbacks called "search mutators" run for every search request.
 
 When the `search` method on a `Searcher` class is called, the following process takes place ([relevant code](https://github.com/flarum/framework/blob/main/framework/core/src/Search/AbstractSearcher.php#L55-L79)):
 
@@ -144,15 +148,19 @@ class CountryGambit extends AbstractRegexGambit
 
 :::warning No Spaces in Gambit Patterns!
 
-Flarum splits the `filter[q]` string into tokens by splitting it at spaces. This means that your custom gambits can NOT use spaces as part of their pattern.
+Flarum splits the `filter[q]` string into tokens by splitting it at spaces.
+This means that your custom gambits can NOT use spaces as part of their pattern.
 
 :::
 
 :::tip AbstractRegexGambit
 
-All a gambit needs to do is implement `Flarum\Search\GambitInterface`, which receives the search state and a token. It should return if this gambit applies for the given token, and if so, make whatever mutations are necessary to the query builder accessible as `$searchState->getQuery()`.
+All a gambit needs to do is implement `Flarum\Search\GambitInterface`, which receives the search state and a token.
+It should return if this gambit applies for the given token, and if so, make whatever mutations are necessary to the
+query builder accessible as `$searchState->getQuery()`.
 
-However, for most gambits, the `AbstractRegexGambit` abstract class (used above) should be used as a base class. This makes it a lot simpler to match and apply gambits.
+However, for most gambits, the `AbstractRegexGambit` abstract class (used above) should be used as a base class.
+This makes it a lot simpler to match and apply gambits.
 
 :::
 
@@ -187,11 +195,14 @@ We can register these via the `SimpleFlarumSearch` extender (in the future, the 
 
 ### Add Searching to a New Model
 
-To support searching for a model, you'll need to create a subclass of `Flarum/Search/AbstractSearcher` for that model. For an example, see core's [UserSearcher](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/UserSearcher.php).
+To support searching for a model, you'll need to create a subclass of `Flarum/Search/AbstractSearcher` for that model.
+For an example, see core's [UserSearcher](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/UserSearcher.php).
 
 Then, you'll need to use that searcher in your model's `List` controller. For an example, see core's [ListUsersController](https://github.com/flarum/framework/blob/main/framework/core/src/Api/Controller/ListUsersController.php#L93-L98).
 
-Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error. See core's [FulltextGambit for users](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/Gambit/FulltextGambit.php) for an example. You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method.
+Every searcher **must** have a fulltext gambit (the logic that actually does the searching). Otherwise, it won't be booted by Flarum, and you'll get an error.
+See core's [FulltextGambit for users](https://github.com/flarum/framework/blob/main/framework/core/src/User/Search/Gambit/FulltextGambit.php) for an example.
+You can set (or override) the full text gambit for a searcher via the `SimpleFlarumSearch` extender's `setFullTextGambit()` method.
 
 ### Search Drivers
 

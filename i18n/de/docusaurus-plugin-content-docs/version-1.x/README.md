@@ -1,6 +1,6 @@
-- - -
+---
 slug: /
-- - -
+---
 
 # Über Flarum
 
@@ -12,13 +12,13 @@ Flarum ist eine herrlich einfache Diskussionsplattform für deine Website. Es is
 
 Flarum ist der kombinierte Nachfolger von [esoTalk](https://github.com/esotalk/esoTalk) und [FluxBB](https://fluxbb.org). Flarum ist:
 
-* **Schnell und einfach.** Kein Durcheinander, kein Ballast, keine komplexen Abhängigkeiten. Flarum wurde mit PHP erstellt, sodass es schnell und einfach bereitgestellt werden kann. Die Oberfläche wird mit [Mithril](https://mithril.js.org) betrieben, einem leistungsstarken JavaScript-Framework mit geringem Platzbedarf.
+- **Schnell und einfach.** Kein Durcheinander, kein Ballast, keine komplexen Abhängigkeiten. Flarum wurde mit PHP erstellt, sodass es schnell und einfach bereitgestellt werden kann. Die Oberfläche wird mit [Mithril](https://mithril.js.org) betrieben, einem leistungsstarken JavaScript-Framework mit geringem Platzbedarf.
 
-* **Schön und responsiv.** Dies ist eine Forensoftware für Menschen. Flarum wurde sorgfältig entwickelt, um plattformübergreifend konsistent und intuitiv zu sein, und zwar sofort nach der Installation.
+- **Schön und responsiv.** Dies ist eine Forensoftware für Menschen. Flarum wurde sorgfältig entwickelt, um plattformübergreifend konsistent und intuitiv zu sein, und zwar sofort nach der Installation.
 
-* **Leistungsstark und erweiterbar.** Passe Flarum an, erweitere es und integriere es in deine Community. Die Architektur von Flarum ist erstaunlich flexibel, mit einer [leistungsfähigen Erweiterungs-API](/extend/README.md).
+- **Leistungsstark und erweiterbar.** Passe Flarum an, erweitere es und integriere es in deine Community. Die Architektur von Flarum ist erstaunlich flexibel, mit einer [leistungsfähigen Erweiterungs-API](/extend/README.md).
 
-* **Kostenlos und Open Source.** Flarum wird unter der [MIT-Lizenz](https://github.com/flarum/flarum/blob/master/LICENSE) veröffentlicht.
+- **Kostenlos und Open Source.** Flarum wird unter der [MIT-Lizenz](https://github.com/flarum/flarum/blob/master/LICENSE) veröffentlicht.
 
 Mehr über unsere [Philosophie und Werte für Flarum kannst du hier lesen](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values).
 
@@ -34,7 +34,7 @@ Flarum ist eine [kostenlose, quelloffene](https://github.com/flarum/core) Softwa
 
 🌐 Wenn du mehrere Sprachen sprichst, könntest du [Übersetzungen](extend/language-packs.md) beisteuern, um Flarum für unzählige Nutzer auf der ganzen Welt zugänglich zu machen.
 
-💸 Die Flarum Foundation verdient kein Geld mit Flarum, hat aber Rechnungen zu bezahlen. Spenden über [GitHub Sponsors](https://github.com/sponsors/flarum) oder [OpenCollective](https://opencollective.com/flarum) werden immer dankbar angenommen. In der Vergangenheit konnten wir auch einige unserer Hauptentwickler finanziell unterstützen, damit sie in Teilzeit an Flarum arbeiten konnten. Dies wäre ohne eure finanzielle Unterstützung nicht möglich gewesen.
+💸 Die Flarum Foundation verdient kein Geld mit Flarum, hat aber Rechnungen zu bezahlen. 💸 Die Flarum Foundation verdient kein Geld mit Flarum, hat aber Rechnungen zu bezahlen. In der Vergangenheit konnten wir auch einige unserer Hauptentwickler finanziell unterstützen, damit sie in Teilzeit an Flarum arbeiten konnten. Dies wäre ohne eure finanzielle Unterstützung nicht möglich gewesen.
 
 🧑🤝🧑 Tritt [unserer Community](https://discuss.flarum.org) bei, um über die Entwicklung von Flarum zu sprechen, Hilfe für deine Instanz zu bekommen oder einfach coole Leute zu treffen! Wenn du Erfahrung mit Flarum hast, kannst du auch gerne Anfängern helfen!
 

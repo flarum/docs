@@ -1,6 +1,6 @@
 # Updating For Beta 8
 
-All extensions will need to be refactored in order to work with beta 8. Here are the main things you will need to do in order to make your extension compatible.
+All extensions will need to be refactored in order to work with beta 8. Here are the main things you will need to do in order to make your extension compatible. Here are the main things you will need to do in order to make your extension compatible.
 
 :::caution
 
@@ -10,7 +10,7 @@ This guide is not comprehensive. You may encounter some changes we haven't docum
 
 ## PHP Namespaces
 
-Beta 8 comes with large changes to the overall structure of the PHP backend. You will need to look through [this list](https://discuss.flarum.org/d/6572-help-us-namespace-changes) of namespace changes and make changes to your extension accordingly.
+Beta 8 comes with large changes to the overall structure of the PHP backend. You will need to look through <a href="https://discuss.flarum.org/d/6572-help-us-namespace-changes">this list</a> of namespace changes and make changes to your extension accordingly. You will need to look through [this list](https://discuss.flarum.org/d/6572-help-us-namespace-changes) of namespace changes and make changes to your extension accordingly.
 
 [This script](https://gist.github.com/tobyzerner/55e7c05c95404e5efab3a9e43799d375) can help you to automate most of the namespace changes. Of course, you should still test your extension after running the script as it may miss something.
 
@@ -40,22 +40,22 @@ return [
 ]
 ```
 
-If you're listening for any of the following events, you'll need to update your code to use an extender instead. See the relevant docs for more information.
+If you're listening for any of the following events, you'll need to update your code to use an extender instead. See the relevant docs for more information. See the relevant docs for more information.
 
-| Event                                 | Extender                    |
-| ------------------------------------- | --------------------------- |
-| `Flarum\Event\ConfigureFormatter`*  | `Flarum\Extend\Formatter` |
-| `Flarum\Event\ConfigureWebApp`*     | `Flarum\Extend\Frontend`  |
-| `Flarum\Event\ConfigureClientView`* | `Flarum\Extend\Frontend`  |
-| `Flarum\Event\ConfigureLocales`     | `Flarum\Extend\Locales`   |
-| `Flarum\Event\ConfigureApiRoutes`   | `Flarum\Extend\Routes`    |
-| `Flarum\Event\ConfigureForumRoutes` | `Flarum\Extend\Routes`    |
+| Event                                  | Extender                    |
+| -------------------------------------- | --------------------------- |
+| `Flarum\Event\ConfigureFormatter`\*  | `Flarum\Extend\Formatter` |
+| `Flarum\Event\ConfigureWebApp`\*     | `Flarum\Extend\Frontend`  |
+| `Flarum\Event\ConfigureClientView`\* | `Flarum\Extend\Frontend`  |
+| `Flarum\Event\ConfigureLocales`      | `Flarum\Extend\Locales`   |
+| `Flarum\Event\ConfigureApiRoutes`    | `Flarum\Extend\Routes`    |
+| `Flarum\Event\ConfigureForumRoutes`  | `Flarum\Extend\Routes`    |
 
 _\* class no longer exists_
 
 ## JavaScript Tooling
 
-Previously Flarum and its extensions used a custom Gulp workflow to compile ES6 source code into something that browsers could understand. Beta 8 switches to a more conventional approach with Webpack.
+Previously Flarum and its extensions used a custom Gulp workflow to compile ES6 source code into something that browsers could understand. Beta 8 switches to a more conventional approach with Webpack. Beta 8 switches to a more conventional approach with Webpack.
 
 You will need to tweak the structure of your extension's `js` directory. Currently, your JS file hierarchy looks something like the following:
 
@@ -81,9 +81,9 @@ You'll need to make the following changes:
 
 1. Update `package.json` and create `webpack.config.js`, `forum.js`, and `admin.js` files using [these templates](frontend.md#transpilation).
 
-2. Inside your `admin` and `forum` *folders*, delete `Gulpfile.js`, `package.json`, and `dist`. Then inside each `src` folder, rename `main.js` to `index.js`. Now move all of the `src` files outside of `src` folder and delete it.
+2. Inside your `admin` and `forum` _folders_, delete `Gulpfile.js`, `package.json`, and `dist`. Then inside each `src` folder, rename `main.js` to `index.js`. Now move all of the `src` files outside of `src` folder and delete it.
 
-3. In the root `js` folder create a folder called `src` and move your `admin` and `forum` *folders* into it.
+3. In the root `js` folder create a folder called `src` and move your `admin` and `forum` _folders_ into it.
 
 4. While still in your root `js` folder, run `npm install` and then `npm run build` to build the new JS dist files.
 
@@ -111,4 +111,4 @@ Take a look at the [bundled extensions](https://github.com/flarum) for more exam
 
 ## Font Awesome Icons
 
-Beta 8 upgrades to Font Awesome 5, in which icon class names have changed. The `flarum/helpers/icon` helper now requires the **full Font Awesome icon class names** to be passed, eg. `fas fa-bolt`.
+Beta 8 upgrades to Font Awesome 5, in which icon class names have changed. The <code>flarum/helpers/icon</code> helper now requires the <strong x-id="1">full Font Awesome icon class names</strong> to be passed, eg. <code>fas fa-bolt</code>. The `flarum/helpers/icon` helper now requires the **full Font Awesome icon class names** to be passed, eg. `fas fa-bolt`.

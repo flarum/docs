@@ -64,7 +64,14 @@ module.exports = {
       className: 'menu__manage-category',
       collapsible: false,
       items: [
-        'extensions/audit'
+        'extensions/akismet',
+        'extensions/audit',
+        'extensions/gdpr',
+        'extensions/messages',
+        'extensions/nicknames',
+        'extensions/realtime',
+        'extensions/statistics',
+        'extensions/suspend'
       ]
     },
     {
@@ -153,6 +160,8 @@ module.exports = {
         'extend/notifications',
         'extend/realtime',
         'extend/audit',
+        'extend/gdpr',
+        'extend/statistics',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',

@@ -4,7 +4,7 @@ La Beta 15 presenta molti nuovi extender, una riprogettazione totale del dashboa
 
 :::tip
 
-If you need help applying these changes or using new features, please start a discussion on the [community forum](https://discuss.flarum.org/t/extensibility) or [Discord chat](https://flarum.org/discord/).
+Se hai bisogno di aiuto per alcune modifiche o utilizzare le nuove funzionalità, si prega di avviare una discussione sul [forum della community](https://discuss.flarum.org/t/extensibility) o nella [chat Discord](https://flarum.org/discord/).
 
 :::
 
@@ -13,15 +13,24 @@ If you need help applying these changes or using new features, please start a di
 ### Extender
 
 - `Flarum\Api\Event\WillGetData` e `Flarum\Api\Event\WillSerializeData` sono stati deprecati, l'extender `ApiController` va utilizzato al suo posto
+
 - `Flarum\Api\Event\Serializing` e `Flarum\Event\GetApiRelationship` sono stati deprecati, l'extender `ApiSerializer` va utilizzato al suo posto
+
 - `Flarum\Formatter\Event\Parsing` è obsoleto, il metodo `parse` di `Formatter` va utilizzato al suo posto
+
 - `Flarum\Formatter\Event\Rendering` è obsoleto, il metodo `render` di `Formatter` va utilizzato al suo posto
+
 - `Flarum\Notification\Event\Sending` è obsoleto, il metodo `driver` di `Notification` va utilizzato al suo posto
-  - Si noti che il nuovo sistema di driver di notifica non è un analogo esatto del vecchio evento `Sending`, poiché può solo aggiungere nuovi driver, non modificare la funzionalità del driver di avviso della campana di notifica predefinito. Se l'estensione deve modificare ** come ** o ** a chi ** vengono inviate le notifiche, potrebbe essere necessario sostituire `Flarum\Notification\NotificationSyncer`.
+  - Si noti che il nuovo sistema di driver di notifica non è un analogo esatto del vecchio evento `Sending`, poiché può solo aggiungere nuovi driver, non modificare la funzionalità del driver di avviso della campana di notifica predefinito. Se l'estensione deve modificare \*\* come \*\* o \*\* a chi \*\* vengono inviate le notifiche, potrebbe essere necessario sostituire `Flarum\Notification\NotificationSyncer`.
+
 - `Flarum\Event\ConfigureNotificationTypes` è obsoleto, il metodo `type` di `Notification` va utilizzato al suo posto
+
 - `Flarum\Event\ConfigurePostTypes` è obsoleto, il metodo `type` di `Post` va utilizzato al suo posto
-- `Flarum\Post\Event\CheckingForFlooding` è ormai obsoleto come `Flarum\Post\Floodgate`. Sono stati sostituiti con un sistema di limitazione basato su middleware che si applica a TUTTE le richieste a / api / * e possono essere configurati tramite il `ThrottleApi`. Per favore guarda la documentazione [limitazioni API](api-throttling.md) per informazioni.
+
+- `Flarum\Post\Event\CheckingForFlooding` è ormai obsoleto come `Flarum\Post\Floodgate`. Sono stati sostituiti con un sistema di limitazione basato su middleware che si applica a TUTTE le richieste a / api / \* e possono essere configurati tramite il `ThrottleApi`. Per favore guarda la documentazione [limitazioni API](api-throttling.md) per informazioni.
+
 - `Flarum\Event\ConfigureUserPreferences` è ormai obsoleto, il metodo `registerPreference` di `User` va utilizzato al suo posto
+
 - `Flarum\Foundation\Event\Validating` è ormai obsoleto, il metodo `configure` di `Validator` va utilizzato al suo posto
 
 - Il sistema delle politiche è stato leggermente rielaborato per essere più intuitivo. In precedenza, i criteri contenevano sia i criteri effettivi, che determinano se un utente può eseguire alcune capacità, sia gli ambiti di visibilità del modello, che consentivano un'efficace limitazione delle query solo agli elementi a cui gli utenti hanno accesso. Guarda [documentazione sulle autorizzazioni](authorization.md) per maggiori informazioni su questo sistema. Ora:
@@ -29,7 +38,9 @@ If you need help applying these changes or using new features, please start a di
   - `Flarum\Event\GetPermission` è ormai obsoleto. Le policy possono essere registrate tramite extender `Policy`. `Flarum\User\User::can` non è cambiato. Si prega di notare che le nuove policy devono restituire uno dei valori `$this->allow()`, `$this->deny()`, `$this->forceAllow()`, `$this->forceDeny()`, non booleano.
 
 - L'extender `ModelUrl` è stato aggiunto, consentendo la registrazione di nuovi driver di slug. Ciò accompagna il nuovo sistema di slug di Flarum, che consente alle estensioni di definire strategie personalizzate per i modelli. L'estensore supporta modelli al di fuori del nucleo Flarum. Si prega di consultare il nostro file [model slugging](slugging.md) per informazioni.
+
 - L'extender `Settings` è stato aggiunto, il metodo `serializeToForum` semplifica la serializzazione di un'impostazione nel forum.
+
 - L'extender `ServiceProvider` è stato aggiunto. Questo dovrebbe essere usato con estrema cautela solo per casi d'uso avanzati, dove non ci sono alternative. Tieni presente che il livello del fornitore di servizi non è considerato API pubblica ed è soggetto a modifiche in qualsiasi momento, senza preavviso.
 
 ### Pannello Amministrazione ridisegnato

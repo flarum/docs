@@ -34,7 +34,7 @@ If you need help applying these changes or using new features, please start a di
 
 ## Recommendations
 
-- We tweaked the [recommended flarum/core version constraints for extensions](start.md#composer-json). We now recommend you mark your extension as compatible with the current and the upcoming beta release. (For beta.10, that would be any beta.10.x and beta.11.x version.) The core team will strive to make this work well by deprecating features before removing them. More details on this change in [this pull request](https://github.com/flarum/docs/pull/75).
+- We tweaked the [recommended flarum/core version constraints for extensions](start.md#composer-json). We now recommend you mark your extension as compatible with the current and the upcoming beta release. (For beta.10, that would be any beta.10.x and beta.11.x version.) (For beta.10, that would be any beta.10.x and beta.11.x version.) The core team will strive to make this work well by deprecating features before removing them. More details on this change in [this pull request](https://github.com/flarum/docs/pull/75).
 
 ## New Features
 

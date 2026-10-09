@@ -2,7 +2,9 @@
 
 Questo articolo riguarda l'autorizzazione, e utilizza alcuni concetti del sistema [authorization](authorization.md). Dovresti familiarizzare con questo concetto.
 
-Quando un utente visita la pagina **Tutte le Discussioni**, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente stesso ha accesso. Lo facciamo tramite il metodo `whereVisibleTo`, definito in `Flarum\Database\ScopeVisibilityTrait`, e disponibile su [Modelli e query Eloquent](https://laravel.com/docs/8.x/queries) tramite [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes). Per esempio:
+Quando un utente visita la pagina **Tutte le Discussioni**, desideriamo mostrargli rapidamente le discussioni recenti a cui l'utente stesso ha accesso.
+Lo facciamo tramite il metodo `whereVisibleTo`, definito in `Flarum\Database\ScopeVisibilityTrait`, e disponibile su [Modelli e query Eloquent](https://laravel.com/docs/8.x/queries) tramite [Eloquent scoping](https://laravel.com/docs/8.x/eloquent#local-scopes).
+Per esempio:
 
 ```php
 usa Flarum\Group\Group;
@@ -34,7 +36,8 @@ Si noti che la visibilità può essere utilizzata solo sui modelli che utilizzan
 
 ## Come viene elaborato
 
-Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`? Questa chiamata è gestita dal sistema di visibilità del modello generale di Flarum, che esegue la query attraverso una sequenza di callback, chiamati "scopers".
+Quindi, cosa succede effettivamente quando richiamiamo `whereVisibleTo`?
+Questa chiamata è gestita dal sistema di visibilità del modello generale di Flarum, che esegue la query attraverso una sequenza di callback, chiamati "scopers".
 
 La query verrà eseguita attraverso tutti gli scoper applicabili registrati per il modello della query. Notare che gli scopers di visibilità registrati per una classe genitore (tipo `Flarum\Post\Post`) verranno applicate sulle classi secondarie (come `Flarum\Post\CommentPost`).
 
@@ -47,7 +50,8 @@ Esistono in realtà due tipi di scoper:
 - Gli scopers basati sulle azioni verranno applicati a tutte le query per il modello eseguito con una determinata capacità (che per impostazione predefinita è `"view"`). Si prega di notare che questo non è correlato alle stringhe di abilità del [policy system](authorization.md#how-it-works)
 - scoper "globali" si applicheranno a tutte le query del modello. Tieni presente che gli scopers globali verranno eseguiti su TUTTE le query per il relativo modello, inclusi `view`, che potrebbe creare loop infiniti o errori. Generalmente, vengono eseguiti solo per abilità che non iniziano con "view". Puoi vedere qualcosa nell' [esempio sottostante](#custom-visibility-scoper-examples)
 
-Un caso d'uso comune per questo è consentire l'estensibilità all'interno dell'ambito della visibilità. Diamo un'occhiata a un semplice pezzo di `Flarum\Post\PostPolicy`:
+Un caso d'uso comune per questo è consentire l'estensibilità all'interno dell'ambito della visibilità.
+Diamo un'occhiata a un semplice pezzo di `Flarum\Post\PostPolicy`:
 
 ```php
 // Qui, vogliamo assicurarci che i post privati non siano visibili agli utenti per impostazione predefinita.
@@ -241,7 +245,6 @@ class ScopeDiscussionVisibility
 Si noti che in contrasto con gli altri 2 esempi, stiamo usando `orWhere` per la nostra logica. Questo è spiegato [sopra](#where-vs-orwhere)
 
 ### Registrazione di scopers personalizzati
-
 
 ```php
 use Flarum\Extend;
