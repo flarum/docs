@@ -6,12 +6,6 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 
 :::
 
-:::warning
-
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production — but it isn't the final stable release yet, so back up your data and test before relying on it.
-
-:::
-
 ## 环境要求
 
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
@@ -65,7 +59,7 @@ Only the latest Flarum 2.x version is detailed here, for previous versions [brow
 Flarum 使用 [Composer](https://getcomposer.org) 来管理其依赖包和扩展程序。 在安装 Flarum 之前，您需要先在机器上 [安装 Composer](https://getcomposer.org)。 然后，在要安装 Flarum 的空白目录下执行此命令： If you're not familiar with it, read [our guide](composer.md) for information on what it is and how to set it up. 然后，在要安装 Flarum 的空白目录下执行此命令：
 
 ```bash
-composer create-project flarum/flarum:^2.0.0 --stability=beta .
+composer create-project flarum/flarum:^2.0.0 .
 ```
 
 您可以在命令执行期间配置您的 Web 服务器。您可以在命令执行期间配置您的 Web 服务器。 请确保网站根目录（Webroot）设置为 `/<Flarum 路径>/public`，并按照下面的说明设置 [URL 重写](#url-rewriting)。

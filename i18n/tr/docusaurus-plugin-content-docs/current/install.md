@@ -6,12 +6,6 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 
 :::
 
-:::warning
-
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production — but it isn't the final stable release yet, so back up your data and test before relying on it.
-
-:::
-
 ## Sunucu Gereksinimleri
 
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
@@ -65,7 +59,7 @@ Only the latest Flarum 2.x version is detailed here, for previous versions [brow
 Flarum, bağımlılıklarını ve uzantılarını yönetmek için [Composer](https://getcomposer.org) kullanır. Flarum'u kurmadan önce, makinenize [Composer'ı kurmanız](https://getcomposer.org) gerekir. Daha sonra, bu komutu Flarum'un yüklenmesini istediğiniz boş bir konumda çalıştırın:
 
 ```bash
-composer create-project flarum/flarum:^2.0.0 --stability=beta .
+composer create-project flarum/flarum:^2.0.0 .
 ```
 
 Bu komut çalışırken web sunucunuzu yapılandırabilirsiniz. Root klasörünüzü `/path/to/your/forum/public` olarak ayarlandığından emin olmanız ve aşağıdaki talimatlara göre \[URL Yeniden Yazma\] (# url-yeniden yazma) ayarlamanız gerekir.
