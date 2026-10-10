@@ -74,7 +74,7 @@ As mentioned above, the entire composer configuration for your Flarum site is co
     "support": {
         "issues": "https://github.com/flarum/core/issues",
         "source": "https://github.com/flarum/flarum",
-        "docs": "https://flarum.org/docs/"
+        "docs": "https://docs.flarum.org/"
     },
     // End of metadata
 

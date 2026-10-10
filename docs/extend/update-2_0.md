@@ -31,7 +31,7 @@ The upgrader is just another command of the [`@flarum/cli` npm package](https://
 npm install -g @flarum/cli@3
 ```
 
-v3 of the CLI is only compatible with v2.x of Flarum, if you wish to continue using the CLI for both v1.x and v2.x of Flarum, you can install them together. Read more about it [here](cli.md#installation).
+v3 of the CLI is only compatible with v2.x of Flarum, if you wish to continue using the CLI for both v1.x and v2.x of Flarum, you can install them together. Read more about it [here](cli.md#installing-multiple-cli-versions).
 
 ### Usage
 
@@ -253,7 +253,7 @@ Flarum 2.0 uses Laravel 13 components, depending on your extension you may need 
 * `Schema::getTables()`, `Schema::getViews()`, and `Schema::getTypes()` now return results across all schemas by default. Pass the `schema` parameter to limit results to a specific schema.
 * The `image` validation rule no longer allows SVGs by default. To allow SVGs, use `'image:allow_svg'`.
 
-For more details, see the [Laravel 9](https://laravel.com/docs/9.x/upgrade), [Laravel 10](https://laravel.com/docs/10.x/upgrade), [Laravel 11](https://laravel.com/docs/11.x/upgrade), [Laravel 12](https://laravel.com/docs/12.x/upgrade) and [Laravel 13](https://laravel.com/docs/13.x/upgrade) upgrade guides.
+For more details, see the [Laravel 9](https://laravel.com/docs/13.x/upgrade), [Laravel 10](https://laravel.com/docs/13.x/upgrade), [Laravel 11](https://laravel.com/docs/13.x/upgrade), [Laravel 12](https://laravel.com/docs/13.x/upgrade) and [Laravel 13](https://laravel.com/docs/13.x/upgrade) upgrade guides.
 
 #### Flysystem (updated from 1.x to 3.x)
 
@@ -285,7 +285,7 @@ Checkout the [Symfony Mailer documentation](https://symfony.com/doc/current/mail
 #### Intervention Image v3
 
 ##### <span class="breaking">Breaking</span>
-The Intervention Image library (`intervention/image`) has been updated to version 3. If your extension makes any image manipulations, you should check the [Intervention Image v3 upgrade guide](https://image.intervention.io/v3/introduction/upgrade) for the breaking changes and adjust your code accordingly.
+The Intervention Image library (`intervention/image`) has been updated to version 3. If your extension makes any image manipulations, you should check the [Intervention Image v3 upgrade guide](https://image.intervention.io/v3/getting-started/upgrade) for the breaking changes and adjust your code accordingly.
 
 You may also check out the core pull request that updated the library [here](https://github.com/flarum/framework/pull/3947/files).
 

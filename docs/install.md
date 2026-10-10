@@ -12,8 +12,9 @@ Before you install Flarum, it's important to check that your server meets the re
 
 * **Apache** (with mod\_rewrite enabled) or **Nginx**
 * **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
+  * If you are using PostgreSQL or SQLite instead of MySQL/MariaDB, you will also need `pdo_pgsql` or `pdo_sqlite` respectively
 * **One of the following databases**:
-  * MySQL 5.7+ / 8.0.30+
+  * MySQL 5.7.8+
   * MariaDB 10.3+
   * SQLite 3.35.0+
   * PostgreSQL 10.0+
@@ -104,12 +105,12 @@ include /path/to/flarum/.nginx.conf;
 
 ### Caddy
 
-Caddy requires a very simple configuration in order for Flarum to work properly. Note that you should replace the URL with your own and the path with the path to your own `public` folder. If you are using a different version of PHP, you wil also need to change the `fastcgi` path to point to your correct PHP install socket or URL.
+Caddy requires a very simple configuration in order for Flarum to work properly. Note that you should replace the URL with your own and the path with the path to your own `public` folder. If you are using a different version of PHP, you will also need to change the `fastcgi` path to point to your correct PHP install socket or URL.
 
 ```
 www.example.com {
     root * /var/www/flarum/public
-    php_fastcgi unix//var/run/php/php7.4-fpm.sock
+    php_fastcgi unix//var/run/php/php8.3-fpm.sock
     header /assets/* {
         +Cache-Control "public, must-revalidate, proxy-revalidate"
         +Cache-Control "max-age=25000"

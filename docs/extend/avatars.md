@@ -122,4 +122,4 @@ Flarum automatically adds your driver to the admin settings page when you regist
 
 The selected driver identifier is stored in the `avatar_driver` setting. If the setting is empty or refers to an unregistered driver, Flarum will use the Default driver as a fallback.
 
-For a minimal example, see Flarum's built-in [DefaultDriver](https://github.com/flarum/framework/blob/main/framework/core/src/User/Avatar/DefaultDriver.php).
+For a minimal example, see Flarum's built-in [DefaultDriver](https://github.com/flarum/framework/blob/2.x/framework/core/src/User/Avatar/DefaultDriver.php).
