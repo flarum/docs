@@ -199,7 +199,7 @@ In some cases, an extension may want to extend code from another flarum extensio
 例如，从标签扩展导入：
 
 ```js
-import TagsPage from 'ext:flarum/tags/components/TagsPage';
+import TagsPage from 'ext:flarum/tags/forum/components/TagsPage';
 ```
 
 ### 转译
