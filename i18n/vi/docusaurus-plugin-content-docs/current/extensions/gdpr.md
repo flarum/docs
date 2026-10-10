@@ -121,6 +121,13 @@ An anonymized account cannot be acted on afterwards: every permission check agai
 
 Deletion removes all the member's posts, their avatar and their tokens, then deletes the account itself. Data that other tables link to the account with a database cascade goes with it.
 
+From Flarum 2.0.1, the discussions they posted in are left as if each of their posts had been deleted on its own:
+
+- A discussion with no posts left is deleted.
+- A discussion they started that others replied to stays, and now begins at the first remaining reply. It keeps its original start date, and its author is shown as a deleted user.
+- Each discussion's reply count, participant count and last post are recalculated. With Tags enabled, so is each tag's most recent discussion.
+- Notifications about their posts are removed.
+
 ### Erasing accounts as a moderator
 
 With GDPR enabled, the **Delete** button in a user's controls is replaced by **Erase**. It does not need a request from the member:
