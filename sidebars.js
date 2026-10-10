@@ -72,7 +72,8 @@ module.exports = {
         'extensions/nicknames',
         'extensions/realtime',
         'extensions/statistics',
-        'extensions/suspend'
+        'extensions/suspend',
+        'extensions/tags'
       ]
     },
     {
@@ -164,6 +165,7 @@ module.exports = {
         'extend/deck',
         'extend/gdpr',
         'extend/statistics',
+        'extend/tags',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
