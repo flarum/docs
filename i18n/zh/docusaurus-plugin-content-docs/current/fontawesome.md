@@ -2,7 +2,7 @@
 
 Flarum uses [FontAwesome](https://fontawesome.com) for icons throughout the interface. By default the **Free** tier is bundled with Flarum and served from your own server. You can switch to a CDN-hosted stylesheet or a FontAwesome Kit to unlock Pro icons, custom icons, and other features.
 
-The active source can be changed from the admin dashboard (**Admin → Advanced**) or directly in [`config.php`](config.md).
+The active source can be changed on the admin panel's [Advanced page](admin.md#the-advanced-page) or directly in [`config.php`](config.md).
 
 ## Sources
 
