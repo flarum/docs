@@ -72,6 +72,7 @@ module.exports = {
         'extensions/nicknames',
         'extensions/realtime',
         'extensions/statistics',
+        'extensions/sticky',
         'extensions/suspend',
         'extensions/tags'
       ]
