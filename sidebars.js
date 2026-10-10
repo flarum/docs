@@ -66,6 +66,7 @@ module.exports = {
       items: [
         'extensions/akismet',
         'extensions/audit',
+        'extensions/deck',
         'extensions/gdpr',
         'extensions/messages',
         'extensions/nicknames',
@@ -160,6 +161,7 @@ module.exports = {
         'extend/notifications',
         'extend/realtime',
         'extend/audit',
+        'extend/deck',
         'extend/gdpr',
         'extend/statistics',
         'extend/post-types',
