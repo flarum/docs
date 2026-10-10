@@ -199,7 +199,7 @@ In some cases, an extension may want to extend code from another flarum extensio
 For example, to import from tags extension:
 
 ```js
-import TagsPage from 'ext:flarum/tags/components/TagsPage';
+import TagsPage from 'ext:flarum/tags/forum/components/TagsPage';
 ```
 
 ### Transpilation
