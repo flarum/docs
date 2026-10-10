@@ -95,6 +95,26 @@ class PostDeletedListener
 
 Come mostrato sopra, è possibile utilizzare una classe listener invece di un callback. This allows you to [inject dependencies](https://laravel.com/docs/12.x/container) into your listener class via constructor parameters. In questo esempio risolviamo un'istanza di un traduttore, ma possiamo iniettare tutto ciò che vogliamo/di cui abbiamo bisogno.
 
+A listener can also name a class and the method to call on it, which is handy when one class handles several events. The class is resolved through the container in the same way, so it can take dependencies, and the method does not have to be static:
+
+```php
+use Flarum\Extend;
+use Flarum\Post\Event\Deleted;
+use Flarum\Post\Event\Restored;
+
+return [
+    (new Extend\Event)
+        ->listen(Deleted::class, [PostCountListener::class, 'whenPostDeleted'])
+        ->listen(Restored::class, [PostCountListener::class, 'whenPostRestored']),
+];
+```
+
+:::info
+
+Flarum 2.0.0 only accepts this form when the method is `static`: an instance method throws a `TypeError` when `extend.php` loads. From Flarum 2.0.1, either works.
+
+:::
+
 È inoltre possibile ascoltare più eventi in una sola volta tramite un event subscriber. Questo è utile per raggruppare le funzionalità comuni; per esempio, se si desidera aggiornare alcuni metadati sulle modifiche ai post:
 
 ```php
