@@ -106,8 +106,9 @@ Choose how long authors have under **Allow tag editing** on the **Permissions** 
 | **Indefinitely**     | at any time                                  |
 | **For 10 minutes**   | for 10 minutes after starting the discussion |
 | **Until next reply** | until someone else replies                   |
+| **Never**            | never                                        |
 
-Until you choose an option, authors can't change their discussions' tags.
+**Never** is the default. Before Flarum 2.0.1, the setting showed **Indefinitely** until you chose an option, although authors couldn't change their tags.
 
 A member can only add a tag they could start a discussion in. The same limits apply as when starting a discussion, unless they have **Bypass tag requirements**.
 
@@ -178,7 +179,7 @@ Set these on the **Permissions** page of the admin panel:
 | --------------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Tag discussions**         | Mods                  | Changing the tags of any discussion. Can be granted per [restricted tag](#restricting-tags).                               |
 | **Bypass tag requirements** | Admins only           | Starting discussions and changing tags without the [limits on how many tags](#how-many-tags-a-discussion-needs) a discussion needs.        |
-| **Allow tag editing**       | Not set               | How long authors can change their own discussion's tags. See [Changing a discussion's tags](#changing-a-discussions-tags). |
+| **Allow tag editing**       | Never                 | How long authors can change their own discussion's tags. See [Changing a discussion's tags](#changing-a-discussions-tags). |
 
 Creating, editing, deleting and reordering tags is for admins only.
 
@@ -186,7 +187,7 @@ Creating, editing, deleting and reordering tags is for admins only.
 
 | Extension               | What it adds to Tags                                                                                                                                                                                                                         |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sticky                  | Sticky discussions are pinned to the top of their tags' pages.                                                                                                                                                               |
+| [Sticky](sticky.md)     | Sticky discussions are pinned to the top of their tags' pages, in the tag's **Default Sort** too. **Sticky discussions** can be granted per restricted tag.                                                  |
 | Approval                | A member needs **Start discussions without approval** in a tag, as well as **Start discussions**, to add it when changing a discussion's tags. Discussions awaiting approval are only counted once approved. |
 | Flags                   | Moderators only see flags in discussions where they can **View flags** in at least one of the discussion's tags.                                                                                                             |
 | Mentions                | Members can mention a tag with `#slug`, which links to it in the tag's color. Mentions of a deleted tag are shown as deleted.                                                                                |
