@@ -186,7 +186,7 @@ Creating, editing, deleting and reordering tags is for admins only.
 
 | Extension | What it adds to Tags |
 | --- | --- |
-| Sticky | Sticky discussions are pinned to the top of their tags' pages. |
+| [Sticky](sticky.md) | Sticky discussions are pinned to the top of their tags' pages, in the tag's **Default Sort** too. **Sticky discussions** can be granted per restricted tag. |
 | Approval | A member needs **Start discussions without approval** in a tag, as well as **Start discussions**, to add it when changing a discussion's tags. Discussions awaiting approval are only counted once approved. |
 | Flags | Moderators only see flags in discussions where they can **View flags** in at least one of the discussion's tags. |
 | Mentions | Members can mention a tag with `#slug`, which links to it in the tag's color. Mentions of a deleted tag are shown as deleted. |
