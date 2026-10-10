@@ -198,7 +198,7 @@ In alcuni casi, un'estensione potrebbe voler estendere il codice da un'altra est
 For example, to import from tags extension:
 
 ```js
-import TagsPage from 'ext:flarum/tags/components/TagsPage';
+import TagsPage from 'ext:flarum/tags/forum/components/TagsPage';
 ```
 
 ### Transpilazione
