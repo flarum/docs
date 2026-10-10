@@ -65,6 +65,31 @@ With **Randomize Usernames** on, new members do not choose a username at all. Th
 
 This only applies when **Allow setting nicknames on registration** is also on. With that off, the sign-up form keeps its username field.
 
+### Forums upgraded from Flarum 1.x
+
+Flarum 1.x gave members who signed up this way a username made only of digits, such as `38275019461204937561`. Flarum 2.0 no longer accepts usernames like these for new accounts, but existing members keep them. From Flarum 2.0.1, you can give them a username in the current format:
+
+```bash
+php flarum nicknames:convert-legacy-usernames
+```
+
+The command renames every member who has a nickname and an all-digit username. It shows how many members that is and asks you to confirm first. Members with an all-digit username but no nickname are left alone: that username is the name they are shown by, and they may log in with it. The command tells you how many of them there are, so that you can rename them yourself.
+
+| Option      | Description                                                                                                     |
+| ----------- | --------------------------------------------------------------------------------------------------------------- |
+| `--dry-run` | Only counts the members who would be renamed.                                                   |
+| `--force`   | Renames them without asking for confirmation, e.g. in a script. |
+
+Renaming takes a while on a large forum. You can stop the command at any time and run it again, and it carries on with the members it has not renamed yet.
+
+Before you run it, bear in mind that:
+
+- links to these members' profiles change, if your profile links use usernames (the default), so old links to them stop working;
+- members who logged in with their old username must use their email address or new username instead;
+- posts and mentions are not affected, because they refer to members by their ID, not their username.
+
+With the [Audit](audit.md) extension enabled, each rename is recorded as `user.username_changed`, with the old and new username. See [Flarum core](audit.md#flarum-core) in Audit's list of logged actions.
+
 ## Audit log
 
 When the [Audit](audit.md) extension is enabled, nickname changes are recorded as `user.nickname_changed`, with the old and new nickname. See [Flarum Nicknames](audit.md#flarum-nicknames) in Audit's list of logged actions.
