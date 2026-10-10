@@ -71,7 +71,7 @@ You can temporarily stop a queue from processing jobs without stopping the worke
 
 ### From the admin panel
 
-The **Advanced** admin page has a queue-pause control. Toggling it pauses (and resumes) job processing for the forum.
+The admin panel's [Advanced page](admin.md#the-advanced-page) has a queue-pause control whenever the forum uses a driver other than `sync`. Toggling it pauses (and resumes) job processing for the forum.
 
 ### From the command line
 

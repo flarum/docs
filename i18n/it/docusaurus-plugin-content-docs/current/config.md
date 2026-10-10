@@ -65,7 +65,7 @@ The only configuration key read from `config.php` is `driver`. Omitting the `que
 - `sync` - default behaviour; jobs run immediately inline during the request
 - `database` - stores jobs in a dedicated `queue_jobs` database table, which are then processed via the [scheduler](scheduler.md) in a separate process. It is strongly advised that the scheduler is configured to run _every minute_
 
-When the `database` driver is active, additional tuning options (retries, memory limit, timeout, etc.) become available in the admin panel under **Admin > Advanced Settings**.
+When the `database` driver is active, additional tuning options (retries, memory limit, timeout, etc.) become available on the admin panel's [Advanced page](admin.md#queue).
 
 ##### Other queue drivers
 
@@ -92,9 +92,7 @@ Flarum has a maintenance mode that can be enabled by setting the `offline` key i
 - `low` - Only admins can access the forum.
 - `safe` - Only admins can access the forum, and no extensions are booted.
 
-Questo può anche essere configurato dalla pagina delle impostazioni avanzate del pannello di amministrazione:
-
-![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
+Low maintenance and safe mode can also be set on the admin panel's [Advanced page](admin.md#maintenance). While `config.php` sets a mode, it takes precedence over the one chosen there.
 
 ### FontAwesome
 

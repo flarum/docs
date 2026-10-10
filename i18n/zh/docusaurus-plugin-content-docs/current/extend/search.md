@@ -304,11 +304,7 @@ Checkout this [proof of concept elastic search driver](https://github.com/SychO9
 
 ## 配置模型驱动程序
 
-您可以从高级管理页面选择搜索模型可以使用的驱动程序。此页面需要从控制面板工具下拉的按钮切换：
-
-![Toggle advanced page](https://user-images.githubusercontent.com/20267363/277113270-f2e9c91d-2a29-436b-827f-5c4d20e2ed54.png)
-
-![Advanced page](https://user-images.githubusercontent.com/20267363/277113315-9d75b9a3-f225-4a2b-9f42-8e5b9d13d5e8.png)
+Admins choose which driver each search model uses under **Search Drivers** on the admin panel's [Advanced page](../admin.md#search-drivers). The page is hidden until it is turned on from the dashboard's **Tools** menu.
 
 ## Gambits
 
