@@ -7,7 +7,7 @@ All [components](frontend.md#components) and [utilities](frontend.md#flarum-util
 
 ## Avvisi
 
-Alerts are managed by a global instance of [`AlertManagerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_states_alertmanagerstate.alertmanagerstate), which is accessible via `app.alerts` on both the `forum` and `admin` frontends. Ha 2 metodi accessibili pubblicamente:
+Alerts are managed by a global instance of [`AlertManagerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_states_alertmanagerstate.alertmanagerstate), which is accessible via `app.alerts` on both the `forum` and `admin` frontends. Its public methods are:
 
 - `app.alerts.show` aggiungerà un nuovo avviso e restituirà una chiave che può essere utilizzata in seguito per ignorarlo. Ha 3 sovraccarichi:
   - `app.alerts.show(children)`
@@ -15,6 +15,26 @@ Alerts are managed by a global instance of [`AlertManagerState`](https://api.doc
   - `app.alerts.show(componentClass, attrs, children)`
 - `app.alerts.dismiss(key)`ignorerà un avviso attivo con la chiave data, se presente.
 - `app.alerts.clear()` ignorerà tutti gli avvisi.
+- `app.alerts.getActiveAlerts()` returns the alerts currently being shown.
+- `app.alerts.showLoading()` and `app.alerts.clearLoading()` bracket a slow operation, showing a shared loading alert while it runs. See below.
+
+### Loading Indicator
+
+`showLoading()` and `clearLoading()` are a pair: call the first when a slow operation starts and the second when it finishes, including when it fails.
+
+They are reference counted, so concurrent operations share one indicator rather than stacking up several, and the indicator only appears after a short delay. An operation that finishes quickly never shows one at all, which avoids a flicker on every fast request.
+
+```js
+app.alerts.showLoading();
+
+try {
+  await doSomethingSlow();
+} finally {
+  app.alerts.clearLoading();
+}
+```
+
+Always clear in a `finally`, or an early return leaves the count raised and the indicator stuck on screen for the rest of the page's life.
 
 In genere, non avrai bisogno di un componente personalizzato per gli avvisi; tuttavia, se lo desideri, puoi impostarne uno. Probabilmente vorrai che erediti `flarum/components/Alert`.
 
@@ -27,10 +47,27 @@ I seguenti attributi sono utili da tenere a mente:
 
 ## Modali
 
-Modals are managed by a global instance of [`ModalManagerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_states_modalmanagerstate.modalmanagerstate), which is accessible via `app.modal` on both the `forum` and `admin` frontends. I suoi metodi pubblici più importanti sono:
+Modals are managed by a global instance of [`ModalManagerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_states_modalmanagerstate.modalmanagerstate), which is accessible via `app.modal` on both the `forum` and `admin` frontends. Its public methods are:
 
-- `app.modal.show(componentClass, attrs)` mostrerà un modale utilizzando la classe componente e attributi dati. Se chiamato mentre un modale è già aperto, sostituirà il modale attualmente aperto.
-- `app.modal.close()` chiuderà il modale se uno è attualmente attivo.
+- `app.modal.show(componentClass, attrs, stackModal)` will show a modal using the given component class and attrs. By default, showing a modal while another is open replaces it. Pass `true` as the third argument to stack the new modal on top of the current one instead.
+- `app.modal.close()` will close the topmost open modal. With stacked modals, this reveals the one underneath rather than closing everything.
+- `app.modal.isModalOpen()` returns whether any modal is currently open.
+
+`show()` is asynchronous, and accepts either a modal component class or a function returning a promise of one. The second form is how a modal is [code split](code-splitting.md) out of your main bundle, with the manager showing a loading state while the chunk arrives:
+
+```js
+app.modal.show(() => import('./components/MyCoolModal'), { attr: 'value' });
+```
+
+:::caution Showing a modal from a lifecycle method
+
+Calling `app.modal.show()` directly inside `oncreate`, `view` or another lifecycle method does not work reliably, because of how Mithril handles a redraw triggered during a redraw. Defer it by a tick:
+
+```js
+setTimeout(() => app.modal.show(MyCoolModal, { attr: 'value' }), 0);
+```
+
+:::
 
 Al contrario degli avvisi, la maggior parte delle modali utilizzerà una classe personalizzata, che eredita `flarum/components/Modal`. Per esempio:
 
@@ -108,7 +145,7 @@ $ flarum-cli make frontend modal
 
 Poiché Flarum è un forum, abbiamo bisogno di strumenti per consentire agli utenti di creare e modificare post e discussioni. Flarum realizza questo attraverso il componente composer.
 
-The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_states_modalmanagerstate.modalmanagerstate), which is accessible via `app.composer` on the `forum` frontend. I suoi metodi pubblici più importanti sono:
+The composer is managed by a global instance of [`ComposerState`](https://api.docs.flarum.org/js/2.x/classes/flarum.forum_states_composerstate.composerstate), which is accessible via `app.composer` on the `forum` frontend. I suoi metodi pubblici più importanti sono:
 
 - `app.composer.load(componentClass, attrs)` caricherà un nuovo tipo di compositore. Se un compositore è già attivo, verrà sostituito.
 - `app.composer.show()` mostrerà il compositore se è attualmente nascosto.
