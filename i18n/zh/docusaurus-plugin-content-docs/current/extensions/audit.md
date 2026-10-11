@@ -108,7 +108,7 @@ Each log entry records:
   - `session` — a cookie session, usually the Flarum web interface.
   - `access_token` — a direct API request using a user access token.
   - `api_key` — a direct API request using a master API key.
-  - `cli` — a command run via the console.
+  - `cli` — a command run via the console, or a queued job.
   - `unknown` — none of the above could be determined.
 - The **IP address**, available for web requests.
 - The **actor**, available for web requests.
@@ -117,6 +117,8 @@ Each log entry records:
 :::info
 
 When an action is processed by a queued job rather than the original web request (for example a password reset, or a GDPR erasure or export), the IP address and actor of the original request are not available to that job. Such an entry is recorded with the `cli` client and no IP. Where the responsible user still matters — for example the administrator who processed a GDPR erasure — the integration records it explicitly (see [GDPR](#flarum-gdpr) below); a system-driven action such as a scheduled erasure is recorded with no actor.
+
+The log browser shows a `cli` entry under the actor it records, with **Command line** beside the time. Only an entry with no actor is shown as **Command line** in place of the actor. Before Flarum 2.0.1, every `cli` entry was shown that way, even when it recorded an actor.
 
 :::
 
