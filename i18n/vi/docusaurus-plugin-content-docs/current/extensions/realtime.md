@@ -168,6 +168,30 @@ If the daemon runs on the same machine as the forum, pointing the backend at loc
 
 :::
 
+## Settings
+
+Find these on the extension's page in the admin panel.
+
+| Setting                                                    | Default | Mô tả                                                                                                                                                                                                                                    |
+| ---------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Typing indicator**                                       | On      | Shows, in a discussion, that other members are replying, to members with [**View who is typing**](#permissions). When off, typing is neither shown nor sent over the websocket.                          |
+| **Discussion list typing dots**                            | On      | Shows a small icon on the discussion list next to any discussion guests can see that someone is replying in. No names are shown.                                                                         |
+| **Discussion list typing dots in restricted tags**         | Off     | Also shows the icon for discussions in restricted tags, to members who can see those tags. Needs [Tags](tags.md).                                                                                        |
+| **DiscussionList updates**                                 | On      | When a discussion gets new activity, a button above the discussion list offers to show it, and the list updates by itself after the interval below. When off, the list only changes when it is reloaded. |
+| **Interval to automatically push new discussion activity** | `10`    | In seconds. With `0`, the list never updates by itself: readers click the button to show the new activity.                                                                               |
+| **Notification toast duration**                            | `10`    | How many seconds a notification that arrives live stays on screen. `0` turns these pop-ups off.                                                                                                          |
+
+Members who can see who is typing also get a **Display who is typing** switch on their own **Settings** page, to choose between seeing names and seeing only how many people are typing.
+
+## Permissions
+
+The extension adds two permissions on the **Permissions** page of the admin panel. Neither is given to any group by default, so only admins have them until you grant them.
+
+| Permission                                  | Section  | Mô tả                                                                                                                                                                                           |
+| ------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **View who is typing**                      | View     | See the typing indicator in a discussion. It can be given to guests, and with [Tags](tags.md) it can be granted per [restricted tag](tags.md#restricting-tags). |
+| **See who is typing anywhere on the forum** | Moderate | See typing across the whole forum, for example in [Deck](deck.md#typing-activity)'s **Typing activity** column.                                                                 |
+
 ## Running Behind TLS
 
 The daemon speaks plain HTTP. On an `https` forum, browsers will refuse to open an insecure websocket from a secure page, so the connection has to be terminated by your web server and proxied through.
