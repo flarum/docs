@@ -168,7 +168,7 @@ There have been many changes to the core frontend codebase, including renamed or
 
 ##### <span class="breaking">Breaking</span>
 
-- `app.extensionData` has been renamed to `app.registry`, but you should now use the [`Admin` extender](./admin.md) instead.
+- `app.extensionData` has been renamed to `app.registry`, but you should now use the [`Admin` extender](./admin.md) instead. Its `getAllExtensionPermissions()` method has been renamed to `getAllPermissions()`.
 - Some extension initializers [have been renamed to be more uniform](https://github.com/flarum/framework/pull/4003/files), if you are checking for initializer existence with `app.initializers.has('...')` you should update the name accordingly.
 - `IndexPage.prototype.sidebar` has been removed, use the `IndexSidebar` component instead.
 - `IndexPage.prototype.navItems` has been moved to `IndexSidebar.prototype.navItems`.
@@ -178,7 +178,6 @@ There have been many changes to the core frontend codebase, including renamed or
 - The `FieldSet` component has been refactored.
 - The `avatar` and `icon` helpers have been refactored to new `Avatar` and `Icon` components. Which now allows you to extend them to modify their behavior.
 - The `Modal` component has been split into `Modal` and `FormModal`. The `Modal` component is now a simple modal that can be used for any content, while the `FormModal` component is a modal that is specifically designed for forms.
-- `app.extensionData` has been removed. You must now use the `Admin` extender to register settings, permissions and custom extension pages.
 
 ##### <span class="notable">Notable</span>
 
