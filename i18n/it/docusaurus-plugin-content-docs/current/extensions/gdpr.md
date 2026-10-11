@@ -91,7 +91,9 @@ The archive contains:
 
 ### Requesting erasure
 
-**Erase Account** asks the member for their password and an optional reason, then emails them a confirmation link. The request only reaches moderators once that link has been followed. Members who are logged in as a different account cannot confirm someone else's request; logged-out visitors with the link can.
+**Erase Account** asks the member for their password and an optional reason, then emails them a confirmation link. The link opens a page where they confirm with **Confirm erasure**, and the request only reaches moderators once they do. Members who are logged in as a different account cannot confirm someone else's request; logged-out visitors with the link can.
+
+Opening the link doesn't confirm the request by itself, so mail security scanners, which open links in incoming mail, can't confirm it for the member. This applies from Flarum 2.0.1. Before then, opening the link confirmed the request.
 
 Until the request is processed, the member can cancel it from the same place. A moderator with **Process erasure requests** can also cancel it. The member gets a notification and an email when a request is cancelled, and a final email when their account has been erased.
 
