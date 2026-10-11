@@ -84,6 +84,15 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 "flarum/mentions": "*",
 ```
 
+Then, at the top level of `composer.json` (not inside `require`), allow beta releases while preferring stable ones:
+
+```json
+"minimum-stability": "beta",
+"prefer-stable": true
+```
+
+Flarum 2.0 itself is stable, but many extensions have so far only tagged beta releases for 2.0. If `minimum-stability` is `stable`, Composer can't install those, and the upgrade fails. `prefer-stable` keeps everything else on stable releases: Composer only chooses a beta when a package has no stable release that fits. As extensions tag stable releases, Composer moves to them on your next update. Once all of yours have, you can set `minimum-stability` back to `stable`.
+
 **5. Update your `config.php` if using MariaDB.**
 Flarum 2.0 distinguishes between MySQL and MariaDB. If your forum runs on MariaDB, you must change the `driver` value in `config.php` to `mariadb`. Leaving it as `mysql` will cause compatibility errors once you are on 2.0.
 
@@ -160,7 +169,7 @@ fof/moderator-notes               0.4.4           requires          flarum/core 
 some/extension                    1.2.3           requires          flarum/core (^1.0)
 ```
 
-This means one or more extensions don't yet have a v2-compatible release. Remove them and try again.
+This means one or more extensions don't yet have a v2-compatible release that Composer is allowed to install. If an extension has tagged a 2.0 beta, check that `minimum-stability` is `beta` and `prefer-stable` is `true` (step 4). If it has no 2.0 release at all, remove it and try again.
 
 - Make sure you're running `composer update` with all the flags shown above.
 
