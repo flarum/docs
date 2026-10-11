@@ -66,8 +66,12 @@ module.exports = {
       items: [
         'extensions/akismet',
         'extensions/audit',
+        'extensions/bbcode',
         'extensions/deck',
+        'extensions/embed',
+        'extensions/emoji',
         'extensions/gdpr',
+        'extensions/markdown',
         'extensions/messages',
         'extensions/nicknames',
         'extensions/realtime',
