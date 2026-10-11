@@ -1,4 +1,10 @@
+---
+image: img/extensions/embed-share.png
+---
+
 # Embed
+
+![Embed: embed Flarum discussions as comments on your blog. Bundled with Flarum 2.0.](/img/docs/extensions/embed.png)
 
 The Embed extension (`flarum/embed`) lets you show a Flarum discussion inside another website, such as under a blog post, as its comment section. Readers see the discussion's posts and can reply without leaving the page. It is a [bundled extension](../extensions.md), and it is disabled by default.
 

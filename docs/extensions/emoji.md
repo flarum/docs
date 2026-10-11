@@ -1,4 +1,10 @@
+---
+image: img/extensions/emoji-share.png
+---
+
 # Emoji
+
+![Emoji: turn text and unicode emoji into Twemoji. Bundled with Flarum 2.0.](/img/docs/extensions/emoji.png)
 
 The Emoji extension (`flarum/emoji`) shows emoji in posts as [Twemoji](https://github.com/jdecked/twemoji) images, so they look the same on every device. It also turns text emoticons such as `:)` into emoji, and adds an emoji picker to the composer. It is a [bundled extension](../extensions.md), and it is enabled by default.
 

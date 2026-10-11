@@ -1,4 +1,10 @@
+---
+image: img/extensions/bbcode-share.png
+---
+
 # BBCode
+
+![BBCode: format posts with BBCode. Bundled with Flarum 2.0.](/img/docs/extensions/bbcode.png)
 
 The BBCode extension (`flarum/bbcode`) lets members format their posts with [BBCode](https://en.wikipedia.org/wiki/BBCode), the square-bracket tags used by many older forums. It is a [bundled extension](../extensions.md), and it is enabled by default.
 

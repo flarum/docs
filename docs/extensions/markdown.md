@@ -1,4 +1,10 @@
+---
+image: img/extensions/markdown-share.png
+---
+
 # Markdown
+
+![Markdown: format posts with Markdown. Bundled with Flarum 2.0.](/img/docs/extensions/markdown.png)
 
 The Markdown extension (`flarum/markdown`) lets members format their posts with [Markdown](https://commonmark.org/help/), and adds a formatting toolbar to the composer. It is a [bundled extension](../extensions.md), and it is enabled by default.
 
