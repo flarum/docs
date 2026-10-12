@@ -120,16 +120,30 @@ We will also want to add scripts to our `composer.json`, so that we can run our 
         "@test:integration"
     ],
     "test:unit": "phpunit -c tests/phpunit.unit.xml",
+    "test:unit:filter": "phpunit -c tests/phpunit.unit.xml --filter",
     "test:integration": "phpunit -c tests/phpunit.integration.xml",
+    "test:integration:filter": "phpunit -c tests/phpunit.integration.xml --filter",
     "test:setup": "@php tests/integration/setup.php"
 },
 "scripts-descriptions": {
     "test": "Runs all tests.",
     "test:unit": "Runs all unit tests.",
+    "test:unit:filter": "Runs unit tests whose name matches: composer test:unit:filter -- ClassName",
     "test:integration": "Runs all integration tests.",
+    "test:integration:filter": "Runs integration tests whose name matches: composer test:integration:filter -- ClassName",
     "test:setup": "Sets up a database for use with integration tests. Execute this only once."
 }
 ```
+
+The `:filter` scripts run only the tests whose name matches, which is quicker than the whole suite while you work on one change. Composer passes anything after `--` on to PHPUnit, so you can give a test class, a test method, or several separated by `|`:
+
+```bash
+composer test:integration:filter -- ShowTest
+composer test:integration:filter -- 'ShowTest|ListTest'
+composer test:unit:filter -- can_parse_the_value
+```
+
+Run the whole suite once before you open a pull request. Extensions created with the [Flarum CLI](cli.md) get these scripts automatically.
 
 #### Github Testing Workflow
 
