@@ -269,3 +269,52 @@ return [
   // Other extenders
 ];
 ```
+
+## Private Models
+
+Visibility scopers answer "who may see this row". Some models additionally support being marked **private**, which is a property of the row rather than of the viewer, and the two work together.
+
+A model can support this if it has an `is_private` column. In core, `Discussion` and `CommentPost` both do, and core registers scopers that hide rows with `is_private = true`. That pairing is what the bundled Approval extension is built on: a post awaiting approval is a private post.
+
+### Marking Models Private
+
+Register a **privacy checker** with the `ModelPrivate` extender. Every checker registered for a model runs when an instance is saved. If any of them returns `true` the model's `is_private` is set to `true`, and otherwise it is set to `false`:
+
+```php
+use Flarum\Extend;
+use Flarum\Post\CommentPost;
+
+return [
+    (new Extend\ModelPrivate(CommentPost::class))
+        ->checker(function (CommentPost $post) {
+            return $post->content && str_contains($post->content, 'acme-secret');
+        }),
+];
+```
+
+An invokable class name may be given instead of a closure.
+
+:::caution Checkers run on every save, and decide both ways
+
+Because the flag is recomputed from all checkers on each save, a checker that stops returning `true` will make a previously private model public again the next time it is saved. Write the condition so that it is stable for a given model rather than dependent on request state, or a routine edit elsewhere can quietly publish something.
+
+:::
+
+### Revealing Private Models
+
+A private model is hidden by core's scopers, so an extension that creates private models usually also needs a way for the right people to see them. That is done with an ordinary [visibility scoper](#custom-scopers) registered against the `viewPrivate` ability:
+
+```php
+use Flarum\Extend;
+use Flarum\Post\Post;
+
+return [
+    (new Extend\ModelVisibility(Post::class))
+        ->scope(function (User $actor, $query) {
+            // Let a user see their own posts that are awaiting approval.
+            $query->orWhere('posts.user_id', $actor->id);
+        }, 'viewPrivate'),
+];
+```
+
+Without a scoper like this, nothing you mark private will be visible to anybody.

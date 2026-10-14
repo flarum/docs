@@ -40,3 +40,45 @@ return [
 ```
 
 With a good understanding of TextFormatter, this will allow you to achieve anything from simple BBCode tag additions to more complex formatting tasks like Flarum's **Mentions** extension.
+
+## Link Attributes
+
+Links in post content are rewritten at render time, so `rel` and `target` are not something you set when the post is written. The `Link` extender lets you decide both per link.
+
+:::tip Most forums want an extension, not code
+
+[`fof/seo`](https://github.com/FriendsOfFlarum/seo) already handles the common case: it adds `nofollow` to links pointing off the forum, except for domains an admin puts on its do-follow list, and opens those links in a new tab. Reach for the `Link` extender only when you need a rule it does not cover. If you run both, they set `rel` on the same links and whichever runs last wins.
+
+:::
+
+The example below adds `rel="nofollow noopener"` to links pointing off the forum and opens them in a new tab.
+
+Both callbacks receive the link's URI, your forum's own URL, and the attributes TextFormatter has collected so far. Return the value you want set, or nothing to leave the attribute alone:
+
+```php
+use Flarum\Extend;
+use Psr\Http\Message\UriInterface;
+
+return [
+    (new Extend\Link())
+        ->setRel(function (?UriInterface $uri, string $siteUrl, array $attributes) {
+            // Only mark links that point somewhere else.
+            if ($uri && $uri->getHost() && $uri->getHost() !== parse_url($siteUrl, PHP_URL_HOST)) {
+                return 'nofollow noopener';
+            }
+        })
+        ->setTarget(function (?UriInterface $uri, string $siteUrl, array $attributes) {
+            if ($uri && $uri->getHost() && $uri->getHost() !== parse_url($siteUrl, PHP_URL_HOST)) {
+                return '_blank';
+            }
+        }),
+];
+```
+
+The URI is `null` when a link has no `url` attribute, so check it before calling anything on it.
+
+:::caution This runs on every link in every rendered post
+
+The callbacks are invoked while rendering, once per link, so keep them cheap. In particular do not query the database or call out over the network from inside one: a discussion page with a hundred links would make a hundred of those calls.
+
+:::
