@@ -802,7 +802,7 @@ public function fields(): array
 
 ### Inclusion & Linkage
 
-You can mark a relationship as includable through the `includable` method. This means that the relationship can be included in the API response. You can also use the `withLinkage` and `withoutLinkage` methods to determine whether the relationship ID(s) should be included in the API response (`ToMany` relationships are not linked by default contrary to `ToOne` relationships).
+You can mark a relationship as includable through the `includable` method. This means that the relationship can be included in the API response. You can also use the `withLinkage` and `withoutLinkage` methods to determine whether the relationship ID(s) should be included in the API response. Neither `ToOne` nor `ToMany` relationships carry linkage by default, so `withLinkage` is how you opt in; note that a relationship which is actually included in a response carries its identifiers regardless.
 
 :::danger
 
