@@ -16,7 +16,7 @@ $ flarum-cli infra githubActions
 ## Backend
 
 
-All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
+All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
 
 ```yaml
 name: Backend
@@ -62,13 +62,13 @@ In addition, the following parameters can be provided:
 
 :::tip
 
-For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml).
+For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml).
 
 :::
 
 ## Frontend
 
-All you need to do is create a `.github/workflows/frontend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml). You need to specify the configuration as follows:
+All you need to do is create a `.github/workflows/frontend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_frontend.yml). You need to specify the configuration as follows:
 
 ```yaml
 name: Frontend
@@ -134,6 +134,6 @@ Unlike the backend workflow, the frontend workflow runs everything in a single j
 | Cache Dependency Path | `cache_dependency_path` | The path to the cache dependency file.                                                                                                                   | string |
 :::tip
 
-For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml).
+For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_frontend.yml).
 
 :::

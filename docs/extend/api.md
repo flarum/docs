@@ -21,7 +21,7 @@ Before we go into detail about how to extend Flarum's data API, it's worth think
 5. Any modifications made through the [`ApiResource` extender](#extending-api-resources) to the API resource's fields will be applied. These can include adding new attributes or relationships to serialize, removing existing ones, or changing how the field value is computed.
 6. The fields (attributes and relationships) are serialized, converting the data from the backend database-friendly format to the JSON:API format expected by the frontend.
 7. The serialized data is returned as a JSON response to the frontend.
-8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](#frontend-models) in the frontend store.
+8. If the request originated via the Flarum frontend's `Store`, the returned data (including any related objects) will be stored as [frontend models](models.md#frontend-models) in the frontend store.
 
 ## API Resources
 
@@ -693,7 +693,7 @@ public function fields(): array
 
 ### Validation
 
-You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/12.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
+You can use the `rule` method to add a [Laravel validation rule](https://laravel.com/docs/13.x/validation#available-validation-rules) to an attribute. We've provided helper methods on some attributes for common validation rules.
 
 ```php
 use Flarum\Api\Schema;
@@ -848,7 +848,7 @@ Relationship linkage is the ID of the related model(s) in the API response. For 
 
 ### Polymorphic Relationships
 
-You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/12.x/eloquent-relationships#polymorphic-relationships) can point to.
+You use the `collection` method to define the resource types that a [polymorphic relationship](https://laravel.com/docs/13.x/eloquent-relationships#polymorphic-relationships) can point to.
 
 ```php
 use Flarum\Api\Schema;
@@ -867,6 +867,8 @@ public function fields(): array
 Any API Resource can be extended through the `ApiResource` extender. This is useful for adding new fields, relationships, or endpoints to an existing resource. Or when registering a new resource.
 
 ```php
+use Flarum\Api\Context;
+use Flarum\Api\Endpoint;
 use Flarum\Api\Resource;
 use Flarum\Api\Schema;
 use Flarum\Extend;
@@ -883,7 +885,7 @@ return [
                 ->route('GET', '/custom')
                 ->action(fn (Context $context) => 'custom'),
         ]),
-]
+];
 ```
 
 ### Adding fields
@@ -930,7 +932,7 @@ return [
 
 ### Removing fields
 
-You can remove fields from an existing resource through the `removeField` method.
+You can remove fields from an existing resource through the `removeFields` method.
 
 ```php
 use Flarum\Api\Resource;
@@ -1088,7 +1090,7 @@ return [
 ## Non-Model API Resources
 
 API Resources don't have to correspond to Eloquent models: you can define JSON:API resources for anything. You need to extend the [`Flarum\Api\Resource\AbstractResource`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/AbstractResource.php) class instead.
-For instance, Flarum core uses the [`Flarum\Api\Resource\ForumResource`](hhttps://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the fields of `ForumResource`.
+For instance, Flarum core uses the [`Flarum\Api\Resource\ForumResource`](https://github.com/flarum/framework/blob/2.x/framework/core/src/Api/Resource/ForumResource.php) to send an initial payload to the frontend. This can include settings, whether the current user can perform certain actions, and other data. Many extensions add data to the payload by extending the fields of `ForumResource`.
 
 ## Programmatically calling an API endpoint
 
