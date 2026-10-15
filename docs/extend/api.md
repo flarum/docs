@@ -468,6 +468,14 @@ public function endpoints(): array
 }
 ```
 
+Default includes only apply to a request that names no includes of its own. A request with `include` gets just the relationships it names, so it misses the defaults, including those that other extensions add. From Flarum 2.0.2, a request can ask for both by adding `withDefaultIncludes=1`:
+
+```
+GET /api/posts?include=user,discussion&withDefaultIncludes=1
+```
+
+The forum's post lists send it, so a default include on the posts `Index` endpoint reaches the posts on a user's profile and in post search results, as well as those on the discussion page. The discussion list doesn't: to load a relationship there, extend `DiscussionListState`'s `requestParams` and add it to `include`.
+
 ### Lifecycle Hooks
 
 Some methods on the endpoint allow you to hook certain logic into the lifecycle of the endpoint. These are `before`, `after`, and `beforeSerialization` which is often not very different from `after` but is called before it when available on the endpoint. For example, you can use these hooks to log additional information (such as marking notifications as read when said endpoint is accessed), or you may need to modify the resulting data before it is serialized.
