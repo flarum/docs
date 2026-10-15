@@ -469,6 +469,14 @@ public function endpoints(): array
 }
 ```
 
+Default includes only apply to a request that names no includes of its own. A request with `include` gets just the relationships it names, so it misses the defaults, including those that other extensions add. From Flarum 2.0.2, a request can ask for both by adding `withDefaultIncludes=1`:
+
+```
+GET /api/posts?include=user,discussion&withDefaultIncludes=1
+```
+
+The forum's post lists send it, so a default include on the posts `Index` endpoint reaches the posts on a user's profile and in post search results, as well as those on the discussion page. The discussion list doesn't: to load a relationship there, extend `DiscussionListState`'s `requestParams` and add it to `include`.
+
 ### Lifecycle Hooks
 
 端点上的一些方法允许您将某些逻辑绑定到端点的生命周期。 These are `before`, `after`, and `beforeSerialization` which is often not very different from `after` but is called before it when available on the endpoint. 例如，您可以使用这些钩子来记录额外的信息（例如在访问该端点时标记通知为已读），或者您可能需要修改生成的数据，然后才能序列化。
