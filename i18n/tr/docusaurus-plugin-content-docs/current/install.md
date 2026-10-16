@@ -11,12 +11,15 @@ Flarum'u [gösteri forumlarımızdan](https://discuss.flarum.org/d/21101) birind
 Flarum'u kurmadan önce, sunucunuzun gereksinimleri karşılayıp karşılamadığını kontrol etmeniz önemlidir. Flarum'u çalıştırmak için şunlara ihtiyacınız olacak:
 
 - **Apache** (mod_rewrite etkin) veya **Nginx**
-- **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
-- **One of the following databases**:
-  - MySQL 5.7+ / 8.0.30+
-  - MariaDB 10.3+
-  - SQLite 3.35.0+
-  - PostgreSQL 10.0+
+- **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, tokenizer, zip, session
+- **One of the following databases**, with the PHP extension for it:
+
+  - MySQL 5.7+ / 8.0.30+ (pdo\_mysql)
+  - MariaDB 10.3+ (pdo\_mysql)
+  - SQLite 3.35.0+ (pdo\_sqlite)
+  - PostgreSQL 10.0+ (pdo\_pgsql)
+
+  Before Flarum 2.0.2, the installer also asks for pdo\_mysql whichever database you use.
 - **SSH (command-line) access** to run potentially necessary software maintenance commands, and Composer if you intend on using the command-line to install and manage Flarum extensions.
 
 :::tip Recommended database versions
