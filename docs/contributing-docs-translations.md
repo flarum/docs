@@ -17,7 +17,7 @@ A good way to find topics to write about is to look for common questions in the 
 
 We want Flarum to be accessible to everyone, regardless of language! By contributing translations, you make it possible for many more people to enjoy Flarum. Best of all, we use user-friendly GUIs for translations, so no technical skills are necessary to help!
 
-Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum/).
+Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum2/).
 
 Translations for this documentation are managed through [Crowdin](https://crowdin.com/project/flarum-docs).
 
