@@ -11,12 +11,15 @@ Feel free to give Flarum a spin on one of our [demonstration forums](https://dis
 在您安装 Flarum 之前，请确保您的服务器满足以下要求，以便顺利的安装和运行 Flarum：
 
 - **Apache**（需要启用 mod\_rewrite 重写模块) 或 **Nginx**
-- **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, pdo\_mysql, tokenizer, zip, session
-- **One of the following databases**:
-  - MySQL 5.7+ / 8.0.30+
-  - MariaDB 10.3+
-  - SQLite 3.35.0+
-  - PostgreSQL 10.0+
+- **PHP 8.3+** with the following extensions: curl, dom, fileinfo, gd, json, mbstring, openssl, tokenizer, zip, session
+- **One of the following databases**, with the PHP extension for it:
+
+  - MySQL 5.7+ / 8.0.30+ (pdo\_mysql)
+  - MariaDB 10.3+ (pdo\_mysql)
+  - SQLite 3.35.0+ (pdo\_sqlite)
+  - PostgreSQL 10.0+ (pdo\_pgsql)
+
+  Before Flarum 2.0.2, the installer also asks for pdo\_mysql whichever database you use.
 - **SSH (命令行) 访问权限**来运行潜在必要的软件维护命令和 Composer (如果您打算使用命令行来安装和管理 Flarum 扩展)
 
 :::tip Recommended database versions
