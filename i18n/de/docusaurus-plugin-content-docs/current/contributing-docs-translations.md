@@ -17,7 +17,7 @@ Eine gute Möglichkeit, Themen zu finden, über die Sie schreiben können, beste
 
 Wir möchten, dass Flarum für alle zugänglich ist, unabhängig von der Sprache! Indem Du Übersetzungen beisteuerst, tust Du es viel mehr Menschen möglich, Flarum zu genießen. Das Beste ist, dass wir benutzerfreundliche GUIs für Übersetzungen verwenden, sodass keine technischen Kenntnisse erforderlich sind, um zu helfen!
 
-Übersetzungen für Flarum Core, gebündelte Erweiterungen und Community-Erweiterungen werden über [Weblate](https://weblate.rob006.net/projects/flarum/) verwaltet.
+Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum2/).
 
 Übersetzungen für diese Dokumentation werden über [Crowdin](https://crowdin.com/project/flarum-docs) verwaltet.
 
