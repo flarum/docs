@@ -17,7 +17,7 @@
 
 我们希望每个人都能使用Flarum，不论其掌握的语言种类！通过提供翻译，您可以让更多的人享受Flarum。最好的是，我们使用方便用户的用户界面进行翻译，所以如果您想提供帮助，不需要硬性技术要求！
 
-Flarum Core的翻译、捆绑扩展和社区扩展是通过 [Weblate](https://weblate.rob006.net/projects/flarum/) 管理的。
+Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum2/).
 
 此文档的翻译通过 [Crowdin](https://crowdin.com/project/flarum-docs) 管理。
 
