@@ -872,6 +872,45 @@ public function fields(): array
 }
 ```
 
+### Loading a relationship in full
+
+An endpoint applies the related resource's [`scope`](#scoping-database-resources) to the relationships it eager loads, so that only what the actor may see is serialized. But the relation it loads is the model's own, and other code may read it too. A user's `groups`, for example, decide whether they are an admin and what they may do, and the policies that ask need every one of them, not only the groups the actor may see.
+
+From Flarum 2.0.2, a relationship like that can call `withoutRelatedScope`. Endpoints then eager load it in full, and the field leaves out what the actor may not see in its getter instead:
+
+```php
+use Flarum\Api\Context;
+use Flarum\Api\Schema;
+use Flarum\Group\Group;
+use Flarum\User\User;
+
+public function fields(): array
+{
+    return [
+        Schema\Relationship\ToMany::make('groups')
+            ->withoutRelatedScope()
+            ->get(function (User $user, Context $context) {
+                // The relation holds every group, hidden ones included.
+                $groups = $user->groups;
+
+                if (! $context->getActor()->can('viewHiddenGroups')) {
+                    $groups = $groups->filter(fn (Group $group) => ! $group->is_hidden)->values();
+                }
+
+                return $groups->all();
+            }),
+    ];
+}
+```
+
+Constraints given to `eagerLoadWhere` still apply, and the rest of an include path beyond the relationship is scoped as usual.
+
+:::danger
+
+A relationship loaded in full is serialized as loaded unless its getter filters it. Without a getter, everything it holds reaches the client.
+
+:::
+
 ## Extending API Resources
 
 Any API Resource can be extended through the `ApiResource` extender. This is useful for adding new fields, relationships, or endpoints to an existing resource. Or when registering a new resource.
