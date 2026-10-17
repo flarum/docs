@@ -17,7 +17,7 @@ Một cách tốt để tìm chủ đề để viết là tìm các câu hỏi p
 
 Chúng tôi muốn Flarum có thể truy cập được cho tất cả mọi người, bất kể ngôn ngữ! Bằng cách đóng góp các bản dịch, bạn có thể giúp nhiều người khác thưởng thức Flarum. Hơn hết, chúng tôi sử dụng GUI thân thiện với người dùng cho các bản dịch, vì vậy không cần kỹ năng kỹ thuật nào để trợ giúp!
 
-Bản dịch cho cốt lõi Flarum, tiện ích mở rộng đi kèm và tiện ích mở rộng cộng đồng được quản lý thông qua [Weblate](https://weblate.rob006.net/projects/flarum/).
+Translations for Flarum core, bundled extensions, and community extensions are managed through [Weblate](https://weblate.rob006.net/projects/flarum2/).
 
 Các bản dịch cho tài liệu này được quản lý thông qua [Crowdin](https://crowdin.com/project/flarum-docs).
 
