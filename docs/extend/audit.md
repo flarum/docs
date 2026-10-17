@@ -113,7 +113,7 @@ This is exactly how the GDPR integration records the administrator who processed
 
 ## Translating actions
 
-Add a translation for each action so the browser shows a readable sentence instead of the raw payload. The key is `flarum-audit.lib.browser.<action>` (a dotted action such as `acme.widget_created` nests accordingly), and any payload key is available as a `{placeholder}`. Define it under the `flarum-audit` namespace in your own extension's [locale file](i18n.md) so it travels with your integration:
+Add a translation for each action so the browser shows a readable sentence instead of the raw payload. The key is `flarum-audit.lib.browser.<action>` (a dotted action such as `acme.widget_created` nests accordingly). From Flarum 2.0.2, any payload key holding a plain value (text, a number or true/false) is available as a `{placeholder}` of the same name; lists and objects only show in the raw view. Core's own placeholders, such as `{username}`, `{discussion}` and `{post}`, take precedence over a payload key with the same name. Define it under the `flarum-audit` namespace in your own extension's [locale file](i18n.md) so it travels with your integration:
 
 ```yaml
 flarum-audit:
