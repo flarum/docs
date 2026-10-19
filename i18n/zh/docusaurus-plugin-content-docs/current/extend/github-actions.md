@@ -16,7 +16,7 @@ $ flarum-cli infra githubActions
 
 ## Backend
 
-All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
+All you need to do is create a `.github/workflows/backend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml). You need to specify the configuration as follows:
 
 ```yaml
 name: Backend
@@ -25,7 +25,7 @@ on: [workflow_dispatch, push, pull_request]
 
 jobs:
   run:
-    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@main
+    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x
     with:
       # Different types of jobs
       enable_backend_testing: true
@@ -52,23 +52,78 @@ These jobs run on every commit pushed to the main branch or pull request created
 
 In addition, the following parameters can be provided:
 
-| Name           | Key                 | 描述                                                                                      | Format            |
-| -------------- | ------------------- | --------------------------------------------------------------------------------------- | ----------------- |
-| Directory      | `backend_directory` | Backend code location. Contains a `composer.json` file. | string            |
-| PHP Versions   | `php_versions`      | The PHP versions to run jobs on                                                         | String JSON Array |
-| PHP Extensions | `php_extensions`    | The PHP extensions to install                                                           | Comma seperated   |
-| Databases      | `db_versions`       | The databases to run jobs on                                                            | String JSON Array |
-| PHP ini values | `php_ini_values`    | The PHP ini values to use                                                               | Comma seperated   |
+| Name              | Key                 | 描述                                                                                                                                                                        | Format            |
+| ----------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Directory         | `backend_directory` | Backend code location. Contains a `composer.json` file.                                                                                   | string            |
+| PHP Versions      | `php_versions`      | The PHP versions to run jobs on                                                                                                                                           | String JSON Array |
+| PHP Extensions    | `php_extensions`    | The PHP extensions to install                                                                                                                                             | Comma seperated   |
+| Databases         | `db_versions`       | The databases to run jobs on                                                                                                                                              | String JSON Array |
+| PHP ini values    | `php_ini_values`    | The PHP ini values to use                                                                                                                                                 | Comma seperated   |
+| Newest PHP        | `latest_php`        | The PHP version that carries the prefixed runs. Used only if it is one of `php_versions`; otherwise the newest of `php_versions` is used. | string            |
+| Table prefix      | `db_prefix`         | The table prefix for the prefixed runs on MySQL, MariaDB and SQLite                                                                                                       | string            |
+| PostgreSQL prefix | `db_prefix_pgsql`   | The table prefix for the prefixed PostgreSQL run                                                                                                                          | string            |
+| Parallel jobs     | `max_parallel`      | The most test jobs of one run to execute at once. Effectively unlimited by default.                                                       | number            |
+| Shorter drafts    | `reduce_drafts`     | Run a shorter check on draft pull requests (see below). Off by default.                                                | boolean           |
 
 :::tip
 
-For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_backend.yml).
+For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_backend.yml).
 
 :::
 
+### How the test matrix is chosen
+
+The backend tests don't run every PHP version against every database. Each PHP version in `php_versions` is paired with one version of every database engine in `db_versions`, the oldest PHP with the oldest version, through to the newest PHP with the newest. The newest version of each engine also runs with a table prefix, because each database driver applies the prefix in its own code. With the default settings that's 11 jobs:
+
+| PHP                 | Databases                                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------------------------- |
+| 8.3 | MySQL 5.7, MariaDB 10.3, PostgreSQL 10, SQLite                             |
+| 8.4 | MySQL 8.4, MariaDB 11.8, PostgreSQL 15                                     |
+| 8.5 | MySQL 9.7, MariaDB 12.3, PostgreSQL 18 and SQLite, all with a table prefix |
+
+The matrix is built only from the versions you pass:
+
+- Every PHP version you list runs at least once.
+- If you list only one version of a database engine, it runs both without and with a prefix.
+- Any MySQL, MariaDB, PostgreSQL or SQLite image tag works, for example `mysql:8.0` or `postgres:16`.
+
+For example, this tests PHP 8.4 and 8.5 against MySQL 8.4 and SQLite only:
+
+```yaml
+    with:
+      enable_backend_testing: true
+      backend_directory: .
+      php_versions: '["8.4", "8.5"]'
+      db_versions: '["mysql:8.4", "sqlite:3"]'
+```
+
+### Shorter checks for draft pull requests
+
+With `reduce_drafts: true`, a draft pull request only runs the newest PHP against the newest version of each database engine, with a table prefix: 4 jobs with the default settings. The full matrix runs once the pull request is marked ready for review, so add `ready_for_review` to your `pull_request` trigger types. Pushes to a branch that has an open draft pull request in the same repository count as drafts too.
+
+```yaml
+name: Backend
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  run:
+    uses: flarum/framework/.github/workflows/REUSABLE_backend.yml@2.x
+    with:
+      enable_backend_testing: true
+      backend_directory: .
+      reduce_drafts: true
+      # Optional: stop one run from taking every runner your account has.
+      max_parallel: 6
+```
+
 ## Frontend
 
-All you need to do is create a `.github/workflows/frontend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml). You need to specify the configuration as follows:
+All you need to do is create a `.github/workflows/frontend.yml` file in your extension, it will reuse a predefined workflow by the core development team which can be found [here](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_frontend.yml). You need to specify the configuration as follows:
 
 ```yaml
 name: Frontend
@@ -77,7 +132,7 @@ on: [workflow_dispatch, push, pull_request]
 
 jobs:
   run:
-    uses: flarum/framework/.github/workflows/REUSABLE_frontend.yml@main
+    uses: flarum/framework/.github/workflows/REUSABLE_frontend.yml@2.x
     with:
       enable_bundlewatch: false
       enable_prettier: true
@@ -134,6 +189,6 @@ Unlike the backend workflow, the frontend workflow runs everything in a single j
 | Cache Dependency Path                                  | `cache_dependency_path` | The path to the cache dependency file.                                                                                                                                   | string |
 | :::tip |                         |                                                                                                                                                                                          |        |
 
-For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/main/.github/workflows/REUSABLE_frontend.yml).
+For more details on parameters, [checkout the full predefined reusable workflow file](https://github.com/flarum/framework/blob/2.x/.github/workflows/REUSABLE_frontend.yml).
 
 :::
