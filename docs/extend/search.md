@@ -379,6 +379,12 @@ So you want to make sure your gambit is added within the common frontend.
 
 ### Localizing gambit keywords
 
+:::info Flarum 2.1
+
+The English fallback described here was added in Flarum 2.1.
+
+:::
+
 Gambit keywords are fully localizable. English always works as a fallback, regardless of the active locale — so `is:hidden` or `author:behz` will always be accepted even when the site language is French, Chinese, or anything else.
 
 #### How keyword localization works
@@ -398,6 +404,8 @@ When the locale is English, `key()` returns `'country'` — and everything works
 `GambitManager` builds a second alias pattern from `canonicalKey()`. If the translated pattern doesn't match a token in the search query, the canonical English pattern is tried instead. This means `country:france` continues to work even when the locale is French.
 
 By default `canonicalKey()` returns the same value as `key()`. For untranslated gambits (where `key()` already returns English) no override is needed — the alias path simply never fires.
+
+`BooleanGambit` and `KeyValueGambit` build the alias pattern for you, through `canonicalPattern()`. If your gambit implements the `IGambit` interface directly instead of extending one of them, `canonicalPattern()` is optional: add it, returning the English pattern, if you want the fallback.
 
 **If your gambit's `key()` returns a translated string, you must override `canonicalKey()` to return the hardcoded English keyword.** This is the only change required for localization support:
 
@@ -456,26 +464,21 @@ export default class SubscriptionGambit extends BooleanGambit {
 
 #### `toFilter()` must always produce canonical filter values
 
-When a gambit matches via the canonical alias rather than the translated keyword, the `matches` array still contains what was typed in the search bar (e.g. `'following'`). Your `toFilter()` implementation should map matched keywords to a stable, locale-independent filter value — never pass the raw matched string directly to the API if it might vary by locale:
+When a gambit matches via the canonical alias rather than the translated keyword, the `matches` array still contains what was typed in the search bar (e.g. `'following'`), in whatever case the user typed it. Your `toFilter()` implementation should map matched keywords to a stable, locale-independent filter value — never pass the raw matched string directly to the API if it might vary by locale:
 
 ```ts
 toFilter(matches: string[], negate: boolean): Record<string, any> {
   const filterKey = (negate ? '-' : '') + this.filterKey();
 
-  // Map both translated and canonical English keywords to the stable DB value.
-  const allFollowKeywords = [
-    'following',
-    'followed',
-    app.translator.trans('flarum-subscriptions.lib.gambits.discussions.subscription.following_key', {}, true),
-  ];
+  // Map the translated or English keyword, in any case, to the stable DB value.
+  const keyword = matches[1].toLowerCase();
+  const followKeys = [this.key()[0], this.canonicalKey()[0]].map((key) => key.toLowerCase());
 
-  const value = allFollowKeywords.includes(matches[1]) ? 'follow' : 'ignore';
-
-  return { [filterKey]: value };
+  return { [filterKey]: followKeys.includes(keyword) ? 'follow' : 'ignore' };
 }
 ```
 
-The backend filter (`SubscriptionFilter` in this case) should only expect the stable canonical values (`'follow'`, `'ignore'`), never locale-specific surface keywords.
+Your backend filter then only needs to understand those stable values, never locale-specific keywords.
 
 #### For language pack maintainers
 
