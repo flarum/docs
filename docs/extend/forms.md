@@ -11,6 +11,7 @@ Please see the linked API documentation for each of these to learn more about it
 - The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_fieldset.fieldset) wraps its children in a HTML fieldset tag, with a legend.
 - The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_select.select) is a stylized select input.
 - The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_switch.switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_checkbox.checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
+- The `flarum/common/components/IconInput` component (from Flarum 2.1) is a field for a Font Awesome icon class that opens an icon picker. Use it as you would an `<input>`, with `value` and `onchange`, or with `bidi`. `FormGroup` renders it for `type: 'icon'`.
 - The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_button.button) is a stylized button, and is used frequently throughout Flarum.
 
 You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
