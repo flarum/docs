@@ -37,6 +37,8 @@ import('flarum/forum/components/LogInModal').then(({ default: LogInModal }) => {
 });
 ```
 
+From Flarum 2.1, the icon picker (`flarum/common/components/IconPicker`) is also split, on the forum as well as the admin. `IconInput` loads it for you, so only import it this way to use the picker on its own.
+
 For modules from other extensions, you can import them using the `ext:` syntax.
 
 ```js

@@ -51,7 +51,7 @@ Each change to the order is saved as soon as you drop the tag.
 | **Slug** | Used in the tag's address, `/t/slug`. It must be unique and can't contain spaces or forward slashes. For names in non-Latin scripts, such as Chinese or Japanese, the slug isn't filled in for you: type one yourself. |
 | **Description** | Shown on the tag's page and on the **Tags** page. Up to 700 characters. |
 | **Color** | Used for the tag's label, its page header and its icon. |
-| **Icon** | Any [Font Awesome](../fontawesome.md) icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
+| **Icon** | A [Font Awesome](../fontawesome.md) icon. Click the field to [choose one](../fontawesome.md#choosing-an-icon), or type any icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
 | **Hide from All Discussions** | See [Hidden tags](#hidden-tags). |
 | **Default Sort** | How the tag's discussions are ordered when someone opens its page without choosing a sort. **Use the forum default** follows the forum's own default. Sorts added by extensions are listed too. If the chosen sort is later removed, it is kept and shown as **(no longer available)**, and the forum default is used. |
 
