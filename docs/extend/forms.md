@@ -11,7 +11,7 @@ Please see the linked API documentation for each of these to learn more about it
 - The [`flarum/common/components/FieldSet` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_fieldset.fieldset) wraps its children in a HTML fieldset tag, with a legend.
 - The [`flarum/common/components/Select` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_select.select) is a stylized select input.
 - The [`flarum/common/components/Switch`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_switch.switch) and [`flarum/common/components/Checkbox` components](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_checkbox.checkbox) are stylized checkbox input components. Their `loading` attr can be set to `true` to show a loading indicator.
-- The `flarum/common/components/IconInput` component (from Flarum 2.1) is a field for a Font Awesome icon class that opens an icon picker. Use it as you would an `<input>`, with `value` and `onchange`, or with `bidi`. `FormGroup` renders it for `type: 'icon'`.
+- The `flarum/common/components/IconInput` component (from Flarum 2.1) is a field for a Font Awesome icon class that opens an icon picker. Use it as you would an `<input>`, with `value` and `onchange`, or with `bidi`. `FormGroup` renders it for `type: 'icon'`. See [Icon picker](#icon-picker).
 - The [`flarum/common/components/Button` component](https://api.docs.flarum.org/js/2.x/classes/flarum.common_components_button.button) is a stylized button, and is used frequently throughout Flarum.
 
 You'll typically want to assign logic for reacting to input changes via Mithril's `on*` attrs, not external listeners (as is common with jQuery or plain JS). For example:
@@ -130,6 +130,87 @@ export default class MyComponent extends Component {
         />
       </div>
     );
+  }
+}
+```
+
+## Icon picker
+
+From Flarum 2.1, `IconInput` gives your forms the same icon field as core's group and tag settings: it shows the chosen Font Awesome class and opens a picker listing every icon and style the forum can draw. A class the picker doesn't list can still be typed, so store the full class string. In admin settings, use [`type: 'icon'`](admin.md#available-setting-types) instead.
+
+Bind it to a `Stream` with `bidi`, as you would an `<input>`:
+
+```jsx
+import app from 'flarum/forum/app';
+import Component from 'flarum/common/Component';
+import IconInput from 'flarum/common/components/IconInput';
+import Stream from 'flarum/common/utils/Stream';
+
+export default class LaunchpadIconField extends Component {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    this.icon = Stream(this.attrs.launchpad.icon() || '');
+  }
+
+  view() {
+    return (
+      <div className="Form-group">
+        <label for="acme-launchpad-icon">{app.translator.trans('acme-interstellar.forum.launchpad.icon_label')}</label>
+        <IconInput id="acme-launchpad-icon" bidi={this.icon} placeholder="fas fa-rocket" />
+      </div>
+    );
+  }
+}
+```
+
+To use the picker on its own, without the field, import `IconPicker` when it's needed. It's a [split module](code-splitting.md#importing-split-modules-from-core-or-other-extensions), so it's only downloaded the first time:
+
+```jsx
+import Component from 'flarum/common/Component';
+import Button from 'flarum/common/components/Button';
+
+export default class MissionPatch extends Component {
+  oninit(vnode) {
+    super.oninit(vnode);
+
+    this.icon = 'fas fa-rocket';
+    this.IconPicker = null;
+  }
+
+  view() {
+    const IconPicker = this.IconPicker;
+
+    return (
+      <div className="MissionPatch">
+        <Button className="Button" icon={this.icon} onclick={() => this.openPicker()}>
+          {this.icon}
+        </Button>
+
+        {IconPicker && (
+          <IconPicker
+            value={this.icon}
+            // Called with the full class picked, such as `fasl fa-rocket`, or an empty string when the icon is removed.
+            onpick={(icon) => {
+              this.icon = icon;
+              this.IconPicker = null;
+            }}
+            // Called on Escape or a click outside the picker, which happens outside Mithril's event handling.
+            onclose={() => {
+              this.IconPicker = null;
+              m.redraw();
+            }}
+          />
+        )}
+      </div>
+    );
+  }
+
+  async openPicker() {
+    const { default: IconPicker } = await import('flarum/common/components/IconPicker');
+
+    this.IconPicker = IconPicker;
+    m.redraw();
   }
 }
 ```
