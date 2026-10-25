@@ -70,7 +70,7 @@ value() === "world!"; // true
 ```
 
 In Flarum forms, streams are frequently used together with the bidi attr.
-Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with the [`m.attrs.bidi` library](https://github.com/tobyzerner/m.attrs.
+Bidi stands for bidirectional binding, and is a common pattern in frontend frameworks. Flarum patches Mithril with its own [`bidi` util](https://github.com/flarum/framework/blob/2.x/framework/core/js/src/common/utils/bidi.js).
 This abstracts away input processing in Mithril. For instance:
 
 ```jsx

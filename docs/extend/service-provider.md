@@ -1,7 +1,7 @@
 # Service Provider
 
-As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/12.x/container) (or IoC container) for dependency injection.
-[Service Providers](https://laravel.com/docs/12.x/providers) allow low-level configuration and modification of the Flarum backend.
+As noted throughout this documentation, Flarum uses [Laravel's service container](https://laravel.com/docs/13.x/container) (or IoC container) for dependency injection.
+[Service Providers](https://laravel.com/docs/13.x/providers) allow low-level configuration and modification of the Flarum backend.
 The most common use case for service providers is to create, modify, or replace container bindings.
 That being said, service providers allow you full access to run whatever logic you need during application boot with access to the container.
 
@@ -13,14 +13,14 @@ Unlike with other extenders, the Service Provider layer is NOT use-case driven, 
 
 ## Flarum Boot Process
 
-To understand service providers, you must first understand the order in which Flarum boots. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/framework/blob/main/framework/core/src/Foundation/InstalledSite.php)
+To understand service providers, you must first understand the order in which Flarum boots. Most of this happens in [Flarum\Foundation\InstalledSite](https://github.com/flarum/framework/blob/2.x/framework/core/src/Foundation/InstalledSite.php)
 
 1. The container and application are initialized, and essential bindings (config, environment, logger) are registered
 2. The `register` methods of all core service providers are run.
 3. The `extend` methods of all extenders used by all enabled extensions are run.
 4. The `extend` methods of all extenders used in the Flarum site's local `extend.php` are run.
 5. The `boot` methods of all core service providers are run.
-6. The `Flarum\Foundation\Event\ApplicationBooted` event is fired. See [backend events](backend-events.md#applicationbooted) for details.
+6. The `Flarum\Foundation\Event\ApplicationBooted` event is fired. See [backend events](backend-events.md#flarumfoundationeventapplicationbooted) for details.
 
 ## Custom Service Providers
 
@@ -53,7 +53,7 @@ class CustomServiceProvider extends AbstractServiceProvider
 
 The `register` method will run during step (3) above, and the `boot` method will run during step (5) above. In the `register` method, the container is available via `$this->container`. In the `boot` method, the container (or any other arguments), should be injected via typehinted method arguments.
 
-Flarum does not currently support Laravel Octane, but some [best practices](https://laravel.com/docs/12.x/octane#dependency-injection-and-octane), like using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used. See the [Octane documentation](https://laravel.com/docs/12.x/octane#dependency-injection-and-octane) for more information.
+Flarum does not currently support Laravel Octane, but some [best practices](https://laravel.com/docs/13.x/octane#dependency-injection-and-octane), like using the `$container` argument inside `bind`, `singleton`, and `resolving` callbacks instead of `$this->container` should be used. See the [Octane documentation](https://laravel.com/docs/13.x/octane#dependency-injection-and-octane) for more information.
 
 ## Registering a Service Provider
 
