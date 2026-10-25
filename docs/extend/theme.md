@@ -21,7 +21,77 @@ All this will do is show your extension in the "theme" section in the admin dash
 
 ## Less Variable Customization
 
-You can define new Less variables in your extension's Less files. There currently isn't an extender to modify Less variable values in the PHP layer, but this is planned for future releases. 
+You can define new Less variables in your extension's Less files, and you can also define them from PHP with the `Theme` extender, which is useful when the value is not known until runtime:
+
+```php
+use Flarum\Extend;
+use Flarum\Http\UrlGenerator;
+
+return [
+    (new Extend\Theme())
+        ->addCustomLessVariable('acme-theme__asset_path', function () {
+            $url = resolve(UrlGenerator::class);
+
+            return '"'.$url->to('forum')->base().'/assets/extensions/acme-theme/pattern.png"';
+        }),
+];
+```
+
+The variable is then available as `@acme-theme__asset_path` in every Less file.
+
+:::danger The value is injected into the Less source verbatim
+
+Whatever your callback returns is written straight into the stylesheet as `@name: value;`. It is not escaped or quoted for you, so a value containing a semicolon can break out and inject arbitrary Less. Never build one out of unvalidated user input, and quote strings yourself, as the example does.
+
+:::
+
+### Exposing a Setting as a Less Variable
+
+If the value you want in Less is a setting from the database, use `registerLessConfigVar` on the [`Settings` extender](settings.md) instead. It takes the Less variable name, the setting key, and an optional callback to transform the stored value:
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\Settings())
+        ->default('acme-theme.accent_color', '#f00')
+        ->registerLessConfigVar('config-acme-accent', 'acme-theme.accent_color'),
+];
+```
+
+This is how core exposes the forum's colour settings: `@config-primary-color` and `@config-secondary-color` are the `theme_primary_color` and `theme_secondary_color` settings registered the same way. Note that these variables are baked into the compiled stylesheet rather than read at runtime, so the CSS has to be rebuilt before a change to the setting becomes visible.
+
+The same injection caveat applies, and it matters more here because the value comes from the database. Use the callback to validate or normalise anything that is not already constrained by the setting's input type.
+
+### Custom Less Functions
+
+`addCustomLessFunction` registers a PHP function callable from Less. It may only return a string, number or boolean; anything else throws at compile time:
+
+```php
+(new Extend\Theme())
+    ->addCustomLessFunction('is-flarum', function (mixed $text) {
+        return strtolower($text) === 'flarum';
+    }),
+```
+
+## Overriding Core Less Files
+
+The `Theme` extender can also replace Less files wholesale, which is how a theme makes structural changes it cannot make by overriding variables.
+
+`overrideLessImport` replaces a file that is pulled in by an `@import` somewhere in the tree, such as core's `forum/DiscussionListItem.less`. `overrideFileSource` replaces one of the top-level sources instead, such as `forum.less`, `admin.less`, `mixins.less` or `variables.less`. Both take the path of the file to replace and an absolute path to yours, plus an optional extension ID when the file you are replacing belongs to an extension rather than core:
+
+```php
+(new Extend\Theme())
+    ->overrideLessImport('forum/Hero.less', __DIR__.'/../less/Hero.less')
+    ->overrideFileSource('variables.less', __DIR__.'/../less/variables.less')
+    ->overrideLessImport('forum/TagHero.less', __DIR__.'/../less/TagHero.less', 'flarum-tags'),
+```
+
+:::caution These are tied to core's internals
+
+An override is matched by path, so it silently stops applying if the file is renamed or its import is removed upstream, and it replaces the file entirely rather than merging with it. Prefer variables where a variable will do, and re-check your overrides on each Flarum release.
+
+:::
 
 ## Layout Widths and Breakpoints
 
