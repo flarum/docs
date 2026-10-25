@@ -104,7 +104,7 @@ const value = Stream();
 
 ## `FormGroup` component
 
-The `FormGroup` component provides the same flexibility you get when [registering admin settings](http://localhost:3000/extend/admin#registering-settings). It allows you to pass an input type, with other information such as the label and help text, then uses the appropriate component to render the input.
+The `FormGroup` component provides the same flexibility you get when [registering admin settings](admin.md#registering-settings). It allows you to pass an input type, with other information such as the label and help text, then uses the appropriate component to render the input.
 
 ```jsx
 import Component from 'flarum/common/Component';
