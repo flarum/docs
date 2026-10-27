@@ -18,7 +18,7 @@ Some of the most popular examples are the following:
 
 ## Ok, let's get this setup!
 
-Most (if not all) Linux distros either come with, or can have, cron installed. For example, on Debian and Ubuntu based systems, you can install `cron` like this:
+Most (if not all) Linux distros either come with, or can have, cron installed. Most (if not all) Linux distros either come with, or can have, cron installed.
 
 ```
 sudo apt-get update
@@ -52,4 +52,4 @@ In case you want to use a different value and don't know exactly how cron expres
 
 Lastly `>> /dev/null 2>&1` suppresses any output from the command.
 
-Voila! Now any extension that registers a task to run, anything from every minute to daily, monthly, yearly - whatever - will now run on your server.
+Voila! Voila! Now any extension that registers a task to run, anything from every minute to daily, monthly, yearly - whatever - will now run on your server.

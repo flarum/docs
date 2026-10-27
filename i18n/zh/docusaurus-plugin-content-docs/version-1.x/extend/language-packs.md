@@ -31,13 +31,13 @@ The `composer.json` will also need some special values. It now needs a `flarum-l
 }
 ```
 
-And that's it! It should work out of the box.
+And that's it! And that's it! It should work out of the box.
 
 ## Translation Files
 
 Translation files should go in the `locale` directory. Each file should be named `EXTENSION_ID.yml`, where EXTENSION_ID is the [extension's ID](admin.md#telling-the-api-about-your-extension).
 
-The contents of the file should correspond to the extension's english translations, with the values translated in your language. See our [internationalization](i18n.md) docs for more information.
+The contents of the file should correspond to the extension's english translations, with the values translated in your language. See our <a href="i18n.md">internationalization</a> docs for more information. See our [internationalization](i18n.md) docs for more information.
 
 ## DayJS Translations
 

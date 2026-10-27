@@ -1,4 +1,10 @@
+---
+image: img/extensions/audit-share.png
+---
+
 # Audit
+
+![Audit: keep a log of moderation and administration actions. Bundled with Flarum 2.0.](/img/docs/extensions/audit.png)
 
 The Audit extension (`flarum/audit`) records moderation and administration actions to a tamper-resistant audit log, so you can see who did what, when, and from where.
 
@@ -102,7 +108,7 @@ Each log entry records:
   - `session` — a cookie session, usually the Flarum web interface.
   - `access_token` — a direct API request using a user access token.
   - `api_key` — a direct API request using a master API key.
-  - `cli` — a command run via the console.
+  - `cli` — a command run via the console, or a queued job.
   - `unknown` — none of the above could be determined.
 - The **IP address**, available for web requests.
 - The **actor**, available for web requests.
@@ -111,6 +117,8 @@ Each log entry records:
 :::info
 
 When an action is processed by a queued job rather than the original web request (for example a password reset, or a GDPR erasure or export), the IP address and actor of the original request are not available to that job. Such an entry is recorded with the `cli` client and no IP. Where the responsible user still matters — for example the administrator who processed a GDPR erasure — the integration records it explicitly (see [GDPR](#flarum-gdpr) below); a system-driven action such as a scheduled erasure is recorded with no actor.
+
+The log browser shows a `cli` entry under the actor it records, with **Command line** beside the time. Only an entry with no actor is shown as **Command line** in place of the actor. Before Flarum 2.0.1, every `cli` entry was shown that way, even when it recorded an actor.
 
 :::
 
@@ -204,8 +212,11 @@ Some actions are deliberately not logged to avoid duplicates:
 
 ### Flarum GDPR
 
-These actions cover the privacy operations in `flarum/gdpr`. Because erasure and export run on a queued job, the responsible user is recorded explicitly rather than from request context.
+These actions cover the privacy operations in [`flarum/gdpr`](gdpr.md). Because erasure and export run on a queued job, the responsible user is recorded explicitly rather than from request context.
 
+- `user.gdpr_erasure_requested` — a user asked for their data to be erased (payload: user ID).
+- `user.gdpr_erasure_confirmed` — a user confirmed their erasure request via the emailed link (payload: user ID). Attributed to that user, even when the link was opened while logged out.
+- `user.gdpr_erasure_cancelled` — an erasure request was cancelled, by the user or a moderator (payload: user ID). Attributed to whoever cancelled it.
 - `user.gdpr_deleted` — a user's data was erased by deletion (payload: user ID, processor). The entry is attributed to the administrator who processed the request; a scheduled (automatic) erasure has no actor.
 - `user.gdpr_anonymized` — a user's data was erased by anonymization (payload: user ID, processor), attributed as above.
 - `user.gdpr_exported` — a user's data export was requested (payload: user ID), attributed to the requesting actor.

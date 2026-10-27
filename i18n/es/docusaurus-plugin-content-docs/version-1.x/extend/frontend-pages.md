@@ -28,30 +28,35 @@ export default class CustomPage extends Page {
 
 ### Uso de Resolvers de Rutas
 
-Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities. To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.
+Flarum uses a setting to determine which page should be the homepage: this gives admins flexibility to customize their communities.
+To add your custom page to the homepage options in Admin, you'll need to extend the `BasicsPage.homePageItems` method with your page's path.
 
-Los datos pueden establecerse y recuperarse del estado de la página utilizando:
+An example from the [Tags extension](https://github.com/flarum/tags/blob/master/js/src/admin/addTagsHomePageOption.js):
 
 ```js
-import IndexPage from 'flarum/components/DiscussionPage';
-import DiscussionPage from 'flarum/components/DiscussionPage';
+import { extend } from 'flarum/common/extend';
+import BasicsPage from 'flarum/common/components/BasicsPage';
 
-// Para comprobar sólo el tipo de página
-app.current.matches(DiscussionPage);
-
-// Para comprobar el tipo de página y algunos datos
-app.current.matches(IndexPage, {routeName: 'following'});
+export default function() {
+  extend(BasicsPage.prototype, 'homePageItems', items => {
+    items.add('tags', {
+      path: '/tags',
+      label: app.translator.trans('flarum-tags.admin.basics.tags_label')
+    });
+  });
+}
 ```
 
-Por ejemplo, así es como la página de discusión hace que su instancia [`PostStreamState`](https://api.docs.flarum.org/js/master/class/src/forum/states/poststreamstate.js~poststreamstate) esté disponible globalmente.
+To learn how to set up a path/route for your custom page, see the [relevant documentation](routes.md).
 
 ### Resolvers personalizados
 
-Often, you'll want some custom text to appear in the browser tab's title for your page. For instance, a tags page might want to show "Tags - FORUM NAME", or a discussion page might want to show the title of the discussion.
+Often, you'll want some custom text to appear in the browser tab's title for your page.
+For instance, a tags page might want to show "Tags - FORUM NAME", or a discussion page might want to show the title of the discussion.
 
 To do this, your page should include calls to `app.setTitle()` and `app.setTitleCount()` in its `oncreate` [lifecycle hook](frontend.md) (or when data is loaded, if it pulls in data from the API).
 
-En realidad hay 3 formas de establecer el componente / resolvedor de rutas cuando se registra una ruta:
+Por ejemplo:
 
 ```js
 import Page from 'flarum/common/components/Page';
@@ -86,11 +91,14 @@ export default class CustomPageLoadsData extends Page {
 }
 ```
 
-Please note that if your page is [set as the homepage](#setting-page-as-homepage), `app.setTitle()` will clear the title for simplicity. It should still be called though, to prevent titles from previous pages from carrying over.
+Please note that if your page is [set as the homepage](#setting-page-as-homepage), `app.setTitle()` will clear the title for simplicity.
+It should still be called though, to prevent titles from previous pages from carrying over.
 
 ## PageState
 
-A veces, queremos obtener información sobre la página en la que estamos actualmente, o la página de la que acabamos de salir. Para permitir esto, Flarum crea (y almacena) instancias de [`PageState`](https://api.docs.flarum.org/js/master/class/src/common/states/pagestate.js~pagestate) como `app.current` y `app.previous`. Estos almacenan:
+A veces, queremos obtener información sobre la página en la que estamos actualmente, o la página de la que acabamos de salir.
+Para permitir esto, Flarum crea (y almacena) instancias de [`PageState`](https://api.docs.flarum.org/js/master/class/src/common/states/pagestate.js~pagestate) como `app.current` y `app.previous`.
+Estos almacenan:
 
 - La clase de componente que se utiliza para la página
 - Una colección de datos que cada página establece sobre sí misma. Siempre se incluye el nombre de la ruta actual.
@@ -123,7 +131,8 @@ See the [Admin Dashboard documentation](admin.md) for more information on tools 
 
 ## Route Resolvers (Advanced)
 
-Los [casos de uso avanzados](https://mithril.js.org/route.html#advanced-component-resolution) pueden aprovechar el [sistema de resolución de rutas](https://mithril.js.org/route.html#routeresolver) de Mithril. En realidad, Flarum ya envuelve todos sus componentes en el resolvedor `flarum/resolvers/DefaultResolver`. Esto tiene los siguientes beneficios:
+Los [casos de uso avanzados](https://mithril.js.org/route.html#advanced-component-resolution) pueden aprovechar el [sistema de resolución de rutas](https://mithril.js.org/route.html#routeresolver) de Mithril.
+En realidad, Flarum ya envuelve todos sus componentes en el resolvedor `flarum/resolvers/DefaultResolver`. Esto tiene los siguientes beneficios:
 
 - Pasa un attr de `routeName` a la página actual, que lo proporciona a `PageState`.
 - Asigna una [clave](https://mithril.js.org/keys.html#single-child-keyed-fragments) al componente de la página de nivel superior. Cuando la ruta cambie, si la clave del componente de nivel superior ha cambiado, se rerenderizará completamente (por defecto, Mithril no rerenderiza los componentes cuando se pasa de una página a otra si ambas son manejadas por el mismo componente).
@@ -162,7 +171,8 @@ app.routes['resolverClass'] = {path: '/custom/path/2', component: CustomPage};
 
 ### Custom Resolvers
 
-Recomendamos encarecidamente que los resolvedores de rutas personalizados extiendan `flarum/resolvers/DefaultResolver`. Por ejemplo, Flarum's `flarum/resolvers/DiscussionPageResolver` asigna la misma clave a todos los enlaces a la misma discusión (independientemente del post actual), y activa el desplazamiento cuando se utiliza `m.route.set` para ir de un post a otro en la misma página de discusión:
+Recomendamos encarecidamente que los resolvedores de rutas personalizados extiendan `flarum/resolvers/DefaultResolver`.
+Por ejemplo, Flarum's `flarum/resolvers/DiscussionPageResolver` asigna la misma clave a todos los enlaces a la misma discusión (independientemente del post actual), y activa el desplazamiento cuando se utiliza `m.route.set` para ir de un post a otro en la misma página de discusión:
 
 ```js
 import DefaultResolver from '../../common/resolvers/DefaultResolver';

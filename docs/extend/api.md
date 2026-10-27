@@ -12,7 +12,7 @@ To use the built-in REST API as part of an integration, see [Consuming the REST 
 
 Before we go into detail about how to extend Flarum's data API, it's worth thinking about the lifecycle of a typical API request:
 
-![Flarum API Flowchart](../assets/api_flowchart.svg)
+![Flarum API Flowchart](/img/docs/api_flowchart.svg)
 
 1. An HTTP request is sent to Flarum's API. Typically, this will come from the Flarum frontend, but external programs can also interact with the API. Flarum's API mostly follows the [JSON:API](https://jsonapi.org/) specification, so accordingly, requests should follow [said specification](https://jsonapi.org/format/#fetching).
 2. The request is run through [middleware](middleware.md), and routed to the proper API resource endpoint. Each API Resource is distinguished by a unique type and has a set of endpoints. You can read more about them in the below sections.
@@ -273,6 +273,33 @@ public function endpoints(): array
 }
 ```
 
+##### Sorting on text columns
+
+Ordering text is the database's decision rather than Flarum's, and the four supported backends do not all answer it the same way.
+
+MySQL, MariaDB and PostgreSQL fold case and accents through the column's collation, so `Apple`, `apple` and `Ápple` sort next to each other as a reader would expect. SQLite compares raw bytes: every capitalised value sorts ahead of every lowercase one, and accented characters land after `Z`. The same sort therefore produces a different — though still stable — order depending on where the forum is hosted:
+
+```
+MySQL, MariaDB, PostgreSQL      SQLite
+  Announcements                   Announcements
+  apple pie                       Bug report
+  banana bread                    Zebra crossing
+  Bug report                      apple pie
+  Zebra crossing                  banana bread
+```
+
+Where non-Latin text is concerned they diverge further still: CJK titles sort before Latin ones on MySQL, and after them on MariaDB, PostgreSQL and SQLite.
+
+There is no query-level fix that reconciles all four. `COLLATE` syntax differs per driver, SQLite's `NOCASE` only folds ASCII, and PostgreSQL's ordering depends on the locale the server was initialised with. Making them agree would mean sorting on a separate normalised column, which is rarely worth the write cost.
+
+If you add a text sort, be aware of this rather than surprised by it, and avoid writing tests that assert an order only one backend produces.
+
+##### Indexes
+
+A sort is only usable at scale if the column it names is indexed. Without one the database reads and sorts the whole table to return a single page, which stays unnoticeable on a small forum and is felt on every request on a large one.
+
+Note that a `FULLTEXT` index does not help here. It records which words appear in a value, not where the whole value falls in order, and MySQL will not consider it for `ORDER BY` at all. A column used for both search and sorting needs both kinds of index.
+
 #### Searching and Filtering
 
 Read our [searching and filtering](search.md) guide for more information!
@@ -440,6 +467,14 @@ public function endpoints(): array
     ];
 }
 ```
+
+Default includes only apply to a request that names no includes of its own. A request with `include` gets just the relationships it names, so it misses the defaults, including those that other extensions add. From Flarum 2.0.2, a request can ask for both by adding `withDefaultIncludes=1`:
+
+```
+GET /api/posts?include=user,discussion&withDefaultIncludes=1
+```
+
+The forum's post lists send it, so a default include on the posts `Index` endpoint reaches the posts on a user's profile and in post search results, as well as those on the discussion page. The discussion list doesn't: to load a relationship there, extend `DiscussionListState`'s `requestParams` and add it to `include`.
 
 ### Lifecycle Hooks
 
@@ -834,6 +869,45 @@ public function fields(): array
     ];
 }
 ```
+
+### Loading a relationship in full
+
+An endpoint applies the related resource's [`scope`](#scoping-database-resources) to the relationships it eager loads, so that only what the actor may see is serialized. But the relation it loads is the model's own, and other code may read it too. A user's `groups`, for example, decide whether they are an admin and what they may do, and the policies that ask need every one of them, not only the groups the actor may see.
+
+From Flarum 2.0.2, a relationship like that can call `withoutRelatedScope`. Endpoints then eager load it in full, and the field leaves out what the actor may not see in its getter instead:
+
+```php
+use Flarum\Api\Context;
+use Flarum\Api\Schema;
+use Flarum\Group\Group;
+use Flarum\User\User;
+
+public function fields(): array
+{
+    return [
+        Schema\Relationship\ToMany::make('groups')
+            ->withoutRelatedScope()
+            ->get(function (User $user, Context $context) {
+                // The relation holds every group, hidden ones included.
+                $groups = $user->groups;
+
+                if (! $context->getActor()->can('viewHiddenGroups')) {
+                    $groups = $groups->filter(fn (Group $group) => ! $group->is_hidden)->values();
+                }
+
+                return $groups->all();
+            }),
+    ];
+}
+```
+
+Constraints given to `eagerLoadWhere` still apply, and the rest of an include path beyond the relationship is scoped as usual.
+
+:::danger
+
+A relationship loaded in full is serialized as loaded unless its getter filters it. Without a getter, everything it holds reaches the client.
+
+:::
 
 ## Extending API Resources
 

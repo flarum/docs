@@ -1,0 +1,35 @@
+# FAQ
+
+### Flarum è stabile?
+
+Sì! After 6 years of development, Flarum **1.0.0** was released, and we are now spearheading the development of Flarum **2.0**.
+
+### Cosa succede dopo la versione stabile di Flarum?
+
+Stiamo ancora lavorando ad una roadmap formale. Abbiamo molti piani e idee e non vediamo l'ora di condividere un traguardo più approfondito con la community.
+
+### Posso donare denaro per accelerare lo sviluppo?
+
+Tutte le donazioni sono ben accette. Puoi effettuarle tramite [Github Sponsors](https://github.com/sponsors/flarum) o [OpenCollective](https://opencollective.com/flarum).
+
+Tuttavia, le donazioni non avranno un impatto diretto sulla velocità di sviluppo di Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](./extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
+
+### Flarum avrà [nome feauture]? Quando? Perchè no?
+
+Al momento non è possibile, ma speriamo di lavorare su integrazioni come queste in futuro.
+
+### Perchè non è stato risolto ancora il [nome problema]?
+
+Anche in questo caso, la risposta è "prima le prime cose". Se non abbiamo ancora risolto un problema (o gli abbiamo assegnato un traguardo), è perché stiamo lavorando a qualcos'altro che è altrettanto importante. Per favore sii paziente; proveremo a farlo prima del rilascio. Oppure, se hai fretta, sentiti libero di aggiustarlo da solo e [contribuire al progetto](contributing.md)!
+
+### Potrò migrare il mio forum su Flarum?
+
+We don't currently provide official migrators. But we do recommend and support [Nitro Porter](https://discuss.flarum.org/d/31776) as a generic import/export tool between community software. Currently it supports Vanilla, vBulletin, SMF, phpBB, PunBB, MyBB, NodeBB, FluxBB, XenForo, bbPress, Drupal and IPBoard.
+
+### Potrò migrare il mio forum su Flarum?
+
+> "Attraverso un'arcana e ardua prova, che coinvolge rituali mistici, pericolo di vita e avventure in terre lontane dove molti vanno e pochi tornano." ~ jordanjay29
+
+La vera risposta è che generalmente teniamo d'occhio la nostra comunità per i membri eccezionali che potrebbero costituire un buon personale. Onestamente, per la maggior parte del nostro attuale staff, quello che hanno fatto prima di diventare parte del personale non era molto diverso da quello che fanno ora.
+
+Trova una passione e contribuisci come ritieni sia opportuno. Quindi lasciate che prenda il suo corso. Non devi avere un badge per essere rispettato qui.

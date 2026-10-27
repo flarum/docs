@@ -27,6 +27,7 @@ class YourCommand extends AbstractCommand {
 :::info [Flarum CLI](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate and register a console command:
+
 ```bash
 $ flarum-cli make backend command
 ```
@@ -51,7 +52,6 @@ return [
 ## Scheduled Commands
 
 The `Flarum\Extend\Console`'s `schedule` method allows extension developers to create scheduled commands that run on an interval:
-
 
 ```php
 use Flarum\Extend;

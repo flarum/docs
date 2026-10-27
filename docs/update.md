@@ -1,16 +1,20 @@
 # Updating to Flarum 2.0
 
+![Flarum 2.0: rebuilt from the foundation. PHP 8.3+, Laravel 13, Symfony 7.4, Flysystem 3, PostgreSQL and SQLite.](/img/docs/flarum-2.0-header.png)
+
 :::warning
 
-Flarum 2.0 is in its release-candidate phase. The API is stable and many forums already run it in production. It isn't the final stable release yet, so back up your database and test on a staging copy before upgrading a live forum.
+Back up your database and files, and test the upgrade on a staging copy before upgrading a live forum.
 
 :::
 
 This guide walks you through upgrading from Flarum v1 to v2. You'll need [Composer](https://getcomposer.org) — if you're not familiar with it, read [our guide](composer.md) first.
 
-:::info
+:::danger Run this upgrade with Composer, not the extension manager
 
-If you have the [extension manager](./extensions#extension-manager) extension installed, you can run the upgrade from its interface instead of the command line. You should still follow this guide for all the preparation steps.
+The [extension manager](./extensions.md#extension-manager) cannot move a forum from 1.x to 2.0. Its update check skips `flarum/core`, so it never sees that a new major version exists and refuses the upgrade; and the step meant to relax your extension version constraints beforehand does not relax them. Use the command line for this upgrade.
+
+The extension manager is still the right tool for routine updates once you are on 2.0, because those stay within a major version. It is only the jump across majors it cannot do.
 
 :::
 
@@ -26,6 +30,31 @@ composer update --prefer-dist --no-plugins --no-dev -a --with-all-dependencies
 php flarum migrate
 php flarum cache:clear
 ```
+
+:::warning Composer may refuse to run this
+
+Flarum 1.x requires `league/flysystem` 1.x, which has security advisories and no patched 1.x release, so current Composer versions block it and the update fails before it starts:
+
+```
+flarum/core[...] require league/flysystem ^1.0.11 -> found league/flysystem[1.0.11, ..., 1.1.10]
+but these were not loaded, because they are affected by security advisories
+```
+
+Ignoring that advisory is the recommended approach for Flarum 1.8. Add this to your `composer.json`, then run the command again:
+
+```json
+"config": {
+    "audit": {
+        "ignore": {
+            "GHSA-cxf4-7mrp-vvpr": "league/flysystem 1.x (required by flarum/core 1.x) has no patched release"
+        }
+    }
+}
+```
+
+This only affects the 1.x line. Flarum 2.0 uses Flysystem 3.x and needs no such entry, so you can drop it once you are upgraded.
+
+:::
 
 **2. Check your PHP version.**
 Flarum 2.0 requires **PHP 8.3 or higher**. Check your current version with `php --version`. If you're below 8.3, upgrade PHP before proceeding.
@@ -43,6 +72,7 @@ Some extensions are no longer compatible with v2, and some have been superseded:
 
 - **Remove** `blomstra/database-queue` and `blomstra/fontawesome` — this functionality is now built into `flarum/core`.
 - **Replace** `blomstra/flarum-redis` with `fof/redis`, and `blomstra/horizon` with `fof/horizon`.
+- **Replace** `flarum/package-manager` with `flarum/extension-manager`. The package was renamed for v2; the old name still resolves, but Composer will warn on every run that it is abandoned.
 - For all other extensions, check their [Discuss thread](https://discuss.flarum.org/t/extensions) or [Packagist](http://packagist.org/) page to confirm a v2-compatible release is available. You'll need to remove any that don't have one yet. Please be patient with extension developers!
 
 **4. Update your `composer.json`.**
@@ -54,21 +84,29 @@ Set the version string of all extensions (including bundled ones like `flarum/ta
 "flarum/mentions": "*",
 ```
 
-**5. Set `minimum-stability` to `beta`.**
-Until Flarum 2.0 reaches its final stable release, your `composer.json` must allow pre-stable versions:
+Then, at the top level of `composer.json` (not inside `require`), allow beta releases while preferring stable ones:
 
 ```json
-"minimum-stability": "beta"
+"minimum-stability": "beta",
+"prefer-stable": true
 ```
 
-:::info
+Flarum 2.0 itself is stable, but many extensions have so far only tagged beta releases for 2.0. If `minimum-stability` is `stable`, Composer can't install those, and the upgrade fails. `prefer-stable` keeps everything else on stable releases: Composer only chooses a beta when a package has no stable release that fits. As extensions tag stable releases, Composer moves to them on your next update. Once all of yours have, you can set `minimum-stability` back to `stable`.
 
-Once Flarum 2.0 stable is released, you should change this back to `stable`. Leaving it as `beta` after that point can cause Composer to pull in unstable versions of packages unexpectedly.
+**5. Update your `config.php` if using MariaDB.**
+Flarum 2.0 distinguishes between MySQL and MariaDB. If your forum runs on MariaDB, you must change the `driver` value in `config.php` to `mariadb`. Leaving it as `mysql` will cause compatibility errors once you are on 2.0.
+
+:::tip Not sure which one you have?
+
+On Flarum 1.x, `php flarum info` labels the line `MySQL version` whichever server you run, so read the version string rather than the label:
+
+```
+MySQL version: 11.8.9-MariaDB-ubu2404
+```
+
+That forum is on MariaDB and does need this change, despite what the label says. After upgrading, 2.0 reports it as `MariaDB version` correctly.
 
 :::
-
-**6. Update your `config.php` if using MariaDB.**
-Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, update the `driver` value in `config.php`:
 
 ```php
 <?php return array (
@@ -84,11 +122,11 @@ Flarum 2.0 distinguishes between MySQL and MariaDB. If you're using MariaDB, upd
     'port' => 3306,
 ```
 
-**7. Check any local extenders.**
+**6. Check any local extenders.**
 If your install uses [local extenders](extenders.md), review them for compatibility with Flarum 2.0's API changes before upgrading.
 
-**8. Disable third-party extensions.**
-We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong.
+**7. Disable third-party extensions.**
+We recommend disabling third-party extensions in the admin dashboard before running the upgrade. This isn't strictly required, but makes debugging easier if something goes wrong. Re-enable them once the upgrade has finished and the forum loads.
 
 ## Running the Upgrade
 
@@ -103,6 +141,10 @@ php flarum cache:clear
 Then restart your PHP process and opcache if applicable.
 
 ## Troubleshooting
+
+### The extension manager reports that no new major version is available
+
+This is expected: the extension manager cannot perform the 1.x to 2.0 upgrade, for the reasons given at the top of this page. Run the upgrade with Composer as described above.
 
 ### The update command doesn't upgrade Flarum
 
@@ -127,7 +169,7 @@ fof/moderator-notes               0.4.4           requires          flarum/core 
 some/extension                    1.2.3           requires          flarum/core (^1.0)
 ```
 
-This means one or more extensions don't yet have a v2-compatible release. Remove them and try again.
+This means one or more extensions don't yet have a v2-compatible release that Composer is allowed to install. If an extension has tagged a 2.0 beta, check that `minimum-stability` is `beta` and `prefer-stable` is `true` (step 4). If it has no 2.0 release at all, remove it and try again.
 
 - Make sure you're running `composer update` with all the flags shown above.
 

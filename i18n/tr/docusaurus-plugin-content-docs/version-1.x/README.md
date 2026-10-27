@@ -1,6 +1,6 @@
-- - -
+---
 slug: /
-- - -
+---
 
 # Flarum Hakkında
 
@@ -12,13 +12,13 @@ Flarum, web siteniz için oldukça basit bir tartışma platformudur. Başarıl�
 
 Flarum, [esoTalk](https://github.com/esotalk/esoTalk) ve [FluxBB](https://fluxbb.org)'nin birleşik halefidir. Şu şekilde tasarlanmıştır:
 
-* **Hızlı ve basit.** Dağınıklık yok, şişkinlik yok, karmaşık bağımlılıklar yok. Flarum PHP ile oluşturulmuştur, bu nedenle dağıtımı hızlı ve kolaydır. Arayüz, küçük bir ayak izine sahip, performanslı bir JavaScript çerçevesi olan [Mithril](https://mithril.js.org) tarafından desteklenmektedir.
+- **Hızlı ve basit.** Dağınıklık yok, şişkinlik yok, karmaşık bağımlılıklar yok. Flarum PHP ile oluşturulmuştur, bu nedenle dağıtımı hızlı ve kolaydır. Arayüz, küçük bir ayak izine sahip, performanslı bir JavaScript çerçevesi olan [Mithril](https://mithril.js.org) tarafından desteklenmektedir.
 
-* **Güzel ve duyarlı.** Bu, insanlar için forum yazılımıdır. Flarum, kutudan çıkar çıkmaz tüm platformlarda tutarlı ve sezgisel olacak şekilde dikkatle tasarlanmıştır.
+- **Güzel ve duyarlı.** Bu, insanlar için forum yazılımıdır. Flarum, kutudan çıkar çıkmaz tüm platformlarda tutarlı ve sezgisel olacak şekilde dikkatle tasarlanmıştır.
 
-* **Güçlü ve genişletilebilir.** Flarum'u topluluğunuza uyacak şekilde özelleştirin, genişletin ve entegre edin. Flarum’un mimarisi, [Güçlü Uzantı API'si](/extend/) ile inanılmaz derecede esnektir.
+- **Güçlü ve genişletilebilir.** Flarum'u topluluğunuza uyacak şekilde özelleştirin, genişletin ve entegre edin. Flarum’un mimarisi, [Güçlü Uzantı API'si](/extend/) ile inanılmaz derecede esnektir.
 
-* **Ücretsiz ve açıktır.** Flarum, [MIT lisansı](https://github.com/flarum/flarum/blob/master/LICENSE) altında yayınlanmıştır.
+- **Ücretsiz ve açıktır.** Flarum, [MIT lisansı](https://github.com/flarum/flarum/blob/master/LICENSE) altında yayınlanmıştır.
 
 [Flarum'a yönelik felsefemiz ve değerlerimiz](https://discuss.flarum.org/d/28869-flarum-philosophy-and-values) hakkında daha fazla bilgi edinebilirsiniz.
 
@@ -34,7 +34,7 @@ Flarum, gönüllüler tarafından bakımı yapılan ve yönetilen [ücretsiz, a�
 
 🌐 Birden fazla dil konuşuyorsanız Flarum'un dünya çapındaki sayısız kullanıcı tarafından erişilebilir olmasına yardımcı olmak için [çevirilere katkıda bulunabilirsiniz](extend/language-packs.md).
 
-💸 Flarum Vakfı, Flarum'dan para kazanmıyor ancak ödenmesi gereken faturaları var. [GitHub Sponsorları](https://github.com/sponsors/flarum) veya [OpenCollective](https://opencollective.com/flarum) aracılığıyla yapılan bağışlar her zaman minnetle alınır. Geçmişte, bazı temel geliştiricilerimizi finansal olarak da destekleyebildik, böylece onların Flarum'da yarı zamanlı çalışabilmesini sağladık. Maddi desteğiniz olmadan bu mümkün olmazdı.
+💸 Flarum Vakfı, Flarum'dan para kazanmıyor ancak ödenmesi gereken faturaları var. 💸 Flarum Vakfı, Flarum'dan para kazanmıyor ancak ödenmesi gereken faturaları var. Geçmişte, bazı temel geliştiricilerimizi finansal olarak da destekleyebildik, böylece onların Flarum'da yarı zamanlı çalışabilmesini sağladık. Maddi desteğiniz olmadan bu mümkün olmazdı.
 
 🧑‍🤝‍🧑 Flarum geliştirme hakkında konuşmak, örneğinizle ilgili yardım almak veya sadece harika insanlarla tanışmak için [topluluğumuza](https://discuss.flarum.org) katılın! Flarum konusunda deneyiminiz varsa yeni başlayanlara da yardımcı olabilirsiniz!
 

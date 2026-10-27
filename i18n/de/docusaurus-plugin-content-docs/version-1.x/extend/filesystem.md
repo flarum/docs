@@ -6,11 +6,13 @@ Extensions can use Flarum's provided utils for their own filesystem interaction 
 
 ## Disks
 
-Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later. Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
+Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later.
+Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
 
 ### Using existing disks
 
-To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html). To do so, you should inject the factory contract in your class, and access the disks you need.
+To access a disk, you'll need to retrieve it from the [Filesystem Factory](https://laravel.com/api/8.x/Illuminate/Contracts/Filesystem/Factory.html).
+To do so, you should inject the factory contract in your class, and access the disks you need.
 
 Let's take a look at core's [`DeleteLogoController`](https://github.com/flarum/framework/blob/4ecd9a9b2ff0e9ba42bb158f3f83bb3ddfc10853/framework/core/src/Api/Controller/DeleteLogoController.php#L19-L58) for an example:
 
@@ -124,6 +126,7 @@ Some drivers might try to index their filesystem every time the driver is instan
 
 ## GUI and Admin Configuration
 
-Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future. For now, extensions are responsible for providing a GUI for their disks and drivers.
+Flarum does not currently provide a GUI for selecting drivers for disks, or for entering settings for drivers. This might be added in the future.
+For now, extensions are responsible for providing a GUI for their disks and drivers.
 
 As noted [above](#storage-drivers), if your extension provides a GUI for selecting drivers for a disk, it should modify the `disk_driver.DISK_NAME` key in settings.

@@ -1,0 +1,131 @@
+name: Auto-merge Crowdin updates
+
+# Crowdin opens and updates PRs from the l10n_main branch. Their commits carry
+# "[ci skip]", which blocks pull_request workflows, so this uses
+# pull_request_target. The PR's files are only built (no secrets, read-only
+# token); merging happens in a separate job that never checks out PR code.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    branches:
+      - main
+
+# Crowdin pushes several commits per sync; only the latest run per PR matters.
+concurrency:
+  group: crowdin-automerge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  check:
+    name: Check files changed
+    if: >-
+      github.event.pull_request.head.ref == 'l10n_main' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Only translation files may change
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          outside=$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files" --jq '.[].filename' | grep -v '^i18n/' || true)
+          if [ -n "$outside" ]; then
+            echo "This Crowdin PR changes files outside i18n/, so it needs a manual review:"
+            echo "$outside"
+            exit 1
+          fi
+
+  build:
+    name: Build all locales
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24.x'
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+  merge:
+    name: Merge and deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - name: Squash-merge without the [ci skip] lines
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPO: ${{ github.repository }}
+        run: |
+          # --match-head-commit refuses to merge if Crowdin pushed again after this build.
+          # Deleting the branch lets Crowdin start the next sync from a fresh branch.
+          gh pr merge "$PR_NUMBER" --repo "$REPO" --squash --delete-branch \
+            --match-head-commit "$HEAD_SHA" \
+            --subject "New Crowdin updates (#$PR_NUMBER)" \
+            --body "Merged automatically after a successful build of all locales."
+
+      # Merges made with GITHUB_TOKEN don't trigger other workflows, but
+      # workflow_dispatch is the exception, so start the deploy explicitly.
+      - name: Deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: gh workflow run deploy.yml --repo "$REPO" --ref main -f crowdin_pr="$PR_NUMBER"
+
+  notify-failure:
+    name: Report a failed check
+    needs: [check, build, merge]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "DISCORD_WEBHOOK_URL is not set; skipping."
+            exit 0
+          fi
+
+          jq -n \
+            --arg url "$PR_URL" \
+            --arg number "$PR_NUMBER" \
+            --arg run "$RUN_URL" \
+            '{
+              username: "GitHub",
+              allowed_mentions: { parse: [] },
+              embeds: [{
+                title: ("Crowdin updates #" + $number + " need attention"),
+                url: $url,
+                description: ("The PR was not merged automatically, because it changes files outside `i18n/` or the docs no longer build with it. [See the run](" + $run + ")."),
+                color: 14427686
+              }]
+            }' > payload.json
+
+          curl --fail-with-body --silent --show-error \
+            -H "Content-Type: application/json" \
+            -d @payload.json \
+            "$DISCORD_WEBHOOK_URL"

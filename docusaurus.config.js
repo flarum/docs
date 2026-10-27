@@ -9,6 +9,11 @@ const darkCodeTheme = prismThemes.dracula;
   tagline: 'Forums made simple.',
   url: 'https://docs.flarum.org',
   baseUrl: '/',
+  // Every page is a directory on the Apache origin, so a URL without the
+  // trailing slash gets a mod_dir redirect, which goes to http:// behind
+  // Cloudflare. Emitting the slash everywhere (links, sitemap, canonical)
+  // avoids that hop, and lets the Algolia crawler index the sitemap URLs.
+  trailingSlash: true,
   onBrokenLinks: 'warn',
   onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',
@@ -83,17 +88,20 @@ const darkCodeTheme = prismThemes.dracula;
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarCollapsible: false,
-          editUrl: 'https://github.com/flarum/docs/tree/master',
-          lastVersion: '1.x',
+          editUrl: 'https://github.com/flarum/docs/tree/main',
+          // 'current' (the docs/ directory) is 2.x and is the default version
+          // served at the site root. 1.x is maintained for critical bug and
+          // security fixes only, and lives under /1.x.
+          lastVersion: 'current',
           versions: {
             current: {
               label: '2.x',
-              path: '2.x',
+              path: '/',
             },
             '1.x': {
               label: '1.x',
-              path: '/', // backwards compatibility, only needed for 1.x
-              // banner: 'unmaintained',
+              path: '1.x',
+              banner: 'unmaintained',
             },
           },
         },
@@ -126,9 +134,10 @@ const darkCodeTheme = prismThemes.dracula;
             docId: 'README',
             label: 'Guide',
             position: 'right',
-            // Anything that isn't `extend`, `'internal`, or contain a slash.
-            // Account for local 2-char code at the start.
-            activeBaseRegex: '^(\/[a-z][a-z])?\/(?!(extend\/?|internal\/?|)$).*',
+            // Match any doc page that isn't `extend`, `internal`, or the version
+            // root itself. Accounts for an optional 2-char locale code and an
+            // optional version prefix (`1.x`), in either order.
+            activeBaseRegex: '^(\/[a-z][a-z])?(\/1\.x)?\/(?!(extend\/?|internal\/?|)$).*',
           },
           {
             type: 'doc',

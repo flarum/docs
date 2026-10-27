@@ -10,9 +10,9 @@ Chúng tôi vẫn đang làm việc trên một lộ trình chính thức. Chún
 
 ### Tôi có thể ủng hộ tiền để đẩy nhanh quá trình phát triển?
 
-Mọi đóng góp đều được nhận với lòng biết ơn. Bạn có thể đóng góp trên [Nhà tài trợ GitHub](https://github.com/sponsors/flarum) hoặc [OpenCollective](https://opencollective.com/flarum).
+Mọi đóng góp đều được nhận với lòng biết ơn. You can give on [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum).
 
-Tuy nhiên, các khoản đóng góp sẽ không tác động trực tiếp đến tốc độ phát triển của Flarum. Chúng tôi cũng khuyến khích người dùng đóng góp theo những cách khác, chẳng hạn như [đóng góp mã](contributing.md), [tiện ích mở rộng xây dựng](/extend/README.md), viết tài liệu, dịch Flarum sang các ngôn ngữ khác, cung cấp trợ giúp và hỗ trợ trên [cộng đồng diễn đàn](https://discuss.flarum.org/)... và chỉ là một nguồn năng lượng tích cực chung cho cộng đồng!
+Tuy nhiên, các khoản đóng góp sẽ không tác động trực tiếp đến tốc độ phát triển của Flarum. We also encourage users to contribute in other ways, such as [contributing code](contributing.md), [building extensions](/extend/README.md), writing documentation, translating Flarum into other languages, providing help and support on the [community forums](https://discuss.flarum.org/)... and just being a general positive energy around the community!
 
 ### Liệu Flarum có [chèn tính năng vào đây] không? Khi nào? Tại sao không?
 
@@ -20,7 +20,8 @@ Chúng tôi muốn xây dựng vô số tính năng và tiện ích mở rộng 
 
 ### Tại sao vẫn chưa khắc phục được [thêm sự cố vào đây]?
 
-Ở đây một lần nữa, câu trả lời là "những điều đầu tiên trước tiên". Nếu chúng tôi chưa khắc phục được một vấn đề (hoặc chỉ định cho nó một cột mốc quan trọng), thì đó là vì chúng tôi đang làm việc khác cũng quan trọng không kém. những điều đầu tiên trước tiên ”. Xin hãy kiên nhẫn; chúng tôi sẽ cố gắng hoàn thành nó trước khi phát hành. Hoặc nếu bạn đang vội, vui lòng tự sửa và [đóng góp cho dự án](contributing.md)!
+Ở đây một lần nữa, câu trả lời là "những điều đầu tiên trước tiên". Nếu chúng tôi chưa khắc phục được một vấn đề (hoặc chỉ định cho nó một cột mốc quan trọng), thì đó là vì chúng tôi đang làm việc khác cũng quan trọng không kém.
+những điều đầu tiên trước tiên ”. Xin hãy kiên nhẫn; chúng tôi sẽ cố gắng hoàn thành nó trước khi phát hành. Or if you’re in a hurry, feel free to fix it yourself and [contribute to the project](contributing.md)!
 
 ### Có thể di chuyển diễn đàn của tôi qua Flarum được không?
 

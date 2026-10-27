@@ -4,7 +4,8 @@ Es existiert nur ein Ort, an dem die Flarum-Konfiguration nicht über das Flarum
 
 Diese Datei ist zwar klein, enthält aber Details, die für das Funktionieren deiner Flarum-Installation entscheidend sind.
 
-Wenn die Datei existiert, teilt es Flarum mit, dass es bereits installiert wurde. Es versorgt Flarum auch mit Datenbankinformationen und mehr.
+Wenn die Datei existiert, teilt es Flarum mit, dass es bereits installiert wurde.
+Es versorgt Flarum auch mit Datenbankinformationen und mehr.
 
 Hier ist ein kurzer Überblick darüber, was alles mit einer Beispieldatei bedeutet:
 

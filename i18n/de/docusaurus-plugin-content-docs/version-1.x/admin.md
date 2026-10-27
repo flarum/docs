@@ -1,8 +1,11 @@
 # Admin-Dashboard
 
-Das Flarum Admin Dashboard ist eine benutzerfreundliche Oberfläche zur Verwaltung deines Forums. Es ist nur für Benutzer in der Gruppe „Admin“ verfügbar. Um auf das Admin-Dashboard zuzugreifen, klicke oben rechts auf dem Bildschirm auf deinen **Namen** und wähle **Administration** aus.
+Das Flarum Admin Dashboard ist eine benutzerfreundliche Oberfläche zur Verwaltung deines Forums.
+Es ist nur für Benutzer in der Gruppe „Admin“ verfügbar.
+Um auf das Admin-Dashboard zuzugreifen, klicke oben rechts auf dem Bildschirm auf deinen **Namen** und wähle **Administration** aus.
 
 Das Admin-Dashboard hat die folgenden Abschnitte:
+
 - **Dashboard** – Zeigt das Haupt-Admin-Dashboard an, das Statistiken und andere relevante Informationen enthält.
 - **Basics** - Zeigt die Optionen zum Festlegen grundlegender Forumsdetails wie Name, Beschreibung und Willkommensbanner.
 - **E-Mail** - Ermöglicht die Konfiguration von E-Mail-Einstellungen. Siehe [hier](https://docs.flarum.org/mail) für weitere Informationen.

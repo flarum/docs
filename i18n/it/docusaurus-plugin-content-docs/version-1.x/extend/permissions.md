@@ -18,7 +18,8 @@ Gli amministratori possono anche creare nuovi gruppi tramite la dashboard dell'a
 
 ## Permessi
 
-I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso). Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
+I "permessi" Flarum sono implementati come semplici stringhe e associati a gruppi in una tabella di pseudo-giunzione (non è una vera relazione, ma il concetto è lo stesso).
+Questo è in realtà tutto ciò che sta facendo la griglia delle autorizzazioni nella dashboard di amministrazione: stai aggiungendo e rimuovendo queste stringhe di autorizzazione dai gruppi.
 
 Non esiste alcuna associazione diretta tra utenti e permessi: quando controlliamo i permessi di un utente, stiamo effettivamente enumerando i permessi per tutti i gruppi dell'utente.
 
@@ -38,7 +39,7 @@ $user->getPermissions();
 $user->hasPermission('viewForum');
 ```
 
-Le autorizzazioni sono solo una parte del puzzle: se imponi che un utente può eseguire un'azione, dovresti usare il [sistema di autorizzazione](authorization.md) di Flarum.
+:::warning Use Proper Authorization
 
 I permessi sono solo parte del puzzle: se stai decidendo se un utente puù o non può eseguire un azione, dovresti usare il [sistema di autorizzazioni di Flarum](authorization.md).
 

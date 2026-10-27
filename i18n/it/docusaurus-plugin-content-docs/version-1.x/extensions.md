@@ -4,7 +4,8 @@ Flarum è minimalista, ma è anche altamente estensibile. In effetti, la maggior
 
 Questo approccio rende Flarum estremamente personalizzabile: Puoi disabilitare tutte le funzionalità che non ti servono e installare altre estensioni per rendere il tuo forum perfetto per la tua comunità.
 
-Per ulteriori informazioni sulla filosofia di Flarum su quali funzionalità includiamo nel core o se stai cercando di creare la tua estensione, consulta la  [documentazione estensioni](extend/README.md). Questo articolo si concentrerà sulla gestione delle estensioni dal punto di vista dell'amministratore del forum.
+Per ulteriori informazioni sulla filosofia di Flarum su quali funzionalità includiamo nel core o se stai cercando di creare la tua estensione, consulta la  [documentazione estensioni](extend/README.md).
+Questo articolo si concentrerà sulla gestione delle estensioni dal punto di vista dell'amministratore del forum.
 
 ## Extension Manager
 
@@ -23,7 +24,6 @@ The extension manager allows an admin user to install any composer package. Only
 :::
 
 ![extension manager admin page](https://github.com/flarum/docs/assets/20267363/d0e1f7a5-e194-4acd-af63-7b8ddd95c26b)
-
 
 ## Trovare le estensioni
 
@@ -97,8 +97,8 @@ If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc)
 
 Extiverse provides access to premium extensions. It is a good example of a composer repository. You would specify the URL as `https://flarum.org/composer/` and the name as `premium`. You would also need to enter an authentication method through the **New authentication method** button. The token can be generated from your Flarum account's [subscriptions](https://flarum.org/dashboard/subscriptions) page with the Instructions button.
 
-* Type: `HTTP Bearer`
-* Host: `flarum.org`
+- Type: `HTTP Bearer`
+- Host: `flarum.org`
 
 ![Configure repositories](/en/img/config-repositories.png)
 
@@ -112,7 +112,7 @@ The configured repositories and auth methods will be active for both the command
 
 If for whatever reason you want to install a non-stable extension (e.g. a beta, alpha or RC version) you must first update the **Minimum stability** setting to the wanted stability.
 
-* If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
-* If you set it to Beta, you will be able to install beta, RC and stable versions.
-* If you set it to RC, you will be able to install RC and stable versions.
-* If you set it to Stable, you will only be able to install stable versions.
+- If you set it to Alpha, you will be able to install alpha, beta, RC (Release Candidate) and stable versions.
+- If you set it to Beta, you will be able to install beta, RC and stable versions.
+- If you set it to RC, you will be able to install RC and stable versions.
+- If you set it to Stable, you will only be able to install stable versions.

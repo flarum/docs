@@ -29,7 +29,7 @@ If all the checks in the template are met, **any** core developer may merge this
 
 - After merging:
   - Assign the related issue (if none exists, the pull request itself, but never both) to the appropriate milestone.
-  - Close all relevant issues (*if* they are closed completely).
+  - Close all relevant issues (_if_ they are closed completely).
   - Regressions should be labeled as such and removed from the project board and milestone after merging.
   - Check for follow-up tasks:
     - Merge related PRs (language files, extensions, documentations).

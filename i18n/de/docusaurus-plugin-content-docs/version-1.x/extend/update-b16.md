@@ -32,7 +32,8 @@ If you need help applying these changes or using new features, please start a di
 
 ### Laravel and Symfony
 
-Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions. The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
+Beta 16 upgrades from v6.x to v8.x of Laravel components and v4 to v5 of Symfony components. Please see the respective upgrade guides of each for changes you might need to make to your extensions.
+The most applicable change is the deprecation of `Symfony\Component\Translation\TranslatorInterface` in favor of `Symfony\Contracts\Translation\TranslatorInterface`. The former will be removed in beta 17.
 
 ### Helper Functions
 
@@ -42,7 +43,9 @@ Since some Flarum extensions use Laravel libraries that assume some global helpe
 
 ### Search Changes
 
-As part of our ongoing efforts to make Flarum's search system more flexible, we've made several refactors in beta 16. Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders. Essentially, if a query has a `filter[q]` query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a `Query` namespace.
+As part of our ongoing efforts to make Flarum's search system more flexible, we've made several refactors in beta 16.
+Most notably, filtering and searching are now treated as different mechanisms, and have separate pipelines and extenders.
+Essentially, if a query has a `filter[q]` query param, it will be treated as a search, and all other filter params will be ignored. Otherwise, it will be handled by the filtering system. This will eventually allow searches to be handled by alternative drivers (provided by extensions), such as ElasticSearch, without impacting filtering (e.g. loading recent discussions). Classes common to both systems have been moved to a `Query` namespace.
 
 Core's filtering and default search (named SimpleFlarumSearch) implementations are quite similar, as both are powered by the database. `List` API controllers call the `search` / `filter` methods on a resource-specific subclass of `Flarum\Search\AbstractSearcher` or `Flarum\Filter\AbstractFilterer`. Arguments are an instance of `Flarum\Query\QueryCriteria`, as well as sort, offset, and limit information. Both systems return an instance of `Flarum\Query\QueryResults`, which is effectively a wrapper around a collection of Eloquent models.
 
@@ -76,7 +79,7 @@ The signature to various method related to authentication have been changed to t
 - `Flarum\Http\RememberAccessToken::generate($userId)` should be used to create remember access tokens.
 - `Flarum\Http\DeveloperAccessToken::generate($userId)` should be used to create developer access tokens (don't expire).
 - `Flarum\Http\SessionAccessToken::generate()` can be used as an alias to `Flarum\Http\AccessToken::generate()`. We might deprecate `AccessToken::generate()` in the future.
-- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. In beta 17 the method signature will change to accept only `RememberAccessToken`.
+- `Flarum\Http\Rememberer::remember(ResponseInterface $response, AccessToken $token)`: passing an `AccessToken` has been deprecated. Pass an instance of `RememberAccessToken` instead. As a temporary compatibility layer, passing any other type of token will convert it into a remember token. As a temporary compatibility layer, passing any other type of token will convert it into a remember token.
 - `Flarum\Http\Rememberer::rememberUser()` has been deprecated. Instead you should create/retrieve a token manually with `RememberAccessToken::generate()` and pass it to `Rememberer::remember()`
 - `Flarum\Http\SessionAuthenticator::logIn(Session $session, $userId)` second parameter has been deprecated and is replaced with `$token`. Backward compatibility is kept. In beta 17, the second parameter method signature will change to `AccessToken $token`.
 - `AccessToken::generate()` now saves the model to the database before returning it.

@@ -6,7 +6,7 @@ Flarum provides a static code analysis package based on [PHPStan](https://phpsta
 
 ## Configuración
 
-:::tip [Flarum CLI](https://github.com/flarum/cli)
+:::tip [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically add and update the infrastructure for phpstan to your code:
 

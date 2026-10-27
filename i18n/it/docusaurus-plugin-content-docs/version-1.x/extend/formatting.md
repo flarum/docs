@@ -2,7 +2,7 @@
 
 Flarum usa la potente libreria [s9e TextFormatter](https://github.com/s9e/TextFormatter) per formattare i post dal semplice markup in HTML. Dovresti familiarizzare con [come funziona TextFormatter](https://s9etextformatter.readthedocs.io/Getting_started/How_it_works/) prima di utilizzarlo.
 
-In Flarum, il contenuto del post è formattato con una configurazione TextFormatter minima per impostazione predefinita. Le estensioni ** Markdown ** e ** BBCode ** in bundle abilitano semplicemente i rispettivi plugin.
+In Flarum, il contenuto del post è formattato con una configurazione TextFormatter minima per impostazione predefinita. Le estensioni \*\* Markdown \*\* e \*\* BBCode \*\* in bundle abilitano semplicemente i rispettivi plugin.
 
 ## Configurazione
 
@@ -39,4 +39,4 @@ return [
 ];
 ```
 
-Una buona conoscenza di TextFormatter, ti consentirà di ottenere molti risultati, dalle semplici aggiunte di tag BBCode a compiti di formattazione più complessi come l'estensione ** Mentions ** di Flarum.
+Una buona conoscenza di TextFormatter, ti consentirà di ottenere molti risultati, dalle semplici aggiunte di tag BBCode a compiti di formattazione più complessi come l'estensione \*\* Mentions \*\* di Flarum.

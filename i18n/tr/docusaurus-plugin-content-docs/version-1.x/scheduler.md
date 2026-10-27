@@ -18,7 +18,7 @@ Some of the most popular examples are the following:
 
 ## Ok, let's get this setup!
 
-Most (if not all) Linux distros either come with, or can have, cron installed. For example, on Debian and Ubuntu based systems, you can install `cron` like this:
+Most (if not all) Linux distros either come with, or can have, cron installed. Most (if not all) Linux distros either come with, or can have, cron installed.
 
 ```
 sudo apt-get update

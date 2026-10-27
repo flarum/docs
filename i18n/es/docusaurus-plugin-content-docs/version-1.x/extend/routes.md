@@ -8,11 +8,11 @@ El enrutamiento ocurre tanto en el backend de PHP como en el frontend de JavaScr
 
 En el backend, Flarum tiene tres colecciones de rutas:
 
-* `forum` Estas rutas son accesibles bajo `suforo.com/`. Incluyen rutas que muestran páginas en el frontend (como `suforo.com/d/123-título`) y otras rutas de utilidad (como la ruta de restablecimiento de contraseña).
+- `forum` Estas rutas son accesibles bajo `suforo.com/`. Incluyen rutas que muestran páginas en el frontend (como `suforo.com/d/123-título`) y otras rutas de utilidad (como la ruta de restablecimiento de contraseña).
 
-* Estas rutas son accesibles en `suforo.com/admin/`. Por defecto, sólo hay una ruta `admin` en el backend; el resto del enrutamiento de administración ocurre en el frontend.
+- Estas rutas son accesibles en `suforo.com/admin/`. Por defecto, sólo hay una ruta `admin` en el backend; el resto del enrutamiento de administración ocurre en el frontend.
 
-* `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON: API de Flarum.
+- `api` Estas rutas son accesibles en `suforo.com/api/` y conforman el JSON: API de Flarum.
 
 ### Definición de rutas
 
@@ -20,9 +20,9 @@ Puedes añadir rutas a cualquiera de estas colecciones utilizando el extensor `R
 
 Hay métodos para registrar rutas para cualquier método de petición HTTP: `get`, `post`, `put`, `patch` y `delete`. Todos estos métodos aceptan tres argumentos:
 
-* `$path` La ruta utilizando la sintaxis [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
-* `$name` Nombre único para la ruta, utilizado para generar URLs. Para evitar conflictos con otras extensiones, debe utilizar el nombre de su proveedor como espacio de nombres.
-* `$handler` El nombre de la clase del controlador que manejará la solicitud. Esto se resolverá a través del contenedor.
+- `$path` La ruta utilizando la sintaxis [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
+- `$name` Nombre único para la ruta, utilizado para generar URLs. Para evitar conflictos con otras extensiones, debe utilizar el nombre de su proveedor como espacio de nombres.
+- `$handler` El nombre de la clase del controlador que manejará la solicitud. Esto se resolverá a través del contenedor.
 
 ```php
 <?php
@@ -36,9 +36,10 @@ return [
 ];
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
-Los controladores se resuelven desde el [contenedor](https://laravel.com/docs/6.x/container) para que puedas inyectar dependencias en sus constructores.
+Los controladores se resuelven desde el <a href="https://laravel.com/docs/6.x/container">contenedor</a> para que puedas inyectar dependencias en sus constructores.
+
 ```bash
 $ flarum-cli make backend route
 ```
@@ -89,7 +90,7 @@ A veces necesitará capturar segmentos del URI dentro de su ruta. Puede hacerlo 
         ->get('/user/{id}', 'acme.user', UserController::class)
 ```
 
-En primer lugar, tendrás que decirle a la fábrica de vistas dónde puede encontrar los archivos de vistas de tu extensión añadiendo un extensor `View` a `extend.php`:
+The values of these parameters will be merged with the request's query params, which you can access in your controller by calling `$request->getQueryParams()`:
 
 ```php
 use Illuminate\Support\Arr;
@@ -224,7 +225,8 @@ const url = app.route.acmeUser(user);
 
 ### Enlaces a otras páginas
 
-A forum wouldn't be very useful if it only had one page. While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+A forum wouldn't be very useful if it only had one page.
+While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
 
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
@@ -250,10 +252,10 @@ import Link from 'flarum/common/components/Link';
 
 Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
 
-* Cambiar el `<title>` de la página
-* Añadir recursos externos de JavaScript y CSS
-* Añadir contenido SEO y etiquetas `<meta>`.
-* Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
+- Cambiar el `<title>` de la página
+- Añadir recursos externos de JavaScript y CSS
+- Añadir contenido SEO y etiquetas `<meta>`.
+- Añadir datos a la carga útil de JavaScript (por ejemplo, para precargar los recursos que se van a renderizar en la página inmediatamente, evitando así una petición innecesaria a la API)
 
 You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 

@@ -16,7 +16,7 @@ El proceso de autorización se utiliza para comprobar si una persona está autor
 
 Cada uno de ellos está determinado por un criterio único: en algunos casos, un flag es suficiente; de lo contrario, podríamos necesitar una lógica personalizada.
 
-## Alcance de la visibilidad
+## Cómo funciona
 
 Las consultas de autorización se realizan con 3 parámetros, con la lógica contenida en [`Flarum\User\Gate`](https://api.docs.flarum.org/php/master/flarum/user/gate):
 
@@ -33,16 +33,16 @@ En primer lugar, pasamos la solicitud completa (los tres parámetros) por todas 
 
 Los resultados de las políticas se consideran en la prioridad `FORCE_DENY` > `FORCE_ALLOW` > `DENY` > `ALLOW`. Por ejemplo, si una sola política devuelve `FORCE_DENY`, todas las demás políticas serán ignoradas. Si una política devuelve `DENY` y 10 políticas devuelven `ALLOW`, la solicitud será denegada. Esto permite tomar decisiones independientemente del orden en el que se arranquen las extensiones. Tenga en cuenta que las políticas son extremadamente poderosas: si el acceso es denegado en la etapa de políticas, eso anulará los permisos de grupo e incluso los privilegios de administrador.
 
-En segundo lugar, si todas las políticas devuelven null (o no devuelven nada), comprobamos si el usuario está en un grupo que tiene un permiso igual a la habilidad (nótese que tanto los permisos como las habilidades se representan como cadenas). Si es así, autorizamos la acción. Consulta nuestra [documentación sobre grupos y permisos](permissions.md) para obtener más información sobre los permisos.
+En segundo lugar, si todas las políticas devuelven null (o no devuelven nada), comprobamos si el usuario está en un grupo que tiene un permiso igual a la habilidad (nótese que tanto los permisos como las habilidades se representan como cadenas). Si es así, autorizamos la acción.
+Consulta nuestra [documentación sobre grupos y permisos](permissions.md) para obtener más información sobre los permisos.
 
 Luego, si el usuario está en el grupo de administradores, autorizaremos la acción.
 
 Finalmente, como hemos agotado todas las comprobaciones, asumiremos que el usuario no está autorizado y denegaremos la solicitud.
 
-## Autorización en el Frontend
+## Cómo usar la autorización
 
 El sistema de autorización de Flarum es accesible a través de los métodos públicos de la clase `Flarum\User\User`. Los más importantes se enumeran a continuación; otros están documentados en nuestra [documentación de la API de PHP](https://api.docs.flarum.org/php/master/flarum/user/user).
-
 
 En este ejemplo, usaremos `$actor` como una instancia de `Flarum\User\User`, `'viewForum'` y `'reply'` como ejemplos de habilidades, y `$discussion` (instancia de `Flarum\Discussion\Discussion`) como argumento de ejemplo.
 
@@ -77,20 +77,64 @@ Las políticas nos permiten utilizar una lógica personalizada más allá de los
 - Queremos permitir a los usuarios editar los mensajes aunque no sean moderadores, pero sólo sus propios mensajes.
 - Dependiendo de la configuración, podríamos permitir a los usuarios renombrar sus propias discusiones indefinidamente, durante un corto período de tiempo después de la publicación, o no en absoluto.
 
-Como se describe [arriba](#how-it-works), en cualquier comprobación de autorización, consultamos todas las políticas registradas para el modelo del objetivo, o cualquier clase padre del modelo del objetivo. Si no se proporciona ningún objetivo, se aplicarán todas las políticas registradas como `global`.
+Como se describe [arriba](#how-it-works), en cualquier comprobación de autorización, consultamos todas las políticas registradas para el modelo del objetivo, o cualquier clase padre del modelo del objetivo.
+Si no se proporciona ningún objetivo, se aplicarán todas las políticas registradas como `global`.
 
 Entonces, ¿cómo se "comprueba" una política?
 
-En primer lugar, comprobamos si la clase política tiene un método con el mismo nombre que la habilidad que se está evaluando. Si es así, lo ejecutamos con el actor y el sujeto como parámetros. Si ese método devuelve un valor no nulo, devolvemos ese resultado. En caso contrario, continuamos con el siguiente paso (no necesariamente con la siguiente política).
+En primer lugar, comprobamos si la clase política tiene un método con el mismo nombre que la habilidad que se está evaluando.
+Si es así, lo ejecutamos con el actor y el sujeto como parámetros.
+Si ese método devuelve un valor no nulo, devolvemos ese resultado. En caso contrario, continuamos con el siguiente paso (no necesariamente con la siguiente política).
 
 A continuación, comprobamos si la clase de política tiene un método llamado `can`. Si es así, lo ejecutamos con el actor, la habilidad y el sujeto, y devolvemos el resultado.
 
 Si `can` no existe o devuelve null, hemos terminado con esta política, y pasamos a la siguiente.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
 You can use the CLI to automatically generate policies:
+
 ```bash
+&lt;?php
+namespace Flarum\Tags\Access;
+
+use Flarum\Tags\Tag;
+use Flarum\User\Access\AbstractPolicy;
+use Flarum\User\User;
+
+class TagPolicy extends AbstractPolicy
+{
+    /**
+     * @param User $actor
+     * @param Tag $tag
+     * @return bool|null
+     */
+    public function startDiscussion(User $actor, Tag $tag)
+    {
+        if ($tag-&gt;is_restricted) {
+            return $actor-&gt;hasPermission('tag'.$tag-&gt;id.'.startDiscussion') ? $this-&gt;allow() : $this-&gt;deny();
+        }
+    }
+
+    /**
+     * @param User $actor
+     * @param Tag $tag
+     * @return bool|null
+     */
+    public function addToDiscussion(User $actor, Tag $tag)
+    {
+        return $this-&gt;startDiscussion($actor, $tag);
+    }
+}
+```
+
+:::
+
+### Cómo funciona
+
+Veamos algunos ejemplos de [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
+
+```php
 <?php
 namespace Flarum\Tags\Access;
 
@@ -120,45 +164,6 @@ class TagPolicy extends AbstractPolicy
     public function addToDiscussion(User $actor, Tag $tag)
     {
         return $this->startDiscussion($actor, $tag);
-    }
-}
-```
-
-:::
-
-### Cómo funciona
-
-Veamos algunos ejemplos de [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access/TagPolicy).
-
-```php
-<?php
-
-namespace Flarum\Tags\Access;
-
-use Flarum\Tags\Tag;
-use Flarum\User\User;
-use Illuminate\Database\Eloquent\Builder;
-
-class ScopeDiscussionVisibilityForAbility
-{
-    /**
-     * @param User $actor
-     * @param Builder $query
-     * @param string $ability
-     */
-    public function __invoke(User $actor, Builder $query, $ability)
-    {
-        if (substr($ability, 0, 4) === 'view') {
-            return;
-        }
-
-        // Si una discusión requiere un determinado permiso para que sea
-        // visible, entonces podemos comprobar si el usuario tiene concedido ese
-        // permiso para cualquiera de las etiquetas de la discusión. $query->whereIn('discussions.id', function ($query) use ($actor, $ability) {
-            return $query->select('discussion_id')
-                ->from('discussion_tag')
-                ->whereIn('tag_id', Tag::getIdsWhereCan($actor, 'discussion.'.$ability));
-        });
     }
 }
 ```
@@ -210,7 +215,7 @@ class GlobalPolicy extends AbstractPolicy
 
 ### Cómo usar la autorización
 
-¿Qué ocurre cuando llamamos a `whereVisibleTo`? Esta llamada es manejada por el sistema de alcance de visibilidad del modelo general de Flarum, que ejecuta la consulta a través de una secuencia de llamadas de retorno, que se llaman "scopers".
+Both model-based and global policies can be registered with the `Policy` extender in your `extend.php` file:
 
 ```php
 use Flarum\Extend;
@@ -228,8 +233,13 @@ return [
 
 ## Frontend Authorization
 
-Comúnmente, querrás usar los resultados de la autorización en la lógica del frontend. Por ejemplo, si un usuario no tiene permiso para ver usuarios de búsqueda, no deberíamos enviar solicitudes a ese punto final. Y si un usuario no tiene permiso para editar usuarios, no deberíamos mostrar elementos del menú para ello.
+Comúnmente, querrás usar los resultados de la autorización en la lógica del frontend.
+Por ejemplo, si un usuario no tiene permiso para ver usuarios de búsqueda, no deberíamos enviar solicitudes a ese punto final.
+Y si un usuario no tiene permiso para editar usuarios, no deberíamos mostrar elementos del menú para ello.
 
-Como no podemos hacer comprobaciones de autorización en el frontend, tenemos que realizarlas en el backend, y adjuntarlas a la serialización de los datos que estamos enviando. Los permisos globales (`viewForum`, `viewUserList`) pueden incluirse en el `ForumSerializer`, pero para la autorización específica de un objeto, podemos querer incluirlos con el objeto sujeto. Por ejemplo, cuando devolvemos listas de discusiones, comprobamos si el usuario puede responder, renombrar, editar y borrar, y almacenamos esos datos en el modelo de discusión del frontend. Entonces es accesible a través de `discussion.canReply()` o `discussion.canEdit()`, pero no hay nada mágico ahí: es sólo otro atributo enviado por el serializador.
+Como no podemos hacer comprobaciones de autorización en el frontend, tenemos que realizarlas en el backend, y adjuntarlas a la serialización de los datos que estamos enviando.
+Los permisos globales (`viewForum`, `viewUserList`) pueden incluirse en el `ForumSerializer`, pero para la autorización específica de un objeto, podemos querer incluirlos con el objeto sujeto.
+Por ejemplo, cuando devolvemos listas de discusiones, comprobamos si el usuario puede responder, renombrar, editar y borrar, y almacenamos esos datos en el modelo de discusión del frontend.
+Entonces es accesible a través de `discussion.canReply()` o `discussion.canEdit()`, pero no hay nada mágico ahí: es sólo otro atributo enviado por el serializador.
 
-Hay dos tipos de scopers:
+For an example of how to attach data to a serializer, see a [similar case for transmitting settings](settings.md#accessing-settings).

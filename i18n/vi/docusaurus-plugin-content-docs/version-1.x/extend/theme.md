@@ -1,6 +1,7 @@
 # Chủ đề
 
-Flarum "themes" chỉ là phần mở rộng. Thông thường, bạn sẽ muốn sử dụng bộ mở rộng `Frontend` để đăng ký [Less](https://lesscss.org/#overview) và JS tùy chỉnh. Tất nhiên, bạn cũng có thể sử dụng các bộ mở rộng khác: ví dụ: bạn có thể muốn hỗ trợ cài đặt để cho phép định cấu hình chủ đề của mình.
+Flarum "themes" chỉ là phần mở rộng. Typically, you'll want to use the `Frontend` extender to register custom [Less](https://lesscss.org/#overview) and JS.
+Tất nhiên, bạn cũng có thể sử dụng các bộ mở rộng khác: ví dụ: bạn có thể muốn hỗ trợ cài đặt để cho phép định cấu hình chủ đề của mình.
 
 Bạn có thể chỉ ra rằng tiện ích của bạn là một chủ đề bằng cách đặt khóa "extra.flarum-extension.category" thành "theme". For example:
 

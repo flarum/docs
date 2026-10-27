@@ -81,7 +81,7 @@ It is common for shared hosts to have a low php version used in SSH, users must 
 
 :::
 
-![Extension Manager Queue Table Preview](../assets/extension-manager-queue.png)
+![Extension Manager Queue Table Preview](/img/docs/extension-manager-queue.png)
 
 ## TODO
 - Try on shared hosting.

@@ -1,6 +1,6 @@
 # Cómo empezar
 
-¿Quieres construir una extensión de Flarum? You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
+¿Quieres construir una extensión de Flarum? You've come to the right place! You've come to the right place! ¡Has venido al lugar correcto! Este documento te llevará a través de algunos conceptos esenciales, después de lo cual construirás tu primera extensión de Flarum desde cero.
 
 ## Arquitectura
 
@@ -10,11 +10,11 @@ Ten en cuenta que Flarum utiliza algunos lenguajes y herramientas _modernas_. Si
 
 Flarum se compone de tres capas:
 
-* En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). También querrás familiarizarte con el concepto de [Dependency Injection](https://laravel.com/docs/6.x/container), que se utiliza en todo nuestro backend.
+- En primer lugar, está el **backend**. Está escrito en [PHP orientado a objetos](https://laracasts.com/series/object-oriented-bootcamp-in-php), y hace uso de una amplia gama de componentes de [Laravel](https://laravel.com/) y otros paquetes a través de [Composer](https://getcomposer.org/). También querrás familiarizarte con el concepto de [Dependency Injection](https://laravel.com/docs/6.x/container), que se utiliza en todo nuestro backend.
 
-* En segundo lugar, el backend expone una **API pública** que permite a los clientes del frontend interactuar con los datos de tu foro. Está construida de acuerdo con la especificación [JSON:API](https://jsonapi.org/).
+- En segundo lugar, el backend expone una **API pública** que permite a los clientes del frontend interactuar con los datos de tu foro. Está construida de acuerdo con la especificación [JSON:API](https://jsonapi.org/).
 
-* Por último, está la interfaz web por defecto que llamamos **frontend**. Esta es una [single-page application](https://en.wikipedia.org/wiki/Single-page_application) que consume la API. Está construida con un sencillo framework tipo React llamado [Mithril.js](https://mithril.js.org).
+- Por último, está la interfaz web por defecto que llamamos **frontend**. Esta es una [single-page application](https://en.wikipedia.org/wiki/Single-page_application) que consume la API. Está construida con un sencillo framework tipo React llamado [Mithril.js](https://mithril.js.org).
 
 Las extensiones a menudo necesitarán interactuar con estas tres capas para hacer que las cosas sucedan. Por ejemplo, si quieres construir una extensión que añada campos personalizados a los perfiles de los usuarios, tendrías que añadir las estructuras de base de datos apropiadas en el **backend**, exponer esos datos en la **public API**, y luego mostrarlos y permitir a los usuarios editarlos en el **frontend**.
 
@@ -22,7 +22,7 @@ Así que... ¿cómo extendemos estas capas?
 
 ## Extensores
 
-Para extender Flarum, usaremos un concepto llamado **extensores**. Los extensores son objetos *declarativos* que describen en términos sencillos los objetivos que se pretenden alcanzar (como añadir una nueva ruta a tu foro, o ejecutar algún código cuando se crea una nueva discusión).
+Para extender Flarum, usaremos un concepto llamado **extensores**. Los extensores son objetos _declarativos_ que describen en términos sencillos los objetivos que se pretenden alcanzar (como añadir una nueva ruta a tu foro, o ejecutar algún código cuando se crea una nueva discusión).
 
 Cada extensor es diferente. Sin embargo, siempre tendrán un aspecto similar a este:
 
@@ -89,7 +89,7 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
     "description": "Say hello to the world!",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.15 <0.1.0-beta.16"
+        "flarum/core": "&gt;=0.1.0-beta.15 &lt;0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"Acme\\HelloWorld\\": "src/"}
@@ -107,29 +107,30 @@ Necesitamos decirle a Composer un poco sobre nuestro paquete, y podemos hacerlo 
 }
 ```
 
-* **name** es el nombre del paquete de Composer en el formato `vendedor/paquete`.
-  * Debes elegir un nombre de proveedor que sea único para ti - tu nombre de usuario de GitHub, por ejemplo. Para los propósitos de este tutorial, asumiremos que estás usando `acme` como tu nombre de proveedor.
-  * Debes anteponer a la parte del `package` el prefijo `flarum-` para indicar que se trata de un paquete específicamente destinado a ser utilizado con Flarum.
+- **name** es el nombre del paquete de Composer en el formato `vendedor/paquete`.
+  - Debes elegir un nombre de proveedor que sea único para ti - tu nombre de usuario de GitHub, por ejemplo. Para los propósitos de este tutorial, asumiremos que estás usando `acme` como tu nombre de proveedor.
+  - Debes anteponer a la parte del `package` el prefijo `flarum-` para indicar que se trata de un paquete específicamente destinado a ser utilizado con Flarum.
 
-* **description** es una breve descripción de una frase de lo que hace la extensión.
+- **description** es una breve descripción de una frase de lo que hace la extensión.
 
-* **type** debe ser establecido como `flarum-extension`. Esto asegura que cuando alguien "requiera" su extensión, será identificada como tal.
+- **type** debe ser establecido como `flarum-extension`. Esto asegura que cuando alguien "requiera" su extensión, será identificada como tal.
 
-* **require** contiene una lista de las dependencias propias de su extensión.
-  * Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
-  * Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
+- **require** contiene una lista de las dependencias propias de su extensión.
+  - Querrá especificar la versión de Flarum con la que su extensión es compatible aquí.
+  - Este es también el lugar para listar otras bibliotecas de Composer que su código necesita para funcionar.
 
-* **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
+- **autoload** indica a Composer dónde encontrar las clases de su extensión. El espacio de nombres aquí debe reflejar el nombre del proveedor y del paquete de su extensión en CamelCase.
 
-* **extra.flarum-extension** contiene alguna información específica de Flarum, como el nombre de su extensión y el aspecto de su icono.
-  * **title** es el nombre de su extensión.
-  * **icon** es un objeto que define el icono de tu extensión. La propiedad **name** es un [nombre de clase de icono de Font Awesome](https://fontawesome.com/icons). Todas las demás propiedades se utilizan como el atributo `style` para el icono de su extensión.
+- **extra.flarum-extension** contiene alguna información específica de Flarum, como el nombre de su extensión y el aspecto de su icono.
+  - **title** es el nombre de su extensión.
+  - **icon** es un objeto que define el icono de tu extensión. La propiedad **name** es un [nombre de clase de icono de Font Awesome](https://fontawesome.com/icons). Todas las demás propiedades se utilizan como el atributo `style` para el icono de su extensión.
 
 Consulte [el esquema composer.json](https://getcomposer.org/doc/04-schema.md) para obtener información sobre otras propiedades que puede añadir a `composer.json`.
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Desarrolladores explicando su flujo de trabajo para el desarrollo de extensiones](https://github.com/flarum/cli)
 
-Utilice el [FoF extension generator](https://github.com/FriendsOfFlarum/extension-generator) para crear automáticamente el andamiaje de su extensión.
+Utilice el <a href="https://github.com/FriendsOfFlarum/extension-generator">FoF extension generator</a> para crear automáticamente el andamiaje de su extensión.
+
 ```bash
 $ flarum-cli init
 ```
@@ -146,8 +147,8 @@ composer require acme/flarum-hello-world *@dev
 
 Una vez hecho esto, sigue adelante y activa la extension en la página de administración de tu foro, luego navega de nuevo a tu foro.
 
-*whizzing, whirring, metal clunking*
+_whizzing, whirring, metal clunking_
 
-Woop! Hello to you too, extension!
+Woop! Woop! Hello to you too, extension!
 
 Estamos haciendo buenos progresos. Hemos aprendido a configurar nuestra extensión y a utilizar los extensores, lo que nos abre muchas puertas. Sigue leyendo para aprender a extender el frontend de Flarum.

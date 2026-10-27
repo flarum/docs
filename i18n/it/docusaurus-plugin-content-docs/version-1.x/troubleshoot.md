@@ -8,7 +8,8 @@ Successivamente, dovresti impiegare alcuni minuti per cercare nel [Forum di supp
 
 :::danger Salta in produzione
 
-Questi strumenti di debug sono molto utili, ma possono esporre informazioni che non dovrebbero essere pubbliche. These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
+Questi strumenti di debug sono molto utili, ma possono esporre informazioni che non dovrebbero essere pubbliche.
+These are fine if you're on a staging or development environment, but if you don't know what you're doing, skip this step when on a production environment.
 
 :::
 
@@ -20,12 +21,12 @@ Se hai visto pagine vuote e la modifica sopra non aiuta, prova a impostare `disp
 
 A lot of issues can be fixed with the following:
 
-* Pulisci la cache del browser
-* Pulisci la cache del backend con il comando [`php flarum cache:clear`](console.md).
-* Assicurati che il tuo database sia aggiornato con il comando [`php flarum migrate`](console.md).
-* Assicurati che [la configurazione email](mail.md) nel tuo pannello di amministrazione sia corretta: una configurazione e-mail non valida causerà errori durante la registrazione, la reimpostazione di una password, la modifica delle e-mail e l'invio di notifiche.
-* Controlla che il tuo file `config.php` sia corretto. Ad esempio, assicurati di utilizzare un `url` corretto.
-* One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
+- Pulisci la cache del browser
+- Pulisci la cache del backend con il comando [`php flarum cache:clear`](console.md).
+- Assicurati che il tuo database sia aggiornato con il comando [`php flarum migrate`](console.md).
+- Assicurati che [la configurazione email](mail.md) nel tuo pannello di amministrazione sia corretta: una configurazione e-mail non valida causerà errori durante la registrazione, la reimpostazione di una password, la modifica delle e-mail e l'invio di notifiche.
+- Controlla che il tuo file `config.php` sia corretto. Ad esempio, assicurati di utilizzare un `url` corretto.
+- One potential culprit could be a custom header, custom footer, or custom LESS. If your issue is in the frontend, try temporarily removing those via the Appearance page of the admin dashboard.
 
 Dovrai anche dare un'occhiata all'output di [`php flarum info`](console.md) per assicurarti che nulla di importante sia fuori posto.
 
@@ -41,11 +42,11 @@ Da qualche parte lungo la strada potresti avere un'idea di cosa sta causando il 
 
 Se sembra che avrai bisogno di aiuto per risolvere il problema, è ora di fare sul serio nella raccolta dei dati. Cerca messaggi di errore o altre informazioni sul problema nei seguenti punti:
 
-* Visualizzato nella pagina attuale
-* Visualizzato nella console del browser (Chrome: More tools -> Developer Tools -> Console)
-* Registrato nel registro degli errori del server (es. `/var/log/nginx/error.log`)
-* Registrato nel log PHP-FPM's (es. `/var/log/php7.x-fpm.log`)
-* Registrato da Flarum (`storage/logs/flarum.log`)
+- Visualizzato nella pagina attuale
+- Visualizzato nella console del browser (Chrome: More tools -> Developer Tools -> Console)
+- Registrato nel registro degli errori del server (es. `/var/log/nginx/error.log`)
+- Registrato nel log PHP-FPM's (es. `/var/log/php7.x-fpm.log`)
+- Registrato da Flarum (`storage/logs/flarum.log`)
 
 Copia i messaggi in un file di testo e prendi nota di quando si è verificato l'errore, cosa stavi facendo in quel momento e così via. Assicurati di includere tutti gli approfondimenti che potresti aver raccolto sulle condizioni in cui il problema si verifica e non si verifica. Aggiungi quante più informazioni possibili sul tuo ambiente server: versione del sistema operativo, versione del server web, versione e gestore di PHP, ecc.
 

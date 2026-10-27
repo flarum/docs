@@ -1,28 +1,28 @@
 # 更新
 
-## From the Admin Dashboard
+## 从管理员控制面板
 
 :::info
 
-If you have the extension manager extension installed you can simply run the update from its interface and skip this page entirely.
+如果您安装了扩展管理器扩展，您可以简单地从其界面运行更新并完全跳过此页面。
 
 :::
 
 ---
 
-您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
+若要更新 Flarum，您需要使用 [Composer](https://getcomposer.org)。您需要使用 [Composer](https://getcomposer.org) 来更新 Flarum。 如果你不熟悉它（尽管你应该是熟悉的，因为你需要它来安装Flarum），阅读 [我们的指南](composer.md) 了解它是什么以及如何设置它。
 
 如果跨主要版本进行更新(如 `<=0.1.0` to 1.x.x, 1.x.x 到 2.x.x.x, ... )，请确保在运行一般升级步骤之前阅读相应的“主要版本更新指南”。
 
 ## 一般步骤
 
-**第1步：**确保你所有的扩展程序的版本与你要安装的Flarum版本兼容。 这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。 你可以通过查看扩展的[讨论贴](https://discuss.flarum.org/t/extensions)，在[Packagist](http://packagist.org/)上搜索它，或者查看[Extiverse](https://extiverse.com)等数据库来检查。 在更新之前，您需要删除(不仅仅禁用) 任何不兼容的扩展。 请耐心等待扩展开发者更新！
+**步骤1:** 确保您所有的扩展版本都与您要安装的 Flarum 版本兼容。这只在主要版本之间需要（例如，如果从v1.0.0升级到v1.1.0，你可能不需要检查这个，假设你使用的扩展遵循建议的版本划分）。您可以通过查看扩展的 [讨论线程](https://discuss.flarum.org/t/extensions) 来检查它。 在 [Packagist](http://packagist.org/上搜索，或检查数据库，例如 [Extiverse](https://extiverse.com)。请耐心等待扩展开发者更新！请耐心等待扩展开发者更新！
 
-**第2步：** 查看您的 `composer.json` 文件。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。
+**步骤2:** 查看您的 `composer.json` 文件。**第2步：** 查看您的 `composer.json` 文件。 除非您有理由要求特定版本的扩展或库； 您应该将除 `flarum/core` 以外的所有版本字符串设置为 `*` (包括 `flarum/tags`, `flarum/mention`和其他捆绑的扩展)。 但请确认 `flarum/core` 未设置为 `*`。 如果你针对的是特定版本的Flarum, 请设置 `flarum/core` 为指定版本(例如， `"flarum/core": "v0.1.0-bet.16`)。 如果你只想要最新的版本，请使用 `"flarum/core": "^1.0"`。请确认 `flarum/core` 没有设置为 `*'。如果你针对的是一个特定版本的Flarum, 设置`flarum/core\`为如此 (例如"flarum/core": "v0.1.0-bet.16")。如果你只是想要最新版本，请使用 "flarum/core": "^1.0"。
 
 **第 3步：** 如果您使用 [本地扩展](extenders.md)，请确保它们更新到最新的 Flarum 中的变更。
 
-**第 4 步：** 我们建议在更新之前在管理面板禁用第三方扩展。 这不是严格需要的，但如果您遇到问题，将更容易调试问题。
+**第 4 步：** 我们建议在更新之前在管理面板禁用第三方扩展。 这不是严格需要的，但如果您遇到问题，将更容易调试问题。这不是严格需要的，但如果您遇到问题，将更容易调试问题。
 
 **第 5步：** 请确保您的 PHP 版本被您正在尝试升级到 Flarum 的版本所支持。 并且你正在使用Composer 2(`composer --version)`
 
@@ -41,14 +41,14 @@ php flarum cache:clear
 ### 从 Beta (`<= 0.1.0`) 更新到 Stable v1 (^1.0.0)
 
 1. 执行上文步骤1-5。
-2. Change the version strings of all bundled extensions (`flarum/tags`, `flarum/mentions`, `flarum/likes`, etc) in `composer.json` from `^0.1.0` to `*`.
-3. Change `flarum/core`'s version string in `composer.json` from `^0.1.0` to `^1.0`.
-4. Remove the `"minimum-stability": "beta",` line from your `composer.json`
-5. Do steps 6 and 7 above.
+2. 在composer.json中，把所有捆绑扩展的版本 (例如：flarum/tags, flarum/mentions, flarum/likes等) 从 `^0.1.0` 改成 `*`。
+3. 将`composer.json`中的`flarum/core`的版本字符串从`^0.1.0`改为\`^1.0'。
+4. 从 `composer.json` 中删除 `“minimum-stability”：“beta”，`行
+5. 执行上文步骤6-7。
 
 ## 故障排除
 
-Flarum 正处于测试阶段，有关如何更新的说明将在每次 [版本发布公告](https://discuss.flarum.org/t/blog?sort=newest)中公示。
+Flarum 正处于测试阶段，有关如何更新的说明将在每次 <a href="https://discuss.flarum.org/t/blog?sort=newest">版本发布公告</a>中公示。
 
 ### 更新时出错
 
@@ -59,17 +59,17 @@ Flarum 正处于测试阶段，有关如何更新的说明将在每次 [版本�
 如果输出较短且包含：
 
 ```
-Nothing to modify in lock file
+在锁定文件中没有可以修改的
 ```
 
-Or does not list `flarum/core` as an updated package, and you are not on the latest flarum version:
+或者没有将`flarum/core`列为更新的软件包，并且您没有使用最新的flarum版本：
 
-- Revisit step 2 above, make sure that all third party extensions have an asterisk for their version string.
-- Make sure your `flarum/core` version requirement isn't locked to a specific minor version (e.g. `v0.1.0-beta.16` is locked, `^1.0.0` isn't). If you're trying to update across major versions of Flarum, follow the related major version update guide above.
+- 请重新访问上面步骤2，确保所有第三方扩展都有一个星号的版本字符串。
+- 请确保您的 `flarum/core` 版本没有被锁定到特定的次要版本 (例如，`v0.1.0-bet.16` 被锁定，`^1.0.0` 没有被锁定)。如果您试图在Flarum的主要版本中更新，请参阅上面相关的主要版本更新指南。
 
 ---
 
-For other errors, try running `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`
+对于其他错误，请尝试运行 `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`
 
 如果输出看起来像这样：
 
@@ -98,13 +98,13 @@ flarum/flarum                     -               does not require  illuminate/e
 ... (this'll go on for a bit)
 ```
 
-It is very likely that some of your extensions have not yet been updated.
+很可能您的一些扩展尚未更新。
 
-- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't.
+- Revisit step 1 again, make sure all your extensions have versions compatible with the core version you want to upgrade to. Remove any that don't. 删除任何不存在的内容。
 - Make sure you're running `composer update` with all the flags specified in the update step.
 
-If none of this fixes your issue, feel free to reach out on our [Support forum](https://discuss.flarum.org/t/support). Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
+如果这些未能解决您的问题，请随时访问我们的 [论坛](https://discuss.flarum.org/t/support)。 Make sure to include the output of `php flarum info` and `composer why-not flarum/core VERSION_YOU_WANT_TO_UPGRADE_TO`.
 
-### Errors After Updating
+### 更新时出错
 
 如果您在更新后无法访问您的论坛，请遵循我们的 [故障排除说明](troubleshoot.md)。

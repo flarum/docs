@@ -8,11 +8,11 @@ Il routing avviene sia sul backend PHP che sul frontend JavaScript.
 
 Sul backend, Flarum ha tre raccolte di percorsi:
 
-* `forum` Questi percorsi sono accessibili in `yourforum.com/`. Includono percorsi che mostrano pagine nel frontend (come `yourforum.com/d/123-title`) e altri percorsi di utilità (come il percorso di reimpostazione della password).
+- `forum` Questi percorsi sono accessibili in `yourforum.com/`. Includono percorsi che mostrano pagine nel frontend (come `yourforum.com/d/123-title`) e altri percorsi di utilità (come il percorso di reimpostazione della password).
 
-* `admin` Questi percorsi sono accessibili sotto `yourforum.com/admin/`. Di default, c'è solo un percorso `admin` nel backend; il resto del routing amministrativo avviene sul frontend
+- `admin` Questi percorsi sono accessibili sotto `yourforum.com/admin/`. Di default, c'è solo un percorso `admin` nel backend; il resto del routing amministrativo avviene sul frontend
 
-* `api` Questi percorsi sono accessibili sotto `yourforum.com/api/` e compone le JSON:API di Flarum.
+- `api` Questi percorsi sono accessibili sotto `yourforum.com/api/` e compone le JSON:API di Flarum.
 
 ### Definizione dei percorsi
 
@@ -20,9 +20,9 @@ Puoi aggiungere percorsi a una qualsiasi di queste raccolte utilizzando l'extend
 
 Esistono metodi per registrare percorsi di qualsiasi metodo di richiesta HTTP: `get`, `post`, `put`, `patch`, e `delete`. Tutti questi metodi accettano tre argomenti:
 
-* `$path` Il percorso che utilizza sintassi [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
-* `$name` Un nome univoco per la rotta, utilizzato per generare URL. Per evitare conflitti con altre estensioni, è necessario utilizzare il nome di chi lo ha fornito.
-* `$handler` Il nome della classe controller che gestirà la richiesta. Quest'ultima verrà risolta tramite il contenitore.
+- `$path` Il percorso che utilizza sintassi [FastRoute](https://github.com/nikic/FastRoute#defining-routes).
+- `$name` Un nome univoco per la rotta, utilizzato per generare URL. Per evitare conflitti con altre estensioni, è necessario utilizzare il nome di chi lo ha fornito.
+- `$handler` Il nome della classe controller che gestirà la richiesta. Quest'ultima verrà risolta tramite il contenitore.
 
 ```php
 <?php
@@ -36,9 +36,10 @@ return [
 ];
 ```
 
-:::info [Flarum CLI](https://github.com/flarum/cli)
+:::info [Sviluppatori che spiegano il loro flusso di lavoro per lo sviluppo di estensioni](https://github.com/flarum/cli)
 
-I controller vengono risolti dal [contenitore](https://laravel.com/docs/6.x/container) così puoi iniettarci all'interno le tue dipendenze.
+I controller vengono risolti dal <a href="https://laravel.com/docs/6.x/container">contenitore</a> così puoi iniettarci all'interno le tue dipendenze.
+
 ```bash
 $ flarum-cli make backend route
 ```
@@ -47,7 +48,7 @@ $ flarum-cli make backend route
 
 ### Controller
 
-In Flarum, ** Controller ** è solo un altro nome per una classe che implementa [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). In parole povere, un controller deve implementare un metodo `handle` che riceve una [Richiesta](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) e restituisce una [Risposta](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum include [laminas-diactoros](https://github.com/laminas/laminas-diactoros) che contiene implementazioni di `Response`.
+In Flarum, \*\* Controller \*\* è solo un altro nome per una classe che implementa [RequestHandlerInterface](https://github.com/php-fig/http-server-handler/blob/master/src/RequestHandlerInterface.php). In parole povere, un controller deve implementare un metodo `handle` che riceve una [Richiesta](https://github.com/php-fig/http-message/blob/master/src/ServerRequestInterface.php) e restituisce una [Risposta](https://github.com/php-fig/http-message/blob/master/src/ResponseInterface.php). Flarum include [laminas-diactoros](https://github.com/laminas/laminas-diactoros) che contiene implementazioni di `Response`.
 
 ```php
 <?php
@@ -89,7 +90,7 @@ A volte sarà necessario acquisire segmenti dell'URI all'interno di un percorso.
         ->get('/user/{id}', 'acme.user', UserController::class)
 ```
 
-Innanzitutto, dovrai indicare alla view factory dove può trovare i file di visualizzazione della tua estensione aggiungendo l'estender `View` a `extend.php`:
+The values of these parameters will be merged with the request's query params, which you can access in your controller by calling `$request->getQueryParams()`:
 
 ```php
 use Illuminate\Support\Arr;
@@ -224,7 +225,8 @@ const url = app.route.acmeUser(user);
 
 ### Collegamenti ad altre pagine
 
-A forum wouldn't be very useful if it only had one page. While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
+A forum wouldn't be very useful if it only had one page.
+While you could, of course, implement links to other parts of your forum with HTML anchor tags and hardcoded links, this can be difficult to maintain, and defeats the purpose of Flarum being a [Single Page Application](https://en.wikipedia.org/wiki/Single-page_application) in the first place.
 
 Flarum uses Mithril's routing API to provide a `Link` component that neatly wraps links to other internal pages. Its use is fairly simple:
 
@@ -250,10 +252,10 @@ import Link from 'flarum/common/components/Link';
 
 Whenever you visit a frontend route, the backend constructs a HTML document with the scaffolding necessary to boot up the frontend JavaScript application. You can easily modify this document to perform tasks like:
 
-* Modificare il `<title>` della pagina
-* Aggiunta di risorse JavaScript e CSS esterne
-* Aggiunta di contenuti SEO e tag `<meta>`
-* Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
+- Modificare il `<title>` della pagina
+- Aggiunta di risorse JavaScript e CSS esterne
+- Aggiunta di contenuti SEO e tag `<meta>`
+- Aggiunta di dati al payload JavaScript (ad es. Per precaricare le risorse che verranno visualizzate immediatamente sulla pagina, evitando così una richiesta non necessaria all'API)
 
 You can make blanket changes to the frontend using the `Frontend` extender's `content` method. This accepts a closure which receives two parameters: a `Flarum\Frontend\Document` object which represents the HTML document that will be displayed, and the `Request` object.
 

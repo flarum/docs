@@ -6,7 +6,6 @@ Flarum mantiene un middleware "Pipe" a través del cual pasan todas las solicitu
 
 Una solicitud pasa por las capas de middleware en orden. Cuando la solicitud es manejada (un middleware devuelve algo en lugar de pasar la solicitud a la siguiente capa, o lanza una excepción), la respuesta se moverá de nuevo por las capas de middleware en orden inverso, antes de ser finalmente devuelta al usuario. Todo, desde el manejador de errores de Flarum hasta su lógica de autenticación, se implementa como middleware, por lo que puede ser complementado, reemplazado, reordenado o eliminado por extensiones.
 
-
 ```php
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -52,7 +51,7 @@ return [
 ];
 ```
 
-Tada! Listo, Middleware registrado. Recuerda que el orden es importante.
+Tada! Tada! Listo, Middleware registrado. Recuerda que el orden es importante.
 
 Ahora que ya tenemos lo básico, vamos a repasar algunas cosas más:
 
@@ -61,14 +60,18 @@ Ahora que ya tenemos lo básico, vamos a repasar algunas cosas más:
 Si no necesitas que tu middleware se ejecute en todas las rutas, puedes añadir un `if` para filtrarlo:
 
 ```php
+use Laminas\Diactoros\Uri;
+
 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-{
-    $response = $handler->handle($request);
+  {
+    $currentRoute = $request->getUri()->getPath();
+    $routeToRunUnder = new Uri(app()->url('/path/to/run/under'));
 
-    // Your logic...
-    $response = $response->withHeader('Content-Type', 'application/json');
+    if ($currentRoute === $routeToRunUnder->getPath()) {
+        // Your logic here!
+    }
 
-    return $response;
+    return $handler->handle($request);
 }
 ```
 
@@ -133,7 +136,7 @@ public function process(ServerRequestInterface $request, RequestHandlerInterface
 }
 ```
 
-Phew! ¡Uf! Crisis evitada.
+Phew! Phew! ¡Uf! Crisis evitada.
 
 Para saber más sobre los objetos de solicitud y respuesta, consulte la documentación [PSR HTTP message interfaces](https://www.php-fig.org/psr/psr-7/#1-specification).
 
@@ -163,4 +166,4 @@ Una vez que todo está dicho y hecho y no estás devolviendo una respuesta por t
 return $handler->handle($request);
 ```
 
-Great! We're all done here. ¡Ahora puedes hacer el middleware de tus sueños!
+Great! Great! We're all done here. ¡Ahora puedes hacer el middleware de tus sueños!

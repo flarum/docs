@@ -64,7 +64,21 @@ module.exports = {
       className: 'menu__manage-category',
       collapsible: false,
       items: [
-        'extensions/audit'
+        'extensions/akismet',
+        'extensions/audit',
+        'extensions/bbcode',
+        'extensions/deck',
+        'extensions/embed',
+        'extensions/emoji',
+        'extensions/gdpr',
+        'extensions/markdown',
+        'extensions/messages',
+        'extensions/nicknames',
+        'extensions/realtime',
+        'extensions/statistics',
+        'extensions/sticky',
+        'extensions/suspend',
+        'extensions/tags'
       ]
     },
     {
@@ -153,6 +167,10 @@ module.exports = {
         'extend/notifications',
         'extend/realtime',
         'extend/audit',
+        'extend/deck',
+        'extend/gdpr',
+        'extend/statistics',
+        'extend/tags',
         'extend/post-types',
         'extend/search',
         'extend/service-provider',
