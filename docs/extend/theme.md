@@ -57,6 +57,23 @@ Independently of the container, the discussion post stream is capped on wide scr
 }
 ```
 
+## Logo Size and Quality
+
+From Flarum 2.1, an uploaded logo, and the dark mode logo, are stored 90px tall as WebP at quality 90. The header shows the logo at most 30px tall, so it stays sharp on screens with up to three times the pixel density. A theme that shows the logo larger can store it taller, or at another quality, with the `Theme` extender:
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\Theme())
+        ->logo(height: 126, quality: 95),
+];
+```
+
+Store the logo at its displayed height times the pixel density it should stay sharp at: a logo shown 42px tall needs 126px for 3x screens. Both arguments are optional, and the one you leave out keeps its default. The quality runs from 1 to 100. An animated logo is stored as GIF, which has no quality setting.
+
+The values apply when a logo is uploaded. A logo that is already stored keeps its size and quality until an admin uploads it again.
+
 ## Switching Between Themes
 
 Flarum doesn't currently have a comprehensive system that would support switching between themes. This is planned for future releases.
