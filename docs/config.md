@@ -9,7 +9,7 @@ It also provides Flarum with database info and more.
 
 Only `database`, `url` and `paths` are written by the installer and required. Everything else is optional — leaving a block out gives you the default shown here.
 
-Here is every option core reads, with what each one does:
+Here are the options core reads, with what each one does:
 
 ```php
 <?php return array (
@@ -198,9 +198,11 @@ Extensions can add their own token types, which are configured the same way, key
 
 `lifetime` is how long the server keeps a session; `cookie_expires_on_close` is whether the browser keeps presenting it. Turning the latter on signs people out when they close the browser, which is useful on shared computers — the session itself is untouched.
 
+It applies to "remember me" too: with it on, the remember cookie also ends when the browser closes, so people who chose to be remembered are signed out as well.
+
 #### config.php takes precedence
 
-Anything set in `config.php` overrides the equivalent admin setting, and the admin panel shows those values read-only rather than letting them be changed. This is deliberate: it lets whoever runs the server pin session lengths where an administrator cannot loosen them.
+Anything set in `config.php` overrides the equivalent admin setting, and the admin panel shows those values read-only rather than letting them be changed. This is deliberate: it lets whoever runs the server pin session lengths where an administrator cannot loosen them. Only `lifetime`, `cookie_expires_on_close` and `tokens` do this; setting `session.driver` alone leaves the session lengths with the admin panel.
 
 ### Maintenance modes
 
