@@ -98,62 +98,69 @@ From Flarum 2.1, a driver can tell Flarum when mail to an address bounces perman
 
 - **`getWebhookRequestParser(SettingsRepositoryInterface $settings): RequestParserInterface`**: a [Symfony Webhook](https://symfony.com/doc/current/webhook.html) request parser for the provider. The parser verifies the request, whether by signature, IP address or anything else the provider uses, and turns it into Symfony remote events. Many `symfony/*-mailer` bridges ship one.
 - **`getWebhookSigningSecret(SettingsRepositoryInterface $settings): ?string`**: the secret passed to the parser, or `null` when the provider does not use one.
-- **`webhookConfigured(SettingsRepositoryInterface $settings): bool`**: whether webhooks can be trusted with the current settings. Return `false` while a setting the parser needs, such as a signing key, is missing.
+- **`webhookConfigured(SettingsRepositoryInterface $settings): bool`**: whether webhooks can be trusted with the current settings. Return `false` while a setting the parser needs, such as a signing key, is missing. Flarum then warns the admin that bounce handling isn't set up.
+- **`webhooksAvailable(SettingsRepositoryInterface $settings): bool`**: whether the driver can report bounces at all with the current settings. Return `false` for a configuration that never delivers to real recipients, such as a sandbox mode. Flarum then hides bounce handling entirely.
+- **`isPermanentFailure(MailerDeliveryEvent $event): bool`**: whether a bounce or drop the parser reported is permanent. Flarum only flags the recipient when it is.
 
-Flarum receives webhooks at `/mail/webhook/{driver}`, where `{driver}` is the identifier the driver was [registered](#registering-the-driver) with. Requests are refused with a 404 unless that driver is the active one and `webhookConfigured()` returns `true`. A rejection the parser throws is answered with its status code. A parser may also return `null` for a request it accepted but that carries nothing to act on.
+Flarum receives webhooks at `/mail/webhook/{driver}`, where `{driver}` is the identifier the driver was [registered](#registering-the-driver) with. Requests are refused with a 404 unless that driver is the active one, its webhooks are available, and `webhookConfigured()` returns `true`. A rejection the parser throws is answered with its status code. Every refused request is logged as a warning, with the reason and the sender's IP address. A parser may also return `null` for a request it accepted but that carries nothing to act on.
 
 Flarum acts on two kinds of event:
 
-- A `MailerDeliveryEvent` named `bounce` or `dropped` dispatches `Flarum\Mail\Event\EmailBounced`.
+- A `MailerDeliveryEvent` named `bounce` or `dropped` dispatches `Flarum\Mail\Event\EmailBounced`, when `isPermanentFailure()` returns `true`.
 - A `MailerEngagementEvent` named `spam` dispatches `Flarum\Mail\Event\EmailComplained`.
 
-Every other event is ignored. Only report a `bounce` for a permanent failure: if your provider's converter also reports soft bounces or auto-replies as `bounce`, wrap the parser and return `null` for those. Core's Postmark driver does this with `Flarum\Mail\PostmarkWebhookParser`.
-
-Here are the methods core's Mailgun driver adds, using the parser from `symfony/mailgun-mailer`:
+Every other event is ignored. Many of Symfony's converters report soft bounces, and even auto-replies, as `bounce`, so `isPermanentFailure()` should check the provider's own payload. Here are the methods core's Postmark driver adds. Postmark verifies webhooks by IP address, so there is no secret, and it marks a bounce `Inactive` when it stops sending to the address:
 
 ```php
 use Flarum\Mail\DriverInterface;
 use Flarum\Mail\HandlesWebhooks;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Symfony\Component\Mailer\Bridge\Mailgun\RemoteEvent\MailgunPayloadConverter;
-use Symfony\Component\Mailer\Bridge\Mailgun\Webhook\MailgunRequestParser;
+use Symfony\Component\Mailer\Bridge\Postmark\RemoteEvent\PostmarkPayloadConverter;
+use Symfony\Component\Mailer\Bridge\Postmark\Webhook\PostmarkRequestParser;
+use Symfony\Component\RemoteEvent\Event\Mailer\MailerDeliveryEvent;
 use Symfony\Component\Webhook\Client\RequestParserInterface;
 
-class MailgunDriver implements DriverInterface, HandlesWebhooks
+class PostmarkDriver implements DriverInterface, HandlesWebhooks
 {
-    public function availableSettings(): array
-    {
-        return [
-            // ...
-            'mail_mailgun_webhook_signing_key' => '',
-        ];
-    }
+    // ...
 
     public function getWebhookRequestParser(SettingsRepositoryInterface $settings): RequestParserInterface
     {
-        return new MailgunRequestParser(new MailgunPayloadConverter());
+        return new PostmarkRequestParser(new PostmarkPayloadConverter());
     }
 
     public function getWebhookSigningSecret(SettingsRepositoryInterface $settings): ?string
     {
-        return $settings->get('mail_mailgun_webhook_signing_key') ?: null;
+        return null;
     }
 
     public function webhookConfigured(SettingsRepositoryInterface $settings): bool
     {
-        return $this->getWebhookSigningSecret($settings) !== null;
+        return true;
     }
 
-    // ...
+    public function webhooksAvailable(SettingsRepositoryInterface $settings): bool
+    {
+        return true;
+    }
+
+    public function isPermanentFailure(MailerDeliveryEvent $event): bool
+    {
+        return ($event->getPayload()['Inactive'] ?? false) === true;
+    }
 }
 ```
 
+A provider that signs its webhooks instead, like Mailgun, adds a setting for the signing key, returns it from `getWebhookSigningSecret()`, and returns `false` from `webhookConfigured()` until it is set.
+
 ### Registering the webhook with the provider
 
-If the provider's API can register webhooks, also implement `Flarum\Mail\ProvisionsWebhooks`. The admin mail page then shows a button that calls it with the forum's webhook URL. Without it, the page shows the URL for the admin to add in the provider's dashboard.
+If the provider's API can register webhooks, also implement `Flarum\Mail\ProvisionsWebhooks`. The admin mail page then shows buttons that call it with the forum's webhook URL. Without it, the admin adds the URL, shown on the same page, in the provider's dashboard.
 
 - **`registerWebhook(SettingsRepositoryInterface $settings, string $url): void`**: register `$url` for permanent failures and spam complaints. Calling it again must change nothing, and it must keep any URLs that other applications registered with the same account.
 - **`unregisterWebhook(SettingsRepositoryInterface $settings, string $url): void`**: remove `$url`, and only `$url`.
+
+If the forum is behind HTTP basic authentication, the admin can enter a username and password on the mail page, and they are included in `$url` as `https://username:password@...`. When the admin changes them, `$url` changes too, so match an existing registration by the rest of the URL and replace it, rather than adding a second one.
 
 Throw an exception when the provider refuses. Its message is shown to the admin.
 

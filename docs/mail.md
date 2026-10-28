@@ -34,8 +34,12 @@ When mail to an address bounces permanently, or a recipient marks it as spam, se
 
 The Mail page shows a Bounce Handling section when the selected driver supports it:
 
-- **Mailgun:** paste the HTTP webhook signing key from your Mailgun dashboard into the "Webhook signing key" field and save. Then click "Register webhook with provider". Flarum adds its webhook for permanent failures and spam complaints, and keeps any webhooks other applications have registered. Mailgun allows three URLs per event, so if three are already registered, remove one in Mailgun first.
+- **Mailgun:** paste the HTTP webhook signing key from your Mailgun dashboard into the "Webhook signing key" field and save. Then click "Register webhook with provider". Flarum adds its webhook for permanent failures and spam complaints, and keeps any webhooks other applications have registered. Mailgun allows three URLs per event, so if three are already registered, remove one in Mailgun first. "Remove webhook from provider" takes Flarum's webhook off again.
 - **Postmark:** copy the "Webhook URL" shown on the Mail page. In Postmark, add a webhook with that URL to the message stream your forum sends through, with bounce and spam complaint events selected. Flarum only counts a bounce when Postmark deactivates the address, so soft bounces and out-of-office replies are ignored.
+
+If your forum is behind HTTP basic authentication, for example a protected staging site, enter a username and password under "Webhook username" and "Webhook password" before registering or copying the webhook URL. They are added to the URL so your mail provider can get through.
+
+Flarum logs every webhook it refuses, with the reason and the sender's IP address. If bounces don't arrive, check your forum's log. Postmark is checked against its published IP addresses, which Flarum reads from the connection. If your forum is behind a proxy or CDN, your web server must pass the visitor's real IP address to PHP, for example with Apache's `mod_remoteip` or nginx's `real_ip` module, or every Postmark webhook is refused.
 
 A flagged user sees a notice asking them to update their email address, and the flag clears once they do. Admins can see who is affected in the "Email delivery" column of the Users page, or by searching for `is:bounced`. The dashboard's Email Bounces widget counts bounces over time.
 
