@@ -15,6 +15,25 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## The Appearance page
+
+Besides the forum's colors and custom CSS, the Appearance page sets its logos and icons:
+
+- **Logo** and **Dark Mode Logo**, shown in the header.
+- **Email Logo**, shown at the top of emails. Without one, emails use a copy of the logo.
+- **Favicon**, shown in browser tabs and bookmarks. A square image at least 48 pixels across stays sharp, and an `.ico` file works too. Flarum also stores it as an `.ico` for older browsers and other software.
+- **App Icon**, which phones show when someone adds the forum to their home screen. Upload a square image at least 512 pixels across. The page previews it as iPhones and Android show it, and **App Icon Background** fills its transparent parts on iPhones and iPads, and the space around it on Android. Without a favicon, the app icon is used as the favicon too.
+
+If a theme sets one of these images, the page shows it, marked as set by that theme, but it can't be changed there.
+
+Flarum answers requests for `/favicon.ico` itself. On nginx, Flarum's suggested configuration serves `.ico` files straight from the disk, so to have Flarum answer that request too, add this before its other `location` blocks:
+
+```nginx
+location = /favicon.ico {
+  try_files $uri /index.php?$query_string;
+}
+```
+
 ## The Advanced page
 
 The Advanced page holds settings that most forums never need to change, so it is hidden from the admin menu until you turn it on.
