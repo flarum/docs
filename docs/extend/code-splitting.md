@@ -107,6 +107,27 @@ Loaders run one at a time, each waiting for the next idle period, so prefetching
 
 Only prefetch chunks the user is *likely* to need soon. Prefetching everything would defeat the point of code splitting by pulling the whole app over the network up front.
 
+### Preloading a chunk a page needs straight away
+
+Prefetching starts once the app has booted, which is too late for a chunk the page imports as soon as it mounts. Core's post stream is one: when the first page someone opens is a discussion, the posts can't show until it has loaded. From Flarum 2.1, the server can have the browser download such a chunk alongside the main bundle instead. Call `preloadChunk()` on the document from the content of the route whose page needs it:
+
+```php
+use Flarum\Frontend\Document;
+use Psr\Http\Message\ServerRequestInterface;
+
+class CustomPageContent
+{
+    public function __invoke(Document $document, ServerRequestInterface $request): Document
+    {
+        $document->preloadChunk('acme-custom', 'forum/components/CustomPage');
+
+        return $document;
+    }
+}
+```
+
+The first argument is your extension's ID, or `core`. The second is the chunk's path in your JS, without `.js`: the module's path under `src`. The preload carries the chunk's current revision, so it matches the address the frontend loads the chunk from. Only preload a chunk on the routes that render it straight away; anywhere else it's a download the page doesn't need.
+
 
 ## Extending a split component class
 
