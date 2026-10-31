@@ -1,6 +1,6 @@
 # Admin Dashboard
 
-Every extension has a unique page containing information, settings, and the extension's own permissions.
+Every extension has a unique page containing information, settings, and the extension's own permissions. By default the page has a **General** tab for the settings and a **Permissions** tab for the permissions; you can [group settings into sections and tabs](#sections-and-tabs) of your own.
 
 You can register settings, permissions, or use an entirely custom page based off of the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) component.
 
@@ -161,6 +161,17 @@ export default [
 ];
 ```
 
+To put a custom setting like this in a [section](#sections-and-tabs), register it with `customSetting()` instead and pass the section id as the third argument:
+
+```js
+new Extend.Admin()
+  .customSetting(
+    () => <div className="Form-group">{/* ... */}</div>,
+    0, // Priority
+    'launch' // Section id
+  )
+```
+
 ### Available Setting Types
 
 This is a list of setting types available by default:
@@ -209,6 +220,128 @@ This is a list of setting types available by default:
   url: () => app.forum.attribute('myImageUrl'), // The URL of the image, this will be used to preview the image.
 }
 ```
+
+### Sections and Tabs
+
+An extension with more than a handful of settings should group them, so admins can tell at a glance what each one is about. The `Admin` extender has two levels of grouping:
+
+- **Sections** are titled groups of settings, with an optional icon and description. On wide screens the title and description sit in a column beside the settings; on narrow screens they stack above them.
+- **Tabs** split the page. Each section is shown on one tab.
+
+#### Grouping Settings into Sections
+
+Register a section with the `section` method, then give each setting a `section` key with the section's id:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .section(
+      () => ({
+        id: 'launch', // Unique within your extension. Settings refer to it with `section: 'launch'`.
+        label: app.translator.trans('acme-interstellar.admin.sections.launch.label'),
+        description: app.translator.trans('acme-interstellar.admin.sections.launch.description'), // Optional
+        icon: 'fas fa-rocket', // Optional
+      }),
+      20 // Optional: Priority
+    )
+    .section(
+      () => ({
+        id: 'crew',
+        label: app.translator.trans('acme-interstellar.admin.sections.crew.label'),
+        icon: 'fas fa-user-astronaut',
+      }),
+      10
+    )
+    .setting(() => ({
+      setting: 'acme-interstellar.fuel_type',
+      section: 'launch',
+      label: app.translator.trans('acme-interstellar.admin.fuel_type_label', {}, true),
+      type: 'select',
+      options: { LOH: 'Liquid Fuel', RDX: 'Solid Fuel' },
+      default: 'LOH',
+    }))
+    .setting(() => ({
+      setting: 'acme-interstellar.crew_count',
+      section: 'crew',
+      label: app.translator.trans('acme-interstellar.admin.crew_count_label', {}, true),
+      type: 'number',
+      min: 1,
+      max: 10,
+    })),
+];
+```
+
+```yaml
+acme-interstellar:
+  admin:
+    sections:
+      launch:
+        label: Launch
+        description: How and when rockets leave the pad.
+      crew:
+        label: Crew
+```
+
+Sections are shown in order of their priority, highest first. Within a section, settings keep the order of their own priorities. A section with no settings in it is not shown.
+
+A setting that doesn't name a section, or names one that isn't registered, joins the section of the setting shown before it. This keeps settings that other extensions add to your page next to the setting they were placed after before your page had sections. Settings shown before the first sectioned one appear at the top of the page without a heading. To keep your own layout predictable, give every setting a `section`.
+
+`replaceSetting()` keeps a setting in its section, unless the replacement names another one.
+
+#### Splitting Settings into Tabs
+
+Register a tab with the `tab` method, and give each section a `tab` key with the tab's id:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin()
+    .tab(
+      () => ({
+        id: 'flight',
+        label: app.translator.trans('acme-interstellar.admin.tabs.flight'),
+        icon: 'fas fa-rocket', // Optional
+      }),
+      20 // Optional: Priority
+    )
+    .tab(
+      () => ({
+        id: 'advanced',
+        label: app.translator.trans('acme-interstellar.admin.tabs.advanced'),
+        icon: 'fas fa-cogs',
+      }),
+      10
+    )
+    .section(() => ({ id: 'launch', tab: 'flight', label: '...' }), 20)
+    .section(() => ({ id: 'crew', tab: 'flight', label: '...' }), 10)
+    .section(() => ({ id: 'telemetry', tab: 'advanced', label: '...' }))
+    .setting(() => ({ setting: 'acme-interstellar.fuel_type', section: 'launch' /* ... */ }))
+    .setting(() => ({ setting: 'acme-interstellar.telemetry_url', section: 'telemetry' /* ... */ })),
+];
+```
+
+Settings are placed on tabs through their sections:
+
+- Tabs are shown in order of their priority, highest first.
+- A section without a `tab`, or with a `tab` that isn't registered, is shown on the first tab. So are settings shown before the first section.
+- A tab with no settings on it is not shown.
+- Once you register a tab of your own, the default **General** tab is no longer added.
+- If your extension registers permissions, a **Permissions** tab is always added last.
+- When the page ends up with a single tab, it is shown without the tab bar.
+
+The open tab is kept in the URL as a `tab` query parameter, so reloading the page or sharing the link opens the same tab, and you can link to a tab directly:
+
+```js
+app.route('extension', { id: 'acme-interstellar', tab: 'advanced' });
+// The default tabs are `general` and `permissions`.
+```
+
+Switching tabs keeps unsaved changes, and a dot on a tab marks the one that has them. The save and reset buttons are shown under the settings of every tab, and apply to the whole page.
 
 ### Registering Permissions
 
@@ -302,6 +435,62 @@ This page will be shown instead of the default.
 
 You can extend the [`ExtensionPage`](https://api.docs.flarum.org/js/2.x/classes/flarum.admin_components_extensionpage.extensionpage) or extend the base `Page` and design your own!
 
+#### Tabs on a Custom Page
+
+A custom page that overrides `content()` keeps the stacked layout it was written for: your `content()`, then the permissions below it, with no tabs. To lay it out in tabs instead, override `pageTabItems()` and `pageTabContent()`:
+
+```tsx
+import app from 'flarum/admin/app';
+import ExtensionPage, { type ExtensionPageAttrs } from 'flarum/admin/components/ExtensionPage';
+import type { TabItem } from 'flarum/common/components/Tabs';
+import type ItemList from 'flarum/common/utils/ItemList';
+import type Mithril from 'mithril';
+import StarMap from './StarMap';
+
+export default class StarPage extends ExtensionPage {
+  pageTabItems(): ItemList<TabItem> {
+    const items = super.pageTabItems();
+
+    items.add('stars', { id: 'stars', label: app.translator.trans('acme-interstellar.admin.tabs.stars'), icon: 'fas fa-star' }, 100);
+
+    return items;
+  }
+
+  pageTabContent(tab: string, vnode: Mithril.VnodeDOM<ExtensionPageAttrs, this>): Mithril.Children {
+    if (tab === 'stars') return this.content();
+
+    return super.pageTabContent(tab, vnode);
+  }
+
+  content() {
+    return <StarMap />;
+  }
+}
+```
+
+`super.pageTabItems()` holds the settings tabs (the ones you registered, or **General**), each only when it has settings in it, followed by **Permissions** with a priority of `-100`. The settings tabs have small positive priorities (`10`, `20`, …), so a priority of `100` puts your own tab first. For those tabs, `super.pageTabContent()` renders the registered settings or the permission grid.
+
+A tab item accepts these properties:
+
+| Property         | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `id`             | The tab's id, also used in the `?tab=` query parameter.                     |
+| `label`          | The tab's label.                                                            |
+| `icon`           | Optional: a Font Awesome icon class.                                        |
+| `badge`          | Optional: a short count or label shown after the tab's label.               |
+| `indicator`      | Optional: `true` shows a dot after the label, e.g. for unsaved changes.     |
+| `indicatorLabel` | Optional: accessible text for the dot.                                      |
+| `disabled`       | Optional: `true` makes the tab unselectable.                                |
+
+To render the registered settings of one tab inside a tab of your own, call `this.settingsForm(tabId)`. It renders the settings in their sections, followed by the buttons from `settingsFormControls()`, an `ItemList` holding `submit` (priority 100) and, on extension pages, `reset` (priority 90). Extend it to add buttons of your own.
+
+#### Changing Every Extension Page
+
+Extensions that change `ExtensionPage` for every extension keep working:
+
+- Changes made to `ExtensionPage.prototype.content` with `extend()` or `override()` show in the **General** tab of pages that don't register tabs of their own.
+- `sections()` still holds a `content` item and a `permissions` item. Replacing `content` brings back the stacked layout, with the permissions below your replacement. Removing or replacing `permissions` removes the **Permissions** tab.
+
 ### Reset Settings Button
 
 `AdminPage` provides a `resetButton()` method that renders a **Reset Settings** button. When clicked, it opens a confirmation modal listing the setting keys that will be deleted from the database, reverting them to their PHP-side defaults (as registered via `Extend\Settings()->default(...)`).
@@ -343,7 +532,7 @@ When a reset is confirmed, a `Flarum\Settings\Event\Reset` event is dispatched o
 
 ### Admin Search
 
-The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.setting` and `Admin.permission` extender methods, your settings and permissions will be automatically indexed and searchable. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
+The admin dashboard has a search bar that allows you to quickly find settings and permissions. If you have used the `Admin.setting` and `Admin.permission` extender methods, your settings and permissions will be automatically indexed and searchable. A setting's search result shows the tab and section it is in, and opens the extension page on that tab; a permission's result opens the **Permissions** tab. However, if you have a custom setting, or custom page that structures its content differently, then you must manually add index entries that reference your custom settings.
 
 To do this, you can use the `Admin.generalIndexItems` extender method. This method takes an index type (`'settings'` or `'permissions'`) and a callback that returns an array of index items. Each index item is an object with the following properties:
 
@@ -394,6 +583,84 @@ export default [
     ])
 ];
 ```
+
+### Adding Settings to Core Pages
+
+The core **Basics**, **Appearance**, **Email** and **Advanced** pages are split into sections too.
+
+The settings on the Basics page are registered under the `core-basics` key. Pass that key to the `Admin` extender to add a setting to one of its sections:
+
+```js
+import Extend from 'flarum/common/extenders';
+import app from 'flarum/admin/app';
+
+export default [
+  new Extend.Admin('core-basics')
+    .setting(() => ({
+      setting: 'acme-interstellar.home_planet',
+      section: 'forum',
+      label: app.translator.trans('acme-interstellar.admin.home_planet_label', {}, true),
+      type: 'text',
+    })),
+];
+```
+
+| Section id   | Label     |
+|--------------|-----------|
+| `forum`      | Forum     |
+| `language`   | Language  |
+| `home`       | Home Page |
+| `members`    | Members   |
+| `urls`       | Links     |
+| `extensions` | Extensions |
+
+The same works for another extension's page: pass that extension's id to the `Admin` extender and use one of its section ids.
+
+The Appearance, Email and Advanced pages are still built from the same `ItemList`s (`brandingItems()`, `mailSettingItems()`, `sectionItems()` and so on). An item you add to one of them, without anything else, joins the section of the item shown before it, so choose its priority to place it next to the items it belongs with. On the Advanced page, every item of `sectionItems()` is a section of its own: add a `FormSection` to it to add a section.
+
+### Section and Tab Components
+
+The components behind the settings layout can be used on pages of your own:
+
+- **`flarum/admin/components/SettingsSection`** renders a titled section. It takes `label`, and optionally `description`, `icon` and `id`, and shows its children as the section's body. Inside a `Form` with the `AdminPage-settingsForm AdminPage-settingsForm--sectioned` classes, sections get the same spacing as core's, and the save buttons stay in reach at the bottom of the screen.
+
+  ```tsx
+  <Form className="AdminPage-settingsForm AdminPage-settingsForm--sectioned">
+    <SettingsSection id="acme-launch" icon="fas fa-rocket" label={app.translator.trans('acme-interstellar.admin.sections.launch.label')}>
+      {this.buildSettingComponent({ setting: 'acme-interstellar.crew_count', type: 'number', label: app.translator.trans('acme-interstellar.admin.crew_count_label') })}
+    </SettingsSection>
+    <div className="Form-group Form-controls">{this.submitButton()}</div>
+  </Form>
+  ```
+
+- **`flarum/admin/components/FormSection`** now renders as a `SettingsSection`, keeping its `FormSection` class. `FormSectionGroup` stacks its sections instead of laying them out side by side as cards.
+- **`AdminPage.itemSections(items, sections)`** renders an `ItemList` as sections. Each section lists the keys of the items it holds in an `items` array; an item none of them lists joins the section of the item before it. This is how the Appearance and Email pages build their sections:
+
+  ```tsx
+  this.itemSections(this.launchItems(), [
+    { id: 'acme-launch', label: app.translator.trans('acme-interstellar.admin.sections.launch.label'), items: ['fuel', 'countdown'] },
+    { id: 'acme-crew', label: app.translator.trans('acme-interstellar.admin.sections.crew.label'), items: ['crew-count'] },
+  ]).toArray()
+  ```
+
+- **`AdminPage.settingsForm()`** renders the settings registered under a key in their sections, with the save buttons. An `AdminPage` subclass returns the key from `settingsRegistryKey()`, as the Basics page does with `core-basics`.
+- **`flarum/common/components/Tabs`** is an accessible tab bar, available in both the forum and the admin frontend. It is controlled: you keep track of the active tab and render its content as the children.
+
+  ```tsx
+  <Tabs
+    tabs={[
+      { id: 'flight', label: app.translator.trans('acme-interstellar.admin.tabs.flight') },
+      { id: 'crew', label: app.translator.trans('acme-interstellar.admin.tabs.crew'), badge: 3 },
+    ]}
+    active={this.activeTab}
+    onchange={(tab) => (this.activeTab = tab)}
+    idPrefix="acme-interstellar"
+  >
+    {this.activeTab === 'flight' ? <FlightSettings /> : <CrewList />}
+  </Tabs>
+  ```
+
+  `idPrefix` is used for the element ids of the tabs and their panel, so it must be unique on the page.
 
 ## Extension Categories
 
