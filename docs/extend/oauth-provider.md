@@ -105,7 +105,11 @@ class McpController implements RequestHandlerInterface
         $header = $request->getHeaderLine('Authorization');
         $jwt = str_starts_with($header, 'Bearer ') ? substr($header, 7) : '';
 
-        $token = $this->tokens->validate($jwt, $this->url->to('forum')->route('mcp'));
+        $token = $this->tokens->validate(
+            $jwt,
+            $this->url->to('forum')->route('mcp'),
+            $request->getAttribute('ipAddress'),
+        );
 
         if ($token === null) {
             return new JsonResponse(['error' => 'invalid_token'], 401, ['WWW-Authenticate' => 'Bearer error="invalid_token"']);
@@ -126,9 +130,9 @@ class McpController implements RequestHandlerInterface
 
 - has a bad signature;
 - has expired or been revoked;
-- belongs to a revoked client;
+- belongs to a revoked client, or to a kind of client the admin has switched off;
 - was issued for another resource;
-- belongs to a user who no longer exists.
+- belongs to a user who no longer exists, or who doesn't have the **Connect applications to their account** permission (`oauthProvider.connect`). Suspended members don't, and nor do anonymised ones.
 
 Otherwise it returns a `ValidatedToken` with these properties:
 
@@ -140,11 +144,27 @@ Otherwise it returns a `ValidatedToken` with these properties:
 | `tokenId` | The token's ID (`jti`) |
 | `resource` | The resource URL |
 
-Validation also records when the token was last used. Members see this under **Connected applications**. It is written at most once a minute per token.
+Validation also records when the token was last used and, when you pass the request's IP address as the third argument, where from. Members see both under **Connected applications** on their Security page. They are written at most once a minute per token.
 
 The token only says which member it acts for. Check that member's permissions as you would for any other request.
 
 The extension doesn't serve protected resource metadata ([RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728)). If your protocol needs it, as MCP does, serve it from your extension and point `authorization_servers` at the forum's URL.
+
+## Events
+
+The extension dispatches these events, in `Flarum\OAuthProvider\Event`, for what members and administrators do. The extension's own [Audit](../extensions/audit.md) integration listens to them.
+
+| Event | When | Properties |
+| --- | --- | --- |
+| `Authorized` | A member authorized an application. | `user`, `client`, `consented`: `true` when the member approved it just now, `false` when an earlier approval covered the request |
+| `Disconnected` | A member disconnected an application. | `user`, `client` |
+| `DisconnectedAll` | A member disconnected every application at once. Not dispatched when logging out everywhere disconnects them. | `user` |
+| `ClientCreated` | An administrator added a client. | `client`, `actor` |
+| `ClientUpdated` | An administrator edited a client. | `client`, `actor` |
+| `ClientDeleted` | An administrator deleted a client. | `client`, `actor` |
+| `ClientSecretRotated` | An administrator rotated a client's secret. | `client`, `actor` |
+
+`client` is a `Flarum\OAuthProvider\Models\Client`; `user` and `actor` are `Flarum\User\User`.
 
 ## Connecting an application
 
@@ -214,7 +234,7 @@ A guest is sent to the forum's login form, then brought back to continue. The me
 - with the same redirect URIs;
 - and the request has no `prompt=consent`.
 
-Approving redirects to `redirect_uri` with `code`, `state` and `iss`. Declining redirects with `error=access_denied`. Approvals of the same client are merged into one, which the member can revoke from their settings.
+Approving redirects to `redirect_uri` with `code`, `state` and `iss`. Declining redirects with `error=access_denied`, as does a member without the **Connect applications to their account** permission, such as a suspended one. Approvals of the same client are merged into one, which the member can revoke from their Security page.
 
 When the client or redirect URI is invalid, the forum answers with a JSON error and doesn't redirect.
 
@@ -302,7 +322,7 @@ The response is `200` for unknown tokens, and for tokens of other clients, so th
 
 ### `POST /oauth/register`
 
-Dynamic client registration ([RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)) for public clients. The endpoint exists only while the admin setting **Allow dynamic client registration** is on, which is the default. Otherwise it returns `404`, and `registration_endpoint` is left out of the discovery documents.
+Dynamic client registration ([RFC 7591](https://datatracker.ietf.org/doc/html/rfc7591)) for public clients. The endpoint exists only while the admin setting **Allow self-registered applications** is on, which is the default. Otherwise it returns `404`, and `registration_endpoint` is left out of the discovery documents.
 
 Send a JSON object:
 
@@ -322,7 +342,7 @@ Registrations are limited to 10 an hour per IP address, or per `/64` for IPv6. O
 
 ### Client ID Metadata Documents
 
-A client can use an `https://` URL as its client ID instead of registering. This is described in the [Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/). The forum fetches the document when the client first sends a member to `/oauth/authorize`, and again on the first authorization after the cached copy expires.
+A client can use an `https://` URL as its client ID instead of registering. This is described in the [Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/). The forum fetches the document when the client first sends a member to `/oauth/authorize`, and again on the first authorization after the cached copy expires. Like dynamic registration, this works only while **Allow self-registered applications** is on.
 
 The URL must:
 
@@ -363,7 +383,7 @@ If the redirect URIs in the document change, members are asked for consent again
 | --- | --- |
 | `issuer` | The forum's URL |
 | `authorization_endpoint`, `token_endpoint`, `revocation_endpoint`, `jwks_uri` | The endpoints above |
-| `registration_endpoint` | When dynamic registration is enabled |
+| `registration_endpoint` | When self-registered applications are allowed |
 | `scopes_supported` | Every registered scope |
 | `response_types_supported` | `["code"]` |
 | `response_modes_supported` | `["query"]` |
@@ -371,7 +391,7 @@ If the redirect URIs in the document change, members are asked for consent again
 | `token_endpoint_auth_methods_supported`, `revocation_endpoint_auth_methods_supported` | `["client_secret_basic", "client_secret_post", "none"]` |
 | `code_challenge_methods_supported` | `["S256"]` |
 | `authorization_response_iss_parameter_supported` | `true` |
-| `client_id_metadata_document_supported` | `true` |
+| `client_id_metadata_document_supported` | `true`, when self-registered applications are allowed |
 
 `/.well-known/openid-configuration` adds:
 

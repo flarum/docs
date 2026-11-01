@@ -39,9 +39,18 @@ The consent screen can't be shown inside another site's frame, so it can't be di
 
 ## Managing applications
 
-Go to the extension's page in the admin panel. The **Clients** tab lists every application that can connect, with its client ID, its redirect URIs, and whether it is revoked. Applications that [registered themselves](#applications-that-register-themselves) are labelled **Self-registered** or **Metadata document**.
+Go to the extension's page in the admin panel. Applications are listed on two tabs:
+
+- **Applications**: the ones an administrator added, such as another site that lets members sign in with their account here.
+- **Self-registered**: the ones that [registered themselves](#applications-that-register-themselves), such as AI assistants. They are labelled **Self-registered** or **Metadata document**.
+
+Each application shows its client ID, its redirect URIs, and whether it is revoked. It also shows how many members have connected it and when it was last used.
 
 Only administrators can see and manage applications.
+
+### Who connected an application
+
+Select an application's member count to open the **Users** page filtered to the members who connected it. The same filter works in the Users page search: `connected:<client ID>` finds those members, and `-connected:<client ID>` the others. Only administrators can use it.
 
 ### Adding an application
 
@@ -94,11 +103,11 @@ Applications that identify themselves this way:
 
 - can't keep a secret, so they must prove each request the way mobile apps do (PKCE);
 - can only use `https://` redirect URIs, or `http://` ones on the same computer;
-- appear on the **Clients** tab, where you can revoke or delete them like any other.
+- appear on the **Self-registered** tab, where you can revoke or delete them like any other.
 
 Because these applications choose their own name, members see them marked **unverified, self-registered** on the consent screen. The screen also shows which site the member will be sent back to, and for a metadata document, which site describes the application.
 
-To stop applications registering themselves, go to the **Settings** tab and switch off **Allow dynamic client registration**. It is on by default. Applications identified by a metadata document are still accepted.
+To stop them, see [Choosing which applications may connect](#choosing-which-applications-may-connect).
 
 ### Limits and clean-up
 
@@ -115,15 +124,28 @@ A self-registered application that no member ever authorized is deleted after 30
 php flarum oauth:prune-clients
 ```
 
+## Choosing which applications may connect
+
+The **Settings** tab has a switch for each kind of application. Both are on by default.
+
+- **Allow self-registered applications.** Switched off, no application can register itself or identify itself with a metadata document, and the forum stops advertising either.
+- **Allow applications added by an admin.** Switched off, **Add client** is hidden as well.
+
+While a kind is switched off, its applications can't sign members in, and the access they already have stops working. Nothing is deleted: switch it back on and they work again, with the access members gave them.
+
 ## What members see
 
-Members find the applications they've approved under **Connected applications** on their **Settings** page. For each one it shows:
+Members find the applications they've approved under **Connected applications** on their **Security** page, listed like their browser sessions. For each one it shows:
 
 - what it can access;
 - when it was connected;
-- when it last used that access.
+- when it last used that access, and from which IP address.
 
-**Revoke** signs the application out at once. It must ask for permission again to come back.
+The address is where the application connected from. For an application running on the member's own computer, such as Claude Code, that is the member's address. For one run by a service, such as a connector on claude.ai, it is the service's.
+
+**Revoke** signs the application out at once. It must ask for permission again to come back. With more than one application connected, **Revoke all** does that for every one of them.
+
+**Global Logout**, further down the same page, also disconnects every application, as well as ending the member's sessions.
 
 ## How long access lasts
 
@@ -167,8 +189,26 @@ Never trust the header from every address. Anyone could then choose their own ad
 
 ## Permissions
 
-The extension adds no permissions. Only administrators can manage applications. Every signed-in member can approve applications and revoke their own approvals.
+| Permission | Default | |
+| --- | --- | --- |
+| **Connect applications to their account** | Members | Approving applications, and using the ones already connected. |
+
+Members without it can't approve applications, and the applications they connected stop working until they have it again. This is how suspended members are kept out: while suspended they only have guests' permissions. Members whose email address isn't confirmed don't have it either.
+
+Only administrators can manage applications. Members can always revoke their own approvals.
+
+## Audit log
+
+With [Audit](audit.md) enabled, the log records:
+
+- a member connecting an application, and signing in to it again with an approval they gave earlier;
+- a member disconnecting an application, or all of them;
+- an administrator adding, editing or deleting a client, or rotating its secret.
+
+See [Audit](audit.md#flarum-oauth-provider) for the entries.
 
 ## Deleting members
 
 Deleting a member deletes their approvals and everything issued for them.
+
+With [GDPR](gdpr.md) enabled, a member's data export lists the applications they connected. Erasing a member, by deletion or anonymisation, disconnects every one of them. An anonymised member also loses the **Connect applications to their account** permission, as their email address is no longer confirmed.
