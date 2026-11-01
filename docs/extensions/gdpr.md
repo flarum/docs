@@ -153,6 +153,8 @@ Check it before choosing your actions. Data stored by an extension is only cover
 
 The bundled [Messages](messages.md) extension registers private messages: a member's messages are included in their export, lose their IP addresses when the account is anonymized, and are deleted when it is deleted. Nobody can message an anonymized account.
 
+The bundled [OAuth Provider](oauth-provider.md) extension registers the applications a member connected: they are listed in the export, and every one is disconnected when the account is anonymized or deleted.
+
 ## Scheduled tasks
 
 These run daily through the [scheduler](../scheduler.md). You can also run them by hand.
