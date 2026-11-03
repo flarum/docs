@@ -243,6 +243,8 @@ public function endpoints(): array
 }
 ```
 
+Without `paginate()`, the endpoint returns the whole list, so leave it out only for lists that stay small, such as groups. A client can still ask for one page of such a list with `page[limit]`, `page[offset]` or `page[number]`: the endpoint then returns that page, of at most `maxLimit` items (50 by default), with `meta.page` and the pagination links to the rest. An endpoint that sets a page size with `limit()` instead of `paginate()` always returns pages of that size, with the same links.
+
 #### Sorting
 
 You can specify sort columns through the `sorts` method. For example the following will permit two sorting options: `createdAt` (in ascending order) and `-createdAt` (in descending order):
