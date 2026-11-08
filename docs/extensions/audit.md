@@ -83,7 +83,7 @@ The filter field uses a fixed set of search gambits. The browser shows clickable
 | `user:<username>` | Match actions affecting a given user. |
 | `client:<client>` | Match the [client type](#anatomy-of-an-entry). |
 | `discussion:<id>` | Match both discussion and post events for a discussion ID. |
-| `ip:<ip>` | Match an IP address (only available to users allowed to see IP addresses). |
+| `ip:<ip>` | Match an IP address (only available to users allowed to see IP addresses). From Flarum 2.1, also accepts a partial address or a range: `ip:192.168` or `ip:192.168.*`, `ip:10.0.0.0/8`, `ip:2a02:390:9e5c:beef` (its /64) or `ip:2a02:390:9e5c:bee0::/60`. See [Indexing older entries for IP range search](#indexing-older-entries-for-ip-range-search). |
 
 Gambits accept comma-separated values to match any of them (for example `action:post.created,post.deleted`), and a leading `-` excludes matches (for example `-client:cli`).
 
@@ -92,6 +92,16 @@ Gambits accept comma-separated values to match any of them (for example `action:
 The filter field only understands these gambits. Free-text typed into the field that does not match a gambit has no effect.
 
 :::
+
+### Indexing older entries for IP range search
+
+Flarum 2.1 adds partial-address and range search to the `ip:` gambit. Entries recorded from then on can be found that way straight away. Entries recorded before the upgrade, including any carried over from the KILOWHAT extension, are still found by an exact `ip:` search, but a partial or range search only finds them after you run this command once:
+
+```bash
+php flarum audit:backfill-ip
+```
+
+The command isn't part of the upgrade itself, because a large log could make the upgrade take a long time. It works through the log in batches (`--chunk=1000` by default), can be stopped and run again, and reports any stored values that aren't valid IP addresses. Those are left as they are and can still be found by an exact search.
 
 ## IP country indicator
 
