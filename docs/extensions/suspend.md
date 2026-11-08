@@ -48,7 +48,7 @@ While suspended, they have a **Suspended** badge. Only they and users who can su
 
 ### Changing or lifting a suspension
 
-Open **Suspend** again to change the length, reason or message, or choose **Not suspended** to lift it. Lifting a suspension clears the reason and the message, and the member gets a notification and an email to say they are no longer suspended.
+Open **Suspend** again to change the length, reason or message. An indefinite suspension remains selected as **Suspended indefinitely** when you reopen the dialog. Choose **Not suspended** to lift it. Lifting a suspension clears the reason and the message, and the member gets a notification and an email to say they are no longer suspended.
 
 Any change to a current suspension, including only editing the reason or message, counts as a new suspension: the member is notified and emailed again.
 
