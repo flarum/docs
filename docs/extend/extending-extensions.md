@@ -45,6 +45,8 @@ if ('some-extension-id' in flarum.extensions) {
 }
 ```
 
+If you only need to add extenders when extension B is enabled, use the frontend [`Conditional` extender](settings.md#in-the-frontend) in your `extend.ts` instead.
+
 In the backend, you'll need to inject an instance of `Flarum\Extension\ExtensionManager`, and use its `isEnabled()` method. For instance:
 
 ```php

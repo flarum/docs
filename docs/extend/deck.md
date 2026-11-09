@@ -26,31 +26,24 @@ Declare `flarum/deck` as an optional dependency in your `composer.json`, so Deck
 }
 ```
 
-Keep the Deck integration in its own file, and only add it when Deck is enabled. Import from Deck with the `ext:` prefix, which resolves modules from another extension at runtime. See [extending extensions](extending-extensions.md) for how that works.
-
-```ts
-// forum/extend.ts
-import extendDeck from './extendDeck';
-
-export default [
-  // ...your other extenders
-  ...('flarum-deck' in flarum.extensions ? extendDeck() : []),
-];
-```
+Your imports from Deck use the `ext:` prefix, which looks the module up among Deck's exports when your extension's JavaScript loads. If Deck loaded after your extension, those imports would come back `undefined` even with Deck enabled. See [extending extensions](extending-extensions.md) for more on `ext:` imports.
 
 ## Adding a column type
 
-`DeckColumns` takes a **key**, a **column type**, and an optional **priority**. Here is a column of discussions with a filter, much as Subscriptions adds **Following**:
+Register a column type with the `DeckColumns` extender, inside a frontend [`Conditional` extender](settings.md#in-the-frontend) in your `extend.ts`. Here is a column of discussions with a filter, much as Subscriptions adds **Following**:
 
 ```ts
-// forum/extendDeck.ts
+// forum/extend.ts
 import app from 'flarum/forum/app';
+import Extend from 'flarum/common/extenders';
 import extractText from 'flarum/common/utils/extractText';
 import DeckColumns from 'ext:flarum/deck/forum/extenders/DeckColumns';
 import DiscussionListSource from 'ext:flarum/deck/forum/columns/DiscussionListSource';
 
-export default function extendDeck() {
-  return [
+export default [
+  // ...your other extenders
+
+  new Extend.Conditional().whenExtensionEnabled('flarum-deck', () => [
     new DeckColumns().add(
       'acme-bookmarks.bookmarked',
       {
@@ -62,9 +55,13 @@ export default function extendDeck() {
       },
       20
     ),
-  ];
-}
+  ]),
+];
 ```
+
+When Deck isn't enabled, `DeckColumns` and `DiscussionListSource` are `undefined`. That is harmless as long as nothing uses them, and the `Conditional` extender makes sure of that: it only calls the callback when Deck is enabled.
+
+`add()` takes a **key**, a **column type**, and an optional **priority**:
 
 - **The key** is stored in every member's layout, so it can't change once members have the column. Prefix it with your extension's name, as in `acme-bookmarks.bookmarked`. It may contain letters, numbers, `_`, `.` and `-`, up to 64 characters, starting with a letter.
 - **The priority** orders the types in the add-column modal, highest first. Deck's own run from 90 down to 20, and the bundled extensions use 100 (**Following**), 70 (**Tag**), 60 (**Flagged Posts**) and 25 (**Messages**).

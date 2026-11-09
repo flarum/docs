@@ -120,7 +120,7 @@ Sometimes you might want a setting's value to be reset to its default value base
 
 ## Conditional Extenders
 
-The `Conditional` extender allows you to apply other extenders only when a certain condition is met. This is useful for optional integrations — for example, adding extra API fields only when a companion extension is enabled, or changing behaviour based on a settings value.
+The `Conditional` extender allows you to apply other extenders only when a certain condition is met. This is useful for optional integrations — for example, adding extra API fields only when a companion extension is enabled, or changing behaviour based on a settings value. The examples below are for `extend.php`. The frontend has its own version, described under [In the frontend](#in-the-frontend).
 
 ```php
 use Flarum\Extend;
@@ -185,3 +185,52 @@ The general-purpose method that all the above convenience methods are built on. 
         // ...
     ])
 ```
+
+### In the frontend
+
+The frontend has a `Conditional` extender too. Use it in `extend.ts` to register extenders that only make sense when another extension is enabled:
+
+```ts
+// forum/extend.ts
+import Extend from 'flarum/common/extenders';
+import Discussion from 'flarum/common/models/Discussion';
+import type Tag from 'ext:flarum/tags/common/models/Tag';
+
+export default [
+  new Extend.Conditional()
+    .whenExtensionEnabled('flarum-tags', () => [
+      new Extend.Model(Discussion).hasOne<Tag>('acmeFeaturedTag'),
+    ])
+    .whenExtensionDisabled('flarum-tags', () => [
+      new Extend.Model(Discussion).attribute<string>('acmeCategoryLabel'),
+    ]),
+];
+```
+
+The extenders are passed as a callback that returns an array, and Flarum only calls it when the condition passes. This is what makes it safe to use an optional extension's exports: an `ext:` import from an extension that isn't enabled resolves to `undefined`, so an extender built from it, such as `new DeckColumns()`, must be created inside the callback. See [Adding columns to Deck](deck.md#adding-a-column-type) for an example.
+
+| Method | Applies the extenders when |
+| --- | --- |
+| `whenExtensionEnabled(extensionId, extenders)` | `extensionId` is a key of `flarum.extensions`. |
+| `whenExtensionDisabled(extensionId, extenders)` | `extensionId` is not a key of `flarum.extensions`. |
+| `when(condition, extenders)` | `condition` is `true`, or is a function that returns `true`. The function receives `app`. |
+
+The frontend extender has no `whenSetting()`, no plural methods, and doesn't accept an invokable class. To depend on several extensions at once, use `when()`:
+
+```ts
+new Extend.Conditional()
+  .when(
+    () => 'flarum-tags' in flarum.extensions && 'flarum-likes' in flarum.extensions,
+    () => [
+      // extenders that need both Tags and Likes
+    ]
+  )
+```
+
+:::caution
+
+`flarum.extensions` only lists extensions that have JavaScript for the current frontend. An enabled extension with no forum JavaScript is treated as disabled in the forum, and one with no admin JavaScript is treated as disabled in the admin dashboard.
+
+Conditions are checked while extensions boot, before the forum data and the current user are loaded. `app.forum` and `app.session` are still undefined at that point, so a condition can't read a forum attribute, such as a setting serialized with `serializeToForum()`, or check who is logged in. If that is what you need, register the extenders unconditionally and check the value where it is used, for example in a component's `view()`.
+
+:::
