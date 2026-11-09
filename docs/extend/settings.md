@@ -155,6 +155,29 @@ Applies extenders only if the given extension is currently enabled.
 
 Applies extenders only if the given extension is currently disabled.
 
+#### `whenExtensionsEnabled(array $extensionIds, ...)`
+
+Applies extenders only if **all** of the given extensions are currently enabled. Use this for integrations that need more than one companion extension at the same time:
+
+```php
+(new Extend\Conditional())
+    ->whenExtensionsEnabled(['flarum-tags', 'flarum-likes'], fn () => [
+        // extenders that rely on both Tags and Likes
+    ])
+```
+
+#### `whenExtensionsDisabled(array $extensionIds, ...)`
+
+Applies extenders only if **all** of the given extensions are currently disabled. If any one of them is enabled, the extenders are not applied.
+
+:::info
+
+If some of the listed extensions are enabled and others are disabled, neither `whenExtensionsEnabled` nor `whenExtensionsDisabled` applies its extenders. To react to "at least one of these is enabled", use `when()` with your own callable.
+
+An empty array matches both methods, so their extenders are always applied.
+
+:::
+
 #### `whenSetting(string $key, mixed $expected, ..., strict: false)`
 
 Applies extenders only if a settings value matches an expected value. Uses loose comparison (`==`) by default, so a stored string `'1'` will match a boolean `true`. Pass `strict: true` to use strict comparison (`===`):
