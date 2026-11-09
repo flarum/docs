@@ -27,8 +27,11 @@ concurrency:
 jobs:
   deploy:
     if: >-
-      github.event_name != 'pull_request_target' ||
-      (github.event.pull_request.merged && github.event.pull_request.head.ref == 'l10n_main')
+      github.repository == 'flarum/docs' &&
+      (
+        github.event_name != 'pull_request_target' ||
+        (github.event.pull_request.merged && github.event.pull_request.head.ref == 'l10n_main')
+      )
     runs-on: ubuntu-latest
 
     steps:
