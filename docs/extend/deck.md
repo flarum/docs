@@ -162,6 +162,7 @@ Sources can also have these:
 | --- | --- |
 | `applyNew()` | Used while [Realtime](realtime.md) is connected: put new items at the top straight away, and resolve to how many. Resolve to `null` when the column can't, and Deck falls back to `checkForNew()` and the button. |
 | `onRealtime(event)` | React to a realtime event. See below. |
+| `recheck()` | Ask the server again about the items `onRealtime()` noted when it returned `'recheck'`, adding those that now belong and taking out those that don't. Resolve to whether an item went in at the very top, so the reader keeps their place. Deck also calls it at the end of every check. |
 | `prune()` | Take out items that the store already shows no longer belong, such as a discussion that was just read. Some changes send no realtime event, so Deck calls this when the deck is shown again and before every check. |
 | `start()` and `stop()` | For sources with their own feed. `start()` is called while the column is on screen, and again whenever Realtime reconnects, so it must be safe to repeat. |
 | `controls(items)` | Add items to the column's menu. |
@@ -183,9 +184,32 @@ Return what your column did with it:
 | `'inserted'` | You added items at the top from the payload. The reader keeps their place. |
 | `'updated'` | You changed what is shown in place. |
 | `'check'` | It may concern the column, but only the server can tell. Deck runs the column's `applyNew()` for that column alone, throttled. |
+| `'recheck'` | You noted particular items to ask the server about again. Deck runs only the column's `recheck()`, throttled like `'check'`. A source without `recheck()` gets a full check instead. |
 | nothing | Not relevant. |
 
 A column with no `onRealtime()` is checked whenever a discussion is started or a post is posted. Handle events yourself when you can: the payload usually holds enough to update the column directly, and every check is a request. Flags, for example, answers its own `flagged` event with `'check'`, since a flag can land on any old post and only the server knows what is now flagged.
+
+## Events that change what a filter matches
+
+Some changes move a discussion in or out of a filter without anything being posted. Locking a discussion moves it into an `is:locked` column, and re-tagging it moves it in or out of a `tag:` column. Its activity doesn't change, so a check for new activity would never find it.
+
+`DiscussionListSource` handles these. For an event that can change which filters a discussion matches, a column with a filter asks the server whether that discussion matches it now, using its own request narrowed to the discussion's id. A discussion that now matches joins the column where the server would list it, and one that no longer matches leaves. Deck does this for Tags' `taggedEvent`, Lock's `lockedEvent`, Sticky's `stickiedEvent`, and when a discussion is hidden or restored. An unfiltered column, such as **All discussions**, doesn't need to ask.
+
+If your extension broadcasts an event that can change what one of its filters matches, register the event:
+
+```ts
+// forum/extendDeck.ts
+import DeckColumns from 'ext:flarum/deck/forum/extenders/DeckColumns';
+
+export default function extendDeck() {
+  return [
+    // Choosing a best answer moves a discussion out of `is:question -is:solved`.
+    new DeckColumns().membershipEvents('bestAnswerEvent'),
+  ];
+}
+```
+
+Every column with a filter then asks the server about the discussion when the event arrives. Each column asks at most once per check interval, for every discussion a burst of events concerns. Register only events that can change what a filter matches: for likes, edits and other changes that don't, the column updates in place from the event's payload without a request.
 
 ## Extending Deck's sources
 
