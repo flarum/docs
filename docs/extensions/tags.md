@@ -37,7 +37,7 @@ Manage tags from the **Tags** page, which you open from the extension in the adm
 
 - **Create a tag** with **Create Primary Tag** or **Create Secondary Tag**.
 - **Edit a tag** with the pencil button next to it.
-- **Reorder** primary tags by dragging them.
+- **Reorder** primary tags by dragging them. Secondary tags stay alphabetical and cannot be reordered within their list.
 - **Nest** a primary tag under another by dragging it there. Only one level of nesting is possible.
 - **Make a tag primary or secondary** by dragging it between the two lists.
 
