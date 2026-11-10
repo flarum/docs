@@ -227,6 +227,8 @@ The posts endpoint also takes a `tag` filter, of numeric tag IDs, for posts in d
 
 The `tags` resource lists, shows, creates, updates and deletes tags at `/api/tags`. `GET /api/tags/{id}` also accepts a slug. Each tag has `name`, `slug`, `description`, `color`, `icon`, `isHidden`, `isPrimary`, `isChild`, `position`, `defaultSort`, `discussionCount`, `lastPostedAt`, `canStartDiscussion` and `canAddToDiscussion`, and admins also see `isRestricted`.
 
+`isPrimary` can be set when creating a tag. On update, sending its current value is accepted, but changing it returns a 422 validation error. To change a tag between primary and secondary, use `POST /api/tags/order`, which updates its kind and position together.
+
 ## Tag slugs
 
 Tags uses [slug drivers](slugging.md) for its addresses. It provides `default`, the tag's own slug in any script, and `id_with_slug`, such as `12-feedback`. Add your own with `Extend\ModelUrl`:
