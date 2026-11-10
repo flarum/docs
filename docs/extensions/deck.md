@@ -74,7 +74,7 @@ A column that can't be shown, because the extension behind it was disabled or be
 
 How a column keeps up depends on whether [Realtime](realtime.md) is connected.
 
-- **With Realtime**, new activity appears at the top of a column as it happens. A member who has scrolled down keeps their place. Nothing polls while Realtime is connected, and when it reconnects after a drop, Deck catches up once.
+- **With Realtime**, new activity appears at the top of a column as it happens. A member who has scrolled down keeps their place. Nothing polls while Realtime is connected, and when it reconnects after a drop, Deck catches up once. Columns with a filter also follow changes that move a discussion in or out of them without a reply: a discussion that is locked joins an `is:locked` column, and one that is re-tagged leaves a `tag:` column it no longer matches.
 - **Without Realtime**, Deck checks every column on the [refresh interval](#settings). New activity waits behind an **N new** button at the top of the column, so the list doesn't move under the reader. Choosing the button, or **Refresh** in the column's menu, brings it in.
 
 A column that isn't ordered by recent activity keeps new activity behind the **N new** button even with Realtime, because new activity doesn't belong at the top of it.
