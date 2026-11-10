@@ -99,7 +99,7 @@ A type that returns nothing from `fields()` is added as it is, and can only be i
 | `gambits` | A filter box that takes a resource's registered gambits, such as `'discussions'`, with the search modal's suggestions. |
 | `input` | A control of your own. Whatever it passes to `onchange` becomes the value. |
 
-Without one of these, the field is a text box. `parse` can turn what was typed into the stored value, or return `null` to reject it and show `invalidText`.
+Without one of these, the field is a text box. `parse` can turn what was typed into the stored value, or return `null` to reject it and show `invalidText`. `invalidText` can also be a function that is given what was typed, to say what's wrong with it.
 
 A member picker, along the lines of Deck's own **Discussions by a member** column:
 
