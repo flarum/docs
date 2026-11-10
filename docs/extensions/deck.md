@@ -45,7 +45,7 @@ A member builds their Deck by adding columns. They choose **Add column**, pick a
 
 Other extensions add their own, such as a column for one tag or for flagged posts. See [Working with other extensions](#working-with-other-extensions).
 
-A custom filter takes filters only, such as `tag:`, `author:`, `is:unread` or `is:following`, and the extensions you have installed can add more. Plain words aren't supported: a text search would be re-run every time the column refreshes, so Deck asks for a filter instead.
+A custom filter takes filters only, such as `tag:`, `author:`, `group:`, `is:unread` or `is:following`, and the extensions you have installed can add more. `group:mods` finds the discussions started by a member of Mods, and `group:mods,admins` those started by a member of either. Plain words aren't supported: a text search would be re-run every time the column refreshes, so Deck asks for a filter instead.
 
 Choosing a type that is already in the deck marks it **In your deck**, with a count when there is more than one. A type that has nothing to choose, such as **Unread**, can only be in the deck once.
 
