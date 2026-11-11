@@ -201,6 +201,7 @@ export default [
     .whenExtensionEnabled('flarum-tags', () => [
       new Extend.Model(Discussion).hasOne<Tag>('acmeFeaturedTag'),
     ])
+
     .whenExtensionDisabled('flarum-tags', () => [
       new Extend.Model(Discussion).attribute<string>('acmeCategoryLabel'),
     ]),
@@ -213,16 +214,36 @@ The extenders are passed as a callback that returns an array, and Flarum only ca
 | --- | --- |
 | `whenExtensionEnabled(extensionId, extenders)` | `extensionId` is a key of `flarum.extensions`. |
 | `whenExtensionDisabled(extensionId, extenders)` | `extensionId` is not a key of `flarum.extensions`. |
+| `whenExtensionsEnabled(extensionIds, extenders)` | Every ID in `extensionIds` is a key of `flarum.extensions`. |
+| `whenExtensionsDisabled(extensionIds, extenders)` | No ID in `extensionIds` is a key of `flarum.extensions`. |
+| `whenForumAttribute(key, expected, extenders)` | The forum attribute `key` is strictly equal (`===`) to `expected`. |
 | `when(condition, extenders)` | `condition` is `true`, or is a function that returns `true`. The function receives `app`. |
 
-The frontend extender has no `whenSetting()`, no plural methods, and doesn't accept an invokable class. To depend on several extensions at once, use `when()`:
+The frontend extender has no `whenSetting()` and doesn't accept an invokable class.
+
+#### Checking a forum attribute
+
+Use `whenForumAttribute()` to depend on a forum attribute, such as a setting serialized with `serializeToForum()`:
+
+```ts
+new Extend.Conditional()
+  .whenForumAttribute('acmeAdvancedMode', true, () => [
+    new Extend.Routes().add('acme.advanced', '/acme/advanced', AdvancedPage),
+  ])
+```
+
+The comparison is strict, since forum attributes keep their JSON types: a boolean attribute matches `true`, not `'1'`. An attribute that isn't sent doesn't match.
+
+#### Writing your own condition
+
+`when()` covers anything the other methods don't, such as depending on either of two extensions:
 
 ```ts
 new Extend.Conditional()
   .when(
-    () => 'flarum-tags' in flarum.extensions && 'flarum-likes' in flarum.extensions,
+    () => 'flarum-tags' in flarum.extensions || 'flarum-mentions' in flarum.extensions,
     () => [
-      // extenders that need both Tags and Likes
+      // extenders that need Tags or Mentions
     ]
   )
 ```
@@ -231,6 +252,6 @@ new Extend.Conditional()
 
 `flarum.extensions` only lists extensions that have JavaScript for the current frontend. An enabled extension with no forum JavaScript is treated as disabled in the forum, and one with no admin JavaScript is treated as disabled in the admin dashboard.
 
-Conditions are checked while extensions boot, before the forum data and the current user are loaded. `app.forum` and `app.session` are still undefined at that point, so a condition can't read a forum attribute, such as a setting serialized with `serializeToForum()`, or check who is logged in. If that is what you need, register the extenders unconditionally and check the value where it is used, for example in a component's `view()`.
+Conditions are checked while extensions boot, before the application does. `app.forum` and `app.session` are still undefined at that point, so a `when()` callback can't call `app.forum.attribute()` or check who is logged in. Use `whenForumAttribute()` for forum attributes. For anything that depends on the current user, register the extenders unconditionally and check the value where it is used, for example in a component's `view()`.
 
 :::
