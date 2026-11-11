@@ -120,7 +120,7 @@ Sometimes you might want a setting's value to be reset to its default value base
 
 ## Conditional Extenders
 
-The `Conditional` extender allows you to apply other extenders only when a certain condition is met. This is useful for optional integrations — for example, adding extra API fields only when a companion extension is enabled, or changing behaviour based on a settings value.
+The `Conditional` extender allows you to apply other extenders only when a certain condition is met. This is useful for optional integrations — for example, adding extra API fields only when a companion extension is enabled, or changing behaviour based on a settings value. The examples below are for `extend.php`. The frontend has its own version, described under [In the frontend](#in-the-frontend).
 
 ```php
 use Flarum\Extend;
@@ -185,3 +185,73 @@ The general-purpose method that all the above convenience methods are built on. 
         // ...
     ])
 ```
+
+### In the frontend
+
+The frontend has a `Conditional` extender too. Use it in `extend.ts` to register extenders that only make sense when another extension is enabled:
+
+```ts
+// forum/extend.ts
+import Extend from 'flarum/common/extenders';
+import Discussion from 'flarum/common/models/Discussion';
+import type Tag from 'ext:flarum/tags/common/models/Tag';
+
+export default [
+  new Extend.Conditional()
+    .whenExtensionEnabled('flarum-tags', () => [
+      new Extend.Model(Discussion).hasOne<Tag>('acmeFeaturedTag'),
+    ])
+
+    .whenExtensionDisabled('flarum-tags', () => [
+      new Extend.Model(Discussion).attribute<string>('acmeCategoryLabel'),
+    ]),
+];
+```
+
+The extenders are passed as a callback that returns an array, and Flarum only calls it when the condition passes. This is what makes it safe to use an optional extension's exports: an `ext:` import from an extension that isn't enabled resolves to `undefined`, so an extender built from it, such as `new DeckColumns()`, must be created inside the callback. See [Adding columns to Deck](deck.md#adding-a-column-type) for an example.
+
+| Method | Applies the extenders when |
+| --- | --- |
+| `whenExtensionEnabled(extensionId, extenders)` | `extensionId` is a key of `flarum.extensions`. |
+| `whenExtensionDisabled(extensionId, extenders)` | `extensionId` is not a key of `flarum.extensions`. |
+| `whenExtensionsEnabled(extensionIds, extenders)` | Every ID in `extensionIds` is a key of `flarum.extensions`. |
+| `whenExtensionsDisabled(extensionIds, extenders)` | No ID in `extensionIds` is a key of `flarum.extensions`. |
+| `whenForumAttribute(key, expected, extenders)` | The forum attribute `key` is strictly equal (`===`) to `expected`. |
+| `when(condition, extenders)` | `condition` is `true`, or is a function that returns `true`. The function receives `app`. |
+
+The frontend extender has no `whenSetting()` and doesn't accept an invokable class.
+
+#### Checking a forum attribute
+
+Use `whenForumAttribute()` to depend on a forum attribute, such as a setting serialized with `serializeToForum()`:
+
+```ts
+new Extend.Conditional()
+  .whenForumAttribute('acmeAdvancedMode', true, () => [
+    new Extend.Routes().add('acme.advanced', '/acme/advanced', AdvancedPage),
+  ])
+```
+
+The comparison is strict, since forum attributes keep their JSON types: a boolean attribute matches `true`, not `'1'`. An attribute that isn't sent doesn't match.
+
+#### Writing your own condition
+
+`when()` covers anything the other methods don't, such as depending on either of two extensions:
+
+```ts
+new Extend.Conditional()
+  .when(
+    () => 'flarum-tags' in flarum.extensions || 'flarum-mentions' in flarum.extensions,
+    () => [
+      // extenders that need Tags or Mentions
+    ]
+  )
+```
+
+:::caution
+
+`flarum.extensions` only lists extensions that have JavaScript for the current frontend. An enabled extension with no forum JavaScript is treated as disabled in the forum, and one with no admin JavaScript is treated as disabled in the admin dashboard.
+
+Conditions are checked while extensions boot, before the application does. `app.forum` and `app.session` are still undefined at that point, so a `when()` callback can't call `app.forum.attribute()` or check who is logged in. Use `whenForumAttribute()` for forum attributes. For anything that depends on the current user, register the extenders unconditionally and check the value where it is used, for example in a component's `view()`.
+
+:::
