@@ -185,3 +185,22 @@ The general-purpose method that all the above convenience methods are built on. 
         // ...
     ])
 ```
+
+### Reusing and combining conditions
+
+From Flarum 2.1, `Flarum\Condition` provides reusable extension and settings predicates, plus `all()`, `any()`, and `not()` for combining predicates, callbacks, and booleans:
+
+```php
+use Flarum\Condition;
+use Flarum\Extend;
+
+(new Extend\Conditional())->when(
+    Condition::all(
+        Condition::extensionEnabled('some-extension-id'),
+        Condition::setting('my_extension.feature_enabled', true),
+    ),
+    fn () => [/* extenders to apply */],
+);
+```
+
+The same predicates can defer [conditional migrations](models.md#conditional-migrations). Extender conditions control which extenders apply at boot; migration conditions control whether a pending migration can run and do not reverse completed migrations when they become false.
