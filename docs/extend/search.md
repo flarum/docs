@@ -98,6 +98,18 @@ return [
 ];
 ```
 
+### Filters that pick a window of a list
+
+Some mutators only apply to the unfiltered list. Tags, for example, hides discussions in hidden tags from All Discussions, but not from a tag's own page. To tell the two apart, such a mutator checks `$state->getListFilters()`, which returns the active filters that decide which list the request is for:
+
+```php
+if (count($state->getListFilters()) === 0 && ! $state->isFulltextSearch()) {
+    // This is the unfiltered list.
+}
+```
+
+Some filters don't ask for a different list; they ask for part of the same one. Deck's `lastPostedAfter`, for example, asks which discussions have had a post since a given time. Implement `Flarum\Search\Filter\WindowFilterInterface` instead of `FilterInterface` for a filter like this. It takes the same methods. `getListFilters()` leaves these filters out, so the list's own mutators still apply. `getActiveFilters()` still returns every active filter. Filters people choose, such as `created:` in a search, and lookups such as `id` ask for a different list, so they implement `FilterInterface`.
+
 ## Making a new model searchable
 
 If you want to make a non-searchable model searchable *(for instance, your extension adds a new model)*, you'll need to create a searcher class for the model, by implementing the `Flarum\Search\SearcherInterface` interface. Assuming this is meant for the default database search driver, you can instead extend `Flarum\Search\Database\AbstractSearcher`:
