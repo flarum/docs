@@ -213,7 +213,7 @@ The same goes for anything else you import from Deck and use when your module lo
 
 You can use these without writing a column of your own.
 
-- **`filter[lastPostedAfter]`** on discussions: only discussions with a post after the given date. `filter[-lastPostedAfter]` is the opposite. A value that isn't a date matches nothing.
+- **`filter[lastPostedAfter]`** on discussions: only discussions with a post after the given date. `filter[-lastPostedAfter]` is the opposite. A value that isn't a date matches nothing. It narrows the list it's added to without changing which list that is, so with no other filters it still leaves out what All Discussions leaves out, such as discussions in hidden tags and those the member ignores.
 - **`filter[authorGroup]`** on posts: only posts by members of the given groups, by id. Groups the actor can't see match nothing, and the Members group matches every post by a registered member.
 
 The member's deck is saved in two user preferences, `deckColumns` and `deckRowSplit`. Members need the `deck.use` permission to change them, and the server validates both when they are saved, so write to them through Deck's page rather than directly. On the forum resource, Deck adds `canUseDeck`, and for those who can use it, `deckMaxColumns` and `deckPollInterval`.
