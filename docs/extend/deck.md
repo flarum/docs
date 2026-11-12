@@ -140,6 +140,10 @@ Whatever your fields choose is saved with the column as its `params`, as part of
 
 So store an id or a slug, not an object, and have `title()` look the rest up. Members may have a column whose model isn't in the store yet, so keep a readable fallback in the params, as Deck does by keeping a member's `name` next to their `userId`.
 
+### Editing a column
+
+Members can change a column later with **Edit column**, which shows your `fields()` again. Text, select and filter fields start from the saved value. A search field keeps what the column was for, shown as its `title()`, until the member picks another result. New settings give the column a new source, so `createSource()` runs again. A name the member gives the column is saved as `name` beside `params`, not in them, so it doesn't count toward the four settings.
+
 ## The source
 
 `createSource(config)` returns the column's **source**, which owns its data. There are two ready-made ones you can use as they are:
