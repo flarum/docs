@@ -70,7 +70,7 @@ Conditional migrations are available from Flarum 2.1.
 A migration can declare a boolean or a `shouldRun` callback to defer its `up` operation until its prerequisites are available. A false result leaves the migration unrecorded, so a later migration run can reconsider it. Exceptions fail the migration run normally.
 
 ```php
-use Flarum\Condition;
+use Flarum\Extension\Condition;
 use Flarum\Database\Migration;
 use Illuminate\Database\Schema\Builder;
 
@@ -87,22 +87,30 @@ return Migration::addColumns(
 Every `Migration::` factory accepts the optional trailing `shouldRun` argument, including plain `true` and `false`. Handwritten migration arrays accept the same callback under a `shouldRun` key:
 
 ```php
+use Flarum\Extension\Condition;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 
 return [
-    'shouldRun' => fn (Builder $schema): bool => $schema->hasTable('catalogue_records'),
+    'shouldRun' => Condition::extensionEnabled('acme-catalogue'),
+
     'up' => function (Builder $schema) {
-        // Apply the integration.
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->string('reference', 100);
+        });
     },
+
     'down' => function (Builder $schema) {
-        // Reverse the integration.
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->dropColumn('reference');
+        });
     },
 ];
 ```
 
-Callbacks can receive the migration's schema builder and container-resolved dependencies. Migration callbacks see the prospective enabled-extension state and current database settings with defaults declared by the prospective enabled extensions, including active `Extend\Conditional` branches and values written by earlier migrations.
+Callbacks can receive the migration's schema builder and container-resolved dependencies. Migration callbacks see the prospective enabled-extension state and current database settings with defaults declared by the prospective enabled extensions, including active `Extend\Conditional` branches and values written by earlier migrations. Conditions that resolve settings through their injected container see the same migration settings. Defaults registered imperatively by custom extenders become available after those extenders boot and remain available while their owner is enabled.
 
-Before application boot, the installer supplies a smaller container with the selected extension IDs, database connection, a scoped extension manager, the installation paths/configuration, and settings repository with core and selected-extension defaults; application-specific services are not yet available.
+Before application boot, the installer supplies a smaller container with the selected extension IDs, database connection, a scoped extension manager, the installation paths/configuration, and settings repository with core and selected-extension defaults; application-specific services are not yet available. Collecting defaults also evaluates selected extensions’ conditional extender callbacks, which must be compatible with that pre-boot container. Default declarations are re-evaluated before each migration condition, so settings written by earlier migrations can activate or deactivate conditional defaults.
 
 `Condition` provides reusable predicates:
 
@@ -116,7 +124,7 @@ Extension checks use Flarum extension IDs, such as `flarum-tags`. They check ena
 These predicates also work with [`Extend\Conditional::when()`](settings.md#conditional-extenders). Its existing convenience methods use the same predicate implementation:
 
 ```php
-use Flarum\Condition;
+use Flarum\Extension\Condition;
 use Flarum\Extend;
 
 (new Extend\Conditional())->when(
@@ -129,7 +137,7 @@ Enabling an extension first runs its migrations, then reconsiders pending condit
 
 Run `php flarum migrate` after changing settings or other custom prerequisites. Ordinary page requests and setting saves do not execute migrations. Conditions may be evaluated more than once and should have no side effects. Skipping one migration does not stop later migrations: each dependent migration must declare its own prerequisites.
 
-Only successful `up` executions are recorded. A completed migration will not execute again when its condition changes. Disabling an integration preserves its schema and data. Rollback runs recorded `down` operations without consulting `shouldRun`, so migrations remain discoverable even when their conditions are false. Write rollback operations to handle optional tables that may already have been removed.
+Only successful `up` executions are recorded. A completed migration will not execute again when its condition changes. Disabling an integration preserves its schema and data. Rollback reverses recorded migrations in reverse execution order, including migrations that were deferred. The Extension Manager preserves this order when undoing an update, including one that was stopped and resumed. Undo also includes migrations from updated packages that were deferred during the update and ran later, while preserving unrelated extensions’ migrations. It runs their `down` operations without consulting `shouldRun`, so migrations remain discoverable even when their conditions are false. Write rollback operations to handle optional tables that may already have been removed.
 
 DDL is not universally transactional. A failed toggle can leave successfully applied migrations in place; fix the failure and retry. Flarum retains those successful records and does not repeat their work.
 

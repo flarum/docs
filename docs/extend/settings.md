@@ -188,10 +188,10 @@ The general-purpose method that all the above convenience methods are built on. 
 
 ### Reusing and combining conditions
 
-From Flarum 2.1, `Flarum\Condition` provides reusable extension and settings predicates, plus `all()`, `any()`, and `not()` for combining predicates, callbacks, and booleans:
+From Flarum 2.1, `Flarum\Extension\Condition` provides reusable extension and settings predicates, plus `all()`, `any()`, and `not()` for combining predicates, callbacks, and booleans:
 
 ```php
-use Flarum\Condition;
+use Flarum\Extension\Condition;
 use Flarum\Extend;
 
 (new Extend\Conditional())->when(
