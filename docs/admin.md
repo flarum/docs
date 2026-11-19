@@ -27,7 +27,9 @@ You can also open the page directly, even while it is hidden, by adding `/admin#
 
 Extensions can add other search drivers, for example one that uses Elasticsearch. Once one is installed, choose here which driver each kind of content, such as discussions or users, is searched with. Until then, this section says that no other drivers are available.
 
-On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums.
+On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums. A single CJK character is often a whole word, so you will usually want to lower the minimum search length as well.
+
+**Minimum Search Length** is how many characters someone has to type before search results start loading. It is 3 by default. Lower it for languages with short words, such as Chinese, Japanese or Korean, where 1 or 2 is common; shorter searches match more loosely and send more requests to the database. With MySQL and MariaDB's default word-based search, discussion and post searches don't find words shorter than the database's minimum word length (3 by default) unless CJK search is turned on, so lowering the setting alone won't help there. The admin panel's own search doesn't use the database, so it isn't affected by a higher minimum, and searches from one character when CJK search is on.
 
 ### Maintenance
 
