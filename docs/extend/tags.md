@@ -110,9 +110,14 @@ For an ability on a discussion, such as `$actor->can('doThing', $discussion)`, T
 - If every restricted tag grants it, the result is an **allow**, even without the global permission.
 - Unrestricted tags leave the decision to the global permission.
 
-A child tag first needs the same ability on its parent.
+Querying discussions by ability gives the same answer, through a visibility scope that Tags registers for every ability. `Discussion::whereVisibleTo($actor, 'doThing')` returns:
 
-Querying discussions by ability works the same way, through a visibility scope that Tags registers for every ability. `Discussion::whereVisibleTo($actor, 'doThing')` only returns discussions where the actor has `discussion.doThing` in **all** of their tags. Untagged discussions are only returned when the actor has the permission globally. Abilities starting with `view`, other than `view` itself, are not scoped this way.
+- with `discussion.doThing` globally: every discussion whose restricted tags all grant it, untagged discussions included;
+- without it: discussions with at least one restricted tag, all of which grant it. Their unrestricted tags are ignored, and untagged discussions are left out.
+
+The scope also needs the ability on a restricted tag's parent, when the parent is restricted too.
+
+`view` is stricter: a discussion is only visible when the actor can see **all** of its tags, so an unrestricted tag hides it from someone without the global `viewForum`. Abilities starting with `view`, other than `view` itself, are not scoped by Tags.
 
 ### Letting members past a restriction
 
