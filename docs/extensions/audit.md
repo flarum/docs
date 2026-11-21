@@ -196,7 +196,7 @@ Some actions are deliberately not logged to avoid duplicates:
 - `user.logged_out` — a user logged out.
 - `user.password_changed` — a user password was changed.
 - `user.password_change_requested` — a password reset token was issued for a user.
-- `user.password_reset_attempted` — a password reset was requested via `/forgot` (payload: whether an account matched; the email is stored only when no account matched, otherwise the matched user is recorded). Captured at the HTTP layer, so it retains the requester's IP and records attempts for unknown emails.
+- `user.password_reset_attempted` — a password reset was requested via `/forgot` (payload: whether an account matched; the email is stored only when no account matched, otherwise each matched user is recorded). Captured at the HTTP layer, so it retains the requester's IP and records attempts for unknown emails.
 - `user.provider_connected` — a social login was connected to an account (payload: provider, identifier).
 - `user.username_changed` — a username was changed (payload: old username, new username).
 
