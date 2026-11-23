@@ -21,6 +21,8 @@ The Basics page sets how the forum is named and described, its language, its hom
 
 **Short Name**, from Flarum 2.1, is used where the **Forum Title** doesn't fit: under the forum's icon on a phone's home screen, and when someone adds the forum as a search engine in their browser. It is up to 16 characters. Without one, the forum title is used, cut short at a whole word if it is too long.
 
+**Show how posts were made**, from Flarum 2.1, adds a small "via …" byline next to the author of posts that weren't written in the forum itself: "via API" for posts made through the [REST API](rest-api.md) with an API key or access token, or "via MCP" for posts made through the MCP extension. For a [confidential client](extensions/oauth-provider.md#adding-an-application) an admin added, MCP shows the application's name instead. It also lets post searches filter on it with `source:`, for example `source:api`, `source:api,mcp`, or `-source:mcp` for every post except those. It is off by default. Posts record how they were made even while it is off, so turning it on also shows it for posts made before then, back to the upgrade to Flarum 2.1.
+
 ### Search from the browser
 
 From Flarum 2.1, browsers can add the forum as a search engine. A search from the browser's address bar or search box opens the forum's discussion list with the results, and while someone types, the browser can suggest discussions whose titles match. Only discussions that person can see are suggested. There is nothing to set up: the browser lists the forum under its **Short Name** and icon.

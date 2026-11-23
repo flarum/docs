@@ -1199,3 +1199,18 @@ public function handle(): void
         )
 }
 ```
+
+## Recording How Posts Were Made
+
+From Flarum 2.1, a post records how it reached the forum when it wasn't written in the forum's own interface. Requests authenticated with an API key or access token in the `Authorization` header are marked as made through the API, and the MCP extension marks its own. An extension that adds another way to post, such as a bridge from email or chat, puts a `Flarum\Post\PostSource` on the request, usually from a [middleware](middleware.md):
+
+```php
+use Flarum\Http\RequestUtil;
+use Flarum\Post\PostSource;
+
+$request = RequestUtil::withPostSource($request, new PostSource('acme-mail', 'Email'));
+```
+
+The key (`acme-mail`) is what post searches filter on with `source:`. It must be lowercase letters, digits, `-` and `_`, starting with a letter or digit, and at most 50 characters. The optional name is shown after "via" in place of the key, cut to 100 characters, and is kept as it was when the post was made. Pass `null` instead of a `PostSource` for a request from the forum's own interface. Posts created during the request, including through `Flarum\Api\Client` calls made from it, record the source in the `created_via` and `created_via_name` columns, and `RequestUtil::getPostSource()` reads it back.
+
+While the admin's **Show how posts were made** setting is on, comment posts have the `source` and `sourceName` attributes, `null` for posts made in the forum, and the `source` filter works; the forum's `showPostSource` attribute says whether it is on. In the frontend, `Post.source()` and `Post.sourceName()` return them, and `PostUser`'s `sourceLabel()` gives the text after "via", which an extension can extend to label its own keys.
