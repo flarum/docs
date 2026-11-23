@@ -637,6 +637,8 @@ export default [
 ];
 ```
 
+From Flarum 2.1, the admin **Users** page shows every enabled `users` gambit as a chip under its search, so a gambit you register there appears without anything else. The chips are the `filters` item of `UserListPage`'s `headerItems()`, which you can change with `extend()` like any other `ItemList`. The page reads its search from the `q` parameter, so an admin page can link to a filtered list, such as `#/users?q=group:Mods`.
+
 ### Autocomplete for custom inputs
 
 If you have a custom input for which you want to provide gambit autocompletion, you may use the `GambitAutocompleteDropdown` wrapper component. The built-in user list admin page uses this component. Here is an example:

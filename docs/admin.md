@@ -71,6 +71,12 @@ While it is on, forums served over HTTPS also show an offline page when they can
 
 The page previews the splash screen as iPhones and Android show it. A theme can set full-screen splash images for iPhones and iPads instead; Android always shows the app icon.
 
+## The Users page
+
+The Users page lists the forum's members, with a search above the list. Below the search, **Filter by:** shows every filter you can search with, such as `group:` or `email:`, including those added by extensions. Select one to add it to the search: a complete filter searches at once, and a key such as `group:` waits for you to type its value.
+
+From Flarum 2.1, the search is kept in the page's address, so you can bookmark or share a filtered list, for example `https://example.com/admin#/users?q=group:Mods`.
+
 ## The Advanced page
 
 The Advanced page holds settings that most forums never need to change, so it is hidden from the admin menu until you turn it on.
