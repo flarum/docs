@@ -73,6 +73,7 @@ module.exports = {
         'extensions/emoji',
         'extensions/gdpr',
         'extensions/markdown',
+        'extensions/mcp',
         'extensions/messages',
         'extensions/nicknames',
         'extensions/oauth-provider',
