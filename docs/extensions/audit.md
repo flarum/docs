@@ -76,6 +76,8 @@ Each entry shows the actor, the action, the affected resource, the client type, 
 
 The filter field uses a fixed set of search gambits. The browser shows clickable filter chips and a **Search help** panel describing each one; the `action:` and `client:` filters offer autocomplete of the available values as you type.
 
+Press **Enter** to apply the filter, or to pick the highlighted suggestion; use the arrow keys to move through the suggestions. **Escape** closes the suggestions, then clears the filter.
+
 | Gambit | Description |
 | --- | --- |
 | `action:<name>` | Match an [action name](#logged-actions). |
