@@ -15,6 +15,10 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## The Dashboard
+
+Besides [statistics](extensions/statistics.md), the Dashboard warns about problems with the forum's setup, such as debug mode being on. From Flarum 2.1, it also warns when the server holds back responses that should reach the browser as they're written: see [Responses held back](troubleshoot.md#responses-held-back).
+
 ## The Basics page
 
 The Basics page sets how the forum is named and described, its language, its home page, how members are named and pictured, and how links are written.

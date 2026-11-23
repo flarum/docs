@@ -55,3 +55,14 @@ Copy any messages to a text file and jot down a few notes about *when* the error
 Once you have gathered all the information you can about the problem, you're ready to file a bug report. Please follow the instructions on [Reporting Bugs](bugs.md).
 
 If you discover something new about the issue after filing your report, please add that information at the bottom of your original post. It's a good idea to file a report even if you have solved the problem on your own, since other users may also benefit from your solution. If you've found a temporary workaround for the problem, be sure to mention that as well.
+
+## Responses held back
+
+From Flarum 2.1, some responses reach the browser as they're written, so that it can show progress along the way, such as each step of clearing the cache. Once per browser session, the admin dashboard checks whether they do, and shows a **Responses held back** warning when the server holds them back and sends them only once they're complete. Things still work, but their progress only shows at the end. Select **Check Again** after changing your setup.
+
+Turn off buffering for the forum wherever it's on:
+
+* PHP's `output_buffering` or `zlib.output_compression`. Flarum turns `zlib.output_compression` off and closes empty output buffers for these responses itself, but can't undo one that already holds output.
+* Apache's `mod_deflate`, which Flarum turns off for these responses itself only when PHP runs as an Apache module. For PHP-FPM behind `mod_proxy_fcgi`, set `flushpackets=on`.
+* nginx's `fastcgi_buffering` or `proxy_buffering`. Flarum sends `X-Accel-Buffering: no` with these responses, which asks nginx not to buffer them.
+* A proxy or CDN in front of the site. Flarum sends `Cache-Control: no-cache, no-transform` with these responses, but a proxy may still buffer them.
