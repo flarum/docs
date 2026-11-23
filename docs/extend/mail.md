@@ -102,14 +102,14 @@ From Flarum 2.1, a driver can tell Flarum when mail to an address bounces perman
 - **`webhooksAvailable(SettingsRepositoryInterface $settings): bool`**: whether the driver can report bounces at all with the current settings. Return `false` for a configuration that never delivers to real recipients, such as a sandbox mode. Flarum then hides bounce handling entirely.
 - **`isPermanentFailure(MailerDeliveryEvent $event): bool`**: whether a bounce or drop the parser reported is permanent. Flarum only flags the recipient when it is.
 
-Flarum receives webhooks at `/mail/webhook/{driver}`, where `{driver}` is the identifier the driver was [registered](#registering-the-driver) with. Requests are refused with a 404 unless that driver is the active one, its webhooks are available, and `webhookConfigured()` returns `true`. A rejection the parser throws is answered with its status code. Every refused request is logged as a warning, with the reason and the sender's IP address. A parser may also return `null` for a request it accepted but that carries nothing to act on.
+Flarum receives webhooks at `/mail/webhook/{driver}`, where `{driver}` is the identifier the driver was [registered](#registering-the-driver) with. The driver segment is optional: `/mail/webhook` goes to the active driver. Requests are refused with a 404 unless that driver is the active one, its webhooks are available, and `webhookConfigured()` returns `true`. A rejection the parser throws is answered with its status code. Refused requests are logged as warnings, with the reason and the sender's IP address, at most once a minute for each status code. A parser may also return `null` for a request it accepted but that carries nothing to act on.
 
 Flarum acts on two kinds of event:
 
 - A `MailerDeliveryEvent` named `bounce` or `dropped` dispatches `Flarum\Mail\Event\EmailBounced`, when `isPermanentFailure()` returns `true`.
 - A `MailerEngagementEvent` named `spam` dispatches `Flarum\Mail\Event\EmailComplained`.
 
-Every other event is ignored. Many of Symfony's converters report soft bounces, and even auto-replies, as `bounce`, so `isPermanentFailure()` should check the provider's own payload. Here are the methods core's Postmark driver adds. Postmark verifies webhooks by IP address, so there is no secret, and it marks a bounce `Inactive` when it stops sending to the address:
+Every other event is ignored. Many of Symfony's converters report soft bounces, and even auto-replies, as `bounce`, so `isPermanentFailure()` should check the provider's own payload. Here are the methods core's Postmark driver adds. Shared provider IP addresses don't tell one Postmark account from another, so it doesn't check them: it checks the webhook username and password the admin set on the mail page (the `mail_webhook_username` and `mail_webhook_password` settings), which Postmark sends as HTTP basic authentication. Postmark marks a bounce `Inactive` when it stops sending to the address:
 
 ```php
 use Flarum\Mail\DriverInterface;
@@ -126,17 +126,26 @@ class PostmarkDriver implements DriverInterface, HandlesWebhooks
 
     public function getWebhookRequestParser(SettingsRepositoryInterface $settings): RequestParserInterface
     {
-        return new PostmarkRequestParser(new PostmarkPayloadConverter());
+        // The provider's IP list would refuse requests through a reverse proxy,
+        // and doesn't identify the account; the credentials do both.
+        return new PostmarkRequestParser(new PostmarkPayloadConverter(), allowedIPs: []);
     }
 
     public function getWebhookSigningSecret(SettingsRepositoryInterface $settings): ?string
     {
-        return null;
+        if (! $this->webhookConfigured($settings)) {
+            return null;
+        }
+
+        return $settings->get('mail_webhook_username').':'.$settings->get('mail_webhook_password');
     }
 
     public function webhookConfigured(SettingsRepositoryInterface $settings): bool
     {
-        return true;
+        $username = (string) $settings->get('mail_webhook_username');
+        $password = (string) $settings->get('mail_webhook_password');
+
+        return $username !== '' && $password !== '' && ! str_contains($username, ':');
     }
 
     public function webhooksAvailable(SettingsRepositoryInterface $settings): bool
@@ -151,7 +160,7 @@ class PostmarkDriver implements DriverInterface, HandlesWebhooks
 }
 ```
 
-A provider that signs its webhooks instead, like Mailgun, adds a setting for the signing key, returns it from `getWebhookSigningSecret()`, and returns `false` from `webhookConfigured()` until it is set.
+A provider that signs its webhooks, like Mailgun, adds a setting for the signing key and returns it from `getWebhookSigningSecret()`. Core's Mailgun driver checks the credentials as well, by wrapping Symfony's parser in `Flarum\Mail\BasicAuthRequestParser`, which refuses a request without the matching `Authorization: Basic` header with a 403. Its `webhookConfigured()` returns `false` until both the signing key and the credentials are set.
 
 ### Registering the webhook with the provider
 
@@ -160,7 +169,7 @@ If the provider's API can register webhooks, also implement `Flarum\Mail\Provisi
 - **`registerWebhook(SettingsRepositoryInterface $settings, string $url): void`**: register `$url` for permanent failures and spam complaints. Calling it again must change nothing, and it must keep any URLs that other applications registered with the same account.
 - **`unregisterWebhook(SettingsRepositoryInterface $settings, string $url): void`**: remove `$url`, and only `$url`.
 
-If the forum is behind HTTP basic authentication, the admin can enter a username and password on the mail page, and they are included in `$url` as `https://username:password@...`. When the admin changes them, `$url` changes too, so match an existing registration by the rest of the URL and replace it, rather than adding a second one.
+The webhook username and password the admin enters on the mail page are included in `$url` as `https://username:password@...`. They authenticate the provider to core's drivers, and also get it past HTTP basic authentication in front of the forum. When the admin changes them, `$url` changes too, so match an existing registration by the rest of the URL and replace it, rather than adding a second one.
 
 Throw an exception when the provider refuses. Its message is shown to the admin.
 
