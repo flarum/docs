@@ -19,16 +19,22 @@ on:
     branches:
       - main
 
-# Queue deploys rather than letting two copy to the server at once.
+# Queue deploys rather than letting two copy to the server at once. Every
+# run joins the queue, including those whose job is skipped, so keep them all:
+# with the default (one pending run), a skipped run cancels a waiting deploy.
 concurrency:
   group: deploy-production
   cancel-in-progress: false
+  queue: max
 
 jobs:
   deploy:
     if: >-
-      github.event_name != 'pull_request_target' ||
-      (github.event.pull_request.merged && github.event.pull_request.head.ref == 'l10n_main')
+      !github.event.repository.fork &&
+      (
+        github.event_name != 'pull_request_target' ||
+        (github.event.pull_request.merged && github.event.pull_request.head.ref == 'l10n_main')
+      )
     runs-on: ubuntu-latest
 
     steps:
