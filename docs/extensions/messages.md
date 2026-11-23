@@ -76,7 +76,7 @@ When you update from an earlier release, conversations that an admin has already
 
 ## The Messages page
 
-Members open the Messages page from the **Messages** icon in the header, which counts the conversations with something unread, or from **Messages** in the forum's navigation. The page lists their conversations, with the open conversation beside the list on wider screens.
+Members open the Messages page from the **Messages** icon in the header, which counts the conversations with something unread, or from **Messages** in the forum's navigation. The page lists their conversations, with the open conversation beside the list on wider screens. A visitor who opens the page without being logged in is asked to log in, and is brought back to it afterwards.
 
 Where participant avatars or group icons overlap, hover over one to bring it to the front and see it in full.
 
@@ -188,6 +188,7 @@ Set these on the **Permissions** page of the admin panel:
 | [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, for everyone in it, including the members of groups it was sent to, and edits, deletions, restored messages and likes show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
 | Likes | Members can [like messages](#likes), and are alerted when someone likes theirs. |
+| MCP | AI assistants connected to the forum through MCP can list and read the member's conversations, send messages, mark conversations read, delete the member's own messages, and leave or rename group conversations, with the member's own permissions. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
 | [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with an entry for each member and each group it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
 | [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
