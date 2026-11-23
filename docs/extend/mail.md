@@ -166,7 +166,7 @@ Throw an exception when the provider refuses. Its message is shown to the admin.
 
 ### Listening for bounces
 
-`EmailBounced` and `EmailComplained` carry the address (`$email`), the provider's reason (`$reason`), the matching user if there is one (`$recipient`), and the provider's payload (`$raw`). Core records each one, flags the user, and can stop sending them notification emails. You can [listen](backend-events.md) for them too, for example to report bounces somewhere else:
+`EmailBounced` and `EmailComplained` carry the address (`$email`), the provider's reason (`$reason`), every user account that uses the address, as a collection that is empty when none does (`$recipients`), and the provider's payload (`$raw`). Core records each one, flags those users, and can stop sending them notification emails. You can [listen](backend-events.md) for them too, for example to report bounces somewhere else:
 
 ```php
 use Flarum\Extend;
@@ -175,7 +175,7 @@ use Flarum\Mail\Event\EmailBounced;
 return [
     (new Extend\Event())
         ->listen(EmailBounced::class, function (EmailBounced $event) {
-            // $event->email, $event->reason, $event->recipient
+            // $event->email, $event->reason, $event->recipients
         }),
 ];
 ```
