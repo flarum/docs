@@ -53,6 +53,8 @@ Since a user's permissions depend only on the set of groups they belong to, perm
 
 The cache is invalidated automatically when permissions are changed through the `Flarum\Group\Permission` model (or the admin permissions grid), and when a group is deleted. If your extension modifies the `group_permission` table directly through the query builder, no model events fire, so you should resolve `Flarum\Group\PermissionCache` from the container and call `flush()` (or `forgetGroup($groupId)`) to make sure permission checks later in the same request see the change.
 
+Changes made by another process never reach a cache that is already loaded. Under PHP-FPM that only lasts one request, but long-running processes keep it for their whole lifetime. Core flushes it as each job a queue worker pulls from a real queue starts (jobs on the `sync` queue run in the dispatching process and share its cache), and the realtime daemon flushes it every 10 seconds. If your extension runs its own long-running process, such as a daemon or a console command that loops, call `flush()` on `Flarum\Group\PermissionCache` often enough that permission changes reach it.
+
 ## Permission Naming Conventions
 
 Nothing is enforced, but we generally recommend the following convention for permission naming:
