@@ -171,6 +171,18 @@ This is a list of setting types available by default:
 
 **Color Picker:** `color-preview`
 
+**Icon Picker:** `icon`
+
+From Flarum 2.1, a field for a Font Awesome icon class, which opens an [icon picker](../fontawesome.md#choosing-an-icon) listing every icon and style the forum can draw. A class the picker doesn't list, such as one from a Font Awesome Kit, can still be typed, so store the setting as the full class string, for example `fas fa-rocket`.
+
+```ts
+{
+  setting: 'acme-interstellar.rocket_icon',
+  label: app.translator.trans('acme-interstellar.admin.settings.rocket_icon', {}, true),
+  type: 'icon',
+}
+```
+
 **Text Input**: `text` or any HTML input types such as `tel` or `number`
 
 ```ts

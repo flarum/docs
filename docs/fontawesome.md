@@ -86,6 +86,14 @@ The legacy shorthand aliases (`fas`, `far`, `fab`, etc.) are fully supported and
 
 Browse the free icon catalogue at [fontawesome.com/icons](https://fontawesome.com/icons).
 
+## Choosing an Icon
+
+From Flarum 2.1, icon fields, such as a group's or a tag's icon, open an icon picker when you click them. Search for an icon by name, choose a style, and click it to use it.
+
+The picker lists the icons and styles your forum can draw, so it follows your source. With the bundled icons or a CDN, that's Solid, Regular and Brands. With a Kit, it's every family and style the Kit includes, such as Light, Thin, Duotone and Sharp for a Pro Kit. To use an icon the picker doesn't list, such as one of your Kit's own uploaded icons, type its class into the search and choose **Use**.
+
+If your forum's assets (its CSS and JavaScript) are served from another domain, such as an S3 or R2 bucket or a CDN, the picker can only list icons when that host allows cross-origin requests by sending an `Access-Control-Allow-Origin` header. Without it, the picker says it can't list icons here, and you can still type any icon's class.
+
 ## Renamed Icons in FA7
 
 FontAwesome 7 renamed a number of icons. The old names continue to work via CSS aliases that FA7 ships, so **nothing breaks**. However, if you are writing new code or updating an existing extension you should prefer the current canonical names.
