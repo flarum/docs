@@ -26,19 +26,29 @@ A conversation is between two members, or a group of them. A member can start on
 - **Send a message** on the other member's profile;
 - **Send a Message** on the Messages page, which asks who the message is for.
 
-A message to one member continues the conversation the two already have, rather than starting another. A message to two or more members starts a group conversation, a new one every time, so the same members can have several.
+A message to one member continues the conversation the two already have, rather than starting another. A message to two or more members, or to a [group](#sending-to-groups), starts a group conversation, a new one every time, so the same members can have several.
 
-Only the members of a conversation can see it. That includes admins and moderators: they can't read conversations they aren't part of.
+Only the members of a conversation can see it: the members it was sent to, and the current members of any group it was sent to. That includes admins and moderators: they can't read conversations they aren't part of.
 
 ## Group conversations
 
 How many members one message can go to is set by **Recipients per message** (see [Settings](#settings)). Set it to 1 to turn group conversations off.
 
-A group conversation without a name is titled with up to three of the other members' names, in alphabetical order, then how many more there are, such as "bob, carol, dave +3". Its header says how many members it has; select that to see who they are.
+A group conversation without a name is titled with up to three of the other members' names, in alphabetical order, then how many more there are, such as "bob, carol, dave +3". Its header says how many members it has, or shows **Participants** when it was sent to a group; select that to see who they are.
+
+### Sending to groups
+
+A message can also go to whole groups, such as your moderators. Choose which groups can receive messages with **Groups that can receive messages** (see [Settings](#settings)); none can until you do, and **Guests** and **Members** can't be chosen. Members with **Start conversations with groups**, only admins by default, then see those groups under **Groups** when choosing who a message is for, and can choose up to 10 of them, with or without members by name. A hidden group is only offered to those who can see hidden groups.
+
+Everyone in the group can read the whole conversation, from its first message, including members who join the group later. Members removed from the group can no longer read it, unless it was also sent to them by name. So anyone who can change a group's members can give someone the conversation's full history. Members of the group are emailed about new messages like any other member.
+
+**Recipients per message** only counts members chosen by name: a group's members don't count towards it. Removing a group from **Groups that can receive messages** doesn't remove it from conversations it is already in.
 
 ### Leaving
 
 Any member of a group conversation can leave it with **Leave conversation**. They no longer see it, or hear about new messages in it. What they wrote stays for the others. When the last member leaves, the conversation and its messages are deleted.
+
+Leaving a conversation sent to a group is for good: the member doesn't get it back by staying in the group, or by joining it again. Such a conversation is never deleted by its members leaving.
 
 A conversation between two members can't be left.
 
@@ -132,7 +142,7 @@ So that a new account can't flood members' inboxes, each member can:
 
 - send one message every 10 seconds. Naming a group conversation counts as a message;
 - start at most 10 new conversations an hour;
-- reach at most 20 members an hour through the conversations they start, or as many as **Recipients per message** allows, if that's more.
+- reach at most 20 members an hour through the conversations they start, or as many as **Recipients per message** allows, if that's more. The members of a group a conversation is sent to count, so only members who can send messages without throttling can start a conversation with a group larger than that.
 
 Only conversations a member starts count: being added to someone else's group conversation doesn't use up their allowance.
 
@@ -144,6 +154,7 @@ Find these in the **Group conversations** section of the extension's page in the
 
 | Setting | Default | Description |
 | --- | --- | --- |
+| **Groups that can receive messages** | None | The groups members can [send messages to](#sending-to-groups), if they have **Start conversations with groups**. Removing a group here doesn't remove it from existing conversations. |
 | **Recipients per message** | 10 | How many members one message can be sent to, from 1 to 50. More than one starts a [group conversation](#group-conversations), so 1 turns group conversations off. |
 | **Let members name group conversations** | Off | Lets members who can write in a group conversation [name it](#naming). Turning it off hides names already given. |
 
@@ -154,6 +165,7 @@ Set these on the **Permissions** page of the admin panel:
 | Permission | Granted to by default | What it allows |
 | --- | --- | --- |
 | **Send private messages** | Members | Starting conversations and sending messages. |
+| **Start conversations with groups** | Admins only | Sending messages to the groups chosen under **Groups that can receive messages**. See [Sending to groups](#sending-to-groups). |
 | **Message users without messaging permission** | Admins only | Messaging members who can't send messages themselves. They can then reply in that conversation. See [Members who can't reply](#members-who-cant-reply). |
 | **Edit own messages** | Until next reply | Editing messages the member sent, for the time you choose. See [Editing and deleting messages](#editing-and-deleting-messages). |
 | **Delete own messages** | Until next reply | Deleting messages the member sent, for the time you choose; they can restore them for as long. See [Editing and deleting messages](#editing-and-deleting-messages). |
@@ -165,8 +177,8 @@ Set these on the **Permissions** page of the admin panel:
 
 | Extension | What it adds to Messages |
 | --- | --- |
-| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
+| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, for everyone in it, including the members of groups it was sent to, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
-| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with an entry for each member it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
+| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with an entry for each member and each group it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
 | [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
