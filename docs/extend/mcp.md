@@ -254,7 +254,7 @@ Read and write through `$context->api`, so the forum's rules apply to the member
 | `dispatch(object $command)` | Dispatch a command bus command, for the rare write that has no endpoint. |
 | `assertCanWrite()` | Throw the error a guest, or a token without write access, gets for a write. |
 
-`delete()` and `assertCanWrite()` return nothing, `dispatch()` returns what the command's handler returns, and every other method returns an `ApiResult`. `data()` is the JSON:API document. `simplify()` is a compact version for tool output: flat attributes, relationships as identifiers, HTML attributes as plain text, long strings shortened and long lists cut, with a hint for the next page.
+`delete()` and `assertCanWrite()` return nothing, `dispatch()` returns what the command's handler returns, and every other method returns an `ApiResult`. `data()` is the JSON:API document. `simplify()` is a compact version for tool output: flat attributes, relationships as identifiers, HTML attributes as plain text, long strings shortened and long lists cut, with a hint for the next page. `simplify(fullStrings: true)` keeps the strings of the primary data whole, as `get_resource` does.
 
 Anything other than a `GET`, and `dispatch()`, is refused unless the member is signed in and the request has write access. If your tool changes the forum some other way, call `assertCanWrite()` first.
 
