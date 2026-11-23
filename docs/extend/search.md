@@ -427,6 +427,28 @@ So you want to make sure your gambit is added within the common frontend.
 
 :::
 
+### Suggesting values
+
+From Flarum 2.1, a `key:value` gambit can suggest values. Once the user has typed the gambit's key and a colon (`country:`), or `-country:` to exclude, the autocomplete lists the values that match what they type after it. Override `values()` in your `KeyValueGambit` to return them, either as strings or as `{ value, label }` objects. The value is what is inserted into the query; the label is shown in the list, and is matched as well:
+
+```ts
+import app from 'flarum/common/app';
+import { KeyValueGambit, type GambitValueOption } from 'flarum/common/query/IGambit';
+
+export default class CountryGambit extends KeyValueGambit {
+  // ...
+
+  values(): GambitValueOption[] {
+    return [
+      { value: 'ch', label: app.translator.trans('acme.lib.countries.ch', {}, true) },
+      { value: 'fr', label: app.translator.trans('acme.lib.countries.fr', {}, true) },
+    ];
+  }
+}
+```
+
+`values()` is called as the user types, so return what is already loaded, such as models in the store, rather than making a request each time. When the gambit sets `predicates` to `true`, the user can pick several values separated by commas, and values already picked are not suggested again. Core's `group:` gambit suggests the forum's groups, and the Tags extension's `tag:` gambit its tags.
+
 ### Localizing gambit keywords
 
 :::info Flarum 2.1
@@ -579,7 +601,7 @@ The server standardised filter key for this gambit. The filter key must not be l
 ###### `fromFilter`
 The method to transform a filter into a gambit format. The gambit format can be localized.
 ###### `suggestion`
-Returns information about how the gambit is structured for the UI. Use localized values. For example, the author gambit will return `{ key: 'author', hint: 'the username of the author' }`.
+Returns information about how the gambit is structured for the UI. Use localized values. For example, the author gambit will return `{ key: 'author', hint: 'the username of the author' }`. A `key:value` gambit's suggestion can also have `values`: an array of strings or `{ value, label }` objects, or a function that returns one (see [Suggesting values](#suggesting-values)).
 ###### `predicates`
 Whether this gambit can use logical operators. For example, the tag gambit can be used as such: `tag:foo,bar tag:baz` which translates to `(foo OR bar) AND baz`. The info allows generation of the correct filtering format, which would be:
 ```json
