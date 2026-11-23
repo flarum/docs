@@ -135,3 +135,18 @@ Shows which [queue driver](queue.md) the forum uses.
 | **Job Timeout (seconds)** | `60` | How long a single job can run before it times out. |
 | **Rest Time (seconds)** | `0` | How long to wait between jobs. |
 | **Backoff (seconds)** | `0` | How long to wait before retrying a failed job. |
+
+### Sessions
+
+From Flarum 2.1, sets how long people stay signed in:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Session Length (minutes)** | `120` | How long a session may sit idle before it is discarded. |
+| **Sign-in Length** | 1 hour | How long someone stays signed in after signing in without choosing to be remembered. |
+| **"Remember me" Length** | 5 years | How long someone stays signed in when they choose to be remembered. This also covers signing in through another service, which is always remembered. |
+| **End sessions when the browser closes** | Off | Signs people out when they close their browser, rather than keeping them signed in until their session expires. Useful on shared computers. |
+
+Each sign-in length is set as a number and a unit, from seconds to years. A length of `0` never expires. Extensions can add their own kinds of sign-in, which are listed here too.
+
+If `config.php` sets these, the page shows its values and they can't be changed here. See [Sessions](config.md#sessions) for the details.
