@@ -1,7 +1,11 @@
 # Extension Manager
 This contains an explanation of how the extension manager works and what it has to offer.
 
-slightly outdated: see [the extensions guide for more](/extensions.md).
+:::caution Outdated
+
+This page describes the extension manager up to Flarum 2.0. Flarum 2.1 replaced it with a rewrite that has no task queue, `extension_manager_tasks` table or `last_update_run` setting. For how the 2.1 extension manager is used, see [the extensions guide](../extensions.md); for how it works, see the [README of `extensions/package-manager`](https://github.com/flarum/framework/blob/2.x/extensions/package-manager/README.md).
+
+:::
 
 ## Contents
 * Installing, Updating, and Removing Extensions.
