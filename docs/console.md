@@ -32,6 +32,8 @@ To display the list of available commands, please use the list command.
 
 Get information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
+From Flarum 2.1, an extension installed from a development branch (such as `dev-main`) is listed with the commit it was installed at, as it is on its page in the admin dashboard.
+
 ### tinker
 
 `php flarum tinker`
