@@ -778,6 +778,8 @@ Flarum also refreshes abandoned-extension data periodically via a scheduled task
 php flarum extensions:sync-abandoned
 ```
 
+The extension manager uses the whole list, not only the installed packages, so that it can flag search results and refuse to install an abandoned extension that has a replacement. That copy is kept under `storage/abandoned-extensions`, where clearing the cache doesn't remove it, and the same task refreshes it.
+
 :::
 
 ### Suggested Extensions

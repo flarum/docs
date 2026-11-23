@@ -44,8 +44,10 @@ Each result says whether it has a release for the Flarum version your forum runs
 - **not for this Flarum**: its newest release asks for a different version of `flarum/core`.
 - **could not check**: the extension manager couldn't find out. Extensions that have no tagged release are checked on their development branches.
 - **needs Beta in Sources** (or RC, Alpha or Dev): it has a release for your Flarum, but it is less finished than your forum's [minimum stability](#installing-non-stable-extensions) allows. Change the setting on the **Sources** tab to install it.
-- **replaced by** another package: its author abandoned it and named a replacement, which the extension manager offers to install instead.
-- **abandoned by its author**: its author abandoned it without naming a replacement. It can still be installed, if it has a release for your Flarum.
+- **replaced by** another package: it is abandoned and a replacement is named, which the extension manager offers to install instead. The abandoned package itself is not installed.
+- **abandoned**: it is abandoned and no replacement is named. It can still be installed, if it has a release for your Flarum.
+
+A package counts as abandoned when its author marked it so on Packagist, or when it is on Flarum's [list of abandoned extensions](https://github.com/flarum/abandoned-extensions), which also covers packages whose authors never marked them. Where both name a replacement, the list's is used.
 
 ![Searching for extensions on the Find extensions tab](/img/docs/extension-manager-find.png)
 
@@ -124,9 +126,9 @@ Where Composer runs in its own process, the extension manager updates Flarum's d
 
 ### Abandoned packages
 
-Sometimes a package an extension depends on has been abandoned by its author, often with a suggested replacement. From Flarum 2.1, when an install or update would bring in an abandoned package (including a dependency you didn't ask for directly), the extension manager lists it on the run's panel with the replacement its author suggests, before anything is downloaded.
+Sometimes a package an extension depends on has been abandoned, often with a suggested replacement. From Flarum 2.1, when an install or update would bring in an abandoned package (including a dependency you didn't ask for directly), the extension manager lists it on the run's panel with the suggested replacement, before anything is downloaded. Packages on Flarum's [list of abandoned extensions](https://github.com/flarum/abandoned-extensions) are listed too.
 
-If your `composer.json` sets Composer's `policy.abandoned.block` (or the older `audit.block-abandoned`), the extension manager respects it. Composer then picks versions without abandoned packages where it can. When it can't, the run stops and names the package that was kept out, with the setting that allows it. For `policy.abandoned.block`, list the package under `config.policy.abandoned.ignore` in `composer.json`:
+If your `composer.json` sets Composer's `policy.abandoned.block` (or the older `audit.block-abandoned`), the extension manager respects it. Composer then picks versions without abandoned packages where it can. When it can't, the run stops and names the package that was kept out, with the setting that allows it. Composer's block only knows the flags in package metadata, so a package that only Flarum's list flags is listed but not blocked. For `policy.abandoned.block`, list the package under `config.policy.abandoned.ignore` in `composer.json`:
 
 ```json
 "config": {
