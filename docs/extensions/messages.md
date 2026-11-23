@@ -109,9 +109,11 @@ Members can stop sharing receipts by turning off **Show others when I've read th
 
 When someone sends a member a message, the member gets an email. They get one email per conversation, then no more about that conversation until they've read it. In a group conversation, the email says how many others the message went to.
 
-Members can turn these emails off with **Someone sends me a message** in the notification settings on their **Settings** page.
-
 The **Messages** icon in the header shows new messages whether or not the member is emailed.
+
+With [likes](#likes), a member is also alerted in the forum when someone likes one of their messages. There is no email for it. Taking the like back withdraws the alert. A member who has left the conversation, or whom the member who liked it can't message, isn't alerted.
+
+Members choose which of these they get in the notification settings on their **Settings** page: **Someone sends me a message** for the emails, and **Someone likes one of my messages** for the alerts.
 
 ## Editing and deleting messages
 
@@ -132,6 +134,10 @@ Deleting a message replaces it with *This message was deleted.* for the other me
 
 Only groups with **Delete messages forever** can remove a message for good, from a message that has already been deleted. Nobody has this permission by default, so only admins can. Deleting a message forever can't be undone, and deleting the last message left in a conversation deletes the conversation.
 
+## Likes
+
+With the Likes extension enabled, members can like messages in their conversations, as they like posts, and see who liked each one. The same rules apply as for posts: a member needs **Like posts**, and can only like their own messages when Likes' **Users may like their own posts** setting is on. They can only like messages in conversations they can reply in, and can't like a deleted message or a notice. A like can always be taken back.
+
 ## Search
 
 Members can find text from their own conversations in the forum's search, where matches appear under **Messages**. Guests never see this section. A deleted message can only be found by its author.
@@ -145,6 +151,8 @@ So that a new account can't flood members' inboxes, each member can:
 - reach at most 20 members an hour through the conversations they start, or as many as **Recipients per message** allows, if that's more. The members of a group a conversation is sent to count, so only members who can send messages without throttling can start a conversation with a group larger than that.
 
 Only conversations a member starts count: being added to someone else's group conversation doesn't use up their allowance.
+
+With [likes](#likes), each member can like or unlike messages at most 30 times a minute, and any one message at most 4 times a minute.
 
 Grant **Send messages without throttling** to any group that should skip these limits, such as your moderators.
 
@@ -177,8 +185,9 @@ Set these on the **Permissions** page of the admin panel:
 
 | Extension | What it adds to Messages |
 | --- | --- |
-| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, for everyone in it, including the members of groups it was sent to, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
+| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, for everyone in it, including the members of groups it was sent to, and edits, deletions, restored messages and likes show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
+| Likes | Members can [like messages](#likes), and are alerted when someone likes theirs. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
 | [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with an entry for each member and each group it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
 | [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
