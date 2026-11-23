@@ -12,6 +12,8 @@ Flarum has several "reserved groups":
 
 Reserved groups actually function just like any other group, existing as records in the database. They just have special properties in regards to how they're assigned (for guest and members), or what they can do (for administrator).
 
+Core relies on these three groups, so they can't be deleted: `DELETE /api/groups/{1,2,3}` answers `403` for every actor, administrators included.
+
 On install, Flarum will also create a moderator group with ID `4`, but this is just for convenience: it holds no special meaning.
 
 Admins can also create new groups through the admin dashboard. Users can be added or removed from groups from their user page.
