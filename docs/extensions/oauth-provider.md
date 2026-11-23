@@ -145,7 +145,7 @@ The address is where the application connected from. For an application running 
 
 **Revoke** signs the application out at once. It must ask for permission again to come back. With more than one application connected, **Revoke all** does that for every one of them.
 
-**Global Logout**, further down the same page, also disconnects every application, as well as ending the member's sessions.
+**Global Logout**, further down the same page, also disconnects every application, as well as ending the member's sessions. So does a change of the member's password, whether they change it themselves, reset it, or an admin changes it.
 
 ## How long access lasts
 

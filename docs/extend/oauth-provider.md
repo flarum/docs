@@ -158,7 +158,8 @@ The extension dispatches these events, in `Flarum\OAuthProvider\Event`, for what
 | --- | --- | --- |
 | `Authorized` | A member authorized an application. | `user`, `client`, `consented`: `true` when the member approved it just now, `false` when an earlier approval covered the request |
 | `Disconnected` | A member disconnected an application. | `user`, `client` |
-| `DisconnectedAll` | A member disconnected every application at once. Not dispatched when logging out everywhere disconnects them. | `user` |
+| `AuthorizationWithdrawn` | A member authorized an application, but their session ended or they disconnected it before it got a code. | `user`, `client`, `approvalKept`: `true` when the member approved the application on the consent form and that approval stays on their connection to it |
+| `DisconnectedAll` | Every application a member had connected was disconnected at once. | `user`, `cause`: why, one of the class's constants: `SETTINGS` (the member did it from their settings), `LOGOUT_EVERYWHERE` or `PASSWORD_CHANGE` (by the member, a password reset or an administrator) |
 | `ClientCreated` | An administrator added a client. | `client`, `actor` |
 | `ClientUpdated` | An administrator edited a client. | `client`, `actor` |
 | `ClientDeleted` | An administrator deleted a client. | `client`, `actor` |

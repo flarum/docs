@@ -250,7 +250,7 @@ These actions cover [`flarum/oauth-provider`](oauth-provider.md): applications t
 - `user.oauth_connected` — a user approved an application (payload: user ID, client ID, client name).
 - `user.oauth_signed_in` — a user signed in to an application again, covered by an approval they gave earlier (payload as above).
 - `user.oauth_disconnected` — a user revoked an application's access (payload as above).
-- `user.oauth_disconnected_all` — a user revoked every application's access at once (payload: user ID). Global Logout also disconnects every application, but is recorded only as `user.logged_out_everywhere`.
+- `user.oauth_disconnected_all` — every application's access was revoked at once (payload: user ID, cause: `settings` when the user revoked them all, `logout_everywhere` for Global Logout, or `password_change` when their password was changed).
 - `oauth_client.created` — an administrator added an application (payload: client ID, client name).
 - `oauth_client.updated` — an administrator edited an application (payload as above).
 - `oauth_client.deleted` — an administrator deleted an application (payload as above).
