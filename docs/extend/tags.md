@@ -230,7 +230,7 @@ The discussions endpoint takes a `tag` filter of tag slugs:
 
 The posts endpoint also takes a `tag` filter, of numeric tag IDs, for posts in discussions with those tags.
 
-The `tags` resource lists, shows, creates, updates and deletes tags at `/api/tags`. `GET /api/tags/{id}` also accepts a slug. Each tag has `name`, `slug`, `description`, `color`, `icon`, `iconImageUrl`, `iconImageSrcset`, `isHidden`, `isPrimary`, `isChild`, `position`, `defaultSort`, `discussionCount`, `lastPostedAt`, `canStartDiscussion` and `canAddToDiscussion`, and admins also see `isRestricted`.
+The `tags` resource lists, shows, creates, updates and deletes tags at `/api/tags`. `GET /api/tags/{id}` also accepts a slug. Each tag has `name`, `slug`, `description`, `color`, `icon`, `iconImageUrl`, `iconImageSrcset`, `isHidden`, `isPrimary`, `isChild`, `position`, `defaultSort`, `discussionCount`, `lastPostedAt`, `canStartDiscussion` and `canAddToDiscussion`, and admins also see `isRestricted`. Those who can edit the tag also see `storedSlug`, the slug as stored, where `slug` is the one the forum's slug driver gives.
 
 `iconImageUrl` and `iconImageSrcset` are the tag's [icon image](models.md#icon-images), or `null`. Upload one with `POST /api/tags/{id}/icon-image` and remove it with `DELETE /api/tags/{id}/icon-image`. In the frontend, `Tag.icon()` includes the classes that show it.
 

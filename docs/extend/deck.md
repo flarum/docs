@@ -61,6 +61,16 @@ export default [
 
 When Deck isn't enabled, `DeckColumns` and `DiscussionListSource` are `undefined`. That is harmless as long as nothing uses them, and the `Conditional` extender makes sure of that: it only calls the callback when Deck is enabled.
 
+The frontend `Conditional` extender is new in Flarum 2.1. If your extension also supports Flarum 2.0, check for Deck yourself instead, as the bundled extensions do:
+
+```ts
+export default [
+  // ...your other extenders
+
+  ...('flarum-deck' in flarum.extensions ? [new DeckColumns().add(/* ... */)] : []),
+];
+```
+
 `add()` takes a **key**, a **column type**, and an optional **priority**:
 
 - **The key** is stored in every member's layout, so it can't change once members have the column. Prefix it with your extension's name, as in `acme-bookmarks.bookmarked`. It may contain letters, numbers, `_`, `.` and `-`, up to 64 characters, starting with a letter.
@@ -199,15 +209,18 @@ Some changes move a discussion in or out of a filter without anything being post
 If your extension broadcasts an event that can change what one of its filters matches, register the event:
 
 ```ts
-// forum/extendDeck.ts
+// forum/extend.ts
+import Extend from 'flarum/common/extenders';
 import DeckColumns from 'ext:flarum/deck/forum/extenders/DeckColumns';
 
-export default function extendDeck() {
-  return [
+export default [
+  // ...your other extenders
+
+  new Extend.Conditional().whenExtensionEnabled('flarum-deck', () => [
     // Choosing a best answer moves a discussion out of `is:question -is:solved`.
     new DeckColumns().membershipEvents('bestAnswerEvent'),
-  ];
-}
+  ]),
+];
 ```
 
 Every column with a filter then asks the server about the discussion when the event arrives. Each column asks at most once per check interval, for every discussion a burst of events concerns. Register only events that can change what a filter matches: for likes, edits and other changes that don't, the column updates in place from the event's payload without a request.

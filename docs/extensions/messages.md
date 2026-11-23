@@ -34,7 +34,7 @@ Only the members of a conversation can see it: the members it was sent to, and t
 
 How many members one message can go to is set by **Recipients per message** (see [Settings](#settings)). Set it to 1 to turn group conversations off.
 
-A group conversation without a name is titled with up to three of the other members' names, in alphabetical order, then how many more there are, such as "bob, carol, dave +3". Its header says how many members it has, or shows **Participants** when it was sent to a group; select that to see who they are.
+A group conversation without a name is titled with up to three of the other members' names, and the names of the groups it was sent to that you can see, in alphabetical order, then how many more there are, such as "bob, carol, dave +3". Its header says how many members it has, or shows **Participants** when it was sent to a group; select that to see who they are.
 
 ### Sending to groups
 
@@ -60,7 +60,7 @@ Turning the setting off hides the names already given, rather than removing them
 
 ### Notices
 
-When a member leaves or names a group conversation, a notice in the conversation says so, such as *alice left the conversation*. Notices don't count as unread, aren't emailed, can't be found in search, and can't be edited or deleted.
+When a member leaves or names a group conversation, a notice in the conversation says so, such as *alice left the conversation*. Notices don't count as unread, aren't emailed, can't be found in search, and can't be edited or deleted by members.
 
 ## Members who can't reply
 
@@ -103,7 +103,7 @@ Members only see receipts for their own messages, not how far the others have re
 
 Receipts start when you update to the release that adds them: messages sent before then show none. Earlier releases moved every conversation's read position when someone used **Mark all as read**, so those positions don't show what was actually read.
 
-Members can stop sharing receipts by turning off **Show others when I've read their messages** in the privacy settings on their **Settings** page. It works both ways: they then see nobody else's either. Members who don't share receipts aren't counted, so in a group, **Read by everyone** means everyone who shares them. Receipts are shared by default.
+Members can stop sharing receipts by turning off **Show others when I've read their messages (and see when they've read mine)** in the privacy settings on their **Settings** page. It works both ways: they then see nobody else's either. Members who don't share receipts aren't counted, so in a group, **Read by everyone** means everyone who shares them. Receipts are shared by default.
 
 ## Notifications
 
@@ -123,7 +123,7 @@ Members can edit and delete their own messages for as long as you allow. Choose 
 | --- | --- |
 | **Indefinitely** | at any time |
 | **For 10 minutes** | for 10 minutes after sending it |
-| **Until next reply** | until someone sends another message in the conversation |
+| **Until next reply** | while it is the conversation's latest message: until someone sends another, or a notice such as a member leaving follows it |
 | **Never** | never |
 
 Until you choose an option, both are allowed until the next reply.
@@ -132,7 +132,7 @@ An edited message is marked **Edited**; hovering over the mark shows who edited 
 
 Deleting a message replaces it with *This message was deleted.* for the other members. Its author still sees what it said, and can restore it within the same time limit.
 
-Only groups with **Delete messages forever** can remove a message for good, from a message that has already been deleted. Nobody has this permission by default, so only admins can. Deleting a message forever can't be undone, and deleting the last message left in a conversation deletes the conversation.
+Only groups with **Delete messages forever** can remove a message for good. Those who can also delete messages do it from a message that has already been deleted; those who can't get **Delete Forever** straight away. Nobody has this permission by default, so only admins can. Deleting a message forever can't be undone, and deleting the last message left in a conversation deletes the conversation.
 
 ## Likes
 
