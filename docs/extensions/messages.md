@@ -68,9 +68,9 @@ Members can only message someone who could reply: someone whose groups have **Se
 
 When a member chooses who to message, anyone who can't reply is shown as **Can't reply to messages** and can't be chosen. On that person's profile, **Send a message** is unavailable and says **This user cannot reply**. In an existing conversation with them, the reply box is gone and the conversation shows **This user cannot reply**.
 
-A group conversation can only be started if every member chosen could reply. Once it exists, a member who can't reply doesn't stop the others writing in it.
-
 Admins, and any group you grant **Message users without messaging permission**, can message them anyway. Once one of them has sent a message in a conversation, everyone in it can reply there, so a suspended member can answer a moderator. That member still can't start conversations of their own.
+
+A group conversation can only be started if every member chosen by name could reply, or by someone with **Message users without messaging permission**. Once it exists, a member who can't reply doesn't stop the others writing in it.
 
 When you update from an earlier release, conversations that an admin has already written in are opened to replies in the same way.
 
