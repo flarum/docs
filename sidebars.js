@@ -64,6 +64,7 @@ module.exports = {
       className: 'menu__manage-category',
       collapsible: false,
       items: [
+        'extensions/ai',
         'extensions/akismet',
         'extensions/audit',
         'extensions/bbcode',
@@ -167,6 +168,7 @@ module.exports = {
         'extend/slugging',
         'extend/notifications',
         'extend/realtime',
+        'extend/ai',
         'extend/audit',
         'extend/deck',
         'extend/gdpr',

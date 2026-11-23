@@ -562,7 +562,7 @@ The bundled helper namespaces use `Flarum\<Package>\Testing`. Install the corres
 
 | Package | Helpers | Purpose |
 | --- | --- | --- |
-| `flarum/ai` | `InteractsWithAi` | Configure test connections, features and permissions. Fake provider calls separately. |
+| `flarum/ai` | `InteractsWithAi` | [Configure test connections, features and permissions](ai.md#testing). Fake provider calls separately. |
 | `flarum/akismet` | `FakeAkismetProvider` | Fake spam classification and key verification. |
 | `flarum/approval` | `InteractsWithUnapprovedContent` | Seed representative approved/unapproved content and provide authorization cases. |
 | `flarum/audit` | `InteractsWithAuditLog`, `BuildsAuditRequests`, `TestCase` | [Audit assertions, setup and optional guest-auth request support](audit.md#testing). |
