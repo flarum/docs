@@ -65,3 +65,39 @@ return [
         ->extendNamespace('acme.hello-world', __DIR__.'/override_views'),
 ];
 ```
+
+### Customise the standalone 404 page
+
+In Flarum 2.1, customise the standalone "Page not found" page by overriding its partials. Register your views in `extend.php`:
+
+```php
+(new Extend\View())
+    ->extendNamespace('flarum.forum', __DIR__.'/resources/views'),
+```
+
+To add artwork above the heading, create `resources/views/error/not_found/hero.blade.php`:
+
+```blade
+<img src="{{ $url->to('forum')->base() }}/assets/not-found.webp" alt="">
+```
+
+Put the artwork in the forum's public assets directory, or use a URL your extension supplies. The hero is empty by default.
+
+To add a recovery link while keeping core's links, create `resources/views/error/not_found/actions.blade.php`:
+
+```blade
+@include('flarum.forum::error.not_found.default_actions')
+
+<a href="{{ $url->to('forum')->base() }}/help">Help</a>
+```
+
+Translate your link text using your extension's locale keys. Core displays these actions in a navigation region that wraps on narrow screens.
+
+The partials receive `$canSearch`, which is true when the request's actor can view the forum, and `$discussionsUrl`, which points to the discussion list for the configured homepage when search is available (otherwise it is null). Gate any links to restricted content yourself. Core hides its search form and discussion-list link when `$canSearch` is false.
+
+These partials retain core's heading, search form and shared layout, including the forum's colour scheme and icons. Full overrides of `error/not_found.blade.php` remain supported. If multiple extensions override the same partial, their overrides do not combine: coordinate them or provide a single override that includes the required content.
+
+This affects the server-rendered HTML error page. API error responses and the forum application's in-app error alerts are separate.
+
+
+If your theme overrides `flarum.forum::layouts.basic`, add `@yield('head')` inside its `<head>` and `@yield('styles')` inside its inline `<style>` block. The core 404 page uses these sections for its robots metadata and page styles.
