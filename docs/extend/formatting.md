@@ -40,3 +40,22 @@ return [
 ```
 
 With a good understanding of TextFormatter, this will allow you to achieve anything from simple BBCode tag additions to more complex formatting tasks like Flarum's **Mentions** extension.
+
+## Changing post HTML in the browser
+
+Formatting on the backend is the right place for most changes, as the HTML is rendered once and cached. When you must change a post's HTML in the browser instead, for example to wrap its images for a lightbox, from Flarum 2.1 you can override the `contentHtml()` method of `flarum/forum/components/Comment`. It returns the HTML that the post body renders, so [`override`](frontend.md#extend-and-override) it and transform the original; `extend` can't change a return value:
+
+```js
+import { override } from 'flarum/common/extend';
+import Comment from 'flarum/forum/components/Comment';
+
+override(Comment.prototype, 'contentHtml', function (original) {
+  return original().replace(/<img /g, '<img loading="lazy" ');
+});
+```
+
+`this.attrs.post` is the model being rendered: the `Post` in a discussion, or the message in the [Messages](../extensions/messages.md) extension. It may be missing when another extension renders a `Comment` without it.
+
+Keep the override fast and return the same HTML for the same input, as posts rebuild their HTML when their state changes. The result is rendered as trusted HTML, so it must be safe. If the override throws, the original HTML is shown. Search highlighting is applied after it, and it isn't called while the post is being edited. Scripts in the HTML, such as TextFormatter's syntax highlighting, run again whenever the rendered HTML changes.
+
+It doesn't affect the composer's preview, plain-text excerpts, or the HTML that the server renders for visitors without JavaScript.
