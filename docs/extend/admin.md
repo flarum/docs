@@ -237,7 +237,7 @@ From Flarum 2.1, a field for a Font Awesome icon class, which opens an [icon pic
 
 An extension with more than a handful of settings should group them, so admins can tell at a glance what each one is about. The `Admin` extender has two levels of grouping:
 
-- **Sections** are titled groups of settings, with an optional icon and description. On wide screens the title and description sit in a column beside the settings; on narrow screens they stack above them.
+- **Sections** are titled groups of settings, with an optional icon and description shown above the settings.
 - **Tabs** split the page. Each section is shown on one tab.
 
 #### Grouping Settings into Sections
@@ -595,6 +595,8 @@ export default [
     ])
 ];
 ```
+
+Settings and permissions registered with `Admin.setting` and `Admin.permission` take an optional `link` as well, for when the setting or permission is shown somewhere other than where search would open by default. `link` is only used by search: it isn't passed on to the setting's field component.
 
 ### Adding Settings to Core Pages
 
