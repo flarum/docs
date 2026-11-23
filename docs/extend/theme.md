@@ -121,7 +121,7 @@ Code written before Flarum 2.1 may read the paths of uploaded images from the `l
 
 ### Web App Manifest
 
-Flarum serves a web app manifest at `/manifest`, which phones read for the name and icons of a home screen shortcut. While **Open as an app from the home screen** is on in the Appearance page, its `display` is `standalone`, so the forum opens as an app; otherwise it is `browser`. Its `start_url` is the forum's address, or the page an admin chose as the **App Start Page**. With a start page, the manifest also has an `id`, the forum's address, so that browsers still see existing installs as the same app.
+Flarum serves a web app manifest at `/manifest`, which phones read for the name and icons of a home screen shortcut. Its `short_name` is the **Short Name** set on the Basics page, when there is one. While **Open as an app from the home screen** is on in the Appearance page, its `display` is `standalone`, so the forum opens as an app; otherwise it is `browser`. Its `start_url` is the forum's address, or the page an admin chose as the **App Start Page**. With a start page, the manifest also has an `id`, the forum's address, so that browsers still see existing installs as the same app.
 
 An extension can change it with `manifest()`. The callback receives the manifest as an array and returns it changed:
 

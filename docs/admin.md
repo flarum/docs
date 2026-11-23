@@ -15,6 +15,16 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## The Basics page
+
+The Basics page sets how the forum is named and described, its language, its home page, how members are named and pictured, and how links are written.
+
+**Short Name**, from Flarum 2.1, is used where the **Forum Title** doesn't fit: under the forum's icon on a phone's home screen, and when someone adds the forum as a search engine in their browser. It is up to 16 characters. Without one, the forum title is used, cut short at a whole word if it is too long.
+
+### Search from the browser
+
+From Flarum 2.1, browsers can add the forum as a search engine. A search from the browser's address bar or search box opens the forum's discussion list with the results, and while someone types, the browser can suggest discussions whose titles match. Only discussions that person can see are suggested. There is nothing to set up: the browser lists the forum under its **Short Name** and icon.
+
 ## Groups
 
 Groups are managed at the top of the **Permissions** page. Select a group to edit it, or **New Group** to create one. A group has:
@@ -54,7 +64,7 @@ It needs an app icon: without one, the forum keeps opening in the browser. It is
 
 While it is on, forums served over HTTPS also show an offline page when they can't be reached, which loads the forum again as soon as the connection is back. The admin dashboard and the API always load from the network.
 
-- **App Start Page** is the page the app opens to: **Same as the home page** (the default), or one of the pages that can be chosen as the **Home Page** on the Basics page. Android picks up a change the next time the browser updates the app. iPhones and iPads don't check again once the app is on the home screen, so there the change only applies to apps added after it.
+- **App Start Page** is the page the app opens to: **Same as the home page** (the default), or one of the pages that can be chosen as the **Home Page** on [the Basics page](#the-basics-page). Android picks up a change the next time the browser updates the app. iPhones and iPads don't check again once the app is on the home screen, so there the change only applies to apps added after it.
 - **Splash Screen Background** fills the screen around the app icon. It takes a solid colour, such as `#f5f5f5`. Leave it empty to use the **App Icon Background**.
 
 The page previews the splash screen as iPhones and Android show it. A theme can set full-screen splash images for iPhones and iPads instead; Android always shows the app icon.
