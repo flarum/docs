@@ -157,7 +157,7 @@ Applies extenders only if the given extension is currently disabled.
 
 #### `whenExtensionsEnabled(array $extensionIds, ...)`
 
-Applies extenders only if **all** of the given extensions are currently enabled. Use this for integrations that need more than one companion extension at the same time:
+From Flarum 2.1. Applies extenders only if **all** of the given extensions are currently enabled. Use this for integrations that need more than one companion extension at the same time:
 
 ```php
 (new Extend\Conditional())
@@ -168,7 +168,7 @@ Applies extenders only if **all** of the given extensions are currently enabled.
 
 #### `whenExtensionsDisabled(array $extensionIds, ...)`
 
-Applies extenders only if **all** of the given extensions are currently disabled. If any one of them is enabled, the extenders are not applied.
+From Flarum 2.1. Applies extenders only if **all** of the given extensions are currently disabled. If any one of them is enabled, the extenders are not applied.
 
 :::info
 
@@ -227,9 +227,10 @@ use Flarum\Extend;
 ```
 
 The same predicates can defer [conditional migrations](models.md#conditional-migrations). Extender conditions control which extenders apply at boot; migration conditions control whether a pending migration can run and do not reverse completed migrations when they become false.
+
 ### In the frontend
 
-The frontend has a `Conditional` extender too. Use it in `extend.ts` to register extenders that only make sense when another extension is enabled:
+From Flarum 2.1, the frontend has a `Conditional` extender too. Use it in `extend.ts` to register extenders that only make sense when another extension is enabled:
 
 ```ts
 // forum/extend.ts

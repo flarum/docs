@@ -7,7 +7,7 @@ This file, though small, contains details that are crucial for your Flarum insta
 If the file exists, it tells Flarum that it has already been installed.
 It also provides Flarum with database info and more.
 
-Only `database`, `url` and `paths` are written by the installer and required. Everything else is optional — leaving a block out gives you the default shown here.
+The installer writes `debug`, `database`, `url`, `paths`, `headers` and `queue`. Flarum needs `url`, and `database` to reach its database. Everything else is optional: leaving a block out gives you the default shown here.
 
 Here are the options core reads, with what each one does:
 
@@ -26,7 +26,6 @@ Here are the options core reads, with what each one does:
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'prefix' => '', // the prefix for the tables, useful if you are sharing the same database with another service
-    'prefix_indexes' => true, // whether the prefix above also applies to index names
     'port' => '3306', // the port of the connection, defaults to 3306 with MySQL
     'strict' => false,
   ),
@@ -58,6 +57,11 @@ Here are the options core reads, with what each one does:
     'domain' => null, // set this to share cookies across subdomains
     'secure' => true, // defaults to true when your forum URL is https
     'samesite' => null, // lax, strict or none
+  ),
+  'headers' =>
+  array (
+    'poweredByHeader' => true, // send the X-Powered-By: Flarum header
+    'referrerPolicy' => 'same-origin', // the Referrer-Policy header sent with every response
   ),
   'fontawesome' =>
   array (

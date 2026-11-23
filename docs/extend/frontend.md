@@ -281,7 +281,7 @@ return [
 
 Each script is served at `/sw/{part}` and loaded with `importScripts()` after core's, wrapped in a function of its own, so it can't be a module. A script that throws or doesn't parse only stops itself: core's and other extensions' keep running. Core's script answers page loads to show the offline page, so yours shouldn't answer them too.
 
-The forum registers the worker, on forums served over HTTPS, while [opening as an app](theme.md#opening-as-an-app) is on or an extension has added a script. Otherwise, `/sw` serves a worker that removes itself.
+The forum registers the worker, in a secure context (a forum served over HTTPS, or from `localhost`), while [opening as an app](theme.md#opening-as-an-app) is on or an extension has added a script. Otherwise, `/sw` serves a worker that removes itself.
 
 ## Changing the UI Part 1
 

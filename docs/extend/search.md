@@ -100,7 +100,7 @@ return [
 
 ### Filters that pick a window of a list
 
-Some mutators only apply to the unfiltered list. Tags, for example, hides discussions in hidden tags from All Discussions, but not from a tag's own page. To tell the two apart, such a mutator checks `$state->getListFilters()`, which returns the active filters that decide which list the request is for:
+From Flarum 2.1, some mutators can tell the unfiltered list apart from a filtered one. They only apply to the unfiltered list. Tags, for example, hides discussions in hidden tags from All Discussions, but not from a tag's own page. To tell the two apart, such a mutator checks `$state->getListFilters()`, which returns the active filters that decide which list the request is for:
 
 ```php
 if (count($state->getListFilters()) === 0 && ! $state->isFulltextSearch()) {

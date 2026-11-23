@@ -93,7 +93,7 @@ To add a recovery link while keeping core's links, create `resources/views/error
 
 Translate your link text using your extension's locale keys. Core displays these actions in a navigation region that wraps on narrow screens.
 
-The partials receive `$canSearch`, which is true when the request's actor can view the forum, and `$discussionsUrl`, which points to the discussion list for the configured homepage when search is available (otherwise it is null). Gate any links to restricted content yourself. Core hides its search form and discussion-list link when `$canSearch` is false.
+The partials receive `$canSearch`, which is true when the request's actor can view the forum, and `$discussionsUrl`, which points to the All Discussions list (`/` when it is the homepage, otherwise `/all`) when search is available, and is null otherwise. Gate any links to restricted content yourself. Core hides its search form and discussion-list link when `$canSearch` is false.
 
 These partials retain core's heading, search form and shared layout, including the forum's colour scheme and icons. Full overrides of `error/not_found.blade.php` remain supported. If multiple extensions override the same partial, their overrides do not combine: coordinate them or provide a single override that includes the required content.
 

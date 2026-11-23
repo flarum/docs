@@ -47,8 +47,8 @@ Deleting a group doesn't delete its members.
 
 Besides the forum's colors and custom CSS, the Appearance page sets its logos and icons:
 
-- **Logo** and **Dark Mode Logo**, shown in the header.
-- **Email Logo**, shown at the top of emails. Without one, emails use a copy of the logo.
+- **Logo** and **Dark mode logo**, shown in the header.
+- **Email logo**, shown at the top of emails. Without one, emails use a copy of the logo.
 - **Favicon**, shown in browser tabs and bookmarks. A square image at least 48 pixels across stays sharp, and an `.ico` file works too. Flarum also stores it as an `.ico` for older browsers and other software.
 - **App Icon**, which phones show when someone adds the forum to their home screen. Upload a square image at least 512 pixels across. The page previews it as iPhones and Android show it, and **App Icon Background** fills its transparent parts on iPhones and iPads, and the space around it on Android. Without a favicon, the app icon is used as the favicon too.
 

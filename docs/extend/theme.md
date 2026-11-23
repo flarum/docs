@@ -136,7 +136,7 @@ Pages link the manifest once there is an app icon, or an extension has changed i
 
 From Flarum 2.1, the forum opens as an app from the home screen while the admin's **Open as an app from the home screen** setting is on and there is an app icon. It is on for new forums and off for forums upgraded from 2.0. Opened as an app, the forum shows a splash screen while it loads, set with `splashScreen()` or drawn from the app icon, and gets pull-to-refresh.
 
-While it is on, forums served over HTTPS register a [service worker](frontend.md#service-worker) that shows an offline page when the forum can't be reached.
+While it is on, forums served over HTTPS (or from `localhost`) register a [service worker](frontend.md#service-worker) that shows an offline page when the forum can't be reached.
 
 `flarum/core` 2.1 conflicts with `fof/pwa` before 2.1, which registers the same `/sw` and `/offline` routes.
 
