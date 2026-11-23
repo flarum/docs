@@ -173,6 +173,7 @@ module.exports = {
         'extend/audit',
         'extend/deck',
         'extend/gdpr',
+        'extend/mcp',
         'extend/oauth-provider',
         'extend/statistics',
         'extend/tags',

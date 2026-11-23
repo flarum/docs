@@ -51,7 +51,7 @@ Because the extender's class comes from `flarum/oauth-provider`, add the extensi
 
 ## Protecting your own API
 
-An extension with an API of its own, an MCP server for example, can accept the forum's tokens through [resource indicators](https://datatracker.ietf.org/doc/html/rfc8707). Register the API's URL as a resource, with the scopes that belong to it:
+An extension with an API of its own, an MCP server for example, can accept the forum's tokens through [resource indicators](https://datatracker.ietf.org/doc/html/rfc8707). The bundled [MCP extension](mcp.md) works this way. Register the API's URL as a resource, with the scopes that belong to it:
 
 ```php
 use Flarum\Http\UrlGenerator;

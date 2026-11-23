@@ -567,7 +567,7 @@ The bundled helper namespaces use `Flarum\<Package>\Testing`. Install the corres
 | `flarum/approval` | `InteractsWithUnapprovedContent` | Seed representative approved/unapproved content and provide authorization cases. |
 | `flarum/audit` | `InteractsWithAuditLog`, `BuildsAuditRequests`, `TestCase` | [Audit assertions, setup and optional guest-auth request support](audit.md#testing). |
 | `flarum/gdpr` | `InteractsWithGdpr` | [Construct a data type for an existing test user](gdpr.md#testing). |
-| `flarum/mcp` | `InteractsWithMcp`, `IssuesOAuthTokens`, `McpTestCase`, `Fixtures` namespace | Exercise JSON-RPC requests, sessions, tools and OAuth authorization. `McpTestCase` enables MCP and OAuth Provider; the token trait is composed separately. |
+| `flarum/mcp` | `InteractsWithMcp`, `IssuesOAuthTokens`, `McpTestCase`, `Fixtures` namespace | [Exercise JSON-RPC requests, sessions, tools and OAuth authorization](mcp.md#testing). `McpTestCase` enables MCP and OAuth Provider; the token trait is composed separately. |
 | `flarum/messages` | `CapturesSentMail` | Capture sent mail with `captureSentMail()` and count recipients with `emailsTo()`. |
 | `flarum/oauth-provider` | `InteractsWithOAuth`, `CollectingLogger` | Exercise OAuth flows and collect log records. |
 | `flarum/extension-manager` | `EnglishTranslator`, `FakeHttp` in `Flarum\ExtensionManager\Testing` | Translate test messages and fake extension-manager HTTP responses. |
