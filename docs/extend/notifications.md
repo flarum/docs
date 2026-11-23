@@ -182,6 +182,18 @@ You can use the following blade components:
 * `mail::html.information`: The HTML template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 * `mail::plain.information`: The plain text template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 
+The footer of the notification template tells the recipient which type of notification the email is for. From Flarum 2.1, it names the type with the translation `core.email.notification.types.<type>`, in the recipient's language, where `<type>` is what your blueprint's `getType()` returns. Add it to your extension's locale file:
+
+```yaml
+core:
+  email:
+    notification:
+      types:
+        postMentioned: Replies to your posts
+```
+
+A type without a name is left out of the footer. Your views receive the name as `$typeName` (`null` when there is none), beside the type key as `$type`.
+
 ### Notification Drivers
 
 In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`.
@@ -400,6 +412,14 @@ class SendNotificationWhenPostIsLiked
         }
     }
 }
+```
+
+The unread and new notification counts shown to each user are cached. `notify()` and the syncer forget them for the users they change. If you change which notifications count for a user some other way, such as updating `is_deleted` with a query of your own, call `Notification::forgetCachedCounts()` with the IDs of the users affected:
+
+```php
+use Flarum\Notification\Notification;
+
+Notification::forgetCachedCounts([$user->id]);
 ```
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
