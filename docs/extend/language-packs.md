@@ -10,28 +10,77 @@ This documentation covers the technical structure of language packs. Read [this 
 
 Language packs should be their own extensions, with no other code / logic included.
 
-The [`LanguagePack` extender](https://github.com/flarum/framework/blob/main/framework/core/src/Extend/LanguagePack.php) allows you to define that your extension is a language pack.
-
-This extender has no setters. All you have to do is instantiate it, make sure you language pack is in the `locale` folder, and you're done!
-
-Here's a quick example from [Flarum English](https://github.com/flarum/lang-english/blob/master/extend.php):
+The [`LanguagePack` extender](https://github.com/flarum/framework/blob/2.x/framework/core/src/Extend/LanguagePack.php) declares that your extension is a language pack. Give it the language's locale code and its name, written in that language. Here's the one from [Flarum English](https://github.com/flarum/lang-english/blob/2.x/extend.php):
 
 ```php
 <?php
 
-return new Flarum\Extend\LanguagePack();
+return (new Flarum\Extend\LanguagePack())
+    ->code('en')
+    ->title('English');
 ```
 
-The `composer.json` will also need some special values. It now needs a `flarum-locale` info object in `extra`, like `flarum-extension`. You can simply insert the following underneath the value of `flarum-extension` while remaining inside `extra`:
+Put your translation files in the `locale` folder, and you're done!
+
+| Method | Description |
+|--------|-------------|
+| `code(string $code)` | The locale code, such as `en` or `pt-BR`. Required. |
+| `title(string $title)` | The language's name, written in that language, such as `Español`. This is what the language selector shows. Required. |
+| `direction(string $direction)` | `ltr` or `rtl`. Optional: a language pack that doesn't set it is left to right. See [Text Direction](#text-direction). |
+
+If your translation files are somewhere other than `locale`, pass the folder to the constructor: `new Flarum\Extend\LanguagePack('/translations')`.
+
+:::info Flarum 2.1
+
+`code()`, `title()` and `direction()` were added in Flarum 2.1, so a language pack that uses them should require `"flarum/core": "^2.1"`. A language pack that still supports Flarum 2.0 should declare its code and title [in `composer.json`](#declaring-in-composerjson-deprecated) instead.
+
+:::
+
+Also give the extension the `language` category in `composer.json`, so that the admin dashboard lists it with the other languages:
 
 ```json
-"flarum-locale": {
-  "code": "en",
-  "title": "English"
+"extra": {
+  "flarum-extension": {
+    "title": "English",
+    "category": "language"
+  }
 }
 ```
 
-And that's it! It should work out of the box.
+### Text Direction
+
+A language written right to left, such as Arabic, Hebrew or Persian, should set its direction to `rtl`:
+
+```php
+<?php
+
+return (new Flarum\Extend\LanguagePack())
+    ->code('ar')
+    ->title('العربية')
+    ->direction('rtl');
+```
+
+While the language is in use, Flarum sets `dir="rtl"` on the `<html>` element of the forum and admin pages, and of the HTML emails it sends in that language. The browser then lays out text right to left, and so does any styling written with CSS logical properties, such as `margin-inline-start` instead of `margin-left`.
+
+Only `ltr` and `rtl` are accepted. Any other value throws an exception when the forum boots.
+
+A regional variant that doesn't set a direction takes the one of its base language: a pack for `ar-EG` that doesn't call `direction()` is right to left when the `ar` pack is. When a variant is written differently from its base language, set its direction explicitly. For example, Punjabi in Gurmukhi script (`pa`) is left to right, but in Shahmukhi script (`pa-Arab`) it is right to left.
+
+### Declaring in `composer.json` (deprecated)
+
+Before Flarum 2.1, a language pack declared its code and title in a `flarum-locale` object inside `extra` in its `composer.json`, alongside `flarum-extension`:
+
+```json
+"flarum-locale": {
+  "code": "ar",
+  "title": "العربية",
+  "direction": "rtl"
+}
+```
+
+This still works throughout Flarum 2.x, but it is deprecated and will be removed in Flarum 3.0. Use the extender instead. If a value is set in both places, the extender's is used.
+
+`direction` is only read from Flarum 2.1, and Flarum 2.0 ignores it. That makes it the way for a right-to-left language pack that supports both 2.0 and 2.1 to set its direction.
 
 ## Translation Files
 
