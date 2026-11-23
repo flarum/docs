@@ -49,8 +49,27 @@ Where participant avatars or group icons overlap, hover over one to bring it to 
 From the page, members can:
 
 - sort their conversations by **Latest** activity, **Newest** or **Oldest**;
-- mark a conversation as read, or all of them with **Mark all as read**;
+- mark a conversation as read, or all of them with **Mark all as read**. Marking every conversation read clears the count without telling anyone their messages were read (see [Read receipts](#read-receipts));
 - see a conversation's participants and when it started, with **Details**.
+
+## Read receipts
+
+A member's own messages show whether they have been read, beside when they were sent:
+
+| Shown | Meaning |
+| --- | --- |
+| ✓ **Sent** | Nobody else has read it yet. |
+| ✓✓ **Read** | In a one-to-one conversation, the other member has read it. |
+| ✓✓ **Read by 2 of 5** | In a group conversation, some of the other members have read it. Select it to see who. |
+| ✓✓ **Read by everyone** | Every other member has read it. In a conversation with a group, that is everyone in the group now. |
+
+A message counts as read when it has been shown to the member in the conversation, when they reply after it, or when they mark that one conversation read. **Mark all as read** doesn't count, so it never tells anyone their messages were read. Apps and other clients using the API mark a conversation read the same way, so they produce receipts too.
+
+Members only see receipts for their own messages, not how far the others have read anyone else's, and never for members they couldn't otherwise see, such as members of a hidden group. With [Realtime](realtime.md), receipts update as members read; without it, they update when the conversation is next loaded.
+
+Receipts start when you update to the release that adds them: messages sent before then show none. Earlier releases moved every conversation's read position when someone used **Mark all as read**, so those positions don't show what was actually read.
+
+Members can stop sharing receipts by turning off **Show others when I've read their messages** in the privacy settings on their **Settings** page. It works both ways: they then see nobody else's either. Members who don't share receipts aren't counted, so in a group, **Read by everyone** means everyone who shares them. Receipts are shared by default.
 
 ## Notifications
 
@@ -110,8 +129,8 @@ Set these on the **Permissions** page of the admin panel:
 
 | Extension | What it adds to Messages |
 | --- | --- |
-| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, and edits, deletions and restored messages show straight away; the header's count updates straight away, and members see when the other person is typing. |
+| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
 | [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with who it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
-| [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
+| [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |

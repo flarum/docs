@@ -95,6 +95,23 @@ Use `broadcastDialogEvent` to push a message to all connected participants of a 
 
 The payload is sent only to connected users who are members of the dialog.
 
+### Broadcasting to particular users
+
+Use `broadcastToUsers` to send a payload of your own to particular users, when there is no model for realtime to serialise. The callback receives the event and returns each user's payload, keyed by user ID. Return an empty array to send nothing:
+
+```php
+(new RealtimeExtend())
+    ->broadcastToUsers(
+        \Flarum\Messages\Dialog\Event\UserRead::class,
+        fn ($event) => resolve(\Flarum\Messages\ReadReceipts::class)->signals($event),
+    ),
+```
+
+Each user receives their payload on their own channel, under the event's class name. Users who aren't connected miss it, as they would any other broadcast. Users given the same payload share one trigger.
+
+The callback runs when the broadcast goes out, not when the event is raised. On a forum with a queue worker that is later, so someone who has lost access in between isn't told. The event is queued with the broadcast: give it Laravel's `SerializesModels` trait if it carries models, so they are loaded afresh.
+
+Realtime doesn't check who may see a payload, so the callback must leave out anyone who may not.
 ### Broadcasting dialog message removals
 
 A message deleted for good can't be rendered for each member, and deleting a dialog's last message deletes the dialog and its memberships. Use `broadcastDialogRemoval` with an event that recorded who could see the message before it was deleted:
