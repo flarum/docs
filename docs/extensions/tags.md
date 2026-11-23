@@ -47,8 +47,8 @@ Each change to the order is saved as soon as you drop the tag.
 
 | Field | Description |
 | --- | --- |
-| **Name** | Shown wherever the tag appears. Typing a name fills in the slug. |
-| **Slug** | Used in the tag's address, `/t/slug`. It must be unique and can't contain spaces or forward slashes. For names in non-Latin scripts, such as Chinese or Japanese, the slug isn't filled in for you: type one yourself. |
+| **Name** | Shown wherever the tag appears. While you create a tag, typing a name suggests a slug, until you edit the slug yourself. |
+| **Slug** | Used in the tag's address, `/t/slug`. It must be unique and can't contain spaces or forward slashes. The suggestion works in any script: Latin letters lose their accents (Tecnología gives `tecnologia`), other scripts keep their letters (Новости gives `новости`), and emoji are left out. Renaming a tag later doesn't change its slug, so links to it keep working. Editing the slug moves the tag to the new address, and links to the old one stop working: nothing redirects them. |
 | **Description** | Shown on the tag's page and on the **Tags** page. Up to 700 characters. |
 | **Color** | Used for the tag's label, its page header and its icon. |
 | **Icon** | A [Font Awesome](../fontawesome.md) icon. Click the field to [choose one](../fontawesome.md#choosing-an-icon), or type any icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
