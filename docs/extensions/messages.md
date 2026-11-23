@@ -6,7 +6,7 @@ image: img/extensions/messages-share.png
 
 ![Messages: private conversations between members. Bundled with Flarum 2.0.](/img/docs/extensions/messages.png)
 
-The Messages extension (`flarum/messages`) lets members talk to each other privately, in one-to-one conversations away from the forum's discussions. It is a [bundled extension](../extensions.md), but it is not enabled on new installs.
+The Messages extension (`flarum/messages`) lets members talk to each other privately, one to one or in groups, away from the forum's discussions. It is a [bundled extension](../extensions.md), but it is not enabled on new installs.
 
 ## Installation
 
@@ -21,20 +21,44 @@ php flarum cache:clear
 
 ## Conversations
 
-A conversation is between two members. A member can start one with:
+A conversation is between two members, or a group of them. A member can start one with:
 
 - **Send a message** on the other member's profile;
 - **Send a Message** on the Messages page, which asks who the message is for.
 
-Messaging someone you already have a conversation with continues that conversation rather than starting another.
+A message to one member continues the conversation the two already have, rather than starting another. A message to two or more members starts a group conversation, a new one every time, so the same members can have several.
 
-Only the two members of a conversation can see it. That includes admins and moderators: they can't read conversations they aren't part of.
+Only the members of a conversation can see it. That includes admins and moderators: they can't read conversations they aren't part of.
+
+## Group conversations
+
+How many members one message can go to is set by **Recipients per message** (see [Settings](#settings)). Set it to 1 to turn group conversations off.
+
+A group conversation without a name is titled with up to three of the other members' names, in alphabetical order, then how many more there are, such as "bob, carol, dave +3". Its header says how many members it has; select that to see who they are.
+
+### Leaving
+
+Any member of a group conversation can leave it with **Leave conversation**. They no longer see it, or hear about new messages in it. What they wrote stays for the others. When the last member leaves, the conversation and its messages are deleted.
+
+A conversation between two members can't be left.
+
+### Naming
+
+When **Let members name group conversations** is on, any member who can write in a group conversation can name it with **Rename conversation**, or remove its name. Everyone in it then sees the name instead of the list of members. Names are up to 50 characters.
+
+Turning the setting off hides the names already given, rather than removing them: they come back if you turn it on again.
+
+### Notices
+
+When a member leaves or names a group conversation, a notice in the conversation says so, such as *alice left the conversation*. Notices don't count as unread, aren't emailed, can't be found in search, and can't be edited or deleted.
 
 ## Members who can't reply
 
 Members can only message someone who could reply: someone whose groups have **Send private messages**. A member who is [suspended](suspend.md), or who hasn't confirmed their email address, has only a guest's permissions, so they can't reply.
 
 When a member chooses who to message, anyone who can't reply is shown as **Can't reply to messages** and can't be chosen. On that person's profile, **Send a message** is unavailable and says **This user cannot reply**. In an existing conversation with them, the reply box is gone and the conversation shows **This user cannot reply**.
+
+A group conversation can only be started if every member chosen could reply. Once it exists, a member who can't reply doesn't stop the others writing in it.
 
 Admins, and any group you grant **Message users without messaging permission**, can message them anyway. Once one of them has sent a message in a conversation, everyone in it can reply there, so a suspended member can answer a moderator. That member still can't start conversations of their own.
 
@@ -73,7 +97,7 @@ Members can stop sharing receipts by turning off **Show others when I've read th
 
 ## Notifications
 
-When someone sends a member a message, the member gets an email. They get one email per conversation, then no more about that conversation until they've read it.
+When someone sends a member a message, the member gets an email. They get one email per conversation, then no more about that conversation until they've read it. In a group conversation, the email says how many others the message went to.
 
 Members can turn these emails off with **Someone sends me a message** in the notification settings on their **Settings** page.
 
@@ -106,10 +130,22 @@ Members can find text from their own conversations in the forum's search, where 
 
 So that a new account can't flood members' inboxes, each member can:
 
-- send one message every 10 seconds;
-- start at most 10 new conversations an hour.
+- send one message every 10 seconds. Naming a group conversation counts as a message;
+- start at most 10 new conversations an hour;
+- reach at most 20 members an hour through the conversations they start, or as many as **Recipients per message** allows, if that's more.
+
+Only conversations a member starts count: being added to someone else's group conversation doesn't use up their allowance.
 
 Grant **Send messages without throttling** to any group that should skip these limits, such as your moderators.
+
+## Settings
+
+Find these in the **Group conversations** section of the extension's page in the admin panel.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Recipients per message** | 10 | How many members one message can be sent to, from 1 to 50. More than one starts a [group conversation](#group-conversations), so 1 turns group conversations off. |
+| **Let members name group conversations** | Off | Lets members who can write in a group conversation [name it](#naming). Turning it off hides names already given. |
 
 ## Permissions
 
@@ -132,5 +168,5 @@ Set these on the **Permissions** page of the admin panel:
 | [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
-| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with who it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
+| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with an entry for each member it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
 | [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |
