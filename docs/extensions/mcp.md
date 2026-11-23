@@ -116,7 +116,7 @@ The server only answers requests made to the forum's own host name, as set in it
 
 Everything an assistant does goes through the forum's own API, as the member. The same rules apply as in the forum: what the member may see, what they may do, validation, and flood control. When an assistant does something too often, it is told to wait.
 
-The assistant is told who it is connected as, what the member is allowed to do, and which extensions are enabled. It is also told to confirm with the member before posting or changing anything.
+The assistant is told who it is connected as and which extensions are enabled, and can look up what the member is allowed to do. It is also told to confirm with the member before posting or editing.
 
 An assistant gets three kinds of capabilities:
 

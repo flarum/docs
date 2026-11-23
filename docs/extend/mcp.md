@@ -254,7 +254,7 @@ Read and write through `$context->api`, so the forum's rules apply to the member
 | `dispatch(object $command)` | Dispatch a command bus command, for the rare write that has no endpoint. |
 | `assertCanWrite()` | Throw the error a guest, or a token without write access, gets for a write. |
 
-Every method except `dispatch()` and `assertCanWrite()` returns an `ApiResult`. `data()` is the JSON:API document. `simplify()` is a compact version for tool output: flat attributes, relationships as identifiers, HTML attributes as plain text, long strings shortened and long lists cut, with a hint for the next page.
+`delete()` and `assertCanWrite()` return nothing, `dispatch()` returns what the command's handler returns, and every other method returns an `ApiResult`. `data()` is the JSON:API document. `simplify()` is a compact version for tool output: flat attributes, relationships as identifiers, HTML attributes as plain text, long strings shortened and long lists cut, with a hint for the next page.
 
 Anything other than a `GET`, and `dispatch()`, is refused unless the member is signed in and the request has write access. If your tool changes the forum some other way, call `assertCanWrite()` first.
 
@@ -330,7 +330,7 @@ Resources, templates and prompts are resolved from the container once per reques
 
 ## Instructions and abilities
 
-When a client connects, the server sends instructions: who the member is, what they can do, which extensions are enabled, and notes on how to do things the tools don't make obvious. The `flarum://forum` resource has the same overview in full.
+When a client connects, the server sends instructions: the forum's title and description, who the member is, which extensions are enabled, the notes extensions add for that member, and general guidance on using the tools. What the member is allowed to do isn't in them: it is in the `flarum://forum` resource, which has the full overview, and in the `whoami` tool.
 
 Add a note for your extension with `instructions()`. It can be a string, or a callable that receives the context and returns a string, or `null` for no note:
 
@@ -383,6 +383,7 @@ All endpoints are on the forum's URL.
 | Path | Method | |
 | --- | --- | --- |
 | `/mcp` | POST, GET, DELETE | The MCP endpoint, over the Streamable HTTP transport |
+| `/mcp` | OPTIONS | CORS preflight, for browser clients on [allowed origins](#hosts-and-origins) |
 | `/.well-known/oauth-protected-resource/mcp` | GET | Protected resource metadata ([RFC 9728](https://datatracker.ietf.org/doc/html/rfc9728)) |
 | `/.well-known/oauth-protected-resource` | GET | The same document |
 
