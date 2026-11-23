@@ -60,6 +60,7 @@ A member arranges their deck however suits them, and Deck remembers it for their
 - **Move a column** by dragging it by its handle, or from the column's menu with **Move left** and **Move right**. The menu works with the keyboard and with screen readers, which hear where the column went.
 - **Use two rows.** Drop a column below the first row, where Deck shows **Drop a column here to start a second row**, or choose **Move to bottom row** from the column's menu. Once both rows have a column, a divider between them can be dragged to share the height as the member likes.
 - **Resize a column** by dragging its edge, or by focusing the edge and using the arrow keys (hold Shift for larger steps). **Reset width** in the column's menu, or a double click on the edge, puts it back. Columns can be between 240 and 900 pixels wide, and stretch in proportion to fill the row.
+- **Edit a column** with **Edit column** in its menu. Change what it shows, such as a custom filter's filters or the member it follows, and give it a name of its own, up to 60 characters, shown instead of its title. Clearing the name brings the title back.
 - **Remove a column** with **Remove column** in its menu.
 
 On a phone, each column fills the screen. Members swipe between them, or use the tabs along the top, which can also be dragged into a new order. On a screen less than 640 pixels tall, the two rows share one strip instead of being stacked.
