@@ -194,6 +194,7 @@ Some actions are deliberately not logged to avoid duplicates:
 - `user.logged_in` — a user logged in via the login form.
 - `user.logged_in_with_provider` — a user logged in via social login (payload: provider, identifier).
 - `user.logged_out` — a user logged out.
+- `user.logged_out_everywhere` — a user logged out everywhere from their Security page (Global Logout), ending every session.
 - `user.password_changed` — a user password was changed.
 - `user.password_change_requested` — a password reset token was issued for a user.
 - `user.password_reset_attempted` — a password reset was requested via `/forgot` (payload: whether an account matched; the email is stored only when no account matched, otherwise the matched user is recorded). Captured at the HTTP layer, so it retains the requester's IP and records attempts for unknown emails.
@@ -229,6 +230,21 @@ These actions cover the privacy operations in [`flarum/gdpr`](gdpr.md). Because 
 ### Flarum Nicknames
 
 - `user.nickname_changed` — a nickname was changed (payload: old nickname, new nickname).
+
+### Flarum OAuth Provider
+
+These actions cover [`flarum/oauth-provider`](oauth-provider.md): applications that sign members in or act for them, such as AI assistants over MCP. Each entry keeps the application's client ID and its name, so it still reads after the application is deleted.
+
+- `user.oauth_connected` — a user approved an application (payload: user ID, client ID, client name).
+- `user.oauth_signed_in` — a user signed in to an application again, covered by an approval they gave earlier (payload as above).
+- `user.oauth_disconnected` — a user revoked an application's access (payload as above).
+- `user.oauth_disconnected_all` — a user revoked every application's access at once (payload: user ID). Global Logout also disconnects every application, but is recorded only as `user.logged_out_everywhere`.
+- `oauth_client.created` — an administrator added an application (payload: client ID, client name).
+- `oauth_client.updated` — an administrator edited an application (payload as above).
+- `oauth_client.deleted` — an administrator deleted an application (payload as above).
+- `oauth_client.secret_rotated` — an administrator rotated an application's secret (payload as above).
+
+Declining an application isn't recorded, nor is an application registering itself.
 
 ### Flarum Sticky
 
