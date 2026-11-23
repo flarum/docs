@@ -85,7 +85,7 @@ For example, if your extension were to add a `is_cool` attribute to the `User` m
 
 ### Optional dependencies
 
-Code that integrates with an [optional dependency](extending-extensions.md#optional-dependencies) refers to that extension's classes, which aren't installed when you analyse your extension without it. From Flarum 2.1 (with `phpstan/phpstan` 2.1.7 or later), PHPStan doesn't report those classes as missing (`class.notFound`) inside a callback passed inline to `whenExtensionEnabled()`, when the extension ID is a string literal and that extension isn't installed:
+Code that integrates with an [optional dependency](extending-extensions.md#optional-dependencies) refers to that extension's classes, which aren't installed when you analyse your extension without it. From Flarum 2.1 (with `phpstan/phpstan` 2.1.7 or later), PHPStan doesn't report those classes as missing (`class.notFound`) inside a callback passed inline to `whenExtensionEnabled()` on a `new Flarum\Extend\Conditional()` chain, when the extension ID is a string literal and that extension isn't installed:
 
 ```php
 (new Extend\Conditional())

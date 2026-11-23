@@ -243,7 +243,7 @@ public function endpoints(): array
 }
 ```
 
-Without `paginate()`, the endpoint returns the whole list, so leave it out only for lists that stay small, such as groups. If the resource can be paginated (every database resource can), a client can still ask for one page of the list with `page[limit]`, `page[offset]` or `page[number]`. The endpoint then returns that page, of at most `maxLimit` items (50 by default), with `meta.page` and links to the rest. An endpoint that sets a page size with `limit()` instead of `paginate()` always returns pages of that size, with the same links.
+Without `paginate()`, the endpoint returns the whole list, so leave it out only for lists that stay small, such as groups. If the resource can be paginated (every database resource can), a client can still ask for one page of the list with `page[limit]`, `page[offset]` or `page[number]`. The endpoint then returns that page, of at most `maxLimit` items (50 by default), with `meta.page` and links to the rest. An endpoint that sets a page size with `limit()` instead of `paginate()` returns pages of that size, with the same links, unless the client asks for a different `page[limit]`, up to `maxLimit`.
 
 A resource that can't be paginated answers any page parameter except `page[total]` with a 400 error. An empty value, `page[offset]=0` or `page[number]=1` still returns the whole list. On any endpoint, a page parameter that isn't a whole number, or is out of range, gets a 400 as well, with the parameter named in the error's `source.parameter`: `page[limit]` and `page[number]` must be positive integers, so `page[number]=0` is refused, and `page[offset]` a non-negative one.
 

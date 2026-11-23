@@ -94,7 +94,7 @@ Some extensions expose gambit keywords — the search tokens users type into the
 
 Translating a gambit keyword lets users search in their own language. For example, translating `country.key` from `country` to `pays` means French users can type `pays:france` into the search bar.
 
-From Flarum 2.1, the English keyword always works as a fallback — users can type either the translated keyword or the English original and get the same result. You do not need to document this for your users; it happens automatically.
+From Flarum 2.1, the English keyword works as a fallback: users can type either the translated keyword or the English original and get the same result. Core's and the bundled extensions' gambits all support it. An extension's gambit supports it once it implements [`canonicalKey()`](search.md), as it should; you don't need to document it for your users.
 
 See [Localizing gambit keywords](./search.md#localizing-gambit-keywords) in the search documentation for the full technical details, including how to identify which translation keys control gambit keywords and what to do if the English fallback stops working.
 

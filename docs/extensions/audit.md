@@ -192,6 +192,8 @@ Some actions are deliberately not logged to avoid duplicates:
 - `post.hidden` — a post was soft-deleted.
 - `post.restored` — a soft-deleted post was restored.
 - `post.revised` — a post's content was edited.
+- `queue.paused` — a queue was paused with `queue:pause` (payload: connection, queue).
+- `queue.resumed` — a paused queue was resumed (payload: connection, queue).
 - `setting_changed` — a setting was edited (payload: key; old and new values are recorded only for a known list of non-sensitive settings).
 - `settings_reset` — one or more settings were reset to their defaults (payload: extension ID, reset keys).
 - `user.activated` — an account was activated manually by an administrator or extension.
@@ -200,6 +202,8 @@ Some actions are deliberately not logged to avoid duplicates:
 - `user.avatar_removed` — a user avatar was removed.
 - `user.created` — an account was created.
 - `user.deleted` — an account was permanently deleted.
+- `user.email_bounced` — mail to a user's address bounced permanently, as reported by the [mail provider](../mail.md#bounce-handling) (payload: reason). Recorded for each account using the address; when none does, one entry records the address instead.
+- `user.email_complained` — a user marked mail from the forum as spam, as reported by the mail provider. Recorded for each account using the address; when none does, one entry records the address instead.
 - `user.email_changed` — a user email changed (payload: old email, new email).
 - `user.email_change_requested` — an email change was requested (payload: new email).
 - `user.groups_changed` — a user's groups changed (payload: old group IDs, new group IDs).
