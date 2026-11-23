@@ -239,6 +239,21 @@ These actions cover the privacy operations in [`flarum/gdpr`](gdpr.md). Because 
 - `discussion.locked` — a discussion was locked.
 - `discussion.unlocked` — a discussion was unlocked.
 
+### Flarum Messages
+
+These actions cover [`flarum/messages`](messages.md). They record who sent what to whom, and what was done to a message, never what a message says.
+
+- `dialog.started` — a user started a private conversation; one entry per member it was sent to (payload: dialog ID, recipient user ID).
+- `dialog.posted` — a user sent a message in an existing conversation; one entry per other member (payload as above).
+- `dialog.group_started` — a user started a private conversation with a group; one entry per recipient group (payload: dialog ID, group ID).
+- `dialog.group_posted` — a user sent a message in a conversation with a group; one entry per recipient group (payload as above).
+- `dialog.message_edited` — a message was edited (payload: dialog ID, message ID, the message author's user ID).
+- `dialog.message_hidden` — a message was deleted (payload as above).
+- `dialog.message_restored` — a deleted message was restored (payload as above).
+- `dialog.message_deleted` — a message was deleted forever (payload as above).
+
+Notices in a conversation, such as a member leaving or the conversation being renamed, aren't recorded.
+
 ### Flarum Nicknames
 
 - `user.nickname_changed` — a nickname was changed (payload: old nickname, new nickname).
