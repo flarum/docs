@@ -33,6 +33,8 @@ Only admins can open the extension manager. Its page in the admin dashboard is l
 
 Composer ships with the extension manager, so your host doesn't need it installed. Where PHP may start another process (`proc_open`), Composer runs in its own process. Where it may not, as on many shared hosts, it runs inside the web request instead. The **This host** tab says which applies, and what to change if something is in the way.
 
+![The This host tab of the extension manager](/img/docs/extension-manager-host.png)
+
 ## Finding Extensions
 
 Flarum has a wide ecosystem of extensions, most of which are open source and free. The **Find extensions** tab of the extension manager lists every Flarum extension published on [Packagist](https://packagist.org), most widely used first, and lets you search them or narrow them down to themes, languages or widgets. Alternatively, you can visit the [Extensions](https://discuss.flarum.org/t/extensions) tag on Flarum's community forums.
@@ -43,6 +45,8 @@ Each result says whether it has a release for the Flarum version your forum runs
 - **could not check**: the extension manager couldn't find out. Extensions that have no tagged release are checked on their development branches.
 - **needs Beta in Sources** (or RC, Alpha or Dev): it has a release for your Flarum, but it is less finished than your forum's [minimum stability](#installing-non-stable-extensions) allows. Change the setting on the **Sources** tab to install it.
 - **abandoned by its author**, or **replaced by** another package: the extension manager offers to install the replacement instead.
+
+![Searching for extensions on the Find extensions tab](/img/docs/extension-manager-find.png)
 
 ## Installing Extensions
 
@@ -74,6 +78,8 @@ A newer version existing doesn't always mean it can be installed: whether anythi
 - one extension, with the **Update** button on its card. **Learn more** shows its release notes from GitHub, when its author published them there.
 - every extension with a newer version, with **Update all**. They are updated together, in one Composer run, so that two updates that can't be installed side by side are found before anything changes.
 
+![The Installed tab, with four extensions that have a newer version](/img/docs/extension-manager-installed.png)
+
 If your `composer.json` requires an exact version of an extension (such as `1.2.3` rather than `^1.2`), the extension manager asks before changing that requirement to the new version. Undoing the update puts the requirement back.
 
 Extensions installed from a folder on the server (a symlink into a local checkout, as extension developers use) are labelled **local checkout**, and the extension manager never replaces them.
@@ -82,6 +88,8 @@ Extensions installed from a folder on the server (a symlink into a local checkou
 
 While an install, update or removal runs, a panel shows its progress through four phases: **Working out what changes**, **Downloading**, **Swapping files in** and **Finishing up**. **Update details** shows the full log.
 
+![An update in its last phase](/img/docs/extension-manager-update-progress.png)
+
 After the new files are in place, the extension manager finishes the job: it runs the database migrations, publishes the assets, clears the caches, rebuilds the post formatter, waits for PHP to use the new files, and checks that the site still answers. If the site stops answering because of the update, the update is undone automatically.
 
 Only one install, update or removal can run at a time. Each step is a short request, so an update also finishes on hosts that cut every request short. If your forum has a [queue](queue.md) worker, the update carries on when you close the page. Without one, keep the page open until it finishes. If you do close it, or the request is cut off, the update picks up where it left off the next time the extension manager is open.
@@ -89,6 +97,10 @@ Only one install, update or removal can run at a time. Each step is a short requ
 ### Undoing an update
 
 Nothing is deleted during an update: the versions it replaced are kept as rollback copies. The most recent install, update or removal can be undone with **Undo this update**, from its panel or from its entry on the **Recent updates** tab. This puts back the extensions it changed, along with `composer.json` and `composer.lock`. If it changed the database, undoing it reverses those changes too, which removes anything stored in what they added. The extension manager says so before you confirm.
+
+![A finished update, with the button that undoes it](/img/docs/extension-manager-update-finished.png)
+
+![The Recent updates tab](/img/docs/extension-manager-history.png)
 
 If an update contains a database change that can't be reversed, it can't be undone.
 
@@ -140,7 +152,11 @@ Follow the instructions provided by extension developers. If you're using `*` as
 
 Using the extension manager extension, you can remove an extension's files directly from the admin dashboard. First disable the extension, and check the forum works without it. Then click **Remove files** on the extension's page, or **Remove** on its card on the extension manager's **Installed** tab (the card offers it once the extension is disabled and has no newer version waiting).
 
+![The page of a disabled extension, with its Purge and Remove files buttons](/img/docs/extension-remove-files.png)
+
 This removes the extension's code from the server, as `composer remove` would. Its database tables and settings are left alone, so reinstalling it puts you back where you were. To remove its data as well, click the **Purge** button on the extension's page before removing its files (see [below](#managing-extensions)).
+
+![Confirming that the files of an extension should be removed](/img/docs/extension-remove-confirm.png)
 
 Like an update, a removal keeps the old files, so it can be [undone](#undoing-an-update). The extension manager only removes extensions your forum's `composer.json` requires directly: an extension that was installed because another one depends on it goes when that one is removed.
 
@@ -172,6 +188,8 @@ On the extension manager's **Sources** tab, under **Where Composer looks**, choo
 - **Git repository**: a repository on GitHub, GitLab, Bitbucket or any other Git host.
 - **Composer repository**: Private Packagist, or a paid marketplace.
 - **Folder on this server**: a local checkout, for development. Enter its path rather than a URL.
+
+![The Sources tab, with a Git repository, a Composer repository and two stored credentials](/img/docs/extension-manager-sources.png)
 
 The repository is added to your forum's `composer.json`. While Composer's `secure-http` setting is on (Composer's default), the extension manager refuses `http://` and `git://` URLs, because Composer won't use them and any credentials would travel unencrypted: use `https://` or `ssh://`.
 
