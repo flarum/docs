@@ -212,3 +212,12 @@ Erasure and export run in queued jobs, so these events are usually handled outsi
 | `removeType(string $type)` | Removes a registered data type. |
 | `removeUserColumns(string\|array $columns)` | Blanks these `users` columns in exports. |
 | `addPiiKeysForSerialization(string\|array $keys)` | Adds keys to the personal data list without a data type. |
+
+
+## Testing
+
+`Flarum\Gdpr\Testing\InteractsWithGdpr` provides `gdprDataType($class, $userId, $request = null)` for integration tests extending `Flarum\Testing\integration\TestCase`. Add `flarum/gdpr` and a compatible `flarum/testing` to your development dependencies, then compose the trait into your test class.
+
+Enable GDPR and your extension, configure settings and seed the user before calling the helper. It boots the application, loads that user and resolves your `Flarum\Gdpr\Contracts\DataType` implementation through the container. The constructor or container binding must accept the named parameters `user` and `erasureRequest`, as the standard `Flarum\Gdpr\Data\Type` base does. Pass an `ErasureRequest` when testing a flow that needs it. The helper returns the data type; it does not perform an export or erasure for you.
+
+See [sharing backend test helpers](testing.md#sharing-backend-test-helpers) for dependency and release-archive requirements.
