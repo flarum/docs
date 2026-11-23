@@ -244,3 +244,21 @@ Rebuilds the compiled JavaScript, CSS and translations of every frontend from th
 `php flarum extension-manager:repair-formatter [--flush-only]`
 
 Rebuilds the post formatter, so that its cached renderer and its generated class in `storage/formatter` match again. If posts stop rendering after `php flarum cache:clear` (which can happen on forums whose cache isn't stored in files, such as those using Redis), this puts them back. The extension manager runs it after an update. With `--flush-only`, it only forgets the cached formatter, and the next request builds a new one.
+
+## AI Commands
+
+These commands are added by the [AI](extensions/ai.md) extension, so they are only available while it is enabled.
+
+### ai:prune-usage
+
+`php flarum ai:prune-usage`
+
+Deletes the [AI](extensions/ai.md) extension's usage records older than 90 days. It runs daily through the [scheduler](scheduler.md), so it should generally not be run manually.
+
+### ai:check-models
+
+`php flarum ai:check-models`
+
+Checks that the AI models features use are still offered by their providers, and records the ones that are deprecated or gone for the admin to see. It runs daily through the [scheduler](scheduler.md). See [Models](extensions/ai.md#models).
+
+It exits with an error when a connection's provider could not be asked for its models.

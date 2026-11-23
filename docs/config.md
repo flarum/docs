@@ -204,6 +204,28 @@ It applies to "remember me" too: with it on, the remember cookie also ends when 
 
 Anything set in `config.php` overrides the equivalent admin setting, and the admin panel shows those values read-only rather than letting them be changed. This is deliberate: it lets whoever runs the server pin session lengths where an administrator cannot loosen them. Only `lifetime`, `cookie_expires_on_close` and `tokens` do this; setting `session.driver` alone leaves the session lengths with the admin panel.
 
+### AI
+
+The [AI](extensions/ai.md) extension reads an `ai` block. Connections set up here take precedence over the ones set up in the admin panel, which shows them read-only:
+
+```php
+'ai' => [
+    // AI connections, by name: a provider and its settings.
+    'connections' => [
+        'claude' => [
+            'driver' => 'anthropic',
+            'key' => env('ANTHROPIC_API_KEY'),
+        ],
+    ],
+    // The connection features use unless they choose another.
+    'default_connection' => 'claude',
+    // Let Amazon Bedrock connections set up in the admin panel use the server's own AWS credentials.
+    'bedrock_server_credentials' => false,
+],
+```
+
+See [Connections in config.php](extensions/ai.md#connections-in-configphp) for every setting.
+
 ### Maintenance modes
 
 Flarum has a maintenance mode that can be enabled by setting the `offline` key in the `config.php` file to one of the following values:
