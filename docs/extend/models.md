@@ -59,6 +59,92 @@ Migrations can also be manually applied with `php flarum migrate` which is also 
 
 There are currently no composer-level hooks for managing migrations at all (i.e. updating an extension with `composer update` will not run its outstanding migrations).
 
+### Conditional migrations
+
+:::info
+
+Conditional migrations are available from Flarum 2.1.
+
+:::
+
+A migration can declare a boolean or a `shouldRun` callback to defer its `up` operation until its prerequisites are available. A false result leaves the migration unrecorded, so a later migration run can reconsider it. Exceptions fail the migration run normally.
+
+```php
+use Flarum\Extension\Condition;
+use Flarum\Database\Migration;
+use Illuminate\Database\Schema\Builder;
+
+return Migration::addColumns(
+    'catalogue_records',
+    ['tag_id' => ['integer', 'unsigned' => true, 'nullable' => true]],
+    shouldRun: Condition::all(
+        Condition::extensionsEnabled(['acme-catalogue', 'flarum-tags']),
+        fn (Builder $schema): bool => $schema->hasTable('catalogue_records'),
+    ),
+);
+```
+
+Every `Migration::` factory accepts the optional trailing `shouldRun` argument, including plain `true` and `false`. Handwritten migration arrays accept the same callback under a `shouldRun` key:
+
+```php
+use Flarum\Extension\Condition;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
+
+return [
+    'shouldRun' => Condition::extensionEnabled('acme-catalogue'),
+
+    'up' => function (Builder $schema) {
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->string('reference', 100);
+        });
+    },
+
+    'down' => function (Builder $schema) {
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->dropColumn('reference');
+        });
+    },
+];
+```
+
+Callbacks can receive the migration's schema builder and container-resolved dependencies. Migration callbacks see the prospective enabled-extension state and current database settings with defaults declared by the prospective enabled extensions, including active `Extend\Conditional` branches and values written by earlier migrations. Conditions that resolve settings through their injected container see the same migration settings. Defaults registered imperatively by custom extenders become available after those extenders boot and remain available while their owner is enabled.
+
+Before application boot, the installer supplies a smaller container with the selected extension IDs, database connection, a scoped extension manager, the installation paths/configuration, and settings repository with core and selected-extension defaults; application-specific services are not yet available. Collecting defaults also evaluates selected extensions’ conditional extender callbacks, which must be compatible with that pre-boot container. Default declarations are re-evaluated before each migration condition, so settings written by earlier migrations can activate or deactivate conditional defaults.
+
+`Condition` provides reusable predicates:
+
+- `extensionEnabled($id)` and `extensionDisabled($id)`.
+- `extensionsEnabled($ids)` and `extensionsDisabled($ids)`, requiring every supplied extension to match.
+- `setting($key, $expected, strict: false)`, using loose comparison by default, like `Extend\Conditional::whenSetting()`.
+- `all(...$conditions)`, `any(...$conditions)`, and `not($condition)`, accepting predicates, callbacks, or booleans. Composition short-circuits. Empty `all()` is true; empty `any()` is false.
+
+Extension checks use Flarum extension IDs, such as `flarum-tags`. They check enabled state: an installed but disabled extension may still have tables. Declare optional dependency ordering in `composer.json` as well; a condition does not add a dependency or establish migration order.
+
+These predicates also work with [`Extend\Conditional::when()`](settings.md#conditional-extenders). Its existing convenience methods use the same predicate implementation:
+
+```php
+use Flarum\Extension\Condition;
+use Flarum\Extend;
+
+(new Extend\Conditional())->when(
+    Condition::extensionsEnabled(['acme-catalogue', 'flarum-tags']),
+    fn () => [new CatalogueTagIntegration()],
+);
+```
+
+Enabling an extension first runs its migrations, then reconsiders pending conditional migrations of enabled extensions in dependency order. Disabling an extension also reconsiders those migrations, allowing `extensionDisabled()` predicates to become eligible. Conditions see the prospective state during either operation. The changed enabled list is persisted and success reported only after reconciliation succeeds. Pending unconditional updates in other extensions are left for a normal migration run and block later conditional migrations in that extension until the updates are applied.
+
+Run `php flarum migrate` after changing settings or other custom prerequisites. Ordinary page requests and setting saves do not execute migrations. Conditions may be evaluated more than once and should have no side effects. Skipping one migration does not stop later migrations: each dependent migration must declare its own prerequisites.
+
+Only successful `up` executions are recorded. A completed migration will not execute again when its condition changes. Disabling an integration preserves its schema and data. Rollback reverses recorded migrations in reverse execution order, including migrations that were deferred. The Extension Manager preserves this order when undoing an update, including one that was stopped and resumed. Undo also includes migrations from updated packages that were deferred during the update and ran later, while preserving unrelated extensions’ migrations. It runs their `down` operations without consulting `shouldRun`, so migrations remain discoverable even when their conditions are false. Write rollback operations to handle optional tables that may already have been removed.
+
+DDL is not universally transactional. A failed toggle can leave successfully applied migrations in place; fix the failure and retry. Flarum retains those successful records and does not repeat their work.
+
+Adding a condition does not repair older migrations that returned early and were already recorded as completed. Publish a new corrective migration for those installations. Similarly, purging another extension's tables does not clear your migration history: conditional migrations are one-time changes, not automatic schema repair.
+
+The standard `flarum/testing` harness migrates selected extensions in dependency order and reconciles conditional migrations after their providers are ready. Update the testing package alongside core when using this feature.
+
 ### Creating Tables
 
 To create a table, use the `Migration::createTable` helper. The `createTable` helper accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives a `Blueprint` object that may be used to define the new table:
