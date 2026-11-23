@@ -53,6 +53,27 @@ Using the extension manager extension, you can update extensions directly from t
 
 ![Updating an extension](/img/docs/update-extension.png)
 
+### Abandoned packages
+
+Sometimes a package an extension depends on has been abandoned by its author, often with a suggested replacement. From Flarum 2.1, when an install or update would bring in an abandoned package (including a dependency you didn't ask for directly), the extension manager lists it on the run's panel with the replacement its author suggests, before anything is downloaded.
+
+If your `composer.json` sets Composer's `policy.abandoned.block` (or the older `audit.block-abandoned`), the extension manager respects it. Composer then picks versions without abandoned packages where it can. When it can't, the run stops and names the package that was kept out, with the setting that allows it. For `policy.abandoned.block`, list the package under `config.policy.abandoned.ignore` in `composer.json`:
+
+```json
+"config": {
+    "policy": {
+        "abandoned": {
+            "block": true,
+            "ignore": {
+                "vendor/package": "Needed by acme/extension until it moves to the replacement"
+            }
+        }
+    }
+}
+```
+
+For the older `audit.block-abandoned`, list it under `config.audit.ignore-abandoned` instead. Don't add a `policy.abandoned` key to a forum that uses the older setting: Composer then stops reading the `audit` section, and the block is switched off for every package.
+
 ### Through the command line
 
 Follow the instructions provided by extension developers. If you're using `*` as the version string for extensions ([as is recommended](composer.md)), running the commands listed in the [Flarum upgrade guide](update.md) should update all your extensions.
