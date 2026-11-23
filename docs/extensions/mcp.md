@@ -144,7 +144,7 @@ Each member is only offered the tools they can use. Tools that only make sense f
 | `mark_notifications_read` | Mark some notifications as read, or all of them. | Write |
 | `start_discussion` | Start a discussion as the member. | Write |
 | `reply_to_discussion` | Reply to a discussion as the member. | Write |
-| `edit_post` | Change a post the member may edit: replace parts of it, or all of its content. Each part to replace must appear exactly once in the post, or nothing is changed. | Write |
+| `edit_post` | Change a comment the member may edit: replace parts of it, or all of its content. Each part to replace must appear exactly once in the post, and the post can't be left empty; otherwise nothing is changed. | Write |
 
 ### Tools from other extensions
 
@@ -173,7 +173,7 @@ For anything without a tool of its own, the assistant uses the forum's API direc
 | Tool | What it does | Access |
 | --- | --- | --- |
 | `describe_api` | The types of data the member can reach, such as discussions, posts and users, and what can be done with each. | Read |
-| `list_resources`, `get_resource` | List or fetch data of a type. Long text is shortened in lists; `get_resource` returns it in full, so a long post can be read before it's edited. | Read |
+| `list_resources`, `get_resource` | List or fetch data of a type. Long text is shortened in lists; `get_resource` returns it in full, within the size limit of a response, so a long post can be read before it's edited. | Read |
 | `create_resource`, `update_resource`, `delete_resource` | Create, change or delete data of a type. | Write |
 
 Through them, an assistant can do whatever the member could do in the forum with discussions, posts, their own profile and notifications. A moderator's assistant can, for example, hide, lock, sticky or re-tag discussions, approve posts and suspend members, and is told how. Each of these is still refused unless the member has the permission.
