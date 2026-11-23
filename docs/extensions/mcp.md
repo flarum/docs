@@ -1,4 +1,10 @@
+---
+image: img/extensions/mcp-share.png
+---
+
 # MCP
+
+![MCP: turn your forum into an MCP server, so AI assistants can read and post as you. New in Flarum 2.1.](/img/docs/extensions/mcp.png)
 
 The MCP extension (`flarum/mcp`) turns your forum into a **Model Context Protocol (MCP) server**. AI assistants that support MCP, such as Claude, ChatGPT, VS Code and Cursor, connect to it and read and post on the forum as the member who connected them.
 

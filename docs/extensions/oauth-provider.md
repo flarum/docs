@@ -1,4 +1,10 @@
+---
+image: img/extensions/oauth-provider-share.png
+---
+
 # OAuth Provider
+
+![OAuth Provider: let people sign in to other apps with their forum account, over OAuth 2.0 and OpenID Connect. New in Flarum 2.1.](/img/docs/extensions/oauth-provider.png)
 
 The OAuth Provider extension (`flarum/oauth-provider`) turns your forum into an **OAuth 2.0 authorization server** and **OpenID Connect provider**. Other applications can then offer "Sign in with" your forum, and act on a member's behalf with the access the member agrees to. These might be another website, a mobile app, or an AI assistant such as Claude or ChatGPT connecting over [MCP](mcp.md).
 

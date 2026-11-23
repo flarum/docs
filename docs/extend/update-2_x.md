@@ -8,6 +8,8 @@ If you need help applying these changes or using new features, please start a di
 
 ## 2.1 Changes
 
+![Flarum 2.1: your forum, connected. AI connections, MCP server, OAuth + OpenID Connect, installable web app.](/img/docs/flarum-2.1-header.png)
+
 ### New bundled extensions
 
 Flarum 2.1 bundles three new extensions. None is enabled on new installs.

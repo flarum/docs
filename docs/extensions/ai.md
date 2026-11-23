@@ -1,4 +1,10 @@
+---
+image: img/extensions/ai-share.png
+---
+
 # AI
+
+![AI: connect AI providers once, with guardrails and usage limits, for every AI feature to build on. New in Flarum 2.1.](/img/docs/extensions/ai.png)
 
 The AI extension (`flarum/ai`) is the foundation other extensions build AI features on. It connects your forum to AI providers, such as Anthropic, OpenAI, Google Gemini or a model you run yourself, and lets you control what those features cost: which provider and model each one uses, who may use it, and how many tokens it may spend. It is built on the [Laravel AI SDK](https://github.com/laravel/ai).
 
