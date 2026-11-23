@@ -199,7 +199,7 @@ This command returns a list of scheduled commands (see `schedule:run` for more i
 
 ## Extension Manager Commands
 
-These commands are added by the [extension manager](extensions.md#extension-manager), so they are only available when it is installed.
+These commands are added by the [extension manager](extensions.md#extension-manager), so they are only available while it is enabled.
 
 ### extension-manager:check {#extension-manager-check}
 
@@ -215,7 +215,7 @@ It is scheduled to run once a day through the [scheduler](scheduler.md).
 
 `php flarum extension-manager:update [packages...] [--all] [--repin] [--nightly] [--resume] [--timeout=3600]`
 
-Updates the named packages (as `vendor/name`), as the same run the extension manager's admin page starts: journalled, with rollback copies of what it replaces, and finished the same way (migrations, assets, caches, formatter, and a check that the site still answers). It prints the run's log as it goes, and exits with a non-zero status if the update fails, or finishes without changing any package. It only updates: install and remove extensions from the admin page or with Composer.
+Updates the named packages (as `vendor/name`), as the same run the extension manager's admin page starts: journalled, with rollback copies of what it replaces, and finished the same way (migrations, assets, caches, formatter, and a check that the site still answers). It prints the run's log as it goes, and exits with a non-zero status if the update fails, or finishes without changing any package. With `--all` and nothing newer to install, it starts no run and exits with status 0. It only updates: install and remove extensions from the admin page or with Composer.
 
 - `--all`: update every package the last check found a newer version for, instead of naming them. If that check is no longer fresh, run `extension-manager:check --force` first.
 - `--repin`: allow changing a requirement your `composer.json` pins to an exact version, to the version the check found. Without it, a pinned package is refused.

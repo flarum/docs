@@ -44,7 +44,8 @@ Each result says whether it has a release for the Flarum version your forum runs
 - **not for this Flarum**: its newest release asks for a different version of `flarum/core`.
 - **could not check**: the extension manager couldn't find out. Extensions that have no tagged release are checked on their development branches.
 - **needs Beta in Sources** (or RC, Alpha or Dev): it has a release for your Flarum, but it is less finished than your forum's [minimum stability](#installing-non-stable-extensions) allows. Change the setting on the **Sources** tab to install it.
-- **abandoned by its author**, or **replaced by** another package: the extension manager offers to install the replacement instead.
+- **replaced by** another package: its author abandoned it and named a replacement, which the extension manager offers to install instead.
+- **abandoned by its author**: its author abandoned it without naming a replacement. It can still be installed, if it has a release for your Flarum.
 
 ![Searching for extensions on the Find extensions tab](/img/docs/extension-manager-find.png)
 
@@ -92,7 +93,7 @@ While an install, update or removal runs, a panel shows its progress through fou
 
 After the new files are in place, the extension manager finishes the job: it runs the database migrations, publishes the assets, clears the caches, rebuilds the post formatter, waits for PHP to use the new files, and checks that the site still answers. If the site stops answering because of the update, the update is undone automatically.
 
-Only one install, update or removal can run at a time. Each step is a short request, so an update also finishes on hosts that cut every request short. If your forum has a [queue](queue.md) worker, the update carries on when you close the page. Without one, keep the page open until it finishes. If you do close it, or the request is cut off, the update picks up where it left off the next time the extension manager is open.
+Only one install, update or removal can run at a time. Each step is a short request, so an update also finishes on hosts that cut every request short. If your forum has a [queue](queue.md) worker and Composer can run in its own process, the update carries on when you close the page. Otherwise, keep the page open until it finishes: where Composer runs inside the web request, the steps after the new files are in place have to run in a fresh request, so the worker waits for the page. If you do close it, or the request is cut off, the update picks up where it left off the next time the extension manager is open.
 
 ### Undoing an update
 
@@ -117,7 +118,7 @@ The **Flarum** panel on the **Installed** tab shows the version your forum runs 
 
 The extension manager asks for confirmation before it starts, naming the extensions that will be updated with Flarum. If the site doesn't work afterwards, everything is put back.
 
-To update Flarum's database, the extension manager hands Flarum's updater a one-time token rather than your database credentials. The token is kept in Flarum's `storage` directory and read from the `config.php` and `storage` beside `vendor/`. On a forum that keeps them elsewhere, or has no `storage` directory, the database can't be updated this way: the update stops, Flarum's files are put back, and you can run the update from the command line instead with [`php flarum extension-manager:update`](console.md#extension-manager-update).
+Where Composer runs in its own process, the extension manager updates Flarum's database by running `php flarum migrate`. Where it runs inside the web request, it can't, so it hands Flarum's updater a one-time token instead, rather than your database credentials. The token is kept in Flarum's `storage` directory and read from the `config.php` and `storage` beside `vendor/`. On a forum that keeps them elsewhere, or has no `storage` directory, the database can't be updated this way: the update stops, Flarum's files are put back, and you can run the update from the command line instead with [`php flarum extension-manager:update`](console.md#extension-manager-update).
 
 **Try the nightly build** moves Flarum and its bundled extensions to the development branch together. It is for testing the next release, not for a live forum. Undoing it returns the forum to the release it was on.
 
@@ -195,7 +196,7 @@ The repository is added to your forum's `composer.json`. While Composer's `secur
 
 ### Adding a repository from a VCS
 
-If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc), choose **Git repository** and enter the repository's URL. For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL. If it is a private source, you will also need to add a credential under **Credentials**, below on the same tab: choose **GitHub token** or **GitLab token**, enter the token, and click **Save credential**. The token can be generated from your VCS provider's website (the form links to the page that creates one), and the host should be the domain of the VCS provider (e.g. `github.com`).
+If you want to add a repository from a VCS (e.g. GitHub, GitLab, BitBucket, etc), choose **Git repository** and enter the repository's URL. For example, if you had a private GitHub repository at `https://github.com/acme/flarum-extension`, you would enter that URL. If it is a private source, you will also need to add a credential under **Credentials**, below on the same tab: choose **GitHub token** or **GitLab token** (or **Username & password**, for Private Packagist and older repositories), enter it, and click **Save credential**. The token can be generated from your VCS provider's website (the form links to the page that creates one), and the host should be the domain of the VCS provider (e.g. `github.com`).
 
 ### Adding a composer repository
 
