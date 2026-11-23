@@ -45,7 +45,7 @@ A member builds their Deck by adding columns. They choose **Add column**, pick a
 
 Other extensions add their own, such as a column for one tag or for flagged posts. See [Working with other extensions](#working-with-other-extensions).
 
-A custom filter takes filters only, such as `tag:`, `author:`, `is:unread` or `is:following`, and the extensions you have installed can add more. Plain words aren't supported: a text search would be re-run every time the column refreshes, so Deck asks for a filter instead.
+A custom filter takes filters only, such as `tag:`, `author:`, `group:`, `is:unread` or `is:following`, and the extensions you have installed can add more. `group:mods` finds the discussions started by a member of Mods, and `group:mods,admins` those started by a member of either. Plain words aren't supported: a text search would be re-run every time the column refreshes, so Deck asks for a filter instead.
 
 Choosing a type that is already in the deck marks it **In your deck**, with a count when there is more than one. A type that has nothing to choose, such as **Unread**, can only be in the deck once.
 
@@ -60,6 +60,7 @@ A member arranges their deck however suits them, and Deck remembers it for their
 - **Move a column** by dragging it by its handle, or from the column's menu with **Move left** and **Move right**. The menu works with the keyboard and with screen readers, which hear where the column went.
 - **Use two rows.** Drop a column below the first row, where Deck shows **Drop a column here to start a second row**, or choose **Move to bottom row** from the column's menu. Once both rows have a column, a divider between them can be dragged to share the height as the member likes.
 - **Resize a column** by dragging its edge, or by focusing the edge and using the arrow keys (hold Shift for larger steps). **Reset width** in the column's menu, or a double click on the edge, puts it back. Columns can be between 240 and 900 pixels wide, and stretch in proportion to fill the row.
+- **Edit a column** with **Edit column** in its menu. Change what it shows, such as a custom filter's filters or the member it follows, and give it a name of its own, up to 60 characters, shown instead of its title. Clearing the name brings the title back.
 - **Remove a column** with **Remove column** in its menu.
 
 On a phone, each column fills the screen. Members swipe between them, or use the tabs along the top, which can also be dragged into a new order. On a screen less than 640 pixels tall, the two rows share one strip instead of being stacked.
@@ -74,7 +75,7 @@ A column that can't be shown, because the extension behind it was disabled or be
 
 How a column keeps up depends on whether [Realtime](realtime.md) is connected.
 
-- **With Realtime**, new activity appears at the top of a column as it happens. A member who has scrolled down keeps their place. Nothing polls while Realtime is connected, and when it reconnects after a drop, Deck catches up once.
+- **With Realtime**, new activity appears at the top of a column as it happens. A member who has scrolled down keeps their place. Nothing polls while Realtime is connected, and when it reconnects after a drop, Deck catches up once. Columns with a filter also follow changes that move a discussion in or out of them without a reply: a discussion that is locked joins an `is:locked` column, and one that is re-tagged leaves a `tag:` column it no longer matches.
 - **Without Realtime**, Deck checks every column on the [refresh interval](#settings). New activity waits behind an **N new** button at the top of the column, so the list doesn't move under the reader. Choosing the button, or **Refresh** in the column's menu, brings it in.
 
 A column that isn't ordered by recent activity keeps new activity behind the **N new** button even with Realtime, because new activity doesn't belong at the top of it.

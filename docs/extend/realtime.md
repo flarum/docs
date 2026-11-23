@@ -95,6 +95,25 @@ Use `broadcastDialogEvent` to push a message to all connected participants of a 
 
 The payload is sent only to connected users who are members of the dialog.
 
+### Broadcasting dialog message removals
+
+A message deleted for good can't be rendered for each member, and deleting a dialog's last message deletes the dialog and its memberships. Use `broadcastDialogRemoval` with an event that recorded who could see the message before it was deleted:
+
+```php
+(new RealtimeExtend())
+    ->broadcastDialogRemoval(
+        \Flarum\Messages\DialogMessage\Event\Deleted::class,
+        fn ($event) => [
+            'id' => $event->message->id,
+            'dialogId' => $event->dialogId,
+            'dialogDeleted' => $event->dialogDeleted,
+            'userIds' => $event->memberIds,
+        ],
+    ),
+```
+
+Those users who are connected receive `{data: {type: 'dialog-messages', id}, meta: {dialogId, dialogDeleted}}` on their own channel, under the event's class name.
+
 ### Broadcasting flag events
 
 Use `broadcastFlagEvent` to push flag-related updates exclusively to connected users who have the `discussion.viewFlags` permission on the relevant discussion:

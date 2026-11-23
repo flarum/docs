@@ -157,7 +157,6 @@ And a global scoper for the `Discussion` model:
 
 namespace Flarum\Tags\Access;
 
-use Flarum\Tags\Tag;
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -188,34 +187,14 @@ class ScopeDiscussionVisibilityForAbility
         // `view` is a special case where the permission string is represented by `viewForum`.
         $permission = $ability === 'view' ? 'viewForum' : $ability;
 
-        // Restrict discussions where users don't have necessary permissions in all tags.
-        // We use a double notIn instead of a doubleIn because the permission must be present in ALL tags,
-        // not just one.
-        $query->where(function ($query) use ($actor, $permission) {
-            $query
-                ->whereNotIn('discussions.id', function ($query) use ($actor, $permission) {
-                    return $query->select('discussion_id')
-                        ->from('discussion_tag')
-                        ->whereNotIn('tag_id', function ($query) use ($actor, $permission) {
-                            Tag::query()->setQuery($query->from('tags'))->whereHasPermission($actor, $permission)->select('tags.id');
-                        });
-                })
-                ->orWhere(function ($query) use ($actor, $permission) {
-                    // Allow extensions a way to override scoping for any given permission.
-                    $query->whereVisibleTo($actor, "${permission}InRestrictedTags");
-                });
-        });
-
-        // Hide discussions with no tags if the user doesn't have that global
-        // permission.
-        if (! $actor->hasPermission($permission)) {
-            $query->has('tags');
-        }
+        // Only return discussions whose tags give the actor `$permission`,
+        // plus whatever `{$permission}InRestrictedTags` scopers add.
+        // See the Tags extension's source for the full query.
     }
 }
 ```
 
-Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers.
+Note that, as mentioned above, we don't run this for abilities starting with `view`, since those are handled by their own, dedicated scopers. Which discussions it returns for each ability is described in [Tags: how tag permissions are checked](tags.md#how-tag-permissions-are-checked).
 
 And finally, a scoper for the `viewPrivate` ability (this one is a fake example, not from tags):
 

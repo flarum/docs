@@ -76,6 +76,8 @@ Each entry shows the actor, the action, the affected resource, the client type, 
 
 The filter field uses a fixed set of search gambits. The browser shows clickable filter chips and a **Search help** panel describing each one; the `action:` and `client:` filters offer autocomplete of the available values as you type.
 
+Press **Enter** to apply the filter, or to pick the highlighted suggestion; use the arrow keys to move through the suggestions. **Escape** closes the suggestions, then clears the filter.
+
 | Gambit | Description |
 | --- | --- |
 | `action:<name>` | Match an [action name](#logged-actions). |
@@ -83,7 +85,7 @@ The filter field uses a fixed set of search gambits. The browser shows clickable
 | `user:<username>` | Match actions affecting a given user. |
 | `client:<client>` | Match the [client type](#anatomy-of-an-entry). |
 | `discussion:<id>` | Match both discussion and post events for a discussion ID. |
-| `ip:<ip>` | Match an IP address (only available to users allowed to see IP addresses). |
+| `ip:<ip>` | Match an IP address (only available to users allowed to see IP addresses). From Flarum 2.1, also accepts a partial address or a range: `ip:192.168` or `ip:192.168.*`, `ip:10.0.0.0/8`, `ip:2a02:390:9e5c:beef` (its /64) or `ip:2a02:390:9e5c:bee0::/60`. See [Indexing older entries for IP range search](#indexing-older-entries-for-ip-range-search). |
 
 Gambits accept comma-separated values to match any of them (for example `action:post.created,post.deleted`), and a leading `-` excludes matches (for example `-client:cli`).
 
@@ -92,6 +94,16 @@ Gambits accept comma-separated values to match any of them (for example `action:
 The filter field only understands these gambits. Free-text typed into the field that does not match a gambit has no effect.
 
 :::
+
+### Indexing older entries for IP range search
+
+Flarum 2.1 adds partial-address and range search to the `ip:` gambit. Entries recorded from then on can be found that way straight away. Entries recorded before the upgrade, including any carried over from the KILOWHAT extension, are still found by an exact `ip:` search, but a partial or range search only finds them after you run this command once:
+
+```bash
+php flarum audit:backfill-ip
+```
+
+The command isn't part of the upgrade itself, because a large log could make the upgrade take a long time. It works through the log in batches (`--chunk=1000` by default), can be stopped and run again, and reports any stored values that aren't valid IP addresses. Those are left as they are and can still be found by an exact search.
 
 ## IP country indicator
 
@@ -194,9 +206,10 @@ Some actions are deliberately not logged to avoid duplicates:
 - `user.logged_in` — a user logged in via the login form.
 - `user.logged_in_with_provider` — a user logged in via social login (payload: provider, identifier).
 - `user.logged_out` — a user logged out.
+- `user.logged_out_everywhere` — a user logged out everywhere from their Security page (Global Logout), ending every session.
 - `user.password_changed` — a user password was changed.
 - `user.password_change_requested` — a password reset token was issued for a user.
-- `user.password_reset_attempted` — a password reset was requested via `/forgot` (payload: whether an account matched; the email is stored only when no account matched, otherwise the matched user is recorded). Captured at the HTTP layer, so it retains the requester's IP and records attempts for unknown emails.
+- `user.password_reset_attempted` — a password reset was requested via `/forgot` (payload: whether an account matched; the email is stored only when no account matched, otherwise each matched user is recorded). Captured at the HTTP layer, so it retains the requester's IP and records attempts for unknown emails.
 - `user.provider_connected` — a social login was connected to an account (payload: provider, identifier).
 - `user.username_changed` — a username was changed (payload: old username, new username).
 
@@ -229,6 +242,21 @@ These actions cover the privacy operations in [`flarum/gdpr`](gdpr.md). Because 
 ### Flarum Nicknames
 
 - `user.nickname_changed` — a nickname was changed (payload: old nickname, new nickname).
+
+### Flarum OAuth Provider
+
+These actions cover [`flarum/oauth-provider`](oauth-provider.md): applications that sign members in or act for them, such as AI assistants over MCP. Each entry keeps the application's client ID and its name, so it still reads after the application is deleted.
+
+- `user.oauth_connected` — a user approved an application (payload: user ID, client ID, client name).
+- `user.oauth_signed_in` — a user signed in to an application again, covered by an approval they gave earlier (payload as above).
+- `user.oauth_disconnected` — a user revoked an application's access (payload as above).
+- `user.oauth_disconnected_all` — a user revoked every application's access at once (payload: user ID). Global Logout also disconnects every application, but is recorded only as `user.logged_out_everywhere`.
+- `oauth_client.created` — an administrator added an application (payload: client ID, client name).
+- `oauth_client.updated` — an administrator edited an application (payload as above).
+- `oauth_client.deleted` — an administrator deleted an application (payload as above).
+- `oauth_client.secret_rotated` — an administrator rotated an application's secret (payload as above).
+
+Declining an application isn't recorded, nor is an application registering itself.
 
 ### Flarum Sticky
 

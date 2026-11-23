@@ -123,3 +123,42 @@ flarum-audit:
         widget_created: Created widget {widget_id}
         widget_renamed: Renamed widget from {old_name} to {new_name}
 ```
+
+
+## Testing
+
+Require `flarum/audit` and `flarum/testing` as development dependencies at versions containing the public helpers. Use `Flarum\Audit\Testing\TestCase` for Audit's guest-auth test environment, or compose `InteractsWithAuditLog` into your own integration base:
+
+```php
+use Flarum\Audit\Testing\InteractsWithAuditLog;
+use Flarum\Testing\integration\TestCase;
+
+abstract class AuditIntegrationTestCase extends TestCase
+{
+    use InteractsWithAuditLog;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpAuditLog();
+        $this->extension('flarum-audit');
+    }
+
+    protected function tearDown(): void
+    {
+        try {
+            parent::tearDown();
+        } finally {
+            $this->tearDownAuditLog();
+        }
+    }
+}
+```
+
+Call setup before the application boots. Cleanup restores the previous Audit test-mode value and must run after the parent's teardown, even when teardown throws. Setup does not clear the audit table or seed users.
+
+`assertLogExists($action, $payload, $actorId, $skip, $ip)` checks the complete payload, actor and IP. Defaults are a null payload, actor `1`, offset `0` and IP `127.0.0.1`. Pass null explicitly for an absent actor or IP. Rows of the same action are selected in ascending ID order. `assertLogDoesntExist($action)` checks that no row has that action.
+
+`BuildsAuditRequests` provides `sendSuccessfulRequest()` and `sendForumCsrfRequest()`. Its separate `exemptAuditAuthRoutesFromCsrf()` method exempts the guest authentication routes for tests that specifically need them; call it before boot. `InteractsWithAuditLog` alone keeps CSRF protection unchanged. The convenience `Flarum\Audit\Testing\TestCase` opts in to those exemptions.
+
+See [sharing backend test helpers](testing.md#sharing-backend-test-helpers) for publishing and consuming helpers.
