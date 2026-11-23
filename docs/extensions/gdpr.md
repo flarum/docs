@@ -113,7 +113,7 @@ Anonymization keeps the member's posts and discussions in place but removes who 
 
 - The username becomes the default anonymous username plus the request ID, and the email becomes `<username>@flarum-gdpr.local`.
 - The password is replaced with a random one, preferences are reset, and the account is removed from all groups.
-- The other columns on the `users` table are cleared, apart from counts such as the number of posts. This includes data that extensions store there, such as a nickname or bio.
+- The other columns on the `users` table that can be empty are cleared, including data that extensions store there, such as a nickname or bio. Counts such as the number of posts are kept, and so are columns that can't be empty, unless the extension that added them anonymizes them itself.
 - The avatar is deleted, along with all access tokens, API keys and connected login providers.
 - IP addresses are removed from all their posts.
 
