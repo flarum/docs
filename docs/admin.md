@@ -34,6 +34,19 @@ location = /favicon.ico {
 }
 ```
 
+### Open as an App
+
+From Flarum 2.1, **Open as an app from the home screen** makes phones open the forum from their home screen in a window of its own, without the browser's toolbar. While it loads, they show a splash screen: the app icon on the splash screen background, the same on iPhones, iPads and Android. Opened this way, the forum also gets pull-to-refresh, since home-screen apps have no reload button.
+
+It needs an app icon: without one, the forum keeps opening in the browser. It is on for new forums, and off for forums upgraded from 2.0 until you turn it on.
+
+While it is on, forums served over HTTPS also show an offline page when they can't be reached, which loads the forum again as soon as the connection is back. The admin dashboard and the API always load from the network.
+
+- **App Start Page** is the page the app opens to: **Same as the home page** (the default), or one of the pages that can be chosen as the **Home Page** on the Basics page. Android picks up a change the next time the browser updates the app. iPhones and iPads don't check again once the app is on the home screen, so there the change only applies to apps added after it.
+- **Splash Screen Background** fills the screen around the app icon. It takes a solid colour, such as `#f5f5f5`. Leave it empty to use the **App Icon Background**.
+
+The page previews the splash screen as iPhones and Android show it. A theme can set full-screen splash images for iPhones and iPads instead; Android always shows the app icon.
+
 ## The Advanced page
 
 The Advanced page holds settings that most forums never need to change, so it is hidden from the admin menu until you turn it on.

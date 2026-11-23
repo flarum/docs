@@ -266,6 +266,23 @@ You should develop extensions with debug mode turned **on** in `config.php`. Thi
 
 :::
 
+### Service Worker
+
+From Flarum 2.1, the forum has a service worker at `/sw`, which shows an offline page when the forum can't be reached. A browser keeps only one service worker for the forum, so core and every extension share it. To run code in it, for example to show push notifications, add a script with the `ServiceWorker` extender rather than registering a worker of your own at the forum's scope, which core's replaces whenever it is on:
+
+```php
+use Flarum\Extend;
+
+return [
+    (new Extend\ServiceWorker())
+        ->js(__DIR__.'/js/dist/sw.js'),
+];
+```
+
+Each script is served at `/sw/{part}` and loaded with `importScripts()` after core's, wrapped in a function of its own, so it can't be a module. A script that throws or doesn't parse only stops itself: core's and other extensions' keep running. Core's script answers page loads to show the offline page, so yours shouldn't answer them too.
+
+The forum registers the worker, on forums served over HTTPS, while [opening as an app](theme.md#opening-as-an-app) is on or an extension has added a script. Otherwise, `/sw` serves a worker that removes itself.
+
 ## Changing the UI Part 1
 
 Flarum's interface is constructed using a JavaScript framework called [Mithril.js](https://mithril.js.org/). If you are familiar with [React](https://reactjs.org), then you'll catch on in no time. But if you are not familiar with any JavaScript frameworks, we suggest you go through a [tutorial](https://mithril.js.org/simple-application.html) to understand the fundamentals before proceeding.

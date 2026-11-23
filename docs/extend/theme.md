@@ -81,6 +81,9 @@ return [
 | `emailLogo(string\|callable $file)` | The logo at the top of emails. Not an SVG, which mail clients can't be relied on to show. |
 | `favicon(string\|callable $file, string\|callable\|null $svg = null)` | The favicon, from a PNG, JPEG, WebP or GIF, ideally at least 48px square, and optionally an SVG version for browsers that support SVG favicons. |
 | `appIcon(string\|callable $file, string\|callable\|null $background = null)` | The icon phones show when the forum is added to a home screen, from a square PNG, JPEG, WebP or GIF at least 512px. The background colour fills its transparent parts on iPhones and iPads and the space around it on Android, and defaults to the one set on the Appearance page. |
+| `splashScreen(string\|callable $file, string\|callable\|null $landscape = null)` | The splash screen iPhones and iPads show while the forum [opens as an app](#opening-as-an-app), in place of the one drawn from the app icon, from a PNG, JPEG, WebP or GIF, and optionally a landscape one for screens held sideways. Android can only show the app icon, so it keeps showing that. |
+
+A splash screen image is scaled to cover each screen and cropped from the middle, so keep what matters near the centre. Images at least 1320 by 2868 pixels, or 2868 by 1320 for landscape, stay sharp on every screen. It is only shown with an app icon, as the forum only opens as an app with one, and admins can still turn opening as an app off.
 
 Each image goes through the same steps as an uploaded one. A raster logo is stored at the [logo size and quality](#logo-size-and-quality), and an SVG logo is used as it is. The favicon becomes a `.ico` and a PNG, and the app icon becomes Apple's touch icon, the web app manifest's icons and a maskable icon. Without `emailLogo()`, emails use a copy of the logo, unless it is an SVG.
 
@@ -118,14 +121,24 @@ Code written before Flarum 2.1 may read the paths of uploaded images from the `l
 
 ### Web App Manifest
 
-Flarum serves a web app manifest at `/manifest`, which phones read for the name and icons of a home screen shortcut. It opens the forum in the browser. An extension can change it with `manifest()`, for example to open the forum as an installed app:
+Flarum serves a web app manifest at `/manifest`, which phones read for the name and icons of a home screen shortcut. While **Open as an app from the home screen** is on in the Appearance page, its `display` is `standalone`, so the forum opens as an app; otherwise it is `browser`. Its `start_url` is the forum's address, or the page an admin chose as the **App Start Page**. With a start page, the manifest also has an `id`, the forum's address, so that browsers still see existing installs as the same app.
+
+An extension can change it with `manifest()`. The callback receives the manifest as an array and returns it changed:
 
 ```php
 (new Extend\Theme())
-    ->manifest(fn (array $manifest) => ['display' => 'standalone'] + $manifest),
+    ->manifest(fn (array $manifest) => ['orientation' => 'portrait'] + $manifest),
 ```
 
 Pages link the manifest once there is an app icon, or an extension has changed it.
+
+### Opening as an App
+
+From Flarum 2.1, the forum opens as an app from the home screen while the admin's **Open as an app from the home screen** setting is on and there is an app icon. It is on for new forums and off for forums upgraded from 2.0. Opened as an app, the forum shows a splash screen while it loads, set with `splashScreen()` or drawn from the app icon, and gets pull-to-refresh.
+
+While it is on, forums served over HTTPS register a [service worker](frontend.md#service-worker) that shows an offline page when the forum can't be reached.
+
+`flarum/core` 2.1 conflicts with `fof/pwa` before 2.1, which registers the same `/sw` and `/offline` routes.
 
 ## Logo Size and Quality
 
