@@ -30,14 +30,14 @@ composer require aws/aws-sdk-php
 
 ## The AI page
 
-Go to the extension's page in the admin panel. It has four tabs:
+Go to the extension's page in the admin panel. It has these tabs:
 
 - **Connections**: the providers the forum can reach, and checks of what AI features need from the server.
 - **Features**: the features extensions have registered, each with its own settings, and the health of the models they use.
 - **Usage**: the daily limits for members and guests, and how many tokens have been used.
-- **Permissions**: who may use each feature.
+- **Permissions**: who may use each feature. It only appears once an extension has registered a feature.
 
-Saving saves your changes on every tab. Connections you add or edit are saved with the page, not when you close their form.
+Saving saves your changes on the Connections, Features and Usage tabs. Connections you add or edit are saved with the page, not when you close their form. Changes on the Permissions tab are saved straight away, as on the main Permissions page.
 
 ## Connections
 
@@ -88,7 +88,7 @@ Removing a connection removes its key.
 
 ### The default connection
 
-Features use the default connection unless they choose another. The first connection you add becomes the default. To change it, select **Make Default** on another one.
+Features use the default connection unless they choose another. When no connection is the default, the first one you add becomes it, unless `config.php` sets the default. Removing the default connection leaves no default. To change it, select **Make Default** on another one.
 
 If no connection is the default, features that don't choose their own connection can't run, and the page says so.
 
@@ -147,12 +147,12 @@ Every feature is off until you turn it on. Members and guests also need its [per
 | --- | --- |
 | **Use AI for …** | Turns the feature on. |
 | **Connection** | The connection the feature uses. **Default connection** follows the [default](#the-default-connection). |
-| **Model** | The model the feature uses. Leave it empty for the connection's default model. |
+| **Model** | The model the feature uses. Leave it empty for the model the extension chose, or else the connection's default model. |
 | **Tokens per Day** | The feature stops for the day once it has used this many tokens. Leave it empty for no limit. |
 | **Temperature** | How varied the replies are, from 0 to 2. Some providers accept at most 1. Leave it empty for the extension's own. |
 | **Longest Reply (Tokens)** | The most tokens a reply may use. Leave it empty for the extension's own. |
 
-Some models refuse a temperature, as current Claude models do. When a model refuses the one you set, the feature asks again without it, and from then on leaves it out of that feature's calls to that model. The page notes it under the temperature.
+Some models refuse a temperature, as current Claude models do. When a model refuses a temperature of 1 or lower, the feature asks again without one, and from then on leaves it out of that feature's calls to that model. A higher temperature that a model refuses makes the call fail: lower it. The page notes it under the temperature.
 
 If you remove a connection, features that used it go back to the default connection.
 
@@ -168,7 +168,7 @@ Providers retire their models. The **Models** section, at the top of the **Featu
 
 The models in use are checked each day by the [scheduler](../scheduler.md), or straight away with **Check Now**. While there's a problem, the admin dashboard shows it too, with a link to choose other models.
 
-When a feature's own model is gone, its calls use the connection's default model until you choose another.
+When a feature's own model is gone, its calls use the model the extension chose, or else the connection's default model, until you choose another.
 
 Some connections can't be checked. The section says which: those whose provider doesn't list its models, and those whose provider couldn't be asked, which usually means a wrong key or API URL.
 

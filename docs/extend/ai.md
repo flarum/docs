@@ -48,7 +48,7 @@ return [
 
 An invalid key throws an `InvalidArgumentException`, as does a key another extension already registered.
 
-The feature then appears on the AI page's **Features** tab, and its permission on the **Permissions** tab. The permission is `ai.feature.` followed by the key, such as `ai.feature.acme-tldr.summaries`. No group has it to begin with, and guests can be given it.
+The feature then appears on the AI page's **Features** tab, and its permission on the **Permissions** tab, which the page only shows once some extension has registered a feature. The permission is `ai.feature.` followed by the key, such as `ai.feature.acme-tldr.summaries`. No group has it to begin with, and guests can be given it.
 
 ## Making calls
 
@@ -114,7 +114,7 @@ Both return a new object, so a `FeatureCall` can be kept and reused.
 | `queue(Agent $agent, string $prompt, array $attachments = [])` | `void` | Prompts the agent on the [queue](../queue.md). |
 | `run(callable $callback)` | What the callback returns | Runs any other kind of call as the feature. |
 
-Each call goes through the connection and model the admin chose for the feature, or the default connection and that connection's default model. The admin's temperature and longest reply for the feature replace your agent's own. Without them, your agent's are used.
+Each call goes through the connection the admin chose for the feature, or the default connection. It uses the model the admin chose for the feature. Without one, it uses the model your agent names, with a `model()` method or a `#[Model]`, `#[UseCheapestModel]` or `#[UseSmartestModel]` attribute, and only then the connection's default model. The connection always replaces any provider your agent names. The admin's temperature and longest reply for the feature replace your agent's own. Without them, your agent's are used.
 
 The call is counted for the feature and for whoever it's for. Text is counted step by step as each step of the agent completes, so a call that fails part of the way, or a stream nobody finished reading, still counts the tokens it spent.
 
@@ -128,7 +128,7 @@ Use this rather than the agent's own `queue()`, which doesn't know which feature
 
 #### `run()`
 
-`run()` is for calls that aren't an agent's, such as embeddings or images. The callback is given the connection to use, and the model the admin chose for the feature, or `null`. Every Laravel AI SDK call made while it runs is counted for the feature:
+`run()` is for calls that aren't an agent's, such as embeddings or images. The callback is given the connection to use, and the text model the admin chose for the feature, or `null`. It is a text model even when your call isn't, so don't pass it to an embeddings or image call. Every Laravel AI SDK call made while it runs is counted for the feature:
 
 ```php
 use Laravel\Ai\Embeddings;
@@ -152,7 +152,7 @@ if ($ai->feature('acme-tldr.summaries')->as($actor)->available()) {
 
 Limits aren't checked, so a call can still be stopped by one.
 
-The feature also tells you the connection and model it would use, with `connection()` and `model()`. `model()` is the model the admin chose for the feature, or `null` when it uses the connection's default.
+The feature also tells you the connection and model it would use, with `connection()` and `model()`. `model()` is the model the admin chose for the feature, or `null` when the admin chose none, and the agent's own model or the connection's default is used.
 
 `Ai::availableTo(User $actor)` lists the keys of every feature a member or guest can use now.
 
@@ -204,7 +204,7 @@ Thrown while handling an API request, each reaches the client as a JSON:API erro
 | `resetsAt` | When the limit's period ends, in UTC |
 | `retryAfter` | Seconds until then |
 
-`LimitReachedException` has the same as properties: `limit` (a `LimitType`), `name` (the connection or feature, the member's username, or `null` for guests), `tokens` (the limit) and `resetsAt`. The Laravel AI SDK treats it as a reason to fail over, so an agent with a fallback provider tries that one next.
+`LimitReachedException` has the same as properties: `limit` (a `LimitType`), `name` (the connection or feature, the member's username, or `null` for guests), `tokens` (the limit) and `resetsAt`. It implements the Laravel AI SDK's `FailoverableException`, but a feature's calls always go to the one connection the admin chose, so they never fail over to another provider.
 
 ## Streaming replies
 
