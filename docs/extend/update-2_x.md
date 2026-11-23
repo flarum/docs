@@ -16,7 +16,7 @@ Flarum 2.1 bundles three new extensions. None is enabled on new installs.
 - **MCP** (`flarum/mcp`) turns a forum into a Model Context Protocol server, so AI assistants can read and post as the member who connected them. Assistants can already read every resource type of your extension's API. To let them change your data, call `allowWrites()` on the `Flarum\Mcp\Extend\Mcp` extender, wrapped in `Extend\Conditional()->whenExtensionEnabled('flarum-mcp', ...)`. The same extender adds tools, resources and prompts. See [MCP](mcp.md).
 - **OAuth Provider** (`flarum/oauth-provider`) lets other applications sign members in and act for them. See [OAuth Provider](oauth-provider.md).
 
-API fields can now be described with `->description()` in a resource's `fields()`. The MCP extension's `describe_api` tool shows the descriptions to assistants, so describe your fields to help them use your API. See [Descriptions](mcp.md#descriptions).
+The MCP extension's `describe_api` tool shows assistants the descriptions you give API fields with `->description()` in a resource's `fields()`, so describe your fields to help them use your API. See [Descriptions](mcp.md#descriptions).
 
 ### Unique email addresses are deprecated
 
@@ -86,7 +86,7 @@ Uploaded logos are now stored 90px tall at WebP quality 90, rather than 60px tal
 
 * **Service worker.** The forum now registers a service worker at `/sw` (on HTTPS, while "Open as an app from the home screen" is on or an extension adds a script) that shows an offline page at `/offline`. A browser keeps one worker per scope, so an extension that registered its own worker at the forum's scope should add its script with the new `Extend\ServiceWorker` extender (`->js(__DIR__.'/js/dist/sw.js')`) instead: core's worker replaces it otherwise. Scripts are loaded with `importScripts()` from `/sw/{part}`, each in its own function, so they can't be modules. See [Service Worker](frontend.md#service-worker).
 * **`fof/pwa`.** `flarum/core` 2.1 conflicts with `fof/pwa` before 2.1, which registers the same `/sw` and `/offline` routes. Update it to 2.1 or later.
-* **Web app manifest.** `display` is now `standalone` while "Open as an app from the home screen" is on (on for new installs, off for upgraded forums) and `browser` otherwise. The manifest also gets `short_name` from the new Short Name setting, and a `start_url` plus an `id` (the forum's address) when an App Start Page is chosen. Extensions that forced `display: standalone` through `Theme::manifest()` no longer need to. `Theme::splashScreen($file, $landscape = null)` sets the splash screen iPhones and iPads show. See [Web App Manifest](theme.md#web-app-manifest).
+* **Web app manifest.** `display` is now `standalone` while "Open as an app from the home screen" is on (on for new installs, off for upgraded forums) and `browser` otherwise. The manifest also gets `short_name` from the new Short Name setting, and a `start_url` (the forum's address, plus the App Start Page when one is chosen), with an `id` (the forum's address) when a start page is chosen. Extensions that forced `display: standalone` through `Theme::manifest()` no longer need to. `Theme::splashScreen($file, $landscape = null)` sets the splash screen iPhones and iPads show. See [Web App Manifest](theme.md#web-app-manifest).
 * **OpenSearch.** New routes: `/opensearch`, `/opensearch/search` and `/api/opensearch/suggestions`. Extensions that registered routes with these paths will conflict.
 
 ### Group and Tag Icon Images
@@ -136,7 +136,17 @@ class YourAccessToken extends AccessToken
 
 * **GDPR anonymizing.** Anonymizing a user now clears only the nullable columns of the `users` table. A column your extension added as `NOT NULL` keeps its value, so anonymize it with your own data type. See [Columns on the users table](gdpr.md#columns-on-the-users-table).
 * **Permission caching.** The permission cache is now flushed as each queued job starts (with a real queue driver) and every 10 seconds in the realtime daemon. Other long-running processes your extension runs must flush it themselves. See [Permission Caching](permissions.md#permission-caching).
-* **OAuth Provider disconnects.** `Flarum\OAuthProvider\Event\DisconnectedAll` now has a `$cause`, and also fires when a member logs out everywhere or their password changes. The new `AuthorizationWithdrawn` event fires when a member's authorization ends before the application got a code. See [Events](oauth-provider.md#events).
+* **Conditional extenders.** The `Conditional` extender has new `whenExtensionsEnabled()` and `whenExtensionsDisabled()` methods for several extensions at once, and `Flarum\Extension\Condition` builds reusable conditions to combine with `all()`, `any()` and `not()`. See [Conditional Extenders](settings.md#conditional-extenders).
+* **Conditional migrations.** A migration can be held back until a condition holds, such as another extension being enabled, with `shouldRun` on the `Migration` helpers. See [Conditional migrations](models.md#conditional-migrations).
+* **Test helpers.** Core and bundled extensions publish test helpers under `Flarum\<Package>\Testing`, for testing your integration with them. See [Bundled backend helpers](testing.md#bundled-backend-helpers).
+* **Narrowing filters.** A filter that narrows the list people are on, rather than choosing another list, implements `Flarum\Search\Filter\RefineFilterInterface`. See [Filters that narrow a list](search.md#filters-that-narrow-a-list).
+* **Discussions `group` filter.** Core now filters discussions by their authors' groups, with the `group` filter key and the `group:` gambit. An extension that registers its own `group` filter on discussions will clash with it.
+* **Realtime.** `Realtime::broadcastToUsers()` sends a payload of your own to particular users. See [Broadcasting to particular users](realtime.md#broadcasting-to-particular-users).
+* **Extensions with missing dependencies.** Every extension whose required extensions are missing or refused is now refused too, along with the extensions that require it.
+* **Translations.** A key missing from the user's language now falls back to the forum's default language.
+* **Slugs.** `slug()` now strips accents instead of replacing accented letters with hyphens, so slugs made from text with accents differ from 2.0's.
+* **Stricter API parameters.** The API now answers 400 for a malformed `include`, `page` or `filter[q]`, for page parameters it can't honour, and for a filter on a resource that has no searcher, and a user or discussion ID that isn't a valid number finds nothing. Clients that sent such requests and relied on them being ignored must fix them. See [Pagination](api.md#pagination).
+* **Formatter.** The formatter cache is rebuilt whenever any extension is enabled or disabled.
 
 ### Posts and Responses
 
@@ -155,6 +165,10 @@ class YourAccessToken extends AccessToken
   - `dialogs` gain a `groups` relationship, and `users` now holds only individually addressed members.
   - `groups` gain `canMessage`.
   - Who may see a dialog is now resolved through `Flarum\Messages\DialogAudience`, which includes the current members of recipient groups and excludes members who left; use it rather than the `dialog_user` table when you need a dialog's audience.
+- **Editing, deleting and restoring messages.**
+  - `dialog-messages` gain `editedAt`, `isHidden`, `hiddenAt` and, for those who may view IP addresses, `ipAddress`. On a deleted message, `contentHtml` is only sent to its author and to those who may delete it.
+  - New events in `Flarum\Messages\DialogMessage\Event`: `Revised`, `Hidden`, `Restored`, `Deleting` and `Deleted`.
+- **Read receipts.** `dialogs` gain `readReceipts` and a `readers` relationship. Marking all conversations read now sets `users.marked_all_dialogs_read_id` rather than moving every read position.
 - **Likes on messages** (with `flarum/likes` enabled).
   - `dialog-messages` gain `canLike`, `likesCount` and a `likes` relationship.
   - New endpoints `POST /api/dialog-messages/{id}/like` and `DELETE /api/dialog-messages/{id}/like`, which dispatch `Flarum\Messages\DialogMessage\Event\Liked` and `Unliked`.
@@ -165,12 +179,16 @@ class YourAccessToken extends AccessToken
 The Extension Manager (`flarum/extension-manager`) has been rewritten. Its package name, extension ID and `Flarum\ExtensionManager` namespace are unchanged.
 
 - **Removed events.** `Flarum\ExtensionManager\Event\FlarumUpdated` and `Flarum\ExtensionManager\Extension\Event\{Installed, Removed, Updated}` no longer exist and are no longer dispatched. Remove any listeners for them.
+- **Removed API.** The 2.0 routes (`/extension-manager/extensions`, `check-for-updates`, `why-not`, `minor-update`, `major-update`, `global-update` and `composer`), the `TaskResource` and `ExternalExtensionResource` API resources, and the 2.0 command bus commands are gone. Code that called them must use the console commands below instead.
 - **Removed table and settings.** A migration drops the `extension_manager_tasks` table (and `package_manager_tasks`, if present) and deletes every `flarum-extension-manager.*` and `flarum-package-manager.*` setting. Runs and their history are now kept under `storage/extension-manager`. Don't read the table or those settings.
 - **New console commands.** `extension-manager:check` (scheduled daily), `extension-manager:update`, `extension-manager:prune` (scheduled daily at 04:20), `extension-manager:rebuild-assets` and `extension-manager:repair-formatter`. See [Console](../console.md#extension-manager-commands).
 - **Insecure repositories refused.** While Composer's `secure-http` is on, the Extension Manager refuses to add `http://` or `git://` repositories.
 
 ### Frontend
 
+* **Conditional frontend extenders.** `Extend.Conditional` registers extenders only when other extensions are enabled or disabled, a forum attribute has a value, or a condition holds. See [In the frontend](settings.md#in-the-frontend).
+* **Tooling.** Core and the bundled extensions are built with TypeScript 5.9, Prettier 3, `flarum-webpack-config` 3.1 and `@flarum/jest-config` 2.1. Extensions can update to them too.
+* **Icon picker.** `IconInput` and `IconPicker` let admins pick a Font Awesome icon, and an admin setting can use `type: 'icon'`. See [Icon picker](forms.md#icon-picker).
 * Gambit keywords now have an English fallback: a gambit matches its English keyword as well as its translated one, whatever the forum's language. If your gambit's `key()` returns a translated string, override `canonicalKey()` to return the English keyword. Gambits that don't do this keep working as before, without the fallback. See [Localizing gambit keywords](./search.md#localizing-gambit-keywords).
 * `isDark()` now picks light or dark text by WCAG contrast ratio: it returns `true` when `--text-on-dark` contrasts more with the colour than `--text-on-light` does, as CSS `contrast-color()` would. It no longer uses a YIQ brightness threshold. Coloured tag labels, tag and group mentions, badges, heroes and the primary button may now get different text from before. The primary button makes the same choice in Less, and when its text is dark it gets lighter, not darker, on hover. Core no longer sets `--yiq-threshold`. A theme that still sets it keeps the old YIQ behaviour, with a deprecation warning in debug mode. That override will be removed in 3.0, so remove `--yiq-threshold` from your theme, and set `--text-on-dark` and `--text-on-light` if you need other text colours.
 * Several toolbar and header controls are now wrapped in a `Tooltip` component instead of having a native `title`. `HeaderDropdown.view().children[0]` can now be a `Tooltip` vnode: use `getButton()` to change the toggle. The `refresh` and `markAllAsRead` items in `IndexPage.actionItems()` are now `Tooltip` vnodes, as are the `refresh` item in `PostsPage.actionItems()` and the `refresh` and `markAllAsRead` items in `MessagesPage.actionItems()` (flarum/messages). If your extension changes one of these buttons, change the wrapper's single child instead. Add extra controls as separate items in `actionItems()`. Every `Tooltip` now hides when its control is clicked or tapped (activating it with the keyboard keeps it up), and a tooltip attached to `body` hides when the page scrolls.
