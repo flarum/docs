@@ -44,6 +44,8 @@ When you update from an earlier release, conversations that an admin has already
 
 Members open the Messages page from the **Messages** icon in the header, which counts the conversations with something unread, or from **Messages** in the forum's navigation. The page lists their conversations, with the open conversation beside the list on wider screens.
 
+Where participant avatars or group icons overlap, hover over one to bring it to the front and see it in full.
+
 From the page, members can:
 
 - sort their conversations by **Latest** activity, **Newest** or **Oldest**;
