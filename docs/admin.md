@@ -15,6 +15,18 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## Groups
+
+Groups are managed at the top of the **Permissions** page. Select a group to edit it, or **New Group** to create one. A group has:
+
+- **Name**, in the singular and the plural, for example "Mod" and "Mods".
+- **Color**, used for its badge.
+- **Icon**, a [Font Awesome](fontawesome.md) icon shown in its badge.
+- **Icon image**, from Flarum 2.1, an image to show instead of the icon: PNG, JPEG, GIF, WebP or BMP. Animated images keep their first frame. The icon is still used where an image can't be shown. The image is uploaded when you save the group.
+- **Hide on forum**, which hides the group and its badge from everyone without the **View hidden group badges** permission.
+
+Deleting a group doesn't delete its members.
+
 ## The Appearance page
 
 Besides the forum's colors and custom CSS, the Appearance page sets its logos and icons:

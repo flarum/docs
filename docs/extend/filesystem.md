@@ -7,7 +7,7 @@ Extensions can use Flarum's provided utils for their own filesystem interaction 
 ## Disks
 
 Filesystem **disks** represent storage locations, and are backed by storage drivers, which we'll cover later.
-Flarum core has 2 disks: `flarum-assets` and `flarum-avatars`.
+Flarum core has 3 disks: `flarum-assets`, `flarum-avatars` and, from Flarum 2.1, `flarum-icons`, which holds the [icon images](models.md#icon-images) of groups and tags.
 
 ### Using existing disks
 

@@ -52,6 +52,7 @@ Each change to the order is saved as soon as you drop the tag.
 | **Description** | Shown on the tag's page and on the **Tags** page. Up to 700 characters. |
 | **Color** | Used for the tag's label, its page header and its icon. |
 | **Icon** | A [Font Awesome](../fontawesome.md) icon. Click the field to [choose one](../fontawesome.md#choosing-an-icon), or type any icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
+| **Icon image** | From Flarum 2.1, an image to show instead of the icon: PNG, JPEG, GIF, WebP or BMP. Animated images keep their first frame. The icon is still used where an image can't be shown. **Upload image** chooses one, and **Remove** removes it. The image is uploaded when you save the tag. |
 | **Hide from All Discussions** | See [Hidden tags](#hidden-tags). |
 | **Default Sort** | How the tag's discussions are ordered when someone opens its page without choosing a sort. **Use the forum default** follows the forum's own default. Sorts added by extensions are listed too. If the chosen sort is later removed, it is kept and shown as **(no longer available)**, and the forum default is used. |
 

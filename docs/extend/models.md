@@ -417,3 +417,81 @@ The attributes and relationships of backend models are based on the **database**
 The attributes and relationships of frontend models are based on the fields of [API Resource](api.md). These will be covered more in depth in the next article, but it's worth that a resource could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
 Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.
+
+## Icon Images
+
+From Flarum 2.1, admins can upload an image to show instead of a group's or a tag's Font Awesome icon. The pieces are in `Flarum\Foundation\IconImage`, so a model of your own can have one too.
+
+Each upload is stored on the `flarum-icons` [disk](filesystem.md) as a static WebP: an animated image keeps its first frame, a fully transparent border is trimmed, and the image is scaled to fit a 64px box at 1x, 2x and 3x without cropping, never larger than the upload. SVG images are rejected.
+
+### Backend
+
+Give the model's table a nullable `icon_image_path` string and an unsigned tiny integer `icon_image_scales` that defaults to 1, and use the `HasIconImage` trait:
+
+```php
+use Flarum\Database\AbstractModel;
+use Flarum\Foundation\IconImage\HasIconImage;
+
+class Team extends AbstractModel
+{
+    use HasIconImage;
+}
+```
+
+The trait adds the `icon_image_url` and `icon_image_srcset` attributes, and deletes the image's files when the model is deleted. A query that deletes rows directly skips model events and leaves the files behind. To store the image with another box size, scales or disk, override `iconImageUploader()` to return a subclass of `IconImageUploader`.
+
+Then add `IconImageApi`'s endpoints and fields to the model's [API resource](api.md):
+
+```php
+use Flarum\Foundation\IconImage\IconImageApi;
+
+public function endpoints(): array
+{
+    return [
+        // ...
+        ...IconImageApi::endpoints(),
+    ];
+}
+
+public function fields(): array
+{
+    return [
+        // ...
+        Schema\Str::make('icon')
+            ->writable()
+            ->deserialize(IconImageApi::withoutImageClasses(...)),
+        ...IconImageApi::fields(),
+    ];
+}
+```
+
+- `POST /api/{type}/{id}/icon-image` takes the file as the `iconImage` form field, and `DELETE /api/{type}/{id}/icon-image` removes the image. Both return the resource. They need the `edit` ability by default: `endpoints()` takes another ability, and a validator class, as arguments. They are named `iconImage.upload` and `iconImage.delete`, so they can be changed with the `ApiResource` extender. Core's `groups` and Tags' `tags` resources have them.
+- `fields()` adds the `iconImageUrl` and `iconImageSrcset` attributes, `null` without an image.
+- `withoutImageClasses()` removes the classes the frontend adds to show the image (below), so a form that saves back the icon it was given stores only the Font Awesome classes.
+
+The endpoints save the model directly, without the resource's saving hooks. Instead, they dispatch `Flarum\Foundation\IconImage\Event\IconImageSaving` before the change, which a listener can throw from to stop it, or use to change `$image` (`null` when the image is being removed). `Event\IconImageChanged` is dispatched once the change is saved. Both carry the `$model` and the `$actor`, so check the model's class to act on one kind of model only.
+
+### Frontend
+
+`Group.icon()` and `Tag.icon()` return the Font Awesome classes, plus `IconImage IconImage--<n>` when there is an image (and `IconImage--only` when there is no icon besides it). The first time an image is seen, a rule for its class is added to the page, and `.IconImage` shows the image in the glyph's place. So whatever renders the icon shows the image without knowing about it: the `Icon` component, a `Button`'s or `Badge`'s `icon`, or a plain `<i className={tag.icon()}>`. Without an image, `icon()` returns what it did before. The stored classes alone are `attribute('icon')`, and the image's URLs are `iconImageUrl()` and `iconImageSrcset()`.
+
+A model of your own does the same with `withIconImage()`:
+
+```ts
+import Model from 'flarum/common/Model';
+import withIconImage from 'flarum/common/utils/withIconImage';
+
+export default class Team extends Model {
+  icon() {
+    return withIconImage(Model.attribute<string | null>('icon').call(this), this.iconImageUrl(), this.iconImageSrcset());
+  }
+  iconImageUrl() {
+    return Model.attribute<string | null>('iconImageUrl').call(this);
+  }
+  iconImageSrcset() {
+    return Model.attribute<string | null>('iconImageSrcset').call(this);
+  }
+}
+```
+
+In a form, `IconImageInput` (`flarum/common/components/IconImageInput`) lets admins choose or remove an image, kept in an `IconImageState` (`flarum/common/states/IconImageState`). Nothing is sent until the state's `save()`, so the form can save its model first and upload the image to it afterwards, as core's group and Tags' tag modals do.
