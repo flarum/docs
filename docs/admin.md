@@ -15,6 +15,25 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## The Appearance page
+
+Besides the forum's colors and custom CSS, the Appearance page sets its logos and icons:
+
+- **Logo** and **Dark Mode Logo**, shown in the header.
+- **Email Logo**, shown at the top of emails. Without one, emails use a copy of the logo.
+- **Favicon**, shown in browser tabs and bookmarks. A square image at least 48 pixels across stays sharp, and an `.ico` file works too. Flarum also stores it as an `.ico` for older browsers and other software.
+- **App Icon**, which phones show when someone adds the forum to their home screen. Upload a square image at least 512 pixels across. The page previews it as iPhones and Android show it, and **App Icon Background** fills its transparent parts on iPhones and iPads, and the space around it on Android. Without a favicon, the app icon is used as the favicon too.
+
+If a theme sets one of these images, the page shows it, marked as set by that theme, but it can't be changed there.
+
+Flarum answers requests for `/favicon.ico` itself. On nginx, Flarum's suggested configuration serves `.ico` files straight from the disk, so to have Flarum answer that request too, add this before its other `location` blocks:
+
+```nginx
+location = /favicon.ico {
+  try_files $uri /index.php?$query_string;
+}
+```
+
 ## The Advanced page
 
 The Advanced page holds settings that most forums never need to change, so it is hidden from the admin menu until you turn it on.
@@ -27,7 +46,9 @@ You can also open the page directly, even while it is hidden, by adding `/admin#
 
 Extensions can add other search drivers, for example one that uses Elasticsearch. Once one is installed, choose here which driver each kind of content, such as discussions or users, is searched with. Until then, this section says that no other drivers are available.
 
-On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums.
+On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums. A single CJK character is often a whole word, so you will usually want to lower the minimum search length as well.
+
+**Minimum Search Length** is how many characters someone has to type before search results start loading. It is 3 by default. Lower it for languages with short words, such as Chinese, Japanese or Korean, where 1 or 2 is common; shorter searches match more loosely and send more requests to the database. With MySQL and MariaDB's default word-based search, discussion and post searches don't find words shorter than the database's minimum word length (3 by default) unless CJK search is turned on, so lowering the setting alone won't help there. The admin panel's own search doesn't use the database, so it isn't affected by a higher minimum, and searches from one character when CJK search is on.
 
 ### Maintenance
 

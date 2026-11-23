@@ -44,6 +44,8 @@ When you update from an earlier release, conversations that an admin has already
 
 Members open the Messages page from the **Messages** icon in the header, which counts the conversations with something unread, or from **Messages** in the forum's navigation. The page lists their conversations, with the open conversation beside the list on wider screens.
 
+Where participant avatars or group icons overlap, hover over one to bring it to the front and see it in full.
+
 From the page, members can:
 
 - sort their conversations by **Latest** activity, **Newest** or **Oldest**;
@@ -77,24 +79,28 @@ Members can turn these emails off with **Someone sends me a message** in the not
 
 The **Messages** icon in the header shows new messages whether or not the member is emailed.
 
-## Deleting messages
+## Editing and deleting messages
 
-Members can delete their own messages if you allow it. Choose how long they have under **Delete own messages** on the **Permissions** page of the admin panel:
+Members can edit and delete their own messages for as long as you allow. Choose how long under **Edit own messages** and **Delete own messages** on the **Permissions** page of the admin panel:
 
-| Option | A member can delete a message they sent |
+| Option | A member can edit or delete a message they sent |
 | --- | --- |
 | **Indefinitely** | at any time |
 | **For 10 minutes** | for 10 minutes after sending it |
 | **Until next reply** | until someone sends another message in the conversation |
 | **Never** | never |
 
-Until you choose an option, members can't delete their messages.
+Until you choose an option, both are allowed until the next reply.
 
-Deleting a message removes it for both members, and it can't be undone. Deleting the last message left in a conversation deletes the conversation.
+An edited message is marked **Edited**; hovering over the mark shows who edited it and when.
+
+Deleting a message replaces it with *This message was deleted.* for the other members. Its author still sees what it said, and can restore it within the same time limit.
+
+Only groups with **Delete messages forever** can remove a message for good, from a message that has already been deleted. Nobody has this permission by default, so only admins can. Deleting a message forever can't be undone, and deleting the last message left in a conversation deletes the conversation.
 
 ## Search
 
-Members can find text from their own conversations in the forum's search, where matches appear under **Messages**. Guests never see this section.
+Members can find text from their own conversations in the forum's search, where matches appear under **Messages**. Guests never see this section. A deleted message can only be found by its author.
 
 ## Flood control
 
@@ -113,7 +119,9 @@ Set these on the **Permissions** page of the admin panel:
 | --- | --- | --- |
 | **Send private messages** | Members | Starting conversations and sending messages. |
 | **Message users without messaging permission** | Admins only | Messaging members who can't send messages themselves. They can then reply in that conversation. See [Members who can't reply](#members-who-cant-reply). |
-| **Delete own messages** | Nobody | Deleting messages the member sent, for the time you choose. See [Deleting messages](#deleting-messages). |
+| **Edit own messages** | Until next reply | Editing messages the member sent, for the time you choose. See [Editing and deleting messages](#editing-and-deleting-messages). |
+| **Delete own messages** | Until next reply | Deleting messages the member sent, for the time you choose; they can restore them for as long. See [Editing and deleting messages](#editing-and-deleting-messages). |
+| **Delete messages forever** | Admins only | Removing deleted messages for good. |
 | **Send messages without throttling** | Admins only | Sending messages without [flood control](#flood-control). |
 | **View IP addresses of messages** | Admins only | Seeing the IP address each message was sent from. Messages records it for every message. |
 
@@ -121,8 +129,8 @@ Set these on the **Permissions** page of the admin panel:
 
 | Extension | What it adds to Messages |
 | --- | --- |
-| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
+| [Realtime](realtime.md) | New messages appear in an open conversation as they are sent, and edits, deletions and restored messages show straight away; the header's count updates straight away, members see when the other person is typing, and [read receipts](#read-receipts) update as members read. |
 | Mentions | Members can mention other members and posts in their messages. |
 | [Statistics](statistics.md) | The **PM started** and **PM replies** statistics count conversations and the replies in them. |
-| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with who it was sent to. It never records what a message says. |
+| [Audit](audit.md) | The audit log records when a member starts a conversation and each message they send, with who it was sent to, and when a message is edited, deleted, restored or deleted forever, with whose it was. It never records what a message says. |
 | [GDPR](gdpr.md) | A member's data export includes their messages. Erasing a member deletes their messages; anonymising them removes the IP addresses recorded with their messages and forgets how far they had read each conversation. Nobody, admins included, can message an anonymised member, in a new conversation or an existing one, and they aren't offered when choosing who to message. |

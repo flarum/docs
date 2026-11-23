@@ -112,6 +112,24 @@ Each user receives their payload on their own channel, under the event's class n
 The callback runs when the broadcast goes out, not when the event is raised. On a forum with a queue worker that is later, so someone who has lost access in between isn't told. The event is queued with the broadcast: give it Laravel's `SerializesModels` trait if it carries models, so they are loaded afresh.
 
 Realtime doesn't check who may see a payload, so the callback must leave out anyone who may not.
+### Broadcasting dialog message removals
+
+A message deleted for good can't be rendered for each member, and deleting a dialog's last message deletes the dialog and its memberships. Use `broadcastDialogRemoval` with an event that recorded who could see the message before it was deleted:
+
+```php
+(new RealtimeExtend())
+    ->broadcastDialogRemoval(
+        \Flarum\Messages\DialogMessage\Event\Deleted::class,
+        fn ($event) => [
+            'id' => $event->message->id,
+            'dialogId' => $event->dialogId,
+            'dialogDeleted' => $event->dialogDeleted,
+            'userIds' => $event->memberIds,
+        ],
+    ),
+```
+
+Those users who are connected receive `{data: {type: 'dialog-messages', id}, meta: {dialogId, dialogDeleted}}` on their own channel, under the event's class name.
 
 ### Broadcasting flag events
 
