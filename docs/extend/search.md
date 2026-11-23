@@ -110,6 +110,44 @@ if (count($state->getListFilters()) === 0 && ! $state->isFulltextSearch()) {
 
 Some filters don't ask for a different list; they ask for part of the same one. Deck's `lastPostedAfter`, for example, asks which discussions have had a post since a given time. Implement `Flarum\Search\Filter\WindowFilterInterface` instead of `FilterInterface` for a filter like this. It takes the same methods. `getListFilters()` leaves these filters out, so the list's own mutators still apply. `getActiveFilters()` still returns every active filter. Filters people choose, such as `created:` in a search, and lookups such as `id` ask for a different list, so they implement `FilterInterface`.
 
+### Filters that narrow a list
+
+From Flarum 2.1, a filter people pick to narrow the list they're on, rather than to go to another one, implements `Flarum\Search\Filter\RefineFilterInterface`. A date range or a language picked on All Discussions is one: the page is still All Discussions, so it should still leave out discussions in hidden tags and those the member ignores, and keep sticky discussions pinned. `getListFilters()` leaves these filters out too, and Sticky doesn't count them when it decides whether to pin, on All Discussions or on a tag page:
+
+```php
+use Flarum\Search\Database\DatabaseSearchState;
+use Flarum\Search\Filter\RefineFilterInterface;
+use Flarum\Search\SearchState;
+
+/**
+ * @implements RefineFilterInterface<DatabaseSearchState>
+ */
+class CreatedRangeFilter implements RefineFilterInterface
+{
+    public function getFilterKey(): string
+    {
+        return 'createdRange';
+    }
+
+    public function filter(SearchState $state, string|array $value, bool $negate): void
+    {
+        $range = explode('..', (string) $value, 2);
+
+        if (count($range) !== 2) {
+            return;
+        }
+
+        [$from, $to] = $range;
+
+        $state->getQuery()->whereBetween('discussions.created_at', [$from, $to]);
+    }
+}
+```
+
+The difference from a window filter is pinning. A window filter's client wants the latest activity first, so a request with one never pins sticky discussions; a refined list is still read in its usual order, so it does. A filter implementing both interfaces counts as a window filter.
+
+Keep a refine filter's conditions in one group: wrap any `orWhere` in a closure, as you would in any filter. Sticky copies the query to find the sticky discussions to pin, and an ungrouped `orWhere` would escape that copy's conditions as well as the list's own.
+
 ## Making a new model searchable
 
 If you want to make a non-searchable model searchable *(for instance, your extension adds a new model)*, you'll need to create a searcher class for the model, by implementing the `Flarum\Search\SearcherInterface` interface. Assuming this is meant for the default database search driver, you can instead extend `Flarum\Search\Database\AbstractSearcher`:
