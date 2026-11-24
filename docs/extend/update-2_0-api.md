@@ -61,7 +61,7 @@ We have the following fields:
 * `updatedAt` (DateTime)
 * `user` (one-to-one relationship)
 
-We can already start filling these [fields](https://docs.flarum.org/2.x/extend/api#fields-attributes-and-relationships) in the DraftResource class, all we know so far about these fields is that they are visible (serialized) and that they all directly point to the equivalent snake case model attribute.
+We can already start filling these [fields](api.md#fields-attributes-and-relationships) in the DraftResource class, all we know so far about these fields is that they are visible (serialized) and that they all directly point to the equivalent snake case model attribute.
 
 We also know from the serializer that the `type` of this resource is: `drafts` and the model is `Draft`.
 
@@ -902,7 +902,7 @@ Here are some ways we can improve the implementation and good practices that we 
 
 #### Visibility Scoper
 
-We can add then use a [visibility scope](https://docs.flarum.org/2.x/extend/model-visibility#registering-custom-scopers), which can be re-used inn different places or by other extensions without having to duplicate the logic.
+We can add then use a [visibility scope](model-visibility.md#registering-custom-scopers), which can be re-used in different places or by other extensions without having to duplicate the logic.
 
 ```php
 class ScopeDraftVisibility
@@ -928,7 +928,7 @@ class DraftResource extends Resource\AbstractDatabaseResource
 
 #### Policy
 
-We can also use a [policy](https://docs.flarum.org/2.x/extend/authorization#registering-policies) to handle the permissions logic, this can be re-used in different places or by other extensions without having to duplicate the logic.
+We can also use a [policy](authorization.md#registering-policies) to handle the permissions logic, this can be re-used in different places or by other extensions without having to duplicate the logic.
 
 ```php
 class GlobalPolicy
@@ -1098,7 +1098,7 @@ Notice how instead of using a `get` accessor like this:
 ->get(fn (User $user, Context $context) => Draft::where('user_id', $context->getActor()->id)->count()
 ```
 
-we used [the relationship aggregate `countRelation` method](http://localhost:3000/2.x/extend/api#relationship-aggregates) which does the same but far more efficiently, without creating a query for each model in the response.
+we used [the relationship aggregate `countRelation` method](api.md#relationship-aggregates) which does the same but far more efficiently, without creating a query for each model in the response.
 
 :::
 
@@ -1408,13 +1408,13 @@ This is because in 2.x, the show discussion endpoint no longer tries to load the
 Notice how we replaced the use of:
 
 ```php
-->prepareDataForSerialization([LoadActorVoteRelationship::class, 'sumRelation'])`
-```
-```php
+->prepareDataForSerialization([LoadActorVoteRelationship::class, 'sumRelation'])
+
+// ... which set the attribute by hand:
 $attributes['votes'] = $post->actualvotes_sum_value;
 ```
 
-With [the relationship aggregate `sumRelation` method](http://localhost:3000/2.x/extend/api#relationship-aggregates) which does the same but in a more readable and flexible way:
+With [the relationship aggregate `sumRelation` method](api.md#relationship-aggregates) which does the same but in a more readable and flexible way:
 
 ```php
 Schema\Number::make('votes')
