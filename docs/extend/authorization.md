@@ -106,6 +106,7 @@ Let's take a look at an example policy from [Flarum Tags](https://github.com/fla
 
 ```php
 <?php
+
 namespace Flarum\Tags\Access;
 
 use Flarum\Tags\Tag;
@@ -114,29 +115,31 @@ use Flarum\User\User;
 
 class TagPolicy extends AbstractPolicy
 {
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function startDiscussion(User $actor, Tag $tag)
+    public function can(User $actor, string $ability, Tag $tag): string|bool|null
     {
-        if ($tag->is_restricted) {
-            return $actor->hasPermission('tag'.$tag->id.'.startDiscussion') ? $this->allow() : $this->deny();
+        // A tag inherits its parent's restrictions: no permission on the
+        // parent means no permission here, whatever this tag says.
+        if ($tag->parent_id && ! $actor->can($ability, $tag->parent)) {
+            return $this->deny();
         }
+
+        if ($tag->is_restricted) {
+            $id = $tag->id;
+
+            return $actor->hasPermission("tag$id.$ability");
+        }
+
+        return null;
     }
 
-    /**
-     * @param User $actor
-     * @param Tag $tag
-     * @return bool|null
-     */
-    public function addToDiscussion(User $actor, Tag $tag)
+    public function addToDiscussion(User $actor, Tag $tag): bool
     {
-        return $this->startDiscussion($actor, $tag);
+        return $actor->can('startDiscussion', $tag);
     }
 }
 ```
+
+Two things in there are worth copying. The `can` method is the catch-all described above, so one method covers every ability rather than one method per ability. And it returns the result of `hasPermission` directly: a raw `true` or `false` is turned into `allow()` or `deny()` for you, so the ternary is unnecessary.
 
 We can also have global policies, which are run when `$user->can()` is called without a target model instance. Again from Tags:
 
@@ -152,36 +155,39 @@ use Flarum\User\User;
 
 class GlobalPolicy extends AbstractPolicy
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
-
-    public function __construct(SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
+    public function __construct(
+        protected SettingsRepositoryInterface $settings
+    ) {
     }
 
-    /**
-     * @param Flarum\User\User $actor
-     * @param string $ability
-     * @return bool|void
-     */
-    public function can(User $actor, string $ability)
+    public function can(User $actor, string $ability): ?string
     {
-        if (in_array($ability, ['viewForum', 'startDiscussion'])) {
-            $enoughPrimary = count(Tag::getIdsWhereCan($actor, $ability, true, false)) >= $this->settings->get('min_primary_tags');
-            $enoughSecondary = count(Tag::getIdsWhereCan($actor, $ability, false, true)) >= $this->settings->get('min_secondary_tags');
-
-            if ($enoughPrimary && $enoughSecondary) {
-                return $this->allow();
-            } else {
-                return $this->deny();
-            }
+        // A global policy is asked about every ability, so say nothing about
+        // the ones you do not care about rather than denying them.
+        if (! in_array($ability, ['viewForum', 'startDiscussion'])) {
+            return null;
         }
+
+        $minPrimary = (int) $this->settings->get('flarum-tags.min_primary_tags');
+
+        if ($minPrimary === 0) {
+            return null;
+        }
+
+        $visiblePrimary = Tag::whereHasPermission($actor, $ability)
+            ->whereNotNull('position')
+            ->count();
+
+        return $visiblePrimary >= $minPrimary ? $this->allow() : $this->deny();
     }
 }
 ```
+
+:::note
+
+That is simplified to keep it readable. The real policy also handles secondary tags, short-circuits on the `bypassTagCounts` permission, memoizes its verdict per actor and ability, and counts both tag kinds in a single aggregate query. Read it in full if you are writing something similar, because a global policy runs on a great many requests and the query cost matters.
+
+:::
 
 ### Registering Policies
 
