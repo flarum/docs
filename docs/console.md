@@ -145,13 +145,13 @@ $ php flarum tinker -e "Group::pluck('name_singular', 'id')->all()"
 
 If the code throws, the error is printed and the command exits with a non-zero status, so it can be used safely in scripts.
 
-### cache:clear
+### cache:clear {#cache-clear}
 
 `php flarum cache:clear`
 
 Clears the backend flarum cache, including generated js/css, text formatter cache, and cached translations. This should be run after installing or removing extensions, and running this should be the first step when issues occur.
 
-### assets:publish
+### assets:publish {#assets-publish}
 
 `php flarum assets:publish`
 
@@ -169,13 +169,13 @@ If you run Flarum on multiple servers or containers that share one database, sev
 php flarum migrate --isolated
 ```
 
-### migrate:reset
+### migrate:reset {#migrate-reset}
 
 `php flarum migrate:reset --extension [extension_id]`
 
 Reset all migrations for an extension. This is mostly used by extension developers, but on occasion, you might need to run this if you are removing an extension, and want to clear all of its data from the database. Please note that the extension in question must currently be installed (but not necessarily enabled) for this to work.
 
-### schedule:run
+### schedule:run {#schedule-run}
 
 `php flarum schedule:run`
 
@@ -189,8 +189,78 @@ This command should generally not be run manually.
 
 Note that some hosts do not allow you to edit cron configuration directly. In this case, you should consult your host for more information on how to schedule cron jobs.
 
-### schedule:list
+### schedule:list {#schedule-list}
 
 `php flarum schedule:list`
 
 This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
+
+### extension:enable {#extension-enable}
+
+`php flarum extension:enable [extension_id]`
+
+Enables an extension from the command line, using the same extension ID shown on its card in the admin dashboard (for example `flarum-tags`). `php flarum extension:disable [extension_id]` is an alias of the same command that disables one instead.
+
+This is most useful when the admin dashboard itself is unreachable, since a misbehaving extension can often be disabled this way without touching the database by hand.
+
+### extension:bisect {#extension-bisect}
+
+`php flarum extension:bisect`
+
+Finds which extension is causing a problem by progressively enabling and disabling extensions until the culprit is isolated, rather than you doing it by hand.
+
+:::caution This puts your forum into maintenance mode
+
+Bisecting toggles extensions repeatedly on the live site, so it puts the forum into maintenance mode while it runs. Expect the forum to be unavailable to your users for the duration, and prefer running it on a staging copy where you can.
+
+:::
+
+### queue:pause {#queue-pause}
+
+`php flarum queue:pause [queue]`
+
+Stops workers picking up new jobs from a [queue](queue.md), without stopping the workers themselves. Jobs already in progress finish, and anything queued afterwards simply waits until the queue is resumed.
+
+The queue name defaults to `default`, and may be prefixed with a connection as `connection:queue`. Pass `--all` to pause every queue on the connection instead.
+
+This is handy immediately before a deployment or a bulk data change, so that jobs do not run against a half-updated forum.
+
+### queue:resume {#queue-resume}
+
+`php flarum queue:resume [queue]`
+
+Resumes a queue that was paused with `queue:pause`. Omit the queue name to resume every paused queue, or pass `--all` to resume all queues on the connection.
+
+### avatars:convert-to-webp {#avatars-convert-to-webp}
+
+`php flarum avatars:convert-to-webp`
+
+Flarum 2.0 saves newly uploaded avatars as WebP, where 1.x saved them as PNG. Avatars uploaded before you upgraded keep working untouched, so this command is optional: run it once if you would rather have your existing avatars stored as WebP too.
+
+It only touches avatars stored on your own forum, skipping any that are hosted elsewhere as a URL, already WebP, or a GIF (so animated avatars are left animated). Each converted file replaces the original, and the command reports how many it converted, how many failed, and how many had a database row pointing at a file that is no longer there.
+
+### avatars:backfill-variants {#avatars-backfill-variants}
+
+`php flarum avatars:backfill-variants`
+
+Checks which HiDPI avatar files (`@2x`, `@3x`) actually exist alongside each locally stored avatar, and corrects the record Flarum keeps of them so that sharp avatars are served where they are available.
+
+You should not need this on a healthy forum, since the flags are set when an avatar is uploaded. It is worth running if avatar files have been restored from a backup, moved between [filesystem disks](extend/filesystem.md), or otherwise changed underneath Flarum.
+
+By default it only examines users that are not already recorded as having both variants; pass `--force` to re-check every avatar. `--chunk` sets how many users are read from the database at a time, which defaults to `100`.
+
+### announcements:refresh {#announcements-refresh}
+
+`php flarum announcements:refresh`
+
+Fetches the announcements shown on your admin dashboard from discuss.flarum.org and caches them.
+
+Core already schedules this weekly, so as long as [`schedule:run`](#schedule-run) is running you do not need to run it yourself. Setting `flarum_announcements.disabled` to `true` in `config.php` switches the feature off, and the command off with it.
+
+### extensions:sync-abandoned {#extensions-sync-abandoned}
+
+`php flarum extensions:sync-abandoned`
+
+Refreshes the list of extensions that have been marked as abandoned, which is what makes the warning appear on an affected extension's card in the admin dashboard.
+
+Core also schedules this weekly, passing `--notify` so that admins are emailed when a newly abandoned extension is found among the ones you have installed. Running it by hand without that flag updates the list quietly.
