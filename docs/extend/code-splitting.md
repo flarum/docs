@@ -99,7 +99,7 @@ Register a loader with `app.prefetch`:
 app.prefetch.add('acme.customPage', () => import('./components/CustomPage'));
 ```
 
-- The key (`'acme.customPage'`) is a unique name for your prefetch, following the usual [`ItemList`](https://api.docs.flarum.org/js/master/class/src/common/utils/itemlist.ts~itemlist) conventions, so other extensions can reorder or remove it.
+- The key (`'acme.customPage'`) is a unique name for your prefetch, following the usual [`ItemList`](https://api.docs.flarum.org/js/2.x/classes/flarum.common_utils_itemlist.itemlist) conventions, so other extensions can reorder or remove it.
 - The value is the same kind of loader you would pass to a lazy route — a function returning a dynamic import.
 - An optional third argument sets the priority; higher priorities are prefetched first.
 

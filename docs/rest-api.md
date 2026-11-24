@@ -34,7 +34,7 @@ The following attributes can be filled:
 
 The remaining attributes are either automatically filled or currently not used:
 
-- `id`: Will be filled by MySQL auto-increment.
+- `id`: Will be filled automatically by the database.
 - `allowed_ips`: Not implemented.
 - `scopes`: Not implemented.
 - `created_at`: Can be set to any date, but is meant for the date of creation of the key.

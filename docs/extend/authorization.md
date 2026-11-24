@@ -24,7 +24,7 @@ Authorization queries are made with 3 parameters, with logic contained in [`Flar
 2. The ability: a string representing the action the actor is attempting
 3. The arguments: usually an instance of a database model which is the subject of the attempted ability, but could be anything.
 
-First, we run the entire request (all three parameters) through all [policies](#policies) registered by extensions and core. Policies are blocks of logic provided by core and extensions that determine whether the actor can perform the ability on the arguments. Policies can return one of the following:
+First, we run the entire request (all three parameters) through all [policies](#custom-policies) registered by extensions and core. Policies are blocks of logic provided by core and extensions that determine whether the actor can perform the ability on the arguments. Policies can return one of the following:
 
 - `Flarum\User\Access\AbstractPolicy::ALLOW` (via `$this->allow()`)
 - `Flarum\User\Access\AbstractPolicy::DENY` (via `$this->deny()`)
@@ -102,7 +102,7 @@ $ flarum-cli make backend policy
 
 ### Example Policies
 
-Let's take a look at an example policy from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access):
+Let's take a look at an example policy from [Flarum Tags](https://github.com/flarum/tags/blob/2.x/src/Access):
 
 ```php
 <?php

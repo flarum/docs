@@ -1,6 +1,6 @@
 # Backend Events
 
-Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/12.x/events).
+Often, an extension will want to react to some events occuring elsewhere in Flarum. For instance, we might want to increment a counter when a new discussion is posted, send a welcome email when a user logs in for the first time, or add tags to a discussion before saving it to the database. These events are known as **domain events**, and are broadcasted across the framework through [Laravel's event system](https://laravel.com/docs/13.x/events).
 
 For a full list of backend events, see our [API documentation](https://api.docs.flarum.org/php/master/search.html?search=Event). Domain events classes are organized by namespace, usually `Flarum\TYPE\Event`.
 
@@ -49,7 +49,7 @@ class PostDeletedListener
 }
 ```
 
-As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/12.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
+As shown above, a listener class can be used instead of a callback. This allows you to [inject dependencies](https://laravel.com/docs/13.x/container) into your listener class via constructor parameters. In this example we resolve a translator instance, but we can inject anything we want/need.
 
 A listener can also name a class and the method to call on it, which is handy when one class handles several events. The class is resolved through the container in the same way, so it can take dependencies, and the method does not have to be static:
 

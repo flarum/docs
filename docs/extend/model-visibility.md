@@ -3,7 +3,7 @@
 This article concerns authorization, and uses some concepts from the [authorization](authorization.md) system. You should familiarize yourself with that first.
 
 When a user visits the **All Discussions** page, we want to quickly show them the recent discussions that the user has access to.
-We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/12.x/queries) through [Eloquent scoping](https://laravel.com/docs/12.x/eloquent#local-scopes).
+We do this via the `whereVisibleTo` method, which is defined in `Flarum\Database\ScopeVisibilityTrait`, and available to [Eloquent models and queries](https://laravel.com/docs/13.x/queries) through [Eloquent scoping](https://laravel.com/docs/13.x/eloquent#local-scopes).
 For example:
 
 ```php
@@ -41,17 +41,17 @@ This call is handled by Flarum's general model visibility scoping system, which 
 
 The query will be run through all applicable scopers registered for the model of the query. Note that visibility scopers registered for a parent class (like `Flarum\Post\Post`) will also be applied to any child classes (like `Flarum\Post\CommentPost`).
 
-Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/12.x/queries).
+Scopers don't need to return anything, but rather should perform in-place mutations on the [Eloquent query object](https://laravel.com/docs/13.x/queries).
 
 ## Custom Scopers
 
 There are actually two types of scopers:
 
 - ability-based scopers will apply to all queries for the query's model run with a given ability (which defaults to `"view"`). Please note this is not related to ability strings from the [policy system](authorization.md#how-it-works)
-- "global" scopers will apply to all queries for the query's model. Please note that global scopers will be run on ALL queries for its model, including `view`, which could create infinite loops or errors. Generally, you only want to run these for abilities that don't begin with `view`. You'll see this in the [example below](#custom-visibility-scoper-examples)
+- "global" scopers will apply to all queries for the query's model. Please note that global scopers will be run on ALL queries for its model, including `view`, which could create infinite loops or errors. Generally, you only want to run these for abilities that don't begin with `view`. You'll see this in the [example below](#custom-scoper-examples)
 
 One common use case for this is allowing extensibility inside visibility scoping.
-Let's take a look at an annotated, simple piece of `Flarum\Post\PostPolicy` as an example:
+Let's take a look at an annotated, simple piece of `Flarum\Post\Access\ScopePostVisibility` as an example:
 
 ```php
 // Here, we want to ensure that private posts aren't visible to users by default.
@@ -122,7 +122,7 @@ See how the top-level statements are the equivalent of `where`s, but their sub-s
 
 ### Custom Scoper Examples
 
-Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/master/src/Access).
+Let's take a look at some examples from [Flarum Tags](https://github.com/flarum/tags/blob/2.x/src/Access).
 
 First, a scoper for the `Tag` model with the `view` ability:
 
