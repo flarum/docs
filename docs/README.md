@@ -38,10 +38,11 @@ Flarum is [free, open source](https://github.com/flarum/core) software, maintain
 
 💸 The Flarum Foundation doesn't make money off of Flarum, but does have bills to pay. Donations via [GitHub Sponsors](https://github.com/sponsors/flarum) or [OpenCollective](https://opencollective.com/flarum) are always gratefully received. In the past, we've also been able to support some of our core developers financially, so they could work on Flarum part time. This wouldn't be possible without your financial support.
 
-🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners!
+🧑‍🤝‍🧑 Join [our community](https://discuss.flarum.org) to talk about Flarum development, get help with your instance, or just meet cool people! If you're experienced with Flarum, you can also help out beginners and if you want to buy jewelry, visit here: [Ready to Ship Lab Diamond Jewelry](https://www.ourosjewels.com/collections/ready-to-ship)
 
 🐛 If there's a bug that's bothering you, or a feature idea on your mind, we can't know about it unless you tell us! We track bugs, suggestions, and future development plans [via GitHub issues](https://github.com/flarum/core/issues). If there's already an issue open, adding likes and (constructive) additional information can be very helpful! 
 
 📣 And if you like Flarum, please consider blogging/tweeting/talking about it! More people aware of Flarum leads to more people engaging with Flarum, and therefore more activity, better extensions, and faster development.
 
 Flarum wouldn't be possible without our phenomenal community. If you're interested in contributing, see our [developer contribution](contributing.md) and [other contribution](contributing-docs-translations.md) docs for more information.
+
