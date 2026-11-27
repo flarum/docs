@@ -67,6 +67,10 @@ Here are the options core reads, with what each one does:
   array (
     'source' => 'local', // Use the bundled FontAwesome Free v7 icons. See below for other config options
   ),
+  'intervention' =>
+  array (
+    'driver' => 'gd', // the image library: gd or imagick. See "Image processing" below
+  ),
   'flarum_announcements.disabled' => false, // hide the announcements widget on the admin dashboard
 );
 ```
@@ -229,6 +233,25 @@ The [AI](extensions/ai.md) extension reads an `ai` block. Connections set up her
 ```
 
 See [Connections in config.php](extensions/ai.md#connections-in-configphp) for every setting.
+
+### Image processing
+
+Flarum resizes and converts uploaded images, such as avatars, tag and group icon images, the logo and the favicon, with one of two PHP image libraries:
+
+* `gd` - the default, included in most PHP installations.
+* `imagick` - ImageMagick, through the `imagick` PHP extension. It reads more kinds of image than GD, including animated WebP, so use it if your host offers it.
+
+To use ImageMagick, add this to your `config.php`:
+
+```php
+'intervention' => [
+    'driver' => 'imagick',
+],
+```
+
+If `imagick` is set but the PHP extension isn't loaded, Flarum uses GD instead, without an error. From Flarum 2.1, the **Image Driver** item on the dashboard's status widget shows the library actually in use, as does `php flarum info`. The command line can load different PHP extensions from your web server, so trust the dashboard if the two disagree.
+
+GD can't read animated WebP at all. On GD, uploading one as an avatar or icon image is refused with a message suggesting a GIF or a still image instead. Animated GIFs work with both libraries.
 
 ### Maintenance modes
 

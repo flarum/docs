@@ -17,6 +17,8 @@ Apart from the above-mentioned sections, the Admin Dashboard also allows you to 
 
 ## The Dashboard
 
+Its status widget lists the Flarum, PHP and database versions, the scheduler's status, and the queue and session drivers. From Flarum 2.1 it also shows the image driver: see [Image processing](config.md#image-processing).
+
 Besides [statistics](extensions/statistics.md), the Dashboard warns about problems with the forum's setup, such as debug mode being on. From Flarum 2.1, it also warns when the server holds back responses that should reach the browser as they're written: see [Responses held back](troubleshoot.md#responses-held-back).
 
 ## The Basics page
