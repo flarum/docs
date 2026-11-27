@@ -422,6 +422,24 @@ use Flarum\Notification\Notification;
 Notification::forgetCachedCounts([$user->id]);
 ```
 
+### One Notification per Action
+
+One action can make several extensions notify the same user: a reply in a discussion they follow that also mentions them, for example. Replying, editing or approving a post and starting a discussion through the API therefore run in a notification scope, and within it each user gets at most one notification per channel (one alert, one email). The first notification sent to them in the scope wins; the others are left out. Only notification types the user has turned on for a channel count, so a type they muted can't take the place of one they want.
+
+The scope travels with jobs queued while it is open, so notifications sent from your own queued jobs are covered too, on every queue driver. You don't need to do anything for the actions above.
+
+To give an action of your own the same limit, run it in a scope:
+
+```php
+use Flarum\Notification\NotificationScope;
+
+NotificationScope::run(function () {
+    // Dispatch the events, or queue the jobs, that send its notifications.
+});
+```
+
+`NotificationSyncer::onePerUser()` is deprecated: use `NotificationScope::run()`.
+
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 
 *Tried everything?* Well if you've tried everything then I guess... Kidding. Feel free to post in the [Flarum Community](https://discuss.flarum.org/t/extensibility) or in the [Discord](https://flarum.org/discord/) and someone will be around to lend a hand!

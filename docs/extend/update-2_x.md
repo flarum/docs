@@ -71,6 +71,7 @@ Flarum can now find out when mail to an address bounces permanently or is marked
 
 * The notification email footer now names the notification type, using the translation `core.email.notification.types.<type>` in the recipient's language, instead of printing the type key. A type without a translation is left out. Add the key to your extension's locale file for each mailable type. Views receive it as `$typeName`. See [Mail Templates](notifications.md#mail-templates).
 * New `Notification::forgetCachedCounts(array $userIds)`: call it after changing which notifications count for a user outside `notify()` and `NotificationSyncer`, for example when you update `is_deleted` with your own query.
+* Replying, editing or approving a post and starting a discussion now notify each user at most once per channel, across extensions and from queued jobs. To give an action of your own the same limit, wrap it in `NotificationScope::run()`. `NotificationSyncer::onePerUser()` is deprecated in favour of it. See [One Notification per Action](notifications.md#one-notification-per-action).
 
 ### Logos and Icons
 
