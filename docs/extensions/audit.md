@@ -120,6 +120,7 @@ Each log entry records:
   - `session` — a cookie session, usually the Flarum web interface.
   - `access_token` — a direct API request using a user access token.
   - `api_key` — a direct API request using a master API key.
+  - `mcp` — an AI assistant or other client using the forum's [MCP server](mcp.md), with the member's access.
   - `cli` — a command run via the console, or a queued job.
   - `unknown` — none of the above could be determined.
 - The **IP address**, available for web requests.

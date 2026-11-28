@@ -13,7 +13,9 @@ Connecting assistants, the admin page and what members can do are covered on the
 
 Every MCP request runs as one member: the one the access token belongs to, or a guest. A server is built for that member on each request, with only the tools, resources and prompts they can use.
 
-Tools read and write through the forum's JSON:API, on a request made as the member. Visibility scopes, endpoint gates, validation and API throttling apply as they do to any other API request, so a tool can never do more than the member could. Writes also need write access (the `mcp:write` scope), which the extension checks again on every API call, whatever the tool says about itself.
+Tools read and write through the forum's JSON:API, on a request made as the member. It goes through the `api` middleware, as core's internal API client's requests do, so visibility scopes, endpoint gates, validation, API throttling and any per-request state your middleware sets apply as they do to any other API request. A tool can never do more than the member could. Writes also need write access (the `mcp:write` scope), which the extension checks again on every API call, whatever the tool says about itself.
+
+The member is known only once the MCP endpoint has checked the access token, after the forum's own middleware ran for a guest. If your extension sets state for the actor in `forum` middleware, set it again in a listener for `Flarum\Mcp\Event\Authenticated`, which is dispatched once a request is admitted. Its `authentication->actor` is the member, or a guest.
 
 There are two kinds of tools:
 
