@@ -111,7 +111,7 @@ Applications that identify themselves this way:
 - can only use `https://` redirect URIs, or `http://` ones on the same computer;
 - appear on the **Self-registered** tab, where you can revoke or delete them like any other.
 
-Because these applications choose their own name, members see them marked **unverified, self-registered** on the consent screen. The screen also shows which site the member will be sent back to, and for a metadata document, which site describes the application.
+Because these applications choose their own name, members see them marked **unverified, self-registered** on the consent screen. The screen also shows which site the member will be sent back to, and for a metadata document, which site describes the application. Until a member has approved such an application, the forum never sends them on to it without showing the consent screen first.
 
 To stop them, see [Choosing which applications may connect](#choosing-which-applications-may-connect).
 

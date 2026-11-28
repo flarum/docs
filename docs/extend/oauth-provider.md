@@ -225,7 +225,7 @@ Clients call the token, revocation and registration endpoints directly, so they 
 | `state` | Recommended. Returned unchanged. |
 | `code_challenge`, `code_challenge_method` | PKCE. The method must be `S256`. Required for public clients. |
 | `nonce` | Copied into the ID token |
-| `prompt` | Space-separated. `login` asks the member to sign in again. `consent` shows the consent screen even when the member already approved. `none` never shows a page and returns `login_required` or `interaction_required` instead. |
+| `prompt` | Space-separated. `login` asks the member to sign in again. `consent` shows the consent screen even when the member already approved. `none` never shows the login or consent screen and returns `login_required` or `interaction_required` instead, or an error page for a self-registered client the member hasn't approved. |
 | `max_age` | Seconds. The member must sign in again if they signed in longer ago than this. `0` always asks. |
 | `resource` | A [registered resource](#protecting-your-own-api) |
 
@@ -238,6 +238,8 @@ A guest is sent to the forum's login form, then brought back to continue. The me
 Approving redirects to `redirect_uri` with `code`, `state` and `iss`. Declining redirects with `error=access_denied`, as does a member without the **Connect applications to their account** permission, such as a suspended one. Approvals of the same client are merged into one, which the member can revoke from their Security page.
 
 When the client or redirect URI is invalid, the forum answers with a JSON error and doesn't redirect.
+
+A client that registered itself gets errors at its `redirect_uri` only once the signed-in member has approved it for its current redirect URIs. Until then, an error raised before the member decides (including `login_required`, `interaction_required` and `access_denied`) shows an error page on the forum instead. Declining on the consent screen always redirects.
 
 ### `POST /oauth/token`
 
