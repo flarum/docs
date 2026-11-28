@@ -534,6 +534,49 @@ class ConsoleTest extends ConsoleTestCase
 }
 ```
 
+### Sharing backend test helpers
+
+Put reusable helpers in `src/Testing/` under your extension's normal PSR-4 namespace, for example `Acme\Reactions\Testing`. Keep concrete test cases in `tests/` and their namespace in `autoload-dev`.
+
+With the usual `"Acme\\Reactions\\": "src/"` mapping in `autoload`, Composer can load `Acme\Reactions\Testing\InteractsWithReactions` when another extension installs your package. Dependencies' `autoload-dev` mappings are not loaded. Files under `tests/` may also be excluded from release archives.
+
+Keep fixtures that a published helper reads alongside it, outside `tests/`, and resolve them relative to `__DIR__`. Check your release archive contains both the helper and its fixtures.
+
+Keep PHPUnit and `flarum/testing` in your extension's `require-dev`. Consumers must add their own development requirements; Composer does not install a dependency's development requirements:
+
+```bash
+composer require --dev acme/reactions flarum/testing
+```
+
+If your extension optionally integrates with the provider, this development requirement is sufficient for testing that integration. Set its minimum version to the release that introduced the helper. A runtime dependency is only needed when your extension requires the provider to operate.
+
+Publish helpers as supported PHP APIs: preserve their signatures within a major release, document setup and cleanup, and choose method names that compose with other testing traits. Call configuration helpers before booting the test application unless their documentation says otherwise. Restore any shared state your helper changes, including when a test fails.
+
+Traits and fakes can refer to PHPUnit assertions without requiring PHPUnit in production. A base class that extends a testing class requires the consumer's development dependencies to be installed before it is loaded. Production code, service discovery and preload scripts must not load those testing base classes.
+
+This layout uses Composer's existing autoloading and can be adopted by third-party extensions immediately; it does not require a Flarum 2.1 framework change. The bundled helpers listed below require the bundled package release that publishes them.
+
+#### Bundled backend helpers
+
+The bundled helper namespaces use `Flarum\<Package>\Testing`. Install the corresponding package and a compatible `flarum/testing` in `require-dev`.
+
+| Package | Helpers | Purpose |
+| --- | --- | --- |
+| `flarum/ai` | `InteractsWithAi` | [Configure test connections, features and permissions](ai.md#testing). Fake provider calls separately. |
+| `flarum/akismet` | `FakeAkismetProvider` | Fake spam classification and key verification. |
+| `flarum/approval` | `InteractsWithUnapprovedContent` | Seed representative approved/unapproved content and provide authorization cases. |
+| `flarum/audit` | `InteractsWithAuditLog`, `BuildsAuditRequests`, `TestCase` | [Audit assertions, setup and optional guest-auth request support](audit.md#testing). |
+| `flarum/gdpr` | `InteractsWithGdpr` | [Construct a data type for an existing test user](gdpr.md#testing). |
+| `flarum/mcp` | `InteractsWithMcp`, `IssuesOAuthTokens`, `McpTestCase`, `Fixtures` namespace | [Exercise JSON-RPC requests, sessions, tools and OAuth authorization](mcp.md#testing). `McpTestCase` enables MCP and OAuth Provider; the token trait is composed separately. |
+| `flarum/messages` | `CapturesSentMail` | Capture sent mail with `captureSentMail()` and count recipients with `emailsTo()`. |
+| `flarum/oauth-provider` | `InteractsWithOAuth`, `CollectingLogger` | Exercise OAuth flows and collect log records. |
+| `flarum/extension-manager` | `EnglishTranslator`, `FakeHttp` in `Flarum\ExtensionManager\Testing` | Translate test messages and fake extension-manager HTTP responses. |
+| `flarum/tags` | `RetrievesRepresentativeTags` | Return representative tag seed rows with `tags()`. |
+
+MCP fault-injection fixtures are opt-in. Call `ThrowingTool::reset()` and `RecordingReporter::reset()` before configuring a test and again in teardown (including failure paths) to isolate their static state. Set `ThrowingTool::$throwFrom` after resetting it; inspect `RecordingReporter::$messages` before cleanup. These classes live in `Flarum\Mcp\Testing\Fixtures\Extend`.
+
+Core's shared helpers live in `flarum/testing`, including `Flarum\Testing\CompiledColors` for compiling core LESS colour fixtures. Existing core, Flags and Tags model factories remain in their `Factory` namespaces.
+
 ### Using Unit Tests
 
 Unit testing in Flarum uses [PHPUnit](https://phpunit.de/) and so unit testing in flarum is much like any other PHP application. You can find [general tutorials on testing](https://www.youtube.com/watch?v=9-X_b_fxmRM) if you're also new to php.

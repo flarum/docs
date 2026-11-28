@@ -59,6 +59,92 @@ Migrations can also be manually applied with `php flarum migrate` which is also 
 
 There are currently no composer-level hooks for managing migrations at all (i.e. updating an extension with `composer update` will not run its outstanding migrations).
 
+### Conditional migrations
+
+:::info
+
+Conditional migrations are available from Flarum 2.1.
+
+:::
+
+A migration can declare a boolean or a `shouldRun` callback to defer its `up` operation until its prerequisites are available. A false result leaves the migration unrecorded, so a later migration run can reconsider it. Exceptions fail the migration run normally.
+
+```php
+use Flarum\Extension\Condition;
+use Flarum\Database\Migration;
+use Illuminate\Database\Schema\Builder;
+
+return Migration::addColumns(
+    'catalogue_records',
+    ['tag_id' => ['integer', 'unsigned' => true, 'nullable' => true]],
+    shouldRun: Condition::all(
+        Condition::extensionsEnabled(['acme-catalogue', 'flarum-tags']),
+        fn (Builder $schema): bool => $schema->hasTable('catalogue_records'),
+    ),
+);
+```
+
+Every `Migration::` factory accepts the optional trailing `shouldRun` argument, including plain `true` and `false`. Handwritten migration arrays accept the same callback under a `shouldRun` key:
+
+```php
+use Flarum\Extension\Condition;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
+
+return [
+    'shouldRun' => Condition::extensionEnabled('acme-catalogue'),
+
+    'up' => function (Builder $schema) {
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->string('reference', 100);
+        });
+    },
+
+    'down' => function (Builder $schema) {
+        $schema->table('catalogue_records', function (Blueprint $table) {
+            $table->dropColumn('reference');
+        });
+    },
+];
+```
+
+Callbacks can receive the migration's schema builder and container-resolved dependencies. Migration callbacks see the prospective enabled-extension state and current database settings with defaults declared by the prospective enabled extensions, including active `Extend\Conditional` branches and values written by earlier migrations. Conditions that resolve settings through their injected container see the same migration settings. Defaults registered imperatively by custom extenders become available after those extenders boot and remain available while their owner is enabled.
+
+Before application boot, the installer supplies a smaller container with the selected extension IDs, database connection, a scoped extension manager, the installation paths/configuration, and settings repository with core and selected-extension defaults; application-specific services are not yet available. Collecting defaults also evaluates selected extensions’ conditional extender callbacks, which must be compatible with that pre-boot container. Default declarations are re-evaluated before each migration condition, so settings written by earlier migrations can activate or deactivate conditional defaults.
+
+`Condition` provides reusable predicates:
+
+- `extensionEnabled($id)` and `extensionDisabled($id)`.
+- `extensionsEnabled($ids)` and `extensionsDisabled($ids)`, requiring every supplied extension to match.
+- `setting($key, $expected, strict: false)`, using loose comparison by default, like `Extend\Conditional::whenSetting()`.
+- `all(...$conditions)`, `any(...$conditions)`, and `not($condition)`, accepting predicates, callbacks, or booleans. Composition short-circuits. Empty `all()` is true; empty `any()` is false.
+
+Extension checks use Flarum extension IDs, such as `flarum-tags`. They check enabled state: an installed but disabled extension may still have tables. Declare optional dependency ordering in `composer.json` as well; a condition does not add a dependency or establish migration order.
+
+These predicates also work with [`Extend\Conditional::when()`](settings.md#conditional-extenders). Its existing convenience methods use the same predicate implementation:
+
+```php
+use Flarum\Extension\Condition;
+use Flarum\Extend;
+
+(new Extend\Conditional())->when(
+    Condition::extensionsEnabled(['acme-catalogue', 'flarum-tags']),
+    fn () => [new CatalogueTagIntegration()],
+);
+```
+
+Enabling an extension first runs its migrations, then reconsiders pending conditional migrations of enabled extensions in dependency order. Disabling an extension also reconsiders those migrations, allowing `extensionDisabled()` predicates to become eligible. Conditions see the prospective state during either operation. The changed enabled list is persisted and success reported only after reconciliation succeeds. Pending unconditional updates in other extensions are left for a normal migration run and block later conditional migrations in that extension until the updates are applied.
+
+Run `php flarum migrate` after changing settings or other custom prerequisites. Ordinary page requests and setting saves do not execute migrations. Conditions may be evaluated more than once and should have no side effects. Skipping one migration does not stop later migrations: each dependent migration must declare its own prerequisites.
+
+Only successful `up` executions are recorded. A completed migration will not execute again when its condition changes. Disabling an integration preserves its schema and data. Rollback reverses recorded migrations in reverse execution order, including migrations that were deferred. The Extension Manager preserves this order when undoing an update, including one that was stopped and resumed. Undo also includes migrations from updated packages that were deferred during the update and ran later, while preserving unrelated extensions’ migrations. It runs their `down` operations without consulting `shouldRun`, so migrations remain discoverable even when their conditions are false. Write rollback operations to handle optional tables that may already have been removed.
+
+DDL is not universally transactional. A failed toggle can leave successfully applied migrations in place; fix the failure and retry. Flarum retains those successful records and does not repeat their work.
+
+Adding a condition does not repair older migrations that returned early and were already recorded as completed. Publish a new corrective migration for those installations. Similarly, purging another extension's tables does not clear your migration history: conditional migrations are one-time changes, not automatic schema repair.
+
+The standard `flarum/testing` harness migrates selected extensions in dependency order and reconciles conditional migrations after their providers are ready. Update the testing package alongside core when using this feature.
+
 ### Creating Tables
 
 To create a table, use the `Migration::createTable` helper. The `createTable` helper accepts two arguments. The first is the name of the table, while the second is a `Closure` which receives a `Blueprint` object that may be used to define the new table:
@@ -331,3 +417,81 @@ The attributes and relationships of backend models are based on the **database**
 The attributes and relationships of frontend models are based on the fields of [API Resource](api.md). These will be covered more in depth in the next article, but it's worth that a resource could output all, any, or none of the backend model's attributes, and the names under which they're accessed might be different in the backend and frontend.
 
 Furthermore, when you save a backend model, that data is being written directly to the database. But when you save a frontend model, all you're doing is triggering a request to the API. In the [next article](api.md), we'll learn how to handle these requests in the backend, so your requested changes are actually reflected in the database.
+
+## Icon Images
+
+From Flarum 2.1, admins can upload an image to show instead of a group's or a tag's Font Awesome icon. The pieces are in `Flarum\Foundation\IconImage`, so a model of your own can have one too.
+
+Each upload is stored on the `flarum-icons` [disk](filesystem.md) as a static WebP: an animated image keeps its first frame, a fully transparent border is trimmed, and the image is scaled to fit a 64px box at 1x, 2x and 3x without cropping, never larger than the upload. SVG images are rejected.
+
+### Backend
+
+Give the model's table a nullable `icon_image_path` string and an unsigned tiny integer `icon_image_scales` that defaults to 1, and use the `HasIconImage` trait:
+
+```php
+use Flarum\Database\AbstractModel;
+use Flarum\Foundation\IconImage\HasIconImage;
+
+class Team extends AbstractModel
+{
+    use HasIconImage;
+}
+```
+
+The trait adds the `icon_image_url` and `icon_image_srcset` attributes, and deletes the image's files when the model is deleted. A query that deletes rows directly skips model events and leaves the files behind. To store the image with another box size, scales or disk, override `iconImageUploader()` to return a subclass of `IconImageUploader`.
+
+Then add `IconImageApi`'s endpoints and fields to the model's [API resource](api.md):
+
+```php
+use Flarum\Foundation\IconImage\IconImageApi;
+
+public function endpoints(): array
+{
+    return [
+        // ...
+        ...IconImageApi::endpoints(),
+    ];
+}
+
+public function fields(): array
+{
+    return [
+        // ...
+        Schema\Str::make('icon')
+            ->writable()
+            ->deserialize(IconImageApi::withoutImageClasses(...)),
+        ...IconImageApi::fields(),
+    ];
+}
+```
+
+- `POST /api/{type}/{id}/icon-image` takes the file as the `iconImage` form field, and `DELETE /api/{type}/{id}/icon-image` removes the image. Both return the resource. They need the `edit` ability by default: `endpoints()` takes another ability, and a validator class, as arguments. They are named `iconImage.upload` and `iconImage.delete`, so they can be changed with the `ApiResource` extender. Core's `groups` and Tags' `tags` resources have them.
+- `fields()` adds the `iconImageUrl` and `iconImageSrcset` attributes, `null` without an image.
+- `withoutImageClasses()` removes the classes the frontend adds to show the image (below), so a form that saves back the icon it was given stores only the Font Awesome classes.
+
+The endpoints save the model directly, without the resource's saving hooks. Instead, they dispatch `Flarum\Foundation\IconImage\Event\IconImageSaving` before the change, which a listener can throw from to stop it, or use to change `$image` (`null` when the image is being removed). `Event\IconImageChanged` is dispatched once the change is saved. Both carry the `$model` and the `$actor`, so check the model's class to act on one kind of model only.
+
+### Frontend
+
+`Group.icon()` and `Tag.icon()` return the Font Awesome classes, plus `IconImage IconImage--<n>` when there is an image (and `IconImage--only` when there is no icon besides it). The first time an image is seen, a rule for its class is added to the page, and `.IconImage` shows the image in the glyph's place. So whatever renders the icon shows the image without knowing about it: the `Icon` component, a `Button`'s or `Badge`'s `icon`, or a plain `<i className={tag.icon()}>`. Without an image, `icon()` returns what it did before. The stored classes alone are `attribute('icon')`, and the image's URLs are `iconImageUrl()` and `iconImageSrcset()`.
+
+A model of your own does the same with `withIconImage()`:
+
+```ts
+import Model from 'flarum/common/Model';
+import withIconImage from 'flarum/common/utils/withIconImage';
+
+export default class Team extends Model {
+  icon() {
+    return withIconImage(Model.attribute<string | null>('icon').call(this), this.iconImageUrl(), this.iconImageSrcset());
+  }
+  iconImageUrl() {
+    return Model.attribute<string | null>('iconImageUrl').call(this);
+  }
+  iconImageSrcset() {
+    return Model.attribute<string | null>('iconImageSrcset').call(this);
+  }
+}
+```
+
+In a form, `IconImageInput` (`flarum/common/components/IconImageInput`) lets admins choose or remove an image, kept in an `IconImageState` (`flarum/common/states/IconImageState`). Nothing is sent until the state's `save()`, so the form can save its model first and upload the image to it afterwards, as core's group and Tags' tag modals do.

@@ -129,7 +129,33 @@ GDPR does not redact these itself. They are collected into one list, shown on th
 
 ## Columns on the users table
 
-If your extension adds columns to the `users` table, you usually need to do nothing. Core's `User` type exports every column, and anonymization clears them.
+If your extension adds columns to the `users` table, you usually need to do nothing. Core's `User` type exports every column, and anonymization sets every nullable one to `null`.
+
+Columns that are not nullable keep their value: setting them to `null` would break their constraint, and their defaults can't be restored reliably across database drivers. If your extension stores personal data in a non-nullable column, make it nullable if you can. Otherwise, [register a data type](#registering-a-data-type) that resets the column in `anonymize()`:
+
+```php
+use Flarum\Gdpr\Data\Type;
+
+class Bio extends Type
+{
+    public function export(): ?array
+    {
+        return ['acme-bio/bio.json' => $this->encodeForExport(['bio' => $this->user->acme_bio])];
+    }
+
+    public function anonymize(): void
+    {
+        // `acme_bio` is a NOT NULL string column, so core's User type leaves it alone.
+        $this->user->acme_bio = '';
+        $this->user->save();
+    }
+
+    public function delete(): void
+    {
+        // The user row is deleted by the User data type.
+    }
+}
+```
 
 If a column should not appear in the export, such as an internal token, remove it with `removeUserColumns()`. Its value is set to `null` in `user.json`; the column itself is still listed.
 
@@ -212,3 +238,12 @@ Erasure and export run in queued jobs, so these events are usually handled outsi
 | `removeType(string $type)` | Removes a registered data type. |
 | `removeUserColumns(string\|array $columns)` | Blanks these `users` columns in exports. |
 | `addPiiKeysForSerialization(string\|array $keys)` | Adds keys to the personal data list without a data type. |
+
+
+## Testing
+
+`Flarum\Gdpr\Testing\InteractsWithGdpr` provides `gdprDataType($class, $userId, $request = null)` for integration tests extending `Flarum\Testing\integration\TestCase`. Add `flarum/gdpr` and a compatible `flarum/testing` to your development dependencies, then compose the trait into your test class.
+
+Enable GDPR and your extension, configure settings and seed the user before calling the helper. It boots the application, loads that user and resolves your `Flarum\Gdpr\Contracts\DataType` implementation through the container. The constructor or container binding must accept the named parameters `user` and `erasureRequest`, as the standard `Flarum\Gdpr\Data\Type` base does. Pass an `ErasureRequest` when testing a flow that needs it. The helper returns the data type; it does not perform an export or erasure for you.
+
+See [sharing backend test helpers](testing.md#sharing-backend-test-helpers) for dependency and release-archive requirements.

@@ -80,6 +80,58 @@ The `handle` method of a Controller is the code that runs when someone visits yo
 
 :::
 
+### Streaming Responses
+
+From Flarum 2.1, a controller for work that takes a while can send its progress as it goes, such as a step finished or a line of output, with `Flarum\Http\EventStream`. The body is newline-delimited JSON, one event per line. Each event has its `type`, whatever data you send with it, and `ms`, the milliseconds since the stream began:
+
+```php
+use Closure;
+use Flarum\Http\EventStream;
+use Flarum\Http\RequestUtil;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+class ImportController implements RequestHandlerInterface
+{
+    public function __construct(
+        protected EventStream $events,
+        protected Importer $importer
+    ) {
+    }
+
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        RequestUtil::getActor($request)->assertAdmin();
+
+        return $this->events->response(function (Closure $send) {
+            foreach ($this->importer->batches() as $batch) {
+                $send('imported', ['count' => $this->importer->import($batch)]);
+            }
+
+            $send('done');
+        });
+    }
+}
+```
+
+The callback runs as the response is sent, after the middleware has passed the request and the status has been sent. So a failure can't be an error response: send it as an event of your own, and end with an event saying the work is done, since a dropped connection looks just like a finished one. An exception the callback doesn't catch is reported like any other, and sent as `{"type": "error"}`.
+
+The response asks proxies not to hold it back, and Flarum stops PHP from doing so, but a server can still be set up to. The admin dashboard warns when it is: see [Responses held back](../troubleshoot.md#responses-held-back).
+
+In the browser, `app.request` gives the body only once it's complete. Read the stream with `flarum/common/utils/readEventStream` instead, which hands over each event as its line arrives. It's a chunk of its own, loaded the first time it's imported:
+
+```js
+const { default: readEventStream } = await import('flarum/common/utils/readEventStream');
+
+await readEventStream(app.forum.attribute('apiUrl') + '/acme/import', { method: 'POST' }, (event) => {
+  if (event.type === 'imported') this.count += event.count;
+  m.redraw();
+});
+```
+
+It takes the request's `method` and a `body`, sent as JSON, and sends the CSRF token. It resolves once the response has ended, and throws an `EventStreamRefusedError`, with the `status` and `errors`, when the server answers with an error before it starts streaming.
+
 ### Route Parameters
 
 Sometimes you will need to capture segments of the URI within your route. You may do so by defining route parameters using the [FastRoute](https://github.com/nikic/FastRoute#defining-routes) syntax:

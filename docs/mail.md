@@ -20,9 +20,32 @@ This driver uses your [Mailgun](https://www.mailgun.com/) account to send emails
 
 To use the mailgun driver, you'll need to install the Guzzle composer package (a PHP HTTP client). You can do this by running `composer require guzzlehttp/guzzle:^6.0|^7.0` in your Flarum install's root directory.
 
+### Postmark
+
+This driver uses your [Postmark](https://postmarkapp.com/) account to send emails. You'll need a server token, and optionally the message stream to send through.
+
 ### Log
 
 The log mail driver DOES NOT SEND MAIL, and is primarily used by developers. It writes the content of any emails to the log file in `FLARUM_ROOT_DIRECTORY/storage/logs`.
+
+## Bounce Handling
+
+When mail to an address bounces permanently, or a recipient marks it as spam, sending more mail to that address harms your forum's reputation with mail providers. From Flarum 2.1, the Mailgun and Postmark drivers can have your provider report these back to Flarum, which flags the affected users. Other drivers, like SMTP, have no way to report them.
+
+The Mail page shows a Bounce Handling section when the selected driver supports it. Both drivers need a webhook username and password, which identify your forum to Flarum when the provider calls it:
+
+1. Under "Webhook username" and "Webhook password", choose a username without colons and a strong password, and save. They are included in the "Webhook URL" shown on the page.
+2. Connect your provider:
+   - **Mailgun:** paste the HTTP webhook signing key from your Mailgun dashboard into the "Webhook signing key" field and save. Then click "Register webhook with provider". Flarum adds its webhook for permanent failures and spam complaints, and keeps any webhooks other applications have registered. Mailgun allows three URLs per event, so if three are already registered, remove one in Mailgun first. "Remove webhook from provider" takes Flarum's webhook off again.
+   - **Postmark:** copy the "Webhook URL" shown on the Mail page. In Postmark, add a webhook with that URL to the message stream your forum sends through, with bounce and spam complaint events selected. Flarum only counts a bounce when Postmark deactivates the address, so soft bounces and out-of-office replies are ignored.
+
+Until the credentials (and, for Mailgun, the signing key) are set, Flarum refuses every webhook. If you change the username or password later, register the webhook again, or update its URL in Postmark.
+
+Flarum logs the webhooks it refuses, with the reason and the sender's IP address. To keep the log small, it logs a given kind of refusal at most once a minute. If bounces don't arrive, check your forum's log.
+
+A flagged user sees a notice asking them to update their email address, and the flag clears once they do. Admins can see who is affected in the "Email delivery" column of the Users page, or by searching for `is:bounced`. The dashboard's Email Bounces widget counts bounces over time.
+
+By default Flarum keeps emailing flagged users. Turn on "Stop emailing bounced addresses" to skip their notification emails. Account emails, such as email confirmations and password resets, are still sent.
 
 ## Testing Email
 

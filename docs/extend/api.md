@@ -243,6 +243,10 @@ public function endpoints(): array
 }
 ```
 
+Without `paginate()`, the endpoint returns the whole list, so leave it out only for lists that stay small, such as groups. If the resource can be paginated (every database resource can), a client can still ask for one page of the list with `page[limit]`, `page[offset]` or `page[number]`. The endpoint then returns that page, of at most `maxLimit` items (50 by default), with `meta.page` and links to the rest. An endpoint that sets a page size with `limit()` instead of `paginate()` returns pages of that size, with the same links, unless the client asks for a different `page[limit]`, up to `maxLimit`.
+
+A resource that can't be paginated answers any page parameter except `page[total]` with a 400 error. An empty value, `page[offset]=0` or `page[number]=1` still returns the whole list. On any endpoint, a page parameter that isn't a whole number, or is out of range, gets a 400 as well, with the parameter named in the error's `source.parameter`: `page[limit]` and `page[number]` must be positive integers, so `page[number]=0` is refused, and `page[offset]` a non-negative one.
+
 #### Sorting
 
 You can specify sort columns through the `sorts` method. For example the following will permit two sorting options: `createdAt` (in ascending order) and `-createdAt` (in descending order):
@@ -1195,3 +1199,18 @@ public function handle(): void
         )
 }
 ```
+
+## Recording How Posts Were Made
+
+From Flarum 2.1, a post records how it reached the forum when it wasn't written in the forum's own interface. Requests authenticated with an API key or access token in the `Authorization` header are marked as made through the API, and the MCP extension marks its own. An extension that adds another way to post, such as a bridge from email or chat, puts a `Flarum\Post\PostSource` on the request, usually from a [middleware](middleware.md):
+
+```php
+use Flarum\Http\RequestUtil;
+use Flarum\Post\PostSource;
+
+$request = RequestUtil::withPostSource($request, new PostSource('acme-mail', 'Email'));
+```
+
+The key (`acme-mail`) is what post searches filter on with `source:`. It must be lowercase letters, digits, `-` and `_`, starting with a letter or digit, and at most 50 characters. The optional name is shown after "via" in place of the key, cut to 100 characters, and is kept as it was when the post was made. Pass `null` instead of a `PostSource` for a request from the forum's own interface. Posts created during the request, including through `Flarum\Api\Client` calls made from it, record the source in the `created_via` and `created_via_name` columns, and `RequestUtil::getPostSource()` reads it back.
+
+While the admin's **Show how posts were made** setting is on, comment posts have the `source` and `sourceName` attributes, `null` for posts made in the forum, and the `source` filter works; the forum's `showPostSource` attribute says whether it is on. In the frontend, `Post.source()` and `Post.sourceName()` return them, and `PostUser`'s `sourceLabel()` gives the text after "via", which an extension can extend to label its own keys.

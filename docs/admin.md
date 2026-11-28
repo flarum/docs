@@ -15,6 +15,74 @@ The Admin Dashboard has the following sections, being:
 
 Apart from the above-mentioned sections, the Admin Dashboard also allows you to manage your Extensions (including the flarum core extensions such as Tags) under the _Features_ section. Extensions which modify the forum theme, or allow you to use multiple languages are categorized under the _Themes_ and _Languages_ section respectively.
 
+## The Dashboard
+
+Its status widget lists the Flarum, PHP and database versions, the scheduler's status, and the queue and session drivers. From Flarum 2.1 it also shows the image driver: see [Image processing](config.md#image-processing).
+
+Besides [statistics](extensions/statistics.md), the Dashboard warns about problems with the forum's setup, such as debug mode being on. From Flarum 2.1, it also warns when the server holds back responses that should reach the browser as they're written: see [Responses held back](troubleshoot.md#responses-held-back).
+
+## The Basics page
+
+The Basics page sets how the forum is named and described, its language, its home page, how members are named and pictured, and how links are written.
+
+**Short Name**, from Flarum 2.1, is used where the **Forum Title** doesn't fit: under the forum's icon on a phone's home screen, and when someone adds the forum as a search engine in their browser. It is up to 16 characters. Without one, the forum title is used, cut short at a whole word if it is too long.
+
+**Show how posts were made**, from Flarum 2.1, adds a small "via …" byline next to the author of posts that weren't written in the forum itself: "via API" for posts made through the [REST API](rest-api.md) with an API key or access token, or "via MCP" for posts made through the MCP extension. For a [confidential client](extensions/oauth-provider.md#adding-an-application) an admin added, MCP shows the application's name instead. It also lets post searches filter on it with `source:`, for example `source:api`, `source:api,mcp`, or `-source:mcp` for every post except those. It is off by default. Posts record how they were made even while it is off, so turning it on also shows it for posts made before then, back to the upgrade to Flarum 2.1.
+
+### Search from the browser
+
+From Flarum 2.1, browsers can add the forum as a search engine. A search from the browser's address bar or search box opens the forum's discussion list with the results, and while someone types, the browser can suggest discussions whose titles match. Only discussions that person can see are suggested. There is nothing to set up: the browser lists the forum under its **Short Name** and icon.
+
+## Groups
+
+Groups are managed at the top of the **Permissions** page. Select a group to edit it, or **New Group** to create one. A group has:
+
+- **Name**, in the singular and the plural, for example "Mod" and "Mods".
+- **Color**, used for its badge.
+- **Icon**, a [Font Awesome](fontawesome.md) icon shown in its badge.
+- **Icon image**, from Flarum 2.1, an image to show instead of the icon: PNG, JPEG, GIF, WebP or BMP. Animated images keep their first frame. The icon is still used where an image can't be shown. The image is uploaded when you save the group.
+- **Hide on forum**, which hides the group and its badge from everyone without the **View hidden group badges** permission.
+
+Deleting a group doesn't delete its members.
+
+## The Appearance page
+
+Besides the forum's colors and custom CSS, the Appearance page sets its logos and icons:
+
+- **Logo** and **Dark mode logo**, shown in the header.
+- **Email logo**, shown at the top of emails. Without one, emails use a copy of the logo.
+- **Favicon**, shown in browser tabs and bookmarks. A square image at least 48 pixels across stays sharp, and an `.ico` file works too. Flarum also stores it as an `.ico` for older browsers and other software.
+- **App Icon**, which phones show when someone adds the forum to their home screen. Upload a square image at least 512 pixels across. The page previews it as iPhones and Android show it, and **App Icon Background** fills its transparent parts on iPhones and iPads, and the space around it on Android. Without a favicon, the app icon is used as the favicon too.
+
+If a theme sets one of these images, the page shows it, marked as set by that theme, but it can't be changed there.
+
+Flarum answers requests for `/favicon.ico` itself. On nginx, Flarum's suggested configuration serves `.ico` files straight from the disk, so to have Flarum answer that request too, add this before its other `location` blocks:
+
+```nginx
+location = /favicon.ico {
+  try_files $uri /index.php?$query_string;
+}
+```
+
+### Open as an App
+
+From Flarum 2.1, **Open as an app from the home screen** makes phones open the forum from their home screen in a window of its own, without the browser's toolbar. While it loads, they show a splash screen: the app icon on the splash screen background, the same on iPhones, iPads and Android. Opened this way, the forum also gets pull-to-refresh, since home-screen apps have no reload button.
+
+It needs an app icon: without one, the forum keeps opening in the browser. It is on for new forums, and off for forums upgraded from 2.0 until you turn it on.
+
+While it is on, forums served over HTTPS also show an offline page when they can't be reached, which loads the forum again as soon as the connection is back. The admin dashboard and the API always load from the network.
+
+- **App Start Page** is the page the app opens to: **Same as the home page** (the default), or one of the pages that can be chosen as the **Home Page** on [the Basics page](#the-basics-page). Android picks up a change the next time the browser updates the app. iPhones and iPads don't check again once the app is on the home screen, so there the change only applies to apps added after it.
+- **Splash Screen Background** fills the screen around the app icon. It takes a solid colour, such as `#f5f5f5`. Leave it empty to use the **App Icon Background**.
+
+The page previews the splash screen as iPhones and Android show it. A theme can set full-screen splash images for iPhones and iPads instead; Android always shows the app icon.
+
+## The Users page
+
+The Users page lists the forum's members, with a search above the list. Below the search, **Filter by:** shows every filter you can search with, such as `group:` or `email:`, including those added by extensions. Select one to add it to the search: a complete filter searches at once, and a key such as `group:` waits for you to type its value.
+
+From Flarum 2.1, the search is kept in the page's address, so you can bookmark or share a filtered list, for example `https://example.com/admin#/users?q=group:Mods`.
+
 ## The Advanced page
 
 The Advanced page holds settings that most forums never need to change, so it is hidden from the admin menu until you turn it on.
@@ -27,7 +95,9 @@ You can also open the page directly, even while it is hidden, by adding `/admin#
 
 Extensions can add other search drivers, for example one that uses Elasticsearch. Once one is installed, choose here which driver each kind of content, such as discussions or users, is searched with. Until then, this section says that no other drivers are available.
 
-On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums.
+On MySQL and MariaDB, **Optimise search for CJK languages** makes search work for Chinese, Japanese and Korean text. The database's word-based search can't match part of a CJK sentence, so this switches to matching any part of the text instead. It is slower on very large forums. A single CJK character is often a whole word, so you will usually want to lower the minimum search length as well.
+
+**Minimum Search Length** is how many characters someone has to type before search results start loading. It is 3 by default. Lower it for languages with short words, such as Chinese, Japanese or Korean, where 1 or 2 is common; shorter searches match more loosely and send more requests to the database. With MySQL and MariaDB's default word-based search, discussion and post searches don't find words shorter than the database's minimum word length (3 by default) unless CJK search is turned on, so lowering the setting alone won't help there. The admin panel's own search doesn't use the database, so it isn't affected by a higher minimum, and searches from one character when CJK search is on.
 
 ### Maintenance
 
@@ -79,3 +149,18 @@ Shows which [queue driver](queue.md) the forum uses.
 | **Job Timeout (seconds)** | `60` | How long a single job can run before it times out. |
 | **Rest Time (seconds)** | `0` | How long to wait between jobs. |
 | **Backoff (seconds)** | `0` | How long to wait before retrying a failed job. |
+
+### Sessions
+
+From Flarum 2.1, sets how long people stay signed in:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| **Session Length (minutes)** | `120` | How long a session may sit idle before it is discarded. |
+| **Sign-in Length** | 1 hour | How long someone stays signed in after signing in without choosing to be remembered. |
+| **"Remember me" Length** | 5 years | How long someone stays signed in when they choose to be remembered. This also covers signing in through another service, which is always remembered. |
+| **End sessions when the browser closes** | Off | Signs people out when they close their browser, rather than keeping them signed in until their session expires. Useful on shared computers. |
+
+Each sign-in length is set as a number and a unit, from seconds to years. A length of `0` never expires. Extensions can add their own kinds of sign-in, which are listed here too.
+
+If `config.php` sets these, the page shows its values and they can't be changed here. See [Sessions](config.md#sessions) for the details.

@@ -87,6 +87,7 @@ The archive contains:
 - Their avatar.
 - Their public comment posts (content, date, IP address and discussion ID) and the discussions they started (title and date).
 - Their access tokens, API keys, email and password tokens and connected login providers, without the token values.
+- From Flarum 2.1, the bounces and spam complaints [mail providers reported](../mail.md#bounce-handling) for their address, one file per event.
 - Anything that other installed extensions [add to the export](../extend/gdpr.md).
 
 ### Requesting erasure
@@ -113,15 +114,16 @@ Anonymization keeps the member's posts and discussions in place but removes who 
 
 - The username becomes the default anonymous username plus the request ID, and the email becomes `<username>@flarum-gdpr.local`.
 - The password is replaced with a random one, preferences are reset, and the account is removed from all groups.
-- The other columns on the `users` table are cleared, apart from counts such as the number of posts. This includes data that extensions store there, such as a nickname or bio.
+- The other columns on the `users` table that can be empty are cleared, including data that extensions store there, such as a nickname or bio. Counts such as the number of posts are kept, and so are columns that can't be empty, unless the extension that added them anonymizes them itself.
 - The avatar is deleted, along with all access tokens, API keys and connected login providers.
 - IP addresses are removed from all their posts.
+- From Flarum 2.1, their reported bounces and spam complaints are kept, so the forum's bounce statistics stay meaningful, but with the address and the provider's reason removed.
 
 An anonymized account cannot be acted on afterwards: every permission check against it is denied except deleting it. Its data can no longer be exported by anyone else.
 
 ### Deletion
 
-Deletion removes all the member's posts, their avatar and their tokens, then deletes the account itself. Data that other tables link to the account with a database cascade goes with it.
+Deletion removes all the member's posts, their avatar, their tokens and, from Flarum 2.1, their reported bounces and spam complaints, then deletes the account itself. Data that other tables link to the account with a database cascade goes with it.
 
 From Flarum 2.0.1, the discussions they posted in are left as if each of their posts had been deleted on its own:
 
@@ -152,6 +154,8 @@ The **GDPR Integrations** page, linked in the admin navigation and from the exte
 Check it before choosing your actions. Data stored by an extension is only covered if that extension registers it with GDPR; anything else stays where it is when an account is anonymized, and is not included in exports.
 
 The bundled [Messages](messages.md) extension registers private messages: a member's messages are included in their export, lose their IP addresses when the account is anonymized, and are deleted when it is deleted. Nobody can message an anonymized account.
+
+The bundled [OAuth Provider](oauth-provider.md) extension registers the applications a member connected: they are listed in the export, and every one is disconnected when the account is anonymized or deleted.
 
 ## Scheduled tasks
 

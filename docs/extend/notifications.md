@@ -182,6 +182,18 @@ You can use the following blade components:
 * `mail::html.information`: The HTML template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 * `mail::plain.information`: The plain text template for informational emails. Use this when your notification is a type that cannot be disabled by the user. For example, the suspensions extension uses this for suspension emails.
 
+The footer of the notification template tells the recipient which type of notification the email is for. From Flarum 2.1, it names the type with the translation `core.email.notification.types.<type>`, in the recipient's language, where `<type>` is what your blueprint's `getType()` returns. Add it to your extension's locale file:
+
+```yaml
+core:
+  email:
+    notification:
+      types:
+        postMentioned: Replies to your posts
+```
+
+A type without a name is left out of the footer. Your views receive the name as `$typeName` (`null` when there is none), beside the type key as `$type`.
+
 ### Notification Drivers
 
 In addition to registering notification types, we can also add new drivers alongside the default `alert` and `email`.
@@ -401,6 +413,32 @@ class SendNotificationWhenPostIsLiked
     }
 }
 ```
+
+The unread and new notification counts shown to each user are cached. `notify()` and the syncer forget them for the users they change. If you change which notifications count for a user some other way, such as updating `is_deleted` with a query of your own, call `Notification::forgetCachedCounts()` with the IDs of the users affected:
+
+```php
+use Flarum\Notification\Notification;
+
+Notification::forgetCachedCounts([$user->id]);
+```
+
+### One Notification per Action
+
+One action can make several extensions notify the same user: a reply in a discussion they follow that also mentions them, for example. Replying, editing or approving a post and starting a discussion through the API therefore run in a notification scope, and within it each user gets at most one notification per channel (one alert, one email). The first notification sent to them in the scope wins; the others are left out. Only notification types the user has turned on for a channel count, so a type they muted can't take the place of one they want.
+
+The scope travels with jobs queued while it is open, so notifications sent from your own queued jobs are covered too, on every queue driver. You don't need to do anything for the actions above.
+
+To give an action of your own the same limit, run it in a scope:
+
+```php
+use Flarum\Notification\NotificationScope;
+
+NotificationScope::run(function () {
+    // Dispatch the events, or queue the jobs, that send its notifications.
+});
+```
+
+`NotificationSyncer::onePerUser()` is deprecated: use `NotificationScope::run()`.
 
 **Awesome!** Now you can spam users with updates on happenings around the forum!
 

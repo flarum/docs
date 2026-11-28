@@ -32,6 +32,8 @@ To display the list of available commands, please use the list command.
 
 Get information about Flarum's core and installed extensions. This is very useful for debugging issues, and should be shared when requesting support.
 
+From Flarum 2.1, an extension installed from a development branch (such as `dev-main`) is listed with the commit it was installed at, as it is on its page in the admin dashboard.
+
 ### tinker
 
 `php flarum tinker`
@@ -194,3 +196,69 @@ Note that some hosts do not allow you to edit cron configuration directly. In th
 `php flarum schedule:list`
 
 This command returns a list of scheduled commands (see `schedule:run` for more information). This is useful for confirming that commands provided by your extensions are registered properly. This **can not** check that cron jobs have been scheduled successfully, or are being run.
+
+## Extension Manager Commands
+
+These commands are added by the [extension manager](extensions.md#extension-manager), so they are only available while it is enabled.
+
+### extension-manager:check {#extension-manager-check}
+
+`php flarum extension-manager:check [--force]`
+
+Checks whether newer versions of your installed packages exist, and prints them. It asks Packagist, then any Composer repositories your forum has configured, and lists separately the packages it could not check and those installed from a development branch. It doesn't run Composer, and doesn't install anything. The result is what the extension manager's **Installed** tab and the dashboard banner show.
+
+If the last check is less than six hours old, the command says so and stops. Pass `--force` to check anyway.
+
+It is scheduled to run once a day through the [scheduler](scheduler.md).
+
+### extension-manager:update {#extension-manager-update}
+
+`php flarum extension-manager:update [packages...] [--all] [--repin] [--nightly] [--resume] [--timeout=3600]`
+
+Updates the named packages (as `vendor/name`), as the same run the extension manager's admin page starts: journalled, with rollback copies of what it replaces, and finished the same way (migrations, assets, caches, formatter, and a check that the site still answers). It prints the run's log as it goes, and exits with a non-zero status if the update fails, or finishes without changing any package. With `--all` and nothing newer to install, it starts no run and exits with status 0. It only updates: install and remove extensions from the admin page or with Composer.
+
+- `--all`: update every package the last check found a newer version for, instead of naming them. If that check is no longer fresh, run `extension-manager:check --force` first.
+- `--repin`: allow changing a requirement your `composer.json` pins to an exact version, to the version the check found. Without it, a pinned package is refused.
+- `--nightly`: move Flarum and its bundled extensions to the nightly development build. Undoing it returns them to the release they were on.
+- `--resume`: carry on with the run already in progress, for example one left behind by a closed browser tab, instead of starting a new one.
+- `--timeout`: stop waiting after this many seconds (default `3600`).
+
+Only one update can run at a time: if one is already in progress, the command refuses to start another. This command is never scheduled.
+
+### extension-manager:prune {#extension-manager-prune}
+
+`php flarum extension-manager:prune [--dry-run]`
+
+Removes the rollback copies and run records that no rollback can use any more. Copies from the last 30 days or the last 5 updates are kept, whichever keeps more (both can be changed on the extension manager's **This host** tab), and so are the copies the latest update needs. Pass `--dry-run` to list what would be removed and how much space it would free, without removing anything.
+
+The same tidy runs at the end of every update, and this command is scheduled to run daily at 04:20 through the [scheduler](scheduler.md).
+
+### extension-manager:rebuild-assets {#extension-manager-rebuild-assets}
+
+`php flarum extension-manager:rebuild-assets [--mark-dirty]`
+
+Rebuilds the compiled JavaScript, CSS and translations of every frontend from the code now installed. The extension manager runs it after an update. With `--mark-dirty`, it only flags the assets to be rebuilt on the next request.
+
+### extension-manager:repair-formatter {#extension-manager-repair-formatter}
+
+`php flarum extension-manager:repair-formatter [--flush-only]`
+
+Rebuilds the post formatter, so that its cached renderer and its generated class in `storage/formatter` match again. If posts stop rendering after `php flarum cache:clear` (which can happen on forums whose cache isn't stored in files, such as those using Redis), this puts them back. The extension manager runs it after an update. With `--flush-only`, it only forgets the cached formatter, and the next request builds a new one.
+
+## AI Commands
+
+These commands are added by the [AI](extensions/ai.md) extension, so they are only available while it is enabled.
+
+### ai:prune-usage
+
+`php flarum ai:prune-usage`
+
+Deletes the [AI](extensions/ai.md) extension's usage records older than 90 days. It runs daily through the [scheduler](scheduler.md), so it should generally not be run manually.
+
+### ai:check-models
+
+`php flarum ai:check-models`
+
+Checks that the AI models features use are still offered by their providers, and records the ones that are deprecated or gone for the admin to see. It runs daily through the [scheduler](scheduler.md). See [Models](extensions/ai.md#models).
+
+It exits with an error when a connection's provider could not be asked for its models.

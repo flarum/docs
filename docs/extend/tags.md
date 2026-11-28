@@ -110,9 +110,14 @@ For an ability on a discussion, such as `$actor->can('doThing', $discussion)`, T
 - If every restricted tag grants it, the result is an **allow**, even without the global permission.
 - Unrestricted tags leave the decision to the global permission.
 
-A child tag first needs the same ability on its parent.
+Querying discussions by ability gives the same answer, through a visibility scope that Tags registers for every ability. `Discussion::whereVisibleTo($actor, 'doThing')` returns:
 
-Querying discussions by ability works the same way, through a visibility scope that Tags registers for every ability. `Discussion::whereVisibleTo($actor, 'doThing')` only returns discussions where the actor has `discussion.doThing` in **all** of their tags. Untagged discussions are only returned when the actor has the permission globally. Abilities starting with `view`, other than `view` itself, are not scoped this way.
+- with `discussion.doThing` globally: every discussion whose restricted tags all grant it, untagged discussions included;
+- without it: discussions with at least one restricted tag, all of which grant it. Their unrestricted tags are ignored, and untagged discussions are left out.
+
+The scope also needs the ability on a restricted tag's parent, when the parent is restricted too.
+
+`view` is stricter: a discussion is only visible when the actor can see **all** of its tags, so an unrestricted tag hides it from someone without the global `viewForum`. Abilities starting with `view`, other than `view` itself, are not scoped by Tags.
 
 ### Letting members past a restriction
 
@@ -225,7 +230,11 @@ The discussions endpoint takes a `tag` filter of tag slugs:
 
 The posts endpoint also takes a `tag` filter, of numeric tag IDs, for posts in discussions with those tags.
 
-The `tags` resource lists, shows, creates, updates and deletes tags at `/api/tags`. `GET /api/tags/{id}` also accepts a slug. Each tag has `name`, `slug`, `description`, `color`, `icon`, `isHidden`, `isPrimary`, `isChild`, `position`, `defaultSort`, `discussionCount`, `lastPostedAt`, `canStartDiscussion` and `canAddToDiscussion`, and admins also see `isRestricted`.
+The `tags` resource lists, shows, creates, updates and deletes tags at `/api/tags`. `GET /api/tags/{id}` also accepts a slug. Each tag has `name`, `slug`, `description`, `color`, `icon`, `iconImageUrl`, `iconImageSrcset`, `isHidden`, `isPrimary`, `isChild`, `position`, `defaultSort`, `discussionCount`, `lastPostedAt`, `canStartDiscussion` and `canAddToDiscussion`, and admins also see `isRestricted`. Those who can edit the tag also see `storedSlug`, the slug as stored, where `slug` is the one the forum's slug driver gives.
+
+`iconImageUrl` and `iconImageSrcset` are the tag's [icon image](models.md#icon-images), or `null`. Upload one with `POST /api/tags/{id}/icon-image` and remove it with `DELETE /api/tags/{id}/icon-image`. In the frontend, `Tag.icon()` includes the classes that show it.
+
+`isPrimary` can be set when creating a tag. On update, sending its current value is accepted, but changing it returns a 422 validation error. To change a tag between primary and secondary, use `POST /api/tags/order`, which updates its kind and position together.
 
 ## Tag slugs
 

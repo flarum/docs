@@ -37,7 +37,7 @@ Manage tags from the **Tags** page, which you open from the extension in the adm
 
 - **Create a tag** with **Create Primary Tag** or **Create Secondary Tag**.
 - **Edit a tag** with the pencil button next to it.
-- **Reorder** primary tags by dragging them.
+- **Reorder** primary tags by dragging them. Secondary tags stay alphabetical and cannot be reordered within their list.
 - **Nest** a primary tag under another by dragging it there. Only one level of nesting is possible.
 - **Make a tag primary or secondary** by dragging it between the two lists.
 
@@ -47,11 +47,12 @@ Each change to the order is saved as soon as you drop the tag.
 
 | Field | Description |
 | --- | --- |
-| **Name** | Shown wherever the tag appears. Typing a name fills in the slug. |
-| **Slug** | Used in the tag's address, `/t/slug`. It must be unique and can't contain spaces or forward slashes. For names in non-Latin scripts, such as Chinese or Japanese, the slug isn't filled in for you: type one yourself. |
+| **Name** | Shown wherever the tag appears. While you create a tag, typing a name suggests a slug, until you edit the slug yourself. |
+| **Slug** | Used in the tag's address, `/t/slug`. It must be unique and can't contain spaces or forward slashes. The suggestion works in any script: Latin letters lose their accents (Tecnología gives `tecnologia`), other scripts keep their letters (Новости gives `новости`), and emoji are left out. Renaming a tag later doesn't change its slug, so links to it keep working. Editing the slug moves the tag to the new address, and links to the old one stop working: nothing redirects them. |
 | **Description** | Shown on the tag's page and on the **Tags** page. Up to 700 characters. |
 | **Color** | Used for the tag's label, its page header and its icon. |
-| **Icon** | Any [Font Awesome](../fontawesome.md) icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
+| **Icon** | A [Font Awesome](../fontawesome.md) icon. Click the field to [choose one](../fontawesome.md#choosing-an-icon), or type any icon class, including the prefix, for example `fas fa-flag`. Without one, a colored square is shown. |
+| **Icon image** | From Flarum 2.1, an image to show instead of the icon: PNG, JPEG, GIF, WebP or BMP. Animated images keep their first frame. The icon is still used where an image can't be shown. **Upload image** chooses one, and **Remove** removes it. The image is uploaded when you save the tag. |
 | **Hide from All Discussions** | See [Hidden tags](#hidden-tags). |
 | **Default Sort** | How the tag's discussions are ordered when someone opens its page without choosing a sort. **Use the forum default** follows the forum's own default. Sorts added by extensions are listed too. If the chosen sort is later removed, it is kept and shown as **(no longer available)**, and the forum default is used. |
 
