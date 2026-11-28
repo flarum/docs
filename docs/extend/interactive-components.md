@@ -140,6 +140,53 @@ $ flarum-cli make frontend modal
 
 :::
 
+### Focus
+
+When a modal opens, focus moves into it and stays there until it closes, then goes back to whatever had it before. By default the first focusable element gets it, which is usually the close button. To start somewhere else, mark that element with `data-autofocus`:
+
+```jsx
+<Button className="Button" data-autofocus onclick={() => this.hide()}>
+  {app.translator.trans('acme.forum.cancel_button')}
+</Button>
+```
+
+Don't move focus yourself in `oncreate` or `onready`: focus would then go back to that element when the modal closes, rather than to what opened it.
+
+### Confirmation dialogs
+
+To ask the user to confirm an action, use `app.confirm()` rather than the browser's `confirm()`. It shows a themed dialog and returns a promise that resolves with the answer:
+
+```js
+const confirmed = await app.confirm({
+  message: app.translator.trans('acme.forum.delete_confirmation'),
+  confirmText: app.translator.trans('acme.forum.delete_button'),
+  danger: true,
+});
+
+if (!confirmed) return;
+```
+
+It takes these options:
+
+| Option | Description |
+| --- | --- |
+| `message` | The question, or what will happen if the user confirms. Required. |
+| `title` | A heading. Without one, the dialog shows only the message. |
+| `details` | Anything to show under the message, such as a list of what will change. |
+| `confirmText` | The confirm button's label. Name the action ("Delete", "Revoke") rather than "OK". Defaults to "Confirm". |
+| `cancelText` | The cancel button's label. Defaults to "Cancel". |
+| `danger` | Styles the confirm button as destructive. |
+
+All of them accept Mithril children, so pass a translation directly, without `extractText()`.
+
+A few things to know:
+
+- The promise resolves `true` only when the user presses the confirm button. Cancel, Escape, a click on the backdrop, the close button, or anything else that closes the dialog (such as a page change) resolves `false`.
+- It opens on top of any modal that is already open, so you can confirm from inside your own modal. It resolves only once it has closed, so your modal can call `this.hide()` straight after.
+- Cancel has the first focus, so pressing Enter doesn't confirm by accident.
+- On phones, it shows as a sheet at the bottom of the screen.
+- Its component, `flarum/common/components/ConfirmModal`, is [code split](code-splitting.md). Use `app.confirm()` rather than showing the component yourself.
+
 ## Composer
 
 Since Flarum is a forum, we need tools for users to be able to create and edit posts and discussions. Flarum accomplishes this through the floating composer component.
@@ -148,11 +195,13 @@ The composer is managed by a global instance of [`ComposerState`](https://api.do
 
 - `app.composer.load(componentClass, attrs)` will load in a new composer type. If a composer is already active, it will be replaced.
 - `app.composer.show()` will show the composer if it is currently hidden.
-- `app.composer.close()` will close and reset the composer after confirming with the user.
+- `app.composer.close()` will close and reset the composer, after confirming with the user if they would lose what they wrote. It returns a promise that resolves once the user has answered. When there is nothing to lose, the composer is closed by the time `close()` returns.
 - `app.composer.hide()` will close and reset the composer without confirming with the user.
 - `app.composer.bodyMatches(componentClass, attrs)` will check if the currently active composer is of a certain type, and whether its atts match optionally provided attrs.
 
 The full list of public methods is documented in the API docs linked above.
+
+A composer body says when closing it would lose something with `app.composer.preventClosingWhen(callback, message)`. When `callback()` returns `true`, `close()` and `load()` ask with [`app.confirm()`](#confirmation-dialogs), showing `message`, before going ahead. `ComposerBody` does this for you through its `confirmExit` attribute. To ask yourself, for example before leaving a page, call `app.composer.confirmExit()`: it resolves `true` if the composer may close, asking first only when there is something to lose.
 
 Because the composer can be used for various different actions (starting a discussion, editing a post, replying to a discussion, etc.), its fields may vary depending as usage.
 This is done by splitting code for each usage into a subclass of `flarum/forum/components/ComposerBody`. This component class must be provided when loading a composer.
