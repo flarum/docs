@@ -189,6 +189,14 @@ The Extension Manager (`flarum/extension-manager`) has been rewritten. Its packa
 
 ### Frontend
 
+##### <span class="notable">Notable</span>
+* **Confirmation dialogs.** Core and the bundled extensions no longer use the browser's `confirm()`. They ask with the new `app.confirm()`, which shows a themed dialog and returns a promise of the answer. Use it in your extension instead of `confirm()`: replace `if (!confirm(message)) return;` with `if (!(await app.confirm({ message, confirmText, danger: true }))) return;`, and drop the `extractText()` around translations. See [Confirmation dialogs](interactive-components.md#confirmation-dialogs).
+* **Composer exit.** `ComposerState.close()` and `load()` now ask through the new `confirmExit()`, which resolves whether the composer may close. `preventExit()` is deprecated and will be removed in 3.0, and `close()` and `load()` no longer call it, so an extension that overrides or extends `preventExit()` to change or skip the discard prompt no longer takes effect. Override `confirmExit()` instead. `close()` now returns a promise; when nothing would be lost, the composer is still closed by the time it returns. See [Composer](interactive-components.md#composer).
+* Actions that asked with `confirm()` now wait for the answer and return a promise in every case, even when the user cancels: `PostControls.hideAction()` and `deleteAction()`, `DiscussionControls.deleteAction()`, `UserControls.deleteAction()` and, in flarum/messages, `MessageControls.hideAction()` and `deleteAction()`. Before, they returned `undefined` when the user cancelled, and acted synchronously when the user confirmed. If you chain on what they return, check the outcome rather than assuming the action happened.
+* The Extension Manager's own `ConfirmModal` and `confirmAction()`, added in 2.1.0-beta.1, have been removed. Use `app.confirm()`.
+
+##### Other changes
+* **Modal focus.** A modal can mark the element that should have the first focus with `data-autofocus`; otherwise the first focusable element gets it, as before. See [Focus](interactive-components.md#focus). A modal also no longer closes on the release of an Escape key that was pressed before it opened, such as the one that opened it.
 * **Conditional frontend extenders.** `Extend.Conditional` registers extenders only when other extensions are enabled or disabled, a forum attribute has a value, or a condition holds. See [In the frontend](settings.md#in-the-frontend).
 * **Tooling.** Core and the bundled extensions are built with TypeScript 5.9, Prettier 3, `flarum-webpack-config` 3.1 and `@flarum/jest-config` 2.1. Extensions can update to them too.
 * **Icon picker.** `IconInput` and `IconPicker` let admins pick a Font Awesome icon, and an admin setting can use `type: 'icon'`. See [Icon picker](forms.md#icon-picker).
